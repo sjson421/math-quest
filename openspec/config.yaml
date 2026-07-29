@@ -1,0 +1,63 @@
+schema: spec-driven
+
+context: |
+  Math Quest — a gamified math PWA taking one adult learner from counting to GED level.
+
+  ## Audience
+  One adult learner restarting math from the beginning, who likes Sanrio-style design.
+  Design rule: KAWAII VISUALS, ADULT TONE. Cute mascot, pastels, rewards — but never
+  baby-talk, never condescension. An adult beginner is not a child, and being addressed
+  as one is the fastest way to lose them; assume the tone matters as much as the maths.
+  Do not simplify the writing because the art is cute; Sanrio's audience is adults.
+
+  ## Tech
+  Vite + React 19 + TypeScript + Tailwind 4 + Framer Motion + Zustand + idb-keyval.
+  PWA installed to the iPhone home screen. No backend, no accounts, no runtime LLM calls.
+  All data local in IndexedDB. Developed on Linux; deployed to Vercel.
+
+  ## Non-negotiable design commitments
+  These are settled decisions. A proposal that contradicts one is wrong — call it out
+  rather than silently redesigning around it.
+
+  - NO HEARTS OR LIVES. A lesson ends after 10 CORRECT answers; misses re-queue ~3 places
+    back in the same session. Same forward pressure, none of the punishment.
+  - GENERATORS COMPUTE THEIR OWN ANSWERS from the operands they just chose. Nothing is
+    hardcoded and nothing calls an LLM at runtime. This is what guarantees correctness.
+  - WRONG ANSWERS ARE DIAGNOSED, NOT REJECTED. Generators predict the exact value a given
+    mistake produces, so feedback names the real error ("it looks like you forgot to carry
+    the 1"). Feedback is warm and never uses alarm-red styling.
+  - PROGRESS IS LOCAL AND FRAGILE. iOS can evict web app storage. Any change touching the
+    data model must also update backup export/import, or a restore silently loses state.
+  - CUSTOM KEYPAD ONLY. Never fall back to the iOS system keyboard.
+  - PATIENT PACING. Skills are small and single-idea. Splitting a hard skill into two is
+    always preferable to one skill that takes three attempts to pass.
+
+  ## Curriculum
+  docs/curriculum.md is the authority: 8 stages, 23 units, 201 skills, with final skill
+  ids, prerequisite rules, the content style contract, and per-stage capability
+  requirements. Use its skill ids VERBATIM. If a change needs to deviate, update that doc
+  in the same change so the two cannot drift.
+
+  ## Content style contract (per skill)
+  1 teaching sentence. 1 worked example. 1-sentence hint. Max 4 solution steps of <=12
+  words each. Max 1 new vocabulary word. Show, don't explain — a worked example beats
+  prose for novice learners. No forward references to later units.
+
+  ## Testing standard
+  Every generator gets ~1000 seeded problems whose answers are RECOMPUTED INDEPENDENTLY
+  from what is displayed on screen, not trusted from the generator. Also assert: no
+  degenerate output, no misconception value equal to the correct answer, difficulty
+  actually scales, determinism per seed, prerequisite graph acyclic.
+
+rules:
+  proposal:
+    - State which curriculum stage/unit and which skill ids from docs/curriculum.md are in scope.
+    - Include a "Non-goals" section naming what is deliberately deferred.
+    - Flag any new capability required (KaTeX, fraction input, diagrams, coordinate plane).
+  design:
+    - Separate CAPABILITY work (new input modes, rendering) from CONTENT work (generators).
+    - Name the misconceptions each generator must predict, especially for skills flagged as walls in docs/curriculum.md.
+  tasks:
+    - One task per skill generator, plus a task for its tests.
+    - Keep tasks under 2 hours each.
+    - Always end with a task to drive the real app in a browser, not just run tests.

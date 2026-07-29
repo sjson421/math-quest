@@ -1,0 +1,17 @@
+# Planning artifacts and local tooling — not part of the app, no reason to ship them.
+openspec
+docs
+.claude
+.codex
+
+# Vercel builds this itself.
+dist
+
+# Anything under `api/` becomes a public route, so a test file there would ship
+# as a live function importing vitest — a 500 on `/api/progress.test`. Keeping
+# tests out of the upload is what stops that, not just tidiness.
+api/**/*.test.ts
+
+# Local credentials — `vercel link` writes an OIDC token here. Never upload it.
+.env.local
+.env*.local
