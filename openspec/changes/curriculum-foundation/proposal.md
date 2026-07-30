@@ -54,14 +54,20 @@ None. `openspec/specs/` is empty; this change establishes the first specs.
 ## Impact
 
 **New files**
-- `src/curriculum/manifest.ts` — the 201-entry manifest, as data
-- `src/curriculum/manifest.test.ts` — graph, uniqueness, reachability, coverage
+- `src/curriculum/manifest/` — `types.ts` and `resolve.ts`, plus `stage-{a..h}.ts` holding
+  the 201 entries as data. Split by stage per design decision 1, not one file.
+- `src/curriculum/manifest/*.test.ts` — derivation rules, graph, uniqueness, reachability,
+  coverage, and the cross-check against `docs/curriculum.md`
 - `src/lib/content-rules.ts` + test — the style contract as an enforceable check
 
 **Modified**
 - `src/curriculum/index.ts` — resolve generators against the manifest, expose `planned`
-- `src/lib/types.ts` — `SkillGenerator` gains a manifest-id link; add `quick` flag
-- `docs/curriculum.md` — reconcile any id the manifest exercise proves wrong
+- `docs/curriculum.md` — reconcile any id the manifest exercise proves wrong. Renames 14.6
+  `with-parentheses` to `equation-parentheses`, since 5.2 already claimed that id.
+
+`src/lib/types.ts` is expected to need no change after all: `quick`, wall marking, and unit
+membership all live on the manifest entry, so `SkillGenerator` gains nothing. Revisit when
+the registry lands.
 
 **Not modified:** no generator logic, no UI, no store behaviour, no data model. Existing
 progress data stays valid because skill ids are additive here.
