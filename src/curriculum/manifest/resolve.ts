@@ -61,11 +61,15 @@ export function indexSkills(stages: readonly StageEntry[]): Map<string, SkillLoc
 export function resolvePrerequisites(
   stages: readonly StageEntry[],
 ): Map<string, string[]> {
+  // First entry wins on a duplicate unit id, matching `indexSkills()` and the
+  // lookups in `index.ts`. Last-wins here would point `dependsOn` edges at the
+  // duplicate while every lookup returned the original, so the graph and the
+  // manifest would disagree without anything failing.
   const lastSkillByUnit = new Map<string, string>()
   for (const stage of stages)
     for (const unit of stage.units) {
       const last = unit.skills.at(-1)
-      if (last) lastSkillByUnit.set(unit.id, last.id)
+      if (last && !lastSkillByUnit.has(unit.id)) lastSkillByUnit.set(unit.id, last.id)
     }
 
   const resolved = new Map<string, string[]>()

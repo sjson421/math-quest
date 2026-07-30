@@ -118,6 +118,24 @@ describe('resolvePrerequisites', () => {
     expect(rooted.get('a2')).toEqual([])
   })
 
+  it('resolves dependsOn against the first unit when a unit id is duplicated', () => {
+    // Matches indexSkills() and the id lookups in index.ts. Last-wins here would
+    // point the edge at the duplicate while every lookup returned the original.
+    const duplicated = resolvePrerequisites([
+      {
+        id: 'stage-x',
+        name: 'X',
+        units: [
+          { id: 'unit-1', name: 'One', skills: [skill('a1')] },
+          { id: 'unit-1', name: 'Copy', skills: [skill('b1')] },
+          { id: 'unit-2', name: 'Two', dependsOn: ['unit-1'], skills: [skill('c1')] },
+        ],
+      },
+    ])
+
+    expect(duplicated.get('c1')).toEqual(['a1'])
+  })
+
   it('names the unit and the missing target for an unresolvable dependsOn', () => {
     const broken: StageEntry[] = [
       {
