@@ -358,7 +358,7 @@ understanding; not one problem asks for a calculation.
 | 14.3 | `one-step-multdiv` | | |
 | 14.4 | `two-step` | | ⚠️ undoing in the wrong order |
 | 14.5 | `vars-both-sides` | | |
-| 14.6 | `with-parentheses` | | |
+| 14.6 | `equation-parentheses` | | |
 | 14.7 | `with-fractions` | Clear denominators | |
 | 14.8 | `special-solutions` | None / infinite | |
 | 14.9 | `equation-words` | | |
@@ -537,10 +537,26 @@ Ship by stage; each stage is independently useful.
 
 ## Notes for implementation
 
+- **This document has a machine-readable twin.** `src/curriculum/manifest/` holds all 201
+  skills as data, one file per stage, and the two cross-check each other in the test suite:
+  the id column, the `quick` and ⚠️ markers, every unit and stage count, and the counts this
+  document states about itself. Either file may be edited — the tests fail until both agree.
+  Editing a table row here without the manifest (or the reverse) is a test failure, not a
+  silent divergence.
 - **Every skill id above is final.** Use them verbatim as `SkillGenerator.id` so the
-  prerequisite graph and this document cannot drift apart.
+  prerequisite graph and this document cannot drift apart. A generator registered under an id
+  this document does not declare fails the suite by name.
 - **Prerequisites** are the previous skill in the unit, plus the last skill of any unit
-  this one depends on. Unlock threshold stays at mastery ≥ 2.
+  this one depends on. Unlock threshold stays at mastery ≥ 2. The manifest derives these
+  rather than storing them, and commits a snapshot of the expanded graph so a change to the
+  derivation is reviewable.
+- **A skill with no generator is `planned`, not broken.** State is derived at load from the
+  generator registry plus the capabilities that are actually built, so a stage waiting on
+  KaTeX or a coordinate plane reports honestly. Planned skills are transparent to unlocking —
+  a learner is never held behind our build order — and never offered for play.
+- **The content style contract above is enforced**, not advisory: `src/lib/content-rules.ts`
+  checks step count, step length, single-sentence hints, wall misconception coverage, and
+  forward references against a curated vocabulary list, over sampled generated problems.
 - **`SkillProgress` gains two fields** for skipping: `source: 'practiced' | 'tested-out' |
   'self-assessed'` and the existing mastery set to 3. These must survive a **sync round
   trip**, not just file export — sync is now the routine path, so losing them there would

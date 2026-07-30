@@ -225,7 +225,7 @@ const add2Carry: SkillGenerator = {
           nudge: `Only the ${onesSum % 10} stays in the ones place — the 1 moves to the tens column.`,
         },
       ],
-      hint: `The ones column adds to ${onesSum}. That is more than 9, so a ten carries over.`,
+      hint: `The ones column adds to ${onesSum}, which is more than 9, so a ten carries over.`,
       solution: [
         {
           text: 'Add the ones column.',
@@ -297,24 +297,40 @@ const sub2Borrow: SkillGenerator = {
           tag: 'forgot-to-reduce-tens',
           nudge: `You borrowed correctly, but the tens digit drops from ${digitAt(a, 1)} to ${reducedTens} once you lend that ten away.`,
         },
+        {
+          // Borrowed, subtracted the ones, then left the tens column alone.
+          //
+          // A third prediction is not padding: this is a wall skill, and the two
+          // above collide with each other whenever the ones digits are five
+          // apart (31 − 16 predicts 25 twice), leaving one after dedup. This one
+          // cannot collide — its tens digit is `t1`, while the real answer's is
+          // `t1 − 1 − t2` and the flipped guess's is `t1 − t2`, and `t2` is never
+          // zero because a borrow needs a two-digit subtrahend.
+          value: Number(`${digitAt(a, 1)}${borrowedOnes - digitAt(b, 0)}`),
+          tag: 'skipped-tens-subtraction',
+          nudge: `The ones are right. There is still the ${digitAt(b, 1)} to take off the tens column.`,
+        },
       ],
       hint: `You cannot take ${digitAt(b, 0)} from ${digitAt(a, 0)}, so borrow a ten from the ${digitAt(a, 1)}.`,
+      // Four steps is the contract's limit, so the closing "So a − b = …" line
+      // the other generators use rides on the tens step instead of taking a step
+      // of its own. The two column subtractions stay separate: on a borrowing
+      // wall, seeing each column done is the whole point.
       solution: [
         {
-          text: `Look at the ones: ${digitAt(a, 0)} − ${digitAt(b, 0)}. There is not enough to take away.`,
+          text: `Ones: ${digitAt(a, 0)} − ${digitAt(b, 0)}. Not enough to take away.`,
         },
         {
-          text: `Borrow one ten. The ${digitAt(a, 1)} becomes ${reducedTens}, and the ones become ${borrowedOnes}.`,
+          text: `Borrow a ten — ${digitAt(a, 1)} becomes ${reducedTens}, ones become ${borrowedOnes}.`,
         },
         {
           text: 'Now subtract the ones.',
           detail: `${borrowedOnes} − ${digitAt(b, 0)} = ${borrowedOnes - digitAt(b, 0)}`,
         },
         {
-          text: 'Then subtract the tens.',
+          text: `Then the tens, giving ${diff}.`,
           detail: `${reducedTens} − ${digitAt(b, 1)} = ${reducedTens - digitAt(b, 1)}`,
         },
-        { text: `So ${a} − ${b} = ${diff}.` },
       ],
       difficulty,
     }
@@ -386,7 +402,7 @@ const add3Digit: SkillGenerator = {
           nudge: 'Check the tens column — a hundred needs to carry across.',
         },
       ],
-      hint: 'Work right to left: ones, then tens, then hundreds. Carry as you go.',
+      hint: 'Work right to left — ones, then tens, then hundreds — carrying as you go.',
       solution: steps,
       difficulty,
     }

@@ -72,6 +72,12 @@ Storing the state would immediately go stale. Deriving it means adding a generat
 the skill on with no bookkeeping, and a skill blocked purely on missing infrastructure
 (fractions needing KaTeX) reports honestly instead of appearing broken.
 
+Capability *availability* is a declared set of its own — `AVAILABLE_CAPABILITIES` in
+`resolve.ts`, empty today because nothing beyond the number keypad exists. Landing a
+capability is then a one-line edit that flips its whole stage on. The resolvers take the
+generator registry and the availability set as parameters rather than importing them, so
+derivation stays pure and testable before any manifest entry exists.
+
 ### 4. Planned skills are transparent to the unlock graph
 
 A `planned` skill must not become a wall. Two candidate behaviours:
@@ -87,6 +93,11 @@ and inserting a generator later slots it into place without stranding anything.
 **Trade-off:** a learner can reach a skill whose conceptual prerequisite is not yet built.
 Acceptable — the alternative is an unplayable app, and build order follows curriculum order
 anyway, so the window is narrow.
+
+Expansion terminates at the first `implemented` skill, so the cycle guard inside
+pass-through protects the traversal from hanging — it is not a graph check. Whole-graph
+acyclicity is validated separately, because a cycle among implemented skills never gets
+walked here.
 
 ### 5. Content contract is a runtime check over sampled problems, not a static lint
 
@@ -126,7 +137,20 @@ build order follows curriculum order. Stage capability requirements keep whole s
 `planned` until their infrastructure lands.
 
 **[The manifest and the document drift apart]** → They cross-check in CI. Either can be
-edited, but the tests fail until both agree.
+edited, but the tests fail until both agree. The document's skill tables parse cleanly off
+one row anchor — `| N.N | \`id\` | … |` — which is the form the cross-check must use. A
+looser scrape for backticked tokens also picks up the `` `quick` `` marker in the Note
+column and reports it as a phantom skill id.
+
+**[`with-parentheses` is declared twice — 5.2 and 14.6]** → **Confirmed defect in
+`docs/curriculum.md`, found while transcribing.** Every other count in the document is
+internally consistent (8 stages, 23 units, 201 rows, every per-unit and per-stage total
+agreeing with the stage map), so this is the single reconciliation the transcription
+exercise turned up. Two skills cannot share an id: progress is keyed by skill id, so they
+would silently overwrite each other's mastery — exactly the failure the uniqueness rule
+exists to prevent. **Resolved:** 14.6 is renamed `equation-parentheses`, matching Unit 14's
+existing `equation-balance` / `equation-words` convention; 5.2 keeps the original id.
+Nothing in `src/` referenced either, since neither has a generator yet.
 
 **[Content contract fires on legitimate copy]** → Limits are deliberately generous
 (4 steps, 12 words). If a skill genuinely cannot fit, that is a signal the skill is too
@@ -151,6 +175,11 @@ persistent state depends on any of it.
 
 ## Open Questions
 
+- **Where do skill `name` and `blurb` come from?** The document supplies an id for all 201
+  rows but leaves the Skill cell empty on 90 of them, so both learner-facing fields are
+  authored during transcription rather than copied. The cross-check therefore covers ids and
+  markers, not names — which is the right split, but it does mean 90 short strings enter the
+  app without the document as a check on tone. Worth a read-through pass once Stage B lands.
 - **Does the vocabulary map earn its keep?** It needs manual upkeep as units are written.
   If it produces mostly false positives through Stage B, drop it rather than maintaining it.
 - **Should `docs/curriculum.md` be generated *from* the manifest instead of cross-checked

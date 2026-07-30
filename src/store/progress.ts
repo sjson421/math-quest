@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { get as idbGet, set as idbSet } from 'idb-keyval'
-import { allSkills, skillById } from '../curriculum'
+import { allSkills, generators } from '../curriculum'
 
 const STORAGE_KEY = 'math-quest-progress'
 const SCHEMA_VERSION = 1
@@ -231,7 +231,7 @@ export const useProgress = create<Store>((set, get) => {
 
 /** A skill is available once every prerequisite has reached the threshold. */
 export function isUnlocked(skillId: string, progress: Progress): boolean {
-  const skill = skillById.get(skillId)
+  const skill = generators.get(skillId)
   if (!skill) return false
   return skill.prerequisites.every(
     (id) => (progress.skills[id]?.mastery ?? 0) >= UNLOCK_THRESHOLD,

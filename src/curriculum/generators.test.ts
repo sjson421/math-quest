@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { allSkills, skillById } from './index'
+import { allSkills, generators, manifestIndex } from './index'
+import { checkContent, formatViolations } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { checkAnswer } from '../lib/answer'
 import { toNumber, rational } from '../lib/rational'
@@ -92,6 +93,19 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
     }
   })
 
+  it('satisfies the content style contract on every sampled problem', () => {
+    // Sampled rather than static: the text is generated, so the only way to
+    // check it is to generate a lot of it. One failure lists every violation
+    // across all five difficulties so an authoring pass can fix them together.
+    const at = manifestIndex.get(skill.id)
+    expect(at, `${skill.id} is not in the manifest`).toBeDefined()
+
+    const violations = all.flatMap((problem) => checkContent(problem, at!))
+    const distinct = [...new Set(formatViolations(violations))]
+
+    expect(distinct).toEqual([])
+  })
+
   it('always ships a hint and worked solution', () => {
     for (const problem of all) {
       expect(problem.hint.length).toBeGreaterThan(0)
@@ -127,7 +141,7 @@ describe('skill graph', () => {
   it('references only skills that exist', () => {
     for (const skill of allSkills) {
       for (const prereq of skill.prerequisites) {
-        expect(skillById.has(prereq), `${skill.id} → ${prereq}`).toBe(true)
+        expect(generators.has(prereq), `${skill.id} → ${prereq}`).toBe(true)
       }
     }
   })
@@ -141,7 +155,7 @@ describe('skill graph', () => {
         throw new Error(`Cycle: ${[...trail, id].join(' → ')}`)
       }
       state.set(id, 'visiting')
-      for (const prereq of skillById.get(id)!.prerequisites) {
+      for (const prereq of generators.get(id)!.prerequisites) {
         visit(prereq, [...trail, id])
       }
       state.set(id, 'done')

@@ -1,4 +1,13 @@
-## ADDED Requirements
+# Skill Progression
+
+## Purpose
+
+How a learner moves through the course: mastery levels, what unlocks a skill,
+how difficulty follows mastery, and how a lesson ends. The through-line is that progress is
+never taken away — there is no failure state, and stored progress survives the course growing
+underneath it.
+
+## Requirements
 
 ### Requirement: Skills have six mastery levels
 
@@ -54,20 +63,19 @@ learned. Difficulty SHALL be `mastery + 1`, clamped to the range 1–5.
 
 ### Requirement: Lessons end on correct answers, never on failure
 
-A standard lesson SHALL end after 10 correct answers. A `quick` lesson SHALL end after 5.
-There SHALL be no hearts, lives, or failure state. An incorrect answer SHALL re-queue that
-problem later in the same session, so a lesson cannot be completed without eventually
-answering every problem correctly.
+Every lesson SHALL end after 10 correct answers. There SHALL be no hearts, lives, or failure
+state. An incorrect answer SHALL re-queue that problem later in the same session, so a lesson
+cannot be completed without eventually answering every problem correctly.
+
+> The manifest records which skills are `quick` — 19 of them — but lesson length does not yet
+> read the flag, so a quick skill still ends at 10. Shortening those lessons to 5 is a
+> behaviour change this change did not make; it lands as its own delta against this
+> requirement.
 
 #### Scenario: Standard lesson length
 
-- **WHEN** a learner answers the 10th problem correctly in a non-quick lesson
+- **WHEN** a learner answers the 10th problem correctly
 - **THEN** the lesson completes
-
-#### Scenario: Quick lesson length
-
-- **WHEN** a skill is marked `quick`
-- **THEN** its lesson completes after 5 correct answers
 
 #### Scenario: Wrong answer re-queues
 
