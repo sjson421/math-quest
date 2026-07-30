@@ -68,7 +68,7 @@ export const stageB: StageEntry = {
         {
           id: 'add-words',
           name: 'Addition Word Problems',
-          blurb: 'Find the addition in the words',
+          blurb: 'Spot the addition',
         },
       ],
     },
@@ -96,7 +96,7 @@ export const stageB: StageEntry = {
         {
           id: 'sub-2digit-noborrow',
           name: 'Two-Digit Subtraction',
-          blurb: 'Column subtraction, no borrowing yet',
+          blurb: 'Column subtraction, no borrowing',
         },
         {
           // Wall: flipping the digits to avoid borrowing. Faced with 4 − 7 in the
@@ -124,7 +124,7 @@ export const stageB: StageEntry = {
         {
           id: 'sub-words',
           name: 'Subtraction Word Problems',
-          blurb: 'Find the subtraction in the words',
+          blurb: 'Spot the subtraction',
         },
       ],
     },
@@ -214,7 +214,7 @@ export const stageB: StageEntry = {
         {
           id: 'mult-words',
           name: 'Multiplication Word Problems',
-          blurb: 'Find the multiplication in the words',
+          blurb: 'Spot the multiplication',
         },
       ],
     },
@@ -255,7 +255,7 @@ export const stageB: StageEntry = {
         {
           id: 'long-div-remainder',
           name: 'Long Division with Remainder',
-          blurb: 'When the divisor does not fit evenly',
+          blurb: 'When it does not divide evenly',
         },
         {
           // Wall: estimating the quotient. A two-digit divisor no longer comes
@@ -283,7 +283,7 @@ export const stageB: StageEntry = {
         {
           id: 'div-words',
           name: 'Division Word Problems',
-          blurb: 'Find the division in the words',
+          blurb: 'Spot the division',
         },
       ],
     },

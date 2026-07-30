@@ -50,7 +50,7 @@ export const stageD: StageEntry = {
         {
           id: 'fractions-numberline',
           name: 'Fractions on a Line',
-          blurb: 'Place a fraction on a number line',
+          blurb: 'Place it on a number line',
         },
         {
           id: 'equivalent-visual',
@@ -73,14 +73,14 @@ export const stageD: StageEntry = {
         {
           id: 'compare-same-den',
           name: 'Comparing Like Fractions',
-          blurb: 'Same denominator',
+          blurb: '3/8 or 5/8 — which is more',
         },
         {
           // Wall: comparing numerators only, ignoring that the denominators name
           // different-sized pieces.
           id: 'compare-diff-den',
           name: 'Comparing Unlike Fractions',
-          blurb: 'Different denominators',
+          blurb: '2/3 or 3/5 — which is more',
           wall: true,
         },
       ],
@@ -94,31 +94,31 @@ export const stageD: StageEntry = {
           // Wall: adding the denominators too, so 1/5 + 2/5 comes out as 3/10.
           id: 'add-frac-same-den',
           name: 'Adding Like Fractions',
-          blurb: 'Same denominator',
+          blurb: '1/5 + 2/5',
           wall: true,
         },
         {
           id: 'sub-frac-same-den',
           name: 'Subtracting Like Fractions',
-          blurb: 'Same denominator',
+          blurb: '4/5 − 2/5',
         },
         {
           id: 'common-denominator',
           name: 'Common Denominators',
-          blurb: 'Find the lowest common denominator',
+          blurb: 'Find the LCD',
         },
         {
           // Major wall: two procedures at once — rewrite both fractions, then
           // add. Either half can fail on its own.
           id: 'add-frac-diff-den',
           name: 'Adding Unlike Fractions',
-          blurb: 'Different denominators',
+          blurb: '1/2 + 1/3',
           wall: true,
         },
         {
           id: 'sub-frac-diff-den',
           name: 'Subtracting Unlike Fractions',
-          blurb: 'Different denominators',
+          blurb: '3/4 − 1/3',
         },
         {
           id: 'improper-to-mixed',
@@ -133,14 +133,14 @@ export const stageD: StageEntry = {
         {
           id: 'add-mixed',
           name: 'Adding Mixed Numbers',
-          blurb: 'Wholes and parts together',
+          blurb: '1 1/2 + 2 1/4',
         },
         {
           // Wall: borrowing from the whole. There is nothing to subtract from in
           // the fraction part, so a whole has to be broken up first.
           id: 'sub-mixed',
           name: 'Subtracting Mixed Numbers',
-          blurb: 'Wholes and parts together',
+          blurb: 'Borrow from the whole',
           wall: true,
         },
         {
@@ -161,7 +161,7 @@ export const stageD: StageEntry = {
         {
           id: 'fraction-words',
           name: 'Fraction Word Problems',
-          blurb: 'Find the fraction in the words',
+          blurb: 'Spot the fraction',
         },
       ],
     },
@@ -202,7 +202,7 @@ export const stageD: StageEntry = {
         {
           id: 'sub-decimals',
           name: 'Subtracting Decimals',
-          blurb: 'Line up the points',
+          blurb: '4.5 − 1.28',
         },
         {
           // Wall: misplacing the point. The count of decimal places in the
@@ -354,7 +354,7 @@ export const stageD: StageEntry = {
           // five" describe the same mix, and the words rarely say which is meant.
           id: 'ratio-words',
           name: 'Ratio Word Problems',
-          blurb: 'Find the ratio in the words',
+          blurb: 'Spot the ratio',
           wall: true,
         },
       ],
