@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { allSkills, skillById } from './index'
+import { allSkills, generators } from './index'
 import { generateProblem } from '../lib/generator'
 import { checkAnswer } from '../lib/answer'
 import { toNumber, rational } from '../lib/rational'
@@ -127,7 +127,7 @@ describe('skill graph', () => {
   it('references only skills that exist', () => {
     for (const skill of allSkills) {
       for (const prereq of skill.prerequisites) {
-        expect(skillById.has(prereq), `${skill.id} → ${prereq}`).toBe(true)
+        expect(generators.has(prereq), `${skill.id} → ${prereq}`).toBe(true)
       }
     }
   })
@@ -141,7 +141,7 @@ describe('skill graph', () => {
         throw new Error(`Cycle: ${[...trail, id].join(' → ')}`)
       }
       state.set(id, 'visiting')
-      for (const prereq of skillById.get(id)!.prerequisites) {
+      for (const prereq of generators.get(id)!.prerequisites) {
         visit(prereq, [...trail, id])
       }
       state.set(id, 'done')
