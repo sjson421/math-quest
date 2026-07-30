@@ -24,12 +24,21 @@ Source of truth is `docs/curriculum.md`. Use its skill ids verbatim.
 - [x] 2.2 `stage-b.ts` — Units 1–5, 44 skills
 - [x] 2.3 `stage-c.ts` — Unit 6, 9 skills; no stage-level `requires` — number-line is needed by 6.1 alone, and `requires` is stage-wide, so declaring it would hold the other eight keypad-answerable skills behind a tap-to-place input mode. Revisit if capability needs move to the skill entry.
 - [x] 2.4 `stage-d.ts` — Units 7–11, 50 skills; mark katex, fraction-input, diagram requirements
-- [ ] 2.5 `stage-e.ts` — Units 12–15, 34 skills; mark expression-input requirement
-- [ ] 2.6 `stage-f.ts` — Units 16–19, 28 skills; mark coordinate-plane requirement
-- [ ] 2.7 `stage-g.ts` — Units 20–21, 22 skills; mark diagram and chart requirements
-- [ ] 2.8 `stage-h.ts` — Unit 22, 6 modules; mark timed requirement
-- [ ] 2.9 `src/curriculum/manifest/index.ts` — re-export all stages, expose `allSkills`, `skillById`, `unitById`, `stageById`
-- [ ] 2.10 Carry `quick` and `wall` flags across from the curriculum document
+- [x] 2.5 `stage-e.ts` — Units 12–15, 34 skills; mark expression-input requirement
+- [x] 2.6 `stage-f.ts` — Units 16–19, 28 skills; mark coordinate-plane requirement
+- [x] 2.7 `stage-g.ts` — Units 20–21, 22 skills; mark diagram and chart requirements
+- [x] 2.8 `stage-h.ts` — Unit 22, 6 modules; mark timed requirement
+- [x] 2.9 `src/curriculum/manifest/index.ts` — re-export all stages, expose `allSkills`, `skillById`, `unitById`, `stageById`; also `allUnits`, and `types`/`resolve` re-exported so consumers have one import site
+- [x] 2.10 Carry `quick` and `wall` flags across from the curriculum document — 19 `quick` and 46 wall, verified position-by-position against the document rather than by count
+
+> **`requires` is each stage's full capability set, not only what it introduces.** A reader
+> should not have to walk back through earlier stages to assemble the real set, so Stage E
+> and F restate katex, and F restates expression-input. Two deliberate exceptions, both
+> commented in place: Stage C declares nothing (number-line is needed by 6.1 alone, and a
+> stage-wide marker would block eight keypad-answerable skills), and Stage H declares only
+> `timed` (its reviews sample items from every earlier stage, which no stage-level field can
+> express). The clean fix for both is an optional `requires` on the skill entry — not taken
+> here, since it widens the change beyond transcription.
 
 ## 3. Structural validation tests
 
