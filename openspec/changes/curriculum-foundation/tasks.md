@@ -22,8 +22,8 @@ Source of truth is `docs/curriculum.md`. Use its skill ids verbatim.
 - [x] 2.0 Rename one of the two `with-parentheses` skills in `docs/curriculum.md`, then use the new id in the manifest so document and manifest agree from the start
 - [x] 2.1 `stage-a.ts` — Unit 0, 8 skills
 - [x] 2.2 `stage-b.ts` — Units 1–5, 44 skills
-- [ ] 2.3 `stage-c.ts` — Unit 6, 9 skills
-- [ ] 2.4 `stage-d.ts` — Units 7–11, 50 skills; mark katex, fraction-input, diagram requirements
+- [x] 2.3 `stage-c.ts` — Unit 6, 9 skills; no stage-level `requires` — number-line is needed by 6.1 alone, and `requires` is stage-wide, so declaring it would hold the other eight keypad-answerable skills behind a tap-to-place input mode. Revisit if capability needs move to the skill entry.
+- [x] 2.4 `stage-d.ts` — Units 7–11, 50 skills; mark katex, fraction-input, diagram requirements
 - [ ] 2.5 `stage-e.ts` — Units 12–15, 34 skills; mark expression-input requirement
 - [ ] 2.6 `stage-f.ts` — Units 16–19, 28 skills; mark coordinate-plane requirement
 - [ ] 2.7 `stage-g.ts` — Units 20–21, 22 skills; mark diagram and chart requirements
