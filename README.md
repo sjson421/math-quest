@@ -4,25 +4,37 @@ A gamified math app that starts at counting and builds toward GED level. Built a
 installable iPhone home-screen web app (PWA) — no App Store, no Apple Developer account,
 no Mac required.
 
-## Status: Phase 1 complete
+## Status: Phase 1 complete, whole course mapped
 
-A full playable loop over Unit 1 (adding & subtracting), with six skills, mastery levels,
-XP, coins, streaks, and backup.
+A full playable loop with six skills, mastery levels, XP, coins, streaks, and backup.
+
+The rest of the course now exists as data rather than intent: all **201 skills** across 8
+stages and 23 units are declared in `src/curriculum/manifest/`, with prerequisites, unit
+membership, and pacing markers, cross-checked against [`docs/curriculum.md`](docs/curriculum.md).
+**6 of the 201 are playable** — a skill becomes playable by gaining a generator, never by
+being added to the manifest.
 
 | Phase | Scope | State |
 |---|---|---|
-| 1 | Playable skeleton, Unit 1, mascot v1, persistence, backup | ✅ done |
+| 1 | Playable skeleton, six skills, mascot v1, persistence, backup | ✅ done |
+| 1.5 | Curriculum manifest, validation, content contract | ✅ done |
 | 2 | Skill tree UI, cosmetics shop, decoratable room, full animation | next |
 | 3 | Spaced repetition, review lessons, stats, streak notifications | |
-| 4 | Units 0, 2–17 — the curriculum bulk | |
+| 4 | Units 0–22 — the curriculum bulk, 195 generators | |
 | 5 | GED prep: timed mixed tests, formula sheet, calculator sections | |
+
+The 55 unbuilt skills in Stages A, B and C — the arithmetic foundation plus signed numbers —
+need only their generators; the existing number keypad is enough for all but one, which wants
+a number line. Stage D onward is gated on infrastructure that does not exist yet as well:
+KaTeX, fraction input, diagrams, expression input, a tap-to-plot coordinate plane, charts,
+and timed mode.
 
 ## Running it
 
 ```bash
 npm install
 npm run dev          # http://localhost:5173
-npm test             # generator + answer-checker + keypad tests
+npm test             # generators, manifest, curriculum cross-check, content contract
 npm run build        # production build into dist/
 npm run icons        # regenerate app icons after changing the mascot
 ```
@@ -50,12 +62,50 @@ Every skill owns a generator that computes its own answer from the operands it j
 Nothing is hardcoded, so problems never run out and the answer key cannot drift from the
 question.
 
-- `src/curriculum/unit-01-add-sub.ts` — the six Unit 1 generators
+- `src/curriculum/unit-01-add-sub.ts` — the six built generators (Units 1 and 2)
 - `src/lib/generator.ts` — the factory every problem passes through
 - `src/lib/rng.ts` — seeded RNG (`mulberry32`) plus `constrain()` for rejecting degenerate
   problems like `x + 0`
 
 Seeding means any problem is reproducible from its seed, which makes bugs debuggable.
+
+### The course is a manifest, and the document is its check
+
+`docs/curriculum.md` describes the whole course in prose; `src/curriculum/manifest/` is the
+same thing as data, one file per stage. It is the authority for skill ids, unit and stage
+membership, and prerequisite edges — and the two cross-check each other in the test suite,
+so either can be edited but they cannot quietly disagree.
+
+Three things are derived rather than written down, because hand-writing them across 201
+skills is 201 chances to make a mistake:
+
+- **Prerequisites** — the previous skill in the unit, plus the last skill of any unit this
+  one declares `dependsOn`. An explicit `prerequisites` array overrides that where the
+  course genuinely branches. A snapshot test commits the fully expanded graph, so a change
+  to the rules shows up as a reviewable diff.
+- **State** — a skill is `implemented` only when a generator is registered for its id *and*
+  every capability its stage needs is built. Otherwise it is `planned`, which is the normal
+  state, not an error. Nothing is stored, so adding a generator flips its skill on with no
+  bookkeeping.
+- **Unlock edges** — a `planned` skill is transparent: its dependants inherit *its*
+  prerequisites rather than waiting behind our build order.
+
+Only `implemented` skills reach the learner. The validation suite fails on a duplicate id, a
+prerequisite that resolves to nothing, a cycle, an unreachable skill, a generator registered
+under an id the course never declared, or an id that disagrees with the document — each
+naming the offending entry, since a bare failure on a 201-node graph is untraceable.
+
+### Generated text has a contract
+
+Brevity is a requirement, not a preference: a worked example beats prose for a novice, and
+long explanations are where an adult restarting math disengages. Because the text is
+generated, `src/lib/content-rules.ts` runs over sampled problems inside the test suite —
+at most 4 solution steps, at most 12 words each, single-sentence hints, and at least two
+distinct predicted misconceptions on any skill marked a difficulty wall.
+
+It earned its keep immediately: enforcing it caught three of the six shipped generators,
+including a wall skill that had only one prediction left on some problems once the engine
+discarded a predicted value that coincided with the real answer.
 
 ### Answers are compared as exact rationals
 
@@ -112,10 +162,13 @@ recovery action, so backups exported before sync existed are not stranded.
 
 ```
 src/
-  lib/          rng, rational arithmetic, answer checking, keypad rules, haptics, types
-  curriculum/   units as data — each skill is a generator
+  lib/          rng, rational arithmetic, answer checking, keypad rules, haptics,
+                content rules, types
+  curriculum/   generators, plus the registry that resolves them against the manifest
+    manifest/   the whole course as data — one file per stage, and the derivation rules
   components/   Mascot, Lesson, Keypad, ProblemView, Home, Settings
   store/        zustand + IndexedDB persistence, mastery and unlock rules
+docs/           curriculum.md — the course in prose, cross-checked against the manifest
 scripts/        icon generation from the mascot artwork
 ```
 
@@ -145,3 +198,9 @@ colliding with the correct answer, difficulty actually scaling, determinism per 
 that the prerequisite graph is acyclic.
 
 A wrong answer key is the one bug this app cannot survive, so that check is the priority.
+
+On top of that, the suite guards the course itself — the manifest's structure, its agreement
+with `docs/curriculum.md` down to each row's markers, generator coverage, and the content
+contract over sampled text. Every reporting helper is paired with a synthetic case proving it
+names the offender, because a checker that returns "no problems" looks exactly like a clean
+course.
