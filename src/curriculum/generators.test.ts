@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { allSkills, generators } from './index'
+import { allSkills, generators, manifestIndex } from './index'
+import { checkContent, formatViolations } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { checkAnswer } from '../lib/answer'
 import { toNumber, rational } from '../lib/rational'
@@ -90,6 +91,19 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
       const values = (problem.misconceptions ?? []).map((m) => m.value)
       expect(new Set(values).size).toBe(values.length)
     }
+  })
+
+  it('satisfies the content style contract on every sampled problem', () => {
+    // Sampled rather than static: the text is generated, so the only way to
+    // check it is to generate a lot of it. One failure lists every violation
+    // across all five difficulties so an authoring pass can fix them together.
+    const at = manifestIndex.get(skill.id)
+    expect(at, `${skill.id} is not in the manifest`).toBeDefined()
+
+    const violations = all.flatMap((problem) => checkContent(problem, at!))
+    const distinct = [...new Set(formatViolations(violations))]
+
+    expect(distinct).toEqual([])
   })
 
   it('always ships a hint and worked solution', () => {
