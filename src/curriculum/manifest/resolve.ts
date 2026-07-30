@@ -1,0 +1,189 @@
+/**
+ * Derivation over the curriculum manifest.
+ *
+ * Three things are computed rather than written down, each for the same reason:
+ * writing them out by hand across 201 skills would be 201 chances to make a
+ * mistake, and storing them would go stale.
+ *
+ *  - prerequisites — derived from unit order plus unit-level `dependsOn`
+ *  - skill state   — derived from the generator registry and built capabilities
+ *  - unlock edges  — derived by seeing through skills that have no generator yet
+ */
+
+import type { Capability, SkillEntry, SkillState, StageEntry, UnitEntry } from './types'
+
+/** Key-shaped lookup. Both `Set<K>` and `Map<K, V>` satisfy this. */
+type Lookup<K> = { has(key: K): boolean }
+
+/**
+ * Capabilities that are actually built today.
+ *
+ * Empty: nothing beyond the plain number keypad exists yet, so every stage that
+ * declares a requirement stays `planned` on infrastructure. Entries are added
+ * here as the capability lands, which flips its stage on with no other change.
+ */
+export const AVAILABLE_CAPABILITIES: ReadonlySet<Capability> = new Set()
+
+export type SkillLocation = {
+  skill: SkillEntry
+  unit: UnitEntry
+  stage: StageEntry
+}
+
+/**
+ * Flatten the manifest into a skill id → location map, in curriculum order.
+ *
+ * First entry wins on a duplicate id, so the manifest still loads; catching the
+ * duplicate is the uniqueness test's job, where it can name both offenders.
+ */
+export function indexSkills(stages: readonly StageEntry[]): Map<string, SkillLocation> {
+  const index = new Map<string, SkillLocation>()
+  for (const stage of stages)
+    for (const unit of stage.units)
+      for (const skill of unit.skills)
+        if (!index.has(skill.id)) index.set(skill.id, { skill, unit, stage })
+  return index
+}
+
+/**
+ * Expand every skill's prerequisites into explicit skill ids.
+ *
+ * Three rules, in priority order:
+ *  1. An explicit `prerequisites` array on the skill replaces the default
+ *     entirely — including replacing it with nothing.
+ *  2. Otherwise a skill's prerequisite is the previous skill in its unit.
+ *  3. The first skill of a unit instead takes the last skill of each unit named
+ *     in `dependsOn`, or nothing if the unit depends on nothing (a root).
+ *
+ * The returned map is the reviewable form of the graph — dangling ids are
+ * passed through as declared, for validation to report.
+ */
+export function resolvePrerequisites(
+  stages: readonly StageEntry[],
+): Map<string, string[]> {
+  const lastSkillByUnit = new Map<string, string>()
+  for (const stage of stages)
+    for (const unit of stage.units) {
+      const last = unit.skills.at(-1)
+      if (last) lastSkillByUnit.set(unit.id, last.id)
+    }
+
+  const resolved = new Map<string, string[]>()
+
+  for (const stage of stages)
+    for (const unit of stage.units)
+      unit.skills.forEach((skill, i) => {
+        if (skill.prerequisites) {
+          resolved.set(skill.id, [...skill.prerequisites])
+        } else if (i > 0) {
+          resolved.set(skill.id, [unit.skills[i - 1].id])
+        } else {
+          resolved.set(
+            skill.id,
+            (unit.dependsOn ?? []).map((unitId) => {
+              const last = lastSkillByUnit.get(unitId)
+              if (!last)
+                throw new Error(
+                  `${unit.id} declares dependsOn "${unitId}", ` +
+                    `which is not a unit with any skills`,
+                )
+              return last
+            }),
+          )
+        }
+      })
+
+  return resolved
+}
+
+export type StateOptions = {
+  /** Skill ids with a registered generator. The registry `Map` works as-is. */
+  generators: Lookup<string>
+  /** Capabilities that are built. Defaults to `AVAILABLE_CAPABILITIES`. */
+  available?: Lookup<Capability>
+}
+
+/**
+ * Whether a skill can be played.
+ *
+ * `implemented` needs both halves: a generator for the id, and every capability
+ * its stage requires. A fractions skill with a finished generator but no KaTeX
+ * to render it is `planned` — which is honest, rather than shipping a lesson
+ * that renders as mush.
+ */
+export function resolveSkillState(
+  skillId: string,
+  stage: Pick<StageEntry, 'requires'>,
+  options: StateOptions,
+): SkillState {
+  if (!options.generators.has(skillId)) return 'planned'
+
+  const available = options.available ?? AVAILABLE_CAPABILITIES
+  const blocked = (stage.requires ?? []).some((capability) => !available.has(capability))
+
+  return blocked ? 'planned' : 'implemented'
+}
+
+/** `resolveSkillState()` across the whole manifest. */
+export function resolveSkillStates(
+  stages: readonly StageEntry[],
+  options: StateOptions,
+): Map<string, SkillState> {
+  const states = new Map<string, SkillState>()
+  for (const [id, { stage }] of indexSkills(stages))
+    states.set(id, resolveSkillState(id, stage, options))
+  return states
+}
+
+/**
+ * Rewrite prerequisites so `planned` skills are transparent.
+ *
+ * A skill with no generator must not become a wall the learner cannot pass, so
+ * it is skipped when resolving unlock and its dependants inherit *its*
+ * prerequisites instead. The learner therefore only ever sees a contiguous run
+ * of playable skills, and adding a generator later slots it into place without
+ * stranding anything behind it.
+ *
+ * Unknown ids are treated as planned with no prerequisites of their own, so they
+ * drop out rather than throwing — a dangling id is validation's to report.
+ *
+ * @throws if pass-through hits a cycle, naming the full path. Implemented skills
+ * terminate expansion, so this guards the traversal rather than validating the
+ * graph — whole-graph acyclicity is checked separately.
+ */
+export function resolveUnlockPrerequisites(
+  prerequisites: ReadonlyMap<string, readonly string[]>,
+  states: ReadonlyMap<string, SkillState>,
+): Map<string, string[]> {
+  const cache = new Map<string, string[]>()
+  const visiting: string[] = []
+
+  /** Unlock prerequisites *of* `id`, seeing through planned skills. */
+  const expand = (id: string): string[] => {
+    const cached = cache.get(id)
+    if (cached) return cached
+
+    const cycleStart = visiting.indexOf(id)
+    if (cycleStart !== -1)
+      throw new Error(
+        `Prerequisite cycle: ${[...visiting.slice(cycleStart), id].join(' → ')}`,
+      )
+
+    visiting.push(id)
+
+    const edges: string[] = []
+    for (const prerequisite of prerequisites.get(id) ?? []) {
+      const inherited =
+        states.get(prerequisite) === 'implemented' ? [prerequisite] : expand(prerequisite)
+      for (const edge of inherited) if (!edges.includes(edge)) edges.push(edge)
+    }
+
+    visiting.pop()
+    cache.set(id, edges)
+    return edges
+  }
+
+  const unlock = new Map<string, string[]>()
+  for (const id of prerequisites.keys()) unlock.set(id, expand(id))
+  return unlock
+}
