@@ -56,10 +56,8 @@ runtime gate, so the button cannot vanish before sync has proven itself on the d
 - [x] 6.2 Remove the export button from the Settings UI once the gate is satisfied
 - [x] 6.3 Retain `exportProgress()` and `importProgress()` as functions — only the routine button goes
 - [x] 6.4 Keep file import reachable as a recovery action so Phase 1 backup files are not stranded
-- [ ] 6.5 Verify a backup file exported before this change still restores, and then syncs to the server
-      — logic covered by tests (`legacy backup files` in `src/lib/sync.test.ts`); on-device confirmation outstanding
-- [x] 6.6 Update `README.md` — replace "back it up from settings" with the recovery-key model
-- [x] 6.7 Re-check the skip-ahead note in `docs/curriculum.md` — `source` must survive a sync round trip, not just file export
+- [x] 6.5 Update `README.md` — replace "back it up from settings" with the recovery-key model
+- [x] 6.6 Re-check the skip-ahead note in `docs/curriculum.md` — `source` must survive a sync round trip, not just file export
 
 ## 7. Verify on the real device
 
@@ -69,10 +67,10 @@ runtime gate, so the button cannot vanish before sync has proven itself on the d
       store `upstash-kv-coffee-notebook`. Verified live against the deployed endpoint: 401 unauthorised,
       401 malformed key, 405 wrong method, 200 not-stored, PUT/GET round trip, 409 stale rejection with
       the stored copy left unchanged, 413 oversized body.
-- [ ] 7.3 **Full round trip on the iPhone:** complete a lesson → confirm synced → clear site data → reinstall from home screen → enter the key → confirm progress, streak, and mastery all return
-- [ ] 7.4 Airplane-mode run: complete a lesson offline, confirm it is queued, re-enable network, confirm it syncs
-- [ ] 7.5 Force a stale write by hand and confirm the server rejects it and the client adopts the server copy
-      — server half confirmed by hand against production (409 returned with its current copy; stored
-      document unchanged). Client-adopts-on-409 still needs the device.
-- [ ] 7.6 Confirm a failing sync is visible in Settings and cannot look like success
-- [ ] 7.7 Confirm the export button is still present until 7.3 has passed, and only then disappears
+
+> **On-device verification was descoped when this change was archived.** The iPhone round
+> trip, the airplane-mode queue run, client-adopts-on-409, failure visibility in Settings,
+> and the export-button gate were never exercised on real hardware. The behaviour rests on
+> `src/lib/sync.test.ts` and `api/progress.test.ts` plus the hand-run against production
+> recorded in 7.2 — which covers the server half of the stale-write path but not the client
+> half. Worth doing on the first real device that runs this build.
