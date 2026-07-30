@@ -358,7 +358,7 @@ understanding; not one problem asks for a calculation.
 | 14.3 | `one-step-multdiv` | | |
 | 14.4 | `two-step` | | ⚠️ undoing in the wrong order |
 | 14.5 | `vars-both-sides` | | |
-| 14.6 | `with-parentheses` | | |
+| 14.6 | `equation-parentheses` | | |
 | 14.7 | `with-fractions` | Clear denominators | |
 | 14.8 | `special-solutions` | None / infinite | |
 | 14.9 | `equation-words` | | |
