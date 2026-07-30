@@ -4,7 +4,7 @@ A gamified math app that starts at counting and builds toward GED level. Built a
 installable iPhone home-screen web app (PWA) — no App Store, no Apple Developer account,
 no Mac required.
 
-## Status: Phase 1 complete, whole course mapped
+## Status: playable loop, whole course mapped
 
 A full playable loop with six skills, mastery levels, XP, coins, streaks, and backup.
 
@@ -14,20 +14,16 @@ membership, and pacing markers, cross-checked against [`docs/curriculum.md`](doc
 **6 of the 201 are playable** — a skill becomes playable by gaining a generator, never by
 being added to the manifest.
 
-| Phase | Scope | State |
-|---|---|---|
-| 1 | Playable skeleton, six skills, mascot v1, persistence, backup | ✅ done |
-| 1.5 | Curriculum manifest, validation, content contract | ✅ done |
-| 2 | Skill tree UI, cosmetics shop, decoratable room, full animation | next |
-| 3 | Spaced repetition, review lessons, stats, streak notifications | |
-| 4 | Units 0–22 — the curriculum bulk, 195 generators | |
-| 5 | GED prep: timed mixed tests, formula sheet, calculator sections | |
-
 The 55 unbuilt skills in Stages A, B and C — the arithmetic foundation plus signed numbers —
 need only their generators; the existing number keypad is enough for all but one, which wants
 a number line. Stage D onward is gated on infrastructure that does not exist yet as well:
 KaTeX, fraction input, diagrams, expression input, a tap-to-plot coordinate plane, charts,
 and timed mode.
+
+**[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
+milestone, what blocks what, and the unbuilt product features (lesson-loop mechanics,
+skill-tree navigation, dress-up, skip-ahead, review). It lives in one place so it cannot
+drift out of step with this file.
 
 ## Running it
 
@@ -153,6 +149,11 @@ allowed to silently overwrite newer progress. **Settings → Backup** shows when
 last reached the server and distinguishes synced, pending, offline, and failed, so a quiet
 failure cannot masquerade as success.
 
+One caveat worth stating: all of this is covered by tests and was exercised by hand against
+the deployed endpoint, but **the full round trip has not yet been run on an actual iPhone** —
+install, complete a lesson, clear site data, reinstall, restore from the key. Until that
+happens, treat sync as verified in principle rather than in practice.
+
 Manual **Export backup** is superseded by sync and disappears once sync has succeeded at
 least once on that device; it stays put until then, so a device where sync has never
 worked is never left with no backup at all. **Restore from a file** remains available as a
@@ -169,6 +170,9 @@ src/
   components/   Mascot, Lesson, Keypad, ProblemView, Home, Settings
   store/        zustand + IndexedDB persistence, mastery and unlock rules
 docs/           curriculum.md — the course in prose, cross-checked against the manifest
+                roadmap.md — everything left to build, and what blocks what
+openspec/       specs/ — what the system does today, as requirements
+                changes/archive/ — how it got that way
 scripts/        icon generation from the mascot artwork
 ```
 
