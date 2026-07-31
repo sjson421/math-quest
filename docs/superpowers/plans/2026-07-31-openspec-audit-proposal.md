@@ -34,11 +34,11 @@
 - Consumes: Real repository authorities and a temporary proposal fixture containing realistic contradictions.
 - Produces: A baseline report identifying which audit behaviors occur without specialized guidance and which defects are missed.
 
-- [ ] **Step 1: Build a disposable realistic fixture**
+- [x] **Step 1: Build a disposable realistic fixture**
 
 Create `/tmp/openspec-audit-proposal-fixture/` from one archived change's four artifact shapes. Seed a small set of independently verifiable defects without changing the repository: one false runtime/capability claim, one incorrect `ADDED` versus `MODIFIED` delta, one requirement with no delivering task, and one testing task that trusts a generated answer instead of recomputing it independently. Record the seeded defects outside the fixture so the baseline agent cannot read the answer key.
 
-- [ ] **Step 2: Dispatch the baseline agent without the new skill**
+- [x] **Step 2: Dispatch the baseline agent without the new skill**
 
 Use a fresh subagent with no inherited conversation and this task-local brief:
 
@@ -48,7 +48,7 @@ Audit the OpenSpec proposal artifacts in /tmp/openspec-audit-proposal-fixture ag
 
 Do not mention the intended skill, seeded defects, expected findings, or this plan.
 
-- [ ] **Step 3: Verify RED behavior**
+- [x] **Step 3: Verify RED behavior**
 
 Save the returned report to `/tmp/openspec-audit-proposal-baseline.md`. Compare it manually with the private defect list and record: defects missed, claims accepted without source evidence, repository areas not explored, and whether the agent proposed unsafe edits or implementation work. The baseline must exhibit at least one relevant gap; otherwise strengthen the fixture before authoring the skill.
 
@@ -64,7 +64,7 @@ Save the returned report to `/tmp/openspec-audit-proposal-baseline.md`. Compare 
 - Consumes: The approved design and demonstrated baseline failures.
 - Produces: `$openspec-audit-proposal`, a self-contained audit-and-correct workflow with UI discovery metadata.
 
-- [ ] **Step 1: Initialize the skill with generated metadata**
+- [x] **Step 1: Initialize the skill with generated metadata**
 
 Run:
 
@@ -78,7 +78,7 @@ python3 /home/jay-son/.codex/skills/.system/skill-creator/scripts/init_skill.py 
 
 Expected: the skill directory contains only `SKILL.md` and `agents/openai.yaml`.
 
-- [ ] **Step 2: Replace the generated template with the minimal workflow**
+- [x] **Step 2: Replace the generated template with the minimal workflow**
 
 Use `apply_patch` to write frontmatter with only:
 
@@ -102,7 +102,7 @@ Write the body in imperative form and include these ordered sections:
 
 Use positive output contracts for the report shape. Add counters only for baseline rationalizations actually observed in Task 1.
 
-- [ ] **Step 3: Inspect generated metadata**
+- [x] **Step 3: Inspect generated metadata**
 
 Run:
 
@@ -112,7 +112,7 @@ sed -n '1,120p' .agents/skills/openspec-audit-proposal/agents/openai.yaml
 
 Expected: quoted interface values, a 25–64 character short description, and a default prompt explicitly naming `$openspec-audit-proposal`.
 
-- [ ] **Step 4: Commit the initial skill**
+- [x] **Step 4: Commit the initial skill**
 
 Run:
 
@@ -135,7 +135,7 @@ Expected: one commit containing only the initial skill and generated metadata.
 - Consumes: The authored skill and the unchanged baseline fixture.
 - Produces: Evidence that the skill closes baseline gaps without unsafe artifact or implementation changes.
 
-- [ ] **Step 1: Dispatch a fresh agent with the skill**
+- [x] **Step 1: Dispatch a fresh agent with the skill**
 
 Use a fresh subagent with no inherited conversation:
 
@@ -145,15 +145,15 @@ Use $openspec-audit-proposal at /home/jay-son/dev/math-quest/.agents/skills/open
 
 Do not provide the defect list or baseline conclusions.
 
-- [ ] **Step 2: Verify GREEN behavior**
+- [x] **Step 2: Verify GREEN behavior**
 
 Confirm the agent explored implementation evidence before auditing, delegated independent investigation areas when warranted, found every seeded defect with evidence, separated suspicions from confirmed defects, avoided implementation code, and produced the required report shape. Inspect any fixture edits and confirm they affect only confirmed proposal defects.
 
-- [ ] **Step 3: Refactor demonstrated gaps only**
+- [x] **Step 3: Refactor demonstrated gaps only**
 
 If the agent misses a seeded defect or finds a new loophole, update `SKILL.md` with the smallest positive recipe, required structural slot, or observable conditional that addresses that failure. Repeat Step 1 with a clean copy of the fixture until the behavior is consistent.
 
-- [ ] **Step 4: Commit verified refinements when needed**
+- [x] **Step 4: Commit verified refinements when needed**
 
 If GREEN verification changes `SKILL.md`, stage the tracked skill file, inspect the
 staged diff, and commit with:
@@ -177,7 +177,7 @@ If verification passes without a skill change, record that no Task 3 commit was 
 - Consumes: Behaviorally verified, committed skill files.
 - Produces: Structural validation evidence with no test contamination or unrelated staged changes.
 
-- [ ] **Step 1: Run the structural validator**
+- [x] **Step 1: Run the structural validator**
 
 Run the provided validator with a Python environment containing PyYAML:
 
@@ -190,7 +190,7 @@ If `yaml` is unavailable, install PyYAML only into a disposable `/tmp` target an
 
 Expected: `Skill is valid!`
 
-- [ ] **Step 2: Run content checks**
+- [x] **Step 2: Run content checks**
 
 Run:
 
@@ -202,11 +202,11 @@ git diff --check -- .agents/skills/openspec-audit-proposal docs/superpowers/plan
 
 Expected: no placeholders, no whitespace errors, and a concise skill body near the 500-word target.
 
-- [ ] **Step 3: Remove disposable test artifacts**
+- [x] **Step 3: Remove disposable test artifacts**
 
 Delete only `/tmp/openspec-audit-proposal-fixture/`, `/tmp/openspec-audit-proposal-baseline.md`, and any disposable validator dependency directory created for this task. Confirm no fixture exists under `openspec/changes/`.
 
-- [ ] **Step 4: Review the final repository state**
+- [x] **Step 4: Review the final repository state**
 
 Run:
 
@@ -219,7 +219,7 @@ git log --oneline -- .agents/skills/openspec-audit-proposal
 Expected: the worktree is clean, the new skill is committed, and no disposable fixture
 exists. The implementation plan is already committed as the execution checkpoint.
 
-- [ ] **Step 5: Commit validation-driven fixes only when needed**
+- [x] **Step 5: Commit validation-driven fixes only when needed**
 
 If structural validation required a file change, stage only that tracked skill file,
 inspect it, and commit with:
