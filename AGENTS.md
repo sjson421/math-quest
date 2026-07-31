@@ -48,13 +48,20 @@ Break these and something fails loudly — or worse, quietly.
 - **`src` is type-checked with browser types only**, deliberately, so app code cannot reach
   a Node builtin and typecheck its way into a runtime error. Test-support code that needs a
   repo file uses a `?raw` import (see `manifest/curriculum-doc.ts`).
-- **`isUnlocked()` still uses the generators' hand-written prerequisites**, not the
-  manifest's derived graph. Deliberate: switching it re-locks skills for existing learners.
-  See roadmap B2 before changing it.
+- **The manifest is the runtime unlock authority.** `isUnlocked()` reads
+  `unlockPrerequisites` from `curriculum/index.ts` — the manifest's edges with planned skills
+  seen through. **Generators do not declare prerequisites**; `SkillGenerator` has no such
+  field, and adding one back would be a second graph nothing keeps in step.
+- **A practised skill is never re-locked**, whatever the graph does afterwards. `isUnlocked()`
+  checks `attempts > 0 || mastery > 0` before prerequisites, on every read rather than as a
+  migration, because a record can arrive from the sync endpoint at any time and that endpoint
+  never migrates. A skill with no generator is still locked — that rule outranks it, so a
+  lesson is never offered that cannot be built.
 - **The `quick` flag is carried but not honoured.** The manifest marks 19 skills `quick`;
   `Lesson.tsx` hardcodes `TARGET_CORRECT = 10` and never reads it. The baseline spec states
   the 10 deliberately, so shortening those lessons to 5 is a `MODIFIED` delta against
-  `skill-progression` (roadmap B1), not a bug fix.
+  `skill-progression` (roadmap item 4), not a bug fix. It is also not demonstrable yet: none
+  of the 19 are implemented, so roadmap item 2 comes first.
 - **`reconcile()` in `store/progress.ts` merges stored skills over defaults per skill
   object, not per field.** That is what lets `SkillProgress` gain fields without a sync
   change. A version that picks named fields out of a stored skill breaks the sync contract.
@@ -77,6 +84,9 @@ single-sentence hint, and ≥2 distinct predicted misconceptions on any skill ma
 | File | Covers |
 |---|---|
 | `curriculum/generators.test.ts` | ~1000 problems/skill, answer recomputed independently, content contract |
+| `curriculum/unit-01-add-sub.test.ts` | golden snapshot of generated wording — the gate on any generator refactor |
+| `curriculum/engine/*.test.ts` | column traces, ladders, draws, misconception factories vs. the expressions they replaced |
+| `curriculum/phrasing/frames.test.ts` | every word-problem frame checked at source, sampled or not |
 | `curriculum/coverage.test.ts` | registry ↔ manifest, planned vs implemented, what the learner is offered |
 | `manifest/manifest.test.ts` | counts, uniqueness, dangling prereqs, cycles, reachability, graph snapshot |
 | `manifest/curriculum-doc.test.ts` | manifest ↔ `docs/curriculum.md`, and the document against itself |
@@ -93,12 +103,14 @@ Work is planned as **OpenSpec changes**. Skills live in `.claude/skills/` and
 `/openspec-archive-change`. Task lists are the running record — mark each item done as it
 lands, and note decisions inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, five capabilities —
-  `curriculum-manifest`, `skill-progression`, `skill-content-contract`, `progress-sync`,
-  `recovery-key`. A change amending built behaviour writes `## MODIFIED Requirements`
-  against one of these; `## ADDED` is for genuinely new surface.
+- `openspec/specs/` is the **baseline**: what the system does today, seven capabilities —
+  `curriculum-manifest`, `skill-progression`, `skill-content-contract`, `problem-generation`,
+  `word-problem-phrasing`, `progress-sync`, `recovery-key`. A change amending built behaviour
+  writes `## MODIFIED Requirements` against one of these; `## ADDED` is for genuinely new
+  surface.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — both changes shipped 2026-07-30.
+  holds shipped changes. **The active queue is empty** — three changes shipped, the latest
+  being `generator-engine` on 2026-07-31.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`

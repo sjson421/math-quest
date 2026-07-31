@@ -13,7 +13,13 @@
 
 import type { SkillGenerator, Unit } from '../lib/types'
 import { unit01 } from './unit-01-add-sub'
-import { indexSkills, resolveSkillStates, stages } from './manifest'
+import {
+  indexSkills,
+  resolvePrerequisites,
+  resolveSkillStates,
+  resolveUnlockPrerequisites,
+  stages,
+} from './manifest'
 import type { SkillState } from './manifest'
 
 /** Units in learning order. Phase 1 ships Unit 1 only. */
@@ -63,3 +69,25 @@ export function skillState(id: string): SkillState {
 export const implementedSkillIds = [...skillStates]
   .filter(([, state]) => state === 'implemented')
   .map(([id]) => id)
+
+/**
+ * What must be mastered before each skill opens — the runtime unlock graph.
+ *
+ * The third derivation over the same two inputs as `skillStates`, and never
+ * stored for the same reason: the manifest declares edges between all 201
+ * skills, most of which have no generator, so the edges that can actually gate a
+ * learner change every time one lands.
+ *
+ * Keyed by every manifest id, planned ones included — but every id in a *value*
+ * is implemented, because `resolveUnlockPrerequisites()` sees through the rest.
+ * That is the half that matters: it is what stops a learner being held behind a
+ * skill nobody can play. A key is not a claim that its skill is playable, so ask
+ * `skillState()` rather than `unlockPrerequisites.has()`.
+ *
+ * Named to survive the crowd. `resolvePrerequisites()` returns the *raw* edges
+ * including planned skills, `resolveUnlockPrerequisites()` is the function that
+ * collapses them, and this is that function's result over the live registry.
+ * Reach for this one when the question is "can the learner start this yet".
+ */
+export const unlockPrerequisites: ReadonlyMap<string, readonly string[]> =
+  resolveUnlockPrerequisites(resolvePrerequisites(stages), skillStates)

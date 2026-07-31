@@ -37,10 +37,21 @@ export type SolutionStep = {
   detail?: string
 }
 
+export type Operator = '+' | '−' | '×' | '÷'
+
 /** How the problem is presented. Column layout matches how arithmetic is taught. */
 export type Display =
   | { kind: 'inline'; text: string }
-  | { kind: 'column'; operands: number[]; operator: '+' | '−' | '×' | '÷' }
+  | { kind: 'column'; operands: number[]; operator: Operator }
+  /**
+   * A word problem: prose for the learner, operands for everything else.
+   *
+   * The operands are not redundant with the text. The answer has to be
+   * recomputable from what is displayed without trusting the generator, and
+   * nothing can do that by reading English — least of all a sentence that
+   * deliberately mentions quantities the answer does not use.
+   */
+  | { kind: 'story'; text: string; operands: number[]; operator: Operator }
 
 export type Problem = {
   skillId: string
@@ -62,8 +73,12 @@ export type SkillGenerator = {
   name: string
   /** Shown on the skill tree node. */
   blurb: string
-  /** Skills that must reach mastery >= 2 before this one unlocks. */
-  prerequisites: string[]
+  /**
+   * Deliberately no `prerequisites`. What unlocks what is the manifest's, and
+   * only the manifest's — see `unlockPrerequisites` in `curriculum/index.ts`. A
+   * generator that also declared its edges would be a second graph nothing keeps
+   * in step with the first.
+   */
   generate(rng: import('./rng').Rng, difficulty: Difficulty): Problem
 }
 

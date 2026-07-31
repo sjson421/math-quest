@@ -155,7 +155,7 @@ Self-assessed skips are the risky ones, so the system watches them:
 | 1.5 | `add-2digit-carry` | Carrying | ✅ ⚠️ forgetting the carry |
 | 1.6 | `add-3digit` | Three digits | ✅ |
 | 1.7 | `add-three-numbers` | Stack of three | |
-| 1.8 | `add-words` | Word problems | |
+| 1.8 | `add-words` | Word problems | ✅ |
 
 ### Unit 2 — Subtraction (8)
 

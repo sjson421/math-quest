@@ -12,8 +12,12 @@ context: |
 
   ## Tech
   Vite + React 19 + TypeScript + Tailwind 4 + Framer Motion + Zustand + idb-keyval.
-  PWA installed to the iPhone home screen. No backend, no accounts, no runtime LLM calls.
-  All data local in IndexedDB. Developed on Linux; deployed to Vercel.
+  PWA installed to the iPhone home screen. No accounts and no runtime LLM calls.
+  The device is the working store: progress lives in IndexedDB and the app is fully
+  usable offline. One serverless endpoint (api/progress.ts, Vercel edge + Upstash Redis)
+  holds a backup copy keyed by a recovery key, storing the progress blob opaquely — it
+  never validates, interprets, or migrates the schema. Developed on Linux; deployed to
+  Vercel.
 
   ## Non-negotiable design commitments
   These are settled decisions. A proposal that contradicts one is wrong — call it out
@@ -26,8 +30,10 @@ context: |
   - WRONG ANSWERS ARE DIAGNOSED, NOT REJECTED. Generators predict the exact value a given
     mistake produces, so feedback names the real error ("it looks like you forgot to carry
     the 1"). Feedback is warm and never uses alarm-red styling.
-  - PROGRESS IS LOCAL AND FRAGILE. iOS can evict web app storage. Any change touching the
-    data model must also update backup export/import, or a restore silently loses state.
+  - PROGRESS IS LOCAL AND FRAGILE. iOS can evict web app storage, so the recovery key and
+    sync endpoint are the safety net. Any change touching the data model must survive the
+    round trip: reconcile() merges stored skills over defaults per skill object, which is
+    what lets SkillProgress gain fields without a sync change.
   - CUSTOM KEYPAD ONLY. Never fall back to the iOS system keyboard.
   - PATIENT PACING. Skills are small and single-idea. Splitting a hard skill into two is
     always preferable to one skill that takes three attempts to pass.

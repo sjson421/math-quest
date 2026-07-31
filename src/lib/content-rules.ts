@@ -131,6 +131,10 @@ function sentences(text: string): string[] {
 function learnerText(problem: Problem): string[] {
   return [
     problem.prompt,
+    // A story is the longest learner-facing string in the course and the most
+    // likely to reach for a word from a later unit. Leaving it out would have
+    // exempted exactly the text the forward-reference rule exists for.
+    problem.display.kind === 'story' ? problem.display.text : '',
     problem.hint,
     ...problem.solution.flatMap((step) => [step.text, step.detail ?? '']),
     ...(problem.misconceptions ?? []).map((m) => m.nudge),

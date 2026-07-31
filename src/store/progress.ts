@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { get as idbGet, set as idbSet } from 'idb-keyval'
-import { allSkills, generators } from '../curriculum'
+import { allSkills, skillState, unlockPrerequisites } from '../curriculum'
 
 const STORAGE_KEY = 'math-quest-progress'
 const SCHEMA_VERSION = 1
@@ -229,11 +229,48 @@ export const useProgress = create<Store>((set, get) => {
   }
 })
 
-/** A skill is available once every prerequisite has reached the threshold. */
+/**
+ * Whether the learner has ever worked on this skill.
+ *
+ * `attempts` is the direct signal — it moves on the first answer of the first
+ * lesson, before any mastery is earned. `mastery` is the belt-and-braces half:
+ * it cannot rise without attempts through normal play, but a handed-over backup
+ * file can carry it, and skipping ahead is specified to set mastery 3 with no
+ * attempts at all.
+ *
+ * A missing record reads as not practised. `initialProgress()` seeds only the
+ * skills with generators, so most of the 201 manifest ids have no entry.
+ */
+function hasPractised(record: SkillProgress | undefined): boolean {
+  return (record?.attempts ?? 0) > 0 || (record?.mastery ?? 0) > 0
+}
+
+/**
+ * Whether a lesson for this skill can be started.
+ *
+ * Three rules, and the first that decides wins:
+ *
+ *  1. A skill we cannot generate is locked — no generator, or a stage waiting on
+ *     infrastructure that is not built.
+ *  2. A skill the learner has already practised stays open. The curriculum graph
+ *     moves as the course is built, and a skill that closes behind someone is a
+ *     mastery they can keep but never raise. This is checked on every read rather
+ *     than migrated once, because a record can arrive from the sync endpoint at
+ *     any time and that endpoint stores it opaquely without ever migrating it.
+ *  3. Otherwise every prerequisite must have reached the threshold.
+ *
+ * Rule 1 outranks rule 2 deliberately: handing back a skill whose lesson cannot
+ * be generated is worse than one that closes because the course is unfinished.
+ *
+ * Prerequisites come from the manifest and from nowhere else — generators do not
+ * declare their own. `unlockPrerequisites` has already seen through the skills
+ * with no generator, so nobody is held behind our build order.
+ */
 export function isUnlocked(skillId: string, progress: Progress): boolean {
-  const skill = generators.get(skillId)
-  if (!skill) return false
-  return skill.prerequisites.every(
+  if (skillState(skillId) !== 'implemented') return false
+  if (hasPractised(progress.skills[skillId])) return true
+
+  return (unlockPrerequisites.get(skillId) ?? []).every(
     (id) => (progress.skills[id]?.mastery ?? 0) >= UNLOCK_THRESHOLD,
   )
 }

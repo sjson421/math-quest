@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`the unlock graph the store gates on > matches the committed snapshot for the skills that are built 1`] = `
+{
+  "add-2digit-carry": [
+    "add-2digit-nocarry",
+  ],
+  "add-2digit-nocarry": [
+    "add-facts",
+  ],
+  "add-3digit": [
+    "add-2digit-carry",
+  ],
+  "add-facts": [],
+  "add-words": [
+    "add-3digit",
+  ],
+  "sub-2digit-borrow": [
+    "sub-facts",
+  ],
+  "sub-facts": [
+    "add-words",
+  ],
+}
+`;

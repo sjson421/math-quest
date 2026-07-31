@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { allSkills, generators, manifestIndex } from './index'
+import { allSkills, manifestIndex } from './index'
 import { checkContent, formatViolations } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { checkAnswer } from '../lib/answer'
@@ -23,7 +23,10 @@ function recompute(problem: Problem): number {
   let operands: number[]
   let operator: string
 
-  if (display.kind === 'column') {
+  if (display.kind === 'column' || display.kind === 'story') {
+    // A story carries its quantities precisely so this stays possible. Reading
+    // them out of the prose would not work: a word problem mentions numbers the
+    // answer does not use, which is most of what makes it a word problem.
     operands = display.operands
     operator = display.operator
   } else {
@@ -137,34 +140,48 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
   })
 })
 
-describe('skill graph', () => {
-  it('references only skills that exist', () => {
-    for (const skill of allSkills) {
-      for (const prereq of skill.prerequisites) {
-        expect(generators.has(prereq), `${skill.id} → ${prereq}`).toBe(true)
-      }
-    }
+describe('recompute', () => {
+  // A checker that returns "no problems" looks exactly like a clean codebase.
+  // These are the synthetic cases proving the story branch actually verifies.
+  const story = (operands: number[], stated: number): Problem => ({
+    skillId: 'synthetic',
+    prompt: 'How many in total?',
+    display: {
+      kind: 'story',
+      // Mentions a quantity the answer does not use, which is the whole reason
+      // the operands are carried separately from the prose.
+      text: `Pip has 4 stickers and 3 more in a box. Jun has 9. How many does Pip have?`,
+      operands,
+      operator: '+',
+    },
+    answer: { kind: 'exact', n: stated, d: 1 },
+    inputMode: 'keypad',
+    hint: 'Add what Pip has.',
+    solution: [{ text: 'Add 4 and 3.' }],
+    difficulty: 1,
   })
 
-  it('is acyclic', () => {
-    const state = new Map<string, 'visiting' | 'done'>()
-
-    const visit = (id: string, trail: string[]) => {
-      if (state.get(id) === 'done') return
-      if (state.get(id) === 'visiting') {
-        throw new Error(`Cycle: ${[...trail, id].join(' → ')}`)
-      }
-      state.set(id, 'visiting')
-      for (const prereq of generators.get(id)!.prerequisites) {
-        visit(prereq, [...trail, id])
-      }
-      state.set(id, 'done')
-    }
-
-    expect(() => allSkills.forEach((s) => visit(s.id, []))).not.toThrow()
+  it('verifies a story from its carried operands, not its prose', () => {
+    const problem = story([4, 3], 7)
+    expect(recompute(problem)).toBe(7)
+    expect(answerValue(problem)).toBe(recompute(problem))
   })
 
-  it('has at least one skill with no prerequisites to start from', () => {
-    expect(allSkills.some((s) => s.prerequisites.length === 0)).toBe(true)
+  it('catches a story whose stated answer disagrees with its operands', () => {
+    // The failure this branch exists to prevent: prose and answer look
+    // plausible together, and the answer key is still wrong.
+    const problem = story([4, 3], 13)
+    expect(recompute(problem)).toBe(7)
+    expect(answerValue(problem)).not.toBe(recompute(problem))
+  })
+
+  it('is not fooled by a distractor quantity in the sentence', () => {
+    // 9 appears in the text; reading numbers out of the prose would find it.
+    const problem = story([4, 3], 7)
+    expect(recompute(problem)).not.toBe(16)
   })
 })
+
+// The prerequisite graph is asserted in `manifest/manifest.test.ts` — acyclic,
+// no dangling ids, every skill reachable from the single root — across all 201
+// skills rather than the seven with generators. Generators do not declare edges.

@@ -1,9 +1,9 @@
 # Math Quest — Road to v1.0
 
-What is left, in what order, and what blocks what.
+What is left, in the order it should be done.
 
-**Status: 6 of 201 skills are playable.** All six are in Units 1–2. No capability beyond
-the number keypad is built. This line is the only progress number in the repo's
+**Status: 7 of 201 skills are playable.** All seven are in Units 1–2. No capability beyond
+the plain number keypad is built. This line is the only progress number in the repo's
 documentation — the manifest and `npm test` are the authority, and everything below is
 scope rather than status.
 
@@ -19,7 +19,13 @@ import { stages } from './src/curriculum/manifest/index'
 
 ## How to read this
 
-**A skill ships by gaining a generator, never by being added to the manifest.** All 201 are
+**One list, in order.** An earlier version of this document ran two parallel tracks, which
+implied a freedom of ordering that does not survive contact with the dependencies. Content
+needs input modes; input modes are pointless before the content that uses them; and several
+items are only *testable* once something else exists. Old identifiers are kept in
+parentheses so references elsewhere in the repo still resolve.
+
+**A skill ships by gaining a generator**, never by being added to the manifest. All 201 are
 already declared in `src/curriculum/manifest/`; each resolves as `planned` until a generator
 is registered for its id *and* every capability its stage needs is built. Only `implemented`
 skills reach the learner, and planned ones are transparent to unlocking, so nobody is held
@@ -27,184 +33,281 @@ behind our build order.
 
 **Capabilities gate whole stages.** `AVAILABLE_CAPABILITIES` in
 `src/curriculum/manifest/resolve.ts` is empty today. Adding a capability there is a one-line
-edit that flips its stage on — which is why capability work is listed as a precondition, not
-as part of the content milestone it unblocks.
+edit that flips its stage on — which is why capability work is its own item, never bundled
+with the content it unblocks.
 
-**Sizing is relative.** S / M / L / XL against each other, not against a calendar. Generator
-throughput is unknown until a full unit has been written, so any date here would be fiction.
+**One unit per change.** A 50-skill stage would be roughly a hundred tasks. Where an item
+below covers several units, it is several changes.
 
-Two tracks run in parallel. Content (Track A) and experience (Track B) are mostly
-independent; a single ordered list would imply blocking that does not exist. Dependencies
-that *do* exist are named on each item.
+**Sizing is relative.** S / M / L / XL against each other, not against a calendar.
 
----
-
-## Track A · Content
-
-Order follows the [build order](curriculum.md#build-order) in the curriculum document.
-Skill counts are per stage in total; the Status line above says how many are built.
-
-| # | Scope | Size | Preconditions |
-|---|---|---|---|
-| **A1** | Stage A · Unit 0 (8) + the rest of Stage B · Units 1–5 (44 total) | L | B0 |
-| **A2** | Stage C · Unit 6 (9) | S | number-line input, for 6.1 only |
-| **A3** | Stage D · Units 7–11 (50) | XL | KaTeX, fraction input, diagram |
-| **A4** | Stage E · Units 12–15 (34) | L | expression input |
-| **A5** | Stage F · Units 16–19 (28) | L | coordinate-plane input |
-| **A6** | Stage G · Units 20–21 (22) | M | diagram, chart |
-| **A7** | Stage H · Unit 22 (6) | S | timed mode, score estimator |
-
-**Exit criteria, every content milestone:** every skill in scope resolves as `implemented`;
+**Exit criteria, every content item:** every skill in scope resolves as `implemented`;
 `npm test` green including the content contract over ~1000 sampled problems per skill; the
 document's ✅ markers updated to match, which the cross-check enforces.
 
-**A1 — the foundation.** The largest single block of playable-today work: nothing here needs
-infrastructure that does not exist. Unit 3 (multiplication, 14 skills) is deliberately the
-slowest unit in the course; Unit 5 is only 3 skills. Word problems close Units 1–4 and need
-B0's phrasing bank.
-
-*One deviation to note:* the curriculum document's build order opens at "finish Stage B" and
-never places Stage A, which was an oversight — Unit 0 is where a learner who needs place
-value starts. A1 covers both, Stage A first.
-
-**A2 — the gate to algebra.** Eight of its nine skills are keypad-answerable; only
-`negatives-numberline` (6.1) wants the number line. Stage C therefore declares no stage-wide
-capability requirement on purpose — marking one would hold eight playable skills behind an
-input mode. Build the eight, or build the number line first and take all nine.
-
-**A3 — the biggest.** Fractions cannot render as plain text, so all three capabilities land
-before any of the 50 skills do. Unit 7 is conceptual only: not one problem asks for a
-calculation.
-
-**A7** closes the course and is the only place time pressure appears anywhere in the app.
-
-### Capability preconditions
-
-First-needed mapping is from the [capability table](curriculum.md#new-capabilities-required-by-stage).
-Each is its own piece of work, sized independently of the content it unblocks.
-
-| Capability | First needed | Size | Notes |
-|---|---|---|---|
-| Number-line input | C · 6.1 | S | Tap to place a value |
-| KaTeX rendering | D · Unit 7 | M | Fractions cannot render as plain text |
-| Diagram rendering | D · 7.2 | M | Shaded shapes for fraction meaning |
-| Fraction keypad mode | D · Unit 8 | S | `allowFraction` already stubbed in the keypad |
-| Expression input | E · Unit 13 | M | Variables on the keypad |
-| Coordinate-plane input | F · 16.1 | L | Tap to plot a point |
-| Chart rendering | G · 21.5 | M | Bar, line, scatter |
-| Timed mode + score estimator | H | M | Includes the GED score model |
-
 ---
 
-## Track B · Experience
+## The sequence
 
-### B0 · Generator engine and phrasing bank — L
+- [x] **0 · Generator engine and phrasing bank** — L *(was B0)* — **shipped 2026-07-31**
 
-The highest-leverage item in this document: all 195 remaining generators ride on it.
+      `src/curriculum/engine/` and a templated phrasing bank, with `add-words` (1.8) on it as
+      proof. The six existing generators moved across with output held byte-identical. Left
+      behind the `problem-generation` and `word-problem-phrasing` capabilities.
 
-- Shared helpers for the shapes that repeat — column layouts, digit extraction, band
-  selection, misconception prediction patterns — extracted from the six in
-  `src/curriculum/unit-01-add-sub.ts`.
-- A **templated phrasing bank** for word problems (fixed sentence frames, generated
-  numbers). These close Units 1–4 and 8–11 and are the weakest fit for pure procedural
-  generation.
-- Per-unit file conventions and a test harness that a new unit joins by existing.
+- [x] **1 · Manifest-driven unlock** — S *(was B2)* — **shipped 2026-07-31**
 
-**Exit:** writing a unit is mostly arithmetic and misconception authoring, not scaffolding.
+      `isUnlocked()` reads `unlockPrerequisites` (the manifest's edges, planned skills seen
+      through) instead of the generators' hand-written `prerequisites`, which is gone from
+      `SkillGenerator` entirely. Left behind: **never re-lock a skill already practised**,
+      enforced at read time off `attempts`/`mastery` rather than as a migration, so a record
+      restored from the endpoint years from now still gets it.
 
-### B1 · Lesson-loop fidelity — M
+      Of the seven built skills, five already agreed. Two moved, and **both ended up later**,
+      which this item originally got half wrong: `sub-facts` **tightens** from `add-facts` to
+      `add-words`, because Unit 2 depends on Unit 1 and inherits its tail. `sub-2digit-borrow`
+      drops its cross-edge to `add-2digit-carry` — a loosening at the level of one edge, but it
+      inherits `sub-facts`, so its transitive gate grew from four skills to six. **No skill
+      unlocks earlier than it used to; Unit 2 is now fully behind Unit 1.** Both can therefore
+      strand a learner, not just `sub-facts`.
 
-Commitments already written down as fact in [anti-discouragement mechanics](curriculum.md#anti-discouragement-mechanics)
-and unbuilt in `src/`:
+      Also corrected here: `Home.tsx` rendered the cards in the order the generators were
+      written, which put `sub-facts` second while it now opens sixth. The array is in
+      curriculum order and a test pins it there.
 
-- **`quick` skills end at 5 correct.** The manifest carries the flag for 19 skills;
-  `Lesson.tsx` hardcodes `TARGET_CORRECT = 10`. Every hard unit opens with one of these.
-- **Warm-up problem** one difficulty band below current — a guaranteed early win.
-- **Silent recovery:** 3 wrong in a row drops difficulty for the rest of the lesson, never
-  surfaced to the learner.
-- **Max 2 unlocks at once**, since more open paths cause choice paralysis.
-- **Stage checkpoints** — a celebration at each stage boundary, not just per skill.
+- [ ] **2 · Unit 1, the remaining three** — S
 
-### B2 · Manifest-driven unlock — S, with a migration note
+      `add-facts-small`, `add-tens`, `add-three-numbers`. Completes the first unit, and
+      produces the course's first `quick` skill, without which item 4 cannot be demonstrated.
+      `add-three-numbers` is the first consumer of a three-operand column trace, which item 0
+      deliberately deferred.
 
-`isUnlocked()` in `src/store/progress.ts` still walks the generators' hand-written
-`prerequisites`. Move it onto `resolveUnlockPrerequisites()` so the manifest is the runtime
-authority as well as the design one.
+- [ ] **3 · Per-problem keypad rules** — S
 
-**This changes behaviour.** The derived chain routes Unit 2 behind Unit 1's tail, so a
-learner holding `add-facts` but not `add-3digit` can see `sub-facts` re-lock. Ship with a
-reconciliation that never reduces an earned mastery, and verify against a stored record from
-before the change. Do this before A1 lands, while six skills are cheap to reason about.
+      `Lesson.tsx` renders `<Keypad>` with no flags and calls `applyKey(prev, key)` with no
+      rules, so `allowNegative`, `allowDecimal` and `allowFraction` are all unreachable —
+      `src/lib/keypad.ts` implements and tests all three, and nothing passes them. Carry
+      `KeypadRules` on the problem and plumb them through.
 
-### B3 · Skill-tree navigation — L
+      This is one small change that unblocks three separate stages, rather than the three
+      independent items the previous version implied. While here, surface the
+      `'not-simplified'` result that `checkAnswer` already returns and `Lesson.tsx` currently
+      collapses into a plain wrong answer — that is the teachable moment Unit 7 is built on.
 
-`Home.tsx` renders a flat list of one unit's skills. Twenty-three units need stage → unit →
-skill navigation, per-unit progress, and locked/planned states that stay hidden rather than
-teasing. Needed once A1 makes more than one unit real; not before.
+- [ ] **4 · Lesson mechanics** — M *(was half of B1)*
 
-### B4a · Dress-up design tooling — M
+      The commitments in [anti-discouragement mechanics](curriculum.md#anti-discouragement-mechanics)
+      that live inside a single lesson:
 
-Settle how cosmetics are authored **before** any exist, because the answer determines what
-every later asset looks like.
+      - **`quick` skills end at 5 correct.** The manifest marks 19; `Lesson.tsx` hardcodes
+        `TARGET_CORRECT = 10` and `SkillGenerator` does not carry the flag at all, so it has to
+        reach the lesson from the manifest entry.
+      - **Warm-up problem** one difficulty band below current — a guaranteed early win.
+      - **Silent recovery:** three wrong in a row drops difficulty for the rest of the lesson,
+        never surfaced to the learner.
 
-- `.claude/skills/mascot-design/` — Pip's layer contract, palette, and geometry conventions,
-  so outfits and room props are composable data. `src/components/Mascot.tsx` is layered SVG
-  (ears/head, face, accessory) for exactly this reason.
-- A spike comparing an animation runtime (Rive, Lottie) against hand-authored SVG plus the
-  framer-motion already in the app. Decide on bundle cost, authoring loop, and whether
-  non-code editing matters. Record the decision either way.
+      All three fight the same piece of architecture: difficulty is computed once at mount and
+      the entire queue of ten is generated up front. The real work is making the queue lazy.
+      The `quick` half is a `MODIFIED` delta against `skill-progression`, whose baseline states
+      the 10 deliberately.
 
-### B4b · Outfits, shop, and room — L
+- [ ] **5 · Choice input** — S
 
-Coins accumulate today with nothing to spend them on; this is the sink they were always for.
+      Render `problem.choices`. `inputMode: 'choice'` and `Answer.kind === 'choice'` both exist
+      and `checkAnswer` handles them, but **no component has ever rendered a choice** — it is a
+      dead branch, which is why this was missing from the previous version's capability table
+      entirely.
 
-- Cosmetic layers on Pip, and a decoratable room.
-- A shop screen priced against real earn rates, and inventory on the progress record —
-  which must survive the sync round trip, not just local storage.
-- A wardrobe/room editor that is pleasant to poke at, since that is the point.
+      First needed at `compare-numbers` (0.5), whose skill line is literally "Use <, >, =".
+      Also `order-numbers` (0.6), `compare-negatives` (6.2), `name-parts` (7.3),
+      `compare-decimals` (9.3). Not in the `Capability` union, so it needs adding there too.
 
-### B5 · Skip-ahead — L
+- [ ] **6 · Stage A · Unit 0** — M — 8 skills
 
-The full flow from [skipping ahead](curriculum.md#skipping-ahead): check-first (8 problems
-sampled at difficulty 3, ≥7 correct) and just-skip, both optional. Sets every skill in the
-block to mastery 3, records `source: 'tested-out' | 'self-assessed'` on `SkillProgress`,
-stays reversible, and carries the accuracy safety net that quietly offers to reopen a unit.
-The "enters spaced repetition at low strength" half needs B6.
+      Place value, comparing, ordering, rounding. Where a learner who needs the beginning
+      starts. `round-to-100` is a wall (the midpoint rule). Needs item 5.
 
-### B6 · Review and spaced repetition — L
+      The previous version placed this inside a milestone it described as needing "no
+      infrastructure that does not exist". That was wrong, and it is the correction that most
+      changes this document's shape.
 
-Review lessons, per-skill strength, and the stats surface. Also what makes B5 safe.
+- [ ] **7 · Unit 2, the remaining six** — M
 
-### B7 · Streak reminders — S
+      Includes `sub-across-zero`, a wall — already supported: `columnTrace` handles borrowing
+      through a zero. `sub-words` needs a subtraction frame bank, which is now a known
+      quantity rather than a design question.
 
-Worth an honest caveat: iOS PWA notification support is narrow and may not reach an
-installed home-screen app reliably. May reduce to in-app nudges, which is an acceptable
-outcome.
+- [ ] **8 · Skill-tree navigation** — L *(was B3)*
 
----
+      `Home.tsx` renders a flat list of one unit's skills. Twenty-three units need stage → unit
+      → skill navigation, per-unit progress, and locked/planned states that stay hidden rather
+      than teasing. Worth doing once items 2, 6 and 7 have made three units real.
 
-## Recommended interleaving
+      Worth knowing before designing it: despite the name, the derived graph is a **path**, not
+      a tree — one root, and every skill has exactly one successor. Unless item 9's branching
+      question is answered otherwise, this is navigation over a line, which is a much smaller
+      problem than a tree.
 
-Not a hard sequence — a reading of the two tracks that keeps each piece of work cheap:
+- [ ] **9 · Stage checkpoints** — S *(was part of B1)*
 
-1. **B0** — engine before bulk content. Every generator after this is faster.
-2. **B2** — while six skills make the unlock change trivial to verify.
-3. **A1** — the foundation, and the first real test of B0's throughput.
-4. **B1** — the loop promises, once there are `quick` skills to honour.
-5. **B3** — navigation, once there is more than one unit to navigate.
-6. **B4a** — design tooling, before art exists to be redone.
-7. **A2** + number-line input — the gate to algebra.
-8. **B4b** — the coins sink, once the app is worth dressing up for.
-9. **A3** onward, each behind its capabilities; **B5**/**B6** whenever the review model is
-   worth building; **B7** last.
+      A celebration at each stage boundary, not just per skill. Separated from item 4 because
+      it cannot fire until a stage is completable: all seven built skills are in Stage B, which
+      is 44 skills. After item 6, Stage A is complete and becomes the first checkpoint the app
+      can actually reach.
+
+      **The "max 2 unlocks at once" commitment is dropped here, and needs a decision.**
+      `docs/curriculum.md` promises it, but the manifest's derived graph has a maximum
+      out-degree of **1** across all 201 skills — one root, every skill with exactly one
+      successor. It is a straight line, because every unit uses the default derivation and a
+      single `dependsOn` edge, and the `prerequisites` override the type supports is used by
+      zero skills. Under that graph the course can never open more than one skill at a time, so
+      a cap at two can never bind.
+
+      The old hand-written generator graph did fan out to two (`add-facts` opened both
+      `sub-facts` and `add-2digit-nocarry`), so **item 1 removed the only branching the course
+      had.** That branching was an accident of how six generators were wired, not a designed
+      choice, so losing it cost nothing — but it does mean the commitment now has no path to
+      being met without deliberate `prerequisites` overrides in the manifest. The override the
+      `SkillEntry` type supports is still there, still used by zero skills, and is the hook a
+      decision to branch would hang on.
+
+      Either the curriculum wants real branching or the commitment comes out of
+      `docs/curriculum.md`. It is a curriculum decision, and item 1 deliberately left the
+      promise standing rather than quietly resolving it. Item 1 also made the decision cheaper
+      to act on: never re-locking a practised skill is exactly what makes a later graph change
+      safe to ship to a learner mid-course.
+
+- [ ] **10 · Unit 3 · Multiplication** — L — 14 skills
+
+      Deliberately the slowest unit in the course; three walls (`times-7-8`, `mult-2by1`,
+      `mult-2by2`). Opens with engine work: `ColumnOperator` is `'+' | '−'`, and partial
+      products are a genuinely different shape. Expect to *extend* the engine here, not merely
+      consume it.
+
+- [ ] **11 · Unit 4 · Division** — L — 11 skills
+
+      Long division needs a trace the engine does not have — quotient digits, remainders,
+      bring-down — and it carries two walls. `factors`, `multiples` and `primes` may want a
+      multi-value answer; decide when authoring whether that is choice input or a new mode.
+
+- [ ] **12 · Unit 5 · Order of Operations** — S — 3 skills
+
+      Closes Stage B. `two-operations` is a wall.
+
+- [ ] **13 · Number-line input** — S
+
+      Tap to place a value. Needed by `negatives-numberline` (6.1) and again by
+      `fractions-numberline` (7.4).
+
+- [ ] **14 · Stage C · Unit 6 · Negatives** — M — 9 skills
+
+      The gate to all algebra, and nothing in it is optional. `sub-negatives` (6.5) is the
+      major wall — minus a minus. Stage C declares no stage-wide capability on purpose, so that
+      the eight keypad-answerable skills are not held behind the number line.
+
+      Item 3 is the real gate. Not every skill here needs negative *entry* — `add-neg-pos`
+      (−3 + 5 = 2), `sub-negatives` (5 − (−3) = 8) and `absolute-value` all have positive
+      answers — but `add-two-negs`, `mult-negatives`, `div-negatives` and `negatives-mixed` do,
+      and without `allowNegative` plumbed through they cannot be answered at all.
+
+- [ ] **15 · Dress-up design tooling** — M *(was B4a)*
+
+      Settle how cosmetics are authored **before** any exist, because the answer determines
+      what every later asset looks like. `.claude/skills/mascot-design/` for Pip's layer
+      contract, palette and geometry conventions — `Mascot.tsx` is already layered SVG
+      (ears/head, face, accessory) for exactly this reason. Plus a spike comparing an animation
+      runtime (Rive, Lottie) against hand-authored SVG with the framer-motion already present.
+      Record the decision either way.
+
+- [ ] **16 · Outfits, shop, and room** — L *(was B4b)*
+
+      Coins accumulate today with nothing to spend them on — they appear on the home screen and
+      in settings and are read nowhere else. Cosmetic layers on Pip, a decoratable room, a shop
+      priced against real earn rates, and inventory on the progress record, which must survive
+      the sync round trip rather than only local storage.
+
+- [ ] **17 · KaTeX rendering** — M
+
+      Fractions cannot render as plain text. First needed across Unit 7.
+
+- [ ] **18 · Diagram rendering** — M
+
+      Shaded shapes for fraction meaning, first at `fraction-of-shape` (7.2); reused heavily by
+      Unit 20's geometry.
+
+- [ ] **19 · Stage D · Units 7–11** — XL — 50 skills, five changes
+
+      The biggest block in the course. Unit 7 is conceptual only — not one problem asks for a
+      calculation. Unit 8 needs the fraction keypad from item 3, Unit 9 the decimal point.
+      `fraction-words` (8.12), `money-problems` (9.12) and `ratio-words` (11.7) draw on the
+      phrasing bank; Unit 10 closes on `simple-interest` instead, so it needs no frames.
+
+- [ ] **20 · Expression input** — M
+
+      Variables on the keypad. First needed at Unit 13.
+
+      Also the point at which `Misconception.value: number` stops being enough: `diagnose()`
+      does `Number(raw)`, so any non-scalar answer silently loses misconception diagnosis.
+      Stage E carries eight walls, and four of them — `words-to-expression`,
+      `combine-like-terms`, `distributive` and `distribute-negative`, all in Unit 13 — answer
+      with an expression rather than a number. The content contract requires two distinct
+      surviving predictions on every wall, so this is a gate on Unit 13, not a nicety.
+
+- [ ] **21 · Stage E · Units 12–15** — L — 34 skills, four changes
+
+      `distribute-negative` (13.7) is a major wall.
+
+- [ ] **22 · Coordinate-plane input** — L
+
+      Tap to plot a point. First needed at `plot-points` (16.1) — the only skill in the course
+      marked both `quick` and a wall. Needs the misconception generalisation from item 20, since
+      a point is not a scalar.
+
+- [ ] **23 · Stage F · Units 16–19** — L — 28 skills, four changes
+
+- [ ] **24 · Chart rendering** — M
+
+      Bar, line, scatter. First needed at `read-bar-line` (21.5).
+
+- [ ] **25 · Stage G · Units 20–21** — M — 22 skills, two changes
+
+      Geometry teaches *choosing and applying* the formula the GED provides, never memorising
+      it.
+
+- [ ] **26 · Review and spaced repetition** — L *(was B6)*
+
+      Review lessons, per-skill strength, and the stats surface. Ordered before skip-ahead
+      because it is what makes skip-ahead safe.
+
+- [ ] **27 · Skip-ahead** — L *(was B5)*
+
+      The full flow from [skipping ahead](curriculum.md#skipping-ahead): check-first (8 problems
+      sampled at difficulty 3, ≥7 correct) and just-skip, both optional. Sets every skill in the
+      block to mastery 3, records `source: 'tested-out' | 'self-assessed'` on `SkillProgress`,
+      stays reversible, and carries the accuracy safety net that quietly offers to reopen a
+      unit. Entering spaced repetition at low strength needs item 26.
+
+- [ ] **28 · Timed mode and score estimator** — M
+
+      Includes the GED score model. The only place time pressure appears anywhere in the app.
+
+- [ ] **29 · Stage H · Unit 22** — S — 6 skills
+
+      Closes the course.
+
+- [ ] **30 · Streak reminders** — S *(was B7)*
+
+      Worth an honest caveat: iOS PWA notification support is narrow and may not reach an
+      installed home-screen app reliably. May reduce to in-app nudges, which is an acceptable
+      outcome. Last because it is the only item nothing else depends on.
 
 ---
 
 ## Done, for v1.0
 
-- 201 of 201 skills `implemented`, all 8 capabilities built.
-- Track B complete: the lesson loop honours every commitment in `docs/curriculum.md`, the
-  tree navigates 23 units, dress-up spends coins, skips are safe, review works.
+- 201 of 201 skills `implemented`, every capability built.
+- The lesson loop honours every commitment in `docs/curriculum.md`, the tree navigates 23
+  units, dress-up spends coins, skips are safe, review works.
 - The content contract passes across every generator, and the manifest, the document, and
   the registry still agree.
 
@@ -214,10 +317,15 @@ Launch work is deliberately excluded and needs its own plan: deploy pipeline, iP
 validation on a real device, performance and bundle budget, an accessibility pass, and a
 beta with an actual learner. Listed so its absence reads as a decision.
 
+Sync has also never been verified on real hardware — see the note closing
+`openspec/changes/archive/2026-07-30-progress-sync/tasks.md`.
+
 ## Working conventions
 
-- Each milestone becomes an OpenSpec change (`/openspec-propose`), and ships through
-  `/openspec-apply-change`.
+- Each item becomes an OpenSpec change (`/openspec-propose`), and ships through
+  `/openspec-apply-change`. Items covering several units are several changes.
+- Create changes just in time, one or two ahead. Proposals written months early against
+  unbuilt infrastructure rot.
 - `docs/curriculum.md` stays the content authority; `src/curriculum/manifest/` is its
   machine-readable twin, and the two cross-check in the test suite.
 - `src/lib/content-rules.ts` gates every new generator — at most 4 solution steps, 12 words

@@ -17,6 +17,7 @@ import {
   skillState,
   skillStates,
   units,
+  unlockPrerequisites,
 } from './index'
 import { parseCurriculumDoc } from './manifest/curriculum-doc'
 import { allSkills as manifestSkills } from './manifest'
@@ -70,7 +71,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(6)
+    expect(documentedAsBuilt).toHaveLength(7)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -113,8 +114,46 @@ describe('what the learner is offered', () => {
     expect([...offered].sort()).toEqual([...implementedSkillIds].sort())
   })
 
-  it('leaves the other 195 skills out of the skill tree entirely', () => {
+  it('offers them in curriculum order, so the cards open top to bottom', () => {
+    // Unsorted, unlike the test above, which is the whole point: the unlock
+    // graph is a line, so a card out of order reads as an arbitrary padlock with
+    // nothing to say which one is next. A new generator appended to the end of
+    // its file fails here rather than landing in the wrong place on screen.
+    expect(offered).toEqual(implementedSkillIds)
+  })
+
+  it('leaves the other 194 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(6)
+    expect(offered).toHaveLength(7)
+  })
+})
+
+describe('the unlock graph the store gates on', () => {
+  it('has an entry for every implemented skill', () => {
+    const missing = implementedSkillIds.filter((id) => !unlockPrerequisites.has(id))
+
+    expect(missing).toEqual([])
+  })
+
+  it('points only at implemented skills', () => {
+    // The property that makes the graph safe to gate on: a learner can never be
+    // held behind a skill that has no generator, because pass-through already
+    // resolved those away. Without this, unlocking would deadlock the course.
+    const unplayable = [...unlockPrerequisites]
+      .flatMap(([id, prereqs]) => prereqs.map((prereq) => `${id} → ${prereq}`))
+      .filter((edge) => skillState(edge.split(' → ')[1]) !== 'implemented')
+
+    expect(unplayable).toEqual([])
+  })
+
+  it('matches the committed snapshot for the skills that are built', () => {
+    // Restricted to implemented skills because the other 194 have no edges that
+    // can gate anyone yet. Committed so the next change that moves an edge has
+    // to look at it — this is the review surface for a re-lock.
+    const graph = Object.fromEntries(
+      implementedSkillIds.map((id) => [id, unlockPrerequisites.get(id)]),
+    )
+
+    expect(graph).toMatchSnapshot()
   })
 })
