@@ -112,6 +112,18 @@ sed -n '1,120p' .agents/skills/openspec-audit-proposal/agents/openai.yaml
 
 Expected: quoted interface values, a 25–64 character short description, and a default prompt explicitly naming `$openspec-audit-proposal`.
 
+- [ ] **Step 4: Commit the initial skill**
+
+Run:
+
+```bash
+git add -f -- .agents/skills/openspec-audit-proposal
+git diff --cached --check
+git commit -m "Add initial OpenSpec proposal audit skill"
+```
+
+Expected: one commit containing only the initial skill and generated metadata.
+
 ### Task 3: Verify GREEN behavior and refine
 
 **Files:**
@@ -141,7 +153,20 @@ Confirm the agent explored implementation evidence before auditing, delegated in
 
 If the agent misses a seeded defect or finds a new loophole, update `SKILL.md` with the smallest positive recipe, required structural slot, or observable conditional that addresses that failure. Repeat Step 1 with a clean copy of the fixture until the behavior is consistent.
 
-### Task 4: Validate and commit the skill
+- [ ] **Step 4: Commit verified refinements when needed**
+
+If GREEN verification changes `SKILL.md`, stage the tracked skill file, inspect the
+staged diff, and commit with:
+
+```bash
+git add -- .agents/skills/openspec-audit-proposal/SKILL.md
+git diff --cached --check
+git commit -m "Refine OpenSpec proposal audit workflow"
+```
+
+If verification passes without a skill change, record that no Task 3 commit was needed.
+
+### Task 4: Validate the completed skill
 
 **Files:**
 - Verify: `.agents/skills/openspec-audit-proposal/SKILL.md`
@@ -149,8 +174,8 @@ If the agent misses a seeded defect or finds a new loophole, update `SKILL.md` w
 - Verify: `docs/superpowers/plans/2026-07-31-openspec-audit-proposal.md`
 
 **Interfaces:**
-- Consumes: Behaviorally verified skill files.
-- Produces: A structurally valid, committed project skill with no test contamination or unrelated staged changes.
+- Consumes: Behaviorally verified, committed skill files.
+- Produces: Structural validation evidence with no test contamination or unrelated staged changes.
 
 - [ ] **Step 1: Run the structural validator**
 
@@ -181,28 +206,28 @@ Expected: no placeholders, no whitespace errors, and a concise skill body near t
 
 Delete only `/tmp/openspec-audit-proposal-fixture/`, `/tmp/openspec-audit-proposal-baseline.md`, and any disposable validator dependency directory created for this task. Confirm no fixture exists under `openspec/changes/`.
 
-- [ ] **Step 4: Review and stage only intended paths**
+- [ ] **Step 4: Review the final repository state**
 
 Run:
 
 ```bash
 git status --short
 git diff -- .agents/skills/openspec-audit-proposal
-git add -f -- .agents/skills/openspec-audit-proposal
-git diff --cached --check
-git diff --cached --name-status
+git log --oneline -- .agents/skills/openspec-audit-proposal
 ```
 
-Expected: the staged set contains only the new skill files. The implementation plan is
-already committed as the execution checkpoint, and existing `ship-roadmap-item` edits
-remain unstaged.
+Expected: the worktree is clean, the new skill is committed, and no disposable fixture
+exists. The implementation plan is already committed as the execution checkpoint.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 5: Commit validation-driven fixes only when needed**
 
-Run:
+If structural validation required a file change, stage only that tracked skill file,
+inspect it, and commit with:
 
 ```bash
-git commit -m "Add OpenSpec proposal audit skill"
+git add -- .agents/skills/openspec-audit-proposal
+git diff --cached --check
+git commit -m "Fix OpenSpec proposal audit validation"
 ```
 
-Expected: one commit containing the new skill, with the user-owned working-tree changes untouched.
+If validation required no change, record that no Task 4 commit was needed.
