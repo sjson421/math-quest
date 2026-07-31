@@ -24,6 +24,7 @@ dist-ssr
 *.sw?
 .vercel
 .env*
+.worktrees/
 
 # Auto-installed third-party agent skill docs — reinstallable, not project source.
 .agents/
