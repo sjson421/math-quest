@@ -81,7 +81,7 @@ Report the blocker and decision. Do not advance into implementation.
 Run:
 
 ```bash
-openspec validate --change "<name>"
+openspec validate "<name>" --type change --strict --no-interactive
 openspec status --change "<name>" --json
 ```
 
