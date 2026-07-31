@@ -6,8 +6,16 @@
  * reports *which* entry is wrong rather than just failing, because a bare
  * "expected true" on a 201-skill graph is nearly useless to debug.
  *
- * The graph helpers live here rather than in `resolve.ts`: validation is
- * test-time by design, and the manifest stays inert data at runtime.
+ * The graph *checkers* below live here rather than in `resolve.ts` because they
+ * are test-time only — naming the offending entry is no use to a running app.
+ *
+ * The *derivation* in `resolve.ts` is no longer test-time, and this file is the
+ * reason that matters. `curriculum/index.ts` builds the unlock graph at module
+ * load, so `resolvePrerequisites()` and `resolveUnlockPrerequisites()` now run
+ * on every app start — and both throw, on a `dependsOn` naming a unit with no
+ * skills and on a prerequisite cycle respectively. A broken manifest is a white
+ * screen, not a red test. These checks run over all 201 entries rather than a
+ * sample precisely so that CI fails first.
  */
 
 import { describe, expect, it } from 'vitest'

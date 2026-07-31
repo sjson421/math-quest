@@ -148,6 +148,10 @@ document's ✅ markers updated to match, which the cross-check enforces.
       question is answered otherwise, this is navigation over a line, which is a much smaller
       problem than a tree.
 
+      Item 1 already took the ordering half: presentation follows manifest order, pinned by a
+      test and now a requirement in `skill-progression`. What is left here is the stage → unit
+      hierarchy, per-unit progress, and keeping planned skills out of sight.
+
 - [ ] **9 · Stage checkpoints** — S *(was part of B1)*
 
       A celebration at each stage boundary, not just per skill. Separated from item 4 because
