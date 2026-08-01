@@ -34,13 +34,15 @@ already-created OpenSpec proposal before implementation.
 5. Audit exact identifiers, factual claims, one-change sizing, dependencies, non-goals,
    `ADDED` versus `MODIFIED` delta direction, cross-artifact coherence, requirement-to-task
    coverage, acceptance criteria, repository invariants, and testing commitments.
-6. Collect the complete findings list, verify each finding against repository evidence,
-   then correct confirmed defects directly in existing proposal artifacts. Do not create
+6. Collect the complete findings list and verify each finding against repository evidence.
+   Evaluate all stop conditions against that complete list before editing so a known blocker
+   never follows partial corrections.
+7. When no stop condition applies, correct confirmed defects directly in existing proposal
+   artifacts, reread the complete artifact set, and repeat the audit. Do not create
    implementation code or advance into apply.
-7. Reread the complete artifact set after corrections. Stop for unresolved product
-   decisions, unverifiable assumptions, or changes that require broader scope.
-8. Run `openspec validate --change <name>` and recheck JSON status. Finish only when
-   validation passes and all apply prerequisites are ready or legitimately skipped.
+8. Run `openspec validate <name> --type change --strict --no-interactive` and recheck JSON
+   status. Always complete the report; declare implementation-ready only when validation
+   passes and all apply prerequisites are ready or legitimately skipped.
 
 ## Editing and reporting contract
 

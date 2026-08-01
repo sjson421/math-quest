@@ -43,7 +43,7 @@ Create `/tmp/openspec-audit-proposal-fixture/` from one archived change's four a
 Use a fresh subagent with no inherited conversation and this task-local brief:
 
 ```text
-Audit the OpenSpec proposal artifacts in /tmp/openspec-audit-proposal-fixture against the Math Quest repository at /home/jay-son/dev/math-quest. Determine whether it is ready for implementation. You may read the repository and fixture, but do not edit files. Report evidence with file paths and line numbers.
+Audit the OpenSpec proposal artifacts in /tmp/openspec-audit-proposal-fixture against the current Math Quest repository/worktree. Determine whether it is ready for implementation. You may read the repository and fixture, but do not edit files. Report evidence with file paths and line numbers.
 ```
 
 Do not mention the intended skill, seeded defects, expected findings, or this plan.
@@ -70,7 +70,7 @@ Run:
 
 ```bash
 python3 /home/jay-son/.codex/skills/.system/skill-creator/scripts/init_skill.py openspec-audit-proposal \
-  --path /home/jay-son/dev/math-quest/.agents/skills \
+  --path .agents/skills \
   --interface 'display_name=Audit OpenSpec Proposal' \
   --interface 'short_description=Audit a proposal before implementation' \
   --interface 'default_prompt=Use $openspec-audit-proposal to audit and correct the selected OpenSpec proposal.'
@@ -140,7 +140,7 @@ Expected: one commit containing only the initial skill and generated metadata.
 Use a fresh subagent with no inherited conversation:
 
 ```text
-Use $openspec-audit-proposal at /home/jay-son/dev/math-quest/.agents/skills/openspec-audit-proposal to audit the proposal fixture at /tmp/openspec-audit-proposal-fixture against /home/jay-son/dev/math-quest. The fixture is disposable. Follow the skill and report the result.
+Use $openspec-audit-proposal at .agents/skills/openspec-audit-proposal to audit the proposal fixture at /tmp/openspec-audit-proposal-fixture against the current Math Quest repository/worktree. The fixture is disposable. Follow the skill and report the result.
 ```
 
 Do not provide the defect list or baseline conclusions.
@@ -183,7 +183,7 @@ Run the provided validator with a Python environment containing PyYAML:
 
 ```bash
 python3 /home/jay-son/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
-  /home/jay-son/dev/math-quest/.agents/skills/openspec-audit-proposal
+  .agents/skills/openspec-audit-proposal
 ```
 
 If `yaml` is unavailable, install PyYAML only into a disposable `/tmp` target and set `PYTHONPATH` for this command; do not add a project dependency.

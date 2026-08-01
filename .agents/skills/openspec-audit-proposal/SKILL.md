@@ -60,7 +60,10 @@ Build a complete findings list across these categories:
 ## Verify and Correct
 
 Verify every finding locally against path-and-line evidence. Reject unsupported findings
-and record why. Correct confirmed defects only in the selected change's existing, reported
+and record why. Evaluate the Stop Conditions against the complete verified findings list
+before editing. If any applies, stop without making partial corrections.
+
+Otherwise, correct confirmed defects only in the selected change's existing, reported
 artifacts. Preserve stated intent and unrelated work.
 
 Reread the complete artifact set after corrections and repeat the audit contract.
@@ -85,8 +88,9 @@ openspec validate "<name>" --type change --strict --no-interactive
 openspec status --change "<name>" --json
 ```
 
-Finish only when validation passes and every apply prerequisite is ready or legitimately
-skipped. Report the audit in this order:
+Always complete the report below. Declare the change implementation-ready only when
+validation passes and every apply prerequisite is ready or legitimately skipped; otherwise
+report it as blocked or not ready. Report the audit in this order:
 
 1. Selected change and artifacts examined
 2. Delegated exploration areas and repository evidence checked
