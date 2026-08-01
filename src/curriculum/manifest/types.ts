@@ -15,6 +15,7 @@
  * looking broken.
  */
 export type Capability =
+  | 'choice-input'
   | 'katex'
   | 'fraction-input'
   | 'diagram'

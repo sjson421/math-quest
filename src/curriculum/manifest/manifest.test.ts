@@ -20,6 +20,7 @@
 
 import { describe, expect, it } from 'vitest'
 import {
+  AVAILABLE_CAPABILITIES,
   allSkills,
   allUnits,
   indexSkills,
@@ -164,6 +165,15 @@ describe('manifest counts', () => {
     expect(unitById.size).toBe(allUnits.length)
     expect(stageById.size).toBe(stages.length)
     expect(index.size).toBe(allSkills.length)
+  })
+})
+
+describe('stage capabilities', () => {
+  it('marks choice input built and records every stage with a named consumer', () => {
+    expect(AVAILABLE_CAPABILITIES.has('choice-input')).toBe(true)
+    expect(stageById.get('stage-a')?.requires).toContain('choice-input')
+    expect(stageById.get('stage-c')?.requires).toContain('choice-input')
+    expect(stageById.get('stage-d')?.requires).toContain('choice-input')
   })
 })
 

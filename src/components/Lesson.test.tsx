@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { intAnswer } from '../lib/answer'
 import type { KeypadRules } from '../lib/keypad'
-import type { Difficulty, SkillGenerator } from '../lib/types'
+import type { Choice, Difficulty, SkillGenerator } from '../lib/types'
 import { Lesson } from './Lesson'
 
 /**
@@ -46,6 +46,29 @@ const skillNeeding = (
 const render = (keypad?: KeypadRules) =>
   renderToStaticMarkup(<Lesson skill={skillNeeding(keypad)} onExit={() => {}} />)
 
+const answerChoices: Choice[] = [
+  { id: 'less-than-id', label: 'Less than' },
+  { id: 'equal-to-id', label: 'Equal to' },
+  { id: 'greater-than-id', label: 'Greater than' },
+]
+
+const choiceSkill: SkillGenerator = {
+  id: 'synthetic-choice',
+  name: 'Synthetic Choice',
+  blurb: 'For testing choice wiring',
+  generate: (_rng, difficulty) => ({
+    skillId: 'synthetic-choice',
+    prompt: 'How do these compare?',
+    display: { kind: 'inline', text: '4 ? 7' },
+    answer: { kind: 'choice', id: 'less-than-id' },
+    inputMode: 'choice',
+    choices: answerChoices,
+    hint: 'Read the values from left to right.',
+    solution: [{ text: 'Four is less than seven.' }],
+    difficulty,
+  }),
+}
+
 const has = (html: string, label: string) => html.includes(`aria-label="${label}"`)
 
 describe('Lesson', () => {
@@ -75,6 +98,32 @@ describe('Lesson', () => {
     expect(has(html, '−')).toBe(false)
     expect(has(html, '.')).toBe(false)
     expect(has(html, '/')).toBe(false)
+  })
+
+  it('replaces the keypad with declared choices for a choice problem', () => {
+    const html = renderToStaticMarkup(<Lesson skill={choiceSkill} onExit={() => {}} />)
+    const positions = answerChoices.map(({ label }) => html.indexOf(label))
+
+    expect(positions.every((position) => position >= 0)).toBe(true)
+    expect([...positions].sort((a, b) => a - b)).toEqual(positions)
+    expect(has(html, '1')).toBe(false)
+    expect(html).not.toContain('Check')
+  })
+
+  it('ignores stray choice data when the problem asks for the keypad', () => {
+    const keypadSkill = skillNeeding()
+    const skill: SkillGenerator = {
+      ...keypadSkill,
+      generate: (rng, difficulty) => ({
+        ...keypadSkill.generate(rng, difficulty),
+        choices: answerChoices,
+      }),
+    }
+    const html = renderToStaticMarkup(<Lesson skill={skill} onExit={() => {}} />)
+
+    for (const { label } of answerChoices) expect(html).not.toContain(label)
+    expect(has(html, '1')).toBe(true)
+    expect(html).toContain('Check')
   })
 
   it('uses the manifest quick flag for a five-correct target', () => {

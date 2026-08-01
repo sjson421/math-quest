@@ -4,9 +4,10 @@
  * Transcribed from `docs/curriculum.md`. Ids are verbatim; the document and this
  * file cross-check each other in the manifest tests.
  *
- * The stage declares all three of its capability needs, and unlike Stage C the
+ * The stage declares all four of its capability needs, and unlike Stage C the
  * stage-wide marking is honest: fractions cannot render as plain text, so KaTeX
- * gates the whole stage, and Units 9–11 keep reaching back for the other two —
+ * gates the whole stage, and later units keep reaching back for the others —
+ * `name-parts` and `compare-decimals` need choice input,
  * `fraction-to-decimal` and `percent-to-fraction` need fraction input, and
  * `scale-drawings` needs a diagram. Every skill here stays `planned` until those
  * land, which is the accurate report rather than a defect.
@@ -20,7 +21,7 @@ import type { StageEntry } from './types'
 export const stageD: StageEntry = {
   id: 'stage-d',
   name: 'Parts of a Whole',
-  requires: ['katex', 'fraction-input', 'diagram'],
+  requires: ['choice-input', 'katex', 'fraction-input', 'diagram'],
   units: [
     {
       // Conceptual only — adults fail fractions when procedure arrives before

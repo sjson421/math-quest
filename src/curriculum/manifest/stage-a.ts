@@ -13,6 +13,7 @@ import type { StageEntry } from './types'
 export const stageA: StageEntry = {
   id: 'stage-a',
   name: 'Numbers',
+  requires: ['choice-input'],
   units: [
     {
       id: 'unit-0',

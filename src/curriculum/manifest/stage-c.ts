@@ -4,12 +4,11 @@
  * Transcribed from `docs/curriculum.md`. Ids are verbatim; the document and this
  * file cross-check each other in the manifest tests.
  *
- * No stage-level `requires`, deliberately. The document's capability table lists
- * number-line input as first needed at 6.1, but `requires` is stage-wide, so
- * declaring it would hold the other eight skills — all answerable on the plain
- * keypad — behind a tap-to-place input mode. This is the gate to all algebra and
- * nothing in it is optional, so blocking it wholesale is the wrong trade. See the
- * note in tasks 2.3 / 6.x about marking capability needs per skill.
+ * Choice input is stage-wide because it is built before this content lands. The
+ * document's capability table also lists number-line input as first needed at
+ * 6.1, but declaring that unavailable capability here would hold the other eight
+ * skills behind a tap-to-place input mode. This is the gate to all algebra and
+ * nothing in it is optional, so blocking it wholesale is the wrong trade.
  */
 
 import type { StageEntry } from './types'
@@ -17,6 +16,7 @@ import type { StageEntry } from './types'
 export const stageC: StageEntry = {
   id: 'stage-c',
   name: 'Negatives',
+  requires: ['choice-input'],
   units: [
     {
       // The gate to all algebra. Nothing here is optional, which is why the unit

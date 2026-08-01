@@ -12,9 +12,11 @@ import {
   requeueMiss,
   startLessonSession,
 } from '../lib/lesson'
+import { createSubmissionGate } from '../lib/submission-gate'
 import { responseTo } from '../lib/submit'
 import type { Difficulty, Misconception, SkillGenerator } from '../lib/types'
 import { difficultyFor, useProgress } from '../store/progress'
+import { ChoiceInput } from './ChoiceInput'
 import { Keypad } from './Keypad'
 import { Mascot, type MascotState } from './Mascot'
 import { ProblemView } from './ProblemView'
@@ -61,6 +63,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
   const [feedback, setFeedback] = useState<Feedback>(null)
   const [showHint, setShowHint] = useState(false)
   const [finished, setFinished] = useState<{ xpGained: number; coinsGained: number } | null>(null)
+  const [submissionGate] = useState(createSubmissionGate)
 
   const response = feedback && responseTo[feedback.status]
 
@@ -78,6 +81,10 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
   }
 
   const problem = currentProblem(session)
+  const visibleEntry =
+    problem.inputMode === 'choice'
+      ? (problem.choices?.find((choice) => choice.id === entry)?.label ?? '')
+      : entry
   const mascotState: MascotState =
     feedback?.status === 'correct'
       ? 'happy'
@@ -85,21 +92,25 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
         ? 'encouraging'
         : 'thinking'
 
-  const submit = () => {
+  const submit = (answerEntry = entry) => {
     // An unfinished entry left the pad up, so Check is still live — pressing it
     // again should re-answer rather than sit dead until a key is tapped.
     if ((feedback && !unfinished) || !problem) return
+    if (!submissionGate.tryAcquire()) return
 
-    const { status } = checkAnswer(problem.answer, entry)
+    const { status } = checkAnswer(problem.answer, answerEntry)
     const policy = responseTo[status]
     // Only a wrong value has a predicted mistake behind it. A right value in the
     // wrong form is not a miscalculation, so there is nothing to name.
-    const misconception = status === 'incorrect' ? diagnose(problem, entry) : undefined
+    const misconception =
+      status === 'incorrect' ? diagnose(problem, answerEntry) : undefined
 
     const nextSession = recordSessionAttempt(session, policy.record)
     if (policy.record !== 'none') {
       setSession(nextSession)
       recordAttempt(skill.id, policy.record === 'correct', misconception?.tag)
+    } else {
+      submissionGate.release()
     }
 
     if (policy.advances) {
@@ -117,6 +128,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
           const outcome = completeLesson(skill.id)
           setFinished(outcome)
         }
+        submissionGate.release()
       }, 750)
       return
     }
@@ -127,6 +139,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
 
   const dismiss = () => {
     if (!response) return
+    submissionGate.release()
     setFeedback(null)
     if (!response.keepsEntry) setEntry('')
     if (!response.requeues) return
@@ -175,7 +188,11 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
             exit={{ opacity: 0, x: -40 }}
             transition={{ duration: feedback?.status === 'incorrect' ? 0.36 : 0.22 }}
           >
-            <ProblemView display={problem.display} entry={entry} />
+            <ProblemView
+              display={problem.display}
+              entry={visibleEntry}
+              entryMode={problem.inputMode}
+            />
           </motion.div>
         </AnimatePresence>
 
@@ -269,23 +286,35 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
             </button>
           </motion.div>
         ) : (
-          <motion.div key="keypad" exit={{ opacity: 0 }}>
-            {/* Not a wrong answer — the number simply is not finished. Say so and
-                leave everything as it is, rather than spending an attempt on it. */}
-            {unfinished && (
-              <p className="text-center text-ink-soft text-sm pb-2">
-                That number is not finished yet.
-              </p>
+          <motion.div key={problem.inputMode} exit={{ opacity: 0 }}>
+            {problem.inputMode === 'choice' ? (
+              <ChoiceInput
+                choices={problem.choices ?? []}
+                onChoose={(id) => {
+                  setEntry(id)
+                  submit(id)
+                }}
+              />
+            ) : (
+              <>
+                {/* Not a wrong answer — the number simply is not finished. Say so and
+                    leave everything as it is, rather than spending an attempt on it. */}
+                {unfinished && (
+                  <p className="text-center text-ink-soft text-sm pb-2">
+                    That number is not finished yet.
+                  </p>
+                )}
+                <Keypad
+                  value={entry}
+                  onEntry={(apply) => {
+                    if (unfinished) dismiss()
+                    setEntry(apply)
+                  }}
+                  onSubmit={submit}
+                  rules={problem.keypad}
+                />
+              </>
             )}
-            <Keypad
-              value={entry}
-              onEntry={(apply) => {
-                if (unfinished) dismiss()
-                setEntry(apply)
-              }}
-              onSubmit={submit}
-              rules={problem.keypad}
-            />
           </motion.div>
         )}
       </AnimatePresence>

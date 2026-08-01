@@ -1,22 +1,30 @@
-import type { Display } from '../lib/types'
+import type { Display, Problem } from '../lib/types'
 
 /**
  * Column layout matters pedagogically — it is how the carrying and borrowing
  * skills are actually taught, and seeing the digits stacked is most of the
  * explanation. Digits are right-aligned on a fixed grid so places line up.
  */
-export function ProblemView({ display, entry }: { display: Display; entry: string }) {
+export function ProblemView({
+  display,
+  entry,
+  entryMode = 'keypad',
+}: {
+  display: Display
+  entry: string
+  entryMode?: Problem['inputMode']
+}) {
   // Exhaustive rather than a fall-through to the column layout. `story` carries
   // the same `operands` and `operator` fields as `column`, so TypeScript narrows
   // the two together and an `if (inline)` guard would have rendered a word
   // problem as a stack of digits without a compile error.
   switch (display.kind) {
     case 'inline':
-      return <InlineView display={display} entry={entry} />
+      return <InlineView display={display} entry={entry} entryMode={entryMode} />
     case 'column':
-      return <ColumnView display={display} entry={entry} />
+      return <ColumnView display={display} entry={entry} entryMode={entryMode} />
     case 'story':
-      return <StoryView display={display} entry={entry} />
+      return <StoryView display={display} entry={entry} entryMode={entryMode} />
     default: {
       const unhandled: never = display
       throw new Error(`Unhandled display: ${JSON.stringify(unhandled)}`)
@@ -26,7 +34,13 @@ export function ProblemView({ display, entry }: { display: Display; entry: strin
 
 type Of<K extends Display['kind']> = Extract<Display, { kind: K }>
 
-function InlineView({ display, entry }: { display: Of<'inline'>; entry: string }) {
+type EntryProps = { entry: string; entryMode: Problem['inputMode'] }
+
+function InlineView({
+  display,
+  entry,
+  entryMode,
+}: { display: Of<'inline'> } & EntryProps) {
   // `add-tens` is the first inline skill with two operands of two digits, and
   // "40 + 40" at 6xl does not fit beside the equals sign and the answer slot on
   // a 375px phone — it wrapped, orphaning the operator on its own line.
@@ -42,7 +56,7 @@ function InlineView({ display, entry }: { display: Of<'inline'>; entry: string }
     >
       <span className="font-bold tabular-nums tracking-tight">{display.text}</span>
       <span className="font-bold text-ink-faint">=</span>
-      <EntrySlot value={entry} />
+      <EntrySlot value={entry} mode={entryMode} />
     </div>
   )
 }
@@ -52,18 +66,18 @@ function InlineView({ display, entry }: { display: Of<'inline'>; entry: string }
  * than problem size: the work here is understanding the situation, and a story
  * rendered in 6xl digits reads as an eye test.
  */
-function StoryView({ display, entry }: { display: Of<'story'>; entry: string }) {
+function StoryView({ display, entry, entryMode }: { display: Of<'story'> } & EntryProps) {
   return (
     <div className="flex flex-col items-center gap-6 max-w-md text-6xl">
       <p className="text-2xl font-medium leading-snug text-center text-balance">
         {display.text}
       </p>
-      <EntrySlot value={entry} />
+      <EntrySlot value={entry} mode={entryMode} />
     </div>
   )
 }
 
-function ColumnView({ display, entry }: { display: Of<'column'>; entry: string }) {
+function ColumnView({ display, entry, entryMode }: { display: Of<'column'> } & EntryProps) {
   const width = Math.max(...display.operands.map((n) => String(n).length))
 
   // A stack of three is a row taller than any column the course had before it,
@@ -100,7 +114,7 @@ function ColumnView({ display, entry }: { display: Of<'column'>; entry: string }
 
       <div className="flex items-center gap-4" aria-hidden>
         <span className="w-8" />
-        <EntrySlot value={entry} minWidth={width} />
+        <EntrySlot value={entry} mode={entryMode} minWidth={width} />
       </div>
     </div>
   )
@@ -124,7 +138,30 @@ function Digits({ value, width }: { value: string; width: number }) {
  * the problem's, so a display that scales itself down carries the answer slot
  * with it rather than having to thread a size in.
  */
-function EntrySlot({ value, minWidth = 2 }: { value: string; minWidth?: number }) {
+function EntrySlot({
+  value,
+  mode,
+  minWidth = 2,
+}: {
+  value: string
+  mode: Problem['inputMode']
+  minWidth?: number
+}) {
+  const content =
+    value === '' ? (
+      <span className="inline-block w-[3px] h-[0.9em] bg-blossom-deep animate-pulse rounded-full" />
+    ) : (
+      value
+    )
+
+  if (mode === 'choice') {
+    return (
+      <span className="inline-flex items-center justify-center max-w-40 min-h-11 rounded-2xl bg-white/70 px-3 py-2 text-center text-xl font-bold leading-snug text-blossom-deep break-words">
+        {content}
+      </span>
+    )
+  }
+
   const chars = Math.max(minWidth, value.length || 1)
 
   return (
@@ -132,11 +169,7 @@ function EntrySlot({ value, minWidth = 2 }: { value: string; minWidth?: number }
       className="inline-flex items-center justify-end rounded-2xl bg-white/70 px-3 py-1 font-bold tabular-nums text-blossom-deep min-h-[1.3em]"
       style={{ minWidth: `${chars * 0.68}em` }}
     >
-      {value === '' ? (
-        <span className="inline-block w-[3px] h-[0.9em] bg-blossom-deep animate-pulse rounded-full" />
-      ) : (
-        value
-      )}
+      {content}
     </span>
   )
 }

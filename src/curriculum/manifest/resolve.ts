@@ -18,11 +18,10 @@ type Lookup<K> = { has(key: K): boolean }
 /**
  * Capabilities that are actually built today.
  *
- * Empty: nothing beyond the plain number keypad exists yet, so every stage that
- * declares a requirement stays `planned` on infrastructure. Entries are added
- * here as the capability lands, which flips its stage on with no other change.
+ * Entries are added here only after their infrastructure lands. A stage that
+ * declares any other requirement stays `planned` on that infrastructure.
  */
-export const AVAILABLE_CAPABILITIES: ReadonlySet<Capability> = new Set()
+export const AVAILABLE_CAPABILITIES: ReadonlySet<Capability> = new Set(['choice-input'])
 
 export type SkillLocation = {
   skill: SkillEntry

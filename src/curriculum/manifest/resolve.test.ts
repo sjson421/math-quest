@@ -6,7 +6,7 @@ import {
   resolveSkillStates,
   resolveUnlockPrerequisites,
 } from './resolve'
-import type { SkillEntry, SkillState, StageEntry } from './types'
+import type { Capability, SkillEntry, SkillState, StageEntry } from './types'
 
 /**
  * Derivation is tested against synthetic stages, not the real manifest. The
@@ -189,6 +189,18 @@ describe('resolveSkillState', () => {
       resolveSkillState(
         'c1',
         { requires: ['katex'] },
+        { generators: new Set(['c1']), available: noCapabilities },
+      ),
+    ).toBe('planned')
+  })
+
+  it('keeps a choice skill planned when choice input is withheld', () => {
+    const choiceInput = 'choice-input' as Capability
+
+    expect(
+      resolveSkillState(
+        'c1',
+        { requires: [choiceInput] },
         { generators: new Set(['c1']), available: noCapabilities },
       ),
     ).toBe('planned')

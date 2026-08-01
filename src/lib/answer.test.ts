@@ -35,6 +35,18 @@ describe('parseInput', () => {
 })
 
 describe('checkAnswer', () => {
+  it('accepts the stable id of the expected choice', () => {
+    const answer: Answer = { kind: 'choice', id: 'less-than' }
+
+    expect(checkAnswer(answer, 'less-than').status).toBe('correct')
+  })
+
+  it('rejects a different choice id', () => {
+    const answer: Answer = { kind: 'choice', id: 'less-than' }
+
+    expect(checkAnswer(answer, 'greater-than').status).toBe('incorrect')
+  })
+
   it('treats equivalent forms of the same number as equal', () => {
     for (const form of ['1/2', '2/4', '0.5', '.5', '4/8', '50/100']) {
       expect(checkAnswer(exact(1, 2), form).status, form).toBe('correct')

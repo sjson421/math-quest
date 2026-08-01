@@ -525,6 +525,7 @@ Ship by stage; each stage is independently useful.
 
 | Capability | First needed | Notes |
 |---|---|---|
+| Choice input | A (Unit 0.5) | Built — declared per problem via `inputMode` |
 | KaTeX rendering | D (Unit 7) | Fractions cannot render as plain text |
 | Fraction keypad mode | D (Unit 8) | Built — declared per problem via `allowFraction` |
 | Diagram rendering | D (Unit 7.2) | Shaded shapes for fraction meaning |

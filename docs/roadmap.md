@@ -4,10 +4,10 @@ What is left, in the order it should be done.
 
 **Status: 10 of 201 skills are playable.** All ten are in Units 1–2, and Unit 1 is complete.
 The keypad can now offer a sign, a decimal point or a fraction slash when a problem asks for
-one, but `AVAILABLE_CAPABILITIES` is still empty, so no stage capability is built and every
-playable skill still answers with whole digits. This line is the only progress number in the repo's
-documentation — the manifest and `npm test` are the authority, and everything below is
-scope rather than status.
+one. Choice input is also built, so `AVAILABLE_CAPABILITIES` contains only `choice-input`;
+every playable skill still answers with whole digits. This line is the only progress number in
+the repo's documentation — the manifest and `npm test` are the authority, and everything
+below is scope rather than status.
 
 To re-derive it rather than trusting this file:
 
@@ -34,9 +34,9 @@ skills reach the learner, and planned ones are transparent to unlocking, so nobo
 behind our build order.
 
 **Capabilities gate whole stages.** `AVAILABLE_CAPABILITIES` in
-`src/curriculum/manifest/resolve.ts` is empty today. Adding a capability there is a one-line
-edit that flips its stage on — which is why capability work is its own item, never bundled
-with the content it unblocks.
+`src/curriculum/manifest/resolve.ts` contains `choice-input` today. Adding a capability there
+is a one-line edit that flips its stage on — which is why capability work is its own item,
+never bundled with the content it unblocks.
 
 **One unit per change.** A 50-skill stage would be roughly a hundred tasks. Where an item
 below covers several units, it is several changes.
@@ -139,21 +139,25 @@ document's ✅ markers updated to match, which the cross-check enforces.
       entry changes nothing, a correct answer resets a pre-recovery streak, and recovery stays
       on for the rest of the lesson without learner-facing text.
 
-- [ ] **5 · Choice input** — S
+- [x] **5 · Choice input** — S — **shipped 2026-08-01**
 
-      Render `problem.choices`. `inputMode: 'choice'` and `Answer.kind === 'choice'` both exist
-      and `checkAnswer` handles them, but **no component has ever rendered a choice** — it is a
-      dead branch, which is why this was missing from the previous version's capability table
-      entirely.
+      `ChoiceInput` renders `problem.choices` in declaration order as labelled native buttons.
+      A tap submits the choice's stable id through the same correct/incorrect, progress and
+      re-queue path as keypad answers; only its label reaches learner-facing markup.
 
-      First needed at `compare-numbers` (0.5), whose skill line is literally "Use <, >, =".
-      Also `order-numbers` (0.6), `compare-negatives` (6.2), `name-parts` (7.3),
-      `compare-decimals` (9.3). Not in the `Capability` union, so it needs adding there too.
+      `inputMode` is the single switch between choices and the keypad, so keypad problems
+      ignore stray choice data and keep their existing surface. `choice-input` is now in the
+      `Capability` union and `AVAILABLE_CAPABILITIES`; Stages A, C and D record it because they
+      contain its five named consumers.
+
+      No generator landed here. `compare-numbers` (0.5), `order-numbers` (0.6),
+      `compare-negatives` (6.2), `name-parts` (7.3), and `compare-decimals` (9.3) remain planned
+      content, with Unit 0 next.
 
 - [ ] **6 · Stage A · Unit 0** — M — 8 skills
 
       Place value, comparing, ordering, rounding. Where a learner who needs the beginning
-      starts. `round-to-100` is a wall (the midpoint rule). Needs item 5.
+      starts. `round-to-100` is a wall (the midpoint rule). Choice input landed in item 5.
 
       The previous version placed this inside a milestone it described as needing "no
       infrastructure that does not exist". That was wrong, and it is the correction that most
@@ -183,7 +187,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
 - [ ] **9 · Stage checkpoints** — S *(was part of B1)*
 
       A celebration at each stage boundary, not just per skill. Separated from item 4 because
-      it cannot fire until a stage is completable: all seven built skills are in Stage B, which
+      it cannot fire until a stage is completable: all ten built skills are in Stage B, which
       is 44 skills. After item 6, Stage A is complete and becomes the first checkpoint the app
       can actually reach.
 
@@ -234,8 +238,9 @@ document's ✅ markers updated to match, which the cross-check enforces.
 - [ ] **14 · Stage C · Unit 6 · Negatives** — M — 9 skills
 
       The gate to all algebra, and nothing in it is optional. `sub-negatives` (6.5) is the
-      major wall — minus a minus. Stage C declares no stage-wide capability on purpose, so that
-      the eight keypad-answerable skills are not held behind the number line.
+      major wall — minus a minus. Stage C declares the built `choice-input` capability, but not
+      number-line input: making that unavailable mode stage-wide would hold the other eight
+      skills behind it.
 
       Item 3 removed the gate this used to name, and left a job in its place: these generators
       must **declare `keypad: { allowNegative: true }` on the problems whose answers are
