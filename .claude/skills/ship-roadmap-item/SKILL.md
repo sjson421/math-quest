@@ -102,10 +102,15 @@ npm run lint
 ```
 
 Run relevant targeted tests as needed. For a user-visible change, exercise it with the
-browser preview; if the preview pane is unavailable, ask for it rather than starting a
-dev server in the shell. Re-run all three gates after any review fix. The three documented
-pre-existing `Settings.tsx` lint warnings may remain; investigate every other warning or
-failure.
+available browser-control tool. An open localhost tab is not evidence that its server is
+running: check the route first. If it is unavailable, start the repository's documented
+development command in a long-lived integrated-terminal session, wait for the route to
+respond, and then navigate the browser to it. Keep the session alive for the exercise and
+stop it cleanly afterward if this workflow started it. Do not ask the user to open a pane,
+start the server, or perform the browser checks for you. If no browser-control capability is
+available after checking the installed tools, stop and report that capability as the blocker.
+Re-run all three gates after any review fix. The three documented pre-existing
+`Settings.tsx` lint warnings may remain; investigate every other warning or failure.
 
 Finally, rerun OpenSpec validation and confirm every task remains checked. Proceed only
 when the verified diff contains no unexplained or unrelated changes.

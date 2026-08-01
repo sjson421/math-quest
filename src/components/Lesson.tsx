@@ -1,16 +1,23 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useMemo, useRef, useState } from 'react'
+import { skillById } from '../curriculum/manifest'
 import { checkAnswer, type CheckResult } from '../lib/answer'
 import { diagnose, generateProblem } from '../lib/generator'
 import { celebrate, tap } from '../lib/haptics'
+import {
+  advanceCorrect,
+  currentProblem,
+  lessonTarget,
+  recordSessionAttempt,
+  requeueMiss,
+  startLessonSession,
+} from '../lib/lesson'
 import { responseTo } from '../lib/submit'
-import type { Misconception, Problem, SkillGenerator } from '../lib/types'
+import type { Difficulty, Misconception, SkillGenerator } from '../lib/types'
 import { difficultyFor, useProgress } from '../store/progress'
 import { Keypad } from './Keypad'
 import { Mascot, type MascotState } from './Mascot'
 import { ProblemView } from './ProblemView'
-
-const TARGET_CORRECT = 10
 
 /**
  * What is on screen between submitting an answer and moving on, or `null` while
@@ -24,17 +31,17 @@ type Feedback = { status: CheckResult['status']; misconception?: Misconception }
 /**
  * The lesson loop.
  *
- * A lesson ends after TARGET_CORRECT correct answers — not after a fixed number
- * of questions, and with no hearts or lives. A missed problem is pushed back
- * into the queue, so the session cannot be finished without eventually getting
- * it right. Same forward pressure as a lives system, none of the punishment.
+ * A lesson ends after its manifest-selected correct target, with no hearts or
+ * lives. A missed problem is pushed back into the lazy queue, so the session
+ * cannot finish without eventually getting it right.
  */
 export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () => void }) {
   const progress = useProgress((s) => s.progress)
   const recordAttempt = useProgress((s) => s.recordAttempt)
   const completeLesson = useProgress((s) => s.completeLesson)
 
-  const difficulty = difficultyFor(progress.skills[skill.id]?.mastery ?? 0)
+  const baseDifficulty = difficultyFor(progress.skills[skill.id]?.mastery ?? 0)
+  const targetCorrect = lessonTarget(skillById.get(skill.id)?.quick)
 
   // Seed from mount time so each lesson is a fresh set, but stays reproducible
   // within the session.
@@ -42,22 +49,19 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
   const nextSeed = useRef(0)
 
   const makeProblem = useCallback(
-    () => generateProblem(skill, seedBase + nextSeed.current++ * 7919, difficulty),
-    [skill, seedBase, difficulty],
+    (difficulty: Difficulty) =>
+      generateProblem(skill, seedBase + nextSeed.current++ * 7919, difficulty),
+    [skill, seedBase],
   )
 
-  const [queue, setQueue] = useState<Problem[]>(() =>
-    Array.from({ length: TARGET_CORRECT }, () =>
-      generateProblem(skill, seedBase + nextSeed.current++ * 7919, difficulty),
-    ),
+  const [session, setSession] = useState(() =>
+    startLessonSession(targetCorrect, baseDifficulty, makeProblem),
   )
   const [entry, setEntry] = useState('')
   const [feedback, setFeedback] = useState<Feedback>(null)
-  const [correctCount, setCorrectCount] = useState(0)
   const [showHint, setShowHint] = useState(false)
   const [finished, setFinished] = useState<{ xpGained: number; coinsGained: number } | null>(null)
 
-  const problem = queue[0]
   const response = feedback && responseTo[feedback.status]
 
   /**
@@ -69,9 +73,13 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
    */
   const unfinished = response?.keepsEntry === true
 
-  const mascotState: MascotState = finished
-    ? 'celebrating'
-    : feedback?.status === 'correct'
+  if (finished) {
+    return <LessonComplete skill={skill} outcome={finished} onExit={onExit} />
+  }
+
+  const problem = currentProblem(session)
+  const mascotState: MascotState =
+    feedback?.status === 'correct'
       ? 'happy'
       : feedback && !unfinished
         ? 'encouraging'
@@ -88,7 +96,9 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
     // wrong form is not a miscalculation, so there is nothing to name.
     const misconception = status === 'incorrect' ? diagnose(problem, entry) : undefined
 
+    const nextSession = recordSessionAttempt(session, policy.record)
     if (policy.record !== 'none') {
+      setSession(nextSession)
       recordAttempt(skill.id, policy.record === 'correct', misconception?.tag)
     }
 
@@ -96,18 +106,16 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
       celebrate()
       setFeedback({ status })
 
-      const nextCount = correctCount + 1
       window.setTimeout(() => {
-        setCorrectCount(nextCount)
         setEntry('')
         setShowHint(false)
         setFeedback(null)
 
-        if (nextCount >= TARGET_CORRECT) {
+        const transition = advanceCorrect(nextSession, makeProblem)
+        setSession(transition.session)
+        if (transition.complete) {
           const outcome = completeLesson(skill.id)
           setFinished(outcome)
-        } else {
-          setQueue((q) => (q.length > 1 ? q.slice(1) : [makeProblem()]))
         }
       }, 750)
       return
@@ -124,19 +132,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
     if (!response.requeues) return
 
     setShowHint(false)
-    // Re-queue the missed problem a few places back so it comes around again.
-    setQueue((q) => {
-      const [missed, ...rest] = q
-      const insertAt = Math.min(3, rest.length)
-      const next = [...rest]
-      next.splice(insertAt, 0, missed)
-      if (next.length < 2) next.push(makeProblem())
-      return next
-    })
-  }
-
-  if (finished) {
-    return <LessonComplete skill={skill} outcome={finished} onExit={onExit} />
+    setSession(requeueMiss(session, makeProblem))
   }
 
   return (
@@ -152,12 +148,12 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
         <div className="flex-1 h-4 rounded-full bg-cream-deep overflow-hidden">
           <motion.div
             className="h-full rounded-full bg-mint-deep"
-            animate={{ width: `${(correctCount / TARGET_CORRECT) * 100}%` }}
+            animate={{ width: `${(session.correctCount / session.targetCorrect) * 100}%` }}
             transition={{ type: 'spring', stiffness: 180, damping: 22 }}
           />
         </div>
         <span className="text-sm font-bold text-ink-soft tabular-nums w-12 text-right">
-          {correctCount}/{TARGET_CORRECT}
+          {session.correctCount}/{session.targetCorrect}
         </span>
       </header>
 
@@ -169,7 +165,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${problem.display.kind}-${JSON.stringify(problem.display)}-${correctCount}`}
+            key={`${problem.display.kind}-${JSON.stringify(problem.display)}-${session.correctCount}`}
             initial={{ opacity: 0, x: 40 }}
             animate={
               feedback?.status === 'incorrect'

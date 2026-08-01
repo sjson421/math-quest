@@ -118,22 +118,26 @@ document's ✅ markers updated to match, which the cross-check enforces.
       No stage capability was built and `AVAILABLE_CAPABILITIES` is untouched. The first
       consumers are Unit 6 (item 14) and `simplify-fractions` (7.7).
 
-- [ ] **4 · Lesson mechanics** — M *(was half of B1)*
+- [x] **4 · Lesson mechanics** — M *(was half of B1)* — **shipped 2026-08-01**
 
       The commitments in [anti-discouragement mechanics](curriculum.md#anti-discouragement-mechanics)
       that live inside a single lesson:
 
-      - **`quick` skills end at 5 correct.** The manifest marks 19; `Lesson.tsx` hardcodes
-        `TARGET_CORRECT = 10` and `SkillGenerator` does not carry the flag at all, so it has to
-        reach the lesson from the manifest entry.
+      - **`quick` skills end at 5 correct.** The manifest marks 19 and is the runtime authority;
+        `SkillGenerator` still does not duplicate the flag. Standard lessons stay at 10.
       - **Warm-up problem** one difficulty band below current — a guaranteed early win.
       - **Silent recovery:** three wrong in a row drops difficulty for the rest of the lesson,
         never surfaced to the learner.
 
-      All three fight the same piece of architecture: difficulty is computed once at mount and
-      the entire queue of ten is generated up front. The real work is making the queue lazy.
-      The `quick` half is a `MODIFIED` delta against `skill-progression`, whose baseline states
-      the 10 deliberately.
+      Left behind: `src/lib/lesson.ts` owns a pure lesson session. Each remaining correct answer
+      is a lazy queue slot, so only the current unseen problem is generated and a missed problem
+      can keep its identity while returning up to three positions later. The queue clamps that
+      distance near the end, so 5/10 correct still means every presented problem was answered.
+
+      Also here: warm-up and recovery are explicit exceptions to the mastery-derived base
+      difficulty, both clamped at 1. Three **recorded** misses trigger recovery; an unfinished
+      entry changes nothing, a correct answer resets a pre-recovery streak, and recovery stays
+      on for the rest of the lesson without learner-facing text.
 
 - [ ] **5 · Choice input** — S
 

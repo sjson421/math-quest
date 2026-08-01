@@ -57,11 +57,13 @@ Break these and something fails loudly — or worse, quietly.
   migration, because a record can arrive from the sync endpoint at any time and that endpoint
   never migrates. A skill with no generator is still locked — that rule outranks it, so a
   lesson is never offered that cannot be built.
-- **The `quick` flag is carried but not honoured.** The manifest marks 19 skills `quick`;
-  `Lesson.tsx` hardcodes `TARGET_CORRECT = 10` and never reads it. The baseline spec states
-  the 10 deliberately, so shortening those lessons to 5 is a `MODIFIED` delta against
-  `skill-progression` (roadmap item 4), not a bug fix. It is also not demonstrable yet: none
-  of the 19 are implemented, so roadmap item 2 comes first.
+- **The manifest is the runtime authority for `quick`.** The 19 marked skills end at 5
+  correct; standard lessons end at 10. `Lesson.tsx` reads the manifest entry by generator id,
+  and `SkillGenerator` deliberately does not duplicate the flag.
+- **Lesson adaptation is session-local and lazy.** `src/lib/lesson.ts` owns the remaining
+  correct-answer slots, warm-up difficulty and sticky recovery after three consecutive
+  recorded misses. Re-queued problems keep the exact object originally presented; only an
+  unseen slot is generated at the adjusted difficulty.
 - **`reconcile()` in `store/progress.ts` merges stored skills over defaults per skill
   object, not per field.** That is what lets `SkillProgress` gain fields without a sync
   change. A version that picks named fields out of a stored skill breaks the sync contract.
@@ -117,8 +119,8 @@ lands, and note decisions inline rather than only in chat.
   built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED` is for
   genuinely new surface.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — six changes shipped, the latest
-  being `per-problem-keypad-rules`, archived 2026-08-01.
+  holds shipped changes. **The active queue contains `lesson-mechanics`** — six changes have
+  already shipped, the latest being `per-problem-keypad-rules`, archived 2026-08-01.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`
@@ -135,10 +137,14 @@ density of the file you are in — this codebase comments its reasoning, not its
 
 ## Environment notes
 
-- Drive the app with the browser preview tools, not `npm run dev` in a shell.
-- If the preview pane is not displayed, `requestAnimationFrame` never fires, so
-  `AnimatePresence mode="wait"` never completes an exit and **screens will not swap** no
-  matter how a click is dispatched. Nothing is broken; ask for the pane to be shown.
+- Drive the app with browser-control tools. If its local route is unavailable, start
+  `npm run dev` in a long-lived integrated-terminal session, wait for readiness, and stop
+  the session after browser validation. An open localhost tab does not prove the server is
+  running.
+- A hidden in-app preview does not run `requestAnimationFrame`, so `AnimatePresence
+  mode="wait"` cannot finish an exit and **screens will not swap**. Keep the controlled
+  browser page displayed while interacting; a separate Playwright browser session satisfies
+  this requirement without user intervention.
 - Progress lives in IndexedDB under `math-quest-progress`. Writing a record there directly
   is the fastest way to test migration or unlock behaviour — delete it afterwards.
 - The manifest ships in the bundle (~6 KB gzipped) because state is derived at load.

@@ -122,10 +122,12 @@ This is the diagnostic value of multiple choice without giving up free response.
 
 ### No hearts
 
-A lesson ends after 10 **correct** answers. A missed problem is re-queued a few places
-back, so the session cannot be finished without eventually getting it right. Same forward
-pressure as a lives system, none of the punishment — and Duolingo's hearts exist to sell
-refills, which is irrelevant here.
+A standard lesson ends after 10 **correct** answers; curriculum skills marked `quick` end
+after 5. Every lesson opens one difficulty band below its current level, and three consecutive
+misses quietly lower later new problems for the rest of the lesson. A missed problem is
+re-queued a few places back, so the session cannot be finished without eventually getting it
+right. Same forward pressure as a lives system, none of the punishment — and Duolingo's
+hearts exist to sell refills, which is irrelevant here.
 
 ### Progress is local-first, with a recovery key
 

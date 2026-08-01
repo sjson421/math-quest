@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { intAnswer } from '../lib/answer'
 import type { KeypadRules } from '../lib/keypad'
-import type { SkillGenerator } from '../lib/types'
+import type { Difficulty, SkillGenerator } from '../lib/types'
 import { Lesson } from './Lesson'
 
 /**
@@ -14,26 +14,33 @@ import { Lesson } from './Lesson'
  * to hand them over — one prop, and every positive case below fails without it.
  *
  * Interaction is out of reach: a static render attaches no handlers, so what
- * happens after Check is pressed stays covered by `lib/submit.test.ts` against
- * the policy the lesson reads.
+ * happens after Check is pressed stays covered by the pure submit and lesson
+ * session policies the component reads.
  */
 
 /** A skill whose every problem carries the rules under test, ignoring the rng. */
-const skillNeeding = (keypad?: KeypadRules): SkillGenerator => ({
-  id: 'synthetic',
+const skillNeeding = (
+  keypad?: KeypadRules,
+  id = 'synthetic',
+  generated?: Difficulty[],
+): SkillGenerator => ({
+  id,
   name: 'Synthetic',
   blurb: 'For testing the wiring',
-  generate: (_rng, difficulty) => ({
-    skillId: 'synthetic',
-    prompt: 'What is the sum?',
-    display: { kind: 'inline', text: '−3 + −5' },
-    answer: intAnswer(-8),
-    inputMode: 'keypad',
-    keypad,
-    hint: 'Add the sizes, keep the sign.',
-    solution: [{ text: 'Add 3 and 5.' }],
-    difficulty,
-  }),
+  generate: (_rng, difficulty) => {
+    generated?.push(difficulty)
+    return {
+      skillId: id,
+      prompt: 'What is the sum?',
+      display: { kind: 'inline', text: '−3 + −5' },
+      answer: intAnswer(-8),
+      inputMode: 'keypad',
+      keypad,
+      hint: 'Add the sizes, keep the sign.',
+      solution: [{ text: 'Add 3 and 5.' }],
+      difficulty,
+    }
+  },
 })
 
 const render = (keypad?: KeypadRules) =>
@@ -69,4 +76,27 @@ describe('Lesson', () => {
     expect(has(html, '.')).toBe(false)
     expect(has(html, '/')).toBe(false)
   })
+
+  it('uses the manifest quick flag for a five-correct target', () => {
+    const html = renderToStaticMarkup(
+      <Lesson skill={skillNeeding(undefined, 'add-facts-small')} onExit={() => {}} />,
+    )
+    expect(html).toContain('0/5')
+  })
+
+  it('keeps a manifest non-quick skill at ten correct', () => {
+    const html = renderToStaticMarkup(
+      <Lesson skill={skillNeeding(undefined, 'add-facts')} onExit={() => {}} />,
+    )
+    expect(html).toContain('0/10')
+  })
+
+  it('generates only the opening warm-up and clamps it at difficulty one', () => {
+    const generated: Difficulty[] = []
+    renderToStaticMarkup(
+      <Lesson skill={skillNeeding(undefined, 'add-facts', generated)} onExit={() => {}} />,
+    )
+    expect(generated).toEqual([1])
+  })
+
 })

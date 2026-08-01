@@ -23,8 +23,9 @@ context: |
   These are settled decisions. A proposal that contradicts one is wrong — call it out
   rather than silently redesigning around it.
 
-  - NO HEARTS OR LIVES. A lesson ends after 10 CORRECT answers; misses re-queue ~3 places
-    back in the same session. Same forward pressure, none of the punishment.
+  - NO HEARTS OR LIVES. A standard lesson ends after 10 CORRECT answers and a manifest
+    `quick` lesson after 5; misses re-queue up to 3 places back in the same session. Same
+    forward pressure, none of the punishment.
   - GENERATORS COMPUTE THEIR OWN ANSWERS from the operands they just chose. Nothing is
     hardcoded and nothing calls an LLM at runtime. This is what guarantees correctness.
   - WRONG ANSWERS ARE DIAGNOSED, NOT REJECTED. Generators predict the exact value a given
