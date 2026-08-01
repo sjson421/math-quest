@@ -102,6 +102,30 @@ describe('generateProblem drops predictions that cannot help', () => {
     expect(problem.prompt).toBe('What is the sum?')
   })
 
+  it('carries the keypad rules on both paths through the filter', () => {
+    // Named separately from the case below because that one compares against a
+    // fixture with no rules on it, so it cannot see this field go missing. A
+    // problem that loses its rules is offered on a pad its own answer cannot be
+    // typed into — the sign key is gone and the answer is negative.
+    const withRules = (misconceptions: Misconception[]): SkillGenerator => {
+      const base = skillPredicting(misconceptions)
+      return {
+        ...base,
+        generate: (rng, difficulty) => ({
+          ...base.generate(rng, difficulty),
+          keypad: { allowNegative: true },
+        }),
+      }
+    }
+
+    // The rebuild path, where a prediction was filtered out.
+    expect(generateProblem(withRules([miss(12, 'dropped'), miss(11, 'kept')]), 1, 1).keypad).toEqual(
+      { allowNegative: true },
+    )
+    // And the early return, which skips the rebuild entirely.
+    expect(generateProblem(withRules([]), 1, 1).keypad).toEqual({ allowNegative: true })
+  })
+
   it('changes nothing else about the problem', () => {
     // The filter rebuilds the object, so this pins that it rebuilds it faithfully.
     const skill = skillPredicting([miss(12, 'dropped'), miss(11, 'kept')])

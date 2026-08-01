@@ -92,9 +92,17 @@ single-sentence hint, and ≥2 distinct predicted misconceptions on any skill ma
 | `manifest/curriculum-doc.test.ts` | manifest ↔ `docs/curriculum.md`, and the document against itself |
 | `manifest/resolve.test.ts` | derivation rules against synthetic stages |
 | `lib/*.test.ts`, `api/progress.test.ts` | answers, keypad, rationals, recovery key, sync |
+| `components/*.test.tsx` | first paint only — which keys a problem's rules put on the pad |
 
 Every reporting helper is paired with a synthetic case proving it names the offender. Keep
 that habit: a checker that returns "no problems" looks exactly like a clean codebase.
+
+**Component tests render to a string, in the node environment.** `test.environment` stays
+`node` and there is no jsdom: `renderToStaticMarkup` from `react-dom/server` covers first
+paint, which is enough to check what a component *offers*. No handlers are attached, so
+anything behind a tap belongs in a pure function under `lib/` where a node test can reach it —
+which is why `lib/submit.ts` exists rather than a four-way branch inside `Lesson.tsx`. A test
+that needs a real DOM fails loudly here rather than passing by accident.
 
 ## Workflow
 
