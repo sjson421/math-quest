@@ -8,18 +8,88 @@ import {
   columnTrace,
   defineSkill,
   digitConcat,
+  drawOperands,
   drawPair,
   flippedColumns,
   forgotCarry,
+  offBy,
   offByOne,
   pickFrame,
   place,
   skippedUpperSubtraction,
+  stackPlace,
+  stackTrace,
   storyProblem,
   wroteFullColumn,
   wrongOperation,
 } from './engine'
 import { ADDITION_FRAMES } from './phrasing/addition'
+
+// ---------------------------------------------------------------------------
+// Sums within ten
+// ---------------------------------------------------------------------------
+
+const addFactsSmall = defineSkill({
+  id: 'add-facts-small',
+  name: 'Small Sums',
+  blurb: 'Sums to 10',
+  build({ rng, difficulty }) {
+    const { a, b } = drawPair({
+      label: 'add-facts-small',
+      rng,
+      // Its own ladder, like `add-facts` next door: `SINGLE_DIGIT` bounds each
+      // operand at 9, which is not the same constraint as a sum within 10.
+      //
+      // Every band starts at 2, which is what excludes an operand of 1 — the
+      // same call `add-facts` makes, because this skill is about combining.
+      //
+      // That leaves only 28 ordered pairs in total, so the ladder was chosen by
+      // enumerating them rather than by eye. Difficulty 1 keeps 9 — the most any
+      // band can hold while still opening on sums of 8 or less, which matters
+      // more here than variety, because this is the first thing anyone sees.
+      band: band(difficulty, {
+        1: [2, 4],
+        2: [2, 5],
+        3: [2, 6],
+        4: [2, 8],
+        5: [3, 8],
+      }),
+      where: ({ a, b }) => a + b <= 10,
+    })
+
+    const sum = a + b
+    // Counting on works from the bigger number, so name the two sides once
+    // rather than re-deriving which is which in the hint and every step.
+    const [bigger, smaller] = a >= b ? [a, b] : [b, a]
+
+    return {
+      prompt: 'What is the sum?',
+      display: { kind: 'inline', text: `${a} + ${b}` },
+      answer: intAnswer(sum),
+      misconceptions: [
+        ...offByOne(sum, {
+          low: 'Almost — one more to count.',
+          high: 'Almost — that counts one too far.',
+        }),
+        // Only where the operands differ. On a double the difference is 0,
+        // which nobody types for a sum — a prediction that can never fire, with
+        // a nudge that would not make sense if it did.
+        ...(a === b
+          ? []
+          : [wrongOperation(a, b, '+', 'That is the gap between them. This one is adding.')]),
+      ],
+      hint: `Hold ${bigger} in your head and count on ${smaller}.`,
+      solution: [
+        { text: `Start at ${bigger}.` },
+        {
+          text: `Count on ${smaller}.`,
+          detail: `${bigger} → ${sum}`,
+        },
+        { text: `So ${a} + ${b} = ${sum}.` },
+      ],
+    }
+  },
+})
 
 // ---------------------------------------------------------------------------
 // 1. Single-digit addition facts
@@ -119,6 +189,70 @@ const subFacts = defineSkill({
         { text: `Start at ${a}.` },
         { text: `Count back ${b}.`, detail: `${a} → ${diff}` },
         { text: `So ${a} − ${b} = ${diff}.` },
+      ],
+    }
+  },
+})
+
+// ---------------------------------------------------------------------------
+// Adding whole tens
+// ---------------------------------------------------------------------------
+
+const addTens = defineSkill({
+  id: 'add-tens',
+  name: 'Adding Tens',
+  blurb: '20 + 30',
+  build({ rng, difficulty }) {
+    // The *count* of tens is drawn, then multiplied up. Drawing from [10, 90]
+    // and rejecting everything that is not a whole ten would throw away nine
+    // draws in ten for a constraint that is really about which numbers exist.
+    const { a, b } = drawPair({
+      label: 'add-tens',
+      rng,
+      band: band(difficulty, {
+        1: [1, 4],
+        2: [1, 5],
+        3: [2, 7],
+        4: [2, 8],
+        5: [3, 9],
+      }),
+    })
+
+    // The skill's one idea, named: you add the counts, then read them as tens.
+    const count = a + b
+    const [x, y] = [a * 10, b * 10]
+    const sum = count * 10
+    // "10 is 1 tens" is the kind of sentence that reads as the app talking down
+    // to someone. The total is always 2 tens or more, so only the operands need it.
+    const tens = (of: number) => (of === 1 ? '1 ten' : `${of} tens`)
+
+    return {
+      prompt: 'What is the sum?',
+      display: { kind: 'inline', text: `${x} + ${y}` },
+      answer: intAnswer(sum),
+      misconceptions: [
+        // The error the skill exists to catch: added the tens digits, then wrote
+        // the count instead of the quantity. Can never equal the sum, which is
+        // ten times it.
+        {
+          value: count,
+          tag: 'dropped-place-value',
+          nudge: `That is ${a} and ${b} added — but you are counting tens here, not ones.`,
+        },
+        ...offBy(sum, 10, {
+          tag: 'off-by-ten',
+          low: 'One ten short — count the tens again.',
+          high: 'One ten too many — count the tens again.',
+        }),
+      ],
+      hint: `Add ${a} and ${b}, then remember you are counting tens.`,
+      solution: [
+        { text: `${x} is ${tens(a)}, and ${y} is ${tens(b)}.` },
+        {
+          text: 'Add the tens.',
+          detail: `${a} + ${b} = ${count}`,
+        },
+        { text: `${count} tens is ${sum}.` },
       ],
     }
   },
@@ -373,6 +507,77 @@ const add3Digit = defineSkill({
 })
 
 // ---------------------------------------------------------------------------
+// A stack of three addends
+// ---------------------------------------------------------------------------
+
+const addThreeNumbers = defineSkill({
+  id: 'add-three-numbers',
+  name: 'Three Addends',
+  blurb: 'Add a stack of three numbers',
+  build({ rng, difficulty }) {
+    const operands = drawOperands({
+      label: 'add-three-numbers',
+      rng,
+      band: band(difficulty, TWO_DIGIT),
+      count: 3,
+      where: (drawn) => {
+        const ones = stackPlace(stackTrace(drawn), 0)
+        // Must carry out of the ones — a stack that does not is `add-3digit`
+        // with an extra row. The second clause keeps the two predictions below
+        // from landing on the same value: dropping the carry gives
+        // `result − 10 × carry`, and adding only the first two gives
+        // `result − c`, which coincide exactly when `c` is `10 × carry`.
+        return ones.carry >= 1 && drawn[2] !== 10 * ones.carry
+      },
+    })
+
+    const [first, second, third] = operands
+    const trace = stackTrace(operands)
+    const ones = stackPlace(trace, 0)
+    const tens = stackPlace(trace, 1)
+    // Three digits can send two tens up, so this reads "one ten" or "two tens"
+    // rather than the "a ten" the two-operand skills can hardcode.
+    const carried = ones.carry === 1 ? 'one ten' : 'two tens'
+
+    return {
+      prompt: 'Add the columns.',
+      display: { kind: 'column', operands, operator: '+' },
+      answer: intAnswer(trace.result),
+      misconceptions: [
+        // Adding three digits can send two tens up, not one, so this is short by
+        // the carry itself rather than by a fixed ten.
+        forgotCarry(trace, 0, {
+          tag: 'forgot-carry',
+          nudge: `The ones digit is right, but ${carried} never made it into the tens column.`,
+        }),
+        {
+          value: first + second,
+          tag: 'added-two-of-three',
+          nudge: `That is ${first} and ${second}. There is still the ${third} to add.`,
+        },
+      ],
+      hint: `The ones come to ${ones.raw}, so ${carried} ${ones.carry === 1 ? 'carries' : 'carry'} into the next column.`,
+      // Four steps is the contract's limit, so the total rides on the tens step
+      // rather than taking one of its own.
+      solution: [
+        {
+          text: 'Add the ones column.',
+          detail: `${ones.digits.join(' + ')} = ${ones.raw}`,
+        },
+        {
+          text: `Write the ${ones.digit}, and carry the ${ones.carry}.`,
+        },
+        {
+          text: 'Add the tens column, plus what you carried.',
+          detail: `${tens.digits.join(' + ')} + ${tens.incoming} = ${tens.total}`,
+        },
+        { text: `That gives ${trace.result}.` },
+      ],
+    }
+  },
+})
+
+// ---------------------------------------------------------------------------
 // 7. Addition word problems
 // ---------------------------------------------------------------------------
 
@@ -408,5 +613,16 @@ export const unit01: Unit = {
   // order the cards are rendered in and therefore the order they open in. The
   // two subtraction skills are last: the manifest puts them in Unit 2, behind
   // all of Unit 1. A test pins this against `implementedSkillIds`.
-  skills: [addFacts, add2NoCarry, add2Carry, add3Digit, addWords, subFacts, sub2Borrow],
+  skills: [
+    addFactsSmall,
+    addFacts,
+    addTens,
+    add2NoCarry,
+    add2Carry,
+    add3Digit,
+    addThreeNumbers,
+    addWords,
+    subFacts,
+    sub2Borrow,
+  ],
 }

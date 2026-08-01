@@ -1,6 +1,6 @@
 import type { Misconception } from '../../lib/types'
-import type { ColumnTrace } from './column'
-import { place } from './column'
+import type { CarryingTrace, ColumnTrace } from './column'
+import { requirePlace } from './column'
 
 /**
  * The wrong answers column arithmetic actually produces.
@@ -20,16 +20,33 @@ import { place } from './column'
 const concat = (parts: number[]) => Number([...parts].reverse().join(''))
 
 /**
- * One off in each direction. The nudges are per skill: counting up one too few
- * on single-digit addition wants different words from a subtraction slip.
+ * One step off in each direction.
+ *
+ * The step is what varies: counting on to a sum miscounts by one, while adding
+ * whole tens miscounts by ten. The nudges are per skill either way — counting up
+ * one too few on single-digit addition wants different words from a subtraction
+ * slip.
+ */
+export const offBy = (
+  correct: number,
+  step: number,
+  { tag, low, high }: { tag: string; low: string; high: string },
+): Misconception[] => [
+  { value: correct - step, tag: `${tag}-low`, nudge: low },
+  { value: correct + step, tag: `${tag}-high`, nudge: high },
+]
+
+/**
+ * The step-of-one case, which four skills use.
+ *
+ * A wrapper rather than a second implementation: `off-by-one-low` and
+ * `off-by-one-high` appear in the recorded output of `add-facts` and
+ * `sub-facts`, so those tags have to survive verbatim.
  */
 export const offByOne = (
   correct: number,
   nudges: { low: string; high: string },
-): Misconception[] => [
-  { value: correct - 1, tag: 'off-by-one-low', nudge: nudges.low },
-  { value: correct + 1, tag: 'off-by-one-high', nudge: nudges.high },
-]
+): Misconception[] => offBy(correct, 1, { tag: 'off-by-one', ...nudges })
 
 /** Ran the other operation. The most common error on a facts skill. */
 export const wrongOperation = (
@@ -50,11 +67,15 @@ export const wrongOperation = (
  * the case the string idiom could not express past two digits.
  */
 export const forgotCarry = (
-  trace: ColumnTrace,
+  trace: CarryingTrace,
   n: number,
   { tag, nudge }: { tag: string; nudge: string },
 ): Misconception => {
-  const column = place(trace, n)
+  // `CarryingTrace` carries no operands, so the message names the total — which
+  // is still enough to identify the problem that asked for a column too far.
+  const column = requirePlace(trace.places, n, () => `a trace totalling ${trace.result}`)
+  // Multiplied, not subtracted as a unit, so a stack dropping a carry of 2 is
+  // short by 20 rather than 10. `CarryingTrace` is what lets a stack in here.
   return { value: trace.result - column.carry * 10 ** (n + 1), tag, nudge }
 }
 

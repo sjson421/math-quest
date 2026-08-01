@@ -1218,6 +1218,982 @@ miss     off-by-one-high = 15   Very close! That is one too many.
 miss     subtracted = 4   That is the difference. This one is asking you to add."
 `;
 
+exports[`recorded output: add-facts-small > matches the output recorded before the engine extraction 1`] = `
+"--- add-facts-small · seed 1 · difficulty 1
+prompt   What is the sum?
+display  inline "3 + 2"
+answer   exact 5/1
+input    keypad
+hint     Hold 3 in your head and count on 2.
+step 1   Start at 3.
+step 2   Count on 2.   [3 → 5]
+step 3   So 3 + 2 = 5.
+miss     off-by-one-low = 4   Almost — one more to count.
+miss     off-by-one-high = 6   Almost — that counts one too far.
+miss     subtracted = 1   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 12345 · difficulty 1
+prompt   What is the sum?
+display  inline "4 + 2"
+answer   exact 6/1
+input    keypad
+hint     Hold 4 in your head and count on 2.
+step 1   Start at 4.
+step 2   Count on 2.   [4 → 6]
+step 3   So 4 + 2 = 6.
+miss     off-by-one-low = 5   Almost — one more to count.
+miss     off-by-one-high = 7   Almost — that counts one too far.
+miss     subtracted = 2   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 67890 · difficulty 1
+prompt   What is the sum?
+display  inline "3 + 3"
+answer   exact 6/1
+input    keypad
+hint     Hold 3 in your head and count on 3.
+step 1   Start at 3.
+step 2   Count on 3.   [3 → 6]
+step 3   So 3 + 3 = 6.
+miss     off-by-one-low = 5   Almost — one more to count.
+miss     off-by-one-high = 7   Almost — that counts one too far.
+
+--- add-facts-small · seed 424242 · difficulty 1
+prompt   What is the sum?
+display  inline "2 + 2"
+answer   exact 4/1
+input    keypad
+hint     Hold 2 in your head and count on 2.
+step 1   Start at 2.
+step 2   Count on 2.   [2 → 4]
+step 3   So 2 + 2 = 4.
+miss     off-by-one-low = 3   Almost — one more to count.
+miss     off-by-one-high = 5   Almost — that counts one too far.
+
+--- add-facts-small · seed 987654321 · difficulty 1
+prompt   What is the sum?
+display  inline "4 + 2"
+answer   exact 6/1
+input    keypad
+hint     Hold 4 in your head and count on 2.
+step 1   Start at 4.
+step 2   Count on 2.   [4 → 6]
+step 3   So 4 + 2 = 6.
+miss     off-by-one-low = 5   Almost — one more to count.
+miss     off-by-one-high = 7   Almost — that counts one too far.
+miss     subtracted = 2   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 1 · difficulty 2
+prompt   What is the sum?
+display  inline "4 + 2"
+answer   exact 6/1
+input    keypad
+hint     Hold 4 in your head and count on 2.
+step 1   Start at 4.
+step 2   Count on 2.   [4 → 6]
+step 3   So 4 + 2 = 6.
+miss     off-by-one-low = 5   Almost — one more to count.
+miss     off-by-one-high = 7   Almost — that counts one too far.
+miss     subtracted = 2   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 12345 · difficulty 2
+prompt   What is the sum?
+display  inline "5 + 3"
+answer   exact 8/1
+input    keypad
+hint     Hold 5 in your head and count on 3.
+step 1   Start at 5.
+step 2   Count on 3.   [5 → 8]
+step 3   So 5 + 3 = 8.
+miss     off-by-one-low = 7   Almost — one more to count.
+miss     off-by-one-high = 9   Almost — that counts one too far.
+miss     subtracted = 2   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 67890 · difficulty 2
+prompt   What is the sum?
+display  inline "3 + 4"
+answer   exact 7/1
+input    keypad
+hint     Hold 4 in your head and count on 3.
+step 1   Start at 4.
+step 2   Count on 3.   [4 → 7]
+step 3   So 3 + 4 = 7.
+miss     off-by-one-low = 6   Almost — one more to count.
+miss     off-by-one-high = 8   Almost — that counts one too far.
+miss     subtracted = 1   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 424242 · difficulty 2
+prompt   What is the sum?
+display  inline "2 + 2"
+answer   exact 4/1
+input    keypad
+hint     Hold 2 in your head and count on 2.
+step 1   Start at 2.
+step 2   Count on 2.   [2 → 4]
+step 3   So 2 + 2 = 4.
+miss     off-by-one-low = 3   Almost — one more to count.
+miss     off-by-one-high = 5   Almost — that counts one too far.
+
+--- add-facts-small · seed 987654321 · difficulty 2
+prompt   What is the sum?
+display  inline "5 + 2"
+answer   exact 7/1
+input    keypad
+hint     Hold 5 in your head and count on 2.
+step 1   Start at 5.
+step 2   Count on 2.   [5 → 7]
+step 3   So 5 + 2 = 7.
+miss     off-by-one-low = 6   Almost — one more to count.
+miss     off-by-one-high = 8   Almost — that counts one too far.
+miss     subtracted = 3   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 1 · difficulty 3
+prompt   What is the sum?
+display  inline "5 + 2"
+answer   exact 7/1
+input    keypad
+hint     Hold 5 in your head and count on 2.
+step 1   Start at 5.
+step 2   Count on 2.   [5 → 7]
+step 3   So 5 + 2 = 7.
+miss     off-by-one-low = 6   Almost — one more to count.
+miss     off-by-one-high = 8   Almost — that counts one too far.
+miss     subtracted = 3   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 12345 · difficulty 3
+prompt   What is the sum?
+display  inline "6 + 3"
+answer   exact 9/1
+input    keypad
+hint     Hold 6 in your head and count on 3.
+step 1   Start at 6.
+step 2   Count on 3.   [6 → 9]
+step 3   So 6 + 3 = 9.
+miss     off-by-one-low = 8   Almost — one more to count.
+miss     off-by-one-high = 10   Almost — that counts one too far.
+miss     subtracted = 3   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 67890 · difficulty 3
+prompt   What is the sum?
+display  inline "3 + 4"
+answer   exact 7/1
+input    keypad
+hint     Hold 4 in your head and count on 3.
+step 1   Start at 4.
+step 2   Count on 3.   [4 → 7]
+step 3   So 3 + 4 = 7.
+miss     off-by-one-low = 6   Almost — one more to count.
+miss     off-by-one-high = 8   Almost — that counts one too far.
+miss     subtracted = 1   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 424242 · difficulty 3
+prompt   What is the sum?
+display  inline "2 + 3"
+answer   exact 5/1
+input    keypad
+hint     Hold 3 in your head and count on 2.
+step 1   Start at 3.
+step 2   Count on 2.   [3 → 5]
+step 3   So 2 + 3 = 5.
+miss     off-by-one-low = 4   Almost — one more to count.
+miss     off-by-one-high = 6   Almost — that counts one too far.
+miss     subtracted = 1   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 987654321 · difficulty 3
+prompt   What is the sum?
+display  inline "6 + 2"
+answer   exact 8/1
+input    keypad
+hint     Hold 6 in your head and count on 2.
+step 1   Start at 6.
+step 2   Count on 2.   [6 → 8]
+step 3   So 6 + 2 = 8.
+miss     off-by-one-low = 7   Almost — one more to count.
+miss     off-by-one-high = 9   Almost — that counts one too far.
+miss     subtracted = 4   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 1 · difficulty 4
+prompt   What is the sum?
+display  inline "6 + 2"
+answer   exact 8/1
+input    keypad
+hint     Hold 6 in your head and count on 2.
+step 1   Start at 6.
+step 2   Count on 2.   [6 → 8]
+step 3   So 6 + 2 = 8.
+miss     off-by-one-low = 7   Almost — one more to count.
+miss     off-by-one-high = 9   Almost — that counts one too far.
+miss     subtracted = 4   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 12345 · difficulty 4
+prompt   What is the sum?
+display  inline "5 + 4"
+answer   exact 9/1
+input    keypad
+hint     Hold 5 in your head and count on 4.
+step 1   Start at 5.
+step 2   Count on 4.   [5 → 9]
+step 3   So 5 + 4 = 9.
+miss     off-by-one-low = 8   Almost — one more to count.
+miss     off-by-one-high = 10   Almost — that counts one too far.
+miss     subtracted = 1   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 67890 · difficulty 4
+prompt   What is the sum?
+display  inline "4 + 6"
+answer   exact 10/1
+input    keypad
+hint     Hold 6 in your head and count on 4.
+step 1   Start at 6.
+step 2   Count on 4.   [6 → 10]
+step 3   So 4 + 6 = 10.
+miss     off-by-one-low = 9   Almost — one more to count.
+miss     off-by-one-high = 11   Almost — that counts one too far.
+miss     subtracted = 2   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 424242 · difficulty 4
+prompt   What is the sum?
+display  inline "2 + 3"
+answer   exact 5/1
+input    keypad
+hint     Hold 3 in your head and count on 2.
+step 1   Start at 3.
+step 2   Count on 2.   [3 → 5]
+step 3   So 2 + 3 = 5.
+miss     off-by-one-low = 4   Almost — one more to count.
+miss     off-by-one-high = 6   Almost — that counts one too far.
+miss     subtracted = 1   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 987654321 · difficulty 4
+prompt   What is the sum?
+display  inline "8 + 2"
+answer   exact 10/1
+input    keypad
+hint     Hold 8 in your head and count on 2.
+step 1   Start at 8.
+step 2   Count on 2.   [8 → 10]
+step 3   So 8 + 2 = 10.
+miss     off-by-one-low = 9   Almost — one more to count.
+miss     off-by-one-high = 11   Almost — that counts one too far.
+miss     subtracted = 6   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 1 · difficulty 5
+prompt   What is the sum?
+display  inline "6 + 3"
+answer   exact 9/1
+input    keypad
+hint     Hold 6 in your head and count on 3.
+step 1   Start at 6.
+step 2   Count on 3.   [6 → 9]
+step 3   So 6 + 3 = 9.
+miss     off-by-one-low = 8   Almost — one more to count.
+miss     off-by-one-high = 10   Almost — that counts one too far.
+miss     subtracted = 3   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 12345 · difficulty 5
+prompt   What is the sum?
+display  inline "3 + 7"
+answer   exact 10/1
+input    keypad
+hint     Hold 7 in your head and count on 3.
+step 1   Start at 7.
+step 2   Count on 3.   [7 → 10]
+step 3   So 3 + 7 = 10.
+miss     off-by-one-low = 9   Almost — one more to count.
+miss     off-by-one-high = 11   Almost — that counts one too far.
+miss     subtracted = 4   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 67890 · difficulty 5
+prompt   What is the sum?
+display  inline "5 + 5"
+answer   exact 10/1
+input    keypad
+hint     Hold 5 in your head and count on 5.
+step 1   Start at 5.
+step 2   Count on 5.   [5 → 10]
+step 3   So 5 + 5 = 10.
+miss     off-by-one-low = 9   Almost — one more to count.
+miss     off-by-one-high = 11   Almost — that counts one too far.
+
+--- add-facts-small · seed 424242 · difficulty 5
+prompt   What is the sum?
+display  inline "3 + 4"
+answer   exact 7/1
+input    keypad
+hint     Hold 4 in your head and count on 3.
+step 1   Start at 4.
+step 2   Count on 3.   [4 → 7]
+step 3   So 3 + 4 = 7.
+miss     off-by-one-low = 6   Almost — one more to count.
+miss     off-by-one-high = 8   Almost — that counts one too far.
+miss     subtracted = 1   That is the gap between them. This one is adding.
+
+--- add-facts-small · seed 987654321 · difficulty 5
+prompt   What is the sum?
+display  inline "5 + 5"
+answer   exact 10/1
+input    keypad
+hint     Hold 5 in your head and count on 5.
+step 1   Start at 5.
+step 2   Count on 5.   [5 → 10]
+step 3   So 5 + 5 = 10.
+miss     off-by-one-low = 9   Almost — one more to count.
+miss     off-by-one-high = 11   Almost — that counts one too far."
+`;
+
+exports[`recorded output: add-tens > matches the output recorded before the engine extraction 1`] = `
+"--- add-tens · seed 1 · difficulty 1
+prompt   What is the sum?
+display  inline "30 + 10"
+answer   exact 40/1
+input    keypad
+hint     Add 3 and 1, then remember you are counting tens.
+step 1   30 is 3 tens, and 10 is 1 ten.
+step 2   Add the tens.   [3 + 1 = 4]
+step 3   4 tens is 40.
+miss     dropped-place-value = 4   That is 3 and 1 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 30   One ten short — count the tens again.
+miss     off-by-ten-high = 50   One ten too many — count the tens again.
+
+--- add-tens · seed 12345 · difficulty 1
+prompt   What is the sum?
+display  inline "40 + 20"
+answer   exact 60/1
+input    keypad
+hint     Add 4 and 2, then remember you are counting tens.
+step 1   40 is 4 tens, and 20 is 2 tens.
+step 2   Add the tens.   [4 + 2 = 6]
+step 3   6 tens is 60.
+miss     dropped-place-value = 6   That is 4 and 2 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 50   One ten short — count the tens again.
+miss     off-by-ten-high = 70   One ten too many — count the tens again.
+
+--- add-tens · seed 67890 · difficulty 1
+prompt   What is the sum?
+display  inline "20 + 30"
+answer   exact 50/1
+input    keypad
+hint     Add 2 and 3, then remember you are counting tens.
+step 1   20 is 2 tens, and 30 is 3 tens.
+step 2   Add the tens.   [2 + 3 = 5]
+step 3   5 tens is 50.
+miss     dropped-place-value = 5   That is 2 and 3 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 40   One ten short — count the tens again.
+miss     off-by-ten-high = 60   One ten too many — count the tens again.
+
+--- add-tens · seed 424242 · difficulty 1
+prompt   What is the sum?
+display  inline "10 + 10"
+answer   exact 20/1
+input    keypad
+hint     Add 1 and 1, then remember you are counting tens.
+step 1   10 is 1 ten, and 10 is 1 ten.
+step 2   Add the tens.   [1 + 1 = 2]
+step 3   2 tens is 20.
+miss     dropped-place-value = 2   That is 1 and 1 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 10   One ten short — count the tens again.
+miss     off-by-ten-high = 30   One ten too many — count the tens again.
+
+--- add-tens · seed 987654321 · difficulty 1
+prompt   What is the sum?
+display  inline "40 + 10"
+answer   exact 50/1
+input    keypad
+hint     Add 4 and 1, then remember you are counting tens.
+step 1   40 is 4 tens, and 10 is 1 ten.
+step 2   Add the tens.   [4 + 1 = 5]
+step 3   5 tens is 50.
+miss     dropped-place-value = 5   That is 4 and 1 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 40   One ten short — count the tens again.
+miss     off-by-ten-high = 60   One ten too many — count the tens again.
+
+--- add-tens · seed 1 · difficulty 2
+prompt   What is the sum?
+display  inline "40 + 10"
+answer   exact 50/1
+input    keypad
+hint     Add 4 and 1, then remember you are counting tens.
+step 1   40 is 4 tens, and 10 is 1 ten.
+step 2   Add the tens.   [4 + 1 = 5]
+step 3   5 tens is 50.
+miss     dropped-place-value = 5   That is 4 and 1 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 40   One ten short — count the tens again.
+miss     off-by-ten-high = 60   One ten too many — count the tens again.
+
+--- add-tens · seed 12345 · difficulty 2
+prompt   What is the sum?
+display  inline "50 + 20"
+answer   exact 70/1
+input    keypad
+hint     Add 5 and 2, then remember you are counting tens.
+step 1   50 is 5 tens, and 20 is 2 tens.
+step 2   Add the tens.   [5 + 2 = 7]
+step 3   7 tens is 70.
+miss     dropped-place-value = 7   That is 5 and 2 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 60   One ten short — count the tens again.
+miss     off-by-ten-high = 80   One ten too many — count the tens again.
+
+--- add-tens · seed 67890 · difficulty 2
+prompt   What is the sum?
+display  inline "20 + 30"
+answer   exact 50/1
+input    keypad
+hint     Add 2 and 3, then remember you are counting tens.
+step 1   20 is 2 tens, and 30 is 3 tens.
+step 2   Add the tens.   [2 + 3 = 5]
+step 3   5 tens is 50.
+miss     dropped-place-value = 5   That is 2 and 3 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 40   One ten short — count the tens again.
+miss     off-by-ten-high = 60   One ten too many — count the tens again.
+
+--- add-tens · seed 424242 · difficulty 2
+prompt   What is the sum?
+display  inline "10 + 20"
+answer   exact 30/1
+input    keypad
+hint     Add 1 and 2, then remember you are counting tens.
+step 1   10 is 1 ten, and 20 is 2 tens.
+step 2   Add the tens.   [1 + 2 = 3]
+step 3   3 tens is 30.
+miss     dropped-place-value = 3   That is 1 and 2 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 20   One ten short — count the tens again.
+miss     off-by-ten-high = 40   One ten too many — count the tens again.
+
+--- add-tens · seed 987654321 · difficulty 2
+prompt   What is the sum?
+display  inline "50 + 10"
+answer   exact 60/1
+input    keypad
+hint     Add 5 and 1, then remember you are counting tens.
+step 1   50 is 5 tens, and 10 is 1 ten.
+step 2   Add the tens.   [5 + 1 = 6]
+step 3   6 tens is 60.
+miss     dropped-place-value = 6   That is 5 and 1 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 50   One ten short — count the tens again.
+miss     off-by-ten-high = 70   One ten too many — count the tens again.
+
+--- add-tens · seed 1 · difficulty 3
+prompt   What is the sum?
+display  inline "50 + 20"
+answer   exact 70/1
+input    keypad
+hint     Add 5 and 2, then remember you are counting tens.
+step 1   50 is 5 tens, and 20 is 2 tens.
+step 2   Add the tens.   [5 + 2 = 7]
+step 3   7 tens is 70.
+miss     dropped-place-value = 7   That is 5 and 2 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 60   One ten short — count the tens again.
+miss     off-by-ten-high = 80   One ten too many — count the tens again.
+
+--- add-tens · seed 12345 · difficulty 3
+prompt   What is the sum?
+display  inline "70 + 30"
+answer   exact 100/1
+input    keypad
+hint     Add 7 and 3, then remember you are counting tens.
+step 1   70 is 7 tens, and 30 is 3 tens.
+step 2   Add the tens.   [7 + 3 = 10]
+step 3   10 tens is 100.
+miss     dropped-place-value = 10   That is 7 and 3 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 90   One ten short — count the tens again.
+miss     off-by-ten-high = 110   One ten too many — count the tens again.
+
+--- add-tens · seed 67890 · difficulty 3
+prompt   What is the sum?
+display  inline "40 + 50"
+answer   exact 90/1
+input    keypad
+hint     Add 4 and 5, then remember you are counting tens.
+step 1   40 is 4 tens, and 50 is 5 tens.
+step 2   Add the tens.   [4 + 5 = 9]
+step 3   9 tens is 90.
+miss     dropped-place-value = 9   That is 4 and 5 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 80   One ten short — count the tens again.
+miss     off-by-ten-high = 100   One ten too many — count the tens again.
+
+--- add-tens · seed 424242 · difficulty 3
+prompt   What is the sum?
+display  inline "20 + 30"
+answer   exact 50/1
+input    keypad
+hint     Add 2 and 3, then remember you are counting tens.
+step 1   20 is 2 tens, and 30 is 3 tens.
+step 2   Add the tens.   [2 + 3 = 5]
+step 3   5 tens is 50.
+miss     dropped-place-value = 5   That is 2 and 3 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 40   One ten short — count the tens again.
+miss     off-by-ten-high = 60   One ten too many — count the tens again.
+
+--- add-tens · seed 987654321 · difficulty 3
+prompt   What is the sum?
+display  inline "70 + 20"
+answer   exact 90/1
+input    keypad
+hint     Add 7 and 2, then remember you are counting tens.
+step 1   70 is 7 tens, and 20 is 2 tens.
+step 2   Add the tens.   [7 + 2 = 9]
+step 3   9 tens is 90.
+miss     dropped-place-value = 9   That is 7 and 2 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 80   One ten short — count the tens again.
+miss     off-by-ten-high = 100   One ten too many — count the tens again.
+
+--- add-tens · seed 1 · difficulty 4
+prompt   What is the sum?
+display  inline "60 + 20"
+answer   exact 80/1
+input    keypad
+hint     Add 6 and 2, then remember you are counting tens.
+step 1   60 is 6 tens, and 20 is 2 tens.
+step 2   Add the tens.   [6 + 2 = 8]
+step 3   8 tens is 80.
+miss     dropped-place-value = 8   That is 6 and 2 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 70   One ten short — count the tens again.
+miss     off-by-ten-high = 90   One ten too many — count the tens again.
+
+--- add-tens · seed 12345 · difficulty 4
+prompt   What is the sum?
+display  inline "80 + 40"
+answer   exact 120/1
+input    keypad
+hint     Add 8 and 4, then remember you are counting tens.
+step 1   80 is 8 tens, and 40 is 4 tens.
+step 2   Add the tens.   [8 + 4 = 12]
+step 3   12 tens is 120.
+miss     dropped-place-value = 12   That is 8 and 4 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 110   One ten short — count the tens again.
+miss     off-by-ten-high = 130   One ten too many — count the tens again.
+
+--- add-tens · seed 67890 · difficulty 4
+prompt   What is the sum?
+display  inline "40 + 60"
+answer   exact 100/1
+input    keypad
+hint     Add 4 and 6, then remember you are counting tens.
+step 1   40 is 4 tens, and 60 is 6 tens.
+step 2   Add the tens.   [4 + 6 = 10]
+step 3   10 tens is 100.
+miss     dropped-place-value = 10   That is 4 and 6 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 90   One ten short — count the tens again.
+miss     off-by-ten-high = 110   One ten too many — count the tens again.
+
+--- add-tens · seed 424242 · difficulty 4
+prompt   What is the sum?
+display  inline "20 + 30"
+answer   exact 50/1
+input    keypad
+hint     Add 2 and 3, then remember you are counting tens.
+step 1   20 is 2 tens, and 30 is 3 tens.
+step 2   Add the tens.   [2 + 3 = 5]
+step 3   5 tens is 50.
+miss     dropped-place-value = 5   That is 2 and 3 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 40   One ten short — count the tens again.
+miss     off-by-ten-high = 60   One ten too many — count the tens again.
+
+--- add-tens · seed 987654321 · difficulty 4
+prompt   What is the sum?
+display  inline "80 + 20"
+answer   exact 100/1
+input    keypad
+hint     Add 8 and 2, then remember you are counting tens.
+step 1   80 is 8 tens, and 20 is 2 tens.
+step 2   Add the tens.   [8 + 2 = 10]
+step 3   10 tens is 100.
+miss     dropped-place-value = 10   That is 8 and 2 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 90   One ten short — count the tens again.
+miss     off-by-ten-high = 110   One ten too many — count the tens again.
+
+--- add-tens · seed 1 · difficulty 5
+prompt   What is the sum?
+display  inline "70 + 30"
+answer   exact 100/1
+input    keypad
+hint     Add 7 and 3, then remember you are counting tens.
+step 1   70 is 7 tens, and 30 is 3 tens.
+step 2   Add the tens.   [7 + 3 = 10]
+step 3   10 tens is 100.
+miss     dropped-place-value = 10   That is 7 and 3 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 90   One ten short — count the tens again.
+miss     off-by-ten-high = 110   One ten too many — count the tens again.
+
+--- add-tens · seed 12345 · difficulty 5
+prompt   What is the sum?
+display  inline "90 + 50"
+answer   exact 140/1
+input    keypad
+hint     Add 9 and 5, then remember you are counting tens.
+step 1   90 is 9 tens, and 50 is 5 tens.
+step 2   Add the tens.   [9 + 5 = 14]
+step 3   14 tens is 140.
+miss     dropped-place-value = 14   That is 9 and 5 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 130   One ten short — count the tens again.
+miss     off-by-ten-high = 150   One ten too many — count the tens again.
+
+--- add-tens · seed 67890 · difficulty 5
+prompt   What is the sum?
+display  inline "50 + 70"
+answer   exact 120/1
+input    keypad
+hint     Add 5 and 7, then remember you are counting tens.
+step 1   50 is 5 tens, and 70 is 7 tens.
+step 2   Add the tens.   [5 + 7 = 12]
+step 3   12 tens is 120.
+miss     dropped-place-value = 12   That is 5 and 7 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 110   One ten short — count the tens again.
+miss     off-by-ten-high = 130   One ten too many — count the tens again.
+
+--- add-tens · seed 424242 · difficulty 5
+prompt   What is the sum?
+display  inline "30 + 40"
+answer   exact 70/1
+input    keypad
+hint     Add 3 and 4, then remember you are counting tens.
+step 1   30 is 3 tens, and 40 is 4 tens.
+step 2   Add the tens.   [3 + 4 = 7]
+step 3   7 tens is 70.
+miss     dropped-place-value = 7   That is 3 and 4 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 60   One ten short — count the tens again.
+miss     off-by-ten-high = 80   One ten too many — count the tens again.
+
+--- add-tens · seed 987654321 · difficulty 5
+prompt   What is the sum?
+display  inline "90 + 30"
+answer   exact 120/1
+input    keypad
+hint     Add 9 and 3, then remember you are counting tens.
+step 1   90 is 9 tens, and 30 is 3 tens.
+step 2   Add the tens.   [9 + 3 = 12]
+step 3   12 tens is 120.
+miss     dropped-place-value = 12   That is 9 and 3 added — but you are counting tens here, not ones.
+miss     off-by-ten-low = 110   One ten short — count the tens again.
+miss     off-by-ten-high = 130   One ten too many — count the tens again."
+`;
+
+exports[`recorded output: add-three-numbers > matches the output recorded before the engine extraction 1`] = `
+"--- add-three-numbers · seed 1 · difficulty 1
+prompt   Add the columns.
+display  column 29 + 10 + 26
+answer   exact 65/1
+input    keypad
+hint     The ones come to 15, so one ten carries into the next column.
+step 1   Add the ones column.   [9 + 0 + 6 = 15]
+step 2   Write the 5, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [2 + 1 + 2 + 1 = 6]
+step 4   That gives 65.
+miss     forgot-carry = 55   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 39   That is 29 and 10. There is still the 26 to add.
+
+--- add-three-numbers · seed 12345 · difficulty 1
+prompt   Add the columns.
+display  column 40 + 19 + 25
+answer   exact 84/1
+input    keypad
+hint     The ones come to 14, so one ten carries into the next column.
+step 1   Add the ones column.   [0 + 9 + 5 = 14]
+step 2   Write the 4, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [4 + 1 + 2 + 1 = 8]
+step 4   That gives 84.
+miss     forgot-carry = 74   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 59   That is 40 and 19. There is still the 25 to add.
+
+--- add-three-numbers · seed 67890 · difficulty 1
+prompt   Add the columns.
+display  column 22 + 28 + 21
+answer   exact 71/1
+input    keypad
+hint     The ones come to 11, so one ten carries into the next column.
+step 1   Add the ones column.   [2 + 8 + 1 = 11]
+step 2   Write the 1, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [2 + 2 + 2 + 1 = 7]
+step 4   That gives 71.
+miss     forgot-carry = 61   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 50   That is 22 and 28. There is still the 21 to add.
+
+--- add-three-numbers · seed 424242 · difficulty 1
+prompt   Add the columns.
+display  column 13 + 17 + 15
+answer   exact 45/1
+input    keypad
+hint     The ones come to 15, so one ten carries into the next column.
+step 1   Add the ones column.   [3 + 7 + 5 = 15]
+step 2   Write the 5, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [1 + 1 + 1 + 1 = 4]
+step 4   That gives 45.
+miss     forgot-carry = 35   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 30   That is 13 and 17. There is still the 15 to add.
+
+--- add-three-numbers · seed 987654321 · difficulty 1
+prompt   Add the columns.
+display  column 38 + 29 + 21
+answer   exact 88/1
+input    keypad
+hint     The ones come to 18, so one ten carries into the next column.
+step 1   Add the ones column.   [8 + 9 + 1 = 18]
+step 2   Write the 8, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [3 + 2 + 2 + 1 = 8]
+step 4   That gives 88.
+miss     forgot-carry = 78   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 67   That is 38 and 29. There is still the 21 to add.
+
+--- add-three-numbers · seed 1 · difficulty 2
+prompt   Add the columns.
+display  column 60 + 59 + 24
+answer   exact 143/1
+input    keypad
+hint     The ones come to 13, so one ten carries into the next column.
+step 1   Add the ones column.   [0 + 9 + 4 = 13]
+step 2   Write the 3, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [6 + 5 + 2 + 1 = 14]
+step 4   That gives 143.
+miss     forgot-carry = 133   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 119   That is 60 and 59. There is still the 24 to add.
+
+--- add-three-numbers · seed 12345 · difficulty 2
+prompt   Add the columns.
+display  column 59 + 25 + 34
+answer   exact 118/1
+input    keypad
+hint     The ones come to 18, so one ten carries into the next column.
+step 1   Add the ones column.   [9 + 5 + 4 = 18]
+step 2   Write the 8, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [5 + 2 + 3 + 1 = 11]
+step 4   That gives 118.
+miss     forgot-carry = 108   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 84   That is 59 and 25. There is still the 34 to add.
+
+--- add-three-numbers · seed 67890 · difficulty 2
+prompt   Add the columns.
+display  column 17 + 43 + 49
+answer   exact 109/1
+input    keypad
+hint     The ones come to 19, so one ten carries into the next column.
+step 1   Add the ones column.   [7 + 3 + 9 = 19]
+step 2   Write the 9, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [1 + 4 + 4 + 1 = 10]
+step 4   That gives 109.
+miss     forgot-carry = 99   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 60   That is 17 and 43. There is still the 49 to add.
+
+--- add-three-numbers · seed 424242 · difficulty 2
+prompt   Add the columns.
+display  column 16 + 22 + 19
+answer   exact 57/1
+input    keypad
+hint     The ones come to 17, so one ten carries into the next column.
+step 1   Add the ones column.   [6 + 2 + 9 = 17]
+step 2   Write the 7, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [1 + 2 + 1 + 1 = 5]
+step 4   That gives 57.
+miss     forgot-carry = 47   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 38   That is 16 and 22. There is still the 19 to add.
+
+--- add-three-numbers · seed 987654321 · difficulty 2
+prompt   Add the columns.
+display  column 56 + 42 + 29
+answer   exact 127/1
+input    keypad
+hint     The ones come to 17, so one ten carries into the next column.
+step 1   Add the ones column.   [6 + 2 + 9 = 17]
+step 2   Write the 7, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [5 + 4 + 2 + 1 = 12]
+step 4   That gives 127.
+miss     forgot-carry = 117   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 98   That is 56 and 42. There is still the 29 to add.
+
+--- add-three-numbers · seed 1 · difficulty 3
+prompt   Add the columns.
+display  column 55 + 12 + 48
+answer   exact 115/1
+input    keypad
+hint     The ones come to 15, so one ten carries into the next column.
+step 1   Add the ones column.   [5 + 2 + 8 = 15]
+step 2   Write the 5, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [5 + 1 + 4 + 1 = 11]
+step 4   That gives 115.
+miss     forgot-carry = 105   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 67   That is 55 and 12. There is still the 48 to add.
+
+--- add-three-numbers · seed 12345 · difficulty 3
+prompt   Add the columns.
+display  column 79 + 33 + 45
+answer   exact 157/1
+input    keypad
+hint     The ones come to 17, so one ten carries into the next column.
+step 1   Add the ones column.   [9 + 3 + 5 = 17]
+step 2   Write the 7, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [7 + 3 + 4 + 1 = 15]
+step 4   That gives 157.
+miss     forgot-carry = 147   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 112   That is 79 and 33. There is still the 45 to add.
+
+--- add-three-numbers · seed 67890 · difficulty 3
+prompt   Add the columns.
+display  column 39 + 52 + 37
+answer   exact 128/1
+input    keypad
+hint     The ones come to 18, so one ten carries into the next column.
+step 1   Add the ones column.   [9 + 2 + 7 = 18]
+step 2   Write the 8, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [3 + 5 + 3 + 1 = 12]
+step 4   That gives 128.
+miss     forgot-carry = 118   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 91   That is 39 and 52. There is still the 37 to add.
+
+--- add-three-numbers · seed 424242 · difficulty 3
+prompt   Add the columns.
+display  column 20 + 28 + 24
+answer   exact 72/1
+input    keypad
+hint     The ones come to 12, so one ten carries into the next column.
+step 1   Add the ones column.   [0 + 8 + 4 = 12]
+step 2   Write the 2, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [2 + 2 + 2 + 1 = 7]
+step 4   That gives 72.
+miss     forgot-carry = 62   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 48   That is 20 and 28. There is still the 24 to add.
+
+--- add-three-numbers · seed 987654321 · difficulty 3
+prompt   Add the columns.
+display  column 77 + 21 + 13
+answer   exact 111/1
+input    keypad
+hint     The ones come to 11, so one ten carries into the next column.
+step 1   Add the ones column.   [7 + 1 + 3 = 11]
+step 2   Write the 1, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [7 + 2 + 1 + 1 = 11]
+step 4   That gives 111.
+miss     forgot-carry = 101   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 98   That is 77 and 21. There is still the 13 to add.
+
+--- add-three-numbers · seed 1 · difficulty 4
+prompt   Add the columns.
+display  column 62 + 15 + 55
+answer   exact 132/1
+input    keypad
+hint     The ones come to 12, so one ten carries into the next column.
+step 1   Add the ones column.   [2 + 5 + 5 = 12]
+step 2   Write the 2, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [6 + 1 + 5 + 1 = 13]
+step 4   That gives 132.
+miss     forgot-carry = 122   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 77   That is 62 and 15. There is still the 55 to add.
+
+--- add-three-numbers · seed 12345 · difficulty 4
+prompt   Add the columns.
+display  column 89 + 38 + 51
+answer   exact 178/1
+input    keypad
+hint     The ones come to 18, so one ten carries into the next column.
+step 1   Add the ones column.   [9 + 8 + 1 = 18]
+step 2   Write the 8, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [8 + 3 + 5 + 1 = 17]
+step 4   That gives 178.
+miss     forgot-carry = 168   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 127   That is 89 and 38. There is still the 51 to add.
+
+--- add-three-numbers · seed 67890 · difficulty 4
+prompt   Add the columns.
+display  column 44 + 59 + 42
+answer   exact 145/1
+input    keypad
+hint     The ones come to 15, so one ten carries into the next column.
+step 1   Add the ones column.   [4 + 9 + 2 = 15]
+step 2   Write the 5, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [4 + 5 + 4 + 1 = 14]
+step 4   That gives 145.
+miss     forgot-carry = 135   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 103   That is 44 and 59. There is still the 42 to add.
+
+--- add-three-numbers · seed 424242 · difficulty 4
+prompt   Add the columns.
+display  column 24 + 32 + 28
+answer   exact 84/1
+input    keypad
+hint     The ones come to 14, so one ten carries into the next column.
+step 1   Add the ones column.   [4 + 2 + 8 = 14]
+step 2   Write the 4, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [2 + 3 + 2 + 1 = 8]
+step 4   That gives 84.
+miss     forgot-carry = 74   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 56   That is 24 and 32. There is still the 28 to add.
+
+--- add-three-numbers · seed 987654321 · difficulty 4
+prompt   Add the columns.
+display  column 87 + 25 + 16
+answer   exact 128/1
+input    keypad
+hint     The ones come to 18, so one ten carries into the next column.
+step 1   Add the ones column.   [7 + 5 + 6 = 18]
+step 2   Write the 8, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [8 + 2 + 1 + 1 = 12]
+step 4   That gives 128.
+miss     forgot-carry = 118   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 112   That is 87 and 25. There is still the 16 to add.
+
+--- add-three-numbers · seed 1 · difficulty 5
+prompt   Add the columns.
+display  column 66 + 74 + 52
+answer   exact 192/1
+input    keypad
+hint     The ones come to 12, so one ten carries into the next column.
+step 1   Add the ones column.   [6 + 4 + 2 = 12]
+step 2   Write the 2, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [6 + 7 + 5 + 1 = 19]
+step 4   That gives 192.
+miss     forgot-carry = 182   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 140   That is 66 and 74. There is still the 52 to add.
+
+--- add-three-numbers · seed 12345 · difficulty 5
+prompt   Add the columns.
+display  column 94 + 43 + 56
+answer   exact 193/1
+input    keypad
+hint     The ones come to 13, so one ten carries into the next column.
+step 1   Add the ones column.   [4 + 3 + 6 = 13]
+step 2   Write the 3, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [9 + 4 + 5 + 1 = 19]
+step 4   That gives 193.
+miss     forgot-carry = 183   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 137   That is 94 and 43. There is still the 56 to add.
+
+--- add-three-numbers · seed 67890 · difficulty 5
+prompt   Add the columns.
+display  column 49 + 64 + 47
+answer   exact 160/1
+input    keypad
+hint     The ones come to 20, so two tens carry into the next column.
+step 1   Add the ones column.   [9 + 4 + 7 = 20]
+step 2   Write the 0, and carry the 2.
+step 3   Add the tens column, plus what you carried.   [4 + 6 + 4 + 2 = 16]
+step 4   That gives 160.
+miss     forgot-carry = 140   The ones digit is right, but two tens never made it into the tens column.
+miss     added-two-of-three = 113   That is 49 and 64. There is still the 47 to add.
+
+--- add-three-numbers · seed 424242 · difficulty 5
+prompt   Add the columns.
+display  column 29 + 37 + 33
+answer   exact 99/1
+input    keypad
+hint     The ones come to 19, so one ten carries into the next column.
+step 1   Add the ones column.   [9 + 7 + 3 = 19]
+step 2   Write the 9, and carry the 1.
+step 3   Add the tens column, plus what you carried.   [2 + 3 + 3 + 1 = 9]
+step 4   That gives 99.
+miss     forgot-carry = 89   The ones digit is right, but one ten never made it into the tens column.
+miss     added-two-of-three = 66   That is 29 and 37. There is still the 33 to add.
+
+--- add-three-numbers · seed 987654321 · difficulty 5
+prompt   Add the columns.
+display  column 89 + 67 + 48
+answer   exact 204/1
+input    keypad
+hint     The ones come to 24, so two tens carry into the next column.
+step 1   Add the ones column.   [9 + 7 + 8 = 24]
+step 2   Write the 4, and carry the 2.
+step 3   Add the tens column, plus what you carried.   [8 + 6 + 4 + 2 = 20]
+step 4   That gives 204.
+miss     forgot-carry = 184   The ones digit is right, but two tens never made it into the tens column.
+miss     added-two-of-three = 156   That is 89 and 67. There is still the 48 to add."
+`;
+
 exports[`recorded output: add-words > matches the output recorded before the engine extraction 1`] = `
 "--- add-words · seed 1 · difficulty 1
 prompt   How long were the calls?

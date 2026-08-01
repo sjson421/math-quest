@@ -57,26 +57,32 @@ const openSkills = (progress: Progress) =>
 /** Unit 1 finished to threshold — the state that opens Unit 2 under the manifest. */
 const throughUnit1 = () =>
   progressWith({
+    'add-facts-small': MASTERED,
     'add-facts': MASTERED,
+    'add-tens': MASTERED,
     'add-2digit-nocarry': MASTERED,
     'add-2digit-carry': MASTERED,
     'add-3digit': MASTERED,
+    'add-three-numbers': MASTERED,
     'add-words': MASTERED,
   })
 
 describe('the unlock rules', () => {
   it('opens a skill once every prerequisite has reached the threshold', () => {
-    expect(isUnlocked('add-2digit-nocarry', progressWith({ 'add-facts': MASTERED }))).toBe(true)
+    expect(isUnlocked('add-2digit-nocarry', progressWith({ 'add-tens': MASTERED }))).toBe(true)
   })
 
   it('keeps a skill locked while a prerequisite is one short', () => {
-    const nearly = progressWith({ 'add-facts': { mastery: UNLOCK_THRESHOLD - 1, attempts: 12 } })
+    const nearly = progressWith({ 'add-tens': { mastery: UNLOCK_THRESHOLD - 1, attempts: 12 } })
 
     expect(isUnlocked('add-2digit-nocarry', nearly)).toBe(false)
   })
 
   it('opens the root skill from first launch', () => {
-    expect(openSkills(initialProgress())).toEqual(['add-facts'])
+    // `add-facts-small` is 1.1, and became the course's root the moment it
+    // gained a generator — the whole of Unit 0 in front of it is still planned,
+    // so pass-through leaves it with no prerequisites at all.
+    expect(openSkills(initialProgress())).toEqual(['add-facts-small'])
   })
 
   it('locks an id the manifest does not know', () => {
@@ -90,7 +96,9 @@ describe('the manifest is the authority', () => {
     // `sub-facts` sat directly behind `add-facts` and would be open here.
     const justAddFacts = progressWith({ 'add-facts': MASTERED })
 
-    expect(openSkills(justAddFacts)).toEqual(['add-facts', 'add-2digit-nocarry'])
+    // `add-facts` itself is open only because it has been practised — it now
+    // sits behind `add-facts-small`, which this record has never touched.
+    expect(openSkills(justAddFacts)).toEqual(['add-facts-small', 'add-facts', 'add-tens'])
     expect(isUnlocked('sub-facts', justAddFacts)).toBe(false)
   })
 
@@ -109,13 +117,14 @@ describe('the manifest is the authority', () => {
   })
 
   it('locks a skill that has no generator, however far the learner has come', () => {
-    // 194 of the 201 are planned. They must never be offered, and they must
-    // never hold anyone up either — `add-2digit-nocarry` sits behind two of them.
+    // 191 of the 201 are planned. They must never be offered, and they must
+    // never hold anyone up either — `add-facts-small` opens from a standing
+    // start despite sitting behind all eight of Unit 0.
     const finished = throughUnit1()
 
-    expect(isUnlocked('add-facts-small', finished)).toBe(false)
-    expect(isUnlocked('add-tens', finished)).toBe(false)
-    expect(isUnlocked('add-2digit-nocarry', finished)).toBe(true)
+    expect(isUnlocked('sub-facts-small', finished)).toBe(false)
+    expect(isUnlocked('sub-tens', finished)).toBe(false)
+    expect(isUnlocked('add-facts-small', initialProgress())).toBe(true)
   })
 })
 
@@ -159,12 +168,25 @@ describe('a practised skill is never re-locked', () => {
   })
 
   it('still refuses a practised skill that can no longer be generated', () => {
-    // Rule 1 beats rule 2. Not reachable with today's seven skills, but the
+    // Rule 1 beats rule 2. Not reachable with today's ten skills, but the
     // order is what stops a future capability requirement handing back a lesson
     // that cannot be built.
-    const practisedButPlanned = progressWith({ 'add-facts-small': { attempts: 9, mastery: 2 } })
+    const practisedButPlanned = progressWith({ 'sub-facts-small': { attempts: 9, mastery: 2 } })
 
-    expect(isUnlocked('add-facts-small', practisedButPlanned)).toBe(false)
+    expect(isUnlocked('sub-facts-small', practisedButPlanned)).toBe(false)
+  })
+
+  it('keeps add-facts open for a learner who reached it before 1.1 existed', () => {
+    // The strand this change would otherwise cause, and the first time the rule
+    // has been load-bearing rather than defensive: `add-facts` was the root of
+    // the course until `add-facts-small` gained a generator, so every existing
+    // record has practice on a skill that has since grown a prerequisite it has
+    // never met.
+    const wasTheRoot = progressWith({ 'add-facts': { mastery: 3, attempts: 40, correct: 34 } })
+
+    expect(isUnlocked('add-facts', wasTheRoot)).toBe(true)
+    expect(wasTheRoot.skills['add-facts'].mastery).toBe(3)
+    expect(isUnlocked('add-facts-small', wasTheRoot)).toBe(true)
   })
 })
 
@@ -216,8 +238,9 @@ describe('surviving the sync round trip', () => {
     useProgress.getState().replaceProgress(ancient)
 
     expect(openSkills(useProgress.getState().progress)).toEqual([
+      'add-facts-small',
       'add-facts',
-      'add-2digit-nocarry',
+      'add-tens',
     ])
   })
 })

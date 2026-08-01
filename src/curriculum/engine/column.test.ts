@@ -1,9 +1,15 @@
 import { describe, expect, it } from 'vitest'
-import { columnTrace, digitAt, place } from './column'
+import { columnTrace, digitAt, place, stackPlace, stackTrace } from './column'
 
 /** Compact view of one column, so a failure names the place that is wrong. */
 const summarise = (trace: ReturnType<typeof columnTrace>) =>
   trace.places.map((p) => `place ${p.place}: ${p.top}/${p.bottom} → ${p.digit} carry ${p.carry}`)
+
+/** The same, for a stack — the digits are a list, so they read as one. */
+const summariseStack = (trace: ReturnType<typeof stackTrace>) =>
+  trace.places.map(
+    (p) => `place ${p.place}: ${p.digits.join('+')} → ${p.digit} carry ${p.carry}`,
+  )
 
 describe('digitAt', () => {
   it('reads places right to left', () => {
@@ -100,9 +106,81 @@ describe('columnTrace, subtraction', () => {
   })
 })
 
+describe('stackTrace', () => {
+  it('keeps each place\'s digits in operand order', () => {
+    const trace = stackTrace([24, 37, 15])
+    expect(stackPlace(trace, 0).digits).toEqual([4, 7, 5])
+    expect(stackPlace(trace, 1).digits).toEqual([2, 3, 1])
+    expect(trace.result).toBe(76)
+  })
+
+  it('carries two out of a column, not one', () => {
+    // The case the binary trace cannot produce, and the reason this trace
+    // exists: 9 + 8 + 7 is 24, so two tens move up.
+    const trace = stackTrace([19, 18, 17])
+    const ones = stackPlace(trace, 0)
+
+    expect(ones.raw).toBe(24)
+    expect(ones.digit).toBe(4)
+    expect(ones.carry).toBe(2)
+    expect(stackPlace(trace, 1).incoming).toBe(2)
+    expect(trace.result).toBe(54)
+  })
+
+  it('separates the raw column sum from the carried total', () => {
+    // `add-three-numbers` shows the raw sum in its ones step and the carried
+    // total in its tens step. Both come from one trace, which is the point.
+    const trace = stackTrace([24, 37, 15])
+    const tens = stackPlace(trace, 1)
+
+    expect(stackPlace(trace, 0).raw).toBe(16)
+    expect(tens.raw).toBe(6)
+    expect(tens.incoming).toBe(1)
+    expect(tens.total).toBe(7)
+  })
+
+  it('propagates a carry through a column whose own digits add to nothing', () => {
+    // The tens digits are all 0, so the column is carried entirely by what
+    // arrives from below. Off-by-one handling of `incoming` fails here.
+    const trace = stackTrace([309, 208, 107])
+    expect(summariseStack(trace)).toEqual([
+      'place 0: 9+8+7 → 4 carry 2',
+      'place 1: 0+0+0 → 2 carry 0',
+      'place 2: 3+2+1 → 6 carry 0',
+    ])
+    expect(trace.result).toBe(624)
+  })
+
+  it('reconstructs the result from the digits it wrote', () => {
+    // Independent of the trace's own `result`: the digits it says the learner
+    // writes must be the answer, including whatever carried off the top.
+    const trace = stackTrace([95, 87, 68])
+    const fromDigits = trace.places.reduce((sum, p) => sum + p.digit * 10 ** p.place, 0)
+    const carriedOut = trace.places[trace.places.length - 1].carry
+
+    expect(fromDigits + carriedOut * 10 ** trace.places.length).toBe(trace.result)
+    expect(trace.result).toBe(250)
+  })
+
+  it('widens to the longest operand rather than the first', () => {
+    const trace = stackTrace([7, 250, 40])
+    expect(trace.places).toHaveLength(3)
+    expect(stackPlace(trace, 2).digits).toEqual([0, 2, 0])
+    expect(trace.result).toBe(297)
+  })
+})
+
 describe('place', () => {
   it('names the trace when a skill asks for a column it does not have', () => {
     const trace = columnTrace(23, 45, '+')
     expect(() => place(trace, 2)).toThrow('has 2 columns, no place 2')
+  })
+
+  it('names the stack the same way', () => {
+    // A checker that returns "no problems" looks exactly like a clean codebase.
+    // Sharing the throw between the two traces is only worth it if the stack's
+    // message still identifies which stack ran short.
+    const trace = stackTrace([24, 37, 15])
+    expect(() => stackPlace(trace, 2)).toThrow('24 + 37 + 15 has 2 columns, no place 2')
   })
 })

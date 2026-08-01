@@ -8,8 +8,15 @@
  * something guessed at from addition.
  */
 
-export { columnTrace, digitAt, at, place } from './column'
-export type { ColumnOperator, ColumnPlace, ColumnTrace } from './column'
+export { columnTrace, digitAt, at, place, requirePlace, stackPlace, stackTrace } from './column'
+export type {
+  CarryingTrace,
+  ColumnOperator,
+  ColumnPlace,
+  ColumnTrace,
+  StackPlace,
+  StackTrace,
+} from './column'
 
 export {
   DIFFICULTIES,
@@ -21,14 +28,15 @@ export {
 } from './bands'
 export type { Band, Ladder } from './bands'
 
-export { drawPair } from './draw'
-export type { DrawOptions, Pair } from './draw'
+export { drawOperands, drawPair } from './draw'
+export type { DrawOperandsOptions, DrawOptions, Pair } from './draw'
 
 export {
   borrowedWithoutReducing,
   digitConcat,
   flippedColumns,
   forgotCarry,
+  offBy,
   offByOne,
   skippedUpperSubtraction,
   wroteFullColumn,

@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 7 of 201 skills are playable.** All seven are in Units 1–2. No capability beyond
-the plain number keypad is built. This line is the only progress number in the repo's
+**Status: 10 of 201 skills are playable.** All ten are in Units 1–2, and Unit 1 is complete.
+No capability beyond the plain number keypad is built. This line is the only progress number in the repo's
 documentation — the manifest and `npm test` are the authority, and everything below is
 scope rather than status.
 
@@ -75,12 +75,22 @@ document's ✅ markers updated to match, which the cross-check enforces.
       written, which put `sub-facts` second while it now opens sixth. The array is in
       curriculum order and a test pins it there.
 
-- [ ] **2 · Unit 1, the remaining three** — S
+- [x] **2 · Unit 1, the remaining three** — S — **shipped 2026-07-31**
 
       `add-facts-small`, `add-tens`, `add-three-numbers`. Completes the first unit, and
       produces the course's first `quick` skill, without which item 4 cannot be demonstrated.
       `add-three-numbers` is the first consumer of a three-operand column trace, which item 0
       deliberately deferred.
+
+      Left behind: `stackTrace` and `drawOperands` in the engine, a **carry that is a count
+      rather than a flag** (three digits reach 24, so two tens move up), and `forgotCarry`
+      widened to accept either trace. Item 10 extends this file again for partial products.
+
+      Also here: completing the unit moved the course's **root** from `add-facts` to
+      `add-facts-small`, and `add-2digit-nocarry` from `add-facts` to `add-tens`. Nothing in
+      the manifest changed — three skills simply stopped being seen through. Item 1's
+      never-re-lock rule kept every existing record whole, and this is the first change that
+      actually needed it.
 
 - [ ] **3 · Per-problem keypad rules** — S
 

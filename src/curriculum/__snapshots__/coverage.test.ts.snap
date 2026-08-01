@@ -6,14 +6,23 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
     "add-2digit-nocarry",
   ],
   "add-2digit-nocarry": [
-    "add-facts",
+    "add-tens",
   ],
   "add-3digit": [
     "add-2digit-carry",
   ],
-  "add-facts": [],
-  "add-words": [
+  "add-facts": [
+    "add-facts-small",
+  ],
+  "add-facts-small": [],
+  "add-tens": [
+    "add-facts",
+  ],
+  "add-three-numbers": [
     "add-3digit",
+  ],
+  "add-words": [
+    "add-three-numbers",
   ],
   "sub-2digit-borrow": [
     "sub-facts",

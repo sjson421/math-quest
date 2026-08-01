@@ -148,13 +148,13 @@ Self-assessed skips are the risky ones, so the system watches them:
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 1.1 | `add-facts-small` | Sums to 10 | `quick` |
+| 1.1 | `add-facts-small` | Sums to 10 | ✅ `quick` |
 | 1.2 | `add-facts` | Sums to 18 | ✅ |
-| 1.3 | `add-tens` | 20 + 30 | |
+| 1.3 | `add-tens` | 20 + 30 | ✅ |
 | 1.4 | `add-2digit-nocarry` | Column addition | ✅ |
 | 1.5 | `add-2digit-carry` | Carrying | ✅ ⚠️ forgetting the carry |
 | 1.6 | `add-3digit` | Three digits | ✅ |
-| 1.7 | `add-three-numbers` | Stack of three | |
+| 1.7 | `add-three-numbers` | Stack of three | ✅ |
 | 1.8 | `add-words` | Word problems | ✅ |
 
 ### Unit 2 — Subtraction (8)

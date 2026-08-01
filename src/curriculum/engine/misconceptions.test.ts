@@ -1,10 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { columnTrace, digitAt } from './column'
+import { columnTrace, digitAt, stackPlace, stackTrace } from './column'
 import {
   borrowedWithoutReducing,
   digitConcat,
   flippedColumns,
   forgotCarry,
+  offBy,
   offByOne,
   skippedUpperSubtraction,
   wroteFullColumn,
@@ -38,6 +39,34 @@ describe('offByOne', () => {
       { value: 11, tag: 'off-by-one-low', nudge: 'too few' },
       { value: 13, tag: 'off-by-one-high', nudge: 'too many' },
     ])
+  })
+
+  it('keeps its tags verbatim now that it delegates', () => {
+    // `off-by-one-low` and `off-by-one-high` are in the recorded output of
+    // `add-facts` and `sub-facts`. Reimplementing this on `offBy` is only safe
+    // while the tags it produces are byte-identical.
+    expect(offByOne(5, { low: 'l', high: 'h' }).map((m) => m.tag)).toEqual([
+      'off-by-one-low',
+      'off-by-one-high',
+    ])
+  })
+})
+
+describe('offBy', () => {
+  it('steps by ten for the whole-tens skill', () => {
+    expect(offBy(50, 10, { tag: 'off-by-ten', low: 'l', high: 'h' })).toEqual([
+      { value: 40, tag: 'off-by-ten-low', nudge: 'l' },
+      { value: 60, tag: 'off-by-ten-high', nudge: 'h' },
+    ])
+  })
+
+  it('never predicts the correct answer, whatever the step', () => {
+    // The one property the central dedup would otherwise have to catch.
+    for (const step of [1, 10, 100]) {
+      for (const prediction of offBy(70, step, { tag: 't', low: 'l', high: 'h' })) {
+        expect(prediction.value).not.toBe(70)
+      }
+    }
   })
 })
 
@@ -132,6 +161,38 @@ describe('forgotCarry at three digits', () => {
         `${a} + ${b} tens`,
       ).toBe(sum - (carryTens ? 100 : 0))
     }
+  })
+})
+
+describe('forgotCarry over a stack', () => {
+  it('is short by the full carry, not by one ten', () => {
+    // The prediction a boolean carry gets quietly wrong. 9 + 8 + 7 is 24, so a
+    // learner who writes the 4 and carries nothing is 20 light, not 10.
+    const trace = stackTrace([19, 18, 17])
+    expect(stackPlace(trace, 0).carry).toBe(2)
+
+    const built = forgotCarry(trace, 0, { tag: 'forgot-carry', nudge: 'n' })
+    expect(built.value).toBe(trace.result - 20)
+    expect(built.value).not.toBe(trace.result - 10)
+  })
+
+  it('agrees with the binary trace wherever the carry is one', () => {
+    // The generalisation must not have moved the case that already shipped.
+    for (let a = 15; a <= 95; a += 4) {
+      for (let b = 16; b <= 96; b += 7) {
+        if (d(a, 0) + d(b, 0) <= 9) continue
+        const binary = forgotCarry(columnTrace(a, b, '+'), 0, { tag: 't', nudge: 'n' })
+        const stacked = forgotCarry(stackTrace([a, b]), 0, { tag: 't', nudge: 'n' })
+        expect(stacked.value, `${a} + ${b}`).toBe(binary.value)
+      }
+    }
+  })
+
+  it('names the width when asked for a carry out of a place that is not there', () => {
+    const trace = stackTrace([4, 7, 5])
+    expect(() => forgotCarry(trace, 1, { tag: 't', nudge: 'n' })).toThrow(
+      'a trace totalling 16 has 1 columns, no place 1',
+    )
   })
 })
 
