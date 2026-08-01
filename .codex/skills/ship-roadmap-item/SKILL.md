@@ -101,14 +101,27 @@ npm run build
 npm run lint
 ```
 
-Run relevant targeted tests as needed. For a user-visible change, exercise it with the
-available browser-control tool. An open localhost tab is not evidence that its server is
-running: check the route first. If it is unavailable, start the repository's documented
-development command in a long-lived integrated-terminal session, wait for the route to
-respond, and then navigate the browser to it. Keep the session alive for the exercise and
-stop it cleanly afterward if this workflow started it. Do not ask the user to open a pane,
-start the server, or perform the browser checks for you. If no browser-control capability is
-available after checking the installed tools, stop and report that capability as the blocker.
+Run relevant targeted tests as needed. For a user-visible change, exercise it in a real
+browser using only the branch below that matches the current host.
+
+### Claude browser validation
+
+Use Claude's browser preview tools. Never run a development server from Bash when a preview
+tool is available. If the preview pane is unavailable or hidden, ask the user to display it
+rather than starting a server in the shell: a hidden pane does not run `requestAnimationFrame`,
+so `AnimatePresence mode="wait"` cannot complete screen transitions.
+
+### Codex browser validation
+
+Use Codex's available browser-control tool, including an installed Playwright MCP when
+present. An open localhost tab is not evidence that its server is running: check the route
+first. If it is unavailable, start the repository's documented development command in a
+long-lived integrated-terminal session, wait for the route to respond, and then navigate the
+browser to it. Keep the session alive for the exercise and stop it cleanly afterward if this
+workflow started it. Do not ask the user to open a pane, start the server, or perform the
+browser checks for you. If no browser-control capability is available after checking the
+installed tools, stop and report that capability as the blocker.
+
 Re-run all three gates after any review fix. The three documented pre-existing
 `Settings.tsx` lint warnings may remain; investigate every other warning or failure.
 
