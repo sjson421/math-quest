@@ -5,6 +5,7 @@ import {
   digitConcat,
   flippedColumns,
   forgotCarry,
+  misalignedColumns,
   offBy,
   offByOne,
   skippedUpperSubtraction,
@@ -96,6 +97,56 @@ describe('digitConcat matches the expression it replaces', () => {
       const legacy = Number(`${d(a, 1) + d(b, 1)}${d(a, 0) + d(b, 0)}`)
       expect(digitConcat(columnTrace(a, b, '+'), 'n').value, `${a} + ${b}`).toBe(legacy)
     }
+  })
+})
+
+describe('misalignedColumns', () => {
+  const noCarry = pairs(
+    (a, b) => d(a, 0) + d(b, 0) <= 9 && d(a, 1) + d(b, 1) <= 9 && d(a, 0) > 0 && d(b, 0) > 0,
+  )
+
+  it('adds each digit to the wrong one, the way a misread column does', () => {
+    // 3 + 4 in the ones and 2 + 5 in the tens, written down as 77.
+    expect(misalignedColumns(columnTrace(23, 45, '+'), 'n').value).toBe(77)
+  })
+
+  it('is `a` plus `b` with its digits swapped, across every pair the skill admits', () => {
+    expect(noCarry.length).toBeGreaterThan(100)
+
+    for (const [a, b] of noCarry) {
+      const swapped = d(b, 0) * 10 + d(b, 1)
+      expect(misalignedColumns(columnTrace(a, b, '+'), 'n').value, `${a} + ${b}`).toBe(
+        a + swapped,
+      )
+    }
+  })
+
+  it('is a real prediction on most pairs, unlike the one it replaced', () => {
+    // The whole point. `digitConcat` equalled the answer on every no-carry pair,
+    // so it was filtered away every time and the skill diagnosed nothing. This
+    // one coincides only when `b`'s digits match, which is why it survives.
+    const collapses = noCarry.filter(
+      ([a, b]) => misalignedColumns(columnTrace(a, b, '+'), 'n').value === a + b,
+    )
+
+    expect(collapses.length).toBeGreaterThan(0)
+    expect(collapses.every(([, b]) => d(b, 0) === d(b, 1))).toBe(true)
+    expect(collapses.length / noCarry.length).toBeLessThan(0.2)
+  })
+
+  it('shows why digitConcat could never work here', () => {
+    // A checker that returns "no problems" looks exactly like a clean codebase.
+    // This is the shipped bug, pinned: on a no-carry pair the old prediction is
+    // the answer, every time.
+    for (const [a, b] of noCarry) {
+      expect(digitConcat(columnTrace(a, b, '+'), 'n').value, `${a} + ${b}`).toBe(a + b)
+    }
+  })
+
+  it('names the trace when handed a single-column pair', () => {
+    expect(() => misalignedColumns(columnTrace(4, 5, '+'), 'n')).toThrow(
+      '4 + 5 has 1 columns, no place 1',
+    )
   })
 })
 

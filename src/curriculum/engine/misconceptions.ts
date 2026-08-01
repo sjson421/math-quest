@@ -79,12 +79,45 @@ export const forgotCarry = (
   return { value: trace.result - column.carry * 10 ** (n + 1), tag, nudge }
 }
 
-/** Wrote each column's sum side by side instead of carrying between them. */
+/**
+ * Wrote each column's sum side by side instead of carrying between them.
+ *
+ * Only meaningful where a column can actually overflow. On a skill whose draw
+ * forbids carrying, every column sum is a single digit, so writing them side by
+ * side *is* the correct answer — the prediction equals the answer on every
+ * problem and is filtered away every time. `add-2digit-nocarry` shipped in
+ * exactly that state; `alwaysFiltered` in `generators.test.ts` now catches it.
+ */
 export const digitConcat = (trace: ColumnTrace, nudge: string): Misconception => ({
   value: concat(trace.places.map((p) => p.raw)),
   tag: 'digit-concat',
   nudge,
 })
+
+/**
+ * Did not line the columns up — added each digit of one operand to the *wrong*
+ * digit of the other.
+ *
+ * For 23 + 45 that is 3 + 4 in the ones and 2 + 5 in the tens, giving 77, which
+ * is `a` plus `b` with its digits swapped. Expressed as that sum rather than as
+ * a concatenation so it stays well-formed when a misaligned column overflows —
+ * a learner who lands on 13 in the ones carries it like any other column.
+ *
+ * Two places, and addition specifically — the value is built by adding, so a
+ * subtraction trace would get arithmetic that means nothing. A wider or a
+ * borrowing version needs a skill that wants one, and should be written with
+ * that skill rather than guessed at now.
+ */
+export const misalignedColumns = (trace: ColumnTrace, nudge: string): Misconception => {
+  const ones = requirePlace(trace.places, 0, () => `${trace.a} + ${trace.b}`)
+  const tens = requirePlace(trace.places, 1, () => `${trace.a} + ${trace.b}`)
+
+  return {
+    value: trace.a + (ones.bottom * 10 + tens.bottom),
+    tag: 'misaligned-columns',
+    nudge,
+  }
+}
 
 /**
  * Carried nothing and wrote the whole two-digit column sum into one place.

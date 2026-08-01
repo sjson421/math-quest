@@ -36,6 +36,7 @@ export {
   digitConcat,
   flippedColumns,
   forgotCarry,
+  misalignedColumns,
   offBy,
   offByOne,
   skippedUpperSubtraction,

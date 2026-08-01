@@ -7,11 +7,11 @@ import {
   borrowedWithoutReducing,
   columnTrace,
   defineSkill,
-  digitConcat,
   drawOperands,
   drawPair,
   flippedColumns,
   forgotCarry,
+  misalignedColumns,
   offBy,
   offByOne,
   pickFrame,
@@ -287,7 +287,15 @@ const add2NoCarry = defineSkill({
       display: { kind: 'column', operands: [a, b], operator: '+' },
       answer: intAnswer(trace.result),
       misconceptions: [
-        digitConcat(trace, 'Check the columns line up — add ones to ones, tens to tens.'),
+        // Was `digitConcat`, which on a skill that forbids carrying is the
+        // correct answer by construction — so this skill predicted nothing at
+        // all, on every problem, and every wrong answer got a bare "not quite".
+        // This is the error the nudge always described, actually modelled.
+        misalignedColumns(
+          trace,
+          'Check the columns line up — add ones to ones, tens to tens.',
+        ),
+        wrongOperation(a, b, '+', 'That is the difference. This one is asking you to add.'),
       ],
       hint: 'Add the ones column first, then the tens column.',
       solution: [

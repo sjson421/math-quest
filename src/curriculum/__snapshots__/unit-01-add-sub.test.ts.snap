@@ -337,6 +337,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [4 + 5 = 9]
 step 2   Add the tens column.   [2 + 2 = 4]
 step 3   Put them together: 49.
+miss     misaligned-columns = 76   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 1   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 12345 · difficulty 1
 prompt   Add the columns.
@@ -347,6 +349,7 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [2 + 3 = 5]
 step 2   Add the tens column.   [1 + 3 = 4]
 step 3   Put them together: 45.
+miss     subtracted = 21   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 67890 · difficulty 1
 prompt   Add the columns.
@@ -357,6 +360,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [3 + 6 = 9]
 step 2   Add the tens column.   [3 + 3 = 6]
 step 3   Put them together: 69.
+miss     misaligned-columns = 96   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 3   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 424242 · difficulty 1
 prompt   Add the columns.
@@ -367,6 +372,7 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [3 + 3 = 6]
 step 2   Add the tens column.   [1 + 3 = 4]
 step 3   Put them together: 46.
+miss     subtracted = 20   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 987654321 · difficulty 1
 prompt   Add the columns.
@@ -377,6 +383,7 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [3 + 2 = 5]
 step 2   Add the tens column.   [2 + 2 = 4]
 step 3   Put them together: 45.
+miss     subtracted = 1   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 1 · difficulty 2
 prompt   Add the columns.
@@ -387,6 +394,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [1 + 6 = 7]
 step 2   Add the tens column.   [4 + 4 = 8]
 step 3   Put them together: 87.
+miss     misaligned-columns = 105   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 5   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 12345 · difficulty 2
 prompt   Add the columns.
@@ -397,6 +406,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [4 + 1 = 5]
 step 2   Add the tens column.   [3 + 5 = 8]
 step 3   Put them together: 85.
+miss     misaligned-columns = 49   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 17   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 67890 · difficulty 2
 prompt   Add the columns.
@@ -407,6 +418,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [6 + 2 = 8]
 step 2   Add the tens column.   [3 + 1 = 4]
 step 3   Put them together: 48.
+miss     misaligned-columns = 57   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 24   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 424242 · difficulty 2
 prompt   Add the columns.
@@ -417,6 +430,7 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [6 + 2 = 8]
 step 2   Add the tens column.   [1 + 2 = 3]
 step 3   Put them together: 38.
+miss     subtracted = 6   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 987654321 · difficulty 2
 prompt   Add the columns.
@@ -427,6 +441,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [1 + 8 = 9]
 step 2   Add the tens column.   [1 + 1 = 2]
 step 3   Put them together: 29.
+miss     misaligned-columns = 92   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 7   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 1 · difficulty 3
 prompt   Add the columns.
@@ -437,6 +453,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [5 + 2 = 7]
 step 2   Add the tens column.   [5 + 1 = 6]
 step 3   Put them together: 67.
+miss     misaligned-columns = 76   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 43   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 12345 · difficulty 3
 prompt   Add the columns.
@@ -447,6 +465,7 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [4 + 3 = 7]
 step 2   Add the tens column.   [4 + 3 = 7]
 step 3   Put them together: 77.
+miss     subtracted = 11   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 67890 · difficulty 3
 prompt   Add the columns.
@@ -457,6 +476,7 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [2 + 6 = 8]
 step 2   Add the tens column.   [1 + 6 = 7]
 step 3   Put them together: 78.
+miss     subtracted = 54   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 424242 · difficulty 3
 prompt   Add the columns.
@@ -467,6 +487,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [5 + 3 = 8]
 step 2   Add the tens column.   [3 + 5 = 8]
 step 3   Put them together: 88.
+miss     misaligned-columns = 70   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 18   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 987654321 · difficulty 3
 prompt   Add the columns.
@@ -477,6 +499,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [7 + 1 = 8]
 step 2   Add the tens column.   [7 + 2 = 9]
 step 3   Put them together: 98.
+miss     misaligned-columns = 89   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 56   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 1 · difficulty 4
 prompt   Add the columns.
@@ -487,6 +511,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [2 + 5 = 7]
 step 2   Add the tens column.   [6 + 1 = 7]
 step 3   Put them together: 77.
+miss     misaligned-columns = 113   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 47   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 12345 · difficulty 4
 prompt   Add the columns.
@@ -497,6 +523,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [3 + 1 = 4]
 step 2   Add the tens column.   [5 + 4 = 9]
 step 3   Put them together: 94.
+miss     misaligned-columns = 67   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 12   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 67890 · difficulty 4
 prompt   Add the columns.
@@ -507,6 +535,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [2 + 1 = 3]
 step 2   Add the tens column.   [4 + 4 = 8]
 step 3   Put them together: 83.
+miss     misaligned-columns = 56   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 1   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 424242 · difficulty 4
 prompt   Add the columns.
@@ -517,6 +547,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [4 + 2 = 6]
 step 2   Add the tens column.   [2 + 3 = 5]
 step 3   Put them together: 56.
+miss     misaligned-columns = 47   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 8   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 987654321 · difficulty 4
 prompt   Add the columns.
@@ -527,6 +559,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [1 + 5 = 6]
 step 2   Add the tens column.   [4 + 4 = 8]
 step 3   Put them together: 86.
+miss     misaligned-columns = 95   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 4   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 1 · difficulty 5
 prompt   Add the columns.
@@ -537,6 +571,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [8 + 1 = 9]
 step 2   Add the tens column.   [3 + 3 = 6]
 step 3   Put them together: 69.
+miss     misaligned-columns = 51   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 7   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 12345 · difficulty 5
 prompt   Add the columns.
@@ -547,6 +583,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [5 + 3 = 8]
 step 2   Add the tens column.   [5 + 4 = 9]
 step 3   Put them together: 98.
+miss     misaligned-columns = 89   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 12   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 67890 · difficulty 5
 prompt   Add the columns.
@@ -557,6 +595,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [4 + 5 = 9]
 step 2   Add the tens column.   [7 + 2 = 9]
 step 3   Put them together: 99.
+miss     misaligned-columns = 126   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 49   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 424242 · difficulty 5
 prompt   Add the columns.
@@ -567,6 +607,8 @@ hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [5 + 3 = 8]
 step 2   Add the tens column.   [3 + 2 = 5]
 step 3   Put them together: 58.
+miss     misaligned-columns = 67   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 12   That is the difference. This one is asking you to add.
 
 --- add-2digit-nocarry · seed 987654321 · difficulty 5
 prompt   Add the columns.
@@ -576,7 +618,9 @@ input    keypad
 hint     Add the ones column first, then the tens column.
 step 1   Add the ones column.   [1 + 2 = 3]
 step 2   Add the tens column.   [2 + 3 = 5]
-step 3   Put them together: 53."
+step 3   Put them together: 53.
+miss     misaligned-columns = 44   Check the columns line up — add ones to ones, tens to tens.
+miss     subtracted = 11   That is the difference. This one is asking you to add."
 `;
 
 exports[`recorded output: add-3digit > matches the output recorded before the engine extraction 1`] = `

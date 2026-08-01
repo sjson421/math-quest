@@ -3,11 +3,43 @@ import { allSkills, manifestIndex } from './index'
 import { checkContent, formatViolations } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { checkAnswer } from '../lib/answer'
+import { makeRng } from '../lib/rng'
 import { toNumber, rational } from '../lib/rational'
-import type { Difficulty, Problem } from '../lib/types'
+import type { Difficulty, Problem, SkillGenerator } from '../lib/types'
 
 const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 const ITERATIONS = 200 // per skill per difficulty → 1000 problems per skill
+
+const seedFor = (i: number, difficulty: Difficulty) => i * 7919 + difficulty * 104729
+
+/**
+ * Misconception tags a skill declares that never once reach the learner.
+ *
+ * `generateProblem()` drops any prediction whose value equals the answer, which
+ * is deliberate — the forgot-carry value *is* the sum when nothing carries. But
+ * a prediction that collapses on **every** problem is an authoring bug wearing
+ * the filter as a disguise: the skill looks like it diagnoses mistakes and never
+ * does. `add-2digit-nocarry` shipped that way, predicting a digit-concatenation
+ * that a no-carry sum makes identical to the answer by construction.
+ *
+ * Compares what the generator authored against what survived, so it needs both.
+ */
+function alwaysFiltered(skill: SkillGenerator): string[] {
+  const declared = new Set<string>()
+  const surviving = new Set<string>()
+
+  for (const difficulty of DIFFICULTIES) {
+    for (let i = 0; i < ITERATIONS; i += 1) {
+      const seed = seedFor(i, difficulty)
+      for (const m of skill.generate(makeRng(seed), difficulty).misconceptions ?? [])
+        declared.add(m.tag)
+      for (const m of generateProblem(skill, seed, difficulty).misconceptions ?? [])
+        surviving.add(m.tag)
+    }
+  }
+
+  return [...declared].filter((tag) => !surviving.has(tag))
+}
 
 /**
  * Recompute the answer independently from what is displayed to the learner.
@@ -62,7 +94,7 @@ const answerValue = (problem: Problem): number => {
 describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, skill) => {
   const sample = (difficulty: Difficulty) =>
     Array.from({ length: ITERATIONS }, (_, i) =>
-      generateProblem(skill, i * 7919 + difficulty * 104729, difficulty),
+      generateProblem(skill, seedFor(i, difficulty), difficulty),
     )
 
   const all = DIFFICULTIES.flatMap(sample)
@@ -80,20 +112,17 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
     }
   })
 
-  it('never predicts a misconception equal to the correct answer', () => {
-    for (const problem of all) {
-      const correct = answerValue(problem)
-      for (const m of problem.misconceptions ?? []) {
-        expect(m.value, `${skill.id} / ${m.tag}`).not.toBe(correct)
-      }
-    }
-  })
+  it('declares no misconception that is always filtered away', () => {
+    // What this file used to assert here — no prediction equal to the answer,
+    // no duplicate values — described `generateProblem()`'s own output, which it
+    // had already cleaned. Neither could fail whatever a generator authored.
+    // That guarantee is real and is checked where it is made, in
+    // `lib/generator.test.ts`, against skills that deliberately author the bad
+    // cases. What belongs here is the property those assertions looked like they
+    // were making: that the skill's predictions actually survive to a learner.
+    const never = alwaysFiltered(skill)
 
-  it('produces no duplicate misconception values', () => {
-    for (const problem of all) {
-      const values = (problem.misconceptions ?? []).map((m) => m.value)
-      expect(new Set(values).size).toBe(values.length)
-    }
+    expect(never, `${skill.id} predicts these and they never reach anyone`).toEqual([])
   })
 
   it('satisfies the content style contract on every sampled problem', () => {
@@ -137,6 +166,76 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
   it('produces varied problems rather than repeating one', () => {
     const shown = new Set(all.map((p) => JSON.stringify(p.display)))
     expect(shown.size).toBeGreaterThan(20)
+  })
+})
+
+describe('alwaysFiltered', () => {
+  // A checker that returns "no problems" looks exactly like a clean codebase —
+  // which is precisely how the assertions this replaced went unnoticed. These
+  // are the synthetic skills proving it names the offender.
+  const skillPredicting = (
+    build: (sum: number) => { value: number; tag: string }[],
+  ): SkillGenerator => ({
+    id: 'synthetic',
+    name: 'Synthetic',
+    blurb: 'For testing the checker',
+    generate(rng, difficulty) {
+      const a = rng.int(2, 9)
+      const b = rng.int(2, 9)
+      return {
+        skillId: 'synthetic',
+        prompt: 'What is the sum?',
+        display: { kind: 'inline', text: `${a} + ${b}` },
+        answer: { kind: 'exact', n: a + b, d: 1 },
+        inputMode: 'keypad',
+        misconceptions: build(a + b).map((m) => ({ ...m, nudge: 'n' })),
+        hint: 'Add them.',
+        solution: [{ text: `Add ${a} and ${b}.` }],
+        difficulty,
+      }
+    },
+  })
+
+  it('names a tag whose value is always the answer', () => {
+    // `add-2digit-nocarry`'s actual failure, in miniature.
+    const skill = skillPredicting((sum) => [
+      { value: sum, tag: 'always-the-answer' },
+      { value: sum - 1, tag: 'off-by-one' },
+    ])
+
+    expect(alwaysFiltered(skill)).toEqual(['always-the-answer'])
+  })
+
+  it('passes a tag that collapses only sometimes', () => {
+    // `add-3digit` is this case: its forgot-carry predictions equal the answer
+    // whenever that column does not carry, and are real diagnoses otherwise.
+    // Collapsing sometimes is the design, not a defect.
+    const skill = skillPredicting((sum) => [
+      { value: sum % 2 === 0 ? sum : sum - 1, tag: 'sometimes' },
+    ])
+
+    expect(alwaysFiltered(skill)).toEqual([])
+  })
+
+  it('names a tag always shadowed by an earlier duplicate', () => {
+    // The other way a prediction can never reach anyone: a second tag that
+    // always carries a value the first already claimed, so dedup drops it every
+    // time and the skill silently offers one diagnosis instead of two.
+    const skill = skillPredicting((sum) => [
+      { value: sum - 1, tag: 'first' },
+      { value: sum - 1, tag: 'always-shadowed' },
+    ])
+
+    expect(alwaysFiltered(skill)).toEqual(['always-shadowed'])
+  })
+
+  it('is quiet on a skill whose predictions all survive', () => {
+    const skill = skillPredicting((sum) => [
+      { value: sum - 1, tag: 'low' },
+      { value: sum + 1, tag: 'high' },
+    ])
+
+    expect(alwaysFiltered(skill)).toEqual([])
   })
 })
 
