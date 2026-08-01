@@ -119,8 +119,8 @@ lands, and note decisions inline rather than only in chat.
   built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED` is for
   genuinely new surface.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **`unit-2-subtraction` is active** — nine changes have shipped, the
-  latest archived being `unit-0-numbers` on 2026-08-01.
+  holds shipped changes. **The active queue is empty** — ten changes have shipped, the latest
+  being `unit-2-subtraction`, archived 2026-08-01.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`
