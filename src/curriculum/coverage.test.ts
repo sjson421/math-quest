@@ -71,7 +71,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(18)
+    expect(documentedAsBuilt).toHaveLength(24)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -91,8 +91,9 @@ describe('the skills that are built', () => {
   })
 
   it('report the unit the manifest puts them in, not the file they live in', () => {
-    // Both ship from `unit-01-add-sub.ts`, a Phase 1 file that predates the
-    // split into Addition and Subtraction. The manifest is the authority.
+    // The files agree with the manifest today, now that Unit 2 has a module of
+    // its own. Pinned anyway: the manifest is the authority, and a generator
+    // moved between files must not be able to move between units.
     expect(manifestIndex.get('sub-facts')?.unit.id).toBe('unit-2')
     expect(manifestIndex.get('sub-2digit-borrow')?.unit.id).toBe('unit-2')
     expect(manifestIndex.get('add-facts')?.unit.id).toBe('unit-1')
@@ -145,9 +146,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 183 skills out of the skill tree entirely', () => {
+  it('leaves the other 177 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(18)
+    expect(offered).toHaveLength(24)
   })
 })
 

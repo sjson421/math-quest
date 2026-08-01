@@ -4,19 +4,17 @@ import {
   THREE_DIGIT,
   TWO_DIGIT,
   band,
-  borrowedWithoutReducing,
   columnTrace,
+  countOf,
   defineSkill,
   drawOperands,
   drawPair,
-  flippedColumns,
   forgotCarry,
   misalignedColumns,
   offBy,
   offByOne,
   pickFrame,
   place,
-  skippedUpperSubtraction,
   stackPlace,
   stackTrace,
   storyProblem,
@@ -92,7 +90,7 @@ const addFactsSmall = defineSkill({
 })
 
 // ---------------------------------------------------------------------------
-// 1. Single-digit addition facts
+// Single-digit addition facts
 // ---------------------------------------------------------------------------
 
 const addFacts = defineSkill({
@@ -148,53 +146,6 @@ const addFacts = defineSkill({
 })
 
 // ---------------------------------------------------------------------------
-// 2. Single-digit subtraction facts
-// ---------------------------------------------------------------------------
-
-const subFacts = defineSkill({
-  id: 'sub-facts',
-  name: 'Subtraction Facts',
-  blurb: 'Taking away small numbers',
-  build({ rng, difficulty }) {
-    const { a, b } = drawPair({
-      label: 'sub-facts',
-      rng,
-      band: band(difficulty, {
-        1: [2, 6],
-        2: [3, 9],
-        3: [4, 12],
-        4: [6, 15],
-        5: [8, 18],
-      }),
-      second: (drawn, r) => r.int(1, Math.min(9, drawn)),
-      // Avoid `x - x = 0`, `x - 1`, and results that are trivially the whole.
-      where: ({ a, b }) => b > 1 && a - b > 0 && a !== b,
-    })
-
-    const diff = a - b
-
-    return {
-      prompt: 'What is the difference?',
-      display: { kind: 'inline', text: `${a} − ${b}` },
-      answer: intAnswer(diff),
-      misconceptions: [
-        wrongOperation(a, b, '−', 'That is the sum. This one is asking you to take away.'),
-        ...offByOne(diff, {
-          low: 'Nearly — that is one too few.',
-          high: 'Nearly — that is one too many.',
-        }),
-      ],
-      hint: `Start at ${a} and count back ${b}.`,
-      solution: [
-        { text: `Start at ${a}.` },
-        { text: `Count back ${b}.`, detail: `${a} → ${diff}` },
-        { text: `So ${a} − ${b} = ${diff}.` },
-      ],
-    }
-  },
-})
-
-// ---------------------------------------------------------------------------
 // Adding whole tens
 // ---------------------------------------------------------------------------
 
@@ -222,9 +173,9 @@ const addTens = defineSkill({
     const count = a + b
     const [x, y] = [a * 10, b * 10]
     const sum = count * 10
-    // "10 is 1 tens" is the kind of sentence that reads as the app talking down
-    // to someone. The total is always 2 tens or more, so only the operands need it.
-    const tens = (of: number) => (of === 1 ? '1 ten' : `${of} tens`)
+    // The total is always 2 tens or more, so only the operands need `countOf`'s
+    // singular — but they do need it: "10 is 1 tens" reads as the app talking
+    // down to someone.
 
     return {
       prompt: 'What is the sum?',
@@ -247,7 +198,7 @@ const addTens = defineSkill({
       ],
       hint: `Add ${a} and ${b}, then remember you are counting tens.`,
       solution: [
-        { text: `${x} is ${tens(a)}, and ${y} is ${tens(b)}.` },
+        { text: `${x} is ${countOf(a, 'ten')}, and ${y} is ${countOf(b, 'ten')}.` },
         {
           text: 'Add the tens.',
           detail: `${a} + ${b} = ${count}`,
@@ -259,7 +210,7 @@ const addTens = defineSkill({
 })
 
 // ---------------------------------------------------------------------------
-// 3. Two-digit addition, no carrying
+// Two-digit addition, no carrying
 // ---------------------------------------------------------------------------
 
 const add2NoCarry = defineSkill({
@@ -314,7 +265,7 @@ const add2NoCarry = defineSkill({
 })
 
 // ---------------------------------------------------------------------------
-// 4. Two-digit addition with carrying
+// Two-digit addition with carrying
 // ---------------------------------------------------------------------------
 
 const add2Carry = defineSkill({
@@ -375,88 +326,7 @@ const add2Carry = defineSkill({
 })
 
 // ---------------------------------------------------------------------------
-// 5. Two-digit subtraction with borrowing
-// ---------------------------------------------------------------------------
-
-const sub2Borrow = defineSkill({
-  id: 'sub-2digit-borrow',
-  name: 'Borrowing',
-  blurb: 'When the ones column runs short',
-  build({ rng, difficulty }) {
-    const { a, b } = drawPair({
-      label: 'sub-2digit-borrow',
-      rng,
-      band: band(difficulty, {
-        1: [21, 45],
-        2: [21, 65],
-        3: [25, 85],
-        4: [30, 95],
-        5: [40, 99],
-      }),
-      second: (drawn, r) => r.int(11, Math.max(11, drawn - 1)),
-      // Must need a borrow, and stay two-digit.
-      where: ({ a, b }) => b < a && place(columnTrace(a, b, '−'), 0).carry === 1 && a - b > 0,
-    })
-
-    const trace = columnTrace(a, b, '−')
-    const ones = place(trace, 0)
-    const tens = place(trace, 1)
-
-    return {
-      prompt: 'Subtract. You will need to borrow.',
-      display: { kind: 'column', operands: [a, b], operator: '−' },
-      answer: intAnswer(trace.result),
-      misconceptions: [
-        // Classic: subtract smaller from larger in each column, ignoring borrow.
-        flippedColumns(
-          trace,
-          `In the ones column you have ${ones.top} and need to take away ${ones.bottom}. Borrow a ten instead of flipping them around.`,
-        ),
-        // Borrowed but forgot to reduce the tens digit.
-        borrowedWithoutReducing(
-          trace,
-          `You borrowed correctly, but the tens digit drops from ${tens.top} to ${tens.reduced} once you lend that ten away.`,
-        ),
-        // Borrowed, subtracted the ones, then left the tens column alone.
-        //
-        // A third prediction is not padding: this is a wall skill, and the two
-        // above collide with each other whenever the ones digits are five
-        // apart (31 − 16 predicts 25 twice), leaving one after dedup. This one
-        // cannot collide — its tens digit is `t1`, while the real answer's is
-        // `t1 − 1 − t2` and the flipped guess's is `t1 − t2`, and `t2` is never
-        // zero because a borrow needs a two-digit subtrahend.
-        skippedUpperSubtraction(
-          trace,
-          `The ones are right. There is still the ${tens.bottom} to take off the tens column.`,
-        ),
-      ],
-      hint: `You cannot take ${ones.bottom} from ${ones.top}, so borrow a ten from the ${tens.top}.`,
-      // Four steps is the contract's limit, so the closing "So a − b = …" line
-      // the other generators use rides on the tens step instead of taking a step
-      // of its own. The two column subtractions stay separate: on a borrowing
-      // wall, seeing each column done is the whole point.
-      solution: [
-        {
-          text: `Ones: ${ones.top} − ${ones.bottom}. Not enough to take away.`,
-        },
-        {
-          text: `Borrow a ten — ${tens.top} becomes ${tens.reduced}, ones become ${ones.borrowed}.`,
-        },
-        {
-          text: 'Now subtract the ones.',
-          detail: `${ones.borrowed} − ${ones.bottom} = ${ones.digit}`,
-        },
-        {
-          text: `Then the tens, giving ${trace.result}.`,
-          detail: `${tens.reduced} − ${tens.bottom} = ${tens.digit}`,
-        },
-      ],
-    }
-  },
-})
-
-// ---------------------------------------------------------------------------
-// 6. Three-digit addition
+// Three-digit addition
 // ---------------------------------------------------------------------------
 
 const add3Digit = defineSkill({
@@ -586,7 +456,7 @@ const addThreeNumbers = defineSkill({
 })
 
 // ---------------------------------------------------------------------------
-// 7. Addition word problems
+// Addition word problems
 // ---------------------------------------------------------------------------
 
 const addWords = defineSkill({
@@ -615,12 +485,11 @@ const addWords = defineSkill({
 
 export const unit01: Unit = {
   id: 'unit-01',
-  name: 'Adding & Subtracting',
+  name: 'Addition',
   color: 'blossom',
   // Curriculum order, not the order these were written, because this is the
-  // order the cards are rendered in and therefore the order they open in. The
-  // two subtraction skills are last: the manifest puts them in Unit 2, behind
-  // all of Unit 1. A test pins this against `implementedSkillIds`.
+  // order the cards are rendered in and therefore the order they open in. A
+  // test pins this against `implementedSkillIds`.
   skills: [
     addFactsSmall,
     addFacts,
@@ -630,7 +499,5 @@ export const unit01: Unit = {
     add3Digit,
     addThreeNumbers,
     addWords,
-    subFacts,
-    sub2Borrow,
   ],
 }

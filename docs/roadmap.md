@@ -2,12 +2,13 @@
 
 What is left, in the order it should be done.
 
-**Status: 18 of 201 skills are playable.** Stage A and Unit 1 are complete; Unit 2 has two.
-The keypad can now offer a sign, a decimal point or a fraction slash when a problem asks for
-one. Choice input is also built, so `AVAILABLE_CAPABILITIES` contains only `choice-input`;
-comparison and ordering use choices, while the other playable skills use the keypad. This
-line is the only progress number in the repo's documentation — the manifest and `npm test`
-are the authority, and everything below is scope rather than status.
+**Status: 24 of 201 skills are playable.** Stage A is complete, and so are Units 1 and 2 —
+Stage B's first two of five. The keypad can now offer a sign, a decimal point or a fraction
+slash when a problem asks for one. Choice input is also built, so `AVAILABLE_CAPABILITIES`
+contains only `choice-input`; comparison and ordering use choices, while the other playable
+skills use the keypad. This line is the only progress number in the repo's documentation —
+the manifest and `npm test` are the authority, and everything below is scope rather than
+status.
 
 To re-derive it rather than trusting this file:
 
@@ -163,11 +164,47 @@ document's ✅ markers updated to match, which the cross-check enforces.
       infrastructure that does not exist". That was wrong, and it is the correction that most
       changes this document's shape.
 
-- [ ] **7 · Unit 2, the remaining six** — M
+- [x] **7 · Unit 2, the remaining six** — M — **shipped 2026-08-01**
 
-      Includes `sub-across-zero`, a wall — already supported: `columnTrace` handles borrowing
-      through a zero. `sub-words` needs a subtraction frame bank, which is now a known
-      quantity rather than a design question.
+      `sub-facts-small`, `sub-tens`, `sub-2digit-noborrow`, `sub-3digit-borrow`,
+      `sub-across-zero` and `sub-words`. Completes the second unit of Stage B, and gives the
+      course its first `quick` subtraction skill.
+
+      `columnTrace` did handle borrowing through a zero, as this item predicted — but only its
+      *result*. Its `reduced` field reads −1 on the column the borrow passes through, because
+      it means "after lending, before receiving" and a chain receives first. That is not a
+      digit anyone writes, and the wall's entire lesson is the working. Left behind:
+      **`borrowChain()`**, which names the column that actually pays, and `reduced` documented
+      as meaningless wherever a column itself borrows. `borrowed` was already the standing
+      digit at any chain length and needed nothing.
+
+      Also left behind: `borrowedWithoutReducing` re-expressed per column, which is a
+      correctness fix rather than a widening — across a zero the old form computed `0 − 3` in
+      the tens and concatenated to **`NaN`**, so the wall would have predicted a non-number.
+      `misalignedColumns` now applies the trace's operator, giving `sub-2digit-noborrow` the
+      prediction `add-2digit-nocarry` has; it cannot use `flippedColumns`, because with nothing
+      to borrow, taking the smaller digit from the larger is the answer.
+
+      The frame bank check became per-operator. It had one shared quantity list opening at
+      `2 − 3` and asserted against `a + b`, both addition assumptions in a check about to cover
+      two operations — a subtraction bank would have been checked against sentences describing
+      a negative difference while the ones a learner sees went unchecked. It also now fails if
+      a bank exists in `phrasing/` and is not registered for checking.
+
+      **Reject-and-redraw hit its limit here, and that is the transferable lesson.**
+      `sub-across-zero` first shipped a draw that filtered for a zero tens digit *and* a
+      borrow *and* an ordering — one candidate in 27 — and `drawPair` genuinely exhausted its
+      300 attempts and threw at a learner, reproducibly, within 15,000 generations. The fix
+      was to compose the subtrahend digit by digit under the minuend rather than draw and
+      filter, which is exactly what `add-tens` already documents one file over. Any unit whose
+      draw wants three independent properties at once should compose, not filter; `drawPair`'s
+      retry loop is for taste, not for structure.
+
+      Also here: **Unit 2 became its own module and its own card section.** `sub-facts` and
+      `sub-2digit-borrow` moved out of `unit-01-add-sub.ts`, which is now `unit-01-addition.ts`,
+      with their recorded output relocated character-identical. Both now open *later* — their
+      unit's earlier skills stopped being seen through — which is the second time item 1's
+      never-re-lock rule has been load-bearing rather than defensive.
 
 - [ ] **8 · Skill-tree navigation** — L *(was B3)*
 
@@ -188,7 +225,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
 
       A celebration at each stage boundary, not just per skill. Separated from item 4 because
       it cannot fire until a stage is completable. Stage A is now complete and becomes the
-      first checkpoint the app can actually reach; Stage B still has ten of its 44 skills.
+      first checkpoint the app can actually reach; Stage B has sixteen of its 44 skills.
 
       **The "max 2 unlocks at once" commitment is dropped here, and needs a decision.**
       `docs/curriculum.md` promises it, but the manifest's derived graph has a maximum

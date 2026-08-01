@@ -1,6 +1,7 @@
 import type { Misconception } from '../../lib/types'
 import type { CarryingTrace, ColumnTrace } from './column'
-import { requirePlace } from './column'
+import { borrowChain, requirePlace } from './column'
+import { applyOperator } from './phrasing'
 
 /**
  * The wrong answers column arithmetic actually produces.
@@ -95,28 +96,46 @@ export const digitConcat = (trace: ColumnTrace, nudge: string): Misconception =>
 })
 
 /**
- * Did not line the columns up — added each digit of one operand to the *wrong*
- * digit of the other.
+ * Did not line the columns up — combined each digit of one operand with the
+ * *wrong* digit of the other.
  *
  * For 23 + 45 that is 3 + 4 in the ones and 2 + 5 in the tens, giving 77, which
- * is `a` plus `b` with its digits swapped. Expressed as that sum rather than as
- * a concatenation so it stays well-formed when a misaligned column overflows —
- * a learner who lands on 13 in the ones carries it like any other column.
+ * is `a` plus `b` with its digits swapped. Expressed as arithmetic on the
+ * swapped operand rather than as a concatenation so it stays well-formed when a
+ * misaligned column overflows — a learner who lands on 13 in the ones carries it
+ * like any other column.
  *
- * Two places, and addition specifically — the value is built by adding, so a
- * subtraction trace would get arithmetic that means nothing. A wider or a
- * borrowing version needs a skill that wants one, and should be written with
- * that skill rather than guessed at now.
+ * Two places, either operator. The operator comes from the trace, so a
+ * subtraction skill gets `a` minus the swapped `b` rather than addition's
+ * arithmetic wearing a subtraction problem's digits — the widening
+ * `sub-2digit-noborrow` was written to want. Addition's value is unchanged.
+ * A version reaching past two places needs a skill that wants one, and should be
+ * written with that skill rather than guessed at now.
  */
-export const misalignedColumns = (trace: ColumnTrace, nudge: string): Misconception => {
-  const ones = requirePlace(trace.places, 0, () => `${trace.a} + ${trace.b}`)
-  const tens = requirePlace(trace.places, 1, () => `${trace.a} + ${trace.b}`)
+export const misalignedColumns = (trace: ColumnTrace, nudge: string): Misconception => ({
+  value: misalignedValue(trace),
+  tag: 'misaligned-columns',
+  nudge,
+})
 
-  return {
-    value: trace.a + (ones.bottom * 10 + tens.bottom),
-    tag: 'misaligned-columns',
-    nudge,
-  }
+/**
+ * The value alone, for a draw predicate that has to reject the operands where it
+ * would be useless.
+ *
+ * Exported because `sub-2digit-noborrow` needs it *before* the problem exists:
+ * subtracting the swapped operand can go negative, and the pad it answers on
+ * offers digits only, so those operands have to be drawn again. Computing the
+ * swap a second time in the generator is how the two would drift.
+ */
+export function misalignedValue(trace: ColumnTrace): number {
+  const describe = () => `${trace.a} ${trace.operator} ${trace.b}`
+  const ones = requirePlace(trace.places, 0, describe)
+  const tens = requirePlace(trace.places, 1, describe)
+
+  // `applyOperator` rather than a ternary on the operator: it is exhaustive over
+  // the union, so widening `ColumnOperator` for multiplication fails to compile
+  // here instead of silently treating × as −.
+  return applyOperator(trace.a, ones.bottom * 10 + tens.bottom, trace.operator)
 }
 
 /**
@@ -145,22 +164,60 @@ export const flippedColumns = (trace: ColumnTrace, nudge: string): Misconception
 })
 
 /**
- * Borrowed the ten but left the lending column at its original digit.
+ * Borrowed the ten but left every lending column at its original digit.
  *
- * Two-place borrowing specifically. A wider version needs a skill that borrows
- * across more than one column — `sub-across-zero` — and it should be written
- * with that skill rather than guessed at now.
+ * Written per column and position-free, which is what lets a borrow chain
+ * through it. The old form special-cased place 0 and gave every other place
+ * `top − bottom`; across a zero that is `0 − 3`, and the concatenation of a
+ * negative part parses as `NaN` — the helper did not mispredict, it produced a
+ * non-number. Judging each column against its *own* untouched digit is the same
+ * arithmetic at two places, which `sub-2digit-borrow`'s recorded output pins.
  */
 export const borrowedWithoutReducing = (
   trace: ColumnTrace,
   nudge: string,
 ): Misconception => ({
   value: concat(
-    trace.places.map((p) => (p.place === 0 ? p.borrowed - p.bottom : p.top - p.bottom)),
+    trace.places.map((p) => (p.top < p.bottom ? p.top + 10 : p.top) - p.bottom),
   ),
   tag: 'forgot-to-reduce-tens',
   nudge,
 })
+
+/**
+ * Followed the borrow to the column that could pay, then forgot the columns it
+ * travelled through had lent a ten onward themselves.
+ *
+ * The error borrowing across a zero specifically invites. For 500 − 237: the
+ * hundreds correctly drop to 4, but the tens are read as the 10 they became
+ * rather than the 9 they end at, giving 273 — exactly ten per column the chain
+ * crossed above the true answer.
+ *
+ * Distinct from `borrowedWithoutReducing` by construction: that one leaves the
+ * lender alone and is short by a whole unit of its place, this one reduces the
+ * lender correctly and is over by tens.
+ */
+export const chainStoppedAtLender = (
+  trace: ColumnTrace,
+  from: number,
+  nudge: string,
+): Misconception => {
+  const { through } = borrowChain(trace, from)
+  if (through.length === 0) {
+    // Without a crossed column the value would equal the answer, so the central
+    // filter would drop it on every problem and the skill would silently predict
+    // nothing. Loud here beats a wall with no diagnosis.
+    throw new Error(
+      `${trace.a} ${trace.operator} ${trace.b} borrows at place ${from} without crossing a column`,
+    )
+  }
+
+  // Each crossed column is read ten too high in its own place: it stands at 10
+  // where the learner should have taken the onward loan off it and read 9.
+  const over = through.reduce((sum, p) => sum + 10 ** p.place, 0)
+
+  return { value: trace.result + over, tag: 'chain-stopped-at-lender', nudge }
+}
 
 /** Borrowed, subtracted the ones, then left the column above untouched. */
 export const skippedUpperSubtraction = (

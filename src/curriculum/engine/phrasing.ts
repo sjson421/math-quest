@@ -95,6 +95,16 @@ export function storyMisconceptions(frame: Frame, q: Quantities): Misconception[
 }
 
 /**
+ * "4 tens", but "1 ten".
+ *
+ * Small, and shared because two units now say the sentence: `add-tens` reads a
+ * total as a count of tens and `sub-tens` reads a difference the same way. Left
+ * inline it drifted once already — the comment explaining *why* singular matters
+ * ("10 is 1 tens" reads as the app talking down to someone) was retyped with it.
+ */
+export const countOf = (n: number, noun: string) => `${n} ${noun}${n === 1 ? '' : 's'}`
+
+/**
  * Choose a frame from the seeded stream.
  *
  * Not `Math.random`, and not module state: a story that varies between two runs
@@ -127,10 +137,32 @@ export function storyProblem(frame: Frame, q: Quantities): ProblemSpec {
   }
 }
 
-/** Quantity sets the static frame check instantiates every frame with. */
-export const CHECK_QUANTITIES: Quantities[] = [
-  { a: 2, b: 3, distractor: 5 },
-  { a: 14, b: 27, distractor: 9 },
-  // Widest numerals the ladder reaches, which is where a step runs long.
-  { a: 486, b: 375, distractor: 128 },
-]
+/**
+ * Quantity sets the static frame check instantiates each bank with.
+ *
+ * Per operator, because the constraints genuinely differ. Addition has none: any
+ * three numbers make a sentence its draw could have produced. Subtraction has
+ * three — `a` is the whole, the distractor has to stay below it, and it must
+ * differ from `b` — and a bank checked outside them is checked against sentences
+ * describing a negative difference that no learner can ever be shown. Worse, it
+ * would stay green while the sentences that do reach a learner went unchecked.
+ *
+ * Each list ends on the widest numerals its ladder reaches, which is where a
+ * solution step runs long.
+ */
+export const CHECK_QUANTITIES: Partial<Record<Operator, Quantities[]>> = {
+  '+': [
+    { a: 2, b: 3, distractor: 5 },
+    { a: 14, b: 27, distractor: 9 },
+    { a: 486, b: 375, distractor: 128 },
+  ],
+  '−': [
+    { a: 7, b: 3, distractor: 5 },
+    { a: 41, b: 27, distractor: 9 },
+    { a: 486, b: 375, distractor: 128 },
+  ],
+  // `Partial`, and no `×` or `÷` keys: a multiplication or division frame
+  // arrives with Unit 3 or 4 and brings the quantities its own draw admits.
+  // Empty placeholders would be a total type promising something absent, and
+  // the check would have to detect the placeholder the type says cannot exist.
+}

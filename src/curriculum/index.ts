@@ -13,7 +13,8 @@
 
 import type { SkillGenerator, Unit } from '../lib/types'
 import { unit00 } from './unit-00-numbers'
-import { unit01 } from './unit-01-add-sub'
+import { unit01 } from './unit-01-addition'
+import { unit02 } from './unit-02-subtraction'
 import {
   indexSkills,
   resolvePrerequisites,
@@ -24,7 +25,7 @@ import {
 import type { SkillState } from './manifest'
 
 /** Units in learning order. Planned units stay absent until their generators land. */
-export const units: Unit[] = [unit00, unit01]
+export const units: Unit[] = [unit00, unit01, unit02]
 
 export const allSkills: SkillGenerator[] = units.flatMap((u) => u.skills)
 

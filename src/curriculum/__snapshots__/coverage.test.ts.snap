@@ -49,10 +49,28 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
     "round-to-10",
   ],
   "sub-2digit-borrow": [
-    "sub-facts",
+    "sub-2digit-noborrow",
+  ],
+  "sub-2digit-noborrow": [
+    "sub-tens",
+  ],
+  "sub-3digit-borrow": [
+    "sub-2digit-borrow",
+  ],
+  "sub-across-zero": [
+    "sub-3digit-borrow",
   ],
   "sub-facts": [
+    "sub-facts-small",
+  ],
+  "sub-facts-small": [
     "add-words",
+  ],
+  "sub-tens": [
+    "sub-facts",
+  ],
+  "sub-words": [
+    "sub-across-zero",
   ],
 }
 `;

@@ -1,0 +1,2634 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: sub-2digit-borrow > matches the wording recorded when the skill landed 1`] = `
+"--- sub-2digit-borrow · seed 1 · difficulty 1
+prompt   Subtract. You will need to borrow.
+display  column 36 − 29
+answer   exact 7/1
+input    keypad
+hint     You cannot take 9 from 6, so borrow a ten from the 3.
+step 1   Ones: 6 − 9. Not enough to take away.
+step 2   Borrow a ten — 3 becomes 2, ones become 16.
+step 3   Now subtract the ones.   [16 − 9 = 7]
+step 4   Then the tens, giving 7.   [2 − 2 = 0]
+miss     flipped-column = 13   In the ones column you have 6 and need to take away 9. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 17   You borrowed correctly, but the tens digit drops from 3 to 2 once you lend that ten away.
+miss     skipped-tens-subtraction = 37   The ones are right. There is still the 2 to take off the tens column.
+
+--- sub-2digit-borrow · seed 12345 · difficulty 1
+prompt   Subtract. You will need to borrow.
+display  column 33 − 28
+answer   exact 5/1
+input    keypad
+hint     You cannot take 8 from 3, so borrow a ten from the 3.
+step 1   Ones: 3 − 8. Not enough to take away.
+step 2   Borrow a ten — 3 becomes 2, ones become 13.
+step 3   Now subtract the ones.   [13 − 8 = 5]
+step 4   Then the tens, giving 5.   [2 − 2 = 0]
+miss     flipped-column = 15   In the ones column you have 3 and need to take away 8. Borrow a ten instead of flipping them around.
+miss     skipped-tens-subtraction = 35   The ones are right. There is still the 2 to take off the tens column.
+
+--- sub-2digit-borrow · seed 67890 · difficulty 1
+prompt   Subtract. You will need to borrow.
+display  column 30 − 22
+answer   exact 8/1
+input    keypad
+hint     You cannot take 2 from 0, so borrow a ten from the 3.
+step 1   Ones: 0 − 2. Not enough to take away.
+step 2   Borrow a ten — 3 becomes 2, ones become 10.
+step 3   Now subtract the ones.   [10 − 2 = 8]
+step 4   Then the tens, giving 8.   [2 − 2 = 0]
+miss     flipped-column = 12   In the ones column you have 0 and need to take away 2. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 18   You borrowed correctly, but the tens digit drops from 3 to 2 once you lend that ten away.
+miss     skipped-tens-subtraction = 38   The ones are right. There is still the 2 to take off the tens column.
+
+--- sub-2digit-borrow · seed 424242 · difficulty 1
+prompt   Subtract. You will need to borrow.
+display  column 21 − 16
+answer   exact 5/1
+input    keypad
+hint     You cannot take 6 from 1, so borrow a ten from the 2.
+step 1   Ones: 1 − 6. Not enough to take away.
+step 2   Borrow a ten — 2 becomes 1, ones become 11.
+step 3   Now subtract the ones.   [11 − 6 = 5]
+step 4   Then the tens, giving 5.   [1 − 1 = 0]
+miss     flipped-column = 15   In the ones column you have 1 and need to take away 6. Borrow a ten instead of flipping them around.
+miss     skipped-tens-subtraction = 25   The ones are right. There is still the 1 to take off the tens column.
+
+--- sub-2digit-borrow · seed 987654321 · difficulty 1
+prompt   Subtract. You will need to borrow.
+display  column 44 − 15
+answer   exact 29/1
+input    keypad
+hint     You cannot take 5 from 4, so borrow a ten from the 4.
+step 1   Ones: 4 − 5. Not enough to take away.
+step 2   Borrow a ten — 4 becomes 3, ones become 14.
+step 3   Now subtract the ones.   [14 − 5 = 9]
+step 4   Then the tens, giving 29.   [3 − 1 = 2]
+miss     flipped-column = 31   In the ones column you have 4 and need to take away 5. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 39   You borrowed correctly, but the tens digit drops from 4 to 3 once you lend that ten away.
+miss     skipped-tens-subtraction = 49   The ones are right. There is still the 1 to take off the tens column.
+
+--- sub-2digit-borrow · seed 1 · difficulty 2
+prompt   Subtract. You will need to borrow.
+display  column 64 − 25
+answer   exact 39/1
+input    keypad
+hint     You cannot take 5 from 4, so borrow a ten from the 6.
+step 1   Ones: 4 − 5. Not enough to take away.
+step 2   Borrow a ten — 6 becomes 5, ones become 14.
+step 3   Now subtract the ones.   [14 − 5 = 9]
+step 4   Then the tens, giving 39.   [5 − 2 = 3]
+miss     flipped-column = 41   In the ones column you have 4 and need to take away 5. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 49   You borrowed correctly, but the tens digit drops from 6 to 5 once you lend that ten away.
+miss     skipped-tens-subtraction = 69   The ones are right. There is still the 2 to take off the tens column.
+
+--- sub-2digit-borrow · seed 12345 · difficulty 2
+prompt   Subtract. You will need to borrow.
+display  column 65 − 27
+answer   exact 38/1
+input    keypad
+hint     You cannot take 7 from 5, so borrow a ten from the 6.
+step 1   Ones: 5 − 7. Not enough to take away.
+step 2   Borrow a ten — 6 becomes 5, ones become 15.
+step 3   Now subtract the ones.   [15 − 7 = 8]
+step 4   Then the tens, giving 38.   [5 − 2 = 3]
+miss     flipped-column = 42   In the ones column you have 5 and need to take away 7. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 48   You borrowed correctly, but the tens digit drops from 6 to 5 once you lend that ten away.
+miss     skipped-tens-subtraction = 68   The ones are right. There is still the 2 to take off the tens column.
+
+--- sub-2digit-borrow · seed 67890 · difficulty 2
+prompt   Subtract. You will need to borrow.
+display  column 21 − 18
+answer   exact 3/1
+input    keypad
+hint     You cannot take 8 from 1, so borrow a ten from the 2.
+step 1   Ones: 1 − 8. Not enough to take away.
+step 2   Borrow a ten — 2 becomes 1, ones become 11.
+step 3   Now subtract the ones.   [11 − 8 = 3]
+step 4   Then the tens, giving 3.   [1 − 1 = 0]
+miss     flipped-column = 17   In the ones column you have 1 and need to take away 8. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 13   You borrowed correctly, but the tens digit drops from 2 to 1 once you lend that ten away.
+miss     skipped-tens-subtraction = 23   The ones are right. There is still the 1 to take off the tens column.
+
+--- sub-2digit-borrow · seed 424242 · difficulty 2
+prompt   Subtract. You will need to borrow.
+display  column 21 − 16
+answer   exact 5/1
+input    keypad
+hint     You cannot take 6 from 1, so borrow a ten from the 2.
+step 1   Ones: 1 − 6. Not enough to take away.
+step 2   Borrow a ten — 2 becomes 1, ones become 11.
+step 3   Now subtract the ones.   [11 − 6 = 5]
+step 4   Then the tens, giving 5.   [1 − 1 = 0]
+miss     flipped-column = 15   In the ones column you have 1 and need to take away 6. Borrow a ten instead of flipping them around.
+miss     skipped-tens-subtraction = 25   The ones are right. There is still the 1 to take off the tens column.
+
+--- sub-2digit-borrow · seed 987654321 · difficulty 2
+prompt   Subtract. You will need to borrow.
+display  column 63 − 18
+answer   exact 45/1
+input    keypad
+hint     You cannot take 8 from 3, so borrow a ten from the 6.
+step 1   Ones: 3 − 8. Not enough to take away.
+step 2   Borrow a ten — 6 becomes 5, ones become 13.
+step 3   Now subtract the ones.   [13 − 8 = 5]
+step 4   Then the tens, giving 45.   [5 − 1 = 4]
+miss     flipped-column = 55   In the ones column you have 3 and need to take away 8. Borrow a ten instead of flipping them around.
+miss     skipped-tens-subtraction = 65   The ones are right. There is still the 1 to take off the tens column.
+
+--- sub-2digit-borrow · seed 1 · difficulty 3
+prompt   Subtract. You will need to borrow.
+display  column 62 − 47
+answer   exact 15/1
+input    keypad
+hint     You cannot take 7 from 2, so borrow a ten from the 6.
+step 1   Ones: 2 − 7. Not enough to take away.
+step 2   Borrow a ten — 6 becomes 5, ones become 12.
+step 3   Now subtract the ones.   [12 − 7 = 5]
+step 4   Then the tens, giving 15.   [5 − 4 = 1]
+miss     flipped-column = 25   In the ones column you have 2 and need to take away 7. Borrow a ten instead of flipping them around.
+miss     skipped-tens-subtraction = 65   The ones are right. There is still the 4 to take off the tens column.
+
+--- sub-2digit-borrow · seed 12345 · difficulty 3
+prompt   Subtract. You will need to borrow.
+display  column 54 − 46
+answer   exact 8/1
+input    keypad
+hint     You cannot take 6 from 4, so borrow a ten from the 5.
+step 1   Ones: 4 − 6. Not enough to take away.
+step 2   Borrow a ten — 5 becomes 4, ones become 14.
+step 3   Now subtract the ones.   [14 − 6 = 8]
+step 4   Then the tens, giving 8.   [4 − 4 = 0]
+miss     flipped-column = 12   In the ones column you have 4 and need to take away 6. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 18   You borrowed correctly, but the tens digit drops from 5 to 4 once you lend that ten away.
+miss     skipped-tens-subtraction = 58   The ones are right. There is still the 4 to take off the tens column.
+
+--- sub-2digit-borrow · seed 67890 · difficulty 3
+prompt   Subtract. You will need to borrow.
+display  column 34 − 26
+answer   exact 8/1
+input    keypad
+hint     You cannot take 6 from 4, so borrow a ten from the 3.
+step 1   Ones: 4 − 6. Not enough to take away.
+step 2   Borrow a ten — 3 becomes 2, ones become 14.
+step 3   Now subtract the ones.   [14 − 6 = 8]
+step 4   Then the tens, giving 8.   [2 − 2 = 0]
+miss     flipped-column = 12   In the ones column you have 4 and need to take away 6. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 18   You borrowed correctly, but the tens digit drops from 3 to 2 once you lend that ten away.
+miss     skipped-tens-subtraction = 38   The ones are right. There is still the 2 to take off the tens column.
+
+--- sub-2digit-borrow · seed 424242 · difficulty 3
+prompt   Subtract. You will need to borrow.
+display  column 32 − 15
+answer   exact 17/1
+input    keypad
+hint     You cannot take 5 from 2, so borrow a ten from the 3.
+step 1   Ones: 2 − 5. Not enough to take away.
+step 2   Borrow a ten — 3 becomes 2, ones become 12.
+step 3   Now subtract the ones.   [12 − 5 = 7]
+step 4   Then the tens, giving 17.   [2 − 1 = 1]
+miss     flipped-column = 23   In the ones column you have 2 and need to take away 5. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 27   You borrowed correctly, but the tens digit drops from 3 to 2 once you lend that ten away.
+miss     skipped-tens-subtraction = 37   The ones are right. There is still the 1 to take off the tens column.
+
+--- sub-2digit-borrow · seed 987654321 · difficulty 3
+prompt   Subtract. You will need to borrow.
+display  column 51 − 26
+answer   exact 25/1
+input    keypad
+hint     You cannot take 6 from 1, so borrow a ten from the 5.
+step 1   Ones: 1 − 6. Not enough to take away.
+step 2   Borrow a ten — 5 becomes 4, ones become 11.
+step 3   Now subtract the ones.   [11 − 6 = 5]
+step 4   Then the tens, giving 25.   [4 − 2 = 2]
+miss     flipped-column = 35   In the ones column you have 1 and need to take away 6. Borrow a ten instead of flipping them around.
+miss     skipped-tens-subtraction = 55   The ones are right. There is still the 2 to take off the tens column.
+
+--- sub-2digit-borrow · seed 1 · difficulty 4
+prompt   Subtract. You will need to borrow.
+display  column 93 − 34
+answer   exact 59/1
+input    keypad
+hint     You cannot take 4 from 3, so borrow a ten from the 9.
+step 1   Ones: 3 − 4. Not enough to take away.
+step 2   Borrow a ten — 9 becomes 8, ones become 13.
+step 3   Now subtract the ones.   [13 − 4 = 9]
+step 4   Then the tens, giving 59.   [8 − 3 = 5]
+miss     flipped-column = 61   In the ones column you have 3 and need to take away 4. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 69   You borrowed correctly, but the tens digit drops from 9 to 8 once you lend that ten away.
+miss     skipped-tens-subtraction = 99   The ones are right. There is still the 3 to take off the tens column.
+
+--- sub-2digit-borrow · seed 12345 · difficulty 4
+prompt   Subtract. You will need to borrow.
+display  column 94 − 36
+answer   exact 58/1
+input    keypad
+hint     You cannot take 6 from 4, so borrow a ten from the 9.
+step 1   Ones: 4 − 6. Not enough to take away.
+step 2   Borrow a ten — 9 becomes 8, ones become 14.
+step 3   Now subtract the ones.   [14 − 6 = 8]
+step 4   Then the tens, giving 58.   [8 − 3 = 5]
+miss     flipped-column = 62   In the ones column you have 4 and need to take away 6. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 68   You borrowed correctly, but the tens digit drops from 9 to 8 once you lend that ten away.
+miss     skipped-tens-subtraction = 98   The ones are right. There is still the 3 to take off the tens column.
+
+--- sub-2digit-borrow · seed 67890 · difficulty 4
+prompt   Subtract. You will need to borrow.
+display  column 55 − 36
+answer   exact 19/1
+input    keypad
+hint     You cannot take 6 from 5, so borrow a ten from the 5.
+step 1   Ones: 5 − 6. Not enough to take away.
+step 2   Borrow a ten — 5 becomes 4, ones become 15.
+step 3   Now subtract the ones.   [15 − 6 = 9]
+step 4   Then the tens, giving 19.   [4 − 3 = 1]
+miss     flipped-column = 21   In the ones column you have 5 and need to take away 6. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 29   You borrowed correctly, but the tens digit drops from 5 to 4 once you lend that ten away.
+miss     skipped-tens-subtraction = 59   The ones are right. There is still the 3 to take off the tens column.
+
+--- sub-2digit-borrow · seed 424242 · difficulty 4
+prompt   Subtract. You will need to borrow.
+display  column 52 − 35
+answer   exact 17/1
+input    keypad
+hint     You cannot take 5 from 2, so borrow a ten from the 5.
+step 1   Ones: 2 − 5. Not enough to take away.
+step 2   Borrow a ten — 5 becomes 4, ones become 12.
+step 3   Now subtract the ones.   [12 − 5 = 7]
+step 4   Then the tens, giving 17.   [4 − 3 = 1]
+miss     flipped-column = 23   In the ones column you have 2 and need to take away 5. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 27   You borrowed correctly, but the tens digit drops from 5 to 4 once you lend that ten away.
+miss     skipped-tens-subtraction = 57   The ones are right. There is still the 3 to take off the tens column.
+
+--- sub-2digit-borrow · seed 987654321 · difficulty 4
+prompt   Subtract. You will need to borrow.
+display  column 31 − 29
+answer   exact 2/1
+input    keypad
+hint     You cannot take 9 from 1, so borrow a ten from the 3.
+step 1   Ones: 1 − 9. Not enough to take away.
+step 2   Borrow a ten — 3 becomes 2, ones become 11.
+step 3   Now subtract the ones.   [11 − 9 = 2]
+step 4   Then the tens, giving 2.   [2 − 2 = 0]
+miss     flipped-column = 18   In the ones column you have 1 and need to take away 9. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 12   You borrowed correctly, but the tens digit drops from 3 to 2 once you lend that ten away.
+miss     skipped-tens-subtraction = 32   The ones are right. There is still the 2 to take off the tens column.
+
+--- sub-2digit-borrow · seed 1 · difficulty 5
+prompt   Subtract. You will need to borrow.
+display  column 71 − 69
+answer   exact 2/1
+input    keypad
+hint     You cannot take 9 from 1, so borrow a ten from the 7.
+step 1   Ones: 1 − 9. Not enough to take away.
+step 2   Borrow a ten — 7 becomes 6, ones become 11.
+step 3   Now subtract the ones.   [11 − 9 = 2]
+step 4   Then the tens, giving 2.   [6 − 6 = 0]
+miss     flipped-column = 18   In the ones column you have 1 and need to take away 9. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 12   You borrowed correctly, but the tens digit drops from 7 to 6 once you lend that ten away.
+miss     skipped-tens-subtraction = 72   The ones are right. There is still the 6 to take off the tens column.
+
+--- sub-2digit-borrow · seed 12345 · difficulty 5
+prompt   Subtract. You will need to borrow.
+display  column 70 − 31
+answer   exact 39/1
+input    keypad
+hint     You cannot take 1 from 0, so borrow a ten from the 7.
+step 1   Ones: 0 − 1. Not enough to take away.
+step 2   Borrow a ten — 7 becomes 6, ones become 10.
+step 3   Now subtract the ones.   [10 − 1 = 9]
+step 4   Then the tens, giving 39.   [6 − 3 = 3]
+miss     flipped-column = 41   In the ones column you have 0 and need to take away 1. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 49   You borrowed correctly, but the tens digit drops from 7 to 6 once you lend that ten away.
+miss     skipped-tens-subtraction = 79   The ones are right. There is still the 3 to take off the tens column.
+
+--- sub-2digit-borrow · seed 67890 · difficulty 5
+prompt   Subtract. You will need to borrow.
+display  column 61 − 28
+answer   exact 33/1
+input    keypad
+hint     You cannot take 8 from 1, so borrow a ten from the 6.
+step 1   Ones: 1 − 8. Not enough to take away.
+step 2   Borrow a ten — 6 becomes 5, ones become 11.
+step 3   Now subtract the ones.   [11 − 8 = 3]
+step 4   Then the tens, giving 33.   [5 − 2 = 3]
+miss     flipped-column = 47   In the ones column you have 1 and need to take away 8. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 43   You borrowed correctly, but the tens digit drops from 6 to 5 once you lend that ten away.
+miss     skipped-tens-subtraction = 63   The ones are right. There is still the 2 to take off the tens column.
+
+--- sub-2digit-borrow · seed 424242 · difficulty 5
+prompt   Subtract. You will need to borrow.
+display  column 47 − 19
+answer   exact 28/1
+input    keypad
+hint     You cannot take 9 from 7, so borrow a ten from the 4.
+step 1   Ones: 7 − 9. Not enough to take away.
+step 2   Borrow a ten — 4 becomes 3, ones become 17.
+step 3   Now subtract the ones.   [17 − 9 = 8]
+step 4   Then the tens, giving 28.   [3 − 1 = 2]
+miss     flipped-column = 32   In the ones column you have 7 and need to take away 9. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 38   You borrowed correctly, but the tens digit drops from 4 to 3 once you lend that ten away.
+miss     skipped-tens-subtraction = 48   The ones are right. There is still the 1 to take off the tens column.
+
+--- sub-2digit-borrow · seed 987654321 · difficulty 5
+prompt   Subtract. You will need to borrow.
+display  column 40 − 37
+answer   exact 3/1
+input    keypad
+hint     You cannot take 7 from 0, so borrow a ten from the 4.
+step 1   Ones: 0 − 7. Not enough to take away.
+step 2   Borrow a ten — 4 becomes 3, ones become 10.
+step 3   Now subtract the ones.   [10 − 7 = 3]
+step 4   Then the tens, giving 3.   [3 − 3 = 0]
+miss     flipped-column = 17   In the ones column you have 0 and need to take away 7. Borrow a ten instead of flipping them around.
+miss     forgot-to-reduce-tens = 13   You borrowed correctly, but the tens digit drops from 4 to 3 once you lend that ten away.
+miss     skipped-tens-subtraction = 43   The ones are right. There is still the 3 to take off the tens column."
+`;
+
+exports[`recorded output: sub-2digit-noborrow > matches the wording recorded when the skill landed 1`] = `
+"--- sub-2digit-noborrow · seed 1 · difficulty 1
+prompt   Subtract the columns.
+display  column 33 − 13
+answer   exact 20/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [3 − 3 = 0]
+step 2   Subtract the tens column.   [3 − 1 = 2]
+step 3   Put them together: 20.
+miss     added = 46   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 2   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 12345 · difficulty 1
+prompt   Subtract the columns.
+display  column 24 − 12
+answer   exact 12/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [4 − 2 = 2]
+step 2   Subtract the tens column.   [2 − 1 = 1]
+step 3   Put them together: 12.
+miss     added = 36   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 3   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 67890 · difficulty 1
+prompt   Subtract the columns.
+display  column 39 − 21
+answer   exact 18/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [9 − 1 = 8]
+step 2   Subtract the tens column.   [3 − 2 = 1]
+step 3   Put them together: 18.
+miss     added = 60   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 27   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 424242 · difficulty 1
+prompt   Subtract the columns.
+display  column 36 − 12
+answer   exact 24/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [6 − 2 = 4]
+step 2   Subtract the tens column.   [3 − 1 = 2]
+step 3   Put them together: 24.
+miss     added = 48   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 15   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 987654321 · difficulty 1
+prompt   Subtract the columns.
+display  column 22 − 12
+answer   exact 10/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [2 − 2 = 0]
+step 2   Subtract the tens column.   [2 − 1 = 1]
+step 3   Put them together: 10.
+miss     added = 34   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 1   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 1 · difficulty 2
+prompt   Subtract the columns.
+display  column 41 − 31
+answer   exact 10/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [1 − 1 = 0]
+step 2   Subtract the tens column.   [4 − 3 = 1]
+step 3   Put them together: 10.
+miss     added = 72   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 28   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 12345 · difficulty 2
+prompt   Subtract the columns.
+display  column 59 − 25
+answer   exact 34/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [9 − 5 = 4]
+step 2   Subtract the tens column.   [5 − 2 = 3]
+step 3   Put them together: 34.
+miss     added = 84   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 7   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 67890 · difficulty 2
+prompt   Subtract the columns.
+display  column 44 − 34
+answer   exact 10/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [4 − 4 = 0]
+step 2   Subtract the tens column.   [4 − 3 = 1]
+step 3   Put them together: 10.
+miss     added = 78   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 1   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 424242 · difficulty 2
+prompt   Subtract the columns.
+display  column 32 − 21
+answer   exact 11/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [2 − 1 = 1]
+step 2   Subtract the tens column.   [3 − 2 = 1]
+step 3   Put them together: 11.
+miss     added = 53   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 20   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 987654321 · difficulty 2
+prompt   Subtract the columns.
+display  column 56 − 43
+answer   exact 13/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [6 − 3 = 3]
+step 2   Subtract the tens column.   [5 − 4 = 1]
+step 3   Put them together: 13.
+miss     added = 99   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 22   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 1 · difficulty 3
+prompt   Subtract the columns.
+display  column 55 − 13
+answer   exact 42/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [5 − 3 = 2]
+step 2   Subtract the tens column.   [5 − 1 = 4]
+step 3   Put them together: 42.
+miss     added = 68   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 24   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 12345 · difficulty 3
+prompt   Subtract the columns.
+display  column 79 − 35
+answer   exact 44/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [9 − 5 = 4]
+step 2   Subtract the tens column.   [7 − 3 = 4]
+step 3   Put them together: 44.
+miss     added = 114   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 26   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 67890 · difficulty 3
+prompt   Subtract the columns.
+display  column 79 − 15
+answer   exact 64/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [9 − 5 = 4]
+step 2   Subtract the tens column.   [7 − 1 = 6]
+step 3   Put them together: 64.
+miss     added = 94   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 28   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 424242 · difficulty 3
+prompt   Subtract the columns.
+display  column 56 − 24
+answer   exact 32/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [6 − 4 = 2]
+step 2   Subtract the tens column.   [5 − 2 = 3]
+step 3   Put them together: 32.
+miss     added = 80   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 14   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 987654321 · difficulty 3
+prompt   Subtract the columns.
+display  column 75 − 52
+answer   exact 23/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [5 − 2 = 3]
+step 2   Subtract the tens column.   [7 − 5 = 2]
+step 3   Put them together: 23.
+miss     added = 127   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 50   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 1 · difficulty 4
+prompt   Subtract the columns.
+display  column 62 − 12
+answer   exact 50/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [2 − 2 = 0]
+step 2   Subtract the tens column.   [6 − 1 = 5]
+step 3   Put them together: 50.
+miss     added = 74   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 41   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 12345 · difficulty 4
+prompt   Subtract the columns.
+display  column 89 − 35
+answer   exact 54/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [9 − 5 = 4]
+step 2   Subtract the tens column.   [8 − 3 = 5]
+step 3   Put them together: 54.
+miss     added = 124   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 36   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 67890 · difficulty 4
+prompt   Subtract the columns.
+display  column 44 − 32
+answer   exact 12/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [4 − 2 = 2]
+step 2   Subtract the tens column.   [4 − 3 = 1]
+step 3   Put them together: 12.
+miss     added = 76   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 21   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 424242 · difficulty 4
+prompt   Subtract the columns.
+display  column 63 − 32
+answer   exact 31/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [3 − 2 = 1]
+step 2   Subtract the tens column.   [6 − 3 = 3]
+step 3   Put them together: 31.
+miss     added = 95   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 40   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 987654321 · difficulty 4
+prompt   Subtract the columns.
+display  column 87 − 21
+answer   exact 66/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [7 − 1 = 6]
+step 2   Subtract the tens column.   [8 − 2 = 6]
+step 3   Put them together: 66.
+miss     added = 108   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 75   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 1 · difficulty 5
+prompt   Subtract the columns.
+display  column 67 − 14
+answer   exact 53/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [7 − 4 = 3]
+step 2   Subtract the tens column.   [6 − 1 = 5]
+step 3   Put them together: 53.
+miss     added = 81   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 26   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 12345 · difficulty 5
+prompt   Subtract the columns.
+display  column 94 − 32
+answer   exact 62/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [4 − 2 = 2]
+step 2   Subtract the tens column.   [9 − 3 = 6]
+step 3   Put them together: 62.
+miss     added = 126   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 71   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 67890 · difficulty 5
+prompt   Subtract the columns.
+display  column 49 − 34
+answer   exact 15/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [9 − 4 = 5]
+step 2   Subtract the tens column.   [4 − 3 = 1]
+step 3   Put them together: 15.
+miss     added = 83   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 6   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 424242 · difficulty 5
+prompt   Subtract the columns.
+display  column 29 − 12
+answer   exact 17/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [9 − 2 = 7]
+step 2   Subtract the tens column.   [2 − 1 = 1]
+step 3   Put them together: 17.
+miss     added = 41   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 8   Check the columns line up — ones under ones, tens under tens.
+
+--- sub-2digit-noborrow · seed 987654321 · difficulty 5
+prompt   Subtract the columns.
+display  column 92 − 21
+answer   exact 71/1
+input    keypad
+hint     Subtract the ones column first, then the tens column.
+step 1   Subtract the ones column.   [2 − 1 = 1]
+step 2   Subtract the tens column.   [9 − 2 = 7]
+step 3   Put them together: 71.
+miss     added = 113   That is the sum. This one is asking you to take away.
+miss     misaligned-columns = 80   Check the columns line up — ones under ones, tens under tens."
+`;
+
+exports[`recorded output: sub-3digit-borrow > matches the wording recorded when the skill landed 1`] = `
+"--- sub-3digit-borrow · seed 1 · difficulty 1
+prompt   Subtract. You will need to borrow.
+display  column 391 − 189
+answer   exact 202/1
+input    keypad
+hint     You cannot take 9 from 1, so borrow a ten from the 9.
+step 1   Borrow a ten — 9 becomes 8, ones become 11.
+step 2   Subtract the ones.   [11 − 9 = 2]
+step 3   Subtract the tens.   [8 − 8 = 0]
+step 4   Then the hundreds, giving 202.   [3 − 1 = 2]
+miss     flipped-column = 218   The ones column has 1 and needs 9 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 212   The borrow is right, but the tens digit drops from 9 to 8 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 12345 · difficulty 1
+prompt   Subtract. You will need to borrow.
+display  column 276 − 249
+answer   exact 27/1
+input    keypad
+hint     You cannot take 9 from 6, so borrow a ten from the 7.
+step 1   Borrow a ten — 7 becomes 6, ones become 16.
+step 2   Subtract the ones.   [16 − 9 = 7]
+step 3   Subtract the tens.   [6 − 4 = 2]
+step 4   Then the hundreds, giving 27.   [2 − 2 = 0]
+miss     flipped-column = 33   The ones column has 6 and needs 9 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 37   The borrow is right, but the tens digit drops from 7 to 6 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 67890 · difficulty 1
+prompt   Subtract. You will need to borrow.
+display  column 345 − 319
+answer   exact 26/1
+input    keypad
+hint     You cannot take 9 from 5, so borrow a ten from the 4.
+step 1   Borrow a ten — 4 becomes 3, ones become 15.
+step 2   Subtract the ones.   [15 − 9 = 6]
+step 3   Subtract the tens.   [3 − 1 = 2]
+step 4   Then the hundreds, giving 26.   [3 − 3 = 0]
+miss     flipped-column = 34   The ones column has 5 and needs 9 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 36   The borrow is right, but the tens digit drops from 4 to 3 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 424242 · difficulty 1
+prompt   Subtract. You will need to borrow.
+display  column 155 − 139
+answer   exact 16/1
+input    keypad
+hint     You cannot take 9 from 5, so borrow a ten from the 5.
+step 1   Borrow a ten — 5 becomes 4, ones become 15.
+step 2   Subtract the ones.   [15 − 9 = 6]
+step 3   Subtract the tens.   [4 − 3 = 1]
+step 4   Then the hundreds, giving 16.   [1 − 1 = 0]
+miss     flipped-column = 24   The ones column has 5 and needs 9 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 26   The borrow is right, but the tens digit drops from 5 to 4 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 987654321 · difficulty 1
+prompt   Subtract. You will need to borrow.
+display  column 386 − 148
+answer   exact 238/1
+input    keypad
+hint     You cannot take 8 from 6, so borrow a ten from the 8.
+step 1   Borrow a ten — 8 becomes 7, ones become 16.
+step 2   Subtract the ones.   [16 − 8 = 8]
+step 3   Subtract the tens.   [7 − 4 = 3]
+step 4   Then the hundreds, giving 238.   [3 − 1 = 2]
+miss     flipped-column = 242   The ones column has 6 and needs 8 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 248   The borrow is right, but the tens digit drops from 8 to 7 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 1 · difficulty 2
+prompt   Subtract. You will need to borrow.
+display  column 364 − 359
+answer   exact 5/1
+input    keypad
+hint     You cannot take 9 from 4, so borrow a ten from the 6.
+step 1   Borrow a ten — 6 becomes 5, ones become 14.
+step 2   Subtract the ones.   [14 − 9 = 5]
+step 3   Subtract the tens.   [5 − 5 = 0]
+step 4   Then the hundreds, giving 5.   [3 − 3 = 0]
+miss     flipped-column = 15   The ones column has 4 and needs 9 taken off it. Borrow a ten rather than flipping them around.
+
+--- sub-3digit-borrow · seed 12345 · difficulty 2
+prompt   Subtract. You will need to borrow.
+display  column 590 − 257
+answer   exact 333/1
+input    keypad
+hint     You cannot take 7 from 0, so borrow a ten from the 9.
+step 1   Borrow a ten — 9 becomes 8, ones become 10.
+step 2   Subtract the ones.   [10 − 7 = 3]
+step 3   Subtract the tens.   [8 − 5 = 3]
+step 4   Then the hundreds, giving 333.   [5 − 2 = 3]
+miss     flipped-column = 347   The ones column has 0 and needs 7 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 343   The borrow is right, but the tens digit drops from 9 to 8 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 67890 · difficulty 2
+prompt   Subtract. You will need to borrow.
+display  column 488 − 309
+answer   exact 179/1
+input    keypad
+hint     You cannot take 9 from 8, so borrow a ten from the 8.
+step 1   Borrow a ten — 8 becomes 7, ones become 18.
+step 2   Subtract the ones.   [18 − 9 = 9]
+step 3   Subtract the tens.   [7 − 0 = 7]
+step 4   Then the hundreds, giving 179.   [4 − 3 = 1]
+miss     flipped-column = 181   The ones column has 8 and needs 9 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 189   The borrow is right, but the tens digit drops from 8 to 7 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 424242 · difficulty 2
+prompt   Subtract. You will need to borrow.
+display  column 192 − 163
+answer   exact 29/1
+input    keypad
+hint     You cannot take 3 from 2, so borrow a ten from the 9.
+step 1   Borrow a ten — 9 becomes 8, ones become 12.
+step 2   Subtract the ones.   [12 − 3 = 9]
+step 3   Subtract the tens.   [8 − 6 = 2]
+step 4   Then the hundreds, giving 29.   [1 − 1 = 0]
+miss     flipped-column = 31   The ones column has 2 and needs 3 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 39   The borrow is right, but the tens digit drops from 9 to 8 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 987654321 · difficulty 2
+prompt   Subtract. You will need to borrow.
+display  column 590 − 457
+answer   exact 133/1
+input    keypad
+hint     You cannot take 7 from 0, so borrow a ten from the 9.
+step 1   Borrow a ten — 9 becomes 8, ones become 10.
+step 2   Subtract the ones.   [10 − 7 = 3]
+step 3   Subtract the tens.   [8 − 5 = 3]
+step 4   Then the hundreds, giving 133.   [5 − 4 = 1]
+miss     flipped-column = 147   The ones column has 0 and needs 7 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 143   The borrow is right, but the tens digit drops from 9 to 8 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 1 · difficulty 3
+prompt   Subtract. You will need to borrow.
+display  column 493 − 485
+answer   exact 8/1
+input    keypad
+hint     You cannot take 5 from 3, so borrow a ten from the 9.
+step 1   Borrow a ten — 9 becomes 8, ones become 13.
+step 2   Subtract the ones.   [13 − 5 = 8]
+step 3   Subtract the tens.   [8 − 8 = 0]
+step 4   Then the hundreds, giving 8.   [4 − 4 = 0]
+miss     flipped-column = 12   The ones column has 3 and needs 5 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 18   The borrow is right, but the tens digit drops from 9 to 8 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 12345 · difficulty 3
+prompt   Subtract. You will need to borrow.
+display  column 787 − 318
+answer   exact 469/1
+input    keypad
+hint     You cannot take 8 from 7, so borrow a ten from the 8.
+step 1   Borrow a ten — 8 becomes 7, ones become 17.
+step 2   Subtract the ones.   [17 − 8 = 9]
+step 3   Subtract the tens.   [7 − 1 = 6]
+step 4   Then the hundreds, giving 469.   [7 − 3 = 4]
+miss     flipped-column = 471   The ones column has 7 and needs 8 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 479   The borrow is right, but the tens digit drops from 8 to 7 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 67890 · difficulty 3
+prompt   Subtract. You will need to borrow.
+display  column 386 − 207
+answer   exact 179/1
+input    keypad
+hint     You cannot take 7 from 6, so borrow a ten from the 8.
+step 1   Borrow a ten — 8 becomes 7, ones become 16.
+step 2   Subtract the ones.   [16 − 7 = 9]
+step 3   Subtract the tens.   [7 − 0 = 7]
+step 4   Then the hundreds, giving 179.   [3 − 2 = 1]
+miss     flipped-column = 181   The ones column has 6 and needs 7 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 189   The borrow is right, but the tens digit drops from 8 to 7 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 424242 · difficulty 3
+prompt   Subtract. You will need to borrow.
+display  column 372 − 268
+answer   exact 104/1
+input    keypad
+hint     You cannot take 8 from 2, so borrow a ten from the 7.
+step 1   Borrow a ten — 7 becomes 6, ones become 12.
+step 2   Subtract the ones.   [12 − 8 = 4]
+step 3   Subtract the tens.   [6 − 6 = 0]
+step 4   Then the hundreds, giving 104.   [3 − 2 = 1]
+miss     flipped-column = 116   The ones column has 2 and needs 8 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 114   The borrow is right, but the tens digit drops from 7 to 6 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 987654321 · difficulty 3
+prompt   Subtract. You will need to borrow.
+display  column 778 − 309
+answer   exact 469/1
+input    keypad
+hint     You cannot take 9 from 8, so borrow a ten from the 7.
+step 1   Borrow a ten — 7 becomes 6, ones become 18.
+step 2   Subtract the ones.   [18 − 9 = 9]
+step 3   Subtract the tens.   [6 − 0 = 6]
+step 4   Then the hundreds, giving 469.   [7 − 3 = 4]
+miss     flipped-column = 471   The ones column has 8 and needs 9 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 479   The borrow is right, but the tens digit drops from 7 to 6 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 1 · difficulty 4
+prompt   Subtract. You will need to borrow.
+display  column 740 − 736
+answer   exact 4/1
+input    keypad
+hint     You cannot take 6 from 0, so borrow a ten from the 4.
+step 1   Borrow a ten — 4 becomes 3, ones become 10.
+step 2   Subtract the ones.   [10 − 6 = 4]
+step 3   Subtract the tens.   [3 − 3 = 0]
+step 4   Then the hundreds, giving 4.   [7 − 7 = 0]
+miss     flipped-column = 16   The ones column has 0 and needs 6 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 14   The borrow is right, but the tens digit drops from 4 to 3 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 12345 · difficulty 4
+prompt   Subtract. You will need to borrow.
+display  column 886 − 348
+answer   exact 538/1
+input    keypad
+hint     You cannot take 8 from 6, so borrow a ten from the 8.
+step 1   Borrow a ten — 8 becomes 7, ones become 16.
+step 2   Subtract the ones.   [16 − 8 = 8]
+step 3   Subtract the tens.   [7 − 4 = 3]
+step 4   Then the hundreds, giving 538.   [8 − 3 = 5]
+miss     flipped-column = 542   The ones column has 6 and needs 8 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 548   The borrow is right, but the tens digit drops from 8 to 7 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 67890 · difficulty 4
+prompt   Subtract. You will need to borrow.
+display  column 671 − 239
+answer   exact 432/1
+input    keypad
+hint     You cannot take 9 from 1, so borrow a ten from the 7.
+step 1   Borrow a ten — 7 becomes 6, ones become 11.
+step 2   Subtract the ones.   [11 − 9 = 2]
+step 3   Subtract the tens.   [6 − 3 = 3]
+step 4   Then the hundreds, giving 432.   [6 − 2 = 4]
+miss     flipped-column = 448   The ones column has 1 and needs 9 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 442   The borrow is right, but the tens digit drops from 7 to 6 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 424242 · difficulty 4
+prompt   Subtract. You will need to borrow.
+display  column 290 − 153
+answer   exact 137/1
+input    keypad
+hint     You cannot take 3 from 0, so borrow a ten from the 9.
+step 1   Borrow a ten — 9 becomes 8, ones become 10.
+step 2   Subtract the ones.   [10 − 3 = 7]
+step 3   Subtract the tens.   [8 − 5 = 3]
+step 4   Then the hundreds, giving 137.   [2 − 1 = 1]
+miss     flipped-column = 143   The ones column has 0 and needs 3 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 147   The borrow is right, but the tens digit drops from 9 to 8 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 987654321 · difficulty 4
+prompt   Subtract. You will need to borrow.
+display  column 210 − 201
+answer   exact 9/1
+input    keypad
+hint     You cannot take 1 from 0, so borrow a ten from the 1.
+step 1   Borrow a ten — 1 becomes 0, ones become 10.
+step 2   Subtract the ones.   [10 − 1 = 9]
+step 3   Subtract the tens.   [0 − 0 = 0]
+step 4   Then the hundreds, giving 9.   [2 − 2 = 0]
+miss     flipped-column = 11   The ones column has 0 and needs 1 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 19   The borrow is right, but the tens digit drops from 1 to 0 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 1 · difficulty 5
+prompt   Subtract. You will need to borrow.
+display  column 622 − 619
+answer   exact 3/1
+input    keypad
+hint     You cannot take 9 from 2, so borrow a ten from the 2.
+step 1   Borrow a ten — 2 becomes 1, ones become 12.
+step 2   Subtract the ones.   [12 − 9 = 3]
+step 3   Subtract the tens.   [1 − 1 = 0]
+step 4   Then the hundreds, giving 3.   [6 − 6 = 0]
+miss     flipped-column = 17   The ones column has 2 and needs 9 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 13   The borrow is right, but the tens digit drops from 2 to 1 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 12345 · difficulty 5
+prompt   Subtract. You will need to borrow.
+display  column 676 − 307
+answer   exact 369/1
+input    keypad
+hint     You cannot take 7 from 6, so borrow a ten from the 7.
+step 1   Borrow a ten — 7 becomes 6, ones become 16.
+step 2   Subtract the ones.   [16 − 7 = 9]
+step 3   Subtract the tens.   [6 − 0 = 6]
+step 4   Then the hundreds, giving 369.   [6 − 3 = 3]
+miss     flipped-column = 371   The ones column has 6 and needs 7 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 379   The borrow is right, but the tens digit drops from 7 to 6 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 67890 · difficulty 5
+prompt   Subtract. You will need to borrow.
+display  column 582 − 277
+answer   exact 305/1
+input    keypad
+hint     You cannot take 7 from 2, so borrow a ten from the 8.
+step 1   Borrow a ten — 8 becomes 7, ones become 12.
+step 2   Subtract the ones.   [12 − 7 = 5]
+step 3   Subtract the tens.   [7 − 7 = 0]
+step 4   Then the hundreds, giving 305.   [5 − 2 = 3]
+miss     flipped-column = 315   The ones column has 2 and needs 7 taken off it. Borrow a ten rather than flipping them around.
+
+--- sub-3digit-borrow · seed 424242 · difficulty 5
+prompt   Subtract. You will need to borrow.
+display  column 593 − 356
+answer   exact 237/1
+input    keypad
+hint     You cannot take 6 from 3, so borrow a ten from the 9.
+step 1   Borrow a ten — 9 becomes 8, ones become 13.
+step 2   Subtract the ones.   [13 − 6 = 7]
+step 3   Subtract the tens.   [8 − 5 = 3]
+step 4   Then the hundreds, giving 237.   [5 − 3 = 2]
+miss     flipped-column = 243   The ones column has 3 and needs 6 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 247   The borrow is right, but the tens digit drops from 9 to 8 once it lends that ten away.
+
+--- sub-3digit-borrow · seed 987654321 · difficulty 5
+prompt   Subtract. You will need to borrow.
+display  column 395 − 167
+answer   exact 228/1
+input    keypad
+hint     You cannot take 7 from 5, so borrow a ten from the 9.
+step 1   Borrow a ten — 9 becomes 8, ones become 15.
+step 2   Subtract the ones.   [15 − 7 = 8]
+step 3   Subtract the tens.   [8 − 6 = 2]
+step 4   Then the hundreds, giving 228.   [3 − 1 = 2]
+miss     flipped-column = 232   The ones column has 5 and needs 7 taken off it. Borrow a ten rather than flipping them around.
+miss     forgot-to-reduce-tens = 238   The borrow is right, but the tens digit drops from 9 to 8 once it lends that ten away."
+`;
+
+exports[`recorded output: sub-across-zero > matches the wording recorded when the skill landed 1`] = `
+"--- sub-across-zero · seed 1 · difficulty 1
+prompt   Subtract. The tens have nothing to lend.
+display  column 306 − 259
+answer   exact 47/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 3 hundreds.
+step 1   Ones: 6 − 9. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 3 becomes 2, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [16 − 9 = 7]
+step 4   Subtract the rest, giving 47.   [9 − 5 = 4, 2 − 2 = 0]
+miss     flipped-column = 153   The ones column has 6 and needs 9 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 157   The ten arrived, but nothing paid for it — the 3 hundreds drop to 2.
+miss     chain-stopped-at-lender = 57   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 12345 · difficulty 1
+prompt   Subtract. The tens have nothing to lend.
+display  column 400 − 359
+answer   exact 41/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 4 hundreds.
+step 1   Ones: 0 − 9. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 4 becomes 3, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [10 − 9 = 1]
+step 4   Subtract the rest, giving 41.   [9 − 5 = 4, 3 − 3 = 0]
+miss     flipped-column = 159   The ones column has 0 and needs 9 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 151   The ten arrived, but nothing paid for it — the 4 hundreds drop to 3.
+miss     chain-stopped-at-lender = 51   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 67890 · difficulty 1
+prompt   Subtract. The tens have nothing to lend.
+display  column 302 − 145
+answer   exact 157/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 3 hundreds.
+step 1   Ones: 2 − 5. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 3 becomes 2, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [12 − 5 = 7]
+step 4   Subtract the rest, giving 157.   [9 − 4 = 5, 2 − 1 = 1]
+miss     flipped-column = 243   The ones column has 2 and needs 5 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 267   The ten arrived, but nothing paid for it — the 3 hundreds drop to 2.
+miss     chain-stopped-at-lender = 167   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 424242 · difficulty 1
+prompt   Subtract. The tens have nothing to lend.
+display  column 203 − 117
+answer   exact 86/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 2 hundreds.
+step 1   Ones: 3 − 7. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 2 becomes 1, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [13 − 7 = 6]
+step 4   Subtract the rest, giving 86.   [9 − 1 = 8, 1 − 1 = 0]
+miss     flipped-column = 114   The ones column has 3 and needs 7 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 196   The ten arrived, but nothing paid for it — the 2 hundreds drop to 1.
+miss     chain-stopped-at-lender = 96   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 987654321 · difficulty 1
+prompt   Subtract. The tens have nothing to lend.
+display  column 207 − 118
+answer   exact 89/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 2 hundreds.
+step 1   Ones: 7 − 8. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 2 becomes 1, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [17 − 8 = 9]
+step 4   Subtract the rest, giving 89.   [9 − 1 = 8, 1 − 1 = 0]
+miss     flipped-column = 111   The ones column has 7 and needs 8 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 199   The ten arrived, but nothing paid for it — the 2 hundreds drop to 1.
+miss     chain-stopped-at-lender = 99   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 1 · difficulty 2
+prompt   Subtract. The tens have nothing to lend.
+display  column 307 − 129
+answer   exact 178/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 3 hundreds.
+step 1   Ones: 7 − 9. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 3 becomes 2, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [17 − 9 = 8]
+step 4   Subtract the rest, giving 178.   [9 − 2 = 7, 2 − 1 = 1]
+miss     flipped-column = 222   The ones column has 7 and needs 9 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 288   The ten arrived, but nothing paid for it — the 3 hundreds drop to 2.
+miss     chain-stopped-at-lender = 188   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 12345 · difficulty 2
+prompt   Subtract. The tens have nothing to lend.
+display  column 507 − 299
+answer   exact 208/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 5 hundreds.
+step 1   Ones: 7 − 9. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 5 becomes 4, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [17 − 9 = 8]
+step 4   Subtract the rest, giving 208.   [9 − 9 = 0, 4 − 2 = 2]
+miss     flipped-column = 392   The ones column has 7 and needs 9 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 318   The ten arrived, but nothing paid for it — the 5 hundreds drop to 4.
+miss     chain-stopped-at-lender = 218   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 67890 · difficulty 2
+prompt   Subtract. The tens have nothing to lend.
+display  column 208 − 129
+answer   exact 79/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 2 hundreds.
+step 1   Ones: 8 − 9. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 2 becomes 1, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [18 − 9 = 9]
+step 4   Subtract the rest, giving 79.   [9 − 2 = 7, 1 − 1 = 0]
+miss     flipped-column = 121   The ones column has 8 and needs 9 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 189   The ten arrived, but nothing paid for it — the 2 hundreds drop to 1.
+miss     chain-stopped-at-lender = 89   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 424242 · difficulty 2
+prompt   Subtract. The tens have nothing to lend.
+display  column 600 − 411
+answer   exact 189/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 6 hundreds.
+step 1   Ones: 0 − 1. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 6 becomes 5, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [10 − 1 = 9]
+step 4   Subtract the rest, giving 189.   [9 − 1 = 8, 5 − 4 = 1]
+miss     flipped-column = 211   The ones column has 0 and needs 1 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 299   The ten arrived, but nothing paid for it — the 6 hundreds drop to 5.
+miss     chain-stopped-at-lender = 199   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 987654321 · difficulty 2
+prompt   Subtract. The tens have nothing to lend.
+display  column 307 − 118
+answer   exact 189/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 3 hundreds.
+step 1   Ones: 7 − 8. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 3 becomes 2, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [17 − 8 = 9]
+step 4   Subtract the rest, giving 189.   [9 − 1 = 8, 2 − 1 = 1]
+miss     flipped-column = 211   The ones column has 7 and needs 8 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 299   The ten arrived, but nothing paid for it — the 3 hundreds drop to 2.
+miss     chain-stopped-at-lender = 199   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 1 · difficulty 3
+prompt   Subtract. The tens have nothing to lend.
+display  column 305 − 227
+answer   exact 78/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 3 hundreds.
+step 1   Ones: 5 − 7. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 3 becomes 2, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [15 − 7 = 8]
+step 4   Subtract the rest, giving 78.   [9 − 2 = 7, 2 − 2 = 0]
+miss     flipped-column = 122   The ones column has 5 and needs 7 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 188   The ten arrived, but nothing paid for it — the 3 hundreds drop to 2.
+miss     chain-stopped-at-lender = 88   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 12345 · difficulty 3
+prompt   Subtract. The tens have nothing to lend.
+display  column 208 − 169
+answer   exact 39/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 2 hundreds.
+step 1   Ones: 8 − 9. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 2 becomes 1, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [18 − 9 = 9]
+step 4   Subtract the rest, giving 39.   [9 − 6 = 3, 1 − 1 = 0]
+miss     flipped-column = 161   The ones column has 8 and needs 9 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 149   The ten arrived, but nothing paid for it — the 2 hundreds drop to 1.
+miss     chain-stopped-at-lender = 49   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 67890 · difficulty 3
+prompt   Subtract. The tens have nothing to lend.
+display  column 406 − 248
+answer   exact 158/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 4 hundreds.
+step 1   Ones: 6 − 8. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 4 becomes 3, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [16 − 8 = 8]
+step 4   Subtract the rest, giving 158.   [9 − 4 = 5, 3 − 2 = 1]
+miss     flipped-column = 242   The ones column has 6 and needs 8 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 268   The ten arrived, but nothing paid for it — the 4 hundreds drop to 3.
+miss     chain-stopped-at-lender = 168   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 424242 · difficulty 3
+prompt   Subtract. The tens have nothing to lend.
+display  column 608 − 249
+answer   exact 359/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 6 hundreds.
+step 1   Ones: 8 − 9. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 6 becomes 5, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [18 − 9 = 9]
+step 4   Subtract the rest, giving 359.   [9 − 4 = 5, 5 − 2 = 3]
+miss     flipped-column = 441   The ones column has 8 and needs 9 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 469   The ten arrived, but nothing paid for it — the 6 hundreds drop to 5.
+miss     chain-stopped-at-lender = 369   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 987654321 · difficulty 3
+prompt   Subtract. The tens have nothing to lend.
+display  column 703 − 627
+answer   exact 76/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 7 hundreds.
+step 1   Ones: 3 − 7. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 7 becomes 6, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [13 − 7 = 6]
+step 4   Subtract the rest, giving 76.   [9 − 2 = 7, 6 − 6 = 0]
+miss     flipped-column = 124   The ones column has 3 and needs 7 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 186   The ten arrived, but nothing paid for it — the 7 hundreds drop to 6.
+miss     chain-stopped-at-lender = 86   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 1 · difficulty 4
+prompt   Subtract. The tens have nothing to lend.
+display  column 400 − 114
+answer   exact 286/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 4 hundreds.
+step 1   Ones: 0 − 4. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 4 becomes 3, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [10 − 4 = 6]
+step 4   Subtract the rest, giving 286.   [9 − 1 = 8, 3 − 1 = 2]
+miss     flipped-column = 314   The ones column has 0 and needs 4 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 396   The ten arrived, but nothing paid for it — the 4 hundreds drop to 3.
+miss     chain-stopped-at-lender = 296   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 12345 · difficulty 4
+prompt   Subtract. The tens have nothing to lend.
+display  column 201 − 182
+answer   exact 19/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 2 hundreds.
+step 1   Ones: 1 − 2. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 2 becomes 1, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [11 − 2 = 9]
+step 4   Subtract the rest, giving 19.   [9 − 8 = 1, 1 − 1 = 0]
+miss     flipped-column = 181   The ones column has 1 and needs 2 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 129   The ten arrived, but nothing paid for it — the 2 hundreds drop to 1.
+miss     chain-stopped-at-lender = 29   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 67890 · difficulty 4
+prompt   Subtract. The tens have nothing to lend.
+display  column 203 − 127
+answer   exact 76/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 2 hundreds.
+step 1   Ones: 3 − 7. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 2 becomes 1, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [13 − 7 = 6]
+step 4   Subtract the rest, giving 76.   [9 − 2 = 7, 1 − 1 = 0]
+miss     flipped-column = 124   The ones column has 3 and needs 7 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 186   The ten arrived, but nothing paid for it — the 2 hundreds drop to 1.
+miss     chain-stopped-at-lender = 86   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 424242 · difficulty 4
+prompt   Subtract. The tens have nothing to lend.
+display  column 402 − 119
+answer   exact 283/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 4 hundreds.
+step 1   Ones: 2 − 9. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 4 becomes 3, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [12 − 9 = 3]
+step 4   Subtract the rest, giving 283.   [9 − 1 = 8, 3 − 1 = 2]
+miss     flipped-column = 317   The ones column has 2 and needs 9 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 393   The ten arrived, but nothing paid for it — the 4 hundreds drop to 3.
+miss     chain-stopped-at-lender = 293   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 987654321 · difficulty 4
+prompt   Subtract. The tens have nothing to lend.
+display  column 308 − 199
+answer   exact 109/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 3 hundreds.
+step 1   Ones: 8 − 9. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 3 becomes 2, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [18 − 9 = 9]
+step 4   Subtract the rest, giving 109.   [9 − 9 = 0, 2 − 1 = 1]
+miss     flipped-column = 291   The ones column has 8 and needs 9 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 219   The ten arrived, but nothing paid for it — the 3 hundreds drop to 2.
+miss     chain-stopped-at-lender = 119   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 1 · difficulty 5
+prompt   Subtract. The tens have nothing to lend.
+display  column 503 − 425
+answer   exact 78/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 5 hundreds.
+step 1   Ones: 3 − 5. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 5 becomes 4, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [13 − 5 = 8]
+step 4   Subtract the rest, giving 78.   [9 − 2 = 7, 4 − 4 = 0]
+miss     flipped-column = 122   The ones column has 3 and needs 5 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 188   The ten arrived, but nothing paid for it — the 5 hundreds drop to 4.
+miss     chain-stopped-at-lender = 88   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 12345 · difficulty 5
+prompt   Subtract. The tens have nothing to lend.
+display  column 905 − 856
+answer   exact 49/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 9 hundreds.
+step 1   Ones: 5 − 6. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 9 becomes 8, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [15 − 6 = 9]
+step 4   Subtract the rest, giving 49.   [9 − 5 = 4, 8 − 8 = 0]
+miss     flipped-column = 151   The ones column has 5 and needs 6 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 159   The ten arrived, but nothing paid for it — the 9 hundreds drop to 8.
+miss     chain-stopped-at-lender = 59   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 67890 · difficulty 5
+prompt   Subtract. The tens have nothing to lend.
+display  column 601 − 344
+answer   exact 257/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 6 hundreds.
+step 1   Ones: 1 − 4. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 6 becomes 5, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [11 − 4 = 7]
+step 4   Subtract the rest, giving 257.   [9 − 4 = 5, 5 − 3 = 2]
+miss     flipped-column = 343   The ones column has 1 and needs 4 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 367   The ten arrived, but nothing paid for it — the 6 hundreds drop to 5.
+miss     chain-stopped-at-lender = 267   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 424242 · difficulty 5
+prompt   Subtract. The tens have nothing to lend.
+display  column 801 − 244
+answer   exact 557/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 8 hundreds.
+step 1   Ones: 1 − 4. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 8 becomes 7, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [11 − 4 = 7]
+step 4   Subtract the rest, giving 557.   [9 − 4 = 5, 7 − 2 = 5]
+miss     flipped-column = 643   The ones column has 1 and needs 4 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 667   The ten arrived, but nothing paid for it — the 8 hundreds drop to 7.
+miss     chain-stopped-at-lender = 567   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9.
+
+--- sub-across-zero · seed 987654321 · difficulty 5
+prompt   Subtract. The tens have nothing to lend.
+display  column 708 − 159
+answer   exact 549/1
+input    keypad
+hint     The tens are 0, so the ten has to come from the 7 hundreds.
+step 1   Ones: 8 − 9. The tens are 0 and cannot lend.
+step 2   So the hundreds lend: 7 becomes 6, tens become 10.
+step 3   Now the tens lend to the ones, standing at 9.   [18 − 9 = 9]
+step 4   Subtract the rest, giving 549.   [9 − 5 = 4, 6 − 1 = 5]
+miss     flipped-column = 651   The ones column has 8 and needs 9 taken off it. The borrow has to come from further along.
+miss     forgot-to-reduce-tens = 659   The ten arrived, but nothing paid for it — the 7 hundreds drop to 6.
+miss     chain-stopped-at-lender = 559   The hundreds are right. The tens became 10, then lent a ten on to the ones, so they stand at 9."
+`;
+
+exports[`recorded output: sub-facts > matches the wording recorded when the skill landed 1`] = `
+"--- sub-facts · seed 1 · difficulty 1
+prompt   What is the difference?
+display  inline "6 − 2"
+answer   exact 4/1
+input    keypad
+hint     Start at 6 and count back 2.
+step 1   Start at 6.
+step 2   Count back 2.   [6 → 4]
+step 3   So 6 − 2 = 4.
+miss     added = 8   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 3   Nearly — that is one too few.
+miss     off-by-one-high = 5   Nearly — that is one too many.
+
+--- sub-facts · seed 12345 · difficulty 1
+prompt   What is the difference?
+display  inline "6 − 2"
+answer   exact 4/1
+input    keypad
+hint     Start at 6 and count back 2.
+step 1   Start at 6.
+step 2   Count back 2.   [6 → 4]
+step 3   So 6 − 2 = 4.
+miss     added = 8   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 3   Nearly — that is one too few.
+miss     off-by-one-high = 5   Nearly — that is one too many.
+
+--- sub-facts · seed 67890 · difficulty 1
+prompt   What is the difference?
+display  inline "3 − 2"
+answer   exact 1/1
+input    keypad
+hint     Start at 3 and count back 2.
+step 1   Start at 3.
+step 2   Count back 2.   [3 → 1]
+step 3   So 3 − 2 = 1.
+miss     added = 5   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 0   Nearly — that is one too few.
+miss     off-by-one-high = 2   Nearly — that is one too many.
+
+--- sub-facts · seed 424242 · difficulty 1
+prompt   What is the difference?
+display  inline "3 − 2"
+answer   exact 1/1
+input    keypad
+hint     Start at 3 and count back 2.
+step 1   Start at 3.
+step 2   Count back 2.   [3 → 1]
+step 3   So 3 − 2 = 1.
+miss     added = 5   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 0   Nearly — that is one too few.
+miss     off-by-one-high = 2   Nearly — that is one too many.
+
+--- sub-facts · seed 987654321 · difficulty 1
+prompt   What is the difference?
+display  inline "5 − 2"
+answer   exact 3/1
+input    keypad
+hint     Start at 5 and count back 2.
+step 1   Start at 5.
+step 2   Count back 2.   [5 → 3]
+step 3   So 5 − 2 = 3.
+miss     added = 7   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 2   Nearly — that is one too few.
+miss     off-by-one-high = 4   Nearly — that is one too many.
+
+--- sub-facts · seed 1 · difficulty 2
+prompt   What is the difference?
+display  inline "9 − 3"
+answer   exact 6/1
+input    keypad
+hint     Start at 9 and count back 3.
+step 1   Start at 9.
+step 2   Count back 3.   [9 → 6]
+step 3   So 9 − 3 = 6.
+miss     added = 12   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 5   Nearly — that is one too few.
+miss     off-by-one-high = 7   Nearly — that is one too many.
+
+--- sub-facts · seed 12345 · difficulty 2
+prompt   What is the difference?
+display  inline "9 − 3"
+answer   exact 6/1
+input    keypad
+hint     Start at 9 and count back 3.
+step 1   Start at 9.
+step 2   Count back 3.   [9 → 6]
+step 3   So 9 − 3 = 6.
+miss     added = 12   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 5   Nearly — that is one too few.
+miss     off-by-one-high = 7   Nearly — that is one too many.
+
+--- sub-facts · seed 67890 · difficulty 2
+prompt   What is the difference?
+display  inline "5 − 3"
+answer   exact 2/1
+input    keypad
+hint     Start at 5 and count back 3.
+step 1   Start at 5.
+step 2   Count back 3.   [5 → 2]
+step 3   So 5 − 3 = 2.
+miss     added = 8   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 1   Nearly — that is one too few.
+miss     off-by-one-high = 3   Nearly — that is one too many.
+
+--- sub-facts · seed 424242 · difficulty 2
+prompt   What is the difference?
+display  inline "4 − 3"
+answer   exact 1/1
+input    keypad
+hint     Start at 4 and count back 3.
+step 1   Start at 4.
+step 2   Count back 3.   [4 → 1]
+step 3   So 4 − 3 = 1.
+miss     added = 7   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 0   Nearly — that is one too few.
+miss     off-by-one-high = 2   Nearly — that is one too many.
+
+--- sub-facts · seed 987654321 · difficulty 2
+prompt   What is the difference?
+display  inline "9 − 2"
+answer   exact 7/1
+input    keypad
+hint     Start at 9 and count back 2.
+step 1   Start at 9.
+step 2   Count back 2.   [9 → 7]
+step 3   So 9 − 2 = 7.
+miss     added = 11   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 6   Nearly — that is one too few.
+miss     off-by-one-high = 8   Nearly — that is one too many.
+
+--- sub-facts · seed 1 · difficulty 3
+prompt   What is the difference?
+display  inline "12 − 3"
+answer   exact 9/1
+input    keypad
+hint     Start at 12 and count back 3.
+step 1   Start at 12.
+step 2   Count back 3.   [12 → 9]
+step 3   So 12 − 3 = 9.
+miss     added = 15   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 8   Nearly — that is one too few.
+miss     off-by-one-high = 10   Nearly — that is one too many.
+
+--- sub-facts · seed 12345 · difficulty 3
+prompt   What is the difference?
+display  inline "12 − 3"
+answer   exact 9/1
+input    keypad
+hint     Start at 12 and count back 3.
+step 1   Start at 12.
+step 2   Count back 3.   [12 → 9]
+step 3   So 12 − 3 = 9.
+miss     added = 15   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 8   Nearly — that is one too few.
+miss     off-by-one-high = 10   Nearly — that is one too many.
+
+--- sub-facts · seed 67890 · difficulty 3
+prompt   What is the difference?
+display  inline "7 − 5"
+answer   exact 2/1
+input    keypad
+hint     Start at 7 and count back 5.
+step 1   Start at 7.
+step 2   Count back 5.   [7 → 2]
+step 3   So 7 − 5 = 2.
+miss     added = 12   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 1   Nearly — that is one too few.
+miss     off-by-one-high = 3   Nearly — that is one too many.
+
+--- sub-facts · seed 424242 · difficulty 3
+prompt   What is the difference?
+display  inline "5 − 2"
+answer   exact 3/1
+input    keypad
+hint     Start at 5 and count back 2.
+step 1   Start at 5.
+step 2   Count back 2.   [5 → 3]
+step 3   So 5 − 2 = 3.
+miss     added = 7   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 2   Nearly — that is one too few.
+miss     off-by-one-high = 4   Nearly — that is one too many.
+
+--- sub-facts · seed 987654321 · difficulty 3
+prompt   What is the difference?
+display  inline "12 − 2"
+answer   exact 10/1
+input    keypad
+hint     Start at 12 and count back 2.
+step 1   Start at 12.
+step 2   Count back 2.   [12 → 10]
+step 3   So 12 − 2 = 10.
+miss     added = 14   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 9   Nearly — that is one too few.
+miss     off-by-one-high = 11   Nearly — that is one too many.
+
+--- sub-facts · seed 1 · difficulty 4
+prompt   What is the difference?
+display  inline "11 − 9"
+answer   exact 2/1
+input    keypad
+hint     Start at 11 and count back 9.
+step 1   Start at 11.
+step 2   Count back 9.   [11 → 2]
+step 3   So 11 − 9 = 2.
+miss     added = 20   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 1   Nearly — that is one too few.
+miss     off-by-one-high = 3   Nearly — that is one too many.
+
+--- sub-facts · seed 12345 · difficulty 4
+prompt   What is the difference?
+display  inline "15 − 3"
+answer   exact 12/1
+input    keypad
+hint     Start at 15 and count back 3.
+step 1   Start at 15.
+step 2   Count back 3.   [15 → 12]
+step 3   So 15 − 3 = 12.
+miss     added = 18   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 11   Nearly — that is one too few.
+miss     off-by-one-high = 13   Nearly — that is one too many.
+
+--- sub-facts · seed 67890 · difficulty 4
+prompt   What is the difference?
+display  inline "9 − 6"
+answer   exact 3/1
+input    keypad
+hint     Start at 9 and count back 6.
+step 1   Start at 9.
+step 2   Count back 6.   [9 → 3]
+step 3   So 9 − 6 = 3.
+miss     added = 15   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 2   Nearly — that is one too few.
+miss     off-by-one-high = 4   Nearly — that is one too many.
+
+--- sub-facts · seed 424242 · difficulty 4
+prompt   What is the difference?
+display  inline "7 − 2"
+answer   exact 5/1
+input    keypad
+hint     Start at 7 and count back 2.
+step 1   Start at 7.
+step 2   Count back 2.   [7 → 5]
+step 3   So 7 − 2 = 5.
+miss     added = 9   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 4   Nearly — that is one too few.
+miss     off-by-one-high = 6   Nearly — that is one too many.
+
+--- sub-facts · seed 987654321 · difficulty 4
+prompt   What is the difference?
+display  inline "15 − 2"
+answer   exact 13/1
+input    keypad
+hint     Start at 15 and count back 2.
+step 1   Start at 15.
+step 2   Count back 2.   [15 → 13]
+step 3   So 15 − 2 = 13.
+miss     added = 17   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 12   Nearly — that is one too few.
+miss     off-by-one-high = 14   Nearly — that is one too many.
+
+--- sub-facts · seed 1 · difficulty 5
+prompt   What is the difference?
+display  inline "13 − 9"
+answer   exact 4/1
+input    keypad
+hint     Start at 13 and count back 9.
+step 1   Start at 13.
+step 2   Count back 9.   [13 → 4]
+step 3   So 13 − 9 = 4.
+miss     added = 22   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 3   Nearly — that is one too few.
+miss     off-by-one-high = 5   Nearly — that is one too many.
+
+--- sub-facts · seed 12345 · difficulty 5
+prompt   What is the difference?
+display  inline "18 − 3"
+answer   exact 15/1
+input    keypad
+hint     Start at 18 and count back 3.
+step 1   Start at 18.
+step 2   Count back 3.   [18 → 15]
+step 3   So 18 − 3 = 15.
+miss     added = 21   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 14   Nearly — that is one too few.
+miss     off-by-one-high = 16   Nearly — that is one too many.
+
+--- sub-facts · seed 67890 · difficulty 5
+prompt   What is the difference?
+display  inline "12 − 6"
+answer   exact 6/1
+input    keypad
+hint     Start at 12 and count back 6.
+step 1   Start at 12.
+step 2   Count back 6.   [12 → 6]
+step 3   So 12 − 6 = 6.
+miss     added = 18   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 5   Nearly — that is one too few.
+miss     off-by-one-high = 7   Nearly — that is one too many.
+
+--- sub-facts · seed 424242 · difficulty 5
+prompt   What is the difference?
+display  inline "9 − 3"
+answer   exact 6/1
+input    keypad
+hint     Start at 9 and count back 3.
+step 1   Start at 9.
+step 2   Count back 3.   [9 → 6]
+step 3   So 9 − 3 = 6.
+miss     added = 12   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 5   Nearly — that is one too few.
+miss     off-by-one-high = 7   Nearly — that is one too many.
+
+--- sub-facts · seed 987654321 · difficulty 5
+prompt   What is the difference?
+display  inline "18 − 2"
+answer   exact 16/1
+input    keypad
+hint     Start at 18 and count back 2.
+step 1   Start at 18.
+step 2   Count back 2.   [18 → 16]
+step 3   So 18 − 2 = 16.
+miss     added = 20   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 15   Nearly — that is one too few.
+miss     off-by-one-high = 17   Nearly — that is one too many."
+`;
+
+exports[`recorded output: sub-facts-small > matches the wording recorded when the skill landed 1`] = `
+"--- sub-facts-small · seed 1 · difficulty 1
+prompt   What is the difference?
+display  inline "5 − 2"
+answer   exact 3/1
+input    keypad
+hint     Start at 5 and count back 2.
+step 1   Start at 5.
+step 2   Count back 2.   [5 → 3]
+step 3   So 5 − 2 = 3.
+miss     off-by-one-low = 2   Almost — that counts back one too far.
+miss     off-by-one-high = 4   Almost — one more to count back.
+miss     added = 7   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 12345 · difficulty 1
+prompt   What is the difference?
+display  inline "6 − 2"
+answer   exact 4/1
+input    keypad
+hint     Start at 6 and count back 2.
+step 1   Start at 6.
+step 2   Count back 2.   [6 → 4]
+step 3   So 6 − 2 = 4.
+miss     off-by-one-low = 3   Almost — that counts back one too far.
+miss     off-by-one-high = 5   Almost — one more to count back.
+miss     added = 8   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 67890 · difficulty 1
+prompt   What is the difference?
+display  inline "5 − 3"
+answer   exact 2/1
+input    keypad
+hint     Start at 5 and count back 3.
+step 1   Start at 5.
+step 2   Count back 3.   [5 → 2]
+step 3   So 5 − 3 = 2.
+miss     off-by-one-low = 1   Almost — that counts back one too far.
+miss     off-by-one-high = 3   Almost — one more to count back.
+miss     added = 8   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 424242 · difficulty 1
+prompt   What is the difference?
+display  inline "4 − 2"
+answer   exact 2/1
+input    keypad
+hint     Start at 4 and count back 2.
+step 1   Start at 4.
+step 2   Count back 2.   [4 → 2]
+step 3   So 4 − 2 = 2.
+miss     off-by-one-low = 1   Almost — that counts back one too far.
+miss     off-by-one-high = 3   Almost — one more to count back.
+miss     added = 6   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 987654321 · difficulty 1
+prompt   What is the difference?
+display  inline "6 − 2"
+answer   exact 4/1
+input    keypad
+hint     Start at 6 and count back 2.
+step 1   Start at 6.
+step 2   Count back 2.   [6 → 4]
+step 3   So 6 − 2 = 4.
+miss     off-by-one-low = 3   Almost — that counts back one too far.
+miss     off-by-one-high = 5   Almost — one more to count back.
+miss     added = 8   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 1 · difficulty 2
+prompt   What is the difference?
+display  inline "6 − 2"
+answer   exact 4/1
+input    keypad
+hint     Start at 6 and count back 2.
+step 1   Start at 6.
+step 2   Count back 2.   [6 → 4]
+step 3   So 6 − 2 = 4.
+miss     off-by-one-low = 3   Almost — that counts back one too far.
+miss     off-by-one-high = 5   Almost — one more to count back.
+miss     added = 8   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 12345 · difficulty 2
+prompt   What is the difference?
+display  inline "7 − 3"
+answer   exact 4/1
+input    keypad
+hint     Start at 7 and count back 3.
+step 1   Start at 7.
+step 2   Count back 3.   [7 → 4]
+step 3   So 7 − 3 = 4.
+miss     off-by-one-low = 3   Almost — that counts back one too far.
+miss     off-by-one-high = 5   Almost — one more to count back.
+miss     added = 10   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 67890 · difficulty 2
+prompt   What is the difference?
+display  inline "5 − 3"
+answer   exact 2/1
+input    keypad
+hint     Start at 5 and count back 3.
+step 1   Start at 5.
+step 2   Count back 3.   [5 → 2]
+step 3   So 5 − 3 = 2.
+miss     off-by-one-low = 1   Almost — that counts back one too far.
+miss     off-by-one-high = 3   Almost — one more to count back.
+miss     added = 8   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 424242 · difficulty 2
+prompt   What is the difference?
+display  inline "4 − 2"
+answer   exact 2/1
+input    keypad
+hint     Start at 4 and count back 2.
+step 1   Start at 4.
+step 2   Count back 2.   [4 → 2]
+step 3   So 4 − 2 = 2.
+miss     off-by-one-low = 1   Almost — that counts back one too far.
+miss     off-by-one-high = 3   Almost — one more to count back.
+miss     added = 6   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 987654321 · difficulty 2
+prompt   What is the difference?
+display  inline "7 − 2"
+answer   exact 5/1
+input    keypad
+hint     Start at 7 and count back 2.
+step 1   Start at 7.
+step 2   Count back 2.   [7 → 5]
+step 3   So 7 − 2 = 5.
+miss     off-by-one-low = 4   Almost — that counts back one too far.
+miss     off-by-one-high = 6   Almost — one more to count back.
+miss     added = 9   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 1 · difficulty 3
+prompt   What is the difference?
+display  inline "7 − 2"
+answer   exact 5/1
+input    keypad
+hint     Start at 7 and count back 2.
+step 1   Start at 7.
+step 2   Count back 2.   [7 → 5]
+step 3   So 7 − 2 = 5.
+miss     off-by-one-low = 4   Almost — that counts back one too far.
+miss     off-by-one-high = 6   Almost — one more to count back.
+miss     added = 9   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 12345 · difficulty 3
+prompt   What is the difference?
+display  inline "8 − 3"
+answer   exact 5/1
+input    keypad
+hint     Start at 8 and count back 3.
+step 1   Start at 8.
+step 2   Count back 3.   [8 → 5]
+step 3   So 8 − 3 = 5.
+miss     off-by-one-low = 4   Almost — that counts back one too far.
+miss     off-by-one-high = 6   Almost — one more to count back.
+miss     added = 11   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 67890 · difficulty 3
+prompt   What is the difference?
+display  inline "6 − 3"
+answer   exact 3/1
+input    keypad
+hint     Start at 6 and count back 3.
+step 1   Start at 6.
+step 2   Count back 3.   [6 → 3]
+step 3   So 6 − 3 = 3.
+miss     off-by-one-low = 2   Almost — that counts back one too far.
+miss     off-by-one-high = 4   Almost — one more to count back.
+miss     added = 9   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 424242 · difficulty 3
+prompt   What is the difference?
+display  inline "5 − 2"
+answer   exact 3/1
+input    keypad
+hint     Start at 5 and count back 2.
+step 1   Start at 5.
+step 2   Count back 2.   [5 → 3]
+step 3   So 5 − 2 = 3.
+miss     off-by-one-low = 2   Almost — that counts back one too far.
+miss     off-by-one-high = 4   Almost — one more to count back.
+miss     added = 7   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 987654321 · difficulty 3
+prompt   What is the difference?
+display  inline "8 − 2"
+answer   exact 6/1
+input    keypad
+hint     Start at 8 and count back 2.
+step 1   Start at 8.
+step 2   Count back 2.   [8 → 6]
+step 3   So 8 − 2 = 6.
+miss     off-by-one-low = 5   Almost — that counts back one too far.
+miss     off-by-one-high = 7   Almost — one more to count back.
+miss     added = 10   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 1 · difficulty 4
+prompt   What is the difference?
+display  inline "8 − 2"
+answer   exact 6/1
+input    keypad
+hint     Start at 8 and count back 2.
+step 1   Start at 8.
+step 2   Count back 2.   [8 → 6]
+step 3   So 8 − 2 = 6.
+miss     off-by-one-low = 5   Almost — that counts back one too far.
+miss     off-by-one-high = 7   Almost — one more to count back.
+miss     added = 10   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 12345 · difficulty 4
+prompt   What is the difference?
+display  inline "9 − 3"
+answer   exact 6/1
+input    keypad
+hint     Start at 9 and count back 3.
+step 1   Start at 9.
+step 2   Count back 3.   [9 → 6]
+step 3   So 9 − 3 = 6.
+miss     off-by-one-low = 5   Almost — that counts back one too far.
+miss     off-by-one-high = 7   Almost — one more to count back.
+miss     added = 12   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 67890 · difficulty 4
+prompt   What is the difference?
+display  inline "7 − 4"
+answer   exact 3/1
+input    keypad
+hint     Start at 7 and count back 4.
+step 1   Start at 7.
+step 2   Count back 4.   [7 → 3]
+step 3   So 7 − 4 = 3.
+miss     off-by-one-low = 2   Almost — that counts back one too far.
+miss     off-by-one-high = 4   Almost — one more to count back.
+miss     added = 11   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 424242 · difficulty 4
+prompt   What is the difference?
+display  inline "6 − 2"
+answer   exact 4/1
+input    keypad
+hint     Start at 6 and count back 2.
+step 1   Start at 6.
+step 2   Count back 2.   [6 → 4]
+step 3   So 6 − 2 = 4.
+miss     off-by-one-low = 3   Almost — that counts back one too far.
+miss     off-by-one-high = 5   Almost — one more to count back.
+miss     added = 8   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 987654321 · difficulty 4
+prompt   What is the difference?
+display  inline "9 − 2"
+answer   exact 7/1
+input    keypad
+hint     Start at 9 and count back 2.
+step 1   Start at 9.
+step 2   Count back 2.   [9 → 7]
+step 3   So 9 − 2 = 7.
+miss     off-by-one-low = 6   Almost — that counts back one too far.
+miss     off-by-one-high = 8   Almost — one more to count back.
+miss     added = 11   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 1 · difficulty 5
+prompt   What is the difference?
+display  inline "9 − 2"
+answer   exact 7/1
+input    keypad
+hint     Start at 9 and count back 2.
+step 1   Start at 9.
+step 2   Count back 2.   [9 → 7]
+step 3   So 9 − 2 = 7.
+miss     off-by-one-low = 6   Almost — that counts back one too far.
+miss     off-by-one-high = 8   Almost — one more to count back.
+miss     added = 11   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 12345 · difficulty 5
+prompt   What is the difference?
+display  inline "10 − 4"
+answer   exact 6/1
+input    keypad
+hint     Start at 10 and count back 4.
+step 1   Start at 10.
+step 2   Count back 4.   [10 → 6]
+step 3   So 10 − 4 = 6.
+miss     off-by-one-low = 5   Almost — that counts back one too far.
+miss     off-by-one-high = 7   Almost — one more to count back.
+miss     added = 14   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 67890 · difficulty 5
+prompt   What is the difference?
+display  inline "8 − 4"
+answer   exact 4/1
+input    keypad
+hint     Start at 8 and count back 4.
+step 1   Start at 8.
+step 2   Count back 4.   [8 → 4]
+step 3   So 8 − 4 = 4.
+miss     off-by-one-low = 3   Almost — that counts back one too far.
+miss     off-by-one-high = 5   Almost — one more to count back.
+miss     added = 12   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 424242 · difficulty 5
+prompt   What is the difference?
+display  inline "7 − 2"
+answer   exact 5/1
+input    keypad
+hint     Start at 7 and count back 2.
+step 1   Start at 7.
+step 2   Count back 2.   [7 → 5]
+step 3   So 7 − 2 = 5.
+miss     off-by-one-low = 4   Almost — that counts back one too far.
+miss     off-by-one-high = 6   Almost — one more to count back.
+miss     added = 9   That is the two put together. This one is taking away.
+
+--- sub-facts-small · seed 987654321 · difficulty 5
+prompt   What is the difference?
+display  inline "10 − 2"
+answer   exact 8/1
+input    keypad
+hint     Start at 10 and count back 2.
+step 1   Start at 10.
+step 2   Count back 2.   [10 → 8]
+step 3   So 10 − 2 = 8.
+miss     off-by-one-low = 7   Almost — that counts back one too far.
+miss     off-by-one-high = 9   Almost — one more to count back.
+miss     added = 12   That is the two put together. This one is taking away."
+`;
+
+exports[`recorded output: sub-tens > matches the wording recorded when the skill landed 1`] = `
+"--- sub-tens · seed 1 · difficulty 1
+prompt   What is the difference?
+display  inline "40 − 10"
+answer   exact 30/1
+input    keypad
+hint     Take 1 from 4, then remember you are counting tens.
+step 1   40 is 4 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [4 − 1 = 3]
+step 3   3 tens is 30.
+miss     dropped-place-value = 3   That is 1 taken from 4 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 20   One ten too few — count the tens again.
+miss     off-by-ten-high = 40   One ten too many — count the tens again.
+
+--- sub-tens · seed 12345 · difficulty 1
+prompt   What is the difference?
+display  inline "50 − 10"
+answer   exact 40/1
+input    keypad
+hint     Take 1 from 5, then remember you are counting tens.
+step 1   50 is 5 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [5 − 1 = 4]
+step 3   4 tens is 40.
+miss     dropped-place-value = 4   That is 1 taken from 5 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 30   One ten too few — count the tens again.
+miss     off-by-ten-high = 50   One ten too many — count the tens again.
+
+--- sub-tens · seed 67890 · difficulty 1
+prompt   What is the difference?
+display  inline "40 − 20"
+answer   exact 20/1
+input    keypad
+hint     Take 2 from 4, then remember you are counting tens.
+step 1   40 is 4 tens, and 20 is 2 tens.
+step 2   Take away the tens.   [4 − 2 = 2]
+step 3   2 tens is 20.
+miss     dropped-place-value = 2   That is 2 taken from 4 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 10   One ten too few — count the tens again.
+miss     off-by-ten-high = 30   One ten too many — count the tens again.
+
+--- sub-tens · seed 424242 · difficulty 1
+prompt   What is the difference?
+display  inline "30 − 10"
+answer   exact 20/1
+input    keypad
+hint     Take 1 from 3, then remember you are counting tens.
+step 1   30 is 3 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [3 − 1 = 2]
+step 3   2 tens is 20.
+miss     dropped-place-value = 2   That is 1 taken from 3 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 10   One ten too few — count the tens again.
+miss     off-by-ten-high = 30   One ten too many — count the tens again.
+
+--- sub-tens · seed 987654321 · difficulty 1
+prompt   What is the difference?
+display  inline "50 − 10"
+answer   exact 40/1
+input    keypad
+hint     Take 1 from 5, then remember you are counting tens.
+step 1   50 is 5 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [5 − 1 = 4]
+step 3   4 tens is 40.
+miss     dropped-place-value = 4   That is 1 taken from 5 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 30   One ten too few — count the tens again.
+miss     off-by-ten-high = 50   One ten too many — count the tens again.
+
+--- sub-tens · seed 1 · difficulty 2
+prompt   What is the difference?
+display  inline "50 − 10"
+answer   exact 40/1
+input    keypad
+hint     Take 1 from 5, then remember you are counting tens.
+step 1   50 is 5 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [5 − 1 = 4]
+step 3   4 tens is 40.
+miss     dropped-place-value = 4   That is 1 taken from 5 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 30   One ten too few — count the tens again.
+miss     off-by-ten-high = 50   One ten too many — count the tens again.
+
+--- sub-tens · seed 12345 · difficulty 2
+prompt   What is the difference?
+display  inline "60 − 20"
+answer   exact 40/1
+input    keypad
+hint     Take 2 from 6, then remember you are counting tens.
+step 1   60 is 6 tens, and 20 is 2 tens.
+step 2   Take away the tens.   [6 − 2 = 4]
+step 3   4 tens is 40.
+miss     dropped-place-value = 4   That is 2 taken from 6 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 30   One ten too few — count the tens again.
+miss     off-by-ten-high = 50   One ten too many — count the tens again.
+
+--- sub-tens · seed 67890 · difficulty 2
+prompt   What is the difference?
+display  inline "40 − 20"
+answer   exact 20/1
+input    keypad
+hint     Take 2 from 4, then remember you are counting tens.
+step 1   40 is 4 tens, and 20 is 2 tens.
+step 2   Take away the tens.   [4 − 2 = 2]
+step 3   2 tens is 20.
+miss     dropped-place-value = 2   That is 2 taken from 4 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 10   One ten too few — count the tens again.
+miss     off-by-ten-high = 30   One ten too many — count the tens again.
+
+--- sub-tens · seed 424242 · difficulty 2
+prompt   What is the difference?
+display  inline "30 − 10"
+answer   exact 20/1
+input    keypad
+hint     Take 1 from 3, then remember you are counting tens.
+step 1   30 is 3 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [3 − 1 = 2]
+step 3   2 tens is 20.
+miss     dropped-place-value = 2   That is 1 taken from 3 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 10   One ten too few — count the tens again.
+miss     off-by-ten-high = 30   One ten too many — count the tens again.
+
+--- sub-tens · seed 987654321 · difficulty 2
+prompt   What is the difference?
+display  inline "60 − 10"
+answer   exact 50/1
+input    keypad
+hint     Take 1 from 6, then remember you are counting tens.
+step 1   60 is 6 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [6 − 1 = 5]
+step 3   5 tens is 50.
+miss     dropped-place-value = 5   That is 1 taken from 6 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 40   One ten too few — count the tens again.
+miss     off-by-ten-high = 60   One ten too many — count the tens again.
+
+--- sub-tens · seed 1 · difficulty 3
+prompt   What is the difference?
+display  inline "70 − 10"
+answer   exact 60/1
+input    keypad
+hint     Take 1 from 7, then remember you are counting tens.
+step 1   70 is 7 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [7 − 1 = 6]
+step 3   6 tens is 60.
+miss     dropped-place-value = 6   That is 1 taken from 7 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 50   One ten too few — count the tens again.
+miss     off-by-ten-high = 70   One ten too many — count the tens again.
+
+--- sub-tens · seed 12345 · difficulty 3
+prompt   What is the difference?
+display  inline "80 − 20"
+answer   exact 60/1
+input    keypad
+hint     Take 2 from 8, then remember you are counting tens.
+step 1   80 is 8 tens, and 20 is 2 tens.
+step 2   Take away the tens.   [8 − 2 = 6]
+step 3   6 tens is 60.
+miss     dropped-place-value = 6   That is 2 taken from 8 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 50   One ten too few — count the tens again.
+miss     off-by-ten-high = 70   One ten too many — count the tens again.
+
+--- sub-tens · seed 67890 · difficulty 3
+prompt   What is the difference?
+display  inline "50 − 20"
+answer   exact 30/1
+input    keypad
+hint     Take 2 from 5, then remember you are counting tens.
+step 1   50 is 5 tens, and 20 is 2 tens.
+step 2   Take away the tens.   [5 − 2 = 3]
+step 3   3 tens is 30.
+miss     dropped-place-value = 3   That is 2 taken from 5 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 20   One ten too few — count the tens again.
+miss     off-by-ten-high = 40   One ten too many — count the tens again.
+
+--- sub-tens · seed 424242 · difficulty 3
+prompt   What is the difference?
+display  inline "40 − 10"
+answer   exact 30/1
+input    keypad
+hint     Take 1 from 4, then remember you are counting tens.
+step 1   40 is 4 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [4 − 1 = 3]
+step 3   3 tens is 30.
+miss     dropped-place-value = 3   That is 1 taken from 4 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 20   One ten too few — count the tens again.
+miss     off-by-ten-high = 40   One ten too many — count the tens again.
+
+--- sub-tens · seed 987654321 · difficulty 3
+prompt   What is the difference?
+display  inline "80 − 10"
+answer   exact 70/1
+input    keypad
+hint     Take 1 from 8, then remember you are counting tens.
+step 1   80 is 8 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [8 − 1 = 7]
+step 3   7 tens is 70.
+miss     dropped-place-value = 7   That is 1 taken from 8 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 60   One ten too few — count the tens again.
+miss     off-by-ten-high = 80   One ten too many — count the tens again.
+
+--- sub-tens · seed 1 · difficulty 4
+prompt   What is the difference?
+display  inline "80 − 10"
+answer   exact 70/1
+input    keypad
+hint     Take 1 from 8, then remember you are counting tens.
+step 1   80 is 8 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [8 − 1 = 7]
+step 3   7 tens is 70.
+miss     dropped-place-value = 7   That is 1 taken from 8 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 60   One ten too few — count the tens again.
+miss     off-by-ten-high = 80   One ten too many — count the tens again.
+
+--- sub-tens · seed 12345 · difficulty 4
+prompt   What is the difference?
+display  inline "90 − 30"
+answer   exact 60/1
+input    keypad
+hint     Take 3 from 9, then remember you are counting tens.
+step 1   90 is 9 tens, and 30 is 3 tens.
+step 2   Take away the tens.   [9 − 3 = 6]
+step 3   6 tens is 60.
+miss     dropped-place-value = 6   That is 3 taken from 9 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 50   One ten too few — count the tens again.
+miss     off-by-ten-high = 70   One ten too many — count the tens again.
+
+--- sub-tens · seed 67890 · difficulty 4
+prompt   What is the difference?
+display  inline "60 − 30"
+answer   exact 30/1
+input    keypad
+hint     Take 3 from 6, then remember you are counting tens.
+step 1   60 is 6 tens, and 30 is 3 tens.
+step 2   Take away the tens.   [6 − 3 = 3]
+step 3   3 tens is 30.
+miss     dropped-place-value = 3   That is 3 taken from 6 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 20   One ten too few — count the tens again.
+miss     off-by-ten-high = 40   One ten too many — count the tens again.
+
+--- sub-tens · seed 424242 · difficulty 4
+prompt   What is the difference?
+display  inline "50 − 10"
+answer   exact 40/1
+input    keypad
+hint     Take 1 from 5, then remember you are counting tens.
+step 1   50 is 5 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [5 − 1 = 4]
+step 3   4 tens is 40.
+miss     dropped-place-value = 4   That is 1 taken from 5 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 30   One ten too few — count the tens again.
+miss     off-by-ten-high = 50   One ten too many — count the tens again.
+
+--- sub-tens · seed 987654321 · difficulty 4
+prompt   What is the difference?
+display  inline "90 − 10"
+answer   exact 80/1
+input    keypad
+hint     Take 1 from 9, then remember you are counting tens.
+step 1   90 is 9 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [9 − 1 = 8]
+step 3   8 tens is 80.
+miss     dropped-place-value = 8   That is 1 taken from 9 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 70   One ten too few — count the tens again.
+miss     off-by-ten-high = 90   One ten too many — count the tens again.
+
+--- sub-tens · seed 1 · difficulty 5
+prompt   What is the difference?
+display  inline "80 − 10"
+answer   exact 70/1
+input    keypad
+hint     Take 1 from 8, then remember you are counting tens.
+step 1   80 is 8 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [8 − 1 = 7]
+step 3   7 tens is 70.
+miss     dropped-place-value = 7   That is 1 taken from 8 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 60   One ten too few — count the tens again.
+miss     off-by-ten-high = 80   One ten too many — count the tens again.
+
+--- sub-tens · seed 12345 · difficulty 5
+prompt   What is the difference?
+display  inline "90 − 30"
+answer   exact 60/1
+input    keypad
+hint     Take 3 from 9, then remember you are counting tens.
+step 1   90 is 9 tens, and 30 is 3 tens.
+step 2   Take away the tens.   [9 − 3 = 6]
+step 3   6 tens is 60.
+miss     dropped-place-value = 6   That is 3 taken from 9 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 50   One ten too few — count the tens again.
+miss     off-by-ten-high = 70   One ten too many — count the tens again.
+
+--- sub-tens · seed 67890 · difficulty 5
+prompt   What is the difference?
+display  inline "70 − 30"
+answer   exact 40/1
+input    keypad
+hint     Take 3 from 7, then remember you are counting tens.
+step 1   70 is 7 tens, and 30 is 3 tens.
+step 2   Take away the tens.   [7 − 3 = 4]
+step 3   4 tens is 40.
+miss     dropped-place-value = 4   That is 3 taken from 7 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 30   One ten too few — count the tens again.
+miss     off-by-ten-high = 50   One ten too many — count the tens again.
+
+--- sub-tens · seed 424242 · difficulty 5
+prompt   What is the difference?
+display  inline "60 − 10"
+answer   exact 50/1
+input    keypad
+hint     Take 1 from 6, then remember you are counting tens.
+step 1   60 is 6 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [6 − 1 = 5]
+step 3   5 tens is 50.
+miss     dropped-place-value = 5   That is 1 taken from 6 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 40   One ten too few — count the tens again.
+miss     off-by-ten-high = 60   One ten too many — count the tens again.
+
+--- sub-tens · seed 987654321 · difficulty 5
+prompt   What is the difference?
+display  inline "90 − 10"
+answer   exact 80/1
+input    keypad
+hint     Take 1 from 9, then remember you are counting tens.
+step 1   90 is 9 tens, and 10 is 1 ten.
+step 2   Take away the tens.   [9 − 1 = 8]
+step 3   8 tens is 80.
+miss     dropped-place-value = 8   That is 1 taken from 9 — but you are counting tens here, not ones.
+miss     off-by-ten-low = 70   One ten too few — count the tens again.
+miss     off-by-ten-high = 90   One ten too many — count the tens again."
+`;
+
+exports[`recorded output: sub-words > matches the wording recorded when the skill landed 1`] = `
+"--- sub-words · seed 1 · difficulty 1
+prompt   How many minutes are left?
+display  story [32 − 23] "A call is booked for 32 minutes and has run 23 so far. The meeting before it ran 31. How many minutes are left?"
+answer   exact 9/1
+input    keypad
+hint     Take the 23 used off the 32 booked.
+step 1   Pick out the two numbers the question asks about.   [32 and 23]
+step 2   Take the second from the first.   [32 − 23 = 9]
+step 3   The 31 minute meeting was not this call.
+miss     wrong-operation = 55   That adds the two times. Minutes used come off the booking.
+miss     distractor-pair = 1   The 31 minutes were the meeting.
+miss     answered-part = 32   That is the whole booking. 23 minutes have gone.
+
+--- sub-words · seed 12345 · difficulty 1
+prompt   How many plants still need water?
+display  story [35 − 25] "A garden has 35 plants and 25 have been watered. Another 13 are in the greenhouse. How many in the garden still need water?"
+answer   exact 10/1
+input    keypad
+hint     Take the 25 watered off the 35 in the garden.
+step 1   Pick out the two numbers the question asks about.   [35 and 25]
+step 2   Take the second from the first.   [35 − 25 = 10]
+step 3   The greenhouse's 13 are not in the garden.
+miss     wrong-operation = 60   That adds them together. A plant watered comes off the list.
+miss     distractor-pair = 22   The 13 are in the greenhouse.
+miss     answered-part = 35   That is every plant. 25 have been done.
+
+--- sub-words · seed 67890 · difficulty 1
+prompt   How many crates are still on the van?
+display  story [28 − 21] "A van sets out with 28 crates and unloads 21 at the depot. A second van carries 10. How many are still on the first van?"
+answer   exact 7/1
+input    keypad
+hint     Take the 21 unloaded off the 28 it set out with.
+step 1   Pick out the two numbers the question asks about.   [28 and 21]
+step 2   Take the second from the first.   [28 − 21 = 7]
+step 3   The second van's 10 are on a different van.
+miss     wrong-operation = 49   That adds the loads together. Unloading takes crates off.
+miss     distractor-pair = 18   The 10 belong to the second van.
+miss     answered-part = 28   That is the full load. 21 came off at the depot.
+
+--- sub-words · seed 424242 · difficulty 1
+prompt   How many are still waiting?
+display  story [17 − 15] "You start the day with 17 emails and clear 15 of them. Another 11 arrive overnight. How many are still waiting?"
+answer   exact 2/1
+input    keypad
+hint     Take the 15 you cleared off the 17 you started with.
+step 1   Pick out the two numbers the question asks about.   [17 and 15]
+step 2   Take the second from the first.   [17 − 15 = 2]
+step 3   The 11 overnight arrive after the question.
+miss     wrong-operation = 32   That adds them together. Clearing an email takes it off the pile.
+miss     distractor-pair = 6   The 11 arrived later, and were not cleared.
+miss     answered-part = 17   That is where you started. You cleared 15 of them.
+
+--- sub-words · seed 987654321 · difficulty 1
+prompt   How many plants still need water?
+display  story [14 − 10] "A garden has 14 plants and 10 have been watered. Another 13 are in the greenhouse. How many in the garden still need water?"
+answer   exact 4/1
+input    keypad
+hint     Take the 10 watered off the 14 in the garden.
+step 1   Pick out the two numbers the question asks about.   [14 and 10]
+step 2   Take the second from the first.   [14 − 10 = 4]
+step 3   The greenhouse's 13 are not in the garden.
+miss     wrong-operation = 24   That adds them together. A plant watered comes off the list.
+miss     distractor-pair = 1   The 13 are in the greenhouse.
+miss     answered-part = 14   That is every plant. 10 have been done.
+
+--- sub-words · seed 1 · difficulty 2
+prompt   How many minutes are left?
+display  story [46 − 31] "A call is booked for 46 minutes and has run 31 so far. The meeting before it ran 45. How many minutes are left?"
+answer   exact 15/1
+input    keypad
+hint     Take the 31 used off the 46 booked.
+step 1   Pick out the two numbers the question asks about.   [46 and 31]
+step 2   Take the second from the first.   [46 − 31 = 15]
+step 3   The 45 minute meeting was not this call.
+miss     wrong-operation = 77   That adds the two times. Minutes used come off the booking.
+miss     distractor-pair = 1   The 45 minutes were the meeting.
+miss     answered-part = 46   That is the whole booking. 31 minutes have gone.
+
+--- sub-words · seed 12345 · difficulty 2
+prompt   How many plants still need water?
+display  story [51 − 35] "A garden has 51 plants and 35 have been watered. Another 18 are in the greenhouse. How many in the garden still need water?"
+answer   exact 16/1
+input    keypad
+hint     Take the 35 watered off the 51 in the garden.
+step 1   Pick out the two numbers the question asks about.   [51 and 35]
+step 2   Take the second from the first.   [51 − 35 = 16]
+step 3   The greenhouse's 18 are not in the garden.
+miss     wrong-operation = 86   That adds them together. A plant watered comes off the list.
+miss     distractor-pair = 33   The 18 are in the greenhouse.
+miss     answered-part = 51   That is every plant. 35 have been done.
+
+--- sub-words · seed 67890 · difficulty 2
+prompt   How many crates are still on the van?
+display  story [40 − 28] "A van sets out with 40 crates and unloads 28 at the depot. A second van carries 15. How many are still on the first van?"
+answer   exact 12/1
+input    keypad
+hint     Take the 28 unloaded off the 40 it set out with.
+step 1   Pick out the two numbers the question asks about.   [40 and 28]
+step 2   Take the second from the first.   [40 − 28 = 12]
+step 3   The second van's 15 are on a different van.
+miss     wrong-operation = 68   That adds the loads together. Unloading takes crates off.
+miss     distractor-pair = 25   The 15 belong to the second van.
+miss     answered-part = 40   That is the full load. 28 came off at the depot.
+
+--- sub-words · seed 424242 · difficulty 2
+prompt   How many are still waiting?
+display  story [22 − 19] "You start the day with 22 emails and clear 19 of them. Another 14 arrive overnight. How many are still waiting?"
+answer   exact 3/1
+input    keypad
+hint     Take the 19 you cleared off the 22 you started with.
+step 1   Pick out the two numbers the question asks about.   [22 and 19]
+step 2   Take the second from the first.   [22 − 19 = 3]
+step 3   The 14 overnight arrive after the question.
+miss     wrong-operation = 41   That adds them together. Clearing an email takes it off the pile.
+miss     distractor-pair = 8   The 14 arrived later, and were not cleared.
+miss     answered-part = 22   That is where you started. You cleared 19 of them.
+
+--- sub-words · seed 987654321 · difficulty 2
+prompt   How many plants still need water?
+display  story [16 − 10] "A garden has 16 plants and 10 have been watered. Another 14 are in the greenhouse. How many in the garden still need water?"
+answer   exact 6/1
+input    keypad
+hint     Take the 10 watered off the 16 in the garden.
+step 1   Pick out the two numbers the question asks about.   [16 and 10]
+step 2   Take the second from the first.   [16 − 10 = 6]
+step 3   The greenhouse's 14 are not in the garden.
+miss     wrong-operation = 26   That adds them together. A plant watered comes off the list.
+miss     distractor-pair = 2   The 14 are in the greenhouse.
+miss     answered-part = 16   That is every plant. 10 have been done.
+
+--- sub-words · seed 1 · difficulty 3
+prompt   How many minutes are left?
+display  story [61 − 41] "A call is booked for 61 minutes and has run 41 so far. The meeting before it ran 60. How many minutes are left?"
+answer   exact 20/1
+input    keypad
+hint     Take the 41 used off the 61 booked.
+step 1   Pick out the two numbers the question asks about.   [61 and 41]
+step 2   Take the second from the first.   [61 − 41 = 20]
+step 3   The 60 minute meeting was not this call.
+miss     wrong-operation = 102   That adds the two times. Minutes used come off the booking.
+miss     distractor-pair = 1   The 60 minutes were the meeting.
+miss     answered-part = 61   That is the whole booking. 41 minutes have gone.
+
+--- sub-words · seed 12345 · difficulty 3
+prompt   How many plants still need water?
+display  story [68 − 47] "A garden has 68 plants and 47 have been watered. Another 24 are in the greenhouse. How many in the garden still need water?"
+answer   exact 21/1
+input    keypad
+hint     Take the 47 watered off the 68 in the garden.
+step 1   Pick out the two numbers the question asks about.   [68 and 47]
+step 2   Take the second from the first.   [68 − 47 = 21]
+step 3   The greenhouse's 24 are not in the garden.
+miss     wrong-operation = 115   That adds them together. A plant watered comes off the list.
+miss     distractor-pair = 44   The 24 are in the greenhouse.
+miss     answered-part = 68   That is every plant. 47 have been done.
+
+--- sub-words · seed 67890 · difficulty 3
+prompt   How many crates are still on the van?
+display  story [52 − 37] "A van sets out with 52 crates and unloads 37 at the depot. A second van carries 19. How many are still on the first van?"
+answer   exact 15/1
+input    keypad
+hint     Take the 37 unloaded off the 52 it set out with.
+step 1   Pick out the two numbers the question asks about.   [52 and 37]
+step 2   Take the second from the first.   [52 − 37 = 15]
+step 3   The second van's 19 are on a different van.
+miss     wrong-operation = 89   That adds the loads together. Unloading takes crates off.
+miss     distractor-pair = 33   The 19 belong to the second van.
+miss     answered-part = 52   That is the full load. 37 came off at the depot.
+
+--- sub-words · seed 424242 · difficulty 3
+prompt   How many are still waiting?
+display  story [28 − 24] "You start the day with 28 emails and clear 24 of them. Another 18 arrive overnight. How many are still waiting?"
+answer   exact 4/1
+input    keypad
+hint     Take the 24 you cleared off the 28 you started with.
+step 1   Pick out the two numbers the question asks about.   [28 and 24]
+step 2   Take the second from the first.   [28 − 24 = 4]
+step 3   The 18 overnight arrive after the question.
+miss     wrong-operation = 52   That adds them together. Clearing an email takes it off the pile.
+miss     distractor-pair = 10   The 18 arrived later, and were not cleared.
+miss     answered-part = 28   That is where you started. You cleared 24 of them.
+
+--- sub-words · seed 987654321 · difficulty 3
+prompt   How many plants still need water?
+display  story [21 − 13] "A garden has 21 plants and 13 have been watered. Another 19 are in the greenhouse. How many in the garden still need water?"
+answer   exact 8/1
+input    keypad
+hint     Take the 13 watered off the 21 in the garden.
+step 1   Pick out the two numbers the question asks about.   [21 and 13]
+step 2   Take the second from the first.   [21 − 13 = 8]
+step 3   The greenhouse's 19 are not in the garden.
+miss     wrong-operation = 34   That adds them together. A plant watered comes off the list.
+miss     distractor-pair = 2   The 19 are in the greenhouse.
+miss     answered-part = 21   That is every plant. 13 have been done.
+
+--- sub-words · seed 1 · difficulty 4
+prompt   How many minutes are left?
+display  story [69 − 47] "A call is booked for 69 minutes and has run 47 so far. The meeting before it ran 68. How many minutes are left?"
+answer   exact 22/1
+input    keypad
+hint     Take the 47 used off the 69 booked.
+step 1   Pick out the two numbers the question asks about.   [69 and 47]
+step 2   Take the second from the first.   [69 − 47 = 22]
+step 3   The 68 minute meeting was not this call.
+miss     wrong-operation = 116   That adds the two times. Minutes used come off the booking.
+miss     distractor-pair = 1   The 68 minutes were the meeting.
+miss     answered-part = 69   That is the whole booking. 47 minutes have gone.
+
+--- sub-words · seed 12345 · difficulty 4
+prompt   How many plants still need water?
+display  story [77 − 53] "A garden has 77 plants and 53 have been watered. Another 27 are in the greenhouse. How many in the garden still need water?"
+answer   exact 24/1
+input    keypad
+hint     Take the 53 watered off the 77 in the garden.
+step 1   Pick out the two numbers the question asks about.   [77 and 53]
+step 2   Take the second from the first.   [77 − 53 = 24]
+step 3   The greenhouse's 27 are not in the garden.
+miss     wrong-operation = 130   That adds them together. A plant watered comes off the list.
+miss     distractor-pair = 50   The 27 are in the greenhouse.
+miss     answered-part = 77   That is every plant. 53 have been done.
+
+--- sub-words · seed 67890 · difficulty 4
+prompt   How many crates are still on the van?
+display  story [59 − 42] "A van sets out with 59 crates and unloads 42 at the depot. A second van carries 21. How many are still on the first van?"
+answer   exact 17/1
+input    keypad
+hint     Take the 42 unloaded off the 59 it set out with.
+step 1   Pick out the two numbers the question asks about.   [59 and 42]
+step 2   Take the second from the first.   [59 − 42 = 17]
+step 3   The second van's 21 are on a different van.
+miss     wrong-operation = 101   That adds the loads together. Unloading takes crates off.
+miss     distractor-pair = 38   The 21 belong to the second van.
+miss     answered-part = 59   That is the full load. 42 came off at the depot.
+
+--- sub-words · seed 424242 · difficulty 4
+prompt   How many are still waiting?
+display  story [32 − 28] "You start the day with 32 emails and clear 28 of them. Another 20 arrive overnight. How many are still waiting?"
+answer   exact 4/1
+input    keypad
+hint     Take the 28 you cleared off the 32 you started with.
+step 1   Pick out the two numbers the question asks about.   [32 and 28]
+step 2   Take the second from the first.   [32 − 28 = 4]
+step 3   The 20 overnight arrive after the question.
+miss     wrong-operation = 60   That adds them together. Clearing an email takes it off the pile.
+miss     distractor-pair = 12   The 20 arrived later, and were not cleared.
+miss     answered-part = 32   That is where you started. You cleared 28 of them.
+
+--- sub-words · seed 987654321 · difficulty 4
+prompt   How many plants still need water?
+display  story [25 − 16] "A garden has 25 plants and 16 have been watered. Another 23 are in the greenhouse. How many in the garden still need water?"
+answer   exact 9/1
+input    keypad
+hint     Take the 16 watered off the 25 in the garden.
+step 1   Pick out the two numbers the question asks about.   [25 and 16]
+step 2   Take the second from the first.   [25 − 16 = 9]
+step 3   The greenhouse's 23 are not in the garden.
+miss     wrong-operation = 41   That adds them together. A plant watered comes off the list.
+miss     distractor-pair = 2   The 23 are in the greenhouse.
+miss     answered-part = 25   That is every plant. 16 have been done.
+
+--- sub-words · seed 1 · difficulty 5
+prompt   How many minutes are left?
+display  story [74 − 52] "A call is booked for 74 minutes and has run 52 so far. The meeting before it ran 73. How many minutes are left?"
+answer   exact 22/1
+input    keypad
+hint     Take the 52 used off the 74 booked.
+step 1   Pick out the two numbers the question asks about.   [74 and 52]
+step 2   Take the second from the first.   [74 − 52 = 22]
+step 3   The 73 minute meeting was not this call.
+miss     wrong-operation = 126   That adds the two times. Minutes used come off the booking.
+miss     distractor-pair = 1   The 73 minutes were the meeting.
+miss     answered-part = 74   That is the whole booking. 52 minutes have gone.
+
+--- sub-words · seed 12345 · difficulty 5
+prompt   How many plants still need water?
+display  story [82 − 58] "A garden has 82 plants and 58 have been watered. Another 29 are in the greenhouse. How many in the garden still need water?"
+answer   exact 24/1
+input    keypad
+hint     Take the 58 watered off the 82 in the garden.
+step 1   Pick out the two numbers the question asks about.   [82 and 58]
+step 2   Take the second from the first.   [82 − 58 = 24]
+step 3   The greenhouse's 29 are not in the garden.
+miss     wrong-operation = 140   That adds them together. A plant watered comes off the list.
+miss     distractor-pair = 53   The 29 are in the greenhouse.
+miss     answered-part = 82   That is every plant. 58 have been done.
+
+--- sub-words · seed 67890 · difficulty 5
+prompt   How many crates are still on the van?
+display  story [64 − 47] "A van sets out with 64 crates and unloads 47 at the depot. A second van carries 23. How many are still on the first van?"
+answer   exact 17/1
+input    keypad
+hint     Take the 47 unloaded off the 64 it set out with.
+step 1   Pick out the two numbers the question asks about.   [64 and 47]
+step 2   Take the second from the first.   [64 − 47 = 17]
+step 3   The second van's 23 are on a different van.
+miss     wrong-operation = 111   That adds the loads together. Unloading takes crates off.
+miss     distractor-pair = 41   The 23 belong to the second van.
+miss     answered-part = 64   That is the full load. 47 came off at the depot.
+
+--- sub-words · seed 424242 · difficulty 5
+prompt   How many are still waiting?
+display  story [37 − 33] "You start the day with 37 emails and clear 33 of them. Another 23 arrive overnight. How many are still waiting?"
+answer   exact 4/1
+input    keypad
+hint     Take the 33 you cleared off the 37 you started with.
+step 1   Pick out the two numbers the question asks about.   [37 and 33]
+step 2   Take the second from the first.   [37 − 33 = 4]
+step 3   The 23 overnight arrive after the question.
+miss     wrong-operation = 70   That adds them together. Clearing an email takes it off the pile.
+miss     distractor-pair = 14   The 23 arrived later, and were not cleared.
+miss     answered-part = 37   That is where you started. You cleared 33 of them.
+
+--- sub-words · seed 987654321 · difficulty 5
+prompt   How many plants still need water?
+display  story [30 − 21] "A garden has 30 plants and 21 have been watered. Another 27 are in the greenhouse. How many in the garden still need water?"
+answer   exact 9/1
+input    keypad
+hint     Take the 21 watered off the 30 in the garden.
+step 1   Pick out the two numbers the question asks about.   [30 and 21]
+step 2   Take the second from the first.   [30 − 21 = 9]
+step 3   The greenhouse's 27 are not in the garden.
+miss     wrong-operation = 51   That adds them together. A plant watered comes off the list.
+miss     distractor-pair = 3   The 27 are in the greenhouse.
+miss     answered-part = 30   That is every plant. 21 have been done."
+`;

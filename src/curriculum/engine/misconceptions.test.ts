@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { columnTrace, digitAt, stackPlace, stackTrace } from './column'
 import {
   borrowedWithoutReducing,
+  chainStoppedAtLender,
   digitConcat,
   flippedColumns,
   forgotCarry,
@@ -286,5 +287,95 @@ describe('borrowing predictions match the expressions they replace', () => {
     expect(flipped).toBe(unreduced)
     expect(skipped).not.toBe(flipped)
     expect(skipped).not.toBe(trace.result)
+  })
+})
+
+describe('misalignedColumns on a subtraction', () => {
+  const noBorrow = pairs(
+    (a, b) => d(a, 0) >= d(b, 0) && d(a, 1) >= d(b, 1) && d(b, 0) > 0 && d(b, 1) > 0,
+  )
+
+  it('takes the digit-swapped subtrahend, not addition arithmetic', () => {
+    // 68 − 23 misread is 8 − 3 in the ones and 6 − 2 in the tens; lining the
+    // columns up wrongly takes 32 instead, giving 36.
+    expect(misalignedColumns(columnTrace(68, 23, '−'), 'n').value).toBe(36)
+  })
+
+  it('is `a` minus `b` with its digits swapped, across every pair the skill admits', () => {
+    expect(noBorrow.length).toBeGreaterThan(100)
+
+    for (const [a, b] of noBorrow) {
+      const swapped = d(b, 0) * 10 + d(b, 1)
+      expect(misalignedColumns(columnTrace(a, b, '−'), 'n').value, `${a} − ${b}`).toBe(
+        a - swapped,
+      )
+    }
+  })
+
+  it('leaves the addition value exactly as it was', () => {
+    // The widening's one obligation: `add-2digit-nocarry` ships this prediction,
+    // and its recorded output is a gate.
+    const adding = pairs((a, b) => d(a, 0) + d(b, 0) <= 9 && d(a, 1) + d(b, 1) <= 9)
+
+    for (const [a, b] of adding) {
+      const swapped = d(b, 0) * 10 + d(b, 1)
+      expect(misalignedColumns(columnTrace(a, b, '+'), 'n').value, `${a} + ${b}`).toBe(
+        a + swapped,
+      )
+    }
+  })
+
+  it('names the trace with its own operator when handed a single column', () => {
+    // A checker that returns "no problems" looks exactly like a clean codebase.
+    expect(() => misalignedColumns(columnTrace(9, 5, '−'), 'n')).toThrow(
+      '9 − 5 has 1 columns, no place 1',
+    )
+  })
+})
+
+describe('borrowing across a zero', () => {
+  const trace = columnTrace(500, 237, '−')
+
+  it('predicts a number rather than NaN, which the old expression did not', () => {
+    // The shipped bug this widening fixes: the old form gave every place above
+    // the ones `top − bottom`, which is 0 − 3 in the tens here, and a negative
+    // part concatenates into `NaN`. Pinned as arithmetic rather than as a
+    // literal so the reason survives.
+    const legacy = Number(
+      [...trace.places]
+        .reverse()
+        .map((p) => (p.place === 0 ? p.borrowed - p.bottom : p.top - p.bottom))
+        .join(''),
+    )
+
+    expect(legacy).toBeNaN()
+    expect(borrowedWithoutReducing(trace, 'n').value).toBe(373)
+  })
+
+  it('predicts the chain stopped at its lender', () => {
+    // Hundreds correctly 5 → 4, but the tens are read as the 10 they became
+    // rather than the 9 they end at: ten above the answer, per crossed column.
+    expect(chainStoppedAtLender(trace, 0, 'n').value).toBe(263 + 10)
+    expect(chainStoppedAtLender(columnTrace(1000, 237, '−'), 0, 'n').value).toBe(763 + 110)
+  })
+
+  it('keeps the wall its three distinct diagnoses', () => {
+    const values = [
+      flippedColumns(trace, 'n').value,
+      borrowedWithoutReducing(trace, 'n').value,
+      chainStoppedAtLender(trace, 0, 'n').value,
+    ]
+
+    expect(values).toEqual([337, 373, 273])
+    expect(new Set([...values, trace.result]).size).toBe(4)
+  })
+
+  it('refuses to predict a stopped chain where nothing was crossed', () => {
+    // A checker that returns "no problems" looks exactly like a clean codebase.
+    // With no crossed column the value would equal the answer and be filtered on
+    // every problem, leaving the skill predicting nothing at all.
+    expect(() => chainStoppedAtLender(columnTrace(52, 27, '−'), 0, 'n')).toThrow(
+      '52 − 27 borrows at place 0 without crossing a column',
+    )
   })
 })

@@ -8,8 +8,18 @@
  * something guessed at from addition.
  */
 
-export { columnTrace, digitAt, at, place, requirePlace, stackPlace, stackTrace } from './column'
+export {
+  borrowChain,
+  columnTrace,
+  digitAt,
+  at,
+  place,
+  requirePlace,
+  stackPlace,
+  stackTrace,
+} from './column'
 export type {
+  BorrowChain,
   CarryingTrace,
   ColumnOperator,
   ColumnPlace,
@@ -33,10 +43,12 @@ export type { DrawOperandsOptions, DrawOptions, Pair } from './draw'
 
 export {
   borrowedWithoutReducing,
+  chainStoppedAtLender,
   digitConcat,
   flippedColumns,
   forgotCarry,
   misalignedColumns,
+  misalignedValue,
   offBy,
   offByOne,
   skippedUpperSubtraction,
@@ -50,6 +62,7 @@ export type { BuildContext, ProblemSpec, SkillConfig } from './problem'
 export {
   CHECK_QUANTITIES,
   applyOperator,
+  countOf,
   pickFrame,
   storyMisconceptions,
   storyProblem,

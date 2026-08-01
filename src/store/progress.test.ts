@@ -100,7 +100,10 @@ describe('the manifest is the authority', () => {
   })
 
   it('opens Unit 2 once Unit 1 is finished', () => {
-    expect(isUnlocked('sub-facts', throughUnit1())).toBe(true)
+    // `sub-facts-small` is Unit 2's first skill, so it is what the boundary
+    // opens. `sub-facts` used to be, and now sits behind it.
+    expect(isUnlocked('sub-facts-small', throughUnit1())).toBe(true)
+    expect(isUnlocked('sub-facts', throughUnit1())).toBe(false)
   })
 
   it('no longer asks sub-2digit-borrow for add-2digit-carry', () => {
@@ -108,17 +111,19 @@ describe('the manifest is the authority', () => {
     // declared. `add-2digit-carry` is left at zero — that is the whole assertion,
     // and it is unreachable through normal play, which is the point: the graph is
     // what is under test here, not the route to it.
-    const dropped = progressWith({ 'sub-facts': MASTERED })
+    const dropped = progressWith({ 'sub-2digit-noborrow': MASTERED })
 
     expect(isUnlocked('sub-2digit-borrow', dropped)).toBe(true)
   })
 
   it('locks a skill that has no generator, however far the learner has come', () => {
-    // 183 of the 201 are planned. They must never be offered or hold anyone up.
+    // 177 of the 201 are planned. They must never be offered or hold anyone up.
+    // Unit 3's ids, because Unit 2's have generators as of this change — the
+    // examples move forward each time a unit lands, which is the point.
     const finished = throughUnit1()
 
-    expect(isUnlocked('sub-facts-small', finished)).toBe(false)
-    expect(isUnlocked('sub-tens', finished)).toBe(false)
+    expect(isUnlocked('mult-meaning', finished)).toBe(false)
+    expect(isUnlocked('times-2', finished)).toBe(false)
     expect(isUnlocked('read-numbers', initialProgress())).toBe(true)
   })
 })
@@ -163,12 +168,12 @@ describe('a practised skill is never re-locked', () => {
   })
 
   it('still refuses a practised skill that can no longer be generated', () => {
-    // Rule 1 beats rule 2. Not reachable with today's ten skills, but the
+    // Rule 1 beats rule 2. Not reachable with today's playable skills, but the
     // order is what stops a future capability requirement handing back a lesson
     // that cannot be built.
-    const practisedButPlanned = progressWith({ 'sub-facts-small': { attempts: 9, mastery: 2 } })
+    const practisedButPlanned = progressWith({ 'mult-meaning': { attempts: 9, mastery: 2 } })
 
-    expect(isUnlocked('sub-facts-small', practisedButPlanned)).toBe(false)
+    expect(isUnlocked('mult-meaning', practisedButPlanned)).toBe(false)
   })
 
   it('keeps add-facts open for a learner who reached it before 1.1 existed', () => {

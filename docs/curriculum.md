@@ -161,14 +161,14 @@ Self-assessed skips are the risky ones, so the system watches them:
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 2.1 | `sub-facts-small` | Within 10 | `quick` |
+| 2.1 | `sub-facts-small` | Within 10 | ✅ `quick` |
 | 2.2 | `sub-facts` | Within 18 | ✅ |
-| 2.3 | `sub-tens` | 50 − 20 | |
-| 2.4 | `sub-2digit-noborrow` | Column subtraction | |
+| 2.3 | `sub-tens` | 50 − 20 | ✅ |
+| 2.4 | `sub-2digit-noborrow` | Column subtraction | ✅ |
 | 2.5 | `sub-2digit-borrow` | Borrowing | ✅ ⚠️ flipping digits to avoid borrowing |
-| 2.6 | `sub-3digit-borrow` | Three digits | |
-| 2.7 | `sub-across-zero` | 500 − 237 | ⚠️ **major wall** — double borrow |
-| 2.8 | `sub-words` | Word problems | |
+| 2.6 | `sub-3digit-borrow` | Three digits | ✅ |
+| 2.7 | `sub-across-zero` | 500 − 237 | ✅ ⚠️ **major wall** — double borrow |
+| 2.8 | `sub-words` | Word problems | ✅ |
 
 ### Unit 3 — Multiplication (14) — *slowest unit by design*
 

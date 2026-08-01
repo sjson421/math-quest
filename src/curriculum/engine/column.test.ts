@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { columnTrace, digitAt, place, stackPlace, stackTrace } from './column'
+import { borrowChain, columnTrace, digitAt, place, stackPlace, stackTrace } from './column'
 
 /** Compact view of one column, so a failure names the place that is wrong. */
 const summarise = (trace: ReturnType<typeof columnTrace>) =>
@@ -103,6 +103,57 @@ describe('columnTrace, subtraction', () => {
     const trace = columnTrace(803, 267, '−')
     const fromDigits = trace.places.reduce((sum, p) => sum + p.digit * 10 ** p.place, 0)
     expect(fromDigits).toBe(trace.result)
+  })
+
+  it('stands every chained column at a digit a learner would write', () => {
+    // `sub-across-zero`'s canonical problem. The working is: the hundreds go
+    // 5 → 4, the tens stand at 9, the ones at 10.
+    const trace = columnTrace(500, 237, '−')
+    expect(trace.places.map((p) => p.borrowed)).toEqual([10, 9, 4])
+    expect(trace.result).toBe(263)
+  })
+
+  it('reports a negative `reduced` on the column a borrow passes through', () => {
+    // Pinned as the trap the field's comment describes, not as desired output.
+    // `reduced` means "after lending, before receiving" and a chain receives
+    // first, so the tens read −1 — consistent, and not a digit anybody writes.
+    // A generator reaching for it here would phrase that into a solution step.
+    expect(place(columnTrace(500, 237, '−'), 1).reduced).toBe(-1)
+    expect(place(columnTrace(500, 237, '−'), 1).borrowed).toBe(9)
+  })
+})
+
+describe('borrowChain', () => {
+  it('names the column that pays, not the one next door', () => {
+    const chain = borrowChain(columnTrace(500, 237, '−'), 0)
+    expect(chain.through.map((p) => p.place)).toEqual([1])
+    expect(chain.lender.place).toBe(2)
+    // What the learner writes: the lender drops by one, the column in between
+    // stands at nine.
+    expect(chain.lender.reduced).toBe(4)
+    expect(chain.through[0].borrowed).toBe(9)
+  })
+
+  it('travels two columns when both are empty', () => {
+    const chain = borrowChain(columnTrace(1000, 237, '−'), 0)
+    expect(chain.through.map((p) => p.place)).toEqual([1, 2])
+    expect(chain.lender.place).toBe(3)
+  })
+
+  it('reports an ordinary borrow as a chain of nothing', () => {
+    const chain = borrowChain(columnTrace(52, 27, '−'), 0)
+    expect(chain.through).toEqual([])
+    expect(chain.lender.place).toBe(1)
+    expect(chain.lender.reduced).toBe(4)
+  })
+
+  it('refuses a column that does not borrow', () => {
+    // A checker that returns "no problems" looks exactly like a clean codebase.
+    // An empty chain here would be phrased into a hint about a borrow that
+    // never happened, so it throws instead.
+    expect(() => borrowChain(columnTrace(48, 23, '−'), 0)).toThrow(
+      '48 − 23 does not borrow at place 0',
+    )
   })
 })
 

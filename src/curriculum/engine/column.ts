@@ -36,9 +36,19 @@ export type ColumnPlace = {
   raw: number
   /** The column's value once the incoming carry is included. Addition only. */
   total: number
-  /** `top` after lending a ten upward. Subtraction only. */
+  /**
+   * `top` after lending a ten downward. Subtraction only, and **meaningless
+   * where this column itself borrows** — it means "after lending, before
+   * receiving", and a borrow chain receives first. In `500 − 237` the tens
+   * column reads −1 here, which is arithmetically consistent and is not a digit
+   * anybody writes. Use `borrowed` wherever `carry` is 1; see `borrowChain`.
+   */
   reduced: number
-  /** `reduced` plus the ten borrowed from above, when this column borrows. */
+  /**
+   * The digit standing over this column once every borrow has passed through —
+   * what the learner crosses out and rewrites. Correct at any chain length,
+   * which `reduced` is not.
+   */
   borrowed: number
   /** The digit written in this place. */
   digit: number
@@ -227,4 +237,58 @@ export function place(trace: ColumnTrace, n: number): ColumnPlace {
 /** As `place()`, for a stack. */
 export function stackPlace(trace: StackTrace, n: number): StackPlace {
   return requirePlace(trace.places, n, () => trace.operands.join(' + '))
+}
+
+/**
+ * Where the ten a column borrows actually comes from.
+ *
+ * A borrow does not always come from the column immediately above. Asked for a
+ * ten, a column standing at zero has none to give, so the request travels until
+ * it reaches one that does — and that column, not the adjacent one, is the one
+ * the learner crosses out and reduces. Every column in between ends up standing
+ * at nine.
+ *
+ * The trace already holds every value this describes; what it cannot say is
+ * *which* column finally lent, and that is the entire subject of
+ * `sub-across-zero`'s hint and solution. Two skills phrase a borrow, so this is
+ * shared rather than walked inside one generator.
+ */
+export type BorrowChain = {
+  /**
+   * Columns the borrow passed through without any of them being able to lend,
+   * nearest the borrowing column first. Empty for an ordinary single borrow.
+   * Each stands at `borrowed` — nine — afterwards.
+   */
+  through: ColumnPlace[]
+  /** The column that lends, standing at its `reduced` value afterwards. */
+  lender: ColumnPlace
+}
+
+/**
+ * Follow the borrow out of place `from` to the column that pays for it.
+ *
+ * Throws where `from` does not borrow, rather than returning an empty chain: a
+ * caller asking about a borrow that never happened has the wrong problem, and a
+ * silent answer would be phrased into a hint.
+ */
+export function borrowChain(trace: ColumnTrace, from: number): BorrowChain {
+  const start = place(trace, from)
+  if (start.carry !== 1) {
+    throw new Error(`${trace.a} ${trace.operator} ${trace.b} does not borrow at place ${from}`)
+  }
+
+  const through: ColumnPlace[] = []
+  for (let n = from + 1; n < trace.places.length; n += 1) {
+    const column = trace.places[n]
+    // A column that borrows in turn had nothing to lend of its own.
+    if (column.carry === 1) {
+      through.push(column)
+      continue
+    }
+    return { through, lender: column }
+  }
+
+  // Unreachable while `a >= b`, which every subtraction skill in the course
+  // guarantees: the top number would have to be the smaller one.
+  throw new Error(`${trace.a} ${trace.operator} ${trace.b} borrows past its last column`)
 }
