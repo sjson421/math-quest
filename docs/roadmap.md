@@ -3,7 +3,9 @@
 What is left, in the order it should be done.
 
 **Status: 10 of 201 skills are playable.** All ten are in Units 1–2, and Unit 1 is complete.
-No capability beyond the plain number keypad is built. This line is the only progress number in the repo's
+The keypad can now offer a sign, a decimal point or a fraction slash when a problem asks for
+one, but `AVAILABLE_CAPABILITIES` is still empty, so no stage capability is built and every
+playable skill still answers with whole digits. This line is the only progress number in the repo's
 documentation — the manifest and `npm test` are the authority, and everything below is
 scope rather than status.
 
@@ -92,17 +94,29 @@ document's ✅ markers updated to match, which the cross-check enforces.
       never-re-lock rule kept every existing record whole, and this is the first change that
       actually needed it.
 
-- [ ] **3 · Per-problem keypad rules** — S
+- [x] **3 · Per-problem keypad rules** — S — **shipped 2026-08-01**
 
-      `Lesson.tsx` renders `<Keypad>` with no flags and calls `applyKey(prev, key)` with no
-      rules, so `allowNegative`, `allowDecimal` and `allowFraction` are all unreachable —
-      `src/lib/keypad.ts` implements and tests all three, and nothing passes them. Carry
-      `KeypadRules` on the problem and plumb them through.
+      `Problem` carries `keypad?: KeypadRules`; omitted still means whole digits only, so no
+      existing generator changed and the learner sees no difference yet. A skill that needs a
+      sign, a point or a slash declares it per problem — not per skill and not per stage,
+      because Unit 6 asks for both −3 + 5 and −3 + −5 under one id and only one of those
+      answers is negative.
 
-      This is one small change that unblocks three separate stages, rather than the three
-      independent items the previous version implied. While here, surface the
-      `'not-simplified'` result that `checkAnswer` already returns and `Lesson.tsx` currently
-      collapses into a plain wrong answer — that is the teachable moment Unit 7 is built on.
+      Left behind: **the pad is the single owner of those rules.** `Keypad` takes one `rules`
+      object and makes the `applyKey` call itself, so what it displays and what it accepts
+      cannot drift apart — the earlier shape, three booleans on one side and a rules object on
+      the other, was a convention someone had to keep rather than a property. It still emits a
+      functional update, so the stale-read protection under fast tapping is unchanged.
+
+      Also left behind: **all four `checkAnswer` results are now distinguishable.**
+      `src/lib/submit.ts` states what the lesson does with each, keyed on the status union so
+      the next one added cannot be silently collapsed — which is exactly what had happened.
+      A right value in the wrong form (`not-simplified`) is a miss below the surface but keeps
+      the worked solution hidden: the arithmetic was already done. An unfinished entry
+      (`unparseable`, newly reachable once `-` or `/` is on the pad) costs no attempt at all.
+
+      No stage capability was built and `AVAILABLE_CAPABILITIES` is untouched. The first
+      consumers are Unit 6 (item 14) and `simplify-fractions` (7.7).
 
 - [ ] **4 · Lesson mechanics** — M *(was half of B1)*
 
@@ -219,10 +233,13 @@ document's ✅ markers updated to match, which the cross-check enforces.
       major wall — minus a minus. Stage C declares no stage-wide capability on purpose, so that
       the eight keypad-answerable skills are not held behind the number line.
 
-      Item 3 is the real gate. Not every skill here needs negative *entry* — `add-neg-pos`
+      Item 3 removed the gate this used to name, and left a job in its place: these generators
+      must **declare `keypad: { allowNegative: true }` on the problems whose answers are
+      negative**, and only those. Not every skill here needs negative *entry* — `add-neg-pos`
       (−3 + 5 = 2), `sub-negatives` (5 − (−3) = 8) and `absolute-value` all have positive
-      answers — but `add-two-negs`, `mult-negatives`, `div-negatives` and `negatives-mixed` do,
-      and without `allowNegative` plumbed through they cannot be answered at all.
+      answers — but `add-two-negs`, `mult-negatives`, `div-negatives` and `negatives-mixed` do.
+      The declaration is per problem, so a skill that sometimes lands negative and sometimes
+      does not can say so problem by problem rather than showing the sign key throughout.
 
 - [ ] **15 · Dress-up design tooling** — M *(was B4a)*
 

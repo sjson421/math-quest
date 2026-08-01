@@ -1,3 +1,5 @@
+import type { KeypadRules } from './keypad'
+
 export type Difficulty = 1 | 2 | 3 | 4 | 5
 
 export type Answer =
@@ -60,6 +62,16 @@ export type Problem = {
   display: Display
   answer: Answer
   inputMode: 'keypad' | 'choice'
+  /**
+   * What this answer may be typed with. Omitted means whole digits only, which
+   * is what every skill built so far wants.
+   *
+   * On the problem rather than on the generator because a skill can need both:
+   * Unit 6 asks for −3 + 5 and −3 + −5 under the same id, and only one of those
+   * answers is negative. A generator knows the shape of the answer it has just
+   * computed; nothing above it does.
+   */
+  keypad?: KeypadRules
   choices?: Choice[]
   misconceptions?: Misconception[]
   hint: string

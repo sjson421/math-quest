@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { tap } from '../lib/haptics'
+import { applyKey, type KeypadRules } from '../lib/keypad'
 
 /**
  * A purpose-built number pad.
@@ -8,42 +9,43 @@ import { tap } from '../lib/haptics'
  * the whole thing feel like a web form. A custom pad is the single biggest
  * contributor to this reading as a real app.
  *
- * Emits raw key names rather than the next string — the parent applies them via
- * a functional state update so rapid taps cannot drop a digit.
+ * Emits a functional update rather than the next string — two taps landing in
+ * the same React render must each apply to the value the previous one produced,
+ * or the first digit is silently dropped. Very reachable when someone types
+ * quickly on a phone.
+ *
+ * The pad both decides which keys to show and applies them, from the one
+ * `rules` object. Splitting those across two owners is a rule that drifts, and
+ * drift here is invisible: a key the entry logic discards looks exactly like a
+ * key that is broken.
  */
 
 type Props = {
   value: string
-  onKey: (key: string) => void
+  onEntry: (apply: (prev: string) => string) => void
   onSubmit: () => void
   disabled?: boolean
-  /** Show the fraction slash — off until the fractions unit. */
-  allowFraction?: boolean
-  allowNegative?: boolean
-  allowDecimal?: boolean
+  /** What this problem's answer may contain. Omitted means whole digits only. */
+  rules?: KeypadRules
 }
 
 const KEY_STYLE =
   'flex items-center justify-center rounded-3xl bg-white text-ink font-bold shadow-[0_3px_0_0_var(--color-cream-deep)] active:shadow-none active:translate-y-[3px] transition-[transform,box-shadow] duration-75 h-16 text-3xl select-none'
 
-export function Keypad({
-  value,
-  onKey,
-  onSubmit,
-  disabled,
-  allowFraction = false,
-  allowNegative = false,
-  allowDecimal = false,
-}: Props) {
+export function Keypad({ value, onEntry, onSubmit, disabled, rules }: Props) {
+  const { allowFraction = false, allowNegative = false, allowDecimal = false } = rules ?? {}
+
+  const press = (k: string) => {
+    tap()
+    onEntry((prev) => applyKey(prev, k, rules))
+  }
+
   const Key = ({ label, k, className = '' }: { label: string; k: string; className?: string }) => (
     <motion.button
       type="button"
       whileTap={{ scale: 0.94 }}
       className={`${KEY_STYLE} ${className}`}
-      onClick={() => {
-        tap()
-        onKey(k)
-      }}
+      onClick={() => press(k)}
       disabled={disabled}
       aria-label={label}
     >
@@ -61,10 +63,7 @@ export function Keypad({
           type="button"
           whileTap={{ scale: 0.94 }}
           className={`${KEY_STYLE} row-span-2 h-auto bg-blossom-soft text-2xl`}
-          onClick={() => {
-            tap()
-            onKey('back')
-          }}
+          onClick={() => press('back')}
           disabled={disabled}
           aria-label="Backspace"
         >

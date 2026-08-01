@@ -513,8 +513,9 @@ Ship by stage; each stage is independently useful.
 1. **Finish Stage B** — split the existing mixed unit into Units 1 and 2, then add 3–5.
    Largest single block (44 skills) and the true foundation.
 2. **Stage C** (9) — small, and unblocks all algebra.
-3. **Stage D** (50) — the biggest. Needs **KaTeX** from Unit 7 onward, and a **fraction
-   input mode** on the keypad (already stubbed via `allowFraction`).
+3. **Stage D** (50) — the biggest. Needs **KaTeX** from Unit 7 onward. The **fraction
+   input mode** on the keypad is wired: a problem declares `allowFraction` and the pad
+   offers the slash.
 4. **Stage E** (34) — needs a variable/expression input mode.
 5. **Stage F** (28) — needs a **coordinate-plane input** component (tap to plot).
 6. **Stage G** (22) — needs **diagram rendering** for shapes and charts.
@@ -525,7 +526,7 @@ Ship by stage; each stage is independently useful.
 | Capability | First needed | Notes |
 |---|---|---|
 | KaTeX rendering | D (Unit 7) | Fractions cannot render as plain text |
-| Fraction keypad mode | D (Unit 8) | `allowFraction` flag already exists |
+| Fraction keypad mode | D (Unit 8) | Built — declared per problem via `allowFraction` |
 | Diagram rendering | D (Unit 7.2) | Shaded shapes for fraction meaning |
 | Expression input | E (Unit 13) | Variables on the keypad |
 | Number-line input | C (Unit 6.1) | Tap to place a value |

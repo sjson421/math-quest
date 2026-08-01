@@ -42,7 +42,11 @@ export default defineConfig({
     }),
   ],
   test: {
+    // Stays `node` deliberately. `.tsx` is matched so a presentational component
+    // can be rendered to a string with `renderToStaticMarkup` and asserted on;
+    // anything needing a real DOM fails loudly here rather than passing by
+    // accident, which is the boundary we want.
     environment: 'node',
-    include: ['src/**/*.test.ts', 'api/**/*.test.ts'],
+    include: ['src/**/*.test.ts', 'src/**/*.test.tsx', 'api/**/*.test.ts'],
   },
 })

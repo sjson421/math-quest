@@ -1,9 +1,9 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useMemo, useRef, useState } from 'react'
-import { checkAnswer } from '../lib/answer'
+import { checkAnswer, type CheckResult } from '../lib/answer'
 import { diagnose, generateProblem } from '../lib/generator'
 import { celebrate, tap } from '../lib/haptics'
-import { applyKey } from '../lib/keypad'
+import { responseTo } from '../lib/submit'
 import type { Misconception, Problem, SkillGenerator } from '../lib/types'
 import { difficultyFor, useProgress } from '../store/progress'
 import { Keypad } from './Keypad'
@@ -12,10 +12,14 @@ import { ProblemView } from './ProblemView'
 
 const TARGET_CORRECT = 10
 
-type Feedback =
-  | { kind: 'none' }
-  | { kind: 'correct' }
-  | { kind: 'wrong'; misconception?: Misconception }
+/**
+ * What is on screen between submitting an answer and moving on, or `null` while
+ * the learner is still typing.
+ *
+ * Holds the check result rather than a screen name, so `responseTo` stays the
+ * one place that decides what each result means.
+ */
+type Feedback = { status: CheckResult['status']; misconception?: Misconception } | null
 
 /**
  * The lesson loop.
@@ -48,37 +52,56 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
     ),
   )
   const [entry, setEntry] = useState('')
-  const [feedback, setFeedback] = useState<Feedback>({ kind: 'none' })
+  const [feedback, setFeedback] = useState<Feedback>(null)
   const [correctCount, setCorrectCount] = useState(0)
   const [showHint, setShowHint] = useState(false)
   const [finished, setFinished] = useState<{ xpGained: number; coinsGained: number } | null>(null)
 
   const problem = queue[0]
+  const response = feedback && responseTo[feedback.status]
+
+  /**
+   * The entry survives, so the pad stays up rather than a panel taking over —
+   * this was not an answer, just a number that is not finished.
+   *
+   * Read off the policy rather than naming a status, so `submit.ts` stays the
+   * only place that decides which results behave this way.
+   */
+  const unfinished = response?.keepsEntry === true
 
   const mascotState: MascotState = finished
     ? 'celebrating'
-    : feedback.kind === 'correct'
+    : feedback?.status === 'correct'
       ? 'happy'
-      : feedback.kind === 'wrong'
+      : feedback && !unfinished
         ? 'encouraging'
         : 'thinking'
 
   const submit = () => {
-    if (feedback.kind !== 'none' || !problem) return
+    // An unfinished entry left the pad up, so Check is still live — pressing it
+    // again should re-answer rather than sit dead until a key is tapped.
+    if ((feedback && !unfinished) || !problem) return
 
-    const result = checkAnswer(problem.answer, entry)
+    const { status } = checkAnswer(problem.answer, entry)
+    const policy = responseTo[status]
+    // Only a wrong value has a predicted mistake behind it. A right value in the
+    // wrong form is not a miscalculation, so there is nothing to name.
+    const misconception = status === 'incorrect' ? diagnose(problem, entry) : undefined
 
-    if (result.status === 'correct') {
+    if (policy.record !== 'none') {
+      recordAttempt(skill.id, policy.record === 'correct', misconception?.tag)
+    }
+
+    if (policy.advances) {
       celebrate()
-      recordAttempt(skill.id, true)
-      setFeedback({ kind: 'correct' })
+      setFeedback({ status })
 
       const nextCount = correctCount + 1
       window.setTimeout(() => {
         setCorrectCount(nextCount)
         setEntry('')
         setShowHint(false)
-        setFeedback({ kind: 'none' })
+        setFeedback(null)
 
         if (nextCount >= TARGET_CORRECT) {
           const outcome = completeLesson(skill.id)
@@ -91,14 +114,15 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
     }
 
     tap()
-    const misconception = diagnose(problem, entry)
-    recordAttempt(skill.id, false, misconception?.tag)
-    setFeedback({ kind: 'wrong', misconception })
+    setFeedback({ status, misconception })
   }
 
-  const continueAfterWrong = () => {
-    setFeedback({ kind: 'none' })
-    setEntry('')
+  const dismiss = () => {
+    if (!response) return
+    setFeedback(null)
+    if (!response.keepsEntry) setEntry('')
+    if (!response.requeues) return
+
     setShowHint(false)
     // Re-queue the missed problem a few places back so it comes around again.
     setQueue((q) => {
@@ -148,19 +172,19 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
             key={`${problem.display.kind}-${JSON.stringify(problem.display)}-${correctCount}`}
             initial={{ opacity: 0, x: 40 }}
             animate={
-              feedback.kind === 'wrong'
+              feedback?.status === 'incorrect'
                 ? { opacity: 1, x: [0, -9, 9, -6, 0] }
                 : { opacity: 1, x: 0 }
             }
             exit={{ opacity: 0, x: -40 }}
-            transition={{ duration: feedback.kind === 'wrong' ? 0.36 : 0.22 }}
+            transition={{ duration: feedback?.status === 'incorrect' ? 0.36 : 0.22 }}
           >
             <ProblemView display={problem.display} entry={entry} />
           </motion.div>
         </AnimatePresence>
 
         <AnimatePresence>
-          {showHint && feedback.kind === 'none' && (
+          {showHint && !feedback && (
             <motion.p
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -172,7 +196,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
           )}
         </AnimatePresence>
 
-        {!showHint && feedback.kind === 'none' && (
+        {!showHint && !feedback && (
           <button
             onClick={() => {
               tap()
@@ -186,44 +210,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
       </div>
 
       <AnimatePresence mode="wait">
-        {feedback.kind === 'wrong' ? (
-          <motion.div
-            key="wrong"
-            initial={{ y: 220 }}
-            animate={{ y: 0 }}
-            exit={{ y: 220 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 28 }}
-            className="bg-butter-soft rounded-t-[2rem] px-5 pt-5 pb-6 shadow-[0_-4px_20px_rgba(180,140,165,0.18)]"
-          >
-            <p className="font-bold text-lg mb-1">Not quite — let's look together</p>
-            <p className="text-ink-soft mb-3">
-              {feedback.misconception?.nudge ?? 'Here is how this one works out.'}
-            </p>
-
-            <ol className="space-y-2 mb-4">
-              {problem.solution.map((step, i) => (
-                <li key={i} className="flex gap-2.5">
-                  <span className="shrink-0 w-6 h-6 rounded-full bg-butter-deep/30 text-xs font-bold flex items-center justify-center">
-                    {i + 1}
-                  </span>
-                  <span>
-                    <span className="block">{step.text}</span>
-                    {step.detail && (
-                      <span className="block font-bold tabular-nums text-ink">{step.detail}</span>
-                    )}
-                  </span>
-                </li>
-              ))}
-            </ol>
-
-            <button
-              onClick={continueAfterWrong}
-              className="w-full h-14 rounded-2xl bg-ink text-cream font-bold text-lg active:scale-[0.98] transition-transform"
-            >
-              Got it
-            </button>
-          </motion.div>
-        ) : feedback.kind === 'correct' ? (
+        {feedback?.status === 'correct' ? (
           <motion.div
             key="correct"
             initial={{ y: 120, opacity: 0 }}
@@ -233,12 +220,75 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
           >
             <p className="text-2xl font-bold">Yes! Nice work.</p>
           </motion.div>
+        ) : feedback && response && !unfinished ? (
+          <motion.div
+            key="feedback"
+            initial={{ y: 220 }}
+            animate={{ y: 0 }}
+            exit={{ y: 220 }}
+            transition={{ type: 'spring', stiffness: 260, damping: 28 }}
+            className="bg-butter-soft rounded-t-[2rem] px-5 pt-5 pb-6 shadow-[0_-4px_20px_rgba(180,140,165,0.18)]"
+          >
+            {feedback.status === 'not-simplified' ? (
+              <>
+                <p className="font-bold text-lg mb-1">Right value — now reduce it</p>
+                <p className="text-ink-soft mb-3">
+                  That is the correct amount. Write it in its simplest form.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="font-bold text-lg mb-1">Not quite — let's look together</p>
+                <p className="text-ink-soft mb-3">
+                  {feedback.misconception?.nudge ?? 'Here is how this one works out.'}
+                </p>
+              </>
+            )}
+
+            {/* Withheld for a right value in the wrong form: the arithmetic was
+                already done, and handing it back removes the step still to take. */}
+            {response.showsSolution && (
+              <ol className="space-y-2 mb-4">
+                {problem.solution.map((step, i) => (
+                  <li key={i} className="flex gap-2.5">
+                    <span className="shrink-0 w-6 h-6 rounded-full bg-butter-deep/30 text-xs font-bold flex items-center justify-center">
+                      {i + 1}
+                    </span>
+                    <span>
+                      <span className="block">{step.text}</span>
+                      {step.detail && (
+                        <span className="block font-bold tabular-nums text-ink">{step.detail}</span>
+                      )}
+                    </span>
+                  </li>
+                ))}
+              </ol>
+            )}
+
+            <button
+              onClick={dismiss}
+              className="w-full h-14 rounded-2xl bg-ink text-cream font-bold text-lg active:scale-[0.98] transition-transform"
+            >
+              Got it
+            </button>
+          </motion.div>
         ) : (
           <motion.div key="keypad" exit={{ opacity: 0 }}>
+            {/* Not a wrong answer — the number simply is not finished. Say so and
+                leave everything as it is, rather than spending an attempt on it. */}
+            {unfinished && (
+              <p className="text-center text-ink-soft text-sm pb-2">
+                That number is not finished yet.
+              </p>
+            )}
             <Keypad
               value={entry}
-              onKey={(key) => setEntry((prev) => applyKey(prev, key))}
+              onEntry={(apply) => {
+                if (unfinished) dismiss()
+                setEntry(apply)
+              }}
               onSubmit={submit}
+              rules={problem.keypad}
             />
           </motion.div>
         )}
