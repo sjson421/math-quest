@@ -10,13 +10,13 @@ Keep every phase separate: finish and verify one phase before starting the next.
 
 ## Workflow control
 
-Create a plan with the seven phases below and keep exactly one phase `in_progress`.
+Create a plan with the eight phases below and keep exactly one phase `in_progress`.
 Carry the selected roadmap text and OpenSpec change name through every phase. Do not
 silently skip, combine, or retroactively complete phases.
 
-This workflow has exactly seven phases. Do not add separate sync, archive, or roadmap
-maintenance phases. Perform that work only when the audited OpenSpec includes it as an
-apply task; otherwise finish with the verified commit and push requested here.
+This workflow has exactly eight phases. Do not add any others — in particular, roadmap
+maintenance is not a phase of its own. Perform that work only when the audited OpenSpec
+includes it as an apply task.
 
 | Phase | Gate |
 | --- | --- |
@@ -27,6 +27,7 @@ apply task; otherwise finish with the verified commit and push requested here.
 | 5. Simplify | Behavior-preserving cleanup is verified |
 | 6. Review | Diff, requirements, tests, build, and lint pass |
 | 7. Ship | Intended files alone are committed and pushed to `main` |
+| 8. Archive | Deltas synced into the baseline and the change moved |
 
 ## Phase 1: Select the roadmap item
 
@@ -128,6 +129,32 @@ Do not create a branch or pull request. Stop if the staged diff differs from the
 diff, credentials are unavailable, branch protection rejects the push, or the push is not
 a safe fast-forward.
 
+## Phase 8: Archive the shipped change
+
+**REQUIRED SUB-SKILL:** Use `openspec-archive-change`.
+
+Archive only once the push has landed, and as its own commit. The archive is bookkeeping
+about work that already shipped, so folding it into phase 7 would mean committing a diff
+phase 6 never verified — and moving the change directory earlier would pull it out from
+under phase 6's validation. That skill prompts before syncing; in this workflow the answer
+is always to sync, because the next change has nothing accurate to amend otherwise.
+
+1. Confirm the change is genuinely complete: every artifact `done` or `skipped`, every task
+   checked. Stop and report rather than archiving unfinished work.
+2. Sync the delta specs into `openspec/specs/` **before** the change directory moves, then
+   move it. `openspec archive "<name>" --yes` does both, in that order.
+3. Inspect the diff to `openspec/specs/`. Confirm each `ADDED` requirement arrived intact
+   and each `MODIFIED` one carries its changes with its other scenarios still present.
+   Expect no deletions: the merge can reflow surrounding lines, and that churn is yours to
+   correct so the baseline stays consistent with the specs beside it.
+4. Correct whatever the archive falsifies — an `AGENTS.md` line describing the active queue
+   is the usual one.
+5. Re-run `openspec validate --specs --strict`, confirm the active queue is empty, then
+   commit and push.
+
+The archive directory is named for the date it is archived, which is not always the date
+the work shipped. Leave that difference standing rather than back-dating it.
+
 ## Stop conditions
 
 Stop at the current phase, leave the tree coherent, and report the blocker when:
@@ -137,11 +164,15 @@ Stop at the current phase, leave the tree coherent, and report the blocker when:
 - a test, build, lint, or OpenSpec validation failure cannot be resolved in scope
 - pre-existing work cannot be isolated from this workflow's changes
 - updating or pushing `main` would require conflict resolution or history rewriting
+- the synced baseline does not match the delta the change declared
 
 Never use a later phase to hide an incomplete earlier phase.
+
+A blocked archive does not un-ship the change. If phase 8 stops, say so plainly and leave
+the change active rather than reverting a push that was already verified.
 
 ## Final report
 
 Report the roadmap item and scope, OpenSpec change name, implementation summary,
-audit/review corrections, exact verification results, commit SHA and subject, push result,
-and any pre-existing files left untouched.
+audit/review corrections, exact verification results, both commit SHAs and subjects, push
+results, the archived change's directory name, and any pre-existing files left untouched.
