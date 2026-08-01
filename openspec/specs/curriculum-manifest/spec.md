@@ -92,7 +92,7 @@ manifest is populated in full while generators arrive one unit at a time.
 
 ### Requirement: Stage capability requirements are recorded
 
-Each stage SHALL record the capabilities its skills require — KaTeX rendering, fraction
+Each stage SHALL record the capabilities its skills require — choice input, KaTeX rendering, fraction
 keypad input, diagram rendering, expression input, number-line input, coordinate-plane
 input, chart rendering, and timed mode. Recording a requirement SHALL NOT imply it is
 built.
@@ -107,6 +107,12 @@ built.
 
 - **WHEN** a skill requires a capability that is not yet built
 - **THEN** the skill resolves as `planned` regardless of whether a generator exists
+
+#### Scenario: Consumer stages record the built choice capability
+
+- **WHEN** Stages A, C, and D are inspected
+- **THEN** each lists choice input as a required capability
+- **AND** choice input is marked available
 
 ### Requirement: Skills carry pacing metadata
 
