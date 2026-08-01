@@ -41,9 +41,24 @@ export type SolutionStep = {
 
 export type Operator = '+' | '−' | '×' | '÷'
 
+export type WholeNumberOperation =
+  | 'read'
+  | 'tens-digit'
+  | 'hundreds-digit'
+  | 'expanded-form'
+  | 'compare'
+  | 'order-ascending'
+  | 'round-to-10'
+  | 'round-to-100'
+
+export type WholeNumberData = {
+  values: number[]
+  operation: WholeNumberOperation
+}
+
 /** How the problem is presented. Column layout matches how arithmetic is taught. */
 export type Display =
-  | { kind: 'inline'; text: string }
+  | { kind: 'inline'; text: string; wholeNumber?: WholeNumberData }
   | { kind: 'column'; operands: number[]; operator: Operator }
   /**
    * A word problem: prose for the learner, operands for everything else.

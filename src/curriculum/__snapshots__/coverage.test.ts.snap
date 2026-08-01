@@ -14,7 +14,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "add-facts": [
     "add-facts-small",
   ],
-  "add-facts-small": [],
+  "add-facts-small": [
+    "round-to-100",
+  ],
   "add-tens": [
     "add-facts",
   ],
@@ -23,6 +25,28 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "add-words": [
     "add-three-numbers",
+  ],
+  "compare-numbers": [
+    "expanded-form",
+  ],
+  "expanded-form": [
+    "place-value-hundreds",
+  ],
+  "order-numbers": [
+    "compare-numbers",
+  ],
+  "place-value-hundreds": [
+    "place-value-tens",
+  ],
+  "place-value-tens": [
+    "read-numbers",
+  ],
+  "read-numbers": [],
+  "round-to-10": [
+    "order-numbers",
+  ],
+  "round-to-100": [
+    "round-to-10",
   ],
   "sub-2digit-borrow": [
     "sub-facts",

@@ -2,12 +2,12 @@
 
 What is left, in the order it should be done.
 
-**Status: 10 of 201 skills are playable.** All ten are in Units 1–2, and Unit 1 is complete.
+**Status: 18 of 201 skills are playable.** Stage A and Unit 1 are complete; Unit 2 has two.
 The keypad can now offer a sign, a decimal point or a fraction slash when a problem asks for
 one. Choice input is also built, so `AVAILABLE_CAPABILITIES` contains only `choice-input`;
-every playable skill still answers with whole digits. This line is the only progress number in
-the repo's documentation — the manifest and `npm test` are the authority, and everything
-below is scope rather than status.
+comparison and ordering use choices, while the other playable skills use the keypad. This
+line is the only progress number in the repo's documentation — the manifest and `npm test`
+are the authority, and everything below is scope rather than status.
 
 To re-derive it rather than trusting this file:
 
@@ -150,11 +150,11 @@ document's ✅ markers updated to match, which the cross-check enforces.
       `Capability` union and `AVAILABLE_CAPABILITIES`; Stages A, C and D record it because they
       contain its five named consumers.
 
-      No generator landed here. `compare-numbers` (0.5), `order-numbers` (0.6),
-      `compare-negatives` (6.2), `name-parts` (7.3), and `compare-decimals` (9.3) remain planned
-      content, with Unit 0 next.
+      No generator landed here. Unit 0 now consumes it in `compare-numbers` (0.5) and
+      `order-numbers` (0.6); `compare-negatives` (6.2), `name-parts` (7.3), and
+      `compare-decimals` (9.3) remain planned consumers.
 
-- [ ] **6 · Stage A · Unit 0** — M — 8 skills
+- [x] **6 · Stage A · Unit 0** — M — 8 skills — **shipped 2026-08-01**
 
       Place value, comparing, ordering, rounding. Where a learner who needs the beginning
       starts. `round-to-100` is a wall (the midpoint rule). Choice input landed in item 5.
@@ -187,9 +187,8 @@ document's ✅ markers updated to match, which the cross-check enforces.
 - [ ] **9 · Stage checkpoints** — S *(was part of B1)*
 
       A celebration at each stage boundary, not just per skill. Separated from item 4 because
-      it cannot fire until a stage is completable: all ten built skills are in Stage B, which
-      is 44 skills. After item 6, Stage A is complete and becomes the first checkpoint the app
-      can actually reach.
+      it cannot fire until a stage is completable. Stage A is now complete and becomes the
+      first checkpoint the app can actually reach; Stage B still has ten of its 44 skills.
 
       **The "max 2 unlocks at once" commitment is dropped here, and needs a decision.**
       `docs/curriculum.md` promises it, but the manifest's derived graph has a maximum

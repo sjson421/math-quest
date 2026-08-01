@@ -79,10 +79,7 @@ describe('the unlock rules', () => {
   })
 
   it('opens the root skill from first launch', () => {
-    // `add-facts-small` is 1.1, and became the course's root the moment it
-    // gained a generator — the whole of Unit 0 in front of it is still planned,
-    // so pass-through leaves it with no prerequisites at all.
-    expect(openSkills(initialProgress())).toEqual(['add-facts-small'])
+    expect(openSkills(initialProgress())).toEqual(['read-numbers'])
   })
 
   it('locks an id the manifest does not know', () => {
@@ -98,7 +95,7 @@ describe('the manifest is the authority', () => {
 
     // `add-facts` itself is open only because it has been practised — it now
     // sits behind `add-facts-small`, which this record has never touched.
-    expect(openSkills(justAddFacts)).toEqual(['add-facts-small', 'add-facts', 'add-tens'])
+    expect(openSkills(justAddFacts)).toEqual(['read-numbers', 'add-facts', 'add-tens'])
     expect(isUnlocked('sub-facts', justAddFacts)).toBe(false)
   })
 
@@ -117,14 +114,12 @@ describe('the manifest is the authority', () => {
   })
 
   it('locks a skill that has no generator, however far the learner has come', () => {
-    // 191 of the 201 are planned. They must never be offered, and they must
-    // never hold anyone up either — `add-facts-small` opens from a standing
-    // start despite sitting behind all eight of Unit 0.
+    // 183 of the 201 are planned. They must never be offered or hold anyone up.
     const finished = throughUnit1()
 
     expect(isUnlocked('sub-facts-small', finished)).toBe(false)
     expect(isUnlocked('sub-tens', finished)).toBe(false)
-    expect(isUnlocked('add-facts-small', initialProgress())).toBe(true)
+    expect(isUnlocked('read-numbers', initialProgress())).toBe(true)
   })
 })
 
@@ -186,7 +181,16 @@ describe('a practised skill is never re-locked', () => {
 
     expect(isUnlocked('add-facts', wasTheRoot)).toBe(true)
     expect(wasTheRoot.skills['add-facts'].mastery).toBe(3)
-    expect(isUnlocked('add-facts-small', wasTheRoot)).toBe(true)
+    expect(isUnlocked('add-facts-small', wasTheRoot)).toBe(false)
+  })
+
+  it('keeps add-facts-small open after Unit 0 becomes its prerequisite', () => {
+    const practised = progressWith({
+      'add-facts-small': { mastery: 1, attempts: 4, correct: 3 },
+    })
+
+    expect(isUnlocked('add-facts-small', practised)).toBe(true)
+    expect(practised.skills['add-facts-small'].mastery).toBe(1)
   })
 })
 
@@ -238,7 +242,7 @@ describe('surviving the sync round trip', () => {
     useProgress.getState().replaceProgress(ancient)
 
     expect(openSkills(useProgress.getState().progress)).toEqual([
-      'add-facts-small',
+      'read-numbers',
       'add-facts',
       'add-tens',
     ])

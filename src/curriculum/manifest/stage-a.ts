@@ -56,7 +56,7 @@ export const stageA: StageEntry = {
           blurb: 'Round to the nearest ten',
         },
         {
-          // Wall: the midpoint rule. 45 rounds to 50, and a learner who has been
+          // Wall: the midpoint rule. 250 rounds to 300, and a learner who has been
           // told "round down when it's below halfway" has no rule for exactly
           // halfway. Needs the midpoint predicted explicitly.
           id: 'round-to-100',

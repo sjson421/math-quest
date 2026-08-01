@@ -197,6 +197,16 @@ describe('forward references', () => {
     expect(fromPrompt.map((v) => v.rule)).toEqual(['forward-reference'])
   })
 
+  it('checks learner-facing inline display text', () => {
+    const violations = checkContent(
+      problem({ display: { kind: 'inline', text: 'Find the numerator' } }),
+      at({}, 'unit-1'),
+    )
+
+    expect(violations.map((v) => v.rule)).toEqual(['forward-reference'])
+    expect(violations[0].message).toContain('Find the numerator')
+  })
+
   it('matches plurals but not words that merely contain a term', () => {
     const plural = checkContent(problem({ hint: 'Add the exponents together.' }), at())
     // "primer" contains "prime"; a substring match would flag it.

@@ -39,7 +39,7 @@ Break these and something fails loudly — or worse, quietly.
 - **Skill ids are verbatim.** Never re-spell one. `times-7-8` is not `times-78`.
 - **A skill ships by gaining a generator**, never by being added to the manifest. State is
   derived at load: `implemented` needs a registered generator *and* every capability its
-  stage requires. `planned` is the normal state for 191 of 201 skills, not an error.
+  stage requires. `planned` is the normal state for 183 of 201 skills, not an error.
 - **`AVAILABLE_CAPABILITIES`** in `manifest/resolve.ts` is the one-line switch that turns a
   stage on once its infrastructure exists. It contains `choice-input` today.
 - **Two different `skillById`s.** `curriculum/index.ts` exports `generators` (the registry,
@@ -119,8 +119,8 @@ lands, and note decisions inline rather than only in chat.
   built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED` is for
   genuinely new surface.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — eight changes have shipped, the latest
-  being `choice-input`, archived 2026-08-01.
+  holds shipped changes. **The active queue contains `unit-0-numbers`**; eight earlier changes
+  have shipped, the latest being `choice-input`, archived 2026-08-01.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`

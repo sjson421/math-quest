@@ -49,8 +49,85 @@ function alwaysFiltered(skill: SkillGenerator): string[] {
  * screen. A generator that displays one problem and stores another answer —
  * the single worst bug this app could ship — fails here.
  */
-function recompute(problem: Problem): number {
+function numberWords(value: number): string {
+  const ones = [
+    'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
+    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
+    'seventeen', 'eighteen', 'nineteen',
+  ]
+  const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
+
+  if (value < 20) return ones[value]
+  if (value < 100) {
+    const rest = value % 10
+    return `${tens[Math.floor(value / 10)]}${rest ? `-${ones[rest]}` : ''}`
+  }
+
+  const rest = value % 100
+  return `${ones[Math.floor(value / 100)]} hundred${rest ? ` ${numberWords(rest)}` : ''}`
+}
+
+const expandedText = (value: number) =>
+  [Math.floor(value / 100) * 100, Math.floor((value % 100) / 10) * 10, value % 10]
+    .filter((part) => part > 0)
+    .join(' + ')
+
+function choiceIdFor(problem: Problem, label: string): string {
+  const choices = problem.choices ?? []
+  const ids = choices.map((choice) => choice.id)
+  if (new Set(ids).size !== ids.length)
+    throw new Error(`${problem.skillId}: choice ids are not unique`)
+
+  const matching = choices.filter((choice) => choice.label === label)
+  if (matching.length !== 1)
+    throw new Error(`${problem.skillId}: expected exactly one choice labelled "${label}"`)
+  return matching[0].id
+}
+
+function recompute(problem: Problem): number | string {
   const { display } = problem
+
+  if (display.kind === 'inline' && display.wholeNumber) {
+    const { operation, values } = display.wholeNumber
+    const [a, b] = values
+    const expectedText =
+      operation === 'read'
+        ? numberWords(a)
+        : operation === 'expanded-form'
+          ? expandedText(a)
+          : operation === 'compare'
+            ? `${a} ? ${b}`
+            : operation === 'order-ascending'
+              ? values.join(', ')
+              : String(a)
+
+    if (display.text !== expectedText)
+      throw new Error(
+        `${problem.skillId}: visible text "${display.text}" does not match "${expectedText}"`,
+      )
+
+    switch (operation) {
+      case 'read':
+      case 'expanded-form':
+        return a
+      case 'tens-digit':
+        return Math.floor(a / 10) % 10
+      case 'hundreds-digit':
+        return Math.floor(a / 100) % 10
+      case 'compare':
+        return choiceIdFor(problem, a < b ? '<' : a > b ? '>' : '=')
+      case 'order-ascending':
+        return choiceIdFor(problem, [...values].sort((x, y) => x - y).join(', '))
+      case 'round-to-10':
+        return Math.round(a / 10) * 10
+      case 'round-to-100':
+        return Math.round(a / 100) * 100
+      default: {
+        const unhandled: never = operation
+        throw new Error(`Unknown whole-number operation: ${unhandled}`)
+      }
+    }
+  }
 
   let operands: number[]
   let operator: string
@@ -83,12 +160,40 @@ function recompute(problem: Problem): number {
   }
 }
 
-const answerValue = (problem: Problem): number => {
+const answerValue = (problem: Problem): number | string => {
   if (problem.answer.kind === 'exact') {
     return toNumber(rational(problem.answer.n, problem.answer.d))
   }
   if (problem.answer.kind === 'approx') return problem.answer.value
-  throw new Error('choice answers have no numeric value')
+  return problem.answer.id
+}
+
+function sourceMagnitude(problem: Problem): number {
+  if (problem.display.kind === 'inline' && problem.display.wholeNumber) {
+    const { values } = problem.display.wholeNumber
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
+
+  const value = answerValue(problem)
+  if (typeof value !== 'number') {
+    throw new Error(`${problem.skillId}: choice answer has no source values`)
+  }
+  return Math.abs(value)
+}
+
+function scalingProblems(skill: SkillGenerator): string[] {
+  const magnitude = (difficulty: Difficulty) => {
+    const problems = Array.from({ length: ITERATIONS }, (_, i) =>
+      generateProblem(skill, seedFor(i, difficulty), difficulty),
+    )
+    return problems.reduce((sum, problem) => sum + sourceMagnitude(problem), 0) / problems.length
+  }
+
+  const low = magnitude(1)
+  const high = magnitude(5)
+  return high > low
+    ? []
+    : [`${skill.id}: difficulty 5 magnitude ${high} is not above difficulty 1 magnitude ${low}`]
 }
 
 describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, skill) => {
@@ -155,12 +260,7 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
   })
 
   it('scales operand size with difficulty', () => {
-    const magnitude = (d: Difficulty) => {
-      const problems = sample(d)
-      const total = problems.reduce((sum, p) => sum + Math.abs(answerValue(p)), 0)
-      return total / problems.length
-    }
-    expect(magnitude(5)).toBeGreaterThan(magnitude(1))
+    expect(scalingProblems(skill)).toEqual([])
   })
 
   it('produces varied problems rather than repeating one', () => {
@@ -260,6 +360,22 @@ describe('recompute', () => {
     difficulty: 1,
   })
 
+  const whole = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-whole',
+    prompt: 'Which digit is in the tens place?',
+    display: {
+      kind: 'inline',
+      text: '347',
+      wholeNumber: { values: [347], operation: 'tens-digit' },
+    },
+    answer: { kind: 'exact', n: 4, d: 1 },
+    inputMode: 'keypad',
+    hint: 'Read the middle digit.',
+    solution: [{ text: 'The tens digit is 4.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
   it('verifies a story from its carried operands, not its prose', () => {
     const problem = story([4, 3], 7)
     expect(recompute(problem)).toBe(7)
@@ -278,6 +394,169 @@ describe('recompute', () => {
     // 9 appears in the text; reading numbers out of the prose would find it.
     const problem = story([4, 3], 7)
     expect(recompute(problem)).not.toBe(16)
+  })
+
+  it('recomputes a whole-number keypad answer from carried values', () => {
+    expect(recompute(whole())).toBe(4)
+  })
+
+  it('names visible text that disagrees with carried values', () => {
+    const mismatched = whole({
+      display: {
+        kind: 'inline',
+        text: '346',
+        wholeNumber: { values: [347], operation: 'tens-digit' },
+      },
+    })
+
+    expect(() => recompute(mismatched)).toThrow('synthetic-whole: visible text')
+  })
+
+  it('catches a whole-number numeric answer that disagrees with its values', () => {
+    const wrong = whole({ answer: { kind: 'exact', n: 7, d: 1 } })
+
+    expect(answerValue(wrong)).not.toBe(recompute(wrong))
+  })
+
+  it('resolves a choice id through the independently derived label', () => {
+    const comparison = whole({
+      display: {
+        kind: 'inline',
+        text: '347 ? 354',
+        wholeNumber: { values: [347, 354], operation: 'compare' },
+      },
+      answer: { kind: 'choice', id: '-1' },
+      inputMode: 'choice',
+      choices: [
+        { id: '1', label: '>' },
+        { id: '-1', label: '<' },
+        { id: '0', label: '=' },
+      ],
+    })
+
+    expect(recompute(comparison)).toBe('-1')
+    expect(answerValue(comparison)).toBe(recompute(comparison))
+  })
+
+  it('catches a correct label mapped to the wrong answer id', () => {
+    const comparison = whole({
+      display: {
+        kind: 'inline',
+        text: '347 ? 354',
+        wholeNumber: { values: [347, 354], operation: 'compare' },
+      },
+      answer: { kind: 'choice', id: '1' },
+      inputMode: 'choice',
+      choices: [
+        { id: '-1', label: '<' },
+        { id: '0', label: '=' },
+        { id: '1', label: '>' },
+      ],
+    })
+
+    expect(answerValue(comparison)).not.toBe(recompute(comparison))
+  })
+
+  it.each([
+    [
+      'missing',
+      [
+        { id: '0', label: '=' },
+        { id: '1', label: '>' },
+      ],
+    ],
+    [
+      'duplicated',
+      [
+        { id: '-1', label: '<' },
+        { id: '2', label: '<' },
+        { id: '1', label: '>' },
+      ],
+    ],
+  ])('names an expected label that is %s', (_case, choices) => {
+    const comparison = whole({
+      display: {
+        kind: 'inline',
+        text: '347 ? 354',
+        wholeNumber: { values: [347, 354], operation: 'compare' },
+      },
+      answer: { kind: 'choice', id: '-1' },
+      inputMode: 'choice',
+      choices,
+    })
+
+    expect(() => recompute(comparison)).toThrow(
+      'synthetic-whole: expected exactly one choice labelled "<"',
+    )
+  })
+
+  it('names duplicate choice ids even when the expected label is unique', () => {
+    const comparison = whole({
+      display: {
+        kind: 'inline',
+        text: '347 ? 354',
+        wholeNumber: { values: [347, 354], operation: 'compare' },
+      },
+      answer: { kind: 'choice', id: '-1' },
+      inputMode: 'choice',
+      choices: [
+        { id: '-1', label: '<' },
+        { id: '-1', label: '=' },
+        { id: '1', label: '>' },
+      ],
+    })
+
+    expect(() => recompute(comparison)).toThrow('synthetic-whole: choice ids are not unique')
+  })
+})
+
+describe('difficulty reporting', () => {
+  const synthetic = (wholeNumber: boolean, flat: boolean): SkillGenerator => ({
+    id: flat ? 'flat-whole' : wholeNumber ? 'growing-whole' : 'growing-arithmetic',
+    name: 'Synthetic',
+    blurb: 'For testing difficulty',
+    generate(_rng, difficulty) {
+      const value = flat ? 40 : difficulty * 40
+      return wholeNumber
+        ? {
+            skillId: flat ? 'flat-whole' : 'growing-whole',
+            prompt: 'Round this value.',
+            display: {
+              kind: 'inline',
+              text: String(value),
+              wholeNumber: { values: [value], operation: 'round-to-10' },
+            },
+            answer: { kind: 'exact', n: value, d: 1 },
+            inputMode: 'keypad',
+            hint: 'Use the ones digit.',
+            solution: [{ text: `This rounds to ${value}.` }],
+            difficulty,
+          }
+        : {
+            skillId: 'growing-arithmetic',
+            prompt: 'What is the sum?',
+            display: { kind: 'inline', text: `${value} + ${value}` },
+            answer: { kind: 'exact', n: value * 2, d: 1 },
+            inputMode: 'keypad',
+            hint: 'Add the values.',
+            solution: [{ text: `Add ${value} and ${value}.` }],
+            difficulty,
+          }
+    },
+  })
+
+  it('names a flat whole-number ladder', () => {
+    expect(scalingProblems(synthetic(true, true))).toEqual([
+      'flat-whole: difficulty 5 magnitude 40 is not above difficulty 1 magnitude 40',
+    ])
+  })
+
+  it('accepts growing whole-number source values', () => {
+    expect(scalingProblems(synthetic(true, false))).toEqual([])
+  })
+
+  it('keeps measuring existing arithmetic by its numeric answer', () => {
+    expect(scalingProblems(synthetic(false, false))).toEqual([])
   })
 })
 

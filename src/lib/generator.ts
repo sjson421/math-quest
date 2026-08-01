@@ -25,7 +25,7 @@ export function generateProblem(
       ? toNumber(rational(problem.answer.n, problem.answer.d))
       : problem.answer.kind === 'approx'
         ? problem.answer.value
-        : NaN
+        : Number(problem.answer.id)
 
   const seen = new Set<number>()
   const misconceptions = problem.misconceptions.filter((m) => {

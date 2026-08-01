@@ -46,14 +46,14 @@ function InlineView({
   // a 375px phone — it wrapped, orphaning the operator on its own line.
   //
   // Seven characters, not six: `sub-facts` tops out at "18 − 9", which still
-  // fits, and it is already shipped. Every inline skill built so far therefore
-  // renders at exactly the size it does today.
+  // fits, and it is already shipped. Existing inline skills therefore keep
+  // their size, while long number names step down again for phone width.
+  const long = display.text.length > 20
   const wide = display.text.length > 6
+  const size = long ? 'text-3xl' : wide ? 'text-5xl' : 'text-6xl'
 
   return (
-    <div
-      className={`flex items-baseline justify-center gap-3 ${wide ? 'text-5xl' : 'text-6xl'}`}
-    >
+    <div className={`flex items-baseline justify-center gap-3 ${size}`}>
       <span className="font-bold tabular-nums tracking-tight">{display.text}</span>
       <span className="font-bold text-ink-faint">=</span>
       <EntrySlot value={entry} mode={entryMode} />

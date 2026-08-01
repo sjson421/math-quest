@@ -131,14 +131,14 @@ Self-assessed skips are the risky ones, so the system watches them:
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 0.1 | `read-numbers` | Read numerals to 999 | `quick` |
-| 0.2 | `place-value-tens` | Name the tens digit | |
-| 0.3 | `place-value-hundreds` | Name the hundreds digit | |
-| 0.4 | `expanded-form` | 347 = 300 + 40 + 7 | |
-| 0.5 | `compare-numbers` | Use <, >, = | |
-| 0.6 | `order-numbers` | Order three numbers | |
-| 0.7 | `round-to-10` | Round to nearest ten | |
-| 0.8 | `round-to-100` | Round to nearest hundred | ⚠️ midpoint rule (45 → 50) |
+| 0.1 | `read-numbers` | Read numerals to 999 | ✅ `quick` |
+| 0.2 | `place-value-tens` | Name the tens digit | ✅ |
+| 0.3 | `place-value-hundreds` | Name the hundreds digit | ✅ |
+| 0.4 | `expanded-form` | 347 = 300 + 40 + 7 | ✅ |
+| 0.5 | `compare-numbers` | Use <, >, = | ✅ |
+| 0.6 | `order-numbers` | Order three numbers | ✅ |
+| 0.7 | `round-to-10` | Round to nearest ten | ✅ |
+| 0.8 | `round-to-100` | Round to nearest hundred | ✅ ⚠️ midpoint rule (250 → 300) |
 
 ---
 

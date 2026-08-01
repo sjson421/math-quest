@@ -71,8 +71,23 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(10)
+    expect(documentedAsBuilt).toHaveLength(18)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
+  })
+
+  it('matches every generator name and blurb to its manifest entry', () => {
+    const mismatches = allSkills
+      .filter((generator) => {
+        const entry = manifestIndex.get(generator.id)?.skill
+        return entry?.name !== generator.name || entry.blurb !== generator.blurb
+      })
+      .map((generator) => generator.id)
+    const longBlurbs = allSkills
+      .filter((generator) => generator.blurb.length > 32)
+      .map((generator) => generator.id)
+
+    expect(mismatches).toEqual([])
+    expect(longBlurbs).toEqual([])
   })
 
   it('report the unit the manifest puts them in, not the file they live in', () => {
@@ -89,6 +104,14 @@ describe('the skills that are built', () => {
 
     expect(stage?.requires).toBeUndefined()
     expect(documentedAsBuilt.every((id) => skillState(id) === 'implemented')).toBe(true)
+  })
+
+  it('implements Stage A because its choice input capability is available', () => {
+    const stage = manifestIndex.get('read-numbers')?.stage
+    const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
+
+    expect(stage?.requires).toEqual(['choice-input'])
+    expect(stageIds.every((id) => skillState(id) === 'implemented')).toBe(true)
   })
 })
 
@@ -122,9 +145,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 191 skills out of the skill tree entirely', () => {
+  it('leaves the other 183 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(10)
+    expect(offered).toHaveLength(18)
   })
 })
 
@@ -147,7 +170,7 @@ describe('the unlock graph the store gates on', () => {
   })
 
   it('matches the committed snapshot for the skills that are built', () => {
-    // Restricted to implemented skills because the other 191 have no edges that
+    // Restricted to implemented skills because the other 183 have no edges that
     // can gate anyone yet. Committed so the next change that moves an edge has
     // to look at it — this is the review surface for a re-lock.
     const graph = Object.fromEntries(

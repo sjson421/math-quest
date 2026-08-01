@@ -45,6 +45,24 @@ function skillPredicting(misconceptions: Misconception[], answer = 12): SkillGen
   }
 }
 
+function choiceSkill(id: string, misconceptions: Misconception[]): SkillGenerator {
+  return {
+    ...skillPredicting(misconceptions),
+    generate(rng, difficulty) {
+      const problem = skillPredicting(misconceptions).generate(rng, difficulty)
+      return {
+        ...problem,
+        answer: { kind: 'choice', id },
+        inputMode: 'choice',
+        choices: [
+          { id, label: 'Expected' },
+          { id: 'other', label: 'Other' },
+        ],
+      }
+    },
+  }
+}
+
 const tagsOf = (problem: Problem) => (problem.misconceptions ?? []).map((m) => m.tag)
 
 describe('generateProblem drops predictions that cannot help', () => {
@@ -153,6 +171,18 @@ describe('generateProblem drops predictions that cannot help', () => {
     }
 
     expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['off-by-one'])
+  })
+
+  it('drops a prediction matching a numeric choice id', () => {
+    const skill = choiceSkill('1', [miss(1, 'equals-choice'), miss(2, 'other-choice')])
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['other-choice'])
+  })
+
+  it('keeps numeric predictions when the choice id is opaque', () => {
+    const skill = choiceSkill('right-choice', [miss(1, 'numeric-mistake')])
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['numeric-mistake'])
   })
 })
 
