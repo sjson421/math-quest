@@ -103,14 +103,14 @@ Work is planned as **OpenSpec changes**. Skills live in `.claude/skills/` and
 `/openspec-archive-change`. Task lists are the running record — mark each item done as it
 lands, and note decisions inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, seven capabilities —
+- `openspec/specs/` is the **baseline**: what the system does today, eight capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-content-contract`, `problem-generation`,
-  `word-problem-phrasing`, `progress-sync`, `recovery-key`. A change amending built behaviour
-  writes `## MODIFIED Requirements` against one of these; `## ADDED` is for genuinely new
-  surface.
+  `word-problem-phrasing`, `progress-sync`, `recovery-key`, `answer-entry`. A change amending
+  built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED` is for
+  genuinely new surface.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **`per-problem-keypad-rules` is active** — five changes shipped
-  before it, the latest being `unit-1-completion`, archived 2026-08-01.
+  holds shipped changes. **The active queue is empty** — six changes shipped, the latest
+  being `per-problem-keypad-rules`, archived 2026-08-01.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`
