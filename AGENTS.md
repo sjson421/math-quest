@@ -31,6 +31,12 @@ Break these and something fails loudly — or worse, quietly.
   `src/curriculum/manifest/`, one file per stage, 201 skills. `docs/curriculum.md` is its
   human twin and the two **cross-check in the test suite** — editing a skill row in one
   without the other is a test failure, by design.
+- **The navigation reads `course`, a derivation, not a list.** `resolveCourseTree()` returns
+  the stages and units holding a playable skill, in manifest order at all three levels. It
+  replaced a hand-written `units: Unit[]`, which had already drifted — its literals said
+  `unit-00` where the manifest says `unit-0`, and nothing failed because nothing read the
+  hand-written id. Unit modules export `SkillGenerator[]` now; there is no `Unit` type and
+  no second place a unit's name, id, order or membership is written down.
 - **`docs/curriculum.md` is load-bearing, not reference material.** `manifest/curriculum-doc.ts`
   imports it with `?raw`, so moving, renaming, or trimming its tables breaks the build and 17
   tests. It is also the *only* external check on 201 hand-transcribed ids, it holds the
@@ -119,8 +125,8 @@ lands, and note decisions inline rather than only in chat.
   built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED` is for
   genuinely new surface.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — ten changes have shipped, the latest
-  being `unit-2-subtraction`, archived 2026-08-01.
+  holds shipped changes. **`skill-tree-navigation` is active** — ten changes have shipped, the
+  latest being `unit-2-subtraction`, archived 2026-08-01.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`

@@ -1,6 +1,6 @@
 import { intAnswer } from '../lib/answer'
 import { constrain } from '../lib/rng'
-import type { Unit } from '../lib/types'
+import type { SkillGenerator } from '../lib/types'
 import { band, defineSkill } from './engine'
 
 const SMALL = [
@@ -511,18 +511,18 @@ const roundTo100 = defineSkill({
   },
 })
 
-export const unit00: Unit = {
-  id: 'unit-00',
-  name: 'Numbers & Place Value',
-  color: 'powder',
-  skills: [
-    readNumbers,
-    placeValueTens,
-    placeValueHundreds,
-    expandedFormSkill,
-    compareNumbers,
-    orderNumbers,
-    roundTo10,
-    roundTo100,
-  ],
-}
+/**
+ * Curriculum order, which is the order the cards render and therefore the order
+ * they open in. The unit's id, name and colour are not repeated here: the
+ * manifest declares the first two and `course` derives the tree from it.
+ */
+export const unit00: SkillGenerator[] = [
+  readNumbers,
+  placeValueTens,
+  placeValueHundreds,
+  expandedFormSkill,
+  compareNumbers,
+  orderNumbers,
+  roundTo10,
+  roundTo100,
+]

@@ -108,11 +108,3 @@ export type SkillGenerator = {
    */
   generate(rng: import('./rng').Rng, difficulty: Difficulty): Problem
 }
-
-export type Unit = {
-  id: string
-  name: string
-  /** Palette key used to colour this unit's nodes on the skill tree. */
-  color: 'blossom' | 'lilac' | 'mint' | 'butter' | 'powder'
-  skills: SkillGenerator[]
-}

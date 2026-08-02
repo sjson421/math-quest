@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import {
   indexSkills,
+  resolveCourseTree,
   resolvePrerequisites,
   resolveSkillState,
   resolveSkillStates,
   resolveUnlockPrerequisites,
 } from './resolve'
+import type { CourseStage } from './resolve'
 import type { Capability, SkillEntry, SkillState, StageEntry } from './types'
 
 /**
@@ -239,6 +241,102 @@ describe('resolveSkillStates', () => {
     // c1 has a generator but stage-y needs katex, which is not built.
     expect(states.get('c1')).toBe('planned')
     expect(states.size).toBe(7)
+  })
+})
+
+describe('resolveCourseTree', () => {
+  /** Ids in the given order; everything else in the manifest planned. */
+  const states = (implemented: string[]): Map<string, SkillState> =>
+    new Map(
+      [...indexSkills(stages).keys()].map((id) => [
+        id,
+        implemented.includes(id) ? 'implemented' : 'planned',
+      ]),
+    )
+
+  /** `[stage, [unit, [skill]]]`, which is what the assertions are actually about. */
+  const shape = (course: CourseStage[]) =>
+    course.map(({ stage, units }) => [
+      stage.id,
+      units.map(({ unit, skills }) => [unit.id, skills.map((s) => s.id)]),
+    ])
+
+  it('carries only the skills that can be played', () => {
+    const course = resolveCourseTree(stages, states(['a1', 'a3']))
+
+    expect(shape(course)).toEqual([['stage-x', [['unit-1', ['a1', 'a3']]]]])
+  })
+
+  it('omits a unit with no playable skill rather than leaving it empty', () => {
+    // unit-2 holds b1 and b2, neither implemented. An empty unit on screen
+    // would tease course that is not written.
+    const course = resolveCourseTree(stages, states(['a1', 'c1', 'c2']))
+    const stageX = course.find((entry) => entry.stage.id === 'stage-x')
+
+    expect(stageX?.units.map((u) => u.unit.id)).toEqual(['unit-1'])
+  })
+
+  it('omits a stage left with no playable unit', () => {
+    const course = resolveCourseTree(stages, states(['a1']))
+
+    expect(course.map((entry) => entry.stage.id)).toEqual(['stage-x'])
+  })
+
+  it('is empty when nothing is implemented', () => {
+    expect(resolveCourseTree(stages, states([]))).toEqual([])
+  })
+
+  it('keeps manifest order at all three levels', () => {
+    const course = resolveCourseTree(stages, states(['a1', 'a2', 'a3', 'b1', 'b2', 'c1', 'c2']))
+
+    expect(shape(course)).toEqual([
+      [
+        'stage-x',
+        [
+          ['unit-1', ['a1', 'a2', 'a3']],
+          ['unit-2', ['b1', 'b2']],
+        ],
+      ],
+      ['stage-y', [['unit-3', ['c1', 'c2']]]],
+    ])
+  })
+
+  it('ignores the order the states arrive in', () => {
+    // The paired offender case. Order is structural here — it comes from
+    // walking the manifest — so this is what proves it, by handing the
+    // derivation a state map built back to front and getting the manifest's
+    // order out anyway. A version that iterated `states` would fail here.
+    const reversed = new Map(
+      [...states(['a1', 'a2', 'a3', 'b1', 'b2'])].reverse(),
+    )
+
+    expect(shape(resolveCourseTree(stages, reversed))).toEqual([
+      [
+        'stage-x',
+        [
+          ['unit-1', ['a1', 'a2', 'a3']],
+          ['unit-2', ['b1', 'b2']],
+        ],
+      ],
+    ])
+  })
+
+  it('carries the manifest entry, so pacing markers survive the walk', () => {
+    const marked: StageEntry[] = [
+      {
+        id: 'stage-x',
+        name: 'X',
+        units: [
+          { id: 'unit-1', name: 'One', skills: [skill('a1', { quick: true, wall: true })] },
+        ],
+      },
+    ]
+    const course = resolveCourseTree(
+      marked,
+      new Map<string, SkillState>([['a1', 'implemented']]),
+    )
+
+    expect(course[0].units[0].skills[0]).toMatchObject({ quick: true, wall: true })
   })
 })
 

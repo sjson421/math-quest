@@ -1,30 +1,45 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { Home } from './components/Home'
+import { course, getSkill, manifestIndex } from './curriculum'
+import { Home, type TreeLevel } from './components/Home'
 import { Lesson } from './components/Lesson'
 import { Mascot } from './components/Mascot'
 import { RecoveryKeyIntro } from './components/RecoveryKey'
 import { Settings } from './components/Settings'
+import { currentUnitId } from './lib/course'
 import { initSync, useSyncStatus } from './lib/sync'
 import type { SkillGenerator } from './lib/types'
-import { useProgress } from './store/progress'
+import { useProgress, type Progress } from './store/progress'
 import { useRecoveryKey } from './store/recovery-key'
 
+/**
+ * Every screen names where leaving it goes, so no back edge has to be guessed.
+ * `lesson` carries the unit it was started from rather than recomputing the
+ * current one on exit — finishing a lesson can move the frontier, and the
+ * learner should land where they were, not where they now are.
+ */
 type Screen =
-  | { name: 'home' }
-  | { name: 'lesson'; skill: SkillGenerator }
-  | { name: 'settings' }
+  | TreeLevel
+  | { name: 'lesson'; skill: SkillGenerator; unitId: string }
+  | { name: 'settings'; back: TreeLevel }
 
 export default function App() {
   const hydrate = useProgress((s) => s.hydrate)
   const loaded = useProgress((s) => s.loaded)
   const keyLoaded = useRecoveryKey((s) => s.loaded)
   const introduced = useRecoveryKey((s) => s.introduced)
-  const hasProgress = useProgress((s) => s.progress.xp > 0)
-  const [screen, setScreen] = useState<Screen>({ name: 'home' })
+  const progress = useProgress((s) => s.progress)
+
+  // `null` means "wherever the learner is now", resolved at render rather than
+  // in an effect: the fallback is only reached after `loaded`, so there is no
+  // hydration race and no extra frame. The first navigation pins it.
+  const [screen, setScreen] = useState<Screen | null>(null)
+  // `??` short-circuits, so the frontier is only worked out while the learner
+  // has not navigated — once they have, this costs nothing per render.
+  const active: Screen = screen ?? openingLevel(progress)
 
   // Held back until the first lesson is done, and never shown mid-lesson.
-  const showKeyIntro = keyLoaded && !introduced && hasProgress && screen.name === 'home'
+  const showKeyIntro = keyLoaded && !introduced && progress.xp > 0 && isTreeLevel(active)
 
   useEffect(() => {
     // Sync starts only after local progress is on screen. It is additive — the
@@ -45,29 +60,68 @@ export default function App() {
       <SyncNotice />
       <AnimatePresence mode="wait">
         <motion.div
-          key={screen.name}
+          key={screenKey(active)}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.16 }}
           className="h-full"
         >
-          {screen.name === 'home' && (
+          {isTreeLevel(active) && (
             <Home
-              onStart={(skill) => setScreen({ name: 'lesson', skill })}
-              onOpenSettings={() => setScreen({ name: 'settings' })}
+              level={active}
+              onNavigate={setScreen}
+              onStart={(skillId) =>
+                setScreen({
+                  name: 'lesson',
+                  skill: getSkill(skillId),
+                  // From the manifest rather than from the level on screen, so
+                  // exit lands in the right unit however the lesson was reached.
+                  unitId: manifestIndex.get(skillId)?.unit.id ?? '',
+                })
+              }
+              onOpenSettings={() => setScreen({ name: 'settings', back: active })}
             />
           )}
-          {screen.name === 'lesson' && (
-            <Lesson skill={screen.skill} onExit={() => setScreen({ name: 'home' })} />
+          {active.name === 'lesson' && (
+            <Lesson
+              skill={active.skill}
+              onExit={() => setScreen({ name: 'skills', unitId: active.unitId })}
+            />
           )}
-          {screen.name === 'settings' && <Settings onClose={() => setScreen({ name: 'home' })} />}
+          {active.name === 'settings' && <Settings onClose={() => setScreen(active.back)} />}
         </motion.div>
       </AnimatePresence>
 
       {showKeyIntro && <RecoveryKeyIntro />}
     </div>
   )
+}
+
+/**
+ * Where the app opens: the skill level of the learner's current unit.
+ *
+ * Only an empty course has no unit to open at, which cannot happen while any
+ * generator is registered — but the stage level renders an empty tree without
+ * complaint, and that beats a screen that renders nothing.
+ */
+function openingLevel(progress: Progress): TreeLevel {
+  const unitId = currentUnitId(course, progress)
+  return unitId ? { name: 'skills', unitId } : { name: 'stages' }
+}
+
+const isTreeLevel = (screen: Screen): screen is TreeLevel =>
+  screen.name === 'stages' || screen.name === 'units' || screen.name === 'skills'
+
+/**
+ * Keyed on the level *and* what it is showing, so moving between two stages or
+ * two units animates like every other transition instead of swapping in place.
+ */
+function screenKey(screen: Screen): string {
+  if (screen.name === 'units') return `units:${screen.stageId}`
+  if (screen.name === 'skills') return `skills:${screen.unitId}`
+  if (screen.name === 'lesson') return `lesson:${screen.skill.id}`
+  return screen.name
 }
 
 /**

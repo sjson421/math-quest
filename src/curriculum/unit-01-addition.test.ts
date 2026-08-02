@@ -17,7 +17,7 @@ import { unit01 } from './unit-01-addition'
  * problems is not a reviewable diff.
  */
 
-describe.each(unit01.skills.map((s) => [s.id, s] as const))(
+describe.each(unit01.map((s) => [s.id, s] as const))(
   'recorded output: %s',
   (_id, skill) => {
     it('matches the output recorded before the engine extraction', () => {
@@ -29,20 +29,20 @@ describe.each(unit01.skills.map((s) => [s.id, s] as const))(
 describe('the gate itself', () => {
   it('renders every field the generators set', () => {
     expect(
-      unrenderedKeys(unit01.skills),
+      unrenderedKeys(unit01),
       'add these to RENDERED_KEYS and render them in format()',
     ).toEqual([])
   })
 
   it('notices a reworded hint', () => {
     // A checker that returns "no problems" looks exactly like a clean codebase.
-    const problem = generateProblem(unit01.skills[0], 1, 1)
+    const problem = generateProblem(unit01[0], 1, 1)
     const reworded = { ...problem, hint: 'Something else entirely.' }
     expect(format(reworded, 1)).not.toBe(format(problem, 1))
   })
 
   it('notices a changed misconception nudge', () => {
-    const problem = generateProblem(unit01.skills[0], 1, 1)
+    const problem = generateProblem(unit01[0], 1, 1)
     const misconceptions = (problem.misconceptions ?? []).map((m, i) =>
       i === 0 ? { ...m, nudge: 'Reworded.' } : m,
     )

@@ -6,28 +6,32 @@
  * module is the join between the two: it registers what exists under its
  * manifest id, and derives which skills can actually be played.
  *
- * Only `implemented` skills are offered to the learner. `units` stays the list
- * the skill tree renders, so a skill becomes visible by gaining a generator —
- * never by being added to the manifest.
+ * Only `implemented` skills are offered to the learner. `course` is the tree the
+ * navigation renders, derived from the manifest rather than written down, so a
+ * skill becomes visible by gaining a generator — never by being added to the
+ * manifest, and never by being added to a second list here.
  */
 
-import type { SkillGenerator, Unit } from '../lib/types'
+import type { SkillGenerator } from '../lib/types'
 import { unit00 } from './unit-00-numbers'
 import { unit01 } from './unit-01-addition'
 import { unit02 } from './unit-02-subtraction'
 import {
   indexSkills,
+  resolveCourseTree,
   resolvePrerequisites,
   resolveSkillStates,
   resolveUnlockPrerequisites,
   stages,
 } from './manifest'
-import type { SkillState } from './manifest'
+import type { CourseStage, CourseUnit, SkillState } from './manifest'
 
-/** Units in learning order. Planned units stay absent until their generators land. */
-export const units: Unit[] = [unit00, unit01, unit02]
-
-export const allSkills: SkillGenerator[] = units.flatMap((u) => u.skills)
+/**
+ * Every registered generator. Order is the order units are listed here and
+ * skills within them, which the manifest re-imposes on anything the learner
+ * sees — see `course` below.
+ */
+export const allSkills: SkillGenerator[] = [...unit00, ...unit01, ...unit02]
 
 /**
  * Generators keyed by manifest skill id.
@@ -37,10 +41,6 @@ export const allSkills: SkillGenerator[] = units.flatMap((u) => u.skills)
  * asserts every key here exists in the manifest.
  */
 export const generators = new Map(allSkills.map((s) => [s.id, s]))
-
-export const unitBySkillId = new Map(
-  units.flatMap((u) => u.skills.map((s) => [s.id, u] as const)),
-)
 
 export function getSkill(id: string): SkillGenerator {
   const skill = generators.get(id)
@@ -93,3 +93,39 @@ export const implementedSkillIds = [...skillStates]
  */
 export const unlockPrerequisites: ReadonlyMap<string, readonly string[]> =
   resolveUnlockPrerequisites(resolvePrerequisites(stages), skillStates)
+
+/**
+ * The course the learner can navigate — stages, their units, and the playable
+ * skills in each.
+ *
+ * The fourth derivation over the same two inputs as `skillStates`, and the one
+ * the navigation renders. It replaced a hand-written array of units, which had
+ * already drifted: those literals declared `unit-00` while the manifest declared
+ * `unit-0`, and nothing failed because nothing read the hand-written id. There
+ * is now nothing to drift from.
+ *
+ * Holds manifest entries rather than generators. Reach for `getSkill(id)` at the
+ * point a lesson starts; everything a card renders — name, blurb, `quick`,
+ * `wall` — is on the entry, and a test pins the two descriptions equal.
+ */
+export const course: readonly CourseStage[] = resolveCourseTree(stages, skillStates)
+
+/**
+ * Id lookups into `course`, built once.
+ *
+ * The navigation asks all three every render — which unit is open, which stage
+ * it belongs to, which stage is open — and scanning the tree for each would walk
+ * 23 units to answer a question the shape of the course already fixes.
+ */
+export const courseUnitById: ReadonlyMap<string, CourseUnit> = new Map(
+  course.flatMap(({ units }) => units.map((entry) => [entry.unit.id, entry] as const)),
+)
+
+export const courseStageById: ReadonlyMap<string, CourseStage> = new Map(
+  course.map((entry) => [entry.stage.id, entry] as const),
+)
+
+/** The stage a playable unit sits in — where back from its skills goes. */
+export const courseStageByUnitId: ReadonlyMap<string, CourseStage> = new Map(
+  course.flatMap((entry) => entry.units.map(({ unit }) => [unit.id, entry] as const)),
+)

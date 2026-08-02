@@ -206,20 +206,47 @@ document's ✅ markers updated to match, which the cross-check enforces.
       unit's earlier skills stopped being seen through — which is the second time item 1's
       never-re-lock rule has been load-bearing rather than defensive.
 
-- [ ] **8 · Skill-tree navigation** — L *(was B3)*
+- [x] **8 · Skill-tree navigation** — L *(was B3)* — **shipped 2026-08-02**
 
-      `Home.tsx` renders a flat list of one unit's skills. Twenty-three units need stage → unit
-      → skill navigation, per-unit progress, and locked/planned states that stay hidden rather
-      than teasing. Worth doing once items 2, 6 and 7 have made three units real.
+      Stage → unit → skill, with per-unit and per-stage progress. A stage or unit holding no
+      playable skill is **absent**, not greyed: six of eight stages and twenty of
+      twenty-three units simply are not there, so nothing on screen counts the unwritten
+      remainder. A *locked* unit stays visible — on a fresh install that is the whole of
+      Units 1 and 2, which is honest about what is coming rather than pretending it is open.
 
-      Worth knowing before designing it: despite the name, the derived graph is a **path**, not
-      a tree — one root, and every skill has exactly one successor. Unless item 9's branching
-      question is answered otherwise, this is navigation over a line, which is a much smaller
-      problem than a tree.
+      **The hand-written unit list is gone, and that turned out to be the substance of this
+      item.** `units: Unit[]` in `curriculum/index.ts` was a second authority for course
+      structure, and it had already drifted: its literals declared `unit-00` while the
+      manifest declared `unit-0`, and nothing failed because nothing read the hand-written id.
+      Left behind: **`resolveCourseTree()`**, the fourth derivation over the same two inputs
+      as `skillStates` — the stages and units holding a playable skill, in manifest order at
+      all three levels. The unit modules now export `SkillGenerator[]`, the `Unit` type is
+      gone from `lib/types.ts`, and the unread `unitBySkillId` went with it. A generator can
+      no longer be filed under the wrong unit by being written in the wrong file.
 
-      Item 1 already took the ordering half: presentation follows manifest order, pinned by a
-      test and now a requirement in `skill-progression`. What is left here is the stage → unit
-      hierarchy, per-unit progress, and keeping planned skills out of sight.
+      The cost of deriving order is that `coverage.test.ts`'s ordering assertion became
+      structurally true — a test that cannot fail. It is still there, but the rules behind it
+      are now tested against synthetic stages in `resolve.test.ts`, including the case that
+      proves order comes from walking the manifest rather than from the state map handed in.
+
+      **The app opens at the skill level of the current unit, not at the stage list.** Three
+      levels would otherwise turn a one-tap daily path into three, and the hierarchy exists to
+      make 201 skills navigable, not to tax the one skill the learner came for. The current
+      unit holds the **frontier**: the first unlocked skill still below `UNLOCK_THRESHOLD`.
+      Not below `MAX_MASTERY` — a skill opens the next at 2 and caps at 5, so a learner who
+      keeps moving leaves a trail of skills at 2, 3 and 4 behind them, and that rule would
+      have opened Unit 0 forever. `lib/course.ts` owns it, and a test pins the case the
+      rejected rule gets wrong.
+
+      Also here: unit colour is derived from manifest position through a five-tone cycle
+      rather than a `color` field, opening powder/blossom/mint so the three built units keep
+      the colours they had. Progress is a mastery *share* over playable skills only — a
+      partly-built unit reports against what can be played, and the accepted cost is that a
+      full bar drops when a new generator lands, because there is genuinely more to learn.
+
+      The observation that survived: despite the name, the derived graph is a **path**, not a
+      tree — one root, every skill with exactly one successor. This is navigation over a line,
+      and item 9's branching question is still open and still unanswered here.
 
 - [ ] **9 · Stage checkpoints** — S *(was part of B1)*
 

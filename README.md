@@ -21,9 +21,9 @@ KaTeX, fraction input, diagrams, expression input, a tap-to-plot coordinate plan
 and timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
-milestone, what blocks what, and the unbuilt product features (lesson-loop mechanics,
-skill-tree navigation, dress-up, skip-ahead, review). It lives in one place so it cannot
-drift out of step with this file.
+milestone, what blocks what, and the unbuilt product features (dress-up, skip-ahead,
+review, stage checkpoints). It lives in one place so it cannot drift out of step with this
+file.
 
 ## Running it
 
@@ -169,7 +169,8 @@ src/
                 content rules, types
   curriculum/   generators, plus the registry that resolves them against the manifest
     manifest/   the whole course as data — one file per stage, and the derivation rules
-  components/   Mascot, Lesson, Keypad, ProblemView, Home, Settings
+  components/   Mascot, Lesson, Keypad, ProblemView, Settings, and the course tree —
+                Home wraps StageList, UnitList and SkillList
   store/        zustand + IndexedDB persistence, mastery and unlock rules
 docs/           curriculum.md — the course in prose, cross-checked against the manifest
                 roadmap.md — everything left to build, and what blocks what

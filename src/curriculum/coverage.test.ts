@@ -11,12 +11,12 @@
 import { describe, expect, it } from 'vitest'
 import {
   allSkills,
+  course,
   generators,
   implementedSkillIds,
   manifestIndex,
   skillState,
   skillStates,
-  units,
   unlockPrerequisites,
 } from './index'
 import { parseCurriculumDoc } from './manifest/curriculum-doc'
@@ -117,7 +117,9 @@ describe('the skills that are built', () => {
 })
 
 describe('what the learner is offered', () => {
-  const offered = units.flatMap((unit) => unit.skills.map((skill) => skill.id))
+  const offered = course.flatMap(({ units }) =>
+    units.flatMap(({ skills }) => skills.map((skill) => skill.id)),
+  )
 
   it('offers only implemented skills', () => {
     const notPlayable = offered.filter((id) => skillState(id) !== 'implemented')
@@ -139,16 +141,45 @@ describe('what the learner is offered', () => {
   })
 
   it('offers them in curriculum order, so the cards open top to bottom', () => {
-    // Unsorted, unlike the test above, which is the whole point: the unlock
-    // graph is a line, so a card out of order reads as an arbitrary padlock with
-    // nothing to say which one is next. A new generator appended to the end of
-    // its file fails here rather than landing in the wrong place on screen.
+    // Unsorted, unlike the test above: the unlock graph is a line, so a card out
+    // of order reads as an arbitrary padlock with nothing to say which one is
+    // next. `course` derives this order from the manifest rather than from the
+    // order generators were registered in, which is what makes it hold — the
+    // rules themselves are tested against synthetic stages in resolve.test.ts.
     expect(offered).toEqual(implementedSkillIds)
   })
 
   it('leaves the other 177 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
     expect(offered).toHaveLength(24)
+  })
+
+  it('groups them under the unit and stage the manifest declares', () => {
+    const located = course.flatMap(({ stage, units }) =>
+      units.flatMap(({ unit, skills }) =>
+        skills.map((skill) => [skill.id, unit.id, stage.id] as const),
+      ),
+    )
+    const misfiled = located.filter(
+      ([id, unitId, stageId]) =>
+        manifestIndex.get(id)?.unit.id !== unitId ||
+        manifestIndex.get(id)?.stage.id !== stageId,
+    )
+
+    expect(misfiled).toEqual([])
+    // Spot-checked against the ids the old hand-written array got wrong: it
+    // called Unit 0 `unit-00` while the manifest calls it `unit-0`.
+    expect(located).toContainEqual(['read-numbers', 'unit-0', 'stage-a'])
+    expect(located).toContainEqual(['sub-facts', 'unit-2', 'stage-b'])
+  })
+
+  it('shows the three built units, and no stage or unit that has nothing to play', () => {
+    expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b'])
+    expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
+      'unit-0',
+      'unit-1',
+      'unit-2',
+    ])
   })
 })
 

@@ -1,5 +1,5 @@
 import { intAnswer } from '../lib/answer'
-import type { Unit } from '../lib/types'
+import type { SkillGenerator } from '../lib/types'
 import {
   THREE_DIGIT,
   TWO_DIGIT,
@@ -483,21 +483,18 @@ const addWords = defineSkill({
   },
 })
 
-export const unit01: Unit = {
-  id: 'unit-01',
-  name: 'Addition',
-  color: 'blossom',
-  // Curriculum order, not the order these were written, because this is the
-  // order the cards are rendered in and therefore the order they open in. A
-  // test pins this against `implementedSkillIds`.
-  skills: [
-    addFactsSmall,
-    addFacts,
-    addTens,
-    add2NoCarry,
-    add2Carry,
-    add3Digit,
-    addThreeNumbers,
-    addWords,
-  ],
-}
+// Curriculum order, not the order these were written, because this is the
+// order the cards are rendered in and therefore the order they open in. A test
+// pins this against `implementedSkillIds`. The unit's id, name and colour are
+// not repeated here: the manifest declares the first two and `course` derives
+// the tree from it.
+export const unit01: SkillGenerator[] = [
+  addFactsSmall,
+  addFacts,
+  addTens,
+  add2NoCarry,
+  add2Carry,
+  add3Digit,
+  addThreeNumbers,
+  addWords,
+]

@@ -1,13 +1,14 @@
 /**
  * Derivation over the curriculum manifest.
  *
- * Three things are computed rather than written down, each for the same reason:
+ * Four things are computed rather than written down, each for the same reason:
  * writing them out by hand across 201 skills would be 201 chances to make a
  * mistake, and storing them would go stale.
  *
  *  - prerequisites — derived from unit order plus unit-level `dependsOn`
  *  - skill state   — derived from the generator registry and built capabilities
  *  - unlock edges  — derived by seeing through skills that have no generator yet
+ *  - course tree   — the stages and units that hold a playable skill
  */
 
 import type { Capability, SkillEntry, SkillState, StageEntry, UnitEntry } from './types'
@@ -136,6 +137,55 @@ export function resolveSkillStates(
   for (const [id, { stage }] of indexSkills(stages))
     states.set(id, resolveSkillState(id, stage, options))
   return states
+}
+
+/** A unit that holds at least one playable skill, carrying only those skills. */
+export type CourseUnit = {
+  unit: UnitEntry
+  skills: readonly SkillEntry[]
+}
+
+/** A stage that holds at least one playable unit, carrying only those units. */
+export type CourseStage = {
+  stage: StageEntry
+  units: readonly CourseUnit[]
+}
+
+/**
+ * The playable shape of the course: what the learner can actually navigate.
+ *
+ * Unbuilt course is absent rather than empty. A unit whose skills are all
+ * `planned` does not appear, nor does a stage left with no such unit, so the
+ * navigation surface cannot leak how much of the course is unwritten.
+ *
+ * Derived, never stored, for the same reason skill state is: registering a
+ * generator files its skill under the unit and stage the *manifest* declares,
+ * with no second list to keep in step. Order comes from the manifest at all
+ * three levels, so it cannot be lost by writing a generator in the wrong file
+ * or appending one to the end of the right one.
+ *
+ * Carries `SkillEntry`, not the generator: this stays a pure function of the
+ * manifest and a state map, and the entry is the side that knows `quick` and
+ * `wall`. The registry is reached by id at the point a lesson starts.
+ */
+export function resolveCourseTree(
+  stages: readonly StageEntry[],
+  states: ReadonlyMap<string, SkillState>,
+): CourseStage[] {
+  const course: CourseStage[] = []
+
+  for (const stage of stages) {
+    const units: CourseUnit[] = []
+
+    for (const unit of stage.units) {
+      const skills = unit.skills.filter((skill) => states.get(skill.id) === 'implemented')
+      if (skills.length > 0) units.push({ unit, skills })
+    }
+
+    if (units.length > 0) course.push({ stage, units })
+  }
+
+  return course
 }
 
 /**

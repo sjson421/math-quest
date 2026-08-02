@@ -8,7 +8,7 @@ const SEEDS = [1, 12345, 67890, 424242, 987654321]
 const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 
 const skill = (id: string) => {
-  const found = unit00.skills.find((candidate) => candidate.id === id)
+  const found = unit00.find((candidate) => candidate.id === id)
   if (!found) throw new Error(`Missing Unit 0 skill: ${id}`)
   return found
 }
@@ -373,7 +373,7 @@ describe('round-to-100', () => {
   })
 })
 
-describe.each(unit00.skills.map((candidate) => [candidate.id, candidate] as const))(
+describe.each(unit00.map((candidate) => [candidate.id, candidate] as const))(
   'recorded Unit 0 output: %s',
   (_id, candidate) => {
     it('matches the reviewed learner-facing problems', () => {

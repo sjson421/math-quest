@@ -15,7 +15,7 @@ import { unit02 } from './unit-02-subtraction'
  * either is a regression, not a prompt to re-record.
  */
 
-describe.each(unit02.skills.map((s) => [s.id, s] as const))(
+describe.each(unit02.map((s) => [s.id, s] as const))(
   'recorded output: %s',
   (_id, skill) => {
     it('matches the wording recorded when the skill landed', () => {
@@ -28,14 +28,14 @@ describe('what the unit guarantees about every problem it makes', () => {
   const SEEDS = Array.from({ length: 300 }, (_, i) => i * 7919 + 1)
   const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 
-  const everyProblem = (skill: (typeof unit02.skills)[number]) =>
+  const everyProblem = (skill: (typeof unit02)[number]) =>
     DIFFICULTIES.flatMap((d) => SEEDS.map((seed) => generateProblem(skill, seed, d)))
 
   it('never asks for a negative difference', () => {
     // Unit 6 brings negatives and the sign key with them. Until then a
     // difference below zero is a problem the pad cannot answer, so it must not
     // be generated rather than merely be unlikely.
-    const negative = unit02.skills.flatMap((skill) =>
+    const negative = unit02.flatMap((skill) =>
       everyProblem(skill)
         .filter((p) => p.answer.kind === 'exact' && p.answer.n / p.answer.d < 0)
         .map((p) => `${p.skillId}: ${JSON.stringify(p.display)}`),
@@ -47,7 +47,7 @@ describe('what the unit guarantees about every problem it makes', () => {
   it('offers digits only, on every skill', () => {
     // No `keypad` rules means whole non-negative digits. A skill here that
     // declared `allowNegative` would be reaching for Unit 6's surface early.
-    const declared = unit02.skills.flatMap((skill) =>
+    const declared = unit02.flatMap((skill) =>
       everyProblem(skill)
         .filter((p) => p.inputMode !== 'keypad' || p.keypad !== undefined)
         .map((p) => `${p.skillId}: ${p.inputMode} ${JSON.stringify(p.keypad)}`),
@@ -67,11 +67,11 @@ describe('what the unit guarantees about every problem it makes', () => {
     }
 
     for (const id of ['sub-2digit-borrow', 'sub-3digit-borrow', 'sub-across-zero']) {
-      const skill = unit02.skills.find((s) => s.id === id)!
+      const skill = unit02.find((s) => s.id === id)!
       expect(everyProblem(skill).every(borrows), `${id} must always borrow`).toBe(true)
     }
 
-    const noBorrow = unit02.skills.find((s) => s.id === 'sub-2digit-noborrow')!
+    const noBorrow = unit02.find((s) => s.id === 'sub-2digit-noborrow')!
     expect(everyProblem(noBorrow).some(borrows), 'sub-2digit-noborrow must never borrow').toBe(
       false,
     )
@@ -81,7 +81,7 @@ describe('what the unit guarantees about every problem it makes', () => {
     // What separates the wall from `sub-3digit-borrow`: the tens have nothing
     // of their own, so the borrow travels. A draw that stopped producing this
     // would leave the unit with two copies of one skill.
-    const skill = unit02.skills.find((s) => s.id === 'sub-across-zero')!
+    const skill = unit02.find((s) => s.id === 'sub-across-zero')!
 
     for (const problem of everyProblem(skill)) {
       if (problem.display.kind !== 'column') throw new Error('expected a column problem')
@@ -95,20 +95,20 @@ describe('what the unit guarantees about every problem it makes', () => {
 describe('the gate itself', () => {
   it('renders every field the generators set', () => {
     expect(
-      unrenderedKeys(unit02.skills),
+      unrenderedKeys(unit02),
       'add these to RENDERED_KEYS and render them in format()',
     ).toEqual([])
   })
 
   it('notices a reworded hint', () => {
     // A checker that returns "no problems" looks exactly like a clean codebase.
-    const problem = generateProblem(unit02.skills[0], 1, 1)
+    const problem = generateProblem(unit02[0], 1, 1)
     const reworded = { ...problem, hint: 'Something else entirely.' }
     expect(format(reworded, 1)).not.toBe(format(problem, 1))
   })
 
   it('notices a changed misconception nudge', () => {
-    const problem = generateProblem(unit02.skills[0], 1, 1)
+    const problem = generateProblem(unit02[0], 1, 1)
     const misconceptions = (problem.misconceptions ?? []).map((m, i) =>
       i === 0 ? { ...m, nudge: 'Reworded.' } : m,
     )
