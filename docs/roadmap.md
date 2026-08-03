@@ -248,33 +248,30 @@ document's ✅ markers updated to match, which the cross-check enforces.
       tree — one root, every skill with exactly one successor. This is navigation over a line,
       and item 9's branching question is still open and still unanswered here.
 
-- [ ] **9 · Stage checkpoints** — S *(was part of B1)*
+- [x] **9 · Stage checkpoints** — S *(was part of B1)* — **shipped 2026-08-03**
 
-      A celebration at each stage boundary, not just per skill. Separated from item 4 because
-      it cannot fire until a stage is completable. Stage A is now complete and becomes the
-      first checkpoint the app can actually reach; Stage B has sixteen of its 44 skills.
+      The checkpoint fires on the exact lesson that carries a learner across a stage boundary:
+      every manifest skill in that stage must be implemented, and every one must have reached
+      `UNLOCK_THRESHOLD`. That makes Stage A the first real checkpoint and prevents the sixteen
+      playable skills in the 44-skill Stage B from impersonating a completed stage.
 
-      **The "max 2 unlocks at once" commitment is dropped here, and needs a decision.**
-      `docs/curriculum.md` promises it, but the manifest's derived graph has a maximum
-      out-degree of **1** across all 201 skills — one root, every skill with exactly one
-      successor. It is a straight line, because every unit uses the default derivation and a
-      single `dependsOn` edge, and the `prerequisites` override the type supports is used by
-      zero skills. Under that graph the course can never open more than one skill at a time, so
-      a cap at two can never bind.
+      The existing lesson result stays first. Its Continue action opens a distinct checkpoint
+      naming the stage, and the checkpoint's sole Continue action returns to the unit the
+      lesson started from. The copy says **boundary reached**, not mastered: progression opens
+      at mastery 2 while the stage's progress bar still has useful practice through mastery 5.
 
-      The old hand-written generator graph did fan out to two (`add-facts` opened both
-      `sub-facts` and `add-2digit-nocarry`), so **item 1 removed the only branching the course
-      had.** That branching was an accident of how six generators were wired, not a designed
-      choice, so losing it cost nothing — but it does mean the commitment now has no path to
-      being met without deliberate `prerequisites` overrides in the manifest. The override the
-      `SkillEntry` type supports is still there, still used by zero skills, and is the hook a
-      decision to branch would hang on.
+      Left behind: **`lib/checkpoint.ts`**, a pure comparison of the progress immediately
+      before and after `completeLesson()`. The store evaluates the same object it persists and
+      returns the optional checkpoint beside the lesson rewards. A completed restore and every
+      later lesson start on the completed side of that comparison, so neither replays it; no
+      stored presentation flag and no progress migration were needed.
 
-      Either the curriculum wants real branching or the commitment comes out of
-      `docs/curriculum.md`. It is a curriculum decision, and item 1 deliberately left the
-      promise standing rather than quietly resolving it. Item 1 also made the decision cheaper
-      to act on: never re-locking a practised skill is exactly what makes a later graph change
-      safe to ship to a learner mid-course.
+      Also here: the old **"max 2 unlocks at once"** commitment is replaced by **one clear
+      path**. The manifest graph has maximum out-degree one, so a cap at two could never bind;
+      keeping the course sequential preserves its actual purpose, which is one obvious next
+      step without competing routes. The explicit `prerequisites` override still exists
+      technically, but using it to introduce real branching now requires a curriculum decision
+      that revisits this commitment rather than happening accidentally.
 
 - [ ] **10 · Unit 3 · Multiplication** — L — 14 skills
 

@@ -54,7 +54,7 @@ Design commitments, not features. Each removes a known quitting point.
 |---|---|
 | **Warm-up problem** | Every lesson opens one difficulty band below current — a guaranteed early win |
 | **Silent recovery** | 3 wrong in a row → difficulty drops for the rest of the lesson. Never surfaced to the learner |
-| **Max 2 unlocks at once** | More than two open paths causes choice paralysis and stalling |
+| **One clear path** | Progression opens one next skill at a time, so the next step stays obvious |
 | **Skip ahead** | Mark any stage or unit as already known — see [Skipping ahead](#skipping-ahead) |
 | **Quick wins** | Skills marked `quick` end at 5 correct instead of 10 — used for the first skill of any hard unit |
 | **Stage checkpoints** | A celebration screen at each stage boundary, not just per skill |

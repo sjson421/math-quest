@@ -10,6 +10,7 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { implementedSkillIds } from '../curriculum'
+import { stageA } from '../curriculum/manifest'
 import {
   UNLOCK_THRESHOLD,
   initialProgress,
@@ -251,5 +252,47 @@ describe('surviving the sync round trip', () => {
       'add-facts',
       'add-tens',
     ])
+  })
+})
+
+describe('stage checkpoint lesson outcomes', () => {
+  beforeEach(() => {
+    useProgress.getState().reset()
+  })
+
+  it('returns the boundary crossed by the same mastery transition it persists', () => {
+    const stageSkills = stageA.units.flatMap((unit) => unit.skills)
+    const beforeBoundary = progressWith(
+      Object.fromEntries(
+        stageSkills.map(({ id }) => [
+          id,
+          id === 'round-to-100'
+            ? { mastery: UNLOCK_THRESHOLD - 1, attempts: 12, correct: 10 }
+            : MASTERED,
+        ]),
+      ),
+    )
+    useProgress.getState().replaceProgress(beforeBoundary)
+
+    const outcome = useProgress.getState().completeLesson('round-to-100')
+
+    expect(outcome.checkpoint).toEqual({ id: 'stage-a', name: 'Numbers' })
+    expect(useProgress.getState().progress.skills['round-to-100'].mastery).toBe(
+      UNLOCK_THRESHOLD,
+    )
+  })
+
+  it('does not return the checkpoint on a later lesson', () => {
+    const stageSkills = stageA.units.flatMap((unit) => unit.skills)
+    useProgress.getState().replaceProgress(
+      progressWith(Object.fromEntries(stageSkills.map(({ id }) => [id, MASTERED]))),
+    )
+
+    const outcome = useProgress.getState().completeLesson('round-to-100')
+
+    expect(outcome.checkpoint).toBeUndefined()
+    expect(useProgress.getState().progress.skills['round-to-100'].mastery).toBe(
+      UNLOCK_THRESHOLD + 1,
+    )
   })
 })

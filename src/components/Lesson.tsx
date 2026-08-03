@@ -2,6 +2,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useCallback, useMemo, useRef, useState } from 'react'
 import { skillById } from '../curriculum/manifest'
 import { checkAnswer, type CheckResult } from '../lib/answer'
+import { completionAction, type CompletionView } from '../lib/checkpoint'
 import { diagnose, generateProblem } from '../lib/generator'
 import { celebrate, tap } from '../lib/haptics'
 import {
@@ -15,11 +16,12 @@ import {
 import { createSubmissionGate } from '../lib/submission-gate'
 import { responseTo } from '../lib/submit'
 import type { Difficulty, Misconception, SkillGenerator } from '../lib/types'
-import { difficultyFor, useProgress } from '../store/progress'
+import { difficultyFor, useProgress, type LessonOutcome } from '../store/progress'
 import { ChoiceInput } from './ChoiceInput'
 import { Keypad } from './Keypad'
 import { Mascot, type MascotState } from './Mascot'
 import { ProblemView } from './ProblemView'
+import { StageCheckpoint } from './StageCheckpoint'
 
 /**
  * What is on screen between submitting an answer and moving on, or `null` while
@@ -62,7 +64,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
   const [entry, setEntry] = useState('')
   const [feedback, setFeedback] = useState<Feedback>(null)
   const [showHint, setShowHint] = useState(false)
-  const [finished, setFinished] = useState<{ xpGained: number; coinsGained: number } | null>(null)
+  const [finished, setFinished] = useState<LessonOutcome | null>(null)
   const [submissionGate] = useState(createSubmissionGate)
 
   const response = feedback && responseTo[feedback.status]
@@ -328,10 +330,25 @@ function LessonComplete({
   onExit,
 }: {
   skill: SkillGenerator
-  outcome: { xpGained: number; coinsGained: number }
+  outcome: LessonOutcome
   onExit: () => void
 }) {
   const mastery = useProgress((s) => s.progress.skills[skill.id]?.mastery ?? 0)
+  const [view, setView] = useState<CompletionView>('lesson-result')
+
+  const continueCompletion = () => {
+    if (completionAction(view, Boolean(outcome.checkpoint)) === 'exit') {
+      onExit()
+      return
+    }
+
+    celebrate()
+    setView('stage-checkpoint')
+  }
+
+  if (view === 'stage-checkpoint' && outcome.checkpoint) {
+    return <StageCheckpoint checkpoint={outcome.checkpoint} onContinue={continueCompletion} />
+  }
 
   return (
     <motion.div
@@ -355,7 +372,7 @@ function LessonComplete({
       </div>
 
       <button
-        onClick={onExit}
+        onClick={continueCompletion}
         className="mt-2 w-full max-w-xs h-14 rounded-2xl bg-mint-deep text-white font-bold text-lg active:scale-[0.98] transition-transform"
       >
         Continue

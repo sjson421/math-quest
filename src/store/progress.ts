@@ -1,6 +1,13 @@
 import { create } from 'zustand'
 import { get as idbGet, set as idbSet } from 'idb-keyval'
-import { allSkills, skillState, unlockPrerequisites } from '../curriculum'
+import {
+  allSkills,
+  manifestIndex,
+  skillState,
+  skillStates,
+  unlockPrerequisites,
+} from '../curriculum'
+import { crossedStageCheckpoint, type StageCheckpoint } from '../lib/checkpoint'
 
 const STORAGE_KEY = 'math-quest-progress'
 const SCHEMA_VERSION = 1
@@ -35,6 +42,13 @@ export type Progress = {
   skills: Record<string, SkillProgress>
   /** Misconception tag → times hit. Drives "you keep doing X" insights later. */
   mistakes: Record<string, number>
+}
+
+export type LessonOutcome = {
+  xpGained: number
+  coinsGained: number
+  leveledUp: boolean
+  checkpoint?: StageCheckpoint
 }
 
 /** Local calendar day. Deliberately not UTC — streaks should follow the learner. */
@@ -88,7 +102,7 @@ type Store = {
   loaded: boolean
   hydrate: () => Promise<void>
   recordAttempt: (skillId: string, correct: boolean, misconceptionTag?: string) => void
-  completeLesson: (skillId: string) => { xpGained: number; coinsGained: number; leveledUp: boolean }
+  completeLesson: (skillId: string) => LessonOutcome
   replaceProgress: (next: Progress) => void
   adoptRemote: (next: Progress, version: number) => void
   reset: () => void
@@ -183,7 +197,7 @@ export const useProgress = create<Store>((set, get) => {
         streakCount = gap === 1 ? p.streakCount + 1 : 1
       }
 
-      persist({
+      const next = {
         ...p,
         xp: p.xp + xpGained,
         coins: p.coins + coinsGained,
@@ -199,9 +213,20 @@ export const useProgress = create<Store>((set, get) => {
             lastPracticed: today,
           },
         },
+      }
+
+      const checkpoint = crossedStageCheckpoint({
+        skillId,
+        before: p,
+        after: next,
+        locations: manifestIndex,
+        states: skillStates,
+        threshold: UNLOCK_THRESHOLD,
       })
 
-      return { xpGained, coinsGained, leveledUp }
+      persist(next)
+
+      return { xpGained, coinsGained, leveledUp, checkpoint }
     },
 
     /**
