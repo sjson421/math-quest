@@ -32,6 +32,21 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "expanded-form": [
     "place-value-hundreds",
   ],
+  "mult-2by1": [
+    "mult-by-10-100",
+  ],
+  "mult-2by2": [
+    "mult-2by1",
+  ],
+  "mult-by-10-100": [
+    "times-mixed",
+  ],
+  "mult-meaning": [
+    "sub-words",
+  ],
+  "mult-words": [
+    "mult-2by2",
+  ],
   "order-numbers": [
     "compare-numbers",
   ],
@@ -71,6 +86,33 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "sub-words": [
     "sub-across-zero",
+  ],
+  "times-10": [
+    "times-2",
+  ],
+  "times-2": [
+    "mult-meaning",
+  ],
+  "times-3": [
+    "times-5",
+  ],
+  "times-4": [
+    "times-3",
+  ],
+  "times-5": [
+    "times-10",
+  ],
+  "times-6": [
+    "times-4",
+  ],
+  "times-7-8": [
+    "times-9",
+  ],
+  "times-9": [
+    "times-6",
+  ],
+  "times-mixed": [
+    "times-7-8",
   ],
 }
 `;

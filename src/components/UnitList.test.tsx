@@ -29,19 +29,20 @@ describe('UnitList', () => {
 
     expect(html).toContain('The Four Operations')
     expect(html.indexOf('Addition')).toBeLessThan(html.indexOf('Subtraction'))
-    expect(html.match(/<button/g)).toHaveLength(2)
+    expect(html.indexOf('Subtraction')).toBeLessThan(html.indexOf('Multiplication'))
+    expect(html.match(/<button/g)).toHaveLength(3)
   })
 
   it('leaves out the units of this stage that have no generator', () => {
-    // Stage B declares five units; Multiplication, Division and Order of
-    // Operations are unwritten, so the level cannot show them and the learner
-    // cannot count what is missing.
+    // Stage B declares five units; Division and Order of Operations are
+    // unwritten, so the level cannot show them and the learner cannot count
+    // what is missing.
     const html = render()
 
-    for (const name of ['Multiplication', 'Division', 'Order of Operations'])
+    for (const name of ['Division', 'Order of Operations'])
       expect(html).not.toContain(name)
     expect(stageB.stage.units).toHaveLength(5)
-    expect(stageB.units).toHaveLength(2)
+    expect(stageB.units).toHaveLength(3)
   })
 
   it('lists no skill, only units', () => {

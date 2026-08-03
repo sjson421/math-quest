@@ -18,7 +18,7 @@ type Props = {
  *
  * A unit with nothing playable never arrives here — the tree omits it — so this
  * level cannot tease unwritten course. A unit whose every skill is locked does
- * arrive, and says so: on a fresh install that is the whole of Units 1 and 2,
+ * arrive, and says so: on a fresh install that is the whole of Units 1–3,
  * which is honest about what is coming rather than pretending it is open.
  */
 export function UnitList({ stage, progress, isUnlocked, onOpen }: Props) {
@@ -71,4 +71,3 @@ export function UnitList({ stage, progress, isUnlocked, onOpen }: Props) {
     </section>
   )
 }
-

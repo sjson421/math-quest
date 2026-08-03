@@ -1,0 +1,4254 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: mult-2by1 > matches the wording recorded when the skill landed 1`] = `
+"--- mult-2by1 · seed 1 · difficulty 1
+prompt   Multiply the columns.
+display  column 27 × 2
+answer   exact 54/1
+input    keypad
+hint     Multiply the ones first; write 4 and carry 1.
+step 1   Multiply the ones digit by 2.   [7 × 2 = 14]
+step 2   Write 4 and carry 1.
+step 3   Multiply the tens, then add the carry.   [2 × 2 + 1 = 5]
+step 4   So 27 × 2 = 54.
+miss     forgot-multiplication-carry = 44   The ones carry 1; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 64   Multiply the tens digit first, then add the carried 1.
+
+--- mult-2by1 · seed 12345 · difficulty 1
+prompt   Multiply the columns.
+display  column 35 × 4
+answer   exact 140/1
+input    keypad
+hint     Multiply the ones first; write 0 and carry 2.
+step 1   Multiply the ones digit by 4.   [5 × 4 = 20]
+step 2   Write 0 and carry 2.
+step 3   Multiply the tens, then add the carry.   [3 × 4 + 2 = 14]
+step 4   So 35 × 4 = 140.
+miss     forgot-multiplication-carry = 120   The ones carry 2; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 200   Multiply the tens digit first, then add the carried 2.
+
+--- mult-2by1 · seed 67890 · difficulty 1
+prompt   Multiply the columns.
+display  column 12 × 8
+answer   exact 96/1
+input    keypad
+hint     Multiply the ones first; write 6 and carry 1.
+step 1   Multiply the ones digit by 8.   [2 × 8 = 16]
+step 2   Write 6 and carry 1.
+step 3   Multiply the tens, then add the carry.   [1 × 8 + 1 = 9]
+step 4   So 12 × 8 = 96.
+miss     forgot-multiplication-carry = 86   The ones carry 1; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 166   Multiply the tens digit first, then add the carried 1.
+
+--- mult-2by1 · seed 424242 · difficulty 1
+prompt   Multiply the columns.
+display  column 15 × 3
+answer   exact 45/1
+input    keypad
+hint     Multiply the ones first; write 5 and carry 1.
+step 1   Multiply the ones digit by 3.   [5 × 3 = 15]
+step 2   Write 5 and carry 1.
+step 3   Multiply the tens, then add the carry.   [1 × 3 + 1 = 4]
+step 4   So 15 × 3 = 45.
+miss     forgot-multiplication-carry = 35   The ones carry 1; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 65   Multiply the tens digit first, then add the carried 1.
+
+--- mult-2by1 · seed 987654321 · difficulty 1
+prompt   Multiply the columns.
+display  column 34 × 3
+answer   exact 102/1
+input    keypad
+hint     Multiply the ones first; write 2 and carry 1.
+step 1   Multiply the ones digit by 3.   [4 × 3 = 12]
+step 2   Write 2 and carry 1.
+step 3   Multiply the tens, then add the carry.   [3 × 3 + 1 = 10]
+step 4   So 34 × 3 = 102.
+miss     forgot-multiplication-carry = 92   The ones carry 1; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 122   Multiply the tens digit first, then add the carried 1.
+
+--- mult-2by1 · seed 1 · difficulty 2
+prompt   Multiply the columns.
+display  column 36 × 2
+answer   exact 72/1
+input    keypad
+hint     Multiply the ones first; write 2 and carry 1.
+step 1   Multiply the ones digit by 2.   [6 × 2 = 12]
+step 2   Write 2 and carry 1.
+step 3   Multiply the tens, then add the carry.   [3 × 2 + 1 = 7]
+step 4   So 36 × 2 = 72.
+miss     forgot-multiplication-carry = 62   The ones carry 1; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 82   Multiply the tens digit first, then add the carried 1.
+
+--- mult-2by1 · seed 12345 · difficulty 2
+prompt   Multiply the columns.
+display  column 49 × 4
+answer   exact 196/1
+input    keypad
+hint     Multiply the ones first; write 6 and carry 3.
+step 1   Multiply the ones digit by 4.   [9 × 4 = 36]
+step 2   Write 6 and carry 3.
+step 3   Multiply the tens, then add the carry.   [4 × 4 + 3 = 19]
+step 4   So 49 × 4 = 196.
+miss     forgot-multiplication-carry = 166   The ones carry 3; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 286   Multiply the tens digit first, then add the carried 3.
+
+--- mult-2by1 · seed 67890 · difficulty 2
+prompt   Multiply the columns.
+display  column 28 × 6
+answer   exact 168/1
+input    keypad
+hint     Multiply the ones first; write 8 and carry 4.
+step 1   Multiply the ones digit by 6.   [8 × 6 = 48]
+step 2   Write 8 and carry 4.
+step 3   Multiply the tens, then add the carry.   [2 × 6 + 4 = 16]
+step 4   So 28 × 6 = 168.
+miss     forgot-multiplication-carry = 128   The ones carry 4; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 368   Multiply the tens digit first, then add the carried 4.
+
+--- mult-2by1 · seed 424242 · difficulty 2
+prompt   Multiply the columns.
+display  column 19 × 3
+answer   exact 57/1
+input    keypad
+hint     Multiply the ones first; write 7 and carry 2.
+step 1   Multiply the ones digit by 3.   [9 × 3 = 27]
+step 2   Write 7 and carry 2.
+step 3   Multiply the tens, then add the carry.   [1 × 3 + 2 = 5]
+step 4   So 19 × 3 = 57.
+miss     forgot-multiplication-carry = 37   The ones carry 2; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 97   Multiply the tens digit first, then add the carried 2.
+
+--- mult-2by1 · seed 987654321 · difficulty 2
+prompt   Multiply the columns.
+display  column 48 × 3
+answer   exact 144/1
+input    keypad
+hint     Multiply the ones first; write 4 and carry 2.
+step 1   Multiply the ones digit by 3.   [8 × 3 = 24]
+step 2   Write 4 and carry 2.
+step 3   Multiply the tens, then add the carry.   [4 × 3 + 2 = 14]
+step 4   So 48 × 3 = 144.
+miss     forgot-multiplication-carry = 124   The ones carry 2; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 184   Multiply the tens digit first, then add the carried 2.
+
+--- mult-2by1 · seed 1 · difficulty 3
+prompt   Multiply the columns.
+display  column 48 × 2
+answer   exact 96/1
+input    keypad
+hint     Multiply the ones first; write 6 and carry 1.
+step 1   Multiply the ones digit by 2.   [8 × 2 = 16]
+step 2   Write 6 and carry 1.
+step 3   Multiply the tens, then add the carry.   [4 × 2 + 1 = 9]
+step 4   So 48 × 2 = 96.
+miss     forgot-multiplication-carry = 86   The ones carry 1; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 106   Multiply the tens digit first, then add the carried 1.
+
+--- mult-2by1 · seed 12345 · difficulty 3
+prompt   Multiply the columns.
+display  column 65 × 4
+answer   exact 260/1
+input    keypad
+hint     Multiply the ones first; write 0 and carry 2.
+step 1   Multiply the ones digit by 4.   [5 × 4 = 20]
+step 2   Write 0 and carry 2.
+step 3   Multiply the tens, then add the carry.   [6 × 4 + 2 = 26]
+step 4   So 65 × 4 = 260.
+miss     forgot-multiplication-carry = 240   The ones carry 2; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 320   Multiply the tens digit first, then add the carried 2.
+
+--- mult-2by1 · seed 67890 · difficulty 3
+prompt   Multiply the columns.
+display  column 38 × 6
+answer   exact 228/1
+input    keypad
+hint     Multiply the ones first; write 8 and carry 4.
+step 1   Multiply the ones digit by 6.   [8 × 6 = 48]
+step 2   Write 8 and carry 4.
+step 3   Multiply the tens, then add the carry.   [3 × 6 + 4 = 22]
+step 4   So 38 × 6 = 228.
+miss     forgot-multiplication-carry = 188   The ones carry 4; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 428   Multiply the tens digit first, then add the carried 4.
+
+--- mult-2by1 · seed 424242 · difficulty 3
+prompt   Multiply the columns.
+display  column 25 × 3
+answer   exact 75/1
+input    keypad
+hint     Multiply the ones first; write 5 and carry 1.
+step 1   Multiply the ones digit by 3.   [5 × 3 = 15]
+step 2   Write 5 and carry 1.
+step 3   Multiply the tens, then add the carry.   [2 × 3 + 1 = 7]
+step 4   So 25 × 3 = 75.
+miss     forgot-multiplication-carry = 65   The ones carry 1; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 95   Multiply the tens digit first, then add the carried 1.
+
+--- mult-2by1 · seed 987654321 · difficulty 3
+prompt   Multiply the columns.
+display  column 48 × 5
+answer   exact 240/1
+input    keypad
+hint     Multiply the ones first; write 0 and carry 4.
+step 1   Multiply the ones digit by 5.   [8 × 5 = 40]
+step 2   Write 0 and carry 4.
+step 3   Multiply the tens, then add the carry.   [4 × 5 + 4 = 24]
+step 4   So 48 × 5 = 240.
+miss     forgot-multiplication-carry = 200   The ones carry 4; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 400   Multiply the tens digit first, then add the carried 4.
+
+--- mult-2by1 · seed 1 · difficulty 4
+prompt   Multiply the columns.
+display  column 57 × 9
+answer   exact 513/1
+input    keypad
+hint     Multiply the ones first; write 3 and carry 6.
+step 1   Multiply the ones digit by 9.   [7 × 9 = 63]
+step 2   Write 3 and carry 6.
+step 3   Multiply the tens, then add the carry.   [5 × 9 + 6 = 51]
+step 4   So 57 × 9 = 513.
+miss     forgot-multiplication-carry = 453   The ones carry 6; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 993   Multiply the tens digit first, then add the carried 6.
+
+--- mult-2by1 · seed 12345 · difficulty 4
+prompt   Multiply the columns.
+display  column 84 × 4
+answer   exact 336/1
+input    keypad
+hint     Multiply the ones first; write 6 and carry 1.
+step 1   Multiply the ones digit by 4.   [4 × 4 = 16]
+step 2   Write 6 and carry 1.
+step 3   Multiply the tens, then add the carry.   [8 × 4 + 1 = 33]
+step 4   So 84 × 4 = 336.
+miss     forgot-multiplication-carry = 326   The ones carry 1; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 366   Multiply the tens digit first, then add the carried 1.
+
+--- mult-2by1 · seed 67890 · difficulty 4
+prompt   Multiply the columns.
+display  column 49 × 6
+answer   exact 294/1
+input    keypad
+hint     Multiply the ones first; write 4 and carry 5.
+step 1   Multiply the ones digit by 6.   [9 × 6 = 54]
+step 2   Write 4 and carry 5.
+step 3   Multiply the tens, then add the carry.   [4 × 6 + 5 = 29]
+step 4   So 49 × 6 = 294.
+miss     forgot-multiplication-carry = 244   The ones carry 5; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 544   Multiply the tens digit first, then add the carried 5.
+
+--- mult-2by1 · seed 424242 · difficulty 4
+prompt   Multiply the columns.
+display  column 36 × 7
+answer   exact 252/1
+input    keypad
+hint     Multiply the ones first; write 2 and carry 4.
+step 1   Multiply the ones digit by 7.   [6 × 7 = 42]
+step 2   Write 2 and carry 4.
+step 3   Multiply the tens, then add the carry.   [3 × 7 + 4 = 25]
+step 4   So 36 × 7 = 252.
+miss     forgot-multiplication-carry = 212   The ones carry 4; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 492   Multiply the tens digit first, then add the carried 4.
+
+--- mult-2by1 · seed 987654321 · difficulty 4
+prompt   Multiply the columns.
+display  column 25 × 9
+answer   exact 225/1
+input    keypad
+hint     Multiply the ones first; write 5 and carry 4.
+step 1   Multiply the ones digit by 9.   [5 × 9 = 45]
+step 2   Write 5 and carry 4.
+step 3   Multiply the tens, then add the carry.   [2 × 9 + 4 = 22]
+step 4   So 25 × 9 = 225.
+miss     forgot-multiplication-carry = 185   The ones carry 4; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 545   Multiply the tens digit first, then add the carried 4.
+
+--- mult-2by1 · seed 1 · difficulty 5
+prompt   Multiply the columns.
+display  column 75 × 2
+answer   exact 150/1
+input    keypad
+hint     Multiply the ones first; write 0 and carry 1.
+step 1   Multiply the ones digit by 2.   [5 × 2 = 10]
+step 2   Write 0 and carry 1.
+step 3   Multiply the tens, then add the carry.   [7 × 2 + 1 = 15]
+step 4   So 75 × 2 = 150.
+miss     forgot-multiplication-carry = 140   The ones carry 1; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 160   Multiply the tens digit first, then add the carried 1.
+
+--- mult-2by1 · seed 12345 · difficulty 5
+prompt   Multiply the columns.
+display  column 98 × 4
+answer   exact 392/1
+input    keypad
+hint     Multiply the ones first; write 2 and carry 3.
+step 1   Multiply the ones digit by 4.   [8 × 4 = 32]
+step 2   Write 2 and carry 3.
+step 3   Multiply the tens, then add the carry.   [9 × 4 + 3 = 39]
+step 4   So 98 × 4 = 392.
+miss     forgot-multiplication-carry = 362   The ones carry 3; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 482   Multiply the tens digit first, then add the carried 3.
+
+--- mult-2by1 · seed 67890 · difficulty 5
+prompt   Multiply the columns.
+display  column 58 × 4
+answer   exact 232/1
+input    keypad
+hint     Multiply the ones first; write 2 and carry 3.
+step 1   Multiply the ones digit by 4.   [8 × 4 = 32]
+step 2   Write 2 and carry 3.
+step 3   Multiply the tens, then add the carry.   [5 × 4 + 3 = 23]
+step 4   So 58 × 4 = 232.
+miss     forgot-multiplication-carry = 202   The ones carry 3; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 322   Multiply the tens digit first, then add the carried 3.
+
+--- mult-2by1 · seed 424242 · difficulty 5
+prompt   Multiply the columns.
+display  column 46 × 7
+answer   exact 322/1
+input    keypad
+hint     Multiply the ones first; write 2 and carry 4.
+step 1   Multiply the ones digit by 7.   [6 × 7 = 42]
+step 2   Write 2 and carry 4.
+step 3   Multiply the tens, then add the carry.   [4 × 7 + 4 = 32]
+step 4   So 46 × 7 = 322.
+miss     forgot-multiplication-carry = 282   The ones carry 4; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 562   Multiply the tens digit first, then add the carried 4.
+
+--- mult-2by1 · seed 987654321 · difficulty 5
+prompt   Multiply the columns.
+display  column 96 × 3
+answer   exact 288/1
+input    keypad
+hint     Multiply the ones first; write 8 and carry 1.
+step 1   Multiply the ones digit by 3.   [6 × 3 = 18]
+step 2   Write 8 and carry 1.
+step 3   Multiply the tens, then add the carry.   [9 × 3 + 1 = 28]
+step 4   So 96 × 3 = 288.
+miss     forgot-multiplication-carry = 278   The ones carry 1; add it after multiplying the tens digit.
+miss     carried-before-multiplying = 308   Multiply the tens digit first, then add the carried 1."
+`;
+
+exports[`recorded output: mult-2by2 > matches the wording recorded when the skill landed 1`] = `
+"--- mult-2by2 · seed 1 · difficulty 1
+prompt   Multiply using two rows.
+display  column 29 × 12
+answer   exact 348/1
+input    keypad
+hint     The second row uses 1 ten, so put a zero after 29.
+step 1   Multiply by the ones digit, 2.   [29 × 2 = 58]
+step 2   Multiply by 1 ten and add a zero.   [29 × 1 × 10 = 290]
+step 3   Add the aligned rows.   [58 + 290 = 348]
+step 4   So 29 × 12 = 348.
+miss     missing-placeholder = 87   The 1 is in the tens place, so its row needs a zero after 29.
+miss     first-partial-only = 58   That is the first row. Add the row for 1 ten as well.
+
+--- mult-2by2 · seed 12345 · difficulty 1
+prompt   Multiply using two rows.
+display  column 25 × 34
+answer   exact 850/1
+input    keypad
+hint     The second row uses 3 tens, so put a zero after 75.
+step 1   Multiply by the ones digit, 4.   [25 × 4 = 100]
+step 2   Multiply by 3 tens and add a zero.   [25 × 3 × 10 = 750]
+step 3   Add the aligned rows.   [100 + 750 = 850]
+step 4   So 25 × 34 = 850.
+miss     missing-placeholder = 175   The 3 is in the tens place, so its row needs a zero after 75.
+miss     first-partial-only = 100   That is the first row. Add the row for 3 tens as well.
+
+--- mult-2by2 · seed 67890 · difficulty 1
+prompt   Multiply using two rows.
+display  column 23 × 28
+answer   exact 644/1
+input    keypad
+hint     The second row uses 2 tens, so put a zero after 46.
+step 1   Multiply by the ones digit, 8.   [23 × 8 = 184]
+step 2   Multiply by 2 tens and add a zero.   [23 × 2 × 10 = 460]
+step 3   Add the aligned rows.   [184 + 460 = 644]
+step 4   So 23 × 28 = 644.
+miss     missing-placeholder = 230   The 2 is in the tens place, so its row needs a zero after 46.
+miss     first-partial-only = 184   That is the first row. Add the row for 2 tens as well.
+
+--- mult-2by2 · seed 424242 · difficulty 1
+prompt   Multiply using two rows.
+display  column 15 × 18
+answer   exact 270/1
+input    keypad
+hint     The second row uses 1 ten, so put a zero after 15.
+step 1   Multiply by the ones digit, 8.   [15 × 8 = 120]
+step 2   Multiply by 1 ten and add a zero.   [15 × 1 × 10 = 150]
+step 3   Add the aligned rows.   [120 + 150 = 270]
+step 4   So 15 × 18 = 270.
+miss     missing-placeholder = 135   The 1 is in the tens place, so its row needs a zero after 15.
+miss     first-partial-only = 120   That is the first row. Add the row for 1 ten as well.
+
+--- mult-2by2 · seed 987654321 · difficulty 1
+prompt   Multiply using two rows.
+display  column 38 × 15
+answer   exact 570/1
+input    keypad
+hint     The second row uses 1 ten, so put a zero after 38.
+step 1   Multiply by the ones digit, 5.   [38 × 5 = 190]
+step 2   Multiply by 1 ten and add a zero.   [38 × 1 × 10 = 380]
+step 3   Add the aligned rows.   [190 + 380 = 570]
+step 4   So 38 × 15 = 570.
+miss     missing-placeholder = 228   The 1 is in the tens place, so its row needs a zero after 38.
+miss     first-partial-only = 190   That is the first row. Add the row for 1 ten as well.
+
+--- mult-2by2 · seed 1 · difficulty 2
+prompt   Multiply using two rows.
+display  column 36 × 15
+answer   exact 540/1
+input    keypad
+hint     The second row uses 1 ten, so put a zero after 36.
+step 1   Multiply by the ones digit, 5.   [36 × 5 = 180]
+step 2   Multiply by 1 ten and add a zero.   [36 × 1 × 10 = 360]
+step 3   Add the aligned rows.   [180 + 360 = 540]
+step 4   So 36 × 15 = 540.
+miss     missing-placeholder = 216   The 1 is in the tens place, so its row needs a zero after 36.
+miss     first-partial-only = 180   That is the first row. Add the row for 1 ten as well.
+
+--- mult-2by2 · seed 12345 · difficulty 2
+prompt   Multiply using two rows.
+display  column 49 × 25
+answer   exact 1225/1
+input    keypad
+hint     The second row uses 2 tens, so put a zero after 98.
+step 1   Multiply by the ones digit, 5.   [49 × 5 = 245]
+step 2   Multiply by 2 tens and add a zero.   [49 × 2 × 10 = 980]
+step 3   Add the aligned rows.   [245 + 980 = 1225]
+step 4   So 49 × 25 = 1225.
+miss     missing-placeholder = 343   The 2 is in the tens place, so its row needs a zero after 98.
+miss     first-partial-only = 245   That is the first row. Add the row for 2 tens as well.
+
+--- mult-2by2 · seed 67890 · difficulty 2
+prompt   Multiply using two rows.
+display  column 28 × 35
+answer   exact 980/1
+input    keypad
+hint     The second row uses 3 tens, so put a zero after 84.
+step 1   Multiply by the ones digit, 5.   [28 × 5 = 140]
+step 2   Multiply by 3 tens and add a zero.   [28 × 3 × 10 = 840]
+step 3   Add the aligned rows.   [140 + 840 = 980]
+step 4   So 28 × 35 = 980.
+miss     missing-placeholder = 224   The 3 is in the tens place, so its row needs a zero after 84.
+miss     first-partial-only = 140   That is the first row. Add the row for 3 tens as well.
+
+--- mult-2by2 · seed 424242 · difficulty 2
+prompt   Multiply using two rows.
+display  column 19 × 23
+answer   exact 437/1
+input    keypad
+hint     The second row uses 2 tens, so put a zero after 38.
+step 1   Multiply by the ones digit, 3.   [19 × 3 = 57]
+step 2   Multiply by 2 tens and add a zero.   [19 × 2 × 10 = 380]
+step 3   Add the aligned rows.   [57 + 380 = 437]
+step 4   So 19 × 23 = 437.
+miss     missing-placeholder = 95   The 2 is in the tens place, so its row needs a zero after 38.
+miss     first-partial-only = 57   That is the first row. Add the row for 2 tens as well.
+
+--- mult-2by2 · seed 987654321 · difficulty 2
+prompt   Multiply using two rows.
+display  column 48 × 19
+answer   exact 912/1
+input    keypad
+hint     The second row uses 1 ten, so put a zero after 48.
+step 1   Multiply by the ones digit, 9.   [48 × 9 = 432]
+step 2   Multiply by 1 ten and add a zero.   [48 × 1 × 10 = 480]
+step 3   Add the aligned rows.   [432 + 480 = 912]
+step 4   So 48 × 19 = 912.
+miss     missing-placeholder = 480   The 1 is in the tens place, so its row needs a zero after 48.
+miss     first-partial-only = 432   That is the first row. Add the row for 1 ten as well.
+
+--- mult-2by2 · seed 1 · difficulty 3
+prompt   Multiply using two rows.
+display  column 46 × 69
+answer   exact 3174/1
+input    keypad
+hint     The second row uses 6 tens, so put a zero after 276.
+step 1   Multiply by the ones digit, 9.   [46 × 9 = 414]
+step 2   Multiply by 6 tens and add a zero.   [46 × 6 × 10 = 2760]
+step 3   Add the aligned rows.   [414 + 2760 = 3174]
+step 4   So 46 × 69 = 3174.
+miss     missing-placeholder = 690   The 6 is in the tens place, so its row needs a zero after 276.
+miss     first-partial-only = 414   That is the first row. Add the row for 6 tens as well.
+
+--- mult-2by2 · seed 12345 · difficulty 3
+prompt   Multiply using two rows.
+display  column 68 × 35
+answer   exact 2380/1
+input    keypad
+hint     The second row uses 3 tens, so put a zero after 204.
+step 1   Multiply by the ones digit, 5.   [68 × 5 = 340]
+step 2   Multiply by 3 tens and add a zero.   [68 × 3 × 10 = 2040]
+step 3   Add the aligned rows.   [340 + 2040 = 2380]
+step 4   So 68 × 35 = 2380.
+miss     missing-placeholder = 544   The 3 is in the tens place, so its row needs a zero after 204.
+miss     first-partial-only = 340   That is the first row. Add the row for 3 tens as well.
+
+--- mult-2by2 · seed 67890 · difficulty 3
+prompt   Multiply using two rows.
+display  column 39 × 49
+answer   exact 1911/1
+input    keypad
+hint     The second row uses 4 tens, so put a zero after 156.
+step 1   Multiply by the ones digit, 9.   [39 × 9 = 351]
+step 2   Multiply by 4 tens and add a zero.   [39 × 4 × 10 = 1560]
+step 3   Add the aligned rows.   [351 + 1560 = 1911]
+step 4   So 39 × 49 = 1911.
+miss     missing-placeholder = 507   The 4 is in the tens place, so its row needs a zero after 156.
+miss     first-partial-only = 351   That is the first row. Add the row for 4 tens as well.
+
+--- mult-2by2 · seed 424242 · difficulty 3
+prompt   Multiply using two rows.
+display  column 26 × 31
+answer   exact 806/1
+input    keypad
+hint     The second row uses 3 tens, so put a zero after 78.
+step 1   Multiply by the ones digit, 1.   [26 × 1 = 26]
+step 2   Multiply by 3 tens and add a zero.   [26 × 3 × 10 = 780]
+step 3   Add the aligned rows.   [26 + 780 = 806]
+step 4   So 26 × 31 = 806.
+miss     missing-placeholder = 104   The 3 is in the tens place, so its row needs a zero after 78.
+miss     first-partial-only = 26   That is the first row. Add the row for 3 tens as well.
+
+--- mult-2by2 · seed 987654321 · difficulty 3
+prompt   Multiply using two rows.
+display  column 67 × 26
+answer   exact 1742/1
+input    keypad
+hint     The second row uses 2 tens, so put a zero after 134.
+step 1   Multiply by the ones digit, 6.   [67 × 6 = 402]
+step 2   Multiply by 2 tens and add a zero.   [67 × 2 × 10 = 1340]
+step 3   Add the aligned rows.   [402 + 1340 = 1742]
+step 4   So 67 × 26 = 1742.
+miss     missing-placeholder = 536   The 2 is in the tens place, so its row needs a zero after 134.
+miss     first-partial-only = 402   That is the first row. Add the row for 2 tens as well.
+
+--- mult-2by2 · seed 1 · difficulty 4
+prompt   Multiply using two rows.
+display  column 65 × 25
+answer   exact 1625/1
+input    keypad
+hint     The second row uses 2 tens, so put a zero after 130.
+step 1   Multiply by the ones digit, 5.   [65 × 5 = 325]
+step 2   Multiply by 2 tens and add a zero.   [65 × 2 × 10 = 1300]
+step 3   Add the aligned rows.   [325 + 1300 = 1625]
+step 4   So 65 × 25 = 1625.
+miss     missing-placeholder = 455   The 2 is in the tens place, so its row needs a zero after 130.
+miss     first-partial-only = 325   That is the first row. Add the row for 2 tens as well.
+
+--- mult-2by2 · seed 12345 · difficulty 4
+prompt   Multiply using two rows.
+display  column 88 × 44
+answer   exact 3872/1
+input    keypad
+hint     The second row uses 4 tens, so put a zero after 352.
+step 1   Multiply by the ones digit, 4.   [88 × 4 = 352]
+step 2   Multiply by 4 tens and add a zero.   [88 × 4 × 10 = 3520]
+step 3   Add the aligned rows.   [352 + 3520 = 3872]
+step 4   So 88 × 44 = 3872.
+miss     missing-placeholder = 704   The 4 is in the tens place, so its row needs a zero after 352.
+miss     first-partial-only = 352   That is the first row. Add the row for 4 tens as well.
+
+--- mult-2by2 · seed 67890 · difficulty 4
+prompt   Multiply using two rows.
+display  column 50 × 63
+answer   exact 3150/1
+input    keypad
+hint     The second row uses 6 tens, so put a zero after 300.
+step 1   Multiply by the ones digit, 3.   [50 × 3 = 150]
+step 2   Multiply by 6 tens and add a zero.   [50 × 6 × 10 = 3000]
+step 3   Add the aligned rows.   [150 + 3000 = 3150]
+step 4   So 50 × 63 = 3150.
+miss     missing-placeholder = 450   The 6 is in the tens place, so its row needs a zero after 300.
+miss     first-partial-only = 150   That is the first row. Add the row for 6 tens as well.
+
+--- mult-2by2 · seed 424242 · difficulty 4
+prompt   Multiply using two rows.
+display  column 36 × 66
+answer   exact 2376/1
+input    keypad
+hint     The second row uses 6 tens, so put a zero after 216.
+step 1   Multiply by the ones digit, 6.   [36 × 6 = 216]
+step 2   Multiply by 6 tens and add a zero.   [36 × 6 × 10 = 2160]
+step 3   Add the aligned rows.   [216 + 2160 = 2376]
+step 4   So 36 × 66 = 2376.
+miss     missing-placeholder = 432   The 6 is in the tens place, so its row needs a zero after 216.
+miss     first-partial-only = 216   That is the first row. Add the row for 6 tens as well.
+
+--- mult-2by2 · seed 987654321 · difficulty 4
+prompt   Multiply using two rows.
+display  column 86 × 33
+answer   exact 2838/1
+input    keypad
+hint     The second row uses 3 tens, so put a zero after 258.
+step 1   Multiply by the ones digit, 3.   [86 × 3 = 258]
+step 2   Multiply by 3 tens and add a zero.   [86 × 3 × 10 = 2580]
+step 3   Add the aligned rows.   [258 + 2580 = 2838]
+step 4   So 86 × 33 = 2838.
+miss     missing-placeholder = 516   The 3 is in the tens place, so its row needs a zero after 258.
+miss     first-partial-only = 258   That is the first row. Add the row for 3 tens as well.
+
+--- mult-2by2 · seed 1 · difficulty 5
+prompt   Multiply using two rows.
+display  column 75 × 35
+answer   exact 2625/1
+input    keypad
+hint     The second row uses 3 tens, so put a zero after 225.
+step 1   Multiply by the ones digit, 5.   [75 × 5 = 375]
+step 2   Multiply by 3 tens and add a zero.   [75 × 3 × 10 = 2250]
+step 3   Add the aligned rows.   [375 + 2250 = 2625]
+step 4   So 75 × 35 = 2625.
+miss     missing-placeholder = 600   The 3 is in the tens place, so its row needs a zero after 225.
+miss     first-partial-only = 375   That is the first row. Add the row for 3 tens as well.
+
+--- mult-2by2 · seed 12345 · difficulty 5
+prompt   Multiply using two rows.
+display  column 98 × 54
+answer   exact 5292/1
+input    keypad
+hint     The second row uses 5 tens, so put a zero after 490.
+step 1   Multiply by the ones digit, 4.   [98 × 4 = 392]
+step 2   Multiply by 5 tens and add a zero.   [98 × 5 × 10 = 4900]
+step 3   Add the aligned rows.   [392 + 4900 = 5292]
+step 4   So 98 × 54 = 5292.
+miss     missing-placeholder = 882   The 5 is in the tens place, so its row needs a zero after 490.
+miss     first-partial-only = 392   That is the first row. Add the row for 5 tens as well.
+
+--- mult-2by2 · seed 67890 · difficulty 5
+prompt   Multiply using two rows.
+display  column 60 × 73
+answer   exact 4380/1
+input    keypad
+hint     The second row uses 7 tens, so put a zero after 420.
+step 1   Multiply by the ones digit, 3.   [60 × 3 = 180]
+step 2   Multiply by 7 tens and add a zero.   [60 × 7 × 10 = 4200]
+step 3   Add the aligned rows.   [180 + 4200 = 4380]
+step 4   So 60 × 73 = 4380.
+miss     missing-placeholder = 600   The 7 is in the tens place, so its row needs a zero after 420.
+miss     first-partial-only = 180   That is the first row. Add the row for 7 tens as well.
+
+--- mult-2by2 · seed 424242 · difficulty 5
+prompt   Multiply using two rows.
+display  column 46 × 76
+answer   exact 3496/1
+input    keypad
+hint     The second row uses 7 tens, so put a zero after 322.
+step 1   Multiply by the ones digit, 6.   [46 × 6 = 276]
+step 2   Multiply by 7 tens and add a zero.   [46 × 7 × 10 = 3220]
+step 3   Add the aligned rows.   [276 + 3220 = 3496]
+step 4   So 46 × 76 = 3496.
+miss     missing-placeholder = 598   The 7 is in the tens place, so its row needs a zero after 322.
+miss     first-partial-only = 276   That is the first row. Add the row for 7 tens as well.
+
+--- mult-2by2 · seed 987654321 · difficulty 5
+prompt   Multiply using two rows.
+display  column 96 × 43
+answer   exact 4128/1
+input    keypad
+hint     The second row uses 4 tens, so put a zero after 384.
+step 1   Multiply by the ones digit, 3.   [96 × 3 = 288]
+step 2   Multiply by 4 tens and add a zero.   [96 × 4 × 10 = 3840]
+step 3   Add the aligned rows.   [288 + 3840 = 4128]
+step 4   So 96 × 43 = 4128.
+miss     missing-placeholder = 672   The 4 is in the tens place, so its row needs a zero after 384.
+miss     first-partial-only = 288   That is the first row. Add the row for 4 tens as well."
+`;
+
+exports[`recorded output: mult-by-10-100 > matches the wording recorded when the skill landed 1`] = `
+"--- mult-by-10-100 · seed 1 · difficulty 1
+prompt   What is the product?
+display  inline "10 × 8"
+answer   exact 80/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 8.
+step 2   Shift its digits 1 place left.   [8 → 80]
+step 3   So 10 × 8 = 80.
+miss     shifted-too-few = 8   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 800   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 12345 · difficulty 1
+prompt   What is the product?
+display  inline "12 × 10"
+answer   exact 120/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 12.
+step 2   Shift its digits 1 place left.   [12 → 120]
+step 3   So 12 × 10 = 120.
+miss     shifted-too-few = 12   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 1200   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 67890 · difficulty 1
+prompt   What is the product?
+display  inline "6 × 10"
+answer   exact 60/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 6.
+step 2   Shift its digits 1 place left.   [6 → 60]
+step 3   So 6 × 10 = 60.
+miss     shifted-too-few = 6   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 600   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 10"
+answer   exact 30/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 3.
+step 2   Shift its digits 1 place left.   [3 → 30]
+step 3   So 3 × 10 = 30.
+miss     shifted-too-few = 3   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 300   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  inline "12 × 10"
+answer   exact 120/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 12.
+step 2   Shift its digits 1 place left.   [12 → 120]
+step 3   So 12 × 10 = 120.
+miss     shifted-too-few = 12   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 1200   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 1 · difficulty 2
+prompt   What is the product?
+display  inline "10 × 18"
+answer   exact 180/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 18.
+step 2   Shift its digits 1 place left.   [18 → 180]
+step 3   So 10 × 18 = 180.
+miss     shifted-too-few = 18   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 1800   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 12345 · difficulty 2
+prompt   What is the product?
+display  inline "25 × 10"
+answer   exact 250/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 25.
+step 2   Shift its digits 1 place left.   [25 → 250]
+step 3   So 25 × 10 = 250.
+miss     shifted-too-few = 25   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 2500   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 67890 · difficulty 2
+prompt   What is the product?
+display  inline "13 × 10"
+answer   exact 130/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 13.
+step 2   Shift its digits 1 place left.   [13 → 130]
+step 3   So 13 × 10 = 130.
+miss     shifted-too-few = 13   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 1300   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "7 × 10"
+answer   exact 70/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 7.
+step 2   Shift its digits 1 place left.   [7 → 70]
+step 3   So 7 × 10 = 70.
+miss     shifted-too-few = 7   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 700   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  inline "24 × 10"
+answer   exact 240/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 24.
+step 2   Shift its digits 1 place left.   [24 → 240]
+step 3   So 24 × 10 = 240.
+miss     shifted-too-few = 24   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 2400   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 1 · difficulty 3
+prompt   What is the product?
+display  inline "10 × 32"
+answer   exact 320/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 32.
+step 2   Shift its digits 1 place left.   [32 → 320]
+step 3   So 10 × 32 = 320.
+miss     shifted-too-few = 32   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 3200   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 12345 · difficulty 3
+prompt   What is the product?
+display  inline "45 × 10"
+answer   exact 450/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 45.
+step 2   Shift its digits 1 place left.   [45 → 450]
+step 3   So 45 × 10 = 450.
+miss     shifted-too-few = 45   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 4500   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 67890 · difficulty 3
+prompt   What is the product?
+display  inline "24 × 100"
+answer   exact 2400/1
+input    keypad
+hint     Shift every digit 2 places left.
+step 1   Start with 24.
+step 2   Shift its digits 2 places left.   [24 → 2400]
+step 3   So 24 × 100 = 2400.
+miss     shifted-too-few = 240   That shifts one place too few. Times 100 needs 2 zeros.
+miss     shifted-too-many = 24000   That shifts one place too many. Times 100 needs 2 zeros.
+
+--- mult-by-10-100 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "14 × 10"
+answer   exact 140/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 14.
+step 2   Shift its digits 1 place left.   [14 → 140]
+step 3   So 14 × 10 = 140.
+miss     shifted-too-few = 14   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 1400   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  inline "44 × 10"
+answer   exact 440/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 44.
+step 2   Shift its digits 1 place left.   [44 → 440]
+step 3   So 44 × 10 = 440.
+miss     shifted-too-few = 44   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 4400   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 1 · difficulty 4
+prompt   What is the product?
+display  inline "10 × 51"
+answer   exact 510/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 51.
+step 2   Shift its digits 1 place left.   [51 → 510]
+step 3   So 10 × 51 = 510.
+miss     shifted-too-few = 51   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 5100   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 12345 · difficulty 4
+prompt   What is the product?
+display  inline "69 × 10"
+answer   exact 690/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 69.
+step 2   Shift its digits 1 place left.   [69 → 690]
+step 3   So 69 × 10 = 690.
+miss     shifted-too-few = 69   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 6900   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 67890 · difficulty 4
+prompt   What is the product?
+display  inline "40 × 100"
+answer   exact 4000/1
+input    keypad
+hint     Shift every digit 2 places left.
+step 1   Start with 40.
+step 2   Shift its digits 2 places left.   [40 → 4000]
+step 3   So 40 × 100 = 4000.
+miss     shifted-too-few = 400   That shifts one place too few. Times 100 needs 2 zeros.
+miss     shifted-too-many = 40000   That shifts one place too many. Times 100 needs 2 zeros.
+
+--- mult-by-10-100 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "26 × 10"
+answer   exact 260/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 26.
+step 2   Shift its digits 1 place left.   [26 → 260]
+step 3   So 26 × 10 = 260.
+miss     shifted-too-few = 26   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 2600   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  inline "68 × 10"
+answer   exact 680/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 68.
+step 2   Shift its digits 1 place left.   [68 → 680]
+step 3   So 68 × 10 = 680.
+miss     shifted-too-few = 68   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 6800   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 1 · difficulty 5
+prompt   What is the product?
+display  inline "10 × 73"
+answer   exact 730/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 73.
+step 2   Shift its digits 1 place left.   [73 → 730]
+step 3   So 10 × 73 = 730.
+miss     shifted-too-few = 73   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 7300   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 12345 · difficulty 5
+prompt   What is the product?
+display  inline "98 × 10"
+answer   exact 980/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 98.
+step 2   Shift its digits 1 place left.   [98 → 980]
+step 3   So 98 × 10 = 980.
+miss     shifted-too-few = 98   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 9800   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 67890 · difficulty 5
+prompt   What is the product?
+display  inline "57 × 100"
+answer   exact 5700/1
+input    keypad
+hint     Shift every digit 2 places left.
+step 1   Start with 57.
+step 2   Shift its digits 2 places left.   [57 → 5700]
+step 3   So 57 × 100 = 5700.
+miss     shifted-too-few = 570   That shifts one place too few. Times 100 needs 2 zeros.
+miss     shifted-too-many = 57000   That shifts one place too many. Times 100 needs 2 zeros.
+
+--- mult-by-10-100 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "39 × 10"
+answer   exact 390/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 39.
+step 2   Shift its digits 1 place left.   [39 → 390]
+step 3   So 39 × 10 = 390.
+miss     shifted-too-few = 39   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 3900   That shifts one place too many. Times 10 needs 1 zero.
+
+--- mult-by-10-100 · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  inline "96 × 10"
+answer   exact 960/1
+input    keypad
+hint     Shift every digit 1 place left.
+step 1   Start with 96.
+step 2   Shift its digits 1 place left.   [96 → 960]
+step 3   So 96 × 10 = 960.
+miss     shifted-too-few = 96   That shifts one place too few. Times 10 needs 1 zero.
+miss     shifted-too-many = 9600   That shifts one place too many. Times 10 needs 1 zero."
+`;
+
+exports[`recorded output: mult-meaning > matches the wording recorded when the skill landed 1`] = `
+"--- mult-meaning · seed 1 · difficulty 1
+prompt   An array has 3 rows of 2. How many entries?
+display  inline "2 × 3"
+answer   exact 6/1
+input    keypad
+hint     3 rows of 2 means 3 equal groups.
+step 1   Read this as 3 groups of 2.
+step 2   Add the equal groups.   [2 + 2 + 2 = 6]
+step 3   So 2 × 3 = 6.
+miss     one-group-low = 4   That is one equal group too few. Add another 2.
+miss     one-group-high = 8   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 12345 · difficulty 1
+prompt   An array has 4 rows of 2. How many entries?
+display  inline "4 × 2"
+answer   exact 8/1
+input    keypad
+hint     4 rows of 2 means 4 equal groups.
+step 1   Read this as 4 groups of 2.
+step 2   Add the equal groups.   [2 + 2 + 2 + 2 = 8]
+step 3   So 4 × 2 = 8.
+miss     one-group-low = 6   That is one equal group too few. Add another 2.
+miss     one-group-high = 10   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 67890 · difficulty 1
+prompt   An array has 3 rows of 3. How many entries?
+display  inline "3 × 3"
+answer   exact 9/1
+input    keypad
+hint     3 rows of 3 means 3 equal groups.
+step 1   Read this as 3 groups of 3.
+step 2   Add the equal groups.   [3 + 3 + 3 = 9]
+step 3   So 3 × 3 = 9.
+miss     one-group-low = 6   That is one equal group too few. Add another 3.
+miss     one-group-high = 12   That is one equal group too many. Take away 3.
+
+--- mult-meaning · seed 424242 · difficulty 1
+prompt   An array has 2 rows of 2. How many entries?
+display  inline "2 × 2"
+answer   exact 4/1
+input    keypad
+hint     2 rows of 2 means 2 equal groups.
+step 1   Read this as 2 groups of 2.
+step 2   Add the equal groups.   [2 + 2 = 4]
+step 3   So 2 × 2 = 4.
+miss     one-group-low = 2   That is one equal group too few. Add another 2.
+miss     one-group-high = 6   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 987654321 · difficulty 1
+prompt   An array has 4 rows of 2. How many entries?
+display  inline "4 × 2"
+answer   exact 8/1
+input    keypad
+hint     4 rows of 2 means 4 equal groups.
+step 1   Read this as 4 groups of 2.
+step 2   Add the equal groups.   [2 + 2 + 2 + 2 = 8]
+step 3   So 4 × 2 = 8.
+miss     one-group-low = 6   That is one equal group too few. Add another 2.
+miss     one-group-high = 10   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 1 · difficulty 2
+prompt   An array has 4 rows of 2. How many entries?
+display  inline "2 × 4"
+answer   exact 8/1
+input    keypad
+hint     4 rows of 2 means 4 equal groups.
+step 1   Read this as 4 groups of 2.
+step 2   Add the equal groups.   [2 + 2 + 2 + 2 = 8]
+step 3   So 2 × 4 = 8.
+miss     one-group-low = 6   That is one equal group too few. Add another 2.
+miss     one-group-high = 10   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 12345 · difficulty 2
+prompt   An array has 5 rows of 3. How many entries?
+display  inline "5 × 3"
+answer   exact 15/1
+input    keypad
+hint     5 rows of 3 means 5 equal groups.
+step 1   Read this as 5 groups of 3.
+step 2   Add the equal groups.   [3 + 3 + 3 + 3 + 3 = 15]
+step 3   So 5 × 3 = 15.
+miss     one-group-low = 12   That is one equal group too few. Add another 3.
+miss     one-group-high = 18   That is one equal group too many. Take away 3.
+
+--- mult-meaning · seed 67890 · difficulty 2
+prompt   An array has 3 rows of 4. How many entries?
+display  inline "3 × 4"
+answer   exact 12/1
+input    keypad
+hint     3 rows of 4 means 3 equal groups.
+step 1   Read this as 3 groups of 4.
+step 2   Add the equal groups.   [4 + 4 + 4 = 12]
+step 3   So 3 × 4 = 12.
+miss     one-group-low = 8   That is one equal group too few. Add another 4.
+miss     one-group-high = 16   That is one equal group too many. Take away 4.
+
+--- mult-meaning · seed 424242 · difficulty 2
+prompt   An array has 2 rows of 2. How many entries?
+display  inline "2 × 2"
+answer   exact 4/1
+input    keypad
+hint     2 rows of 2 means 2 equal groups.
+step 1   Read this as 2 groups of 2.
+step 2   Add the equal groups.   [2 + 2 = 4]
+step 3   So 2 × 2 = 4.
+miss     one-group-low = 2   That is one equal group too few. Add another 2.
+miss     one-group-high = 6   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 987654321 · difficulty 2
+prompt   An array has 5 rows of 2. How many entries?
+display  inline "5 × 2"
+answer   exact 10/1
+input    keypad
+hint     5 rows of 2 means 5 equal groups.
+step 1   Read this as 5 groups of 2.
+step 2   Add the equal groups.   [2 + 2 + 2 + 2 + 2 = 10]
+step 3   So 5 × 2 = 10.
+miss     one-group-low = 8   That is one equal group too few. Add another 2.
+miss     one-group-high = 12   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 1 · difficulty 3
+prompt   An array has 5 rows of 2. How many entries?
+display  inline "2 × 5"
+answer   exact 10/1
+input    keypad
+hint     5 rows of 2 means 5 equal groups.
+step 1   Read this as 5 groups of 2.
+step 2   Add the equal groups.   [2 + 2 + 2 + 2 + 2 = 10]
+step 3   So 2 × 5 = 10.
+miss     one-group-low = 8   That is one equal group too few. Add another 2.
+miss     one-group-high = 12   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 12345 · difficulty 3
+prompt   An array has 6 rows of 3. How many entries?
+display  inline "6 × 3"
+answer   exact 18/1
+input    keypad
+hint     6 rows of 3 means 6 equal groups.
+step 1   Read this as 6 groups of 3.
+step 2   Add the equal groups.   [3 + 3 + 3 + 3 + 3 + 3 = 18]
+step 3   So 6 × 3 = 18.
+miss     one-group-low = 15   That is one equal group too few. Add another 3.
+miss     one-group-high = 21   That is one equal group too many. Take away 3.
+
+--- mult-meaning · seed 67890 · difficulty 3
+prompt   An array has 3 rows of 4. How many entries?
+display  inline "3 × 4"
+answer   exact 12/1
+input    keypad
+hint     3 rows of 4 means 3 equal groups.
+step 1   Read this as 3 groups of 4.
+step 2   Add the equal groups.   [4 + 4 + 4 = 12]
+step 3   So 3 × 4 = 12.
+miss     one-group-low = 8   That is one equal group too few. Add another 4.
+miss     one-group-high = 16   That is one equal group too many. Take away 4.
+
+--- mult-meaning · seed 424242 · difficulty 3
+prompt   An array has 2 rows of 3. How many entries?
+display  inline "2 × 3"
+answer   exact 6/1
+input    keypad
+hint     2 rows of 3 means 2 equal groups.
+step 1   Read this as 2 groups of 3.
+step 2   Add the equal groups.   [3 + 3 = 6]
+step 3   So 2 × 3 = 6.
+miss     one-group-low = 3   That is one equal group too few. Add another 3.
+miss     one-group-high = 9   That is one equal group too many. Take away 3.
+
+--- mult-meaning · seed 987654321 · difficulty 3
+prompt   An array has 6 rows of 2. How many entries?
+display  inline "6 × 2"
+answer   exact 12/1
+input    keypad
+hint     6 rows of 2 means 6 equal groups.
+step 1   Read this as 6 groups of 2.
+step 2   Add the equal groups.   [2 + 2 + 2 + 2 + 2 + 2 = 12]
+step 3   So 6 × 2 = 12.
+miss     one-group-low = 10   That is one equal group too few. Add another 2.
+miss     one-group-high = 14   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 1 · difficulty 4
+prompt   An array has 6 rows of 2. How many entries?
+display  inline "2 × 6"
+answer   exact 12/1
+input    keypad
+hint     6 rows of 2 means 6 equal groups.
+step 1   Read this as 6 groups of 2.
+step 2   Add the equal groups.   [2 + 2 + 2 + 2 + 2 + 2 = 12]
+step 3   So 2 × 6 = 12.
+miss     one-group-low = 10   That is one equal group too few. Add another 2.
+miss     one-group-high = 14   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 12345 · difficulty 4
+prompt   An array has 8 rows of 4. How many entries?
+display  inline "8 × 4"
+answer   exact 32/1
+input    keypad
+hint     8 rows of 4 means 8 equal groups.
+step 1   Read this as 8 groups of 4.
+step 2   Add the equal groups.   [4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 = 32]
+step 3   So 8 × 4 = 32.
+miss     one-group-low = 28   That is one equal group too few. Add another 4.
+miss     one-group-high = 36   That is one equal group too many. Take away 4.
+
+--- mult-meaning · seed 67890 · difficulty 4
+prompt   An array has 4 rows of 6. How many entries?
+display  inline "4 × 6"
+answer   exact 24/1
+input    keypad
+hint     4 rows of 6 means 4 equal groups.
+step 1   Read this as 4 groups of 6.
+step 2   Add the equal groups.   [6 + 6 + 6 + 6 = 24]
+step 3   So 4 × 6 = 24.
+miss     one-group-low = 18   That is one equal group too few. Add another 6.
+miss     one-group-high = 30   That is one equal group too many. Take away 6.
+
+--- mult-meaning · seed 424242 · difficulty 4
+prompt   An array has 2 rows of 3. How many entries?
+display  inline "2 × 3"
+answer   exact 6/1
+input    keypad
+hint     2 rows of 3 means 2 equal groups.
+step 1   Read this as 2 groups of 3.
+step 2   Add the equal groups.   [3 + 3 = 6]
+step 3   So 2 × 3 = 6.
+miss     one-group-low = 3   That is one equal group too few. Add another 3.
+miss     one-group-high = 9   That is one equal group too many. Take away 3.
+
+--- mult-meaning · seed 987654321 · difficulty 4
+prompt   An array has 8 rows of 2. How many entries?
+display  inline "8 × 2"
+answer   exact 16/1
+input    keypad
+hint     8 rows of 2 means 8 equal groups.
+step 1   Read this as 8 groups of 2.
+step 2   Add the equal groups.   [2 + 2 + 2 + 2 + 2 + 2 + 2 + 2 = 16]
+step 3   So 8 × 2 = 16.
+miss     one-group-low = 14   That is one equal group too few. Add another 2.
+miss     one-group-high = 18   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 1 · difficulty 5
+prompt   An array has 7 rows of 2. How many entries?
+display  inline "2 × 7"
+answer   exact 14/1
+input    keypad
+hint     7 rows of 2 means 7 equal groups.
+step 1   Read this as 7 groups of 2.
+step 2   Add the equal groups.   [2 + 2 + 2 + 2 + 2 + 2 + 2 = 14]
+step 3   So 2 × 7 = 14.
+miss     one-group-low = 12   That is one equal group too few. Add another 2.
+miss     one-group-high = 16   That is one equal group too many. Take away 2.
+
+--- mult-meaning · seed 12345 · difficulty 5
+prompt   An array has 10 rows of 4. How many entries?
+display  inline "10 × 4"
+answer   exact 40/1
+input    keypad
+hint     10 rows of 4 means 10 equal groups.
+step 1   Read this as 10 groups of 4.
+step 2   Add the equal groups.   [4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 + 4 = 40]
+step 3   So 10 × 4 = 40.
+miss     one-group-low = 36   That is one equal group too few. Add another 4.
+miss     one-group-high = 44   That is one equal group too many. Take away 4.
+
+--- mult-meaning · seed 67890 · difficulty 5
+prompt   An array has 5 rows of 7. How many entries?
+display  inline "5 × 7"
+answer   exact 35/1
+input    keypad
+hint     5 rows of 7 means 5 equal groups.
+step 1   Read this as 5 groups of 7.
+step 2   Add the equal groups.   [7 + 7 + 7 + 7 + 7 = 35]
+step 3   So 5 × 7 = 35.
+miss     one-group-low = 28   That is one equal group too few. Add another 7.
+miss     one-group-high = 42   That is one equal group too many. Take away 7.
+
+--- mult-meaning · seed 424242 · difficulty 5
+prompt   An array has 3 rows of 4. How many entries?
+display  inline "3 × 4"
+answer   exact 12/1
+input    keypad
+hint     3 rows of 4 means 3 equal groups.
+step 1   Read this as 3 groups of 4.
+step 2   Add the equal groups.   [4 + 4 + 4 = 12]
+step 3   So 3 × 4 = 12.
+miss     one-group-low = 8   That is one equal group too few. Add another 4.
+miss     one-group-high = 16   That is one equal group too many. Take away 4.
+
+--- mult-meaning · seed 987654321 · difficulty 5
+prompt   An array has 10 rows of 3. How many entries?
+display  inline "10 × 3"
+answer   exact 30/1
+input    keypad
+hint     10 rows of 3 means 10 equal groups.
+step 1   Read this as 10 groups of 3.
+step 2   Add the equal groups.   [3 + 3 + 3 + 3 + 3 + 3 + 3 + 3 + 3 + 3 = 30]
+step 3   So 10 × 3 = 30.
+miss     one-group-low = 27   That is one equal group too few. Add another 3.
+miss     one-group-high = 33   That is one equal group too many. Take away 3."
+`;
+
+exports[`recorded output: mult-words > matches the wording recorded when the skill landed 1`] = `
+"--- mult-words · seed 1 · difficulty 1
+prompt   How many plants are in the beds?
+display  story [4 × 3] "A garden has 4 beds with 3 plants in each. The greenhouse holds 8 plants. How many plants are in the beds?"
+answer   exact 12/1
+input    keypad
+hint     Multiply 4 beds by 3 plants in each.
+step 1   Pick out the number of groups and the amount in each.   [4 groups of 3]
+step 2   Multiply the two numbers.   [4 × 3 = 12]
+step 3   The greenhouse's 8 plants are elsewhere.
+miss     wrong-operation = 7   That adds beds to one bed size; every bed has plants.
+miss     distractor-pair = 32   The 8 plants are in the greenhouse.
+miss     answered-part = 4   That counts beds only. Each bed holds 3 plants.
+
+--- mult-words · seed 12345 · difficulty 1
+prompt   How many calls were completed?
+display  story [5 × 3] "A support worker completes 3 calls daily for 5 days. Another 7 calls are missed. How many calls were completed?"
+answer   exact 15/1
+input    keypad
+hint     Multiply 5 days by 3 completed calls each day.
+step 1   Pick out the number of groups and the amount in each.   [5 groups of 3]
+step 2   Multiply the two numbers.   [5 × 3 = 15]
+step 3   The 7 missed calls were not completed.
+miss     wrong-operation = 8   That adds days to calls once; the calls repeat each day.
+miss     distractor-pair = 35   The 7 calls were missed, not completed daily.
+miss     answered-part = 5   That counts days only. Each day has 3 completed calls.
+
+--- mult-words · seed 67890 · difficulty 1
+prompt   How many trips were made?
+display  story [4 × 4] "A commuter makes 4 train trips each week for 4 weeks. They work remotely 6 days. How many train trips were made?"
+answer   exact 16/1
+input    keypad
+hint     Multiply 4 weeks by 4 trips each week.
+step 1   Pick out the number of groups and the amount in each.   [4 groups of 4]
+step 2   Multiply the two numbers.   [4 × 4 = 16]
+step 3   The 6 remote days add no train trips.
+miss     wrong-operation = 8   That combines weeks and trips once; the trips repeat every week.
+miss     distractor-pair = 24   Remote days, 6, do not replace the weekly trip count.
+miss     answered-part = 4   That is the number of weeks. Each has 4 trips.
+
+--- mult-words · seed 424242 · difficulty 1
+prompt   How many tickets were sold?
+display  story [3 × 3] "A cinema fills 3 rows with 3 ticket holders in each. Another screen sells 4 tickets. How many tickets filled these rows?"
+answer   exact 9/1
+input    keypad
+hint     Multiply 3 rows by 3 ticket holders in each.
+step 1   Pick out the number of groups and the amount in each.   [3 groups of 3]
+step 2   Multiply the two numbers.   [3 × 3 = 9]
+step 3   The other screen's 4 tickets are separate.
+miss     wrong-operation = 6   That adds rows to one row size; every row is filled.
+miss     distractor-pair = 12   The other screen sold the 4 tickets.
+miss     answered-part = 3   That counts rows only. Each row has 3 people.
+
+--- mult-words · seed 987654321 · difficulty 1
+prompt   How many plants are in the beds?
+display  story [5 × 3] "A garden has 5 beds with 3 plants in each. The greenhouse holds 2 plants. How many plants are in the beds?"
+answer   exact 15/1
+input    keypad
+hint     Multiply 5 beds by 3 plants in each.
+step 1   Pick out the number of groups and the amount in each.   [5 groups of 3]
+step 2   Multiply the two numbers.   [5 × 3 = 15]
+step 3   The greenhouse's 2 plants are elsewhere.
+miss     wrong-operation = 8   That adds beds to one bed size; every bed has plants.
+miss     distractor-pair = 10   The 2 plants are in the greenhouse.
+miss     answered-part = 5   That counts beds only. Each bed holds 3 plants.
+
+--- mult-words · seed 1 · difficulty 2
+prompt   How many plants are in the beds?
+display  story [6 × 3] "A garden has 6 beds with 3 plants in each. The greenhouse holds 8 plants. How many plants are in the beds?"
+answer   exact 18/1
+input    keypad
+hint     Multiply 6 beds by 3 plants in each.
+step 1   Pick out the number of groups and the amount in each.   [6 groups of 3]
+step 2   Multiply the two numbers.   [6 × 3 = 18]
+step 3   The greenhouse's 8 plants are elsewhere.
+miss     wrong-operation = 9   That adds beds to one bed size; every bed has plants.
+miss     distractor-pair = 48   The 8 plants are in the greenhouse.
+miss     answered-part = 6   That counts beds only. Each bed holds 3 plants.
+
+--- mult-words · seed 12345 · difficulty 2
+prompt   How many calls were completed?
+display  story [7 × 4] "A support worker completes 4 calls daily for 7 days. Another 7 calls are missed. How many calls were completed?"
+answer   exact 28/1
+input    keypad
+hint     Multiply 7 days by 4 completed calls each day.
+step 1   Pick out the number of groups and the amount in each.   [7 groups of 4]
+step 2   Multiply the two numbers.   [7 × 4 = 28]
+step 3   The 7 missed calls were not completed.
+miss     wrong-operation = 11   That adds days to calls once; the calls repeat each day.
+miss     distractor-pair = 49   The 7 calls were missed, not completed daily.
+miss     answered-part = 7   That counts days only. Each day has 4 completed calls.
+
+--- mult-words · seed 67890 · difficulty 2
+prompt   How many trips were made?
+display  story [4 × 5] "A commuter makes 5 train trips each week for 4 weeks. They work remotely 6 days. How many train trips were made?"
+answer   exact 20/1
+input    keypad
+hint     Multiply 4 weeks by 5 trips each week.
+step 1   Pick out the number of groups and the amount in each.   [4 groups of 5]
+step 2   Multiply the two numbers.   [4 × 5 = 20]
+step 3   The 6 remote days add no train trips.
+miss     wrong-operation = 9   That combines weeks and trips once; the trips repeat every week.
+miss     distractor-pair = 24   Remote days, 6, do not replace the weekly trip count.
+miss     answered-part = 4   That is the number of weeks. Each has 5 trips.
+
+--- mult-words · seed 424242 · difficulty 2
+prompt   How many tickets were sold?
+display  story [3 × 4] "A cinema fills 3 rows with 4 ticket holders in each. Another screen sells 3 tickets. How many tickets filled these rows?"
+answer   exact 12/1
+input    keypad
+hint     Multiply 3 rows by 4 ticket holders in each.
+step 1   Pick out the number of groups and the amount in each.   [3 groups of 4]
+step 2   Multiply the two numbers.   [3 × 4 = 12]
+step 3   The other screen's 3 tickets are separate.
+miss     wrong-operation = 7   That adds rows to one row size; every row is filled.
+miss     distractor-pair = 9   The other screen sold the 3 tickets.
+miss     answered-part = 3   That counts rows only. Each row has 4 people.
+
+--- mult-words · seed 987654321 · difficulty 2
+prompt   How many plants are in the beds?
+display  story [7 × 3] "A garden has 7 beds with 3 plants in each. The greenhouse holds 2 plants. How many plants are in the beds?"
+answer   exact 21/1
+input    keypad
+hint     Multiply 7 beds by 3 plants in each.
+step 1   Pick out the number of groups and the amount in each.   [7 groups of 3]
+step 2   Multiply the two numbers.   [7 × 3 = 21]
+step 3   The greenhouse's 2 plants are elsewhere.
+miss     wrong-operation = 10   That adds beds to one bed size; every bed has plants.
+miss     distractor-pair = 14   The 2 plants are in the greenhouse.
+miss     answered-part = 7   That counts beds only. Each bed holds 3 plants.
+
+--- mult-words · seed 1 · difficulty 3
+prompt   How many plants are in the beds?
+display  story [7 × 4] "A garden has 7 beds with 4 plants in each. The greenhouse holds 8 plants. How many plants are in the beds?"
+answer   exact 28/1
+input    keypad
+hint     Multiply 7 beds by 4 plants in each.
+step 1   Pick out the number of groups and the amount in each.   [7 groups of 4]
+step 2   Multiply the two numbers.   [7 × 4 = 28]
+step 3   The greenhouse's 8 plants are elsewhere.
+miss     wrong-operation = 11   That adds beds to one bed size; every bed has plants.
+miss     distractor-pair = 56   The 8 plants are in the greenhouse.
+miss     answered-part = 7   That counts beds only. Each bed holds 4 plants.
+
+--- mult-words · seed 12345 · difficulty 3
+prompt   How many calls were completed?
+display  story [9 × 5] "A support worker completes 5 calls daily for 9 days. Another 7 calls are missed. How many calls were completed?"
+answer   exact 45/1
+input    keypad
+hint     Multiply 9 days by 5 completed calls each day.
+step 1   Pick out the number of groups and the amount in each.   [9 groups of 5]
+step 2   Multiply the two numbers.   [9 × 5 = 45]
+step 3   The 7 missed calls were not completed.
+miss     wrong-operation = 14   That adds days to calls once; the calls repeat each day.
+miss     distractor-pair = 63   The 7 calls were missed, not completed daily.
+miss     answered-part = 9   That counts days only. Each day has 5 completed calls.
+
+--- mult-words · seed 67890 · difficulty 3
+prompt   How many trips were made?
+display  story [6 × 7] "A commuter makes 7 train trips each week for 6 weeks. They work remotely 5 days. How many train trips were made?"
+answer   exact 42/1
+input    keypad
+hint     Multiply 6 weeks by 7 trips each week.
+step 1   Pick out the number of groups and the amount in each.   [6 groups of 7]
+step 2   Multiply the two numbers.   [6 × 7 = 42]
+step 3   The 5 remote days add no train trips.
+miss     wrong-operation = 13   That combines weeks and trips once; the trips repeat every week.
+miss     distractor-pair = 30   Remote days, 5, do not replace the weekly trip count.
+miss     answered-part = 6   That is the number of weeks. Each has 7 trips.
+
+--- mult-words · seed 424242 · difficulty 3
+prompt   How many tickets were sold?
+display  story [4 × 5] "A cinema fills 4 rows with 5 ticket holders in each. Another screen sells 3 tickets. How many tickets filled these rows?"
+answer   exact 20/1
+input    keypad
+hint     Multiply 4 rows by 5 ticket holders in each.
+step 1   Pick out the number of groups and the amount in each.   [4 groups of 5]
+step 2   Multiply the two numbers.   [4 × 5 = 20]
+step 3   The other screen's 3 tickets are separate.
+miss     wrong-operation = 9   That adds rows to one row size; every row is filled.
+miss     distractor-pair = 12   The other screen sold the 3 tickets.
+miss     answered-part = 4   That counts rows only. Each row has 5 people.
+
+--- mult-words · seed 987654321 · difficulty 3
+prompt   How many plants are in the beds?
+display  story [9 × 4] "A garden has 9 beds with 4 plants in each. The greenhouse holds 2 plants. How many plants are in the beds?"
+answer   exact 36/1
+input    keypad
+hint     Multiply 9 beds by 4 plants in each.
+step 1   Pick out the number of groups and the amount in each.   [9 groups of 4]
+step 2   Multiply the two numbers.   [9 × 4 = 36]
+step 3   The greenhouse's 2 plants are elsewhere.
+miss     wrong-operation = 13   That adds beds to one bed size; every bed has plants.
+miss     distractor-pair = 18   The 2 plants are in the greenhouse.
+miss     answered-part = 9   That counts beds only. Each bed holds 4 plants.
+
+--- mult-words · seed 1 · difficulty 4
+prompt   How many plants are in the beds?
+display  story [10 × 5] "A garden has 10 beds with 5 plants in each. The greenhouse holds 8 plants. How many plants are in the beds?"
+answer   exact 50/1
+input    keypad
+hint     Multiply 10 beds by 5 plants in each.
+step 1   Pick out the number of groups and the amount in each.   [10 groups of 5]
+step 2   Multiply the two numbers.   [10 × 5 = 50]
+step 3   The greenhouse's 8 plants are elsewhere.
+miss     wrong-operation = 15   That adds beds to one bed size; every bed has plants.
+miss     distractor-pair = 80   The 8 plants are in the greenhouse.
+miss     answered-part = 10   That counts beds only. Each bed holds 5 plants.
+
+--- mult-words · seed 12345 · difficulty 4
+prompt   How many calls were completed?
+display  story [12 × 7] "A support worker completes 7 calls daily for 12 days. Another 6 calls are missed. How many calls were completed?"
+answer   exact 84/1
+input    keypad
+hint     Multiply 12 days by 7 completed calls each day.
+step 1   Pick out the number of groups and the amount in each.   [12 groups of 7]
+step 2   Multiply the two numbers.   [12 × 7 = 84]
+step 3   The 6 missed calls were not completed.
+miss     wrong-operation = 19   That adds days to calls once; the calls repeat each day.
+miss     distractor-pair = 72   The 6 calls were missed, not completed daily.
+miss     answered-part = 12   That counts days only. Each day has 7 completed calls.
+
+--- mult-words · seed 67890 · difficulty 4
+prompt   How many trips were made?
+display  story [8 × 9] "A commuter makes 9 train trips each week for 8 weeks. They work remotely 5 days. How many train trips were made?"
+answer   exact 72/1
+input    keypad
+hint     Multiply 8 weeks by 9 trips each week.
+step 1   Pick out the number of groups and the amount in each.   [8 groups of 9]
+step 2   Multiply the two numbers.   [8 × 9 = 72]
+step 3   The 5 remote days add no train trips.
+miss     wrong-operation = 17   That combines weeks and trips once; the trips repeat every week.
+miss     distractor-pair = 40   Remote days, 5, do not replace the weekly trip count.
+miss     answered-part = 8   That is the number of weeks. Each has 9 trips.
+
+--- mult-words · seed 424242 · difficulty 4
+prompt   How many tickets were sold?
+display  story [6 × 6] "A cinema fills 6 rows with 6 ticket holders in each. Another screen sells 3 tickets. How many tickets filled these rows?"
+answer   exact 36/1
+input    keypad
+hint     Multiply 6 rows by 6 ticket holders in each.
+step 1   Pick out the number of groups and the amount in each.   [6 groups of 6]
+step 2   Multiply the two numbers.   [6 × 6 = 36]
+step 3   The other screen's 3 tickets are separate.
+miss     wrong-operation = 12   That adds rows to one row size; every row is filled.
+miss     distractor-pair = 18   The other screen sold the 3 tickets.
+miss     answered-part = 6   That counts rows only. Each row has 6 people.
+
+--- mult-words · seed 987654321 · difficulty 4
+prompt   How many plants are in the beds?
+display  story [12 × 6] "A garden has 12 beds with 6 plants in each. The greenhouse holds 2 plants. How many plants are in the beds?"
+answer   exact 72/1
+input    keypad
+hint     Multiply 12 beds by 6 plants in each.
+step 1   Pick out the number of groups and the amount in each.   [12 groups of 6]
+step 2   Multiply the two numbers.   [12 × 6 = 72]
+step 3   The greenhouse's 2 plants are elsewhere.
+miss     wrong-operation = 18   That adds beds to one bed size; every bed has plants.
+miss     distractor-pair = 24   The 2 plants are in the greenhouse.
+miss     answered-part = 12   That counts beds only. Each bed holds 6 plants.
+
+--- mult-words · seed 1 · difficulty 5
+prompt   How many plants are in the beds?
+display  story [12 × 7] "A garden has 12 beds with 7 plants in each. The greenhouse holds 8 plants. How many plants are in the beds?"
+answer   exact 84/1
+input    keypad
+hint     Multiply 12 beds by 7 plants in each.
+step 1   Pick out the number of groups and the amount in each.   [12 groups of 7]
+step 2   Multiply the two numbers.   [12 × 7 = 84]
+step 3   The greenhouse's 8 plants are elsewhere.
+miss     wrong-operation = 19   That adds beds to one bed size; every bed has plants.
+miss     distractor-pair = 96   The 8 plants are in the greenhouse.
+miss     answered-part = 12   That counts beds only. Each bed holds 7 plants.
+
+--- mult-words · seed 12345 · difficulty 5
+prompt   How many calls were completed?
+display  story [15 × 9] "A support worker completes 9 calls daily for 15 days. Another 6 calls are missed. How many calls were completed?"
+answer   exact 135/1
+input    keypad
+hint     Multiply 15 days by 9 completed calls each day.
+step 1   Pick out the number of groups and the amount in each.   [15 groups of 9]
+step 2   Multiply the two numbers.   [15 × 9 = 135]
+step 3   The 6 missed calls were not completed.
+miss     wrong-operation = 24   That adds days to calls once; the calls repeat each day.
+miss     distractor-pair = 90   The 6 calls were missed, not completed daily.
+miss     answered-part = 15   That counts days only. Each day has 9 completed calls.
+
+--- mult-words · seed 67890 · difficulty 5
+prompt   How many trips were made?
+display  story [10 × 12] "A commuter makes 12 train trips each week for 10 weeks. They work remotely 6 days. How many train trips were made?"
+answer   exact 120/1
+input    keypad
+hint     Multiply 10 weeks by 12 trips each week.
+step 1   Pick out the number of groups and the amount in each.   [10 groups of 12]
+step 2   Multiply the two numbers.   [10 × 12 = 120]
+step 3   The 6 remote days add no train trips.
+miss     wrong-operation = 22   That combines weeks and trips once; the trips repeat every week.
+miss     distractor-pair = 60   Remote days, 6, do not replace the weekly trip count.
+miss     answered-part = 10   That is the number of weeks. Each has 12 trips.
+
+--- mult-words · seed 424242 · difficulty 5
+prompt   How many tickets were sold?
+display  story [8 × 9] "A cinema fills 8 rows with 9 ticket holders in each. Another screen sells 3 tickets. How many tickets filled these rows?"
+answer   exact 72/1
+input    keypad
+hint     Multiply 8 rows by 9 ticket holders in each.
+step 1   Pick out the number of groups and the amount in each.   [8 groups of 9]
+step 2   Multiply the two numbers.   [8 × 9 = 72]
+step 3   The other screen's 3 tickets are separate.
+miss     wrong-operation = 17   That adds rows to one row size; every row is filled.
+miss     distractor-pair = 24   The other screen sold the 3 tickets.
+miss     answered-part = 8   That counts rows only. Each row has 9 people.
+
+--- mult-words · seed 987654321 · difficulty 5
+prompt   How many plants are in the beds?
+display  story [15 × 8] "A garden has 15 beds with 8 plants in each. The greenhouse holds 2 plants. How many plants are in the beds?"
+answer   exact 120/1
+input    keypad
+hint     Multiply 15 beds by 8 plants in each.
+step 1   Pick out the number of groups and the amount in each.   [15 groups of 8]
+step 2   Multiply the two numbers.   [15 × 8 = 120]
+step 3   The greenhouse's 2 plants are elsewhere.
+miss     wrong-operation = 23   That adds beds to one bed size; every bed has plants.
+miss     distractor-pair = 30   The 2 plants are in the greenhouse.
+miss     answered-part = 15   That counts beds only. Each bed holds 8 plants."
+`;
+
+exports[`recorded output: times-2 > matches the wording recorded when the skill landed 1`] = `
+"--- times-2 · seed 1 · difficulty 1
+prompt   What is the product?
+display  inline "2 × 3"
+answer   exact 6/1
+input    keypad
+hint     Double 3: add it to itself.
+step 1   Double 3.   [3 + 3 = 6]
+step 2   So 2 × 3 = 6.
+miss     one-group-low = 3   That is one equal group too few. Add another 3.
+miss     one-group-high = 9   That is one equal group too many. Take away 3.
+
+--- times-2 · seed 12345 · difficulty 1
+prompt   What is the product?
+display  inline "2 × 4"
+answer   exact 8/1
+input    keypad
+hint     Double 4: add it to itself.
+step 1   Double 4.   [4 + 4 = 8]
+step 2   So 2 × 4 = 8.
+miss     one-group-low = 4   That is one equal group too few. Add another 4.
+miss     one-group-high = 12   That is one equal group too many. Take away 4.
+
+--- times-2 · seed 67890 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 2"
+answer   exact 6/1
+input    keypad
+hint     Double 3: add it to itself.
+step 1   Double 3.   [3 + 3 = 6]
+step 2   So 2 × 3 = 6.
+miss     one-group-low = 3   That is one equal group too few. Add another 3.
+miss     one-group-high = 9   That is one equal group too many. Take away 3.
+
+--- times-2 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "2 × 2"
+answer   exact 4/1
+input    keypad
+hint     Double 2: add it to itself.
+step 1   Double 2.   [2 + 2 = 4]
+step 2   So 2 × 2 = 4.
+miss     one-group-low = 2   That is one equal group too few. Add another 2.
+miss     one-group-high = 6   That is one equal group too many. Take away 2.
+
+--- times-2 · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  inline "2 × 4"
+answer   exact 8/1
+input    keypad
+hint     Double 4: add it to itself.
+step 1   Double 4.   [4 + 4 = 8]
+step 2   So 2 × 4 = 8.
+miss     one-group-low = 4   That is one equal group too few. Add another 4.
+miss     one-group-high = 12   That is one equal group too many. Take away 4.
+
+--- times-2 · seed 1 · difficulty 2
+prompt   What is the product?
+display  inline "2 × 5"
+answer   exact 10/1
+input    keypad
+hint     Double 5: add it to itself.
+step 1   Double 5.   [5 + 5 = 10]
+step 2   So 2 × 5 = 10.
+miss     one-group-low = 5   That is one equal group too few. Add another 5.
+miss     one-group-high = 15   That is one equal group too many. Take away 5.
+
+--- times-2 · seed 12345 · difficulty 2
+prompt   What is the product?
+display  inline "2 × 6"
+answer   exact 12/1
+input    keypad
+hint     Double 6: add it to itself.
+step 1   Double 6.   [6 + 6 = 12]
+step 2   So 2 × 6 = 12.
+miss     one-group-low = 6   That is one equal group too few. Add another 6.
+miss     one-group-high = 18   That is one equal group too many. Take away 6.
+
+--- times-2 · seed 67890 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 2"
+answer   exact 6/1
+input    keypad
+hint     Double 3: add it to itself.
+step 1   Double 3.   [3 + 3 = 6]
+step 2   So 2 × 3 = 6.
+miss     one-group-low = 3   That is one equal group too few. Add another 3.
+miss     one-group-high = 9   That is one equal group too many. Take away 3.
+
+--- times-2 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "2 × 2"
+answer   exact 4/1
+input    keypad
+hint     Double 2: add it to itself.
+step 1   Double 2.   [2 + 2 = 4]
+step 2   So 2 × 2 = 4.
+miss     one-group-low = 2   That is one equal group too few. Add another 2.
+miss     one-group-high = 6   That is one equal group too many. Take away 2.
+
+--- times-2 · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  inline "2 × 6"
+answer   exact 12/1
+input    keypad
+hint     Double 6: add it to itself.
+step 1   Double 6.   [6 + 6 = 12]
+step 2   So 2 × 6 = 12.
+miss     one-group-low = 6   That is one equal group too few. Add another 6.
+miss     one-group-high = 18   That is one equal group too many. Take away 6.
+
+--- times-2 · seed 1 · difficulty 3
+prompt   What is the product?
+display  inline "2 × 6"
+answer   exact 12/1
+input    keypad
+hint     Double 6: add it to itself.
+step 1   Double 6.   [6 + 6 = 12]
+step 2   So 2 × 6 = 12.
+miss     one-group-low = 6   That is one equal group too few. Add another 6.
+miss     one-group-high = 18   That is one equal group too many. Take away 6.
+
+--- times-2 · seed 12345 · difficulty 3
+prompt   What is the product?
+display  inline "2 × 8"
+answer   exact 16/1
+input    keypad
+hint     Double 8: add it to itself.
+step 1   Double 8.   [8 + 8 = 16]
+step 2   So 2 × 8 = 16.
+miss     one-group-low = 8   That is one equal group too few. Add another 8.
+miss     one-group-high = 24   That is one equal group too many. Take away 8.
+
+--- times-2 · seed 67890 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 2"
+answer   exact 8/1
+input    keypad
+hint     Double 4: add it to itself.
+step 1   Double 4.   [4 + 4 = 8]
+step 2   So 2 × 4 = 8.
+miss     one-group-low = 4   That is one equal group too few. Add another 4.
+miss     one-group-high = 12   That is one equal group too many. Take away 4.
+
+--- times-2 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "2 × 2"
+answer   exact 4/1
+input    keypad
+hint     Double 2: add it to itself.
+step 1   Double 2.   [2 + 2 = 4]
+step 2   So 2 × 2 = 4.
+miss     one-group-low = 2   That is one equal group too few. Add another 2.
+miss     one-group-high = 6   That is one equal group too many. Take away 2.
+
+--- times-2 · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  inline "2 × 8"
+answer   exact 16/1
+input    keypad
+hint     Double 8: add it to itself.
+step 1   Double 8.   [8 + 8 = 16]
+step 2   So 2 × 8 = 16.
+miss     one-group-low = 8   That is one equal group too few. Add another 8.
+miss     one-group-high = 24   That is one equal group too many. Take away 8.
+
+--- times-2 · seed 1 · difficulty 4
+prompt   What is the product?
+display  inline "2 × 7"
+answer   exact 14/1
+input    keypad
+hint     Double 7: add it to itself.
+step 1   Double 7.   [7 + 7 = 14]
+step 2   So 2 × 7 = 14.
+miss     one-group-low = 7   That is one equal group too few. Add another 7.
+miss     one-group-high = 21   That is one equal group too many. Take away 7.
+
+--- times-2 · seed 12345 · difficulty 4
+prompt   What is the product?
+display  inline "2 × 10"
+answer   exact 20/1
+input    keypad
+hint     Double 10: add it to itself.
+step 1   Double 10.   [10 + 10 = 20]
+step 2   So 2 × 10 = 20.
+miss     one-group-low = 10   That is one equal group too few. Add another 10.
+miss     one-group-high = 30   That is one equal group too many. Take away 10.
+
+--- times-2 · seed 67890 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 2"
+answer   exact 10/1
+input    keypad
+hint     Double 5: add it to itself.
+step 1   Double 5.   [5 + 5 = 10]
+step 2   So 2 × 5 = 10.
+miss     one-group-low = 5   That is one equal group too few. Add another 5.
+miss     one-group-high = 15   That is one equal group too many. Take away 5.
+
+--- times-2 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "2 × 3"
+answer   exact 6/1
+input    keypad
+hint     Double 3: add it to itself.
+step 1   Double 3.   [3 + 3 = 6]
+step 2   So 2 × 3 = 6.
+miss     one-group-low = 3   That is one equal group too few. Add another 3.
+miss     one-group-high = 9   That is one equal group too many. Take away 3.
+
+--- times-2 · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  inline "2 × 10"
+answer   exact 20/1
+input    keypad
+hint     Double 10: add it to itself.
+step 1   Double 10.   [10 + 10 = 20]
+step 2   So 2 × 10 = 20.
+miss     one-group-low = 10   That is one equal group too few. Add another 10.
+miss     one-group-high = 30   That is one equal group too many. Take away 10.
+
+--- times-2 · seed 1 · difficulty 5
+prompt   What is the product?
+display  inline "2 × 8"
+answer   exact 16/1
+input    keypad
+hint     Double 8: add it to itself.
+step 1   Double 8.   [8 + 8 = 16]
+step 2   So 2 × 8 = 16.
+miss     one-group-low = 8   That is one equal group too few. Add another 8.
+miss     one-group-high = 24   That is one equal group too many. Take away 8.
+
+--- times-2 · seed 12345 · difficulty 5
+prompt   What is the product?
+display  inline "2 × 12"
+answer   exact 24/1
+input    keypad
+hint     Double 12: add it to itself.
+step 1   Double 12.   [12 + 12 = 24]
+step 2   So 2 × 12 = 24.
+miss     one-group-low = 12   That is one equal group too few. Add another 12.
+miss     one-group-high = 36   That is one equal group too many. Take away 12.
+
+--- times-2 · seed 67890 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 2"
+answer   exact 12/1
+input    keypad
+hint     Double 6: add it to itself.
+step 1   Double 6.   [6 + 6 = 12]
+step 2   So 2 × 6 = 12.
+miss     one-group-low = 6   That is one equal group too few. Add another 6.
+miss     one-group-high = 18   That is one equal group too many. Take away 6.
+
+--- times-2 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "2 × 3"
+answer   exact 6/1
+input    keypad
+hint     Double 3: add it to itself.
+step 1   Double 3.   [3 + 3 = 6]
+step 2   So 2 × 3 = 6.
+miss     one-group-low = 3   That is one equal group too few. Add another 3.
+miss     one-group-high = 9   That is one equal group too many. Take away 3.
+
+--- times-2 · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  inline "2 × 12"
+answer   exact 24/1
+input    keypad
+hint     Double 12: add it to itself.
+step 1   Double 12.   [12 + 12 = 24]
+step 2   So 2 × 12 = 24.
+miss     one-group-low = 12   That is one equal group too few. Add another 12.
+miss     one-group-high = 36   That is one equal group too many. Take away 12."
+`;
+
+exports[`recorded output: times-3 > matches the wording recorded when the skill landed 1`] = `
+"--- times-3 · seed 1 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 3"
+answer   exact 9/1
+input    keypad
+hint     Add three equal groups of 3.
+step 1   Write three equal groups.   [3 + 3 + 3]
+step 2   Add them.   [3 + 3 + 3 = 9]
+step 3   So 3 × 3 = 9.
+miss     one-group-low = 6   That is one equal group too few. Add another 3.
+miss     one-group-high = 12   That is one equal group too many. Take away 3.
+
+--- times-3 · seed 12345 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 4"
+answer   exact 12/1
+input    keypad
+hint     Add three equal groups of 4.
+step 1   Write three equal groups.   [4 + 4 + 4]
+step 2   Add them.   [4 + 4 + 4 = 12]
+step 3   So 3 × 4 = 12.
+miss     one-group-low = 8   That is one equal group too few. Add another 4.
+miss     one-group-high = 16   That is one equal group too many. Take away 4.
+
+--- times-3 · seed 67890 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 3"
+answer   exact 9/1
+input    keypad
+hint     Add three equal groups of 3.
+step 1   Write three equal groups.   [3 + 3 + 3]
+step 2   Add them.   [3 + 3 + 3 = 9]
+step 3   So 3 × 3 = 9.
+miss     one-group-low = 6   That is one equal group too few. Add another 3.
+miss     one-group-high = 12   That is one equal group too many. Take away 3.
+
+--- times-3 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 2"
+answer   exact 6/1
+input    keypad
+hint     Add three equal groups of 2.
+step 1   Write three equal groups.   [2 + 2 + 2]
+step 2   Add them.   [2 + 2 + 2 = 6]
+step 3   So 3 × 2 = 6.
+miss     one-group-low = 4   That is one equal group too few. Add another 2.
+miss     one-group-high = 8   That is one equal group too many. Take away 2.
+
+--- times-3 · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 4"
+answer   exact 12/1
+input    keypad
+hint     Add three equal groups of 4.
+step 1   Write three equal groups.   [4 + 4 + 4]
+step 2   Add them.   [4 + 4 + 4 = 12]
+step 3   So 3 × 4 = 12.
+miss     one-group-low = 8   That is one equal group too few. Add another 4.
+miss     one-group-high = 16   That is one equal group too many. Take away 4.
+
+--- times-3 · seed 1 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 5"
+answer   exact 15/1
+input    keypad
+hint     Add three equal groups of 5.
+step 1   Write three equal groups.   [5 + 5 + 5]
+step 2   Add them.   [5 + 5 + 5 = 15]
+step 3   So 3 × 5 = 15.
+miss     one-group-low = 10   That is one equal group too few. Add another 5.
+miss     one-group-high = 20   That is one equal group too many. Take away 5.
+
+--- times-3 · seed 12345 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 6"
+answer   exact 18/1
+input    keypad
+hint     Add three equal groups of 6.
+step 1   Write three equal groups.   [6 + 6 + 6]
+step 2   Add them.   [6 + 6 + 6 = 18]
+step 3   So 3 × 6 = 18.
+miss     one-group-low = 12   That is one equal group too few. Add another 6.
+miss     one-group-high = 24   That is one equal group too many. Take away 6.
+
+--- times-3 · seed 67890 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 3"
+answer   exact 9/1
+input    keypad
+hint     Add three equal groups of 3.
+step 1   Write three equal groups.   [3 + 3 + 3]
+step 2   Add them.   [3 + 3 + 3 = 9]
+step 3   So 3 × 3 = 9.
+miss     one-group-low = 6   That is one equal group too few. Add another 3.
+miss     one-group-high = 12   That is one equal group too many. Take away 3.
+
+--- times-3 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 2"
+answer   exact 6/1
+input    keypad
+hint     Add three equal groups of 2.
+step 1   Write three equal groups.   [2 + 2 + 2]
+step 2   Add them.   [2 + 2 + 2 = 6]
+step 3   So 3 × 2 = 6.
+miss     one-group-low = 4   That is one equal group too few. Add another 2.
+miss     one-group-high = 8   That is one equal group too many. Take away 2.
+
+--- times-3 · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 6"
+answer   exact 18/1
+input    keypad
+hint     Add three equal groups of 6.
+step 1   Write three equal groups.   [6 + 6 + 6]
+step 2   Add them.   [6 + 6 + 6 = 18]
+step 3   So 3 × 6 = 18.
+miss     one-group-low = 12   That is one equal group too few. Add another 6.
+miss     one-group-high = 24   That is one equal group too many. Take away 6.
+
+--- times-3 · seed 1 · difficulty 3
+prompt   What is the product?
+display  inline "3 × 6"
+answer   exact 18/1
+input    keypad
+hint     Add three equal groups of 6.
+step 1   Write three equal groups.   [6 + 6 + 6]
+step 2   Add them.   [6 + 6 + 6 = 18]
+step 3   So 3 × 6 = 18.
+miss     one-group-low = 12   That is one equal group too few. Add another 6.
+miss     one-group-high = 24   That is one equal group too many. Take away 6.
+
+--- times-3 · seed 12345 · difficulty 3
+prompt   What is the product?
+display  inline "3 × 8"
+answer   exact 24/1
+input    keypad
+hint     Add three equal groups of 8.
+step 1   Write three equal groups.   [8 + 8 + 8]
+step 2   Add them.   [8 + 8 + 8 = 24]
+step 3   So 3 × 8 = 24.
+miss     one-group-low = 16   That is one equal group too few. Add another 8.
+miss     one-group-high = 32   That is one equal group too many. Take away 8.
+
+--- times-3 · seed 67890 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 3"
+answer   exact 12/1
+input    keypad
+hint     Add three equal groups of 4.
+step 1   Write three equal groups.   [4 + 4 + 4]
+step 2   Add them.   [4 + 4 + 4 = 12]
+step 3   So 3 × 4 = 12.
+miss     one-group-low = 8   That is one equal group too few. Add another 4.
+miss     one-group-high = 16   That is one equal group too many. Take away 4.
+
+--- times-3 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "3 × 2"
+answer   exact 6/1
+input    keypad
+hint     Add three equal groups of 2.
+step 1   Write three equal groups.   [2 + 2 + 2]
+step 2   Add them.   [2 + 2 + 2 = 6]
+step 3   So 3 × 2 = 6.
+miss     one-group-low = 4   That is one equal group too few. Add another 2.
+miss     one-group-high = 8   That is one equal group too many. Take away 2.
+
+--- times-3 · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  inline "3 × 8"
+answer   exact 24/1
+input    keypad
+hint     Add three equal groups of 8.
+step 1   Write three equal groups.   [8 + 8 + 8]
+step 2   Add them.   [8 + 8 + 8 = 24]
+step 3   So 3 × 8 = 24.
+miss     one-group-low = 16   That is one equal group too few. Add another 8.
+miss     one-group-high = 32   That is one equal group too many. Take away 8.
+
+--- times-3 · seed 1 · difficulty 4
+prompt   What is the product?
+display  inline "3 × 7"
+answer   exact 21/1
+input    keypad
+hint     Add three equal groups of 7.
+step 1   Write three equal groups.   [7 + 7 + 7]
+step 2   Add them.   [7 + 7 + 7 = 21]
+step 3   So 3 × 7 = 21.
+miss     one-group-low = 14   That is one equal group too few. Add another 7.
+miss     one-group-high = 28   That is one equal group too many. Take away 7.
+
+--- times-3 · seed 12345 · difficulty 4
+prompt   What is the product?
+display  inline "3 × 10"
+answer   exact 30/1
+input    keypad
+hint     Add three equal groups of 10.
+step 1   Write three equal groups.   [10 + 10 + 10]
+step 2   Add them.   [10 + 10 + 10 = 30]
+step 3   So 3 × 10 = 30.
+miss     one-group-low = 20   That is one equal group too few. Add another 10.
+miss     one-group-high = 40   That is one equal group too many. Take away 10.
+
+--- times-3 · seed 67890 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 3"
+answer   exact 15/1
+input    keypad
+hint     Add three equal groups of 5.
+step 1   Write three equal groups.   [5 + 5 + 5]
+step 2   Add them.   [5 + 5 + 5 = 15]
+step 3   So 3 × 5 = 15.
+miss     one-group-low = 10   That is one equal group too few. Add another 5.
+miss     one-group-high = 20   That is one equal group too many. Take away 5.
+
+--- times-3 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "3 × 3"
+answer   exact 9/1
+input    keypad
+hint     Add three equal groups of 3.
+step 1   Write three equal groups.   [3 + 3 + 3]
+step 2   Add them.   [3 + 3 + 3 = 9]
+step 3   So 3 × 3 = 9.
+miss     one-group-low = 6   That is one equal group too few. Add another 3.
+miss     one-group-high = 12   That is one equal group too many. Take away 3.
+
+--- times-3 · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  inline "3 × 10"
+answer   exact 30/1
+input    keypad
+hint     Add three equal groups of 10.
+step 1   Write three equal groups.   [10 + 10 + 10]
+step 2   Add them.   [10 + 10 + 10 = 30]
+step 3   So 3 × 10 = 30.
+miss     one-group-low = 20   That is one equal group too few. Add another 10.
+miss     one-group-high = 40   That is one equal group too many. Take away 10.
+
+--- times-3 · seed 1 · difficulty 5
+prompt   What is the product?
+display  inline "3 × 8"
+answer   exact 24/1
+input    keypad
+hint     Add three equal groups of 8.
+step 1   Write three equal groups.   [8 + 8 + 8]
+step 2   Add them.   [8 + 8 + 8 = 24]
+step 3   So 3 × 8 = 24.
+miss     one-group-low = 16   That is one equal group too few. Add another 8.
+miss     one-group-high = 32   That is one equal group too many. Take away 8.
+
+--- times-3 · seed 12345 · difficulty 5
+prompt   What is the product?
+display  inline "3 × 12"
+answer   exact 36/1
+input    keypad
+hint     Add three equal groups of 12.
+step 1   Write three equal groups.   [12 + 12 + 12]
+step 2   Add them.   [12 + 12 + 12 = 36]
+step 3   So 3 × 12 = 36.
+miss     one-group-low = 24   That is one equal group too few. Add another 12.
+miss     one-group-high = 48   That is one equal group too many. Take away 12.
+
+--- times-3 · seed 67890 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 3"
+answer   exact 18/1
+input    keypad
+hint     Add three equal groups of 6.
+step 1   Write three equal groups.   [6 + 6 + 6]
+step 2   Add them.   [6 + 6 + 6 = 18]
+step 3   So 3 × 6 = 18.
+miss     one-group-low = 12   That is one equal group too few. Add another 6.
+miss     one-group-high = 24   That is one equal group too many. Take away 6.
+
+--- times-3 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "3 × 3"
+answer   exact 9/1
+input    keypad
+hint     Add three equal groups of 3.
+step 1   Write three equal groups.   [3 + 3 + 3]
+step 2   Add them.   [3 + 3 + 3 = 9]
+step 3   So 3 × 3 = 9.
+miss     one-group-low = 6   That is one equal group too few. Add another 3.
+miss     one-group-high = 12   That is one equal group too many. Take away 3.
+
+--- times-3 · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  inline "3 × 12"
+answer   exact 36/1
+input    keypad
+hint     Add three equal groups of 12.
+step 1   Write three equal groups.   [12 + 12 + 12]
+step 2   Add them.   [12 + 12 + 12 = 36]
+step 3   So 3 × 12 = 36.
+miss     one-group-low = 24   That is one equal group too few. Add another 12.
+miss     one-group-high = 48   That is one equal group too many. Take away 12."
+`;
+
+exports[`recorded output: times-4 > matches the wording recorded when the skill landed 1`] = `
+"--- times-4 · seed 1 · difficulty 1
+prompt   What is the product?
+display  inline "4 × 3"
+answer   exact 12/1
+input    keypad
+hint     Double 3, then double that result.
+step 1   Double 3.   [3 + 3 = 6]
+step 2   Double that result.   [6 + 6 = 12]
+step 3   So 4 × 3 = 12.
+miss     one-group-low = 9   That is one equal group too few. Add another 3.
+miss     one-group-high = 15   That is one equal group too many. Take away 3.
+
+--- times-4 · seed 12345 · difficulty 1
+prompt   What is the product?
+display  inline "4 × 4"
+answer   exact 16/1
+input    keypad
+hint     Double 4, then double that result.
+step 1   Double 4.   [4 + 4 = 8]
+step 2   Double that result.   [8 + 8 = 16]
+step 3   So 4 × 4 = 16.
+miss     one-group-low = 12   That is one equal group too few. Add another 4.
+miss     one-group-high = 20   That is one equal group too many. Take away 4.
+
+--- times-4 · seed 67890 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 4"
+answer   exact 12/1
+input    keypad
+hint     Double 3, then double that result.
+step 1   Double 3.   [3 + 3 = 6]
+step 2   Double that result.   [6 + 6 = 12]
+step 3   So 4 × 3 = 12.
+miss     one-group-low = 9   That is one equal group too few. Add another 3.
+miss     one-group-high = 15   That is one equal group too many. Take away 3.
+
+--- times-4 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "4 × 2"
+answer   exact 8/1
+input    keypad
+hint     Double 2, then double that result.
+step 1   Double 2.   [2 + 2 = 4]
+step 2   Double that result.   [4 + 4 = 8]
+step 3   So 4 × 2 = 8.
+miss     one-group-low = 6   That is one equal group too few. Add another 2.
+miss     one-group-high = 10   That is one equal group too many. Take away 2.
+
+--- times-4 · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  inline "4 × 4"
+answer   exact 16/1
+input    keypad
+hint     Double 4, then double that result.
+step 1   Double 4.   [4 + 4 = 8]
+step 2   Double that result.   [8 + 8 = 16]
+step 3   So 4 × 4 = 16.
+miss     one-group-low = 12   That is one equal group too few. Add another 4.
+miss     one-group-high = 20   That is one equal group too many. Take away 4.
+
+--- times-4 · seed 1 · difficulty 2
+prompt   What is the product?
+display  inline "4 × 5"
+answer   exact 20/1
+input    keypad
+hint     Double 5, then double that result.
+step 1   Double 5.   [5 + 5 = 10]
+step 2   Double that result.   [10 + 10 = 20]
+step 3   So 4 × 5 = 20.
+miss     one-group-low = 15   That is one equal group too few. Add another 5.
+miss     one-group-high = 25   That is one equal group too many. Take away 5.
+
+--- times-4 · seed 12345 · difficulty 2
+prompt   What is the product?
+display  inline "4 × 6"
+answer   exact 24/1
+input    keypad
+hint     Double 6, then double that result.
+step 1   Double 6.   [6 + 6 = 12]
+step 2   Double that result.   [12 + 12 = 24]
+step 3   So 4 × 6 = 24.
+miss     one-group-low = 18   That is one equal group too few. Add another 6.
+miss     one-group-high = 30   That is one equal group too many. Take away 6.
+
+--- times-4 · seed 67890 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 4"
+answer   exact 12/1
+input    keypad
+hint     Double 3, then double that result.
+step 1   Double 3.   [3 + 3 = 6]
+step 2   Double that result.   [6 + 6 = 12]
+step 3   So 4 × 3 = 12.
+miss     one-group-low = 9   That is one equal group too few. Add another 3.
+miss     one-group-high = 15   That is one equal group too many. Take away 3.
+
+--- times-4 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "4 × 2"
+answer   exact 8/1
+input    keypad
+hint     Double 2, then double that result.
+step 1   Double 2.   [2 + 2 = 4]
+step 2   Double that result.   [4 + 4 = 8]
+step 3   So 4 × 2 = 8.
+miss     one-group-low = 6   That is one equal group too few. Add another 2.
+miss     one-group-high = 10   That is one equal group too many. Take away 2.
+
+--- times-4 · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  inline "4 × 6"
+answer   exact 24/1
+input    keypad
+hint     Double 6, then double that result.
+step 1   Double 6.   [6 + 6 = 12]
+step 2   Double that result.   [12 + 12 = 24]
+step 3   So 4 × 6 = 24.
+miss     one-group-low = 18   That is one equal group too few. Add another 6.
+miss     one-group-high = 30   That is one equal group too many. Take away 6.
+
+--- times-4 · seed 1 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 6"
+answer   exact 24/1
+input    keypad
+hint     Double 6, then double that result.
+step 1   Double 6.   [6 + 6 = 12]
+step 2   Double that result.   [12 + 12 = 24]
+step 3   So 4 × 6 = 24.
+miss     one-group-low = 18   That is one equal group too few. Add another 6.
+miss     one-group-high = 30   That is one equal group too many. Take away 6.
+
+--- times-4 · seed 12345 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 8"
+answer   exact 32/1
+input    keypad
+hint     Double 8, then double that result.
+step 1   Double 8.   [8 + 8 = 16]
+step 2   Double that result.   [16 + 16 = 32]
+step 3   So 4 × 8 = 32.
+miss     one-group-low = 24   That is one equal group too few. Add another 8.
+miss     one-group-high = 40   That is one equal group too many. Take away 8.
+
+--- times-4 · seed 67890 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 4"
+answer   exact 16/1
+input    keypad
+hint     Double 4, then double that result.
+step 1   Double 4.   [4 + 4 = 8]
+step 2   Double that result.   [8 + 8 = 16]
+step 3   So 4 × 4 = 16.
+miss     one-group-low = 12   That is one equal group too few. Add another 4.
+miss     one-group-high = 20   That is one equal group too many. Take away 4.
+
+--- times-4 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 2"
+answer   exact 8/1
+input    keypad
+hint     Double 2, then double that result.
+step 1   Double 2.   [2 + 2 = 4]
+step 2   Double that result.   [4 + 4 = 8]
+step 3   So 4 × 2 = 8.
+miss     one-group-low = 6   That is one equal group too few. Add another 2.
+miss     one-group-high = 10   That is one equal group too many. Take away 2.
+
+--- times-4 · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 8"
+answer   exact 32/1
+input    keypad
+hint     Double 8, then double that result.
+step 1   Double 8.   [8 + 8 = 16]
+step 2   Double that result.   [16 + 16 = 32]
+step 3   So 4 × 8 = 32.
+miss     one-group-low = 24   That is one equal group too few. Add another 8.
+miss     one-group-high = 40   That is one equal group too many. Take away 8.
+
+--- times-4 · seed 1 · difficulty 4
+prompt   What is the product?
+display  inline "4 × 7"
+answer   exact 28/1
+input    keypad
+hint     Double 7, then double that result.
+step 1   Double 7.   [7 + 7 = 14]
+step 2   Double that result.   [14 + 14 = 28]
+step 3   So 4 × 7 = 28.
+miss     one-group-low = 21   That is one equal group too few. Add another 7.
+miss     one-group-high = 35   That is one equal group too many. Take away 7.
+
+--- times-4 · seed 12345 · difficulty 4
+prompt   What is the product?
+display  inline "4 × 10"
+answer   exact 40/1
+input    keypad
+hint     Double 10, then double that result.
+step 1   Double 10.   [10 + 10 = 20]
+step 2   Double that result.   [20 + 20 = 40]
+step 3   So 4 × 10 = 40.
+miss     one-group-low = 30   That is one equal group too few. Add another 10.
+miss     one-group-high = 50   That is one equal group too many. Take away 10.
+
+--- times-4 · seed 67890 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 4"
+answer   exact 20/1
+input    keypad
+hint     Double 5, then double that result.
+step 1   Double 5.   [5 + 5 = 10]
+step 2   Double that result.   [10 + 10 = 20]
+step 3   So 4 × 5 = 20.
+miss     one-group-low = 15   That is one equal group too few. Add another 5.
+miss     one-group-high = 25   That is one equal group too many. Take away 5.
+
+--- times-4 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "4 × 3"
+answer   exact 12/1
+input    keypad
+hint     Double 3, then double that result.
+step 1   Double 3.   [3 + 3 = 6]
+step 2   Double that result.   [6 + 6 = 12]
+step 3   So 4 × 3 = 12.
+miss     one-group-low = 9   That is one equal group too few. Add another 3.
+miss     one-group-high = 15   That is one equal group too many. Take away 3.
+
+--- times-4 · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  inline "4 × 10"
+answer   exact 40/1
+input    keypad
+hint     Double 10, then double that result.
+step 1   Double 10.   [10 + 10 = 20]
+step 2   Double that result.   [20 + 20 = 40]
+step 3   So 4 × 10 = 40.
+miss     one-group-low = 30   That is one equal group too few. Add another 10.
+miss     one-group-high = 50   That is one equal group too many. Take away 10.
+
+--- times-4 · seed 1 · difficulty 5
+prompt   What is the product?
+display  inline "4 × 8"
+answer   exact 32/1
+input    keypad
+hint     Double 8, then double that result.
+step 1   Double 8.   [8 + 8 = 16]
+step 2   Double that result.   [16 + 16 = 32]
+step 3   So 4 × 8 = 32.
+miss     one-group-low = 24   That is one equal group too few. Add another 8.
+miss     one-group-high = 40   That is one equal group too many. Take away 8.
+
+--- times-4 · seed 12345 · difficulty 5
+prompt   What is the product?
+display  inline "4 × 12"
+answer   exact 48/1
+input    keypad
+hint     Double 12, then double that result.
+step 1   Double 12.   [12 + 12 = 24]
+step 2   Double that result.   [24 + 24 = 48]
+step 3   So 4 × 12 = 48.
+miss     one-group-low = 36   That is one equal group too few. Add another 12.
+miss     one-group-high = 60   That is one equal group too many. Take away 12.
+
+--- times-4 · seed 67890 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 4"
+answer   exact 24/1
+input    keypad
+hint     Double 6, then double that result.
+step 1   Double 6.   [6 + 6 = 12]
+step 2   Double that result.   [12 + 12 = 24]
+step 3   So 4 × 6 = 24.
+miss     one-group-low = 18   That is one equal group too few. Add another 6.
+miss     one-group-high = 30   That is one equal group too many. Take away 6.
+
+--- times-4 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "4 × 3"
+answer   exact 12/1
+input    keypad
+hint     Double 3, then double that result.
+step 1   Double 3.   [3 + 3 = 6]
+step 2   Double that result.   [6 + 6 = 12]
+step 3   So 4 × 3 = 12.
+miss     one-group-low = 9   That is one equal group too few. Add another 3.
+miss     one-group-high = 15   That is one equal group too many. Take away 3.
+
+--- times-4 · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  inline "4 × 12"
+answer   exact 48/1
+input    keypad
+hint     Double 12, then double that result.
+step 1   Double 12.   [12 + 12 = 24]
+step 2   Double that result.   [24 + 24 = 48]
+step 3   So 4 × 12 = 48.
+miss     one-group-low = 36   That is one equal group too few. Add another 12.
+miss     one-group-high = 60   That is one equal group too many. Take away 12."
+`;
+
+exports[`recorded output: times-5 > matches the wording recorded when the skill landed 1`] = `
+"--- times-5 · seed 1 · difficulty 1
+prompt   What is the product?
+display  inline "5 × 3"
+answer   exact 15/1
+input    keypad
+hint     Find ten groups of 3, then take half.
+step 1   Find ten groups first.   [3 × 10 = 30]
+step 2   Five groups are half of that.   [30 split in half = 15]
+step 3   So 5 × 3 = 15.
+miss     one-group-low = 12   That is one equal group too few. Add another 3.
+miss     one-group-high = 18   That is one equal group too many. Take away 3.
+
+--- times-5 · seed 12345 · difficulty 1
+prompt   What is the product?
+display  inline "5 × 4"
+answer   exact 20/1
+input    keypad
+hint     Find ten groups of 4, then take half.
+step 1   Find ten groups first.   [4 × 10 = 40]
+step 2   Five groups are half of that.   [40 split in half = 20]
+step 3   So 5 × 4 = 20.
+miss     one-group-low = 16   That is one equal group too few. Add another 4.
+miss     one-group-high = 24   That is one equal group too many. Take away 4.
+
+--- times-5 · seed 67890 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 5"
+answer   exact 15/1
+input    keypad
+hint     Find ten groups of 3, then take half.
+step 1   Find ten groups first.   [3 × 10 = 30]
+step 2   Five groups are half of that.   [30 split in half = 15]
+step 3   So 5 × 3 = 15.
+miss     one-group-low = 12   That is one equal group too few. Add another 3.
+miss     one-group-high = 18   That is one equal group too many. Take away 3.
+
+--- times-5 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "5 × 2"
+answer   exact 10/1
+input    keypad
+hint     Find ten groups of 2, then take half.
+step 1   Find ten groups first.   [2 × 10 = 20]
+step 2   Five groups are half of that.   [20 split in half = 10]
+step 3   So 5 × 2 = 10.
+miss     one-group-low = 8   That is one equal group too few. Add another 2.
+miss     one-group-high = 12   That is one equal group too many. Take away 2.
+
+--- times-5 · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  inline "5 × 4"
+answer   exact 20/1
+input    keypad
+hint     Find ten groups of 4, then take half.
+step 1   Find ten groups first.   [4 × 10 = 40]
+step 2   Five groups are half of that.   [40 split in half = 20]
+step 3   So 5 × 4 = 20.
+miss     one-group-low = 16   That is one equal group too few. Add another 4.
+miss     one-group-high = 24   That is one equal group too many. Take away 4.
+
+--- times-5 · seed 1 · difficulty 2
+prompt   What is the product?
+display  inline "5 × 5"
+answer   exact 25/1
+input    keypad
+hint     Find ten groups of 5, then take half.
+step 1   Find ten groups first.   [5 × 10 = 50]
+step 2   Five groups are half of that.   [50 split in half = 25]
+step 3   So 5 × 5 = 25.
+miss     one-group-low = 20   That is one equal group too few. Add another 5.
+miss     one-group-high = 30   That is one equal group too many. Take away 5.
+
+--- times-5 · seed 12345 · difficulty 2
+prompt   What is the product?
+display  inline "5 × 6"
+answer   exact 30/1
+input    keypad
+hint     Find ten groups of 6, then take half.
+step 1   Find ten groups first.   [6 × 10 = 60]
+step 2   Five groups are half of that.   [60 split in half = 30]
+step 3   So 5 × 6 = 30.
+miss     one-group-low = 24   That is one equal group too few. Add another 6.
+miss     one-group-high = 36   That is one equal group too many. Take away 6.
+
+--- times-5 · seed 67890 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 5"
+answer   exact 15/1
+input    keypad
+hint     Find ten groups of 3, then take half.
+step 1   Find ten groups first.   [3 × 10 = 30]
+step 2   Five groups are half of that.   [30 split in half = 15]
+step 3   So 5 × 3 = 15.
+miss     one-group-low = 12   That is one equal group too few. Add another 3.
+miss     one-group-high = 18   That is one equal group too many. Take away 3.
+
+--- times-5 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "5 × 2"
+answer   exact 10/1
+input    keypad
+hint     Find ten groups of 2, then take half.
+step 1   Find ten groups first.   [2 × 10 = 20]
+step 2   Five groups are half of that.   [20 split in half = 10]
+step 3   So 5 × 2 = 10.
+miss     one-group-low = 8   That is one equal group too few. Add another 2.
+miss     one-group-high = 12   That is one equal group too many. Take away 2.
+
+--- times-5 · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  inline "5 × 6"
+answer   exact 30/1
+input    keypad
+hint     Find ten groups of 6, then take half.
+step 1   Find ten groups first.   [6 × 10 = 60]
+step 2   Five groups are half of that.   [60 split in half = 30]
+step 3   So 5 × 6 = 30.
+miss     one-group-low = 24   That is one equal group too few. Add another 6.
+miss     one-group-high = 36   That is one equal group too many. Take away 6.
+
+--- times-5 · seed 1 · difficulty 3
+prompt   What is the product?
+display  inline "5 × 6"
+answer   exact 30/1
+input    keypad
+hint     Find ten groups of 6, then take half.
+step 1   Find ten groups first.   [6 × 10 = 60]
+step 2   Five groups are half of that.   [60 split in half = 30]
+step 3   So 5 × 6 = 30.
+miss     one-group-low = 24   That is one equal group too few. Add another 6.
+miss     one-group-high = 36   That is one equal group too many. Take away 6.
+
+--- times-5 · seed 12345 · difficulty 3
+prompt   What is the product?
+display  inline "5 × 8"
+answer   exact 40/1
+input    keypad
+hint     Find ten groups of 8, then take half.
+step 1   Find ten groups first.   [8 × 10 = 80]
+step 2   Five groups are half of that.   [80 split in half = 40]
+step 3   So 5 × 8 = 40.
+miss     one-group-low = 32   That is one equal group too few. Add another 8.
+miss     one-group-high = 48   That is one equal group too many. Take away 8.
+
+--- times-5 · seed 67890 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 5"
+answer   exact 20/1
+input    keypad
+hint     Find ten groups of 4, then take half.
+step 1   Find ten groups first.   [4 × 10 = 40]
+step 2   Five groups are half of that.   [40 split in half = 20]
+step 3   So 5 × 4 = 20.
+miss     one-group-low = 16   That is one equal group too few. Add another 4.
+miss     one-group-high = 24   That is one equal group too many. Take away 4.
+
+--- times-5 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "5 × 2"
+answer   exact 10/1
+input    keypad
+hint     Find ten groups of 2, then take half.
+step 1   Find ten groups first.   [2 × 10 = 20]
+step 2   Five groups are half of that.   [20 split in half = 10]
+step 3   So 5 × 2 = 10.
+miss     one-group-low = 8   That is one equal group too few. Add another 2.
+miss     one-group-high = 12   That is one equal group too many. Take away 2.
+
+--- times-5 · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  inline "5 × 8"
+answer   exact 40/1
+input    keypad
+hint     Find ten groups of 8, then take half.
+step 1   Find ten groups first.   [8 × 10 = 80]
+step 2   Five groups are half of that.   [80 split in half = 40]
+step 3   So 5 × 8 = 40.
+miss     one-group-low = 32   That is one equal group too few. Add another 8.
+miss     one-group-high = 48   That is one equal group too many. Take away 8.
+
+--- times-5 · seed 1 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 7"
+answer   exact 35/1
+input    keypad
+hint     Find ten groups of 7, then take half.
+step 1   Find ten groups first.   [7 × 10 = 70]
+step 2   Five groups are half of that.   [70 split in half = 35]
+step 3   So 5 × 7 = 35.
+miss     one-group-low = 28   That is one equal group too few. Add another 7.
+miss     one-group-high = 42   That is one equal group too many. Take away 7.
+
+--- times-5 · seed 12345 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 10"
+answer   exact 50/1
+input    keypad
+hint     Find ten groups of 10, then take half.
+step 1   Find ten groups first.   [10 × 10 = 100]
+step 2   Five groups are half of that.   [100 split in half = 50]
+step 3   So 5 × 10 = 50.
+miss     one-group-low = 40   That is one equal group too few. Add another 10.
+miss     one-group-high = 60   That is one equal group too many. Take away 10.
+
+--- times-5 · seed 67890 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 5"
+answer   exact 25/1
+input    keypad
+hint     Find ten groups of 5, then take half.
+step 1   Find ten groups first.   [5 × 10 = 50]
+step 2   Five groups are half of that.   [50 split in half = 25]
+step 3   So 5 × 5 = 25.
+miss     one-group-low = 20   That is one equal group too few. Add another 5.
+miss     one-group-high = 30   That is one equal group too many. Take away 5.
+
+--- times-5 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 3"
+answer   exact 15/1
+input    keypad
+hint     Find ten groups of 3, then take half.
+step 1   Find ten groups first.   [3 × 10 = 30]
+step 2   Five groups are half of that.   [30 split in half = 15]
+step 3   So 5 × 3 = 15.
+miss     one-group-low = 12   That is one equal group too few. Add another 3.
+miss     one-group-high = 18   That is one equal group too many. Take away 3.
+
+--- times-5 · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 10"
+answer   exact 50/1
+input    keypad
+hint     Find ten groups of 10, then take half.
+step 1   Find ten groups first.   [10 × 10 = 100]
+step 2   Five groups are half of that.   [100 split in half = 50]
+step 3   So 5 × 10 = 50.
+miss     one-group-low = 40   That is one equal group too few. Add another 10.
+miss     one-group-high = 60   That is one equal group too many. Take away 10.
+
+--- times-5 · seed 1 · difficulty 5
+prompt   What is the product?
+display  inline "5 × 8"
+answer   exact 40/1
+input    keypad
+hint     Find ten groups of 8, then take half.
+step 1   Find ten groups first.   [8 × 10 = 80]
+step 2   Five groups are half of that.   [80 split in half = 40]
+step 3   So 5 × 8 = 40.
+miss     one-group-low = 32   That is one equal group too few. Add another 8.
+miss     one-group-high = 48   That is one equal group too many. Take away 8.
+
+--- times-5 · seed 12345 · difficulty 5
+prompt   What is the product?
+display  inline "5 × 12"
+answer   exact 60/1
+input    keypad
+hint     Find ten groups of 12, then take half.
+step 1   Find ten groups first.   [12 × 10 = 120]
+step 2   Five groups are half of that.   [120 split in half = 60]
+step 3   So 5 × 12 = 60.
+miss     one-group-low = 48   That is one equal group too few. Add another 12.
+miss     one-group-high = 72   That is one equal group too many. Take away 12.
+
+--- times-5 · seed 67890 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 5"
+answer   exact 30/1
+input    keypad
+hint     Find ten groups of 6, then take half.
+step 1   Find ten groups first.   [6 × 10 = 60]
+step 2   Five groups are half of that.   [60 split in half = 30]
+step 3   So 5 × 6 = 30.
+miss     one-group-low = 24   That is one equal group too few. Add another 6.
+miss     one-group-high = 36   That is one equal group too many. Take away 6.
+
+--- times-5 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "5 × 3"
+answer   exact 15/1
+input    keypad
+hint     Find ten groups of 3, then take half.
+step 1   Find ten groups first.   [3 × 10 = 30]
+step 2   Five groups are half of that.   [30 split in half = 15]
+step 3   So 5 × 3 = 15.
+miss     one-group-low = 12   That is one equal group too few. Add another 3.
+miss     one-group-high = 18   That is one equal group too many. Take away 3.
+
+--- times-5 · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  inline "5 × 12"
+answer   exact 60/1
+input    keypad
+hint     Find ten groups of 12, then take half.
+step 1   Find ten groups first.   [12 × 10 = 120]
+step 2   Five groups are half of that.   [120 split in half = 60]
+step 3   So 5 × 12 = 60.
+miss     one-group-low = 48   That is one equal group too few. Add another 12.
+miss     one-group-high = 72   That is one equal group too many. Take away 12."
+`;
+
+exports[`recorded output: times-6 > matches the wording recorded when the skill landed 1`] = `
+"--- times-6 · seed 1 · difficulty 1
+prompt   What is the product?
+display  inline "6 × 3"
+answer   exact 18/1
+input    keypad
+hint     Use five groups of 3, then add one more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add one more group.   [15 + 3 = 18]
+step 3   So 6 × 3 = 18.
+miss     one-group-low = 15   That is one equal group too few. Add another 3.
+miss     one-group-high = 21   That is one equal group too many. Take away 3.
+
+--- times-6 · seed 12345 · difficulty 1
+prompt   What is the product?
+display  inline "6 × 4"
+answer   exact 24/1
+input    keypad
+hint     Use five groups of 4, then add one more.
+step 1   Find five groups.   [5 × 4 = 20]
+step 2   Add one more group.   [20 + 4 = 24]
+step 3   So 6 × 4 = 24.
+miss     one-group-low = 20   That is one equal group too few. Add another 4.
+miss     one-group-high = 28   That is one equal group too many. Take away 4.
+
+--- times-6 · seed 67890 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 6"
+answer   exact 18/1
+input    keypad
+hint     Use five groups of 3, then add one more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add one more group.   [15 + 3 = 18]
+step 3   So 6 × 3 = 18.
+miss     one-group-low = 15   That is one equal group too few. Add another 3.
+miss     one-group-high = 21   That is one equal group too many. Take away 3.
+
+--- times-6 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "6 × 2"
+answer   exact 12/1
+input    keypad
+hint     Use five groups of 2, then add one more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add one more group.   [10 + 2 = 12]
+step 3   So 6 × 2 = 12.
+miss     one-group-low = 10   That is one equal group too few. Add another 2.
+miss     one-group-high = 14   That is one equal group too many. Take away 2.
+
+--- times-6 · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  inline "6 × 4"
+answer   exact 24/1
+input    keypad
+hint     Use five groups of 4, then add one more.
+step 1   Find five groups.   [5 × 4 = 20]
+step 2   Add one more group.   [20 + 4 = 24]
+step 3   So 6 × 4 = 24.
+miss     one-group-low = 20   That is one equal group too few. Add another 4.
+miss     one-group-high = 28   That is one equal group too many. Take away 4.
+
+--- times-6 · seed 1 · difficulty 2
+prompt   What is the product?
+display  inline "6 × 5"
+answer   exact 30/1
+input    keypad
+hint     Use five groups of 5, then add one more.
+step 1   Find five groups.   [5 × 5 = 25]
+step 2   Add one more group.   [25 + 5 = 30]
+step 3   So 6 × 5 = 30.
+miss     one-group-low = 25   That is one equal group too few. Add another 5.
+miss     one-group-high = 35   That is one equal group too many. Take away 5.
+
+--- times-6 · seed 12345 · difficulty 2
+prompt   What is the product?
+display  inline "6 × 6"
+answer   exact 36/1
+input    keypad
+hint     Use five groups of 6, then add one more.
+step 1   Find five groups.   [5 × 6 = 30]
+step 2   Add one more group.   [30 + 6 = 36]
+step 3   So 6 × 6 = 36.
+miss     one-group-low = 30   That is one equal group too few. Add another 6.
+miss     one-group-high = 42   That is one equal group too many. Take away 6.
+
+--- times-6 · seed 67890 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 6"
+answer   exact 18/1
+input    keypad
+hint     Use five groups of 3, then add one more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add one more group.   [15 + 3 = 18]
+step 3   So 6 × 3 = 18.
+miss     one-group-low = 15   That is one equal group too few. Add another 3.
+miss     one-group-high = 21   That is one equal group too many. Take away 3.
+
+--- times-6 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "6 × 2"
+answer   exact 12/1
+input    keypad
+hint     Use five groups of 2, then add one more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add one more group.   [10 + 2 = 12]
+step 3   So 6 × 2 = 12.
+miss     one-group-low = 10   That is one equal group too few. Add another 2.
+miss     one-group-high = 14   That is one equal group too many. Take away 2.
+
+--- times-6 · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  inline "6 × 6"
+answer   exact 36/1
+input    keypad
+hint     Use five groups of 6, then add one more.
+step 1   Find five groups.   [5 × 6 = 30]
+step 2   Add one more group.   [30 + 6 = 36]
+step 3   So 6 × 6 = 36.
+miss     one-group-low = 30   That is one equal group too few. Add another 6.
+miss     one-group-high = 42   That is one equal group too many. Take away 6.
+
+--- times-6 · seed 1 · difficulty 3
+prompt   What is the product?
+display  inline "6 × 6"
+answer   exact 36/1
+input    keypad
+hint     Use five groups of 6, then add one more.
+step 1   Find five groups.   [5 × 6 = 30]
+step 2   Add one more group.   [30 + 6 = 36]
+step 3   So 6 × 6 = 36.
+miss     one-group-low = 30   That is one equal group too few. Add another 6.
+miss     one-group-high = 42   That is one equal group too many. Take away 6.
+
+--- times-6 · seed 12345 · difficulty 3
+prompt   What is the product?
+display  inline "6 × 8"
+answer   exact 48/1
+input    keypad
+hint     Use five groups of 8, then add one more.
+step 1   Find five groups.   [5 × 8 = 40]
+step 2   Add one more group.   [40 + 8 = 48]
+step 3   So 6 × 8 = 48.
+miss     one-group-low = 40   That is one equal group too few. Add another 8.
+miss     one-group-high = 56   That is one equal group too many. Take away 8.
+
+--- times-6 · seed 67890 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 6"
+answer   exact 24/1
+input    keypad
+hint     Use five groups of 4, then add one more.
+step 1   Find five groups.   [5 × 4 = 20]
+step 2   Add one more group.   [20 + 4 = 24]
+step 3   So 6 × 4 = 24.
+miss     one-group-low = 20   That is one equal group too few. Add another 4.
+miss     one-group-high = 28   That is one equal group too many. Take away 4.
+
+--- times-6 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "6 × 2"
+answer   exact 12/1
+input    keypad
+hint     Use five groups of 2, then add one more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add one more group.   [10 + 2 = 12]
+step 3   So 6 × 2 = 12.
+miss     one-group-low = 10   That is one equal group too few. Add another 2.
+miss     one-group-high = 14   That is one equal group too many. Take away 2.
+
+--- times-6 · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  inline "6 × 8"
+answer   exact 48/1
+input    keypad
+hint     Use five groups of 8, then add one more.
+step 1   Find five groups.   [5 × 8 = 40]
+step 2   Add one more group.   [40 + 8 = 48]
+step 3   So 6 × 8 = 48.
+miss     one-group-low = 40   That is one equal group too few. Add another 8.
+miss     one-group-high = 56   That is one equal group too many. Take away 8.
+
+--- times-6 · seed 1 · difficulty 4
+prompt   What is the product?
+display  inline "6 × 7"
+answer   exact 42/1
+input    keypad
+hint     Use five groups of 7, then add one more.
+step 1   Find five groups.   [5 × 7 = 35]
+step 2   Add one more group.   [35 + 7 = 42]
+step 3   So 6 × 7 = 42.
+miss     one-group-low = 35   That is one equal group too few. Add another 7.
+miss     one-group-high = 49   That is one equal group too many. Take away 7.
+
+--- times-6 · seed 12345 · difficulty 4
+prompt   What is the product?
+display  inline "6 × 10"
+answer   exact 60/1
+input    keypad
+hint     Use five groups of 10, then add one more.
+step 1   Find five groups.   [5 × 10 = 50]
+step 2   Add one more group.   [50 + 10 = 60]
+step 3   So 6 × 10 = 60.
+miss     one-group-low = 50   That is one equal group too few. Add another 10.
+miss     one-group-high = 70   That is one equal group too many. Take away 10.
+
+--- times-6 · seed 67890 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 6"
+answer   exact 30/1
+input    keypad
+hint     Use five groups of 5, then add one more.
+step 1   Find five groups.   [5 × 5 = 25]
+step 2   Add one more group.   [25 + 5 = 30]
+step 3   So 6 × 5 = 30.
+miss     one-group-low = 25   That is one equal group too few. Add another 5.
+miss     one-group-high = 35   That is one equal group too many. Take away 5.
+
+--- times-6 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "6 × 3"
+answer   exact 18/1
+input    keypad
+hint     Use five groups of 3, then add one more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add one more group.   [15 + 3 = 18]
+step 3   So 6 × 3 = 18.
+miss     one-group-low = 15   That is one equal group too few. Add another 3.
+miss     one-group-high = 21   That is one equal group too many. Take away 3.
+
+--- times-6 · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  inline "6 × 10"
+answer   exact 60/1
+input    keypad
+hint     Use five groups of 10, then add one more.
+step 1   Find five groups.   [5 × 10 = 50]
+step 2   Add one more group.   [50 + 10 = 60]
+step 3   So 6 × 10 = 60.
+miss     one-group-low = 50   That is one equal group too few. Add another 10.
+miss     one-group-high = 70   That is one equal group too many. Take away 10.
+
+--- times-6 · seed 1 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 8"
+answer   exact 48/1
+input    keypad
+hint     Use five groups of 8, then add one more.
+step 1   Find five groups.   [5 × 8 = 40]
+step 2   Add one more group.   [40 + 8 = 48]
+step 3   So 6 × 8 = 48.
+miss     one-group-low = 40   That is one equal group too few. Add another 8.
+miss     one-group-high = 56   That is one equal group too many. Take away 8.
+
+--- times-6 · seed 12345 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 12"
+answer   exact 72/1
+input    keypad
+hint     Use five groups of 12, then add one more.
+step 1   Find five groups.   [5 × 12 = 60]
+step 2   Add one more group.   [60 + 12 = 72]
+step 3   So 6 × 12 = 72.
+miss     one-group-low = 60   That is one equal group too few. Add another 12.
+miss     one-group-high = 84   That is one equal group too many. Take away 12.
+
+--- times-6 · seed 67890 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 6"
+answer   exact 36/1
+input    keypad
+hint     Use five groups of 6, then add one more.
+step 1   Find five groups.   [5 × 6 = 30]
+step 2   Add one more group.   [30 + 6 = 36]
+step 3   So 6 × 6 = 36.
+miss     one-group-low = 30   That is one equal group too few. Add another 6.
+miss     one-group-high = 42   That is one equal group too many. Take away 6.
+
+--- times-6 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 3"
+answer   exact 18/1
+input    keypad
+hint     Use five groups of 3, then add one more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add one more group.   [15 + 3 = 18]
+step 3   So 6 × 3 = 18.
+miss     one-group-low = 15   That is one equal group too few. Add another 3.
+miss     one-group-high = 21   That is one equal group too many. Take away 3.
+
+--- times-6 · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 12"
+answer   exact 72/1
+input    keypad
+hint     Use five groups of 12, then add one more.
+step 1   Find five groups.   [5 × 12 = 60]
+step 2   Add one more group.   [60 + 12 = 72]
+step 3   So 6 × 12 = 72.
+miss     one-group-low = 60   That is one equal group too few. Add another 12.
+miss     one-group-high = 84   That is one equal group too many. Take away 12."
+`;
+
+exports[`recorded output: times-7-8 > matches the wording recorded when the skill landed 1`] = `
+"--- times-7-8 · seed 1 · difficulty 1
+prompt   What is the product?
+display  inline "2 × 8"
+answer   exact 16/1
+input    keypad
+hint     Start with five groups of 2, then add 3 more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add the remaining 3 groups.   [10 + 6 = 16]
+step 3   So 2 × 8 = 16.
+miss     one-group-low = 14   That is one equal group too few. Add another 2.
+miss     one-group-high = 18   That is one equal group too many. Take away 2.
+
+--- times-7-8 · seed 12345 · difficulty 1
+prompt   What is the product?
+display  inline "8 × 2"
+answer   exact 16/1
+input    keypad
+hint     Start with five groups of 2, then add 3 more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add the remaining 3 groups.   [10 + 6 = 16]
+step 3   So 8 × 2 = 16.
+miss     one-group-low = 14   That is one equal group too few. Add another 2.
+miss     one-group-high = 18   That is one equal group too many. Take away 2.
+
+--- times-7-8 · seed 67890 · difficulty 1
+prompt   What is the product?
+display  inline "7 × 3"
+answer   exact 21/1
+input    keypad
+hint     Start with five groups of 3, then add 2 more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add the remaining 2 groups.   [15 + 6 = 21]
+step 3   So 7 × 3 = 21.
+miss     one-group-low = 18   That is one equal group too few. Add another 3.
+miss     one-group-high = 24   That is one equal group too many. Take away 3.
+
+--- times-7-8 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "7 × 2"
+answer   exact 14/1
+input    keypad
+hint     Start with five groups of 2, then add 2 more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add the remaining 2 groups.   [10 + 4 = 14]
+step 3   So 7 × 2 = 14.
+miss     one-group-low = 12   That is one equal group too few. Add another 2.
+miss     one-group-high = 16   That is one equal group too many. Take away 2.
+
+--- times-7-8 · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  inline "8 × 2"
+answer   exact 16/1
+input    keypad
+hint     Start with five groups of 2, then add 3 more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add the remaining 3 groups.   [10 + 6 = 16]
+step 3   So 8 × 2 = 16.
+miss     one-group-low = 14   That is one equal group too few. Add another 2.
+miss     one-group-high = 18   That is one equal group too many. Take away 2.
+
+--- times-7-8 · seed 1 · difficulty 2
+prompt   What is the product?
+display  inline "2 × 8"
+answer   exact 16/1
+input    keypad
+hint     Start with five groups of 2, then add 3 more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add the remaining 3 groups.   [10 + 6 = 16]
+step 3   So 2 × 8 = 16.
+miss     one-group-low = 14   That is one equal group too few. Add another 2.
+miss     one-group-high = 18   That is one equal group too many. Take away 2.
+
+--- times-7-8 · seed 12345 · difficulty 2
+prompt   What is the product?
+display  inline "8 × 3"
+answer   exact 24/1
+input    keypad
+hint     Start with five groups of 3, then add 3 more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add the remaining 3 groups.   [15 + 9 = 24]
+step 3   So 8 × 3 = 24.
+miss     one-group-low = 21   That is one equal group too few. Add another 3.
+miss     one-group-high = 27   That is one equal group too many. Take away 3.
+
+--- times-7-8 · seed 67890 · difficulty 2
+prompt   What is the product?
+display  inline "7 × 4"
+answer   exact 28/1
+input    keypad
+hint     Start with five groups of 4, then add 2 more.
+step 1   Find five groups.   [5 × 4 = 20]
+step 2   Add the remaining 2 groups.   [20 + 8 = 28]
+step 3   So 7 × 4 = 28.
+miss     one-group-low = 24   That is one equal group too few. Add another 4.
+miss     one-group-high = 32   That is one equal group too many. Take away 4.
+
+--- times-7-8 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "7 × 3"
+answer   exact 21/1
+input    keypad
+hint     Start with five groups of 3, then add 2 more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add the remaining 2 groups.   [15 + 6 = 21]
+step 3   So 7 × 3 = 21.
+miss     one-group-low = 18   That is one equal group too few. Add another 3.
+miss     one-group-high = 24   That is one equal group too many. Take away 3.
+
+--- times-7-8 · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  inline "8 × 2"
+answer   exact 16/1
+input    keypad
+hint     Start with five groups of 2, then add 3 more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add the remaining 3 groups.   [10 + 6 = 16]
+step 3   So 8 × 2 = 16.
+miss     one-group-low = 14   That is one equal group too few. Add another 2.
+miss     one-group-high = 18   That is one equal group too many. Take away 2.
+
+--- times-7-8 · seed 1 · difficulty 3
+prompt   What is the product?
+display  inline "2 × 8"
+answer   exact 16/1
+input    keypad
+hint     Start with five groups of 2, then add 3 more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add the remaining 3 groups.   [10 + 6 = 16]
+step 3   So 2 × 8 = 16.
+miss     one-group-low = 14   That is one equal group too few. Add another 2.
+miss     one-group-high = 18   That is one equal group too many. Take away 2.
+
+--- times-7-8 · seed 12345 · difficulty 3
+prompt   What is the product?
+display  inline "8 × 4"
+answer   exact 32/1
+input    keypad
+hint     Start with five groups of 4, then add 3 more.
+step 1   Find five groups.   [5 × 4 = 20]
+step 2   Add the remaining 3 groups.   [20 + 12 = 32]
+step 3   So 8 × 4 = 32.
+miss     one-group-low = 28   That is one equal group too few. Add another 4.
+miss     one-group-high = 36   That is one equal group too many. Take away 4.
+
+--- times-7-8 · seed 67890 · difficulty 3
+prompt   What is the product?
+display  inline "7 × 6"
+answer   exact 42/1
+input    keypad
+hint     Start with five groups of 6, then add 2 more.
+step 1   Find five groups.   [5 × 6 = 30]
+step 2   Add the remaining 2 groups.   [30 + 12 = 42]
+step 3   So 7 × 6 = 42.
+miss     one-group-low = 36   That is one equal group too few. Add another 6.
+miss     one-group-high = 48   That is one equal group too many. Take away 6.
+
+--- times-7-8 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "7 × 3"
+answer   exact 21/1
+input    keypad
+hint     Start with five groups of 3, then add 2 more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add the remaining 2 groups.   [15 + 6 = 21]
+step 3   So 7 × 3 = 21.
+miss     one-group-low = 18   That is one equal group too few. Add another 3.
+miss     one-group-high = 24   That is one equal group too many. Take away 3.
+
+--- times-7-8 · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  inline "8 × 2"
+answer   exact 16/1
+input    keypad
+hint     Start with five groups of 2, then add 3 more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add the remaining 3 groups.   [10 + 6 = 16]
+step 3   So 8 × 2 = 16.
+miss     one-group-low = 14   That is one equal group too few. Add another 2.
+miss     one-group-high = 18   That is one equal group too many. Take away 2.
+
+--- times-7-8 · seed 1 · difficulty 4
+prompt   What is the product?
+display  inline "2 × 8"
+answer   exact 16/1
+input    keypad
+hint     Start with five groups of 2, then add 3 more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add the remaining 3 groups.   [10 + 6 = 16]
+step 3   So 2 × 8 = 16.
+miss     one-group-low = 14   That is one equal group too few. Add another 2.
+miss     one-group-high = 18   That is one equal group too many. Take away 2.
+
+--- times-7-8 · seed 12345 · difficulty 4
+prompt   What is the product?
+display  inline "8 × 4"
+answer   exact 32/1
+input    keypad
+hint     Start with five groups of 4, then add 3 more.
+step 1   Find five groups.   [5 × 4 = 20]
+step 2   Add the remaining 3 groups.   [20 + 12 = 32]
+step 3   So 8 × 4 = 32.
+miss     one-group-low = 28   That is one equal group too few. Add another 4.
+miss     one-group-high = 36   That is one equal group too many. Take away 4.
+
+--- times-7-8 · seed 67890 · difficulty 4
+prompt   What is the product?
+display  inline "7 × 7"
+answer   exact 49/1
+input    keypad
+hint     Start with five groups of 7, then add 2 more.
+step 1   Find five groups.   [5 × 7 = 35]
+step 2   Add the remaining 2 groups.   [35 + 14 = 49]
+step 3   So 7 × 7 = 49.
+miss     one-group-low = 42   That is one equal group too few. Add another 7.
+miss     one-group-high = 56   That is one equal group too many. Take away 7.
+
+--- times-7-8 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "7 × 4"
+answer   exact 28/1
+input    keypad
+hint     Start with five groups of 4, then add 2 more.
+step 1   Find five groups.   [5 × 4 = 20]
+step 2   Add the remaining 2 groups.   [20 + 8 = 28]
+step 3   So 7 × 4 = 28.
+miss     one-group-low = 24   That is one equal group too few. Add another 4.
+miss     one-group-high = 32   That is one equal group too many. Take away 4.
+
+--- times-7-8 · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  inline "8 × 3"
+answer   exact 24/1
+input    keypad
+hint     Start with five groups of 3, then add 3 more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add the remaining 3 groups.   [15 + 9 = 24]
+step 3   So 8 × 3 = 24.
+miss     one-group-low = 21   That is one equal group too few. Add another 3.
+miss     one-group-high = 27   That is one equal group too many. Take away 3.
+
+--- times-7-8 · seed 1 · difficulty 5
+prompt   What is the product?
+display  inline "2 × 8"
+answer   exact 16/1
+input    keypad
+hint     Start with five groups of 2, then add 3 more.
+step 1   Find five groups.   [5 × 2 = 10]
+step 2   Add the remaining 3 groups.   [10 + 6 = 16]
+step 3   So 2 × 8 = 16.
+miss     one-group-low = 14   That is one equal group too few. Add another 2.
+miss     one-group-high = 18   That is one equal group too many. Take away 2.
+
+--- times-7-8 · seed 12345 · difficulty 5
+prompt   What is the product?
+display  inline "8 × 5"
+answer   exact 40/1
+input    keypad
+hint     Start with five groups of 5, then add 3 more.
+step 1   Find five groups.   [5 × 5 = 25]
+step 2   Add the remaining 3 groups.   [25 + 15 = 40]
+step 3   So 8 × 5 = 40.
+miss     one-group-low = 35   That is one equal group too few. Add another 5.
+miss     one-group-high = 45   That is one equal group too many. Take away 5.
+
+--- times-7-8 · seed 67890 · difficulty 5
+prompt   What is the product?
+display  inline "7 × 8"
+answer   exact 56/1
+input    keypad
+hint     Start with five groups of 8, then add 2 more.
+step 1   Find five groups.   [5 × 8 = 40]
+step 2   Add the remaining 2 groups.   [40 + 16 = 56]
+step 3   So 7 × 8 = 56.
+miss     one-group-low = 48   That is one equal group too few. Add another 8.
+miss     one-group-high = 64   That is one equal group too many. Take away 8.
+
+--- times-7-8 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "7 × 4"
+answer   exact 28/1
+input    keypad
+hint     Start with five groups of 4, then add 2 more.
+step 1   Find five groups.   [5 × 4 = 20]
+step 2   Add the remaining 2 groups.   [20 + 8 = 28]
+step 3   So 7 × 4 = 28.
+miss     one-group-low = 24   That is one equal group too few. Add another 4.
+miss     one-group-high = 32   That is one equal group too many. Take away 4.
+
+--- times-7-8 · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  inline "8 × 3"
+answer   exact 24/1
+input    keypad
+hint     Start with five groups of 3, then add 3 more.
+step 1   Find five groups.   [5 × 3 = 15]
+step 2   Add the remaining 3 groups.   [15 + 9 = 24]
+step 3   So 8 × 3 = 24.
+miss     one-group-low = 21   That is one equal group too few. Add another 3.
+miss     one-group-high = 27   That is one equal group too many. Take away 3."
+`;
+
+exports[`recorded output: times-9 > matches the wording recorded when the skill landed 1`] = `
+"--- times-9 · seed 1 · difficulty 1
+prompt   What is the product?
+display  inline "9 × 3"
+answer   exact 27/1
+input    keypad
+hint     Use ten groups minus one; the digits in 27 add to 9.
+step 1   Start with ten groups.   [10 × 3 = 30]
+step 2   Take one group away.   [30 − 3 = 27]
+step 3   Check the digits in 27: they add to 9.
+miss     used-ten-groups = 30   That is ten groups. Take one group of 3 away.
+miss     removed-two-groups = 24   That takes away two groups of 3; only one comes off ten groups.
+
+--- times-9 · seed 12345 · difficulty 1
+prompt   What is the product?
+display  inline "9 × 4"
+answer   exact 36/1
+input    keypad
+hint     Use ten groups minus one; the digits in 36 add to 9.
+step 1   Start with ten groups.   [10 × 4 = 40]
+step 2   Take one group away.   [40 − 4 = 36]
+step 3   Check the digits in 36: they add to 9.
+miss     used-ten-groups = 40   That is ten groups. Take one group of 4 away.
+miss     removed-two-groups = 32   That takes away two groups of 4; only one comes off ten groups.
+
+--- times-9 · seed 67890 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 9"
+answer   exact 27/1
+input    keypad
+hint     Use ten groups minus one; the digits in 27 add to 9.
+step 1   Start with ten groups.   [10 × 3 = 30]
+step 2   Take one group away.   [30 − 3 = 27]
+step 3   Check the digits in 27: they add to 9.
+miss     used-ten-groups = 30   That is ten groups. Take one group of 3 away.
+miss     removed-two-groups = 24   That takes away two groups of 3; only one comes off ten groups.
+
+--- times-9 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "9 × 2"
+answer   exact 18/1
+input    keypad
+hint     Use ten groups minus one; the digits in 18 add to 9.
+step 1   Start with ten groups.   [10 × 2 = 20]
+step 2   Take one group away.   [20 − 2 = 18]
+step 3   Check the digits in 18: they add to 9.
+miss     used-ten-groups = 20   That is ten groups. Take one group of 2 away.
+miss     removed-two-groups = 16   That takes away two groups of 2; only one comes off ten groups.
+
+--- times-9 · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  inline "9 × 4"
+answer   exact 36/1
+input    keypad
+hint     Use ten groups minus one; the digits in 36 add to 9.
+step 1   Start with ten groups.   [10 × 4 = 40]
+step 2   Take one group away.   [40 − 4 = 36]
+step 3   Check the digits in 36: they add to 9.
+miss     used-ten-groups = 40   That is ten groups. Take one group of 4 away.
+miss     removed-two-groups = 32   That takes away two groups of 4; only one comes off ten groups.
+
+--- times-9 · seed 1 · difficulty 2
+prompt   What is the product?
+display  inline "9 × 5"
+answer   exact 45/1
+input    keypad
+hint     Use ten groups minus one; the digits in 45 add to 9.
+step 1   Start with ten groups.   [10 × 5 = 50]
+step 2   Take one group away.   [50 − 5 = 45]
+step 3   Check the digits in 45: they add to 9.
+miss     used-ten-groups = 50   That is ten groups. Take one group of 5 away.
+miss     removed-two-groups = 40   That takes away two groups of 5; only one comes off ten groups.
+
+--- times-9 · seed 12345 · difficulty 2
+prompt   What is the product?
+display  inline "9 × 6"
+answer   exact 54/1
+input    keypad
+hint     Use ten groups minus one; the digits in 54 add to 9.
+step 1   Start with ten groups.   [10 × 6 = 60]
+step 2   Take one group away.   [60 − 6 = 54]
+step 3   Check the digits in 54: they add to 9.
+miss     used-ten-groups = 60   That is ten groups. Take one group of 6 away.
+miss     removed-two-groups = 48   That takes away two groups of 6; only one comes off ten groups.
+
+--- times-9 · seed 67890 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 9"
+answer   exact 27/1
+input    keypad
+hint     Use ten groups minus one; the digits in 27 add to 9.
+step 1   Start with ten groups.   [10 × 3 = 30]
+step 2   Take one group away.   [30 − 3 = 27]
+step 3   Check the digits in 27: they add to 9.
+miss     used-ten-groups = 30   That is ten groups. Take one group of 3 away.
+miss     removed-two-groups = 24   That takes away two groups of 3; only one comes off ten groups.
+
+--- times-9 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "9 × 2"
+answer   exact 18/1
+input    keypad
+hint     Use ten groups minus one; the digits in 18 add to 9.
+step 1   Start with ten groups.   [10 × 2 = 20]
+step 2   Take one group away.   [20 − 2 = 18]
+step 3   Check the digits in 18: they add to 9.
+miss     used-ten-groups = 20   That is ten groups. Take one group of 2 away.
+miss     removed-two-groups = 16   That takes away two groups of 2; only one comes off ten groups.
+
+--- times-9 · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  inline "9 × 6"
+answer   exact 54/1
+input    keypad
+hint     Use ten groups minus one; the digits in 54 add to 9.
+step 1   Start with ten groups.   [10 × 6 = 60]
+step 2   Take one group away.   [60 − 6 = 54]
+step 3   Check the digits in 54: they add to 9.
+miss     used-ten-groups = 60   That is ten groups. Take one group of 6 away.
+miss     removed-two-groups = 48   That takes away two groups of 6; only one comes off ten groups.
+
+--- times-9 · seed 1 · difficulty 3
+prompt   What is the product?
+display  inline "9 × 6"
+answer   exact 54/1
+input    keypad
+hint     Use ten groups minus one; the digits in 54 add to 9.
+step 1   Start with ten groups.   [10 × 6 = 60]
+step 2   Take one group away.   [60 − 6 = 54]
+step 3   Check the digits in 54: they add to 9.
+miss     used-ten-groups = 60   That is ten groups. Take one group of 6 away.
+miss     removed-two-groups = 48   That takes away two groups of 6; only one comes off ten groups.
+
+--- times-9 · seed 12345 · difficulty 3
+prompt   What is the product?
+display  inline "9 × 8"
+answer   exact 72/1
+input    keypad
+hint     Use ten groups minus one; the digits in 72 add to 9.
+step 1   Start with ten groups.   [10 × 8 = 80]
+step 2   Take one group away.   [80 − 8 = 72]
+step 3   Check the digits in 72: they add to 9.
+miss     used-ten-groups = 80   That is ten groups. Take one group of 8 away.
+miss     removed-two-groups = 64   That takes away two groups of 8; only one comes off ten groups.
+
+--- times-9 · seed 67890 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 9"
+answer   exact 36/1
+input    keypad
+hint     Use ten groups minus one; the digits in 36 add to 9.
+step 1   Start with ten groups.   [10 × 4 = 40]
+step 2   Take one group away.   [40 − 4 = 36]
+step 3   Check the digits in 36: they add to 9.
+miss     used-ten-groups = 40   That is ten groups. Take one group of 4 away.
+miss     removed-two-groups = 32   That takes away two groups of 4; only one comes off ten groups.
+
+--- times-9 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "9 × 2"
+answer   exact 18/1
+input    keypad
+hint     Use ten groups minus one; the digits in 18 add to 9.
+step 1   Start with ten groups.   [10 × 2 = 20]
+step 2   Take one group away.   [20 − 2 = 18]
+step 3   Check the digits in 18: they add to 9.
+miss     used-ten-groups = 20   That is ten groups. Take one group of 2 away.
+miss     removed-two-groups = 16   That takes away two groups of 2; only one comes off ten groups.
+
+--- times-9 · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  inline "9 × 8"
+answer   exact 72/1
+input    keypad
+hint     Use ten groups minus one; the digits in 72 add to 9.
+step 1   Start with ten groups.   [10 × 8 = 80]
+step 2   Take one group away.   [80 − 8 = 72]
+step 3   Check the digits in 72: they add to 9.
+miss     used-ten-groups = 80   That is ten groups. Take one group of 8 away.
+miss     removed-two-groups = 64   That takes away two groups of 8; only one comes off ten groups.
+
+--- times-9 · seed 1 · difficulty 4
+prompt   What is the product?
+display  inline "9 × 7"
+answer   exact 63/1
+input    keypad
+hint     Use ten groups minus one; the digits in 63 add to 9.
+step 1   Start with ten groups.   [10 × 7 = 70]
+step 2   Take one group away.   [70 − 7 = 63]
+step 3   Check the digits in 63: they add to 9.
+miss     used-ten-groups = 70   That is ten groups. Take one group of 7 away.
+miss     removed-two-groups = 56   That takes away two groups of 7; only one comes off ten groups.
+
+--- times-9 · seed 12345 · difficulty 4
+prompt   What is the product?
+display  inline "9 × 10"
+answer   exact 90/1
+input    keypad
+hint     Use ten groups minus one; the digits in 90 add to 9.
+step 1   Start with ten groups.   [10 × 10 = 100]
+step 2   Take one group away.   [100 − 10 = 90]
+step 3   Check the digits in 90: they add to 9.
+miss     used-ten-groups = 100   That is ten groups. Take one group of 10 away.
+miss     removed-two-groups = 80   That takes away two groups of 10; only one comes off ten groups.
+
+--- times-9 · seed 67890 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 9"
+answer   exact 45/1
+input    keypad
+hint     Use ten groups minus one; the digits in 45 add to 9.
+step 1   Start with ten groups.   [10 × 5 = 50]
+step 2   Take one group away.   [50 − 5 = 45]
+step 3   Check the digits in 45: they add to 9.
+miss     used-ten-groups = 50   That is ten groups. Take one group of 5 away.
+miss     removed-two-groups = 40   That takes away two groups of 5; only one comes off ten groups.
+
+--- times-9 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "9 × 3"
+answer   exact 27/1
+input    keypad
+hint     Use ten groups minus one; the digits in 27 add to 9.
+step 1   Start with ten groups.   [10 × 3 = 30]
+step 2   Take one group away.   [30 − 3 = 27]
+step 3   Check the digits in 27: they add to 9.
+miss     used-ten-groups = 30   That is ten groups. Take one group of 3 away.
+miss     removed-two-groups = 24   That takes away two groups of 3; only one comes off ten groups.
+
+--- times-9 · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  inline "9 × 10"
+answer   exact 90/1
+input    keypad
+hint     Use ten groups minus one; the digits in 90 add to 9.
+step 1   Start with ten groups.   [10 × 10 = 100]
+step 2   Take one group away.   [100 − 10 = 90]
+step 3   Check the digits in 90: they add to 9.
+miss     used-ten-groups = 100   That is ten groups. Take one group of 10 away.
+miss     removed-two-groups = 80   That takes away two groups of 10; only one comes off ten groups.
+
+--- times-9 · seed 1 · difficulty 5
+prompt   What is the product?
+display  inline "9 × 8"
+answer   exact 72/1
+input    keypad
+hint     Use ten groups minus one; the digits in 72 add to 9.
+step 1   Start with ten groups.   [10 × 8 = 80]
+step 2   Take one group away.   [80 − 8 = 72]
+step 3   Check the digits in 72: they add to 9.
+miss     used-ten-groups = 80   That is ten groups. Take one group of 8 away.
+miss     removed-two-groups = 64   That takes away two groups of 8; only one comes off ten groups.
+
+--- times-9 · seed 12345 · difficulty 5
+prompt   What is the product?
+display  inline "9 × 12"
+answer   exact 108/1
+input    keypad
+hint     Use ten groups minus one; the digits in 108 add to 9.
+step 1   Start with ten groups.   [10 × 12 = 120]
+step 2   Take one group away.   [120 − 12 = 108]
+step 3   Check the digits in 108: they add to 9.
+miss     used-ten-groups = 120   That is ten groups. Take one group of 12 away.
+miss     removed-two-groups = 96   That takes away two groups of 12; only one comes off ten groups.
+
+--- times-9 · seed 67890 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 9"
+answer   exact 54/1
+input    keypad
+hint     Use ten groups minus one; the digits in 54 add to 9.
+step 1   Start with ten groups.   [10 × 6 = 60]
+step 2   Take one group away.   [60 − 6 = 54]
+step 3   Check the digits in 54: they add to 9.
+miss     used-ten-groups = 60   That is ten groups. Take one group of 6 away.
+miss     removed-two-groups = 48   That takes away two groups of 6; only one comes off ten groups.
+
+--- times-9 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "9 × 3"
+answer   exact 27/1
+input    keypad
+hint     Use ten groups minus one; the digits in 27 add to 9.
+step 1   Start with ten groups.   [10 × 3 = 30]
+step 2   Take one group away.   [30 − 3 = 27]
+step 3   Check the digits in 27: they add to 9.
+miss     used-ten-groups = 30   That is ten groups. Take one group of 3 away.
+miss     removed-two-groups = 24   That takes away two groups of 3; only one comes off ten groups.
+
+--- times-9 · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  inline "9 × 12"
+answer   exact 108/1
+input    keypad
+hint     Use ten groups minus one; the digits in 108 add to 9.
+step 1   Start with ten groups.   [10 × 12 = 120]
+step 2   Take one group away.   [120 − 12 = 108]
+step 3   Check the digits in 108: they add to 9.
+miss     used-ten-groups = 120   That is ten groups. Take one group of 12 away.
+miss     removed-two-groups = 96   That takes away two groups of 12; only one comes off ten groups."
+`;
+
+exports[`recorded output: times-10 > matches the wording recorded when the skill landed 1`] = `
+"--- times-10 · seed 1 · difficulty 1
+prompt   What is the product?
+display  inline "10 × 3"
+answer   exact 30/1
+input    keypad
+hint     Ten groups of 3 puts one zero after 3.
+step 1   Start with 3.
+step 2   Shift every digit one place left.   [3 → 30]
+step 3   So 10 × 3 = 30.
+miss     dropped-zero = 3   The 3 still needs one zero after it for ten groups.
+miss     one-group-high = 40   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 12345 · difficulty 1
+prompt   What is the product?
+display  inline "10 × 4"
+answer   exact 40/1
+input    keypad
+hint     Ten groups of 4 puts one zero after 4.
+step 1   Start with 4.
+step 2   Shift every digit one place left.   [4 → 40]
+step 3   So 10 × 4 = 40.
+miss     dropped-zero = 4   The 4 still needs one zero after it for ten groups.
+miss     one-group-high = 50   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 67890 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 10"
+answer   exact 30/1
+input    keypad
+hint     Ten groups of 3 puts one zero after 3.
+step 1   Start with 3.
+step 2   Shift every digit one place left.   [3 → 30]
+step 3   So 10 × 3 = 30.
+miss     dropped-zero = 3   The 3 still needs one zero after it for ten groups.
+miss     one-group-high = 40   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "10 × 2"
+answer   exact 20/1
+input    keypad
+hint     Ten groups of 2 puts one zero after 2.
+step 1   Start with 2.
+step 2   Shift every digit one place left.   [2 → 20]
+step 3   So 10 × 2 = 20.
+miss     dropped-zero = 2   The 2 still needs one zero after it for ten groups.
+miss     one-group-high = 30   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  inline "10 × 4"
+answer   exact 40/1
+input    keypad
+hint     Ten groups of 4 puts one zero after 4.
+step 1   Start with 4.
+step 2   Shift every digit one place left.   [4 → 40]
+step 3   So 10 × 4 = 40.
+miss     dropped-zero = 4   The 4 still needs one zero after it for ten groups.
+miss     one-group-high = 50   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 1 · difficulty 2
+prompt   What is the product?
+display  inline "10 × 5"
+answer   exact 50/1
+input    keypad
+hint     Ten groups of 5 puts one zero after 5.
+step 1   Start with 5.
+step 2   Shift every digit one place left.   [5 → 50]
+step 3   So 10 × 5 = 50.
+miss     dropped-zero = 5   The 5 still needs one zero after it for ten groups.
+miss     one-group-high = 60   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 12345 · difficulty 2
+prompt   What is the product?
+display  inline "10 × 6"
+answer   exact 60/1
+input    keypad
+hint     Ten groups of 6 puts one zero after 6.
+step 1   Start with 6.
+step 2   Shift every digit one place left.   [6 → 60]
+step 3   So 10 × 6 = 60.
+miss     dropped-zero = 6   The 6 still needs one zero after it for ten groups.
+miss     one-group-high = 70   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 67890 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 10"
+answer   exact 30/1
+input    keypad
+hint     Ten groups of 3 puts one zero after 3.
+step 1   Start with 3.
+step 2   Shift every digit one place left.   [3 → 30]
+step 3   So 10 × 3 = 30.
+miss     dropped-zero = 3   The 3 still needs one zero after it for ten groups.
+miss     one-group-high = 40   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "10 × 2"
+answer   exact 20/1
+input    keypad
+hint     Ten groups of 2 puts one zero after 2.
+step 1   Start with 2.
+step 2   Shift every digit one place left.   [2 → 20]
+step 3   So 10 × 2 = 20.
+miss     dropped-zero = 2   The 2 still needs one zero after it for ten groups.
+miss     one-group-high = 30   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  inline "10 × 6"
+answer   exact 60/1
+input    keypad
+hint     Ten groups of 6 puts one zero after 6.
+step 1   Start with 6.
+step 2   Shift every digit one place left.   [6 → 60]
+step 3   So 10 × 6 = 60.
+miss     dropped-zero = 6   The 6 still needs one zero after it for ten groups.
+miss     one-group-high = 70   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 1 · difficulty 3
+prompt   What is the product?
+display  inline "10 × 6"
+answer   exact 60/1
+input    keypad
+hint     Ten groups of 6 puts one zero after 6.
+step 1   Start with 6.
+step 2   Shift every digit one place left.   [6 → 60]
+step 3   So 10 × 6 = 60.
+miss     dropped-zero = 6   The 6 still needs one zero after it for ten groups.
+miss     one-group-high = 70   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 12345 · difficulty 3
+prompt   What is the product?
+display  inline "10 × 8"
+answer   exact 80/1
+input    keypad
+hint     Ten groups of 8 puts one zero after 8.
+step 1   Start with 8.
+step 2   Shift every digit one place left.   [8 → 80]
+step 3   So 10 × 8 = 80.
+miss     dropped-zero = 8   The 8 still needs one zero after it for ten groups.
+miss     one-group-high = 90   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 67890 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 10"
+answer   exact 40/1
+input    keypad
+hint     Ten groups of 4 puts one zero after 4.
+step 1   Start with 4.
+step 2   Shift every digit one place left.   [4 → 40]
+step 3   So 10 × 4 = 40.
+miss     dropped-zero = 4   The 4 still needs one zero after it for ten groups.
+miss     one-group-high = 50   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "10 × 2"
+answer   exact 20/1
+input    keypad
+hint     Ten groups of 2 puts one zero after 2.
+step 1   Start with 2.
+step 2   Shift every digit one place left.   [2 → 20]
+step 3   So 10 × 2 = 20.
+miss     dropped-zero = 2   The 2 still needs one zero after it for ten groups.
+miss     one-group-high = 30   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  inline "10 × 8"
+answer   exact 80/1
+input    keypad
+hint     Ten groups of 8 puts one zero after 8.
+step 1   Start with 8.
+step 2   Shift every digit one place left.   [8 → 80]
+step 3   So 10 × 8 = 80.
+miss     dropped-zero = 8   The 8 still needs one zero after it for ten groups.
+miss     one-group-high = 90   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 1 · difficulty 4
+prompt   What is the product?
+display  inline "10 × 7"
+answer   exact 70/1
+input    keypad
+hint     Ten groups of 7 puts one zero after 7.
+step 1   Start with 7.
+step 2   Shift every digit one place left.   [7 → 70]
+step 3   So 10 × 7 = 70.
+miss     dropped-zero = 7   The 7 still needs one zero after it for ten groups.
+miss     one-group-high = 80   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 12345 · difficulty 4
+prompt   What is the product?
+display  inline "10 × 10"
+answer   exact 100/1
+input    keypad
+hint     Ten groups of 10 puts one zero after 10.
+step 1   Start with 10.
+step 2   Shift every digit one place left.   [10 → 100]
+step 3   So 10 × 10 = 100.
+miss     dropped-zero = 10   The 10 still needs one zero after it for ten groups.
+miss     one-group-high = 110   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 67890 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 10"
+answer   exact 50/1
+input    keypad
+hint     Ten groups of 5 puts one zero after 5.
+step 1   Start with 5.
+step 2   Shift every digit one place left.   [5 → 50]
+step 3   So 10 × 5 = 50.
+miss     dropped-zero = 5   The 5 still needs one zero after it for ten groups.
+miss     one-group-high = 60   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "10 × 3"
+answer   exact 30/1
+input    keypad
+hint     Ten groups of 3 puts one zero after 3.
+step 1   Start with 3.
+step 2   Shift every digit one place left.   [3 → 30]
+step 3   So 10 × 3 = 30.
+miss     dropped-zero = 3   The 3 still needs one zero after it for ten groups.
+miss     one-group-high = 40   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  inline "10 × 10"
+answer   exact 100/1
+input    keypad
+hint     Ten groups of 10 puts one zero after 10.
+step 1   Start with 10.
+step 2   Shift every digit one place left.   [10 → 100]
+step 3   So 10 × 10 = 100.
+miss     dropped-zero = 10   The 10 still needs one zero after it for ten groups.
+miss     one-group-high = 110   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 1 · difficulty 5
+prompt   What is the product?
+display  inline "10 × 8"
+answer   exact 80/1
+input    keypad
+hint     Ten groups of 8 puts one zero after 8.
+step 1   Start with 8.
+step 2   Shift every digit one place left.   [8 → 80]
+step 3   So 10 × 8 = 80.
+miss     dropped-zero = 8   The 8 still needs one zero after it for ten groups.
+miss     one-group-high = 90   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 12345 · difficulty 5
+prompt   What is the product?
+display  inline "10 × 12"
+answer   exact 120/1
+input    keypad
+hint     Ten groups of 12 puts one zero after 12.
+step 1   Start with 12.
+step 2   Shift every digit one place left.   [12 → 120]
+step 3   So 10 × 12 = 120.
+miss     dropped-zero = 12   The 12 still needs one zero after it for ten groups.
+miss     one-group-high = 130   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 67890 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 10"
+answer   exact 60/1
+input    keypad
+hint     Ten groups of 6 puts one zero after 6.
+step 1   Start with 6.
+step 2   Shift every digit one place left.   [6 → 60]
+step 3   So 10 × 6 = 60.
+miss     dropped-zero = 6   The 6 still needs one zero after it for ten groups.
+miss     one-group-high = 70   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "10 × 3"
+answer   exact 30/1
+input    keypad
+hint     Ten groups of 3 puts one zero after 3.
+step 1   Start with 3.
+step 2   Shift every digit one place left.   [3 → 30]
+step 3   So 10 × 3 = 30.
+miss     dropped-zero = 3   The 3 still needs one zero after it for ten groups.
+miss     one-group-high = 40   That has one group of ten too many. Take one ten away.
+
+--- times-10 · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  inline "10 × 12"
+answer   exact 120/1
+input    keypad
+hint     Ten groups of 12 puts one zero after 12.
+step 1   Start with 12.
+step 2   Shift every digit one place left.   [12 → 120]
+step 3   So 10 × 12 = 120.
+miss     dropped-zero = 12   The 12 still needs one zero after it for ten groups.
+miss     one-group-high = 130   That has one group of ten too many. Take one ten away."
+`;
+
+exports[`recorded output: times-mixed > matches the wording recorded when the skill landed 1`] = `
+"--- times-mixed · seed 1 · difficulty 1
+prompt   What is the product?
+display  inline "2 × 3"
+answer   exact 6/1
+input    keypad
+hint     Treat this as 2 equal groups of 3.
+step 1   Use the 3 times table for 2 groups.
+step 2   Multiply the two numbers.   [3 × 2 = 6]
+miss     one-group-low = 3   That is one equal group too few. Add another 3.
+miss     one-group-high = 9   That is one equal group too many. Take away 3.
+
+--- times-mixed · seed 12345 · difficulty 1
+prompt   What is the product?
+display  inline "4 × 2"
+answer   exact 8/1
+input    keypad
+hint     Treat this as 2 equal groups of 4.
+step 1   Use the 4 times table for 2 groups.
+step 2   Multiply the two numbers.   [4 × 2 = 8]
+miss     one-group-low = 4   That is one equal group too few. Add another 4.
+miss     one-group-high = 12   That is one equal group too many. Take away 4.
+
+--- times-mixed · seed 67890 · difficulty 1
+prompt   What is the product?
+display  inline "3 × 3"
+answer   exact 9/1
+input    keypad
+hint     Treat this as 3 equal groups of 3.
+step 1   Use the 3 times table for 3 groups.
+step 2   Multiply the two numbers.   [3 × 3 = 9]
+miss     one-group-low = 6   That is one equal group too few. Add another 3.
+miss     one-group-high = 12   That is one equal group too many. Take away 3.
+
+--- times-mixed · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "2 × 2"
+answer   exact 4/1
+input    keypad
+hint     Treat this as 2 equal groups of 2.
+step 1   Use the 2 times table for 2 groups.
+step 2   Multiply the two numbers.   [2 × 2 = 4]
+miss     one-group-low = 2   That is one equal group too few. Add another 2.
+miss     one-group-high = 6   That is one equal group too many. Take away 2.
+
+--- times-mixed · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  inline "4 × 2"
+answer   exact 8/1
+input    keypad
+hint     Treat this as 2 equal groups of 4.
+step 1   Use the 4 times table for 2 groups.
+step 2   Multiply the two numbers.   [4 × 2 = 8]
+miss     one-group-low = 4   That is one equal group too few. Add another 4.
+miss     one-group-high = 12   That is one equal group too many. Take away 4.
+
+--- times-mixed · seed 1 · difficulty 2
+prompt   What is the product?
+display  inline "2 × 5"
+answer   exact 10/1
+input    keypad
+hint     Treat this as 2 equal groups of 5.
+step 1   Use the 5 times table for 2 groups.
+step 2   Multiply the two numbers.   [5 × 2 = 10]
+miss     one-group-low = 5   That is one equal group too few. Add another 5.
+miss     one-group-high = 15   That is one equal group too many. Take away 5.
+
+--- times-mixed · seed 12345 · difficulty 2
+prompt   What is the product?
+display  inline "6 × 3"
+answer   exact 18/1
+input    keypad
+hint     Treat this as 3 equal groups of 6.
+step 1   Use the 6 times table for 3 groups.
+step 2   Multiply the two numbers.   [6 × 3 = 18]
+miss     one-group-low = 12   That is one equal group too few. Add another 6.
+miss     one-group-high = 24   That is one equal group too many. Take away 6.
+
+--- times-mixed · seed 67890 · difficulty 2
+prompt   What is the product?
+display  inline "3 × 4"
+answer   exact 12/1
+input    keypad
+hint     Treat this as 4 equal groups of 3.
+step 1   Use the 3 times table for 4 groups.
+step 2   Multiply the two numbers.   [3 × 4 = 12]
+miss     one-group-low = 9   That is one equal group too few. Add another 3.
+miss     one-group-high = 15   That is one equal group too many. Take away 3.
+
+--- times-mixed · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "2 × 3"
+answer   exact 6/1
+input    keypad
+hint     Treat this as 3 equal groups of 2.
+step 1   Use the 2 times table for 3 groups.
+step 2   Multiply the two numbers.   [2 × 3 = 6]
+miss     one-group-low = 4   That is one equal group too few. Add another 2.
+miss     one-group-high = 8   That is one equal group too many. Take away 2.
+
+--- times-mixed · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  inline "6 × 2"
+answer   exact 12/1
+input    keypad
+hint     Treat this as 2 equal groups of 6.
+step 1   Use the 6 times table for 2 groups.
+step 2   Multiply the two numbers.   [6 × 2 = 12]
+miss     one-group-low = 6   That is one equal group too few. Add another 6.
+miss     one-group-high = 18   That is one equal group too many. Take away 6.
+
+--- times-mixed · seed 1 · difficulty 3
+prompt   What is the product?
+display  inline "2 × 6"
+answer   exact 12/1
+input    keypad
+hint     Treat this as 2 equal groups of 6.
+step 1   Use the 6 times table for 2 groups.
+step 2   Multiply the two numbers.   [6 × 2 = 12]
+miss     one-group-low = 6   That is one equal group too few. Add another 6.
+miss     one-group-high = 18   That is one equal group too many. Take away 6.
+
+--- times-mixed · seed 12345 · difficulty 3
+prompt   What is the product?
+display  inline "8 × 4"
+answer   exact 32/1
+input    keypad
+hint     Treat this as 4 equal groups of 8.
+step 1   Use the 8 times table for 4 groups.
+step 2   Multiply the two numbers.   [8 × 4 = 32]
+miss     one-group-low = 24   That is one equal group too few. Add another 8.
+miss     one-group-high = 40   That is one equal group too many. Take away 8.
+
+--- times-mixed · seed 67890 · difficulty 3
+prompt   What is the product?
+display  inline "4 × 6"
+answer   exact 24/1
+input    keypad
+hint     Treat this as 6 equal groups of 4.
+step 1   Use the 4 times table for 6 groups.
+step 2   Multiply the two numbers.   [4 × 6 = 24]
+miss     one-group-low = 20   That is one equal group too few. Add another 4.
+miss     one-group-high = 28   That is one equal group too many. Take away 4.
+
+--- times-mixed · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "2 × 3"
+answer   exact 6/1
+input    keypad
+hint     Treat this as 3 equal groups of 2.
+step 1   Use the 2 times table for 3 groups.
+step 2   Multiply the two numbers.   [2 × 3 = 6]
+miss     one-group-low = 4   That is one equal group too few. Add another 2.
+miss     one-group-high = 8   That is one equal group too many. Take away 2.
+
+--- times-mixed · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  inline "8 × 2"
+answer   exact 16/1
+input    keypad
+hint     Treat this as 2 equal groups of 8.
+step 1   Use the 8 times table for 2 groups.
+step 2   Multiply the two numbers.   [8 × 2 = 16]
+miss     one-group-low = 8   That is one equal group too few. Add another 8.
+miss     one-group-high = 24   That is one equal group too many. Take away 8.
+
+--- times-mixed · seed 1 · difficulty 4
+prompt   What is the product?
+display  inline "2 × 7"
+answer   exact 14/1
+input    keypad
+hint     Treat this as 2 equal groups of 7.
+step 1   Use the 7 times table for 2 groups.
+step 2   Multiply the two numbers.   [7 × 2 = 14]
+miss     one-group-low = 7   That is one equal group too few. Add another 7.
+miss     one-group-high = 21   That is one equal group too many. Take away 7.
+
+--- times-mixed · seed 12345 · difficulty 4
+prompt   What is the product?
+display  inline "10 × 4"
+answer   exact 40/1
+input    keypad
+hint     Treat this as 4 equal groups of 10.
+step 1   Use the 10 times table for 4 groups.
+step 2   Multiply the two numbers.   [10 × 4 = 40]
+miss     one-group-low = 30   That is one equal group too few. Add another 10.
+miss     one-group-high = 50   That is one equal group too many. Take away 10.
+
+--- times-mixed · seed 67890 · difficulty 4
+prompt   What is the product?
+display  inline "5 × 7"
+answer   exact 35/1
+input    keypad
+hint     Treat this as 7 equal groups of 5.
+step 1   Use the 5 times table for 7 groups.
+step 2   Multiply the two numbers.   [5 × 7 = 35]
+miss     one-group-low = 30   That is one equal group too few. Add another 5.
+miss     one-group-high = 40   That is one equal group too many. Take away 5.
+
+--- times-mixed · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "3 × 4"
+answer   exact 12/1
+input    keypad
+hint     Treat this as 4 equal groups of 3.
+step 1   Use the 3 times table for 4 groups.
+step 2   Multiply the two numbers.   [3 × 4 = 12]
+miss     one-group-low = 9   That is one equal group too few. Add another 3.
+miss     one-group-high = 15   That is one equal group too many. Take away 3.
+
+--- times-mixed · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  inline "10 × 3"
+answer   exact 30/1
+input    keypad
+hint     Treat this as 3 equal groups of 10.
+step 1   Use the 10 times table for 3 groups.
+step 2   Multiply the two numbers.   [10 × 3 = 30]
+miss     one-group-low = 20   That is one equal group too few. Add another 10.
+miss     one-group-high = 40   That is one equal group too many. Take away 10.
+
+--- times-mixed · seed 1 · difficulty 5
+prompt   What is the product?
+display  inline "2 × 8"
+answer   exact 16/1
+input    keypad
+hint     Treat this as 2 equal groups of 8.
+step 1   Use the 8 times table for 2 groups.
+step 2   Multiply the two numbers.   [8 × 2 = 16]
+miss     one-group-low = 8   That is one equal group too few. Add another 8.
+miss     one-group-high = 24   That is one equal group too many. Take away 8.
+
+--- times-mixed · seed 12345 · difficulty 5
+prompt   What is the product?
+display  inline "12 × 5"
+answer   exact 60/1
+input    keypad
+hint     Treat this as 5 equal groups of 12.
+step 1   Use the 12 times table for 5 groups.
+step 2   Multiply the two numbers.   [12 × 5 = 60]
+miss     one-group-low = 48   That is one equal group too few. Add another 12.
+miss     one-group-high = 72   That is one equal group too many. Take away 12.
+
+--- times-mixed · seed 67890 · difficulty 5
+prompt   What is the product?
+display  inline "6 × 8"
+answer   exact 48/1
+input    keypad
+hint     Treat this as 8 equal groups of 6.
+step 1   Use the 6 times table for 8 groups.
+step 2   Multiply the two numbers.   [6 × 8 = 48]
+miss     one-group-low = 42   That is one equal group too few. Add another 6.
+miss     one-group-high = 54   That is one equal group too many. Take away 6.
+
+--- times-mixed · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "3 × 4"
+answer   exact 12/1
+input    keypad
+hint     Treat this as 4 equal groups of 3.
+step 1   Use the 3 times table for 4 groups.
+step 2   Multiply the two numbers.   [3 × 4 = 12]
+miss     one-group-low = 9   That is one equal group too few. Add another 3.
+miss     one-group-high = 15   That is one equal group too many. Take away 3.
+
+--- times-mixed · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  inline "12 × 3"
+answer   exact 36/1
+input    keypad
+hint     Treat this as 3 equal groups of 12.
+step 1   Use the 12 times table for 3 groups.
+step 2   Multiply the two numbers.   [12 × 3 = 36]
+miss     one-group-low = 24   That is one equal group too few. Add another 12.
+miss     one-group-high = 48   That is one equal group too many. Take away 12."
+`;

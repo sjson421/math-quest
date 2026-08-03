@@ -172,9 +172,9 @@ describe('a practised skill is never re-locked', () => {
     // Rule 1 beats rule 2. Not reachable with today's playable skills, but the
     // order is what stops a future capability requirement handing back a lesson
     // that cannot be built.
-    const practisedButPlanned = progressWith({ 'mult-meaning': { attempts: 9, mastery: 2 } })
+    const practisedButPlanned = progressWith({ 'div-meaning': { attempts: 9, mastery: 2 } })
 
-    expect(isUnlocked('mult-meaning', practisedButPlanned)).toBe(false)
+    expect(isUnlocked('div-meaning', practisedButPlanned)).toBe(false)
   })
 
   it('keeps add-facts open for a learner who reached it before 1.1 existed', () => {

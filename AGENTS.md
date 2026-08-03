@@ -126,8 +126,8 @@ lands, and note decisions inline rather than only in chat.
   `## MODIFIED Requirements` against one of these; `## ADDED` is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — twelve changes have shipped, the
-  latest being `stage-checkpoints`, archived 2026-08-03.
+  holds shipped changes. **The active queue contains `unit-03-multiplication`** — twelve
+  changes have shipped, the latest being `stage-checkpoints`, archived 2026-08-03.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`

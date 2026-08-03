@@ -71,7 +71,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(24)
+    expect(documentedAsBuilt).toHaveLength(38)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -98,6 +98,7 @@ describe('the skills that are built', () => {
     expect(manifestIndex.get('sub-2digit-borrow')?.unit.id).toBe('unit-2')
     expect(manifestIndex.get('add-facts')?.unit.id).toBe('unit-1')
     expect(manifestIndex.get('sub-facts')?.stage.id).toBe('stage-b')
+    expect(manifestIndex.get('mult-2by2')?.unit.id).toBe('unit-3')
   })
 
   it('stay implemented because Stage B needs no unbuilt capability', () => {
@@ -149,9 +150,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 177 skills out of the skill tree entirely', () => {
+  it('leaves the other 163 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(24)
+    expect(offered).toHaveLength(38)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -171,14 +172,16 @@ describe('what the learner is offered', () => {
     // called Unit 0 `unit-00` while the manifest calls it `unit-0`.
     expect(located).toContainEqual(['read-numbers', 'unit-0', 'stage-a'])
     expect(located).toContainEqual(['sub-facts', 'unit-2', 'stage-b'])
+    expect(located).toContainEqual(['mult-meaning', 'unit-3', 'stage-b'])
   })
 
-  it('shows the three built units, and no stage or unit that has nothing to play', () => {
+  it('shows the four built units, and no stage or unit that has nothing to play', () => {
     expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b'])
     expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
       'unit-0',
       'unit-1',
       'unit-2',
+      'unit-3',
     ])
   })
 })
@@ -202,7 +205,7 @@ describe('the unlock graph the store gates on', () => {
   })
 
   it('matches the committed snapshot for the skills that are built', () => {
-    // Restricted to implemented skills because the other 183 have no edges that
+    // Restricted to implemented skills because the other 163 have no edges that
     // can gate anyone yet. Committed so the next change that moves an edge has
     // to look at it — this is the review surface for a re-lock.
     const graph = Object.fromEntries(

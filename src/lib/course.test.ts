@@ -107,7 +107,7 @@ describe('currentUnitId', () => {
     const progress = progressAt(every(unitIds, MAX_MASTERY))
 
     expect(currentUnitId(course, progress)).toBe(unitIds.at(-1))
-    expect(unitIds.at(-1)).toBe('unit-2')
+    expect(unitIds.at(-1)).toBe('unit-3')
   })
 
   it('has no answer for an empty course', () => {
@@ -197,13 +197,13 @@ describe('stageProgress', () => {
 
   it('aggregates every playable skill across a stage of units', () => {
     expect(stageB.stage.id).toBe('stage-b')
-    expect(stageProgress(stageB, initialProgress()).possible).toBe(16 * MAX_MASTERY)
+    expect(stageProgress(stageB, initialProgress()).possible).toBe(30 * MAX_MASTERY)
   })
 
-  it('reads one unit of two as half the stage', () => {
+  it('weights each unit by its playable skill count', () => {
     const progress = progressAt(every(['unit-1'], MAX_MASTERY))
 
-    expect(stageProgress(stageB, progress).share).toBe(0.5)
+    expect(stageProgress(stageB, progress).share).toBeCloseTo(8 / 30)
   })
 
   it('is zero for a stage with no playable unit', () => {

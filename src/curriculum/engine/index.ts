@@ -12,6 +12,7 @@ export {
   borrowChain,
   columnTrace,
   digitAt,
+  digitWidth,
   at,
   place,
   requirePlace,
@@ -27,6 +28,23 @@ export type {
   StackPlace,
   StackTrace,
 } from './column'
+
+export {
+  carriedBeforeMultiplying,
+  firstPartialOnly,
+  forgotMultiplicationCarry,
+  missingPlaceholder,
+  multiplicationPlace,
+  multiplicationTrace,
+  partialProductRow,
+  partialProductTrace,
+} from './multiplication'
+export type {
+  MultiplicationPlace,
+  MultiplicationTrace,
+  PartialProductRow,
+  PartialProductTrace,
+} from './multiplication'
 
 export {
   DIFFICULTIES,

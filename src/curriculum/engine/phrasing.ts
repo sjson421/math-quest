@@ -69,8 +69,9 @@ export const applyOperator = (a: number, b: number, operator: Operator): number 
  *
  * Values are computed here so every frame predicts the same errors; the words
  * come from the frame, which is the only thing that knows what its numbers were
- * standing for. None of the three can equal the answer while `b` is non-zero and
- * the distractor differs from `b`, which the drawing constraint guarantees.
+ * standing for. Each bank owns the constraints that keep these values distinct
+ * from its answer: multiplication additionally rejects `2 × 2`, where adding
+ * the operands happens to give the product.
  */
 export function storyMisconceptions(frame: Frame, q: Quantities): Misconception[] {
   const { a, b, distractor } = q
@@ -161,8 +162,13 @@ export const CHECK_QUANTITIES: Partial<Record<Operator, Quantities[]>> = {
     { a: 41, b: 27, distractor: 9 },
     { a: 486, b: 375, distractor: 128 },
   ],
-  // `Partial`, and no `×` or `÷` keys: a multiplication or division frame
-  // arrives with Unit 3 or 4 and brings the quantities its own draw admits.
+  '×': [
+    { a: 3, b: 4, distractor: 5 },
+    { a: 7, b: 6, distractor: 4 },
+    { a: 12, b: 9, distractor: 7 },
+  ],
+  // `Partial`, and no `÷` key: a division frame arrives with Unit 4 and brings
+  // the quantities its own draw admits.
   // Empty placeholders would be a total type promising something absent, and
   // the check would have to detect the placeholder the type says cannot exist.
 }

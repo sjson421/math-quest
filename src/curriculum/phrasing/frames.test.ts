@@ -11,6 +11,7 @@ import { checkContent, formatViolations } from '../../lib/content-rules'
 import type { ContentLocation } from '../../lib/content-rules'
 import type { Operator, Problem } from '../../lib/types'
 import { ADDITION_FRAMES } from './addition'
+import { MULTIPLICATION_FRAMES } from './multiplication'
 import { SUBTRACTION_FRAMES } from './subtraction'
 
 /**
@@ -36,6 +37,12 @@ type Bank = { name: string; skillId: string; unitId: string; frames: Frame[] }
 const banks: Bank[] = [
   { name: 'addition', skillId: 'add-words', unitId: 'unit-1', frames: ADDITION_FRAMES },
   { name: 'subtraction', skillId: 'sub-words', unitId: 'unit-2', frames: SUBTRACTION_FRAMES },
+  {
+    name: 'multiplication',
+    skillId: 'mult-words',
+    unitId: 'unit-3',
+    frames: MULTIPLICATION_FRAMES,
+  },
 ]
 
 const locationFor = (skillId: string, unitId: string): ContentLocation => {
@@ -168,6 +175,16 @@ describe.each(banks)('the $name frame bank', (bank: Bank) => {
       }
     }
   })
+
+  if (operator === '×') {
+    it('rejects quantity sets where addition accidentally equals multiplication', () => {
+      for (const q of sets) {
+        expect(q.a + q.b, `${q.a} + ${q.b} must differ from ${q.a} × ${q.b}`).not.toBe(
+          q.a * q.b,
+        )
+      }
+    })
+  }
 })
 
 describe('the frame check itself', () => {
@@ -235,6 +252,21 @@ describe('the frame check itself', () => {
     const bank = { name: 'broken', skillId: 'sub-words', unitId: 'unit-2', frames }
     expect(checkBank(bank).join('\n')).toContain(
       'deliberately-broken: sub-words [hint-sentences]',
+    )
+  })
+
+  it('catches a broken multiplication frame under multiplication quantities', () => {
+    const frames = [
+      {
+        ...MULTIPLICATION_FRAMES[0],
+        id: 'deliberately-broken-multiplication',
+        hint: () => 'Multiply the groups. Then check it.',
+      },
+    ]
+
+    const bank = { name: 'broken', skillId: 'mult-words', unitId: 'unit-3', frames }
+    expect(checkBank(bank).join('\n')).toContain(
+      'deliberately-broken-multiplication: mult-words [hint-sentences]',
     )
   })
 

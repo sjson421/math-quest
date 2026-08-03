@@ -15,7 +15,7 @@
 export const digitAt = (value: number, place: number) =>
   Math.floor(Math.abs(value) / 10 ** place) % 10
 
-const width = (value: number) => Math.abs(value).toString().length
+export const digitWidth = (value: number) => Math.abs(value).toString().length
 
 export type ColumnOperator = '+' | '−'
 
@@ -80,7 +80,7 @@ export type ColumnTrace = {
  */
 export function columnTrace(a: number, b: number, operator: ColumnOperator): ColumnTrace {
   const places: ColumnPlace[] = []
-  const count = Math.max(width(a), width(b))
+  const count = Math.max(digitWidth(a), digitWidth(b))
   let incoming = 0
 
   for (let place = 0; place < count; place += 1) {
@@ -182,7 +182,7 @@ export type StackTrace = {
 /** Trace the sum of `operands` column by column, right to left. */
 export function stackTrace(operands: number[]): StackTrace {
   const places: StackPlace[] = []
-  const count = Math.max(...operands.map(width))
+  const count = Math.max(...operands.map(digitWidth))
   let incoming = 0
 
   for (let place = 0; place < count; place += 1) {

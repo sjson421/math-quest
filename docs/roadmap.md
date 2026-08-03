@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 24 of 201 skills are playable.** Stage A is complete, and so are Units 1 and 2 —
-Stage B's first two of five. The keypad can now offer a sign, a decimal point or a fraction
+**Status: 38 of 201 skills are playable.** Stage A is complete, and so are Units 1–3 —
+Stage B's first three of five. The keypad can now offer a sign, a decimal point or a fraction
 slash when a problem asks for one. Choice input is also built, so `AVAILABLE_CAPABILITIES`
 contains only `choice-input`; comparison and ordering use choices, while the other playable
 skills use the keypad. This line is the only progress number in the repo's documentation —
@@ -273,12 +273,28 @@ document's ✅ markers updated to match, which the cross-check enforces.
       technically, but using it to introduce real branching now requires a curriculum decision
       that revisits this commitment rather than happening accidentally.
 
-- [ ] **10 · Unit 3 · Multiplication** — L — 14 skills
+- [x] **10 · Unit 3 · Multiplication** — L — 14 skills — **shipped 2026-08-03**
 
       Deliberately the slowest unit in the course; three walls (`times-7-8`, `mult-2by1`,
-      `mult-2by2`). Opens with engine work: `ColumnOperator` is `'+' | '−'`, and partial
-      products are a genuinely different shape. Expect to *extend* the engine here, not merely
-      consume it.
+      `mult-2by2`). It extends the engine with a multiplication trace whose carry is applied
+      after multiplying each digit, plus a separate partial-product trace that preserves row
+      alignment. The wall misconceptions are derived from those traces: using ten groups,
+      applying the carry before multiplying, dropping the placeholder zero, or stopping after
+      the first partial product can no longer drift away from the arithmetic they diagnose.
+
+      **The table sequence teaches a usable route, not fourteen versions of recall.** Twos
+      double, tens expose the zero pattern, fives halve ten groups, fours double twice, sixes
+      build from five groups, and nines use ten groups minus one with a concrete digit-sum
+      check. Sevens and eights deliberately have no claimed shortcut; their recovery path
+      breaks a fact into five groups plus the remainder. `mult-meaning` stays text-described
+      rows and repeated addition until the course has a diagram capability.
+
+      Left behind: **a multiplication frame bank and operator-specific source checks**. Eight
+      adult contexts are checked with multiplication-safe quantities that exclude `2 × 2`,
+      where adding the operands equals their product. Two-by-two lessons show both
+      aligned partial products before combining them, and every Unit 3 problem remains a
+      whole-number problem on the digit keypad. The manifest's first three skills keep their
+      existing quick flag and finish after five correct answers.
 
 - [ ] **11 · Unit 4 · Division** — L — 11 skills
 

@@ -176,20 +176,20 @@ Tables are introduced **easiest first** so momentum builds before the hard ones.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 3.1 | `mult-meaning` | Repeated addition, arrays | `quick` |
-| 3.2 | `times-2` | Doubling | `quick` |
-| 3.3 | `times-10` | Pattern of zeros | `quick` |
-| 3.4 | `times-5` | Half of ten | |
-| 3.5 | `times-3` | | |
-| 3.6 | `times-4` | Double twice | |
-| 3.7 | `times-6` | | |
-| 3.8 | `times-9` | Digit-sum pattern | taught before 7/8 — the pattern makes it easy |
-| 3.9 | `times-7-8` | | ⚠️ hardest facts |
-| 3.10 | `times-mixed` | Full table review | |
-| 3.11 | `mult-by-10-100` | Shifting places | |
-| 3.12 | `mult-2by1` | 34 × 6 | ⚠️ carrying inside multiplication |
-| 3.13 | `mult-2by2` | 34 × 26 | ⚠️ placeholder zero on row two |
-| 3.14 | `mult-words` | Word problems | |
+| 3.1 | `mult-meaning` | Repeated addition, arrays | ✅ `quick` |
+| 3.2 | `times-2` | Doubling | ✅ `quick` |
+| 3.3 | `times-10` | Pattern of zeros | ✅ `quick` |
+| 3.4 | `times-5` | Half of ten | ✅ |
+| 3.5 | `times-3` | | ✅ |
+| 3.6 | `times-4` | Double twice | ✅ |
+| 3.7 | `times-6` | | ✅ |
+| 3.8 | `times-9` | Digit-sum pattern | ✅ taught before 7/8 — the pattern makes it easy |
+| 3.9 | `times-7-8` | | ✅ ⚠️ hardest facts |
+| 3.10 | `times-mixed` | Full table review | ✅ |
+| 3.11 | `mult-by-10-100` | Shifting places | ✅ |
+| 3.12 | `mult-2by1` | 34 × 6 | ✅ ⚠️ carrying inside multiplication |
+| 3.13 | `mult-2by2` | 34 × 26 | ✅ ⚠️ placeholder zero on row two |
+| 3.14 | `mult-words` | Word problems | ✅ |
 
 ### Unit 4 — Division (11)
 
