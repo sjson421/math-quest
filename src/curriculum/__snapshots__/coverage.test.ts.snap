@@ -29,8 +29,35 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "compare-numbers": [
     "expanded-form",
   ],
+  "div-by-10-100": [
+    "div-remainder",
+  ],
+  "div-facts": [
+    "div-meaning",
+  ],
+  "div-meaning": [
+    "mult-words",
+  ],
+  "div-remainder": [
+    "div-facts",
+  ],
+  "div-words": [
+    "primes",
+  ],
   "expanded-form": [
     "place-value-hundreds",
+  ],
+  "factors": [
+    "long-div-2digit",
+  ],
+  "long-div-1digit": [
+    "div-by-10-100",
+  ],
+  "long-div-2digit": [
+    "long-div-remainder",
+  ],
+  "long-div-remainder": [
+    "long-div-1digit",
   ],
   "mult-2by1": [
     "mult-by-10-100",
@@ -47,6 +74,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "mult-words": [
     "mult-2by2",
   ],
+  "multiples": [
+    "factors",
+  ],
   "order-numbers": [
     "compare-numbers",
   ],
@@ -55,6 +85,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "place-value-tens": [
     "read-numbers",
+  ],
+  "primes": [
+    "multiples",
   ],
   "read-numbers": [],
   "round-to-10": [

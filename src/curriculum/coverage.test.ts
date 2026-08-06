@@ -20,7 +20,7 @@ import {
   unlockPrerequisites,
 } from './index'
 import { parseCurriculumDoc } from './manifest/curriculum-doc'
-import { allSkills as manifestSkills } from './manifest'
+import { AVAILABLE_CAPABILITIES, allSkills as manifestSkills } from './manifest'
 
 const doc = parseCurriculumDoc()
 
@@ -71,7 +71,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(38)
+    expect(documentedAsBuilt).toHaveLength(49)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -102,9 +102,17 @@ describe('the skills that are built', () => {
   })
 
   it('stay implemented because Stage B needs no unbuilt capability', () => {
+    // Stage B declared nothing at all until Unit 4 landed. What this case was
+    // really protecting is not the absence of a requirement but that every
+    // requirement is met, so it asks that directly — a stage naming an unbuilt
+    // capability would send all 44 of its skills back to `planned`.
     const stage = manifestIndex.get('add-facts')?.stage
+    const unbuilt = (stage?.requires ?? []).filter(
+      (capability) => !AVAILABLE_CAPABILITIES.has(capability),
+    )
 
-    expect(stage?.requires).toBeUndefined()
+    expect(stage?.requires).toEqual(['choice-input'])
+    expect(unbuilt).toEqual([])
     expect(documentedAsBuilt.every((id) => skillState(id) === 'implemented')).toBe(true)
   })
 
@@ -150,9 +158,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 163 skills out of the skill tree entirely', () => {
+  it('leaves the other 152 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(38)
+    expect(offered).toHaveLength(49)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -173,15 +181,17 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['read-numbers', 'unit-0', 'stage-a'])
     expect(located).toContainEqual(['sub-facts', 'unit-2', 'stage-b'])
     expect(located).toContainEqual(['mult-meaning', 'unit-3', 'stage-b'])
+    expect(located).toContainEqual(['div-meaning', 'unit-4', 'stage-b'])
   })
 
-  it('shows the four built units, and no stage or unit that has nothing to play', () => {
+  it('shows the five built units, and no stage or unit that has nothing to play', () => {
     expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b'])
     expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
       'unit-0',
       'unit-1',
       'unit-2',
       'unit-3',
+      'unit-4',
     ])
   })
 })

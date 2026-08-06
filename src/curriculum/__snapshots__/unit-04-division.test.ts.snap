@@ -1,0 +1,3496 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: div-by-10-100 > matches the wording recorded when the skill landed 1`] = `
+"--- div-by-10-100 · seed 1 · difficulty 1
+prompt   What is the quotient?
+display  inline "80 ÷ 10"
+answer   exact 8/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 80.
+step 2   Shift its digits 1 place right.   [80 → 8]
+step 3   So 80 ÷ 10 = 8.
+miss     shifted-too-few = 80   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 800   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 12345 · difficulty 1
+prompt   What is the quotient?
+display  inline "120 ÷ 10"
+answer   exact 12/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 120.
+step 2   Shift its digits 1 place right.   [120 → 12]
+step 3   So 120 ÷ 10 = 12.
+miss     shifted-too-few = 120   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 1200   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 67890 · difficulty 1
+prompt   What is the quotient?
+display  inline "60 ÷ 10"
+answer   exact 6/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 60.
+step 2   Shift its digits 1 place right.   [60 → 6]
+step 3   So 60 ÷ 10 = 6.
+miss     shifted-too-few = 60   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 600   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 424242 · difficulty 1
+prompt   What is the quotient?
+display  inline "30 ÷ 10"
+answer   exact 3/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 30.
+step 2   Shift its digits 1 place right.   [30 → 3]
+step 3   So 30 ÷ 10 = 3.
+miss     shifted-too-few = 30   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 300   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 987654321 · difficulty 1
+prompt   What is the quotient?
+display  inline "120 ÷ 10"
+answer   exact 12/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 120.
+step 2   Shift its digits 1 place right.   [120 → 12]
+step 3   So 120 ÷ 10 = 12.
+miss     shifted-too-few = 120   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 1200   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 1 · difficulty 2
+prompt   What is the quotient?
+display  inline "180 ÷ 10"
+answer   exact 18/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 180.
+step 2   Shift its digits 1 place right.   [180 → 18]
+step 3   So 180 ÷ 10 = 18.
+miss     shifted-too-few = 180   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 1800   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 12345 · difficulty 2
+prompt   What is the quotient?
+display  inline "250 ÷ 10"
+answer   exact 25/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 250.
+step 2   Shift its digits 1 place right.   [250 → 25]
+step 3   So 250 ÷ 10 = 25.
+miss     shifted-too-few = 250   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 2500   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 67890 · difficulty 2
+prompt   What is the quotient?
+display  inline "130 ÷ 10"
+answer   exact 13/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 130.
+step 2   Shift its digits 1 place right.   [130 → 13]
+step 3   So 130 ÷ 10 = 13.
+miss     shifted-too-few = 130   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 1300   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 424242 · difficulty 2
+prompt   What is the quotient?
+display  inline "70 ÷ 10"
+answer   exact 7/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 70.
+step 2   Shift its digits 1 place right.   [70 → 7]
+step 3   So 70 ÷ 10 = 7.
+miss     shifted-too-few = 70   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 700   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 987654321 · difficulty 2
+prompt   What is the quotient?
+display  inline "240 ÷ 10"
+answer   exact 24/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 240.
+step 2   Shift its digits 1 place right.   [240 → 24]
+step 3   So 240 ÷ 10 = 24.
+miss     shifted-too-few = 240   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 2400   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 1 · difficulty 3
+prompt   What is the quotient?
+display  inline "320 ÷ 10"
+answer   exact 32/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 320.
+step 2   Shift its digits 1 place right.   [320 → 32]
+step 3   So 320 ÷ 10 = 32.
+miss     shifted-too-few = 320   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 3200   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 12345 · difficulty 3
+prompt   What is the quotient?
+display  inline "450 ÷ 10"
+answer   exact 45/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 450.
+step 2   Shift its digits 1 place right.   [450 → 45]
+step 3   So 450 ÷ 10 = 45.
+miss     shifted-too-few = 450   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 4500   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 67890 · difficulty 3
+prompt   What is the quotient?
+display  inline "2400 ÷ 100"
+answer   exact 24/1
+input    keypad
+hint     Shift every digit 2 places right.
+step 1   Start with 2400.
+step 2   Shift its digits 2 places right.   [2400 → 24]
+step 3   So 2400 ÷ 100 = 24.
+miss     shifted-too-few = 240   That shifts one place too few. Dividing by 100 shifts 2 places.
+miss     shifted-wrong-way = 240000   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 424242 · difficulty 3
+prompt   What is the quotient?
+display  inline "140 ÷ 10"
+answer   exact 14/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 140.
+step 2   Shift its digits 1 place right.   [140 → 14]
+step 3   So 140 ÷ 10 = 14.
+miss     shifted-too-few = 140   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 1400   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 987654321 · difficulty 3
+prompt   What is the quotient?
+display  inline "440 ÷ 10"
+answer   exact 44/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 440.
+step 2   Shift its digits 1 place right.   [440 → 44]
+step 3   So 440 ÷ 10 = 44.
+miss     shifted-too-few = 440   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 4400   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 1 · difficulty 4
+prompt   What is the quotient?
+display  inline "510 ÷ 10"
+answer   exact 51/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 510.
+step 2   Shift its digits 1 place right.   [510 → 51]
+step 3   So 510 ÷ 10 = 51.
+miss     shifted-too-few = 510   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 5100   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 12345 · difficulty 4
+prompt   What is the quotient?
+display  inline "690 ÷ 10"
+answer   exact 69/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 690.
+step 2   Shift its digits 1 place right.   [690 → 69]
+step 3   So 690 ÷ 10 = 69.
+miss     shifted-too-few = 690   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 6900   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 67890 · difficulty 4
+prompt   What is the quotient?
+display  inline "4000 ÷ 100"
+answer   exact 40/1
+input    keypad
+hint     Shift every digit 2 places right.
+step 1   Start with 4000.
+step 2   Shift its digits 2 places right.   [4000 → 40]
+step 3   So 4000 ÷ 100 = 40.
+miss     shifted-too-few = 400   That shifts one place too few. Dividing by 100 shifts 2 places.
+miss     shifted-wrong-way = 400000   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 424242 · difficulty 4
+prompt   What is the quotient?
+display  inline "260 ÷ 10"
+answer   exact 26/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 260.
+step 2   Shift its digits 1 place right.   [260 → 26]
+step 3   So 260 ÷ 10 = 26.
+miss     shifted-too-few = 260   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 2600   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 987654321 · difficulty 4
+prompt   What is the quotient?
+display  inline "680 ÷ 10"
+answer   exact 68/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 680.
+step 2   Shift its digits 1 place right.   [680 → 68]
+step 3   So 680 ÷ 10 = 68.
+miss     shifted-too-few = 680   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 6800   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 1 · difficulty 5
+prompt   What is the quotient?
+display  inline "730 ÷ 10"
+answer   exact 73/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 730.
+step 2   Shift its digits 1 place right.   [730 → 73]
+step 3   So 730 ÷ 10 = 73.
+miss     shifted-too-few = 730   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 7300   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 12345 · difficulty 5
+prompt   What is the quotient?
+display  inline "980 ÷ 10"
+answer   exact 98/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 980.
+step 2   Shift its digits 1 place right.   [980 → 98]
+step 3   So 980 ÷ 10 = 98.
+miss     shifted-too-few = 980   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 9800   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 67890 · difficulty 5
+prompt   What is the quotient?
+display  inline "5700 ÷ 100"
+answer   exact 57/1
+input    keypad
+hint     Shift every digit 2 places right.
+step 1   Start with 5700.
+step 2   Shift its digits 2 places right.   [5700 → 57]
+step 3   So 5700 ÷ 100 = 57.
+miss     shifted-too-few = 570   That shifts one place too few. Dividing by 100 shifts 2 places.
+miss     shifted-wrong-way = 570000   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 424242 · difficulty 5
+prompt   What is the quotient?
+display  inline "390 ÷ 10"
+answer   exact 39/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 390.
+step 2   Shift its digits 1 place right.   [390 → 39]
+step 3   So 390 ÷ 10 = 39.
+miss     shifted-too-few = 390   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 3900   That shifts left, which makes it larger. Dividing shifts right.
+
+--- div-by-10-100 · seed 987654321 · difficulty 5
+prompt   What is the quotient?
+display  inline "960 ÷ 10"
+answer   exact 96/1
+input    keypad
+hint     Shift every digit 1 place right.
+step 1   Start with 960.
+step 2   Shift its digits 1 place right.   [960 → 96]
+step 3   So 960 ÷ 10 = 96.
+miss     shifted-too-few = 960   That shifts one place too few. Dividing by 10 shifts 1 place.
+miss     shifted-wrong-way = 9600   That shifts left, which makes it larger. Dividing shifts right."
+`;
+
+exports[`recorded output: div-facts > matches the wording recorded when the skill landed 1`] = `
+"--- div-facts · seed 1 · difficulty 1
+prompt   What is the quotient?
+display  inline "6 ÷ 2"
+answer   exact 3/1
+input    keypad
+hint     Ask what times 2 makes 6.
+step 1   Use the 2 times table backwards.
+step 2   Find what times 2 makes 6.   [2 × 3 = 6]
+step 3   So 6 ÷ 2 = 3.
+miss     multiplied-instead = 12   That multiplies. This asks how many 2s fit inside 6.
+miss     one-each-low = 2   That leaves one over in each group. Share one more.
+miss     one-each-high = 4   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 12345 · difficulty 1
+prompt   What is the quotient?
+display  inline "16 ÷ 4"
+answer   exact 4/1
+input    keypad
+hint     Ask what times 4 makes 16.
+step 1   Use the 4 times table backwards.
+step 2   Find what times 4 makes 16.   [4 × 4 = 16]
+step 3   So 16 ÷ 4 = 4.
+miss     multiplied-instead = 64   That multiplies. This asks how many 4s fit inside 16.
+miss     one-each-low = 3   That leaves one over in each group. Share one more.
+miss     one-each-high = 5   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 67890 · difficulty 1
+prompt   What is the quotient?
+display  inline "21 ÷ 7"
+answer   exact 3/1
+input    keypad
+hint     Ask what times 7 makes 21.
+step 1   Use the 7 times table backwards.
+step 2   Find what times 7 makes 21.   [7 × 3 = 21]
+step 3   So 21 ÷ 7 = 3.
+miss     multiplied-instead = 147   That multiplies. This asks how many 7s fit inside 21.
+miss     one-each-low = 2   That leaves one over in each group. Share one more.
+miss     one-each-high = 4   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 424242 · difficulty 1
+prompt   What is the quotient?
+display  inline "8 ÷ 4"
+answer   exact 2/1
+input    keypad
+hint     Ask what times 4 makes 8.
+step 1   Use the 4 times table backwards.
+step 2   Find what times 4 makes 8.   [4 × 2 = 8]
+step 3   So 8 ÷ 4 = 2.
+miss     multiplied-instead = 32   That multiplies. This asks how many 4s fit inside 8.
+miss     one-each-low = 1   That leaves one over in each group. Share one more.
+miss     one-each-high = 3   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 987654321 · difficulty 1
+prompt   What is the quotient?
+display  inline "12 ÷ 3"
+answer   exact 4/1
+input    keypad
+hint     Ask what times 3 makes 12.
+step 1   Use the 3 times table backwards.
+step 2   Find what times 3 makes 12.   [3 × 4 = 12]
+step 3   So 12 ÷ 3 = 4.
+miss     multiplied-instead = 36   That multiplies. This asks how many 3s fit inside 12.
+miss     one-each-low = 3   That leaves one over in each group. Share one more.
+miss     one-each-high = 5   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 1 · difficulty 2
+prompt   What is the quotient?
+display  inline "10 ÷ 2"
+answer   exact 5/1
+input    keypad
+hint     Ask what times 2 makes 10.
+step 1   Use the 2 times table backwards.
+step 2   Find what times 2 makes 10.   [2 × 5 = 10]
+step 3   So 10 ÷ 2 = 5.
+miss     multiplied-instead = 20   That multiplies. This asks how many 2s fit inside 10.
+miss     one-each-low = 4   That leaves one over in each group. Share one more.
+miss     one-each-high = 6   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 12345 · difficulty 2
+prompt   What is the quotient?
+display  inline "24 ÷ 4"
+answer   exact 6/1
+input    keypad
+hint     Ask what times 4 makes 24.
+step 1   Use the 4 times table backwards.
+step 2   Find what times 4 makes 24.   [4 × 6 = 24]
+step 3   So 24 ÷ 4 = 6.
+miss     multiplied-instead = 96   That multiplies. This asks how many 4s fit inside 24.
+miss     one-each-low = 5   That leaves one over in each group. Share one more.
+miss     one-each-high = 7   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 67890 · difficulty 2
+prompt   What is the quotient?
+display  inline "21 ÷ 7"
+answer   exact 3/1
+input    keypad
+hint     Ask what times 7 makes 21.
+step 1   Use the 7 times table backwards.
+step 2   Find what times 7 makes 21.   [7 × 3 = 21]
+step 3   So 21 ÷ 7 = 3.
+miss     multiplied-instead = 147   That multiplies. This asks how many 7s fit inside 21.
+miss     one-each-low = 2   That leaves one over in each group. Share one more.
+miss     one-each-high = 4   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 424242 · difficulty 2
+prompt   What is the quotient?
+display  inline "8 ÷ 4"
+answer   exact 2/1
+input    keypad
+hint     Ask what times 4 makes 8.
+step 1   Use the 4 times table backwards.
+step 2   Find what times 4 makes 8.   [4 × 2 = 8]
+step 3   So 8 ÷ 4 = 2.
+miss     multiplied-instead = 32   That multiplies. This asks how many 4s fit inside 8.
+miss     one-each-low = 1   That leaves one over in each group. Share one more.
+miss     one-each-high = 3   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 987654321 · difficulty 2
+prompt   What is the quotient?
+display  inline "18 ÷ 3"
+answer   exact 6/1
+input    keypad
+hint     Ask what times 3 makes 18.
+step 1   Use the 3 times table backwards.
+step 2   Find what times 3 makes 18.   [3 × 6 = 18]
+step 3   So 18 ÷ 3 = 6.
+miss     multiplied-instead = 54   That multiplies. This asks how many 3s fit inside 18.
+miss     one-each-low = 5   That leaves one over in each group. Share one more.
+miss     one-each-high = 7   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 1 · difficulty 3
+prompt   What is the quotient?
+display  inline "12 ÷ 2"
+answer   exact 6/1
+input    keypad
+hint     Ask what times 2 makes 12.
+step 1   Use the 2 times table backwards.
+step 2   Find what times 2 makes 12.   [2 × 6 = 12]
+step 3   So 12 ÷ 2 = 6.
+miss     multiplied-instead = 24   That multiplies. This asks how many 2s fit inside 12.
+miss     one-each-low = 5   That leaves one over in each group. Share one more.
+miss     one-each-high = 7   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 12345 · difficulty 3
+prompt   What is the quotient?
+display  inline "32 ÷ 4"
+answer   exact 8/1
+input    keypad
+hint     Ask what times 4 makes 32.
+step 1   Use the 4 times table backwards.
+step 2   Find what times 4 makes 32.   [4 × 8 = 32]
+step 3   So 32 ÷ 4 = 8.
+miss     multiplied-instead = 128   That multiplies. This asks how many 4s fit inside 32.
+miss     one-each-low = 7   That leaves one over in each group. Share one more.
+miss     one-each-high = 9   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 67890 · difficulty 3
+prompt   What is the quotient?
+display  inline "28 ÷ 7"
+answer   exact 4/1
+input    keypad
+hint     Ask what times 7 makes 28.
+step 1   Use the 7 times table backwards.
+step 2   Find what times 7 makes 28.   [7 × 4 = 28]
+step 3   So 28 ÷ 7 = 4.
+miss     multiplied-instead = 196   That multiplies. This asks how many 7s fit inside 28.
+miss     one-each-low = 3   That leaves one over in each group. Share one more.
+miss     one-each-high = 5   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 424242 · difficulty 3
+prompt   What is the quotient?
+display  inline "8 ÷ 4"
+answer   exact 2/1
+input    keypad
+hint     Ask what times 4 makes 8.
+step 1   Use the 4 times table backwards.
+step 2   Find what times 4 makes 8.   [4 × 2 = 8]
+step 3   So 8 ÷ 4 = 2.
+miss     multiplied-instead = 32   That multiplies. This asks how many 4s fit inside 8.
+miss     one-each-low = 1   That leaves one over in each group. Share one more.
+miss     one-each-high = 3   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 987654321 · difficulty 3
+prompt   What is the quotient?
+display  inline "24 ÷ 3"
+answer   exact 8/1
+input    keypad
+hint     Ask what times 3 makes 24.
+step 1   Use the 3 times table backwards.
+step 2   Find what times 3 makes 24.   [3 × 8 = 24]
+step 3   So 24 ÷ 3 = 8.
+miss     multiplied-instead = 72   That multiplies. This asks how many 3s fit inside 24.
+miss     one-each-low = 7   That leaves one over in each group. Share one more.
+miss     one-each-high = 9   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 1 · difficulty 4
+prompt   What is the quotient?
+display  inline "16 ÷ 2"
+answer   exact 8/1
+input    keypad
+hint     Ask what times 2 makes 16.
+step 1   Use the 2 times table backwards.
+step 2   Find what times 2 makes 16.   [2 × 8 = 16]
+step 3   So 16 ÷ 2 = 8.
+miss     multiplied-instead = 32   That multiplies. This asks how many 2s fit inside 16.
+miss     one-each-low = 7   That leaves one over in each group. Share one more.
+miss     one-each-high = 9   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 12345 · difficulty 4
+prompt   What is the quotient?
+display  inline "40 ÷ 4"
+answer   exact 10/1
+input    keypad
+hint     Ask what times 4 makes 40.
+step 1   Use the 4 times table backwards.
+step 2   Find what times 4 makes 40.   [4 × 10 = 40]
+step 3   So 40 ÷ 4 = 10.
+miss     multiplied-instead = 160   That multiplies. This asks how many 4s fit inside 40.
+miss     one-each-low = 9   That leaves one over in each group. Share one more.
+miss     one-each-high = 11   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 67890 · difficulty 4
+prompt   What is the quotient?
+display  inline "42 ÷ 7"
+answer   exact 6/1
+input    keypad
+hint     Ask what times 7 makes 42.
+step 1   Use the 7 times table backwards.
+step 2   Find what times 7 makes 42.   [7 × 6 = 42]
+step 3   So 42 ÷ 7 = 6.
+miss     multiplied-instead = 294   That multiplies. This asks how many 7s fit inside 42.
+miss     one-each-low = 5   That leaves one over in each group. Share one more.
+miss     one-each-high = 7   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 424242 · difficulty 4
+prompt   What is the quotient?
+display  inline "16 ÷ 4"
+answer   exact 4/1
+input    keypad
+hint     Ask what times 4 makes 16.
+step 1   Use the 4 times table backwards.
+step 2   Find what times 4 makes 16.   [4 × 4 = 16]
+step 3   So 16 ÷ 4 = 4.
+miss     multiplied-instead = 64   That multiplies. This asks how many 4s fit inside 16.
+miss     one-each-low = 3   That leaves one over in each group. Share one more.
+miss     one-each-high = 5   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 987654321 · difficulty 4
+prompt   What is the quotient?
+display  inline "30 ÷ 3"
+answer   exact 10/1
+input    keypad
+hint     Ask what times 3 makes 30.
+step 1   Use the 3 times table backwards.
+step 2   Find what times 3 makes 30.   [3 × 10 = 30]
+step 3   So 30 ÷ 3 = 10.
+miss     multiplied-instead = 90   That multiplies. This asks how many 3s fit inside 30.
+miss     one-each-low = 9   That leaves one over in each group. Share one more.
+miss     one-each-high = 11   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 1 · difficulty 5
+prompt   What is the quotient?
+display  inline "18 ÷ 2"
+answer   exact 9/1
+input    keypad
+hint     Ask what times 2 makes 18.
+step 1   Use the 2 times table backwards.
+step 2   Find what times 2 makes 18.   [2 × 9 = 18]
+step 3   So 18 ÷ 2 = 9.
+miss     multiplied-instead = 36   That multiplies. This asks how many 2s fit inside 18.
+miss     one-each-low = 8   That leaves one over in each group. Share one more.
+miss     one-each-high = 10   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 12345 · difficulty 5
+prompt   What is the quotient?
+display  inline "48 ÷ 4"
+answer   exact 12/1
+input    keypad
+hint     Ask what times 4 makes 48.
+step 1   Use the 4 times table backwards.
+step 2   Find what times 4 makes 48.   [4 × 12 = 48]
+step 3   So 48 ÷ 4 = 12.
+miss     multiplied-instead = 192   That multiplies. This asks how many 4s fit inside 48.
+miss     one-each-low = 11   That leaves one over in each group. Share one more.
+miss     one-each-high = 13   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 67890 · difficulty 5
+prompt   What is the quotient?
+display  inline "49 ÷ 7"
+answer   exact 7/1
+input    keypad
+hint     Ask what times 7 makes 49.
+step 1   Use the 7 times table backwards.
+step 2   Find what times 7 makes 49.   [7 × 7 = 49]
+step 3   So 49 ÷ 7 = 7.
+miss     multiplied-instead = 343   That multiplies. This asks how many 7s fit inside 49.
+miss     one-each-low = 6   That leaves one over in each group. Share one more.
+miss     one-each-high = 8   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 424242 · difficulty 5
+prompt   What is the quotient?
+display  inline "20 ÷ 4"
+answer   exact 5/1
+input    keypad
+hint     Ask what times 4 makes 20.
+step 1   Use the 4 times table backwards.
+step 2   Find what times 4 makes 20.   [4 × 5 = 20]
+step 3   So 20 ÷ 4 = 5.
+miss     multiplied-instead = 80   That multiplies. This asks how many 4s fit inside 20.
+miss     one-each-low = 4   That leaves one over in each group. Share one more.
+miss     one-each-high = 6   That runs the total out early. Each group gets one fewer.
+
+--- div-facts · seed 987654321 · difficulty 5
+prompt   What is the quotient?
+display  inline "36 ÷ 3"
+answer   exact 12/1
+input    keypad
+hint     Ask what times 3 makes 36.
+step 1   Use the 3 times table backwards.
+step 2   Find what times 3 makes 36.   [3 × 12 = 36]
+step 3   So 36 ÷ 3 = 12.
+miss     multiplied-instead = 108   That multiplies. This asks how many 3s fit inside 36.
+miss     one-each-low = 11   That leaves one over in each group. Share one more.
+miss     one-each-high = 13   That runs the total out early. Each group gets one fewer."
+`;
+
+exports[`recorded output: div-meaning > matches the wording recorded when the skill landed 1`] = `
+"--- div-meaning · seed 1 · difficulty 1
+prompt   6 is shared into 2 equal groups. How many in each?
+display  inline "6 ÷ 2"
+answer   exact 3/1
+input    keypad
+hint     Share 6 evenly across 2 groups.
+step 1   Split 6 into 2 equal groups.
+step 2   Count what lands in one group.   [6 ÷ 2 = 3]
+step 3   Each group gets 3.
+miss     one-each-low = 2   That leaves one over in each group. Share one more.
+miss     one-each-high = 4   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 12345 · difficulty 1
+prompt   12 is shared into 3 equal groups. How many in each?
+display  inline "12 ÷ 3"
+answer   exact 4/1
+input    keypad
+hint     Share 12 evenly across 3 groups.
+step 1   Split 12 into 3 equal groups.
+step 2   Count what lands in one group.   [12 ÷ 3 = 4]
+step 3   Each group gets 4.
+miss     one-each-low = 3   That leaves one over in each group. Share one more.
+miss     one-each-high = 5   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 67890 · difficulty 1
+prompt   12 is shared into 4 equal groups. How many in each?
+display  inline "12 ÷ 4"
+answer   exact 3/1
+input    keypad
+hint     Share 12 evenly across 4 groups.
+step 1   Split 12 into 4 equal groups.
+step 2   Count what lands in one group.   [12 ÷ 4 = 3]
+step 3   Each group gets 3.
+miss     one-each-low = 2   That leaves one over in each group. Share one more.
+miss     one-each-high = 4   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 424242 · difficulty 1
+prompt   6 is shared into 3 equal groups. How many in each?
+display  inline "6 ÷ 3"
+answer   exact 2/1
+input    keypad
+hint     Share 6 evenly across 3 groups.
+step 1   Split 6 into 3 equal groups.
+step 2   Count what lands in one group.   [6 ÷ 3 = 2]
+step 3   Each group gets 2.
+miss     one-each-low = 1   That leaves one over in each group. Share one more.
+miss     one-each-high = 3   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 987654321 · difficulty 1
+prompt   8 is shared into 2 equal groups. How many in each?
+display  inline "8 ÷ 2"
+answer   exact 4/1
+input    keypad
+hint     Share 8 evenly across 2 groups.
+step 1   Split 8 into 2 equal groups.
+step 2   Count what lands in one group.   [8 ÷ 2 = 4]
+step 3   Each group gets 4.
+miss     one-each-low = 3   That leaves one over in each group. Share one more.
+miss     one-each-high = 5   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 1 · difficulty 2
+prompt   8 is shared into 2 equal groups. How many in each?
+display  inline "8 ÷ 2"
+answer   exact 4/1
+input    keypad
+hint     Share 8 evenly across 2 groups.
+step 1   Split 8 into 2 equal groups.
+step 2   Count what lands in one group.   [8 ÷ 2 = 4]
+step 3   Each group gets 4.
+miss     one-each-low = 3   That leaves one over in each group. Share one more.
+miss     one-each-high = 5   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 12345 · difficulty 2
+prompt   15 is shared into 3 equal groups. How many in each?
+display  inline "15 ÷ 3"
+answer   exact 5/1
+input    keypad
+hint     Share 15 evenly across 3 groups.
+step 1   Split 15 into 3 equal groups.
+step 2   Count what lands in one group.   [15 ÷ 3 = 5]
+step 3   Each group gets 5.
+miss     one-each-low = 4   That leaves one over in each group. Share one more.
+miss     one-each-high = 6   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 67890 · difficulty 2
+prompt   12 is shared into 4 equal groups. How many in each?
+display  inline "12 ÷ 4"
+answer   exact 3/1
+input    keypad
+hint     Share 12 evenly across 4 groups.
+step 1   Split 12 into 4 equal groups.
+step 2   Count what lands in one group.   [12 ÷ 4 = 3]
+step 3   Each group gets 3.
+miss     one-each-low = 2   That leaves one over in each group. Share one more.
+miss     one-each-high = 4   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 424242 · difficulty 2
+prompt   6 is shared into 3 equal groups. How many in each?
+display  inline "6 ÷ 3"
+answer   exact 2/1
+input    keypad
+hint     Share 6 evenly across 3 groups.
+step 1   Split 6 into 3 equal groups.
+step 2   Count what lands in one group.   [6 ÷ 3 = 2]
+step 3   Each group gets 2.
+miss     one-each-low = 1   That leaves one over in each group. Share one more.
+miss     one-each-high = 3   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 987654321 · difficulty 2
+prompt   10 is shared into 2 equal groups. How many in each?
+display  inline "10 ÷ 2"
+answer   exact 5/1
+input    keypad
+hint     Share 10 evenly across 2 groups.
+step 1   Split 10 into 2 equal groups.
+step 2   Count what lands in one group.   [10 ÷ 2 = 5]
+step 3   Each group gets 5.
+miss     one-each-low = 4   That leaves one over in each group. Share one more.
+miss     one-each-high = 6   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 1 · difficulty 3
+prompt   10 is shared into 2 equal groups. How many in each?
+display  inline "10 ÷ 2"
+answer   exact 5/1
+input    keypad
+hint     Share 10 evenly across 2 groups.
+step 1   Split 10 into 2 equal groups.
+step 2   Count what lands in one group.   [10 ÷ 2 = 5]
+step 3   Each group gets 5.
+miss     one-each-low = 4   That leaves one over in each group. Share one more.
+miss     one-each-high = 6   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 12345 · difficulty 3
+prompt   18 is shared into 3 equal groups. How many in each?
+display  inline "18 ÷ 3"
+answer   exact 6/1
+input    keypad
+hint     Share 18 evenly across 3 groups.
+step 1   Split 18 into 3 equal groups.
+step 2   Count what lands in one group.   [18 ÷ 3 = 6]
+step 3   Each group gets 6.
+miss     one-each-low = 5   That leaves one over in each group. Share one more.
+miss     one-each-high = 7   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 67890 · difficulty 3
+prompt   12 is shared into 4 equal groups. How many in each?
+display  inline "12 ÷ 4"
+answer   exact 3/1
+input    keypad
+hint     Share 12 evenly across 4 groups.
+step 1   Split 12 into 4 equal groups.
+step 2   Count what lands in one group.   [12 ÷ 4 = 3]
+step 3   Each group gets 3.
+miss     one-each-low = 2   That leaves one over in each group. Share one more.
+miss     one-each-high = 4   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 424242 · difficulty 3
+prompt   6 is shared into 3 equal groups. How many in each?
+display  inline "6 ÷ 3"
+answer   exact 2/1
+input    keypad
+hint     Share 6 evenly across 3 groups.
+step 1   Split 6 into 3 equal groups.
+step 2   Count what lands in one group.   [6 ÷ 3 = 2]
+step 3   Each group gets 2.
+miss     one-each-low = 1   That leaves one over in each group. Share one more.
+miss     one-each-high = 3   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 987654321 · difficulty 3
+prompt   12 is shared into 2 equal groups. How many in each?
+display  inline "12 ÷ 2"
+answer   exact 6/1
+input    keypad
+hint     Share 12 evenly across 2 groups.
+step 1   Split 12 into 2 equal groups.
+step 2   Count what lands in one group.   [12 ÷ 2 = 6]
+step 3   Each group gets 6.
+miss     one-each-low = 5   That leaves one over in each group. Share one more.
+miss     one-each-high = 7   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 1 · difficulty 4
+prompt   12 is shared into 2 equal groups. How many in each?
+display  inline "12 ÷ 2"
+answer   exact 6/1
+input    keypad
+hint     Share 12 evenly across 2 groups.
+step 1   Split 12 into 2 equal groups.
+step 2   Count what lands in one group.   [12 ÷ 2 = 6]
+step 3   Each group gets 6.
+miss     one-each-low = 5   That leaves one over in each group. Share one more.
+miss     one-each-high = 7   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 12345 · difficulty 4
+prompt   24 is shared into 3 equal groups. How many in each?
+display  inline "24 ÷ 3"
+answer   exact 8/1
+input    keypad
+hint     Share 24 evenly across 3 groups.
+step 1   Split 24 into 3 equal groups.
+step 2   Count what lands in one group.   [24 ÷ 3 = 8]
+step 3   Each group gets 8.
+miss     one-each-low = 7   That leaves one over in each group. Share one more.
+miss     one-each-high = 9   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 67890 · difficulty 4
+prompt   16 is shared into 4 equal groups. How many in each?
+display  inline "16 ÷ 4"
+answer   exact 4/1
+input    keypad
+hint     Share 16 evenly across 4 groups.
+step 1   Split 16 into 4 equal groups.
+step 2   Count what lands in one group.   [16 ÷ 4 = 4]
+step 3   Each group gets 4.
+miss     one-each-low = 3   That leaves one over in each group. Share one more.
+miss     one-each-high = 5   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 424242 · difficulty 4
+prompt   6 is shared into 3 equal groups. How many in each?
+display  inline "6 ÷ 3"
+answer   exact 2/1
+input    keypad
+hint     Share 6 evenly across 3 groups.
+step 1   Split 6 into 3 equal groups.
+step 2   Count what lands in one group.   [6 ÷ 3 = 2]
+step 3   Each group gets 2.
+miss     one-each-low = 1   That leaves one over in each group. Share one more.
+miss     one-each-high = 3   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 987654321 · difficulty 4
+prompt   16 is shared into 2 equal groups. How many in each?
+display  inline "16 ÷ 2"
+answer   exact 8/1
+input    keypad
+hint     Share 16 evenly across 2 groups.
+step 1   Split 16 into 2 equal groups.
+step 2   Count what lands in one group.   [16 ÷ 2 = 8]
+step 3   Each group gets 8.
+miss     one-each-low = 7   That leaves one over in each group. Share one more.
+miss     one-each-high = 9   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 1 · difficulty 5
+prompt   14 is shared into 2 equal groups. How many in each?
+display  inline "14 ÷ 2"
+answer   exact 7/1
+input    keypad
+hint     Share 14 evenly across 2 groups.
+step 1   Split 14 into 2 equal groups.
+step 2   Count what lands in one group.   [14 ÷ 2 = 7]
+step 3   Each group gets 7.
+miss     one-each-low = 6   That leaves one over in each group. Share one more.
+miss     one-each-high = 8   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 12345 · difficulty 5
+prompt   30 is shared into 3 equal groups. How many in each?
+display  inline "30 ÷ 3"
+answer   exact 10/1
+input    keypad
+hint     Share 30 evenly across 3 groups.
+step 1   Split 30 into 3 equal groups.
+step 2   Count what lands in one group.   [30 ÷ 3 = 10]
+step 3   Each group gets 10.
+miss     one-each-low = 9   That leaves one over in each group. Share one more.
+miss     one-each-high = 11   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 67890 · difficulty 5
+prompt   20 is shared into 4 equal groups. How many in each?
+display  inline "20 ÷ 4"
+answer   exact 5/1
+input    keypad
+hint     Share 20 evenly across 4 groups.
+step 1   Split 20 into 4 equal groups.
+step 2   Count what lands in one group.   [20 ÷ 4 = 5]
+step 3   Each group gets 5.
+miss     one-each-low = 4   That leaves one over in each group. Share one more.
+miss     one-each-high = 6   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 424242 · difficulty 5
+prompt   9 is shared into 3 equal groups. How many in each?
+display  inline "9 ÷ 3"
+answer   exact 3/1
+input    keypad
+hint     Share 9 evenly across 3 groups.
+step 1   Split 9 into 3 equal groups.
+step 2   Count what lands in one group.   [9 ÷ 3 = 3]
+step 3   Each group gets 3.
+miss     one-each-low = 2   That leaves one over in each group. Share one more.
+miss     one-each-high = 4   That runs the total out early. Each group gets one fewer.
+
+--- div-meaning · seed 987654321 · difficulty 5
+prompt   20 is shared into 2 equal groups. How many in each?
+display  inline "20 ÷ 2"
+answer   exact 10/1
+input    keypad
+hint     Share 20 evenly across 2 groups.
+step 1   Split 20 into 2 equal groups.
+step 2   Count what lands in one group.   [20 ÷ 2 = 10]
+step 3   Each group gets 10.
+miss     one-each-low = 9   That leaves one over in each group. Share one more.
+miss     one-each-high = 11   That runs the total out early. Each group gets one fewer."
+`;
+
+exports[`recorded output: div-remainder > matches the wording recorded when the skill landed 1`] = `
+"--- div-remainder · seed 1 · difficulty 1
+prompt   What is left over?
+display  inline "14 ÷ 3"
+answer   exact 2/1
+input    keypad
+hint     Take groups of 3 away until fewer than 3 remain.
+step 1   3 fits into 14 4 times.   [3 × 4 = 12]
+step 2   Take that away from the total.   [14 − 12 = 2]
+step 3   So 2 is left over.
+miss     gave-quotient = 4   That counts whole groups of 3, not what is left after them.
+miss     counted-to-the-next-group = 1   That counts up to the next 3 instead of down from 14.
+
+--- div-remainder · seed 12345 · difficulty 1
+prompt   What is left over?
+display  inline "27 ÷ 5"
+answer   exact 2/1
+input    keypad
+hint     Take groups of 5 away until fewer than 5 remain.
+step 1   5 fits into 27 5 times.   [5 × 5 = 25]
+step 2   Take that away from the total.   [27 − 25 = 2]
+step 3   So 2 is left over.
+miss     gave-quotient = 5   That counts whole groups of 5, not what is left after them.
+miss     counted-to-the-next-group = 3   That counts up to the next 5 instead of down from 27.
+
+--- div-remainder · seed 67890 · difficulty 1
+prompt   What is left over?
+display  inline "24 ÷ 7"
+answer   exact 3/1
+input    keypad
+hint     Take groups of 7 away until fewer than 7 remain.
+step 1   7 fits into 24 3 times.   [7 × 3 = 21]
+step 2   Take that away from the total.   [24 − 21 = 3]
+step 3   So 3 is left over.
+miss     counted-to-the-next-group = 4   That counts up to the next 7 instead of down from 24.
+
+--- div-remainder · seed 424242 · difficulty 1
+prompt   What is left over?
+display  inline "9 ÷ 4"
+answer   exact 1/1
+input    keypad
+hint     Take groups of 4 away until fewer than 4 remain.
+step 1   4 fits into 9 2 times.   [4 × 2 = 8]
+step 2   Take that away from the total.   [9 − 8 = 1]
+step 3   So 1 is left over.
+miss     gave-quotient = 2   That counts whole groups of 4, not what is left after them.
+miss     counted-to-the-next-group = 3   That counts up to the next 4 instead of down from 9.
+
+--- div-remainder · seed 987654321 · difficulty 1
+prompt   What is left over?
+display  inline "16 ÷ 3"
+answer   exact 1/1
+input    keypad
+hint     Take groups of 3 away until fewer than 3 remain.
+step 1   3 fits into 16 5 times.   [3 × 5 = 15]
+step 2   Take that away from the total.   [16 − 15 = 1]
+step 3   So 1 is left over.
+miss     gave-quotient = 5   That counts whole groups of 3, not what is left after them.
+miss     counted-to-the-next-group = 2   That counts up to the next 3 instead of down from 16.
+
+--- div-remainder · seed 1 · difficulty 2
+prompt   What is left over?
+display  inline "20 ÷ 3"
+answer   exact 2/1
+input    keypad
+hint     Take groups of 3 away until fewer than 3 remain.
+step 1   3 fits into 20 6 times.   [3 × 6 = 18]
+step 2   Take that away from the total.   [20 − 18 = 2]
+step 3   So 2 is left over.
+miss     gave-quotient = 6   That counts whole groups of 3, not what is left after them.
+miss     counted-to-the-next-group = 1   That counts up to the next 3 instead of down from 20.
+
+--- div-remainder · seed 12345 · difficulty 2
+prompt   What is left over?
+display  inline "42 ÷ 5"
+answer   exact 2/1
+input    keypad
+hint     Take groups of 5 away until fewer than 5 remain.
+step 1   5 fits into 42 8 times.   [5 × 8 = 40]
+step 2   Take that away from the total.   [42 − 40 = 2]
+step 3   So 2 is left over.
+miss     gave-quotient = 8   That counts whole groups of 5, not what is left after them.
+miss     counted-to-the-next-group = 3   That counts up to the next 5 instead of down from 42.
+
+--- div-remainder · seed 67890 · difficulty 2
+prompt   What is left over?
+display  inline "38 ÷ 7"
+answer   exact 3/1
+input    keypad
+hint     Take groups of 7 away until fewer than 7 remain.
+step 1   7 fits into 38 5 times.   [7 × 5 = 35]
+step 2   Take that away from the total.   [38 − 35 = 3]
+step 3   So 3 is left over.
+miss     gave-quotient = 5   That counts whole groups of 7, not what is left after them.
+miss     counted-to-the-next-group = 4   That counts up to the next 7 instead of down from 38.
+
+--- div-remainder · seed 424242 · difficulty 2
+prompt   What is left over?
+display  inline "13 ÷ 4"
+answer   exact 1/1
+input    keypad
+hint     Take groups of 4 away until fewer than 4 remain.
+step 1   4 fits into 13 3 times.   [4 × 3 = 12]
+step 2   Take that away from the total.   [13 − 12 = 1]
+step 3   So 1 is left over.
+miss     gave-quotient = 3   That counts whole groups of 4, not what is left after them.
+
+--- div-remainder · seed 987654321 · difficulty 2
+prompt   What is left over?
+display  inline "25 ÷ 3"
+answer   exact 1/1
+input    keypad
+hint     Take groups of 3 away until fewer than 3 remain.
+step 1   3 fits into 25 8 times.   [3 × 8 = 24]
+step 2   Take that away from the total.   [25 − 24 = 1]
+step 3   So 1 is left over.
+miss     gave-quotient = 8   That counts whole groups of 3, not what is left after them.
+miss     counted-to-the-next-group = 2   That counts up to the next 3 instead of down from 25.
+
+--- div-remainder · seed 1 · difficulty 3
+prompt   What is left over?
+display  inline "29 ÷ 3"
+answer   exact 2/1
+input    keypad
+hint     Take groups of 3 away until fewer than 3 remain.
+step 1   3 fits into 29 9 times.   [3 × 9 = 27]
+step 2   Take that away from the total.   [29 − 27 = 2]
+step 3   So 2 is left over.
+miss     gave-quotient = 9   That counts whole groups of 3, not what is left after them.
+miss     counted-to-the-next-group = 1   That counts up to the next 3 instead of down from 29.
+
+--- div-remainder · seed 12345 · difficulty 3
+prompt   What is left over?
+display  inline "62 ÷ 5"
+answer   exact 2/1
+input    keypad
+hint     Take groups of 5 away until fewer than 5 remain.
+step 1   5 fits into 62 12 times.   [5 × 12 = 60]
+step 2   Take that away from the total.   [62 − 60 = 2]
+step 3   So 2 is left over.
+miss     gave-quotient = 12   That counts whole groups of 5, not what is left after them.
+miss     counted-to-the-next-group = 3   That counts up to the next 5 instead of down from 62.
+
+--- div-remainder · seed 67890 · difficulty 3
+prompt   What is left over?
+display  inline "52 ÷ 7"
+answer   exact 3/1
+input    keypad
+hint     Take groups of 7 away until fewer than 7 remain.
+step 1   7 fits into 52 7 times.   [7 × 7 = 49]
+step 2   Take that away from the total.   [52 − 49 = 3]
+step 3   So 3 is left over.
+miss     gave-quotient = 7   That counts whole groups of 7, not what is left after them.
+miss     counted-to-the-next-group = 4   That counts up to the next 7 instead of down from 52.
+
+--- div-remainder · seed 424242 · difficulty 3
+prompt   What is left over?
+display  inline "21 ÷ 4"
+answer   exact 1/1
+input    keypad
+hint     Take groups of 4 away until fewer than 4 remain.
+step 1   4 fits into 21 5 times.   [4 × 5 = 20]
+step 2   Take that away from the total.   [21 − 20 = 1]
+step 3   So 1 is left over.
+miss     gave-quotient = 5   That counts whole groups of 4, not what is left after them.
+miss     counted-to-the-next-group = 3   That counts up to the next 4 instead of down from 21.
+
+--- div-remainder · seed 987654321 · difficulty 3
+prompt   What is left over?
+display  inline "37 ÷ 3"
+answer   exact 1/1
+input    keypad
+hint     Take groups of 3 away until fewer than 3 remain.
+step 1   3 fits into 37 12 times.   [3 × 12 = 36]
+step 2   Take that away from the total.   [37 − 36 = 1]
+step 3   So 1 is left over.
+miss     gave-quotient = 12   That counts whole groups of 3, not what is left after them.
+miss     counted-to-the-next-group = 2   That counts up to the next 3 instead of down from 37.
+
+--- div-remainder · seed 1 · difficulty 4
+prompt   What is left over?
+display  inline "38 ÷ 3"
+answer   exact 2/1
+input    keypad
+hint     Take groups of 3 away until fewer than 3 remain.
+step 1   3 fits into 38 12 times.   [3 × 12 = 36]
+step 2   Take that away from the total.   [38 − 36 = 2]
+step 3   So 2 is left over.
+miss     gave-quotient = 12   That counts whole groups of 3, not what is left after them.
+miss     counted-to-the-next-group = 1   That counts up to the next 3 instead of down from 38.
+
+--- div-remainder · seed 12345 · difficulty 4
+prompt   What is left over?
+display  inline "82 ÷ 5"
+answer   exact 2/1
+input    keypad
+hint     Take groups of 5 away until fewer than 5 remain.
+step 1   5 fits into 82 16 times.   [5 × 16 = 80]
+step 2   Take that away from the total.   [82 − 80 = 2]
+step 3   So 2 is left over.
+miss     gave-quotient = 16   That counts whole groups of 5, not what is left after them.
+miss     counted-to-the-next-group = 3   That counts up to the next 5 instead of down from 82.
+
+--- div-remainder · seed 67890 · difficulty 4
+prompt   What is left over?
+display  inline "66 ÷ 7"
+answer   exact 3/1
+input    keypad
+hint     Take groups of 7 away until fewer than 7 remain.
+step 1   7 fits into 66 9 times.   [7 × 9 = 63]
+step 2   Take that away from the total.   [66 − 63 = 3]
+step 3   So 3 is left over.
+miss     gave-quotient = 9   That counts whole groups of 7, not what is left after them.
+miss     counted-to-the-next-group = 4   That counts up to the next 7 instead of down from 66.
+
+--- div-remainder · seed 424242 · difficulty 4
+prompt   What is left over?
+display  inline "25 ÷ 4"
+answer   exact 1/1
+input    keypad
+hint     Take groups of 4 away until fewer than 4 remain.
+step 1   4 fits into 25 6 times.   [4 × 6 = 24]
+step 2   Take that away from the total.   [25 − 24 = 1]
+step 3   So 1 is left over.
+miss     gave-quotient = 6   That counts whole groups of 4, not what is left after them.
+miss     counted-to-the-next-group = 3   That counts up to the next 4 instead of down from 25.
+
+--- div-remainder · seed 987654321 · difficulty 4
+prompt   What is left over?
+display  inline "49 ÷ 3"
+answer   exact 1/1
+input    keypad
+hint     Take groups of 3 away until fewer than 3 remain.
+step 1   3 fits into 49 16 times.   [3 × 16 = 48]
+step 2   Take that away from the total.   [49 − 48 = 1]
+step 3   So 1 is left over.
+miss     gave-quotient = 16   That counts whole groups of 3, not what is left after them.
+miss     counted-to-the-next-group = 2   That counts up to the next 3 instead of down from 49.
+
+--- div-remainder · seed 1 · difficulty 5
+prompt   What is left over?
+display  inline "47 ÷ 3"
+answer   exact 2/1
+input    keypad
+hint     Take groups of 3 away until fewer than 3 remain.
+step 1   3 fits into 47 15 times.   [3 × 15 = 45]
+step 2   Take that away from the total.   [47 − 45 = 2]
+step 3   So 2 is left over.
+miss     gave-quotient = 15   That counts whole groups of 3, not what is left after them.
+miss     counted-to-the-next-group = 1   That counts up to the next 3 instead of down from 47.
+
+--- div-remainder · seed 12345 · difficulty 5
+prompt   What is left over?
+display  inline "102 ÷ 5"
+answer   exact 2/1
+input    keypad
+hint     Take groups of 5 away until fewer than 5 remain.
+step 1   5 fits into 102 20 times.   [5 × 20 = 100]
+step 2   Take that away from the total.   [102 − 100 = 2]
+step 3   So 2 is left over.
+miss     gave-quotient = 20   That counts whole groups of 5, not what is left after them.
+miss     counted-to-the-next-group = 3   That counts up to the next 5 instead of down from 102.
+
+--- div-remainder · seed 67890 · difficulty 5
+prompt   What is left over?
+display  inline "80 ÷ 7"
+answer   exact 3/1
+input    keypad
+hint     Take groups of 7 away until fewer than 7 remain.
+step 1   7 fits into 80 11 times.   [7 × 11 = 77]
+step 2   Take that away from the total.   [80 − 77 = 3]
+step 3   So 3 is left over.
+miss     gave-quotient = 11   That counts whole groups of 7, not what is left after them.
+miss     counted-to-the-next-group = 4   That counts up to the next 7 instead of down from 80.
+
+--- div-remainder · seed 424242 · difficulty 5
+prompt   What is left over?
+display  inline "29 ÷ 4"
+answer   exact 1/1
+input    keypad
+hint     Take groups of 4 away until fewer than 4 remain.
+step 1   4 fits into 29 7 times.   [4 × 7 = 28]
+step 2   Take that away from the total.   [29 − 28 = 1]
+step 3   So 1 is left over.
+miss     gave-quotient = 7   That counts whole groups of 4, not what is left after them.
+miss     counted-to-the-next-group = 3   That counts up to the next 4 instead of down from 29.
+
+--- div-remainder · seed 987654321 · difficulty 5
+prompt   What is left over?
+display  inline "61 ÷ 3"
+answer   exact 1/1
+input    keypad
+hint     Take groups of 3 away until fewer than 3 remain.
+step 1   3 fits into 61 20 times.   [3 × 20 = 60]
+step 2   Take that away from the total.   [61 − 60 = 1]
+step 3   So 1 is left over.
+miss     gave-quotient = 20   That counts whole groups of 3, not what is left after them.
+miss     counted-to-the-next-group = 2   That counts up to the next 3 instead of down from 61."
+`;
+
+exports[`recorded output: div-words > matches the wording recorded when the skill landed 1`] = `
+"--- div-words · seed 1 · difficulty 1
+prompt   How many invoices are in each batch?
+display  story [32 ÷ 8] "An office splits 32 invoices evenly into 8 batches. Another 2 batches are archived. How many invoices are in each batch?"
+answer   exact 4/1
+input    keypad
+hint     Divide the 32 invoices into 8 equal batches.
+step 1   Find the total and how many equal groups.   [32 split into 8]
+step 2   Divide the total by the groups.   [32 ÷ 8 = 4]
+step 3   The 2 archived batches are not being split.
+miss     wrong-operation = 256   That multiplies. One pile of invoices is being divided up.
+miss     distractor-pair = 16   That uses the 2 archived batches instead.
+miss     answered-part = 32   That is the full pile of 32, not one batch.
+
+--- div-words · seed 12345 · difficulty 1
+prompt   How many people attend each session?
+display  story [20 ÷ 4] "A course places 20 people evenly across 4 sessions. Another 10 sessions run next month. How many people attend each session?"
+answer   exact 5/1
+input    keypad
+hint     Divide the 20 people between this month's 4 sessions.
+step 1   Find the total and how many equal groups.   [20 split into 4]
+step 2   Divide the total by the groups.   [20 ÷ 4 = 5]
+step 3   Next month's 10 sessions are separate.
+miss     wrong-operation = 80   That multiplies. One group of people is being divided up.
+miss     distractor-pair = 2   That uses next month's 10 sessions instead.
+miss     answered-part = 20   That is everyone enrolled, not one session's 20 divided.
+
+--- div-words · seed 67890 · difficulty 1
+prompt   How many chairs go at each table?
+display  story [24 ÷ 6] "A venue sets 24 chairs evenly around 6 tables. A store room holds 3 more. How many chairs go at each table?"
+answer   exact 4/1
+input    keypad
+hint     Split the chairs evenly across the 6 tables.
+step 1   Find the total and how many equal groups.   [24 split into 6]
+step 2   Divide the total by the groups.   [24 ÷ 6 = 4]
+step 3   The 3 in the store room stay there.
+miss     wrong-operation = 144   That multiplies. The chairs are being spread out, not stacked up.
+miss     distractor-pair = 8   The 3 in storage are not tables to set.
+miss     answered-part = 24   That counts every chair. Each table takes a share of 24.
+
+--- div-words · seed 424242 · difficulty 1
+prompt   How many chairs go at each table?
+display  story [18 ÷ 6] "A venue sets 18 chairs evenly around 6 tables. A store room holds 9 more. How many chairs go at each table?"
+answer   exact 3/1
+input    keypad
+hint     Split the chairs evenly across the 6 tables.
+step 1   Find the total and how many equal groups.   [18 split into 6]
+step 2   Divide the total by the groups.   [18 ÷ 6 = 3]
+step 3   The 9 in the store room stay there.
+miss     wrong-operation = 108   That multiplies. The chairs are being spread out, not stacked up.
+miss     distractor-pair = 2   The 9 in storage are not tables to set.
+miss     answered-part = 18   That counts every chair. Each table takes a share of 18.
+
+--- div-words · seed 987654321 · difficulty 1
+prompt   How many miles were driven each day?
+display  story [24 ÷ 8] "A driver covers 24 miles evenly across 8 days. They also had 4 days off. How many miles were driven each day?"
+answer   exact 3/1
+input    keypad
+hint     Divide the total distance by the 8 driving days.
+step 1   Find the total and how many equal groups.   [24 split into 8]
+step 2   Divide the total by the groups.   [24 ÷ 8 = 3]
+step 3   No miles were driven on the 4 days off.
+miss     wrong-operation = 192   That multiplies. One total distance is being split by day.
+miss     distractor-pair = 6   The 4 days off had no driving in them.
+miss     answered-part = 24   That is the whole 24 miles, not one day of it.
+
+--- div-words · seed 1 · difficulty 2
+prompt   How many units sit on each shelf?
+display  story [12 ÷ 2] "A stockroom spreads 12 units evenly over 2 shelves. A pallet still holds 4. How many units sit on each shelf?"
+answer   exact 6/1
+input    keypad
+hint     Share the shelved units across all 2 shelves.
+step 1   Find the total and how many equal groups.   [12 split into 2]
+step 2   Divide the total by the groups.   [12 ÷ 2 = 6]
+step 3   The pallet's 4 units are not shelved yet.
+miss     wrong-operation = 24   That multiplies. The shelved stock is being divided, not repeated.
+miss     distractor-pair = 3   The pallet's 4 units are not a shelf count.
+miss     answered-part = 12   That is all 12 shelved units, not one shelf's share.
+
+--- div-words · seed 12345 · difficulty 2
+prompt   How many people attend each session?
+display  story [28 ÷ 4] "A course places 28 people evenly across 4 sessions. Another 14 sessions run next month. How many people attend each session?"
+answer   exact 7/1
+input    keypad
+hint     Divide the 28 people between this month's 4 sessions.
+step 1   Find the total and how many equal groups.   [28 split into 4]
+step 2   Divide the total by the groups.   [28 ÷ 4 = 7]
+step 3   Next month's 14 sessions are separate.
+miss     wrong-operation = 112   That multiplies. One group of people is being divided up.
+miss     distractor-pair = 2   That uses next month's 14 sessions instead.
+miss     answered-part = 28   That is everyone enrolled, not one session's 28 divided.
+
+--- div-words · seed 67890 · difficulty 2
+prompt   How many chairs go at each table?
+display  story [24 ÷ 6] "A venue sets 24 chairs evenly around 6 tables. A store room holds 3 more. How many chairs go at each table?"
+answer   exact 4/1
+input    keypad
+hint     Split the chairs evenly across the 6 tables.
+step 1   Find the total and how many equal groups.   [24 split into 6]
+step 2   Divide the total by the groups.   [24 ÷ 6 = 4]
+step 3   The 3 in the store room stay there.
+miss     wrong-operation = 144   That multiplies. The chairs are being spread out, not stacked up.
+miss     distractor-pair = 8   The 3 in storage are not tables to set.
+miss     answered-part = 24   That counts every chair. Each table takes a share of 24.
+
+--- div-words · seed 424242 · difficulty 2
+prompt   How many chairs go at each table?
+display  story [18 ÷ 6] "A venue sets 18 chairs evenly around 6 tables. A store room holds 9 more. How many chairs go at each table?"
+answer   exact 3/1
+input    keypad
+hint     Split the chairs evenly across the 6 tables.
+step 1   Find the total and how many equal groups.   [18 split into 6]
+step 2   Divide the total by the groups.   [18 ÷ 6 = 3]
+step 3   The 9 in the store room stay there.
+miss     wrong-operation = 108   That multiplies. The chairs are being spread out, not stacked up.
+miss     distractor-pair = 2   The 9 in storage are not tables to set.
+miss     answered-part = 18   That counts every chair. Each table takes a share of 18.
+
+--- div-words · seed 987654321 · difficulty 2
+prompt   How many miles were driven each day?
+display  story [24 ÷ 8] "A driver covers 24 miles evenly across 8 days. They also had 4 days off. How many miles were driven each day?"
+answer   exact 3/1
+input    keypad
+hint     Divide the total distance by the 8 driving days.
+step 1   Find the total and how many equal groups.   [24 split into 8]
+step 2   Divide the total by the groups.   [24 ÷ 8 = 3]
+step 3   No miles were driven on the 4 days off.
+miss     wrong-operation = 192   That multiplies. One total distance is being split by day.
+miss     distractor-pair = 6   The 4 days off had no driving in them.
+miss     answered-part = 24   That is the whole 24 miles, not one day of it.
+
+--- div-words · seed 1 · difficulty 3
+prompt   How many invoices are in each batch?
+display  story [56 ÷ 8] "An office splits 56 invoices evenly into 8 batches. Another 4 batches are archived. How many invoices are in each batch?"
+answer   exact 7/1
+input    keypad
+hint     Divide the 56 invoices into 8 equal batches.
+step 1   Find the total and how many equal groups.   [56 split into 8]
+step 2   Divide the total by the groups.   [56 ÷ 8 = 7]
+step 3   The 4 archived batches are not being split.
+miss     wrong-operation = 448   That multiplies. One pile of invoices is being divided up.
+miss     distractor-pair = 14   That uses the 4 archived batches instead.
+miss     answered-part = 56   That is the full pile of 56, not one batch.
+
+--- div-words · seed 12345 · difficulty 3
+prompt   How many people attend each session?
+display  story [36 ÷ 4] "A course places 36 people evenly across 4 sessions. Another 18 sessions run next month. How many people attend each session?"
+answer   exact 9/1
+input    keypad
+hint     Divide the 36 people between this month's 4 sessions.
+step 1   Find the total and how many equal groups.   [36 split into 4]
+step 2   Divide the total by the groups.   [36 ÷ 4 = 9]
+step 3   Next month's 18 sessions are separate.
+miss     wrong-operation = 144   That multiplies. One group of people is being divided up.
+miss     distractor-pair = 2   That uses next month's 18 sessions instead.
+miss     answered-part = 36   That is everyone enrolled, not one session's 36 divided.
+
+--- div-words · seed 67890 · difficulty 3
+prompt   How many chairs go at each table?
+display  story [36 ÷ 6] "A venue sets 36 chairs evenly around 6 tables. A store room holds 4 more. How many chairs go at each table?"
+answer   exact 6/1
+input    keypad
+hint     Split the chairs evenly across the 6 tables.
+step 1   Find the total and how many equal groups.   [36 split into 6]
+step 2   Divide the total by the groups.   [36 ÷ 6 = 6]
+step 3   The 4 in the store room stay there.
+miss     wrong-operation = 216   That multiplies. The chairs are being spread out, not stacked up.
+miss     distractor-pair = 9   The 4 in storage are not tables to set.
+miss     answered-part = 36   That counts every chair. Each table takes a share of 36.
+
+--- div-words · seed 424242 · difficulty 3
+prompt   How many parcels go in each van?
+display  story [12 ÷ 3] "A depot loads 12 parcels equally into 3 vans. Another 6 vans are off the road. How many parcels go in each van?"
+answer   exact 4/1
+input    keypad
+hint     Share the parcels equally between the 3 loaded vans.
+step 1   Find the total and how many equal groups.   [12 split into 3]
+step 2   Divide the total by the groups.   [12 ÷ 3 = 4]
+step 3   The 6 off-road vans carry nothing.
+miss     wrong-operation = 36   That multiplies. One load is being shared out, not repeated.
+miss     distractor-pair = 2   The 6 off-road vans are not carrying parcels.
+miss     answered-part = 12   That is the whole load of 12, not one van's share.
+
+--- div-words · seed 987654321 · difficulty 3
+prompt   How many hours does each shift cover?
+display  story [18 ÷ 2] "A rota spreads 18 hours evenly over 2 shifts. A second site runs 6 shifts. How many hours does each shift cover?"
+answer   exact 9/1
+input    keypad
+hint     Divide the 18 hours between the 2 shifts.
+step 1   Find the total and how many equal groups.   [18 split into 2]
+step 2   Divide the total by the groups.   [18 ÷ 2 = 9]
+step 3   The other site's 6 shifts are not on this rota.
+miss     wrong-operation = 36   That multiplies the two. The hours are being split, not repeated.
+miss     distractor-pair = 3   That divides by the second site's 6 shifts.
+miss     answered-part = 18   That is all 18 hours, not what one shift covers.
+
+--- div-words · seed 1 · difficulty 4
+prompt   How many units sit on each shelf?
+display  story [20 ÷ 2] "A stockroom spreads 20 units evenly over 2 shelves. A pallet still holds 5. How many units sit on each shelf?"
+answer   exact 10/1
+input    keypad
+hint     Share the shelved units across all 2 shelves.
+step 1   Find the total and how many equal groups.   [20 split into 2]
+step 2   Divide the total by the groups.   [20 ÷ 2 = 10]
+step 3   The pallet's 5 units are not shelved yet.
+miss     wrong-operation = 40   That multiplies. The shelved stock is being divided, not repeated.
+miss     distractor-pair = 4   The pallet's 5 units are not a shelf count.
+miss     answered-part = 20   That is all 20 shelved units, not one shelf's share.
+
+--- div-words · seed 12345 · difficulty 4
+prompt   How many people attend each session?
+display  story [48 ÷ 4] "A course places 48 people evenly across 4 sessions. Another 16 sessions run next month. How many people attend each session?"
+answer   exact 12/1
+input    keypad
+hint     Divide the 48 people between this month's 4 sessions.
+step 1   Find the total and how many equal groups.   [48 split into 4]
+step 2   Divide the total by the groups.   [48 ÷ 4 = 12]
+step 3   Next month's 16 sessions are separate.
+miss     wrong-operation = 192   That multiplies. One group of people is being divided up.
+miss     distractor-pair = 3   That uses next month's 16 sessions instead.
+miss     answered-part = 48   That is everyone enrolled, not one session's 48 divided.
+
+--- div-words · seed 67890 · difficulty 4
+prompt   How many chairs go at each table?
+display  story [48 ÷ 6] "A venue sets 48 chairs evenly around 6 tables. A store room holds 4 more. How many chairs go at each table?"
+answer   exact 8/1
+input    keypad
+hint     Split the chairs evenly across the 6 tables.
+step 1   Find the total and how many equal groups.   [48 split into 6]
+step 2   Divide the total by the groups.   [48 ÷ 6 = 8]
+step 3   The 4 in the store room stay there.
+miss     wrong-operation = 288   That multiplies. The chairs are being spread out, not stacked up.
+miss     distractor-pair = 12   The 4 in storage are not tables to set.
+miss     answered-part = 48   That counts every chair. Each table takes a share of 48.
+
+--- div-words · seed 424242 · difficulty 4
+prompt   How many parcels go in each van?
+display  story [18 ÷ 3] "A depot loads 18 parcels equally into 3 vans. Another 9 vans are off the road. How many parcels go in each van?"
+answer   exact 6/1
+input    keypad
+hint     Share the parcels equally between the 3 loaded vans.
+step 1   Find the total and how many equal groups.   [18 split into 3]
+step 2   Divide the total by the groups.   [18 ÷ 3 = 6]
+step 3   The 9 off-road vans carry nothing.
+miss     wrong-operation = 54   That multiplies. One load is being shared out, not repeated.
+miss     distractor-pair = 2   The 9 off-road vans are not carrying parcels.
+miss     answered-part = 18   That is the whole load of 18, not one van's share.
+
+--- div-words · seed 987654321 · difficulty 4
+prompt   How many hours does each shift cover?
+display  story [24 ÷ 2] "A rota spreads 24 hours evenly over 2 shifts. A second site runs 8 shifts. How many hours does each shift cover?"
+answer   exact 12/1
+input    keypad
+hint     Divide the 24 hours between the 2 shifts.
+step 1   Find the total and how many equal groups.   [24 split into 2]
+step 2   Divide the total by the groups.   [24 ÷ 2 = 12]
+step 3   The other site's 8 shifts are not on this rota.
+miss     wrong-operation = 48   That multiplies the two. The hours are being split, not repeated.
+miss     distractor-pair = 3   That divides by the second site's 8 shifts.
+miss     answered-part = 24   That is all 24 hours, not what one shift covers.
+
+--- div-words · seed 1 · difficulty 5
+prompt   How many units sit on each shelf?
+display  story [24 ÷ 2] "A stockroom spreads 24 units evenly over 2 shelves. A pallet still holds 8. How many units sit on each shelf?"
+answer   exact 12/1
+input    keypad
+hint     Share the shelved units across all 2 shelves.
+step 1   Find the total and how many equal groups.   [24 split into 2]
+step 2   Divide the total by the groups.   [24 ÷ 2 = 12]
+step 3   The pallet's 8 units are not shelved yet.
+miss     wrong-operation = 48   That multiplies. The shelved stock is being divided, not repeated.
+miss     distractor-pair = 3   The pallet's 8 units are not a shelf count.
+miss     answered-part = 24   That is all 24 shelved units, not one shelf's share.
+
+--- div-words · seed 12345 · difficulty 5
+prompt   How many people attend each session?
+display  story [60 ÷ 4] "A course places 60 people evenly across 4 sessions. Another 20 sessions run next month. How many people attend each session?"
+answer   exact 15/1
+input    keypad
+hint     Divide the 60 people between this month's 4 sessions.
+step 1   Find the total and how many equal groups.   [60 split into 4]
+step 2   Divide the total by the groups.   [60 ÷ 4 = 15]
+step 3   Next month's 20 sessions are separate.
+miss     wrong-operation = 240   That multiplies. One group of people is being divided up.
+miss     distractor-pair = 3   That uses next month's 20 sessions instead.
+miss     answered-part = 60   That is everyone enrolled, not one session's 60 divided.
+
+--- div-words · seed 67890 · difficulty 5
+prompt   How many chairs go at each table?
+display  story [60 ÷ 6] "A venue sets 60 chairs evenly around 6 tables. A store room holds 4 more. How many chairs go at each table?"
+answer   exact 10/1
+input    keypad
+hint     Split the chairs evenly across the 6 tables.
+step 1   Find the total and how many equal groups.   [60 split into 6]
+step 2   Divide the total by the groups.   [60 ÷ 6 = 10]
+step 3   The 4 in the store room stay there.
+miss     wrong-operation = 360   That multiplies. The chairs are being spread out, not stacked up.
+miss     distractor-pair = 15   The 4 in storage are not tables to set.
+miss     answered-part = 60   That counts every chair. Each table takes a share of 60.
+
+--- div-words · seed 424242 · difficulty 5
+prompt   How many parcels go in each van?
+display  story [24 ÷ 3] "A depot loads 24 parcels equally into 3 vans. Another 6 vans are off the road. How many parcels go in each van?"
+answer   exact 8/1
+input    keypad
+hint     Share the parcels equally between the 3 loaded vans.
+step 1   Find the total and how many equal groups.   [24 split into 3]
+step 2   Divide the total by the groups.   [24 ÷ 3 = 8]
+step 3   The 6 off-road vans carry nothing.
+miss     wrong-operation = 72   That multiplies. One load is being shared out, not repeated.
+miss     distractor-pair = 4   The 6 off-road vans are not carrying parcels.
+miss     answered-part = 24   That is the whole load of 24, not one van's share.
+
+--- div-words · seed 987654321 · difficulty 5
+prompt   How many hours does each shift cover?
+display  story [30 ÷ 2] "A rota spreads 30 hours evenly over 2 shifts. A second site runs 10 shifts. How many hours does each shift cover?"
+answer   exact 15/1
+input    keypad
+hint     Divide the 30 hours between the 2 shifts.
+step 1   Find the total and how many equal groups.   [30 split into 2]
+step 2   Divide the total by the groups.   [30 ÷ 2 = 15]
+step 3   The other site's 10 shifts are not on this rota.
+miss     wrong-operation = 60   That multiplies the two. The hours are being split, not repeated.
+miss     distractor-pair = 3   That divides by the second site's 10 shifts.
+miss     answered-part = 30   That is all 30 hours, not what one shift covers."
+`;
+
+exports[`recorded output: factors > matches the wording recorded when the skill landed 1`] = `
+"--- factors · seed 1 · difficulty 1
+prompt   Choose the list of every factor.
+display  inline "12"
+answer   choice 0
+input    choice
+hint     A factor divides 12 with nothing left over.
+choice   0 = 1, 2, 3, 4, 6, 12
+choice   1 = 2, 3, 4, 6
+choice   2 = 1, 2, 3, 4, 6, 9, 12
+step 1   Try each number from 1 up to 12.
+step 2   Keep the ones dividing 12 exactly.   [1, 2, 3, 4, 6, 12]
+miss     omitted-ends = 1   1 and 12 divide 12 exactly, so both belong in the list.
+miss     included-non-factor = 2   9 does not divide 12 exactly, so it is not a factor.
+
+--- factors · seed 12345 · difficulty 1
+prompt   Choose the list of every factor.
+display  inline "30"
+answer   choice 0
+input    choice
+hint     A factor divides 30 with nothing left over.
+choice   0 = 1, 2, 3, 5, 6, 10, 15, 30
+choice   2 = 1, 2, 3, 5, 6, 10, 13, 15, 30
+choice   1 = 2, 3, 5, 6, 10, 15
+step 1   Try each number from 1 up to 30.
+step 2   Keep the ones dividing 30 exactly.   [1, 2, 3, 5, 6, 10, 15, 30]
+miss     omitted-ends = 1   1 and 30 divide 30 exactly, so both belong in the list.
+miss     included-non-factor = 2   13 does not divide 30 exactly, so it is not a factor.
+
+--- factors · seed 67890 · difficulty 1
+prompt   Choose the list of every factor.
+display  inline "18"
+answer   choice 0
+input    choice
+hint     A factor divides 18 with nothing left over.
+choice   2 = 1, 2, 3, 6, 9, 10, 18
+choice   1 = 2, 3, 6, 9
+choice   0 = 1, 2, 3, 6, 9, 18
+step 1   Try each number from 1 up to 18.
+step 2   Keep the ones dividing 18 exactly.   [1, 2, 3, 6, 9, 18]
+miss     omitted-ends = 1   1 and 18 divide 18 exactly, so both belong in the list.
+miss     included-non-factor = 2   10 does not divide 18 exactly, so it is not a factor.
+
+--- factors · seed 424242 · difficulty 1
+prompt   Choose the list of every factor.
+display  inline "24"
+answer   choice 0
+input    choice
+hint     A factor divides 24 with nothing left over.
+choice   2 = 1, 2, 3, 4, 6, 8, 12, 13, 24
+choice   0 = 1, 2, 3, 4, 6, 8, 12, 24
+choice   1 = 2, 3, 4, 6, 8, 12
+step 1   Try each number from 1 up to 24.
+step 2   Keep the ones dividing 24 exactly.   [1, 2, 3, 4, 6, 8, 12, 24]
+miss     omitted-ends = 1   1 and 24 divide 24 exactly, so both belong in the list.
+miss     included-non-factor = 2   13 does not divide 24 exactly, so it is not a factor.
+
+--- factors · seed 987654321 · difficulty 1
+prompt   Choose the list of every factor.
+display  inline "30"
+answer   choice 0
+input    choice
+hint     A factor divides 30 with nothing left over.
+choice   2 = 1, 2, 3, 5, 6, 8, 10, 15, 30
+choice   1 = 2, 3, 5, 6, 10, 15
+choice   0 = 1, 2, 3, 5, 6, 10, 15, 30
+step 1   Try each number from 1 up to 30.
+step 2   Keep the ones dividing 30 exactly.   [1, 2, 3, 5, 6, 10, 15, 30]
+miss     omitted-ends = 1   1 and 30 divide 30 exactly, so both belong in the list.
+miss     included-non-factor = 2   8 does not divide 30 exactly, so it is not a factor.
+
+--- factors · seed 1 · difficulty 2
+prompt   Choose the list of every factor.
+display  inline "12"
+answer   choice 0
+input    choice
+hint     A factor divides 12 with nothing left over.
+choice   0 = 1, 2, 3, 4, 6, 12
+choice   1 = 2, 3, 4, 6
+choice   2 = 1, 2, 3, 4, 6, 9, 12
+step 1   Try each number from 1 up to 12.
+step 2   Keep the ones dividing 12 exactly.   [1, 2, 3, 4, 6, 12]
+miss     omitted-ends = 1   1 and 12 divide 12 exactly, so both belong in the list.
+miss     included-non-factor = 2   9 does not divide 12 exactly, so it is not a factor.
+
+--- factors · seed 12345 · difficulty 2
+prompt   Choose the list of every factor.
+display  inline "48"
+answer   choice 0
+input    choice
+hint     A factor divides 48 with nothing left over.
+choice   0 = 1, 2, 3, 4, 6, 8, 12, 16, 24, 48
+choice   2 = 1, 2, 3, 4, 6, 8, 12, 16, 20, 24, 48
+choice   1 = 2, 3, 4, 6, 8, 12, 16, 24
+step 1   Try each number from 1 up to 48.
+step 2   Keep the ones dividing 48 exactly.   [1, 2, 3, 4, 6, 8, 12, 16, 24, 48]
+miss     omitted-ends = 1   1 and 48 divide 48 exactly, so both belong in the list.
+miss     included-non-factor = 2   20 does not divide 48 exactly, so it is not a factor.
+
+--- factors · seed 67890 · difficulty 2
+prompt   Choose the list of every factor.
+display  inline "12"
+answer   choice 0
+input    choice
+hint     A factor divides 12 with nothing left over.
+choice   2 = 1, 2, 3, 4, 6, 10, 12
+choice   1 = 2, 3, 4, 6
+choice   0 = 1, 2, 3, 4, 6, 12
+step 1   Try each number from 1 up to 12.
+step 2   Keep the ones dividing 12 exactly.   [1, 2, 3, 4, 6, 12]
+miss     omitted-ends = 1   1 and 12 divide 12 exactly, so both belong in the list.
+miss     included-non-factor = 2   10 does not divide 12 exactly, so it is not a factor.
+
+--- factors · seed 424242 · difficulty 2
+prompt   Choose the list of every factor.
+display  inline "20"
+answer   choice 0
+input    choice
+hint     A factor divides 20 with nothing left over.
+choice   2 = 1, 2, 4, 5, 7, 10, 20
+choice   0 = 1, 2, 4, 5, 10, 20
+choice   1 = 2, 4, 5, 10
+step 1   Try each number from 1 up to 20.
+step 2   Keep the ones dividing 20 exactly.   [1, 2, 4, 5, 10, 20]
+miss     omitted-ends = 1   1 and 20 divide 20 exactly, so both belong in the list.
+miss     included-non-factor = 2   7 does not divide 20 exactly, so it is not a factor.
+
+--- factors · seed 987654321 · difficulty 2
+prompt   Choose the list of every factor.
+display  inline "12"
+answer   choice 0
+input    choice
+hint     A factor divides 12 with nothing left over.
+choice   2 = 1, 2, 3, 4, 6, 11, 12
+choice   0 = 1, 2, 3, 4, 6, 12
+choice   1 = 2, 3, 4, 6
+step 1   Try each number from 1 up to 12.
+step 2   Keep the ones dividing 12 exactly.   [1, 2, 3, 4, 6, 12]
+miss     omitted-ends = 1   1 and 12 divide 12 exactly, so both belong in the list.
+miss     included-non-factor = 2   11 does not divide 12 exactly, so it is not a factor.
+
+--- factors · seed 1 · difficulty 3
+prompt   Choose the list of every factor.
+display  inline "52"
+answer   choice 0
+input    choice
+hint     A factor divides 52 with nothing left over.
+choice   0 = 1, 2, 4, 13, 26, 52
+choice   2 = 1, 2, 3, 4, 13, 26, 52
+choice   1 = 2, 4, 13, 26
+step 1   Try each number from 1 up to 52.
+step 2   Keep the ones dividing 52 exactly.   [1, 2, 4, 13, 26, 52]
+miss     omitted-ends = 1   1 and 52 divide 52 exactly, so both belong in the list.
+miss     included-non-factor = 2   3 does not divide 52 exactly, so it is not a factor.
+
+--- factors · seed 12345 · difficulty 3
+prompt   Choose the list of every factor.
+display  inline "44"
+answer   choice 0
+input    choice
+hint     A factor divides 44 with nothing left over.
+choice   2 = 1, 2, 4, 11, 22, 37, 44
+choice   0 = 1, 2, 4, 11, 22, 44
+choice   1 = 2, 4, 11, 22
+step 1   Try each number from 1 up to 44.
+step 2   Keep the ones dividing 44 exactly.   [1, 2, 4, 11, 22, 44]
+miss     omitted-ends = 1   1 and 44 divide 44 exactly, so both belong in the list.
+miss     included-non-factor = 2   37 does not divide 44 exactly, so it is not a factor.
+
+--- factors · seed 67890 · difficulty 3
+prompt   Choose the list of every factor.
+display  inline "50"
+answer   choice 0
+input    choice
+hint     A factor divides 50 with nothing left over.
+choice   2 = 1, 2, 5, 10, 20, 25, 50
+choice   0 = 1, 2, 5, 10, 25, 50
+choice   1 = 2, 5, 10, 25
+step 1   Try each number from 1 up to 50.
+step 2   Keep the ones dividing 50 exactly.   [1, 2, 5, 10, 25, 50]
+miss     omitted-ends = 1   1 and 50 divide 50 exactly, so both belong in the list.
+miss     included-non-factor = 2   20 does not divide 50 exactly, so it is not a factor.
+
+--- factors · seed 424242 · difficulty 3
+prompt   Choose the list of every factor.
+display  inline "30"
+answer   choice 0
+input    choice
+hint     A factor divides 30 with nothing left over.
+choice   2 = 1, 2, 3, 5, 6, 10, 11, 15, 30
+choice   0 = 1, 2, 3, 5, 6, 10, 15, 30
+choice   1 = 2, 3, 5, 6, 10, 15
+step 1   Try each number from 1 up to 30.
+step 2   Keep the ones dividing 30 exactly.   [1, 2, 3, 5, 6, 10, 15, 30]
+miss     omitted-ends = 1   1 and 30 divide 30 exactly, so both belong in the list.
+miss     included-non-factor = 2   11 does not divide 30 exactly, so it is not a factor.
+
+--- factors · seed 987654321 · difficulty 3
+prompt   Choose the list of every factor.
+display  inline "70"
+answer   choice 0
+input    choice
+hint     A factor divides 70 with nothing left over.
+choice   2 = 1, 2, 5, 7, 10, 14, 15, 35, 70
+choice   1 = 2, 5, 7, 10, 14, 35
+choice   0 = 1, 2, 5, 7, 10, 14, 35, 70
+step 1   Try each number from 1 up to 70.
+step 2   Keep the ones dividing 70 exactly.   [1, 2, 5, 7, 10, 14, 35, 70]
+miss     omitted-ends = 1   1 and 70 divide 70 exactly, so both belong in the list.
+miss     included-non-factor = 2   15 does not divide 70 exactly, so it is not a factor.
+
+--- factors · seed 1 · difficulty 4
+prompt   Choose the list of every factor.
+display  inline "24"
+answer   choice 0
+input    choice
+hint     A factor divides 24 with nothing left over.
+choice   0 = 1, 2, 3, 4, 6, 8, 12, 24
+choice   1 = 2, 3, 4, 6, 8, 12
+choice   2 = 1, 2, 3, 4, 6, 8, 12, 16, 24
+step 1   Try each number from 1 up to 24.
+step 2   Keep the ones dividing 24 exactly.   [1, 2, 3, 4, 6, 8, 12, 24]
+miss     omitted-ends = 1   1 and 24 divide 24 exactly, so both belong in the list.
+miss     included-non-factor = 2   16 does not divide 24 exactly, so it is not a factor.
+
+--- factors · seed 12345 · difficulty 4
+prompt   Choose the list of every factor.
+display  inline "96"
+answer   choice 0
+input    choice
+hint     A factor divides 96 with nothing left over.
+choice   0 = 1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96
+choice   2 = 1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 81, 96
+choice   1 = 2, 3, 4, 6, 8, 12, 16, 24, 32, 48
+step 1   Try each number from 1 up to 96.
+step 2   Keep the ones dividing 96 exactly.   [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 96]
+miss     omitted-ends = 1   1 and 96 divide 96 exactly, so both belong in the list.
+miss     included-non-factor = 2   81 does not divide 96 exactly, so it is not a factor.
+
+--- factors · seed 67890 · difficulty 4
+prompt   Choose the list of every factor.
+display  inline "52"
+answer   choice 0
+input    choice
+hint     A factor divides 52 with nothing left over.
+choice   2 = 1, 2, 4, 13, 26, 33, 52
+choice   0 = 1, 2, 4, 13, 26, 52
+choice   1 = 2, 4, 13, 26
+step 1   Try each number from 1 up to 52.
+step 2   Keep the ones dividing 52 exactly.   [1, 2, 4, 13, 26, 52]
+miss     omitted-ends = 1   1 and 52 divide 52 exactly, so both belong in the list.
+miss     included-non-factor = 2   33 does not divide 52 exactly, so it is not a factor.
+
+--- factors · seed 424242 · difficulty 4
+prompt   Choose the list of every factor.
+display  inline "70"
+answer   choice 0
+input    choice
+hint     A factor divides 70 with nothing left over.
+choice   2 = 1, 2, 5, 7, 10, 14, 28, 35, 70
+choice   0 = 1, 2, 5, 7, 10, 14, 35, 70
+choice   1 = 2, 5, 7, 10, 14, 35
+step 1   Try each number from 1 up to 70.
+step 2   Keep the ones dividing 70 exactly.   [1, 2, 5, 7, 10, 14, 35, 70]
+miss     omitted-ends = 1   1 and 70 divide 70 exactly, so both belong in the list.
+miss     included-non-factor = 2   28 does not divide 70 exactly, so it is not a factor.
+
+--- factors · seed 987654321 · difficulty 4
+prompt   Choose the list of every factor.
+display  inline "90"
+answer   choice 0
+input    choice
+hint     A factor divides 90 with nothing left over.
+choice   2 = 1, 2, 3, 5, 6, 9, 10, 15, 18, 30, 45, 61, 90
+choice   0 = 1, 2, 3, 5, 6, 9, 10, 15, 18, 30, 45, 90
+choice   1 = 2, 3, 5, 6, 9, 10, 15, 18, 30, 45
+step 1   Try each number from 1 up to 90.
+step 2   Keep the ones dividing 90 exactly.   [1, 2, 3, 5, 6, 9, 10, 15, 18, 30, 45, 90]
+miss     omitted-ends = 1   1 and 90 divide 90 exactly, so both belong in the list.
+miss     included-non-factor = 2   61 does not divide 90 exactly, so it is not a factor.
+
+--- factors · seed 1 · difficulty 5
+prompt   Choose the list of every factor.
+display  inline "99"
+answer   choice 0
+input    choice
+hint     A factor divides 99 with nothing left over.
+choice   0 = 1, 3, 9, 11, 33, 99
+choice   2 = 1, 2, 3, 9, 11, 33, 99
+choice   1 = 3, 9, 11, 33
+step 1   Try each number from 1 up to 99.
+step 2   Keep the ones dividing 99 exactly.   [1, 3, 9, 11, 33, 99]
+miss     omitted-ends = 1   1 and 99 divide 99 exactly, so both belong in the list.
+miss     included-non-factor = 2   2 does not divide 99 exactly, so it is not a factor.
+
+--- factors · seed 12345 · difficulty 5
+prompt   Choose the list of every factor.
+display  inline "138"
+answer   choice 0
+input    choice
+hint     A factor divides 138 with nothing left over.
+choice   0 = 1, 2, 3, 6, 23, 46, 69, 138
+choice   2 = 1, 2, 3, 6, 23, 45, 46, 69, 138
+choice   1 = 2, 3, 6, 23, 46, 69
+step 1   Try each number from 1 up to 138.
+step 2   Keep the ones dividing 138 exactly.   [1, 2, 3, 6, 23, 46, 69, 138]
+miss     omitted-ends = 1   1 and 138 divide 138 exactly, so both belong in the list.
+miss     included-non-factor = 2   45 does not divide 138 exactly, so it is not a factor.
+
+--- factors · seed 67890 · difficulty 5
+prompt   Choose the list of every factor.
+display  inline "70"
+answer   choice 0
+input    choice
+hint     A factor divides 70 with nothing left over.
+choice   2 = 1, 2, 5, 7, 10, 14, 28, 35, 70
+choice   1 = 2, 5, 7, 10, 14, 35
+choice   0 = 1, 2, 5, 7, 10, 14, 35, 70
+step 1   Try each number from 1 up to 70.
+step 2   Keep the ones dividing 70 exactly.   [1, 2, 5, 7, 10, 14, 35, 70]
+miss     omitted-ends = 1   1 and 70 divide 70 exactly, so both belong in the list.
+miss     included-non-factor = 2   28 does not divide 70 exactly, so it is not a factor.
+
+--- factors · seed 424242 · difficulty 5
+prompt   Choose the list of every factor.
+display  inline "44"
+answer   choice 0
+input    choice
+hint     A factor divides 44 with nothing left over.
+choice   2 = 1, 2, 4, 11, 13, 22, 44
+choice   1 = 2, 4, 11, 22
+choice   0 = 1, 2, 4, 11, 22, 44
+step 1   Try each number from 1 up to 44.
+step 2   Keep the ones dividing 44 exactly.   [1, 2, 4, 11, 22, 44]
+miss     omitted-ends = 1   1 and 44 divide 44 exactly, so both belong in the list.
+miss     included-non-factor = 2   13 does not divide 44 exactly, so it is not a factor.
+
+--- factors · seed 987654321 · difficulty 5
+prompt   Choose the list of every factor.
+display  inline "135"
+answer   choice 0
+input    choice
+hint     A factor divides 135 with nothing left over.
+choice   2 = 1, 3, 5, 9, 15, 23, 27, 45, 135
+choice   1 = 3, 5, 9, 15, 27, 45
+choice   0 = 1, 3, 5, 9, 15, 27, 45, 135
+step 1   Try each number from 1 up to 135.
+step 2   Keep the ones dividing 135 exactly.   [1, 3, 5, 9, 15, 27, 45, 135]
+miss     omitted-ends = 1   1 and 135 divide 135 exactly, so both belong in the list.
+miss     included-non-factor = 2   23 does not divide 135 exactly, so it is not a factor."
+`;
+
+exports[`recorded output: long-div-1digit > matches the wording recorded when the skill landed 1`] = `
+"--- long-div-1digit · seed 1 · difficulty 1
+prompt   What is the quotient?
+display  inline "84 ÷ 7"
+answer   exact 12/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 8 by 7 first.   [7 × 1 = 7, leaving 1]
+step 2   Bring the next digit down to make 14.
+step 3   Repeat to the last digit.   [84 ÷ 7 = 12]
+miss     forgot-bring-down = 1   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 10   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 12345 · difficulty 1
+prompt   What is the quotient?
+display  inline "170 ÷ 5"
+answer   exact 34/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 17 by 5 first.   [5 × 3 = 15, leaving 2]
+step 2   Bring the next digit down to make 20.
+step 3   Repeat to the last digit.   [170 ÷ 5 = 34]
+miss     forgot-bring-down = 3   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 10   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 67890 · difficulty 1
+prompt   What is the quotient?
+display  inline "208 ÷ 8"
+answer   exact 26/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 20 by 8 first.   [8 × 2 = 16, leaving 4]
+step 2   Bring the next digit down to make 48.
+step 3   Repeat to the last digit.   [208 ÷ 8 = 26]
+miss     forgot-bring-down = 2   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 1   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 424242 · difficulty 1
+prompt   What is the quotient?
+display  inline "54 ÷ 3"
+answer   exact 18/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 5 by 3 first.   [3 × 1 = 3, leaving 2]
+step 2   Bring the next digit down to make 24.
+step 3   Repeat to the last digit.   [54 ÷ 3 = 18]
+miss     forgot-bring-down = 1   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 11   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 987654321 · difficulty 1
+prompt   What is the quotient?
+display  inline "74 ÷ 2"
+answer   exact 37/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 7 by 2 first.   [2 × 3 = 6, leaving 1]
+step 2   Bring the next digit down to make 14.
+step 3   Repeat to the last digit.   [74 ÷ 2 = 37]
+miss     forgot-bring-down = 3   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 32   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 1 · difficulty 2
+prompt   What is the quotient?
+display  inline "360 ÷ 6"
+answer   exact 60/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 36 by 6 first.   [6 × 6 = 36, leaving 0]
+step 2   Bring the next digit down to make 0.
+step 3   Repeat to the last digit.   [360 ÷ 6 = 60]
+miss     forgot-bring-down = 6   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 10   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 12345 · difficulty 2
+prompt   What is the quotient?
+display  inline "260 ÷ 5"
+answer   exact 52/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 26 by 5 first.   [5 × 5 = 25, leaving 1]
+step 2   Bring the next digit down to make 10.
+step 3   Repeat to the last digit.   [260 ÷ 5 = 52]
+miss     forgot-bring-down = 5   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 10   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 67890 · difficulty 2
+prompt   What is the quotient?
+display  inline "124 ÷ 4"
+answer   exact 31/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 12 by 4 first.   [4 × 3 = 12, leaving 0]
+step 2   Bring the next digit down to make 4.
+step 3   Repeat to the last digit.   [124 ÷ 4 = 31]
+miss     forgot-bring-down = 3   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 1   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 424242 · difficulty 2
+prompt   What is the quotient?
+display  inline "75 ÷ 3"
+answer   exact 25/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 7 by 3 first.   [3 × 2 = 6, leaving 1]
+step 2   Bring the next digit down to make 15.
+step 3   Repeat to the last digit.   [75 ÷ 3 = 25]
+miss     forgot-bring-down = 2   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 21   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 987654321 · difficulty 2
+prompt   What is the quotient?
+display  inline "189 ÷ 9"
+answer   exact 21/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 18 by 9 first.   [9 × 2 = 18, leaving 0]
+step 2   Bring the next digit down to make 9.
+step 3   Repeat to the last digit.   [189 ÷ 9 = 21]
+miss     forgot-bring-down = 2   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 1   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 1 · difficulty 3
+prompt   What is the quotient?
+display  inline "714 ÷ 6"
+answer   exact 119/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 7 by 6 first.   [6 × 1 = 6, leaving 1]
+step 2   Bring the next digit down to make 11.
+step 3   Repeat to the last digit.   [714 ÷ 6 = 119]
+miss     forgot-bring-down = 11   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 100   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 12345 · difficulty 3
+prompt   What is the quotient?
+display  inline "510 ÷ 5"
+answer   exact 102/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 5 by 5 first.   [5 × 1 = 5, leaving 0]
+step 2   Bring the next digit down to make 1.
+step 3   Repeat to the last digit.   [510 ÷ 5 = 102]
+miss     forgot-bring-down = 10   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 100   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 67890 · difficulty 3
+prompt   What is the quotient?
+display  inline "395 ÷ 5"
+answer   exact 79/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 39 by 5 first.   [5 × 7 = 35, leaving 4]
+step 2   Bring the next digit down to make 45.
+step 3   Repeat to the last digit.   [395 ÷ 5 = 79]
+miss     forgot-bring-down = 7   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 11   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 424242 · difficulty 3
+prompt   What is the quotient?
+display  inline "129 ÷ 3"
+answer   exact 43/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 12 by 3 first.   [3 × 4 = 12, leaving 0]
+step 2   Bring the next digit down to make 9.
+step 3   Repeat to the last digit.   [129 ÷ 3 = 43]
+miss     forgot-bring-down = 4   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 3   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 987654321 · difficulty 3
+prompt   What is the quotient?
+display  inline "297 ÷ 9"
+answer   exact 33/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 29 by 9 first.   [9 × 3 = 27, leaving 2]
+step 2   Bring the next digit down to make 27.
+step 3   Repeat to the last digit.   [297 ÷ 9 = 33]
+miss     forgot-bring-down = 3   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 10   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 1 · difficulty 4
+prompt   What is the quotient?
+display  inline "280 ÷ 7"
+answer   exact 40/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 28 by 7 first.   [7 × 4 = 28, leaving 0]
+step 2   Bring the next digit down to make 0.
+step 3   Repeat to the last digit.   [280 ÷ 7 = 40]
+miss     forgot-bring-down = 4   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 10   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 12345 · difficulty 4
+prompt   What is the quotient?
+display  inline "936 ÷ 9"
+answer   exact 104/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 9 by 9 first.   [9 × 1 = 9, leaving 0]
+step 2   Bring the next digit down to make 3.
+step 3   Repeat to the last digit.   [936 ÷ 9 = 104]
+miss     forgot-bring-down = 10   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 100   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 67890 · difficulty 4
+prompt   What is the quotient?
+display  inline "820 ÷ 5"
+answer   exact 164/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 8 by 5 first.   [5 × 1 = 5, leaving 3]
+step 2   Bring the next digit down to make 32.
+step 3   Repeat to the last digit.   [820 ÷ 5 = 164]
+miss     forgot-bring-down = 16   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 100   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 424242 · difficulty 4
+prompt   What is the quotient?
+display  inline "267 ÷ 3"
+answer   exact 89/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 26 by 3 first.   [3 × 8 = 24, leaving 2]
+step 2   Bring the next digit down to make 27.
+step 3   Repeat to the last digit.   [267 ÷ 3 = 89]
+miss     forgot-bring-down = 8   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 22   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 987654321 · difficulty 4
+prompt   What is the quotient?
+display  inline "833 ÷ 7"
+answer   exact 119/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 8 by 7 first.   [7 × 1 = 7, leaving 1]
+step 2   Bring the next digit down to make 13.
+step 3   Repeat to the last digit.   [833 ÷ 7 = 119]
+miss     forgot-bring-down = 11   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 100   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 1 · difficulty 5
+prompt   What is the quotient?
+display  inline "2364 ÷ 6"
+answer   exact 394/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 23 by 6 first.   [6 × 3 = 18, leaving 5]
+step 2   Bring the next digit down to make 56.
+step 3   Repeat to the last digit.   [2364 ÷ 6 = 394]
+miss     forgot-bring-down = 39   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 10   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 12345 · difficulty 5
+prompt   What is the quotient?
+display  inline "1690 ÷ 5"
+answer   exact 338/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 16 by 5 first.   [5 × 3 = 15, leaving 1]
+step 2   Bring the next digit down to make 19.
+step 3   Repeat to the last digit.   [1690 ÷ 5 = 338]
+miss     forgot-bring-down = 33   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 110   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 67890 · difficulty 5
+prompt   What is the quotient?
+display  inline "1305 ÷ 5"
+answer   exact 261/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 13 by 5 first.   [5 × 2 = 10, leaving 3]
+step 2   Bring the next digit down to make 30.
+step 3   Repeat to the last digit.   [1305 ÷ 5 = 261]
+miss     forgot-bring-down = 26   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 1   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 424242 · difficulty 5
+prompt   What is the quotient?
+display  inline "420 ÷ 3"
+answer   exact 140/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 4 by 3 first.   [3 × 1 = 3, leaving 1]
+step 2   Bring the next digit down to make 12.
+step 3   Repeat to the last digit.   [420 ÷ 3 = 140]
+miss     forgot-bring-down = 14   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 100   Each step divides what was left over plus the next digit.
+
+--- long-div-1digit · seed 987654321 · difficulty 5
+prompt   What is the quotient?
+display  inline "945 ÷ 9"
+answer   exact 105/1
+input    keypad
+hint     Divide, multiply, subtract, then bring the next digit down.
+step 1   Divide 9 by 9 first.   [9 × 1 = 9, leaving 0]
+step 2   Bring the next digit down to make 4.
+step 3   Repeat to the last digit.   [945 ÷ 9 = 105]
+miss     forgot-bring-down = 10   One more digit still has to come down before you stop.
+miss     ignored-step-remainder = 100   Each step divides what was left over plus the next digit."
+`;
+
+exports[`recorded output: long-div-2digit > matches the wording recorded when the skill landed 1`] = `
+"--- long-div-2digit · seed 1 · difficulty 1
+prompt   What is the quotient?
+display  inline "253 ÷ 11"
+answer   exact 23/1
+input    keypad
+hint     Try a digit, multiply it by 11, and check it fits.
+step 1   Estimate how many 11s fit into 25.   [11 × 2 = 22]
+step 2   Subtract, then bring the next digit down.   [25 − 22 = 3]
+step 3   Estimate again for the last place.   [253 ÷ 11 = 23]
+miss     estimate-low = 13   That first estimate was one too low; another 11 still fits.
+miss     estimate-high = 33   That first estimate was one too high; the product passes 25.
+
+--- long-div-2digit · seed 12345 · difficulty 1
+prompt   What is the quotient?
+display  inline "580 ÷ 20"
+answer   exact 29/1
+input    keypad
+hint     Try a digit, multiply it by 20, and check it fits.
+step 1   Estimate how many 20s fit into 58.   [20 × 2 = 40]
+step 2   Subtract, then bring the next digit down.   [58 − 40 = 18]
+step 3   Estimate again for the last place.   [580 ÷ 20 = 29]
+miss     estimate-low = 19   That first estimate was one too low; another 20 still fits.
+miss     estimate-high = 39   That first estimate was one too high; the product passes 58.
+
+--- long-div-2digit · seed 67890 · difficulty 1
+prompt   What is the quotient?
+display  inline "532 ÷ 28"
+answer   exact 19/1
+input    keypad
+hint     Try a digit, multiply it by 28, and check it fits.
+step 1   Estimate how many 28s fit into 53.   [28 × 1 = 28]
+step 2   Subtract, then bring the next digit down.   [53 − 28 = 25]
+step 3   Estimate again for the last place.   [532 ÷ 28 = 19]
+miss     estimate-low = 9   That first estimate was one too low; another 28 still fits.
+miss     estimate-high = 29   That first estimate was one too high; the product passes 53.
+
+--- long-div-2digit · seed 424242 · difficulty 1
+prompt   What is the quotient?
+display  inline "252 ÷ 18"
+answer   exact 14/1
+input    keypad
+hint     Try a digit, multiply it by 18, and check it fits.
+step 1   Estimate how many 18s fit into 25.   [18 × 1 = 18]
+step 2   Subtract, then bring the next digit down.   [25 − 18 = 7]
+step 3   Estimate again for the last place.   [252 ÷ 18 = 14]
+miss     estimate-low = 4   That first estimate was one too low; another 18 still fits.
+miss     estimate-high = 24   That first estimate was one too high; the product passes 25.
+
+--- long-div-2digit · seed 987654321 · difficulty 1
+prompt   What is the quotient?
+display  inline "435 ÷ 15"
+answer   exact 29/1
+input    keypad
+hint     Try a digit, multiply it by 15, and check it fits.
+step 1   Estimate how many 15s fit into 43.   [15 × 2 = 30]
+step 2   Subtract, then bring the next digit down.   [43 − 30 = 13]
+step 3   Estimate again for the last place.   [435 ÷ 15 = 29]
+miss     estimate-low = 19   That first estimate was one too low; another 15 still fits.
+miss     estimate-high = 39   That first estimate was one too high; the product passes 43.
+
+--- long-div-2digit · seed 1 · difficulty 2
+prompt   What is the quotient?
+display  inline "374 ÷ 11"
+answer   exact 34/1
+input    keypad
+hint     Try a digit, multiply it by 11, and check it fits.
+step 1   Estimate how many 11s fit into 37.   [11 × 3 = 33]
+step 2   Subtract, then bring the next digit down.   [37 − 33 = 4]
+step 3   Estimate again for the last place.   [374 ÷ 11 = 34]
+miss     estimate-low = 24   That first estimate was one too low; another 11 still fits.
+miss     estimate-high = 44   That first estimate was one too high; the product passes 37.
+
+--- long-div-2digit · seed 12345 · difficulty 2
+prompt   What is the quotient?
+display  inline "900 ÷ 20"
+answer   exact 45/1
+input    keypad
+hint     Try a digit, multiply it by 20, and check it fits.
+step 1   Estimate how many 20s fit into 90.   [20 × 4 = 80]
+step 2   Subtract, then bring the next digit down.   [90 − 80 = 10]
+step 3   Estimate again for the last place.   [900 ÷ 20 = 45]
+miss     estimate-low = 35   That first estimate was one too low; another 20 still fits.
+miss     estimate-high = 55   That first estimate was one too high; the product passes 90.
+
+--- long-div-2digit · seed 67890 · difficulty 2
+prompt   What is the quotient?
+display  inline "728 ÷ 28"
+answer   exact 26/1
+input    keypad
+hint     Try a digit, multiply it by 28, and check it fits.
+step 1   Estimate how many 28s fit into 72.   [28 × 2 = 56]
+step 2   Subtract, then bring the next digit down.   [72 − 56 = 16]
+step 3   Estimate again for the last place.   [728 ÷ 28 = 26]
+miss     estimate-low = 16   That first estimate was one too low; another 28 still fits.
+miss     estimate-high = 36   That first estimate was one too high; the product passes 72.
+
+--- long-div-2digit · seed 424242 · difficulty 2
+prompt   What is the quotient?
+display  inline "324 ÷ 18"
+answer   exact 18/1
+input    keypad
+hint     Try a digit, multiply it by 18, and check it fits.
+step 1   Estimate how many 18s fit into 32.   [18 × 1 = 18]
+step 2   Subtract, then bring the next digit down.   [32 − 18 = 14]
+step 3   Estimate again for the last place.   [324 ÷ 18 = 18]
+miss     estimate-low = 8   That first estimate was one too low; another 18 still fits.
+miss     estimate-high = 28   That first estimate was one too high; the product passes 32.
+
+--- long-div-2digit · seed 987654321 · difficulty 2
+prompt   What is the quotient?
+display  inline "660 ÷ 15"
+answer   exact 44/1
+input    keypad
+hint     Try a digit, multiply it by 15, and check it fits.
+step 1   Estimate how many 15s fit into 66.   [15 × 4 = 60]
+step 2   Subtract, then bring the next digit down.   [66 − 60 = 6]
+step 3   Estimate again for the last place.   [660 ÷ 15 = 44]
+miss     estimate-low = 34   That first estimate was one too low; another 15 still fits.
+miss     estimate-high = 54   That first estimate was one too high; the product passes 66.
+
+--- long-div-2digit · seed 1 · difficulty 3
+prompt   What is the quotient?
+display  inline "561 ÷ 11"
+answer   exact 51/1
+input    keypad
+hint     Try a digit, multiply it by 11, and check it fits.
+step 1   Estimate how many 11s fit into 56.   [11 × 5 = 55]
+step 2   Subtract, then bring the next digit down.   [56 − 55 = 1]
+step 3   Estimate again for the last place.   [561 ÷ 11 = 51]
+miss     estimate-low = 41   That first estimate was one too low; another 11 still fits.
+miss     estimate-high = 61   That first estimate was one too high; the product passes 56.
+
+--- long-div-2digit · seed 12345 · difficulty 3
+prompt   What is the quotient?
+display  inline "1380 ÷ 20"
+answer   exact 69/1
+input    keypad
+hint     Try a digit, multiply it by 20, and check it fits.
+step 1   Estimate how many 20s fit into 138.   [20 × 6 = 120]
+step 2   Subtract, then bring the next digit down.   [138 − 120 = 18]
+step 3   Estimate again for the last place.   [1380 ÷ 20 = 69]
+miss     estimate-low = 59   That first estimate was one too low; another 20 still fits.
+miss     estimate-high = 79   That first estimate was one too high; the product passes 138.
+
+--- long-div-2digit · seed 67890 · difficulty 3
+prompt   What is the quotient?
+display  inline "1064 ÷ 28"
+answer   exact 38/1
+input    keypad
+hint     Try a digit, multiply it by 28, and check it fits.
+step 1   Estimate how many 28s fit into 106.   [28 × 3 = 84]
+step 2   Subtract, then bring the next digit down.   [106 − 84 = 22]
+step 3   Estimate again for the last place.   [1064 ÷ 28 = 38]
+miss     estimate-low = 28   That first estimate was one too low; another 28 still fits.
+miss     estimate-high = 48   That first estimate was one too high; the product passes 106.
+
+--- long-div-2digit · seed 424242 · difficulty 3
+prompt   What is the quotient?
+display  inline "432 ÷ 18"
+answer   exact 24/1
+input    keypad
+hint     Try a digit, multiply it by 18, and check it fits.
+step 1   Estimate how many 18s fit into 43.   [18 × 2 = 36]
+step 2   Subtract, then bring the next digit down.   [43 − 36 = 7]
+step 3   Estimate again for the last place.   [432 ÷ 18 = 24]
+miss     estimate-low = 14   That first estimate was one too low; another 18 still fits.
+miss     estimate-high = 34   That first estimate was one too high; the product passes 43.
+
+--- long-div-2digit · seed 987654321 · difficulty 3
+prompt   What is the quotient?
+display  inline "1020 ÷ 15"
+answer   exact 68/1
+input    keypad
+hint     Try a digit, multiply it by 15, and check it fits.
+step 1   Estimate how many 15s fit into 102.   [15 × 6 = 90]
+step 2   Subtract, then bring the next digit down.   [102 − 90 = 12]
+step 3   Estimate again for the last place.   [1020 ÷ 15 = 68]
+miss     estimate-low = 58   That first estimate was one too low; another 15 still fits.
+miss     estimate-high = 78   That first estimate was one too high; the product passes 102.
+
+--- long-div-2digit · seed 1 · difficulty 4
+prompt   What is the quotient?
+display  inline "792 ÷ 11"
+answer   exact 72/1
+input    keypad
+hint     Try a digit, multiply it by 11, and check it fits.
+step 1   Estimate how many 11s fit into 79.   [11 × 7 = 77]
+step 2   Subtract, then bring the next digit down.   [79 − 77 = 2]
+step 3   Estimate again for the last place.   [792 ÷ 11 = 72]
+miss     estimate-low = 62   That first estimate was one too low; another 11 still fits.
+miss     estimate-high = 82   That first estimate was one too high; the product passes 79.
+
+--- long-div-2digit · seed 12345 · difficulty 4
+prompt   What is the quotient?
+display  inline "1960 ÷ 20"
+answer   exact 98/1
+input    keypad
+hint     Try a digit, multiply it by 20, and check it fits.
+step 1   Estimate how many 20s fit into 196.   [20 × 9 = 180]
+step 2   Subtract, then bring the next digit down.   [196 − 180 = 16]
+step 3   Estimate again for the last place.   [1960 ÷ 20 = 98]
+miss     estimate-low = 88   That first estimate was one too low; another 20 still fits.
+miss     estimate-high = 108   That first estimate was one too high; the product passes 196.
+
+--- long-div-2digit · seed 67890 · difficulty 4
+prompt   What is the quotient?
+display  inline "1512 ÷ 28"
+answer   exact 54/1
+input    keypad
+hint     Try a digit, multiply it by 28, and check it fits.
+step 1   Estimate how many 28s fit into 151.   [28 × 5 = 140]
+step 2   Subtract, then bring the next digit down.   [151 − 140 = 11]
+step 3   Estimate again for the last place.   [1512 ÷ 28 = 54]
+miss     estimate-low = 44   That first estimate was one too low; another 28 still fits.
+miss     estimate-high = 64   That first estimate was one too high; the product passes 151.
+
+--- long-div-2digit · seed 424242 · difficulty 4
+prompt   What is the quotient?
+display  inline "612 ÷ 18"
+answer   exact 34/1
+input    keypad
+hint     Try a digit, multiply it by 18, and check it fits.
+step 1   Estimate how many 18s fit into 61.   [18 × 3 = 54]
+step 2   Subtract, then bring the next digit down.   [61 − 54 = 7]
+step 3   Estimate again for the last place.   [612 ÷ 18 = 34]
+miss     estimate-low = 24   That first estimate was one too low; another 18 still fits.
+miss     estimate-high = 44   That first estimate was one too high; the product passes 61.
+
+--- long-div-2digit · seed 987654321 · difficulty 4
+prompt   What is the quotient?
+display  inline "1440 ÷ 15"
+answer   exact 96/1
+input    keypad
+hint     Try a digit, multiply it by 15, and check it fits.
+step 1   Estimate how many 15s fit into 144.   [15 × 9 = 135]
+step 2   Subtract, then bring the next digit down.   [144 − 135 = 9]
+step 3   Estimate again for the last place.   [1440 ÷ 15 = 96]
+miss     estimate-low = 86   That first estimate was one too low; another 15 still fits.
+miss     estimate-high = 106   That first estimate was one too high; the product passes 144.
+
+--- long-div-2digit · seed 1 · difficulty 5
+prompt   What is the quotient?
+display  inline "1111 ÷ 11"
+answer   exact 101/1
+input    keypad
+hint     Try a digit, multiply it by 11, and check it fits.
+step 1   Estimate how many 11s fit into 11.   [11 × 1 = 11]
+step 2   Subtract, then bring the next digit down.   [11 − 11 = 0]
+step 3   Estimate again for the last place.   [1111 ÷ 11 = 101]
+miss     estimate-low = 1   That first estimate was one too low; another 11 still fits.
+miss     estimate-high = 201   That first estimate was one too high; the product passes 11.
+
+--- long-div-2digit · seed 12345 · difficulty 5
+prompt   What is the quotient?
+display  inline "2760 ÷ 20"
+answer   exact 138/1
+input    keypad
+hint     Try a digit, multiply it by 20, and check it fits.
+step 1   Estimate how many 20s fit into 27.   [20 × 1 = 20]
+step 2   Subtract, then bring the next digit down.   [27 − 20 = 7]
+step 3   Estimate again for the last place.   [2760 ÷ 20 = 138]
+miss     estimate-low = 38   That first estimate was one too low; another 20 still fits.
+miss     estimate-high = 238   That first estimate was one too high; the product passes 27.
+
+--- long-div-2digit · seed 67890 · difficulty 5
+prompt   What is the quotient?
+display  inline "2128 ÷ 28"
+answer   exact 76/1
+input    keypad
+hint     Try a digit, multiply it by 28, and check it fits.
+step 1   Estimate how many 28s fit into 212.   [28 × 7 = 196]
+step 2   Subtract, then bring the next digit down.   [212 − 196 = 16]
+step 3   Estimate again for the last place.   [2128 ÷ 28 = 76]
+miss     estimate-low = 66   That first estimate was one too low; another 28 still fits.
+miss     estimate-high = 86   That first estimate was one too high; the product passes 212.
+
+--- long-div-2digit · seed 424242 · difficulty 5
+prompt   What is the quotient?
+display  inline "864 ÷ 18"
+answer   exact 48/1
+input    keypad
+hint     Try a digit, multiply it by 18, and check it fits.
+step 1   Estimate how many 18s fit into 86.   [18 × 4 = 72]
+step 2   Subtract, then bring the next digit down.   [86 − 72 = 14]
+step 3   Estimate again for the last place.   [864 ÷ 18 = 48]
+miss     estimate-low = 38   That first estimate was one too low; another 18 still fits.
+miss     estimate-high = 58   That first estimate was one too high; the product passes 86.
+
+--- long-div-2digit · seed 987654321 · difficulty 5
+prompt   What is the quotient?
+display  inline "2025 ÷ 15"
+answer   exact 135/1
+input    keypad
+hint     Try a digit, multiply it by 15, and check it fits.
+step 1   Estimate how many 15s fit into 20.   [15 × 1 = 15]
+step 2   Subtract, then bring the next digit down.   [20 − 15 = 5]
+step 3   Estimate again for the last place.   [2025 ÷ 15 = 135]
+miss     estimate-low = 35   That first estimate was one too low; another 15 still fits.
+miss     estimate-high = 235   That first estimate was one too high; the product passes 20."
+`;
+
+exports[`recorded output: long-div-remainder > matches the wording recorded when the skill landed 1`] = `
+"--- long-div-remainder · seed 1 · difficulty 1
+prompt   How many whole groups fit?
+display  inline "89 ÷ 3"
+answer   exact 29/1
+input    keypad
+hint     Stop once what is left is under 3.
+step 1   3 fits into 89 29 whole times.   [3 × 29 = 87]
+step 2   That leaves 2, too few for another group.   [89 − 87 = 2]
+step 3   So the quotient is 29.
+miss     gave-remainder = 2   That is what was left over. The question asks how many groups.
+miss     rounded-up = 30   The last 2 cannot make another group of 3.
+
+--- long-div-remainder · seed 12345 · difficulty 1
+prompt   How many whole groups fit?
+display  inline "197 ÷ 5"
+answer   exact 39/1
+input    keypad
+hint     Stop once what is left is under 5.
+step 1   5 fits into 197 39 whole times.   [5 × 39 = 195]
+step 2   That leaves 2, too few for another group.   [197 − 195 = 2]
+step 3   So the quotient is 39.
+miss     gave-remainder = 2   That is what was left over. The question asks how many groups.
+miss     rounded-up = 40   The last 2 cannot make another group of 5.
+
+--- long-div-remainder · seed 67890 · difficulty 1
+prompt   How many whole groups fit?
+display  inline "164 ÷ 7"
+answer   exact 23/1
+input    keypad
+hint     Stop once what is left is under 7.
+step 1   7 fits into 164 23 whole times.   [7 × 23 = 161]
+step 2   That leaves 3, too few for another group.   [164 − 161 = 3]
+step 3   So the quotient is 23.
+miss     gave-remainder = 3   That is what was left over. The question asks how many groups.
+miss     rounded-up = 24   The last 3 cannot make another group of 7.
+
+--- long-div-remainder · seed 424242 · difficulty 1
+prompt   How many whole groups fit?
+display  inline "61 ÷ 4"
+answer   exact 15/1
+input    keypad
+hint     Stop once what is left is under 4.
+step 1   4 fits into 61 15 whole times.   [4 × 15 = 60]
+step 2   That leaves 1, too few for another group.   [61 − 60 = 1]
+step 3   So the quotient is 15.
+miss     gave-remainder = 1   That is what was left over. The question asks how many groups.
+miss     rounded-up = 16   The last 1 cannot make another group of 4.
+
+--- long-div-remainder · seed 987654321 · difficulty 1
+prompt   How many whole groups fit?
+display  inline "115 ÷ 3"
+answer   exact 38/1
+input    keypad
+hint     Stop once what is left is under 3.
+step 1   3 fits into 115 38 whole times.   [3 × 38 = 114]
+step 2   That leaves 1, too few for another group.   [115 − 114 = 1]
+step 3   So the quotient is 38.
+miss     gave-remainder = 1   That is what was left over. The question asks how many groups.
+miss     rounded-up = 39   The last 1 cannot make another group of 3.
+
+--- long-div-remainder · seed 1 · difficulty 2
+prompt   How many whole groups fit?
+display  inline "131 ÷ 3"
+answer   exact 43/1
+input    keypad
+hint     Stop once what is left is under 3.
+step 1   3 fits into 131 43 whole times.   [3 × 43 = 129]
+step 2   That leaves 2, too few for another group.   [131 − 129 = 2]
+step 3   So the quotient is 43.
+miss     gave-remainder = 2   That is what was left over. The question asks how many groups.
+miss     rounded-up = 44   The last 2 cannot make another group of 3.
+
+--- long-div-remainder · seed 12345 · difficulty 2
+prompt   How many whole groups fit?
+display  inline "302 ÷ 5"
+answer   exact 60/1
+input    keypad
+hint     Stop once what is left is under 5.
+step 1   5 fits into 302 60 whole times.   [5 × 60 = 300]
+step 2   That leaves 2, too few for another group.   [302 − 300 = 2]
+step 3   So the quotient is 60.
+miss     gave-remainder = 2   That is what was left over. The question asks how many groups.
+miss     rounded-up = 61   The last 2 cannot make another group of 5.
+
+--- long-div-remainder · seed 67890 · difficulty 2
+prompt   How many whole groups fit?
+display  inline "234 ÷ 7"
+answer   exact 33/1
+input    keypad
+hint     Stop once what is left is under 7.
+step 1   7 fits into 234 33 whole times.   [7 × 33 = 231]
+step 2   That leaves 3, too few for another group.   [234 − 231 = 3]
+step 3   So the quotient is 33.
+miss     gave-remainder = 3   That is what was left over. The question asks how many groups.
+miss     rounded-up = 34   The last 3 cannot make another group of 7.
+
+--- long-div-remainder · seed 424242 · difficulty 2
+prompt   How many whole groups fit?
+display  inline "81 ÷ 4"
+answer   exact 20/1
+input    keypad
+hint     Stop once what is left is under 4.
+step 1   4 fits into 81 20 whole times.   [4 × 20 = 80]
+step 2   That leaves 1, too few for another group.   [81 − 80 = 1]
+step 3   So the quotient is 20.
+miss     gave-remainder = 1   That is what was left over. The question asks how many groups.
+miss     rounded-up = 21   The last 1 cannot make another group of 4.
+
+--- long-div-remainder · seed 987654321 · difficulty 2
+prompt   How many whole groups fit?
+display  inline "175 ÷ 3"
+answer   exact 58/1
+input    keypad
+hint     Stop once what is left is under 3.
+step 1   3 fits into 175 58 whole times.   [3 × 58 = 174]
+step 2   That leaves 1, too few for another group.   [175 − 174 = 1]
+step 3   So the quotient is 58.
+miss     gave-remainder = 1   That is what was left over. The question asks how many groups.
+miss     rounded-up = 59   The last 1 cannot make another group of 3.
+
+--- long-div-remainder · seed 1 · difficulty 3
+prompt   How many whole groups fit?
+display  inline "251 ÷ 3"
+answer   exact 83/1
+input    keypad
+hint     Stop once what is left is under 3.
+step 1   3 fits into 251 83 whole times.   [3 × 83 = 249]
+step 2   That leaves 2, too few for another group.   [251 − 249 = 2]
+step 3   So the quotient is 83.
+miss     gave-remainder = 2   That is what was left over. The question asks how many groups.
+miss     rounded-up = 84   The last 2 cannot make another group of 3.
+
+--- long-div-remainder · seed 12345 · difficulty 3
+prompt   How many whole groups fit?
+display  inline "592 ÷ 5"
+answer   exact 118/1
+input    keypad
+hint     Stop once what is left is under 5.
+step 1   5 fits into 592 118 whole times.   [5 × 118 = 590]
+step 2   That leaves 2, too few for another group.   [592 − 590 = 2]
+step 3   So the quotient is 118.
+miss     gave-remainder = 2   That is what was left over. The question asks how many groups.
+miss     rounded-up = 119   The last 2 cannot make another group of 5.
+
+--- long-div-remainder · seed 67890 · difficulty 3
+prompt   How many whole groups fit?
+display  inline "416 ÷ 7"
+answer   exact 59/1
+input    keypad
+hint     Stop once what is left is under 7.
+step 1   7 fits into 416 59 whole times.   [7 × 59 = 413]
+step 2   That leaves 3, too few for another group.   [416 − 413 = 3]
+step 3   So the quotient is 59.
+miss     gave-remainder = 3   That is what was left over. The question asks how many groups.
+miss     rounded-up = 60   The last 3 cannot make another group of 7.
+
+--- long-div-remainder · seed 424242 · difficulty 3
+prompt   How many whole groups fit?
+display  inline "129 ÷ 4"
+answer   exact 32/1
+input    keypad
+hint     Stop once what is left is under 4.
+step 1   4 fits into 129 32 whole times.   [4 × 32 = 128]
+step 2   That leaves 1, too few for another group.   [129 − 128 = 1]
+step 3   So the quotient is 32.
+miss     gave-remainder = 1   That is what was left over. The question asks how many groups.
+miss     rounded-up = 33   The last 1 cannot make another group of 4.
+
+--- long-div-remainder · seed 987654321 · difficulty 3
+prompt   How many whole groups fit?
+display  inline "349 ÷ 3"
+answer   exact 116/1
+input    keypad
+hint     Stop once what is left is under 3.
+step 1   3 fits into 349 116 whole times.   [3 × 116 = 348]
+step 2   That leaves 1, too few for another group.   [349 − 348 = 1]
+step 3   So the quotient is 116.
+miss     gave-remainder = 1   That is what was left over. The question asks how many groups.
+miss     rounded-up = 117   The last 1 cannot make another group of 3.
+
+--- long-div-remainder · seed 1 · difficulty 4
+prompt   How many whole groups fit?
+display  inline "518 ÷ 3"
+answer   exact 172/1
+input    keypad
+hint     Stop once what is left is under 3.
+step 1   3 fits into 518 172 whole times.   [3 × 172 = 516]
+step 2   That leaves 2, too few for another group.   [518 − 516 = 2]
+step 3   So the quotient is 172.
+miss     gave-remainder = 2   That is what was left over. The question asks how many groups.
+miss     rounded-up = 173   The last 2 cannot make another group of 3.
+
+--- long-div-remainder · seed 12345 · difficulty 4
+prompt   How many whole groups fit?
+display  inline "1232 ÷ 5"
+answer   exact 246/1
+input    keypad
+hint     Stop once what is left is under 5.
+step 1   5 fits into 1232 246 whole times.   [5 × 246 = 1230]
+step 2   That leaves 2, too few for another group.   [1232 − 1230 = 2]
+step 3   So the quotient is 246.
+miss     gave-remainder = 2   That is what was left over. The question asks how many groups.
+miss     rounded-up = 247   The last 2 cannot make another group of 5.
+
+--- long-div-remainder · seed 67890 · difficulty 4
+prompt   How many whole groups fit?
+display  inline "864 ÷ 7"
+answer   exact 123/1
+input    keypad
+hint     Stop once what is left is under 7.
+step 1   7 fits into 864 123 whole times.   [7 × 123 = 861]
+step 2   That leaves 3, too few for another group.   [864 − 861 = 3]
+step 3   So the quotient is 123.
+miss     gave-remainder = 3   That is what was left over. The question asks how many groups.
+miss     rounded-up = 124   The last 3 cannot make another group of 7.
+
+--- long-div-remainder · seed 424242 · difficulty 4
+prompt   How many whole groups fit?
+display  inline "269 ÷ 4"
+answer   exact 67/1
+input    keypad
+hint     Stop once what is left is under 4.
+step 1   4 fits into 269 67 whole times.   [4 × 67 = 268]
+step 2   That leaves 1, too few for another group.   [269 − 268 = 1]
+step 3   So the quotient is 67.
+miss     gave-remainder = 1   That is what was left over. The question asks how many groups.
+miss     rounded-up = 68   The last 1 cannot make another group of 4.
+
+--- long-div-remainder · seed 987654321 · difficulty 4
+prompt   How many whole groups fit?
+display  inline "721 ÷ 3"
+answer   exact 240/1
+input    keypad
+hint     Stop once what is left is under 3.
+step 1   3 fits into 721 240 whole times.   [3 × 240 = 720]
+step 2   That leaves 1, too few for another group.   [721 − 720 = 1]
+step 3   So the quotient is 240.
+miss     gave-remainder = 1   That is what was left over. The question asks how many groups.
+miss     rounded-up = 241   The last 1 cannot make another group of 3.
+
+--- long-div-remainder · seed 1 · difficulty 5
+prompt   How many whole groups fit?
+display  inline "821 ÷ 3"
+answer   exact 273/1
+input    keypad
+hint     Stop once what is left is under 3.
+step 1   3 fits into 821 273 whole times.   [3 × 273 = 819]
+step 2   That leaves 2, too few for another group.   [821 − 819 = 2]
+step 3   So the quotient is 273.
+miss     gave-remainder = 2   That is what was left over. The question asks how many groups.
+miss     rounded-up = 274   The last 2 cannot make another group of 3.
+
+--- long-div-remainder · seed 12345 · difficulty 5
+prompt   How many whole groups fit?
+display  inline "1972 ÷ 5"
+answer   exact 394/1
+input    keypad
+hint     Stop once what is left is under 5.
+step 1   5 fits into 1972 394 whole times.   [5 × 394 = 1970]
+step 2   That leaves 2, too few for another group.   [1972 − 1970 = 2]
+step 3   So the quotient is 394.
+miss     gave-remainder = 2   That is what was left over. The question asks how many groups.
+miss     rounded-up = 395   The last 2 cannot make another group of 5.
+
+--- long-div-remainder · seed 67890 · difficulty 5
+prompt   How many whole groups fit?
+display  inline "1361 ÷ 7"
+answer   exact 194/1
+input    keypad
+hint     Stop once what is left is under 7.
+step 1   7 fits into 1361 194 whole times.   [7 × 194 = 1358]
+step 2   That leaves 3, too few for another group.   [1361 − 1358 = 3]
+step 3   So the quotient is 194.
+miss     gave-remainder = 3   That is what was left over. The question asks how many groups.
+miss     rounded-up = 195   The last 3 cannot make another group of 7.
+
+--- long-div-remainder · seed 424242 · difficulty 5
+prompt   How many whole groups fit?
+display  inline "413 ÷ 4"
+answer   exact 103/1
+input    keypad
+hint     Stop once what is left is under 4.
+step 1   4 fits into 413 103 whole times.   [4 × 103 = 412]
+step 2   That leaves 1, too few for another group.   [413 − 412 = 1]
+step 3   So the quotient is 103.
+miss     gave-remainder = 1   That is what was left over. The question asks how many groups.
+miss     rounded-up = 104   The last 1 cannot make another group of 4.
+
+--- long-div-remainder · seed 987654321 · difficulty 5
+prompt   How many whole groups fit?
+display  inline "1153 ÷ 3"
+answer   exact 384/1
+input    keypad
+hint     Stop once what is left is under 3.
+step 1   3 fits into 1153 384 whole times.   [3 × 384 = 1152]
+step 2   That leaves 1, too few for another group.   [1153 − 1152 = 1]
+step 3   So the quotient is 384.
+miss     gave-remainder = 1   That is what was left over. The question asks how many groups.
+miss     rounded-up = 385   The last 1 cannot make another group of 3."
+`;
+
+exports[`recorded output: multiples > matches the wording recorded when the skill landed 1`] = `
+"--- multiples · seed 1 · difficulty 1
+prompt   Choose the first 4 multiples.
+display  inline "5"
+answer   choice 0
+input    choice
+hint     Count up in 5s, starting at 5.
+choice   2 = 0, 5, 10, 15
+choice   1 = 1, 5
+choice   0 = 5, 10, 15, 20
+step 1   Start at 5 and keep adding 5.
+step 2   The first 4 land here.   [5, 10, 15, 20]
+miss     listed-factors = 1   Those divide into 5. Multiples count upward from 5.
+miss     started-at-zero = 2   The first multiple counted is 5 itself.
+
+--- multiples · seed 12345 · difficulty 1
+prompt   Choose the first 4 multiples.
+display  inline "7"
+answer   choice 0
+input    choice
+hint     Count up in 7s, starting at 7.
+choice   1 = 1, 7
+choice   2 = 0, 7, 14, 21
+choice   0 = 7, 14, 21, 28
+step 1   Start at 7 and keep adding 7.
+step 2   The first 4 land here.   [7, 14, 21, 28]
+miss     listed-factors = 1   Those divide into 7. Multiples count upward from 7.
+miss     started-at-zero = 2   The first multiple counted is 7 itself.
+
+--- multiples · seed 67890 · difficulty 1
+prompt   Choose the first 4 multiples.
+display  inline "4"
+answer   choice 0
+input    choice
+hint     Count up in 4s, starting at 4.
+choice   2 = 0, 4, 8, 12
+choice   0 = 4, 8, 12, 16
+choice   1 = 1, 2, 4
+step 1   Start at 4 and keep adding 4.
+step 2   The first 4 land here.   [4, 8, 12, 16]
+miss     listed-factors = 1   Those divide into 4. Multiples count upward from 4.
+miss     started-at-zero = 2   The first multiple counted is 4 itself.
+
+--- multiples · seed 424242 · difficulty 1
+prompt   Choose the first 4 multiples.
+display  inline "2"
+answer   choice 0
+input    choice
+hint     Count up in 2s, starting at 2.
+choice   1 = 1, 2
+choice   2 = 0, 2, 4, 6
+choice   0 = 2, 4, 6, 8
+step 1   Start at 2 and keep adding 2.
+step 2   The first 4 land here.   [2, 4, 6, 8]
+miss     listed-factors = 1   Those divide into 2. Multiples count upward from 2.
+miss     started-at-zero = 2   The first multiple counted is 2 itself.
+
+--- multiples · seed 987654321 · difficulty 1
+prompt   Choose the first 4 multiples.
+display  inline "7"
+answer   choice 0
+input    choice
+hint     Count up in 7s, starting at 7.
+choice   1 = 1, 7
+choice   2 = 0, 7, 14, 21
+choice   0 = 7, 14, 21, 28
+step 1   Start at 7 and keep adding 7.
+step 2   The first 4 land here.   [7, 14, 21, 28]
+miss     listed-factors = 1   Those divide into 7. Multiples count upward from 7.
+miss     started-at-zero = 2   The first multiple counted is 7 itself.
+
+--- multiples · seed 1 · difficulty 2
+prompt   Choose the first 4 multiples.
+display  inline "8"
+answer   choice 0
+input    choice
+hint     Count up in 8s, starting at 8.
+choice   2 = 0, 8, 16, 24
+choice   1 = 1, 2, 4, 8
+choice   0 = 8, 16, 24, 32
+step 1   Start at 8 and keep adding 8.
+step 2   The first 4 land here.   [8, 16, 24, 32]
+miss     listed-factors = 1   Those divide into 8. Multiples count upward from 8.
+miss     started-at-zero = 2   The first multiple counted is 8 itself.
+
+--- multiples · seed 12345 · difficulty 2
+prompt   Choose the first 4 multiples.
+display  inline "11"
+answer   choice 0
+input    choice
+hint     Count up in 11s, starting at 11.
+choice   1 = 1, 11
+choice   2 = 0, 11, 22, 33
+choice   0 = 11, 22, 33, 44
+step 1   Start at 11 and keep adding 11.
+step 2   The first 4 land here.   [11, 22, 33, 44]
+miss     listed-factors = 1   Those divide into 11. Multiples count upward from 11.
+miss     started-at-zero = 2   The first multiple counted is 11 itself.
+
+--- multiples · seed 67890 · difficulty 2
+prompt   Choose the first 4 multiples.
+display  inline "6"
+answer   choice 0
+input    choice
+hint     Count up in 6s, starting at 6.
+choice   2 = 0, 6, 12, 18
+choice   0 = 6, 12, 18, 24
+choice   1 = 1, 2, 3, 6
+step 1   Start at 6 and keep adding 6.
+step 2   The first 4 land here.   [6, 12, 18, 24]
+miss     listed-factors = 1   Those divide into 6. Multiples count upward from 6.
+miss     started-at-zero = 2   The first multiple counted is 6 itself.
+
+--- multiples · seed 424242 · difficulty 2
+prompt   Choose the first 4 multiples.
+display  inline "4"
+answer   choice 0
+input    choice
+hint     Count up in 4s, starting at 4.
+choice   1 = 1, 2, 4
+choice   2 = 0, 4, 8, 12
+choice   0 = 4, 8, 12, 16
+step 1   Start at 4 and keep adding 4.
+step 2   The first 4 land here.   [4, 8, 12, 16]
+miss     listed-factors = 1   Those divide into 4. Multiples count upward from 4.
+miss     started-at-zero = 2   The first multiple counted is 4 itself.
+
+--- multiples · seed 987654321 · difficulty 2
+prompt   Choose the first 4 multiples.
+display  inline "11"
+answer   choice 0
+input    choice
+hint     Count up in 11s, starting at 11.
+choice   1 = 1, 11
+choice   2 = 0, 11, 22, 33
+choice   0 = 11, 22, 33, 44
+step 1   Start at 11 and keep adding 11.
+step 2   The first 4 land here.   [11, 22, 33, 44]
+miss     listed-factors = 1   Those divide into 11. Multiples count upward from 11.
+miss     started-at-zero = 2   The first multiple counted is 11 itself.
+
+--- multiples · seed 1 · difficulty 3
+prompt   Choose the first 4 multiples.
+display  inline "11"
+answer   choice 0
+input    choice
+hint     Count up in 11s, starting at 11.
+choice   2 = 0, 11, 22, 33
+choice   1 = 1, 11
+choice   0 = 11, 22, 33, 44
+step 1   Start at 11 and keep adding 11.
+step 2   The first 4 land here.   [11, 22, 33, 44]
+miss     listed-factors = 1   Those divide into 11. Multiples count upward from 11.
+miss     started-at-zero = 2   The first multiple counted is 11 itself.
+
+--- multiples · seed 12345 · difficulty 3
+prompt   Choose the first 4 multiples.
+display  inline "15"
+answer   choice 0
+input    choice
+hint     Count up in 15s, starting at 15.
+choice   1 = 1, 3, 5, 15
+choice   2 = 0, 15, 30, 45
+choice   0 = 15, 30, 45, 60
+step 1   Start at 15 and keep adding 15.
+step 2   The first 4 land here.   [15, 30, 45, 60]
+miss     listed-factors = 1   Those divide into 15. Multiples count upward from 15.
+miss     started-at-zero = 2   The first multiple counted is 15 itself.
+
+--- multiples · seed 67890 · difficulty 3
+prompt   Choose the first 4 multiples.
+display  inline "8"
+answer   choice 0
+input    choice
+hint     Count up in 8s, starting at 8.
+choice   2 = 0, 8, 16, 24
+choice   0 = 8, 16, 24, 32
+choice   1 = 1, 2, 4, 8
+step 1   Start at 8 and keep adding 8.
+step 2   The first 4 land here.   [8, 16, 24, 32]
+miss     listed-factors = 1   Those divide into 8. Multiples count upward from 8.
+miss     started-at-zero = 2   The first multiple counted is 8 itself.
+
+--- multiples · seed 424242 · difficulty 3
+prompt   Choose the first 4 multiples.
+display  inline "5"
+answer   choice 0
+input    choice
+hint     Count up in 5s, starting at 5.
+choice   1 = 1, 5
+choice   2 = 0, 5, 10, 15
+choice   0 = 5, 10, 15, 20
+step 1   Start at 5 and keep adding 5.
+step 2   The first 4 land here.   [5, 10, 15, 20]
+miss     listed-factors = 1   Those divide into 5. Multiples count upward from 5.
+miss     started-at-zero = 2   The first multiple counted is 5 itself.
+
+--- multiples · seed 987654321 · difficulty 3
+prompt   Choose the first 4 multiples.
+display  inline "15"
+answer   choice 0
+input    choice
+hint     Count up in 15s, starting at 15.
+choice   1 = 1, 3, 5, 15
+choice   2 = 0, 15, 30, 45
+choice   0 = 15, 30, 45, 60
+step 1   Start at 15 and keep adding 15.
+step 2   The first 4 land here.   [15, 30, 45, 60]
+miss     listed-factors = 1   Those divide into 15. Multiples count upward from 15.
+miss     started-at-zero = 2   The first multiple counted is 15 itself.
+
+--- multiples · seed 1 · difficulty 4
+prompt   Choose the first 4 multiples.
+display  inline "15"
+answer   choice 0
+input    choice
+hint     Count up in 15s, starting at 15.
+choice   2 = 0, 15, 30, 45
+choice   1 = 1, 3, 5, 15
+choice   0 = 15, 30, 45, 60
+step 1   Start at 15 and keep adding 15.
+step 2   The first 4 land here.   [15, 30, 45, 60]
+miss     listed-factors = 1   Those divide into 15. Multiples count upward from 15.
+miss     started-at-zero = 2   The first multiple counted is 15 itself.
+
+--- multiples · seed 12345 · difficulty 4
+prompt   Choose the first 4 multiples.
+display  inline "20"
+answer   choice 0
+input    choice
+hint     Count up in 20s, starting at 20.
+choice   1 = 1, 2, 4, 5, 10, 20
+choice   2 = 0, 20, 40, 60
+choice   0 = 20, 40, 60, 80
+step 1   Start at 20 and keep adding 20.
+step 2   The first 4 land here.   [20, 40, 60, 80]
+miss     listed-factors = 1   Those divide into 20. Multiples count upward from 20.
+miss     started-at-zero = 2   The first multiple counted is 20 itself.
+
+--- multiples · seed 67890 · difficulty 4
+prompt   Choose the first 4 multiples.
+display  inline "11"
+answer   choice 0
+input    choice
+hint     Count up in 11s, starting at 11.
+choice   2 = 0, 11, 22, 33
+choice   0 = 11, 22, 33, 44
+choice   1 = 1, 11
+step 1   Start at 11 and keep adding 11.
+step 2   The first 4 land here.   [11, 22, 33, 44]
+miss     listed-factors = 1   Those divide into 11. Multiples count upward from 11.
+miss     started-at-zero = 2   The first multiple counted is 11 itself.
+
+--- multiples · seed 424242 · difficulty 4
+prompt   Choose the first 4 multiples.
+display  inline "7"
+answer   choice 0
+input    choice
+hint     Count up in 7s, starting at 7.
+choice   1 = 1, 7
+choice   2 = 0, 7, 14, 21
+choice   0 = 7, 14, 21, 28
+step 1   Start at 7 and keep adding 7.
+step 2   The first 4 land here.   [7, 14, 21, 28]
+miss     listed-factors = 1   Those divide into 7. Multiples count upward from 7.
+miss     started-at-zero = 2   The first multiple counted is 7 itself.
+
+--- multiples · seed 987654321 · difficulty 4
+prompt   Choose the first 4 multiples.
+display  inline "20"
+answer   choice 0
+input    choice
+hint     Count up in 20s, starting at 20.
+choice   1 = 1, 2, 4, 5, 10, 20
+choice   2 = 0, 20, 40, 60
+choice   0 = 20, 40, 60, 80
+step 1   Start at 20 and keep adding 20.
+step 2   The first 4 land here.   [20, 40, 60, 80]
+miss     listed-factors = 1   Those divide into 20. Multiples count upward from 20.
+miss     started-at-zero = 2   The first multiple counted is 20 itself.
+
+--- multiples · seed 1 · difficulty 5
+prompt   Choose the first 4 multiples.
+display  inline "19"
+answer   choice 0
+input    choice
+hint     Count up in 19s, starting at 19.
+choice   2 = 0, 19, 38, 57
+choice   1 = 1, 19
+choice   0 = 19, 38, 57, 76
+step 1   Start at 19 and keep adding 19.
+step 2   The first 4 land here.   [19, 38, 57, 76]
+miss     listed-factors = 1   Those divide into 19. Multiples count upward from 19.
+miss     started-at-zero = 2   The first multiple counted is 19 itself.
+
+--- multiples · seed 12345 · difficulty 5
+prompt   Choose the first 4 multiples.
+display  inline "25"
+answer   choice 0
+input    choice
+hint     Count up in 25s, starting at 25.
+choice   1 = 1, 5, 25
+choice   2 = 0, 25, 50, 75
+choice   0 = 25, 50, 75, 100
+step 1   Start at 25 and keep adding 25.
+step 2   The first 4 land here.   [25, 50, 75, 100]
+miss     listed-factors = 1   Those divide into 25. Multiples count upward from 25.
+miss     started-at-zero = 2   The first multiple counted is 25 itself.
+
+--- multiples · seed 67890 · difficulty 5
+prompt   Choose the first 4 multiples.
+display  inline "15"
+answer   choice 0
+input    choice
+hint     Count up in 15s, starting at 15.
+choice   2 = 0, 15, 30, 45
+choice   0 = 15, 30, 45, 60
+choice   1 = 1, 3, 5, 15
+step 1   Start at 15 and keep adding 15.
+step 2   The first 4 land here.   [15, 30, 45, 60]
+miss     listed-factors = 1   Those divide into 15. Multiples count upward from 15.
+miss     started-at-zero = 2   The first multiple counted is 15 itself.
+
+--- multiples · seed 424242 · difficulty 5
+prompt   Choose the first 4 multiples.
+display  inline "10"
+answer   choice 0
+input    choice
+hint     Count up in 10s, starting at 10.
+choice   1 = 1, 2, 5, 10
+choice   2 = 0, 10, 20, 30
+choice   0 = 10, 20, 30, 40
+step 1   Start at 10 and keep adding 10.
+step 2   The first 4 land here.   [10, 20, 30, 40]
+miss     listed-factors = 1   Those divide into 10. Multiples count upward from 10.
+miss     started-at-zero = 2   The first multiple counted is 10 itself.
+
+--- multiples · seed 987654321 · difficulty 5
+prompt   Choose the first 4 multiples.
+display  inline "25"
+answer   choice 0
+input    choice
+hint     Count up in 25s, starting at 25.
+choice   1 = 1, 5, 25
+choice   2 = 0, 25, 50, 75
+choice   0 = 25, 50, 75, 100
+step 1   Start at 25 and keep adding 25.
+step 2   The first 4 land here.   [25, 50, 75, 100]
+miss     listed-factors = 1   Those divide into 25. Multiples count upward from 25.
+miss     started-at-zero = 2   The first multiple counted is 25 itself."
+`;
+
+exports[`recorded output: primes > matches the wording recorded when the skill landed 1`] = `
+"--- primes · seed 1 · difficulty 1
+prompt   Is this number prime or composite?
+display  inline "10"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 10.
+step 2   2 divides it exactly.   [2 × 5 = 10]
+step 3   So 10 is composite.
+miss     called-prime = 1   10 is 2 × 5, so it has another factor.
+
+--- primes · seed 12345 · difficulty 1
+prompt   Is this number prime or composite?
+display  inline "25"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 25.
+step 2   5 divides it exactly.   [5 × 5 = 25]
+step 3   So 25 is composite.
+miss     called-prime = 1   25 is 5 × 5, so it has another factor.
+
+--- primes · seed 67890 · difficulty 1
+prompt   Is this number prime or composite?
+display  inline "37"
+answer   choice 1
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 37.
+step 2   None of them divide it exactly.
+step 3   So 37 is prime.
+miss     called-composite = 0   Nothing between 2 and 36 divides 37 exactly.
+
+--- primes · seed 424242 · difficulty 1
+prompt   Is this number prime or composite?
+display  inline "17"
+answer   choice 1
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 17.
+step 2   None of them divide it exactly.
+step 3   So 17 is prime.
+miss     called-composite = 0   Nothing between 2 and 16 divides 17 exactly.
+
+--- primes · seed 987654321 · difficulty 1
+prompt   Is this number prime or composite?
+display  inline "14"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 14.
+step 2   2 divides it exactly.   [2 × 7 = 14]
+step 3   So 14 is composite.
+miss     called-prime = 1   14 is 2 × 7, so it has another factor.
+
+--- primes · seed 1 · difficulty 2
+prompt   Is this number prime or composite?
+display  inline "10"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 10.
+step 2   2 divides it exactly.   [2 × 5 = 10]
+step 3   So 10 is composite.
+miss     called-prime = 1   10 is 2 × 5, so it has another factor.
+
+--- primes · seed 12345 · difficulty 2
+prompt   Is this number prime or composite?
+display  inline "25"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 25.
+step 2   5 divides it exactly.   [5 × 5 = 25]
+step 3   So 25 is composite.
+miss     called-prime = 1   25 is 5 × 5, so it has another factor.
+
+--- primes · seed 67890 · difficulty 2
+prompt   Is this number prime or composite?
+display  inline "17"
+answer   choice 1
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 17.
+step 2   None of them divide it exactly.
+step 3   So 17 is prime.
+miss     called-composite = 0   Nothing between 2 and 16 divides 17 exactly.
+
+--- primes · seed 424242 · difficulty 2
+prompt   Is this number prime or composite?
+display  inline "19"
+answer   choice 1
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 19.
+step 2   None of them divide it exactly.
+step 3   So 19 is prime.
+miss     called-composite = 0   Nothing between 2 and 18 divides 19 exactly.
+
+--- primes · seed 987654321 · difficulty 2
+prompt   Is this number prime or composite?
+display  inline "16"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 16.
+step 2   2 divides it exactly.   [2 × 8 = 16]
+step 3   So 16 is composite.
+miss     called-prime = 1   16 is 2 × 8, so it has another factor.
+
+--- primes · seed 1 · difficulty 3
+prompt   Is this number prime or composite?
+display  inline "20"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 20.
+step 2   2 divides it exactly.   [2 × 10 = 20]
+step 3   So 20 is composite.
+miss     called-prime = 1   20 is 2 × 10, so it has another factor.
+
+--- primes · seed 12345 · difficulty 3
+prompt   Is this number prime or composite?
+display  inline "38"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 38.
+step 2   2 divides it exactly.   [2 × 19 = 38]
+step 3   So 38 is composite.
+miss     called-prime = 1   38 is 2 × 19, so it has another factor.
+
+--- primes · seed 67890 · difficulty 3
+prompt   Is this number prime or composite?
+display  inline "41"
+answer   choice 1
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 41.
+step 2   None of them divide it exactly.
+step 3   So 41 is prime.
+miss     called-composite = 0   Nothing between 2 and 40 divides 41 exactly.
+
+--- primes · seed 424242 · difficulty 3
+prompt   Is this number prime or composite?
+display  inline "31"
+answer   choice 1
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 31.
+step 2   None of them divide it exactly.
+step 3   So 31 is prime.
+miss     called-composite = 0   Nothing between 2 and 30 divides 31 exactly.
+
+--- primes · seed 987654321 · difficulty 3
+prompt   Is this number prime or composite?
+display  inline "28"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 28.
+step 2   2 divides it exactly.   [2 × 14 = 28]
+step 3   So 28 is composite.
+miss     called-prime = 1   28 is 2 × 14, so it has another factor.
+
+--- primes · seed 1 · difficulty 4
+prompt   Is this number prime or composite?
+display  inline "30"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 30.
+step 2   2 divides it exactly.   [2 × 15 = 30]
+step 3   So 30 is composite.
+miss     called-prime = 1   30 is 2 × 15, so it has another factor.
+
+--- primes · seed 12345 · difficulty 4
+prompt   Is this number prime or composite?
+display  inline "51"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 51.
+step 2   3 divides it exactly.   [3 × 17 = 51]
+step 3   So 51 is composite.
+miss     called-prime = 1   51 is 3 × 17, so it has another factor.
+
+--- primes · seed 67890 · difficulty 4
+prompt   Is this number prime or composite?
+display  inline "71"
+answer   choice 1
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 71.
+step 2   None of them divide it exactly.
+step 3   So 71 is prime.
+miss     called-composite = 0   Nothing between 2 and 70 divides 71 exactly.
+
+--- primes · seed 424242 · difficulty 4
+prompt   Is this number prime or composite?
+display  inline "53"
+answer   choice 1
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 53.
+step 2   None of them divide it exactly.
+step 3   So 53 is prime.
+miss     called-composite = 0   Nothing between 2 and 52 divides 53 exactly.
+
+--- primes · seed 987654321 · difficulty 4
+prompt   Is this number prime or composite?
+display  inline "39"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 39.
+step 2   3 divides it exactly.   [3 × 13 = 39]
+step 3   So 39 is composite.
+miss     called-prime = 1   39 is 3 × 13, so it has another factor.
+
+--- primes · seed 1 · difficulty 5
+prompt   Is this number prime or composite?
+display  inline "40"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 40.
+step 2   2 divides it exactly.   [2 × 20 = 40]
+step 3   So 40 is composite.
+miss     called-prime = 1   40 is 2 × 20, so it has another factor.
+
+--- primes · seed 12345 · difficulty 5
+prompt   Is this number prime or composite?
+display  inline "70"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 70.
+step 2   2 divides it exactly.   [2 × 35 = 70]
+step 3   So 70 is composite.
+miss     called-prime = 1   70 is 2 × 35, so it has another factor.
+
+--- primes · seed 67890 · difficulty 5
+prompt   Is this number prime or composite?
+display  inline "139"
+answer   choice 1
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 139.
+step 2   None of them divide it exactly.
+step 3   So 139 is prime.
+miss     called-composite = 0   Nothing between 2 and 138 divides 139 exactly.
+
+--- primes · seed 424242 · difficulty 5
+prompt   Is this number prime or composite?
+display  inline "101"
+answer   choice 1
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   1 = prime
+choice   0 = composite
+step 1   Test 2, 3, 5 and 7 against 101.
+step 2   None of them divide it exactly.
+step 3   So 101 is prime.
+miss     called-composite = 0   Nothing between 2 and 100 divides 101 exactly.
+
+--- primes · seed 987654321 · difficulty 5
+prompt   Is this number prime or composite?
+display  inline "132"
+answer   choice 0
+input    choice
+hint     Try dividing by 2, 3, 5 and 7.
+choice   0 = composite
+choice   1 = prime
+step 1   Test 2, 3, 5 and 7 against 132.
+step 2   2 divides it exactly.   [2 × 66 = 132]
+step 3   So 132 is composite.
+miss     called-prime = 1   132 is 2 × 66, so it has another factor."
+`;

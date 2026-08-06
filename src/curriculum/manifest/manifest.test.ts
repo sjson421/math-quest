@@ -172,6 +172,9 @@ describe('stage capabilities', () => {
   it('marks choice input built and records every stage with a named consumer', () => {
     expect(AVAILABLE_CAPABILITIES.has('choice-input')).toBe(true)
     expect(stageById.get('stage-a')?.requires).toContain('choice-input')
+    // Stage B joined the list with Unit 4: `factors`, `multiples` and `primes`
+    // ask which complete list is right, which the number keypad cannot express.
+    expect(stageById.get('stage-b')?.requires).toContain('choice-input')
     expect(stageById.get('stage-c')?.requires).toContain('choice-input')
     expect(stageById.get('stage-d')?.requires).toContain('choice-input')
   })

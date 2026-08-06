@@ -4,8 +4,12 @@
  * Transcribed from `docs/curriculum.md`. Ids are verbatim; the document and this
  * file cross-check each other in the manifest tests.
  *
- * No capability requirements: everything here is whole-number arithmetic on the
- * plain number keypad, which is all that exists today.
+ * Requires `choice-input`, which is built. Everything here is whole-number
+ * arithmetic, and almost all of it is answered on the plain number keypad — but
+ * Unit 4's `factors`, `multiples` and `primes` ask which complete list is right,
+ * and a set is not something a number pad can express. `requires` lists every
+ * capability this stage's own skills need, so it is recorded here even though
+ * nothing waits on it.
  *
  * The units run in a straight line — each depends on the one before it, so
  * multiplication reaches addition transitively rather than by a second edge. The
@@ -20,6 +24,7 @@ import type { StageEntry } from './types'
 export const stageB: StageEntry = {
   id: 'stage-b',
   name: 'The Four Operations',
+  requires: ['choice-input'],
   units: [
     {
       id: 'unit-1',

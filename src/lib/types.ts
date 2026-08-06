@@ -50,7 +50,36 @@ export type WholeNumberOperation =
   | 'order-ascending'
   | 'round-to-10'
   | 'round-to-100'
+  /**
+   * A division displayed in full whose answer is a *property* of it rather than
+   * its value. `47 ÷ 5` evaluates to 9.4; the remainder is 2 and the whole
+   * quotient is 9, and neither can be reached by evaluating what is on screen.
+   */
+  | 'divide-remainder'
+  | 'divide-quotient'
+  /** Properties of the one displayed number, answered by choosing a label. */
+  | 'factors'
+  | 'multiples'
+  | 'classify-prime'
 
+/**
+ * The values a problem's answer is derived from, and which derivation.
+ *
+ * Named for the representation skills of Unit 0, which asked the first questions
+ * a displayed expression could not answer on its own. Unit 4 is the second
+ * caller and the name has stretched: a division is whole-number work too, but
+ * it is arithmetic rather than representation. Renaming it would touch every
+ * Unit 0 test for no behavioural gain, so it stays and this comment carries the
+ * meaning — carried values plus the operation applied to them.
+ *
+ * Nothing that renders reads this. It exists so the answer can be recomputed
+ * without trusting the generator.
+ *
+ * `values` is positional and means something different per operation, which is
+ * a real weakness: writing a dividend and divisor the wrong way round type-checks.
+ * Making it a union keyed by the operation is the fix, and is deliberately left
+ * to its own change rather than folded into a content unit.
+ */
 export type WholeNumberData = {
   values: number[]
   operation: WholeNumberOperation

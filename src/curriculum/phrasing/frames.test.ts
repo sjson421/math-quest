@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   CHECK_QUANTITIES,
   applyOperator,
+  storyMisconceptions,
   storyProblem,
   type Frame,
   type Quantities,
@@ -11,6 +12,7 @@ import { checkContent, formatViolations } from '../../lib/content-rules'
 import type { ContentLocation } from '../../lib/content-rules'
 import type { Operator, Problem } from '../../lib/types'
 import { ADDITION_FRAMES } from './addition'
+import { DIVISION_FRAMES } from './division'
 import { MULTIPLICATION_FRAMES } from './multiplication'
 import { SUBTRACTION_FRAMES } from './subtraction'
 
@@ -43,6 +45,7 @@ const banks: Bank[] = [
     unitId: 'unit-3',
     frames: MULTIPLICATION_FRAMES,
   },
+  { name: 'division', skillId: 'div-words', unitId: 'unit-4', frames: DIVISION_FRAMES },
 ]
 
 const locationFor = (skillId: string, unitId: string): ContentLocation => {
@@ -185,6 +188,25 @@ describe.each(banks)('the $name frame bank', (bank: Bank) => {
       }
     })
   }
+
+  if (operator === '÷') {
+    it('divides exactly by both the second quantity and the distractor', () => {
+      // The division equivalent of the rule above. `a ÷ distractor` is one of
+      // the three predicted values, so a distractor that does not divide the
+      // total predicts a fraction — which no whole-number pad can produce, so
+      // the diagnosis sits in the bank and never once fires.
+      for (const q of sets) {
+        expect(q.a % q.b, `${q.a} ÷ ${q.b} must come out exactly`).toBe(0)
+        expect(
+          q.a % q.distractor,
+          `${q.a} ÷ ${q.distractor} must come out exactly`,
+        ).toBe(0)
+        // Dividing by one returns the total, which is already predicted as the
+        // intermediate-value error — dedup would silently drop one of the two.
+        expect(q.distractor, 'the distractor must not be one').not.toBe(1)
+      }
+    })
+  }
 })
 
 describe('the frame check itself', () => {
@@ -268,6 +290,48 @@ describe('the frame check itself', () => {
     expect(checkBank(bank).join('\n')).toContain(
       'deliberately-broken-multiplication: mult-words [hint-sentences]',
     )
+  })
+
+  it('catches a broken division frame under division quantities', () => {
+    const frames = [
+      {
+        ...DIVISION_FRAMES[0],
+        id: 'deliberately-broken-division',
+        hint: () => 'Divide the total. Then check it.',
+      },
+    ]
+
+    const bank = { name: 'broken', skillId: 'div-words', unitId: 'unit-4', frames }
+    expect(checkBank(bank).join('\n')).toContain(
+      'deliberately-broken-division: div-words [hint-sentences]',
+    )
+  })
+
+  it('predicts multiplication as a division story wrong operation, not addition', () => {
+    // The partner map's whole reason. A learner who has not identified the
+    // operation combines the two quantities; predicting 12 + 3 would name an
+    // error the sentence does not invite, and 15 is not a value anyone reaches.
+    const q = { a: 12, b: 3, distractor: 2 }
+    const wrongOperation = storyMisconceptions(DIVISION_FRAMES[0], q).find(
+      (m) => m.tag === 'wrong-operation',
+    )
+
+    expect(wrongOperation?.value).toBe(36)
+  })
+
+  it('leaves the other three operations predicting what they always did', () => {
+    const pairs = [
+      [ADDITION_FRAMES[0], { a: 14, b: 27, distractor: 9 }, 13],
+      [SUBTRACTION_FRAMES[0], { a: 41, b: 27, distractor: 9 }, 68],
+      [MULTIPLICATION_FRAMES[0], { a: 7, b: 6, distractor: 4 }, 13],
+    ] as const
+
+    for (const [frame, q, expected] of pairs) {
+      const wrongOperation = storyMisconceptions(frame, q).find(
+        (m) => m.tag === 'wrong-operation',
+      )
+      expect(wrongOperation?.value, frame.id).toBe(expected)
+    }
   })
 
   it('refuses a bank whose frames disagree about the operation', () => {

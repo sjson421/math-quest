@@ -55,11 +55,11 @@ describe('StageList', () => {
   })
 
   it('counts only the playable units of each stage', () => {
-    // Stage B declares five units and can play three.
+    // Stage B declares five units and can play four.
     const html = render()
 
     expect(html).toContain('1 unit')
-    expect(html).toContain('3 units')
+    expect(html).toContain('4 units')
     expect(html).not.toContain('5 units')
   })
 

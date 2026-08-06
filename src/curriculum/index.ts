@@ -17,6 +17,7 @@ import { unit00 } from './unit-00-numbers'
 import { unit01 } from './unit-01-addition'
 import { unit02 } from './unit-02-subtraction'
 import { unit03 } from './unit-03-multiplication'
+import { unit04 } from './unit-04-division'
 import {
   indexSkills,
   resolveCourseTree,
@@ -32,7 +33,13 @@ import type { CourseStage, CourseUnit, SkillState } from './manifest'
  * skills within them, which the manifest re-imposes on anything the learner
  * sees — see `course` below.
  */
-export const allSkills: SkillGenerator[] = [...unit00, ...unit01, ...unit02, ...unit03]
+export const allSkills: SkillGenerator[] = [
+  ...unit00,
+  ...unit01,
+  ...unit02,
+  ...unit03,
+  ...unit04,
+]
 
 /**
  * Generators keyed by manifest skill id.

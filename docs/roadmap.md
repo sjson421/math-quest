@@ -2,10 +2,11 @@
 
 What is left, in the order it should be done.
 
-**Status: 38 of 201 skills are playable.** Stage A is complete, and so are Units 1–3 —
-Stage B's first three of five. The keypad can now offer a sign, a decimal point or a fraction
-slash when a problem asks for one. Choice input is also built, so `AVAILABLE_CAPABILITIES`
-contains only `choice-input`; comparison and ordering use choices, while the other playable
+**Status: 49 of 201 skills are playable.** Stage A is complete, and so are Units 1–4 —
+Stage B's first four of five, leaving only order of operations before the stage closes. The
+keypad can now offer a sign, a decimal point or a fraction slash when a problem asks for one.
+Choice input is also built, so `AVAILABLE_CAPABILITIES` contains only `choice-input`;
+comparison, ordering, factors, multiples and primes use choices, while the other playable
 skills use the keypad. This line is the only progress number in the repo's documentation —
 the manifest and `npm test` are the authority, and everything below is scope rather than
 status.
@@ -296,11 +297,44 @@ document's ✅ markers updated to match, which the cross-check enforces.
       whole-number problem on the digit keypad. The manifest's first three skills keep their
       existing quick flag and finish after five correct answers.
 
-- [ ] **11 · Unit 4 · Division** — L — 11 skills
+- [x] **11 · Unit 4 · Division** — L — 11 skills — **shipped 2026-08-06**
 
-      Long division needs a trace the engine does not have — quotient digits, remainders,
-      bring-down — and it carries two walls. `factors`, `multiples` and `primes` may want a
-      multi-value answer; decide when authoring whether that is choice input or a new mode.
+      Long division got the trace this item predicted — per quotient digit: the digit brought
+      down, the working value it joins, the digit written, the amount subtracted, and the
+      remainder carried on. `working` is the field that earns its place: it is the previous
+      remainder times ten plus the digit, and a trace recording only the digit could not tell
+      the algorithm apart from the error of dividing each digit on its own.
+
+      **The multi-value question resolved to choice input, not a new mode.** `factors`,
+      `multiples` and `primes` offer complete authored lists — the shape `order-numbers`
+      already uses — so the unit stayed content work rather than pulling capability work in
+      with it. Recognising a complete factor list is also the skill; typing eight numbers in
+      an order a checker has to normalise would have tested entry instead.
+
+      That decision had a consequence worth naming: **Stage B now declares `choice-input`**,
+      the first stage outside A, C and D to do so. Nothing waits on it — the capability has
+      shipped since item 5 — but `requires` lists what a stage's own skills need, and two
+      tests pinned Stage B's emptiness.
+
+      Left behind: **a displayed expression may now be asked for a property of its result.**
+      `47 ÷ 5` evaluates to 9.4 while `div-remainder` wants 2 and `long-div-remainder` wants
+      9, so those two carry their operands and the property requested, and verification
+      derives the answer rather than evaluating the screen. Every earlier skill could be
+      checked by evaluating what it displayed; division is the first that cannot.
+
+      Also here: **the wrong-operation prediction became operation-specific.** It was "`−` if
+      the frame is `+`, otherwise `+`", which for a division story predicts a sum — an error
+      the wording does not invite. Division's partner is multiplication. Its check quantities
+      divide exactly by the distractor as well as the divisor, because `total ÷ distractor` is
+      a predicted value and a fractional one is a diagnosis no whole-number pad can ever
+      match. `div-words` composes its total from both for the same reason, and excludes a
+      distractor equal to the answer — which shipped once, printing the answer in the sentence
+      as a quantity meaning something else.
+
+      The long-division draws **compose from a quotient and divisor** rather than filtering a
+      dividend, which is item 7's lesson applied before it could bite: exact division, quotient
+      width and a non-zero intermediate remainder are three independent properties, and that is
+      exactly the shape that exhausted `sub-across-zero`'s draw in front of a learner.
 
 - [ ] **12 · Unit 5 · Order of Operations** — S — 3 skills
 

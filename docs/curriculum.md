@@ -195,17 +195,17 @@ Tables are introduced **easiest first** so momentum builds before the hard ones.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 4.1 | `div-meaning` | Sharing and grouping | `quick` |
-| 4.2 | `div-facts` | Inverse of tables | |
-| 4.3 | `div-remainder` | Whole-number remainders | |
-| 4.4 | `div-by-10-100` | | |
-| 4.5 | `long-div-1digit` | Single-digit divisor | ⚠️ the algorithm itself |
-| 4.6 | `long-div-remainder` | | |
-| 4.7 | `long-div-2digit` | Two-digit divisor | ⚠️ estimating the quotient |
-| 4.8 | `factors` | Find all factors | |
-| 4.9 | `multiples` | | |
-| 4.10 | `primes` | Prime vs composite | |
-| 4.11 | `div-words` | Word problems | |
+| 4.1 | `div-meaning` | Sharing and grouping | ✅ `quick` |
+| 4.2 | `div-facts` | Inverse of tables | ✅ |
+| 4.3 | `div-remainder` | Whole-number remainders | ✅ |
+| 4.4 | `div-by-10-100` | | ✅ |
+| 4.5 | `long-div-1digit` | Single-digit divisor | ✅ ⚠️ the algorithm itself |
+| 4.6 | `long-div-remainder` | | ✅ |
+| 4.7 | `long-div-2digit` | Two-digit divisor | ✅ ⚠️ estimating the quotient |
+| 4.8 | `factors` | Find all factors | ✅ choice input |
+| 4.9 | `multiples` | | ✅ choice input |
+| 4.10 | `primes` | Prime vs composite | ✅ choice input |
+| 4.11 | `div-words` | Word problems | ✅ |
 
 ### Unit 5 — Order of Operations (3)
 

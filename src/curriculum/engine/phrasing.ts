@@ -65,20 +65,37 @@ export const applyOperator = (a: number, b: number, operator: Operator): number 
 }
 
 /**
+ * The operation each one is actually confused with.
+ *
+ * Not a single counterpart. Addition and subtraction are each other's, and
+ * multiplication's has been addition since Unit 3 — its recorded output pins
+ * that. Division's is multiplication: a learner who has not identified the
+ * operation combines the two quantities rather than adding them, and predicting
+ * a sum there would name an error the wording does not invite.
+ */
+const CONFUSED_WITH: Record<Operator, Operator> = {
+  '+': '−',
+  '−': '+',
+  '×': '+',
+  '÷': '×',
+}
+
+/**
  * The three ways a word problem is misread.
  *
  * Values are computed here so every frame predicts the same errors; the words
  * come from the frame, which is the only thing that knows what its numbers were
  * standing for. Each bank owns the constraints that keep these values distinct
  * from its answer: multiplication additionally rejects `2 × 2`, where adding
- * the operands happens to give the product.
+ * the operands happens to give the product, and division requires both its pairs
+ * to divide exactly so the values are numbers a whole-number pad can produce.
  */
 export function storyMisconceptions(frame: Frame, q: Quantities): Misconception[] {
   const { a, b, distractor } = q
 
   return [
     {
-      value: Math.abs(applyOperator(a, b, frame.operator === '+' ? '−' : '+')),
+      value: Math.abs(applyOperator(a, b, CONFUSED_WITH[frame.operator])),
       tag: 'wrong-operation',
       nudge: frame.nudges.wrongOperation(q),
     },
@@ -167,8 +184,19 @@ export const CHECK_QUANTITIES: Partial<Record<Operator, Quantities[]>> = {
     { a: 7, b: 6, distractor: 4 },
     { a: 12, b: 9, distractor: 7 },
   ],
-  // `Partial`, and no `÷` key: a division frame arrives with Unit 4 and brings
-  // the quantities its own draw admits.
-  // Empty placeholders would be a total type promising something absent, and
-  // the check would have to detect the placeholder the type says cannot exist.
+  // Division's, brought by Unit 4 as this comment used to promise. Both pairs
+  // divide exactly: `a / distractor` is a predicted value, and a fractional one
+  // is a diagnosis nothing typed on a whole-number pad can ever match. The
+  // distractor is never 1, which would make that value `a` — already predicted
+  // as the intermediate-value error, so dedup would drop one of the two.
+  //
+  // All four operators are declared now, and the type stays `Partial` anyway:
+  // the next one added to `Operator` should fail in the frame check, which names
+  // the operator it has no quantities for, rather than fail to compile here and
+  // invite an empty array that satisfies the type and checks nothing.
+  '÷': [
+    { a: 12, b: 3, distractor: 2 },
+    { a: 60, b: 5, distractor: 4 },
+    { a: 144, b: 12, distractor: 8 },
+  ],
 }

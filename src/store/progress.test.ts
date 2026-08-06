@@ -9,7 +9,7 @@
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { implementedSkillIds } from '../curriculum'
+import { implementedSkillIds, skillStates } from '../curriculum'
 import { stageA } from '../curriculum/manifest'
 import {
   UNLOCK_THRESHOLD,
@@ -172,9 +172,16 @@ describe('a practised skill is never re-locked', () => {
     // Rule 1 beats rule 2. Not reachable with today's playable skills, but the
     // order is what stops a future capability requirement handing back a lesson
     // that cannot be built.
-    const practisedButPlanned = progressWith({ 'div-meaning': { attempts: 9, mastery: 2 } })
+    //
+    // The id comes from the registry rather than being named. This case used to
+    // say `div-meaning`, and Unit 4 shipping it turned a test about a rule into
+    // a failure about which unit exists — any planned skill proves the same rule.
+    const planned = [...skillStates].find(([, state]) => state === 'planned')?.[0]
+    expect(planned, 'every skill is built; this rule needs a planned one').toBeDefined()
 
-    expect(isUnlocked('div-meaning', practisedButPlanned)).toBe(false)
+    const practisedButPlanned = progressWith({ [planned!]: { attempts: 9, mastery: 2 } })
+
+    expect(isUnlocked(planned!, practisedButPlanned)).toBe(false)
   })
 
   it('keeps add-facts open for a learner who reached it before 1.1 existed', () => {

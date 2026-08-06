@@ -72,6 +72,19 @@ const expandedText = (value: number) =>
     .filter((part) => part > 0)
     .join(' + ')
 
+/**
+ * Number theory, written out independently.
+ *
+ * Trial division rather than anything the unit file shares, for the same reason
+ * the arithmetic above is recomputed rather than imported: a helper used by both
+ * the generator and its check verifies nothing about the generator.
+ */
+const factorsOf = (n: number) =>
+  Array.from({ length: n }, (_, i) => i + 1).filter((d) => n % d === 0)
+
+const multiplesOf = (n: number, count: number) =>
+  Array.from({ length: count }, (_, i) => n * (i + 1))
+
 function choiceIdFor(problem: Problem, label: string): string {
   const choices = problem.choices ?? []
   const ids = choices.map((choice) => choice.id)
@@ -99,7 +112,9 @@ function recompute(problem: Problem): number | string {
             ? `${a} ? ${b}`
             : operation === 'order-ascending'
               ? values.join(', ')
-              : String(a)
+              : operation === 'divide-remainder' || operation === 'divide-quotient'
+                ? `${a} ÷ ${b}`
+                : String(a)
 
     if (display.text !== expectedText)
       throw new Error(
@@ -122,6 +137,18 @@ function recompute(problem: Problem): number | string {
         return Math.round(a / 10) * 10
       case 'round-to-100':
         return Math.round(a / 100) * 100
+      // The two cases the arithmetic branch below would get wrong: `47 ÷ 5`
+      // evaluates to 9.4, and neither answer is that.
+      case 'divide-remainder':
+        return a % b
+      case 'divide-quotient':
+        return Math.floor(a / b)
+      case 'factors':
+        return choiceIdFor(problem, factorsOf(a).join(', '))
+      case 'multiples':
+        return choiceIdFor(problem, multiplesOf(a, b).join(', '))
+      case 'classify-prime':
+        return choiceIdFor(problem, factorsOf(a).length === 2 ? 'prime' : 'composite')
       default: {
         const unhandled: never = operation
         throw new Error(`Unknown whole-number operation: ${unhandled}`)
@@ -488,6 +515,137 @@ describe('recompute', () => {
     expect(() => recompute(comparison)).toThrow(
       'synthetic-whole: expected exactly one choice labelled "<"',
     )
+  })
+
+  it('derives a remainder rather than evaluating the division shown', () => {
+    // The case the arithmetic branch gets wrong. Evaluating "47 ÷ 5" gives 9.4;
+    // this problem asks what is left over, and the answer is 2.
+    const remainder = whole({
+      prompt: 'What is left over?',
+      display: {
+        kind: 'inline',
+        text: '47 ÷ 5',
+        wholeNumber: { values: [47, 5], operation: 'divide-remainder' },
+      },
+      answer: { kind: 'exact', n: 2, d: 1 },
+    })
+
+    expect(recompute(remainder)).toBe(2)
+    expect(answerValue(remainder)).toBe(recompute(remainder))
+  })
+
+  it('catches a remainder answer that disagrees with its carried operands', () => {
+    const wrong = whole({
+      display: {
+        kind: 'inline',
+        text: '47 ÷ 5',
+        wholeNumber: { values: [47, 5], operation: 'divide-remainder' },
+      },
+      // 9 is the quotient, which is exactly the confusion the skill diagnoses —
+      // and an answer key that made it would be shipped without this branch.
+      answer: { kind: 'exact', n: 9, d: 1 },
+    })
+
+    expect(answerValue(wrong)).not.toBe(recompute(wrong))
+  })
+
+  it('discards the remainder when the whole quotient is asked for', () => {
+    const quotient = whole({
+      display: {
+        kind: 'inline',
+        text: '47 ÷ 5',
+        wholeNumber: { values: [47, 5], operation: 'divide-quotient' },
+      },
+      answer: { kind: 'exact', n: 9, d: 1 },
+    })
+
+    expect(recompute(quotient)).toBe(9)
+    expect(answerValue(quotient)).toBe(recompute(quotient))
+  })
+
+  it('names a division whose displayed text does not match its operands', () => {
+    const mismatched = whole({
+      display: {
+        kind: 'inline',
+        text: '47 ÷ 6',
+        wholeNumber: { values: [47, 5], operation: 'divide-remainder' },
+      },
+    })
+
+    expect(() => recompute(mismatched)).toThrow('synthetic-whole: visible text')
+  })
+
+  it('resolves a factor list through its visible label', () => {
+    const factors = whole({
+      prompt: 'Which list holds every factor?',
+      display: {
+        kind: 'inline',
+        text: '12',
+        wholeNumber: { values: [12], operation: 'factors' },
+      },
+      answer: { kind: 'choice', id: '0' },
+      inputMode: 'choice',
+      choices: [
+        { id: '1', label: '2, 3, 4, 6' },
+        { id: '0', label: '1, 2, 3, 4, 6, 12' },
+        { id: '2', label: '1, 2, 3, 4, 5, 6, 12' },
+      ],
+    })
+
+    expect(recompute(factors)).toBe('0')
+    expect(answerValue(factors)).toBe(recompute(factors))
+  })
+
+  it('catches a correct factor list mapped to the wrong choice id', () => {
+    const factors = whole({
+      display: {
+        kind: 'inline',
+        text: '12',
+        wholeNumber: { values: [12], operation: 'factors' },
+      },
+      // Points at the list with 1 and 12 stripped out — the distractor.
+      answer: { kind: 'choice', id: '1' },
+      inputMode: 'choice',
+      choices: [
+        { id: '0', label: '1, 2, 3, 4, 6, 12' },
+        { id: '1', label: '2, 3, 4, 6' },
+      ],
+    })
+
+    expect(answerValue(factors)).not.toBe(recompute(factors))
+  })
+
+  it('resolves multiples and a primality classification through their labels', () => {
+    const multiples = whole({
+      display: {
+        kind: 'inline',
+        text: '6',
+        wholeNumber: { values: [6, 4], operation: 'multiples' },
+      },
+      answer: { kind: 'choice', id: '0' },
+      inputMode: 'choice',
+      choices: [
+        { id: '0', label: '6, 12, 18, 24' },
+        { id: '1', label: '0, 6, 12, 18' },
+      ],
+    })
+    const classify = whole({
+      display: {
+        kind: 'inline',
+        text: '51',
+        wholeNumber: { values: [51], operation: 'classify-prime' },
+      },
+      answer: { kind: 'choice', id: '0' },
+      inputMode: 'choice',
+      choices: [
+        { id: '0', label: 'composite' },
+        { id: '1', label: 'prime' },
+      ],
+    })
+
+    expect(recompute(multiples)).toBe('0')
+    // 51 looks prime and is 3 × 17, which is the whole point of the skill.
+    expect(recompute(classify)).toBe('0')
   })
 
   it('names duplicate choice ids even when the expected label is unique', () => {

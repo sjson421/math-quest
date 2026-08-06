@@ -47,6 +47,16 @@ export type {
 } from './multiplication'
 
 export {
+  divisionStep,
+  divisionTrace,
+  forgotBringDown,
+  forgotBringDownValue,
+  ignoredStepRemainder,
+  ignoredStepRemainderValue,
+} from './division'
+export type { DivisionStep, DivisionTrace } from './division'
+
+export {
   DIFFICULTIES,
   SINGLE_DIGIT,
   THREE_DIGIT,
