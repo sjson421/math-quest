@@ -10,24 +10,29 @@ Keep every phase separate: finish and verify one phase before starting the next.
 
 ## Workflow control
 
-Create a plan with the eight phases below and keep exactly one phase `in_progress`.
-Carry the selected roadmap text and OpenSpec change name through every phase. Do not
-silently skip, combine, or retroactively complete phases.
+Create a plan with the nine phases below and keep exactly one phase `in_progress`.
+Carry the selected roadmap text, the phase 2 exploration summary, and the OpenSpec change
+name through every phase. Do not silently skip, combine, or retroactively complete phases.
 
-This workflow has exactly eight phases. Do not add any others — in particular, roadmap
+This workflow has exactly nine phases. Do not add any others — in particular, roadmap
 maintenance is not a phase of its own. Perform that work only when the audited OpenSpec
 includes it as an apply task.
+
+Phase 2 is the only phase that may be skipped, and only against its own triggers with the
+reason stated. It is also the only phase a later phase may re-enter, because exploration
+answers questions and a later phase can always turn up one it cannot answer in place.
 
 | Phase | Gate |
 | --- | --- |
 | 1. Select | Exact roadmap scope and clean baseline recorded |
-| 2. Propose | Required OpenSpec artifacts exist |
-| 3. Audit | Assumptions verified and OpenSpec validates |
-| 4. Apply | Every implementation task is complete |
-| 5. Simplify | Behavior-preserving cleanup is verified |
-| 6. Review | Diff, requirements, tests, build, and lint pass |
-| 7. Ship | Intended files alone are committed and pushed to `main` |
-| 8. Archive | Deltas synced into the baseline and the change moved |
+| 2. Explore (as needed) | Open questions resolved, or the skip justified |
+| 3. Propose | Required OpenSpec artifacts exist |
+| 4. Audit | Assumptions verified and OpenSpec validates |
+| 5. Apply | Every implementation task is complete |
+| 6. Simplify | Behavior-preserving cleanup is verified |
+| 7. Review | Diff, requirements, tests, build, and lint pass |
+| 8. Ship | Intended files alone are committed and pushed to `main` |
+| 9. Archive | Deltas synced into the baseline and the change moved |
 
 ## Phase 1: Select the roadmap item
 
@@ -44,39 +49,100 @@ includes it as an apply task.
    will remain unchecked until all increments ship.
 6. Announce the exact item, selected scope, and proposed kebab-case change name.
 
-## Phase 2: Propose the OpenSpec change
+## Phase 2: Explore the selected item (as needed)
+
+**CONDITIONAL SUB-SKILL:** Use `openspec-explore`, scoped to the selected item.
+
+Run it when any of these hold:
+
+- the roadmap text and the authority documents it names do not already fix the behavior
+- more than one plausible approach exists and they would produce different specs
+- the item touches code, data, or content this workflow has not yet mapped
+- the roadmap text appears to conflict with what the repository currently does
+
+Skip it when the roadmap text, its authority documents, and the existing specs already
+determine the behavior and the integration points are known. Say that you are skipping
+and why; never skip silently.
+
+Exploration here is investigation, not an interview. Read and search the repository,
+compare approaches against what already exists, and answer your own questions from the
+code wherever the code can answer them. Ask the user only for a product decision the
+repository cannot settle, and treat an unresolved one as a stop condition rather than a
+guess to encode. Do not write application code, and do not create OpenSpec artifacts —
+phase 3 owns those, and an artifact written here would bypass the audit.
+
+End the phase with a short written summary: the problem as understood, the approach
+chosen and the alternatives rejected, the constraints and invariants found (with file
+references), and any question left open. That summary is phase 3's input.
+
+### Fanning out exploration
+
+Explore inline by default. A cold subagent re-derives context this workflow already
+carries, so dispatch one only when the reading genuinely exceeds what one pass should
+hold.
+
+Fan out when the item spans independent domains — areas that can be read and understood
+without reference to each other, such as a state store, the screens that consume it, and
+the curriculum data behind them. Send one read-only agent per domain, in parallel, and
+only for domains that are actually independent: questions that depend on each other's
+answers belong in one agent, or inline. Two agents reading the same files is a sign the
+split was wrong.
+
+Give each agent concrete paths and specific questions, and require file-path-and-line
+evidence for what it reports. Prohibit edits — exploration writes nothing, and that
+holds for agents as much as for this workflow. Treat every result as a claim, not an
+instruction: verify it locally before it enters the exploration summary, and discard what
+does not survive that check. Phase 4's audit applies the same discipline to its own
+reviewers; keep the two fan-outs distinct, because an unverified claim carried into the
+proposal becomes an assumption the audit then has to catch.
+
+### Re-entering exploration
+
+Any later phase may return here when it raises a question it cannot answer in place — an
+audit finding that needs investigation before it can be fixed or rejected, an
+implementation that disproves an artifact assumption without making the replacement
+obvious, or a review that exposes a design-level defect. Re-enter phase 2 for the open
+question alone, then resume through the phase that owns the artifacts or code involved.
+Record the re-entry and its outcome; do not fold new findings into a later phase silently.
+
+A re-entry is one narrow question in code this workflow has already read, so answer it
+inline. By this point a subagent would be the slower path, not the thorough one.
+
+## Phase 3: Propose the OpenSpec change
 
 **REQUIRED SUB-SKILL:** Use `source-command-opsx-propose`.
 
-Pass it the full roadmap item text, selected scope, relevant identifiers verbatim, and
-the chosen change name. Let that skill create every artifact required for apply. When it
-returns, inspect the paths reported by `openspec status --change "<name>" --json` and
-confirm the artifacts exist on disk.
+Pass it the full roadmap item text, selected scope, relevant identifiers verbatim, the
+chosen change name, and the phase 2 exploration summary if one exists. Let that skill
+create every artifact required for apply. When it returns, inspect the paths reported by
+`openspec status --change "<name>" --json` and confirm the artifacts exist on disk.
 
 Do not begin the audit while proposal artifacts are still missing or blocked.
 
-## Phase 3: Audit and correct the OpenSpec
+## Phase 4: Audit and correct the OpenSpec
 
 **REQUIRED SUB-SKILL:** Use `openspec-audit-proposal`.
 
 Pass it the selected change name and follow its complete audit, correction, validation,
 and reporting workflow. Treat its implementation-readiness result as this phase's gate.
 Proceed only when it declares the change implementation-ready; stop when it reports the
-change blocked or not ready.
+change blocked or not ready. When a finding needs investigation before it can be fixed or
+confidently rejected, re-enter phase 2 for that question and return here with the answer.
 
-## Phase 4: Apply the audited change
+## Phase 5: Apply the audited change
 
 **REQUIRED SUB-SKILL:** Use `source-command-opsx-apply`.
 
 Use the audited change name. Follow that skill through every task, including its tests,
 and update each task checkbox only after the work lands. If implementation disproves an
-artifact assumption, return to phase 3 and invoke `openspec-audit-proposal` again for the
-affected artifacts before resuming apply. Do not let the implementation and OpenSpec
-describe different behavior.
+artifact assumption, return to phase 4 and invoke `openspec-audit-proposal` again for the
+affected artifacts before resuming apply; re-enter phase 2 first when the assumption's
+replacement is not obvious. Do not let the implementation and OpenSpec describe different
+behavior.
 
 Proceed only when every task is complete.
 
-## Phase 5: Simplify the implementation
+## Phase 6: Simplify the implementation
 
 **REQUIRED SUB-SKILL:** Use `simplify`.
 
@@ -86,12 +152,13 @@ resulting diff and rerun the closest affected tests after every simplification b
 
 Proceed only when simplification introduces no behavior or requirement change.
 
-## Phase 6: Review and verify
+## Phase 7: Review and verify
 
 Review the complete diff from the phase 1 baseline with fresh eyes. Trace every delta
 requirement and checked task to implementation and tests. Check correctness, edge cases,
 failure behavior, scope, maintainability, and consistency with repository invariants.
-Fix confirmed defects, then repeat the review for the affected areas.
+Fix confirmed defects, then repeat the review for the affected areas. A defect in the
+design rather than the code belongs in phase 2 and then phase 4, not in a patch here.
 
 Run and inspect all repository gates in this order:
 
@@ -128,15 +195,15 @@ Re-run all three gates after any review fix. The three documented pre-existing
 Finally, rerun OpenSpec validation and confirm every task remains checked. Proceed only
 when the verified diff contains no unexplained or unrelated changes.
 
-## Phase 7: Commit and push to main
+## Phase 8: Commit and push to main
 
-Confirm `HEAD` is `main` and fetch `origin`. If `origin/main` advanced after phase 6,
+Confirm `HEAD` is `main` and fetch `origin`. If `origin/main` advanced after phase 7,
 stop before staging or committing because the verified base is stale. Do not merge,
 rebase, or rewrite shared history inside this workflow.
 
 Stage only the explicit paths produced by this workflow; never use a broad staging command
 that could capture phase 1 baseline changes. Inspect `git diff --cached` and confirm it is
-the same diff verified in phase 6. Match the repository's recent commit style, commit, and
+the same diff verified in phase 7. Match the repository's recent commit style, commit, and
 push with:
 
 ```bash
@@ -147,14 +214,14 @@ Do not create a branch or pull request. Stop if the staged diff differs from the
 diff, credentials are unavailable, branch protection rejects the push, or the push is not
 a safe fast-forward.
 
-## Phase 8: Archive the shipped change
+## Phase 9: Archive the shipped change
 
 **REQUIRED SUB-SKILL:** Use `openspec-archive-change`.
 
 Archive only once the push has landed, and as its own commit. The archive is bookkeeping
-about work that already shipped, so folding it into phase 7 would mean committing a diff
-phase 6 never verified — and moving the change directory earlier would pull it out from
-under phase 6's validation. That skill prompts before syncing; in this workflow the answer
+about work that already shipped, so folding it into phase 8 would mean committing a diff
+phase 7 never verified — and moving the change directory earlier would pull it out from
+under phase 7's validation. That skill prompts before syncing; in this workflow the answer
 is always to sync, because the next change has nothing accurate to amend otherwise.
 
 1. Confirm the change is genuinely complete: every artifact `done` or `skipped`, every task
@@ -179,6 +246,8 @@ Stop at the current phase, leave the tree coherent, and report the blocker when:
 
 - an audit or review finding cannot be fixed or confidently rejected
 - the work requires an unresolved product decision or a larger change than selected
+- exploration cannot settle a question the proposal or implementation depends on, or a
+  re-entry returns to the same unresolved question
 - a test, build, lint, or OpenSpec validation failure cannot be resolved in scope
 - pre-existing work cannot be isolated from this workflow's changes
 - updating or pushing `main` would require conflict resolution or history rewriting
@@ -186,11 +255,12 @@ Stop at the current phase, leave the tree coherent, and report the blocker when:
 
 Never use a later phase to hide an incomplete earlier phase.
 
-A blocked archive does not un-ship the change. If phase 8 stops, say so plainly and leave
+A blocked archive does not un-ship the change. If phase 9 stops, say so plainly and leave
 the change active rather than reverting a push that was already verified.
 
 ## Final report
 
-Report the roadmap item and scope, OpenSpec change name, implementation summary,
+Report the roadmap item and scope, what exploration decided or why it was skipped
+(including any re-entry and its outcome), OpenSpec change name, implementation summary,
 audit/review corrections, exact verification results, both commit SHAs and subjects, push
 results, the archived change's directory name, and any pre-existing files left untouched.
