@@ -13,6 +13,7 @@ import {
   requeueMiss,
   startLessonSession,
 } from '../lib/lesson'
+import { placedLabel } from '../lib/number-line'
 import { createSubmissionGate } from '../lib/submission-gate'
 import { responseTo } from '../lib/submit'
 import type { Difficulty, Misconception, SkillGenerator } from '../lib/types'
@@ -84,10 +85,18 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
   }
 
   const problem = currentProblem(session)
-  const visibleEntry =
-    problem.inputMode === 'choice'
-      ? (problem.choices?.find((choice) => choice.id === entry)?.label ?? '')
-      : entry
+  // What the entry slot shows, which is not always what the checker gets: a
+  // choice submits an id and reads as its label, a placement submits ASCII and
+  // reads with the typographic minus the rest of the screen uses.
+  const visibleEntry = (() => {
+    if (problem.inputMode === 'choice') {
+      return problem.choices?.find((choice) => choice.id === entry)?.label ?? ''
+    }
+    if (problem.inputMode === 'number-line' && problem.numberLine) {
+      return placedLabel(problem.numberLine, entry)
+    }
+    return entry
+  })()
   const mascotState: MascotState =
     feedback?.status === 'correct'
       ? 'happy'

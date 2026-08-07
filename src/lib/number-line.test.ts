@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { parseInput } from './answer'
-import { placement, tickEntry, tickLabel, ticks, type NumberLineSpec } from './number-line'
+import {
+  placedLabel,
+  placement,
+  tickEntry,
+  tickLabel,
+  ticks,
+  type NumberLineSpec,
+} from './number-line'
 import { rational, toNumber, type Rational } from './rational'
 
 const spec = (start: Rational, step: Rational, count: number): NumberLineSpec => ({
@@ -126,6 +133,20 @@ describe('placing a value', () => {
 
     expect(first.index).not.toBe(second.index)
     expect(second).toEqual({ index: 9, canConfirm: true })
+  })
+
+  it('echoes a placement in the form the rest of the screen is written in', () => {
+    // The defect this replaced was visible and passed every assertion: the
+    // problem read `−3`, the tick read `−3`, and the slot between them read
+    // `-3`, because the slot echoed the string the checker parses.
+    expect(placedLabel(LINES.wholeNumbers, '-3')).toBe('−3')
+    expect(placedLabel(LINES.wholeNumbers, '-3')).toBe(tickLabel(whole[2]))
+    expect(placedLabel(LINES.quarters, '3/4')).toBe('3/4')
+  })
+
+  it('echoes nothing when nothing is placed', () => {
+    expect(placedLabel(LINES.wholeNumbers, '')).toBe('')
+    expect(placedLabel(LINES.wholeNumbers, '99')).toBe('')
   })
 
   it('offers no confirmation for a value the line does not carry', () => {

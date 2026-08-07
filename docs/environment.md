@@ -10,14 +10,26 @@ script prints a compact pass/fail summary and per-step page state never enters t
 conversation, which is why this approach costs a fraction of an interactive tool's
 per-step page snapshots. Keep the script and its `playwright-core` dependency in a scratch
 directory outside the repo (matching the version that installed the browser) and launch
-the shared Chromium at `~/.cache/ms-playwright`. Before installing anything, check
-whether a completed Chromium installation is already there and reuse it; do not run
-`npx playwright install chromium` when it is. If Chromium is missing, install it once
-with `npx playwright install chromium`, adding `--with-deps` only if system libraries
-are missing. `playwright-core` downloads no browser of its own and the scratch directory
-touches no repo file, so the script can never leak into a commit. On failure the script writes a screenshot and an
-accessibility-tree dump to the scratch directory; read those selectively rather than
-pulling whole pages into context.
+the shared Chromium at `~/.cache/ms-playwright`. The executable is
+`~/.cache/ms-playwright/chromium-<build>/chrome-linux64/chrome` — the `64` is easy to
+guess wrong, and the launch failure names a path that looks plausible either way, so
+resolve it with `find ~/.cache/ms-playwright -name chrome` rather than assuming. Before
+installing anything, check whether a completed Chromium installation is already there and
+reuse it; do not run `npx playwright install chromium` when it is. If Chromium is missing,
+install it once with `npx playwright install chromium`, adding `--with-deps` only if
+system libraries are missing. `playwright-core` downloads no browser of its own and the
+scratch directory touches no repo file, so the script can never leak into a commit. On
+failure the script writes a screenshot and an accessibility-tree dump to the scratch
+directory; read those selectively rather than pulling whole pages into context.
+
+**A passing run still captures one screenshot, and you still look at it.** Assertions
+check behaviour; they cannot check that the thing looks right. A control can pass every
+query it is given — right number of elements, right names, right measured width and
+height, no overflow — while its parts sit misaligned, its labels collide, or its marker
+lands off the line it belongs to. That is not a gap in how the assertions were written;
+no assertion phrased in element queries reaches it. This app commits to a visual identity,
+so shipping a screen nobody has seen is shipping half-checked. Take one shot at 375px at
+the end of a green run, read it, and say what it looked like.
 
 A script-driven real Chromium runs `requestAnimationFrame`, so `AnimatePresence
 mode="wait"` transitions complete. A hidden in-app preview pane does not — with no

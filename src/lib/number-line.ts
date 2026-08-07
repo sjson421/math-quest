@@ -90,3 +90,20 @@ export function placement(tickList: readonly Rational[], entry: string): Placeme
 
   return { index, canConfirm: index !== -1 }
 }
+
+/**
+ * How a placed value reads where the answer is echoed back, or empty.
+ *
+ * The entry is what the checker parses, so it carries an ASCII `-`; everything
+ * the learner reads carries the typographic `−`. Echoing the entry verbatim put
+ * both on screen at once — `−3` in the problem, `-3` in the slot beside it, and
+ * `−3` on the tick below — which is the control disagreeing with itself about
+ * what it just did. Round-tripping through the tick means the two forms meet
+ * only here, where the difference is the point.
+ */
+export function placedLabel(spec: NumberLineSpec, entry: string): string {
+  const tickList = ticks(spec)
+  const { index } = placement(tickList, entry)
+
+  return index === -1 ? '' : tickLabel(tickList[index])
+}
