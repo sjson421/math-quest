@@ -36,8 +36,12 @@ answers questions and a later phase can always turn up one it cannot answer in p
 
 ## Phase 1: Select the roadmap item
 
-1. Read `AGENTS.md`, `docs/roadmap.md`, `openspec/config.yaml`, and any authority
-   documents the roadmap item names.
+1. Read `AGENTS.md` and `openspec/config.yaml`. Read `docs/roadmap.md` in two slices:
+   the header through "How to read this", then from the first unchecked checkbox to the
+   end of the file — the checked items between are shipped history, read only when the
+   selected item references one. Read any authority documents the item names, and
+   whichever task docs `AGENTS.md` lists (docs/invariants.md, docs/testing.md,
+   docs/workflow.md, docs/environment.md) the item's domain touches.
 2. Record the initial branch, `git status --short`, and `git diff`. Treat every existing
    change as user-owned and exclude it from later staging.
 3. Move to `main` before making changes. Fetch `origin` and fast-forward only. Stop if
@@ -144,7 +148,9 @@ Proceed only when every task is complete.
 
 ## Phase 6: Simplify the implementation
 
-**REQUIRED SUB-SKILL:** Use `simplify`.
+**REQUIRED SUB-SKILL:** Use `simplify`. (Pi hosts only: `simplify` is not a skill there —
+use the `pi-simplify` extension's `/simplify` command, or apply this phase's discipline
+inline if that command is unavailable. Every other host resolves `simplify` unchanged.)
 
 Scope the review to this run's changed code. Apply only high-confidence,
 behavior-preserving improvements and preserve repository domain boundaries. Inspect the
@@ -169,25 +175,14 @@ npm run lint
 ```
 
 Run relevant targeted tests as needed. For a user-visible change, exercise it in a real
-browser using only the branch below that matches the current host.
-
-### Claude browser validation
-
-Use Claude's browser preview tools. Never run a development server from Bash when a preview
-tool is available. If the preview pane is unavailable or hidden, ask the user to display it
-rather than starting a server in the shell: a hidden pane does not run `requestAnimationFrame`,
-so `AnimatePresence mode="wait"` cannot complete screen transitions.
-
-### Codex browser validation
-
-Use Codex's available browser-control tool, including an installed Playwright MCP when
-present. An open localhost tab is not evidence that its server is running: check the route
-first. If it is unavailable, start the repository's documented development command in a
-long-lived integrated-terminal session, wait for the route to respond, and then navigate the
-browser to it. Keep the session alive for the exercise and stop it cleanly afterward if this
-workflow started it. Do not ask the user to open a pane, start the server, or perform the
-browser checks for you. If no browser-control capability is available after checking the
-installed tools, stop and report that capability as the blocker.
+browser, the same way on every host: a Playwright script run from the shell, following
+`docs/environment.md`. Reuse an installed Chromium; do not run the browser-install
+command if it is already present. The script prints only a compact pass/fail summary,
+and it lives with its dependencies in a scratch directory outside the repo, so it can
+never leak into the phase 8 diff. Do not ask the user to open a page, start the server,
+or perform the browser checks. If Chromium is missing, follow the conditional setup in
+`docs/environment.md`; if the host cannot install it, stop and report that capability as
+the blocker.
 
 Re-run all three gates after any review fix. The three documented pre-existing
 `Settings.tsx` lint warnings may remain; investigate every other warning or failure.
@@ -232,7 +227,7 @@ is always to sync, because the next change has nothing accurate to amend otherwi
    and each `MODIFIED` one carries its changes with its other scenarios still present.
    Expect no deletions: the merge can reflow surrounding lines, and that churn is yours to
    correct so the baseline stays consistent with the specs beside it.
-4. Correct whatever the archive falsifies — an `AGENTS.md` line describing the active queue
+4. Correct whatever the archive falsifies — the active-queue line in `docs/workflow.md`
    is the usual one.
 5. Re-run `openspec validate --specs --strict`, confirm the active queue is empty, then
    commit and push.

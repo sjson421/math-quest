@@ -9,10 +9,21 @@ Read these rather than re-deriving them:
 - **[docs/curriculum.md](docs/curriculum.md)** — the course. Authority for content.
 - **[docs/roadmap.md](docs/roadmap.md)** — what is left, in what order, what blocks what.
 
+Task docs — read the one that matches the work and skip the rest:
+
+- **[docs/invariants.md](docs/invariants.md)** — the reasoning behind every rule below.
+  Read it before changing code a rule names.
+- **[docs/testing.md](docs/testing.md)** — what each test suite covers, and how component
+  tests work without a DOM.
+- **[docs/workflow.md](docs/workflow.md)** — the OpenSpec process: baseline, changes,
+  archiving, sizing.
+- **[docs/environment.md](docs/environment.md)** — scripted browser validation, IndexedDB
+  shortcuts, sync caveats.
+
 ## Commands
 
 ```bash
-npm run dev          # never run a dev server from bash if a preview tool exists
+npm run dev          # background session for scripted browser checks; see docs/environment.md
 npm test             # full suite, ~3s
 npx vitest run src/lib/content-rules.test.ts   # one file
 npm run build        # tsc -b + vite build
@@ -25,54 +36,44 @@ for example, a Node builtin imported from `src`. Run the build before claiming t
 
 ## Invariants
 
-Break these and something fails loudly — or worse, quietly.
+Break these and something fails loudly — or worse, quietly. Each rule is stated once here;
+[docs/invariants.md](docs/invariants.md) gives the reasoning, in the same order.
 
-- **The manifest is the authority** for skill ids, unit/stage membership, and prerequisites:
-  `src/curriculum/manifest/`, one file per stage, 201 skills. `docs/curriculum.md` is its
-  human twin and the two **cross-check in the test suite** — editing a skill row in one
-  without the other is a test failure, by design.
-- **The navigation reads `course`, a derivation, not a list.** `resolveCourseTree()` returns
-  the stages and units holding a playable skill, in manifest order at all three levels. It
-  replaced a hand-written `units: Unit[]`, which had already drifted — its literals said
-  `unit-00` where the manifest says `unit-0`, and nothing failed because nothing read the
-  hand-written id. Unit modules export `SkillGenerator[]` now; there is no `Unit` type and
-  no second place a unit's name, id, order or membership is written down.
-- **`docs/curriculum.md` is load-bearing, not reference material.** `manifest/curriculum-doc.ts`
-  imports it with `?raw`, so moving, renaming, or trimming its tables breaks the build and 17
-  tests. It is also the *only* external check on 201 hand-transcribed ids, it holds the
-  design for work not yet built (skip-ahead, anti-discouragement mechanics, GED mapping), and
-  `openspec/specs/curriculum-manifest` requires it to keep existing. Do not "clean it up".
+- **The manifest is the authority** for skill ids, unit/stage membership, and
+  prerequisites: `src/curriculum/manifest/`, one file per stage, 201 skills.
+  `docs/curriculum.md` is its human twin and the two cross-check in the test suite — edit
+  both or neither.
+- **The navigation reads `course`, a derivation, not a list.** Unit modules export
+  `SkillGenerator[]`; there is no `Unit` type and no second place a unit's name, id,
+  order, or membership is written down.
+- **`docs/curriculum.md` is load-bearing, not reference material** — imported `?raw`.
+  Moving, renaming, or trimming its tables breaks the build and 17 tests. Do not "clean
+  it up".
 - **Skill ids are verbatim.** Never re-spell one. `times-7-8` is not `times-78`.
 - **A skill ships by gaining a generator**, never by being added to the manifest. State is
   derived at load: `implemented` needs a registered generator *and* every capability its
   stage requires. `planned` is the normal state for 183 of 201 skills, not an error.
-- **`AVAILABLE_CAPABILITIES`** in `manifest/resolve.ts` is the one-line switch that turns a
-  stage on once its infrastructure exists. It contains `choice-input` today.
-- **Two different `skillById`s.** `curriculum/index.ts` exports `generators` (the registry,
-  `SkillGenerator`); `manifest/index.ts` exports `skillById` (manifest entries). Do not
-  conflate them, and do not reintroduce the old name for the registry.
-- **`src` is type-checked with browser types only**, deliberately, so app code cannot reach
-  a Node builtin and typecheck its way into a runtime error. Test-support code that needs a
-  repo file uses a `?raw` import (see `manifest/curriculum-doc.ts`).
-- **The manifest is the runtime unlock authority.** `isUnlocked()` reads
-  `unlockPrerequisites` from `curriculum/index.ts` — the manifest's edges with planned skills
-  seen through. **Generators do not declare prerequisites**; `SkillGenerator` has no such
-  field, and adding one back would be a second graph nothing keeps in step.
-- **A practised skill is never re-locked**, whatever the graph does afterwards. `isUnlocked()`
-  checks `attempts > 0 || mastery > 0` before prerequisites, on every read rather than as a
-  migration, because a record can arrive from the sync endpoint at any time and that endpoint
-  never migrates. A skill with no generator is still locked — that rule outranks it, so a
-  lesson is never offered that cannot be built.
+- **`AVAILABLE_CAPABILITIES`** in `manifest/resolve.ts` is the one-line switch that turns
+  a stage on once its infrastructure exists. It contains `choice-input` today.
+- **Two different `skillById`s.** `curriculum/index.ts` exports `generators` (the
+  registry); `manifest/index.ts` exports `skillById` (manifest entries). Do not conflate
+  them, and do not reintroduce the old name for the registry.
+- **`src` is type-checked with browser types only**; test-support code that needs a repo
+  file uses a `?raw` import (see `manifest/curriculum-doc.ts`).
+- **The manifest is the runtime unlock authority.** Generators do not declare
+  prerequisites; `SkillGenerator` has no such field, and adding one back would be a second
+  graph nothing keeps in step.
+- **A practised skill is never re-locked** — `isUnlocked()` checks `attempts > 0 ||
+  mastery > 0` before prerequisites, on every read. A skill with no generator is still
+  locked; that rule outranks it.
 - **The manifest is the runtime authority for `quick`.** The 19 marked skills end at 5
-  correct; standard lessons end at 10. `Lesson.tsx` reads the manifest entry by generator id,
-  and `SkillGenerator` deliberately does not duplicate the flag.
-- **Lesson adaptation is session-local and lazy.** `src/lib/lesson.ts` owns the remaining
-  correct-answer slots, warm-up difficulty and sticky recovery after three consecutive
-  recorded misses. Re-queued problems keep the exact object originally presented; only an
-  unseen slot is generated at the adjusted difficulty.
+  correct; standard lessons end at 10. `SkillGenerator` does not duplicate the flag.
+- **Lesson adaptation is session-local and lazy** in `src/lib/lesson.ts`. Re-queued
+  problems keep the exact object originally presented; only an unseen slot is generated at
+  the adjusted difficulty.
 - **`reconcile()` in `store/progress.ts` merges stored skills over defaults per skill
-  object, not per field.** That is what lets `SkillProgress` gain fields without a sync
-  change. A version that picks named fields out of a stored skill breaks the sync contract.
+  object, not per field.** A version that picks named fields out of a stored skill breaks
+  the sync contract.
 
 ## Content rules
 
@@ -87,77 +88,14 @@ single-sentence hint, and ≥2 distinct predicted misconceptions on any skill ma
 - **Adult tone.** Describe the skill; never talk down, never scold. Wrong answers are
   diagnosed, not marked incorrect.
 
-## Test map
-
-| File | Covers |
-|---|---|
-| `curriculum/generators.test.ts` | ~1000 problems/skill, answer recomputed independently, content contract |
-| `curriculum/unit-01-add-sub.test.ts` | golden snapshot of generated wording — the gate on any generator refactor |
-| `curriculum/engine/*.test.ts` | column traces, ladders, draws, misconception factories vs. the expressions they replaced |
-| `curriculum/phrasing/frames.test.ts` | every word-problem frame checked at source, sampled or not |
-| `curriculum/coverage.test.ts` | registry ↔ manifest, planned vs implemented, what the learner is offered |
-| `manifest/manifest.test.ts` | counts, uniqueness, dangling prereqs, cycles, reachability, graph snapshot |
-| `manifest/curriculum-doc.test.ts` | manifest ↔ `docs/curriculum.md`, and the document against itself |
-| `manifest/resolve.test.ts` | derivation rules against synthetic stages |
-| `lib/*.test.ts`, `api/progress.test.ts` | answers, keypad, rationals, recovery key, sync |
-| `components/*.test.tsx` | first paint only — which keys a problem's rules put on the pad |
-
-Every reporting helper is paired with a synthetic case proving it names the offender. Keep
-that habit: a checker that returns "no problems" looks exactly like a clean codebase.
-
-**Component tests render to a string, in the node environment.** `test.environment` stays
-`node` and there is no jsdom: `renderToStaticMarkup` from `react-dom/server` covers first
-paint, which is enough to check what a component *offers*. No handlers are attached, so
-anything behind a tap belongs in a pure function under `lib/` where a node test can reach it —
-which is why `lib/submit.ts` exists rather than a four-way branch inside `Lesson.tsx`. A test
-that needs a real DOM fails loudly here rather than passing by accident.
-
 ## Workflow
 
-Work is planned as **OpenSpec changes**. Skills live in `.claude/skills/` and
-`.codex/skills/`: `/openspec-propose` → `/openspec-apply-change` →
-`/openspec-archive-change`. Task lists are the running record — mark each item done as it
-lands, and note decisions inline rather than only in chat.
-
-- `openspec/specs/` is the **baseline**: what the system does today, eleven capabilities —
-  `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
-  `skill-content-contract`, `problem-generation`, `word-problem-phrasing`, `choice-input`,
-  `progress-sync`, `recovery-key`, `answer-entry`. A change amending built behaviour writes
-  `## MODIFIED Requirements` against one of these; `## ADDED` is for genuinely new surface.
-  The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
-- `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — fifteen changes have shipped, the
-  latest being `unit-05-order-of-operations`, archived 2026-08-07.
-- Archive as soon as a change completes, and sync its deltas into the baseline first.
-  A completed change left active means the next one has nothing accurate to amend.
-- **A delta spec must describe what the change actually built.** `curriculum-foundation`
-  proposed quick lessons ending at 5; that was never implemented, so the requirement was
-  corrected to the shipped 10 before syncing. Do not archive an aspiration as fact.
-- **Sizing**, from the `tasks` rules in `openspec/config.yaml` (one task per generator plus
-  its tests, under 2 hours each): a content change is **one unit**, not one stage — a
-  50-skill stage would be ~100 tasks. Capability work is its own change, never bundled with
-  the content it unblocks. Create changes just-in-time, one or two ahead of the work;
-  proposals written months early against unbuilt infrastructure rot.
+Work is planned as **OpenSpec changes**: `/openspec-propose` → `/openspec-apply-change` →
+`/openspec-archive-change`, with task lists as the running record — mark each item done as
+it lands. Archive a change as soon as it completes, syncing its deltas into the baseline
+first; a completed change left active means the next one has nothing accurate to amend.
+The process details — baseline layout, sizing, what a delta may claim — are in
+[docs/workflow.md](docs/workflow.md).
 
 Style: no semicolons, single quotes, 2-space indent, comments that say *why*. Match the
 density of the file you are in — this codebase comments its reasoning, not its syntax.
-
-## Environment notes
-
-- Drive the app with browser-control tools. If its local route is unavailable, start
-  `npm run dev` in a long-lived integrated-terminal session, wait for readiness, and stop
-  the session after browser validation. An open localhost tab does not prove the server is
-  running.
-- A hidden in-app preview does not run `requestAnimationFrame`, so `AnimatePresence
-  mode="wait"` cannot finish an exit and **screens will not swap**. Keep the controlled
-  browser page displayed while interacting; a separate Playwright browser session satisfies
-  this requirement without user intervention.
-- Progress lives in IndexedDB under `math-quest-progress`. Writing a record there directly
-  is the fastest way to test migration or unlock behaviour — delete it afterwards.
-- The manifest ships in the bundle (~6 KB gzipped) because state is derived at load.
-  Validation is test-time and costs nothing at runtime.
-- **Sync has never been verified on real hardware.** The iPhone round trip, airplane-mode
-  queue, client-adopts-on-409, and failure visibility rest on `lib/sync.test.ts`,
-  `api/progress.test.ts`, and a hand-run against production covering the server half only.
-  Treat a sync bug report as plausible rather than surprising; see the note at the end of
-  `openspec/changes/archive/2026-07-30-progress-sync/tasks.md`.

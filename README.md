@@ -6,19 +6,22 @@ no Mac required.
 
 ## Status: playable loop, whole course mapped
 
-A full playable loop with six skills, mastery levels, XP, coins, streaks, and backup.
+A full playable loop over every skill built so far — mastery levels, XP, coins, streaks,
+and backup.
 
 The rest of the course now exists as data rather than intent: all **201 skills** across 8
 stages and 23 units are declared in `src/curriculum/manifest/`, with prerequisites, unit
 membership, and pacing markers, cross-checked against [`docs/curriculum.md`](docs/curriculum.md).
-**6 of the 201 are playable** — a skill becomes playable by gaining a generator, never by
-being added to the manifest.
+A skill becomes playable by gaining a generator, never by being added to the manifest — so
+how many are playable is a fact about the code, and the status line of
+[`docs/roadmap.md`](docs/roadmap.md) is where it is written down, deliberately in only one
+place.
 
-The 55 unbuilt skills in Stages A, B and C — the arithmetic foundation plus signed numbers —
-need only their generators; the existing number keypad is enough for all but one, which wants
-a number line. Stage D onward is gated on infrastructure that does not exist yet as well:
-KaTeX, fraction input, diagrams, expression input, a tap-to-plot coordinate plane, charts,
-and timed mode.
+The unbuilt skills left in Stages B and C — the rest of the arithmetic foundation plus signed
+numbers — need only their generators; the existing number keypad is enough for all but one,
+which wants a number line. Stage D onward is gated on infrastructure that does not exist yet
+as well: KaTeX, fraction input, diagrams, expression input, a tap-to-plot coordinate plane,
+charts, and timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
 milestone, what blocks what, and the unbuilt product features (dress-up, skip-ahead,
@@ -58,7 +61,8 @@ Every skill owns a generator that computes its own answer from the operands it j
 Nothing is hardcoded, so problems never run out and the answer key cannot drift from the
 question.
 
-- `src/curriculum/unit-01-add-sub.ts` — the six built generators (Units 1 and 2)
+- `src/curriculum/unit-00-numbers.ts` … `unit-04-division.ts` — the built generators, one
+  file per curriculum unit, added a unit at a time
 - `src/lib/generator.ts` — the factory every problem passes through
 - `src/lib/rng.ts` — seeded RNG (`mulberry32`) plus `constrain()` for rejecting degenerate
   problems like `x + 0`
@@ -99,9 +103,9 @@ generated, `src/lib/content-rules.ts` runs over sampled problems inside the test
 at most 4 solution steps, at most 12 words each, single-sentence hints, and at least two
 distinct predicted misconceptions on any skill marked a difficulty wall.
 
-It earned its keep immediately: enforcing it caught three of the six shipped generators,
-including a wall skill that had only one prediction left on some problems once the engine
-discarded a predicted value that coincided with the real answer.
+It earned its keep immediately: enforcing it caught three of the six generators that existed
+at the time, including a wall skill that had only one prediction left on some problems once
+the engine discarded a predicted value that coincided with the real answer.
 
 ### Answers are compared as exact rationals
 
