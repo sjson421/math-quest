@@ -6,15 +6,16 @@ Work is planned as **OpenSpec changes**. Skills live in `.agents/skills/`,
 across all three. Task lists are the running record — mark each item done as it lands, and
 note decisions inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, eleven capabilities —
+- `openspec/specs/` is the **baseline**: what the system does today, twelve capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `word-problem-phrasing`, `choice-input`,
-  `progress-sync`, `recovery-key`, `answer-entry`. A change amending built behaviour writes
-  `## MODIFIED Requirements` against one of these; `## ADDED` is for genuinely new surface.
-  The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
+  `number-line-input`, `progress-sync`, `recovery-key`, `answer-entry`. A change amending
+  built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED` is for
+  genuinely new surface. The count has been wrong before — `ls openspec/specs/` is the
+  authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — fifteen changes have shipped, the
-  latest being `unit-05-order-of-operations`, archived 2026-08-07.
+  holds shipped changes. **The active queue is empty** — sixteen changes have shipped, the
+  latest being `number-line-input`, archived 2026-08-07.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`
