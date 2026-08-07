@@ -30,7 +30,7 @@ answers questions and a later phase can always turn up one it cannot answer in p
 | 4. Audit | Assumptions verified and OpenSpec validates |
 | 5. Apply | Every implementation task is complete |
 | 6. Simplify | Behavior-preserving cleanup is verified |
-| 7. Review | Diff, requirements, tests, build, and lint pass |
+| 7. Review | Diff, requirements, tests, build, and lint pass, and the screen was looked at |
 | 8. Ship | Intended files alone are committed and pushed to `main` |
 | 9. Archive | Deltas synced into the baseline and the change moved |
 
@@ -184,6 +184,38 @@ or perform the browser checks. If Chromium is missing, follow the conditional se
 `docs/environment.md`; if the host cannot install it, stop and report that capability as
 the blocker.
 
+### Look at it
+
+A green script is half the check. Assertions are written in element queries — counts,
+names, measured sizes, overflow — and no query phrased that way reaches whether the
+thing *looks* right. A control can pass every one while its parts sit misaligned, its
+labels collide, it renders the same value two different ways, or it lands somewhere
+absurd on the page. This app commits to a visual identity, so a screen nobody has seen
+is not verified.
+
+So on a **passing** run, capture at least one screenshot at 375px and read it. Failure
+screenshots do not cover this: a green run is exactly when nobody looks. Shoot the new
+surface in each state that renders differently — empty and filled, selected and not,
+before and after feedback — rather than one shot of the happy path. Where the change
+touches an existing screen, look at that screen too, not only the new control.
+
+Read each shot against three questions, in this order:
+
+1. **Does it agree with itself?** The same value, in the same view, rendered two ways is
+   the defect this catches most often — a typographic minus beside an ASCII hyphen, a
+   label that disagrees with the thing it labels.
+2. **Is it laid out, not just present?** Alignment, spacing, collisions, truncation,
+   things overlapping or drifting off the strip they belong to.
+3. **Does it look like the rest of the app?** Sanrio-adjacent, adult in tone. A control
+   that is correct and ugly is not done.
+
+Say in the final report what you looked at and what you saw. "Screenshot taken" is not a
+finding; "the entry slot and the tick disagreed on the minus sign" is. Treat a visual
+defect exactly like any other confirmed defect in this phase: fix it, then re-run the
+gates and re-shoot. When something looks wrong but the fix is a design decision rather
+than a bug — a layout you would be guessing at, a change that would move controls the
+rest of the course already uses — report it for the user instead of fixing it quietly.
+
 Re-run all three gates after any review fix. The three documented pre-existing
 `Settings.tsx` lint warnings may remain; investigate every other warning or failure.
 
@@ -259,3 +291,8 @@ Report the roadmap item and scope, what exploration decided or why it was skippe
 (including any re-entry and its outcome), OpenSpec change name, implementation summary,
 audit/review corrections, exact verification results, both commit SHAs and subjects, push
 results, the archived change's directory name, and any pre-existing files left untouched.
+
+Verification results include what the screens looked like, not only that the scripts were
+green: which states you shot and what you saw in them. If a user-visible change shipped
+without anyone looking at it, say that plainly rather than letting a row of passing checks
+imply otherwise.
