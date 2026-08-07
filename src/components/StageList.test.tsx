@@ -54,13 +54,16 @@ describe('StageList', () => {
     }
   })
 
-  it('counts only the playable units of each stage', () => {
-    // Stage B declares five units and can play four.
+  it('counts the units of each stage it is given', () => {
+    // Both built stages are complete now, so this count matches what the
+    // curriculum declares. It did not before Unit 5, and the omission that made
+    // the two differ belongs to `resolveCourseTree` rather than to this
+    // component — which reads `units.length` and nothing else. Asserting it
+    // again against a hand-chopped tree would only re-read that length.
     const html = render()
 
     expect(html).toContain('1 unit')
-    expect(html).toContain('4 units')
-    expect(html).not.toContain('5 units')
+    expect(html).toContain('5 units')
   })
 
   it('reports mastery across the whole stage', () => {

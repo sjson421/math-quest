@@ -132,6 +132,110 @@ function displayedText(data: WholeNumberData): string {
   }
 }
 
+/**
+ * Evaluate a displayed expression the way a reader does.
+ *
+ * The branch this replaced matched two operands around one operator, which every
+ * skill through Unit 4 satisfied. Unit 5 displays `3 + 4 × 2`, where the answer
+ * depends on which operation runs first — and folding the operators in written
+ * order is precisely the mistake that unit teaches against, so a check that
+ * folded would agree with a generator that made it.
+ *
+ * Recursive descent, written from scratch rather than shared with the unit that
+ * builds these expressions, for the same reason the number theory above is
+ * written twice: a helper used by both the generator and its check verifies
+ * nothing. A precedence bug now has to be made identically by two different
+ * methods to survive.
+ *
+ * The grammar is the conventional one, and its shape *is* the precedence rule:
+ *
+ *     expression := term (('+' | '−') term)*
+ *     term       := factor (('×' | '÷') factor)*
+ *     factor     := '-'? number | '(' expression ')'
+ *
+ * Both loops consume left to right, which is what makes `20 − 8 + 3` fifteen
+ * rather than nine — the same-precedence case `pemdas` exists to teach.
+ */
+function tokenize(text: string): (string | number)[] {
+  // The third alternative is the point: anything that is neither a number nor an
+  // operator is captured and thrown on, rather than skipped. A tokenizer that
+  // ignored what it did not recognise would read `3 + 4 ? 2` as `3 + 4 2` and
+  // report a parse failure a character too late.
+  return [...text.matchAll(/(\d+)|([-+−×÷()])|(\S)/g)].map(([, digits, symbol, unknown]) => {
+    if (unknown) throw new Error(`unexpected "${unknown}"`)
+    return digits ? Number(digits) : symbol
+  })
+}
+
+function evaluateExpression(text: string): number {
+  const tokens = tokenize(text)
+  let at = 0
+
+  const peek = () => tokens[at]
+
+  function factor(): number {
+    const token = peek()
+
+    if (token === '(') {
+      at += 1
+      const value = expression()
+      if (peek() !== ')') throw new Error('unbalanced parentheses')
+      at += 1
+      return value
+    }
+
+    // A signed literal, which the two-operand branch also accepted. No generator
+    // produces one today; Unit 6 will, and narrowing here would drop that
+    // silently rather than loudly.
+    if (token === '-' || token === '−') {
+      at += 1
+      return -factor()
+    }
+
+    if (typeof token !== 'number') {
+      throw new Error(`expected a number, found "${token ?? 'end of expression'}"`)
+    }
+    at += 1
+    return token
+  }
+
+  function term(): number {
+    let value = factor()
+    for (;;) {
+      const token = peek()
+      if (token === '×') {
+        at += 1
+        value *= factor()
+      } else if (token === '÷') {
+        at += 1
+        value /= factor()
+      } else {
+        return value
+      }
+    }
+  }
+
+  function expression(): number {
+    let value = term()
+    for (;;) {
+      const token = peek()
+      if (token === '+') {
+        at += 1
+        value += term()
+      } else if (token === '-' || token === '−') {
+        at += 1
+        value -= term()
+      } else {
+        return value
+      }
+    }
+  }
+
+  const value = expression()
+  if (at !== tokens.length) throw new Error(`unexpected "${tokens[at]}"`)
+  return value
+}
+
 function recompute(problem: Problem): number | string {
   const { display } = problem
 
@@ -182,34 +286,39 @@ function recompute(problem: Problem): number | string {
     }
   }
 
-  let operands: number[]
-  let operator: string
-
-  if (display.kind === 'column' || display.kind === 'story') {
-    // A story carries its quantities precisely so this stays possible. Reading
-    // them out of the prose would not work: a word problem mentions numbers the
-    // answer does not use, which is most of what makes it a word problem.
-    operands = display.operands
-    operator = display.operator
-  } else {
-    const m = /^(-?\d+)\s*([+\-−×÷])\s*(-?\d+)$/.exec(display.text)
-    if (!m) throw new Error(`Cannot parse inline display: "${display.text}"`)
-    operands = [Number(m[1]), Number(m[3])]
-    operator = m[2]
+  if (display.kind === 'inline') {
+    try {
+      return evaluateExpression(display.text)
+    } catch (error) {
+      throw new Error(
+        `${problem.skillId}: cannot evaluate "${display.text}" — ${(error as Error).message}`,
+      )
+    }
   }
+
+  // A story carries its quantities precisely so this stays possible. Reading
+  // them out of the prose would not work: a word problem mentions numbers the
+  // answer does not use, which is most of what makes it a word problem.
+  //
+  // The ASCII hyphen this switch used to accept is gone with the regex that
+  // produced it. A column or story declares `Operator`, which spells subtraction
+  // `−`, so the extra case was unreachable — and now that `operator` is no longer
+  // widened to `string` on its way here, the compiler says so.
+  const { operands, operator } = display
 
   switch (operator) {
     case '+':
       return operands.reduce((a, b) => a + b)
-    case '-':
     case '−':
       return operands.reduce((a, b) => a - b)
     case '×':
       return operands.reduce((a, b) => a * b)
     case '÷':
       return operands.reduce((a, b) => a / b)
-    default:
-      throw new Error(`Unknown operator: ${operator}`)
+    default: {
+      const unhandled: never = operator
+      throw new Error(`Unknown operator: ${unhandled}`)
+    }
   }
 }
 
@@ -693,6 +802,70 @@ describe('recompute', () => {
     expect(recompute(multiples)).toBe('0')
     // 51 looks prime and is 3 × 17, which is the whole point of the skill.
     expect(recompute(classify)).toBe('0')
+  })
+
+  // The expression evaluator is the branch every keypad arithmetic skill routes
+  // through, so a bug in it weakens the check protecting the whole course rather
+  // than one unit. These are the cases proving it does the reading.
+  // `stated` defaults, because most cases below assert on `recompute` alone and
+  // never read the answer. Spelling out a value there invited reading it as the
+  // assertion when the `.toBe()` beside it is.
+  const expression = (text: string, stated = 0): Problem => ({
+    skillId: 'synthetic-expression',
+    prompt: 'What is the value?',
+    display: { kind: 'inline', text },
+    answer: { kind: 'exact', n: stated, d: 1 },
+    inputMode: 'keypad',
+    hint: 'Work out which operation comes first.',
+    solution: [{ text: 'Multiply before adding.' }],
+    difficulty: 1,
+  })
+
+  it('applies precedence rather than the order the operators are written in', () => {
+    const problem = expression('3 + 4 × 2', 11)
+
+    expect(recompute(problem)).toBe(11)
+    expect(answerValue(problem)).toBe(recompute(problem))
+  })
+
+  it('catches an answer folded left to right', () => {
+    // The `two-operations` wall in miniature, and the reason this branch cannot
+    // stay a fold: 14 is the mistake the skill exists to diagnose, and a checker
+    // that folded would have called it correct.
+    const problem = expression('3 + 4 × 2', 14)
+
+    expect(recompute(problem)).toBe(11)
+    expect(answerValue(problem)).not.toBe(recompute(problem))
+  })
+
+  it('evaluates a parenthesised group first', () => {
+    expect(recompute(expression('(3 + 4) × 2'))).toBe(14)
+    expect(recompute(expression('7 + 3 × (9 − 4)'))).toBe(22)
+  })
+
+  it('runs equal precedence left to right, not in PEMDAS letter order', () => {
+    // The `pemdas` misconception, checked on the checker. Reading A before S
+    // gives 9 and M before D gives 3; both are wrong and both are values a
+    // learner reaches.
+    expect(recompute(expression('20 − 8 + 3'))).toBe(15)
+    expect(recompute(expression('24 ÷ 4 × 2'))).toBe(12)
+  })
+
+  it('keeps evaluating the two-operand displays that already ship', () => {
+    expect(recompute(expression('40 + 40'))).toBe(80)
+    expect(recompute(expression('1482 ÷ 6'))).toBe(247)
+    expect(recompute(expression('30 − 10'))).toBe(20)
+  })
+
+  it.each([
+    ['unbalanced parentheses', '(3 + 4 × 2'],
+    ['a stray operator', '3 + × 2'],
+    ['a character that is not arithmetic', '3 + 4 ? 2'],
+    ['nothing to evaluate', ''],
+  ])('names a display it cannot read: %s', (_case, text) => {
+    // Loud beats silent: an unreadable display that returned NaN would compare
+    // unequal to every answer and look like a generator bug in the wrong place.
+    expect(() => recompute(expression(text))).toThrow('synthetic-expression: cannot evaluate')
   })
 
   it('names duplicate choice ids even when the expected label is unique', () => {

@@ -31,18 +31,19 @@ describe('UnitList', () => {
     expect(html.indexOf('Addition')).toBeLessThan(html.indexOf('Subtraction'))
     expect(html.indexOf('Subtraction')).toBeLessThan(html.indexOf('Multiplication'))
     expect(html.indexOf('Multiplication')).toBeLessThan(html.indexOf('Division'))
-    expect(html.match(/<button/g)).toHaveLength(4)
+    expect(html.indexOf('Division')).toBeLessThan(html.indexOf('Order of Operations'))
+    expect(html.match(/<button/g)).toHaveLength(5)
   })
 
-  it('leaves out the units of this stage that have no generator', () => {
-    // Stage B declares five units; Order of Operations is unwritten, so the
-    // level cannot show it and the learner cannot count what is missing.
-    const html = render()
-
-    expect(html).not.toContain('Order of Operations')
-    expect(stageB.stage.units).toHaveLength(5)
-    expect(stageB.units).toHaveLength(4)
-  })
+  // The case that used to sit here asserted that Stage B's unwritten fifth unit
+  // stayed off screen. Unit 5 built it, and there is now no part-built stage in
+  // the course to run it against — every stage the learner can reach is
+  // complete. It is not re-staged on a hand-chopped tree: `UnitList` maps
+  // `stage.units` unconditionally, so feeding it four units and finding four
+  // units asserts only that `.map` works. The rule it named is omission, which
+  // happens in `resolveCourseTree` before this component sees anything, and is
+  // tested where it lives — `resolve.test.ts` against synthetic stages, and
+  // `coverage.test.ts` against the real course.
 
   it('lists no skill, only units', () => {
     const html = render()

@@ -111,14 +111,53 @@ describe('crossedStageCheckpoint', () => {
     ).toEqual({ id: 'stage-a', name: 'Numbers' })
   })
 
-  it('does not mistake the playable end of Stage B for its boundary', () => {
-    const playable = stageB.units
-      .flatMap((unit) => unit.skills)
-      .filter((skill) => skillStates.get(skill.id) === 'implemented')
-    const masteries = Object.fromEntries(playable.map((skill) => [skill.id, threshold]))
-    const last = playable.at(-1)
+  it('does not mistake the playable end of a part-built stage for its boundary', () => {
+    // This case used to run against Stage B, whose forty-one playable skills sat
+    // inside forty-four declared ones. Unit 5 finished the stage, and a case
+    // whose premise the course outgrows stops testing anything — so it moved to
+    // a synthetic stage, where "part-built" is a property rather than a
+    // temporary fact. `resolve.test.ts` tests its derivation rules the same way.
+    const partBuilt: StageEntry = {
+      id: 'stage-part-built',
+      name: 'Part Built',
+      units: [
+        {
+          id: 'unit-part-built',
+          name: 'Part Built Unit',
+          skills: [
+            { id: 'playable', name: 'Playable', blurb: 'Playable' },
+            { id: 'unwritten', name: 'Unwritten', blurb: 'Unwritten' },
+          ],
+        },
+      ],
+    }
 
-    expect(last).toBeDefined()
+    expect(
+      crossedStageCheckpoint({
+        skillId: 'playable',
+        // Everything playable is mastered, and the stage is still not finished.
+        before: progressAt({ playable: threshold - 1 }),
+        after: progressAt({ playable: threshold }),
+        locations: indexSkills([partBuilt]),
+        states: new Map<string, SkillState>([
+          ['playable', 'implemented'],
+          ['unwritten', 'planned'],
+        ]),
+        threshold,
+      }),
+    ).toBeUndefined()
+  })
+
+  it('recognizes Stage B now that its last unit is built', () => {
+    // The other half of the case above, and the reason it had to move: Stage B
+    // is complete for the first time, so mastering all forty-four of its skills
+    // does now carry the learner across a boundary.
+    const skills = stageB.units.flatMap((unit) => unit.skills)
+    const masteries = Object.fromEntries(skills.map((skill) => [skill.id, threshold]))
+    const last = skills.at(-1)
+
+    expect(last?.id).toBe('pemdas')
+    expect(skills.every((skill) => skillStates.get(skill.id) === 'implemented')).toBe(true)
     expect(
       crossedStageCheckpoint({
         skillId: last!.id,
@@ -128,7 +167,7 @@ describe('crossedStageCheckpoint', () => {
         states: skillStates,
         threshold,
       }),
-    ).toBeUndefined()
+    ).toEqual({ id: 'stage-b', name: 'The Four Operations' })
   })
 })
 

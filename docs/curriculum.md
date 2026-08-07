@@ -211,9 +211,9 @@ Tables are introduced **easiest first** so momentum builds before the hard ones.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 5.1 | `two-operations` | 3 + 4 × 2 | ⚠️ left-to-right instinct |
-| 5.2 | `with-parentheses` | | |
-| 5.3 | `pemdas` | Full, no exponents yet | exponents revisited at 12.10 |
+| 5.1 | `two-operations` | 3 + 4 × 2 | ✅ ⚠️ left-to-right instinct |
+| 5.2 | `with-parentheses` | | ✅ |
+| 5.3 | `pemdas` | Full, no exponents yet | ✅ exponents revisited at 12.10 |
 
 ---
 

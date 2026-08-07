@@ -18,6 +18,7 @@ import { unit01 } from './unit-01-addition'
 import { unit02 } from './unit-02-subtraction'
 import { unit03 } from './unit-03-multiplication'
 import { unit04 } from './unit-04-division'
+import { unit05 } from './unit-05-order-of-operations'
 import {
   indexSkills,
   resolveCourseTree,
@@ -39,6 +40,7 @@ export const allSkills: SkillGenerator[] = [
   ...unit02,
   ...unit03,
   ...unit04,
+  ...unit05,
 ]
 
 /**

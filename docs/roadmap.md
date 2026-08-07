@@ -2,8 +2,9 @@
 
 What is left, in the order it should be done.
 
-**Status: 49 of 201 skills are playable.** Stage A is complete, and so are Units 1–4 —
-Stage B's first four of five, leaving only order of operations before the stage closes. The
+**Status: 52 of 201 skills are playable.** Stages A and B are both complete — all five of
+Stage B's units, through order of operations — which makes Stage B the first stage to close
+since checkpoints were built, and the first place the checkpoint fires outside Stage A. The
 keypad can now offer a sign, a decimal point or a fraction slash when a problem asks for one.
 Choice input is also built, so `AVAILABLE_CAPABILITIES` contains only `choice-input`;
 comparison, ordering, factors, multiples and primes use choices, while the other playable
@@ -336,9 +337,64 @@ document's ✅ markers updated to match, which the cross-check enforces.
       width and a non-zero intermediate remainder are three independent properties, and that is
       exactly the shape that exhausted `sub-across-zero`'s draw in front of a learner.
 
-- [ ] **12 · Unit 5 · Order of Operations** — S — 3 skills
+- [x] **12 · Unit 5 · Order of Operations** — S — 3 skills — **shipped 2026-08-07**
 
-      Closes Stage B. `two-operations` is a wall.
+      Closes Stage B, and with it the first stage boundary the learner reaches that is not
+      Stage A. The checkpoint needed nothing: it already walked the manifest and failed on a
+      planned skill, so it started firing because the data finally satisfied it.
+
+      **The verification contract was the real work, not the generators.** Every skill through
+      Unit 4 displayed two operands around one operator, and `generators.test.ts` recomputed
+      the answer by matching exactly that. `3 + 4 × 2` does not match it, so the check threw
+      before it could disagree with anything. It now parses the display and evaluates it under
+      precedence and parentheses — and that had to be a real evaluator rather than a fold,
+      because **folding the operators in written order is the mistake this unit teaches
+      against**, and a check that folded would have agreed with a generator that made it.
+
+      Deliberately **no new carried display data**, which is the boundary worth naming against
+      item 11. Unit 4 added `wholeNumber` because `47 ÷ 5` shows a division whose answer is a
+      *property* of it. Here the answer **is** the value of what is on screen, so the check
+      evaluates the screen. Carry data when the answer is *about* the display; evaluate the
+      display when the answer *is* it.
+
+      Left behind: **an expression model local to the unit** — build, render, evaluate — plus
+      the two wrong-rule evaluations the diagnoses read off the same tree the display renders.
+      Not in `engine/`: all three consumers are Unit 5 skills, which is the rule Unit 4's
+      number theory states, and Unit 12's exponents should shape their own rather than inherit
+      one guessed at here. **Parentheses are derived, never stored** — a child is bracketed
+      when it binds less tightly than its parent, or equally and on the right. That makes
+      `with-parentheses` structurally honest: brackets appear only where removing them changes
+      the value, which is exactly what keeps its `ignored-parentheses` diagnosis from being
+      filtered away as a collision on every problem.
+
+      `two-operations` draws the multiplication **second on two problems in three, and first on
+      the other third**. The first half is the wall the curriculum names; the second half is
+      why the skill is not passable by "always do the last one first", which is a different
+      wrong rule rather than the one being unlearned. Its second diagnosis is the higher-
+      precedence step answered on its own — getting the order right and stopping is a different
+      error from getting it wrong, and a wall needs two distinct tags on **every** problem.
+
+      Also here: **a stage completing is now a thing tests have to survive.** Four assertions
+      encoded "Stage B is part-built" as a fact — the checkpoint case, the unit list, the stage
+      count, and stage progress. Each moved onto a synthetic part-built stage, the pattern
+      `resolve.test.ts` already uses, so none of them expires again when Unit 6 lands. A case
+      whose premise the course outgrows stops testing anything, and it does so silently.
+
+      One presentation change, and it turned out not to be about Unit 5. The inline size ladder
+      stepped straight from 7 characters to 20, and **everything between overflowed a 375px
+      phone** — `1482 ÷ 6`, `2800 ÷ 100`, `100 + 10 + 5` and `121, 104, 178` are all shipped
+      skills that were wrapping. Nobody had measured the *row*: the equals sign and the answer
+      slot are sized in `em`, so they grow with the font, and the slot grows again as the
+      learner types. A display that fits beside an empty slot can wrap on the second digit,
+      which is how it passed inspection and failed in use. Unit 5's expressions cannot be drawn
+      short enough to sit outside that range, so the ladder is re-derived for every length and
+      those four move down a size. `read-numbers` still fits at no size — 27 characters of
+      words wants wrapping rather than shrinking, and that is left for whoever needs it.
+
+      Worth naming because it is the transferable part: **the browser check found this, and
+      nothing else could have.** 1055 tests, the build and the lint were all green with a
+      wrapped expression on screen. The measurement is now executed in `coverage.test.ts`
+      rather than recorded in a comment, so the next unit to widen a display fails there.
 
 - [ ] **13 · Number-line input** — S
 

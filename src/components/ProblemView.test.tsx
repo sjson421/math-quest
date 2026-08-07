@@ -13,7 +13,10 @@ describe('ProblemView', () => {
     )
 
     expect(html).toContain('nine hundred eighty-seven')
-    expect(html).toContain('text-3xl')
+    // The smallest band. Even here a spelled-out number overruns 375px — it is
+    // 27 characters of words, and wants wrapping rather than shrinking. Pinned
+    // at the floor so a later fix to that is a deliberate one.
+    expect(html).toContain('text-2xl')
     expect(html).toContain('=')
   })
 
@@ -32,6 +35,26 @@ describe('ProblemView', () => {
       expect(html).toContain('text-ink-faint')
     },
   )
+
+  it.each([
+    // Each of these was measured in a real 375px viewport, as the whole row —
+    // expression, equals sign, and an answer slot holding the widest answer that
+    // skill produces. The size named is the largest that keeps it on one line.
+    ['18 − 9', 'text-6xl'],
+    ['40 + 40', 'text-5xl'],
+    ['1482 ÷ 6', 'text-4xl'],
+    ['9 − 3 × 2', 'text-4xl'],
+    ['2800 ÷ 100', 'text-4xl'],
+    ['100 + 10 + 5', 'text-3xl'],
+    ['121, 104, 178', 'text-3xl'],
+    ['10 × (32 + 31)', 'text-3xl'],
+    ['19 + 10 × (41 − 6)', 'text-2xl'],
+  ])('sizes "%s" at %s', (text, size) => {
+    const html = renderToStaticMarkup(<ProblemView display={{ kind: 'inline', text }} entry="" />)
+
+    expect(html).toContain(text)
+    expect(html).toContain(size)
+  })
 
   it('bounds and wraps a selected choice label instead of sizing it like digits', () => {
     const html = renderToStaticMarkup(

@@ -9,6 +9,7 @@
  */
 
 import { describe, expect, it } from 'vitest'
+import { generateProblem } from '../lib/generator'
 import {
   allSkills,
   course,
@@ -71,8 +72,39 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(49)
+    expect(documentedAsBuilt).toHaveLength(52)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
+  })
+
+  it('keeps every inline expression inside the width its size band was chosen for', () => {
+    // `ProblemView` picks a font size from a character count, and its thresholds
+    // were set from a measurement of every built skill. A comment recording that
+    // measurement is not a gate — the next unit to widen a display would land in
+    // the bottom band with no headroom left, and the failure is a wrapped problem
+    // on a phone, found by a person rather than by CI. This runs the measurement.
+    //
+    // `read-numbers` is exempt and is the only exemption: it spells a number out
+    // in words, it is what the bottom band was built for, and it has shipped
+    // there. Every other inline display is arithmetic, whose widest today is the
+    // 18 characters of a `pemdas` expression.
+    const widest = new Map<string, string>()
+
+    for (const generator of allSkills) {
+      for (const difficulty of [1, 2, 3, 4, 5] as const) {
+        for (let i = 0; i < 50; i += 1) {
+          const { display } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
+          if (display.kind !== 'inline') continue
+          const seen = widest.get(generator.id) ?? ''
+          if (display.text.length > seen.length) widest.set(generator.id, display.text)
+        }
+      }
+    }
+
+    const tooWide = [...widest]
+      .filter(([id, text]) => id !== 'read-numbers' && text.length > 18)
+      .map(([id, text]) => `${id}: "${text}" is ${text.length} characters`)
+
+    expect(tooWide, 'widen the ProblemView size bands, or narrow the draw').toEqual([])
   })
 
   it('matches every generator name and blurb to its manifest entry', () => {
@@ -158,9 +190,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 152 skills out of the skill tree entirely', () => {
+  it('leaves the other 149 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(49)
+    expect(offered).toHaveLength(52)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -184,7 +216,7 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['div-meaning', 'unit-4', 'stage-b'])
   })
 
-  it('shows the five built units, and no stage or unit that has nothing to play', () => {
+  it('shows the six built units, and no stage or unit that has nothing to play', () => {
     expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b'])
     expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
       'unit-0',
@@ -192,6 +224,7 @@ describe('what the learner is offered', () => {
       'unit-2',
       'unit-3',
       'unit-4',
+      'unit-5',
     ])
   })
 })
@@ -215,7 +248,7 @@ describe('the unlock graph the store gates on', () => {
   })
 
   it('matches the committed snapshot for the skills that are built', () => {
-    // Restricted to implemented skills because the other 163 have no edges that
+    // Restricted to implemented skills because the other 149 have no edges that
     // can gate anyone yet. Committed so the next change that moves an edge has
     // to look at it — this is the review surface for a re-lock.
     const graph = Object.fromEntries(

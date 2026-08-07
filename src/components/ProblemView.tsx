@@ -41,16 +41,35 @@ function InlineView({
   entry,
   entryMode,
 }: { display: Of<'inline'> } & EntryProps) {
-  // `add-tens` is the first inline skill with two operands of two digits, and
-  // "40 + 40" at 6xl does not fit beside the equals sign and the answer slot on
-  // a 375px phone — it wrapped, orphaning the operator on its own line.
+  // Sized so the expression, the equals sign and the answer slot fit one line at
+  // 375px — the phone this is installed on.
   //
-  // Seven characters, not six: `sub-facts` tops out at "18 − 9", which still
-  // fits, and it is already shipped. Existing inline skills therefore keep
-  // their size, while long number names step down again for phone width.
-  const long = display.text.length > 20
-  const wide = display.text.length > 6
-  const size = long ? 'text-3xl' : wide ? 'text-5xl' : 'text-6xl'
+  // These thresholds are measured rather than judged, and the measurement is the
+  // whole row, not the text: `=` and the slot are sized in `em`, so they grow
+  // with the font too, and the slot grows again as the learner types. A display
+  // that fits while the slot is empty can still wrap on the third digit, which
+  // is exactly how the previous ladder passed inspection and failed in use.
+  //
+  // The previous version had one step from 7 characters to 20, and everything in
+  // between overflowed: `1482 ÷ 6` and `2800 ÷ 100` want 4xl, `100 + 10 + 5` and
+  // `121, 104, 178` want 3xl, and all four were set at 5xl. Those are shipped
+  // skills, so this is a fix to them and not only to Unit 5 — whose expressions
+  // reach 18 characters and cannot be drawn short enough to dodge the question.
+  //
+  // A word-based display still does not fit at any of these sizes: `read-numbers`
+  // spells out 27 characters and wants wrapping rather than shrinking, which is a
+  // different mechanism and is left alone here.
+  const length = display.text.length
+  const size =
+    length > 16
+      ? 'text-2xl'
+      : length > 11
+        ? 'text-3xl'
+        : length > 7
+          ? 'text-4xl'
+          : length > 6
+            ? 'text-5xl'
+            : 'text-6xl'
 
   return (
     <div className={`flex items-baseline justify-center gap-3 ${size}`}>

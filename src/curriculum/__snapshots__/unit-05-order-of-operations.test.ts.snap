@@ -1,0 +1,917 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: pemdas > matches the wording recorded when the skill landed 1`] = `
+"--- pemdas · seed 1 · difficulty 1
+prompt   What is the value?
+display  inline "80 ÷ 4 × 5"
+answer   exact 100/1
+input    keypad
+hint     Divide and multiply left to right, starting at 80 ÷ 4.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [80 ÷ 4 = 20]
+step 3   Then multiply.   [80 ÷ 4 × 5 = 100]
+miss     pemdas-letter-order = 4   PEMDAS is tiers, not steps. 80 ÷ 4 is leftmost, so it goes first.
+miss     first-step-only = 20   That is 80 ÷ 4 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 12345 · difficulty 1
+prompt   What is the value?
+display  inline "60 ÷ 4 × 5"
+answer   exact 75/1
+input    keypad
+hint     Divide and multiply left to right, starting at 60 ÷ 4.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [60 ÷ 4 = 15]
+step 3   Then multiply.   [60 ÷ 4 × 5 = 75]
+miss     pemdas-letter-order = 3   PEMDAS is tiers, not steps. 60 ÷ 4 is leftmost, so it goes first.
+miss     first-step-only = 15   That is 60 ÷ 4 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 67890 · difficulty 1
+prompt   What is the value?
+display  inline "2 + 3 × (6 − 2)"
+answer   exact 14/1
+input    keypad
+hint     Take the brackets, then the multiplication, then the addition.
+step 1   Brackets, then multiply, then add.
+step 2   Start inside the brackets.   [6 − 2 = 4]
+step 3   Multiply that.   [3 × (6 − 2) = 12]
+step 4   Then add.   [2 + 3 × (6 − 2) = 14]
+miss     ignored-parentheses = 18   That multiplies by 6 alone. The brackets take 6 − 2 first.
+miss     left-to-right = 28   That works straight across. Brackets first, then multiply, then add.
+
+--- pemdas · seed 424242 · difficulty 1
+prompt   What is the value?
+display  inline "4 + 3 × (4 − 1)"
+answer   exact 13/1
+input    keypad
+hint     Take the brackets, then the multiplication, then the addition.
+step 1   Brackets, then multiply, then add.
+step 2   Start inside the brackets.   [4 − 1 = 3]
+step 3   Multiply that.   [3 × (4 − 1) = 9]
+step 4   Then add.   [4 + 3 × (4 − 1) = 13]
+miss     ignored-parentheses = 15   That multiplies by 4 alone. The brackets take 4 − 1 first.
+miss     left-to-right = 27   That works straight across. Brackets first, then multiply, then add.
+
+--- pemdas · seed 987654321 · difficulty 1
+prompt   What is the value?
+display  inline "30 ÷ 2 × 5"
+answer   exact 75/1
+input    keypad
+hint     Divide and multiply left to right, starting at 30 ÷ 2.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [30 ÷ 2 = 15]
+step 3   Then multiply.   [30 ÷ 2 × 5 = 75]
+miss     pemdas-letter-order = 3   PEMDAS is tiers, not steps. 30 ÷ 2 is leftmost, so it goes first.
+miss     first-step-only = 15   That is 30 ÷ 2 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 1 · difficulty 2
+prompt   What is the value?
+display  inline "100 ÷ 4 × 5"
+answer   exact 125/1
+input    keypad
+hint     Divide and multiply left to right, starting at 100 ÷ 4.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [100 ÷ 4 = 25]
+step 3   Then multiply.   [100 ÷ 4 × 5 = 125]
+miss     pemdas-letter-order = 5   PEMDAS is tiers, not steps. 100 ÷ 4 is leftmost, so it goes first.
+miss     first-step-only = 25   That is 100 ÷ 4 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 12345 · difficulty 2
+prompt   What is the value?
+display  inline "80 ÷ 4 × 5"
+answer   exact 100/1
+input    keypad
+hint     Divide and multiply left to right, starting at 80 ÷ 4.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [80 ÷ 4 = 20]
+step 3   Then multiply.   [80 ÷ 4 × 5 = 100]
+miss     pemdas-letter-order = 4   PEMDAS is tiers, not steps. 80 ÷ 4 is leftmost, so it goes first.
+miss     first-step-only = 20   That is 80 ÷ 4 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 67890 · difficulty 2
+prompt   What is the value?
+display  inline "3 + 3 × (8 − 3)"
+answer   exact 18/1
+input    keypad
+hint     Take the brackets, then the multiplication, then the addition.
+step 1   Brackets, then multiply, then add.
+step 2   Start inside the brackets.   [8 − 3 = 5]
+step 3   Multiply that.   [3 × (8 − 3) = 15]
+step 4   Then add.   [3 + 3 × (8 − 3) = 18]
+miss     ignored-parentheses = 24   That multiplies by 8 alone. The brackets take 8 − 3 first.
+miss     left-to-right = 45   That works straight across. Brackets first, then multiply, then add.
+
+--- pemdas · seed 424242 · difficulty 2
+prompt   What is the value?
+display  inline "6 + 4 × (5 − 1)"
+answer   exact 22/1
+input    keypad
+hint     Take the brackets, then the multiplication, then the addition.
+step 1   Brackets, then multiply, then add.
+step 2   Start inside the brackets.   [5 − 1 = 4]
+step 3   Multiply that.   [4 × (5 − 1) = 16]
+step 4   Then add.   [6 + 4 × (5 − 1) = 22]
+miss     ignored-parentheses = 25   That multiplies by 5 alone. The brackets take 5 − 1 first.
+miss     left-to-right = 49   That works straight across. Brackets first, then multiply, then add.
+
+--- pemdas · seed 987654321 · difficulty 2
+prompt   What is the value?
+display  inline "40 ÷ 2 × 5"
+answer   exact 100/1
+input    keypad
+hint     Divide and multiply left to right, starting at 40 ÷ 2.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [40 ÷ 2 = 20]
+step 3   Then multiply.   [40 ÷ 2 × 5 = 100]
+miss     pemdas-letter-order = 4   PEMDAS is tiers, not steps. 40 ÷ 2 is leftmost, so it goes first.
+miss     first-step-only = 20   That is 40 ÷ 2 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 1 · difficulty 3
+prompt   What is the value?
+display  inline "120 ÷ 4 × 5"
+answer   exact 150/1
+input    keypad
+hint     Divide and multiply left to right, starting at 120 ÷ 4.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [120 ÷ 4 = 30]
+step 3   Then multiply.   [120 ÷ 4 × 5 = 150]
+miss     pemdas-letter-order = 6   PEMDAS is tiers, not steps. 120 ÷ 4 is leftmost, so it goes first.
+miss     first-step-only = 30   That is 120 ÷ 4 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 12345 · difficulty 3
+prompt   What is the value?
+display  inline "80 ÷ 4 × 5"
+answer   exact 100/1
+input    keypad
+hint     Divide and multiply left to right, starting at 80 ÷ 4.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [80 ÷ 4 = 20]
+step 3   Then multiply.   [80 ÷ 4 × 5 = 100]
+miss     pemdas-letter-order = 4   PEMDAS is tiers, not steps. 80 ÷ 4 is leftmost, so it goes first.
+miss     first-step-only = 20   That is 80 ÷ 4 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 67890 · difficulty 3
+prompt   What is the value?
+display  inline "4 + 3 × (11 − 3)"
+answer   exact 28/1
+input    keypad
+hint     Take the brackets, then the multiplication, then the addition.
+step 1   Brackets, then multiply, then add.
+step 2   Start inside the brackets.   [11 − 3 = 8]
+step 3   Multiply that.   [3 × (11 − 3) = 24]
+step 4   Then add.   [4 + 3 × (11 − 3) = 28]
+miss     ignored-parentheses = 34   That multiplies by 11 alone. The brackets take 11 − 3 first.
+miss     left-to-right = 74   That works straight across. Brackets first, then multiply, then add.
+
+--- pemdas · seed 424242 · difficulty 3
+prompt   What is the value?
+display  inline "9 + 5 × (7 − 2)"
+answer   exact 34/1
+input    keypad
+hint     Take the brackets, then the multiplication, then the addition.
+step 1   Brackets, then multiply, then add.
+step 2   Start inside the brackets.   [7 − 2 = 5]
+step 3   Multiply that.   [5 × (7 − 2) = 25]
+step 4   Then add.   [9 + 5 × (7 − 2) = 34]
+miss     ignored-parentheses = 42   That multiplies by 7 alone. The brackets take 7 − 2 first.
+miss     left-to-right = 96   That works straight across. Brackets first, then multiply, then add.
+
+--- pemdas · seed 987654321 · difficulty 3
+prompt   What is the value?
+display  inline "50 ÷ 2 × 5"
+answer   exact 125/1
+input    keypad
+hint     Divide and multiply left to right, starting at 50 ÷ 2.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [50 ÷ 2 = 25]
+step 3   Then multiply.   [50 ÷ 2 × 5 = 125]
+miss     pemdas-letter-order = 5   PEMDAS is tiers, not steps. 50 ÷ 2 is leftmost, so it goes first.
+miss     first-step-only = 25   That is 50 ÷ 2 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 1 · difficulty 4
+prompt   What is the value?
+display  inline "160 ÷ 4 × 5"
+answer   exact 200/1
+input    keypad
+hint     Divide and multiply left to right, starting at 160 ÷ 4.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [160 ÷ 4 = 40]
+step 3   Then multiply.   [160 ÷ 4 × 5 = 200]
+miss     pemdas-letter-order = 8   PEMDAS is tiers, not steps. 160 ÷ 4 is leftmost, so it goes first.
+miss     first-step-only = 40   That is 160 ÷ 4 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 12345 · difficulty 4
+prompt   What is the value?
+display  inline "120 ÷ 4 × 5"
+answer   exact 150/1
+input    keypad
+hint     Divide and multiply left to right, starting at 120 ÷ 4.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [120 ÷ 4 = 30]
+step 3   Then multiply.   [120 ÷ 4 × 5 = 150]
+miss     pemdas-letter-order = 6   PEMDAS is tiers, not steps. 120 ÷ 4 is leftmost, so it goes first.
+miss     first-step-only = 30   That is 120 ÷ 4 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 67890 · difficulty 4
+prompt   What is the value?
+display  inline "5 + 5 × (16 − 5)"
+answer   exact 60/1
+input    keypad
+hint     Take the brackets, then the multiplication, then the addition.
+step 1   Brackets, then multiply, then add.
+step 2   Start inside the brackets.   [16 − 5 = 11]
+step 3   Multiply that.   [5 × (16 − 5) = 55]
+step 4   Then add.   [5 + 5 × (16 − 5) = 60]
+miss     ignored-parentheses = 80   That multiplies by 16 alone. The brackets take 16 − 5 first.
+miss     left-to-right = 155   That works straight across. Brackets first, then multiply, then add.
+
+--- pemdas · seed 424242 · difficulty 4
+prompt   What is the value?
+display  inline "12 + 6 × (8 − 2)"
+answer   exact 48/1
+input    keypad
+hint     Take the brackets, then the multiplication, then the addition.
+step 1   Brackets, then multiply, then add.
+step 2   Start inside the brackets.   [8 − 2 = 6]
+step 3   Multiply that.   [6 × (8 − 2) = 36]
+step 4   Then add.   [12 + 6 × (8 − 2) = 48]
+miss     ignored-parentheses = 58   That multiplies by 8 alone. The brackets take 8 − 2 first.
+miss     left-to-right = 142   That works straight across. Brackets first, then multiply, then add.
+
+--- pemdas · seed 987654321 · difficulty 4
+prompt   What is the value?
+display  inline "60 ÷ 2 × 5"
+answer   exact 150/1
+input    keypad
+hint     Divide and multiply left to right, starting at 60 ÷ 2.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [60 ÷ 2 = 30]
+step 3   Then multiply.   [60 ÷ 2 × 5 = 150]
+miss     pemdas-letter-order = 6   PEMDAS is tiers, not steps. 60 ÷ 2 is leftmost, so it goes first.
+miss     first-step-only = 30   That is 60 ÷ 2 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 1 · difficulty 5
+prompt   What is the value?
+display  inline "200 ÷ 4 × 5"
+answer   exact 250/1
+input    keypad
+hint     Divide and multiply left to right, starting at 200 ÷ 4.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [200 ÷ 4 = 50]
+step 3   Then multiply.   [200 ÷ 4 × 5 = 250]
+miss     pemdas-letter-order = 10   PEMDAS is tiers, not steps. 200 ÷ 4 is leftmost, so it goes first.
+miss     first-step-only = 50   That is 200 ÷ 4 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 12345 · difficulty 5
+prompt   What is the value?
+display  inline "140 ÷ 4 × 5"
+answer   exact 175/1
+input    keypad
+hint     Divide and multiply left to right, starting at 140 ÷ 4.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [140 ÷ 4 = 35]
+step 3   Then multiply.   [140 ÷ 4 × 5 = 175]
+miss     pemdas-letter-order = 7   PEMDAS is tiers, not steps. 140 ÷ 4 is leftmost, so it goes first.
+miss     first-step-only = 35   That is 140 ÷ 4 on its own. The multiplication still has to happen.
+
+--- pemdas · seed 67890 · difficulty 5
+prompt   What is the value?
+display  inline "6 + 5 × (21 − 6)"
+answer   exact 81/1
+input    keypad
+hint     Take the brackets, then the multiplication, then the addition.
+step 1   Brackets, then multiply, then add.
+step 2   Start inside the brackets.   [21 − 6 = 15]
+step 3   Multiply that.   [5 × (21 − 6) = 75]
+step 4   Then add.   [6 + 5 × (21 − 6) = 81]
+miss     ignored-parentheses = 105   That multiplies by 21 alone. The brackets take 21 − 6 first.
+miss     left-to-right = 225   That works straight across. Brackets first, then multiply, then add.
+
+--- pemdas · seed 424242 · difficulty 5
+prompt   What is the value?
+display  inline "17 + 8 × (11 − 3)"
+answer   exact 81/1
+input    keypad
+hint     Take the brackets, then the multiplication, then the addition.
+step 1   Brackets, then multiply, then add.
+step 2   Start inside the brackets.   [11 − 3 = 8]
+step 3   Multiply that.   [8 × (11 − 3) = 64]
+step 4   Then add.   [17 + 8 × (11 − 3) = 81]
+miss     ignored-parentheses = 102   That multiplies by 11 alone. The brackets take 11 − 3 first.
+miss     left-to-right = 272   That works straight across. Brackets first, then multiply, then add.
+
+--- pemdas · seed 987654321 · difficulty 5
+prompt   What is the value?
+display  inline "80 ÷ 2 × 5"
+answer   exact 200/1
+input    keypad
+hint     Divide and multiply left to right, starting at 80 ÷ 2.
+step 1   Divide and multiply rank equally.
+step 2   So work left to right.   [80 ÷ 2 = 40]
+step 3   Then multiply.   [80 ÷ 2 × 5 = 200]
+miss     pemdas-letter-order = 8   PEMDAS is tiers, not steps. 80 ÷ 2 is leftmost, so it goes first.
+miss     first-step-only = 40   That is 80 ÷ 2 on its own. The multiplication still has to happen."
+`;
+
+exports[`recorded output: two-operations > matches the wording recorded when the skill landed 1`] = `
+"--- two-operations · seed 1 · difficulty 1
+prompt   What is the value?
+display  inline "21 − 3 × 4"
+answer   exact 9/1
+input    keypad
+hint     Multiply 3 and 4 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [3 × 4 = 12]
+step 3   Then the subtraction.   [21 − 3 × 4 = 9]
+miss     left-to-right = 72   Reading straight across skips ahead. 3 × 4 is done first.
+miss     first-step-only = 12   That is 3 × 4 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 12345 · difficulty 1
+prompt   What is the value?
+display  inline "3 × 3 − 1"
+answer   exact 8/1
+input    keypad
+hint     Multiply 3 and 3 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [3 × 3 = 9]
+step 3   Then the subtraction.   [3 × 3 − 1 = 8]
+miss     right-to-left = 6   That does the subtraction first. 3 × 3 comes before it.
+miss     first-step-only = 9   That is 3 × 3 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 67890 · difficulty 1
+prompt   What is the value?
+display  inline "2 + 3 × 3"
+answer   exact 11/1
+input    keypad
+hint     Multiply 3 and 3 before the addition.
+step 1   Multiplication comes before addition.
+step 2   Multiply first.   [3 × 3 = 9]
+step 3   Then the addition.   [2 + 3 × 3 = 11]
+miss     left-to-right = 15   Reading straight across skips ahead. 3 × 3 is done first.
+miss     first-step-only = 9   That is 3 × 3 on its own. The addition still has to happen.
+
+--- two-operations · seed 424242 · difficulty 1
+prompt   What is the value?
+display  inline "9 − 2 × 3"
+answer   exact 3/1
+input    keypad
+hint     Multiply 2 and 3 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [2 × 3 = 6]
+step 3   Then the subtraction.   [9 − 2 × 3 = 3]
+miss     left-to-right = 21   Reading straight across skips ahead. 2 × 3 is done first.
+miss     first-step-only = 6   That is 2 × 3 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 987654321 · difficulty 1
+prompt   What is the value?
+display  inline "3 × 2 − 1"
+answer   exact 5/1
+input    keypad
+hint     Multiply 3 and 2 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [3 × 2 = 6]
+step 3   Then the subtraction.   [3 × 2 − 1 = 5]
+miss     right-to-left = 3   That does the subtraction first. 3 × 2 comes before it.
+miss     first-step-only = 6   That is 3 × 2 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 1 · difficulty 2
+prompt   What is the value?
+display  inline "34 − 4 × 5"
+answer   exact 14/1
+input    keypad
+hint     Multiply 4 and 5 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [4 × 5 = 20]
+step 3   Then the subtraction.   [34 − 4 × 5 = 14]
+miss     left-to-right = 150   Reading straight across skips ahead. 4 × 5 is done first.
+miss     first-step-only = 20   That is 4 × 5 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 12345 · difficulty 2
+prompt   What is the value?
+display  inline "4 × 3 − 1"
+answer   exact 11/1
+input    keypad
+hint     Multiply 4 and 3 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [4 × 3 = 12]
+step 3   Then the subtraction.   [4 × 3 − 1 = 11]
+miss     right-to-left = 8   That does the subtraction first. 4 × 3 comes before it.
+miss     first-step-only = 12   That is 4 × 3 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 67890 · difficulty 2
+prompt   What is the value?
+display  inline "3 + 3 × 3"
+answer   exact 12/1
+input    keypad
+hint     Multiply 3 and 3 before the addition.
+step 1   Multiplication comes before addition.
+step 2   Multiply first.   [3 × 3 = 9]
+step 3   Then the addition.   [3 + 3 × 3 = 12]
+miss     left-to-right = 18   Reading straight across skips ahead. 3 × 3 is done first.
+miss     first-step-only = 9   That is 3 × 3 on its own. The addition still has to happen.
+
+--- two-operations · seed 424242 · difficulty 2
+prompt   What is the value?
+display  inline "13 − 2 × 4"
+answer   exact 5/1
+input    keypad
+hint     Multiply 2 and 4 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [2 × 4 = 8]
+step 3   Then the subtraction.   [13 − 2 × 4 = 5]
+miss     left-to-right = 44   Reading straight across skips ahead. 2 × 4 is done first.
+miss     first-step-only = 8   That is 2 × 4 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 987654321 · difficulty 2
+prompt   What is the value?
+display  inline "4 × 2 − 1"
+answer   exact 7/1
+input    keypad
+hint     Multiply 4 and 2 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [4 × 2 = 8]
+step 3   Then the subtraction.   [4 × 2 − 1 = 7]
+miss     right-to-left = 4   That does the subtraction first. 4 × 2 comes before it.
+miss     first-step-only = 8   That is 4 × 2 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 1 · difficulty 3
+prompt   What is the value?
+display  inline "57 − 5 × 7"
+answer   exact 22/1
+input    keypad
+hint     Multiply 5 and 7 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [5 × 7 = 35]
+step 3   Then the subtraction.   [57 − 5 × 7 = 22]
+miss     left-to-right = 364   Reading straight across skips ahead. 5 × 7 is done first.
+miss     first-step-only = 35   That is 5 × 7 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 12345 · difficulty 3
+prompt   What is the value?
+display  inline "5 × 4 − 2"
+answer   exact 18/1
+input    keypad
+hint     Multiply 5 and 4 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [5 × 4 = 20]
+step 3   Then the subtraction.   [5 × 4 − 2 = 18]
+miss     right-to-left = 10   That does the subtraction first. 5 × 4 comes before it.
+miss     first-step-only = 20   That is 5 × 4 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 67890 · difficulty 3
+prompt   What is the value?
+display  inline "4 + 4 × 4"
+answer   exact 20/1
+input    keypad
+hint     Multiply 4 and 4 before the addition.
+step 1   Multiplication comes before addition.
+step 2   Multiply first.   [4 × 4 = 16]
+step 3   Then the addition.   [4 + 4 × 4 = 20]
+miss     left-to-right = 32   Reading straight across skips ahead. 4 × 4 is done first.
+miss     first-step-only = 16   That is 4 × 4 on its own. The addition still has to happen.
+
+--- two-operations · seed 424242 · difficulty 3
+prompt   What is the value?
+display  inline "23 − 3 × 5"
+answer   exact 8/1
+input    keypad
+hint     Multiply 3 and 5 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [3 × 5 = 15]
+step 3   Then the subtraction.   [23 − 3 × 5 = 8]
+miss     left-to-right = 100   Reading straight across skips ahead. 3 × 5 is done first.
+miss     first-step-only = 15   That is 3 × 5 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 987654321 · difficulty 3
+prompt   What is the value?
+display  inline "5 × 2 − 1"
+answer   exact 9/1
+input    keypad
+hint     Multiply 5 and 2 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [5 × 2 = 10]
+step 3   Then the subtraction.   [5 × 2 − 1 = 9]
+miss     right-to-left = 5   That does the subtraction first. 5 × 2 comes before it.
+miss     first-step-only = 10   That is 5 × 2 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 1 · difficulty 4
+prompt   What is the value?
+display  inline "88 − 6 × 9"
+answer   exact 34/1
+input    keypad
+hint     Multiply 6 and 9 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [6 × 9 = 54]
+step 3   Then the subtraction.   [88 − 6 × 9 = 34]
+miss     left-to-right = 738   Reading straight across skips ahead. 6 × 9 is done first.
+miss     first-step-only = 54   That is 6 × 9 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 12345 · difficulty 4
+prompt   What is the value?
+display  inline "6 × 6 − 2"
+answer   exact 34/1
+input    keypad
+hint     Multiply 6 and 6 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [6 × 6 = 36]
+step 3   Then the subtraction.   [6 × 6 − 2 = 34]
+miss     right-to-left = 24   That does the subtraction first. 6 × 6 comes before it.
+miss     first-step-only = 36   That is 6 × 6 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 67890 · difficulty 4
+prompt   What is the value?
+display  inline "6 + 5 × 5"
+answer   exact 31/1
+input    keypad
+hint     Multiply 5 and 5 before the addition.
+step 1   Multiplication comes before addition.
+step 2   Multiply first.   [5 × 5 = 25]
+step 3   Then the addition.   [6 + 5 × 5 = 31]
+miss     left-to-right = 55   Reading straight across skips ahead. 5 × 5 is done first.
+miss     first-step-only = 25   That is 5 × 5 on its own. The addition still has to happen.
+
+--- two-operations · seed 424242 · difficulty 4
+prompt   What is the value?
+display  inline "40 − 4 × 7"
+answer   exact 12/1
+input    keypad
+hint     Multiply 4 and 7 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [4 × 7 = 28]
+step 3   Then the subtraction.   [40 − 4 × 7 = 12]
+miss     left-to-right = 252   Reading straight across skips ahead. 4 × 7 is done first.
+miss     first-step-only = 28   That is 4 × 7 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 987654321 · difficulty 4
+prompt   What is the value?
+display  inline "7 × 3 − 1"
+answer   exact 20/1
+input    keypad
+hint     Multiply 7 and 3 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [7 × 3 = 21]
+step 3   Then the subtraction.   [7 × 3 − 1 = 20]
+miss     right-to-left = 14   That does the subtraction first. 7 × 3 comes before it.
+miss     first-step-only = 21   That is 7 × 3 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 1 · difficulty 5
+prompt   What is the value?
+display  inline "145 − 8 × 12"
+answer   exact 49/1
+input    keypad
+hint     Multiply 8 and 12 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [8 × 12 = 96]
+step 3   Then the subtraction.   [145 − 8 × 12 = 49]
+miss     left-to-right = 1644   Reading straight across skips ahead. 8 × 12 is done first.
+miss     first-step-only = 96   That is 8 × 12 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 12345 · difficulty 5
+prompt   What is the value?
+display  inline "8 × 8 − 3"
+answer   exact 61/1
+input    keypad
+hint     Multiply 8 and 8 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [8 × 8 = 64]
+step 3   Then the subtraction.   [8 × 8 − 3 = 61]
+miss     right-to-left = 40   That does the subtraction first. 8 × 8 comes before it.
+miss     first-step-only = 64   That is 8 × 8 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 67890 · difficulty 5
+prompt   What is the value?
+display  inline "8 + 7 × 7"
+answer   exact 57/1
+input    keypad
+hint     Multiply 7 and 7 before the addition.
+step 1   Multiplication comes before addition.
+step 2   Multiply first.   [7 × 7 = 49]
+step 3   Then the addition.   [8 + 7 × 7 = 57]
+miss     left-to-right = 105   Reading straight across skips ahead. 7 × 7 is done first.
+miss     first-step-only = 49   That is 7 × 7 on its own. The addition still has to happen.
+
+--- two-operations · seed 424242 · difficulty 5
+prompt   What is the value?
+display  inline "62 − 5 × 9"
+answer   exact 17/1
+input    keypad
+hint     Multiply 5 and 9 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [5 × 9 = 45]
+step 3   Then the subtraction.   [62 − 5 × 9 = 17]
+miss     left-to-right = 513   Reading straight across skips ahead. 5 × 9 is done first.
+miss     first-step-only = 45   That is 5 × 9 on its own. The subtraction still has to happen.
+
+--- two-operations · seed 987654321 · difficulty 5
+prompt   What is the value?
+display  inline "9 × 4 − 2"
+answer   exact 34/1
+input    keypad
+hint     Multiply 9 and 4 before the subtraction.
+step 1   Multiplication comes before subtraction.
+step 2   Multiply first.   [9 × 4 = 36]
+step 3   Then the subtraction.   [9 × 4 − 2 = 34]
+miss     right-to-left = 18   That does the subtraction first. 9 × 4 comes before it.
+miss     first-step-only = 36   That is 9 × 4 on its own. The subtraction still has to happen."
+`;
+
+exports[`recorded output: with-parentheses > matches the wording recorded when the skill landed 1`] = `
+"--- with-parentheses · seed 1 · difficulty 1
+prompt   What is the value?
+display  inline "(9 + 9) × 3"
+answer   exact 54/1
+input    keypad
+hint     Work out 9 + 9 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [9 + 9 = 18]
+step 3   Then multiply.   [(9 + 9) × 3 = 54]
+miss     ignored-parentheses = 36   That works without the brackets. 9 + 9 is done first.
+miss     first-step-only = 18   That is 9 + 9 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 12345 · difficulty 1
+prompt   What is the value?
+display  inline "(6 + 8) × 3"
+answer   exact 42/1
+input    keypad
+hint     Work out 6 + 8 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [6 + 8 = 14]
+step 3   Then multiply.   [(6 + 8) × 3 = 42]
+miss     ignored-parentheses = 30   That works without the brackets. 6 + 8 is done first.
+miss     first-step-only = 14   That is 6 + 8 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 67890 · difficulty 1
+prompt   What is the value?
+display  inline "3 × (8 − 4)"
+answer   exact 12/1
+input    keypad
+hint     Work out 8 − 4 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [8 − 4 = 4]
+step 3   Then multiply.   [3 × (8 − 4) = 12]
+miss     ignored-parentheses = 20   That works without the brackets. 8 − 4 is done first.
+miss     first-step-only = 4   That is 8 − 4 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 424242 · difficulty 1
+prompt   What is the value?
+display  inline "2 × (9 − 3)"
+answer   exact 12/1
+input    keypad
+hint     Work out 9 − 3 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [9 − 3 = 6]
+step 3   Then multiply.   [2 × (9 − 3) = 12]
+miss     ignored-parentheses = 15   That works without the brackets. 9 − 3 is done first.
+miss     first-step-only = 6   That is 9 − 3 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 987654321 · difficulty 1
+prompt   What is the value?
+display  inline "(7 + 9) × 2"
+answer   exact 32/1
+input    keypad
+hint     Work out 7 + 9 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [7 + 9 = 16]
+step 3   Then multiply.   [(7 + 9) × 2 = 32]
+miss     ignored-parentheses = 25   That works without the brackets. 7 + 9 is done first.
+miss     first-step-only = 16   That is 7 + 9 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 1 · difficulty 2
+prompt   What is the value?
+display  inline "(13 + 13) × 4"
+answer   exact 104/1
+input    keypad
+hint     Work out 13 + 13 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [13 + 13 = 26]
+step 3   Then multiply.   [(13 + 13) × 4 = 104]
+miss     ignored-parentheses = 65   That works without the brackets. 13 + 13 is done first.
+miss     first-step-only = 26   That is 13 + 13 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 12345 · difficulty 2
+prompt   What is the value?
+display  inline "(8 + 11) × 3"
+answer   exact 57/1
+input    keypad
+hint     Work out 8 + 11 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [8 + 11 = 19]
+step 3   Then multiply.   [(8 + 11) × 3 = 57]
+miss     ignored-parentheses = 41   That works without the brackets. 8 + 11 is done first.
+miss     first-step-only = 19   That is 8 + 11 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 67890 · difficulty 2
+prompt   What is the value?
+display  inline "4 × (11 − 6)"
+answer   exact 20/1
+input    keypad
+hint     Work out 11 − 6 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [11 − 6 = 5]
+step 3   Then multiply.   [4 × (11 − 6) = 20]
+miss     ignored-parentheses = 38   That works without the brackets. 11 − 6 is done first.
+miss     first-step-only = 5   That is 11 − 6 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 424242 · difficulty 2
+prompt   What is the value?
+display  inline "2 × (14 − 5)"
+answer   exact 18/1
+input    keypad
+hint     Work out 14 − 5 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [14 − 5 = 9]
+step 3   Then multiply.   [2 × (14 − 5) = 18]
+miss     ignored-parentheses = 23   That works without the brackets. 14 − 5 is done first.
+miss     first-step-only = 9   That is 14 − 5 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 987654321 · difficulty 2
+prompt   What is the value?
+display  inline "(9 + 13) × 2"
+answer   exact 44/1
+input    keypad
+hint     Work out 9 + 13 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [9 + 13 = 22]
+step 3   Then multiply.   [(9 + 13) × 2 = 44]
+miss     ignored-parentheses = 35   That works without the brackets. 9 + 13 is done first.
+miss     first-step-only = 22   That is 9 + 13 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 1 · difficulty 3
+prompt   What is the value?
+display  inline "(20 + 20) × 5"
+answer   exact 200/1
+input    keypad
+hint     Work out 20 + 20 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [20 + 20 = 40]
+step 3   Then multiply.   [(20 + 20) × 5 = 200]
+miss     ignored-parentheses = 120   That works without the brackets. 20 + 20 is done first.
+miss     first-step-only = 40   That is 20 + 20 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 12345 · difficulty 3
+prompt   What is the value?
+display  inline "(12 + 17) × 4"
+answer   exact 116/1
+input    keypad
+hint     Work out 12 + 17 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [12 + 17 = 29]
+step 3   Then multiply.   [(12 + 17) × 4 = 116]
+miss     ignored-parentheses = 80   That works without the brackets. 12 + 17 is done first.
+miss     first-step-only = 29   That is 12 + 17 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 67890 · difficulty 3
+prompt   What is the value?
+display  inline "5 × (18 − 10)"
+answer   exact 40/1
+input    keypad
+hint     Work out 18 − 10 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [18 − 10 = 8]
+step 3   Then multiply.   [5 × (18 − 10) = 40]
+miss     ignored-parentheses = 80   That works without the brackets. 18 − 10 is done first.
+miss     first-step-only = 8   That is 18 − 10 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 424242 · difficulty 3
+prompt   What is the value?
+display  inline "3 × (20 − 7)"
+answer   exact 39/1
+input    keypad
+hint     Work out 20 − 7 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [20 − 7 = 13]
+step 3   Then multiply.   [3 × (20 − 7) = 39]
+miss     ignored-parentheses = 53   That works without the brackets. 20 − 7 is done first.
+miss     first-step-only = 13   That is 20 − 7 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 987654321 · difficulty 3
+prompt   What is the value?
+display  inline "(14 + 19) × 2"
+answer   exact 66/1
+input    keypad
+hint     Work out 14 + 19 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [14 + 19 = 33]
+step 3   Then multiply.   [(14 + 19) × 2 = 66]
+miss     ignored-parentheses = 52   That works without the brackets. 14 + 19 is done first.
+miss     first-step-only = 33   That is 14 + 19 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 1 · difficulty 4
+prompt   What is the value?
+display  inline "(30 + 30) × 6"
+answer   exact 360/1
+input    keypad
+hint     Work out 30 + 30 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [30 + 30 = 60]
+step 3   Then multiply.   [(30 + 30) × 6 = 360]
+miss     ignored-parentheses = 210   That works without the brackets. 30 + 30 is done first.
+miss     first-step-only = 60   That is 30 + 30 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 12345 · difficulty 4
+prompt   What is the value?
+display  inline "(18 + 26) × 6"
+answer   exact 264/1
+input    keypad
+hint     Work out 18 + 26 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [18 + 26 = 44]
+step 3   Then multiply.   [(18 + 26) × 6 = 264]
+miss     ignored-parentheses = 174   That works without the brackets. 18 + 26 is done first.
+miss     first-step-only = 44   That is 18 + 26 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 67890 · difficulty 4
+prompt   What is the value?
+display  inline "7 × (25 − 14)"
+answer   exact 77/1
+input    keypad
+hint     Work out 25 − 14 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [25 − 14 = 11]
+step 3   Then multiply.   [7 × (25 − 14) = 77]
+miss     ignored-parentheses = 161   That works without the brackets. 25 − 14 is done first.
+miss     first-step-only = 11   That is 25 − 14 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 424242 · difficulty 4
+prompt   What is the value?
+display  inline "4 × (29 − 9)"
+answer   exact 80/1
+input    keypad
+hint     Work out 29 − 9 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [29 − 9 = 20]
+step 3   Then multiply.   [4 × (29 − 9) = 80]
+miss     ignored-parentheses = 107   That works without the brackets. 29 − 9 is done first.
+miss     first-step-only = 20   That is 29 − 9 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 987654321 · difficulty 4
+prompt   What is the value?
+display  inline "(21 + 28) × 3"
+answer   exact 147/1
+input    keypad
+hint     Work out 21 + 28 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [21 + 28 = 49]
+step 3   Then multiply.   [(21 + 28) × 3 = 147]
+miss     ignored-parentheses = 105   That works without the brackets. 21 + 28 is done first.
+miss     first-step-only = 49   That is 21 + 28 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 1 · difficulty 5
+prompt   What is the value?
+display  inline "(44 + 45) × 8"
+answer   exact 712/1
+input    keypad
+hint     Work out 44 + 45 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [44 + 45 = 89]
+step 3   Then multiply.   [(44 + 45) × 8 = 712]
+miss     ignored-parentheses = 404   That works without the brackets. 44 + 45 is done first.
+miss     first-step-only = 89   That is 44 + 45 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 12345 · difficulty 5
+prompt   What is the value?
+display  inline "(26 + 38) × 7"
+answer   exact 448/1
+input    keypad
+hint     Work out 26 + 38 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [26 + 38 = 64]
+step 3   Then multiply.   [(26 + 38) × 7 = 448]
+miss     ignored-parentheses = 292   That works without the brackets. 26 + 38 is done first.
+miss     first-step-only = 64   That is 26 + 38 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 67890 · difficulty 5
+prompt   What is the value?
+display  inline "8 × (37 − 21)"
+answer   exact 128/1
+input    keypad
+hint     Work out 37 − 21 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [37 − 21 = 16]
+step 3   Then multiply.   [8 × (37 − 21) = 128]
+miss     ignored-parentheses = 275   That works without the brackets. 37 − 21 is done first.
+miss     first-step-only = 16   That is 37 − 21 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 424242 · difficulty 5
+prompt   What is the value?
+display  inline "5 × (43 − 14)"
+answer   exact 145/1
+input    keypad
+hint     Work out 43 − 14 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [43 − 14 = 29]
+step 3   Then multiply.   [5 × (43 − 14) = 145]
+miss     ignored-parentheses = 201   That works without the brackets. 43 − 14 is done first.
+miss     first-step-only = 29   That is 43 − 14 on its own. The multiplication still has to happen.
+
+--- with-parentheses · seed 987654321 · difficulty 5
+prompt   What is the value?
+display  inline "(31 + 42) × 4"
+answer   exact 292/1
+input    keypad
+hint     Work out 31 + 42 before multiplying.
+step 1   Brackets come before everything else.
+step 2   Work out the brackets first.   [31 + 42 = 73]
+step 3   Then multiply.   [(31 + 42) × 4 = 292]
+miss     ignored-parentheses = 199   That works without the brackets. 31 + 42 is done first.
+miss     first-step-only = 73   That is 31 + 42 on its own. The multiplication still has to happen."
+`;

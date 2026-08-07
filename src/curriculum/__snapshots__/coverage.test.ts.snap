@@ -80,6 +80,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "order-numbers": [
     "compare-numbers",
   ],
+  "pemdas": [
+    "with-parentheses",
+  ],
   "place-value-hundreds": [
     "place-value-tens",
   ],
@@ -146,6 +149,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "times-mixed": [
     "times-7-8",
+  ],
+  "two-operations": [
+    "div-words",
+  ],
+  "with-parentheses": [
+    "two-operations",
   ],
 }
 `;
