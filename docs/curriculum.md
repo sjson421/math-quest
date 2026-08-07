@@ -530,7 +530,7 @@ Ship by stage; each stage is independently useful.
 | Fraction keypad mode | D (Unit 8) | Built — declared per problem via `allowFraction` |
 | Diagram rendering | D (Unit 7.2) | Shaded shapes for fraction meaning |
 | Expression input | E (Unit 13) | Variables on the keypad |
-| Number-line input | C (Unit 6.1) | Tap to place a value |
+| Number-line input | C (Unit 6.1) | Built — declared per problem via `numberLine` |
 | Coordinate-plane input | F (Unit 16.1) | Tap to plot a point |
 | Chart rendering | G (Unit 21.5) | Bar, line, scatter |
 | Timed mode | H | Only place time pressure appears |

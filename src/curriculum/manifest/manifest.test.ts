@@ -178,6 +178,26 @@ describe('stage capabilities', () => {
     expect(stageById.get('stage-c')?.requires).toContain('choice-input')
     expect(stageById.get('stage-d')?.requires).toContain('choice-input')
   })
+
+  it('marks number-line input built and records both stages that need it', () => {
+    // Stage C for `negatives-numberline` (6.1) and Stage D for
+    // `fractions-numberline` (7.4). Stage C left it undeclared while it was
+    // unbuilt, because naming an unavailable capability would have held its
+    // other eight skills back; that cost went away when the capability shipped.
+    //
+    // Pinned exactly rather than with `toContain`, because the claim is that
+    // `requires` names every capability the stage's own skills need — a set
+    // missing an entry is the failure, and a containment check cannot see it.
+    expect(AVAILABLE_CAPABILITIES.has('number-line')).toBe(true)
+    expect(stageById.get('stage-c')?.requires).toEqual(['choice-input', 'number-line'])
+    expect(stageById.get('stage-d')?.requires).toEqual([
+      'choice-input',
+      'katex',
+      'fraction-input',
+      'diagram',
+      'number-line',
+    ])
+  })
 })
 
 describe('skill ids are unique', () => {

@@ -148,6 +148,28 @@ describe('the skills that are built', () => {
     expect(documentedAsBuilt.every((id) => skillState(id) === 'implemented')).toBe(true)
   })
 
+  it('unlocks nothing by making the number line available', () => {
+    // The capability is built and both its stages declare it, yet every skill
+    // that needs it has no generator — so nothing moved. Worth pinning: a
+    // capability flip is a one-line edit, and the failure mode is a stage
+    // quietly becoming playable before its content exists.
+    // `manifestSkills`, not the registry's `allSkills`: the registry holds only
+    // skills that have a generator, so filtering it for these stages returns
+    // nothing and the assertion below would pass by measuring an empty set.
+    const needsLine = ['stage-c', 'stage-d']
+    const reachedByLine = manifestSkills
+      .filter((skill) => needsLine.includes(manifestIndex.get(skill.id)!.stage.id))
+      .map((skill) => skill.id)
+
+    expect(AVAILABLE_CAPABILITIES.has('number-line')).toBe(true)
+    expect(reachedByLine.length).toBeGreaterThan(0)
+    expect(reachedByLine.filter((id) => skillState(id) !== 'planned')).toEqual([])
+    // And nothing from either stage leaked into what the learner is offered.
+    expect(
+      course.filter(({ stage }) => needsLine.includes(stage.id)),
+    ).toEqual([])
+  })
+
   it('implements Stage A because its choice input capability is available', () => {
     const stage = manifestIndex.get('read-numbers')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []

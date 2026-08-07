@@ -20,6 +20,7 @@ import { difficultyFor, useProgress, type LessonOutcome } from '../store/progres
 import { ChoiceInput } from './ChoiceInput'
 import { Keypad } from './Keypad'
 import { Mascot, type MascotState } from './Mascot'
+import { NumberLineInput } from './NumberLineInput'
 import { ProblemView } from './ProblemView'
 import { StageCheckpoint } from './StageCheckpoint'
 
@@ -148,6 +149,69 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
 
     setShowHint(false)
     setSession(requeueMiss(session, makeProblem))
+  }
+
+  /**
+   * The control this problem is answered with.
+   *
+   * Exhaustive rather than a two-way branch with the pad as the fall-through.
+   * The union widened silently when number-line input was added — nothing
+   * failed to compile, the new mode simply drew a keypad — so the next mode
+   * gets a compile error here instead of a plausible wrong control.
+   */
+  const answerControl = () => {
+    switch (problem.inputMode) {
+      case 'choice':
+        return (
+          <ChoiceInput
+            choices={problem.choices ?? []}
+            onChoose={(id) => {
+              setEntry(id)
+              submit(id)
+            }}
+          />
+        )
+
+      case 'number-line':
+        // A tap only places; `submit` runs on confirm, so the placement goes
+        // through the same gate, recording and re-queue as a typed answer, and
+        // a slip costs nothing until the learner says it is their answer.
+        return problem.numberLine ? (
+          <NumberLineInput
+            spec={problem.numberLine}
+            entry={entry}
+            onPlace={setEntry}
+            onConfirm={() => submit()}
+          />
+        ) : null
+
+      case 'keypad':
+        return (
+          <>
+            {/* Not a wrong answer — the number simply is not finished. Say so and
+                leave everything as it is, rather than spending an attempt on it. */}
+            {unfinished && (
+              <p className="text-center text-ink-soft text-sm pb-2">
+                That number is not finished yet.
+              </p>
+            )}
+            <Keypad
+              value={entry}
+              onEntry={(apply) => {
+                if (unfinished) dismiss()
+                setEntry(apply)
+              }}
+              onSubmit={submit}
+              rules={problem.keypad}
+            />
+          </>
+        )
+
+      default: {
+        const unhandled: never = problem.inputMode
+        throw new Error(`Unhandled input mode: ${String(unhandled)}`)
+      }
+    }
   }
 
   return (
@@ -289,34 +353,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
           </motion.div>
         ) : (
           <motion.div key={problem.inputMode} exit={{ opacity: 0 }}>
-            {problem.inputMode === 'choice' ? (
-              <ChoiceInput
-                choices={problem.choices ?? []}
-                onChoose={(id) => {
-                  setEntry(id)
-                  submit(id)
-                }}
-              />
-            ) : (
-              <>
-                {/* Not a wrong answer — the number simply is not finished. Say so and
-                    leave everything as it is, rather than spending an attempt on it. */}
-                {unfinished && (
-                  <p className="text-center text-ink-soft text-sm pb-2">
-                    That number is not finished yet.
-                  </p>
-                )}
-                <Keypad
-                  value={entry}
-                  onEntry={(apply) => {
-                    if (unfinished) dismiss()
-                    setEntry(apply)
-                  }}
-                  onSubmit={submit}
-                  rules={problem.keypad}
-                />
-              </>
-            )}
+            {answerControl()}
           </motion.div>
         )}
       </AnimatePresence>

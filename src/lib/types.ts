@@ -1,4 +1,5 @@
 import type { KeypadRules } from './keypad'
+import type { NumberLineSpec } from './number-line'
 
 export type Difficulty = 1 | 2 | 3 | 4 | 5
 
@@ -107,7 +108,7 @@ export type Problem = {
   prompt: string
   display: Display
   answer: Answer
-  inputMode: 'keypad' | 'choice'
+  inputMode: 'keypad' | 'choice' | 'number-line'
   /**
    * What this answer may be typed with. Omitted means whole digits only, which
    * is what every skill built so far wants.
@@ -119,6 +120,15 @@ export type Problem = {
    */
   keypad?: KeypadRules
   choices?: Choice[]
+  /**
+   * The line this answer is placed on, when `inputMode` is `number-line`.
+   *
+   * Per problem for the same reason `keypad` is: one skill asks about several
+   * lines. `fractions-numberline` walks a line of halves before it walks one of
+   * fifths, and which one a problem got is known only to the generator that
+   * just built it.
+   */
+  numberLine?: NumberLineSpec
   misconceptions?: Misconception[]
   hint: string
   /** Worked steps, generated procedurally from the actual operands. */

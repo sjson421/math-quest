@@ -32,6 +32,21 @@ export function ProblemView({
   }
 }
 
+/**
+ * Which slot each input mode's answer wants.
+ *
+ * A choice label is prose and wraps; a typed answer and a value placed on a
+ * line are both numbers and want the tabular slot. Keyed on the union rather
+ * than written as "choice, and everything else is a number", so the next mode
+ * added is a compile error here instead of quietly inheriting a shape — which
+ * is what happened when `number-line` widened `inputMode` and nothing broke.
+ */
+const SLOT: Record<Problem['inputMode'], 'prose' | 'number'> = {
+  keypad: 'number',
+  choice: 'prose',
+  'number-line': 'number',
+}
+
 type Of<K extends Display['kind']> = Extract<Display, { kind: K }>
 
 type EntryProps = { entry: string; entryMode: Problem['inputMode'] }
@@ -173,7 +188,7 @@ function EntrySlot({
       value
     )
 
-  if (mode === 'choice') {
+  if (SLOT[mode] === 'prose') {
     return (
       <span className="inline-flex items-center justify-center max-w-40 min-h-11 rounded-2xl bg-white/70 px-3 py-2 text-center text-xl font-bold leading-snug text-blossom-deep break-words">
         {content}

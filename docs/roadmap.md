@@ -6,9 +6,11 @@ What is left, in the order it should be done.
 Stage B's units, through order of operations — which makes Stage B the first stage to close
 since checkpoints were built, and the first place the checkpoint fires outside Stage A. The
 keypad can now offer a sign, a decimal point or a fraction slash when a problem asks for one.
-Choice input is also built, so `AVAILABLE_CAPABILITIES` contains only `choice-input`;
-comparison, ordering, factors, multiples and primes use choices, while the other playable
-skills use the keypad. This line is the only progress number in the repo's documentation —
+Choice input and number-line input are both built, so `AVAILABLE_CAPABILITIES` holds
+`choice-input` and `number-line`; comparison, ordering, factors, multiples and primes use
+choices, while the other playable skills use the keypad. No skill declares a number line
+yet — its two consumers are still unwritten. This line is the only progress number in the
+repo's documentation —
 the manifest and `npm test` are the authority, and everything below is scope rather than
 status.
 
@@ -37,9 +39,11 @@ skills reach the learner, and planned ones are transparent to unlocking, so nobo
 behind our build order.
 
 **Capabilities gate whole stages.** `AVAILABLE_CAPABILITIES` in
-`src/curriculum/manifest/resolve.ts` contains `choice-input` today. Adding a capability there
-is a one-line edit that flips its stage on — which is why capability work is its own item,
-never bundled with the content it unblocks.
+`src/curriculum/manifest/resolve.ts` contains `choice-input` and `number-line` today. Adding
+a capability there is a one-line edit that flips its stage on — which is why capability work
+is its own item, never bundled with the content it unblocks. It flips nothing on its own,
+though: `number-line` unlocked no skill, because every skill that declares it is still
+waiting for a generator.
 
 **One unit per change.** A 50-skill stage would be roughly a hundred tasks. Where an item
 below covers several units, it is several changes.
@@ -396,17 +400,39 @@ document's ✅ markers updated to match, which the cross-check enforces.
       wrapped expression on screen. The measurement is now executed in `coverage.test.ts`
       rather than recorded in a comment, so the next unit to widen a display fails there.
 
-- [ ] **13 · Number-line input** — S
+- [x] **13 · Number-line input** — S — **shipped 2026-08-07**
 
-      Tap to place a value. Needed by `negatives-numberline` (6.1) and again by
-      `fractions-numberline` (7.4).
+      Tap to place a value. `NumberLineInput` draws a problem's declared line as one labelled
+      button per tick, named by its value, so assistive technology gets a control per position
+      and nothing depends on hit-testing a coordinate — which also keeps the whole interaction
+      inside what a first-paint test can read.
+
+      **A tap places; it does not answer.** Choice input can submit on tap because its controls
+      are tall and few; a line packs every tick into one strip, so at 375px a tap landing one
+      tick out is a slip rather than a wrong answer. Confirming is the separate step, and the
+      placed value is the lesson's ordinary `entry` — so it costs no new state, and confirming
+      runs the same `submit()` a Check press runs, with the same gate, recording and re-queue.
+
+      Left behind: `src/lib/number-line.ts` owns the line as `{ start, step, count }` in exact
+      rationals — tick *i* is `start + i × step`, so a line of thirds cannot round and there is
+      no division to fail on. It also owns what a tick submits versus what it reads as: `−3` is
+      drawn, `-3` is parsed, and the two diverge there rather than where one is passed to the
+      wrong place. `ProblemView` now keys its entry slot on a `Record` over `inputMode`, so a
+      fourth mode is a compile error instead of an inherited shape.
+
+      `number-line` joins `AVAILABLE_CAPABILITIES`, and Stages C and D now declare it — Stage C
+      had left it undeclared because naming an unbuilt capability would have held its other
+      eight skills back, and that cost expired when the capability shipped. **Nothing unlocked.**
+      Every Stage C and Stage D skill is still `planned`, which a coverage test now pins.
+      `negatives-numberline` (6.1) and `fractions-numberline` (7.4) remain planned consumers.
 
 - [ ] **14 · Stage C · Unit 6 · Negatives** — M — 9 skills
 
       The gate to all algebra, and nothing in it is optional. `sub-negatives` (6.5) is the
-      major wall — minus a minus. Stage C declares the built `choice-input` capability, but not
-      number-line input: making that unavailable mode stage-wide would hold the other eight
-      skills behind it.
+      major wall — minus a minus. Stage C declares both of its capabilities — `choice-input`
+      and, since item 13, `number-line` — and both are built, so nothing here is held behind
+      an input mode. Only `negatives-numberline` (6.1) actually draws a line; the stage-wide
+      declaration was the wrong trade only while the capability was unbuilt.
 
       Item 3 removed the gate this used to name, and left a job in its place: these generators
       must **declare `keypad: { allowNegative: true }` on the problems whose answers are

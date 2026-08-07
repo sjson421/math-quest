@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { intAnswer } from '../lib/answer'
 import type { KeypadRules } from '../lib/keypad'
+import { rational } from '../lib/rational'
 import type { Choice, Difficulty, SkillGenerator } from '../lib/types'
 import { Lesson } from './Lesson'
 
@@ -69,6 +70,23 @@ const choiceSkill: SkillGenerator = {
   }),
 }
 
+const numberLineSkill: SkillGenerator = {
+  id: 'synthetic-number-line',
+  name: 'Synthetic Number Line',
+  blurb: 'For testing number-line wiring',
+  generate: (_rng, difficulty) => ({
+    skillId: 'synthetic-number-line',
+    prompt: 'Where does −3 sit?',
+    display: { kind: 'inline', text: '−3' },
+    answer: intAnswer(-3),
+    inputMode: 'number-line',
+    numberLine: { start: rational(-5, 1), step: rational(1, 1), count: 11 },
+    hint: 'Count left from zero.',
+    solution: [{ text: 'Step three places below zero.' }],
+    difficulty,
+  }),
+}
+
 const has = (html: string, label: string) => html.includes(`aria-label="${label}"`)
 
 describe('Lesson', () => {
@@ -124,6 +142,46 @@ describe('Lesson', () => {
     for (const { label } of answerChoices) expect(html).not.toContain(label)
     expect(has(html, '1')).toBe(true)
     expect(html).toContain('Check')
+  })
+
+  it('replaces the keypad with the declared line for a number-line problem', () => {
+    const html = renderToStaticMarkup(
+      <Lesson skill={numberLineSkill} onExit={() => {}} />,
+    )
+
+    expect(html).toContain('aria-label="Number line"')
+    for (const label of ['−5', '−3', '0', '5']) expect(has(html, label)).toBe(true)
+    // Checked on Backspace, not on a digit: this line runs −5 to 5, so it has
+    // a tick legitimately labelled `1` and a digit proves nothing either way.
+    expect(has(html, 'Backspace')).toBe(false)
+    for (const { label } of answerChoices) expect(html).not.toContain(label)
+  })
+
+  it('offers nothing to confirm before a value is placed', () => {
+    // The lesson opens with an empty entry, so the line has nothing placed and
+    // confirming must be unavailable — a tap is what makes an answer, and none
+    // has happened yet.
+    const html = renderToStaticMarkup(
+      <Lesson skill={numberLineSkill} onExit={() => {}} />,
+    )
+
+    expect(html).toContain('Check')
+    expect(html).toContain('disabled=""')
+  })
+
+  it('ignores stray line data when the problem asks for the keypad', () => {
+    const keypadSkill = skillNeeding()
+    const skill: SkillGenerator = {
+      ...keypadSkill,
+      generate: (rng, difficulty) => ({
+        ...keypadSkill.generate(rng, difficulty),
+        numberLine: { start: rational(-5, 1), step: rational(1, 1), count: 11 },
+      }),
+    }
+    const html = renderToStaticMarkup(<Lesson skill={skill} onExit={() => {}} />)
+
+    expect(html).not.toContain('aria-label="Number line"')
+    expect(has(html, '1')).toBe(true)
   })
 
   it('uses the manifest quick flag for a five-correct target', () => {

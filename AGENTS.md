@@ -54,7 +54,8 @@ Break these and something fails loudly — or worse, quietly. Each rule is state
   derived at load: `implemented` needs a registered generator *and* every capability its
   stage requires. `planned` is the normal state for 183 of 201 skills, not an error.
 - **`AVAILABLE_CAPABILITIES`** in `manifest/resolve.ts` is the one-line switch that turns
-  a stage on once its infrastructure exists. It contains `choice-input` today.
+  a stage on once its infrastructure exists. It contains `choice-input` and `number-line`
+  today.
 - **Two different `skillById`s.** `curriculum/index.ts` exports `generators` (the
   registry); `manifest/index.ts` exports `skillById` (manifest entries). Do not conflate
   them, and do not reintroduce the old name for the registry.
