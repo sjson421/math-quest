@@ -10,11 +10,11 @@ Keep every phase separate: finish and verify one phase before starting the next.
 
 ## Workflow control
 
-Create a plan with the nine phases below and keep exactly one phase `in_progress`.
+Create a plan with the ten phases below and keep exactly one phase `in_progress`.
 Carry the selected roadmap text, the phase 2 exploration summary, and the OpenSpec change
 name through every phase. Do not silently skip, combine, or retroactively complete phases.
 
-This workflow has exactly nine phases. Do not add any others — in particular, roadmap
+This workflow has exactly ten phases. Do not add any others — in particular, roadmap
 maintenance is not a phase of its own. Perform that work only when the audited OpenSpec
 includes it as an apply task.
 
@@ -31,8 +31,9 @@ answers questions and a later phase can always turn up one it cannot answer in p
 | 5. Apply | Every implementation task is complete |
 | 6. Simplify | Behavior-preserving cleanup is verified |
 | 7. Review | Diff, requirements, tests, build, and lint pass, and the screen was looked at |
-| 8. Ship | Intended files alone are committed and pushed to `main` |
-| 9. Archive | Deltas synced into the baseline and the change moved |
+| 8. Clean up | Workspace restored to only the changes meant to ship |
+| 9. Ship | Intended files alone are committed and pushed to `main` |
+| 10. Archive | Deltas synced into the baseline and the change moved |
 
 ## Phase 1: Select the roadmap item
 
@@ -179,7 +180,7 @@ browser, the same way on every host: a Playwright script run from the shell, fol
 `docs/environment.md`. Reuse an installed Chromium; do not run the browser-install
 command if it is already present. The script prints only a compact pass/fail summary,
 and it lives with its dependencies in a scratch directory outside the repo, so it can
-never leak into the phase 8 diff. Do not ask the user to open a page, start the server,
+never leak into the phase 9 diff. Do not ask the user to open a page, start the server,
 or perform the browser checks. If Chromium is missing, follow the conditional setup in
 `docs/environment.md`; if the host cannot install it, stop and report that capability as
 the blocker.
@@ -222,7 +223,42 @@ Re-run all three gates after any review fix. The three documented pre-existing
 Finally, rerun OpenSpec validation and confirm every task remains checked. Proceed only
 when the verified diff contains no unexplained or unrelated changes.
 
-## Phase 8: Commit and push to main
+## Phase 8: Clean up
+
+Before the commit, not after it. Phase 7 creates things that must not ship — most
+reliably a temporary generator or fixture edited into place so the browser had something
+to drive — and the moment to find them is while a stray file is still a mistake rather
+than a commit. Cleaning up afterwards only tidies; cleaning up here is a gate.
+
+1. Undo every temporary edit this run made to make something reachable, by name, with
+   `git checkout --` on the specific files. Then prove it rather than assuming: grep for
+   whatever marker the edit carried, and confirm the file is absent from `git diff`.
+2. Inspect `git status --porcelain --untracked-files=all`. Every untracked path is either
+   an intended artifact of this change or something that should not exist. Account for
+   each one out loud. Confirm build output and other generated directories are ignored,
+   so they cannot leak.
+3. Stop what this run started — the dev server, any browser it launched — and confirm the
+   port is free. Match on something specific like `node.*vite`: a bare `pkill -f vite`
+   also matches the shell running it, and kills your own command.
+4. Re-check the phase 1 baseline. The files recorded as user-owned must still be modified
+   and unstaged, with the same content they had at the start. This is the last point at
+   which their survival is cheap to verify and the first place its loss would be
+   expensive.
+
+**This phase deletes nothing inside the repository.** No `git clean`, no `git checkout .`,
+no `git reset --hard`, no `rm` under the working tree. It reverts named files it knows
+this run edited, and nothing else. A cleanup step that removes work it did not create is
+worse than the mess it was aiming at, and the user's uncommitted changes are sitting right
+next to the target.
+
+The scratch directory is not torn down here: it lives outside the repo, so it can never
+reach a commit, and the later phases still want it. Clear it once the run is over, and say
+so in the final report.
+
+Proceed only when the working tree holds this change and the phase 1 baseline, and nothing
+else.
+
+## Phase 9: Commit and push to main
 
 Confirm `HEAD` is `main` and fetch `origin`. If `origin/main` advanced after phase 7,
 stop before staging or committing because the verified base is stale. Do not merge,
@@ -241,12 +277,12 @@ Do not create a branch or pull request. Stop if the staged diff differs from the
 diff, credentials are unavailable, branch protection rejects the push, or the push is not
 a safe fast-forward.
 
-## Phase 9: Archive the shipped change
+## Phase 10: Archive the shipped change
 
 **REQUIRED SUB-SKILL:** Use `openspec-archive-change`.
 
 Archive only once the push has landed, and as its own commit. The archive is bookkeeping
-about work that already shipped, so folding it into phase 8 would mean committing a diff
+about work that already shipped, so folding it into phase 9 would mean committing a diff
 phase 7 never verified — and moving the change directory earlier would pull it out from
 under phase 7's validation. That skill prompts before syncing; in this workflow the answer
 is always to sync, because the next change has nothing accurate to amend otherwise.
@@ -277,12 +313,14 @@ Stop at the current phase, leave the tree coherent, and report the blocker when:
   re-entry returns to the same unresolved question
 - a test, build, lint, or OpenSpec validation failure cannot be resolved in scope
 - pre-existing work cannot be isolated from this workflow's changes
+- a temporary edit made to reach something cannot be reverted, or an untracked path cannot
+  be accounted for
 - updating or pushing `main` would require conflict resolution or history rewriting
 - the synced baseline does not match the delta the change declared
 
 Never use a later phase to hide an incomplete earlier phase.
 
-A blocked archive does not un-ship the change. If phase 9 stops, say so plainly and leave
+A blocked archive does not un-ship the change. If phase 10 stops, say so plainly and leave
 the change active rather than reverting a push that was already verified.
 
 ## Final report
@@ -296,3 +334,9 @@ Verification results include what the screens looked like, not only that the scr
 green: which states you shot and what you saw in them. If a user-visible change shipped
 without anyone looking at it, say that plainly rather than letting a row of passing checks
 imply otherwise.
+
+Report the cleanup as an outcome, not as a step performed: which temporary edits were
+reverted and how that was proven, what was left running and then stopped, and that the
+scratch directory is cleared. Name the pre-existing files again here and state that they
+are still modified and unstaged — the run ends with the same claim it opened on, which is
+what makes the claim worth anything.
