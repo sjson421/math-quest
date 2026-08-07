@@ -1,5 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
+import type { WholeNumberData } from '../lib/types'
 import { ProblemView } from './ProblemView'
 
 describe('ProblemView', () => {
@@ -17,17 +18,14 @@ describe('ProblemView', () => {
   })
 
   it.each([
-    ['347', [347], 'tens-digit'],
-    ['347 ? 354', [347, 354], 'compare'],
-    ['347, 102, 880', [347, 102, 880], 'order-ascending'],
-  ] as const)(
+    ['347', { operation: 'tens-digit', value: 347 }],
+    ['347 ? 354', { operation: 'compare', left: 347, right: 354 }],
+    ['347, 102, 880', { operation: 'order-ascending', values: [347, 102, 880] }],
+  ] as const satisfies readonly (readonly [string, WholeNumberData])[])(
     'renders carried values through the existing inline branch: %s',
-    (text, values, operation) => {
+    (text, wholeNumber) => {
       const html = renderToStaticMarkup(
-        <ProblemView
-          display={{ kind: 'inline', text, wholeNumber: { values: [...values], operation } }}
-          entry=""
-        />,
+        <ProblemView display={{ kind: 'inline', text, wholeNumber }} entry="" />,
       )
 
       expect(html).toContain(text)

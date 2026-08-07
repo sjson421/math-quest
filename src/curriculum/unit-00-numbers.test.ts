@@ -1,11 +1,40 @@
 import { describe, expect, it } from 'vitest'
 import { generateProblem } from '../lib/generator'
 import { makeRng } from '../lib/rng'
-import type { Difficulty } from '../lib/types'
+import type { Difficulty, Display, Problem } from '../lib/types'
 import { expandedForm, numberWords, unit00 } from './unit-00-numbers'
 
 const SEEDS = [1, 12345, 67890, 424242, 987654321]
 const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
+
+type InlineDisplay = Extract<Display, { kind: 'inline' }>
+
+const inline = (problem: Problem): InlineDisplay | undefined =>
+  problem.display.kind === 'inline' ? problem.display : undefined
+
+/**
+ * The carried payload, narrowed by shape rather than by operation.
+ *
+ * The display data names its fields per operation, so "the number on screen" is
+ * asked for once here instead of at two dozen call sites. Narrowing on the field
+ * rather than the operation keeps these independent of the operation assertions
+ * beside them — a skill carrying the wrong operation still fails those, loudly,
+ * instead of quietly returning nothing here.
+ */
+const carried = (display?: InlineDisplay): number | undefined => {
+  const data = display?.wholeNumber
+  return data && 'value' in data ? data.value : undefined
+}
+
+const comparePair = (display?: InlineDisplay): number[] => {
+  const data = display?.wholeNumber
+  return data && 'left' in data ? [data.left, data.right] : []
+}
+
+const orderedValues = (display?: InlineDisplay): number[] => {
+  const data = display?.wholeNumber
+  return data && 'values' in data ? data.values : []
+}
 
 const skill = (id: string) => {
   const found = unit00.find((candidate) => candidate.id === id)
@@ -31,7 +60,7 @@ describe('read-numbers', () => {
   it('shows words, accepts digits, and derives both diagnoses from the value', () => {
     const problem = generateProblem(skill('read-numbers'), 12345, 3)
     const display = problem.display.kind === 'inline' ? problem.display : undefined
-    const value = display?.wholeNumber?.values[0]
+    const value = carried(display)
 
     expect(value).toBeTypeOf('number')
     expect(display?.wholeNumber?.operation).toBe('read')
@@ -48,7 +77,7 @@ describe('read-numbers', () => {
     for (let seed = 1; seed <= 200; seed += 1) {
       const problem = skill('read-numbers').generate(makeRng(seed), 5)
       const display = problem.display.kind === 'inline' ? problem.display : undefined
-      const value = display?.wholeNumber?.values[0]
+      const value = carried(display)
       const predicted = problem.misconceptions?.map((m) => m.value) ?? []
 
       expect(value).toBeGreaterThanOrEqual(10)
@@ -65,7 +94,7 @@ describe('place-value-tens', () => {
       for (let seed = 1; seed <= 100; seed += 1) {
         const problem = generateProblem(skill('place-value-tens'), seed, difficulty)
         const display = problem.display.kind === 'inline' ? problem.display : undefined
-        const value = display?.wholeNumber?.values[0] ?? -1
+        const value = carried(display) ?? -1
 
         expect(display?.text).toBe(String(value))
         expect(display?.wholeNumber?.operation).toBe('tens-digit')
@@ -83,11 +112,11 @@ describe('place-value-tens', () => {
       generateProblem(skill('place-value-tens'), seed, 5),
     ).find((candidate) => {
       const display = candidate.display.kind === 'inline' ? candidate.display : undefined
-      const value = display?.wholeNumber?.values[0] ?? -1
+      const value = carried(display) ?? -1
       return Math.floor(value / 10) % 10 === 0
     })
     const display = problem?.display.kind === 'inline' ? problem.display : undefined
-    const value = display?.wholeNumber?.values[0] ?? -1
+    const value = carried(display) ?? -1
 
     expect(problem).toBeDefined()
     expect(problem?.misconceptions).toEqual(
@@ -116,7 +145,7 @@ describe('place-value-hundreds', () => {
       for (let seed = 1; seed <= 100; seed += 1) {
         const problem = generateProblem(skill('place-value-hundreds'), seed, difficulty)
         const display = problem.display.kind === 'inline' ? problem.display : undefined
-        const value = display?.wholeNumber?.values[0] ?? -1
+        const value = carried(display) ?? -1
 
         expect(display?.wholeNumber?.operation).toBe('hundreds-digit')
         expect(problem.answer).toEqual({
@@ -143,7 +172,7 @@ describe('place-value-hundreds', () => {
   it('includes values whose lower places contain zeroes', () => {
     const values = Array.from({ length: 2_000 }, (_, seed) => {
       const problem = generateProblem(skill('place-value-hundreds'), seed, 5)
-      return problem.display.kind === 'inline' ? problem.display.wholeNumber?.values[0] : undefined
+      return carried(inline(problem))
     })
 
     expect(values.some((value) => value !== undefined && value % 10 === 0)).toBe(true)
@@ -177,7 +206,7 @@ describe('expanded-form', () => {
       for (let seed = 1; seed <= 100; seed += 1) {
         const problem = generateProblem(skill('expanded-form'), seed, difficulty)
         const display = problem.display.kind === 'inline' ? problem.display : undefined
-        const value = display?.wholeNumber?.values[0] ?? -1
+        const value = carried(display) ?? -1
         const hundreds = Math.floor(value / 100)
         const tens = Math.floor(value / 10) % 10
         const ones = value % 10
@@ -201,7 +230,7 @@ describe('expanded-form', () => {
   it('includes values with zero ones and zero tens', () => {
     const values = Array.from({ length: 2_000 }, (_, seed) => {
       const problem = generateProblem(skill('expanded-form'), seed, 5)
-      return problem.display.kind === 'inline' ? problem.display.wholeNumber?.values[0] : undefined
+      return carried(inline(problem))
     })
 
     expect(values.some((value) => value !== undefined && value % 10 === 0)).toBe(true)
@@ -217,7 +246,7 @@ describe('compare-numbers', () => {
     for (let seed = 1; seed <= 500; seed += 1) {
       const problem = generateProblem(skill('compare-numbers'), seed, 5)
       const display = problem.display.kind === 'inline' ? problem.display : undefined
-      const [left, right] = display?.wholeNumber?.values ?? []
+      const [left, right] = comparePair(display)
       const relation = left < right ? -1 : left > right ? 1 : 0
       const choiceIds = problem.choices?.map((choice) => choice.id) ?? []
 
@@ -260,7 +289,7 @@ describe('order-numbers', () => {
       for (let seed = 1; seed <= 100; seed += 1) {
         const problem = generateProblem(skill('order-numbers'), seed, difficulty)
         const display = problem.display.kind === 'inline' ? problem.display : undefined
-        const values = display?.wholeNumber?.values ?? []
+        const values = orderedValues(display)
         const ascending = [...values].sort((a, b) => a - b)
         const descending = [...ascending].reverse()
         const swapped = [ascending[0], ascending[2], ascending[1]]
@@ -293,7 +322,7 @@ describe('round-to-10', () => {
     for (let seed = 1; seed <= 1_000; seed += 1) {
       const problem = generateProblem(skill('round-to-10'), seed, 5)
       const display = problem.display.kind === 'inline' ? problem.display : undefined
-      const value = display?.wholeNumber?.values[0] ?? -1
+      const value = carried(display) ?? -1
       const remainder = value % 10
 
       if (remainder < 5) remainders.add('below')
@@ -316,7 +345,7 @@ describe('round-to-10', () => {
     const raw = skill('round-to-10').generate(makeRng(12345), 5)
     const problem = generateProblem(skill('round-to-10'), 12345, 5)
     const display = raw.display.kind === 'inline' ? raw.display : undefined
-    const value = display?.wholeNumber?.values[0] ?? -1
+    const value = carried(display) ?? -1
     const lower = Math.floor(value / 10) * 10
     const upper = lower + 10
 
@@ -335,7 +364,7 @@ describe('round-to-100', () => {
     for (let seed = 1; seed <= 1_000; seed += 1) {
       const problem = generateProblem(skill('round-to-100'), seed, 5)
       const display = problem.display.kind === 'inline' ? problem.display : undefined
-      const value = display?.wholeNumber?.values[0] ?? -1
+      const value = carried(display) ?? -1
       const remainder = value % 100
       const lower = Math.floor(value / 100) * 100
       const upper = lower + 100
@@ -362,7 +391,7 @@ describe('round-to-100', () => {
   it('declares neighbouring hundreds and rounding only to tens', () => {
     const raw = skill('round-to-100').generate(makeRng(12345), 5)
     const display = raw.display.kind === 'inline' ? raw.display : undefined
-    const value = display?.wholeNumber?.values[0] ?? -1
+    const value = carried(display) ?? -1
     const lower = Math.floor(value / 100) * 100
 
     expect(raw.misconceptions?.map((m) => m.value)).toEqual([

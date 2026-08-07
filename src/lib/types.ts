@@ -41,49 +41,51 @@ export type SolutionStep = {
 
 export type Operator = '+' | '−' | '×' | '÷'
 
-export type WholeNumberOperation =
-  | 'read'
-  | 'tens-digit'
-  | 'hundreds-digit'
-  | 'expanded-form'
-  | 'compare'
-  | 'order-ascending'
-  | 'round-to-10'
-  | 'round-to-100'
+/**
+ * What a problem's answer is derived from, and which derivation.
+ *
+ * Named for the representation skills of Unit 0, which asked the first questions
+ * a displayed expression could not answer on its own. Unit 4 is the second
+ * caller and the name has stretched: a division is whole-number work too, but it
+ * is arithmetic rather than representation.
+ *
+ * Nothing that renders reads this. It exists so the answer can be recomputed
+ * without trusting the generator — which is why the payload is named per
+ * operation rather than a shared `number[]`. That list meant a different thing
+ * in each case, so writing a dividend and divisor in the order they came to hand
+ * type-checked, and verification would then recompute the remainder of the wrong
+ * division and agree with the generator it exists to check. A union makes that
+ * swap a compile error instead of a silent pass.
+ */
+export type WholeNumberData =
+  /**
+   * A property of the one displayed number: which digit sits in a place, how it
+   * reads or expands, what it rounds to, what divides it, whether anything does.
+   */
+  | {
+      operation:
+        | 'read'
+        | 'tens-digit'
+        | 'hundreds-digit'
+        | 'expanded-form'
+        | 'round-to-10'
+        | 'round-to-100'
+        | 'factors'
+        | 'classify-prime'
+      value: number
+    }
+  | { operation: 'compare'; left: number; right: number }
+  | { operation: 'order-ascending'; values: number[] }
   /**
    * A division displayed in full whose answer is a *property* of it rather than
    * its value. `47 ÷ 5` evaluates to 9.4; the remainder is 2 and the whole
    * quotient is 9, and neither can be reached by evaluating what is on screen.
    */
-  | 'divide-remainder'
-  | 'divide-quotient'
-  /** Properties of the one displayed number, answered by choosing a label. */
-  | 'factors'
-  | 'multiples'
-  | 'classify-prime'
+  | { operation: 'divide-remainder' | 'divide-quotient'; dividend: number; divisor: number }
+  /** The first `count` multiples of `value`, counted from `value` itself. */
+  | { operation: 'multiples'; value: number; count: number }
 
-/**
- * The values a problem's answer is derived from, and which derivation.
- *
- * Named for the representation skills of Unit 0, which asked the first questions
- * a displayed expression could not answer on its own. Unit 4 is the second
- * caller and the name has stretched: a division is whole-number work too, but
- * it is arithmetic rather than representation. Renaming it would touch every
- * Unit 0 test for no behavioural gain, so it stays and this comment carries the
- * meaning — carried values plus the operation applied to them.
- *
- * Nothing that renders reads this. It exists so the answer can be recomputed
- * without trusting the generator.
- *
- * `values` is positional and means something different per operation, which is
- * a real weakness: writing a dividend and divisor the wrong way round type-checks.
- * Making it a union keyed by the operation is the fix, and is deliberately left
- * to its own change rather than folded into a content unit.
- */
-export type WholeNumberData = {
-  values: number[]
-  operation: WholeNumberOperation
-}
+export type WholeNumberOperation = WholeNumberData['operation']
 
 /** How the problem is presented. Column layout matches how arithmetic is taught. */
 export type Display =

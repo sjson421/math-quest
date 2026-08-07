@@ -77,7 +77,7 @@ const readNumbers = defineSkill({
       display: {
         kind: 'inline',
         text: words,
-        wholeNumber: { values: [value], operation: 'read' },
+        wholeNumber: { operation: 'read', value },
       },
       answer: intAnswer(value),
       misconceptions: [
@@ -132,7 +132,7 @@ const placeValueTens = defineSkill({
       display: {
         kind: 'inline',
         text: String(value),
-        wholeNumber: { values: [value], operation: 'tens-digit' },
+        wholeNumber: { operation: 'tens-digit', value },
       },
       answer: intAnswer(tens),
       misconceptions: [
@@ -186,7 +186,7 @@ const placeValueHundreds = defineSkill({
       display: {
         kind: 'inline',
         text: String(value),
-        wholeNumber: { values: [value], operation: 'hundreds-digit' },
+        wholeNumber: { operation: 'hundreds-digit', value },
       },
       answer: intAnswer(hundreds),
       misconceptions: [
@@ -242,7 +242,7 @@ const expandedFormSkill = defineSkill({
       display: {
         kind: 'inline',
         text: expression,
-        wholeNumber: { values: [value], operation: 'expanded-form' },
+        wholeNumber: { operation: 'expanded-form', value },
       },
       answer: intAnswer(value),
       misconceptions: [
@@ -293,7 +293,7 @@ const compareNumbers = defineSkill({
       display: {
         kind: 'inline',
         text: `${left} ? ${right}`,
-        wholeNumber: { values: [left, right], operation: 'compare' },
+        wholeNumber: { operation: 'compare', left, right },
       },
       answer: { kind: 'choice', id: String(relation) },
       inputMode: 'choice',
@@ -364,7 +364,7 @@ const orderNumbers = defineSkill({
       display: {
         kind: 'inline',
         text: label(values),
-        wholeNumber: { values, operation: 'order-ascending' },
+        wholeNumber: { operation: 'order-ascending', values },
       },
       answer: { kind: 'choice', id: '0' },
       inputMode: 'choice',
@@ -416,7 +416,7 @@ const roundTo10 = defineSkill({
       display: {
         kind: 'inline',
         text: String(value),
-        wholeNumber: { values: [value], operation: 'round-to-10' },
+        wholeNumber: { operation: 'round-to-10', value },
       },
       answer: intAnswer(rounded),
       misconceptions: [
@@ -479,7 +479,7 @@ const roundTo100 = defineSkill({
       display: {
         kind: 'inline',
         text: String(value),
-        wholeNumber: { values: [value], operation: 'round-to-100' },
+        wholeNumber: { operation: 'round-to-100', value },
       },
       answer: intAnswer(rounded),
       misconceptions: [

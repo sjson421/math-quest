@@ -26,11 +26,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "62 ? 62",
       "wholeNumber": {
+        "left": 62,
         "operation": "compare",
-        "values": [
-          62,
-          62,
-        ],
+        "right": 62,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -82,11 +80,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "97 ? 47",
       "wholeNumber": {
+        "left": 97,
         "operation": "compare",
-        "values": [
-          97,
-          47,
-        ],
+        "right": 47,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -138,11 +134,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "39 ? 35",
       "wholeNumber": {
+        "left": 39,
         "operation": "compare",
-        "values": [
-          39,
-          35,
-        ],
+        "right": 35,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -194,11 +188,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "12 ? 19",
       "wholeNumber": {
+        "left": 12,
         "operation": "compare",
-        "values": [
-          12,
-          19,
-        ],
+        "right": 19,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -250,11 +242,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "95 ? 95",
       "wholeNumber": {
+        "left": 95,
         "operation": "compare",
-        "values": [
-          95,
-          95,
-        ],
+        "right": 95,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -306,11 +296,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "129 ? 129",
       "wholeNumber": {
+        "left": 129,
         "operation": "compare",
-        "values": [
-          129,
-          129,
-        ],
+        "right": 129,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -362,11 +350,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "196 ? 101",
       "wholeNumber": {
+        "left": 196,
         "operation": "compare",
-        "values": [
-          196,
-          101,
-        ],
+        "right": 101,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -418,11 +404,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "84 ? 78",
       "wholeNumber": {
+        "left": 84,
         "operation": "compare",
-        "values": [
-          84,
-          78,
-        ],
+        "right": 78,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -474,11 +458,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "34 ? 45",
       "wholeNumber": {
+        "left": 34,
         "operation": "compare",
-        "values": [
-          34,
-          45,
-        ],
+        "right": 45,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -530,11 +512,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "190 ? 190",
       "wholeNumber": {
+        "left": 190,
         "operation": "compare",
-        "values": [
-          190,
-          190,
-        ],
+        "right": 190,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -586,11 +566,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "269 ? 269",
       "wholeNumber": {
+        "left": 269,
         "operation": "compare",
-        "values": [
-          269,
-          269,
-        ],
+        "right": 269,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -642,11 +620,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "392 ? 218",
       "wholeNumber": {
+        "left": 392,
         "operation": "compare",
-        "values": [
-          392,
-          218,
-        ],
+        "right": 218,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -698,11 +674,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "187 ? 176",
       "wholeNumber": {
+        "left": 187,
         "operation": "compare",
-        "values": [
-          187,
-          176,
-        ],
+        "right": 176,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -754,11 +728,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "95 ? 115",
       "wholeNumber": {
+        "left": 95,
         "operation": "compare",
-        "values": [
-          95,
-          115,
-        ],
+        "right": 115,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -810,11 +782,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "383 ? 383",
       "wholeNumber": {
+        "left": 383,
         "operation": "compare",
-        "values": [
-          383,
-          383,
-        ],
+        "right": 383,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -866,11 +836,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "476 ? 476",
       "wholeNumber": {
+        "left": 476,
         "operation": "compare",
-        "values": [
-          476,
-          476,
-        ],
+        "right": 476,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -922,11 +890,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "687 ? 390",
       "wholeNumber": {
+        "left": 687,
         "operation": "compare",
-        "values": [
-          687,
-          390,
-        ],
+        "right": 390,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -978,11 +944,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "336 ? 317",
       "wholeNumber": {
+        "left": 336,
         "operation": "compare",
-        "values": [
-          336,
-          317,
-        ],
+        "right": 317,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -1034,11 +998,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "177 ? 211",
       "wholeNumber": {
+        "left": 177,
         "operation": "compare",
-        "values": [
-          177,
-          211,
-        ],
+        "right": 211,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -1090,11 +1052,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "670 ? 670",
       "wholeNumber": {
+        "left": 670,
         "operation": "compare",
-        "values": [
-          670,
-          670,
-        ],
+        "right": 670,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -1146,11 +1106,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "664 ? 664",
       "wholeNumber": {
+        "left": 664,
         "operation": "compare",
-        "values": [
-          664,
-          664,
-        ],
+        "right": 664,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -1202,11 +1160,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "981 ? 535",
       "wholeNumber": {
+        "left": 981,
         "operation": "compare",
-        "values": [
-          981,
-          535,
-        ],
+        "right": 535,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -1258,11 +1214,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "454 ? 426",
       "wholeNumber": {
+        "left": 454,
         "operation": "compare",
-        "values": [
-          454,
-          426,
-        ],
+        "right": 426,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -1314,11 +1268,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "215 ? 266",
       "wholeNumber": {
+        "left": 215,
         "operation": "compare",
-        "values": [
-          215,
-          266,
-        ],
+        "right": 266,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -1370,11 +1322,9 @@ exports[`recorded Unit 0 output: compare-numbers > matches the reviewed learner-
       "kind": "inline",
       "text": "956 ? 956",
       "wholeNumber": {
+        "left": 956,
         "operation": "compare",
-        "values": [
-          956,
-          956,
-        ],
+        "right": 956,
       },
     },
     "hint": "Compare the hundreds first, then tens, then ones.",
@@ -1419,9 +1369,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "200 + 20 + 5",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          225,
-        ],
+        "value": 225,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1461,9 +1409,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "200 + 90 + 5",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          295,
-        ],
+        "value": 295,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1503,9 +1449,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "100 + 70 + 8",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          178,
-        ],
+        "value": 178,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1545,9 +1489,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "100 + 20 + 5",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          125,
-        ],
+        "value": 125,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1587,9 +1529,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "200 + 90",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          290,
-        ],
+        "value": 290,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1629,9 +1569,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "300 + 50",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          350,
-        ],
+        "value": 350,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1671,9 +1609,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "400 + 90 + 1",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          491,
-        ],
+        "value": 491,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1713,9 +1649,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "200 + 50 + 7",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          257,
-        ],
+        "value": 257,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1755,9 +1689,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "100 + 50 + 1",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          151,
-        ],
+        "value": 151,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1797,9 +1729,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "400 + 80",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          480,
-        ],
+        "value": 480,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1839,9 +1769,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "500 + 10 + 3",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          513,
-        ],
+        "value": 513,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1881,9 +1809,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "600 + 80 + 9",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          689,
-        ],
+        "value": 689,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1923,9 +1849,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "300 + 90 + 6",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          396,
-        ],
+        "value": 396,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -1965,9 +1889,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "200 + 60 + 4",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          264,
-        ],
+        "value": 264,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2007,9 +1929,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "600 + 70 + 5",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          675,
-        ],
+        "value": 675,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2049,9 +1969,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "600 + 70 + 6",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          676,
-        ],
+        "value": 676,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2091,9 +2009,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "800 + 80 + 7",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          887,
-        ],
+        "value": 887,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2133,9 +2049,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "500 + 30 + 6",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          536,
-        ],
+        "value": 536,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2175,9 +2089,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "300 + 70 + 7",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          377,
-        ],
+        "value": 377,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2217,9 +2129,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "800 + 70",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          870,
-        ],
+        "value": 870,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2259,9 +2169,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "700 + 70 + 6",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          776,
-        ],
+        "value": 776,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2301,9 +2209,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "900 + 80 + 7",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          987,
-        ],
+        "value": 987,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2343,9 +2249,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "600 + 30 + 6",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          636,
-        ],
+        "value": 636,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2385,9 +2289,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "400 + 70 + 7",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          477,
-        ],
+        "value": 477,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -2427,9 +2329,7 @@ exports[`recorded Unit 0 output: expanded-form > matches the reviewed learner-fa
       "text": "900 + 70",
       "wholeNumber": {
         "operation": "expanded-form",
-        "values": [
-          970,
-        ],
+        "value": 970,
       },
     },
     "hint": "Add the hundreds, tens, and ones values shown.",
@@ -3904,9 +3804,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "100",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          100,
-        ],
+        "value": 100,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -3946,9 +3844,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "295",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          295,
-        ],
+        "value": 295,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -3988,9 +3884,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "178",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          178,
-        ],
+        "value": 178,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4030,9 +3924,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "125",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          125,
-        ],
+        "value": 125,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4072,9 +3964,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "290",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          290,
-        ],
+        "value": 290,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4114,9 +4004,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "350",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          350,
-        ],
+        "value": 350,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4156,9 +4044,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "491",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          491,
-        ],
+        "value": 491,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4198,9 +4084,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "257",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          257,
-        ],
+        "value": 257,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4240,9 +4124,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "151",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          151,
-        ],
+        "value": 151,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4282,9 +4164,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "480",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          480,
-        ],
+        "value": 480,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4324,9 +4204,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "513",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          513,
-        ],
+        "value": 513,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4366,9 +4244,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "689",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          689,
-        ],
+        "value": 689,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4408,9 +4284,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "396",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          396,
-        ],
+        "value": 396,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4450,9 +4324,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "264",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          264,
-        ],
+        "value": 264,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4492,9 +4364,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "675",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          675,
-        ],
+        "value": 675,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4534,9 +4404,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "676",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          676,
-        ],
+        "value": 676,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4576,9 +4444,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "484",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          484,
-        ],
+        "value": 484,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4618,9 +4484,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "536",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          536,
-        ],
+        "value": 536,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4660,9 +4524,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "377",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          377,
-        ],
+        "value": 377,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4702,9 +4564,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "870",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          870,
-        ],
+        "value": 870,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4744,9 +4604,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "401",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          401,
-        ],
+        "value": 401,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4786,9 +4644,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "987",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          987,
-        ],
+        "value": 987,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4828,9 +4684,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "636",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          636,
-        ],
+        "value": 636,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4870,9 +4724,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "477",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          477,
-        ],
+        "value": 477,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4912,9 +4764,7 @@ exports[`recorded Unit 0 output: place-value-hundreds > matches the reviewed lea
       "text": "970",
       "wholeNumber": {
         "operation": "hundreds-digit",
-        "values": [
-          970,
-        ],
+        "value": 970,
       },
     },
     "hint": "The hundreds digit is third from the right.",
@@ -4959,9 +4809,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "10",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          10,
-        ],
+        "value": 10,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5001,9 +4849,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "98",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          98,
-        ],
+        "value": 98,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5043,9 +4889,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "45",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          45,
-        ],
+        "value": 45,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5085,9 +4929,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "21",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          21,
-        ],
+        "value": 21,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5127,9 +4969,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "95",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          95,
-        ],
+        "value": 95,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5169,9 +5009,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "132",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          132,
-        ],
+        "value": 132,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5211,9 +5049,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "196",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          196,
-        ],
+        "value": 196,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5253,9 +5089,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "90",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          90,
-        ],
+        "value": 90,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5295,9 +5129,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "43",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          43,
-        ],
+        "value": 43,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5337,9 +5169,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "191",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          191,
-        ],
+        "value": 191,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5379,9 +5209,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "350",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          350,
-        ],
+        "value": 350,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5421,9 +5249,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "491",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          491,
-        ],
+        "value": 491,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5463,9 +5289,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "257",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          257,
-        ],
+        "value": 257,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5505,9 +5329,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "151",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          151,
-        ],
+        "value": 151,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5547,9 +5369,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "480",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          480,
-        ],
+        "value": 480,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5589,9 +5409,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "538",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          538,
-        ],
+        "value": 538,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5631,9 +5449,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "785",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          785,
-        ],
+        "value": 785,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5673,9 +5489,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "375",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          375,
-        ],
+        "value": 375,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5715,9 +5529,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "190",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          190,
-        ],
+        "value": 190,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5757,9 +5569,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "194",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          194,
-        ],
+        "value": 194,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5799,9 +5609,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "664",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          664,
-        ],
+        "value": 664,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5841,9 +5649,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "981",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          981,
-        ],
+        "value": 981,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5883,9 +5689,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "454",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          454,
-        ],
+        "value": 454,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5925,9 +5729,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "215",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          215,
-        ],
+        "value": 215,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -5967,9 +5769,7 @@ exports[`recorded Unit 0 output: place-value-tens > matches the reviewed learner
       "text": "956",
       "wholeNumber": {
         "operation": "tens-digit",
-        "values": [
-          956,
-        ],
+        "value": 956,
       },
     },
     "hint": "The tens digit is second from the right.",
@@ -6014,9 +5814,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "ten",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          10,
-        ],
+        "value": 10,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6059,9 +5857,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "ninety-eight",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          98,
-        ],
+        "value": 98,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6104,9 +5900,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "forty-five",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          45,
-        ],
+        "value": 45,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6149,9 +5943,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "twenty-one",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          21,
-        ],
+        "value": 21,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6194,9 +5986,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "ninety-five",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          95,
-        ],
+        "value": 95,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6239,9 +6029,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "one hundred thirty-two",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          132,
-        ],
+        "value": 132,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6284,9 +6072,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "one hundred ninety-six",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          196,
-        ],
+        "value": 196,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6329,9 +6115,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "ninety",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          90,
-        ],
+        "value": 90,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6374,9 +6158,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "forty-three",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          43,
-        ],
+        "value": 43,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6419,9 +6201,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "one hundred ninety-one",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          191,
-        ],
+        "value": 191,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6464,9 +6244,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "two hundred sixty-nine",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          269,
-        ],
+        "value": 269,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6509,9 +6287,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "three hundred ninety-two",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          392,
-        ],
+        "value": 392,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6554,9 +6330,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "one hundred eighty-seven",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          187,
-        ],
+        "value": 187,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6599,9 +6373,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "ninety-five",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          95,
-        ],
+        "value": 95,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6644,9 +6416,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "three hundred eighty-three",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          383,
-        ],
+        "value": 383,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6689,9 +6459,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "four hundred seventy-six",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          476,
-        ],
+        "value": 476,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6734,9 +6502,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "six hundred eighty-seven",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          687,
-        ],
+        "value": 687,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6779,9 +6545,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "three hundred thirty-six",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          336,
-        ],
+        "value": 336,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6824,9 +6588,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "two hundred forty-one",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          241,
-        ],
+        "value": 241,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6869,9 +6631,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "six hundred seventy",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          670,
-        ],
+        "value": 670,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6914,9 +6674,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "six hundred sixty-four",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          664,
-        ],
+        "value": 664,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -6959,9 +6717,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "nine hundred eighty-one",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          981,
-        ],
+        "value": 981,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -7004,9 +6760,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "four hundred fifty-four",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          454,
-        ],
+        "value": 454,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -7049,9 +6803,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "two hundred fifteen",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          215,
-        ],
+        "value": 215,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -7094,9 +6846,7 @@ exports[`recorded Unit 0 output: read-numbers > matches the reviewed learner-fac
       "text": "nine hundred fifty-six",
       "wholeNumber": {
         "operation": "read",
-        "values": [
-          956,
-        ],
+        "value": 956,
       },
     },
     "hint": "Read each place from left to right, then enter the digits.",
@@ -7144,9 +6894,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "66",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          66,
-        ],
+        "value": 66,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7186,9 +6934,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "98",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          98,
-        ],
+        "value": 98,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7228,9 +6974,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "46",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          46,
-        ],
+        "value": 46,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7270,9 +7014,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "22",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          22,
-        ],
+        "value": 22,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7312,9 +7054,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "95",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          95,
-        ],
+        "value": 95,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7354,9 +7094,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "133",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          133,
-        ],
+        "value": 133,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7396,9 +7134,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "196",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          196,
-        ],
+        "value": 196,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7438,9 +7174,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "91",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          91,
-        ],
+        "value": 91,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7480,9 +7214,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "44",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          44,
-        ],
+        "value": 44,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7522,9 +7254,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "191",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          191,
-        ],
+        "value": 191,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7564,9 +7294,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "269",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          269,
-        ],
+        "value": 269,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7606,9 +7334,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "392",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          392,
-        ],
+        "value": 392,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7648,9 +7374,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "188",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          188,
-        ],
+        "value": 188,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7690,9 +7414,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "95",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          95,
-        ],
+        "value": 95,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7732,9 +7454,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "383",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          383,
-        ],
+        "value": 383,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7774,9 +7494,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "476",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          476,
-        ],
+        "value": 476,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7816,9 +7534,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "687",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          687,
-        ],
+        "value": 687,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7858,9 +7574,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "336",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          336,
-        ],
+        "value": 336,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7900,9 +7614,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "178",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          178,
-        ],
+        "value": 178,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7942,9 +7654,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "181",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          181,
-        ],
+        "value": 181,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -7984,9 +7694,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "664",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          664,
-        ],
+        "value": 664,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -8026,9 +7734,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "981",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          981,
-        ],
+        "value": 981,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -8068,9 +7774,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "454",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          454,
-        ],
+        "value": 454,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -8110,9 +7814,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "216",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          216,
-        ],
+        "value": 216,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -8152,9 +7854,7 @@ exports[`recorded Unit 0 output: round-to-10 > matches the reviewed learner-faci
       "text": "956",
       "wholeNumber": {
         "operation": "round-to-10",
-        "values": [
-          956,
-        ],
+        "value": 956,
       },
     },
     "hint": "Use the ones digit: 5 or more rounds up.",
@@ -8199,9 +7899,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "227",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          227,
-        ],
+        "value": 227,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8241,9 +7939,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "164",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          164,
-        ],
+        "value": 164,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8283,9 +7979,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "181",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          181,
-        ],
+        "value": 181,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8325,9 +8019,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "130",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          130,
-        ],
+        "value": 130,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8367,9 +8059,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "290",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          290,
-        ],
+        "value": 290,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8409,9 +8099,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "352",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          352,
-        ],
+        "value": 352,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8451,9 +8139,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "491",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          491,
-        ],
+        "value": 491,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8493,9 +8179,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "260",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          260,
-        ],
+        "value": 260,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8535,9 +8219,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "155",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          155,
-        ],
+        "value": 155,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8577,9 +8259,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "480",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          480,
-        ],
+        "value": 480,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8619,9 +8299,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "515",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          515,
-        ],
+        "value": 515,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8661,9 +8339,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "689",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          689,
-        ],
+        "value": 689,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8703,9 +8379,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "384",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          384,
-        ],
+        "value": 384,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8745,9 +8419,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "268",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          268,
-        ],
+        "value": 268,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8787,9 +8459,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "675",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          675,
-        ],
+        "value": 675,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8829,9 +8499,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "678",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          678,
-        ],
+        "value": 678,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8871,9 +8539,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "887",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          887,
-        ],
+        "value": 887,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8913,9 +8579,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "539",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          539,
-        ],
+        "value": 539,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8955,9 +8619,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "381",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          381,
-        ],
+        "value": 381,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -8997,9 +8659,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "871",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          871,
-        ],
+        "value": 871,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -9039,9 +8699,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "778",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          778,
-        ],
+        "value": 778,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -9081,9 +8739,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "987",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          987,
-        ],
+        "value": 987,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -9123,9 +8779,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "639",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          639,
-        ],
+        "value": 639,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -9165,9 +8819,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "481",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          481,
-        ],
+        "value": 481,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",
@@ -9207,9 +8859,7 @@ exports[`recorded Unit 0 output: round-to-100 > matches the reviewed learner-fac
       "text": "971",
       "wholeNumber": {
         "operation": "round-to-100",
-        "values": [
-          971,
-        ],
+        "value": 971,
       },
     },
     "hint": "Use the final two digits: 50 or more rounds up.",

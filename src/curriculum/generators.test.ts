@@ -5,7 +5,7 @@ import { generateProblem } from '../lib/generator'
 import { checkAnswer } from '../lib/answer'
 import { makeRng } from '../lib/rng'
 import { toNumber, rational } from '../lib/rational'
-import type { Difficulty, Problem, SkillGenerator } from '../lib/types'
+import type { Difficulty, Problem, SkillGenerator, WholeNumberData } from '../lib/types'
 
 const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 const ITERATIONS = 200 // per skill per difficulty → 1000 problems per skill
@@ -97,61 +97,87 @@ function choiceIdFor(problem: Problem, label: string): string {
   return matching[0].id
 }
 
+/**
+ * What the learner must be looking at for the carried data to describe it.
+ *
+ * Checked before anything is derived, so a problem that displays one number and
+ * carries another is named rather than silently verified against itself.
+ */
+function displayedText(data: WholeNumberData): string {
+  switch (data.operation) {
+    case 'read':
+      return numberWords(data.value)
+    case 'expanded-form':
+      return expandedText(data.value)
+    case 'compare':
+      return `${data.left} ? ${data.right}`
+    case 'order-ascending':
+      return data.values.join(', ')
+    case 'divide-remainder':
+    case 'divide-quotient':
+      return `${data.dividend} ÷ ${data.divisor}`
+    case 'tens-digit':
+    case 'hundreds-digit':
+    case 'round-to-10':
+    case 'round-to-100':
+    case 'factors':
+    case 'classify-prime':
+      return String(data.value)
+    case 'multiples':
+      return String(data.value)
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unknown whole-number operation: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 function recompute(problem: Problem): number | string {
   const { display } = problem
 
   if (display.kind === 'inline' && display.wholeNumber) {
-    const { operation, values } = display.wholeNumber
-    const [a, b] = values
-    const expectedText =
-      operation === 'read'
-        ? numberWords(a)
-        : operation === 'expanded-form'
-          ? expandedText(a)
-          : operation === 'compare'
-            ? `${a} ? ${b}`
-            : operation === 'order-ascending'
-              ? values.join(', ')
-              : operation === 'divide-remainder' || operation === 'divide-quotient'
-                ? `${a} ÷ ${b}`
-                : String(a)
+    const data = display.wholeNumber
+    const expectedText = displayedText(data)
 
     if (display.text !== expectedText)
       throw new Error(
         `${problem.skillId}: visible text "${display.text}" does not match "${expectedText}"`,
       )
 
-    switch (operation) {
+    switch (data.operation) {
       case 'read':
       case 'expanded-form':
-        return a
+        return data.value
       case 'tens-digit':
-        return Math.floor(a / 10) % 10
+        return Math.floor(data.value / 10) % 10
       case 'hundreds-digit':
-        return Math.floor(a / 100) % 10
+        return Math.floor(data.value / 100) % 10
       case 'compare':
-        return choiceIdFor(problem, a < b ? '<' : a > b ? '>' : '=')
+        return choiceIdFor(
+          problem,
+          data.left < data.right ? '<' : data.left > data.right ? '>' : '=',
+        )
       case 'order-ascending':
-        return choiceIdFor(problem, [...values].sort((x, y) => x - y).join(', '))
+        return choiceIdFor(problem, [...data.values].sort((x, y) => x - y).join(', '))
       case 'round-to-10':
-        return Math.round(a / 10) * 10
+        return Math.round(data.value / 10) * 10
       case 'round-to-100':
-        return Math.round(a / 100) * 100
+        return Math.round(data.value / 100) * 100
       // The two cases the arithmetic branch below would get wrong: `47 ÷ 5`
       // evaluates to 9.4, and neither answer is that.
       case 'divide-remainder':
-        return a % b
+        return data.dividend % data.divisor
       case 'divide-quotient':
-        return Math.floor(a / b)
+        return Math.floor(data.dividend / data.divisor)
       case 'factors':
-        return choiceIdFor(problem, factorsOf(a).join(', '))
+        return choiceIdFor(problem, factorsOf(data.value).join(', '))
       case 'multiples':
-        return choiceIdFor(problem, multiplesOf(a, b).join(', '))
+        return choiceIdFor(problem, multiplesOf(data.value, data.count).join(', '))
       case 'classify-prime':
-        return choiceIdFor(problem, factorsOf(a).length === 2 ? 'prime' : 'composite')
+        return choiceIdFor(problem, factorsOf(data.value).length === 2 ? 'prime' : 'composite')
       default: {
-        const unhandled: never = operation
-        throw new Error(`Unknown whole-number operation: ${unhandled}`)
+        const unhandled: never = data
+        throw new Error(`Unknown whole-number operation: ${JSON.stringify(unhandled)}`)
       }
     }
   }
@@ -195,9 +221,30 @@ const answerValue = (problem: Problem): number | string => {
   return problem.answer.id
 }
 
+/**
+ * The numbers a difficulty ladder is meant to be growing, per operation.
+ *
+ * `multiples` deliberately reports only its value: `count` is fixed at four, so
+ * averaging it in would drag the mean toward a constant and make a real ladder
+ * look flatter than it is.
+ */
+function sourceValues(data: WholeNumberData): number[] {
+  switch (data.operation) {
+    case 'compare':
+      return [data.left, data.right]
+    case 'order-ascending':
+      return data.values
+    case 'divide-remainder':
+    case 'divide-quotient':
+      return [data.dividend, data.divisor]
+    default:
+      return [data.value]
+  }
+}
+
 function sourceMagnitude(problem: Problem): number {
   if (problem.display.kind === 'inline' && problem.display.wholeNumber) {
-    const { values } = problem.display.wholeNumber
+    const values = sourceValues(problem.display.wholeNumber)
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
@@ -393,7 +440,7 @@ describe('recompute', () => {
     display: {
       kind: 'inline',
       text: '347',
-      wholeNumber: { values: [347], operation: 'tens-digit' },
+      wholeNumber: { operation: 'tens-digit', value: 347 },
     },
     answer: { kind: 'exact', n: 4, d: 1 },
     inputMode: 'keypad',
@@ -432,7 +479,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '346',
-        wholeNumber: { values: [347], operation: 'tens-digit' },
+        wholeNumber: { operation: 'tens-digit', value: 347 },
       },
     })
 
@@ -450,7 +497,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '347 ? 354',
-        wholeNumber: { values: [347, 354], operation: 'compare' },
+        wholeNumber: { operation: 'compare', left: 347, right: 354 },
       },
       answer: { kind: 'choice', id: '-1' },
       inputMode: 'choice',
@@ -470,7 +517,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '347 ? 354',
-        wholeNumber: { values: [347, 354], operation: 'compare' },
+        wholeNumber: { operation: 'compare', left: 347, right: 354 },
       },
       answer: { kind: 'choice', id: '1' },
       inputMode: 'choice',
@@ -505,7 +552,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '347 ? 354',
-        wholeNumber: { values: [347, 354], operation: 'compare' },
+        wholeNumber: { operation: 'compare', left: 347, right: 354 },
       },
       answer: { kind: 'choice', id: '-1' },
       inputMode: 'choice',
@@ -525,7 +572,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '47 ÷ 5',
-        wholeNumber: { values: [47, 5], operation: 'divide-remainder' },
+        wholeNumber: { operation: 'divide-remainder', dividend: 47, divisor: 5 },
       },
       answer: { kind: 'exact', n: 2, d: 1 },
     })
@@ -539,7 +586,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '47 ÷ 5',
-        wholeNumber: { values: [47, 5], operation: 'divide-remainder' },
+        wholeNumber: { operation: 'divide-remainder', dividend: 47, divisor: 5 },
       },
       // 9 is the quotient, which is exactly the confusion the skill diagnoses —
       // and an answer key that made it would be shipped without this branch.
@@ -554,7 +601,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '47 ÷ 5',
-        wholeNumber: { values: [47, 5], operation: 'divide-quotient' },
+        wholeNumber: { operation: 'divide-quotient', dividend: 47, divisor: 5 },
       },
       answer: { kind: 'exact', n: 9, d: 1 },
     })
@@ -568,7 +615,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '47 ÷ 6',
-        wholeNumber: { values: [47, 5], operation: 'divide-remainder' },
+        wholeNumber: { operation: 'divide-remainder', dividend: 47, divisor: 5 },
       },
     })
 
@@ -581,7 +628,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '12',
-        wholeNumber: { values: [12], operation: 'factors' },
+        wholeNumber: { operation: 'factors', value: 12 },
       },
       answer: { kind: 'choice', id: '0' },
       inputMode: 'choice',
@@ -601,7 +648,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '12',
-        wholeNumber: { values: [12], operation: 'factors' },
+        wholeNumber: { operation: 'factors', value: 12 },
       },
       // Points at the list with 1 and 12 stripped out — the distractor.
       answer: { kind: 'choice', id: '1' },
@@ -620,7 +667,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '6',
-        wholeNumber: { values: [6, 4], operation: 'multiples' },
+        wholeNumber: { operation: 'multiples', value: 6, count: 4 },
       },
       answer: { kind: 'choice', id: '0' },
       inputMode: 'choice',
@@ -633,7 +680,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '51',
-        wholeNumber: { values: [51], operation: 'classify-prime' },
+        wholeNumber: { operation: 'classify-prime', value: 51 },
       },
       answer: { kind: 'choice', id: '0' },
       inputMode: 'choice',
@@ -653,7 +700,7 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '347 ? 354',
-        wholeNumber: { values: [347, 354], operation: 'compare' },
+        wholeNumber: { operation: 'compare', left: 347, right: 354 },
       },
       answer: { kind: 'choice', id: '-1' },
       inputMode: 'choice',
@@ -682,7 +729,7 @@ describe('difficulty reporting', () => {
             display: {
               kind: 'inline',
               text: String(value),
-              wholeNumber: { values: [value], operation: 'round-to-10' },
+              wholeNumber: { operation: 'round-to-10', value },
             },
             answer: { kind: 'exact', n: value, d: 1 },
             inputMode: 'keypad',

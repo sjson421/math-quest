@@ -182,7 +182,7 @@ const divRemainder = defineSkill({
         // The answer is a property of this division, not its value. `${dividend}
         // ÷ ${divisor}` evaluates to a fraction, and the remainder is neither
         // that nor its whole part, so verification is told which to derive.
-        wholeNumber: { values: [dividend, divisor], operation: 'divide-remainder' as const },
+        wholeNumber: { operation: 'divide-remainder' as const, dividend, divisor },
       },
       answer: intAnswer(remainder),
       misconceptions: [
@@ -346,7 +346,7 @@ const longDivRemainder = defineSkill({
       prompt: 'How many whole groups fit?',
       display: {
         ...divisionDisplay(dividend, divisor),
-        wholeNumber: { values: [dividend, divisor], operation: 'divide-quotient' as const },
+        wholeNumber: { operation: 'divide-quotient' as const, dividend, divisor },
       },
       answer: intAnswer(quotient),
       misconceptions: [
@@ -497,7 +497,7 @@ const factors = defineSkill({
       display: {
         kind: 'inline',
         text: String(value),
-        wholeNumber: { values: [value], operation: 'factors' as const },
+        wholeNumber: { operation: 'factors' as const, value },
       },
       answer: { kind: 'choice', id: CORRECT },
       inputMode: 'choice',
@@ -548,8 +548,9 @@ const multiples = defineSkill({
         kind: 'inline',
         text: String(value),
         wholeNumber: {
-          values: [value, MULTIPLES_SHOWN],
           operation: 'multiples' as const,
+          value,
+          count: MULTIPLES_SHOWN,
         },
       },
       answer: { kind: 'choice', id: CORRECT },
@@ -618,7 +619,7 @@ const primes = defineSkill({
       display: {
         kind: 'inline',
         text: String(value),
-        wholeNumber: { values: [value], operation: 'classify-prime' as const },
+        wholeNumber: { operation: 'classify-prime' as const, value },
       },
       answer: { kind: 'choice', id: wantPrime ? '1' : CORRECT },
       inputMode: 'choice',
