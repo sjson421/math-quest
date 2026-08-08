@@ -1,4 +1,0 @@
-interface:
-  display_name: "Audit OpenSpec Proposal"
-  short_description: "Audit a proposal before implementation"
-  default_prompt: "Use $openspec-audit-proposal to audit and correct the selected OpenSpec proposal."

@@ -45,8 +45,8 @@ is its own item, never bundled with the content it unblocks. It flips nothing on
 though: `number-line` unlocked no skill, because every skill that declares it is still
 waiting for a generator.
 
-**One unit per change.** A 50-skill stage would be roughly a hundred tasks. Where an item
-below covers several units, it is several changes.
+**At most six generators per change.** Larger units ship in the ordered increments written
+below. Their roadmap checkbox remains open until every increment lands.
 
 **Sizing is relative.** S / M / L / XL against each other, not against a calendar.
 
@@ -485,12 +485,19 @@ document's ✅ markers updated to match, which the cross-check enforces.
       Shaded shapes for fraction meaning, first at `fraction-of-shape` (7.2); reused heavily by
       Unit 20's geometry.
 
-- [ ] **19 · Stage D · Units 7–11** — XL — 50 skills, five changes
+- [ ] **19 · Stage D · Units 7–11** — XL — 50 skills, ten changes
 
       The biggest block in the course. Unit 7 is conceptual only — not one problem asks for a
       calculation. Unit 8 needs the fraction keypad from item 3, Unit 9 the decimal point.
       `fraction-words` (8.12), `money-problems` (9.12) and `ratio-words` (11.7) draw on the
       phrasing bank; Unit 10 closes on `simple-interest` instead, so it needs no frames.
+
+      Ordered increments: 7a `fraction-meaning`–`equivalent-multiply`, 7b
+      `simplify-fractions`–`compare-diff-den`; 8a `add-frac-same-den`–`improper-to-mixed`,
+      8b `mixed-to-improper`–`fraction-words`; 9a `decimal-place-value`–`sub-decimals`, 9b
+      `mult-decimals`–`money-problems`; 10a `percent-meaning`–`percent-of`, 10b
+      `find-the-percent`–`simple-interest`; 11a `write-ratios`–`unit-conversion`, 11b
+      `ratio-words`.
 
 - [ ] **20 · Expression input** — M
 
@@ -503,9 +510,15 @@ document's ✅ markers updated to match, which the cross-check enforces.
       with an expression rather than a number. The content contract requires two distinct
       surviving predictions on every wall, so this is a gate on Unit 13, not a nicety.
 
-- [ ] **21 · Stage E · Units 12–15** — L — 34 skills, four changes
+- [ ] **21 · Stage E · Units 12–15** — L — 34 skills, seven changes
 
       `distribute-negative` (13.7) is a major wall.
+
+      Ordered increments: 12a `exponent-meaning`–`exponent-divide`, 12b
+      `power-of-power`–`pemdas-exponents`; 13a `variable-meaning`–`distributive`, 13b
+      `distribute-negative`–`factor-gcf`; 14a `equation-balance`–`equation-parentheses`,
+      14b `with-fractions`–`rearrange-formula`; 15 `inequality-symbols`–
+      `compound-inequalities`.
 
 - [ ] **22 · Coordinate-plane input** — L
 
@@ -513,16 +526,25 @@ document's ✅ markers updated to match, which the cross-check enforces.
       marked both `quick` and a wall. Needs the misconception generalisation from item 20, since
       a point is not a scalar.
 
-- [ ] **23 · Stage F · Units 16–19** — L — 28 skills, four changes
+- [ ] **23 · Stage F · Units 16–19** — L — 28 skills, six changes
+
+      Ordered increments: 16a `plot-points`–`y-intercept`, 16b
+      `slope-intercept`–`parallel-perpendicular`; 17 `system-by-graphing`–`system-words`;
+      18a `add-polynomials`–`factor-trinomial`, 18b `difference-of-squares`–
+      `quadratic-formula`; 19 `function-notation`–`compare-functions`.
 
 - [ ] **24 · Chart rendering** — M
 
       Bar, line, scatter. First needed at `read-bar-line` (21.5).
 
-- [ ] **25 · Stage G · Units 20–21** — M — 22 skills, two changes
+- [ ] **25 · Stage G · Units 20–21** — M — 22 skills, five changes
 
       Geometry teaches *choosing and applying* the formula the GED provides, never memorising
       it.
+
+      Ordered increments: 20a `perimeter`–`area-circle`, 20b
+      `composite-figures`–`pythagorean`, 20c `similar-figures`; 21a `mean`–
+      `read-scatterplot`, 21b `basic-probability`–`counting-outcomes`.
 
 - [ ] **26 · Review and spaced repetition** — L *(was B6)*
 
@@ -572,8 +594,9 @@ Sync has also never been verified on real hardware — see the note closing
 
 ## Working conventions
 
-- Each item becomes an OpenSpec change (`/openspec-propose`), and ships through
-  `/openspec-apply-change`. Items covering several units are several changes.
+- Each item uses `openspec-propose` and ships through `openspec-apply-change`. A content
+  change adds no more than six generators; larger units use their ordered increments and
+  remain unchecked until all of them ship.
 - Create changes just in time, one or two ahead. Proposals written months early against
   unbuilt infrastructure rot.
 - `docs/curriculum.md` stays the content authority; `src/curriculum/manifest/` is its

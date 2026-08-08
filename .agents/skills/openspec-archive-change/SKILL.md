@@ -3,7 +3,6 @@ name: openspec-archive-change
 description: Archive a completed change in the experimental workflow. Use when the user wants to finalize and archive a change after implementation is complete.
 allowed-tools: Bash(openspec:*)
 license: MIT
-compatibility: Requires openspec CLI.
 metadata:
   author: openspec
   version: "1.0"
@@ -28,7 +27,7 @@ Archive a completed change in the experimental workflow.
    When prompting, show only active changes (not already archived).
    Include the schema used for each change if available.
 
-   Always announce: "Using change: <name>" and how to override (e.g., `/opsx:archive <other>`).
+   Always announce: "Using change: <name>" and how to select another change.
 
    **Load current archive inputs before the existing archive checks:**
 

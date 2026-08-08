@@ -3,7 +3,6 @@ name: openspec-propose
 description: Propose a new change with all artifacts generated in one step. Use when the user wants to quickly describe what they want to build and get a complete proposal with design, specs, and tasks ready for implementation.
 allowed-tools: Bash(openspec:*)
 license: MIT
-compatibility: Requires openspec CLI.
 metadata:
   author: openspec
   version: "1.0"
@@ -18,7 +17,7 @@ I'll create a change with the artifacts your schema defines. With the default sp
 - design.md (how)
 - tasks.md (implementation steps)
 
-When ready to implement, run /opsx:apply
+When ready to implement, use `openspec-apply-change`.
 
 ---
 
@@ -71,7 +70,11 @@ When ready to implement, run /opsx:apply
         - `skipped`/`warning`: present when the change declares skip_specs and this artifact must NOT be created - stop and pick another artifact
         - `resolvedOutputPath`: Resolved path or pattern to write the artifact
         - `dependencies`: Completed artifacts to read for context
-      - Read any completed dependency files for context - always re-read them from disk, even if you saw them earlier in the conversation (the user may have edited them)
+      - For every dependency path, compute a content hash and keep that hash with its
+        in-context summary in a map scoped to this proposal run. Before a later artifact
+        uses the dependency, recompute the hash. Reuse the summary when it matches; reread
+        the file before generation when it differs, then replace the cached hash and
+        summary. Discard the map when this proposal run ends.
       - If the `instruction` field delegates creation to a specific skill or command, invoke it to produce the artifact instead of writing the file yourself, then verify the artifact file exists at `resolvedOutputPath`
       - Otherwise create the artifact file using `template` as the structure and write it to `resolvedOutputPath`. If `resolvedOutputPath` is a glob, follow `instruction` to choose the concrete file path
       - Apply `context` and `rules` as constraints - but do NOT copy them into the file
@@ -102,7 +105,7 @@ After completing all artifacts, summarize:
 - Change name and location
 - List of artifacts created with brief descriptions, plus any conditional artifact you skipped and why
 - What's ready: "All artifacts needed for implementation are ready."
-- Prompt: "Run `/opsx:apply` or ask me to implement to start working on the tasks."
+- Prompt: "Use `openspec-apply-change` or ask me to implement to start working on the tasks."
 
 **Artifact Creation Guidelines**
 
@@ -117,7 +120,9 @@ After completing all artifacts, summarize:
 
 **Guardrails**
 - Create every artifact the apply phase transitively depends on, not just the ids listed in `apply.requires`
-- Always read dependency artifacts before creating a new one - re-read from disk, not from conversation memory (files may have changed since you last saw them)
+- Track every dependency artifact by resolved path, content hash, and run-local summary.
+  Reuse only an unchanged dependency; reread any dependency whose hash changed before
+  generating the next artifact.
 - If context is critically unclear, ask the user - but prefer making reasonable decisions to keep momentum
 - If a change with that name already exists, ask if user wants to continue it or create a new one
 - Verify each artifact file exists after writing before proceeding to next

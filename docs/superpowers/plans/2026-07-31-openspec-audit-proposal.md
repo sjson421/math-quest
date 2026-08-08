@@ -69,7 +69,7 @@ Save the returned report to `/tmp/openspec-audit-proposal-baseline.md`. Compare 
 Run:
 
 ```bash
-python3 /home/jay-son/.codex/skills/.system/skill-creator/scripts/init_skill.py openspec-audit-proposal \
+python3 <skill-creator>/scripts/init_skill.py openspec-audit-proposal \
   --path .agents/skills \
   --interface 'display_name=Audit OpenSpec Proposal' \
   --interface 'short_description=Audit a proposal before implementation' \
@@ -182,7 +182,7 @@ If verification passes without a skill change, record that no Task 3 commit was 
 Run the provided validator with a Python environment containing PyYAML:
 
 ```bash
-python3 /home/jay-son/.codex/skills/.system/skill-creator/scripts/quick_validate.py \
+python3 <skill-creator>/scripts/quick_validate.py \
   .agents/skills/openspec-audit-proposal
 ```
 

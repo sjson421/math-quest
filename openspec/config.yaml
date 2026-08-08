@@ -1,70 +1,29 @@
 schema: spec-driven
 
 context: |
-  Math Quest — a gamified math PWA taking one adult learner from counting to GED level.
+  Math Quest is an offline-first React math PWA for one adult learner.
 
-  ## Audience
-  One adult learner restarting math from the beginning, who likes Sanrio-style design.
-  Design rule: KAWAII VISUALS, ADULT TONE. Cute mascot, pastels, rewards — but never
-  baby-talk, never condescension. An adult beginner is not a child, and being addressed
-  as one is the fastest way to lose them; assume the tone matters as much as the maths.
-  Do not simplify the writing because the art is cute; Sanrio's audience is adults.
+  Read repository authorities instead of repeating them here:
+  - AGENTS.md: architecture, invariants, commands, and task-document routing
+  - docs/curriculum.md: curriculum, exact skill ids, tone, and content contract
+  - docs/roadmap.md: order, dependencies, and selected scope
+  - docs/workflow.md: baseline inventory, lifecycle, and sizing
 
-  ## Tech
-  Vite + React 19 + TypeScript + Tailwind 4 + Framer Motion + Zustand + idb-keyval.
-  PWA installed to the iPhone home screen. No accounts and no runtime LLM calls.
-  The device is the working store: progress lives in IndexedDB and the app is fully
-  usable offline. One serverless endpoint (api/progress.ts, Vercel edge + Upstash Redis)
-  holds a backup copy keyed by a recovery key, storing the progress blob opaquely — it
-  never validates, interprets, or migrates the schema. Developed on Linux; deployed to
-  Vercel.
-
-  ## Non-negotiable design commitments
-  These are settled decisions. A proposal that contradicts one is wrong — call it out
-  rather than silently redesigning around it.
-
-  - NO HEARTS OR LIVES. A standard lesson ends after 10 CORRECT answers and a manifest
-    `quick` lesson after 5; misses re-queue up to 3 places back in the same session. Same
-    forward pressure, none of the punishment.
-  - GENERATORS COMPUTE THEIR OWN ANSWERS from the operands they just chose. Nothing is
-    hardcoded and nothing calls an LLM at runtime. This is what guarantees correctness.
-  - WRONG ANSWERS ARE DIAGNOSED, NOT REJECTED. Generators predict the exact value a given
-    mistake produces, so feedback names the real error ("it looks like you forgot to carry
-    the 1"). Feedback is warm and never uses alarm-red styling.
-  - PROGRESS IS LOCAL AND FRAGILE. iOS can evict web app storage, so the recovery key and
-    sync endpoint are the safety net. Any change touching the data model must survive the
-    round trip: reconcile() merges stored skills over defaults per skill object, which is
-    what lets SkillProgress gain fields without a sync change.
-  - CUSTOM KEYPAD ONLY. Never fall back to the iOS system keyboard.
-  - PATIENT PACING. Skills are small and single-idea. Splitting a hard skill into two is
-    always preferable to one skill that takes three attempts to pass.
-
-  ## Curriculum
-  docs/curriculum.md is the authority: 8 stages, 23 units, 201 skills, with final skill
-  ids, prerequisite rules, the content style contract, and per-stage capability
-  requirements. Use its skill ids VERBATIM. If a change needs to deviate, update that doc
-  in the same change so the two cannot drift.
-
-  ## Content style contract (per skill)
-  1 teaching sentence. 1 worked example. 1-sentence hint. Max 4 solution steps of <=12
-  words each. Max 1 new vocabulary word. Show, don't explain — a worked example beats
-  prose for novice learners. No forward references to later units.
-
-  ## Testing standard
-  Every generator gets ~1000 seeded problems whose answers are RECOMPUTED INDEPENDENTLY
-  from what is displayed on screen, not trusted from the generator. Also assert: no
-  degenerate output, no misconception value equal to the correct answer, difficulty
-  actually scales, determinism per seed, prerequisite graph acyclic.
+  OpenSpec-specific constraints:
+  - No runtime LLM calls. Generators compute answers from their chosen operands.
+  - Separate capability infrastructure from content-generator changes.
+  - Use the manifest and curriculum authorities together; never duplicate their graph.
+  - A data-model change must preserve the progress reconcile and opaque-sync contract.
 
 rules:
   proposal:
-    - State which curriculum stage/unit and which skill ids from docs/curriculum.md are in scope.
-    - Include a "Non-goals" section naming what is deliberately deferred.
-    - Flag any new capability required (KaTeX, fraction input, diagrams, coordinate plane).
+    - State which curriculum stage/unit and exact skill ids are in scope, or state that the change is tooling-only.
+    - Include a Non-goals section naming deliberately deferred work.
+    - Flag every new capability required, such as rendering or input infrastructure.
   design:
-    - Separate CAPABILITY work (new input modes, rendering) from CONTENT work (generators).
-    - Name the misconceptions each generator must predict, especially for skills flagged as walls in docs/curriculum.md.
+    - Separate capability work from content work.
+    - For content, name the predicted misconceptions, especially for curriculum walls.
   tasks:
-    - One task per skill generator, plus a task for its tests.
-    - Keep tasks under 2 hours each.
-    - Always end with a task to drive the real app in a browser, not just run tests.
+    - A content change may add at most six generators; split larger units into ordered increments and leave the roadmap item unchecked until every increment lands.
+    - Give each generator and its independent tests explicit tasks, each under two hours.
+    - End with real-app browser validation; use docs/environment.md.
