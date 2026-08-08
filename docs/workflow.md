@@ -16,8 +16,10 @@ lands, and note decisions inline rather than only in chat.
   `## ADDED` is for genuinely new surface. The count has been wrong before —
   `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — nineteen changes have shipped, the
-  latest being `split-unit-capabilities`, archived 2026-08-08.
+  holds shipped changes. **The active queue is empty** — twenty changes have shipped, the
+  latest being `establish-dress-up-design-tooling`, archived 2026-08-08. That one is
+  tooling-only and declared `skip_specs: true`, so it archived without a `specs/` directory
+  and amended no baseline capability.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`
