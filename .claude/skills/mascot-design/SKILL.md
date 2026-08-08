@@ -82,3 +82,10 @@ has the mechanics.
   is where fine detail turns to mud.
 - **Nothing loads over the network.** The PWA works offline; every asset is vendored into
   the repository with its source and licence recorded.
+- **No cosmetic may require a paid or account-gated tool to author.** This gates a tool
+  before any of its merits are weighed. A format whose only editor is a hosted product
+  makes the authoring path a standing dependency on someone else's pricing and account
+  policy — and unlike a bad runtime, you cannot swap it out later without redrawing every
+  asset already made in it. Hand-written SVG, Inkscape, and SVGO all qualify; Rive does
+  not, which is the first reason item 15 rejected it and the one that would still hold if
+  every other objection were answered.

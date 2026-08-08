@@ -58,6 +58,11 @@ looking, which is the point — none of it is a matter of taste.
 - [ ] No `<image href>` to a remote URL, no webfont, no runtime fetch. Everything the item
       needs is in the bundle.
 
+**Tooling**
+
+- [ ] The item can be opened and edited again with free tools. Nothing in its authoring
+      path — editor, format, or export step — needs a paid plan or an account.
+
 ## Provenance
 
 Final Pip artwork should be drawn in this repository. Outside art is for prototypes,
@@ -71,6 +76,9 @@ When an asset does come from outside:
 - **Record source URL, author, licence, any local modification, and the required
   attribution** beside the asset or in the asset registry. Do it when the file lands; a
   licence reconstructed six months later is a guess.
+- **Check that you can still edit it.** A licence that permits use is not the same as a
+  format you can reopen. Prefer sources that hand you SVG or another plain-text format over
+  ones that hand you a file only their own hosted editor can change.
 - **Check the licence per file.** A download button is not a grant. CC0 is clean, CC BY
   needs attribution shipped with the app, and anything non-commercial or no-derivatives
   does not belong here at all.
