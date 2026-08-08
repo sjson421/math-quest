@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { generateProblem } from '../lib/generator'
-import type { Difficulty, Problem } from '../lib/types'
-import { format, sample, unrenderedKeys } from './recorded-output'
+import type { Problem } from '../lib/types'
+import { format, sample, sweep, unrenderedKeys } from './recorded-output'
 import {
   evaluate,
   foldInOrder,
@@ -20,36 +20,9 @@ describe.each(unit05.map((skill) => [skill.id, skill] as const))(
   },
 )
 
-const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
-const SEEDS = Array.from({ length: 100 }, (_, i) => i * 7919 + 1)
-
-const skill = (id: string) => {
-  const found = unit05.find((candidate) => candidate.id === id)
-  if (!found) throw new Error(`Missing Unit 5 skill: ${id}`)
-  return found
-}
-
-const problemCache = new Map<string, Problem[]>()
-
-const everyProblem = (id: string) => {
-  const cached = problemCache.get(id)
-  if (cached) return cached
-
-  const problems = DIFFICULTIES.flatMap((difficulty) =>
-    SEEDS.map((seed) => generateProblem(skill(id), seed, difficulty)),
-  )
-  problemCache.set(id, problems)
-  return problems
-}
+const { everyProblem, exactValue, skill } = sweep(unit05, 'Unit 5')
 
 const allProblems = () => unit05.flatMap((generator) => everyProblem(generator.id))
-
-const exactValue = (problem: Problem) => {
-  if (problem.answer.kind !== 'exact' || problem.answer.d !== 1) {
-    throw new Error(`${problem.skillId} did not make a whole-number answer`)
-  }
-  return problem.answer.n
-}
 
 const shown = (problem: Problem) => {
   if (problem.display.kind !== 'inline') throw new Error('expected an inline problem')

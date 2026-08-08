@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { generateProblem } from '../lib/generator'
-import type { Difficulty, Problem } from '../lib/types'
+import type { Problem } from '../lib/types'
 import {
   divisionTrace,
   forgotBringDown,
   ignoredStepRemainder,
 } from './engine'
-import { format, sample, unrenderedKeys } from './recorded-output'
+import { format, sample, sweep, unrenderedKeys } from './recorded-output'
 import { factorsOf, isPrime, multiplesOf, unit04 } from './unit-04-division'
 
 describe.each(unit04.map((skill) => [skill.id, skill] as const))(
@@ -18,34 +18,7 @@ describe.each(unit04.map((skill) => [skill.id, skill] as const))(
   },
 )
 
-const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
-const SEEDS = Array.from({ length: 100 }, (_, i) => i * 7919 + 1)
-
-const skill = (id: string) => {
-  const found = unit04.find((candidate) => candidate.id === id)
-  if (!found) throw new Error(`Missing Unit 4 skill: ${id}`)
-  return found
-}
-
-const problemCache = new Map<string, Problem[]>()
-
-const everyProblem = (id: string) => {
-  const cached = problemCache.get(id)
-  if (cached) return cached
-
-  const problems = DIFFICULTIES.flatMap((difficulty) =>
-    SEEDS.map((seed) => generateProblem(skill(id), seed, difficulty)),
-  )
-  problemCache.set(id, problems)
-  return problems
-}
-
-const exactValue = (problem: Problem) => {
-  if (problem.answer.kind !== 'exact' || problem.answer.d !== 1) {
-    throw new Error(`${problem.skillId} did not make a whole-number answer`)
-  }
-  return problem.answer.n
-}
+const { everyProblem, exactValue, skill } = sweep(unit04, 'Unit 4')
 
 /** The `a ÷ b` an inline division shows, read back off the screen text. */
 const shownOperands = (problem: Problem): [number, number] => {

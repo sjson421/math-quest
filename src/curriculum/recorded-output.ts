@@ -100,6 +100,52 @@ export const sample = (skill: SkillGenerator) =>
     SEEDS.map((seed) => format(generateProblem(skill, seed, difficulty), seed)),
   ).join('\n\n')
 
+/**
+ * The seeds the per-unit property sweeps run over — a much wider net than the
+ * five `SEEDS` above, because those pin exact wording and these only assert
+ * invariants, so they can afford the breadth.
+ */
+const SWEEP_SEEDS = Array.from({ length: 100 }, (_, i) => i * 7919 + 1)
+
+/**
+ * The fixture plumbing every unit's "what this guarantees about every problem"
+ * block needs: look a skill up by id, generate its whole sweep once, and read a
+ * whole-number answer back off a problem.
+ *
+ * Shared because it cross-checks nothing — it only feeds problems to the
+ * assertions each unit writes for itself. Three copies had already drifted in
+ * their types by the time this moved here.
+ */
+export const sweep = (unit: readonly SkillGenerator[], unitName: string) => {
+  const cache = new Map<string, Problem[]>()
+
+  const skill = (id: string) => {
+    const found = unit.find((candidate) => candidate.id === id)
+    if (!found) throw new Error(`Missing ${unitName} skill: ${id}`)
+    return found
+  }
+
+  const everyProblem = (id: string) => {
+    const cached = cache.get(id)
+    if (cached) return cached
+
+    const problems = DIFFICULTIES.flatMap((difficulty) =>
+      SWEEP_SEEDS.map((seed) => generateProblem(skill(id), seed, difficulty)),
+    )
+    cache.set(id, problems)
+    return problems
+  }
+
+  const exactValue = (problem: Problem) => {
+    if (problem.answer.kind !== 'exact' || problem.answer.d !== 1) {
+      throw new Error(`${problem.skillId} did not make a whole-number answer`)
+    }
+    return problem.answer.n
+  }
+
+  return { skill, everyProblem, exactValue }
+}
+
 /** Fields the generators set that `format()` would not show. Empty is passing. */
 export const unrenderedKeys = (skills: readonly SkillGenerator[]): string[] => {
   const seen = new Set<string>()
