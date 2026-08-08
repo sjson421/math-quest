@@ -68,6 +68,33 @@ describe('NumberLineInput', () => {
     expect(drawn.length).toBeGreaterThan(0)
   })
 
+  it('labels zero however the thinning falls', () => {
+    // Found by looking at a screenshot, not by a query: a line of 15 ticks
+    // labels every second one, zero sits at an odd index, and the label the
+    // whole skill counts from was the one left off. Roughly half of
+    // `negatives-numberline`'s lines drew that way.
+    const labelled = (spec: NumberLineSpec) =>
+      [...render(spec).matchAll(/leading-none[^>]*>([^<]*)</g)]
+        .map((match) => match[1])
+        .filter(Boolean)
+
+    for (let reach = 5; reach <= 15; reach += 1) {
+      const spec = line(-reach, [1, 1], reach * 2 + 1)
+      expect(labelled(spec), `a line reaching ${reach} does not label zero`).toContain('0')
+    }
+  })
+
+  it('thins from the left when there is no zero to anchor on', () => {
+    // `fractions-numberline` will mostly draw lines that start above zero.
+    const aboveZero = line(1, [1, 1], 15)
+
+    expect(
+      [...render(aboveZero).matchAll(/leading-none[^>]*>([^<]*)</g)]
+        .map((match) => match[1])
+        .filter(Boolean)[0],
+    ).toBe('1')
+  })
+
   it('marks the placed tick and nothing else', () => {
     const html = render(wholeNumbers, '-3')
 

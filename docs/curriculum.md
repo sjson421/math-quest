@@ -225,15 +225,15 @@ The gate to all algebra. Nothing here is optional.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 6.1 | `negatives-numberline` | Read below zero | `quick` |
-| 6.2 | `compare-negatives` | −7 < −3 | ⚠️ "bigger digit = bigger" |
-| 6.3 | `add-neg-pos` | −3 + 5 | ⚠️ added magnitudes, kept sign |
-| 6.4 | `add-two-negs` | −3 + −5 | |
-| 6.5 | `sub-negatives` | 5 − (−3) | ⚠️ **major wall** — minus a minus |
-| 6.6 | `mult-negatives` | Sign rules | |
-| 6.7 | `div-negatives` | | |
-| 6.8 | `absolute-value` | | |
-| 6.9 | `negatives-mixed` | Interleaved review | |
+| 6.1 | `negatives-numberline` | Read below zero | ✅ `quick` number-line input |
+| 6.2 | `compare-negatives` | −7 < −3 | ✅ ⚠️ "bigger digit = bigger" · choice input |
+| 6.3 | `add-neg-pos` | −3 + 5 | ✅ ⚠️ added magnitudes, kept sign |
+| 6.4 | `add-two-negs` | −3 + −5 | ✅ |
+| 6.5 | `sub-negatives` | 5 − (−3) | ✅ ⚠️ **major wall** — minus a minus |
+| 6.6 | `mult-negatives` | Sign rules | ✅ |
+| 6.7 | `div-negatives` | | ✅ |
+| 6.8 | `absolute-value` | | ✅ |
+| 6.9 | `negatives-mixed` | Interleaved review | ✅ |
 
 ---
 

@@ -3,6 +3,7 @@ import { useCallback, useMemo, useRef, useState } from 'react'
 import { skillById } from '../curriculum/manifest'
 import { checkAnswer, type CheckResult } from '../lib/answer'
 import { completionAction, type CompletionView } from '../lib/checkpoint'
+import { visibleEntry } from '../lib/entry'
 import { diagnose, generateProblem } from '../lib/generator'
 import { celebrate, tap } from '../lib/haptics'
 import {
@@ -13,7 +14,6 @@ import {
   requeueMiss,
   startLessonSession,
 } from '../lib/lesson'
-import { placedLabel } from '../lib/number-line'
 import { createSubmissionGate } from '../lib/submission-gate'
 import { responseTo } from '../lib/submit'
 import type { Difficulty, Misconception, SkillGenerator } from '../lib/types'
@@ -85,18 +85,6 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
   }
 
   const problem = currentProblem(session)
-  // What the entry slot shows, which is not always what the checker gets: a
-  // choice submits an id and reads as its label, a placement submits ASCII and
-  // reads with the typographic minus the rest of the screen uses.
-  const visibleEntry = (() => {
-    if (problem.inputMode === 'choice') {
-      return problem.choices?.find((choice) => choice.id === entry)?.label ?? ''
-    }
-    if (problem.inputMode === 'number-line' && problem.numberLine) {
-      return placedLabel(problem.numberLine, entry)
-    }
-    return entry
-  })()
   const mascotState: MascotState =
     feedback?.status === 'correct'
       ? 'happy'
@@ -265,7 +253,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
           >
             <ProblemView
               display={problem.display}
-              entry={visibleEntry}
+              entry={visibleEntry(problem, entry)}
               entryMode={problem.inputMode}
             />
           </motion.div>

@@ -1,0 +1,2819 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: absolute-value > matches the wording recorded when the skill landed 1`] = `
+"--- absolute-value · seed 1 · difficulty 1
+prompt   How far is this from zero?
+display  inline "|−6|"
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −6 sits 6 steps away.   [|−6| = 6]
+miss     kept-the-sign = -6   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 12345 · difficulty 1
+prompt   How far is this from zero?
+display  inline "|−9|"
+answer   exact 9/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −9 sits 9 steps away.   [|−9| = 9]
+miss     kept-the-sign = -9   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 67890 · difficulty 1
+prompt   How far is this from zero?
+display  inline "|−4|"
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −4 sits 4 steps away.   [|−4| = 4]
+miss     kept-the-sign = -4   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 424242 · difficulty 1
+prompt   How far is this from zero?
+display  inline "|−2|"
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −2 sits 2 steps away.   [|−2| = 2]
+miss     kept-the-sign = -2   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 987654321 · difficulty 1
+prompt   How far is this from zero?
+display  inline "|−9|"
+answer   exact 9/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −9 sits 9 steps away.   [|−9| = 9]
+miss     kept-the-sign = -9   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 1 · difficulty 2
+prompt   How far is this from zero?
+display  inline "|−10|"
+answer   exact 10/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −10 sits 10 steps away.   [|−10| = 10]
+miss     kept-the-sign = -10   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 12345 · difficulty 2
+prompt   How far is this from zero?
+display  inline "|−15|"
+answer   exact 15/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −15 sits 15 steps away.   [|−15| = 15]
+miss     kept-the-sign = -15   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 67890 · difficulty 2
+prompt   How far is this from zero?
+display  inline "|−7|"
+answer   exact 7/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −7 sits 7 steps away.   [|−7| = 7]
+miss     kept-the-sign = -7   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 424242 · difficulty 2
+prompt   How far is this from zero?
+display  inline "|−3|"
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −3 sits 3 steps away.   [|−3| = 3]
+miss     kept-the-sign = -3   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 987654321 · difficulty 2
+prompt   How far is this from zero?
+display  inline "|−15|"
+answer   exact 15/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −15 sits 15 steps away.   [|−15| = 15]
+miss     kept-the-sign = -15   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 1 · difficulty 3
+prompt   How far is this from zero?
+display  inline "|−18|"
+answer   exact 18/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −18 sits 18 steps away.   [|−18| = 18]
+miss     kept-the-sign = -18   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 12345 · difficulty 3
+prompt   How far is this from zero?
+display  inline "|−27|"
+answer   exact 27/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −27 sits 27 steps away.   [|−27| = 27]
+miss     kept-the-sign = -27   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 67890 · difficulty 3
+prompt   How far is this from zero?
+display  inline "|−12|"
+answer   exact 12/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −12 sits 12 steps away.   [|−12| = 12]
+miss     kept-the-sign = -12   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 424242 · difficulty 3
+prompt   How far is this from zero?
+display  inline "|−6|"
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −6 sits 6 steps away.   [|−6| = 6]
+miss     kept-the-sign = -6   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 987654321 · difficulty 3
+prompt   How far is this from zero?
+display  inline "|−26|"
+answer   exact 26/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −26 sits 26 steps away.   [|−26| = 26]
+miss     kept-the-sign = -26   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 1 · difficulty 4
+prompt   How far is this from zero?
+display  inline "|−30|"
+answer   exact 30/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −30 sits 30 steps away.   [|−30| = 30]
+miss     kept-the-sign = -30   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 12345 · difficulty 4
+prompt   How far is this from zero?
+display  inline "|−45|"
+answer   exact 45/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −45 sits 45 steps away.   [|−45| = 45]
+miss     kept-the-sign = -45   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 67890 · difficulty 4
+prompt   How far is this from zero?
+display  inline "|−21|"
+answer   exact 21/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −21 sits 21 steps away.   [|−21| = 21]
+miss     kept-the-sign = -21   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 424242 · difficulty 4
+prompt   How far is this from zero?
+display  inline "|−10|"
+answer   exact 10/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −10 sits 10 steps away.   [|−10| = 10]
+miss     kept-the-sign = -10   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 987654321 · difficulty 4
+prompt   How far is this from zero?
+display  inline "|−44|"
+answer   exact 44/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −44 sits 44 steps away.   [|−44| = 44]
+miss     kept-the-sign = -44   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 1 · difficulty 5
+prompt   How far is this from zero?
+display  inline "|−47|"
+answer   exact 47/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −47 sits 47 steps away.   [|−47| = 47]
+miss     kept-the-sign = -47   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 12345 · difficulty 5
+prompt   How far is this from zero?
+display  inline "|−69|"
+answer   exact 69/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −69 sits 69 steps away.   [|−69| = 69]
+miss     kept-the-sign = -69   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 67890 · difficulty 5
+prompt   How far is this from zero?
+display  inline "|−32|"
+answer   exact 32/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −32 sits 32 steps away.   [|−32| = 32]
+miss     kept-the-sign = -32   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 424242 · difficulty 5
+prompt   How far is this from zero?
+display  inline "|−16|"
+answer   exact 16/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −16 sits 16 steps away.   [|−16| = 16]
+miss     kept-the-sign = -16   A distance counts steps, and steps do not run backwards.
+
+--- absolute-value · seed 987654321 · difficulty 5
+prompt   How far is this from zero?
+display  inline "|−67|"
+answer   exact 67/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −67 sits 67 steps away.   [|−67| = 67]
+miss     kept-the-sign = -67   A distance counts steps, and steps do not run backwards."
+`;
+
+exports[`recorded output: add-neg-pos > matches the wording recorded when the skill landed 1`] = `
+"--- add-neg-pos · seed 1 · difficulty 1
+prompt   What is the value?
+display  inline "−4 + 1"
+answer   exact -3/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [4 − 1 = 3]
+step 3   The larger size decides the sign.   [−4 + 1 = −3]
+miss     added-magnitudes = -5   That stacks 4 and 1 up. Opposite signs pull against each other.
+miss     wrong-sign = 3   The larger size is 4, and it decides the sign.
+
+--- add-neg-pos · seed 12345 · difficulty 1
+prompt   What is the value?
+display  inline "−6 + 2"
+answer   exact -4/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [6 − 2 = 4]
+step 3   The larger size decides the sign.   [−6 + 2 = −4]
+miss     added-magnitudes = -8   That stacks 6 and 2 up. Opposite signs pull against each other.
+miss     wrong-sign = 4   The larger size is 6, and it decides the sign.
+
+--- add-neg-pos · seed 67890 · difficulty 1
+prompt   What is the value?
+display  inline "−3 + 4"
+answer   exact 1/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [4 − 3 = 1]
+step 3   The larger size decides the sign.   [−3 + 4 = 1]
+miss     added-magnitudes = -7   That stacks 3 and 4 up. Opposite signs pull against each other.
+miss     wrong-sign = -1   The larger size is 4, and it decides the sign.
+
+--- add-neg-pos · seed 424242 · difficulty 1
+prompt   What is the value?
+display  inline "−1 + 3"
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [3 − 1 = 2]
+step 3   The larger size decides the sign.   [−1 + 3 = 2]
+miss     added-magnitudes = -4   That stacks 1 and 3 up. Opposite signs pull against each other.
+miss     wrong-sign = -2   The larger size is 3, and it decides the sign.
+
+--- add-neg-pos · seed 987654321 · difficulty 1
+prompt   What is the value?
+display  inline "−6 + 1"
+answer   exact -5/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [6 − 1 = 5]
+step 3   The larger size decides the sign.   [−6 + 1 = −5]
+miss     added-magnitudes = -7   That stacks 6 and 1 up. Opposite signs pull against each other.
+miss     wrong-sign = 5   The larger size is 6, and it decides the sign.
+
+--- add-neg-pos · seed 1 · difficulty 2
+prompt   What is the value?
+display  inline "−8 + 2"
+answer   exact -6/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [8 − 2 = 6]
+step 3   The larger size decides the sign.   [−8 + 2 = −6]
+miss     added-magnitudes = -10   That stacks 8 and 2 up. Opposite signs pull against each other.
+miss     wrong-sign = 6   The larger size is 8, and it decides the sign.
+
+--- add-neg-pos · seed 12345 · difficulty 2
+prompt   What is the value?
+display  inline "−11 + 4"
+answer   exact -7/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [11 − 4 = 7]
+step 3   The larger size decides the sign.   [−11 + 4 = −7]
+miss     added-magnitudes = -15   That stacks 11 and 4 up. Opposite signs pull against each other.
+miss     wrong-sign = 7   The larger size is 11, and it decides the sign.
+
+--- add-neg-pos · seed 67890 · difficulty 2
+prompt   What is the value?
+display  inline "−5 + 8"
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [8 − 5 = 3]
+step 3   The larger size decides the sign.   [−5 + 8 = 3]
+miss     added-magnitudes = -13   That stacks 5 and 8 up. Opposite signs pull against each other.
+miss     wrong-sign = -3   The larger size is 8, and it decides the sign.
+
+--- add-neg-pos · seed 424242 · difficulty 2
+prompt   What is the value?
+display  inline "−3 + 5"
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [5 − 3 = 2]
+step 3   The larger size decides the sign.   [−3 + 5 = 2]
+miss     added-magnitudes = -8   That stacks 3 and 5 up. Opposite signs pull against each other.
+miss     wrong-sign = -2   The larger size is 5, and it decides the sign.
+
+--- add-neg-pos · seed 987654321 · difficulty 2
+prompt   What is the value?
+display  inline "−11 + 3"
+answer   exact -8/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [11 − 3 = 8]
+step 3   The larger size decides the sign.   [−11 + 3 = −8]
+miss     added-magnitudes = -14   That stacks 11 and 3 up. Opposite signs pull against each other.
+miss     wrong-sign = 8   The larger size is 11, and it decides the sign.
+
+--- add-neg-pos · seed 1 · difficulty 3
+prompt   What is the value?
+display  inline "−13 + 3"
+answer   exact -10/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [13 − 3 = 10]
+step 3   The larger size decides the sign.   [−13 + 3 = −10]
+miss     added-magnitudes = -16   That stacks 13 and 3 up. Opposite signs pull against each other.
+miss     wrong-sign = 10   The larger size is 13, and it decides the sign.
+
+--- add-neg-pos · seed 12345 · difficulty 3
+prompt   What is the value?
+display  inline "−19 + 7"
+answer   exact -12/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [19 − 7 = 12]
+step 3   The larger size decides the sign.   [−19 + 7 = −12]
+miss     added-magnitudes = -26   That stacks 19 and 7 up. Opposite signs pull against each other.
+miss     wrong-sign = 12   The larger size is 19, and it decides the sign.
+
+--- add-neg-pos · seed 67890 · difficulty 3
+prompt   What is the value?
+display  inline "−9 + 13"
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [13 − 9 = 4]
+step 3   The larger size decides the sign.   [−9 + 13 = 4]
+miss     added-magnitudes = -22   That stacks 9 and 13 up. Opposite signs pull against each other.
+miss     wrong-sign = -4   The larger size is 13, and it decides the sign.
+
+--- add-neg-pos · seed 424242 · difficulty 3
+prompt   What is the value?
+display  inline "−5 + 7"
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [7 − 5 = 2]
+step 3   The larger size decides the sign.   [−5 + 7 = 2]
+miss     added-magnitudes = -12   That stacks 5 and 7 up. Opposite signs pull against each other.
+miss     wrong-sign = -2   The larger size is 7, and it decides the sign.
+
+--- add-neg-pos · seed 987654321 · difficulty 3
+prompt   What is the value?
+display  inline "−19 + 5"
+answer   exact -14/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [19 − 5 = 14]
+step 3   The larger size decides the sign.   [−19 + 5 = −14]
+miss     added-magnitudes = -24   That stacks 19 and 5 up. Opposite signs pull against each other.
+miss     wrong-sign = 14   The larger size is 19, and it decides the sign.
+
+--- add-neg-pos · seed 1 · difficulty 4
+prompt   What is the value?
+display  inline "−20 + 4"
+answer   exact -16/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [20 − 4 = 16]
+step 3   The larger size decides the sign.   [−20 + 4 = −16]
+miss     added-magnitudes = -24   That stacks 20 and 4 up. Opposite signs pull against each other.
+miss     wrong-sign = 16   The larger size is 20, and it decides the sign.
+
+--- add-neg-pos · seed 12345 · difficulty 4
+prompt   What is the value?
+display  inline "−30 + 11"
+answer   exact -19/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [30 − 11 = 19]
+step 3   The larger size decides the sign.   [−30 + 11 = −19]
+miss     added-magnitudes = -41   That stacks 30 and 11 up. Opposite signs pull against each other.
+miss     wrong-sign = 19   The larger size is 30, and it decides the sign.
+
+--- add-neg-pos · seed 67890 · difficulty 4
+prompt   What is the value?
+display  inline "−14 + 20"
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [20 − 14 = 6]
+step 3   The larger size decides the sign.   [−14 + 20 = 6]
+miss     added-magnitudes = -34   That stacks 14 and 20 up. Opposite signs pull against each other.
+miss     wrong-sign = -6   The larger size is 20, and it decides the sign.
+
+--- add-neg-pos · seed 424242 · difficulty 4
+prompt   What is the value?
+display  inline "−7 + 11"
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [11 − 7 = 4]
+step 3   The larger size decides the sign.   [−7 + 11 = 4]
+miss     added-magnitudes = -18   That stacks 7 and 11 up. Opposite signs pull against each other.
+miss     wrong-sign = -4   The larger size is 11, and it decides the sign.
+
+--- add-neg-pos · seed 987654321 · difficulty 4
+prompt   What is the value?
+display  inline "−29 + 7"
+answer   exact -22/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [29 − 7 = 22]
+step 3   The larger size decides the sign.   [−29 + 7 = −22]
+miss     added-magnitudes = -36   That stacks 29 and 7 up. Opposite signs pull against each other.
+miss     wrong-sign = 22   The larger size is 29, and it decides the sign.
+
+--- add-neg-pos · seed 1 · difficulty 5
+prompt   What is the value?
+display  inline "−31 + 6"
+answer   exact -25/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [31 − 6 = 25]
+step 3   The larger size decides the sign.   [−31 + 6 = −25]
+miss     added-magnitudes = -37   That stacks 31 and 6 up. Opposite signs pull against each other.
+miss     wrong-sign = 25   The larger size is 31, and it decides the sign.
+
+--- add-neg-pos · seed 12345 · difficulty 5
+prompt   What is the value?
+display  inline "−45 + 17"
+answer   exact -28/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [45 − 17 = 28]
+step 3   The larger size decides the sign.   [−45 + 17 = −28]
+miss     added-magnitudes = -62   That stacks 45 and 17 up. Opposite signs pull against each other.
+miss     wrong-sign = 28   The larger size is 45, and it decides the sign.
+
+--- add-neg-pos · seed 67890 · difficulty 5
+prompt   What is the value?
+display  inline "−21 + 30"
+answer   exact 9/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [30 − 21 = 9]
+step 3   The larger size decides the sign.   [−21 + 30 = 9]
+miss     added-magnitudes = -51   That stacks 21 and 30 up. Opposite signs pull against each other.
+miss     wrong-sign = -9   The larger size is 30, and it decides the sign.
+
+--- add-neg-pos · seed 424242 · difficulty 5
+prompt   What is the value?
+display  inline "−11 + 16"
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [16 − 11 = 5]
+step 3   The larger size decides the sign.   [−11 + 16 = 5]
+miss     added-magnitudes = -27   That stacks 11 and 16 up. Opposite signs pull against each other.
+miss     wrong-sign = -5   The larger size is 16, and it decides the sign.
+
+--- add-neg-pos · seed 987654321 · difficulty 5
+prompt   What is the value?
+display  inline "−44 + 11"
+answer   exact -33/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [44 − 11 = 33]
+step 3   The larger size decides the sign.   [−44 + 11 = −33]
+miss     added-magnitudes = -55   That stacks 44 and 11 up. Opposite signs pull against each other.
+miss     wrong-sign = 33   The larger size is 44, and it decides the sign."
+`;
+
+exports[`recorded output: add-two-negs > matches the wording recorded when the skill landed 1`] = `
+"--- add-two-negs · seed 1 · difficulty 1
+prompt   What is the value?
+display  inline "−4 + −1"
+answer   exact -5/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [4 + 1 = 5]
+step 3   Both started below zero, so the total does too.   [−4 + −1 = −5]
+miss     dropped-the-signs = 5   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -3   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 12345 · difficulty 1
+prompt   What is the value?
+display  inline "−6 + −2"
+answer   exact -8/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [6 + 2 = 8]
+step 3   Both started below zero, so the total does too.   [−6 + −2 = −8]
+miss     dropped-the-signs = 8   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -4   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 67890 · difficulty 1
+prompt   What is the value?
+display  inline "−3 + −4"
+answer   exact -7/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [3 + 4 = 7]
+step 3   Both started below zero, so the total does too.   [−3 + −4 = −7]
+miss     dropped-the-signs = 7   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -1   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 424242 · difficulty 1
+prompt   What is the value?
+display  inline "−1 + −3"
+answer   exact -4/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [1 + 3 = 4]
+step 3   Both started below zero, so the total does too.   [−1 + −3 = −4]
+miss     dropped-the-signs = 4   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -2   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 987654321 · difficulty 1
+prompt   What is the value?
+display  inline "−6 + −1"
+answer   exact -7/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [6 + 1 = 7]
+step 3   Both started below zero, so the total does too.   [−6 + −1 = −7]
+miss     dropped-the-signs = 7   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -5   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 1 · difficulty 2
+prompt   What is the value?
+display  inline "−8 + −2"
+answer   exact -10/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [8 + 2 = 10]
+step 3   Both started below zero, so the total does too.   [−8 + −2 = −10]
+miss     dropped-the-signs = 10   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -6   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 12345 · difficulty 2
+prompt   What is the value?
+display  inline "−11 + −4"
+answer   exact -15/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [11 + 4 = 15]
+step 3   Both started below zero, so the total does too.   [−11 + −4 = −15]
+miss     dropped-the-signs = 15   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -7   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 67890 · difficulty 2
+prompt   What is the value?
+display  inline "−5 + −8"
+answer   exact -13/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [5 + 8 = 13]
+step 3   Both started below zero, so the total does too.   [−5 + −8 = −13]
+miss     dropped-the-signs = 13   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -3   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 424242 · difficulty 2
+prompt   What is the value?
+display  inline "−3 + −5"
+answer   exact -8/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [3 + 5 = 8]
+step 3   Both started below zero, so the total does too.   [−3 + −5 = −8]
+miss     dropped-the-signs = 8   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -2   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 987654321 · difficulty 2
+prompt   What is the value?
+display  inline "−11 + −3"
+answer   exact -14/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [11 + 3 = 14]
+step 3   Both started below zero, so the total does too.   [−11 + −3 = −14]
+miss     dropped-the-signs = 14   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -8   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 1 · difficulty 3
+prompt   What is the value?
+display  inline "−13 + −3"
+answer   exact -16/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [13 + 3 = 16]
+step 3   Both started below zero, so the total does too.   [−13 + −3 = −16]
+miss     dropped-the-signs = 16   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -10   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 12345 · difficulty 3
+prompt   What is the value?
+display  inline "−19 + −7"
+answer   exact -26/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [19 + 7 = 26]
+step 3   Both started below zero, so the total does too.   [−19 + −7 = −26]
+miss     dropped-the-signs = 26   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -12   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 67890 · difficulty 3
+prompt   What is the value?
+display  inline "−9 + −13"
+answer   exact -22/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [9 + 13 = 22]
+step 3   Both started below zero, so the total does too.   [−9 + −13 = −22]
+miss     dropped-the-signs = 22   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -4   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 424242 · difficulty 3
+prompt   What is the value?
+display  inline "−5 + −7"
+answer   exact -12/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [5 + 7 = 12]
+step 3   Both started below zero, so the total does too.   [−5 + −7 = −12]
+miss     dropped-the-signs = 12   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -2   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 987654321 · difficulty 3
+prompt   What is the value?
+display  inline "−19 + −5"
+answer   exact -24/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [19 + 5 = 24]
+step 3   Both started below zero, so the total does too.   [−19 + −5 = −24]
+miss     dropped-the-signs = 24   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -14   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 1 · difficulty 4
+prompt   What is the value?
+display  inline "−20 + −4"
+answer   exact -24/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [20 + 4 = 24]
+step 3   Both started below zero, so the total does too.   [−20 + −4 = −24]
+miss     dropped-the-signs = 24   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -16   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 12345 · difficulty 4
+prompt   What is the value?
+display  inline "−30 + −11"
+answer   exact -41/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [30 + 11 = 41]
+step 3   Both started below zero, so the total does too.   [−30 + −11 = −41]
+miss     dropped-the-signs = 41   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -19   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 67890 · difficulty 4
+prompt   What is the value?
+display  inline "−14 + −20"
+answer   exact -34/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [14 + 20 = 34]
+step 3   Both started below zero, so the total does too.   [−14 + −20 = −34]
+miss     dropped-the-signs = 34   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -6   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 424242 · difficulty 4
+prompt   What is the value?
+display  inline "−7 + −11"
+answer   exact -18/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [7 + 11 = 18]
+step 3   Both started below zero, so the total does too.   [−7 + −11 = −18]
+miss     dropped-the-signs = 18   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -4   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 987654321 · difficulty 4
+prompt   What is the value?
+display  inline "−29 + −7"
+answer   exact -36/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [29 + 7 = 36]
+step 3   Both started below zero, so the total does too.   [−29 + −7 = −36]
+miss     dropped-the-signs = 36   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -22   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 1 · difficulty 5
+prompt   What is the value?
+display  inline "−31 + −6"
+answer   exact -37/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [31 + 6 = 37]
+step 3   Both started below zero, so the total does too.   [−31 + −6 = −37]
+miss     dropped-the-signs = 37   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -25   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 12345 · difficulty 5
+prompt   What is the value?
+display  inline "−45 + −17"
+answer   exact -62/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [45 + 17 = 62]
+step 3   Both started below zero, so the total does too.   [−45 + −17 = −62]
+miss     dropped-the-signs = 62   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -28   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 67890 · difficulty 5
+prompt   What is the value?
+display  inline "−21 + −30"
+answer   exact -51/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [21 + 30 = 51]
+step 3   Both started below zero, so the total does too.   [−21 + −30 = −51]
+miss     dropped-the-signs = 51   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -9   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 424242 · difficulty 5
+prompt   What is the value?
+display  inline "−11 + −16"
+answer   exact -27/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [11 + 16 = 27]
+step 3   Both started below zero, so the total does too.   [−11 + −16 = −27]
+miss     dropped-the-signs = 27   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -5   Sizes are taken apart when the signs differ. These match.
+
+--- add-two-negs · seed 987654321 · difficulty 5
+prompt   What is the value?
+display  inline "−44 + −11"
+answer   exact -55/1
+input    keypad
+keypad   allowNegative=true
+hint     Two values below zero stack up further below zero.
+step 1   The signs match, so add the sizes.
+step 2   Add them.   [44 + 11 = 55]
+step 3   Both started below zero, so the total does too.   [−44 + −11 = −55]
+miss     dropped-the-signs = 55   Both start below zero, so the total cannot end up above it.
+miss     subtracted-instead = -33   Sizes are taken apart when the signs differ. These match."
+`;
+
+exports[`recorded output: compare-negatives > matches the wording recorded when the skill landed 1`] = `
+"--- compare-negatives · seed 1 · difficulty 1
+prompt   Choose the symbol that makes this true.
+display  inline "−1 ? −6"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   0 = =
+choice   -1 = <
+choice   1 = >
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−1 > −6]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 12345 · difficulty 1
+prompt   Choose the symbol that makes this true.
+display  inline "−3 ? −9"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−3 > −9]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 67890 · difficulty 1
+prompt   Choose the symbol that makes this true.
+display  inline "−4 ? −6"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   0 = =
+choice   -1 = <
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−4 > −6]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 424242 · difficulty 1
+prompt   Choose the symbol that makes this true.
+display  inline "−3 ? −2"
+answer   choice -1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   -1 = <
+choice   1 = >
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−3 < −2]
+miss     reversed-comparison = 1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 987654321 · difficulty 1
+prompt   Choose the symbol that makes this true.
+display  inline "−2 ? −9"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−2 > −9]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 1 · difficulty 2
+prompt   Choose the symbol that makes this true.
+display  inline "−2 ? −10"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   0 = =
+choice   -1 = <
+choice   1 = >
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−2 > −10]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 12345 · difficulty 2
+prompt   Choose the symbol that makes this true.
+display  inline "−5 ? −15"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−5 > −15]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 67890 · difficulty 2
+prompt   Choose the symbol that makes this true.
+display  inline "−7 ? −10"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   0 = =
+choice   -1 = <
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−7 > −10]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 424242 · difficulty 2
+prompt   Choose the symbol that makes this true.
+display  inline "−6 ? −3"
+answer   choice -1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   -1 = <
+choice   1 = >
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−6 < −3]
+miss     reversed-comparison = 1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 987654321 · difficulty 2
+prompt   Choose the symbol that makes this true.
+display  inline "−3 ? −15"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−3 > −15]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 1 · difficulty 3
+prompt   Choose the symbol that makes this true.
+display  inline "−3 ? −17"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   0 = =
+choice   -1 = <
+choice   1 = >
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−3 > −17]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 12345 · difficulty 3
+prompt   Choose the symbol that makes this true.
+display  inline "−9 ? −25"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−9 > −25]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 67890 · difficulty 3
+prompt   Choose the symbol that makes this true.
+display  inline "−12 ? −16"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   0 = =
+choice   -1 = <
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−12 > −16]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 424242 · difficulty 3
+prompt   Choose the symbol that makes this true.
+display  inline "−9 ? −5"
+answer   choice -1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   -1 = <
+choice   1 = >
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−9 < −5]
+miss     reversed-comparison = 1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 987654321 · difficulty 3
+prompt   Choose the symbol that makes this true.
+display  inline "−5 ? −24"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−5 > −24]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 1 · difficulty 4
+prompt   Choose the symbol that makes this true.
+display  inline "−5 ? −27"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   0 = =
+choice   -1 = <
+choice   1 = >
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−5 > −27]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 12345 · difficulty 4
+prompt   Choose the symbol that makes this true.
+display  inline "−15 ? −40"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−15 > −40]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 67890 · difficulty 4
+prompt   Choose the symbol that makes this true.
+display  inline "−19 ? −26"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   0 = =
+choice   -1 = <
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−19 > −26]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 424242 · difficulty 4
+prompt   Choose the symbol that makes this true.
+display  inline "−14 ? −9"
+answer   choice -1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   -1 = <
+choice   1 = >
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−14 < −9]
+miss     reversed-comparison = 1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 987654321 · difficulty 4
+prompt   Choose the symbol that makes this true.
+display  inline "−9 ? −39"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−9 > −39]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 1 · difficulty 5
+prompt   Choose the symbol that makes this true.
+display  inline "−8 ? −41"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   0 = =
+choice   -1 = <
+choice   1 = >
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−8 > −41]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 12345 · difficulty 5
+prompt   Choose the symbol that makes this true.
+display  inline "−23 ? −59"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−23 > −59]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 67890 · difficulty 5
+prompt   Choose the symbol that makes this true.
+display  inline "−28 ? −39"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   0 = =
+choice   -1 = <
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−28 > −39]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 424242 · difficulty 5
+prompt   Choose the symbol that makes this true.
+display  inline "−21 ? −14"
+answer   choice -1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   -1 = <
+choice   1 = >
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−21 < −14]
+miss     reversed-comparison = 1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line.
+
+--- compare-negatives · seed 987654321 · difficulty 5
+prompt   Choose the symbol that makes this true.
+display  inline "−15 ? −58"
+answer   choice 1
+input    choice
+hint     Whichever sits further left on the line is smaller.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Picture both of them on a number line.
+step 2   The one further left is smaller.   [−15 > −58]
+miss     reversed-comparison = -1   Below zero, the bigger the digit the smaller the value.
+miss     called-equal = 0   These sit at different places on the line."
+`;
+
+exports[`recorded output: div-negatives > matches the wording recorded when the skill landed 1`] = `
+"--- div-negatives · seed 1 · difficulty 1
+prompt   What is the value?
+display  inline "8 ÷ −4"
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [8 ÷ 4 = 2]
+step 2   Two different signs give a negative.   [8 ÷ −4 = −2]
+miss     wrong-sign = 2   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -32   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 12345 · difficulty 1
+prompt   What is the value?
+display  inline "−9 ÷ −3"
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [9 ÷ 3 = 3]
+step 2   Two signs the same give a positive.   [−9 ÷ −3 = 3]
+miss     wrong-sign = -3   The size is right. Two signs the same give a positive.
+miss     multiplied-instead = 27   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 67890 · difficulty 1
+prompt   What is the value?
+display  inline "12 ÷ −3"
+answer   exact -4/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [12 ÷ 3 = 4]
+step 2   Two different signs give a negative.   [12 ÷ −3 = −4]
+miss     wrong-sign = 4   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -36   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 424242 · difficulty 1
+prompt   What is the value?
+display  inline "−4 ÷ 2"
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [4 ÷ 2 = 2]
+step 2   Two different signs give a negative.   [−4 ÷ 2 = −2]
+miss     wrong-sign = 2   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -8   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 987654321 · difficulty 1
+prompt   What is the value?
+display  inline "−4 ÷ −2"
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [4 ÷ 2 = 2]
+step 2   Two signs the same give a positive.   [−4 ÷ −2 = 2]
+miss     wrong-sign = -2   The size is right. Two signs the same give a positive.
+miss     multiplied-instead = 8   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 1 · difficulty 2
+prompt   What is the value?
+display  inline "10 ÷ −5"
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [10 ÷ 5 = 2]
+step 2   Two different signs give a negative.   [10 ÷ −5 = −2]
+miss     wrong-sign = 2   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -50   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 12345 · difficulty 2
+prompt   What is the value?
+display  inline "−12 ÷ −4"
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [12 ÷ 4 = 3]
+step 2   Two signs the same give a positive.   [−12 ÷ −4 = 3]
+miss     wrong-sign = -3   The size is right. Two signs the same give a positive.
+miss     multiplied-instead = 48   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 67890 · difficulty 2
+prompt   What is the value?
+display  inline "20 ÷ −4"
+answer   exact -5/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [20 ÷ 4 = 5]
+step 2   Two different signs give a negative.   [20 ÷ −4 = −5]
+miss     wrong-sign = 5   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -80   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 424242 · difficulty 2
+prompt   What is the value?
+display  inline "−9 ÷ 3"
+answer   exact -3/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [9 ÷ 3 = 3]
+step 2   Two different signs give a negative.   [−9 ÷ 3 = −3]
+miss     wrong-sign = 3   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -27   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 987654321 · difficulty 2
+prompt   What is the value?
+display  inline "−4 ÷ −2"
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [4 ÷ 2 = 2]
+step 2   Two signs the same give a positive.   [−4 ÷ −2 = 2]
+miss     wrong-sign = -2   The size is right. Two signs the same give a positive.
+miss     multiplied-instead = 8   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 1 · difficulty 3
+prompt   What is the value?
+display  inline "18 ÷ −6"
+answer   exact -3/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [18 ÷ 6 = 3]
+step 2   Two different signs give a negative.   [18 ÷ −6 = −3]
+miss     wrong-sign = 3   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -108   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 12345 · difficulty 3
+prompt   What is the value?
+display  inline "−25 ÷ −5"
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [25 ÷ 5 = 5]
+step 2   Two signs the same give a positive.   [−25 ÷ −5 = 5]
+miss     wrong-sign = -5   The size is right. Two signs the same give a positive.
+miss     multiplied-instead = 125   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 67890 · difficulty 3
+prompt   What is the value?
+display  inline "28 ÷ −4"
+answer   exact -7/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [28 ÷ 4 = 7]
+step 2   Two different signs give a negative.   [28 ÷ −4 = −7]
+miss     wrong-sign = 7   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -112   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 424242 · difficulty 3
+prompt   What is the value?
+display  inline "−12 ÷ 3"
+answer   exact -4/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [12 ÷ 3 = 4]
+step 2   Two different signs give a negative.   [−12 ÷ 3 = −4]
+miss     wrong-sign = 4   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -36   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 987654321 · difficulty 3
+prompt   What is the value?
+display  inline "−6 ÷ −2"
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [6 ÷ 2 = 3]
+step 2   Two signs the same give a positive.   [−6 ÷ −2 = 3]
+miss     wrong-sign = -3   The size is right. Two signs the same give a positive.
+miss     multiplied-instead = 12   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 1 · difficulty 4
+prompt   What is the value?
+display  inline "18 ÷ −6"
+answer   exact -3/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [18 ÷ 6 = 3]
+step 2   Two different signs give a negative.   [18 ÷ −6 = −3]
+miss     wrong-sign = 3   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -108   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 12345 · difficulty 4
+prompt   What is the value?
+display  inline "−25 ÷ −5"
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [25 ÷ 5 = 5]
+step 2   Two signs the same give a positive.   [−25 ÷ −5 = 5]
+miss     wrong-sign = -5   The size is right. Two signs the same give a positive.
+miss     multiplied-instead = 125   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 67890 · difficulty 4
+prompt   What is the value?
+display  inline "32 ÷ −4"
+answer   exact -8/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [32 ÷ 4 = 8]
+step 2   Two different signs give a negative.   [32 ÷ −4 = −8]
+miss     wrong-sign = 8   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -128   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 424242 · difficulty 4
+prompt   What is the value?
+display  inline "−15 ÷ 3"
+answer   exact -5/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [15 ÷ 3 = 5]
+step 2   Two different signs give a negative.   [−15 ÷ 3 = −5]
+miss     wrong-sign = 5   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -45   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 987654321 · difficulty 4
+prompt   What is the value?
+display  inline "−8 ÷ −2"
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [8 ÷ 2 = 4]
+step 2   Two signs the same give a positive.   [−8 ÷ −2 = 4]
+miss     wrong-sign = -4   The size is right. Two signs the same give a positive.
+miss     multiplied-instead = 16   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 1 · difficulty 5
+prompt   What is the value?
+display  inline "24 ÷ −6"
+answer   exact -4/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [24 ÷ 6 = 4]
+step 2   Two different signs give a negative.   [24 ÷ −6 = −4]
+miss     wrong-sign = 4   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -144   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 12345 · difficulty 5
+prompt   What is the value?
+display  inline "−35 ÷ −5"
+answer   exact 7/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [35 ÷ 5 = 7]
+step 2   Two signs the same give a positive.   [−35 ÷ −5 = 7]
+miss     wrong-sign = -7   The size is right. Two signs the same give a positive.
+miss     multiplied-instead = 175   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 67890 · difficulty 5
+prompt   What is the value?
+display  inline "40 ÷ −4"
+answer   exact -10/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [40 ÷ 4 = 10]
+step 2   Two different signs give a negative.   [40 ÷ −4 = −10]
+miss     wrong-sign = 10   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -160   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 424242 · difficulty 5
+prompt   What is the value?
+display  inline "−18 ÷ 3"
+answer   exact -6/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [18 ÷ 3 = 6]
+step 2   Two different signs give a negative.   [−18 ÷ 3 = −6]
+miss     wrong-sign = 6   The size is right. Two different signs give a negative.
+miss     multiplied-instead = -54   That grows it. Dividing asks how many fit inside.
+
+--- div-negatives · seed 987654321 · difficulty 5
+prompt   What is the value?
+display  inline "−10 ÷ −2"
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=true
+hint     Divide the sizes, then read the two signs together.
+step 1   Divide the sizes first.   [10 ÷ 2 = 5]
+step 2   Two signs the same give a positive.   [−10 ÷ −2 = 5]
+miss     wrong-sign = -5   The size is right. Two signs the same give a positive.
+miss     multiplied-instead = 20   That grows it. Dividing asks how many fit inside."
+`;
+
+exports[`recorded output: mult-negatives > matches the wording recorded when the skill landed 1`] = `
+"--- mult-negatives · seed 1 · difficulty 1
+prompt   What is the value?
+display  inline "2 × −4"
+answer   exact -8/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [2 × 4 = 8]
+step 2   Two different signs give a negative.   [2 × −4 = −8]
+miss     wrong-sign = 8   The size is right. Two different signs give a negative.
+miss     added-instead = -2   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 12345 · difficulty 1
+prompt   What is the value?
+display  inline "−3 × −3"
+answer   exact 9/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [3 × 3 = 9]
+step 2   Two signs the same give a positive.   [−3 × −3 = 9]
+miss     wrong-sign = -9   The size is right. Two signs the same give a positive.
+miss     added-instead = -6   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 67890 · difficulty 1
+prompt   What is the value?
+display  inline "4 × −3"
+answer   exact -12/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [4 × 3 = 12]
+step 2   Two different signs give a negative.   [4 × −3 = −12]
+miss     wrong-sign = 12   The size is right. Two different signs give a negative.
+miss     added-instead = 1   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 424242 · difficulty 1
+prompt   What is the value?
+display  inline "−2 × 2"
+answer   exact -4/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [2 × 2 = 4]
+step 2   Two different signs give a negative.   [−2 × 2 = −4]
+miss     wrong-sign = 4   The size is right. Two different signs give a negative.
+miss     added-instead = 0   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 987654321 · difficulty 1
+prompt   What is the value?
+display  inline "−2 × −3"
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [2 × 3 = 6]
+step 2   Two signs the same give a positive.   [−2 × −3 = 6]
+miss     wrong-sign = -6   The size is right. Two signs the same give a positive.
+miss     added-instead = -5   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 1 · difficulty 2
+prompt   What is the value?
+display  inline "2 × −5"
+answer   exact -10/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [2 × 5 = 10]
+step 2   Two different signs give a negative.   [2 × −5 = −10]
+miss     wrong-sign = 10   The size is right. Two different signs give a negative.
+miss     added-instead = -3   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 12345 · difficulty 2
+prompt   What is the value?
+display  inline "−3 × −4"
+answer   exact 12/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [3 × 4 = 12]
+step 2   Two signs the same give a positive.   [−3 × −4 = 12]
+miss     wrong-sign = -12   The size is right. Two signs the same give a positive.
+miss     added-instead = -7   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 67890 · difficulty 2
+prompt   What is the value?
+display  inline "5 × −4"
+answer   exact -20/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [5 × 4 = 20]
+step 2   Two different signs give a negative.   [5 × −4 = −20]
+miss     wrong-sign = 20   The size is right. Two different signs give a negative.
+miss     added-instead = 1   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 424242 · difficulty 2
+prompt   What is the value?
+display  inline "−3 × 3"
+answer   exact -9/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [3 × 3 = 9]
+step 2   Two different signs give a negative.   [−3 × 3 = −9]
+miss     wrong-sign = 9   The size is right. Two different signs give a negative.
+miss     added-instead = 0   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 987654321 · difficulty 2
+prompt   What is the value?
+display  inline "−2 × −3"
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [2 × 3 = 6]
+step 2   Two signs the same give a positive.   [−2 × −3 = 6]
+miss     wrong-sign = -6   The size is right. Two signs the same give a positive.
+miss     added-instead = -5   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 1 · difficulty 3
+prompt   What is the value?
+display  inline "3 × −6"
+answer   exact -18/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [3 × 6 = 18]
+step 2   Two different signs give a negative.   [3 × −6 = −18]
+miss     wrong-sign = 18   The size is right. Two different signs give a negative.
+miss     added-instead = -3   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 12345 · difficulty 3
+prompt   What is the value?
+display  inline "−5 × −6"
+answer   exact 30/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [5 × 6 = 30]
+step 2   Two signs the same give a positive.   [−5 × −6 = 30]
+miss     wrong-sign = -30   The size is right. Two signs the same give a positive.
+miss     added-instead = -11   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 67890 · difficulty 3
+prompt   What is the value?
+display  inline "7 × −5"
+answer   exact -35/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [7 × 5 = 35]
+step 2   Two different signs give a negative.   [7 × −5 = −35]
+miss     wrong-sign = 35   The size is right. Two different signs give a negative.
+miss     added-instead = 2   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 424242 · difficulty 3
+prompt   What is the value?
+display  inline "−4 × 4"
+answer   exact -16/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [4 × 4 = 16]
+step 2   Two different signs give a negative.   [−4 × 4 = −16]
+miss     wrong-sign = 16   The size is right. Two different signs give a negative.
+miss     added-instead = 0   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 987654321 · difficulty 3
+prompt   What is the value?
+display  inline "−3 × −3"
+answer   exact 9/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [3 × 3 = 9]
+step 2   Two signs the same give a positive.   [−3 × −3 = 9]
+miss     wrong-sign = -9   The size is right. Two signs the same give a positive.
+miss     added-instead = -6   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 1 · difficulty 4
+prompt   What is the value?
+display  inline "3 × −7"
+answer   exact -21/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [3 × 7 = 21]
+step 2   Two different signs give a negative.   [3 × −7 = −21]
+miss     wrong-sign = 21   The size is right. Two different signs give a negative.
+miss     added-instead = -4   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 12345 · difficulty 4
+prompt   What is the value?
+display  inline "−5 × −7"
+answer   exact 35/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [5 × 7 = 35]
+step 2   Two signs the same give a positive.   [−5 × −7 = 35]
+miss     wrong-sign = -35   The size is right. Two signs the same give a positive.
+miss     added-instead = -12   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 67890 · difficulty 4
+prompt   What is the value?
+display  inline "8 × −6"
+answer   exact -48/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [8 × 6 = 48]
+step 2   Two different signs give a negative.   [8 × −6 = −48]
+miss     wrong-sign = 48   The size is right. Two different signs give a negative.
+miss     added-instead = 2   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 424242 · difficulty 4
+prompt   What is the value?
+display  inline "−5 × 4"
+answer   exact -20/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [5 × 4 = 20]
+step 2   Two different signs give a negative.   [−5 × 4 = −20]
+miss     wrong-sign = 20   The size is right. Two different signs give a negative.
+miss     added-instead = -1   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 987654321 · difficulty 4
+prompt   What is the value?
+display  inline "−4 × −3"
+answer   exact 12/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [4 × 3 = 12]
+step 2   Two signs the same give a positive.   [−4 × −3 = 12]
+miss     wrong-sign = -12   The size is right. Two signs the same give a positive.
+miss     added-instead = -7   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 1 · difficulty 5
+prompt   What is the value?
+display  inline "4 × −9"
+answer   exact -36/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [4 × 9 = 36]
+step 2   Two different signs give a negative.   [4 × −9 = −36]
+miss     wrong-sign = 36   The size is right. Two different signs give a negative.
+miss     added-instead = -5   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 12345 · difficulty 5
+prompt   What is the value?
+display  inline "−7 × −9"
+answer   exact 63/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [7 × 9 = 63]
+step 2   Two signs the same give a positive.   [−7 × −9 = 63]
+miss     wrong-sign = -63   The size is right. Two signs the same give a positive.
+miss     added-instead = -16   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 67890 · difficulty 5
+prompt   What is the value?
+display  inline "10 × −7"
+answer   exact -70/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [10 × 7 = 70]
+step 2   Two different signs give a negative.   [10 × −7 = −70]
+miss     wrong-sign = 70   The size is right. Two different signs give a negative.
+miss     added-instead = 3   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 424242 · difficulty 5
+prompt   What is the value?
+display  inline "−6 × 6"
+answer   exact -36/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [6 × 6 = 36]
+step 2   Two different signs give a negative.   [−6 × 6 = −36]
+miss     wrong-sign = 36   The size is right. Two different signs give a negative.
+miss     added-instead = 0   That combines them. This one asks for groups of them.
+
+--- mult-negatives · seed 987654321 · difficulty 5
+prompt   What is the value?
+display  inline "−5 × −4"
+answer   exact 20/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [5 × 4 = 20]
+step 2   Two signs the same give a positive.   [−5 × −4 = 20]
+miss     wrong-sign = -20   The size is right. Two signs the same give a positive.
+miss     added-instead = -9   That combines them. This one asks for groups of them."
+`;
+
+exports[`recorded output: negatives-mixed > matches the wording recorded when the skill landed 1`] = `
+"--- negatives-mixed · seed 1 · difficulty 1
+prompt   What is the value?
+display  inline "−4 × 5"
+answer   exact -20/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [4 × 5 = 20]
+step 2   Two different signs give a negative.   [−4 × 5 = −20]
+miss     wrong-sign = 20   The size is right. Two different signs give a negative.
+miss     added-instead = 1   That combines them. This one asks for groups of them.
+
+--- negatives-mixed · seed 12345 · difficulty 1
+prompt   How far is this from zero?
+display  inline "|−3|"
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −3 sits 3 steps away.   [|−3| = 3]
+miss     kept-the-sign = -3   A distance counts steps, and steps do not run backwards.
+
+--- negatives-mixed · seed 67890 · difficulty 1
+prompt   What is the value?
+display  inline "−5 − (−3)"
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−5 − (−3) = −5 + 3]
+step 3   The signs differ, so subtract the sizes.   [−5 + 3 = −2]
+miss     still-subtracted = -8   That takes 3 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = 2   Both signs are written, and both of them count.
+
+--- negatives-mixed · seed 424242 · difficulty 1
+prompt   What is the value?
+display  inline "−2 + 1"
+answer   exact -1/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [2 − 1 = 1]
+step 3   The larger size decides the sign.   [−2 + 1 = −1]
+miss     added-magnitudes = -3   That stacks 2 and 1 up. Opposite signs pull against each other.
+miss     wrong-sign = 1   The larger size is 2, and it decides the sign.
+
+--- negatives-mixed · seed 987654321 · difficulty 1
+prompt   How far is this from zero?
+display  inline "|−2|"
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −2 sits 2 steps away.   [|−2| = 2]
+miss     kept-the-sign = -2   A distance counts steps, and steps do not run backwards.
+
+--- negatives-mixed · seed 1 · difficulty 2
+prompt   What is the value?
+display  inline "−5 × 7"
+answer   exact -35/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [5 × 7 = 35]
+step 2   Two different signs give a negative.   [−5 × 7 = −35]
+miss     wrong-sign = 35   The size is right. Two different signs give a negative.
+miss     added-instead = 2   That combines them. This one asks for groups of them.
+
+--- negatives-mixed · seed 12345 · difficulty 2
+prompt   How far is this from zero?
+display  inline "|−6|"
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −6 sits 6 steps away.   [|−6| = 6]
+miss     kept-the-sign = -6   A distance counts steps, and steps do not run backwards.
+
+--- negatives-mixed · seed 67890 · difficulty 2
+prompt   What is the value?
+display  inline "−8 − (−6)"
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−8 − (−6) = −8 + 6]
+step 3   The signs differ, so subtract the sizes.   [−8 + 6 = −2]
+miss     still-subtracted = -14   That takes 6 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = 2   Both signs are written, and both of them count.
+
+--- negatives-mixed · seed 424242 · difficulty 2
+prompt   What is the value?
+display  inline "−4 + 3"
+answer   exact -1/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [4 − 3 = 1]
+step 3   The larger size decides the sign.   [−4 + 3 = −1]
+miss     added-magnitudes = -7   That stacks 4 and 3 up. Opposite signs pull against each other.
+miss     wrong-sign = 1   The larger size is 4, and it decides the sign.
+
+--- negatives-mixed · seed 987654321 · difficulty 2
+prompt   How far is this from zero?
+display  inline "|−3|"
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −3 sits 3 steps away.   [|−3| = 3]
+miss     kept-the-sign = -3   A distance counts steps, and steps do not run backwards.
+
+--- negatives-mixed · seed 1 · difficulty 3
+prompt   What is the value?
+display  inline "−6 × 9"
+answer   exact -54/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [6 × 9 = 54]
+step 2   Two different signs give a negative.   [−6 × 9 = −54]
+miss     wrong-sign = 54   The size is right. Two different signs give a negative.
+miss     added-instead = 3   That combines them. This one asks for groups of them.
+
+--- negatives-mixed · seed 12345 · difficulty 3
+prompt   How far is this from zero?
+display  inline "|−10|"
+answer   exact 10/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −10 sits 10 steps away.   [|−10| = 10]
+miss     kept-the-sign = -10   A distance counts steps, and steps do not run backwards.
+
+--- negatives-mixed · seed 67890 · difficulty 3
+prompt   What is the value?
+display  inline "−14 − (−9)"
+answer   exact -5/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−14 − (−9) = −14 + 9]
+step 3   The signs differ, so subtract the sizes.   [−14 + 9 = −5]
+miss     still-subtracted = -23   That takes 9 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = 5   Both signs are written, and both of them count.
+
+--- negatives-mixed · seed 424242 · difficulty 3
+prompt   What is the value?
+display  inline "−7 + 5"
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [7 − 5 = 2]
+step 3   The larger size decides the sign.   [−7 + 5 = −2]
+miss     added-magnitudes = -12   That stacks 7 and 5 up. Opposite signs pull against each other.
+miss     wrong-sign = 2   The larger size is 7, and it decides the sign.
+
+--- negatives-mixed · seed 987654321 · difficulty 3
+prompt   How far is this from zero?
+display  inline "|−6|"
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −6 sits 6 steps away.   [|−6| = 6]
+miss     kept-the-sign = -6   A distance counts steps, and steps do not run backwards.
+
+--- negatives-mixed · seed 1 · difficulty 4
+prompt   What is the value?
+display  inline "−7 × 11"
+answer   exact -77/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [7 × 11 = 77]
+step 2   Two different signs give a negative.   [−7 × 11 = −77]
+miss     wrong-sign = 77   The size is right. Two different signs give a negative.
+miss     added-instead = 4   That combines them. This one asks for groups of them.
+
+--- negatives-mixed · seed 12345 · difficulty 4
+prompt   How far is this from zero?
+display  inline "|−17|"
+answer   exact 17/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −17 sits 17 steps away.   [|−17| = 17]
+miss     kept-the-sign = -17   A distance counts steps, and steps do not run backwards.
+
+--- negatives-mixed · seed 67890 · difficulty 4
+prompt   What is the value?
+display  inline "−21 − (−14)"
+answer   exact -7/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−21 − (−14) = −21 + 14]
+step 3   The signs differ, so subtract the sizes.   [−21 + 14 = −7]
+miss     still-subtracted = -35   That takes 14 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = 7   Both signs are written, and both of them count.
+
+--- negatives-mixed · seed 424242 · difficulty 4
+prompt   What is the value?
+display  inline "−10 + 8"
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [10 − 8 = 2]
+step 3   The larger size decides the sign.   [−10 + 8 = −2]
+miss     added-magnitudes = -18   That stacks 10 and 8 up. Opposite signs pull against each other.
+miss     wrong-sign = 2   The larger size is 10, and it decides the sign.
+
+--- negatives-mixed · seed 987654321 · difficulty 4
+prompt   How far is this from zero?
+display  inline "|−10|"
+answer   exact 10/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −10 sits 10 steps away.   [|−10| = 10]
+miss     kept-the-sign = -10   A distance counts steps, and steps do not run backwards.
+
+--- negatives-mixed · seed 1 · difficulty 5
+prompt   What is the value?
+display  inline "−9 × 14"
+answer   exact -126/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply the sizes, then read the two signs together.
+step 1   Multiply the sizes first.   [9 × 14 = 126]
+step 2   Two different signs give a negative.   [−9 × 14 = −126]
+miss     wrong-sign = 126   The size is right. Two different signs give a negative.
+miss     added-instead = 5   That combines them. This one asks for groups of them.
+
+--- negatives-mixed · seed 12345 · difficulty 5
+prompt   How far is this from zero?
+display  inline "|−27|"
+answer   exact 27/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −27 sits 27 steps away.   [|−27| = 27]
+miss     kept-the-sign = -27   A distance counts steps, and steps do not run backwards.
+
+--- negatives-mixed · seed 67890 · difficulty 5
+prompt   What is the value?
+display  inline "−31 − (−21)"
+answer   exact -10/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−31 − (−21) = −31 + 21]
+step 3   The signs differ, so subtract the sizes.   [−31 + 21 = −10]
+miss     still-subtracted = -52   That takes 21 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = 10   Both signs are written, and both of them count.
+
+--- negatives-mixed · seed 424242 · difficulty 5
+prompt   What is the value?
+display  inline "−15 + 13"
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Different signs pull against each other, so take one size from the other.
+step 1   The signs differ, so subtract the sizes.
+step 2   Take the smaller size from the larger.   [15 − 13 = 2]
+step 3   The larger size decides the sign.   [−15 + 13 = −2]
+miss     added-magnitudes = -28   That stacks 15 and 13 up. Opposite signs pull against each other.
+miss     wrong-sign = 2   The larger size is 15, and it decides the sign.
+
+--- negatives-mixed · seed 987654321 · difficulty 5
+prompt   How far is this from zero?
+display  inline "|−16|"
+answer   exact 16/1
+input    keypad
+keypad   allowNegative=true
+hint     Absolute value asks the distance, and no distance is below zero.
+step 1   The bars ask how far from zero.
+step 2   −16 sits 16 steps away.   [|−16| = 16]
+miss     kept-the-sign = -16   A distance counts steps, and steps do not run backwards."
+`;
+
+exports[`recorded output: negatives-numberline > matches the wording recorded when the skill landed 1`] = `
+"--- negatives-numberline · seed 1 · difficulty 1
+prompt   Place this value on the line.
+display  inline "−1"
+answer   exact -1/1
+input    number-line
+line     −5 to 5 by 1 (11 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 1 tick to the left.   [0 → −1]
+miss     mirrored-across-zero = 1   That is 1 step from zero, but the other way.
+miss     counted-the-zero = 0   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 12345 · difficulty 1
+prompt   Place this value on the line.
+display  inline "−2"
+answer   exact -2/1
+input    number-line
+line     −5 to 5 by 1 (11 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 2 ticks to the left.   [0 → −2]
+miss     mirrored-across-zero = 2   That is 2 steps from zero, but the other way.
+miss     counted-the-zero = -1   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 67890 · difficulty 1
+prompt   Place this value on the line.
+display  inline "−3"
+answer   exact -3/1
+input    number-line
+line     −5 to 5 by 1 (11 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 3 ticks to the left.   [0 → −3]
+miss     mirrored-across-zero = 3   That is 3 steps from zero, but the other way.
+miss     counted-the-zero = -2   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 424242 · difficulty 1
+prompt   Place this value on the line.
+display  inline "−2"
+answer   exact -2/1
+input    number-line
+line     −5 to 5 by 1 (11 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 2 ticks to the left.   [0 → −2]
+miss     mirrored-across-zero = 2   That is 2 steps from zero, but the other way.
+miss     counted-the-zero = -1   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 987654321 · difficulty 1
+prompt   Place this value on the line.
+display  inline "−1"
+answer   exact -1/1
+input    number-line
+line     −5 to 5 by 1 (11 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 1 tick to the left.   [0 → −1]
+miss     mirrored-across-zero = 1   That is 1 step from zero, but the other way.
+miss     counted-the-zero = 0   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 1 · difficulty 2
+prompt   Place this value on the line.
+display  inline "−1"
+answer   exact -1/1
+input    number-line
+line     −7 to 7 by 1 (15 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 1 tick to the left.   [0 → −1]
+miss     mirrored-across-zero = 1   That is 1 step from zero, but the other way.
+miss     counted-the-zero = 0   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 12345 · difficulty 2
+prompt   Place this value on the line.
+display  inline "−3"
+answer   exact -3/1
+input    number-line
+line     −7 to 7 by 1 (15 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 3 ticks to the left.   [0 → −3]
+miss     mirrored-across-zero = 3   That is 3 steps from zero, but the other way.
+miss     counted-the-zero = -2   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 67890 · difficulty 2
+prompt   Place this value on the line.
+display  inline "−4"
+answer   exact -4/1
+input    number-line
+line     −6 to 6 by 1 (13 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 4 ticks to the left.   [0 → −4]
+miss     mirrored-across-zero = 4   That is 4 steps from zero, but the other way.
+miss     counted-the-zero = -3   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 424242 · difficulty 2
+prompt   Place this value on the line.
+display  inline "−2"
+answer   exact -2/1
+input    number-line
+line     −6 to 6 by 1 (13 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 2 ticks to the left.   [0 → −2]
+miss     mirrored-across-zero = 2   That is 2 steps from zero, but the other way.
+miss     counted-the-zero = -1   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 987654321 · difficulty 2
+prompt   Place this value on the line.
+display  inline "−1"
+answer   exact -1/1
+input    number-line
+line     −7 to 7 by 1 (15 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 1 tick to the left.   [0 → −1]
+miss     mirrored-across-zero = 1   That is 1 step from zero, but the other way.
+miss     counted-the-zero = 0   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 1 · difficulty 3
+prompt   Place this value on the line.
+display  inline "−1"
+answer   exact -1/1
+input    number-line
+line     −9 to 9 by 1 (19 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 1 tick to the left.   [0 → −1]
+miss     mirrored-across-zero = 1   That is 1 step from zero, but the other way.
+miss     counted-the-zero = 0   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 12345 · difficulty 3
+prompt   Place this value on the line.
+display  inline "−3"
+answer   exact -3/1
+input    number-line
+line     −9 to 9 by 1 (19 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 3 ticks to the left.   [0 → −3]
+miss     mirrored-across-zero = 3   That is 3 steps from zero, but the other way.
+miss     counted-the-zero = -2   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 67890 · difficulty 3
+prompt   Place this value on the line.
+display  inline "−5"
+answer   exact -5/1
+input    number-line
+line     −8 to 8 by 1 (17 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 5 ticks to the left.   [0 → −5]
+miss     mirrored-across-zero = 5   That is 5 steps from zero, but the other way.
+miss     counted-the-zero = -4   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 424242 · difficulty 3
+prompt   Place this value on the line.
+display  inline "−2"
+answer   exact -2/1
+input    number-line
+line     −8 to 8 by 1 (17 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 2 ticks to the left.   [0 → −2]
+miss     mirrored-across-zero = 2   That is 2 steps from zero, but the other way.
+miss     counted-the-zero = -1   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 987654321 · difficulty 3
+prompt   Place this value on the line.
+display  inline "−2"
+answer   exact -2/1
+input    number-line
+line     −9 to 9 by 1 (19 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 2 ticks to the left.   [0 → −2]
+miss     mirrored-across-zero = 2   That is 2 steps from zero, but the other way.
+miss     counted-the-zero = -1   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 1 · difficulty 4
+prompt   Place this value on the line.
+display  inline "−1"
+answer   exact -1/1
+input    number-line
+line     −11 to 11 by 1 (23 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 1 tick to the left.   [0 → −1]
+miss     mirrored-across-zero = 1   That is 1 step from zero, but the other way.
+miss     counted-the-zero = 0   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 12345 · difficulty 4
+prompt   Place this value on the line.
+display  inline "−4"
+answer   exact -4/1
+input    number-line
+line     −12 to 12 by 1 (25 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 4 ticks to the left.   [0 → −4]
+miss     mirrored-across-zero = 4   That is 4 steps from zero, but the other way.
+miss     counted-the-zero = -3   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 67890 · difficulty 4
+prompt   Place this value on the line.
+display  inline "−7"
+answer   exact -7/1
+input    number-line
+line     −11 to 11 by 1 (23 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 7 ticks to the left.   [0 → −7]
+miss     mirrored-across-zero = 7   That is 7 steps from zero, but the other way.
+miss     counted-the-zero = -6   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 424242 · difficulty 4
+prompt   Place this value on the line.
+display  inline "−3"
+answer   exact -3/1
+input    number-line
+line     −10 to 10 by 1 (21 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 3 ticks to the left.   [0 → −3]
+miss     mirrored-across-zero = 3   That is 3 steps from zero, but the other way.
+miss     counted-the-zero = -2   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 987654321 · difficulty 4
+prompt   Place this value on the line.
+display  inline "−2"
+answer   exact -2/1
+input    number-line
+line     −12 to 12 by 1 (25 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 2 ticks to the left.   [0 → −2]
+miss     mirrored-across-zero = 2   That is 2 steps from zero, but the other way.
+miss     counted-the-zero = -1   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 1 · difficulty 5
+prompt   Place this value on the line.
+display  inline "−1"
+answer   exact -1/1
+input    number-line
+line     −14 to 14 by 1 (29 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 1 tick to the left.   [0 → −1]
+miss     mirrored-across-zero = 1   That is 1 step from zero, but the other way.
+miss     counted-the-zero = 0   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 12345 · difficulty 5
+prompt   Place this value on the line.
+display  inline "−5"
+answer   exact -5/1
+input    number-line
+line     −15 to 15 by 1 (31 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 5 ticks to the left.   [0 → −5]
+miss     mirrored-across-zero = 5   That is 5 steps from zero, but the other way.
+miss     counted-the-zero = -4   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 67890 · difficulty 5
+prompt   Place this value on the line.
+display  inline "−8"
+answer   exact -8/1
+input    number-line
+line     −13 to 13 by 1 (27 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 8 ticks to the left.   [0 → −8]
+miss     mirrored-across-zero = 8   That is 8 steps from zero, but the other way.
+miss     counted-the-zero = -7   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 424242 · difficulty 5
+prompt   Place this value on the line.
+display  inline "−3"
+answer   exact -3/1
+input    number-line
+line     −12 to 12 by 1 (25 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 3 ticks to the left.   [0 → −3]
+miss     mirrored-across-zero = 3   That is 3 steps from zero, but the other way.
+miss     counted-the-zero = -2   Zero is where the counting starts, not the first step.
+
+--- negatives-numberline · seed 987654321 · difficulty 5
+prompt   Place this value on the line.
+display  inline "−3"
+answer   exact -3/1
+input    number-line
+line     −15 to 15 by 1 (31 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 3 ticks to the left.   [0 → −3]
+miss     mirrored-across-zero = 3   That is 3 steps from zero, but the other way.
+miss     counted-the-zero = -2   Zero is where the counting starts, not the first step."
+`;
+
+exports[`recorded output: sub-negatives > matches the wording recorded when the skill landed 1`] = `
+"--- sub-negatives · seed 1 · difficulty 1
+prompt   What is the value?
+display  inline "5 − (−2)"
+answer   exact 7/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [5 − (−2) = 5 + 2]
+step 3   Then add.   [5 + 2 = 7]
+miss     still-subtracted = 3   That takes 2 away. Subtracting a negative puts it back instead.
+miss     negated-the-whole = -7   The two signs cancel each other, not the answer.
+
+--- sub-negatives · seed 12345 · difficulty 1
+prompt   What is the value?
+display  inline "7 − (−3)"
+answer   exact 10/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [7 − (−3) = 7 + 3]
+step 3   Then add.   [7 + 3 = 10]
+miss     still-subtracted = 4   That takes 3 away. Subtracting a negative puts it back instead.
+miss     negated-the-whole = -10   The two signs cancel each other, not the answer.
+
+--- sub-negatives · seed 67890 · difficulty 1
+prompt   What is the value?
+display  inline "−4 − (−5)"
+answer   exact 1/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−4 − (−5) = −4 + 5]
+step 3   The signs differ, so subtract the sizes.   [−4 + 5 = 1]
+miss     still-subtracted = -9   That takes 5 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = -1   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 424242 · difficulty 1
+prompt   What is the value?
+display  inline "−2 − (−4)"
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−2 − (−4) = −2 + 4]
+step 3   The signs differ, so subtract the sizes.   [−2 + 4 = 2]
+miss     still-subtracted = -6   That takes 4 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = -2   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 987654321 · difficulty 1
+prompt   What is the value?
+display  inline "−7 − (−2)"
+answer   exact -5/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−7 − (−2) = −7 + 2]
+step 3   The signs differ, so subtract the sizes.   [−7 + 2 = −5]
+miss     still-subtracted = -9   That takes 2 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = 5   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 1 · difficulty 2
+prompt   What is the value?
+display  inline "9 − (−3)"
+answer   exact 12/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [9 − (−3) = 9 + 3]
+step 3   Then add.   [9 + 3 = 12]
+miss     still-subtracted = 6   That takes 3 away. Subtracting a negative puts it back instead.
+miss     negated-the-whole = -12   The two signs cancel each other, not the answer.
+
+--- sub-negatives · seed 12345 · difficulty 2
+prompt   What is the value?
+display  inline "12 − (−5)"
+answer   exact 17/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [12 − (−5) = 12 + 5]
+step 3   Then add.   [12 + 5 = 17]
+miss     still-subtracted = 7   That takes 5 away. Subtracting a negative puts it back instead.
+miss     negated-the-whole = -17   The two signs cancel each other, not the answer.
+
+--- sub-negatives · seed 67890 · difficulty 2
+prompt   What is the value?
+display  inline "−6 − (−9)"
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−6 − (−9) = −6 + 9]
+step 3   The signs differ, so subtract the sizes.   [−6 + 9 = 3]
+miss     still-subtracted = -15   That takes 9 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = -3   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 424242 · difficulty 2
+prompt   What is the value?
+display  inline "−4 − (−6)"
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−4 − (−6) = −4 + 6]
+step 3   The signs differ, so subtract the sizes.   [−4 + 6 = 2]
+miss     still-subtracted = -10   That takes 6 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = -2   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 987654321 · difficulty 2
+prompt   What is the value?
+display  inline "−12 − (−4)"
+answer   exact -8/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−12 − (−4) = −12 + 4]
+step 3   The signs differ, so subtract the sizes.   [−12 + 4 = −8]
+miss     still-subtracted = -16   That takes 4 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = 8   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 1 · difficulty 3
+prompt   What is the value?
+display  inline "14 − (−4)"
+answer   exact 18/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [14 − (−4) = 14 + 4]
+step 3   Then add.   [14 + 4 = 18]
+miss     still-subtracted = 10   That takes 4 away. Subtracting a negative puts it back instead.
+miss     negated-the-whole = -18   The two signs cancel each other, not the answer.
+
+--- sub-negatives · seed 12345 · difficulty 3
+prompt   What is the value?
+display  inline "20 − (−8)"
+answer   exact 28/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [20 − (−8) = 20 + 8]
+step 3   Then add.   [20 + 8 = 28]
+miss     still-subtracted = 12   That takes 8 away. Subtracting a negative puts it back instead.
+miss     negated-the-whole = -28   The two signs cancel each other, not the answer.
+
+--- sub-negatives · seed 67890 · difficulty 3
+prompt   What is the value?
+display  inline "−10 − (−14)"
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−10 − (−14) = −10 + 14]
+step 3   The signs differ, so subtract the sizes.   [−10 + 14 = 4]
+miss     still-subtracted = -24   That takes 14 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = -4   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 424242 · difficulty 3
+prompt   What is the value?
+display  inline "−6 − (−8)"
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−6 − (−8) = −6 + 8]
+step 3   The signs differ, so subtract the sizes.   [−6 + 8 = 2]
+miss     still-subtracted = -14   That takes 8 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = -2   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 987654321 · difficulty 3
+prompt   What is the value?
+display  inline "−20 − (−6)"
+answer   exact -14/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−20 − (−6) = −20 + 6]
+step 3   The signs differ, so subtract the sizes.   [−20 + 6 = −14]
+miss     still-subtracted = -26   That takes 6 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = 14   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 1 · difficulty 4
+prompt   What is the value?
+display  inline "22 − (−5)"
+answer   exact 27/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [22 − (−5) = 22 + 5]
+step 3   Then add.   [22 + 5 = 27]
+miss     still-subtracted = 17   That takes 5 away. Subtracting a negative puts it back instead.
+miss     negated-the-whole = -27   The two signs cancel each other, not the answer.
+
+--- sub-negatives · seed 12345 · difficulty 4
+prompt   What is the value?
+display  inline "32 − (−13)"
+answer   exact 45/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [32 − (−13) = 32 + 13]
+step 3   Then add.   [32 + 13 = 45]
+miss     still-subtracted = 19   That takes 13 away. Subtracting a negative puts it back instead.
+miss     negated-the-whole = -45   The two signs cancel each other, not the answer.
+
+--- sub-negatives · seed 67890 · difficulty 4
+prompt   What is the value?
+display  inline "−16 − (−21)"
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−16 − (−21) = −16 + 21]
+step 3   The signs differ, so subtract the sizes.   [−16 + 21 = 5]
+miss     still-subtracted = -37   That takes 21 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = -5   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 424242 · difficulty 4
+prompt   What is the value?
+display  inline "−8 − (−12)"
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−8 − (−12) = −8 + 12]
+step 3   The signs differ, so subtract the sizes.   [−8 + 12 = 4]
+miss     still-subtracted = -20   That takes 12 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = -4   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 987654321 · difficulty 4
+prompt   What is the value?
+display  inline "−31 − (−8)"
+answer   exact -23/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−31 − (−8) = −31 + 8]
+step 3   The signs differ, so subtract the sizes.   [−31 + 8 = −23]
+miss     still-subtracted = -39   That takes 8 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = 23   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 1 · difficulty 5
+prompt   What is the value?
+display  inline "33 − (−7)"
+answer   exact 40/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [33 − (−7) = 33 + 7]
+step 3   Then add.   [33 + 7 = 40]
+miss     still-subtracted = 26   That takes 7 away. Subtracting a negative puts it back instead.
+miss     negated-the-whole = -40   The two signs cancel each other, not the answer.
+
+--- sub-negatives · seed 12345 · difficulty 5
+prompt   What is the value?
+display  inline "48 − (−19)"
+answer   exact 67/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [48 − (−19) = 48 + 19]
+step 3   Then add.   [48 + 19 = 67]
+miss     still-subtracted = 29   That takes 19 away. Subtracting a negative puts it back instead.
+miss     negated-the-whole = -67   The two signs cancel each other, not the answer.
+
+--- sub-negatives · seed 67890 · difficulty 5
+prompt   What is the value?
+display  inline "−23 − (−32)"
+answer   exact 9/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−23 − (−32) = −23 + 32]
+step 3   The signs differ, so subtract the sizes.   [−23 + 32 = 9]
+miss     still-subtracted = -55   That takes 32 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = -9   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 424242 · difficulty 5
+prompt   What is the value?
+display  inline "−12 − (−17)"
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−12 − (−17) = −12 + 17]
+step 3   The signs differ, so subtract the sizes.   [−12 + 17 = 5]
+miss     still-subtracted = -29   That takes 17 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = -5   Both signs are written, and both of them count.
+
+--- sub-negatives · seed 987654321 · difficulty 5
+prompt   What is the value?
+display  inline "−46 − (−12)"
+answer   exact -34/1
+input    keypad
+keypad   allowNegative=true
+hint     Subtracting a negative is the same as adding it back.
+step 1   Two minus signs together make a plus.
+step 2   Rewrite it as an addition.   [−46 − (−12) = −46 + 12]
+step 3   The signs differ, so subtract the sizes.   [−46 + 12 = −34]
+miss     still-subtracted = -58   That takes 12 away. Subtracting a negative puts it back instead.
+miss     dropped-both-signs = 34   Both signs are written, and both of them count."
+`;

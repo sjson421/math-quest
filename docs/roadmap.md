@@ -2,17 +2,17 @@
 
 What is left, in the order it should be done.
 
-**Status: 52 of 201 skills are playable.** Stages A and B are both complete — all five of
-Stage B's units, through order of operations — which makes Stage B the first stage to close
-since checkpoints were built, and the first place the checkpoint fires outside Stage A. The
-keypad can now offer a sign, a decimal point or a fraction slash when a problem asks for one.
-Choice input and number-line input are both built, so `AVAILABLE_CAPABILITIES` holds
-`choice-input` and `number-line`; comparison, ordering, factors, multiples and primes use
-choices, while the other playable skills use the keypad. No skill declares a number line
-yet — its two consumers are still unwritten. This line is the only progress number in the
-repo's documentation —
-the manifest and `npm test` are the authority, and everything below is scope rather than
-status.
+**Status: 61 of 201 skills are playable.** Stages A, B and C are all complete — Stage C is one
+unit, and closing it puts the course below zero for the first time. Choice input and
+number-line input are both built, so `AVAILABLE_CAPABILITIES` holds `choice-input` and
+`number-line`. All three input modes now have content: `negatives-numberline` is the first
+skill anywhere to declare a line, comparison, ordering, factors, multiples, primes and
+negative comparison use choices, and everything else uses the keypad. The pad offers a sign,
+a decimal point or a fraction slash when a problem asks for one — and every Unit 6 problem
+answered on the pad asks for the sign, because on each one a negative value is either the
+answer or a predicted mistake. This line is the only progress number in the repo's
+documentation — the manifest and `npm test` are the authority, and everything below is scope
+rather than status.
 
 To re-derive it rather than trusting this file:
 
@@ -426,21 +426,39 @@ document's ✅ markers updated to match, which the cross-check enforces.
       Every Stage C and Stage D skill is still `planned`, which a coverage test now pins.
       `negatives-numberline` (6.1) and `fractions-numberline` (7.4) remain planned consumers.
 
-- [ ] **14 · Stage C · Unit 6 · Negatives** — M — 9 skills
+- [x] **14 · Stage C · Unit 6 · Negatives** — M — **shipped 2026-08-07**
 
-      The gate to all algebra, and nothing in it is optional. `sub-negatives` (6.5) is the
-      major wall — minus a minus. Stage C declares both of its capabilities — `choice-input`
-      and, since item 13, `number-line` — and both are built, so nothing here is held behind
-      an input mode. Only `negatives-numberline` (6.1) actually draws a line; the stage-wide
-      declaration was the wrong trade only while the capability was unbuilt.
+      The gate to all algebra, and nothing in it was optional. Nine skills, three of them
+      walls, and `sub-negatives` (6.5) the major one — minus a minus. `negatives-numberline`
+      (6.1) is the first skill anywhere to declare a line, which is the content item 13 was
+      built for and went a whole change without.
 
-      Item 3 removed the gate this used to name, and left a job in its place: these generators
-      must **declare `keypad: { allowNegative: true }` on the problems whose answers are
-      negative**, and only those. Not every skill here needs negative *entry* — `add-neg-pos`
-      (−3 + 5 = 2), `sub-negatives` (5 − (−3) = 8) and `absolute-value` all have positive
-      answers — but `add-two-negs`, `mult-negatives`, `div-negatives` and `negatives-mixed` do.
-      The declaration is per problem, so a skill that sometimes lands negative and sometimes
-      does not can say so problem by problem rather than showing the sign key throughout.
+      **The sign-key rule this item asked for did not survive contact with the walls.** It
+      said to declare `keypad: { allowNegative: true }` on the problems whose answers are
+      negative *and only those*, on the grounds that `add-neg-pos`, `sub-negatives` and
+      `absolute-value` answer positively. But `docs/curriculum.md` names 6.3's wall as "added
+      magnitudes, kept sign", and for −3 + 5 that mistake is −8; 6.5 has exactly one enterable
+      wrong answer without a sign key, where a wall must carry two on every problem; and 6.8's
+      only real mistake is keeping the sign. A pad that withholds the key does not merely fail
+      to record those answers — it **tells the learner the answer is not negative**, at the
+      three skills whose question is what sign it has.
+
+      So the rule shipped as: a problem permits a sign when a negative value is *plausible*
+      for it — the correct answer or a predicted mistake. It is derived in the generator from
+      the answer and the predictions together, so the declaration cannot drift from what the
+      problem holds. The consequence, stated rather than discovered later: every Unit 6
+      problem answered on the pad offers the sign. The per-problem mechanism is still the
+      mechanism, and Unit 8's fractions will use it to say something different.
+
+      Left behind: `entryLabel` in `src/lib/keypad.ts` owns the minus glyph for everything the
+      learner reads — `−` is drawn, `-` is submitted — and `tickLabel` is now stated in terms
+      of it, so the line and the pad cannot disagree about the same value. The answer slot was
+      echoing a typed `-8` under a display reading `−3 + −5` until this change; no unit before
+      this one could produce a signed answer, so nothing had reached it. `WholeNumberData`
+      gained a distance-from-zero variant, because `|−7|` is not an expression and a display
+      of `−7` would evaluate to the answer 6.8 exists to call wrong. The recorded-output gate
+      now renders `keypad` and `numberLine`, which no generator had ever set — without that,
+      the per-problem sign declaration would have shipped outside the review surface.
 
 - [ ] **15 · Dress-up design tooling** — M *(was B4a)*
 

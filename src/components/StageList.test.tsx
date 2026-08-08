@@ -1,7 +1,7 @@
 /**
  * What the top of the course offers at first paint.
  *
- * Six of the eight stages have no generator anywhere in them. None of the six
+ * Five of the eight stages have no generator anywhere in them. None of the five
  * may appear here, in any form — that is the difference between a course that
  * is being written and one that looks two-thirds empty.
  */
@@ -22,8 +22,9 @@ describe('StageList', () => {
   it('lists the stages that have something to play, in curriculum order', () => {
     const html = render()
 
-    expect(html.match(/<button/g)).toHaveLength(2)
+    expect(html.match(/<button/g)).toHaveLength(3)
     expect(html.indexOf('Numbers')).toBeLessThan(html.indexOf('The Four Operations'))
+    expect(html.indexOf('The Four Operations')).toBeLessThan(html.indexOf('Negatives'))
   })
 
   it('shows no trace of a stage with no generator in it', () => {
@@ -33,7 +34,6 @@ describe('StageList', () => {
     )
 
     expect(unbuilt.map((stage) => stage.name)).toEqual([
-      'Negatives',
       'Parts of a Whole',
       'Powers & Early Algebra',
       'Graphs & Algebra II',
@@ -55,11 +55,13 @@ describe('StageList', () => {
   })
 
   it('counts the units of each stage it is given', () => {
-    // Both built stages are complete now, so this count matches what the
-    // curriculum declares. It did not before Unit 5, and the omission that made
-    // the two differ belongs to `resolveCourseTree` rather than to this
+    // All three built stages are complete now, so these counts match what the
+    // curriculum declares. They did not before Unit 5, and the omission that
+    // made the two differ belongs to `resolveCourseTree` rather than to this
     // component — which reads `units.length` and nothing else. Asserting it
     // again against a hand-chopped tree would only re-read that length.
+    //
+    // Stages A and C are both one unit, so the singular covers two stages here.
     const html = render()
 
     expect(html).toContain('1 unit')

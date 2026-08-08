@@ -8,6 +8,22 @@ export type KeypadRules = {
 }
 
 /**
+ * How an entry reads on screen, as opposed to what it submits.
+ *
+ * The sign key is labelled `−` and emits `-`, because everything the learner
+ * reads uses the typographic minus and the answer checker parses ASCII. Both
+ * are right; what is wrong is showing one of them where the other is already on
+ * screen. Echoing an entry verbatim beside a problem reading `−3 + −5` puts
+ * `-8` in the slot below it — the control disagreeing with itself about what it
+ * just did, which is indistinguishable from a broken control.
+ *
+ * Here rather than in the component, beside `applyKey` which produced the
+ * string: one owner for the notation, so the line's tick labels and the pad's
+ * entry cannot drift into two answers about the same glyph.
+ */
+export const entryLabel = (value: string): string => value.replace('-', '−')
+
+/**
  * Apply one key press to the current entry.
  *
  * Pure, so the caller can run it inside a functional state update. That matters:

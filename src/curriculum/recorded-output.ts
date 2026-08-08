@@ -1,4 +1,7 @@
 import { generateProblem } from '../lib/generator'
+import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
+// Aliased: this module exports a `format` of its own, over a whole problem.
+import { format as formatRational } from '../lib/rational'
 import type { Difficulty, Problem, SkillGenerator } from '../lib/types'
 
 /**
@@ -31,6 +34,8 @@ export const RENDERED_KEYS = [
   'display',
   'answer',
   'inputMode',
+  'keypad',
+  'numberLine',
   'choices',
   'misconceptions',
   'hint',
@@ -52,6 +57,40 @@ const formatDisplay = (display: Problem['display']): string => {
       throw new Error(`Unhandled display: ${JSON.stringify(unhandled)}`)
     }
   }
+}
+
+/**
+ * What the problem permits to be typed into it.
+ *
+ * Read off the object rather than from a list of the rules this file knows
+ * about. A hand-written list is a second declaration of `KeypadRules` that
+ * nothing forces anyone to update, so a fifth rule would be dropped here in
+ * silence — and `unrenderedKeys()` could not catch it, because it walks the
+ * problem's own keys and `keypad` is one key whatever is inside it. That is the
+ * exact drift `RENDERED_KEYS` exists to stop, one level down.
+ *
+ * Rendered only when a problem declares something: every skill through Unit 5
+ * declares nothing, so printing an empty line would have re-recorded the whole
+ * course to say so.
+ */
+const formatKeypad = (keypad: Problem['keypad']): string | undefined =>
+  Object.entries(keypad ?? {})
+    .map(([rule, value]) => `${rule}=${value}`)
+    .join(' ') || undefined
+
+/**
+ * The line a placement is made on, as its ticks rather than its fields.
+ *
+ * `start`/`step`/`count` are what the spec stores; the first tick, the last and
+ * the spacing are what a reviewer can check against the problem beside them —
+ * and a line drawn one tick short is invisible in the stored form.
+ */
+const formatNumberLine = (spec: NumberLineSpec): string => {
+  const tickList = ticks(spec)
+  const first = tickLabel(tickList[0])
+  const last = tickLabel(tickList[tickList.length - 1])
+
+  return `${first} to ${last} by ${formatRational(spec.step)} (${spec.count} ticks)`
 }
 
 const formatAnswer = (answer: Problem['answer']): string => {
@@ -76,8 +115,13 @@ export const format = (problem: Problem, seed: number): string => {
     `display  ${formatDisplay(problem.display)}`,
     `answer   ${formatAnswer(problem.answer)}`,
     `input    ${problem.inputMode}`,
-    `hint     ${problem.hint}`,
   ]
+
+  const keypad = formatKeypad(problem.keypad)
+  if (keypad) lines.push(`keypad   ${keypad}`)
+  if (problem.numberLine) lines.push(`line     ${formatNumberLine(problem.numberLine)}`)
+
+  lines.push(`hint     ${problem.hint}`)
 
   for (const choice of problem.choices ?? []) {
     lines.push(`choice   ${choice.id} = ${choice.label}`)

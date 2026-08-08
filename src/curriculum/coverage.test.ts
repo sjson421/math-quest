@@ -72,7 +72,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(52)
+    expect(documentedAsBuilt).toHaveLength(61)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -148,26 +148,42 @@ describe('the skills that are built', () => {
     expect(documentedAsBuilt.every((id) => skillState(id) === 'implemented')).toBe(true)
   })
 
-  it('unlocks nothing by making the number line available', () => {
-    // The capability is built and both its stages declare it, yet every skill
-    // that needs it has no generator — so nothing moved. Worth pinning: a
-    // capability flip is a one-line edit, and the failure mode is a stage
-    // quietly becoming playable before its content exists.
+  it('makes a number-line skill playable on its generator, never on the capability', () => {
+    // The capability is built, so it contributes nothing on its own: across
+    // every stage that declares it, a skill is playable exactly when it has a
+    // generator. Stage C is now the half where that is true and Stage D the
+    // half where it is not, and stating it as the biconditional covers both
+    // without naming either — which is what stops this needing an edit for a
+    // third time when Unit 7 lands.
+    //
     // `manifestSkills`, not the registry's `allSkills`: the registry holds only
-    // skills that have a generator, so filtering it for these stages returns
-    // nothing and the assertion below would pass by measuring an empty set.
-    const needsLine = ['stage-c', 'stage-d']
-    const reachedByLine = manifestSkills
-      .filter((skill) => needsLine.includes(manifestIndex.get(skill.id)!.stage.id))
+    // skills that have a generator, so filtering it would measure an empty set
+    // for the stage that has none and pass by vacuity.
+    const declaring = manifestSkills.filter((skill) =>
+      manifestIndex.get(skill.id)!.stage.requires?.includes('number-line'),
+    )
+    const wrong = declaring
+      .filter((skill) => (skillState(skill.id) === 'implemented') !== generators.has(skill.id))
       .map((skill) => skill.id)
 
     expect(AVAILABLE_CAPABILITIES.has('number-line')).toBe(true)
-    expect(reachedByLine.length).toBeGreaterThan(0)
-    expect(reachedByLine.filter((id) => skillState(id) !== 'planned')).toEqual([])
-    // And nothing from either stage leaked into what the learner is offered.
-    expect(
-      course.filter(({ stage }) => needsLine.includes(stage.id)),
-    ).toEqual([])
+    expect(declaring.length).toBeGreaterThan(0)
+    expect(wrong).toEqual([])
+    // Both halves are represented, so neither side of the biconditional is
+    // being carried by an empty set.
+    expect(declaring.some((skill) => generators.has(skill.id))).toBe(true)
+    expect(declaring.some((skill) => !generators.has(skill.id))).toBe(true)
+  })
+
+  it('has a skill that actually draws a line, which the capability went a change without', () => {
+    // The capability shipped unlocking nothing, because a declared capability
+    // is not a declared line. `negatives-numberline` is the first skill
+    // anywhere to carry one.
+    const drawing = allSkills.filter(
+      (generator) => generateProblem(generator, 1, 3).numberLine !== undefined,
+    )
+
+    expect(drawing.map((generator) => generator.id)).toEqual(['negatives-numberline'])
   })
 
   it('implements Stage A because its choice input capability is available', () => {
@@ -212,9 +228,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 149 skills out of the skill tree entirely', () => {
+  it('leaves the other 140 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(52)
+    expect(offered).toHaveLength(61)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -238,8 +254,8 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['div-meaning', 'unit-4', 'stage-b'])
   })
 
-  it('shows the six built units, and no stage or unit that has nothing to play', () => {
-    expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b'])
+  it('shows the seven built units, and no stage or unit that has nothing to play', () => {
+    expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b', 'stage-c'])
     expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
       'unit-0',
       'unit-1',
@@ -247,6 +263,7 @@ describe('what the learner is offered', () => {
       'unit-3',
       'unit-4',
       'unit-5',
+      'unit-6',
     ])
   })
 })
@@ -270,7 +287,7 @@ describe('the unlock graph the store gates on', () => {
   })
 
   it('matches the committed snapshot for the skills that are built', () => {
-    // Restricted to implemented skills because the other 149 have no edges that
+    // Restricted to implemented skills because the other 140 have no edges that
     // can gate anyone yet. Committed so the next change that moves an edge has
     // to look at it — this is the review surface for a re-lock.
     const graph = Object.fromEntries(

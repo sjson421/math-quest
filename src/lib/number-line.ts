@@ -13,6 +13,7 @@
  * and testable here.
  */
 
+import { entryLabel } from './keypad'
 import { format, rational, type Rational } from './rational'
 
 /**
@@ -47,6 +48,9 @@ export function ticks(spec: NumberLineSpec): Rational[] {
   )
 }
 
+/** What placing on a tick submits: the value in the form `parseInput` reads. */
+export const tickEntry = (tick: Rational): string => format(tick)
+
 /**
  * What a tick reads as on screen.
  *
@@ -54,11 +58,13 @@ export function ticks(spec: NumberLineSpec): Rational[] {
  * That is exactly why this is not the same string as `tickEntry()` — the
  * checker parses ASCII, and the two diverged here rather than at the point one
  * of them was passed to the wrong place.
+ *
+ * Stated as `entryLabel` of the entry, which is what it always was: the pad
+ * needs the same translation for a typed answer, and a second copy of the swap
+ * would be two owners of one notation — the drift this function exists to stop,
+ * one level up.
  */
-export const tickLabel = (tick: Rational): string => format(tick).replace('-', '−')
-
-/** What placing on a tick submits: the value in the form `parseInput` reads. */
-export const tickEntry = (tick: Rational): string => format(tick)
+export const tickLabel = (tick: Rational): string => entryLabel(tickEntry(tick))
 
 export type Placement = {
   /** Which tick the entry sits on, or `-1` when nothing is placed. */

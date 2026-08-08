@@ -61,7 +61,13 @@ export type Operator = '+' | '−' | '×' | '÷'
 export type WholeNumberData =
   /**
    * A property of the one displayed number: which digit sits in a place, how it
-   * reads or expands, what it rounds to, what divides it, whether anything does.
+   * reads or expands, what it rounds to, what divides it, whether anything does,
+   * how far from zero it sits.
+   *
+   * Grouped by payload, not by how they draw. Most of these show the value
+   * plainly; `absolute-value` wraps it in bars, and `read` and `expanded-form`
+   * do not show a numeral at all. What they share is that one number is enough
+   * to re-derive the answer, which is the only thing this arm claims.
    */
   | {
       operation:
@@ -73,6 +79,7 @@ export type WholeNumberData =
         | 'round-to-100'
         | 'factors'
         | 'classify-prime'
+        | 'absolute-value'
       value: number
     }
   | { operation: 'compare'; left: number; right: number }

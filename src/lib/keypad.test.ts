@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { applyKey } from './keypad'
+import { applyKey, entryLabel } from './keypad'
+import { tickEntry, tickLabel } from './number-line'
+import { rational } from './rational'
 
 const type = (keys: string, rules = {}) =>
   [...keys].reduce((acc, k) => applyKey(acc, k, rules), '')
@@ -53,5 +55,41 @@ describe('applyKey', () => {
     const rules = { maxLength: 3, allowNegative: true }
     expect(type('12345', rules)).toBe('123')
     expect(applyKey('-123', '4', rules)).toBe('-123')
+  })
+})
+
+describe('entryLabel', () => {
+  // Covered here rather than through the lesson for the reason `placedLabel` is:
+  // a static render attaches no handlers and starts with an empty entry, so a
+  // typed sign is unreachable from the component and reachable from the rule.
+  it('reads a typed sign the way the problem above it is drawn', () => {
+    const rules = { allowNegative: true }
+
+    expect(entryLabel(type('8', rules))).toBe('8')
+    expect(entryLabel(applyKey(type('8', rules), '-', rules))).toBe('−8')
+  })
+
+  it('leaves an unsigned entry exactly as it was typed', () => {
+    expect(entryLabel('')).toBe('')
+    expect(entryLabel('427')).toBe('427')
+    expect(entryLabel('3/4')).toBe('3/4')
+    expect(entryLabel('1.5')).toBe('1.5')
+  })
+
+  it('shows a sign with nothing after it, which is unfinished rather than wrong', () => {
+    // `applyKey` reaches this state on the first tap of the sign key, and
+    // `answer.ts` reads it as unparseable — so it must still be visible while
+    // the learner finishes the number.
+    expect(entryLabel(applyKey('', '-', { allowNegative: true }))).toBe('−')
+  })
+
+  it('agrees with the number line about the same value', () => {
+    // The point of one owner: a tick and a typed answer are the same value on
+    // the same screen, and a second copy of the swap is how they stop matching.
+    const tick = rational(-3, 1)
+
+    expect(tickEntry(tick)).toBe('-3')
+    expect(tickLabel(tick)).toBe(entryLabel('-3'))
+    expect(tickLabel(tick)).toBe('−3')
   })
 })

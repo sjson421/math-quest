@@ -42,6 +42,17 @@ export function NumberLineInput({ spec, entry, onPlace, onConfirm, disabled }: P
   // never a reachability one.
   const labelEvery = Math.ceil(tickList.length / 11)
 
+  // Phased so zero always carries a label, rather than counted from the left
+  // end. Anchored at the end, roughly half of `negatives-numberline`'s lines
+  // drew every second tick and skipped zero — on the one skill whose hint says
+  // to start there and whose first worked step is "find zero in the middle of
+  // the line". Shifting the phase rather than adding a label keeps the spacing
+  // exactly as measured; an extra label between two existing ones is what
+  // collides at this width. Falls back to the left end on a line with no zero
+  // on it, which is what `fractions-numberline` will mostly draw.
+  const zeroAt = tickList.findIndex((tick) => tick.n === 0)
+  const anchor = zeroAt === -1 ? 0 : zeroAt % labelEvery
+
   return (
     <div className="w-full max-w-sm mx-auto px-3 pb-3">
       <div className="relative flex items-end pt-2" role="group" aria-label="Number line">
@@ -83,7 +94,7 @@ export function NumberLineInput({ spec, entry, onPlace, onConfirm, disabled }: P
                 }`}
                 aria-hidden
               >
-                {i % labelEvery === 0 ? tickLabel(tick) : ''}
+                {i % labelEvery === anchor ? tickLabel(tick) : ''}
               </span>
             </motion.button>
           )

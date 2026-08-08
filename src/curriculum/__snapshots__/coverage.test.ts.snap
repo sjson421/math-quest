@@ -2,6 +2,9 @@
 
 exports[`the unlock graph the store gates on > matches the committed snapshot for the skills that are built 1`] = `
 {
+  "absolute-value": [
+    "div-negatives",
+  ],
   "add-2digit-carry": [
     "add-2digit-nocarry",
   ],
@@ -17,14 +20,23 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "add-facts-small": [
     "round-to-100",
   ],
+  "add-neg-pos": [
+    "compare-negatives",
+  ],
   "add-tens": [
     "add-facts",
   ],
   "add-three-numbers": [
     "add-3digit",
   ],
+  "add-two-negs": [
+    "add-neg-pos",
+  ],
   "add-words": [
     "add-three-numbers",
+  ],
+  "compare-negatives": [
+    "negatives-numberline",
   ],
   "compare-numbers": [
     "expanded-form",
@@ -37,6 +49,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "div-meaning": [
     "mult-words",
+  ],
+  "div-negatives": [
+    "mult-negatives",
   ],
   "div-remainder": [
     "div-facts",
@@ -71,11 +86,20 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "mult-meaning": [
     "sub-words",
   ],
+  "mult-negatives": [
+    "sub-negatives",
+  ],
   "mult-words": [
     "mult-2by2",
   ],
   "multiples": [
     "factors",
+  ],
+  "negatives-mixed": [
+    "absolute-value",
+  ],
+  "negatives-numberline": [
+    "pemdas",
   ],
   "order-numbers": [
     "compare-numbers",
@@ -116,6 +140,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "sub-facts-small": [
     "add-words",
+  ],
+  "sub-negatives": [
+    "add-two-negs",
   ],
   "sub-tens": [
     "sub-facts",

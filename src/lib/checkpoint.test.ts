@@ -4,6 +4,7 @@ import {
   indexSkills,
   stageA,
   stageB,
+  stageC,
   type SkillState,
   type StageEntry,
 } from '../curriculum/manifest'
@@ -168,6 +169,50 @@ describe('crossedStageCheckpoint', () => {
         threshold,
       }),
     ).toEqual({ id: 'stage-b', name: 'The Four Operations' })
+  })
+
+  it('recognizes Stage C, whose one unit is the whole stage', () => {
+    // A different shape from the two above and worth its own case: Stage A and
+    // Stage B each close on the last unit of several, and Stage C closes on its
+    // only one. Nothing in the rule distinguishes them — it walks the manifest's
+    // membership either way — and that is the claim.
+    const skills = stageC.units.flatMap((unit) => unit.skills)
+    const masteries = Object.fromEntries(skills.map((skill) => [skill.id, threshold]))
+    const last = skills.at(-1)
+
+    expect(stageC.units).toHaveLength(1)
+    expect(last?.id).toBe('negatives-mixed')
+    expect(skills.every((skill) => skillStates.get(skill.id) === 'implemented')).toBe(true)
+    expect(
+      crossedStageCheckpoint({
+        skillId: last!.id,
+        before: progressAt({ ...masteries, [last!.id]: threshold - 1 }),
+        after: progressAt(masteries),
+        locations: manifestIndex,
+        states: skillStates,
+        threshold,
+      }),
+    ).toEqual({ id: 'stage-c', name: 'Negatives' })
+  })
+
+  it('does not fire part way through Stage C', () => {
+    // The other side of the case above: eight of the nine at the threshold is
+    // not a completed stage, however close it looks.
+    const skills = stageC.units.flatMap((unit) => unit.skills)
+    const short = Object.fromEntries(
+      skills.slice(0, -1).map((skill) => [skill.id, threshold]),
+    )
+
+    expect(
+      crossedStageCheckpoint({
+        skillId: skills.at(-2)!.id,
+        before: progressAt({ ...short, [skills.at(-2)!.id]: threshold - 1 }),
+        after: progressAt(short),
+        locations: manifestIndex,
+        states: skillStates,
+        threshold,
+      }),
+    ).toBeUndefined()
   })
 })
 

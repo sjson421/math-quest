@@ -98,6 +98,16 @@ function choiceIdFor(problem: Problem, label: string): string {
 }
 
 /**
+ * A value as the course draws it, with the typographic minus every display uses.
+ *
+ * Written here rather than imported from the unit that draws it, for the same
+ * reason the number theory above is written twice: a helper shared with the
+ * generator agrees with it by construction. A positive value passes through
+ * untouched, so every display that shipped before Unit 6 is unaffected.
+ */
+const drawn = (value: number): string => String(value).replace('-', '−')
+
+/**
  * What the learner must be looking at for the carried data to describe it.
  *
  * Checked before anything is derived, so a problem that displays one number and
@@ -110,7 +120,11 @@ function displayedText(data: WholeNumberData): string {
     case 'expanded-form':
       return expandedText(data.value)
     case 'compare':
-      return `${data.left} ? ${data.right}`
+      return `${drawn(data.left)} ? ${drawn(data.right)}`
+    // Bars, not a numeral: distance from zero is a question about the value, and
+    // a display that dropped the sign to look like arithmetic would stop asking it.
+    case 'absolute-value':
+      return `|${drawn(data.value)}|`
     case 'order-ascending':
       return data.values.join(', ')
     case 'divide-remainder':
@@ -267,6 +281,11 @@ function recompute(problem: Problem): number | string {
         return Math.round(data.value / 10) * 10
       case 'round-to-100':
         return Math.round(data.value / 100) * 100
+      // The third case the arithmetic branch would get wrong, after the two
+      // divisions below: `|−7|` is not an expression, and the sign is the
+      // question rather than something to evaluate past.
+      case 'absolute-value':
+        return Math.abs(data.value)
       // The two cases the arithmetic branch below would get wrong: `47 ÷ 5`
       // evaluates to 9.4, and neither answer is that.
       case 'divide-remainder':
@@ -729,6 +748,104 @@ describe('recompute', () => {
     })
 
     expect(() => recompute(mismatched)).toThrow('synthetic-whole: visible text')
+  })
+
+  it('derives a magnitude rather than evaluating the value shown', () => {
+    // `|−7|` is not arithmetic, so the expression branch cannot read it at all;
+    // and a display of `−7` alone would evaluate to −7, which is the answer this
+    // problem exists to say is wrong.
+    const distance = whole({
+      prompt: 'How far is this from zero?',
+      display: {
+        kind: 'inline',
+        text: '|−7|',
+        wholeNumber: { operation: 'absolute-value', value: -7 },
+      },
+      answer: { kind: 'exact', n: 7, d: 1 },
+    })
+
+    expect(recompute(distance)).toBe(7)
+    expect(answerValue(distance)).toBe(recompute(distance))
+  })
+
+  it('catches a distance answer that kept the sign', () => {
+    const wrong = whole({
+      display: {
+        kind: 'inline',
+        text: '|−7|',
+        wholeNumber: { operation: 'absolute-value', value: -7 },
+      },
+      // The mistake the skill diagnoses, shipped as the answer key — which is
+      // exactly what this branch exists to catch.
+      answer: { kind: 'exact', n: -7, d: 1 },
+    })
+
+    expect(recompute(wrong)).toBe(7)
+    expect(answerValue(wrong)).not.toBe(recompute(wrong))
+  })
+
+  it('names a distance display that does not match its carried value', () => {
+    const mismatched = whole({
+      display: {
+        kind: 'inline',
+        text: '|7|',
+        wholeNumber: { operation: 'absolute-value', value: -7 },
+      },
+      answer: { kind: 'exact', n: 7, d: 1 },
+    })
+
+    // Both display the same answer, which is what makes this worth pinning: the
+    // problem asked a different question from the one it carries.
+    expect(() => recompute(mismatched)).toThrow('synthetic-whole: visible text')
+  })
+
+  it('expects a compared display to draw its signs the way the course does', () => {
+    const negatives = whole({
+      display: {
+        kind: 'inline',
+        text: '−7 ? −3',
+        wholeNumber: { operation: 'compare', left: -7, right: -3 },
+      },
+      answer: { kind: 'choice', id: '-1' },
+      inputMode: 'choice',
+      choices: [
+        { id: '-1', label: '<' },
+        { id: '0', label: '=' },
+        { id: '1', label: '>' },
+      ],
+    })
+    const hyphenated = whole({
+      ...negatives,
+      display: {
+        kind: 'inline',
+        text: '-7 ? -3',
+        wholeNumber: { operation: 'compare', left: -7, right: -3 },
+      },
+    })
+
+    expect(recompute(negatives)).toBe('-1')
+    // The pair the number line already separates: `−` is drawn, `-` is entered.
+    // A display carrying the entry form is named rather than quietly accepted.
+    expect(() => recompute(hyphenated)).toThrow('synthetic-whole: visible text')
+  })
+
+  it('leaves a comparison of positive values exactly as it was', () => {
+    const positives = whole({
+      display: {
+        kind: 'inline',
+        text: '347 ? 354',
+        wholeNumber: { operation: 'compare', left: 347, right: 354 },
+      },
+      answer: { kind: 'choice', id: '-1' },
+      inputMode: 'choice',
+      choices: [
+        { id: '-1', label: '<' },
+        { id: '0', label: '=' },
+        { id: '1', label: '>' },
+      ],
+    })
+
+    expect(recompute(positives)).toBe('-1')
   })
 
   it('resolves a factor list through its visible label', () => {
