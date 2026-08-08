@@ -14,8 +14,8 @@ note decisions inline rather than only in chat.
   genuinely new surface. The count has been wrong before — `ls openspec/specs/` is the
   authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **`unit-06-negatives` is active** — sixteen changes have shipped,
-  the latest being `number-line-input`, archived 2026-08-07.
+  holds shipped changes. **The active queue is empty** — seventeen changes have shipped, the
+  latest being `unit-06-negatives`, archived 2026-08-07.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`
