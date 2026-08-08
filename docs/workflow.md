@@ -14,8 +14,8 @@ lands, and note decisions inline rather than only in chat.
   genuinely new surface. The count has been wrong before — `ls openspec/specs/` is the
   authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — eighteen changes have shipped, the
-  latest being `reduce-roadmap-agent-context`, archived 2026-08-08.
+  holds shipped changes. **The active queue contains `split-unit-capabilities`** — eighteen
+  changes have shipped, the latest being `reduce-roadmap-agent-context`, archived 2026-08-08.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`
