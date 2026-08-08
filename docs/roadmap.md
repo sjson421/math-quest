@@ -460,14 +460,51 @@ document's ✅ markers updated to match, which the cross-check enforces.
       now renders `keypad` and `numberLine`, which no generator had ever set — without that,
       the per-problem sign declaration would have shipped outside the review surface.
 
-- [ ] **15 · Dress-up design tooling** — M *(was B4a)*
+- [x] **15 · Dress-up design tooling** — M *(was B4a)* — **shipped 2026-08-08**
 
       Settle how cosmetics are authored **before** any exist, because the answer determines
-      what every later asset looks like. `.claude/skills/mascot-design/` for Pip's layer
-      contract, palette and geometry conventions — `Mascot.tsx` is already layered SVG
-      (ears/head, face, accessory) for exactly this reason. Plus a spike comparing an animation
-      runtime (Rive, Lottie) against hand-authored SVG with the framer-motion already present.
-      Record the decision either way.
+      what every later asset looks like. `mascot-design` for Pip's layer contract, palette and
+      geometry conventions — `Mascot.tsx` is already layered SVG (ears/head, face, accessory)
+      for exactly this reason. Plus a spike comparing an animation runtime (Rive, Lottie)
+      against hand-authored SVG with the framer-motion already present. Record the decision
+      either way.
+
+      **The decision is hand-authored layered SVG with the installed `framer-motion`.** All
+      three arms were built and measured against the real bundle rather than argued about:
+      SVG added **1.13 kB gzip**, `@rive-app/react-canvas@4.31.0` added 57 kB of JS plus a
+      758 kB gzipped WASM, and `@lottiefiles/dotlottie-react@0.19.13` added 31 kB plus a
+      495 kB WASM. Rive's total is roughly 5.7× the entire app's gzipped weight and
+      dotLottie's roughly 3.7× — and in a PWA that precaches for offline use, every learner
+      downloads that whether or not they ever equip anything.
+
+      **Size was the least interesting of the three findings.** Neither canvas runtime is
+      testable here at all: `vite.config.ts` pins `environment: 'node'` and component tests
+      assert on `renderToStaticMarkup`, so a cosmetic drawn into a `<canvas>` produces no
+      markup to assert on and every item would ship untested. Both also break offline *by
+      default* — `@rive-app/canvas` resolves its WASM from `unpkg.com` and
+      `@lottiefiles/dotlottie-web` from `cdn.jsdelivr.net` with an `unpkg` fallback, which is
+      a silent network dependency that only fails on the device of a learner with no
+      connection. And neither composes the way the slot contract needs: Rive switches
+      appearance through state-machine inputs inside one binary artboard, and a `.lottie` is a
+      self-contained timeline with no runtime notion of inserting a layer into another file's
+      paint order, which leaves the back/front occlusion case with no expression at all.
+
+      Stated rather than glossed: the Rive arm measured the runtime, not a hand-authored
+      artboard. A `.riv` needs the Rive editor behind an account and community assets are
+      login-gated, so none was downloaded. That is itself part of the finding — an authoring
+      path that cannot be driven from a shell and produces a binary no reviewer can read in a
+      diff is a real cost for a single-maintainer repo, independent of how good the output
+      looks. dotLottie had no such problem; a valid 1.6 kB Lottie was written by hand.
+
+      **The canonical skill is `.agents/skills/mascot-design/`, not the `.claude/` path this
+      item named** — `.claude/skills/mascot-design/` is its byte-identical mirror, matching
+      how every other skill in the repo is laid out. Note that `.gitignore` excludes
+      `.agents/`, so project-authored skills there are tracked with `git add -f`, as the
+      sixteen existing files already were. The contract documents six named anchors, five
+      slots, and a ten-step render order; three of those anchors are the exact
+      `transformOrigin` values `Mascot.tsx` already uses, so they are load-bearing rather than
+      descriptive. It changes no runtime code — item 16 owns the renderer that makes the slot
+      list real.
 
 - [ ] **16 · Outfits, shop, and room** — L *(was B4b)*
 
