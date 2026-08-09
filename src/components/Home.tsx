@@ -18,6 +18,7 @@ type Props = {
   onNavigate: (level: TreeLevel) => void
   onStart: (skillId: string) => void
   onOpenSettings: () => void
+  onOpenShop: () => void
 }
 
 /**
@@ -31,7 +32,7 @@ type Props = {
  * one against a synthetic `Progress`. This component is the only place that
  * reaches for the live one.
  */
-export function Home({ level, onNavigate, onStart, onOpenSettings }: Props) {
+export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }: Props) {
   const progress = useProgress((s) => s.progress)
   const goalPct = Math.min(100, (progress.todayXp / progress.dailyGoal) * 100)
 
@@ -47,7 +48,19 @@ export function Home({ level, onNavigate, onStart, onOpenSettings }: Props) {
     <div className="flex flex-col h-full overflow-y-auto">
       <header className="flex items-center justify-between px-5 pt-4">
         <Stat icon="🔥" value={progress.streakCount} label="day streak" />
-        <Stat icon="🪙" value={progress.coins} label="coins" />
+        {/* The reward and the thing it buys, one tap apart. Sized to match the
+            settings button rather than shrink-wrapping the stat: this is a
+            control on a phone, and the text it wraps is only 28px tall. */}
+        <button
+          onClick={() => {
+            tap()
+            onOpenShop()
+          }}
+          className="h-10 px-3 rounded-full flex items-center active:bg-cream-deep"
+          aria-label={`${progress.coins} coins — open Pip's wardrobe`}
+        >
+          <Stat icon="🪙" value={progress.coins} label="coins" />
+        </button>
         <button
           onClick={() => {
             tap()
@@ -61,7 +74,7 @@ export function Home({ level, onNavigate, onStart, onOpenSettings }: Props) {
       </header>
 
       <section className="flex flex-col items-center pt-2 pb-5">
-        <Mascot state={doneToday ? 'idle' : 'sleeping'} size={148} />
+        <Mascot state={doneToday ? 'idle' : 'sleeping'} size={148} equipped={progress.equipped} />
 
         <div className="w-full max-w-xs px-6 mt-1">
           <div className="flex justify-between text-sm font-semibold text-ink-soft mb-1.5">

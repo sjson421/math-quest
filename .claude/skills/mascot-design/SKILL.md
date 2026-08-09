@@ -27,11 +27,14 @@ another:
 
 ## What this skill does not do
 
-It does not change `Mascot.tsx`. The slot list and render order in `references/layers.md`
-are a **contract for future work**, not a description of code that exists — Pip today renders one hard-coded
-accessory in the `pin` slot and has no cosmetic renderer, no inventory, and no equip state.
-Roadmap item 16 owns that renderer. Writing an item against this contract before item 16
-lands means the item is ready when the renderer is, not that it displays today.
+It does not change `Mascot.tsx`. It describes what an item must satisfy; the component
+decides how items are drawn.
+
+The slot list and render order in `references/layers.md` were a contract for future work
+until roadmap item 16's first increment built the renderer. **They now describe code**:
+`Mascot.tsx` walks those ten steps, `src/cosmetics/` holds the catalogue, and the progress
+record carries what is owned and worn. An item authored against this contract displays as
+soon as it is in the catalogue and bought.
 
 ## The shape of an item
 

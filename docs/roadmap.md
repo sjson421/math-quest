@@ -506,12 +506,39 @@ document's ✅ markers updated to match, which the cross-check enforces.
       descriptive. It changes no runtime code — item 16 owns the renderer that makes the slot
       list real.
 
-- [ ] **16 · Outfits, shop, and room** — L *(was B4b)*
+- [ ] **16 · Outfits, shop, and room** — L *(was B4b)* — **two increments, one shipped**
 
       Coins accumulate today with nothing to spend them on — they appear on the home screen and
       in settings and are read nowhere else. Cosmetic layers on Pip, a decoratable room, a shop
       priced against real earn rates, and inventory on the progress record, which must survive
       the sync round trip rather than only local storage.
+
+      Too large for one change, so it ships in order. The checkbox stays open until both land.
+
+      **16a · Cosmetics and shop — shipped 2026-08-09.** `inventory` and `equipped` on the
+      progress record, the slot renderer in `Mascot.tsx`, five cosmetics, and a shop reached
+      from the coin balance. The renderer walks the ten steps item 15's contract wrote down,
+      so `references/layers.md` now describes code rather than intent.
+
+      Neither `api/progress.ts` nor `src/lib/sync.ts` needed a line: the endpoint stores the
+      blob opaquely and sync is a store subscriber, which is the design decision from
+      `progress-sync` paying off — that spec already required a push after "a purchase",
+      written before one could happen.
+
+      **Pricing was checked against the running app, not argued.** Three lessons pay 45 coins,
+      and the cheapest cosmetic is 40. The set totals 470 — about a week and a half at three
+      lessons a day.
+
+      Left behind: **`pin` ships no item.** The slot and its replacement path are built and
+      tested with a fixture, but every catalogue item leaves Pip's signature star alone,
+      because the contract calls displacing it an identity change rather than a free slot.
+      Also worth knowing for 16b: a cosmetic hung *below* Pip's chin reads as a bib, not a
+      cape — the head circle ends at y 169, so anything under it shows as a flat band. The
+      cape only worked once its hem curved up behind the head, leaving the side flares as the
+      visible part. Room décor will hit the same wall from the other direction.
+
+      **16b · The room.** A decoratable room, its items in the same catalogue and inventory,
+      placement persisted on the progress record.
 
 - [ ] **17 · KaTeX rendering** — M
 

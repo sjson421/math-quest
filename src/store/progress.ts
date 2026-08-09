@@ -8,6 +8,8 @@ import {
   unlockPrerequisites,
 } from '../curriculum'
 import { crossedStageCheckpoint, type StageCheckpoint } from '../lib/checkpoint'
+import type { CosmeticSlot, Equipped } from '../cosmetics'
+import { buy, equip, unequip } from '../lib/wardrobe'
 
 const STORAGE_KEY = 'math-quest-progress'
 const SCHEMA_VERSION = 1
@@ -42,6 +44,10 @@ export type Progress = {
   skills: Record<string, SkillProgress>
   /** Misconception tag → times hit. Drives "you keep doing X" insights later. */
   mistakes: Record<string, number>
+  /** Cosmetic ids the learner has bought, in the order they bought them. */
+  inventory: string[]
+  /** Slot → the cosmetic worn in it. An absent slot means Pip's own default. */
+  equipped: Equipped
 }
 
 export type LessonOutcome = {
@@ -94,6 +100,8 @@ export function initialProgress(): Progress {
     todayDate: todayKey(),
     skills: Object.fromEntries(allSkills.map((s) => [s.id, emptySkill()])),
     mistakes: {},
+    inventory: [],
+    equipped: {},
   }
 }
 
@@ -103,6 +111,9 @@ type Store = {
   hydrate: () => Promise<void>
   recordAttempt: (skillId: string, correct: boolean, misconceptionTag?: string) => void
   completeLesson: (skillId: string) => LessonOutcome
+  buyCosmetic: (id: string) => void
+  equipCosmetic: (id: string) => void
+  unequipSlot: (slot: CosmeticSlot) => void
   replaceProgress: (next: Progress) => void
   adoptRemote: (next: Progress, version: number) => void
   reset: () => void
@@ -118,8 +129,16 @@ function reconcile(stored: Progress): Progress {
     updatedAt: typeof stored.updatedAt === 'number' ? stored.updatedAt : 0,
     skills: { ...base.skills, ...stored.skills },
     mistakes: { ...stored.mistakes },
+    // Shape-checked rather than spread blindly. A record predating cosmetics has
+    // neither field, and a corrupt one can carry anything: `{ ...'ab' }` is
+    // `{ 0: 'a', 1: 'b' }`, which would survive as a junk wardrobe.
+    inventory: Array.isArray(stored.inventory) ? [...stored.inventory] : [],
+    equipped: isRecord(stored.equipped) ? { ...stored.equipped } : {},
   }
 }
+
+const isRecord = (value: unknown): value is Equipped =>
+  typeof value === 'object' && value !== null && !Array.isArray(value)
 
 export const useProgress = create<Store>((set, get) => {
   /**
@@ -227,6 +246,26 @@ export const useProgress = create<Store>((set, get) => {
       persist(next)
 
       return { xpGained, coinsGained, leveledUp, checkpoint }
+    },
+
+    /**
+     * The three wardrobe actions all persist only on a non-null result, so a
+     * refusal — cannot afford, already owned, slot already empty — leaves
+     * `updatedAt` alone and schedules no push.
+     */
+    buyCosmetic(id) {
+      const next = buy(get().progress, id)
+      if (next) persist(next)
+    },
+
+    equipCosmetic(id) {
+      const next = equip(get().progress, id)
+      if (next) persist(next)
+    },
+
+    unequipSlot(slot) {
+      const next = unequip(get().progress, slot)
+      if (next) persist(next)
     },
 
     /**

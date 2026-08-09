@@ -1,13 +1,16 @@
 import { motion } from 'framer-motion'
+import type { Equipped } from '../cosmetics'
 import type { StageCheckpoint as Checkpoint } from '../lib/checkpoint'
 import { Mascot } from './Mascot'
 
 export function StageCheckpoint({
   checkpoint,
   onContinue,
+  equipped,
 }: {
   checkpoint: Checkpoint
   onContinue: () => void
+  equipped?: Equipped
 }) {
   return (
     <motion.div
@@ -19,7 +22,7 @@ export function StageCheckpoint({
         Stage checkpoint
       </div>
 
-      <Mascot state="celebrating" size={190} />
+      <Mascot state="celebrating" size={190} equipped={equipped} />
 
       <div>
         <h2 className="text-3xl font-bold">{checkpoint.name} boundary reached!</h2>

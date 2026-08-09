@@ -13,6 +13,7 @@ import {
   type SyncNotice,
   type SyncSnapshot,
 } from './sync'
+import { buy } from './wardrobe'
 
 const KEY = 'MATH-A1B2-C3D4-E5F6-G7H8'
 
@@ -96,6 +97,11 @@ function harness(options: { local?: Progress; meta?: SyncMeta; online?: boolean 
     /** A local mutation, the way the store would make it. */
     mutate(updatedAt: number, xp = updatedAt) {
       progress = { ...progress, updatedAt, xp }
+      listener?.(progress)
+    },
+    /** A local mutation that changed something other than xp. */
+    mutateTo(next: Progress, updatedAt: number) {
+      progress = { ...next, updatedAt }
       listener?.(progress)
     },
     setOnline(value: boolean) {
@@ -247,6 +253,22 @@ describe('debounce', () => {
     await h.sync.flush()
 
     expect(h.documents.get(`progress:${KEY}`)).toMatchObject({ updatedAt: 2000 })
+  })
+
+  it('pushes a purchase, carrying the reduced balance and the new wardrobe', async () => {
+    // Nothing in `sync.ts` knows what a cosmetic is. This passes because sync is
+    // a store *subscriber* rather than something the shop remembers to call —
+    // which is the whole reason it was built that way.
+    const before = { ...progressAt(1000, 10), coins: 100 }
+    const h = harness({ local: before })
+    await h.sync.start()
+
+    h.mutateTo(buy(before, 'round-glasses')!, 2000)
+    await vi.advanceTimersByTimeAsync(DEBOUNCE_MS)
+
+    const stored = h.documents.get(`progress:${KEY}`)?.progress as Progress
+    expect(stored.coins).toBe(60)
+    expect(stored.inventory).toEqual(['round-glasses'])
   })
 })
 

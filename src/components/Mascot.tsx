@@ -1,28 +1,32 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { wornIn, type Equipped, type MascotState } from '../cosmetics'
+import { BLUSH, CREAM, CREAM_SHADE, INK } from '../cosmetics/palette'
 
 /**
  * Pip — an original character in the kawaii idiom.
  *
  * Built as layered SVG (ears/head, face, accessory) rather than flat artwork so
- * expressions and future outfits are composable data instead of separate
- * drawings. Every part is plain geometry, so new cosmetics cost a few lines.
+ * expressions and outfits are composable data instead of separate drawings.
+ * Every part is plain geometry, so new cosmetics cost a few lines.
  */
 
-export type MascotState = 'idle' | 'thinking' | 'happy' | 'encouraging' | 'celebrating' | 'sleeping'
+export type { MascotState }
 
 type Props = {
   state?: MascotState
   size?: number
   className?: string
+  /**
+   * What the learner has on. Ids are resolved against the catalogue here rather
+   * than by the caller, so one that no longer exists draws nothing in exactly
+   * one place — and so the shop can preview an unequipped item by passing
+   * `{ [slot]: id }` without owning any of that logic.
+   */
+  equipped?: Equipped
 }
 
-const CREAM = '#fff6f0'
-const CREAM_SHADE = '#ffe8dd'
-const INK = '#4a3f47'
-const BLUSH = '#ffb3c9'
-
-export function Mascot({ state = 'idle', size = 160, className }: Props) {
+export function Mascot({ state = 'idle', size = 160, className, equipped }: Props) {
   const [blinking, setBlinking] = useState(false)
 
   // Irregular blink cadence reads as alive; a fixed interval reads as a loop.
@@ -61,6 +65,14 @@ export function Mascot({ state = 'idle', size = 160, className }: Props) {
     sleeping: 4.5,
   }[state]
 
+  // Resolved once, so an id the catalogue has retired costs one lookup and then
+  // reads the same as an empty slot everywhere below.
+  const back = wornIn(equipped, 'back')
+  const headwear = wornIn(equipped, 'headwear')
+  const face = wornIn(equipped, 'face')
+  const neck = wornIn(equipped, 'neck')
+  const pin = wornIn(equipped, 'pin')
+
   return (
     <motion.svg
       className={className}
@@ -74,10 +86,16 @@ export function Mascot({ state = 'idle', size = 160, className }: Props) {
       aria-label={`Pip is ${state}`}
       role="img"
     >
-      {/* soft ground shadow */}
+      {/* 1 · soft ground shadow */}
       <ellipse cx="100" cy="180" rx="42" ry="7" fill={BLUSH} opacity="0.22" />
 
-      {/* ---- ears ---- */}
+      {/* 2 · back cosmetics — the only slot painted before Pip */}
+      {back?.render?.(state)}
+
+      {/* 3 · headwear back fragments — a crown behind the ear tips */}
+      {headwear?.back?.(state)}
+
+      {/* 4 · ears and head */}
       <g>
         <motion.ellipse
           cx="56"
@@ -109,7 +127,6 @@ export function Mascot({ state = 'idle', size = 160, className }: Props) {
         <ellipse cx="144" cy="70" rx="8" ry="18" fill={BLUSH} opacity="0.35" transform="rotate(24 144 70)" />
       </g>
 
-      {/* ---- head ---- */}
       <circle cx="100" cy="112" r="57" fill={CREAM} stroke={CREAM_SHADE} strokeWidth="3" />
 
       {/* little tuft */}
@@ -121,30 +138,57 @@ export function Mascot({ state = 'idle', size = 160, className }: Props) {
         fill="none"
       />
 
-      {/* ---- cheeks ---- */}
+      {/* 5 · headwear front fragments — a brim over the forehead. A headwear
+          item that does not split is drawn here too: in front is the side that
+          reads, and only a shape needing to pass behind declares a `back`. */}
+      {headwear?.front?.(state) ?? headwear?.render?.(state)}
+
+      {/* 6 · expression: cheeks, then eyes and mouth */}
       <ellipse cx="66" cy="126" rx="11" ry="7" fill={BLUSH} opacity="0.75" />
       <ellipse cx="134" cy="126" rx="11" ry="7" fill={BLUSH} opacity="0.75" />
-
-      {/* ---- face ---- */}
       <Face state={state} blinking={blinking} />
 
-      {/* ---- accessory slot: signature star ---- */}
-      <motion.path
-        d="M148 150 l4.2 8.6 9.4 1.4 -6.8 6.7 1.6 9.4 -8.4 -4.4 -8.4 4.4 1.6 -9.4 -6.8 -6.7 9.4 -1.4z"
-        fill="#ffe5a3"
-        stroke="#e8b53d"
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-        animate={{
-          rotate: state === 'celebrating' ? [0, 360] : [0, 12, 0],
-          scale: state === 'celebrating' ? [1, 1.25, 1] : 1,
-        }}
-        transition={{ duration: state === 'celebrating' ? 1.2 : 3.4, repeat: Infinity, ease: 'easeInOut' }}
-        style={{ transformOrigin: '148px 162px' }}
-      />
+      {/* 7 · face cosmetics */}
+      {face?.render?.(state)}
 
+      {/* 8 · neck cosmetics */}
+      {neck?.render?.(state)}
+
+      {/* 9 · pin — the signature star unless something replaces it */}
+      {pin ? pin.render?.(state) : <SignatureStar state={state} />}
+
+      {/* 10 · foreground effects */}
       {state === 'sleeping' && <SleepZs />}
     </motion.svg>
+  )
+}
+
+/**
+ * Pip's own charm, and what the `pin` slot falls back to.
+ *
+ * It is a default rather than a fixture: a cosmetic equipped there takes its
+ * place, which the contract calls a deliberate identity change. Nothing in the
+ * catalogue does that today.
+ */
+function SignatureStar({ state }: { state: MascotState }) {
+  return (
+    <motion.path
+      d="M148 150 l4.2 8.6 9.4 1.4 -6.8 6.7 1.6 9.4 -8.4 -4.4 -8.4 4.4 1.6 -9.4 -6.8 -6.7 9.4 -1.4z"
+      fill="#ffe5a3"
+      stroke="#e8b53d"
+      strokeWidth="2.5"
+      strokeLinejoin="round"
+      animate={{
+        rotate: state === 'celebrating' ? [0, 360] : [0, 12, 0],
+        scale: state === 'celebrating' ? [1, 1.25, 1] : 1,
+      }}
+      transition={{
+        duration: state === 'celebrating' ? 1.2 : 3.4,
+        repeat: Infinity,
+        ease: 'easeInOut',
+      }}
+      style={{ transformOrigin: '148px 162px' }}
+    />
   )
 }
 

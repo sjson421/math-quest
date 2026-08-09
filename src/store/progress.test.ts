@@ -260,6 +260,120 @@ describe('surviving the sync round trip', () => {
       'add-tens',
     ])
   })
+
+  it('carries the wardrobe both ways', () => {
+    const dressed = {
+      ...progressWith({}),
+      inventory: ['round-glasses', 'party-hat'],
+      equipped: { face: 'round-glasses' },
+    }
+
+    useProgress.getState().adoptRemote(dressed, 4321)
+
+    expect(useProgress.getState().progress.inventory).toEqual(['round-glasses', 'party-hat'])
+    expect(useProgress.getState().progress.equipped).toEqual({ face: 'round-glasses' })
+  })
+
+  it('gives a record predating cosmetics an empty wardrobe rather than failing', () => {
+    const ancient = { version: 1, xp: 60, skills: {} } as unknown as Progress
+
+    useProgress.getState().replaceProgress(ancient)
+
+    expect(useProgress.getState().progress.inventory).toEqual([])
+    expect(useProgress.getState().progress.equipped).toEqual({})
+  })
+
+  it('keeps a cosmetic id the catalogue no longer knows', () => {
+    // Retained rather than discarded, exactly as an unknown *skill* id is. The
+    // server stores the record opaquely and never migrates it, so a copy naming
+    // a retired item can arrive at any time and must not lose data on the way
+    // through.
+    const retired = {
+      ...progressWith({}),
+      inventory: ['sombrero'],
+      equipped: { headwear: 'sombrero' },
+    }
+
+    useProgress.getState().adoptRemote(retired, 5555)
+
+    expect(useProgress.getState().progress.inventory).toEqual(['sombrero'])
+    expect(useProgress.getState().progress.equipped).toEqual({ headwear: 'sombrero' })
+  })
+
+  it('defaults a corrupt wardrobe to empty rather than letting it through', () => {
+    const corrupt = {
+      ...progressWith({}),
+      inventory: 'round-glasses',
+      equipped: 'face',
+    } as unknown as Progress
+
+    useProgress.getState().adoptRemote(corrupt, 6666)
+
+    expect(useProgress.getState().progress.inventory).toEqual([])
+    expect(useProgress.getState().progress.equipped).toEqual({})
+  })
+})
+
+describe('spending coins', () => {
+  beforeEach(() => {
+    useProgress.getState().reset()
+  })
+
+  const withCoins = (coins: number) => {
+    useProgress.getState().replaceProgress({ ...progressWith({}), coins })
+  }
+
+  it('charges the price and records what was bought', () => {
+    withCoins(100)
+
+    useProgress.getState().buyCosmetic('round-glasses')
+
+    expect(useProgress.getState().progress.coins).toBe(60)
+    expect(useProgress.getState().progress.inventory).toEqual(['round-glasses'])
+  })
+
+  it('leaves the version alone when a purchase is refused', () => {
+    withCoins(10)
+    const before = useProgress.getState().progress.updatedAt
+
+    useProgress.getState().buyCosmetic('round-glasses')
+
+    expect(useProgress.getState().progress.updatedAt).toBe(before)
+    expect(useProgress.getState().progress.inventory).toEqual([])
+    expect(useProgress.getState().progress.coins).toBe(10)
+  })
+
+  it('leaves the version alone when taking off an empty slot', () => {
+    withCoins(0)
+    const before = useProgress.getState().progress.updatedAt
+
+    useProgress.getState().unequipSlot('face')
+
+    expect(useProgress.getState().progress.updatedAt).toBe(before)
+  })
+
+  it('advances the version on a real purchase, so sync notices', () => {
+    withCoins(100)
+    const before = useProgress.getState().progress.updatedAt
+
+    useProgress.getState().buyCosmetic('round-glasses')
+
+    expect(useProgress.getState().progress.updatedAt).toBeGreaterThan(before)
+  })
+
+  it('wears and removes without touching the balance', () => {
+    withCoins(100)
+    useProgress.getState().buyCosmetic('round-glasses')
+    const afterBuying = useProgress.getState().progress.coins
+
+    useProgress.getState().equipCosmetic('round-glasses')
+    expect(useProgress.getState().progress.equipped).toEqual({ face: 'round-glasses' })
+
+    useProgress.getState().unequipSlot('face')
+    expect(useProgress.getState().progress.equipped).toEqual({})
+    expect(useProgress.getState().progress.coins).toBe(afterBuying)
+    expect(useProgress.getState().progress.inventory).toEqual(['round-glasses'])
+  })
 })
 
 describe('stage checkpoint lesson outcomes', () => {

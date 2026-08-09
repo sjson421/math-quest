@@ -2,9 +2,12 @@
 
 ## Two palettes that are not one palette
 
-Pip's colours are constants in `Mascot.tsx`. The app's colours are custom properties in
-`src/index.css`. Some are the same value; the creams are not, and the difference is
-deliberate — Pip's cream is warmer and peachier than the app's, which is pinker.
+Pip's colours are constants in `src/cosmetics/palette.ts`. The app's colours are custom
+properties in `src/index.css`, and a cosmetic reaches them through the `families` map in that
+same module, which holds `var(--color-…)` references rather than copies — so each app colour
+is written down exactly once, in the stylesheet. Some values are the same between the two
+groups; the creams are not, and the difference is deliberate — Pip's cream is warmer and
+peachier than the app's, which is pinker.
 
 **Pip's own constants**
 
@@ -27,6 +30,10 @@ shade, which is exactly enough for a fill, a highlight, and an outline:
 `blossom` `#ffb3c9` / `#ffd9e4` / `#f2789c` · `lilac` `#cbb6f0` / `#e5daf9` / `#9b7ed6` ·
 `mint` `#a8e6cf` / `#d3f3e6` / `#4fbf95` · `butter` `#ffe5a3` / `#fff3d6` / `#e8b53d` ·
 `powder` `#a8d8f0` / `#d6ecf9` / `#59b4dd`
+
+Those hex values are shown so you can picture the family; do not paste them into an item.
+Reach a family through `families` in `palette.ts` — `families.lilac.deep` — which resolves to
+the custom property rather than repeating its value.
 
 Pick one family per item and outline it in that family's deep shade. An item that mixes
 three families reads as clutter at 92 px, whatever it looks like at 190.

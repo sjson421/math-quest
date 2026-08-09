@@ -6,6 +6,7 @@ import { Lesson } from './components/Lesson'
 import { Mascot } from './components/Mascot'
 import { RecoveryKeyIntro } from './components/RecoveryKey'
 import { Settings } from './components/Settings'
+import { Shop } from './components/Shop'
 import { currentUnitId } from './lib/course'
 import { initSync, useSyncStatus } from './lib/sync'
 import type { SkillGenerator } from './lib/types'
@@ -22,6 +23,7 @@ type Screen =
   | TreeLevel
   | { name: 'lesson'; skill: SkillGenerator; unitId: string }
   | { name: 'settings'; back: TreeLevel }
+  | { name: 'shop'; back: TreeLevel }
 
 export default function App() {
   const hydrate = useProgress((s) => s.hydrate)
@@ -29,6 +31,9 @@ export default function App() {
   const keyLoaded = useRecoveryKey((s) => s.loaded)
   const introduced = useRecoveryKey((s) => s.introduced)
   const progress = useProgress((s) => s.progress)
+  const buyCosmetic = useProgress((s) => s.buyCosmetic)
+  const equipCosmetic = useProgress((s) => s.equipCosmetic)
+  const unequipSlot = useProgress((s) => s.unequipSlot)
 
   // `null` means "wherever the learner is now", resolved at render rather than
   // in an effect: the fallback is only reached after `loaded`, so there is no
@@ -81,6 +86,7 @@ export default function App() {
                 })
               }
               onOpenSettings={() => setScreen({ name: 'settings', back: active })}
+              onOpenShop={() => setScreen({ name: 'shop', back: active })}
             />
           )}
           {active.name === 'lesson' && (
@@ -90,6 +96,15 @@ export default function App() {
             />
           )}
           {active.name === 'settings' && <Settings onClose={() => setScreen(active.back)} />}
+          {active.name === 'shop' && (
+            <Shop
+              progress={progress}
+              onBuy={buyCosmetic}
+              onEquip={equipCosmetic}
+              onUnequip={unequipSlot}
+              onClose={() => setScreen(active.back)}
+            />
+          )}
         </motion.div>
       </AnimatePresence>
 

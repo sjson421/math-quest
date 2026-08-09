@@ -2,9 +2,10 @@
 
 ## The canvas
 
-One view box, `0 0 200 200`, shared by Pip and every cosmetic. Five call sites render it at
+One view box, `0 0 200 200`, shared by Pip and every cosmetic. Six call sites render it at
 four sizes — 92, 120, 148, and 190 CSS pixels. (`Mascot.tsx` defaults `size` to 160, but no
-caller passes it, so 92 and 190 are the extremes that matter.)
+caller passes it, so 92 and 190 are the extremes that matter.) The shop draws one Pip per
+catalogue item at 92, which makes the smallest size also the most repeated one.
 
 Pip's resting geometry occupies roughly `x 26–174`, `y 46–187`. Note that **the ears, not
 the tuft, are the highest and widest part** — they are drawn as upright ellipses and then
@@ -79,9 +80,10 @@ rest are the openings cosmetics paint into.
 10. foreground effects — today only the sleep marks; the slot is reserved for the
     celebration effects item 16 may add
 
-This ordering is conceptual until item 16 builds a renderer. It is consistent with the
-order `Mascot.tsx` paints today — shadow, ears, head, face, star, sleep marks — so an item
-authored against it will not need re-layering later.
+`Mascot.tsx` implements these ten steps in this order. It is the same order Pip was always
+painted in — shadow, ears, head, face, star, sleep marks — with the cosmetic openings
+interleaved, so items authored against this table before the renderer existed did not need
+re-layering.
 
 ## Back and front fragments
 
