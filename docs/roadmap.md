@@ -57,11 +57,13 @@ assert on `renderToStaticMarkup`, which is what ruled out both animation runtime
 and anything that widens what is on screen re-measures the inline size ladder that
 `coverage.test.ts` executes, which is item 12's finding.
 
-**All nine capability names already exist.** `Capability` in `manifest/types.ts` declares
+**All nine capability names exist today.** `Capability` in `manifest/types.ts` declares
 `katex`, `fraction-input`, `diagram`, `expression-input`, `coordinate-plane`, `chart` and
 `timed` beside the two that are built, and every stage's `requires` is already written against
 them. A capability item flips a name the manifest has held from the start; it never invents
-one. **`fraction-input` is the odd one out — built, never flipped.** Item 3 shipped the rules,
+one. Item 17 is the one measured exception: 17a rejected the KaTeX library, so 17b renames
+`katex` to the implementation-honest `math-notation` before flipping it. **`fraction-input`
+is the odd one out — built, never flipped.** Item 3 shipped the rules,
 `Keypad` renders the slash and `openspec/specs/answer-entry` specifies it, but
 `AVAILABLE_CAPABILITIES` does not list it, so Stage D waits on three flags of which one costs
 a line. It ships with item 17.
@@ -600,7 +602,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
       anchor is almost entirely covered by the party hat's crown**, so check a new one against
       a hatted Pip rather than a bare one. The bunting is wide and reads with any hat on.
 
-- [ ] **17 · Math notation rendering (`katex`)** — M — **two increments**
+- [ ] **17 · Math notation rendering (`math-notation`)** — M — **two increments**
 
       Fractions cannot render as plain text. First needed across Unit 7; with item 18 it is what
       opens Stage D.
@@ -611,19 +613,38 @@ document's ✅ markers updated to match, which the cross-check enforces.
       little more — so the arms are KaTeX against a hand-authored notation element in the CSS
       already present, both weighed against what Stages D–G actually ask for. Unlike item 15 both
       arms are testable here, because both produce markup; the decision turns on weight (KaTeX's
-      JS **and its font files**, all precached for every learner by a PWA that must work
-      offline), and on whether hand-authored notation carries superscripts and roots without
-      quietly becoming a typesetter. Record the decision either way — and if KaTeX loses, say so
-      about the flag too: `katex` is named in `Capability` and in four stages' `requires`, so the
-      name either outlives the library or the rename is part of 17b, not a later tidy-up.
+      JS and modern WOFF2 fonts, precached for every learner by a PWA that must work offline,
+      plus the fallback font files Vite emits), and on whether hand-authored notation carries
+      superscripts and roots without quietly becoming a typesetter. Record the decision either
+      way — and if KaTeX loses, say so about the flag too: `katex` is named in `Capability` and
+      in four stages' `requires`, so the name either outlives the library or the rename is part
+      of 17b, not a later tidy-up.
+
+      **17a decision — use structured React/CSS, and rename the flag to `math-notation` in
+      17b.** Both arms rendered the same ten curriculum-derived expressions to testable
+      markup with one authored accessible name, local-only assets and no overflow at 375px.
+      The custom arm covered stacked and mixed fractions, positive and negative superscripts,
+      radicals, the nested quadratic formula and geometry formulas with five recursive
+      primitives and no formula-specific CSS. It added **1.34 kB gzip** of JS/CSS and
+      **4.27 KiB** to the Workbox precache.
+
+      `katex@0.18.3` was more typographically polished, especially for stretchable radicals,
+      but added **84.86 kB gzip** of JS/CSS plus **256.17 kB across 19 precached WOFF2 files**.
+      The real PWA precache grew from **552.97 KiB to 1088.27 KiB (+96.8%)**, before the
+      learner reaches fractions, and Vite also emitted 816.78 kB of non-precached legacy font
+      fallbacks. That is not proportionate to a notation surface the small structured arm
+      covered without becoming a general typesetter. Item 17 remains open: 17b owns the
+      production renderer, accessible-label contract, `katex` → `math-notation` manifest
+      rename, and the `math-notation` plus `fraction-input` availability flags.
 
       **17b · The renderer and the two flags.** A math arm on `Display`, one owner for the
       notation so nothing else spells a fraction, and an accessible name on every rendered
       expression — a stacked fraction that reads aloud as "3 4" is a wrong answer waiting to
-      happen. `katex` joins `AVAILABLE_CAPABILITIES`, and **`fraction-input` joins it here too**,
-      built since item 3 and unflipped ever since. Neither opens a skill on its own: Stage D also
-      needs `diagram`, and a coverage test should pin that nothing unlocked, exactly as item 13's
-      did.
+      happen. 17b renames `katex` to `math-notation` in `Capability` and the four stages that
+      require it, then `math-notation` joins `AVAILABLE_CAPABILITIES`; **`fraction-input` joins
+      it here too**, built since item 3 and unflipped ever since. Neither opens a skill on its
+      own: Stage D also needs `diagram`, and a coverage test should pin that nothing unlocked,
+      exactly as item 13's did.
 
 - [ ] **18 · Diagram rendering** — M
 
@@ -653,7 +674,8 @@ document's ✅ markers updated to match, which the cross-check enforces.
       phrasing bank; Unit 10 closes on `simple-interest` instead, so it needs no frames.
 
       **Nothing here starts before items 17 and 18 have both landed.** The stage declares
-      `katex`, `fraction-input` and `diagram`, and it stays `planned` while any one is missing.
+      `math-notation`, `fraction-input` and `diagram`, and it stays `planned` while any one is
+      missing.
 
       Ordered increments, each with what it waits on beyond that:
 
@@ -800,7 +822,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
          A chart that exists only visually makes its skill unanswerable with a screen reader, and
          every input mode so far has held that line.
       4. **The flag** — `chart` into `AVAILABLE_CAPABILITIES`, opening nothing on its own, since
-         Stage G also declares `katex` and `diagram`.
+         Stage G also declares `math-notation` and `diagram`.
 
 - [ ] **25 · Stage G · Units 20–21** — M — 22 skills, five changes
 
