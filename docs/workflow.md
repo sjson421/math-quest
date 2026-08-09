@@ -6,20 +6,26 @@ commands. Use `openspec-propose` → `openspec-apply-change` →
 `openspec-archive-change`. Task lists are the running record — mark each item done as it
 lands, and note decisions inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, twenty capabilities —
+- `openspec/specs/` is the **baseline**: what the system does today, twenty-one capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
   `unit-02-subtraction`, `unit-03-multiplication`, `unit-04-division`,
   `unit-05-order-of-operations`, `unit-06-negatives`, `word-problem-phrasing`,
   `choice-input`, `number-line-input`, `progress-sync`, `recovery-key`, `answer-entry`,
-  `cosmetic-wardrobe`. A change amending built behaviour writes
+  `cosmetic-wardrobe`, `decorated-room`. A change amending built behaviour writes
   `## MODIFIED Requirements` against one of these; `## ADDED` is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — twenty-one changes have shipped,
-  the latest being `add-cosmetics-and-shop`, archived 2026-08-09. That one is the first
-  increment of a roadmap item that needs two, so its roadmap checkbox is deliberately still
-  open; the increments are written under item 16.
+  holds shipped changes. **The active queue is empty** — twenty-two changes have shipped,
+  the latest being `add-decoratable-room`, archived 2026-08-09. That one closes roadmap item
+  16, whose second increment it was; both increments have now landed.
+- **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
+  scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
+  rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
+  archive aborted without changing a file. The fix is to keep the original scenario verbatim
+  and add a second one beside it rather than absorbing it — which is the better spec anyway,
+  since the two kinds are checked separately. Rename a scenario only by leaving the old one
+  in place.
 - **`openspec archive` reflows what it writes.** It strips the blank lines around `##` and
   `###` headings, appends a trailing newline, and titles a new capability
   `# <kebab-name> Specification` rather than the title case every other spec uses. Read the

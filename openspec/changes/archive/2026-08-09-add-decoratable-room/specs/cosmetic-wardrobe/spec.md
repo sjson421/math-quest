@@ -13,10 +13,15 @@ from one another in the shop rather than presented as one undifferentiated list.
 
 Leaving the shop SHALL return to the level of the course the learner came from.
 
-#### Scenario: Each item states where the learner stands with it
+#### Scenario: Each cosmetic states where the learner stands with it
 
 - **WHEN** the shop is open
-- **THEN** every item shows its price and whether it is owned, in use, or affordable
+- **THEN** every cosmetic shows its price and whether it is owned, worn, or affordable
+
+#### Scenario: Each decoration states where the learner stands with it
+
+- **WHEN** the shop is open
+- **THEN** every decoration shows its price and whether it is owned, in the room, or affordable
 
 #### Scenario: Each kind is previewed where it belongs
 
