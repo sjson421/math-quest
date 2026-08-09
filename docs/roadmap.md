@@ -45,8 +45,30 @@ is its own item, never bundled with the content it unblocks. It flips nothing on
 though: `number-line` unlocked no skill, because every skill that declares it is still
 waiting for a generator.
 
-**At most six generators per change.** Larger units ship in the ordered increments written
-below. Their roadmap checkbox remains open until every increment lands.
+**What a capability item contains.** Items 5 and 13 shipped the same shape, and every
+capability item below is written against it rather than restating it: the component and the
+per-problem declaration it reads; the exhaustive switch extended, since `ProblemView` keys its
+entry slot on a `Record` over `inputMode` and its layout on `Display['kind']`, so a mode
+nobody handled is a compile error rather than a fallback; the name added to
+`AVAILABLE_CAPABILITIES`; a coverage test pinning what unlocked, which is usually nothing; and
+no generator, because the content is the next item. Two standing constraints: it must render
+to **markup, not canvas** — `vite.config.ts` pins `environment: 'node'` and component tests
+assert on `renderToStaticMarkup`, which is what ruled out both animation runtimes in item 15 —
+and anything that widens what is on screen re-measures the inline size ladder that
+`coverage.test.ts` executes, which is item 12's finding.
+
+**All nine capability names already exist.** `Capability` in `manifest/types.ts` declares
+`katex`, `fraction-input`, `diagram`, `expression-input`, `coordinate-plane`, `chart` and
+`timed` beside the two that are built, and every stage's `requires` is already written against
+them. A capability item flips a name the manifest has held from the start; it never invents
+one. **`fraction-input` is the odd one out — built, never flipped.** Item 3 shipped the rules,
+`Keypad` renders the slash and `openspec/specs/answer-entry` specifies it, but
+`AVAILABLE_CAPABILITIES` does not list it, so Stage D waits on three flags of which one costs
+a line. It ships with item 17.
+
+**At most six generators per change.** Larger units, and the capability items carrying a
+decision, ship in the ordered increments written below. Their roadmap checkbox remains open
+until every increment lands.
 
 **Sizing is relative.** S / M / L / XL against each other, not against a calendar.
 
@@ -506,14 +528,14 @@ document's ✅ markers updated to match, which the cross-check enforces.
       descriptive. It changes no runtime code — item 16 owns the renderer that makes the slot
       list real.
 
-- [ ] **16 · Outfits, shop, and room** — L *(was B4b)* — **two increments, one shipped**
+- [x] **16 · Outfits, shop, and room** — L *(was B4b)* — **shipped 2026-08-09**
 
       Coins accumulate today with nothing to spend them on — they appear on the home screen and
       in settings and are read nowhere else. Cosmetic layers on Pip, a decoratable room, a shop
       priced against real earn rates, and inventory on the progress record, which must survive
       the sync round trip rather than only local storage.
 
-      Too large for one change, so it ships in order. The checkbox stays open until both land.
+      Too large for one change, so it shipped in order, in two increments on the same day.
 
       **16a · Cosmetics and shop — shipped 2026-08-09.** `inventory` and `equipped` on the
       progress record, the slot renderer in `Mascot.tsx`, five cosmetics, and a shop reached
@@ -537,17 +559,91 @@ document's ✅ markers updated to match, which the cross-check enforces.
       cape only worked once its hem curved up behind the head, leaving the side flares as the
       visible part. Room décor will hit the same wall from the other direction.
 
-      **16b · The room.** A decoratable room, its items in the same catalogue and inventory,
-      placement persisted on the progress record.
+      **16b · The room — shipped 2026-08-09.** Five decorations, a `room` slot map beside
+      `equipped`, and `Room.tsx` — a `0 0 320 200` surface that *contains* Pip's own canvas at
+      the same unit scale, placed with one translate at `(60, 0)`. One catalogue discriminated
+      on `kind` carries both surfaces, so a decoration is bought with the same coins into the
+      same `inventory` and a rug cannot be equipped onto a face. Left behind:
+      `openspec/specs/decorated-room`, and `references/room.md` beside the layer contract.
 
-- [ ] **17 · KaTeX rendering** — M
+      **Pip is painted as one opaque step, and that is the whole occlusion rule.** The room
+      never opens a gap inside his ten, so the two paint orders this item worried about cannot
+      disagree — which is why no decoration needs the back/front split a hat crown uses, and
+      `Decoration` has no such fields to declare. A test pins it: a worn cape lands in front of
+      every decoration and still behind Pip's own head.
 
-      Fractions cannot render as plain text. First needed across Unit 7.
+      Placement is named slots — `rug`, `wall`, `left`, `right` — not coordinates. Dragging is
+      behind a pointer, and component tests render first paint in node with no DOM, so a
+      dragged position is a decision no test can reach; a coordinate map would also have needed
+      the per-entry merge rule in `reconcile()` that AGENTS.md forbids for skills. The accepted
+      cost is that an item is authored for its side and cannot move across. `api/progress.ts`
+      and `src/lib/sync.ts` again needed nothing.
+
+      **Two findings the browser check produced and nothing else could**, which is the second
+      time running that check has paid for itself after item 12. **Tailwind emits a `@theme`
+      variable only when some utility class references it**, and cosmetics reach the palette
+      through `var()` rather than a class — so `--color-mint-soft` and `--color-powder-soft`
+      did not exist at runtime, and a shape filled with a pruned variable renders *unfilled*
+      rather than falling back. The wall was invisible. No shipped cosmetic had hit it purely
+      by luck: the three `-soft` tints the wardrobe uses are the three some class keeps alive.
+      `src/index.css` now declares `@theme static`. **Nothing in the suite can catch a
+      regression** — vitest runs `css: false`, the same fact that made 16a abandon
+      cross-checking the palette, so this is guarded by making it impossible rather than
+      detectable. And the horizon started at `y 168`, where Pip's head circle ends: the line
+      met his chin, the floor read as a windowsill he was leaning on, and 1296 tests, the build
+      and the lint were all green. It sits at 150.
+
+      Also here: the room totals 470 coins — the same as the wardrobe, which is the honest
+      answer to what a room should cost when the wardrobe is the only comparison there is. Both
+      sets together are 940, about three weeks at three lessons a day, so the shop does not
+      empty. And worth knowing before a sixth decoration: **a narrow `wall` item centred on the
+      anchor is almost entirely covered by the party hat's crown**, so check a new one against
+      a hatted Pip rather than a bare one. The bunting is wide and reads with any hat on.
+
+- [ ] **17 · Math notation rendering (`katex`)** — M — **two increments**
+
+      Fractions cannot render as plain text. First needed across Unit 7; with item 18 it is what
+      opens Stage D.
+
+      **17a · Measure, then decide.** KaTeX is the assumed answer, not a settled one, and item 15
+      is the precedent for settling it against the real bundle instead of in argument. Stage D
+      wants stacked fractions and mixed numbers, Unit 12 superscripts and radicals, Stage F
+      little more — so the arms are KaTeX against a hand-authored notation element in the CSS
+      already present, both weighed against what Stages D–G actually ask for. Unlike item 15 both
+      arms are testable here, because both produce markup; the decision turns on weight (KaTeX's
+      JS **and its font files**, all precached for every learner by a PWA that must work
+      offline), and on whether hand-authored notation carries superscripts and roots without
+      quietly becoming a typesetter. Record the decision either way — and if KaTeX loses, say so
+      about the flag too: `katex` is named in `Capability` and in four stages' `requires`, so the
+      name either outlives the library or the rename is part of 17b, not a later tidy-up.
+
+      **17b · The renderer and the two flags.** A math arm on `Display`, one owner for the
+      notation so nothing else spells a fraction, and an accessible name on every rendered
+      expression — a stacked fraction that reads aloud as "3 4" is a wrong answer waiting to
+      happen. `katex` joins `AVAILABLE_CAPABILITIES`, and **`fraction-input` joins it here too**,
+      built since item 3 and unflipped ever since. Neither opens a skill on its own: Stage D also
+      needs `diagram`, and a coverage test should pin that nothing unlocked, exactly as item 13's
+      did.
 
 - [ ] **18 · Diagram rendering** — M
 
-      Shaded shapes for fraction meaning, first at `fraction-of-shape` (7.2); reused heavily by
-      Unit 20's geometry.
+      Shaded shapes for fraction meaning, first at `fraction-of-shape` (7.2) and again at
+      `equivalent-visual` (7.5). Unit 20's geometry reuses the model.
+
+      **Scoped to those two skills deliberately.** Unit 20 wants labelled dimensions, composite
+      outlines and right-angle marks; guessing at them here would repeat the mistake item 12
+      avoided by keeping Unit 5's expression model out of `engine/` — build for the consumers
+      that exist. Unit 20's figures extend this model under item 25, not here.
+
+      In order:
+
+      1. **The shape spec** — bar, circle, grid, each as parts and shaded parts, carried in the
+         problem's data rather than in markup, so the answer stays derivable without trusting
+         the generator. That is Unit 4's rule: carry data when the answer is *about* the display.
+      2. **The renderer** — SVG, one accessible name per figure ("circle in 4 parts, 3 shaded"),
+         and nothing sized so small it is unreadable at 375px.
+      3. **The declaration and the flag** — a `diagram` display arm, and `diagram` added to
+         `AVAILABLE_CAPABILITIES`, which together with item 17 is what finally opens Stage D.
 
 - [ ] **19 · Stage D · Units 7–11** — XL — 50 skills, ten changes
 
@@ -556,86 +652,274 @@ document's ✅ markers updated to match, which the cross-check enforces.
       `fraction-words` (8.12), `money-problems` (9.12) and `ratio-words` (11.7) draw on the
       phrasing bank; Unit 10 closes on `simple-interest` instead, so it needs no frames.
 
-      Ordered increments: 7a `fraction-meaning`–`equivalent-multiply`, 7b
-      `simplify-fractions`–`compare-diff-den`; 8a `add-frac-same-den`–`improper-to-mixed`,
-      8b `mixed-to-improper`–`fraction-words`; 9a `decimal-place-value`–`sub-decimals`, 9b
-      `mult-decimals`–`money-problems`; 10a `percent-meaning`–`percent-of`, 10b
-      `find-the-percent`–`simple-interest`; 11a `write-ratios`–`unit-conversion`, 11b
-      `ratio-words`.
+      **Nothing here starts before items 17 and 18 have both landed.** The stage declares
+      `katex`, `fraction-input` and `diagram`, and it stays `planned` while any one is missing.
 
-- [ ] **20 · Expression input** — M
+      Ordered increments, each with what it waits on beyond that:
+
+      - **7a** `fraction-meaning`–`equivalent-multiply` — the two diagram skills (7.2, 7.5), and
+        `fractions-numberline` (7.4), whose line of thirds is the case item 13's exact rationals
+        were built for. `name-parts` (7.3) is choice input and the course's first new vocabulary.
+      - **7b** `simplify-fractions`–`compare-diff-den` — 7.7 is the first consumer of
+        `requireSimplified` and of the `not-simplified` status item 3 left behind; 7.9's wall is
+        comparing numerators only.
+      - **8a** `add-frac-same-den`–`improper-to-mixed` — `add-frac-diff-den` (8.4) is a major
+        wall. **Settle mixed-number entry before this ships:** `parseInput` accepts `1 1/2`, but
+        the pad has no space key and its bottom row holds one shared slot carrying either the
+        slash or the point, so `improper-to-mixed` (8.6) has no way to be answered today.
+        Whichever way it resolves — a key, a second slot, or accepting improper answers — it
+        changes the pad, so it is capability work under item 3's mechanism rather than content
+        work smuggled into a unit.
+      - **8b** `mixed-to-improper`–`fraction-words` — `sub-mixed` (8.9) borrows from the whole and
+        `div-fractions` (8.11) flips the wrong fraction; both are walls owing two surviving
+        predictions each. `add-mixed` and `sub-mixed` are the mixed-entry consumers 8a decided for.
+      - **9a** `decimal-place-value`–`sub-decimals` — the decimal point (item 3, built);
+        `compare-decimals` (9.3) is choice input and has been a named Stage D consumer since item 5.
+      - **9b** `mult-decimals`–`money-problems` — **`fraction-to-decimal` and `decimal-to-fraction`
+        (9.10, 9.11) need a required *form*, which no answer type expresses.** `checkAnswer`
+        compares exact rationals, so `3/4` and `0.75` are the same answer to it, and each skill is
+        currently passable in precisely the notation it is teaching away from. `requireSimplified`
+        is the nearest thing and constrains fractions only. Decide it as an answer-type change,
+        with the same care item 3 took over the four `checkAnswer` results.
+      - **10a** `percent-meaning`–`percent-of` · **10b** `find-the-percent`–`simple-interest` —
+        `find-the-whole` (10.7) is a major wall; no new capability, and 10.9–10.10 lean on the
+        money intuition the curriculum asks for.
+      - **11a** `write-ratios`–`unit-conversion` · **11b** `ratio-words` — `unit-conversion` (11.6)
+        needs a stated conversion set, or a generator drawing arbitrary units teaches lookup
+        rather than proportion. `ratio-words` (11.7) is a wall on part-to-part vs part-to-whole
+        and is the last phrasing-bank consumer in the stage.
+
+- [ ] **20 · Expression input** — M — **two increments**
 
       Variables on the keypad. First needed at Unit 13.
 
-      Also the point at which `Misconception.value: number` stops being enough: `diagnose()`
-      does `Number(raw)`, so any non-scalar answer silently loses misconception diagnosis.
-      Stage E carries eight walls, and four of them — `words-to-expression`,
-      `combine-like-terms`, `distributive` and `distribute-negative`, all in Unit 13 — answer
-      with an expression rather than a number. The content contract requires two distinct
-      surviving predictions on every wall, so this is a gate on Unit 13, not a nicety.
+      **20a · Answers that are not scalars.** `Misconception.value: number` and a `diagnose()`
+      that does `Number(raw)` mean any non-scalar answer silently loses diagnosis — and
+      `generateProblem` filters predictions with `Number.isFinite`, so they do not merely miss,
+      they are dropped before the learner sees the problem. Stage E carries eight walls and four
+      of them — `words-to-expression`, `combine-like-terms`, `distributive` and
+      `distribute-negative`, all Unit 13 — answer with an expression. The content contract wants
+      two distinct surviving predictions on every wall, so this is a gate on Unit 13 rather than
+      a nicety, and item 22 needs the same generalisation for a point. Ship it on its own: it
+      touches the diagnosis path every built skill already uses, and that is not something to
+      change in the same breath as a new input mode.
+
+      **20b · The mode.** Variable keys on the pad, an expression parser, and the decision this
+      increment exists to make: **what counts as the same expression.** `2x + 3` and `3 + 2x` are
+      one answer; `2(x + 1)` and `2x + 2` are one answer at 13.6 and two different ones at 13.8,
+      where un-distributing *is* the skill. Canonical form is the mechanism; which skills demand
+      which form is the content decision, and it belongs to the answer type, not to a checker
+      each generator writes for itself.
 
 - [ ] **21 · Stage E · Units 12–15** — L — 34 skills, seven changes
 
       `distribute-negative` (13.7) is a major wall.
 
-      Ordered increments: 12a `exponent-meaning`–`exponent-divide`, 12b
-      `power-of-power`–`pemdas-exponents`; 13a `variable-meaning`–`distributive`, 13b
-      `distribute-negative`–`factor-gcf`; 14a `equation-balance`–`equation-parentheses`,
-      14b `with-fractions`–`rearrange-formula`; 15 `inequality-symbols`–
-      `compound-inequalities`.
+      Ordered increments:
 
-- [ ] **22 · Coordinate-plane input** — L
+      - **12a** `exponent-meaning`–`exponent-divide` — needs item 17's notation for superscripts
+        and the radical; `evaluate-powers` (12.2) is a wall on reading 3⁴ as 3 × 4, which is the
+        misconception the notation itself invites.
+      - **12b** `power-of-power`–`pemdas-exponents` — `scientific-notation` (12.9) is the first
+        skill wanting ×10ⁿ, and `pemdas-exponents` (12.10) completes 5.3. Item 12 deliberately
+        kept Unit 5's expression model local to Unit 5 and said this unit should shape its own;
+        whether to extend it or write a second one is the decision to record here.
+      - **13a** `variable-meaning`–`distributive` — the first content on item 20, and it needs
+        both increments of it: three of these six are walls answering with an expression.
+      - **13b** `distribute-negative`–`factor-gcf` — 13.7 is the major wall (sign on the second
+        term); `factor-gcf` (13.8) is where 20b's "same expression" decision is load-bearing,
+        since the answer is a factored form and the expanded one is exactly wrong.
+      - **14a** `equation-balance`–`equation-parentheses` — answers are numbers, so the keypad
+        carries it, with the sign key declared per problem as Unit 6 established.
+      - **14b** `with-fractions`–`rearrange-formula` — two skills break the pad: `rearrange-formula`
+        (14.10) answers with an expression, and `special-solutions` (14.8) answers "no solution"
+        or "infinitely many", which is not a value at all and wants choice input. Name both in the
+        proposal; neither is a generator detail.
+      - **15** `inequality-symbols`–`compound-inequalities` — `flip-the-sign` (15.5) is a major
+        wall and has its own skill on purpose. **`graph-inequality` (15.2) has no input mode
+        today:** item 13's line submits one tick's value and cannot express an open circle or a
+        shaded ray. Either the skill picks among rendered lines (choice input, built) or the line
+        component grows — and growing it is capability work with its own item, decided before this
+        increment is proposed rather than inside it.
 
-      Tap to plot a point. First needed at `plot-points` (16.1) — the only skill in the course
-      marked both `quick` and a wall. Needs the misconception generalisation from item 20, since
-      a point is not a scalar.
+- [ ] **22 · Coordinate-plane input** — L — **two increments**
+
+      First needed at `plot-points` (16.1) — the only skill in the course marked both `quick` and
+      a wall.
+
+      **22a · The plane draws.** Much of Unit 16 *reads* a graph rather than making one:
+      `table-to-graph` (16.3), `slope-from-graph` (16.4), `graph-from-equation` (16.8) and
+      `equation-from-graph` (16.9) all need axes, gridlines and a plotted line on screen before
+      any tap is involved, and `system-by-graphing` (17.1) needs two. That is a display arm,
+      subject to item 12's size-ladder measurement, with an accessible description per graph.
+
+      **22b · The plane accepts.** Tap to place, then confirm — item 13's rule, and for the same
+      reason: a plane packs far more targets into 375px than a line does, so a tap one square out
+      is a slip rather than a wrong answer. Needs an `Answer` arm for a point (the union is exact,
+      approx and choice today) and item 20a's non-scalar misconceptions, since (3, 2) plotted as
+      (2, 3) is *the* predicted mistake of 16.1 and unrepresentable as a number.
+      `coordinate-plane` joins `AVAILABLE_CAPABILITIES` here.
 
 - [ ] **23 · Stage F · Units 16–19** — L — 28 skills, six changes
 
-      Ordered increments: 16a `plot-points`–`y-intercept`, 16b
-      `slope-intercept`–`parallel-perpendicular`; 17 `system-by-graphing`–`system-words`;
-      18a `add-polynomials`–`factor-trinomial`, 18b `difference-of-squares`–
-      `quadratic-formula`; 19 `function-notation`–`compare-functions`.
+      Ordered increments:
+
+      - **16a** `plot-points`–`y-intercept` — needs both halves of item 22; `slope-from-points`
+        (16.5) is a wall on inconsistent subtraction order, which a generator holding both points
+        can predict exactly.
+      - **16b** `slope-intercept`–`parallel-perpendicular` — `graph-from-equation` (16.8) asks the
+        learner to *produce* a line: two placed points, or a choice among rendered graphs. Decide
+        it here; it is the one skill in the unit whose answer shape is genuinely open.
+      - **17** `system-by-graphing`–`system-words` — answers are ordered pairs throughout, so this
+        is the second consumer of 22b's point answer. `elimination` (17.3) is a wall on forgetting
+        to scale both sides.
+      - **18a** `add-polynomials`–`factor-trinomial` — expression answers throughout (item 20);
+        `factor-trinomial` (18.6) is a major wall, and `sub-polynomials` (18.2) is Unit 6's
+        minus-a-minus mistake one abstraction up.
+      - **18b** `difference-of-squares`–`quadratic-formula` — `quadratic-formula` (18.9) needs the
+        radical from item 17, the formula given rather than recalled (it is on the GED sheet), and
+        an answer that is a *pair* of roots. The pair is the part to settle first, and it is the
+        third answer shape after a point and an expression that a single value cannot hold.
+      - **19** `function-notation`–`compare-functions` — 19.1 is a wall on reading f(x) as
+        multiplication. `compare-functions` (19.5) puts a table, a graph and an equation side by
+        side; the stage declares no `chart`, so it must be served by 22a's plane plus a table, and
+        the proposal should say so rather than reach for item 24.
 
 - [ ] **24 · Chart rendering** — M
 
-      Bar, line, scatter. First needed at `read-bar-line` (21.5).
+      Bar, line, scatter. First needed at `read-bar-line` (21.5), reused at `read-scatterplot`
+      (21.6), and those two skills are its whole scope.
+
+      In order:
+
+      1. **The data model** — series and labels in the problem's data, so the answer is derivable
+         from what is charted without trusting the generator, which is the same rule item 18's
+         shape spec follows.
+      2. **The three renderers** — SVG, sharing axes and labelling, drawn legibly at 375px.
+      3. **A non-visual path** — an accessible name plus the underlying values reachable as text.
+         A chart that exists only visually makes its skill unanswerable with a screen reader, and
+         every input mode so far has held that line.
+      4. **The flag** — `chart` into `AVAILABLE_CAPABILITIES`, opening nothing on its own, since
+         Stage G also declares `katex` and `diagram`.
 
 - [ ] **25 · Stage G · Units 20–21** — M — 22 skills, five changes
 
       Geometry teaches *choosing and applying* the formula the GED provides, never memorising
       it.
 
-      Ordered increments: 20a `perimeter`–`area-circle`, 20b
-      `composite-figures`–`pythagorean`, 20c `similar-figures`; 21a `mean`–
-      `read-scatterplot`, 21b `basic-probability`–`counting-outcomes`.
+      Ordered increments:
 
-- [ ] **26 · Review and spaced repetition** — L *(was B6)*
+      - **20a** `perimeter`–`area-circle` — **the geometry figures land here**, as the extension
+        item 18 deliberately did not guess at: labelled dimensions, units, and a right-angle mark.
+        Two policies to set once for the whole unit rather than per skill: π (the GED sheet's
+        3.14) and how a rounded answer is checked, which is what the `approx` answer arm with its
+        tolerance has been waiting for since before anything used it.
+      - **20b** `composite-figures`–`pythagorean` — `surface-area` (20.11) is the heaviest drawing
+        in the course and wants a net rather than a solid; `pythagorean` (20.12) is a wall on
+        hypotenuse placement and needs item 17's radical.
+      - **20c** `similar-figures` — paired figures at a scale, which is a second figure on screen
+        and the reason it is its own increment rather than a tail on 20b.
+      - **21a** `mean`–`read-scatterplot` — 21.1–21.4 need only a list of values; 21.5 and 21.6
+        are item 24's only consumers. `median` (21.2) is a wall on forgetting to sort, which is a
+        prediction the generator can compute exactly.
+      - **21b** `basic-probability`–`counting-outcomes` — answers are fractions, so the required-
+        form question 9b settles applies again here: a probability typed as 0.5, 1/2 or 50% is
+        one value and three different answers, and the unit picks one.
+
+- [ ] **26 · Review and spaced repetition** — L *(was B6)* — **three increments**
 
       Review lessons, per-skill strength, and the stats surface. Ordered before skip-ahead
       because it is what makes skip-ahead safe.
 
-- [ ] **27 · Skip-ahead** — L *(was B5)*
+      **26a · Strength and the schedule.** New fields on `SkillProgress` — strength, when a skill
+      is next due, how many review attempts it has taken — and a pure scheduler beside them, in
+      `lib/` rather than the store, the way `checkpoint.ts` and `lesson.ts` already are. Two
+      things to know before writing them: `reconcile()` merges a stored skill **per object**, so
+      a record saved before the field existed carries nothing and `emptySkill()` never runs over
+      it — the default has to be applied at read time, which is the shape item 1's never-re-lock
+      rule already uses and for the same reason. The endpoint stores the blob opaquely, so the
+      round trip needs no change; what needs a test is today's stored record surviving the new
+      fields.
 
-      The full flow from [skipping ahead](curriculum.md#skipping-ahead): check-first (8 problems
-      sampled at difficulty 3, ≥7 correct) and just-skip, both optional. Sets every skill in the
-      block to mastery 3, records `source: 'tested-out' | 'self-assessed'` on `SkillProgress`,
-      stays reversible, and carries the accuracy safety net that quietly offers to reopen a
-      unit. Entering spaced repetition at low strength needs item 26.
+      **26b · The review lesson.** `lesson.ts` builds each queue slot from a factory taking only
+      a difficulty, so a session is one skill by construction. A review lesson is many: a slot
+      has to carry the skill it belongs to, and `recordAttempt` — already keyed by skill id —
+      gets called per slot. **This is the increment two later items wait on.** Item 27's
+      check-first sampling and Stage H's mixed reviews are this mechanism with different
+      selection, so neither should grow its own.
 
-- [ ] **28 · Timed mode and score estimator** — M
+      **26c · Where it is seen.** A review entry point that appears only when something is due,
+      per-skill strength on the skill tree, and the "you keep doing X" insight that the store's
+      `mistakes` map has been accumulating tags for since before there was anywhere to show them.
 
-      Includes the GED score model. The only place time pressure appears anywhere in the app.
+- [ ] **27 · Skip-ahead** — L *(was B5)* — **three increments**
 
-- [ ] **29 · Stage H · Unit 22** — S — 6 skills
+      The full flow from [skipping ahead](curriculum.md#skipping-ahead). Every route is optional
+      to the learner and reversible at any time.
 
-      Closes the course.
+      **27a · Marking a block known, and taking it back.** `source: 'practiced' | 'tested-out' |
+      'self-assessed'` on `SkillProgress`, and a block mutation setting every skill in a stage or
+      unit to mastery 3 — clear of `UNLOCK_THRESHOLD`, short of `MAX_MASTERY`, so a skipped skill
+      reads as "not needed yet" rather than finished. "Actually, let me practice this" resets the
+      block to 0. Same read-time defaulting as 26a, since an existing record has no `source`;
+      `hasPractised()` already reads mastery for exactly this case, which item 1 wrote down
+      before anything could produce it.
 
-- [ ] **30 · Streak reminders** — S *(was B7)*
+      **27b · Check first.** Eight problems sampled across the block at difficulty 3, ≥7 correct
+      to skip, and a failing run offers the first unmastered unit with no penalty framing.
+      Sampling many skills into one session is 26b's, which is why this waits rather than
+      duplicating it. Both entry points land here: per stage on first launch, and the "I already
+      know this" affordance on a locked or unstarted unit — the second matters most, because it
+      lets the decision wait until the learner knows what the app is like.
 
-      Worth an honest caveat: iOS PWA notification support is narrow and may not reach an
-      installed home-screen app reliably. May reduce to in-app nudges, which is an acceptable
-      outcome. Last because it is the only item nothing else depends on.
+      **27c · The safety net.** A skipped skill enters review at low strength so it resurfaces
+      sooner than a practised one; below 60% accuracy across 5+ review attempts the app quietly
+      offers to warm its unit up; and a downstream skill failing repeatedly points back at the
+      skipped prerequisite, which is the actual cause and the one thing the learner cannot see.
+      All three read counters that 26a and 26b maintain, which is the whole reason review is
+      ordered first.
+
+- [ ] **28 · Timed mode and score estimator** — M — **two increments**
+
+      **28a · The timer.** A clock on the session and `timed` into `AVAILABLE_CAPABILITIES`,
+      which is what makes Stage H playable at all. It stays a property of the session rather than
+      a setting: "no time pressure until Stage H" is a curriculum commitment, and a global switch
+      would erode it by accident.
+
+      **28b · The score estimator.** Raw score to a GED scaled estimate, with the mapping written
+      where a reader can check it and the result presented as an estimate. This is the only place
+      the app says anything about an official test, so the caveat is part of the feature rather
+      than a disclaimer bolted to it.
+
+- [ ] **29 · Stage H · Unit 22** — S — 6 skills — **two increments**
+
+      Closes the course, and the only unit whose skills are not all ordinary lessons.
+
+      **29a · `calculator-skills`–`review-algebraic`.** 22.1 teaches TI-30XS operation, and the
+      open question is what the learner operates: the GED supplies the calculator and this app
+      does not, so either the skill teaches key sequences as text and choices, or something
+      calculator-shaped gets built. Decide that in the proposal, not in the generator. 22.2
+      renders the provided formula sheet in item 17's notation. 22.3 and 22.4 are mixed reviews
+      across the whole course, sampling other skills' generators — that is 26b's session, so they
+      cannot ship before it.
+
+      **29b · `timed-practice-1`, `timed-practice-2`.** Full-length forms on item 28's clock,
+      sampled the way 22.3 and 22.4 sample. Two skills, but each is a test form rather than a
+      ten-problem lesson, which is why they are not a tail on 29a.
+
+- [ ] **30 · Streak reminders** — S *(was B7)* — **two increments**
+
+      Last because it is the only item nothing else depends on.
+
+      **30a · The in-app nudge.** Works on every platform and asks for no permission, and the
+      state is already there: `streakCount` and `lastActiveDay` are on the record and the store
+      breaks a stale streak on load, so this reads existing values rather than adding any.
+
+      **30b · System notifications where they actually work.** Permission asked at a moment the
+      learner has earned something, never on first launch. Worth an honest caveat: iOS PWA
+      notification support is narrow and may not reach an installed home-screen app reliably. If
+      it does not, 30a is the shipped answer and that is an acceptable outcome — which is why it
+      ships first. Verifying on real hardware is launch work and out of scope below.
 
 ---
 
