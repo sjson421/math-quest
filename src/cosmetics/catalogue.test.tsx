@@ -13,10 +13,19 @@
 
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { cosmetics, type Cosmetic, type MascotState } from './index'
+import {
+  ROOM_SLOTS,
+  catalogue,
+  cosmetics,
+  decorations,
+  type CatalogueItem,
+  type Cosmetic,
+  type MascotState,
+} from './index'
 import { BLUSH, CREAM, CREAM_SHADE, INK, families } from './palette'
 
 const slots = new Set(['back', 'headwear', 'face', 'neck', 'pin'])
+const roomSlots = new Set<string>(ROOM_SLOTS)
 
 /** Every fragment of an item, drawn in both a resting and an excited state. */
 const markupOf = (cosmetic: Cosmetic): string =>
@@ -27,6 +36,13 @@ const markupOf = (cosmetic: Cosmetic): string =>
         .map((fragment) => renderToStaticMarkup(fragment(state))),
     )
     .join('')
+
+/**
+ * Either kind, as markup. A decoration takes no state, so there is nothing to
+ * sample — which is the point of that signature.
+ */
+const markupOfItem = (item: CatalogueItem): string =>
+  item.kind === 'decoration' ? renderToStaticMarkup(item.render()) : markupOf(item)
 
 const strokeWidths = (markup: string): number[] =>
   [...markup.matchAll(/stroke-width="([\d.]+)"/g)].map((m) => Number(m[1]))
@@ -61,35 +77,88 @@ describe('every cosmetic', () => {
       expect(cosmetic.front, `${cosmetic.id} front`).toBeUndefined()
     }
   })
+})
+
+/**
+ * The rules that hold on both surfaces. Both canvases share a unit scale, so a
+ * stroke means the same thing on a hat and on a bookshelf, and one loop is
+ * honest rather than a shortcut.
+ */
+describe('every catalogue item', () => {
+  it('has an id unique across both kinds', () => {
+    const ids = catalogue.map((item) => item.id)
+
+    expect(new Set(ids).size).toBe(ids.length)
+  })
 
   it('strokes between 2.5 and 3 units — thinner vanishes at 92px, thicker fights the face', () => {
-    for (const cosmetic of cosmetics) {
-      const widths = strokeWidths(markupOf(cosmetic))
-      expect(widths.length, `${cosmetic.id} has strokes`).toBeGreaterThan(0)
+    for (const item of catalogue) {
+      const widths = strokeWidths(markupOfItem(item))
+      expect(widths.length, `${item.id} has strokes`).toBeGreaterThan(0)
 
       for (const width of widths) {
-        expect(width, `${cosmetic.id} stroke width`).toBeGreaterThanOrEqual(2.5)
-        expect(width, `${cosmetic.id} stroke width`).toBeLessThanOrEqual(3)
+        expect(width, `${item.id} stroke width`).toBeGreaterThanOrEqual(2.5)
+        expect(width, `${item.id} stroke width`).toBeLessThanOrEqual(3)
       }
     }
   })
 
   it('positions transforms in view-box units, never as an originX fraction', () => {
-    for (const cosmetic of cosmetics) {
-      expect(markupOf(cosmetic), `${cosmetic.id}`).not.toMatch(/originX|originY/)
+    for (const item of catalogue) {
+      expect(markupOfItem(item), `${item.id}`).not.toMatch(/originX|originY/)
     }
   })
 
   it('loads nothing over the network — the app is used offline', () => {
-    for (const cosmetic of cosmetics) {
-      expect(markupOf(cosmetic), `${cosmetic.id}`).not.toMatch(/href=|url\(|@import/)
+    for (const item of catalogue) {
+      expect(markupOfItem(item), `${item.id}`).not.toMatch(/href=|url\(|@import/)
     }
+  })
+})
+
+describe('every decoration', () => {
+  it('has a real room slot and a positive price', () => {
+    for (const decoration of decorations) {
+      expect(roomSlots.has(decoration.slot), `${decoration.id} slot`).toBe(true)
+      expect(decoration.price, `${decoration.id} price`).toBeGreaterThan(0)
+      expect(decoration.name.length, `${decoration.id} name`).toBeGreaterThan(0)
+      expect(renderToStaticMarkup(decoration.render()).length, decoration.id).toBeGreaterThan(0)
+    }
+  })
+
+  it('declares no back or front fragment — the room paints Pip as one step', () => {
+    // There is no gap inside Pip's ten for a decoration to span, so a `back`
+    // would be silently dropped. The type forbids it; this is the check that
+    // the type is the one the catalogue is actually written against.
+    for (const decoration of decorations) {
+      expect('back' in decoration, `${decoration.id} back`).toBe(false)
+      expect('front' in decoration, `${decoration.id} front`).toBe(false)
+    }
+  })
+})
+
+describe('the two slot unions', () => {
+  /**
+   * `unequip` is handed a slot and routes to `equipped` or `room` by membership
+   * alone. The day a string appears in both unions it routes to the wrong map,
+   * silently, so the disjointness is asserted rather than assumed.
+   */
+  it('share no slot name', () => {
+    const overlap = [...slots].filter((slot) => roomSlots.has(slot))
+
+    expect(overlap).toEqual([])
+  })
+
+  it('catches an overlap', () => {
+    const withOverlap = new Set([...roomSlots, 'face'])
+
+    expect([...slots].filter((slot) => withOverlap.has(slot))).not.toEqual([])
   })
 })
 
 describe('the checker itself', () => {
   // Without these, a checker that silently matched nothing would pass forever.
-  const bad: Cosmetic = { id: 'bad', slot: 'face', name: 'Bad', price: 1, render: () => null }
+  const bad: Cosmetic = { kind: 'cosmetic', id: 'bad', slot: 'face', name: 'Bad', price: 1, render: () => null }
 
   it('catches a stroke outside the range', () => {
     const hairline = { ...bad, render: () => <circle r="5" stroke="#000" strokeWidth="1" /> }
@@ -110,17 +179,17 @@ describe('the checker itself', () => {
 
 describe('where colours come from', () => {
   /**
-   * An app colour is written down once, in `src/index.css`. A cosmetic reaches
-   * it by reference, so the only literals allowed in the catalogue are Pip's own
+   * An app colour is written down once, in `src/index.css`. An item reaches it
+   * by reference, so the only literals allowed in the catalogue are Pip's own
    * four — anything else is a pasted copy that nothing keeps in step.
    */
   const pipsOwn = new Set([CREAM, CREAM_SHADE, INK, BLUSH])
   const literals = (markup: string) => [...markup.matchAll(/#[0-9a-fA-F]{3,8}/g)].map((m) => m[0])
 
   it('uses no hex beyond Pip’s own constants', () => {
-    for (const cosmetic of cosmetics) {
-      for (const literal of literals(markupOf(cosmetic))) {
-        expect(pipsOwn.has(literal), `${cosmetic.id} paints a literal ${literal}`).toBe(true)
+    for (const item of catalogue) {
+      for (const literal of literals(markupOfItem(item))) {
+        expect(pipsOwn.has(literal), `${item.id} paints a literal ${literal}`).toBe(true)
       }
     }
   })
@@ -133,6 +202,7 @@ describe('where colours come from', () => {
 
   it('catches a pasted family hex', () => {
     const pasted = {
+      kind: 'cosmetic',
       id: 'pasted',
       slot: 'face',
       name: 'Pasted',

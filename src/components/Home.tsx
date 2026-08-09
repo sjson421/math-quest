@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { course, courseStageById, courseStageByUnitId, courseUnitById } from '../curriculum'
 import { tap } from '../lib/haptics'
 import { isUnlocked, useProgress } from '../store/progress'
-import { Mascot } from './Mascot'
+import { Room } from './Room'
 import { SkillList } from './SkillList'
 import { StageList } from './StageList'
 import { UnitList } from './UnitList'
@@ -57,7 +57,7 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
             onOpenShop()
           }}
           className="h-10 px-3 rounded-full flex items-center active:bg-cream-deep"
-          aria-label={`${progress.coins} coins — open Pip's wardrobe`}
+          aria-label={`${progress.coins} coins — open Pip's shop`}
         >
           <Stat icon="🪙" value={progress.coins} label="coins" />
         </button>
@@ -74,7 +74,15 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
       </header>
 
       <section className="flex flex-col items-center pt-2 pb-5">
-        <Mascot state={doneToday ? 'idle' : 'sleeping'} size={148} equipped={progress.equipped} />
+        {/* The room's box is 200 units tall and Pip's canvas fills it, so 148
+            here is exactly the size he rendered at before he had a room — the
+            section gains width around him and no height at all. */}
+        <Room
+          state={doneToday ? 'idle' : 'sleeping'}
+          height={148}
+          equipped={progress.equipped}
+          placed={progress.room}
+        />
 
         <div className="w-full max-w-xs px-6 mt-1">
           <div className="flex justify-between text-sm font-semibold text-ink-soft mb-1.5">

@@ -8,7 +8,7 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import { cosmeticById, cosmetics } from '../cosmetics'
+import { cosmeticById, cosmetics, decorations } from '../cosmetics'
 import { initialProgress, type Progress } from '../store/progress'
 import { buy, equip, owns, standing, unequip } from './wardrobe'
 
@@ -131,7 +131,7 @@ describe('standing', () => {
     expect(standing(learner(), glasses)).toBe('affordable')
     expect(standing(broke, glasses)).toBe('out-of-reach')
     expect(standing(owned, glasses)).toBe('owned')
-    expect(standing(worn, glasses)).toBe('worn')
+    expect(standing(worn, glasses)).toBe('in-use')
   })
 
   it('calls a cosmetic affordable at exactly its price', () => {
@@ -155,5 +155,104 @@ describe('the catalogue the shop is priced against', () => {
     expect(slots).toEqual(new Set(['face', 'headwear', 'neck', 'back']))
     expect(cosmeticById.get('party-hat')?.back).toBeDefined()
     expect(cosmeticById.get('party-hat')?.front).toBeDefined()
+  })
+})
+
+/**
+ * The room half. One purse and one inventory, so these check that a decoration
+ * travels the same purchase path a cosmetic does — and that the two slot maps
+ * stay strictly apart once it has.
+ */
+describe('decorations', () => {
+  const rug = decorations.find((d) => d.id === 'blossom-rug')!
+  const window = decorations.find((d) => d.id === 'round-window')!
+  const bunting = decorations.find((d) => d.id === 'blossom-bunting')!
+
+  it('spends the same coins into the same inventory', () => {
+    const before = learner({ coins: 200 })
+
+    const after = buy(before, rug.id)
+
+    expect(after!.coins).toBe(200 - rug.price)
+    expect(after!.inventory).toContain(rug.id)
+  })
+
+  it('stands in the room rather than on Pip', () => {
+    const owned = learner({ inventory: [rug.id] })
+
+    const after = equip(owned, rug.id)
+
+    expect(after!.room).toEqual({ rug: rug.id })
+    expect(after!.equipped).toEqual({})
+  })
+
+  it('never lands in the room when it is a cosmetic', () => {
+    const owned = learner({ inventory: [glasses.id] })
+
+    const after = equip(owned, glasses.id)
+
+    expect(after!.equipped).toEqual({ face: glasses.id })
+    expect(after!.room).toEqual({})
+  })
+
+  it('refuses to place what is not owned', () => {
+    expect(equip(learner(), rug.id)).toBeNull()
+  })
+
+  it('replaces what shares its slot, keeping the old one owned', () => {
+    const placed = learner({
+      inventory: [window.id, bunting.id],
+      room: { wall: window.id },
+    })
+
+    const after = equip(placed, bunting.id)
+
+    expect(after!.room).toEqual({ wall: bunting.id })
+    expect(owns(after!, window.id)).toBe(true)
+  })
+
+  it('puts one away without touching the wardrobe', () => {
+    const both = learner({
+      inventory: [rug.id, glasses.id],
+      room: { rug: rug.id },
+      equipped: { face: glasses.id },
+    })
+
+    const after = unequip(both, 'rug')
+
+    expect(after!.room).toEqual({})
+    expect(after!.equipped).toEqual({ face: glasses.id })
+    expect(owns(after!, rug.id)).toBe(true)
+  })
+
+  it('refuses to clear an empty room slot, so no push is scheduled', () => {
+    expect(unequip(learner(), 'rug')).toBeNull()
+    expect(unequip(learner({ room: { wall: window.id } }), 'rug')).toBeNull()
+  })
+
+  it('reads its standing from the room, not from what Pip wears', () => {
+    const placed = learner({ inventory: [rug.id], room: { rug: rug.id } })
+
+    expect(standing(placed, rug)).toBe('in-use')
+    expect(standing(learner({ inventory: [rug.id] }), rug)).toBe('owned')
+    expect(standing(learner({ coins: 0 }), rug)).toBe('out-of-reach')
+  })
+})
+
+describe('the room the shop is priced against', () => {
+  it('is priced on the same measured rate as the wardrobe', () => {
+    // 15 coins for a lesson that raises mastery; two or three lessons a sitting.
+    const perLesson = 15
+    const prices = decorations.map((d) => d.price).sort((a, b) => a - b)
+
+    expect(Math.ceil(prices[0] / perLesson)).toBeLessThanOrEqual(4)
+    expect(Math.ceil(prices.at(-1)! / perLesson)).toBeLessThanOrEqual(15)
+  })
+
+  it('fills all four room slots, with one of them twice over', () => {
+    const slots = decorations.map((d) => d.slot)
+
+    expect(new Set(slots)).toEqual(new Set(['rug', 'wall', 'left', 'right']))
+    expect(slots.filter((slot) => slot === 'wall')).toHaveLength(2)
   })
 })

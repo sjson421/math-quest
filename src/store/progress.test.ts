@@ -312,6 +312,67 @@ describe('surviving the sync round trip', () => {
     expect(useProgress.getState().progress.inventory).toEqual([])
     expect(useProgress.getState().progress.equipped).toEqual({})
   })
+
+  it('carries the room both ways', () => {
+    const decorated = {
+      ...progressWith({}),
+      inventory: ['blossom-rug', 'round-window'],
+      room: { rug: 'blossom-rug', wall: 'round-window' },
+    }
+
+    useProgress.getState().adoptRemote(decorated, 7777)
+
+    expect(useProgress.getState().progress.room).toEqual({
+      rug: 'blossom-rug',
+      wall: 'round-window',
+    })
+  })
+
+  it('gives a record predating the room an empty one rather than failing', () => {
+    // The wardrobe half of this record is fully formed, so it is specifically
+    // the newest field being absent that is under test — not a record so old
+    // that everything defaults at once.
+    const beforeTheRoom = {
+      ...progressWith({}),
+      inventory: ['round-glasses'],
+      equipped: { face: 'round-glasses' },
+    } as unknown as Progress
+
+    useProgress.getState().replaceProgress(beforeTheRoom)
+
+    expect(useProgress.getState().progress.room).toEqual({})
+    expect(useProgress.getState().progress.equipped).toEqual({ face: 'round-glasses' })
+  })
+
+  it('defaults a corrupt room to empty while the rest of the record survives', () => {
+    // `{ ...'ab' }` is `{ 0: 'a', 1: 'b' }`, so a bare spread would leave a room
+    // of indexed characters standing in slots that do not exist.
+    const corrupt = {
+      ...progressWith({}),
+      xp: 140,
+      inventory: ['blossom-rug'],
+      room: 'rug',
+    } as unknown as Progress
+
+    useProgress.getState().adoptRemote(corrupt, 8888)
+
+    expect(useProgress.getState().progress.room).toEqual({})
+    expect(useProgress.getState().progress.xp).toBe(140)
+    expect(useProgress.getState().progress.inventory).toEqual(['blossom-rug'])
+  })
+
+  it('keeps a decoration id the catalogue no longer knows', () => {
+    const retired = {
+      ...progressWith({}),
+      inventory: ['chandelier'],
+      room: { wall: 'chandelier' },
+    }
+
+    useProgress.getState().adoptRemote(retired, 9999)
+
+    expect(useProgress.getState().progress.inventory).toEqual(['chandelier'])
+    expect(useProgress.getState().progress.room).toEqual({ wall: 'chandelier' })
+  })
 })
 
 describe('spending coins', () => {
@@ -326,7 +387,7 @@ describe('spending coins', () => {
   it('charges the price and records what was bought', () => {
     withCoins(100)
 
-    useProgress.getState().buyCosmetic('round-glasses')
+    useProgress.getState().buyItem('round-glasses')
 
     expect(useProgress.getState().progress.coins).toBe(60)
     expect(useProgress.getState().progress.inventory).toEqual(['round-glasses'])
@@ -336,7 +397,7 @@ describe('spending coins', () => {
     withCoins(10)
     const before = useProgress.getState().progress.updatedAt
 
-    useProgress.getState().buyCosmetic('round-glasses')
+    useProgress.getState().buyItem('round-glasses')
 
     expect(useProgress.getState().progress.updatedAt).toBe(before)
     expect(useProgress.getState().progress.inventory).toEqual([])
@@ -356,17 +417,17 @@ describe('spending coins', () => {
     withCoins(100)
     const before = useProgress.getState().progress.updatedAt
 
-    useProgress.getState().buyCosmetic('round-glasses')
+    useProgress.getState().buyItem('round-glasses')
 
     expect(useProgress.getState().progress.updatedAt).toBeGreaterThan(before)
   })
 
   it('wears and removes without touching the balance', () => {
     withCoins(100)
-    useProgress.getState().buyCosmetic('round-glasses')
+    useProgress.getState().buyItem('round-glasses')
     const afterBuying = useProgress.getState().progress.coins
 
-    useProgress.getState().equipCosmetic('round-glasses')
+    useProgress.getState().equipItem('round-glasses')
     expect(useProgress.getState().progress.equipped).toEqual({ face: 'round-glasses' })
 
     useProgress.getState().unequipSlot('face')

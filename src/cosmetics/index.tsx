@@ -1,13 +1,25 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { INK, families } from './palette'
+import { decorations } from './room'
+import type {
+  CatalogueItem,
+  Cosmetic,
+  CosmeticSlot,
+  Decoration,
+  Equipped,
+  MascotState,
+  Placed,
+  RoomSlot,
+} from './types'
 
 /**
- * The cosmetics Pip can wear.
+ * The cosmetics Pip can wear, and the one catalogue holding them beside the
+ * room's decorations.
  *
- * Each one is a small layer hung off Pip's existing geometry, never a second
- * drawing of the character — that is what keeps a wardrobe of any size from
- * multiplying every future expression by the number of items shipped.
+ * Each cosmetic is a small layer hung off Pip's existing geometry, never a
+ * second drawing of the character — that is what keeps a wardrobe of any size
+ * from multiplying every future expression by the number of items shipped.
  *
  * Geometry is written in Pip's own `0 0 200 200` view box against the anchors in
  * the `mascot-design` contract, so nothing here is scaled or repositioned into
@@ -15,56 +27,16 @@ import { INK, families } from './palette'
  * child inherits it: re-applying the bob doubles it.
  */
 
-/**
- * Pip's six states. Declared here rather than in `Mascot.tsx` because responding
- * to them is part of what a cosmetic promises, and the component that draws
- * cosmetics cannot be the one they import from. `Mascot.tsx` re-exports it.
- */
-export type MascotState =
-  | 'idle'
-  | 'thinking'
-  | 'happy'
-  | 'encouraging'
-  | 'celebrating'
-  | 'sleeping'
-
-/** Two items in the same slot cannot be worn at once. That is what a slot is for. */
-export type CosmeticSlot = 'back' | 'headwear' | 'face' | 'neck' | 'pin'
-
-/** Slot → the id worn in it. An absent slot means Pip's own default. */
-export type Equipped = Partial<Record<CosmeticSlot, string>>
-
-/**
- * A fragment gets the state so it can follow a part that moves on its own. Only
- * the ears do — everything else rides the root `<svg>` and needs no state at
- * all, which is why most items ignore the argument.
- */
-type Fragment = (state: MascotState) => ReactNode
-
-export type Cosmetic = {
-  id: string
-  slot: CosmeticSlot
-  /** Shown in the shop. */
-  name: string
-  price: number
-  /**
-   * Drawn in one pass, at the step its slot owns. Mutually exclusive with the
-   * fragment pair below.
-   */
-  render?: Fragment
-  /**
-   * A shape that passes on both sides of Pip — a hat crown behind the ear tips
-   * while its brim crosses the forehead. Still one item with one id: both
-   * fragments equip and unequip together and share one inventory entry.
-   *
-   * **`headwear` only.** The render order opens two gaps around Pip's head and
-   * nowhere else, so splitting is not a general capability of a cosmetic — it is
-   * the answer to the one place the head sits between a shape and itself. Every
-   * other slot has a single step, and `catalogue.test.tsx` holds the line.
-   */
-  back?: Fragment
-  front?: Fragment
-}
+export type {
+  CatalogueItem,
+  Cosmetic,
+  CosmeticSlot,
+  Decoration,
+  Equipped,
+  MascotState,
+  Placed,
+  RoomSlot,
+} from './types'
 
 /* ------------------------------------------------------------------------- *
  * The catalogue
@@ -81,6 +53,7 @@ const { blossom, lilac, mint, powder } = families
  */
 export const cosmetics: Cosmetic[] = [
   {
+    kind: 'cosmetic',
     id: 'round-glasses',
     slot: 'face',
     name: 'Round glasses',
@@ -97,6 +70,7 @@ export const cosmetics: Cosmetic[] = [
   },
 
   {
+    kind: 'cosmetic',
     id: 'ear-bows',
     slot: 'headwear',
     name: 'Ear bows',
@@ -114,6 +88,7 @@ export const cosmetics: Cosmetic[] = [
   },
 
   {
+    kind: 'cosmetic',
     id: 'mint-scarf',
     slot: 'neck',
     name: 'Mint scarf',
@@ -142,6 +117,7 @@ export const cosmetics: Cosmetic[] = [
   },
 
   {
+    kind: 'cosmetic',
     id: 'party-hat',
     slot: 'headwear',
     name: 'Party hat',
@@ -179,6 +155,7 @@ export const cosmetics: Cosmetic[] = [
   },
 
   {
+    kind: 'cosmetic',
     id: 'powder-cape',
     slot: 'back',
     name: 'Powder cape',
@@ -258,6 +235,38 @@ function bow({
 
 export const cosmeticById = new Map(cosmetics.map((c) => [c.id, c]))
 
+/* ------------------------------------------------------------------------- *
+ * One catalogue over both surfaces
+ * ------------------------------------------------------------------------- */
+
+/**
+ * Everything the learner can own, in the order the shop offers it.
+ *
+ * One list rather than two, because there is one purse and one inventory: a
+ * decoration is bought with the coins a cosmetic is bought with, and `buy()`
+ * should not need to know which kind it was handed.
+ */
+export { decorations } from './room'
+
+export const catalogue: CatalogueItem[] = [...cosmetics, ...decorations]
+
+export const itemById = new Map(catalogue.map((item) => [item.id, item]))
+
+/**
+ * The room slots, as a value rather than only a type.
+ *
+ * `unequip` is given a slot and has to decide which map it belongs to. That
+ * works only while no string is in both slot unions — true today, and exactly
+ * the kind of thing that breaks silently when someone adds a `back` shelf, so
+ * `catalogue.test.tsx` asserts the two sets stay disjoint.
+ */
+export const ROOM_SLOTS: readonly RoomSlot[] = ['rug', 'wall', 'left', 'right']
+
+const roomSlots = new Set<string>(ROOM_SLOTS)
+
+export const isRoomSlot = (slot: CosmeticSlot | RoomSlot): slot is RoomSlot =>
+  roomSlots.has(slot)
+
 /**
  * The cosmetic worn in a slot, or `undefined`.
  *
@@ -268,4 +277,17 @@ export const cosmeticById = new Map(cosmetics.map((c) => [c.id, c]))
 export function wornIn(equipped: Equipped | undefined, slot: CosmeticSlot): Cosmetic | undefined {
   const id = equipped?.[slot]
   return id ? cosmeticById.get(id) : undefined
+}
+
+export const decorationById = new Map(decorations.map((d) => [d.id, d]))
+
+/**
+ * The decoration standing in a room slot, or `undefined`. `wornIn`'s twin, and
+ * deliberately its mirror image rather than a lookup in `itemById` with a kind
+ * check bolted on: each surface resolves its own ids, so neither can be handed
+ * an item belonging to the other.
+ */
+export function placedIn(placed: Placed | undefined, slot: RoomSlot): Decoration | undefined {
+  const id = placed?.[slot]
+  return id ? decorationById.get(id) : undefined
 }

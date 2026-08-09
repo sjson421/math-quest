@@ -31,8 +31,8 @@ export default function App() {
   const keyLoaded = useRecoveryKey((s) => s.loaded)
   const introduced = useRecoveryKey((s) => s.introduced)
   const progress = useProgress((s) => s.progress)
-  const buyCosmetic = useProgress((s) => s.buyCosmetic)
-  const equipCosmetic = useProgress((s) => s.equipCosmetic)
+  const buyItem = useProgress((s) => s.buyItem)
+  const equipItem = useProgress((s) => s.equipItem)
   const unequipSlot = useProgress((s) => s.unequipSlot)
 
   // `null` means "wherever the learner is now", resolved at render rather than
@@ -99,8 +99,8 @@ export default function App() {
           {active.name === 'shop' && (
             <Shop
               progress={progress}
-              onBuy={buyCosmetic}
-              onEquip={equipCosmetic}
+              onBuy={buyItem}
+              onEquip={equipItem}
               onUnequip={unequipSlot}
               onClose={() => setScreen(active.back)}
             />

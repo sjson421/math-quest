@@ -98,6 +98,7 @@ describe('the pin slot', () => {
    * proved with a fixture registered into the catalogue for the test.
    */
   const badge: Cosmetic = {
+    kind: 'cosmetic',
     id: 'test-badge',
     slot: 'pin',
     name: 'Test badge',

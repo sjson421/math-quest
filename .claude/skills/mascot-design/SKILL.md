@@ -1,6 +1,6 @@
 ---
 name: mascot-design
-description: Use when authoring, reviewing, or changing a Pip cosmetic, accessory, or mascot layer in Math Quest — the coordinate system, slot and occlusion order, palette, geometry limits, motion vocabulary, and asset provenance rules a new item must satisfy.
+description: Use when authoring, reviewing, or changing a Pip cosmetic, a room decoration, or any mascot or scene layer in Math Quest — the two coordinate systems, slot and occlusion order, palette, geometry limits, motion vocabulary, and asset provenance rules a new item must satisfy.
 ---
 
 # Designing for Pip
@@ -15,11 +15,19 @@ rule exists because the alternative — a complete mascot variant per outfit —
 every future expression, state, and palette fix by the number of items shipped. If an item
 cannot be expressed as geometry hung off an anchor, the item is wrong, not the contract.
 
+**There are two surfaces.** Pip himself, on the `0 0 200 200` canvas, wearing cosmetics; and
+the room he stands in, on a `0 0 320 200` canvas that *contains* his at the same unit scale,
+holding decorations. The same rules govern both — geometry in view-box units, one family per
+item, 2.5–3 unit strokes — and each surface has its own anchors, slots and paint order.
+
 Read the reference that matches the question; each is one level deep and none links to
 another:
 
-- **[references/layers.md](references/layers.md)** — the canvas, named anchors, slot list,
+- **[references/layers.md](references/layers.md)** — Pip's canvas, named anchors, slot list,
   global render order, and how one item spans back and front fragments.
+- **[references/room.md](references/room.md)** — the room's canvas, how Pip's is nested
+  inside it, the horizon, the four placement slots, the paint order that makes Pip one
+  opaque step, and the fixed surface colours.
 - **[references/visual-language.md](references/visual-language.md)** — palette, stroke and
   shape limits, the size floor, semantic motion, and reduced-motion behaviour.
 - **[references/checklist.md](references/checklist.md)** — the acceptance pass an item must
@@ -32,9 +40,10 @@ decides how items are drawn.
 
 The slot list and render order in `references/layers.md` were a contract for future work
 until roadmap item 16's first increment built the renderer. **They now describe code**:
-`Mascot.tsx` walks those ten steps, `src/cosmetics/` holds the catalogue, and the progress
-record carries what is owned and worn. An item authored against this contract displays as
-soon as it is in the catalogue and bought.
+`Mascot.tsx` walks those ten steps, `Room.tsx` walks the seven in `references/room.md`,
+`src/cosmetics/` holds one catalogue of both kinds, and the progress record carries what is
+owned, worn, and placed. An item authored against this contract displays as soon as it is in
+the catalogue and bought.
 
 ## The shape of an item
 
@@ -71,9 +80,10 @@ has the mechanics.
 
 ## Non-negotiables
 
-- **Geometry lives in `0 0 200 200`.** Pip's head is a circle at `(100, 112)` with radius
-  `57`. Anything authored against a different canvas and scaled in will not survive a
-  future tweak to that circle.
+- **Geometry lives in the canvas its surface owns** — `0 0 200 200` for a cosmetic,
+  `0 0 320 200` for a decoration. Pip's head is a circle at `(100, 112)` with radius `57`.
+  Anything authored against a different canvas and scaled in will not survive a future tweak
+  to that circle.
 - **Pip is a head and two ears. There is no body, no neck, no hands.** The `neck-center`
   anchor at `(100, 160)` sits inside the lower head, and a scarf there reads as a scarf
   because it crosses the chin line — not because there is a neck to wrap. Do not author an

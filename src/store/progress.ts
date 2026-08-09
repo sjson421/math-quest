@@ -8,7 +8,7 @@ import {
   unlockPrerequisites,
 } from '../curriculum'
 import { crossedStageCheckpoint, type StageCheckpoint } from '../lib/checkpoint'
-import type { CosmeticSlot, Equipped } from '../cosmetics'
+import type { CosmeticSlot, Equipped, Placed, RoomSlot } from '../cosmetics'
 import { buy, equip, unequip } from '../lib/wardrobe'
 
 const STORAGE_KEY = 'math-quest-progress'
@@ -44,10 +44,16 @@ export type Progress = {
   skills: Record<string, SkillProgress>
   /** Misconception tag → times hit. Drives "you keep doing X" insights later. */
   mistakes: Record<string, number>
-  /** Cosmetic ids the learner has bought, in the order they bought them. */
+  /**
+   * Catalogue ids the learner has bought, in the order they bought them. One
+   * list across both kinds: a decoration is bought with the coins a cosmetic is
+   * bought with, so a second inventory would be a second thing to keep in step.
+   */
   inventory: string[]
   /** Slot → the cosmetic worn in it. An absent slot means Pip's own default. */
   equipped: Equipped
+  /** Slot → the decoration standing in it. An absent slot means nothing there. */
+  room: Placed
 }
 
 export type LessonOutcome = {
@@ -102,6 +108,7 @@ export function initialProgress(): Progress {
     mistakes: {},
     inventory: [],
     equipped: {},
+    room: {},
   }
 }
 
@@ -111,9 +118,9 @@ type Store = {
   hydrate: () => Promise<void>
   recordAttempt: (skillId: string, correct: boolean, misconceptionTag?: string) => void
   completeLesson: (skillId: string) => LessonOutcome
-  buyCosmetic: (id: string) => void
-  equipCosmetic: (id: string) => void
-  unequipSlot: (slot: CosmeticSlot) => void
+  buyItem: (id: string) => void
+  equipItem: (id: string) => void
+  unequipSlot: (slot: CosmeticSlot | RoomSlot) => void
   replaceProgress: (next: Progress) => void
   adoptRemote: (next: Progress, version: number) => void
   reset: () => void
@@ -130,14 +137,20 @@ function reconcile(stored: Progress): Progress {
     skills: { ...base.skills, ...stored.skills },
     mistakes: { ...stored.mistakes },
     // Shape-checked rather than spread blindly. A record predating cosmetics has
-    // neither field, and a corrupt one can carry anything: `{ ...'ab' }` is
-    // `{ 0: 'a', 1: 'b' }`, which would survive as a junk wardrobe.
+    // none of these fields, and a corrupt one can carry anything: `{ ...'ab' }`
+    // is `{ 0: 'a', 1: 'b' }`, which would survive as a junk wardrobe.
     inventory: Array.isArray(stored.inventory) ? [...stored.inventory] : [],
-    equipped: isRecord(stored.equipped) ? { ...stored.equipped } : {},
+    equipped: isSlotRecord<Equipped>(stored.equipped) ? { ...stored.equipped } : {},
+    room: isSlotRecord<Placed>(stored.room) ? { ...stored.room } : {},
   }
 }
 
-const isRecord = (value: unknown): value is Equipped =>
+/**
+ * One guard for both slot maps. It is generic only so the caller names which map
+ * it got back; the check itself is the same, because the failure it exists for —
+ * a string spreading into indexed characters — is the same for either.
+ */
+const isSlotRecord = <T,>(value: unknown): value is T =>
   typeof value === 'object' && value !== null && !Array.isArray(value)
 
 export const useProgress = create<Store>((set, get) => {
@@ -249,16 +262,17 @@ export const useProgress = create<Store>((set, get) => {
     },
 
     /**
-     * The three wardrobe actions all persist only on a non-null result, so a
+     * The three catalogue actions all persist only on a non-null result, so a
      * refusal — cannot afford, already owned, slot already empty — leaves
-     * `updatedAt` alone and schedules no push.
+     * `updatedAt` alone and schedules no push. They cover both kinds: the pure
+     * functions route on the item's own `kind`, so nothing here has to.
      */
-    buyCosmetic(id) {
+    buyItem(id) {
       const next = buy(get().progress, id)
       if (next) persist(next)
     },
 
-    equipCosmetic(id) {
+    equipItem(id) {
       const next = equip(get().progress, id)
       if (next) persist(next)
     },

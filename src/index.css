@@ -1,6 +1,18 @@
 @import 'tailwindcss';
 
-@theme {
+/* `static`, not a bare `@theme`. Tailwind emits a theme variable only when some
+   utility class references it, and cosmetics reach these through `var()` from
+   `src/cosmetics/palette.ts` rather than through a class — so `--color-mint-soft`
+   and `--color-powder-soft`, which no utility uses, were pruned and resolved to
+   an invalid paint. A shape with `fill: var(--color-powder-soft)` does not fall
+   back; it renders unfilled. `static` emits every token whether a class wants it
+   or not, which is what makes the palette module's "declared once, resolves
+   everywhere" true rather than nearly true.
+
+   Nothing in the test suite can catch this: vitest runs with `css: false`, so a
+   pruned variable and a present one look identical there. The browser check is
+   what found it. */
+@theme static {
   /* Kawaii pastel palette — cream base, never stark white */
   --color-cream: #fef7f9;
   --color-cream-deep: #f9ecf1;

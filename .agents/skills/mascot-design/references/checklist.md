@@ -63,6 +63,42 @@ looking, which is the point — none of it is a matter of taste.
 - [ ] The item can be opened and edited again with free tools. Nothing in its authoring
       path — editor, format, or export step — needs a paid plan or an account.
 
+## The acceptance pass for a decoration
+
+A decoration is checked against the list above wherever it still applies — one id, one slot,
+view-box units, one family plus its deep shade, 2.5–3 unit strokes, round caps and joins, no
+remote reference, free tooling. These replace the parts that are about Pip's body:
+
+**Composition**
+
+- [ ] The item draws only itself. No wall, no floor, no horizon, no Pip.
+- [ ] All geometry is in the room's `0 0 320 200` units, positioned against a named anchor
+      from `references/room.md`, not wrapped in a scaling or repositioning `transform`.
+- [ ] A floor item stands *on* its anchor — the anchor is the item's base, not its centre.
+- [ ] It declares no `back` or `front` fragment. Pip is one step; there is no gap to span.
+- [ ] Its colour family differs from the surface it sits against: no `wall` item is powder,
+      no floor item is butter.
+
+**Size and placement**
+
+- [ ] Rendered with the room at **148 px** tall, every feature is still distinguishable.
+- [ ] Nothing crosses the room's view-box edge.
+- [ ] A `left` or `right` item stays clear of Pip's rendered extent — `x 86` and `x 234` — or
+      is deliberately content to pass behind him.
+- [ ] A `wall` item is checked with the party hat equipped, not just against a bare Pip: a
+      narrow shape centred on `wall-center` is almost entirely covered by the crown.
+
+**Occlusion**
+
+- [ ] The item reads correctly with Pip drawn over it, since that is the only order there is.
+- [ ] It does not sit where it will be entirely hidden by Pip or by his ground shadow.
+
+**Motion and accessibility**
+
+- [ ] The item is still. It takes no state and animates nothing.
+- [ ] It adds no accessible name of its own; Pip's single `aria-label` is all that is
+      announced.
+
 ## Provenance
 
 Final Pip artwork should be drawn in this repository. Outside art is for prototypes,

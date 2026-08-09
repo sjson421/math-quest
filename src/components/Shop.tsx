@@ -1,9 +1,17 @@
 import { motion } from 'framer-motion'
-import { cosmetics, type Cosmetic, type CosmeticSlot } from '../cosmetics'
+import type { ReactNode } from 'react'
+import {
+  cosmetics,
+  decorations,
+  type CatalogueItem,
+  type CosmeticSlot,
+  type RoomSlot,
+} from '../cosmetics'
 import { tap } from '../lib/haptics'
-import { standing, type CosmeticStanding } from '../lib/wardrobe'
+import { standing, type ItemStanding } from '../lib/wardrobe'
 import type { Progress } from '../store/progress'
 import { Mascot } from './Mascot'
+import { Room } from './Room'
 
 /**
  * Where coins go.
@@ -11,16 +19,27 @@ import { Mascot } from './Mascot'
  * Props only, no store read, so a node test can render the whole screen against
  * a synthetic record — the same reason the tree levels take a `Progress` instead
  * of reaching for the live one.
+ *
+ * Two sections, because the two kinds are previewed at different sizes and read
+ * with different words: you wear a hat and you place a rug.
  */
 type Props = {
   progress: Progress
   onBuy: (id: string) => void
   onEquip: (id: string) => void
-  onUnequip: (slot: CosmeticSlot) => void
+  onUnequip: (slot: CosmeticSlot | RoomSlot) => void
   onClose: () => void
 }
 
 export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
+  const card = (item: CatalogueItem) => ({
+    item,
+    standing: standing(progress, item),
+    onBuy: () => onBuy(item.id),
+    onEquip: () => onEquip(item.id),
+    onUnequip: () => onUnequip(item.slot),
+  })
+
   return (
     <div className="flex flex-col h-full overflow-y-auto">
       <header className="flex items-center gap-3 px-5 pt-4 pb-2">
@@ -31,7 +50,7 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
         >
           ✕
         </button>
-        <h1 className="text-2xl font-bold flex-1">Pip's wardrobe</h1>
+        <h1 className="text-2xl font-bold flex-1">Pip's shop</h1>
         <div className="flex items-center gap-1.5">
           <span className="text-xl" aria-hidden="true">
             🪙
@@ -46,42 +65,72 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
         changes the maths.
       </p>
 
-      <div className="px-5 pb-10 grid grid-cols-2 gap-4">
+      <SectionHeading>Wardrobe</SectionHeading>
+      <div className="px-5 pb-6 grid grid-cols-2 gap-4">
         {cosmetics.map((cosmetic) => (
-          <Card
-            key={cosmetic.id}
-            cosmetic={cosmetic}
-            standing={standing(progress, cosmetic)}
-            onBuy={() => onBuy(cosmetic.id)}
-            onEquip={() => onEquip(cosmetic.id)}
-            onUnequip={() => onUnequip(cosmetic.slot)}
-          />
+          <Card key={cosmetic.id} {...card(cosmetic)}>
+            {/* 92px is the size floor the contract names — an item illegible here is
+                an item that fails its acceptance pass, so the shop card is the check. */}
+            <Mascot state="idle" size={92} equipped={{ [cosmetic.slot]: cosmetic.id }} />
+          </Card>
+        ))}
+      </div>
+
+      <SectionHeading>Room</SectionHeading>
+      {/* Full width, not the wardrobe's two columns: see the card comment below. */}
+      <div className="px-5 pb-10 flex flex-col gap-4">
+        {decorations.map((decoration) => (
+          <Card key={decoration.id} {...card(decoration)}>
+            {/* Full width, so the room draws at 194px and Pip inside it clears the
+                same 92px floor. In the two-column grid he would land at 84. */}
+            <Room state="idle" height={194} placed={{ [decoration.slot]: decoration.id }} />
+          </Card>
         ))}
       </div>
     </div>
   )
 }
 
+function SectionHeading({ children }: { children: ReactNode }) {
+  return (
+    <h2 className="px-5 pb-2 text-sm font-bold text-ink-soft uppercase tracking-wide">
+      {children}
+    </h2>
+  )
+}
+
+/**
+ * The words for each standing, per kind. One table for both lines of the card;
+ * two would drift, and a rug captioned "Worn" is exactly the drift.
+ */
+const WORDS = {
+  cosmetic: { using: 'Worn', stop: 'Take off', start: 'Wear' },
+  decoration: { using: 'In the room', stop: 'Put away', start: 'Place' },
+} as const
+
 function Card({
-  cosmetic,
+  item,
   standing,
   onBuy,
   onEquip,
   onUnequip,
+  children,
 }: {
-  cosmetic: Cosmetic
-  standing: CosmeticStanding
+  item: CatalogueItem
+  standing: ItemStanding
   onBuy: () => void
   onEquip: () => void
   onUnequip: () => void
+  children: ReactNode
 }) {
-  // One switch for both lines of the card. Two would drift.
+  const words = WORDS[item.kind]
+
   const action = {
-    worn: { caption: 'Worn', label: 'Take off', run: onUnequip },
-    owned: { caption: 'Owned', label: 'Wear', run: onEquip },
-    affordable: { caption: `${cosmetic.price} coins`, label: `Buy · ${cosmetic.price}`, run: onBuy },
+    'in-use': { caption: words.using, label: words.stop, run: onUnequip },
+    owned: { caption: 'Owned', label: words.start, run: onEquip },
+    affordable: { caption: `${item.price} coins`, label: `Buy · ${item.price}`, run: onBuy },
     'out-of-reach': {
-      caption: `${cosmetic.price} coins`,
+      caption: `${item.price} coins`,
       label: 'Not enough coins',
       run: null,
     },
@@ -93,11 +142,9 @@ function Card({
       animate={{ opacity: 1, y: 0 }}
       className="rounded-blob bg-white shadow-soft p-3 flex flex-col items-center gap-1"
     >
-      {/* 92px is the size floor the contract names — an item illegible here is
-          an item that fails its acceptance pass, so the shop card is the check. */}
-      <Mascot state="idle" size={92} equipped={{ [cosmetic.slot]: cosmetic.id }} />
+      {children}
 
-      <p className="font-bold text-sm text-center">{cosmetic.name}</p>
+      <p className="font-bold text-sm text-center">{item.name}</p>
       <p className="text-xs text-ink-faint">{action.caption}</p>
 
       <button

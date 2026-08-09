@@ -8,7 +8,7 @@
 
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { cosmetics } from '../cosmetics'
+import { catalogue, cosmetics, decorations } from '../cosmetics'
 import { initialProgress, type Progress } from '../store/progress'
 import { Shop } from './Shop'
 
@@ -69,12 +69,56 @@ describe('the shop', () => {
     const known = render({ coins: 500 })
     const withRetired = render({ coins: 500, inventory: ['sombrero'] })
 
-    expect(withRetired.match(/rounded-blob/g)).toHaveLength(cosmetics.length)
+    // `shadow-soft` is the card container and nothing else. `rounded-blob` is
+    // no longer specific enough — the room preview carries it too.
+    expect(withRetired.match(/shadow-soft/g)).toHaveLength(catalogue.length)
     expect(withRetired).not.toContain('sombrero')
     expect(withRetired).toBe(known)
   })
 
   it('says plainly that nothing here changes the maths', () => {
     expect(render({})).toContain('nothing here changes the maths')
+  })
+})
+
+describe('the two sections', () => {
+  const rug = decorations.find((d) => d.id === 'blossom-rug')!
+
+  it('offers both kinds under headings of their own', () => {
+    const html = render({ coins: 500 })
+
+    expect(html).toContain('Wardrobe')
+    expect(html).toContain('Room')
+    for (const decoration of decorations) {
+      expect(html, decoration.id).toContain(decoration.name)
+      expect(html, decoration.id).toContain(`${decoration.price} coins`)
+    }
+  })
+
+  it('previews a decoration in the room and a cosmetic on Pip', () => {
+    const html = render({ coins: 500 })
+
+    // The room's box appears once per decoration; Pip's alone once per cosmetic.
+    expect(html.match(/viewBox="0 0 320 200"/g)).toHaveLength(decorations.length)
+    expect(html.match(/viewBox="0 0 200 200"/g)).toHaveLength(catalogue.length)
+  })
+
+  it('says place and put away for a decoration, never wear and take off', () => {
+    const owned = render({ inventory: [rug.id] })
+    const placed = render({ inventory: [rug.id], room: { rug: rug.id } })
+
+    expect(owned).toContain('Place')
+    expect(placed).toContain('In the room')
+    expect(placed).toContain('Put away')
+    expect(placed).not.toContain('Take off')
+  })
+
+  it('draws a decoration at a size that clears the mascot’s floor', () => {
+    // A two-column card would put the room at 84px and Pip inside it at 84,
+    // below the 92px the contract says an item must survive. The room section
+    // is full width for exactly this reason.
+    const html = render({})
+
+    expect(html).toContain('height="194"')
   })
 })
