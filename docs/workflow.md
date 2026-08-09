@@ -6,20 +6,25 @@ commands. Use `openspec-propose` → `openspec-apply-change` →
 `openspec-archive-change`. Task lists are the running record — mark each item done as it
 lands, and note decisions inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, nineteen capabilities —
+- `openspec/specs/` is the **baseline**: what the system does today, twenty capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
   `unit-02-subtraction`, `unit-03-multiplication`, `unit-04-division`,
   `unit-05-order-of-operations`, `unit-06-negatives`, `word-problem-phrasing`,
-  `choice-input`, `number-line-input`, `progress-sync`, `recovery-key`, `answer-entry`. A
-  change amending built behaviour writes `## MODIFIED Requirements` against one of these;
-  `## ADDED` is for genuinely new surface. The count has been wrong before —
-  `ls openspec/specs/` is the authority, not this line.
+  `choice-input`, `number-line-input`, `progress-sync`, `recovery-key`, `answer-entry`,
+  `cosmetic-wardrobe`. A change amending built behaviour writes
+  `## MODIFIED Requirements` against one of these; `## ADDED` is for genuinely new surface.
+  The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — twenty changes have shipped, the
-  latest being `establish-dress-up-design-tooling`, archived 2026-08-08. That one is
-  tooling-only and declared `skip_specs: true`, so it archived without a `specs/` directory
-  and amended no baseline capability.
+  holds shipped changes. **The active queue is empty** — twenty-one changes have shipped,
+  the latest being `add-cosmetics-and-shop`, archived 2026-08-09. That one is the first
+  increment of a roadmap item that needs two, so its roadmap checkbox is deliberately still
+  open; the increments are written under item 16.
+- **`openspec archive` reflows what it writes.** It strips the blank lines around `##` and
+  `###` headings, appends a trailing newline, and titles a new capability
+  `# <kebab-name> Specification` rather than the title case every other spec uses. Read the
+  diff against the baseline after archiving and put the formatting back, or the next change
+  inherits a spec that does not match its neighbours.
 - Archive as soon as a change completes, and sync its deltas into the baseline first.
   A completed change left active means the next one has nothing accurate to amend.
 - **A delta spec must describe what the change actually built.** `curriculum-foundation`

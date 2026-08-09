@@ -79,6 +79,11 @@ one request.
 - **WHEN** a lesson completes
 - **THEN** a push is scheduled
 
+#### Scenario: A purchase triggers a push
+
+- **WHEN** a cosmetic is bought
+- **THEN** a push is scheduled carrying the reduced coin balance and the new wardrobe
+
 #### Scenario: Rapid changes are coalesced
 
 - **WHEN** several mutations occur within the debounce window
