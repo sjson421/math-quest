@@ -16,9 +16,10 @@ lands, and note decisions inline rather than only in chat.
   `## MODIFIED Requirements` against one of these; `## ADDED` is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — twenty-two changes have shipped,
-  the latest being `add-decoratable-room`, archived 2026-08-09. That one closes roadmap item
-  16, whose second increment it was; both increments have now landed.
+  holds shipped changes. **The active queue is empty** — twenty-three changes have shipped,
+  the latest being `evaluate-math-notation-rendering`, archived 2026-08-09. It completes
+  roadmap increment 17a's measured renderer decision; item 17 remains open for the production
+  renderer and capability flags in 17b.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
