@@ -51,8 +51,9 @@ A displayed expression MAY contain more than one operation. Recomputation SHALL 
 operand and every operator the display shows, so an expression cannot present a term the check
 does not see. A structured math display whose answer is a fraction property SHALL carry the
 specific fraction operation and its integer source values rather than rely on a general
-notation evaluator. A value-bearing choice SHALL carry its rational value as structured data
-when verification must compare it with another representation.
+notation evaluator. A comparison SHALL carry both fractions and derive their relation from
+exact rational values. A value-bearing choice SHALL carry its rational value as structured
+data when verification must compare it with another representation.
 
 #### Scenario: Answer is recomputed from the display, not the generator
 
@@ -74,7 +75,8 @@ when verification must compare it with another representation.
 
 #### Scenario: A fraction property is derived without evaluating arbitrary notation
 
-- **WHEN** a math display asks the learner to read, name, place, or complete a fraction
+- **WHEN** a math display asks the learner to read, name, place, complete, simplify, or compare
+  a fraction
 - **THEN** it carries the operation and integer values needed to derive that answer
 - **AND** verification fails if the visible notation disagrees with the carried values
 

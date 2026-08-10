@@ -18,9 +18,9 @@ lands, and note decisions inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — twenty-six changes have shipped,
-  the latest being `add-stage-d-unit-7a`, archived 2026-08-10. It adds the first six
-  conceptual fraction skills in roadmap item 19; the remaining Unit 7 skills are next.
+  holds shipped changes. **The active queue is empty** — twenty-seven changes have shipped,
+  the latest being `add-stage-d-unit-7b`, archived 2026-08-10. It completes Unit 7 with
+  lowest-terms and fraction-comparison skills; Unit 8 is next.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
