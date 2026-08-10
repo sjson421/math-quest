@@ -49,7 +49,10 @@ cannot survive.
 
 A displayed expression MAY contain more than one operation. Recomputation SHALL read every
 operand and every operator the display shows, so an expression cannot present a term the check
-does not see.
+does not see. A structured math display whose answer is a fraction property SHALL carry the
+specific fraction operation and its integer source values rather than rely on a general
+notation evaluator. A value-bearing choice SHALL carry its rational value as structured data
+when verification must compare it with another representation.
 
 #### Scenario: Answer is recomputed from the display, not the generator
 
@@ -68,6 +71,18 @@ does not see.
 - **WHEN** a problem displays an expression containing more than one operator
 - **THEN** recomputation reads every operand and operator shown
 - **AND** fails and names the problem if the display cannot be read as an expression
+
+#### Scenario: A fraction property is derived without evaluating arbitrary notation
+
+- **WHEN** a math display asks the learner to read, name, place, or complete a fraction
+- **THEN** it carries the operation and integer values needed to derive that answer
+- **AND** verification fails if the visible notation disagrees with the carried values
+
+#### Scenario: A diagram selects an equivalent value-bearing choice
+
+- **WHEN** a diagram problem asks which prose choice represents the same rational amount
+- **THEN** verification compares the diagram's part counts with structured choice values
+- **AND** it neither parses the prose labels nor trusts the stated choice id
 
 ### Requirement: Difficulty scales the problem measurably
 
@@ -191,4 +206,3 @@ the prompt, the display and the answer rather than left to a reviewer to notice 
 
 - **WHEN** a generator sets a field the gate does not render
 - **THEN** the gate fails and names that field
-
