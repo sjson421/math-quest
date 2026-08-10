@@ -2,7 +2,7 @@ import { generateProblem } from '../lib/generator'
 import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
-import type { Difficulty, Problem, SkillGenerator } from '../lib/types'
+import type { Difficulty, MathNotation, Problem, SkillGenerator } from '../lib/types'
 
 /**
  * The shared half of the per-unit wording gates.
@@ -43,6 +43,25 @@ export const RENDERED_KEYS = [
   'difficulty',
 ]
 
+const formatNotation = (notation: MathNotation): string => {
+  switch (notation.kind) {
+    case 'text':
+      return JSON.stringify(notation.value)
+    case 'row':
+      return `row(${notation.children.map(formatNotation).join(', ')})`
+    case 'fraction':
+      return `fraction(${formatNotation(notation.numerator)}, ${formatNotation(notation.denominator)})`
+    case 'superscript':
+      return `superscript(${formatNotation(notation.base)}, ${formatNotation(notation.exponent)})`
+    case 'root':
+      return `root(${formatNotation(notation.radicand)})`
+    default: {
+      const unhandled: never = notation
+      throw new Error(`Unhandled notation: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 const formatDisplay = (display: Problem['display']): string => {
   switch (display.kind) {
     case 'inline':
@@ -51,6 +70,8 @@ const formatDisplay = (display: Problem['display']): string => {
       return `column ${display.operands.join(` ${display.operator} `)}`
     case 'story':
       return `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
+    case 'math':
+      return `math "${display.label}" ${formatNotation(display.notation)}`
     default: {
       // A new Display variant must be rendered here or it slips past the gate.
       const unhandled: never = display

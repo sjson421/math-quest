@@ -17,11 +17,9 @@ how many are playable is a fact about the code, and the status line of
 [`docs/roadmap.md`](docs/roadmap.md) is where it is written down, deliberately in only one
 place.
 
-The unbuilt skills left in Stages B and C — the rest of the arithmetic foundation plus signed
-numbers — need only their generators; the existing number keypad is enough for all but one,
-which wants a number line. Stage D onward is gated on infrastructure that does not exist yet
-as well: KaTeX, fraction input, diagrams, expression input, a tap-to-plot coordinate plane,
-charts, and timed mode.
+Stages A, B, and C are playable. Structured math notation and fraction input are built for
+Stage D, which remains gated on diagrams before its fraction generators can ship. Later
+stages still need expression input, a tap-to-plot coordinate plane, charts, and timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
 milestone, what blocks what, and the unbuilt product features (dress-up, skip-ahead,

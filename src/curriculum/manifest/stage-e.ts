@@ -8,8 +8,8 @@
  * not only the one it introduces — the field is a statement about the stage, and
  * a reader should not have to walk back through earlier stages to assemble the
  * real set. Expression input is the new need (variables on the keypad, from Unit
- * 13); KaTeX is just as real, since `3⁴` and a fraction inside an equation cannot
- * render as plain text.
+ * 13); math notation is just as real, since `3⁴` and a fraction inside an
+ * equation cannot render as plain text.
  *
  * `zero-neg-exponents` may also want fraction input, since 2⁻³ is 1/8. Left
  * undeclared until the generator settles whether the answer is entered as a
@@ -21,7 +21,7 @@ import type { StageEntry } from './types'
 export const stageE: StageEntry = {
   id: 'stage-e',
   name: 'Powers & Early Algebra',
-  requires: ['katex', 'expression-input'],
+  requires: ['math-notation', 'expression-input'],
   units: [
     {
       id: 'unit-12',

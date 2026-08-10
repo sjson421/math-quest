@@ -192,11 +192,22 @@ describe('stage capabilities', () => {
     expect(stageById.get('stage-c')?.requires).toEqual(['choice-input', 'number-line'])
     expect(stageById.get('stage-d')?.requires).toEqual([
       'choice-input',
-      'katex',
+      'math-notation',
       'fraction-input',
       'diagram',
       'number-line',
     ])
+  })
+
+  it('marks math notation and fraction input built under honest stage requirements', () => {
+    expect(AVAILABLE_CAPABILITIES.has('math-notation')).toBe(true)
+    expect(AVAILABLE_CAPABILITIES.has('fraction-input')).toBe(true)
+
+    for (const stageId of ['stage-d', 'stage-e', 'stage-f', 'stage-g']) {
+      const requires = stageById.get(stageId)?.requires ?? []
+      expect(requires, stageId).toContain('math-notation')
+      expect((requires as readonly string[]).includes('katex'), stageId).toBe(false)
+    }
   })
 })
 

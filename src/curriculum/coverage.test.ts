@@ -175,6 +175,20 @@ describe('the skills that are built', () => {
     expect(declaring.some((skill) => !generators.has(skill.id))).toBe(true)
   })
 
+  it('keeps Stage D planned until diagrams land, after its other flags are available', () => {
+    const stage = manifestIndex.get('fraction-meaning')?.stage
+    const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
+    const unavailable = (stage?.requires ?? []).filter(
+      (capability) => !AVAILABLE_CAPABILITIES.has(capability),
+    )
+
+    expect(AVAILABLE_CAPABILITIES.has('math-notation')).toBe(true)
+    expect(AVAILABLE_CAPABILITIES.has('fraction-input')).toBe(true)
+    expect(unavailable).toEqual(['diagram'])
+    expect(stageIds.filter((id) => skillState(id) === 'implemented')).toEqual([])
+    expect(implementedSkillIds).toHaveLength(61)
+  })
+
   it('has a skill that actually draws a line, which the capability went a change without', () => {
     // The capability shipped unlocking nothing, because a declared capability
     // is not a declared line. `negatives-numberline` is the first skill

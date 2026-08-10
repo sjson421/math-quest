@@ -1,4 +1,6 @@
 import type { Display, Problem } from '../lib/types'
+import { entrySpokenLabel, fractionEntryNotation } from '../lib/math-notation'
+import { MathNotation } from './MathNotation'
 
 /**
  * Column layout matters pedagogically — it is how the carrying and borrowing
@@ -25,6 +27,8 @@ export function ProblemView({
       return <ColumnView display={display} entry={entry} entryMode={entryMode} />
     case 'story':
       return <StoryView display={display} entry={entry} entryMode={entryMode} />
+    case 'math':
+      return <MathView display={display} entry={entry} entryMode={entryMode} />
     default: {
       const unhandled: never = display
       throw new Error(`Unhandled display: ${JSON.stringify(unhandled)}`)
@@ -111,6 +115,18 @@ function StoryView({ display, entry, entryMode }: { display: Of<'story'> } & Ent
   )
 }
 
+function MathView({ display, entry, entryMode }: { display: Of<'math'> } & EntryProps) {
+  return (
+    <div className="flex items-center justify-center gap-3 max-w-full">
+      <MathNotation notation={display.notation} label={display.label} />
+      <span className="text-4xl font-bold text-ink-faint">=</span>
+      <span className="text-4xl">
+        <EntrySlot value={entry} mode={entryMode} fractionSize="fluid" />
+      </span>
+    </div>
+  )
+}
+
 function ColumnView({ display, entry, entryMode }: { display: Of<'column'> } & EntryProps) {
   const width = Math.max(...display.operands.map((n) => String(n).length))
 
@@ -133,7 +149,7 @@ function ColumnView({ display, entry, entryMode }: { display: Of<'column'> } & E
       // Digits are split into per-character spans to keep places aligned, which
       // reads as "3, 8, plus, 1, 1" without this.
       role="math"
-      aria-label={`${display.operands.join(` ${display.operator} `)} equals ${entry || 'blank'}`}
+      aria-label={`${display.operands.join(` ${display.operator} `)} equals ${entrySpokenLabel(entry)}`}
     >
       {display.operands.map((operand, i) => (
         <div key={i} className="flex items-center gap-4" aria-hidden>
@@ -176,14 +192,19 @@ function EntrySlot({
   value,
   mode,
   minWidth = 2,
+  fractionSize = 'entry',
 }: {
   value: string
   mode: Problem['inputMode']
   minWidth?: number
+  fractionSize?: 'fluid' | 'entry'
 }) {
+  const fraction = mode === 'keypad' ? fractionEntryNotation(value) : undefined
   const content =
     value === '' ? (
       <span className="inline-block w-[3px] h-[0.9em] bg-blossom-deep animate-pulse rounded-full" />
+    ) : fraction ? (
+      <MathNotation notation={fraction.notation} label={fraction.label} size={fractionSize} />
     ) : (
       value
     )

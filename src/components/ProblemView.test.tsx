@@ -70,4 +70,59 @@ describe('ProblemView', () => {
     expect(html).toContain('break-words')
     expect(html).not.toContain('min-width')
   })
+
+  it('renders structured notation beside the existing answer slot', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'math',
+          notation: {
+            kind: 'fraction',
+            numerator: { kind: 'text', value: '3' },
+            denominator: { kind: 'text', value: '4' },
+          },
+          label: 'three fourths',
+        }}
+        entry=""
+      />,
+    )
+
+    expect(html).toContain('role="math"')
+    expect(html).toContain('aria-label="three fourths"')
+    expect(html).toContain('mq-math-fraction')
+    expect(html).toContain('=')
+  })
+
+  it.each([
+    ['3/4', '3 over 4'],
+    ['3/', '3 over blank'],
+  ])('echoes the keypad entry %s as one named stacked fraction', (entry, label) => {
+    const html = renderToStaticMarkup(
+      <ProblemView display={{ kind: 'inline', text: '1 + 1' }} entry={entry} />,
+    )
+
+    expect(html).toContain('mq-math-fraction')
+    expect(html).toContain(`aria-label="${label}"`)
+    expect(html).toContain('mq-math-entry')
+    expect(html).not.toContain(`>${entry}<`)
+  })
+
+  it('leaves an ordinary keypad entry on the text path', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView display={{ kind: 'inline', text: '40 + 2' }} entry="42" />,
+    )
+
+    expect(html).toContain('>42<')
+    expect(html).not.toContain('aria-label="42"')
+  })
+
+  it('lets the column own a nested fraction answer as one accessible expression', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView display={{ kind: 'column', operands: [3, 4], operator: '+' }} entry="3/4" />,
+    )
+
+    expect(html).toContain('aria-label="3 + 4 equals 3 over 4"')
+    expect(html).toMatch(/aria-hidden="true">[\s\S]*aria-label="3 over 4"/)
+    expect(html).toContain('mq-math-fraction')
+  })
 })

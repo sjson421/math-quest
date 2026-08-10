@@ -5,8 +5,8 @@
  * file cross-check each other in the manifest tests.
  *
  * The stage declares all five of its capability needs, and the stage-wide
- * marking is honest: fractions cannot render as plain text, so KaTeX gates the
- * whole stage, and later units keep reaching back for the others — `name-parts`
+ * marking is honest: fractions cannot render as plain text, so math notation
+ * gates the whole stage, and later units keep reaching back for the others — `name-parts`
  * and `compare-decimals` need choice input, `fractions-numberline` needs the
  * number line, `fraction-to-decimal` and `percent-to-fraction` need fraction
  * input, and `scale-drawings` needs a diagram. Every skill here stays `planned`
@@ -22,7 +22,7 @@ import type { StageEntry } from './types'
 export const stageD: StageEntry = {
   id: 'stage-d',
   name: 'Parts of a Whole',
-  requires: ['choice-input', 'katex', 'fraction-input', 'diagram', 'number-line'],
+  requires: ['choice-input', 'math-notation', 'fraction-input', 'diagram', 'number-line'],
   units: [
     {
       // Conceptual only — adults fail fractions when procedure arrives before

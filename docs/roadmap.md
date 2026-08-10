@@ -3,16 +3,17 @@
 What is left, in the order it should be done.
 
 **Status: 61 of 201 skills are playable.** Stages A, B and C are all complete — Stage C is one
-unit, and closing it puts the course below zero for the first time. Choice input and
-number-line input are both built, so `AVAILABLE_CAPABILITIES` holds `choice-input` and
-`number-line`. All three input modes now have content: `negatives-numberline` is the first
-skill anywhere to declare a line, comparison, ordering, factors, multiples, primes and
-negative comparison use choices, and everything else uses the keypad. The pad offers a sign,
-a decimal point or a fraction slash when a problem asks for one — and every Unit 6 problem
-answered on the pad asks for the sign, because on each one a negative value is either the
-answer or a predicted mistake. This line is the only progress number in the repo's
-documentation — the manifest and `npm test` are the authority, and everything below is scope
-rather than status.
+unit, and closing it puts the course below zero for the first time. Choice input, number-line
+input, math notation and fraction input are built, so `AVAILABLE_CAPABILITIES` holds
+`choice-input`, `number-line`, `math-notation` and `fraction-input`. The three answer-control
+modes all have content: `negatives-numberline` is the first skill anywhere to declare a line,
+comparison, ordering, factors, multiples, primes and negative comparison use choices, and
+everything else uses the keypad. The pad offers a sign, a decimal point or a fraction slash
+when a problem asks for one — and every Unit 6 problem answered on the pad asks for the sign,
+because on each one a negative value is either the answer or a predicted mistake. Math
+notation and fraction input unlock nothing alone: Stage D still requires diagrams and has no
+generator yet. This line is the only progress number in the repo's documentation — the
+manifest and `npm test` are the authority, and everything below is scope rather than status.
 
 To re-derive it rather than trusting this file:
 
@@ -39,11 +40,11 @@ skills reach the learner, and planned ones are transparent to unlocking, so nobo
 behind our build order.
 
 **Capabilities gate whole stages.** `AVAILABLE_CAPABILITIES` in
-`src/curriculum/manifest/resolve.ts` contains `choice-input` and `number-line` today. Adding
-a capability there is a one-line edit that flips its stage on — which is why capability work
-is its own item, never bundled with the content it unblocks. It flips nothing on its own,
-though: `number-line` unlocked no skill, because every skill that declares it is still
-waiting for a generator.
+`src/curriculum/manifest/resolve.ts` contains `choice-input`, `number-line`, `math-notation`
+and `fraction-input` today. Adding a capability there is a one-line edit that flips its stage
+on — which is why capability work is its own item, never bundled with the content it unblocks.
+It flips nothing on its own, though: a skill still needs a generator and every other
+capability its stage declares.
 
 **What a capability item contains.** Items 5 and 13 shipped the same shape, and every
 capability item below is written against it rather than restating it: the component and the
@@ -58,15 +59,13 @@ and anything that widens what is on screen re-measures the inline size ladder th
 `coverage.test.ts` executes, which is item 12's finding.
 
 **All nine capability names exist today.** `Capability` in `manifest/types.ts` declares
-`katex`, `fraction-input`, `diagram`, `expression-input`, `coordinate-plane`, `chart` and
-`timed` beside the two that are built, and every stage's `requires` is already written against
-them. A capability item flips a name the manifest has held from the start; it never invents
-one. Item 17 is the one measured exception: 17a rejected the KaTeX library, so 17b renames
-`katex` to the implementation-honest `math-notation` before flipping it. **`fraction-input`
-is the odd one out — built, never flipped.** Item 3 shipped the rules,
-`Keypad` renders the slash and `openspec/specs/answer-entry` specifies it, but
-`AVAILABLE_CAPABILITIES` does not list it, so Stage D waits on three flags of which one costs
-a line. It ships with item 17.
+`choice-input`, `number-line`, `math-notation`, `fraction-input`, `diagram`,
+`expression-input`, `coordinate-plane`, `chart` and `timed`, and every stage's `requires` is
+already written against them. A capability item normally flips a name the manifest has held
+from the start. Item 17 was the measured exception: 17a rejected the KaTeX library and 17b
+replaced its library-specific `katex` flag with the implementation-honest `math-notation`.
+`fraction-input` arrived by the other route: item 3 built the keypad rules, and item 17 made
+the long-built capability available alongside notation.
 
 **At most six generators per change.** Larger units, and the capability items carrying a
 decision, ship in the ordered increments written below. Their roadmap checkbox remains open
@@ -602,7 +601,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
       anchor is almost entirely covered by the party hat's crown**, so check a new one against
       a hatted Pip rather than a bare one. The bunting is wide and reads with any hat on.
 
-- [ ] **17 · Math notation rendering (`math-notation`)** — M — **two increments**
+- [x] **17 · Math notation rendering (`math-notation`)** — M — **two increments** — **shipped 2026-08-09**
 
       Fractions cannot render as plain text. First needed across Unit 7; with item 18 it is what
       opens Stage D.
@@ -633,18 +632,18 @@ document's ✅ markers updated to match, which the cross-check enforces.
       The real PWA precache grew from **552.97 KiB to 1088.27 KiB (+96.8%)**, before the
       learner reaches fractions, and Vite also emitted 816.78 kB of non-precached legacy font
       fallbacks. That is not proportionate to a notation surface the small structured arm
-      covered without becoming a general typesetter. Item 17 remains open: 17b owns the
+      covered without becoming a general typesetter. That left item 17 open for 17b's
       production renderer, accessible-label contract, `katex` → `math-notation` manifest
       rename, and the `math-notation` plus `fraction-input` availability flags.
 
-      **17b · The renderer and the two flags.** A math arm on `Display`, one owner for the
-      notation so nothing else spells a fraction, and an accessible name on every rendered
-      expression — a stacked fraction that reads aloud as "3 4" is a wrong answer waiting to
-      happen. 17b renames `katex` to `math-notation` in `Capability` and the four stages that
-      require it, then `math-notation` joins `AVAILABLE_CAPABILITIES`; **`fraction-input` joins
-      it here too**, built since item 3 and unflipped ever since. Neither opens a skill on its
-      own: Stage D also needs `diagram`, and a coverage test should pin that nothing unlocked,
-      exactly as item 13's did.
+      **17b · The renderer and the two flags — shipped 2026-08-09.** `Display` gained a typed
+      math arm and one recursive markup owner for text, rows, fractions, superscripts and
+      roots. Every authored expression has one accessible name, fraction entries echo through
+      the same owner, and the existing column view speaks a nested answer through its enclosing
+      math label rather than exposing two. `katex` became `math-notation` in `Capability` and
+      all four consuming stages; `math-notation` and the long-built `fraction-input` both
+      joined `AVAILABLE_CAPABILITIES`. The playable set stayed at 61 because Stage D still
+      requires `diagram` and has no generator.
 
 - [ ] **18 · Diagram rendering** — M
 

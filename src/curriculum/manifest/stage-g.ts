@@ -6,7 +6,7 @@
  *
  * `requires` is the full set this stage's skills need, per the rule stated in
  * stage-e.ts: diagram rendering for the shapes, chart rendering from 21.5, and
- * KaTeX for the formulas the skills apply.
+ * math notation for the formulas the skills apply.
  */
 
 import type { StageEntry } from './types'
@@ -14,7 +14,7 @@ import type { StageEntry } from './types'
 export const stageG: StageEntry = {
   id: 'stage-g',
   name: 'Geometry & Data',
-  requires: ['katex', 'diagram', 'chart'],
+  requires: ['math-notation', 'diagram', 'chart'],
   units: [
     {
       // The GED *provides* a formula sheet, so every skill here teaches choosing

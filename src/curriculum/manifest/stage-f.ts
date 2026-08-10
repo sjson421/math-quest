@@ -7,7 +7,7 @@
  * `requires` is the full set this stage's skills need, per the rule stated in
  * stage-e.ts. Coordinate-plane input is the new one — tap to plot, from 16.1 —
  * alongside expression input for the equation and factored-form answers and
- * KaTeX for the slope and quadratic formulas.
+ * math notation for the slope and quadratic formulas.
  */
 
 import type { StageEntry } from './types'
@@ -15,7 +15,7 @@ import type { StageEntry } from './types'
 export const stageF: StageEntry = {
   id: 'stage-f',
   name: 'Graphs & Algebra II',
-  requires: ['katex', 'expression-input', 'coordinate-plane'],
+  requires: ['math-notation', 'expression-input', 'coordinate-plane'],
   units: [
     {
       id: 'unit-16',

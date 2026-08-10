@@ -24,6 +24,8 @@ type Lookup<K> = { has(key: K): boolean }
  */
 export const AVAILABLE_CAPABILITIES: ReadonlySet<Capability> = new Set([
   'choice-input',
+  'math-notation',
+  'fraction-input',
   'number-line',
 ])
 
@@ -114,9 +116,9 @@ export type StateOptions = {
  * Whether a skill can be played.
  *
  * `implemented` needs both halves: a generator for the id, and every capability
- * its stage requires. A fractions skill with a finished generator but no KaTeX
- * to render it is `planned` — which is honest, rather than shipping a lesson
- * that renders as mush.
+ * its stage requires. A fractions skill with a finished generator but no math
+ * notation to render it is `planned` — which is honest, rather than shipping a
+ * lesson that renders as mush.
  */
 export function resolveSkillState(
   skillId: string,

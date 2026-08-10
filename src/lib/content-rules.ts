@@ -12,7 +12,7 @@
  */
 
 import type { SkillEntry, UnitEntry } from '../curriculum/manifest/types'
-import type { Problem } from './types'
+import type { Display, Problem } from './types'
 
 export const MAX_SOLUTION_STEPS = 4
 export const MAX_WORDS_PER_STEP = 12
@@ -128,13 +128,29 @@ function sentences(text: string): string[] {
 }
 
 /** Every learner-facing string a problem carries. */
+function displayText(display: Display): string {
+  switch (display.kind) {
+    case 'inline':
+    case 'story':
+      return display.text
+    case 'math':
+      return display.label
+    case 'column':
+      return ''
+    default: {
+      const unhandled: never = display
+      throw new Error(`Unhandled display: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 function learnerText(problem: Problem): string[] {
   return [
     problem.prompt,
     // A story is the longest learner-facing string in the course and the most
     // likely to reach for a word from a later unit. Leaving it out would have
     // exempted exactly the text the forward-reference rule exists for.
-    problem.display.kind === 'column' ? '' : problem.display.text,
+    displayText(problem.display),
     problem.hint,
     ...problem.solution.flatMap((step) => [step.text, step.detail ?? '']),
     ...(problem.misconceptions ?? []).map((m) => m.nudge),

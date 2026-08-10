@@ -41,7 +41,7 @@ const stages: StageEntry[] = [
   {
     id: 'stage-y',
     name: 'Y',
-    requires: ['katex'],
+    requires: ['math-notation'],
     units: [
       {
         id: 'unit-3',
@@ -60,7 +60,7 @@ describe('indexSkills', () => {
     expect([...index.keys()]).toEqual(['a1', 'a2', 'a3', 'b1', 'b2', 'c1', 'c2'])
     expect(index.get('b2')?.unit.id).toBe('unit-2')
     expect(index.get('b2')?.stage.id).toBe('stage-x')
-    expect(index.get('c1')?.stage.requires).toEqual(['katex'])
+    expect(index.get('c1')?.stage.requires).toEqual(['math-notation'])
   })
 
   it('keeps the first entry when an id is duplicated', () => {
@@ -190,7 +190,7 @@ describe('resolveSkillState', () => {
     expect(
       resolveSkillState(
         'c1',
-        { requires: ['katex'] },
+        { requires: ['math-notation'] },
         { generators: new Set(['c1']), available: noCapabilities },
       ),
     ).toBe('planned')
@@ -212,8 +212,8 @@ describe('resolveSkillState', () => {
     expect(
       resolveSkillState(
         'c1',
-        { requires: ['katex', 'diagram'] },
-        { generators: new Set(['c1']), available: new Set(['katex', 'diagram']) },
+        { requires: ['math-notation', 'diagram'] },
+        { generators: new Set(['c1']), available: new Set(['math-notation', 'diagram']) },
       ),
     ).toBe('implemented')
   })
@@ -222,8 +222,8 @@ describe('resolveSkillState', () => {
     expect(
       resolveSkillState(
         'c1',
-        { requires: ['katex', 'diagram'] },
-        { generators: new Set(['c1']), available: new Set(['katex']) },
+        { requires: ['math-notation', 'diagram'] },
+        { generators: new Set(['c1']), available: new Set(['math-notation']) },
       ),
     ).toBe('planned')
   })
@@ -238,7 +238,7 @@ describe('resolveSkillStates', () => {
 
     expect(states.get('a1')).toBe('implemented')
     expect(states.get('a3')).toBe('planned')
-    // c1 has a generator but stage-y needs katex, which is not built.
+    // c1 has a generator but stage-y needs math notation, which is not built.
     expect(states.get('c1')).toBe('planned')
     expect(states.size).toBe(7)
   })

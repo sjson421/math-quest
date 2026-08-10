@@ -95,6 +95,20 @@ export type WholeNumberData =
 
 export type WholeNumberOperation = WholeNumberData['operation']
 
+/**
+ * Structured notation for the closed expression surface used by Stages D–G.
+ *
+ * Generators build this tree directly rather than passing TeX or a string to a
+ * parser. Every node nests through the same five primitives, so a quadratic
+ * formula is composition rather than a formula-specific display case.
+ */
+export type MathNotation =
+  | { kind: 'text'; value: string }
+  | { kind: 'row'; children: MathNotation[] }
+  | { kind: 'fraction'; numerator: MathNotation; denominator: MathNotation }
+  | { kind: 'superscript'; base: MathNotation; exponent: MathNotation }
+  | { kind: 'root'; radicand: MathNotation }
+
 /** How the problem is presented. Column layout matches how arithmetic is taught. */
 export type Display =
   | { kind: 'inline'; text: string; wholeNumber?: WholeNumberData }
@@ -108,6 +122,8 @@ export type Display =
    * deliberately mentions quantities the answer does not use.
    */
   | { kind: 'story'; text: string; operands: number[]; operator: Operator }
+  /** Structured notation with the one complete name assistive technology reads. */
+  | { kind: 'math'; notation: MathNotation; label: string }
 
 export type Problem = {
   skillId: string

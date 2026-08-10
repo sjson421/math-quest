@@ -207,6 +207,22 @@ describe('forward references', () => {
     expect(violations[0].message).toContain('Find the numerator')
   })
 
+  it('checks the authored label instead of walking visual math nodes', () => {
+    const violations = checkContent(
+      problem({
+        display: {
+          kind: 'math',
+          notation: { kind: 'text', value: 'x' },
+          label: 'Find the exponent',
+        },
+      }),
+      at({}, 'unit-1'),
+    )
+
+    expect(violations.map((v) => v.rule)).toEqual(['forward-reference'])
+    expect(violations[0].message).toContain('Find the exponent')
+  })
+
   it('matches plurals but not words that merely contain a term', () => {
     const plural = checkContent(problem({ hint: 'Add the exponents together.' }), at())
     // "primer" contains "prime"; a substring match would flag it.

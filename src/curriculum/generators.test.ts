@@ -315,6 +315,12 @@ function recompute(problem: Problem): number | string {
     }
   }
 
+  if (display.kind === 'math') {
+    throw new Error(
+      `${problem.skillId}: a math display needs operation-specific data for independent verification`,
+    )
+  }
+
   // A story carries its quantities precisely so this stays possible. Reading
   // them out of the prose would not work: a word problem mentions numbers the
   // answer does not use, which is most of what makes it a word problem.
@@ -582,6 +588,25 @@ describe('recompute', () => {
     const problem = story([4, 3], 7)
     expect(recompute(problem)).toBe(7)
     expect(answerValue(problem)).toBe(recompute(problem))
+  })
+
+  it('rejects a math display until its generator adds independently verifiable data', () => {
+    const candidate = whole({
+      skillId: 'synthetic-math',
+      display: {
+        kind: 'math',
+        notation: {
+          kind: 'fraction',
+          numerator: { kind: 'text', value: '3' },
+          denominator: { kind: 'text', value: '4' },
+        },
+        label: 'three fourths',
+      },
+    })
+
+    expect(() => recompute(candidate)).toThrow(
+      'synthetic-math: a math display needs operation-specific data',
+    )
   })
 
   it('catches a story whose stated answer disagrees with its operands', () => {

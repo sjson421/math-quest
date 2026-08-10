@@ -92,3 +92,95 @@
     cursor: pointer;
   }
 }
+
+/* Five general notation primitives, measured against the Stages D–G surface.
+   Sizes stay in em so nesting carries its proportions with it, while the one
+   fluid root keeps the quadratic formula inside a 375px lesson. */
+.mq-math {
+  display: inline-flex;
+  max-width: 100%;
+  color: inherit;
+  font-weight: 700;
+}
+
+.mq-math-visual,
+.mq-math-row,
+.mq-math-superscript,
+.mq-math-root {
+  display: inline-flex;
+  align-items: center;
+}
+
+.mq-math-visual {
+  max-width: 100%;
+  font-size: clamp(1.1rem, 6vw, 3rem);
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.mq-math-entry > .mq-math-visual {
+  font-size: 0.55em;
+}
+
+.mq-math-row {
+  gap: 0.12em;
+}
+
+.mq-math-text {
+  white-space: pre;
+}
+
+.mq-math-fraction {
+  display: inline-grid;
+  grid-template-rows: auto auto;
+  min-width: 0.9em;
+  margin-inline: 0.08em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.mq-math-numerator,
+.mq-math-denominator {
+  display: flex;
+  min-width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 0.12em;
+  line-height: 1;
+}
+
+.mq-math-numerator {
+  border-bottom: 0.07em solid currentColor;
+  padding-bottom: 0.08em;
+}
+
+.mq-math-denominator {
+  padding-top: 0.08em;
+}
+
+.mq-math-superscript {
+  align-items: flex-start;
+}
+
+.mq-math-exponent {
+  margin-left: 0.04em;
+  font-size: 0.62em;
+  line-height: 1;
+}
+
+.mq-math-root {
+  align-items: flex-start;
+}
+
+.mq-math-root-sign {
+  margin-top: 0.05em;
+  font-size: 1.15em;
+  line-height: 0.9;
+}
+
+.mq-math-radicand {
+  display: inline-flex;
+  align-items: center;
+  border-top: 0.07em solid currentColor;
+  padding: 0.06em 0.08em 0;
+}

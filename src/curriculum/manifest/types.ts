@@ -16,7 +16,7 @@
  */
 export type Capability =
   | 'choice-input'
-  | 'katex'
+  | 'math-notation'
   | 'fraction-input'
   | 'diagram'
   | 'expression-input'
