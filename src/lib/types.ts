@@ -1,5 +1,6 @@
 import type { KeypadRules } from './keypad'
 import type { NumberLineSpec } from './number-line'
+import type { Rational } from './rational'
 import type { ShapeDiagram } from './shape-diagram'
 
 export type Difficulty = 1 | 2 | 3 | 4 | 5
@@ -15,6 +16,8 @@ export type Answer =
 export type Choice = {
   id: string
   label: string
+  /** Exact meaning for prose choices that represent a rational amount. */
+  value?: Rational
 }
 
 /**
@@ -110,6 +113,25 @@ export type MathNotation =
   | { kind: 'superscript'; base: MathNotation; exponent: MathNotation }
   | { kind: 'root'; radicand: MathNotation }
 
+/** The fraction question a structured math display asks. */
+export type FractionData =
+  | { operation: 'read'; numerator: number; denominator: number }
+  | { operation: 'place'; numerator: number; denominator: number }
+  | {
+      operation: 'name-part'
+      numerator: number
+      denominator: number
+      requestedPart: 'numerator' | 'denominator'
+    }
+  | {
+      operation: 'scale-missing'
+      numerator: number
+      denominator: number
+      factor: number
+      direction: 'up' | 'down'
+      missing: 'numerator' | 'denominator'
+    }
+
 /** How the problem is presented. Column layout matches how arithmetic is taught. */
 export type Display =
   | { kind: 'inline'; text: string; wholeNumber?: WholeNumberData }
@@ -124,7 +146,7 @@ export type Display =
    */
   | { kind: 'story'; text: string; operands: number[]; operator: Operator }
   /** Structured notation with the one complete name assistive technology reads. */
-  | { kind: 'math'; notation: MathNotation; label: string }
+  | { kind: 'math'; notation: MathNotation; label: string; fraction?: FractionData }
   /** A shaded equal-part shape whose visible fraction is carried as data. */
   | { kind: 'diagram'; diagram: ShapeDiagram }
 

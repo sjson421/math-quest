@@ -246,12 +246,12 @@ understanding; not one problem asks for a calculation.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 7.1 | `fraction-meaning` | Parts of a whole | `quick` |
-| 7.2 | `fraction-of-shape` | Read from a diagram | |
-| 7.3 | `name-parts` | Numerator / denominator | first new vocabulary |
-| 7.4 | `fractions-numberline` | Place on a line | |
-| 7.5 | `equivalent-visual` | ½ = 2/4 by picture | |
-| 7.6 | `equivalent-multiply` | Scale up and down | |
+| 7.1 | `fraction-meaning` | Parts of a whole | ✅ `quick` |
+| 7.2 | `fraction-of-shape` | Read from a diagram | ✅ |
+| 7.3 | `name-parts` | Numerator / denominator | ✅ first new vocabulary |
+| 7.4 | `fractions-numberline` | Place on a line | ✅ |
+| 7.5 | `equivalent-visual` | ½ = 2/4 by picture | ✅ |
+| 7.6 | `equivalent-multiply` | Scale up and down | ✅ |
 | 7.7 | `simplify-fractions` | Lowest terms | ⚠️ partial simplification |
 | 7.8 | `compare-same-den` | | |
 | 7.9 | `compare-diff-den` | | ⚠️ comparing numerators only |

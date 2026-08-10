@@ -4,9 +4,16 @@ import { checkContent, formatViolations } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { checkAnswer } from '../lib/answer'
 import { makeRng } from '../lib/rng'
-import { toNumber, rational } from '../lib/rational'
+import { equals, format as formatRational, toNumber, rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
-import type { Difficulty, Problem, SkillGenerator, WholeNumberData } from '../lib/types'
+import type {
+  Difficulty,
+  FractionData,
+  MathNotation,
+  Problem,
+  SkillGenerator,
+  WholeNumberData,
+} from '../lib/types'
 
 const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 const ITERATIONS = 200 // per skill per difficulty → 1000 problems per skill
@@ -251,6 +258,94 @@ function evaluateExpression(text: string): number {
   return value
 }
 
+const notationText = (value: string): MathNotation => ({ kind: 'text', value })
+
+const notationFraction = (numerator: string, denominator: string): MathNotation => ({
+  kind: 'fraction',
+  numerator: notationText(numerator),
+  denominator: notationText(denominator),
+})
+
+/**
+ * The exact notation and spoken label a fraction operation claims to show.
+ *
+ * Kept in the verifier rather than exported by Unit 7: sharing the generator's
+ * builder would make a wrong tree agree with itself and defeat this check.
+ */
+function expectedFractionDisplay(data: FractionData): {
+  notation: MathNotation
+  label: string
+  answer: number | string
+} {
+  const { numerator, denominator } = data
+  rational(numerator, denominator)
+
+  if (data.operation === 'read') {
+    return {
+      notation: notationFraction(`${numerator} selected`, `${denominator} equal parts`),
+      label: `${numerator} selected parts out of ${denominator} equal parts`,
+      answer: numerator / denominator,
+    }
+  }
+
+  if (data.operation === 'place') {
+    return {
+      notation: notationFraction(String(numerator), String(denominator)),
+      label: `${numerator} over ${denominator}`,
+      answer: numerator / denominator,
+    }
+  }
+
+  if (data.operation === 'name-part') {
+    return {
+      notation: notationFraction(String(numerator), String(denominator)),
+      label: `${numerator} over ${denominator}`,
+      answer: data.requestedPart === 'numerator' ? 'Numerator' : 'Denominator',
+    }
+  }
+
+  const scaledNumerator = numerator * data.factor
+  const scaledDenominator = denominator * data.factor
+  const missingValue =
+    data.direction === 'up'
+      ? data.missing === 'numerator'
+        ? scaledNumerator
+        : scaledDenominator
+      : data.missing === 'numerator'
+        ? numerator
+        : denominator
+  const baseNumerator =
+    data.direction === 'down' && data.missing === 'numerator' ? '?' : String(numerator)
+  const baseDenominator =
+    data.direction === 'down' && data.missing === 'denominator' ? '?' : String(denominator)
+  const largeNumerator =
+    data.direction === 'up' && data.missing === 'numerator' ? '?' : String(scaledNumerator)
+  const largeDenominator =
+    data.direction === 'up' && data.missing === 'denominator' ? '?' : String(scaledDenominator)
+  const left =
+    data.direction === 'up'
+      ? notationFraction(baseNumerator, baseDenominator)
+      : notationFraction(String(scaledNumerator), String(scaledDenominator))
+  const right =
+    data.direction === 'up'
+      ? notationFraction(largeNumerator, largeDenominator)
+      : notationFraction(baseNumerator, baseDenominator)
+  const leftLabel =
+    data.direction === 'up'
+      ? `${baseNumerator} over ${baseDenominator}`
+      : `${scaledNumerator} over ${scaledDenominator}`
+  const rightLabel =
+    data.direction === 'up'
+      ? `${largeNumerator} over ${largeDenominator}`
+      : `${baseNumerator} over ${baseDenominator}`
+
+  return {
+    notation: { kind: 'row', children: [left, notationText('='), right] },
+    label: `${leftLabel} equals ${rightLabel}`.replace('?', 'blank'),
+    answer: missingValue,
+  }
+}
+
 function recompute(problem: Problem): number | string {
   const { display } = problem
 
@@ -317,13 +412,39 @@ function recompute(problem: Problem): number | string {
   }
 
   if (display.kind === 'math') {
-    throw new Error(
-      `${problem.skillId}: a math display needs operation-specific data for independent verification`,
-    )
+    if (!display.fraction) {
+      throw new Error(
+        `${problem.skillId}: a math display needs operation-specific data for independent verification`,
+      )
+    }
+
+    const expected = expectedFractionDisplay(display.fraction)
+    if (
+      JSON.stringify(display.notation) !== JSON.stringify(expected.notation) ||
+      display.label !== expected.label
+    ) {
+      throw new Error(`${problem.skillId}: visible fraction notation disagrees with its data`)
+    }
+
+    return typeof expected.answer === 'string'
+      ? choiceIdFor(problem, expected.answer)
+      : expected.answer
   }
 
   if (display.kind === 'diagram') {
-    return toNumber(shapeDiagramFraction(display.diagram))
+    const visible = shapeDiagramFraction(display.diagram)
+    if (problem.answer.kind !== 'choice') return toNumber(visible)
+
+    const matches = (problem.choices ?? []).filter((choice) => {
+      if (!choice.value) return false
+      return equals(rational(choice.value.n, choice.value.d), visible)
+    })
+    if (matches.length !== 1) {
+      throw new Error(
+        `${problem.skillId}: expected one choice matching the diagram, found ${matches.length}`,
+      )
+    }
+    return matches[0].id
   }
 
   // A story carries its quantities precisely so this stays possible. Reading
@@ -395,6 +516,15 @@ function sourceMagnitude(problem: Problem): number {
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
+  if (problem.display.kind === 'math' && problem.display.fraction) {
+    const data = problem.display.fraction
+    const values = [data.numerator, data.denominator]
+    if (data.operation === 'scale-missing') values.push(data.factor)
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
+
+  if (problem.display.kind === 'diagram') return problem.display.diagram.parts
+
   const value = answerValue(problem)
   if (typeof value !== 'number') {
     throw new Error(`${problem.skillId}: choice answer has no source values`)
@@ -446,6 +576,79 @@ describe('diagram answer verification', () => {
   })
 })
 
+describe('fraction math answer verification', () => {
+  const readProblem = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-fraction',
+    prompt: 'Write the fraction.',
+    display: {
+      kind: 'math',
+      notation: notationFraction('3 selected', '5 equal parts'),
+      label: '3 selected parts out of 5 equal parts',
+      fraction: { operation: 'read', numerator: 3, denominator: 5 },
+    },
+    answer: { kind: 'exact', n: 3, d: 5 },
+    inputMode: 'keypad',
+    keypad: { allowFraction: true },
+    hint: 'Put selected parts over all equal parts.',
+    solution: [{ text: 'Write selected parts over all equal parts.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('accepts a fraction answer derived from operation data and visible notation', () => {
+    expect(answerMismatch(readProblem())).toBeUndefined()
+  })
+
+  it('rejects notation that disagrees with its operation data', () => {
+    const problem = readProblem()
+    if (problem.display.kind !== 'math') throw new Error('expected math display')
+    problem.display.notation = notationFraction('2 selected', '5 equal parts')
+
+    expect(() => answerMismatch(problem)).toThrow('visible fraction notation disagrees')
+  })
+
+  it('rejects a math problem without operation-specific data', () => {
+    const problem = readProblem()
+    if (problem.display.kind !== 'math') throw new Error('expected math display')
+    delete problem.display.fraction
+
+    expect(() => answerMismatch(problem)).toThrow('needs operation-specific data')
+  })
+})
+
+describe('value-bearing diagram choice verification', () => {
+  const problem = (secondValue = rational(1, 3)): Problem => ({
+    skillId: 'synthetic-equivalent-visual',
+    prompt: 'Which description names the same amount?',
+    display: { kind: 'diagram', diagram: { kind: 'bar', parts: 4, shadedParts: 2 } },
+    answer: { kind: 'choice', id: 'half' },
+    inputMode: 'choice',
+    choices: [
+      { id: 'half', label: '1 shaded part in every 2 equal parts', value: rational(1, 2) },
+      { id: 'other', label: '1 shaded part in every 3 equal parts', value: secondValue },
+    ],
+    hint: 'Compare each description with the shaded amount.',
+    solution: [{ text: 'Two fourths names the same amount as one half.' }],
+    difficulty: 1,
+  })
+
+  it('derives the correct choice from exact rational metadata', () => {
+    expect(answerMismatch(problem())).toBeUndefined()
+  })
+
+  it('names a stated choice that disagrees with the diagram value', () => {
+    expect(
+      answerMismatch({ ...problem(), answer: { kind: 'choice', id: 'other' } }),
+    ).toContain('stated other, derived half')
+  })
+
+  it('rejects duplicate equivalent choices', () => {
+    expect(() => answerMismatch(problem(rational(2, 4)))).toThrow(
+      'expected one choice matching the diagram, found 2',
+    )
+  })
+})
+
 describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, skill) => {
   const sample = (difficulty: Difficulty) =>
     Array.from({ length: ITERATIONS }, (_, i) =>
@@ -462,7 +665,10 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
 
   it('accepts its own answer through the real answer checker', () => {
     for (const problem of all) {
-      const typed = String(answerValue(problem))
+      const typed =
+        problem.answer.kind === 'exact'
+          ? formatRational(rational(problem.answer.n, problem.answer.d))
+          : String(answerValue(problem))
       expect(checkAnswer(problem.answer, typed).status).toBe('correct')
     }
   })

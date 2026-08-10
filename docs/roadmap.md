@@ -2,16 +2,16 @@
 
 What is left, in the order it should be done.
 
-**Status: 61 of 201 skills are playable.** Stages A, B and C are all complete — Stage C is one
-unit, and closing it puts the course below zero for the first time. Choice input, number-line
-input, math notation, fraction input and diagrams are built, so `AVAILABLE_CAPABILITIES` holds
+**Status: 67 of 201 skills are playable.** Stages A, B and C are all complete, and the first six
+conceptual skills in Stage D are playable. Choice input, number-line input, math notation,
+fraction input and diagrams are built, so `AVAILABLE_CAPABILITIES` holds
 `choice-input`, `number-line`, `math-notation`, `fraction-input` and `diagram`. The three
 answer-control modes all have content: `negatives-numberline` is the first skill anywhere to
 declare a line, comparison, ordering, factors, multiples, primes and negative comparison use
 choices, and everything else uses the keypad. The pad offers a sign, a decimal point or a
-fraction slash when a problem asks for one — and every Unit 6 problem answered on the pad asks
-for the sign, because on each one a negative value is either the answer or a predicted mistake. Math
-notation, fraction input and diagrams unlock nothing alone: Stage D has no generator yet.
+fraction slash when a problem asks for one. Unit 7 now uses all three answer controls: fraction
+meaning and diagram reading use the pad, vocabulary and visual equivalence use choices, and a
+fraction is placed on an exact rational line. Its remaining three skills stay planned.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -40,8 +40,8 @@ skills reach the learner, and planned ones are transparent to unlocking, so nobo
 behind our build order.
 
 **Capabilities gate whole stages.** `AVAILABLE_CAPABILITIES` in
-`src/curriculum/manifest/resolve.ts` contains `choice-input`, `number-line`, `math-notation`
-and `fraction-input` today. Adding a capability there is a one-line edit that flips its stage
+`src/curriculum/manifest/resolve.ts` contains `choice-input`, `number-line`, `math-notation`,
+`fraction-input` and `diagram` today. Adding a capability there is a one-line edit that flips its stage
 on — which is why capability work is its own item, never bundled with the content it unblocks.
 It flips nothing on its own, though: a skill still needs a generator and every other
 capability its stage declares.

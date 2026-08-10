@@ -93,6 +93,75 @@ describe('ProblemView', () => {
     expect(html).toContain('=')
   })
 
+  it('shows a named fraction part without claiming the fraction equals a word', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'math',
+          notation: {
+            kind: 'fraction',
+            numerator: { kind: 'text', value: '1' },
+            denominator: { kind: 'text', value: '3' },
+          },
+          label: 'one third',
+          fraction: {
+            operation: 'name-part',
+            numerator: 1,
+            denominator: 3,
+            requestedPart: 'numerator',
+          },
+        }}
+        entry=""
+        entryMode="choice"
+      />,
+    )
+
+    expect(html).toContain('aria-label="one third"')
+    expect(html).not.toContain('text-ink-faint')
+    expect(html).not.toContain('bg-blossom-deep')
+  })
+
+  it('labels the entry beneath a missing-term equality instead of appending another equals sign', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'math',
+          notation: {
+            kind: 'row',
+            children: [
+              {
+                kind: 'fraction',
+                numerator: { kind: 'text', value: '3' },
+                denominator: { kind: 'text', value: '6' },
+              },
+              { kind: 'text', value: '=' },
+              {
+                kind: 'fraction',
+                numerator: { kind: 'text', value: '?' },
+                denominator: { kind: 'text', value: '2' },
+              },
+            ],
+          },
+          label: '3 over 6 equals blank over 2',
+          fraction: {
+            operation: 'scale-missing',
+            numerator: 1,
+            denominator: 2,
+            factor: 3,
+            direction: 'down',
+            missing: 'numerator',
+          },
+        }}
+        entry="1"
+      />,
+    )
+
+    expect(html).toContain('aria-label="3 over 6 equals blank over 2"')
+    expect(html).toContain('>Answer<')
+    expect(html).toContain('>1<')
+    expect(html).not.toContain('text-ink-faint')
+  })
+
   it('renders a diagram above the existing fraction answer slot', () => {
     const html = renderToStaticMarkup(
       <ProblemView

@@ -3,7 +3,13 @@ import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
 import { shapeDiagramLabel } from '../lib/shape-diagram'
-import type { Difficulty, MathNotation, Problem, SkillGenerator } from '../lib/types'
+import type {
+  Difficulty,
+  FractionData,
+  MathNotation,
+  Problem,
+  SkillGenerator,
+} from '../lib/types'
 
 /**
  * The shared half of the per-unit wording gates.
@@ -63,6 +69,26 @@ const formatNotation = (notation: MathNotation): string => {
   }
 }
 
+const formatFractionData = (data: FractionData): string => {
+  const fraction = `${data.numerator}/${data.denominator}`
+  switch (data.operation) {
+    case 'read':
+    case 'place':
+      return `${data.operation} ${fraction}`
+    case 'name-part':
+      return `${data.operation} ${fraction} ${data.requestedPart}`
+    case 'scale-missing':
+      return (
+        `${data.operation} ${fraction} ×${data.factor} ${data.direction} ` +
+        `missing-${data.missing}`
+      )
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled fraction data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 const formatDisplay = (display: Problem['display']): string => {
   switch (display.kind) {
     case 'inline':
@@ -72,7 +98,10 @@ const formatDisplay = (display: Problem['display']): string => {
     case 'story':
       return `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
     case 'math':
-      return `math "${display.label}" ${formatNotation(display.notation)}`
+      return (
+        `math "${display.label}" ${formatNotation(display.notation)}` +
+        (display.fraction ? ` [${formatFractionData(display.fraction)}]` : '')
+      )
     case 'diagram':
       return (
         `diagram ${display.diagram.kind} ${display.diagram.shadedParts}/${display.diagram.parts} ` +
@@ -151,7 +180,8 @@ export const format = (problem: Problem, seed: number): string => {
   lines.push(`hint     ${problem.hint}`)
 
   for (const choice of problem.choices ?? []) {
-    lines.push(`choice   ${choice.id} = ${choice.label}`)
+    const value = choice.value ? ` [${formatRational(choice.value)}]` : ''
+    lines.push(`choice   ${choice.id} = ${choice.label}${value}`)
   }
 
   problem.solution.forEach((step, i) => {

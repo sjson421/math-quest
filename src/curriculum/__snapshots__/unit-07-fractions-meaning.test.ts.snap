@@ -1,0 +1,1463 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: equivalent-multiply > matches the wording recorded when the skill landed 1`] = `
+"--- equivalent-multiply · seed 1 · difficulty 1
+prompt   Which whole number completes the equality?
+display  math "3 over 9 equals 1 over blank" row(fraction("3", "9"), "=", fraction("1", "?")) [scale-missing 1/3 ×3 down missing-denominator]
+answer   exact 3/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 3.   [9 ÷ 3 = 3]
+miss     left-term-unchanged = 9   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 6   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 12345 · difficulty 1
+prompt   Which whole number completes the equality?
+display  math "2 over 6 equals 1 over blank" row(fraction("2", "6"), "=", fraction("1", "?")) [scale-missing 1/3 ×2 down missing-denominator]
+answer   exact 3/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [6 ÷ 2 = 3]
+miss     left-term-unchanged = 6   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 4   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 67890 · difficulty 1
+prompt   Which whole number completes the equality?
+display  math "1 over 2 equals blank over 4" row(fraction("1", "2"), "=", fraction("?", "4")) [scale-missing 1/2 ×2 up missing-numerator]
+answer   exact 2/1
+input    keypad
+hint     Multiply both parts by the same factor.
+step 1   Multiply the matching part by 2.   [1 × 2 = 2]
+miss     left-term-unchanged = 1   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 3   Adding changes the fraction; scale by multiplying.
+
+--- equivalent-multiply · seed 424242 · difficulty 1
+prompt   Which whole number completes the equality?
+display  math "2 over 4 equals blank over 2" row(fraction("2", "4"), "=", fraction("?", "2")) [scale-missing 1/2 ×2 down missing-numerator]
+answer   exact 1/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [2 ÷ 2 = 1]
+miss     left-term-unchanged = 2   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 0   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 987654321 · difficulty 1
+prompt   Which whole number completes the equality?
+display  math "2 over 6 equals 1 over blank" row(fraction("2", "6"), "=", fraction("1", "?")) [scale-missing 1/3 ×2 down missing-denominator]
+answer   exact 3/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [6 ÷ 2 = 3]
+miss     left-term-unchanged = 6   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 4   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 1 · difficulty 2
+prompt   Which whole number completes the equality?
+display  math "3 over 9 equals 1 over blank" row(fraction("3", "9"), "=", fraction("1", "?")) [scale-missing 1/3 ×3 down missing-denominator]
+answer   exact 3/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 3.   [9 ÷ 3 = 3]
+miss     left-term-unchanged = 9   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 6   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 12345 · difficulty 2
+prompt   Which whole number completes the equality?
+display  math "2 over 8 equals 1 over blank" row(fraction("2", "8"), "=", fraction("1", "?")) [scale-missing 1/4 ×2 down missing-denominator]
+answer   exact 4/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [8 ÷ 2 = 4]
+miss     left-term-unchanged = 8   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 6   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 67890 · difficulty 2
+prompt   Which whole number completes the equality?
+display  math "3 over 12 equals 1 over blank" row(fraction("3", "12"), "=", fraction("1", "?")) [scale-missing 1/4 ×3 down missing-denominator]
+answer   exact 4/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 3.   [12 ÷ 3 = 4]
+miss     left-term-unchanged = 12   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 9   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 424242 · difficulty 2
+prompt   Which whole number completes the equality?
+display  math "2 over 4 equals blank over 2" row(fraction("2", "4"), "=", fraction("?", "2")) [scale-missing 1/2 ×2 down missing-numerator]
+answer   exact 1/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [2 ÷ 2 = 1]
+miss     left-term-unchanged = 2   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 0   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 987654321 · difficulty 2
+prompt   Which whole number completes the equality?
+display  math "2 over 8 equals 1 over blank" row(fraction("2", "8"), "=", fraction("1", "?")) [scale-missing 1/4 ×2 down missing-denominator]
+answer   exact 4/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [8 ÷ 2 = 4]
+miss     left-term-unchanged = 8   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 6   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 1 · difficulty 3
+prompt   Which whole number completes the equality?
+display  math "3 over 15 equals 1 over blank" row(fraction("3", "15"), "=", fraction("1", "?")) [scale-missing 1/5 ×3 down missing-denominator]
+answer   exact 5/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 3.   [15 ÷ 3 = 5]
+miss     left-term-unchanged = 15   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 12   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 12345 · difficulty 3
+prompt   Which whole number completes the equality?
+display  math "6 over 18 equals 2 over blank" row(fraction("6", "18"), "=", fraction("2", "?")) [scale-missing 2/6 ×3 down missing-denominator]
+answer   exact 6/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 3.   [18 ÷ 3 = 6]
+miss     left-term-unchanged = 18   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 15   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 67890 · difficulty 3
+prompt   Which whole number completes the equality?
+display  math "2 over 4 equals blank over 12" row(fraction("2", "4"), "=", fraction("?", "12")) [scale-missing 2/4 ×3 up missing-numerator]
+answer   exact 6/1
+input    keypad
+hint     Multiply both parts by the same factor.
+step 1   Multiply the matching part by 3.   [2 × 3 = 6]
+miss     left-term-unchanged = 2   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 5   Adding changes the fraction; scale by multiplying.
+
+--- equivalent-multiply · seed 424242 · difficulty 3
+prompt   Which whole number completes the equality?
+display  math "2 over 6 equals blank over 3" row(fraction("2", "6"), "=", fraction("?", "3")) [scale-missing 1/3 ×2 down missing-numerator]
+answer   exact 1/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [2 ÷ 2 = 1]
+miss     left-term-unchanged = 2   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 0   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 987654321 · difficulty 3
+prompt   Which whole number completes the equality?
+display  math "2 over 12 equals 1 over blank" row(fraction("2", "12"), "=", fraction("1", "?")) [scale-missing 1/6 ×2 down missing-denominator]
+answer   exact 6/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [12 ÷ 2 = 6]
+miss     left-term-unchanged = 12   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 10   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 1 · difficulty 4
+prompt   Which whole number completes the equality?
+display  math "3 over 21 equals 1 over blank" row(fraction("3", "21"), "=", fraction("1", "?")) [scale-missing 1/7 ×3 down missing-denominator]
+answer   exact 7/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 3.   [21 ÷ 3 = 7]
+miss     left-term-unchanged = 21   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 18   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 12345 · difficulty 4
+prompt   Which whole number completes the equality?
+display  math "9 over 24 equals 3 over blank" row(fraction("9", "24"), "=", fraction("3", "?")) [scale-missing 3/8 ×3 down missing-denominator]
+answer   exact 8/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 3.   [24 ÷ 3 = 8]
+miss     left-term-unchanged = 24   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 21   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 67890 · difficulty 4
+prompt   Which whole number completes the equality?
+display  math "3 over 5 equals blank over 15" row(fraction("3", "5"), "=", fraction("?", "15")) [scale-missing 3/5 ×3 up missing-numerator]
+answer   exact 9/1
+input    keypad
+hint     Multiply both parts by the same factor.
+step 1   Multiply the matching part by 3.   [3 × 3 = 9]
+miss     left-term-unchanged = 3   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 6   Adding changes the fraction; scale by multiplying.
+
+--- equivalent-multiply · seed 424242 · difficulty 4
+prompt   Which whole number completes the equality?
+display  math "2 over 8 equals blank over 4" row(fraction("2", "8"), "=", fraction("?", "4")) [scale-missing 1/4 ×2 down missing-numerator]
+answer   exact 1/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [2 ÷ 2 = 1]
+miss     left-term-unchanged = 2   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 0   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 987654321 · difficulty 4
+prompt   Which whole number completes the equality?
+display  math "2 over 16 equals 1 over blank" row(fraction("2", "16"), "=", fraction("1", "?")) [scale-missing 1/8 ×2 down missing-denominator]
+answer   exact 8/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [16 ÷ 2 = 8]
+miss     left-term-unchanged = 16   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 14   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 1 · difficulty 5
+prompt   Which whole number completes the equality?
+display  math "4 over 32 equals 1 over blank" row(fraction("4", "32"), "=", fraction("1", "?")) [scale-missing 1/8 ×4 down missing-denominator]
+answer   exact 8/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 4.   [32 ÷ 4 = 8]
+miss     left-term-unchanged = 32   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 28   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 12345 · difficulty 5
+prompt   Which whole number completes the equality?
+display  math "9 over 30 equals 3 over blank" row(fraction("9", "30"), "=", fraction("3", "?")) [scale-missing 3/10 ×3 down missing-denominator]
+answer   exact 10/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 3.   [30 ÷ 3 = 10]
+miss     left-term-unchanged = 30   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 27   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 67890 · difficulty 5
+prompt   Which whole number completes the equality?
+display  math "4 over 7 equals blank over 21" row(fraction("4", "7"), "=", fraction("?", "21")) [scale-missing 4/7 ×3 up missing-numerator]
+answer   exact 12/1
+input    keypad
+hint     Multiply both parts by the same factor.
+step 1   Multiply the matching part by 3.   [4 × 3 = 12]
+miss     left-term-unchanged = 4   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 7   Adding changes the fraction; scale by multiplying.
+
+--- equivalent-multiply · seed 424242 · difficulty 5
+prompt   Which whole number completes the equality?
+display  math "2 over 10 equals blank over 5" row(fraction("2", "10"), "=", fraction("?", "5")) [scale-missing 1/5 ×2 down missing-numerator]
+answer   exact 1/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [2 ÷ 2 = 1]
+miss     left-term-unchanged = 2   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 0   Subtracting changes the fraction; scale by dividing.
+
+--- equivalent-multiply · seed 987654321 · difficulty 5
+prompt   Which whole number completes the equality?
+display  math "4 over 20 equals 2 over blank" row(fraction("4", "20"), "=", fraction("2", "?")) [scale-missing 2/10 ×2 down missing-denominator]
+answer   exact 10/1
+input    keypad
+hint     Divide both parts by the same factor.
+step 1   Divide the matching part by 2.   [20 ÷ 2 = 10]
+miss     left-term-unchanged = 20   Both parts must change by the same factor.
+miss     offset-by-scale-factor = 18   Subtracting changes the fraction; scale by dividing."
+`;
+
+exports[`recorded output: equivalent-visual > matches the wording recorded when the skill landed 1`] = `
+"--- equivalent-visual · seed 1 · difficulty 1
+prompt   Which description names the same shaded amount?
+display  diagram circle 2/4 "circle in 4 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 2 equal parts [1/2]
+choice   scaled-top-only = 2 shaded parts in every 2 equal parts [1]
+choice   scaled-bottom-only = 1 shaded part in every 4 equal parts [1/4]
+step 1   Group every 2 small parts into one larger part.   [2/4 = 1/2]
+
+--- equivalent-visual · seed 12345 · difficulty 1
+prompt   Which description names the same shaded amount?
+display  diagram circle 2/4 "circle in 4 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 2 equal parts [1/2]
+choice   scaled-top-only = 2 shaded parts in every 2 equal parts [1]
+choice   scaled-bottom-only = 1 shaded part in every 4 equal parts [1/4]
+step 1   Group every 2 small parts into one larger part.   [2/4 = 1/2]
+
+--- equivalent-visual · seed 67890 · difficulty 1
+prompt   Which description names the same shaded amount?
+display  diagram circle 2/4 "circle in 4 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 1 shaded part in every 4 equal parts [1/4]
+choice   equivalent = 1 shaded part in every 2 equal parts [1/2]
+choice   scaled-top-only = 2 shaded parts in every 2 equal parts [1]
+step 1   Group every 2 small parts into one larger part.   [2/4 = 1/2]
+
+--- equivalent-visual · seed 424242 · difficulty 1
+prompt   Which description names the same shaded amount?
+display  diagram bar 2/4 "bar in 4 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 1 shaded part in every 4 equal parts [1/4]
+choice   equivalent = 1 shaded part in every 2 equal parts [1/2]
+choice   scaled-top-only = 2 shaded parts in every 2 equal parts [1]
+step 1   Group every 2 small parts into one larger part.   [2/4 = 1/2]
+
+--- equivalent-visual · seed 987654321 · difficulty 1
+prompt   Which description names the same shaded amount?
+display  diagram bar 2/4 "bar in 4 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 2 equal parts [1/2]
+choice   scaled-top-only = 2 shaded parts in every 2 equal parts [1]
+choice   scaled-bottom-only = 1 shaded part in every 4 equal parts [1/4]
+step 1   Group every 2 small parts into one larger part.   [2/4 = 1/2]
+
+--- equivalent-visual · seed 1 · difficulty 2
+prompt   Which description names the same shaded amount?
+display  diagram circle 2/6 "circle in 6 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 3 equal parts [1/3]
+choice   scaled-top-only = 2 shaded parts in every 3 equal parts [2/3]
+choice   scaled-bottom-only = 1 shaded part in every 6 equal parts [1/6]
+step 1   Group every 2 small parts into one larger part.   [2/6 = 1/3]
+
+--- equivalent-visual · seed 12345 · difficulty 2
+prompt   Which description names the same shaded amount?
+display  diagram circle 2/6 "circle in 6 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 3 equal parts [1/3]
+choice   scaled-top-only = 2 shaded parts in every 3 equal parts [2/3]
+choice   scaled-bottom-only = 1 shaded part in every 6 equal parts [1/6]
+step 1   Group every 2 small parts into one larger part.   [2/6 = 1/3]
+
+--- equivalent-visual · seed 67890 · difficulty 2
+prompt   Which description names the same shaded amount?
+display  diagram circle 2/4 "circle in 4 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 1 shaded part in every 4 equal parts [1/4]
+choice   equivalent = 1 shaded part in every 2 equal parts [1/2]
+choice   scaled-top-only = 2 shaded parts in every 2 equal parts [1]
+step 1   Group every 2 small parts into one larger part.   [2/4 = 1/2]
+
+--- equivalent-visual · seed 424242 · difficulty 2
+prompt   Which description names the same shaded amount?
+display  diagram bar 2/4 "bar in 4 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 1 shaded part in every 4 equal parts [1/4]
+choice   equivalent = 1 shaded part in every 2 equal parts [1/2]
+choice   scaled-top-only = 2 shaded parts in every 2 equal parts [1]
+step 1   Group every 2 small parts into one larger part.   [2/4 = 1/2]
+
+--- equivalent-visual · seed 987654321 · difficulty 2
+prompt   Which description names the same shaded amount?
+display  diagram bar 2/6 "bar in 6 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 3 equal parts [1/3]
+choice   scaled-top-only = 2 shaded parts in every 3 equal parts [2/3]
+choice   scaled-bottom-only = 1 shaded part in every 6 equal parts [1/6]
+step 1   Group every 2 small parts into one larger part.   [2/6 = 1/3]
+
+--- equivalent-visual · seed 1 · difficulty 3
+prompt   Which description names the same shaded amount?
+display  diagram circle 2/8 "circle in 8 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 4 equal parts [1/4]
+choice   scaled-top-only = 2 shaded parts in every 4 equal parts [1/2]
+choice   scaled-bottom-only = 1 shaded part in every 8 equal parts [1/8]
+step 1   Group every 2 small parts into one larger part.   [2/8 = 1/4]
+
+--- equivalent-visual · seed 12345 · difficulty 3
+prompt   Which description names the same shaded amount?
+display  diagram circle 2/8 "circle in 8 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 4 equal parts [1/4]
+choice   scaled-top-only = 2 shaded parts in every 4 equal parts [1/2]
+choice   scaled-bottom-only = 1 shaded part in every 8 equal parts [1/8]
+step 1   Group every 2 small parts into one larger part.   [2/8 = 1/4]
+
+--- equivalent-visual · seed 67890 · difficulty 3
+prompt   Which description names the same shaded amount?
+display  diagram circle 4/6 "circle in 6 parts, 4 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 2 shaded parts in every 6 equal parts [1/3]
+choice   equivalent = 2 shaded parts in every 3 equal parts [2/3]
+choice   scaled-top-only = 4 shaded parts in every 3 equal parts [4/3]
+step 1   Group every 2 small parts into one larger part.   [4/6 = 2/3]
+
+--- equivalent-visual · seed 424242 · difficulty 3
+prompt   Which description names the same shaded amount?
+display  diagram bar 2/6 "bar in 6 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 1 shaded part in every 6 equal parts [1/6]
+choice   equivalent = 1 shaded part in every 3 equal parts [1/3]
+choice   scaled-top-only = 2 shaded parts in every 3 equal parts [2/3]
+step 1   Group every 2 small parts into one larger part.   [2/6 = 1/3]
+
+--- equivalent-visual · seed 987654321 · difficulty 3
+prompt   Which description names the same shaded amount?
+display  diagram bar 2/8 "bar in 8 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 4 equal parts [1/4]
+choice   scaled-top-only = 2 shaded parts in every 4 equal parts [1/2]
+choice   scaled-bottom-only = 1 shaded part in every 8 equal parts [1/8]
+step 1   Group every 2 small parts into one larger part.   [2/8 = 1/4]
+
+--- equivalent-visual · seed 1 · difficulty 4
+prompt   Which description names the same shaded amount?
+display  diagram circle 2/10 "circle in 10 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 5 equal parts [1/5]
+choice   scaled-top-only = 2 shaded parts in every 5 equal parts [2/5]
+choice   scaled-bottom-only = 1 shaded part in every 10 equal parts [1/10]
+step 1   Group every 2 small parts into one larger part.   [2/10 = 1/5]
+
+--- equivalent-visual · seed 12345 · difficulty 4
+prompt   Which description names the same shaded amount?
+display  diagram circle 4/10 "circle in 10 parts, 4 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 2 shaded parts in every 5 equal parts [2/5]
+choice   scaled-top-only = 4 shaded parts in every 5 equal parts [4/5]
+choice   scaled-bottom-only = 2 shaded parts in every 10 equal parts [1/5]
+step 1   Group every 2 small parts into one larger part.   [4/10 = 2/5]
+
+--- equivalent-visual · seed 67890 · difficulty 4
+prompt   Which description names the same shaded amount?
+display  diagram grid 2/8 "grid in 8 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 1 shaded part in every 8 equal parts [1/8]
+choice   scaled-top-only = 2 shaded parts in every 4 equal parts [1/2]
+choice   equivalent = 1 shaded part in every 4 equal parts [1/4]
+step 1   Group every 2 small parts into one larger part.   [2/8 = 1/4]
+
+--- equivalent-visual · seed 424242 · difficulty 4
+prompt   Which description names the same shaded amount?
+display  diagram bar 2/8 "bar in 8 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 1 shaded part in every 8 equal parts [1/8]
+choice   equivalent = 1 shaded part in every 4 equal parts [1/4]
+choice   scaled-top-only = 2 shaded parts in every 4 equal parts [1/2]
+step 1   Group every 2 small parts into one larger part.   [2/8 = 1/4]
+
+--- equivalent-visual · seed 987654321 · difficulty 4
+prompt   Which description names the same shaded amount?
+display  diagram bar 2/10 "bar in 10 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 5 equal parts [1/5]
+choice   scaled-top-only = 2 shaded parts in every 5 equal parts [2/5]
+choice   scaled-bottom-only = 1 shaded part in every 10 equal parts [1/10]
+step 1   Group every 2 small parts into one larger part.   [2/10 = 1/5]
+
+--- equivalent-visual · seed 1 · difficulty 5
+prompt   Which description names the same shaded amount?
+display  diagram circle 2/12 "circle in 12 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 6 equal parts [1/6]
+choice   scaled-top-only = 2 shaded parts in every 6 equal parts [1/3]
+choice   scaled-bottom-only = 1 shaded part in every 12 equal parts [1/12]
+step 1   Group every 2 small parts into one larger part.   [2/12 = 1/6]
+
+--- equivalent-visual · seed 12345 · difficulty 5
+prompt   Which description names the same shaded amount?
+display  diagram circle 10/12 "circle in 12 parts, 10 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 5 shaded parts in every 12 equal parts [5/12]
+choice   equivalent = 5 shaded parts in every 6 equal parts [5/6]
+choice   scaled-top-only = 10 shaded parts in every 6 equal parts [5/3]
+step 1   Group every 2 small parts into one larger part.   [10/12 = 5/6]
+
+--- equivalent-visual · seed 67890 · difficulty 5
+prompt   Which description names the same shaded amount?
+display  diagram circle 6/10 "circle in 10 parts, 6 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 3 shaded parts in every 10 equal parts [3/10]
+choice   equivalent = 3 shaded parts in every 5 equal parts [3/5]
+choice   scaled-top-only = 6 shaded parts in every 5 equal parts [6/5]
+step 1   Group every 2 small parts into one larger part.   [6/10 = 3/5]
+
+--- equivalent-visual · seed 424242 · difficulty 5
+prompt   Which description names the same shaded amount?
+display  diagram bar 2/10 "bar in 10 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   scaled-bottom-only = 1 shaded part in every 10 equal parts [1/10]
+choice   equivalent = 1 shaded part in every 5 equal parts [1/5]
+choice   scaled-top-only = 2 shaded parts in every 5 equal parts [2/5]
+step 1   Group every 2 small parts into one larger part.   [2/10 = 1/5]
+
+--- equivalent-visual · seed 987654321 · difficulty 5
+prompt   Which description names the same shaded amount?
+display  diagram bar 2/12 "bar in 12 parts, 2 shaded"
+answer   choice equivalent
+input    choice
+hint     Group the small parts into equal larger parts.
+choice   equivalent = 1 shaded part in every 6 equal parts [1/6]
+choice   scaled-top-only = 2 shaded parts in every 6 equal parts [1/3]
+choice   scaled-bottom-only = 1 shaded part in every 12 equal parts [1/12]
+step 1   Group every 2 small parts into one larger part.   [2/12 = 1/6]"
+`;
+
+exports[`recorded output: fraction-meaning > matches the wording recorded when the skill landed 1`] = `
+"--- fraction-meaning · seed 1 · difficulty 1
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 3 equal parts" fraction("1 selected", "3 equal parts") [read 1/3]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/3]
+
+--- fraction-meaning · seed 12345 · difficulty 1
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 3 equal parts" fraction("1 selected", "3 equal parts") [read 1/3]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/3]
+
+--- fraction-meaning · seed 67890 · difficulty 1
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 2 equal parts" fraction("1 selected", "2 equal parts") [read 1/2]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/2]
+
+--- fraction-meaning · seed 424242 · difficulty 1
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 2 equal parts" fraction("1 selected", "2 equal parts") [read 1/2]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/2]
+
+--- fraction-meaning · seed 987654321 · difficulty 1
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 3 equal parts" fraction("1 selected", "3 equal parts") [read 1/3]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/3]
+
+--- fraction-meaning · seed 1 · difficulty 2
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 3 equal parts" fraction("1 selected", "3 equal parts") [read 1/3]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/3]
+
+--- fraction-meaning · seed 12345 · difficulty 2
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 4 equal parts" fraction("1 selected", "4 equal parts") [read 1/4]
+answer   exact 1/4
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/4]
+
+--- fraction-meaning · seed 67890 · difficulty 2
+prompt   Write the fraction these quantities name.
+display  math "2 selected parts out of 3 equal parts" fraction("2 selected", "3 equal parts") [read 2/3]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [2/3]
+
+--- fraction-meaning · seed 424242 · difficulty 2
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 2 equal parts" fraction("1 selected", "2 equal parts") [read 1/2]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/2]
+
+--- fraction-meaning · seed 987654321 · difficulty 2
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 4 equal parts" fraction("1 selected", "4 equal parts") [read 1/4]
+answer   exact 1/4
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/4]
+
+--- fraction-meaning · seed 1 · difficulty 3
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 5 equal parts" fraction("1 selected", "5 equal parts") [read 1/5]
+answer   exact 1/5
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/5]
+
+--- fraction-meaning · seed 12345 · difficulty 3
+prompt   Write the fraction these quantities name.
+display  math "2 selected parts out of 6 equal parts" fraction("2 selected", "6 equal parts") [read 2/6]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [2/6]
+
+--- fraction-meaning · seed 67890 · difficulty 3
+prompt   Write the fraction these quantities name.
+display  math "2 selected parts out of 4 equal parts" fraction("2 selected", "4 equal parts") [read 2/4]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [2/4]
+
+--- fraction-meaning · seed 424242 · difficulty 3
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 3 equal parts" fraction("1 selected", "3 equal parts") [read 1/3]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/3]
+
+--- fraction-meaning · seed 987654321 · difficulty 3
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 6 equal parts" fraction("1 selected", "6 equal parts") [read 1/6]
+answer   exact 1/6
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/6]
+
+--- fraction-meaning · seed 1 · difficulty 4
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 7 equal parts" fraction("1 selected", "7 equal parts") [read 1/7]
+answer   exact 1/7
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/7]
+
+--- fraction-meaning · seed 12345 · difficulty 4
+prompt   Write the fraction these quantities name.
+display  math "3 selected parts out of 8 equal parts" fraction("3 selected", "8 equal parts") [read 3/8]
+answer   exact 3/8
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [3/8]
+
+--- fraction-meaning · seed 67890 · difficulty 4
+prompt   Write the fraction these quantities name.
+display  math "3 selected parts out of 5 equal parts" fraction("3 selected", "5 equal parts") [read 3/5]
+answer   exact 3/5
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [3/5]
+
+--- fraction-meaning · seed 424242 · difficulty 4
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 4 equal parts" fraction("1 selected", "4 equal parts") [read 1/4]
+answer   exact 1/4
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/4]
+
+--- fraction-meaning · seed 987654321 · difficulty 4
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 8 equal parts" fraction("1 selected", "8 equal parts") [read 1/8]
+answer   exact 1/8
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/8]
+
+--- fraction-meaning · seed 1 · difficulty 5
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 8 equal parts" fraction("1 selected", "8 equal parts") [read 1/8]
+answer   exact 1/8
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/8]
+
+--- fraction-meaning · seed 12345 · difficulty 5
+prompt   Write the fraction these quantities name.
+display  math "3 selected parts out of 10 equal parts" fraction("3 selected", "10 equal parts") [read 3/10]
+answer   exact 3/10
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [3/10]
+
+--- fraction-meaning · seed 67890 · difficulty 5
+prompt   Write the fraction these quantities name.
+display  math "4 selected parts out of 7 equal parts" fraction("4 selected", "7 equal parts") [read 4/7]
+answer   exact 4/7
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [4/7]
+
+--- fraction-meaning · seed 424242 · difficulty 5
+prompt   Write the fraction these quantities name.
+display  math "1 selected parts out of 5 equal parts" fraction("1 selected", "5 equal parts") [read 1/5]
+answer   exact 1/5
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [1/5]
+
+--- fraction-meaning · seed 987654321 · difficulty 5
+prompt   Write the fraction these quantities name.
+display  math "2 selected parts out of 10 equal parts" fraction("2 selected", "10 equal parts") [read 2/10]
+answer   exact 1/5
+input    keypad
+keypad   allowFraction=true
+hint     Put selected parts over all equal parts.
+step 1   Write selected parts over all equal parts.   [2/10]"
+`;
+
+exports[`recorded output: fraction-of-shape > matches the wording recorded when the skill landed 1`] = `
+"--- fraction-of-shape · seed 1 · difficulty 1
+prompt   What fraction of the shape is shaded?
+display  diagram circle 1/3 "circle in 3 parts, 1 shaded"
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/3]
+
+--- fraction-of-shape · seed 12345 · difficulty 1
+prompt   What fraction of the shape is shaded?
+display  diagram circle 1/3 "circle in 3 parts, 1 shaded"
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/3]
+
+--- fraction-of-shape · seed 67890 · difficulty 1
+prompt   What fraction of the shape is shaded?
+display  diagram circle 1/2 "circle in 2 parts, 1 shaded"
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/2]
+
+--- fraction-of-shape · seed 424242 · difficulty 1
+prompt   What fraction of the shape is shaded?
+display  diagram bar 1/2 "bar in 2 parts, 1 shaded"
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/2]
+
+--- fraction-of-shape · seed 987654321 · difficulty 1
+prompt   What fraction of the shape is shaded?
+display  diagram bar 1/3 "bar in 3 parts, 1 shaded"
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/3]
+
+--- fraction-of-shape · seed 1 · difficulty 2
+prompt   What fraction of the shape is shaded?
+display  diagram circle 1/3 "circle in 3 parts, 1 shaded"
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/3]
+
+--- fraction-of-shape · seed 12345 · difficulty 2
+prompt   What fraction of the shape is shaded?
+display  diagram circle 1/4 "circle in 4 parts, 1 shaded"
+answer   exact 1/4
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/4]
+
+--- fraction-of-shape · seed 67890 · difficulty 2
+prompt   What fraction of the shape is shaded?
+display  diagram circle 2/3 "circle in 3 parts, 2 shaded"
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [2/3]
+
+--- fraction-of-shape · seed 424242 · difficulty 2
+prompt   What fraction of the shape is shaded?
+display  diagram bar 1/2 "bar in 2 parts, 1 shaded"
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/2]
+
+--- fraction-of-shape · seed 987654321 · difficulty 2
+prompt   What fraction of the shape is shaded?
+display  diagram bar 1/4 "bar in 4 parts, 1 shaded"
+answer   exact 1/4
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/4]
+
+--- fraction-of-shape · seed 1 · difficulty 3
+prompt   What fraction of the shape is shaded?
+display  diagram circle 1/5 "circle in 5 parts, 1 shaded"
+answer   exact 1/5
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/5]
+
+--- fraction-of-shape · seed 12345 · difficulty 3
+prompt   What fraction of the shape is shaded?
+display  diagram circle 2/6 "circle in 6 parts, 2 shaded"
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [2/6]
+
+--- fraction-of-shape · seed 67890 · difficulty 3
+prompt   What fraction of the shape is shaded?
+display  diagram circle 2/4 "circle in 4 parts, 2 shaded"
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [2/4]
+
+--- fraction-of-shape · seed 424242 · difficulty 3
+prompt   What fraction of the shape is shaded?
+display  diagram bar 1/3 "bar in 3 parts, 1 shaded"
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/3]
+
+--- fraction-of-shape · seed 987654321 · difficulty 3
+prompt   What fraction of the shape is shaded?
+display  diagram bar 1/6 "bar in 6 parts, 1 shaded"
+answer   exact 1/6
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/6]
+
+--- fraction-of-shape · seed 1 · difficulty 4
+prompt   What fraction of the shape is shaded?
+display  diagram circle 1/7 "circle in 7 parts, 1 shaded"
+answer   exact 1/7
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/7]
+
+--- fraction-of-shape · seed 12345 · difficulty 4
+prompt   What fraction of the shape is shaded?
+display  diagram circle 3/8 "circle in 8 parts, 3 shaded"
+answer   exact 3/8
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [3/8]
+
+--- fraction-of-shape · seed 67890 · difficulty 4
+prompt   What fraction of the shape is shaded?
+display  diagram circle 3/5 "circle in 5 parts, 3 shaded"
+answer   exact 3/5
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [3/5]
+
+--- fraction-of-shape · seed 424242 · difficulty 4
+prompt   What fraction of the shape is shaded?
+display  diagram bar 1/4 "bar in 4 parts, 1 shaded"
+answer   exact 1/4
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/4]
+
+--- fraction-of-shape · seed 987654321 · difficulty 4
+prompt   What fraction of the shape is shaded?
+display  diagram bar 1/8 "bar in 8 parts, 1 shaded"
+answer   exact 1/8
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/8]
+
+--- fraction-of-shape · seed 1 · difficulty 5
+prompt   What fraction of the shape is shaded?
+display  diagram circle 1/8 "circle in 8 parts, 1 shaded"
+answer   exact 1/8
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/8]
+
+--- fraction-of-shape · seed 12345 · difficulty 5
+prompt   What fraction of the shape is shaded?
+display  diagram circle 3/10 "circle in 10 parts, 3 shaded"
+answer   exact 3/10
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [3/10]
+
+--- fraction-of-shape · seed 67890 · difficulty 5
+prompt   What fraction of the shape is shaded?
+display  diagram circle 4/7 "circle in 7 parts, 4 shaded"
+answer   exact 4/7
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [4/7]
+
+--- fraction-of-shape · seed 424242 · difficulty 5
+prompt   What fraction of the shape is shaded?
+display  diagram bar 1/5 "bar in 5 parts, 1 shaded"
+answer   exact 1/5
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [1/5]
+
+--- fraction-of-shape · seed 987654321 · difficulty 5
+prompt   What fraction of the shape is shaded?
+display  diagram bar 2/10 "bar in 10 parts, 2 shaded"
+answer   exact 1/5
+input    keypad
+keypad   allowFraction=true
+hint     Put shaded parts over all equal parts.
+step 1   Count shaded parts, then count all equal parts.   [2/10]"
+`;
+
+exports[`recorded output: fractions-numberline > matches the wording recorded when the skill landed 1`] = `
+"--- fractions-numberline · seed 1 · difficulty 1
+prompt   Place this fraction on the number line.
+display  math "1 over 3" fraction("1", "3") [place 1/3]
+answer   exact 1/3
+input    number-line
+line     0 to 1 by 1/3 (4 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/3 = 1/3]
+
+--- fractions-numberline · seed 12345 · difficulty 1
+prompt   Place this fraction on the number line.
+display  math "1 over 3" fraction("1", "3") [place 1/3]
+answer   exact 1/3
+input    number-line
+line     0 to 1 by 1/3 (4 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/3 = 1/3]
+
+--- fractions-numberline · seed 67890 · difficulty 1
+prompt   Place this fraction on the number line.
+display  math "1 over 2" fraction("1", "2") [place 1/2]
+answer   exact 1/2
+input    number-line
+line     0 to 1 by 1/2 (3 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/2 = 1/2]
+
+--- fractions-numberline · seed 424242 · difficulty 1
+prompt   Place this fraction on the number line.
+display  math "1 over 2" fraction("1", "2") [place 1/2]
+answer   exact 1/2
+input    number-line
+line     0 to 1 by 1/2 (3 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/2 = 1/2]
+
+--- fractions-numberline · seed 987654321 · difficulty 1
+prompt   Place this fraction on the number line.
+display  math "1 over 3" fraction("1", "3") [place 1/3]
+answer   exact 1/3
+input    number-line
+line     0 to 1 by 1/3 (4 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/3 = 1/3]
+
+--- fractions-numberline · seed 1 · difficulty 2
+prompt   Place this fraction on the number line.
+display  math "1 over 3" fraction("1", "3") [place 1/3]
+answer   exact 1/3
+input    number-line
+line     0 to 1 by 1/3 (4 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/3 = 1/3]
+
+--- fractions-numberline · seed 12345 · difficulty 2
+prompt   Place this fraction on the number line.
+display  math "1 over 4" fraction("1", "4") [place 1/4]
+answer   exact 1/4
+input    number-line
+line     0 to 1 by 1/4 (5 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/4 = 1/4]
+
+--- fractions-numberline · seed 67890 · difficulty 2
+prompt   Place this fraction on the number line.
+display  math "2 over 3" fraction("2", "3") [place 2/3]
+answer   exact 2/3
+input    number-line
+line     0 to 1 by 1/3 (4 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 2 equal spaces from zero.   [2 × 1/3 = 2/3]
+
+--- fractions-numberline · seed 424242 · difficulty 2
+prompt   Place this fraction on the number line.
+display  math "1 over 2" fraction("1", "2") [place 1/2]
+answer   exact 1/2
+input    number-line
+line     0 to 1 by 1/2 (3 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/2 = 1/2]
+
+--- fractions-numberline · seed 987654321 · difficulty 2
+prompt   Place this fraction on the number line.
+display  math "1 over 4" fraction("1", "4") [place 1/4]
+answer   exact 1/4
+input    number-line
+line     0 to 1 by 1/4 (5 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/4 = 1/4]
+
+--- fractions-numberline · seed 1 · difficulty 3
+prompt   Place this fraction on the number line.
+display  math "1 over 5" fraction("1", "5") [place 1/5]
+answer   exact 1/5
+input    number-line
+line     0 to 1 by 1/5 (6 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/5 = 1/5]
+
+--- fractions-numberline · seed 12345 · difficulty 3
+prompt   Place this fraction on the number line.
+display  math "2 over 6" fraction("2", "6") [place 2/6]
+answer   exact 1/3
+input    number-line
+line     0 to 1 by 1/6 (7 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 2 equal spaces from zero.   [2 × 1/6 = 2/6]
+
+--- fractions-numberline · seed 67890 · difficulty 3
+prompt   Place this fraction on the number line.
+display  math "2 over 4" fraction("2", "4") [place 2/4]
+answer   exact 1/2
+input    number-line
+line     0 to 1 by 1/4 (5 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 2 equal spaces from zero.   [2 × 1/4 = 2/4]
+
+--- fractions-numberline · seed 424242 · difficulty 3
+prompt   Place this fraction on the number line.
+display  math "1 over 3" fraction("1", "3") [place 1/3]
+answer   exact 1/3
+input    number-line
+line     0 to 1 by 1/3 (4 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/3 = 1/3]
+
+--- fractions-numberline · seed 987654321 · difficulty 3
+prompt   Place this fraction on the number line.
+display  math "1 over 6" fraction("1", "6") [place 1/6]
+answer   exact 1/6
+input    number-line
+line     0 to 1 by 1/6 (7 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/6 = 1/6]
+
+--- fractions-numberline · seed 1 · difficulty 4
+prompt   Place this fraction on the number line.
+display  math "1 over 7" fraction("1", "7") [place 1/7]
+answer   exact 1/7
+input    number-line
+line     0 to 1 by 1/7 (8 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/7 = 1/7]
+
+--- fractions-numberline · seed 12345 · difficulty 4
+prompt   Place this fraction on the number line.
+display  math "3 over 8" fraction("3", "8") [place 3/8]
+answer   exact 3/8
+input    number-line
+line     0 to 1 by 1/8 (9 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 3 equal spaces from zero.   [3 × 1/8 = 3/8]
+
+--- fractions-numberline · seed 67890 · difficulty 4
+prompt   Place this fraction on the number line.
+display  math "3 over 5" fraction("3", "5") [place 3/5]
+answer   exact 3/5
+input    number-line
+line     0 to 1 by 1/5 (6 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 3 equal spaces from zero.   [3 × 1/5 = 3/5]
+
+--- fractions-numberline · seed 424242 · difficulty 4
+prompt   Place this fraction on the number line.
+display  math "1 over 4" fraction("1", "4") [place 1/4]
+answer   exact 1/4
+input    number-line
+line     0 to 1 by 1/4 (5 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/4 = 1/4]
+
+--- fractions-numberline · seed 987654321 · difficulty 4
+prompt   Place this fraction on the number line.
+display  math "1 over 8" fraction("1", "8") [place 1/8]
+answer   exact 1/8
+input    number-line
+line     0 to 1 by 1/8 (9 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/8 = 1/8]
+
+--- fractions-numberline · seed 1 · difficulty 5
+prompt   Place this fraction on the number line.
+display  math "1 over 8" fraction("1", "8") [place 1/8]
+answer   exact 1/8
+input    number-line
+line     0 to 1 by 1/8 (9 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/8 = 1/8]
+
+--- fractions-numberline · seed 12345 · difficulty 5
+prompt   Place this fraction on the number line.
+display  math "3 over 10" fraction("3", "10") [place 3/10]
+answer   exact 3/10
+input    number-line
+line     0 to 1 by 1/10 (11 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 3 equal spaces from zero.   [3 × 1/10 = 3/10]
+
+--- fractions-numberline · seed 67890 · difficulty 5
+prompt   Place this fraction on the number line.
+display  math "4 over 7" fraction("4", "7") [place 4/7]
+answer   exact 4/7
+input    number-line
+line     0 to 1 by 1/7 (8 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 4 equal spaces from zero.   [4 × 1/7 = 4/7]
+
+--- fractions-numberline · seed 424242 · difficulty 5
+prompt   Place this fraction on the number line.
+display  math "1 over 5" fraction("1", "5") [place 1/5]
+answer   exact 1/5
+input    number-line
+line     0 to 1 by 1/5 (6 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 1 equal space from zero.   [1 × 1/5 = 1/5]
+
+--- fractions-numberline · seed 987654321 · difficulty 5
+prompt   Place this fraction on the number line.
+display  math "2 over 10" fraction("2", "10") [place 2/10]
+answer   exact 1/5
+input    number-line
+line     0 to 1 by 1/10 (11 ticks)
+hint     Count equal spaces to the right from zero.
+step 1   Move 2 equal spaces from zero.   [2 × 1/10 = 2/10]"
+`;
+
+exports[`recorded output: name-parts > matches the wording recorded when the skill landed 1`] = `
+"--- name-parts · seed 1 · difficulty 1
+prompt   What is the bottom number called?
+display  math "1 over 3" fraction("1", "3") [name-part 1/3 denominator]
+answer   choice denominator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The bottom number is the denominator.
+
+--- name-parts · seed 12345 · difficulty 1
+prompt   What is the top number called?
+display  math "1 over 3" fraction("1", "3") [name-part 1/3 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 67890 · difficulty 1
+prompt   What is the top number called?
+display  math "1 over 2" fraction("1", "2") [name-part 1/2 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   denominator = Denominator
+choice   numerator = Numerator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 424242 · difficulty 1
+prompt   What is the top number called?
+display  math "1 over 2" fraction("1", "2") [name-part 1/2 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 987654321 · difficulty 1
+prompt   What is the top number called?
+display  math "1 over 3" fraction("1", "3") [name-part 1/3 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 1 · difficulty 2
+prompt   What is the bottom number called?
+display  math "1 over 3" fraction("1", "3") [name-part 1/3 denominator]
+answer   choice denominator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The bottom number is the denominator.
+
+--- name-parts · seed 12345 · difficulty 2
+prompt   What is the top number called?
+display  math "1 over 4" fraction("1", "4") [name-part 1/4 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 67890 · difficulty 2
+prompt   What is the top number called?
+display  math "2 over 3" fraction("2", "3") [name-part 2/3 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   denominator = Denominator
+choice   numerator = Numerator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 424242 · difficulty 2
+prompt   What is the top number called?
+display  math "1 over 2" fraction("1", "2") [name-part 1/2 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 987654321 · difficulty 2
+prompt   What is the top number called?
+display  math "1 over 4" fraction("1", "4") [name-part 1/4 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 1 · difficulty 3
+prompt   What is the bottom number called?
+display  math "1 over 5" fraction("1", "5") [name-part 1/5 denominator]
+answer   choice denominator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The bottom number is the denominator.
+
+--- name-parts · seed 12345 · difficulty 3
+prompt   What is the top number called?
+display  math "2 over 6" fraction("2", "6") [name-part 2/6 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 67890 · difficulty 3
+prompt   What is the top number called?
+display  math "2 over 4" fraction("2", "4") [name-part 2/4 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   denominator = Denominator
+choice   numerator = Numerator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 424242 · difficulty 3
+prompt   What is the top number called?
+display  math "1 over 3" fraction("1", "3") [name-part 1/3 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 987654321 · difficulty 3
+prompt   What is the top number called?
+display  math "1 over 6" fraction("1", "6") [name-part 1/6 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 1 · difficulty 4
+prompt   What is the bottom number called?
+display  math "1 over 7" fraction("1", "7") [name-part 1/7 denominator]
+answer   choice denominator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The bottom number is the denominator.
+
+--- name-parts · seed 12345 · difficulty 4
+prompt   What is the top number called?
+display  math "3 over 8" fraction("3", "8") [name-part 3/8 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 67890 · difficulty 4
+prompt   What is the top number called?
+display  math "3 over 5" fraction("3", "5") [name-part 3/5 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   denominator = Denominator
+choice   numerator = Numerator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 424242 · difficulty 4
+prompt   What is the top number called?
+display  math "1 over 4" fraction("1", "4") [name-part 1/4 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 987654321 · difficulty 4
+prompt   What is the top number called?
+display  math "1 over 8" fraction("1", "8") [name-part 1/8 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 1 · difficulty 5
+prompt   What is the bottom number called?
+display  math "1 over 8" fraction("1", "8") [name-part 1/8 denominator]
+answer   choice denominator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The bottom number is the denominator.
+
+--- name-parts · seed 12345 · difficulty 5
+prompt   What is the top number called?
+display  math "3 over 10" fraction("3", "10") [name-part 3/10 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 67890 · difficulty 5
+prompt   What is the top number called?
+display  math "4 over 7" fraction("4", "7") [name-part 4/7 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   denominator = Denominator
+choice   numerator = Numerator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 424242 · difficulty 5
+prompt   What is the top number called?
+display  math "1 over 5" fraction("1", "5") [name-part 1/5 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator.
+
+--- name-parts · seed 987654321 · difficulty 5
+prompt   What is the top number called?
+display  math "2 over 10" fraction("2", "10") [name-part 2/10 numerator]
+answer   choice numerator
+input    choice
+hint     The numerator is above the denominator.
+choice   numerator = Numerator
+choice   denominator = Denominator
+step 1   The top number is the numerator."
+`;

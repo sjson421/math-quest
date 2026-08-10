@@ -119,6 +119,33 @@ function StoryView({ display, entry, entryMode }: { display: Of<'story'> } & Ent
 }
 
 function MathView({ display, entry, entryMode }: { display: Of<'math'> } & EntryProps) {
+  // These two fraction prompts already carry the blank in their authored
+  // notation. Appending the ordinary "= answer" frame turned a vocabulary
+  // question into "1/3 = Numerator" and a missing-term equality into two
+  // equalities. Keep the fraction itself intact, then give the keypad problem
+  // a plainly labelled echo so typed digits remain visible.
+  if (display.fraction?.operation === 'name-part') {
+    return (
+      <div className="flex items-center justify-center max-w-full">
+        <MathNotation notation={display.notation} label={display.label} />
+      </div>
+    )
+  }
+
+  if (display.fraction?.operation === 'scale-missing') {
+    return (
+      <div className="flex flex-col items-center justify-center gap-3 max-w-full">
+        <MathNotation notation={display.notation} label={display.label} />
+        <div className="flex items-center justify-center gap-3">
+          <span className="text-lg font-bold text-ink-soft">Answer</span>
+          <span className="text-4xl">
+            <EntrySlot value={entry} mode={entryMode} fractionSize="fluid" />
+          </span>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex items-center justify-center gap-3 max-w-full">
       <MathNotation notation={display.notation} label={display.label} />

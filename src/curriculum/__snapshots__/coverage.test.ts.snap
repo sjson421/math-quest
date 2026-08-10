@@ -59,11 +59,26 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "div-words": [
     "primes",
   ],
+  "equivalent-multiply": [
+    "equivalent-visual",
+  ],
+  "equivalent-visual": [
+    "fractions-numberline",
+  ],
   "expanded-form": [
     "place-value-hundreds",
   ],
   "factors": [
     "long-div-2digit",
+  ],
+  "fraction-meaning": [
+    "negatives-mixed",
+  ],
+  "fraction-of-shape": [
+    "fraction-meaning",
+  ],
+  "fractions-numberline": [
+    "name-parts",
   ],
   "long-div-1digit": [
     "div-by-10-100",
@@ -94,6 +109,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "multiples": [
     "factors",
+  ],
+  "name-parts": [
+    "fraction-of-shape",
   ],
   "negatives-mixed": [
     "absolute-value",

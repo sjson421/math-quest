@@ -1,7 +1,7 @@
 /**
  * What the top of the course offers at first paint.
  *
- * Five of the eight stages have no generator anywhere in them. None of the five
+ * Four of the eight stages have no generator anywhere in them. None of the four
  * may appear here, in any form — that is the difference between a course that
  * is being written and one that looks two-thirds empty.
  */
@@ -22,9 +22,10 @@ describe('StageList', () => {
   it('lists the stages that have something to play, in curriculum order', () => {
     const html = render()
 
-    expect(html.match(/<button/g)).toHaveLength(3)
+    expect(html.match(/<button/g)).toHaveLength(4)
     expect(html.indexOf('Numbers')).toBeLessThan(html.indexOf('The Four Operations'))
     expect(html.indexOf('The Four Operations')).toBeLessThan(html.indexOf('Negatives'))
+    expect(html.indexOf('Negatives')).toBeLessThan(html.indexOf('Parts of a Whole'))
   })
 
   it('shows no trace of a stage with no generator in it', () => {
@@ -34,7 +35,6 @@ describe('StageList', () => {
     )
 
     expect(unbuilt.map((stage) => stage.name)).toEqual([
-      'Parts of a Whole',
       'Powers & Early Algebra',
       'Graphs & Algebra II',
       'Geometry & Data',
@@ -55,13 +55,10 @@ describe('StageList', () => {
   })
 
   it('counts the units of each stage it is given', () => {
-    // All three built stages are complete now, so these counts match what the
-    // curriculum declares. They did not before Unit 5, and the omission that
-    // made the two differ belongs to `resolveCourseTree` rather than to this
-    // component — which reads `units.length` and nothing else. Asserting it
-    // again against a hand-chopped tree would only re-read that length.
+    // The component counts only units with something playable. Asserting it
+    // again against a hand-chopped tree would only re-read `units.length`.
     //
-    // Stages A and C are both one unit, so the singular covers two stages here.
+    // Stages A, C, and the partial Stage D are one playable unit each.
     const html = render()
 
     expect(html).toContain('1 unit')
