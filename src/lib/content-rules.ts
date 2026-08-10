@@ -12,6 +12,7 @@
  */
 
 import type { SkillEntry, UnitEntry } from '../curriculum/manifest/types'
+import { shapeDiagramLabel } from './shape-diagram'
 import type { Display, Problem } from './types'
 
 export const MAX_SOLUTION_STEPS = 4
@@ -135,6 +136,8 @@ function displayText(display: Display): string {
       return display.text
     case 'math':
       return display.label
+    case 'diagram':
+      return shapeDiagramLabel(display.diagram)
     case 'column':
       return ''
     default: {

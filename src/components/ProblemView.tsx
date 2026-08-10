@@ -1,6 +1,7 @@
 import type { Display, Problem } from '../lib/types'
 import { entrySpokenLabel, fractionEntryNotation } from '../lib/math-notation'
 import { MathNotation } from './MathNotation'
+import { ShapeDiagram } from './ShapeDiagram'
 
 /**
  * Column layout matters pedagogically — it is how the carrying and borrowing
@@ -29,6 +30,8 @@ export function ProblemView({
       return <StoryView display={display} entry={entry} entryMode={entryMode} />
     case 'math':
       return <MathView display={display} entry={entry} entryMode={entryMode} />
+    case 'diagram':
+      return <DiagramView display={display} entry={entry} entryMode={entryMode} />
     default: {
       const unhandled: never = display
       throw new Error(`Unhandled display: ${JSON.stringify(unhandled)}`)
@@ -123,6 +126,18 @@ function MathView({ display, entry, entryMode }: { display: Of<'math'> } & Entry
       <span className="text-4xl">
         <EntrySlot value={entry} mode={entryMode} fractionSize="fluid" />
       </span>
+    </div>
+  )
+}
+
+function DiagramView({ display, entry, entryMode }: { display: Of<'diagram'> } & EntryProps) {
+  return (
+    <div className="flex flex-col items-center gap-3 max-w-full">
+      <ShapeDiagram diagram={display.diagram} />
+      <div className="flex items-center justify-center gap-3 text-4xl">
+        <span className="font-bold text-ink-faint">=</span>
+        <EntrySlot value={entry} mode={entryMode} fractionSize="fluid" />
+      </div>
     </div>
   )
 }

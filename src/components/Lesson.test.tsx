@@ -87,6 +87,26 @@ const numberLineSkill: SkillGenerator = {
   }),
 }
 
+const diagramSkill: SkillGenerator = {
+  id: 'synthetic-diagram',
+  name: 'Synthetic Diagram',
+  blurb: 'For testing diagram wiring',
+  generate: (_rng, difficulty) => ({
+    skillId: 'synthetic-diagram',
+    prompt: 'What fraction is shaded?',
+    display: {
+      kind: 'diagram',
+      diagram: { kind: 'circle', parts: 4, shadedParts: 3 },
+    },
+    answer: { kind: 'exact', n: 3, d: 4 },
+    inputMode: 'keypad',
+    keypad: { allowFraction: true },
+    hint: 'Count all parts, then shaded parts.',
+    solution: [{ text: 'Three of four parts are shaded.' }],
+    difficulty,
+  }),
+}
+
 const has = (html: string, label: string) => html.includes(`aria-label="${label}"`)
 
 describe('Lesson', () => {
@@ -95,6 +115,15 @@ describe('Lesson', () => {
     expect(html).toContain('What is the sum?')
     expect(html).toContain('0/10')
     for (const d of ['1', '5', '9', '0']) expect(has(html, d)).toBe(true)
+  })
+
+  it('keeps a diagram on the ordinary fraction-keypad path', () => {
+    const html = renderToStaticMarkup(<Lesson skill={diagramSkill} onExit={() => {}} />)
+
+    expect(html).toContain('aria-label="circle in 4 parts, 3 shaded"')
+    expect(html).toContain('What fraction is shaded?')
+    expect(has(html, '/')).toBe(true)
+    expect(html).toContain('Check')
   })
 
   it('gives the pad the sign key when the problem asks for one', () => {

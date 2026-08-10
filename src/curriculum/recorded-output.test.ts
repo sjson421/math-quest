@@ -43,3 +43,25 @@ describe('recorded output for structured math', () => {
     )
   })
 })
+
+describe('recorded output for diagrams', () => {
+  it('records the shape, both counts, and the derived accessible name', () => {
+    const problem: Problem = {
+      skillId: 'synthetic-diagram',
+      prompt: 'What fraction is shaded?',
+      display: {
+        kind: 'diagram',
+        diagram: { kind: 'grid', parts: 6, shadedParts: 4 },
+      },
+      answer: { kind: 'exact', n: 2, d: 3 },
+      inputMode: 'keypad',
+      hint: 'Count all parts, then shaded parts.',
+      solution: [{ text: 'Four of six parts are shaded.' }],
+      difficulty: 1,
+    }
+
+    expect(format(problem, 7)).toContain(
+      'display  diagram grid 4/6 "grid in 6 parts, 4 shaded"',
+    )
+  })
+})

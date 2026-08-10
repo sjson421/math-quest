@@ -175,7 +175,7 @@ describe('the skills that are built', () => {
     expect(declaring.some((skill) => !generators.has(skill.id))).toBe(true)
   })
 
-  it('keeps Stage D planned until diagrams land, after its other flags are available', () => {
+  it('keeps Stage D planned on its missing generators after every capability lands', () => {
     const stage = manifestIndex.get('fraction-meaning')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unavailable = (stage?.requires ?? []).filter(
@@ -184,7 +184,9 @@ describe('the skills that are built', () => {
 
     expect(AVAILABLE_CAPABILITIES.has('math-notation')).toBe(true)
     expect(AVAILABLE_CAPABILITIES.has('fraction-input')).toBe(true)
-    expect(unavailable).toEqual(['diagram'])
+    expect(AVAILABLE_CAPABILITIES.has('diagram')).toBe(true)
+    expect(unavailable).toEqual([])
+    expect(stageIds.filter((id) => generators.has(id))).toEqual([])
     expect(stageIds.filter((id) => skillState(id) === 'implemented')).toEqual([])
     expect(implementedSkillIds).toHaveLength(61)
   })

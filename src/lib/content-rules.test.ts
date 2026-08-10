@@ -223,6 +223,20 @@ describe('forward references', () => {
     expect(violations[0].message).toContain('Find the exponent')
   })
 
+  it('reads a diagram name from its mathematical data', () => {
+    expect(
+      checkContent(
+        problem({
+          display: {
+            kind: 'diagram',
+            diagram: { kind: 'circle', parts: 4, shadedParts: 3 },
+          },
+        }),
+        at({}, 'unit-7'),
+      ),
+    ).toEqual([])
+  })
+
   it('matches plurals but not words that merely contain a term', () => {
     const plural = checkContent(problem({ hint: 'Add the exponents together.' }), at())
     // "primer" contains "prime"; a substring match would flag it.

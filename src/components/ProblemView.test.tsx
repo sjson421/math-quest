@@ -93,6 +93,25 @@ describe('ProblemView', () => {
     expect(html).toContain('=')
   })
 
+  it('renders a diagram above the existing fraction answer slot', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'diagram',
+          diagram: { kind: 'bar', parts: 4, shadedParts: 3 },
+        }}
+        entry="3/4"
+      />,
+    )
+
+    expect(html).toContain('role="img"')
+    expect(html).toContain('aria-label="bar in 4 parts, 3 shaded"')
+    expect(html.match(/data-diagram-part=/g)).toHaveLength(4)
+    expect(html).toContain('mq-math-fraction')
+    expect(html).toContain('aria-label="3 over 4"')
+    expect(html).toContain('=')
+  })
+
   it.each([
     ['3/4', '3 over 4'],
     ['3/', '3 over blank'],

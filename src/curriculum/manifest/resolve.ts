@@ -26,6 +26,7 @@ export const AVAILABLE_CAPABILITIES: ReadonlySet<Capability> = new Set([
   'choice-input',
   'math-notation',
   'fraction-input',
+  'diagram',
   'number-line',
 ])
 

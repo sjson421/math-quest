@@ -5,6 +5,7 @@ import { generateProblem } from '../lib/generator'
 import { checkAnswer } from '../lib/answer'
 import { makeRng } from '../lib/rng'
 import { toNumber, rational } from '../lib/rational'
+import { shapeDiagramFraction } from '../lib/shape-diagram'
 import type { Difficulty, Problem, SkillGenerator, WholeNumberData } from '../lib/types'
 
 const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
@@ -321,6 +322,10 @@ function recompute(problem: Problem): number | string {
     )
   }
 
+  if (display.kind === 'diagram') {
+    return toNumber(shapeDiagramFraction(display.diagram))
+  }
+
   // A story carries its quantities precisely so this stays possible. Reading
   // them out of the prose would not work: a word problem mentions numbers the
   // answer does not use, which is most of what makes it a word problem.
@@ -353,6 +358,14 @@ const answerValue = (problem: Problem): number | string => {
   }
   if (problem.answer.kind === 'approx') return problem.answer.value
   return problem.answer.id
+}
+
+function answerMismatch(problem: Problem): string | undefined {
+  const stated = answerValue(problem)
+  const derived = recompute(problem)
+  return stated === derived
+    ? undefined
+    : `${problem.skillId}: stated ${stated}, derived ${derived} from ${JSON.stringify(problem.display)}`
 }
 
 /**
@@ -404,6 +417,35 @@ function scalingProblems(skill: SkillGenerator): string[] {
     : [`${skill.id}: difficulty 5 magnitude ${high} is not above difficulty 1 magnitude ${low}`]
 }
 
+describe('diagram answer verification', () => {
+  const problem = (parts: number, shadedParts: number, answer = { n: 3, d: 4 }): Problem => ({
+    skillId: 'synthetic-diagram',
+    prompt: 'What fraction is shaded?',
+    display: { kind: 'diagram', diagram: { kind: 'bar', parts, shadedParts } },
+    answer: { kind: 'exact', ...answer },
+    inputMode: 'keypad',
+    hint: 'Count all parts, then shaded parts.',
+    solution: [{ text: 'Read shaded parts over all parts.' }],
+    difficulty: 1,
+  })
+
+  it('accepts a rational answer derived from the visible part counts', () => {
+    expect(answerMismatch(problem(4, 3))).toBeUndefined()
+  })
+
+  it('names a stated answer that disagrees with the visible part counts', () => {
+    expect(answerMismatch(problem(4, 3, { n: 1, d: 1 }))).toContain(
+      'synthetic-diagram: stated 1, derived 0.75',
+    )
+  })
+
+  it('rejects invalid visible counts instead of trusting the stated answer', () => {
+    expect(() => answerMismatch(problem(0, 0, { n: 0, d: 1 }))).toThrow(
+      /parts must be a positive whole number/,
+    )
+  })
+})
+
 describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, skill) => {
   const sample = (difficulty: Difficulty) =>
     Array.from({ length: ITERATIONS }, (_, i) =>
@@ -414,7 +456,7 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
 
   it('states an answer that matches the problem it displays', () => {
     for (const problem of all) {
-      expect(answerValue(problem), JSON.stringify(problem.display)).toBe(recompute(problem))
+      expect(answerMismatch(problem), JSON.stringify(problem.display)).toBeUndefined()
     }
   })
 

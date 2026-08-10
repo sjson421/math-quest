@@ -4,15 +4,15 @@ What is left, in the order it should be done.
 
 **Status: 61 of 201 skills are playable.** Stages A, B and C are all complete — Stage C is one
 unit, and closing it puts the course below zero for the first time. Choice input, number-line
-input, math notation and fraction input are built, so `AVAILABLE_CAPABILITIES` holds
-`choice-input`, `number-line`, `math-notation` and `fraction-input`. The three answer-control
-modes all have content: `negatives-numberline` is the first skill anywhere to declare a line,
-comparison, ordering, factors, multiples, primes and negative comparison use choices, and
-everything else uses the keypad. The pad offers a sign, a decimal point or a fraction slash
-when a problem asks for one — and every Unit 6 problem answered on the pad asks for the sign,
-because on each one a negative value is either the answer or a predicted mistake. Math
-notation and fraction input unlock nothing alone: Stage D still requires diagrams and has no
-generator yet. This line is the only progress number in the repo's documentation — the
+input, math notation, fraction input and diagrams are built, so `AVAILABLE_CAPABILITIES` holds
+`choice-input`, `number-line`, `math-notation`, `fraction-input` and `diagram`. The three
+answer-control modes all have content: `negatives-numberline` is the first skill anywhere to
+declare a line, comparison, ordering, factors, multiples, primes and negative comparison use
+choices, and everything else uses the keypad. The pad offers a sign, a decimal point or a
+fraction slash when a problem asks for one — and every Unit 6 problem answered on the pad asks
+for the sign, because on each one a negative value is either the answer or a predicted mistake. Math
+notation, fraction input and diagrams unlock nothing alone: Stage D has no generator yet.
+This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
 To re-derive it rather than trusting this file:
@@ -645,7 +645,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
       joined `AVAILABLE_CAPABILITIES`. The playable set stayed at 61 because Stage D still
       requires `diagram` and has no generator.
 
-- [ ] **18 · Diagram rendering** — M
+- [x] **18 · Diagram rendering** — M — **shipped 2026-08-10**
 
       Shaded shapes for fraction meaning, first at `fraction-of-shape` (7.2) and again at
       `equivalent-visual` (7.5). Unit 20's geometry reuses the model.
@@ -664,6 +664,12 @@ document's ✅ markers updated to match, which the cross-check enforces.
          and nothing sized so small it is unreadable at 375px.
       3. **The declaration and the flag** — a `diagram` display arm, and `diagram` added to
          `AVAILABLE_CAPABILITIES`, which together with item 17 is what finally opens Stage D.
+
+      Shipped as a validated `bar` / `circle` / `grid` shape record carrying total and shaded
+      parts, a responsive local SVG with one derived accessible image name, and an exhaustive
+      `diagram` display branch above the existing answer slot. Static and real-browser fixtures
+      cover empty, whole, dense and prime-count figures at 375px. The capability flag changes no
+      playable skill on its own, so the status remains 61 until Unit 7 gains generators.
 
 - [ ] **19 · Stage D · Units 7–11** — XL — 50 skills, ten changes
 

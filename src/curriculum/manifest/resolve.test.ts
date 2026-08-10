@@ -218,6 +218,12 @@ describe('resolveSkillState', () => {
     ).toBe('implemented')
   })
 
+  it('uses the built diagram capability when availability is not overridden', () => {
+    expect(
+      resolveSkillState('c1', { requires: ['diagram'] }, { generators: new Set(['c1']) }),
+    ).toBe('implemented')
+  })
+
   it('stays planned when only some required capabilities are available', () => {
     expect(
       resolveSkillState(

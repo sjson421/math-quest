@@ -515,10 +515,11 @@ Ship by stage; each stage is independently useful.
 2. **Stage C** (9) — small, and unblocks all algebra.
 3. **Stage D** (50) — the biggest. **Structured math notation** is built from Unit 7
    onward. The **fraction input mode** is also built: a problem declares `allowFraction`
-   and the pad offers the slash. Diagram rendering is the remaining stage-wide blocker.
+   and the pad offers the slash. **Diagram rendering** is built for shaded bars, circles and
+   grids, so Stage D's capability infrastructure is complete.
 4. **Stage E** (34) — needs a variable/expression input mode.
 5. **Stage F** (28) — needs a **coordinate-plane input** component (tap to plot).
-6. **Stage G** (22) — needs **diagram rendering** for shapes and charts.
+6. **Stage G** (22) — reuses built **diagram rendering** for shapes and still needs charts.
 7. **Stage H** (6) — needs timed mode and a score estimator.
 
 ### New capabilities required, by stage
@@ -528,7 +529,7 @@ Ship by stage; each stage is independently useful.
 | Choice input | A (Unit 0.5) | Built — declared per problem via `inputMode` |
 | Math notation rendering | D (Unit 7) | Built — structured React/CSS via `Display` |
 | Fraction keypad mode | D (Unit 8) | Built and available — declared per problem via `allowFraction` |
-| Diagram rendering | D (Unit 7.2) | Shaded shapes for fraction meaning |
+| Diagram rendering | D (Unit 7.2) | Built — typed shaded bars, circles and grids via `Display` |
 | Expression input | E (Unit 13) | Variables on the keypad |
 | Number-line input | C (Unit 6.1) | Built — declared per problem via `numberLine` |
 | Coordinate-plane input | F (Unit 16.1) | Tap to plot a point |

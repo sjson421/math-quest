@@ -2,6 +2,7 @@ import { generateProblem } from '../lib/generator'
 import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
+import { shapeDiagramLabel } from '../lib/shape-diagram'
 import type { Difficulty, MathNotation, Problem, SkillGenerator } from '../lib/types'
 
 /**
@@ -72,6 +73,11 @@ const formatDisplay = (display: Problem['display']): string => {
       return `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
     case 'math':
       return `math "${display.label}" ${formatNotation(display.notation)}`
+    case 'diagram':
+      return (
+        `diagram ${display.diagram.kind} ${display.diagram.shadedParts}/${display.diagram.parts} ` +
+        `"${shapeDiagramLabel(display.diagram)}"`
+      )
     default: {
       // A new Display variant must be rendered here or it slips past the gate.
       const unhandled: never = display

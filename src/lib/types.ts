@@ -1,5 +1,6 @@
 import type { KeypadRules } from './keypad'
 import type { NumberLineSpec } from './number-line'
+import type { ShapeDiagram } from './shape-diagram'
 
 export type Difficulty = 1 | 2 | 3 | 4 | 5
 
@@ -124,6 +125,8 @@ export type Display =
   | { kind: 'story'; text: string; operands: number[]; operator: Operator }
   /** Structured notation with the one complete name assistive technology reads. */
   | { kind: 'math'; notation: MathNotation; label: string }
+  /** A shaded equal-part shape whose visible fraction is carried as data. */
+  | { kind: 'diagram'; diagram: ShapeDiagram }
 
 export type Problem = {
   skillId: string
