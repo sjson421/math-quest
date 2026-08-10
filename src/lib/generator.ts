@@ -1,3 +1,4 @@
+import { parseInput } from './answer'
 import { makeRng } from './rng'
 import { toNumber, rational } from './rational'
 import type { Difficulty, Problem, SkillGenerator } from './types'
@@ -41,7 +42,8 @@ export function generateProblem(
 
 /** Match a wrong entry against this problem's predicted mistakes. */
 export function diagnose(problem: Problem, raw: string) {
-  const value = Number(raw)
-  if (!Number.isFinite(value)) return undefined
+  const parsed = parseInput(raw)
+  if (parsed.kind === 'invalid') return undefined
+  const value = toNumber(parsed.value)
   return problem.misconceptions?.find((m) => m.value === value)
 }

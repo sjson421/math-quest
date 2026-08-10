@@ -2,16 +2,16 @@
 
 What is left, in the order it should be done.
 
-**Status: 67 of 201 skills are playable.** Stages A, B and C are all complete, and the first six
-conceptual skills in Stage D are playable. Choice input, number-line input, math notation,
+**Status: 70 of 201 skills are playable.** Stages A, B and C and all nine conceptual skills in
+Stage D's Unit 7 are playable. Choice input, number-line input, math notation,
 fraction input and diagrams are built, so `AVAILABLE_CAPABILITIES` holds
 `choice-input`, `number-line`, `math-notation`, `fraction-input` and `diagram`. The three
 answer-control modes all have content: `negatives-numberline` is the first skill anywhere to
 declare a line, comparison, ordering, factors, multiples, primes and negative comparison use
 choices, and everything else uses the keypad. The pad offers a sign, a decimal point or a
-fraction slash when a problem asks for one. Unit 7 now uses all three answer controls: fraction
-meaning and diagram reading use the pad, vocabulary and visual equivalence use choices, and a
-fraction is placed on an exact rational line. Its remaining three skills stay planned.
+fraction slash when a problem asks for one. Unit 7 uses all three answer controls: fraction
+meaning, diagram reading and lowest terms use the pad; vocabulary, visual equivalence and both
+comparisons use choices; and a fraction is placed on an exact rational line. Unit 8 stays planned.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -673,8 +673,9 @@ document's ✅ markers updated to match, which the cross-check enforces.
 
 - [ ] **19 · Stage D · Units 7–11** — XL — 50 skills, ten changes
 
-      The biggest block in the course. Unit 7 is conceptual only — not one problem asks for a
-      calculation. Unit 8 needs the fraction keypad from item 3, Unit 9 the decimal point.
+      The biggest block in the course. Unit 7 builds meaning before operations, with
+      simplification as its closing bridge. Unit 8 needs the fraction keypad from item 3,
+      Unit 9 the decimal point.
       `fraction-words` (8.12), `money-problems` (9.12) and `ratio-words` (11.7) draw on the
       phrasing bank; Unit 10 closes on `simple-interest` instead, so it needs no frames.
 

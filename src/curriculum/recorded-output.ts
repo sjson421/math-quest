@@ -70,17 +70,22 @@ const formatNotation = (notation: MathNotation): string => {
 }
 
 const formatFractionData = (data: FractionData): string => {
-  const fraction = `${data.numerator}/${data.denominator}`
   switch (data.operation) {
     case 'read':
     case 'place':
-      return `${data.operation} ${fraction}`
+    case 'simplify':
+      return `${data.operation} ${data.numerator}/${data.denominator}`
     case 'name-part':
-      return `${data.operation} ${fraction} ${data.requestedPart}`
+      return `${data.operation} ${data.numerator}/${data.denominator} ${data.requestedPart}`
     case 'scale-missing':
       return (
-        `${data.operation} ${fraction} ×${data.factor} ${data.direction} ` +
+        `${data.operation} ${data.numerator}/${data.denominator} ×${data.factor} ${data.direction} ` +
         `missing-${data.missing}`
+      )
+    case 'compare':
+      return (
+        `${data.operation} ${data.leftNumerator}/${data.leftDenominator} ` +
+        `? ${data.rightNumerator}/${data.rightDenominator}`
       )
     default: {
       const unhandled: never = data

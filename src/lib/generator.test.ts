@@ -198,6 +198,18 @@ describe('diagnose', () => {
     expect(diagnose(problem, '2')?.tag).toBe('subtracted')
   })
 
+  it('matches fractions and decimals through the answer parser', () => {
+    const fractional = generateProblem(
+      skillPredicting([miss(0.5, 'one-half'), miss(0.25, 'one-quarter')], 1),
+      1,
+      1,
+    )
+
+    expect(diagnose(fractional, '1/2')?.tag).toBe('one-half')
+    expect(diagnose(fractional, '2/4')?.tag).toBe('one-half')
+    expect(diagnose(fractional, '0.25')?.tag).toBe('one-quarter')
+  })
+
   it('returns nothing for a wrong answer it did not predict', () => {
     expect(diagnose(problem, '99')).toBeUndefined()
   })
@@ -205,6 +217,7 @@ describe('diagnose', () => {
   it('returns nothing for an entry that is not a number', () => {
     expect(diagnose(problem, '')).toBeUndefined()
     expect(diagnose(problem, 'twelve')).toBeUndefined()
+    expect(diagnose(problem, '5/')).toBeUndefined()
   })
 
   it('cannot match a prediction the filter removed', () => {

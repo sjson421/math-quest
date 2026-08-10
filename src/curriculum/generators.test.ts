@@ -277,8 +277,34 @@ function expectedFractionDisplay(data: FractionData): {
   label: string
   answer: number | string
 } {
+  if (data.operation === 'compare') {
+    const left = rational(data.leftNumerator, data.leftDenominator)
+    const right = rational(data.rightNumerator, data.rightDenominator)
+    const relation = left.n * right.d < right.n * left.d
+      ? '<'
+      : left.n * right.d > right.n * left.d
+        ? '>'
+        : '='
+
+    return {
+      notation: {
+        kind: 'row',
+        children: [
+          notationFraction(String(data.leftNumerator), String(data.leftDenominator)),
+          notationText('?'),
+          notationFraction(String(data.rightNumerator), String(data.rightDenominator)),
+        ],
+      },
+      label: (
+        `${data.leftNumerator} over ${data.leftDenominator}, blank, ` +
+        `${data.rightNumerator} over ${data.rightDenominator}`
+      ),
+      answer: relation,
+    }
+  }
+
   const { numerator, denominator } = data
-  rational(numerator, denominator)
+  const visible = rational(numerator, denominator)
 
   if (data.operation === 'read') {
     return {
@@ -288,11 +314,11 @@ function expectedFractionDisplay(data: FractionData): {
     }
   }
 
-  if (data.operation === 'place') {
+  if (data.operation === 'place' || data.operation === 'simplify') {
     return {
       notation: notationFraction(String(numerator), String(denominator)),
       label: `${numerator} over ${denominator}`,
-      answer: numerator / denominator,
+      answer: data.operation === 'simplify' ? toNumber(visible) : numerator / denominator,
     }
   }
 
@@ -518,7 +544,14 @@ function sourceMagnitude(problem: Problem): number {
 
   if (problem.display.kind === 'math' && problem.display.fraction) {
     const data = problem.display.fraction
-    const values = [data.numerator, data.denominator]
+    const values = data.operation === 'compare'
+      ? [
+          data.leftNumerator,
+          data.leftDenominator,
+          data.rightNumerator,
+          data.rightDenominator,
+        ]
+      : [data.numerator, data.denominator]
     if (data.operation === 'scale-missing') values.push(data.factor)
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
@@ -613,6 +646,99 @@ describe('fraction math answer verification', () => {
     delete problem.display.fraction
 
     expect(() => answerMismatch(problem)).toThrow('needs operation-specific data')
+  })
+
+  const simplifyProblem = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-simplify',
+    prompt: 'Write this fraction in lowest terms.',
+    display: {
+      kind: 'math',
+      notation: notationFraction('6', '8'),
+      label: '6 over 8',
+      fraction: { operation: 'simplify', numerator: 6, denominator: 8 },
+    },
+    answer: { kind: 'exact', n: 3, d: 4, requireSimplified: true },
+    inputMode: 'keypad',
+    keypad: { allowFraction: true },
+    hint: 'Divide both parts by their greatest common factor.',
+    solution: [{ text: 'Divide both parts by 2.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('derives a lowest-terms answer from the visible reducible fraction', () => {
+    expect(answerMismatch(simplifyProblem())).toBeUndefined()
+  })
+
+  it('names a simplification answer that disagrees with the visible fraction', () => {
+    expect(
+      answerMismatch({
+        ...simplifyProblem(),
+        answer: { kind: 'exact', n: 2, d: 3, requireSimplified: true },
+      }),
+    ).toContain('stated 0.6666666666666666, derived 0.75')
+  })
+
+  const compareProblem = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-fraction-compare',
+    prompt: 'Choose the relation.',
+    display: {
+      kind: 'math',
+      notation: {
+        kind: 'row',
+        children: [notationFraction('2', '3'), notationText('?'), notationFraction('3', '5')],
+      },
+      label: '2 over 3, blank, 3 over 5',
+      fraction: {
+        operation: 'compare',
+        leftNumerator: 2,
+        leftDenominator: 3,
+        rightNumerator: 3,
+        rightDenominator: 5,
+      },
+    },
+    answer: { kind: 'choice', id: '1' },
+    inputMode: 'choice',
+    choices: [
+      { id: '-1', label: '<' },
+      { id: '0', label: '=' },
+      { id: '1', label: '>' },
+    ],
+    hint: 'Compare the fractions as equal-sized amounts.',
+    solution: [{ text: 'Two thirds is greater than three fifths.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('derives a comparison choice from both exact fraction values', () => {
+    expect(answerMismatch(compareProblem())).toBeUndefined()
+  })
+
+  it('rejects comparison notation that disagrees with its operation data', () => {
+    const problem = compareProblem()
+    if (problem.display.kind !== 'math') throw new Error('expected math display')
+    problem.display.notation = {
+      kind: 'row',
+      children: [notationFraction('1', '3'), notationText('?'), notationFraction('3', '5')],
+    }
+
+    expect(() => answerMismatch(problem)).toThrow('visible fraction notation disagrees')
+  })
+
+  it('names a comparison answer that disagrees with the exact values', () => {
+    expect(
+      answerMismatch({ ...compareProblem(), answer: { kind: 'choice', id: '-1' } }),
+    ).toContain('stated -1, derived 1')
+  })
+
+  it('rejects malformed fraction semantic data', () => {
+    const problem = compareProblem()
+    if (problem.display.kind !== 'math' || problem.display.fraction?.operation !== 'compare') {
+      throw new Error('expected comparison data')
+    }
+    problem.display.fraction.leftDenominator = 0
+
+    expect(() => answerMismatch(problem)).toThrow('zero denominator')
   })
 })
 

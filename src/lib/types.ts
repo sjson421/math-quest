@@ -117,6 +117,7 @@ export type MathNotation =
 export type FractionData =
   | { operation: 'read'; numerator: number; denominator: number }
   | { operation: 'place'; numerator: number; denominator: number }
+  | { operation: 'simplify'; numerator: number; denominator: number }
   | {
       operation: 'name-part'
       numerator: number
@@ -130,6 +131,13 @@ export type FractionData =
       factor: number
       direction: 'up' | 'down'
       missing: 'numerator' | 'denominator'
+    }
+  | {
+      operation: 'compare'
+      leftNumerator: number
+      leftDenominator: number
+      rightNumerator: number
+      rightDenominator: number
     }
 
 /** How the problem is presented. Column layout matches how arithmetic is taught. */

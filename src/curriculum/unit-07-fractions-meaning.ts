@@ -1,18 +1,18 @@
 import { intAnswer } from '../lib/answer'
 import { constrain } from '../lib/rng'
-import { gcd, rational } from '../lib/rational'
+import { gcd, rational, toNumber } from '../lib/rational'
 import type { ShapeDiagram } from '../lib/shape-diagram'
 import type { Choice, FractionData, MathNotation, SkillGenerator } from '../lib/types'
 import { band, defineSkill, type BuildContext, type ProblemSpec } from './engine'
 
 /**
- * Unit 7 · Fractions: Meaning, increment 7a.
+ * Unit 7 · Fractions: Meaning.
  *
- * These six skills deliberately stop before fraction arithmetic. Every draw
- * asks what a fraction means, what its parts are called, where it sits, or how
- * two names can describe one amount. The integer source values travel beside
- * the notation so the global verifier can read the question without turning
- * the renderer into an algebra engine.
+ * These nine skills deliberately stop before fraction arithmetic. Every draw
+ * asks what a fraction means, what its parts are called, where it sits, how two
+ * names describe one amount, or how represented amounts compare. The integer
+ * source values travel beside the notation so the global verifier can read the
+ * question without turning the renderer into an algebra engine.
  */
 
 const denominatorBand = (difficulty: BuildContext['difficulty']) =>
@@ -52,11 +52,50 @@ const readDisplay = (numerator: number, denominator: number): ProblemSpec['displ
 })
 
 const simpleFractionDisplay = (
-  data: Extract<FractionData, { operation: 'place' | 'name-part' }>,
+  data: Extract<FractionData, { operation: 'place' | 'name-part' | 'simplify' }>,
 ): ProblemSpec['display'] => ({
   kind: 'math',
   notation: fraction(String(data.numerator), String(data.denominator)),
   label: `${data.numerator} over ${data.denominator}`,
+  fraction: data,
+})
+
+type Relation = -1 | 0 | 1
+
+const compareFractions = (
+  leftNumerator: number,
+  leftDenominator: number,
+  rightNumerator: number,
+  rightDenominator: number,
+): Relation => {
+  const difference = leftNumerator * rightDenominator - rightNumerator * leftDenominator
+  return difference < 0 ? -1 : difference > 0 ? 1 : 0
+}
+
+const relationSymbol = (relation: Relation) => relation < 0 ? '<' : relation > 0 ? '>' : '='
+
+const relationChoices = (context: BuildContext): Choice[] => context.rng.shuffle([
+  { id: '-1', label: '<' },
+  { id: '0', label: '=' },
+  { id: '1', label: '>' },
+])
+
+const comparisonDisplay = (
+  data: Extract<FractionData, { operation: 'compare' }>,
+): ProblemSpec['display'] => ({
+  kind: 'math',
+  notation: {
+    kind: 'row',
+    children: [
+      fraction(String(data.leftNumerator), String(data.leftDenominator)),
+      text('?'),
+      fraction(String(data.rightNumerator), String(data.rightDenominator)),
+    ],
+  },
+  label: (
+    `${data.leftNumerator} over ${data.leftDenominator}, blank, ` +
+    `${data.rightNumerator} over ${data.rightDenominator}`
+  ),
   fraction: data,
 })
 
@@ -347,6 +386,212 @@ const equivalentMultiply = defineSkill({
   },
 })
 
+const compositeFactors = {
+  1: [4],
+  2: [4, 6],
+  3: [6, 8],
+  4: [8, 9],
+  5: [9, 10, 12],
+} satisfies Record<BuildContext['difficulty'], readonly number[]>
+
+const simplifyFractions = defineSkill({
+  id: 'simplify-fractions',
+  name: 'Lowest Terms',
+  blurb: 'Simplify a fraction',
+  build(context) {
+    const { rng, difficulty } = context
+    const base = constrain(
+      () => properFraction(context),
+      ({ numerator, denominator }) => gcd(numerator, denominator) === 1,
+    )
+    const factor = rng.pick(compositeFactors[difficulty])
+    const numerator = base.numerator * factor
+    const denominator = base.denominator * factor
+    const data = { operation: 'simplify' as const, numerator, denominator }
+
+    return {
+      prompt: 'Write this fraction in lowest terms.',
+      display: simpleFractionDisplay(data),
+      answer: {
+        ...exactFraction(base.numerator, base.denominator),
+        requireSimplified: true,
+      },
+      keypad: { allowFraction: true },
+      misconceptions: [
+        {
+          value: toNumber(rational(base.numerator, denominator)),
+          tag: 'reduced-numerator-only',
+          nudge: `The denominator stayed unchanged; divide it by ${factor} too.`,
+        },
+        {
+          value: toNumber(rational(numerator, base.denominator)),
+          tag: 'reduced-denominator-only',
+          nudge: `The numerator stayed unchanged; divide it by ${factor} too.`,
+        },
+      ],
+      hint: 'Divide both parts by their greatest common factor.',
+      solution: [
+        {
+          text: `The greatest common factor is ${factor}.`,
+          detail: `gcf(${numerator}, ${denominator}) = ${factor}`,
+        },
+        {
+          text: `Divide both parts by ${factor}.`,
+          detail: `${numerator}/${denominator} = ${base.numerator}/${base.denominator}`,
+        },
+      ],
+    }
+  },
+})
+
+const comparisonDenominatorBand = (difficulty: BuildContext['difficulty']) =>
+  band(difficulty, {
+    1: [3, 5],
+    2: [4, 7],
+    3: [5, 9],
+    4: [6, 12],
+    5: [8, 16],
+  })
+
+const compareSameDen = defineSkill({
+  id: 'compare-same-den',
+  name: 'Comparing Like Fractions',
+  blurb: '3/8 or 5/8 — which is more',
+  build(context) {
+    const { rng, difficulty } = context
+    const [min, max] = comparisonDenominatorBand(difficulty)
+    const denominator = rng.int(min, max)
+    const leftNumerator = rng.int(1, denominator - 1)
+    const rightNumerator = rng.intExcept(1, denominator - 1, [leftNumerator])
+    const relation = compareFractions(
+      leftNumerator,
+      denominator,
+      rightNumerator,
+      denominator,
+    )
+    const data = {
+      operation: 'compare' as const,
+      leftNumerator,
+      leftDenominator: denominator,
+      rightNumerator,
+      rightDenominator: denominator,
+    }
+
+    return {
+      prompt: 'Choose the symbol that makes this true.',
+      display: comparisonDisplay(data),
+      answer: { kind: 'choice' as const, id: String(relation) },
+      inputMode: 'choice' as const,
+      choices: relationChoices(context),
+      misconceptions: [
+        {
+          value: -relation,
+          tag: 'reversed-comparison',
+          nudge: 'The open side points toward the larger fraction.',
+        },
+        {
+          value: 0,
+          tag: 'called-equal',
+          nudge: 'The numerators differ, so the fractions are not equal.',
+        },
+      ],
+      hint: 'With equal denominators, compare the numerators.',
+      solution: [
+        {
+          text: 'Equal denominators make the numerators decide.',
+          detail: `${leftNumerator} ${relationSymbol(relation)} ${rightNumerator}`,
+        },
+      ],
+    }
+  },
+})
+
+const compareDiffDen = defineSkill({
+  id: 'compare-diff-den',
+  name: 'Comparing Unlike Fractions',
+  blurb: '2/3 or 3/5 — which is more',
+  build(context) {
+    const { rng, difficulty } = context
+    const [min, max] = comparisonDenominatorBand(difficulty)
+    const comparison = constrain(
+      () => {
+        const leftDenominator = rng.int(min, max)
+        const rightDenominator = rng.intExcept(min, max, [leftDenominator])
+        const leftNumerator = rng.int(1, leftDenominator - 1)
+        const rightNumerator = rng.int(1, rightDenominator - 1)
+        const relation = compareFractions(
+          leftNumerator,
+          leftDenominator,
+          rightNumerator,
+          rightDenominator,
+        )
+        const numeratorRelation =
+          leftNumerator < rightNumerator ? -1 : leftNumerator > rightNumerator ? 1 : 0
+
+        return {
+          leftNumerator,
+          leftDenominator,
+          rightNumerator,
+          rightDenominator,
+          relation,
+          numeratorRelation,
+        }
+      },
+      ({ relation, numeratorRelation }) => relation !== 0 && numeratorRelation === -relation,
+    )
+    const data = {
+      operation: 'compare' as const,
+      leftNumerator: comparison.leftNumerator,
+      leftDenominator: comparison.leftDenominator,
+      rightNumerator: comparison.rightNumerator,
+      rightDenominator: comparison.rightDenominator,
+    }
+    const commonDenominator =
+      comparison.leftDenominator * comparison.rightDenominator /
+      gcd(comparison.leftDenominator, comparison.rightDenominator)
+    const leftScaled =
+      comparison.leftNumerator * (commonDenominator / comparison.leftDenominator)
+    const rightScaled =
+      comparison.rightNumerator * (commonDenominator / comparison.rightDenominator)
+
+    return {
+      prompt: 'Choose the symbol that makes this true.',
+      display: comparisonDisplay(data),
+      answer: { kind: 'choice' as const, id: String(comparison.relation) },
+      inputMode: 'choice' as const,
+      choices: relationChoices(context),
+      misconceptions: [
+        {
+          value: comparison.numeratorRelation,
+          tag: 'compared-numerators-only',
+          nudge: 'Different denominators mean the pieces have different sizes.',
+        },
+        {
+          value: 0,
+          tag: 'called-equal',
+          nudge: 'These fractions name different amounts with equal-sized pieces.',
+        },
+      ],
+      hint: 'Rewrite both fractions with equal denominators, then compare.',
+      solution: [
+        {
+          text: `Rename both fractions with ${commonDenominator} equal-sized pieces.`,
+          detail: (
+            `${comparison.leftNumerator}/${comparison.leftDenominator} = ` +
+            `${leftScaled}/${commonDenominator}; ` +
+            `${comparison.rightNumerator}/${comparison.rightDenominator} = ` +
+            `${rightScaled}/${commonDenominator}`
+          ),
+        },
+        {
+          text: 'Compare the rewritten numerators.',
+          detail: `${leftScaled} ${relationSymbol(comparison.relation)} ${rightScaled}`,
+        },
+      ],
+    }
+  },
+})
+
 export const unit07: SkillGenerator[] = [
   fractionMeaning,
   fractionOfShape,
@@ -354,4 +599,7 @@ export const unit07: SkillGenerator[] = [
   fractionsNumberline,
   equivalentVisual,
   equivalentMultiply,
+  simplifyFractions,
+  compareSameDen,
+  compareDiffDen,
 ]

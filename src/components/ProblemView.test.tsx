@@ -121,6 +121,46 @@ describe('ProblemView', () => {
     expect(html).not.toContain('bg-blossom-deep')
   })
 
+  it('shows a fraction comparison without appending a second answer blank', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'math',
+          notation: {
+            kind: 'row',
+            children: [
+              {
+                kind: 'fraction',
+                numerator: { kind: 'text', value: '2' },
+                denominator: { kind: 'text', value: '3' },
+              },
+              { kind: 'text', value: '?' },
+              {
+                kind: 'fraction',
+                numerator: { kind: 'text', value: '3' },
+                denominator: { kind: 'text', value: '5' },
+              },
+            ],
+          },
+          label: '2 over 3, blank, 3 over 5',
+          fraction: {
+            operation: 'compare',
+            leftNumerator: 2,
+            leftDenominator: 3,
+            rightNumerator: 3,
+            rightDenominator: 5,
+          },
+        }}
+        entry=""
+        entryMode="choice"
+      />,
+    )
+
+    expect(html).toContain('aria-label="2 over 3, blank, 3 over 5"')
+    expect(html).not.toContain('text-ink-faint')
+    expect(html).not.toContain('bg-blossom-deep')
+  })
+
   it('labels the entry beneath a missing-term equality instead of appending another equals sign', () => {
     const html = renderToStaticMarkup(
       <ProblemView

@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
+import { checkAnswer } from '../lib/answer'
+import { diagnose } from '../lib/generator'
 import { ticks } from '../lib/number-line'
-import { equals, gcd, rational } from '../lib/rational'
+import { equals, gcd, rational, toNumber } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
 import type { FractionData, MathNotation, Problem } from '../lib/types'
 import { format, sample, sweep, unrenderedKeys } from './recorded-output'
@@ -30,6 +32,22 @@ const fractionData = (problem: Problem): FractionData => {
   return problem.display.fraction
 }
 
+const comparisonData = (problem: Problem) => {
+  const data = fractionData(problem)
+  if (data.operation !== 'compare') throw new Error('expected comparison data')
+  return data
+}
+
+const relation = (
+  leftNumerator: number,
+  leftDenominator: number,
+  rightNumerator: number,
+  rightDenominator: number,
+) => {
+  const difference = leftNumerator * rightDenominator - rightNumerator * leftDenominator
+  return difference < 0 ? -1 : difference > 0 ? 1 : 0
+}
+
 const textValue = (notation: MathNotation): string => {
   if (notation.kind !== 'text') throw new Error('expected text notation')
   return notation.value
@@ -38,6 +56,15 @@ const textValue = (notation: MathNotation): string => {
 const fractionValues = (notation: MathNotation): [string, string] => {
   if (notation.kind !== 'fraction') throw new Error('expected fraction notation')
   return [textValue(notation.numerator), textValue(notation.denominator)]
+}
+
+const comparisonValues = (problem: Problem): [string, string, string, string] => {
+  if (problem.display.kind !== 'math' || problem.display.notation.kind !== 'row') {
+    throw new Error('expected comparison notation')
+  }
+  const [left, mark, right] = problem.display.notation.children
+  expect(textValue(mark)).toBe('?')
+  return [...fractionValues(left), ...fractionValues(right)]
 }
 
 describe('fraction-meaning', () => {
@@ -198,7 +225,123 @@ describe('equivalent-multiply', () => {
   })
 })
 
-describe('the six-skill increment', () => {
+describe('simplify-fractions', () => {
+  it('derives lowest terms and keeps both one-part mistakes diagnosable', () => {
+    for (const problem of everyProblem('simplify-fractions')) {
+      const data = fractionData(problem)
+      if (data.operation !== 'simplify') throw new Error('expected simplification data')
+      if (problem.answer.kind !== 'exact') throw new Error('expected exact answer')
+
+      const reduced = rational(data.numerator, data.denominator)
+      const factor = gcd(data.numerator, data.denominator)
+      const partialDivisor = Array.from({ length: factor - 2 }, (_, i) => i + 2)
+        .find((candidate) => factor % candidate === 0)
+      const numeratorOnly = toNumber(rational(reduced.n, data.denominator))
+      const denominatorOnly = toNumber(rational(data.numerator, reduced.d))
+
+      if (problem.display.kind !== 'math') throw new Error('expected math display')
+      expect(fractionValues(problem.display.notation)).toEqual([
+        String(data.numerator),
+        String(data.denominator),
+      ])
+      expect(data.numerator).toBeGreaterThan(0)
+      expect(data.numerator).toBeLessThan(data.denominator)
+      expect(factor).toBeGreaterThan(1)
+      expect(partialDivisor).toBeDefined()
+      expect(problem.answer).toEqual({ kind: 'exact', ...reduced, requireSimplified: true })
+      expect(problem.keypad).toEqual({ allowFraction: true })
+      expect(problem.misconceptions?.map(({ value }) => value)).toEqual([
+        numeratorOnly,
+        denominatorOnly,
+      ])
+      expect(diagnose(problem, `${reduced.n}/${data.denominator}`)?.tag)
+        .toBe('reduced-numerator-only')
+      expect(diagnose(problem, `${data.numerator}/${reduced.d}`)?.tag)
+        .toBe('reduced-denominator-only')
+      expect(checkAnswer(problem.answer, `${data.numerator}/${data.denominator}`).status)
+        .toBe('not-simplified')
+      expect(
+        checkAnswer(
+          problem.answer,
+          `${data.numerator / partialDivisor!}/${data.denominator / partialDivisor!}`,
+        ).status,
+      ).toBe('not-simplified')
+    }
+  })
+})
+
+describe('compare-same-den', () => {
+  it('compares distinct numerators over one denominator', () => {
+    const seen = new Set<number>()
+    for (const problem of everyProblem('compare-same-den')) {
+      const data = comparisonData(problem)
+      const expected = relation(
+        data.leftNumerator,
+        data.leftDenominator,
+        data.rightNumerator,
+        data.rightDenominator,
+      )
+
+      seen.add(expected)
+      expect(comparisonValues(problem)).toEqual([
+        String(data.leftNumerator),
+        String(data.leftDenominator),
+        String(data.rightNumerator),
+        String(data.rightDenominator),
+      ])
+      expect(data.leftDenominator).toBe(data.rightDenominator)
+      expect(data.leftNumerator).not.toBe(data.rightNumerator)
+      expect(problem.answer).toEqual({ kind: 'choice', id: String(expected) })
+      expect(problem.inputMode).toBe('choice')
+      expect(problem.choices).toEqual(expect.arrayContaining([
+        { id: '-1', label: '<' },
+        { id: '0', label: '=' },
+        { id: '1', label: '>' },
+      ]))
+    }
+    expect([...seen].sort()).toEqual([-1, 1])
+  })
+})
+
+describe('compare-diff-den', () => {
+  it('makes numerator-only comparison wrong and retains both wall diagnoses', () => {
+    const denominatorPairs = new Set<string>()
+    for (const problem of everyProblem('compare-diff-den')) {
+      const data = comparisonData(problem)
+      const expected = relation(
+        data.leftNumerator,
+        data.leftDenominator,
+        data.rightNumerator,
+        data.rightDenominator,
+      )
+      const numeratorOnly = data.leftNumerator < data.rightNumerator ? -1 : 1
+
+      denominatorPairs.add(`${data.leftDenominator}/${data.rightDenominator}`)
+      expect(comparisonValues(problem)).toEqual([
+        String(data.leftNumerator),
+        String(data.leftDenominator),
+        String(data.rightNumerator),
+        String(data.rightDenominator),
+      ])
+      expect(data.leftDenominator).not.toBe(data.rightDenominator)
+      expect(expected).not.toBe(0)
+      expect(numeratorOnly).toBe(-expected)
+      expect(problem.answer).toEqual({ kind: 'choice', id: String(expected) })
+      expect(problem.inputMode).toBe('choice')
+      expect(problem.choices).toEqual(expect.arrayContaining([
+        { id: '-1', label: '<' },
+        { id: '0', label: '=' },
+        { id: '1', label: '>' },
+      ]))
+      expect(problem.misconceptions?.map(({ value }) => value)).toEqual([numeratorOnly, 0])
+      expect(diagnose(problem, String(numeratorOnly))?.tag).toBe('compared-numerators-only')
+      expect(diagnose(problem, '0')?.tag).toBe('called-equal')
+    }
+    expect(denominatorPairs.size).toBeGreaterThan(10)
+  })
+})
+
+describe('the nine-skill unit', () => {
   it('uses the intended input mode for every skill', () => {
     expect(
       unit07.map((skill) => `${skill.id} ${everyProblem(skill.id)[0].inputMode}`),
@@ -209,6 +352,9 @@ describe('the six-skill increment', () => {
       'fractions-numberline number-line',
       'equivalent-visual choice',
       'equivalent-multiply keypad',
+      'simplify-fractions keypad',
+      'compare-same-den choice',
+      'compare-diff-den choice',
     ])
   })
 
@@ -220,7 +366,14 @@ describe('the six-skill increment', () => {
     const magnitude = (problem: Problem) => {
       if (problem.display.kind === 'diagram') return problem.display.diagram.parts
       const data = fractionData(problem)
-      const values = [data.numerator, data.denominator]
+      const values = data.operation === 'compare'
+        ? [
+            data.leftNumerator,
+            data.leftDenominator,
+            data.rightNumerator,
+            data.rightDenominator,
+          ]
+        : [data.numerator, data.denominator]
       if (data.operation === 'scale-missing') values.push(data.factor)
       return values.reduce((sum, value) => sum + value, 0) / values.length
     }

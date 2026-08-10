@@ -35,11 +35,17 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "add-words": [
     "add-three-numbers",
   ],
+  "compare-diff-den": [
+    "compare-same-den",
+  ],
   "compare-negatives": [
     "negatives-numberline",
   ],
   "compare-numbers": [
     "expanded-form",
+  ],
+  "compare-same-den": [
+    "simplify-fractions",
   ],
   "div-by-10-100": [
     "div-remainder",
@@ -140,6 +146,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "round-to-100": [
     "round-to-10",
+  ],
+  "simplify-fractions": [
+    "equivalent-multiply",
   ],
   "sub-2digit-borrow": [
     "sub-2digit-noborrow",

@@ -239,10 +239,11 @@ The gate to all algebra. Nothing here is optional.
 
 # STAGE D · Parts of a Whole
 
-### Unit 7 — Fractions: Meaning (9) — *conceptual only, no arithmetic*
+### Unit 7 — Fractions: Meaning (9) — *meaning before operations*
 
-Adults fail fractions when procedure arrives before meaning. This entire unit is
-understanding; not one problem asks for a calculation.
+Adults fail fractions when procedure arrives before meaning. This unit builds
+representations, equivalence, and comparison first, then closes by expressing fractions
+in lowest terms. Fraction operations wait for Unit 8.
 
 | # | id | Skill | Note |
 |---|---|---|---|
@@ -252,9 +253,9 @@ understanding; not one problem asks for a calculation.
 | 7.4 | `fractions-numberline` | Place on a line | ✅ |
 | 7.5 | `equivalent-visual` | ½ = 2/4 by picture | ✅ |
 | 7.6 | `equivalent-multiply` | Scale up and down | ✅ |
-| 7.7 | `simplify-fractions` | Lowest terms | ⚠️ partial simplification |
-| 7.8 | `compare-same-den` | | |
-| 7.9 | `compare-diff-den` | | ⚠️ comparing numerators only |
+| 7.7 | `simplify-fractions` | Lowest terms | ✅ ⚠️ partial simplification |
+| 7.8 | `compare-same-den` | | ✅ |
+| 7.9 | `compare-diff-den` | | ✅ ⚠️ comparing numerators only |
 
 ### Unit 8 — Fractions: Operations (12)
 

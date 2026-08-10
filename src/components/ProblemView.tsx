@@ -119,12 +119,15 @@ function StoryView({ display, entry, entryMode }: { display: Of<'story'> } & Ent
 }
 
 function MathView({ display, entry, entryMode }: { display: Of<'math'> } & EntryProps) {
-  // These two fraction prompts already carry the blank in their authored
-  // notation. Appending the ordinary "= answer" frame turned a vocabulary
-  // question into "1/3 = Numerator" and a missing-term equality into two
-  // equalities. Keep the fraction itself intact, then give the keypad problem
-  // a plainly labelled echo so typed digits remain visible.
-  if (display.fraction?.operation === 'name-part') {
+  // These fraction prompts already carry the answer relationship in their
+  // authored notation. Appending the ordinary "= answer" frame turns a
+  // vocabulary answer into an equality, duplicates a missing-term equality,
+  // and adds an unrelated blank after a comparison. Keep those displays intact,
+  // then give only the keypad equality a labelled echo for its typed digits.
+  if (
+    display.fraction?.operation === 'name-part' ||
+    display.fraction?.operation === 'compare'
+  ) {
     return (
       <div className="flex items-center justify-center max-w-full">
         <MathNotation notation={display.notation} label={display.label} />

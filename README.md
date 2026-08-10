@@ -17,8 +17,9 @@ how many are playable is a fact about the code, and the status line of
 [`docs/roadmap.md`](docs/roadmap.md) is where it is written down, deliberately in only one
 place.
 
-Stages A, B, and C are playable. Structured math notation, fraction input, and shaded-shape
-diagram rendering are built for Stage D; its fraction generators are next. Later stages still
+Stages A, B, and C and Stage D's conceptual fraction unit are playable. Structured math
+notation, fraction input, and shaded-shape diagram rendering are built; fraction operations are
+next. Later stages still
 need expression input, a tap-to-plot coordinate plane, charts, and timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining

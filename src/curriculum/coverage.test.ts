@@ -72,7 +72,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(67)
+    expect(documentedAsBuilt).toHaveLength(70)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -173,7 +173,7 @@ describe('the skills that are built', () => {
     expect(declaring.some((skill) => !generators.has(skill.id))).toBe(true)
   })
 
-  it('implements exactly the six Stage D generators that have landed', () => {
+  it('implements exactly the nine Stage D generators that have landed', () => {
     const stage = manifestIndex.get('fraction-meaning')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unavailable = (stage?.requires ?? []).filter(
@@ -191,12 +191,17 @@ describe('the skills that are built', () => {
       'fractions-numberline',
       'equivalent-visual',
       'equivalent-multiply',
+      'simplify-fractions',
+      'compare-same-den',
+      'compare-diff-den',
     ])
     expect(stageIds.filter((id) => skillState(id) === 'implemented')).toEqual(
       stageIds.filter((id) => generators.has(id)),
     )
-    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(44)
-    expect(implementedSkillIds).toHaveLength(67)
+    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(41)
+    const unit8 = stage?.units.find((unit) => unit.id === 'unit-8')
+    expect(unit8?.skills.every((skill) => skillState(skill.id) === 'planned')).toBe(true)
+    expect(implementedSkillIds).toHaveLength(70)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -255,9 +260,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 134 skills out of the skill tree entirely', () => {
+  it('leaves the other 131 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(67)
+    expect(offered).toHaveLength(70)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -280,6 +285,7 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['mult-meaning', 'unit-3', 'stage-b'])
     expect(located).toContainEqual(['div-meaning', 'unit-4', 'stage-b'])
     expect(located).toContainEqual(['fraction-meaning', 'unit-7', 'stage-d'])
+    expect(located).toContainEqual(['compare-diff-den', 'unit-7', 'stage-d'])
   })
 
   it('shows the eight built units, and no stage or unit that has nothing to play', () => {
