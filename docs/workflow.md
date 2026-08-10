@@ -6,20 +6,20 @@ commands. Use `openspec-propose` → `openspec-apply-change` →
 `openspec-archive-change`. Task lists are the running record — mark each item done as it
 lands, and note decisions inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, twenty-one capabilities —
+- `openspec/specs/` is the **baseline**: what the system does today, twenty-two capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
   `unit-02-subtraction`, `unit-03-multiplication`, `unit-04-division`,
   `unit-05-order-of-operations`, `unit-06-negatives`, `word-problem-phrasing`,
   `choice-input`, `number-line-input`, `progress-sync`, `recovery-key`, `answer-entry`,
-  `cosmetic-wardrobe`, `decorated-room`. A change amending built behaviour writes
-  `## MODIFIED Requirements` against one of these; `## ADDED` is for genuinely new surface.
+  `cosmetic-wardrobe`, `decorated-room`, `math-notation`. A change amending built behaviour
+  writes `## MODIFIED Requirements` against one of these; `## ADDED` is for genuinely new
+  surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — twenty-three changes have shipped,
-  the latest being `evaluate-math-notation-rendering`, archived 2026-08-09. It completes
-  roadmap increment 17a's measured renderer decision; item 17 remains open for the production
-  renderer and capability flags in 17b.
+  holds shipped changes. **The active queue is empty** — twenty-four changes have shipped,
+  the latest being `add-math-notation-renderer`, archived 2026-08-09. It completes roadmap
+  increment 17b's production renderer and capability flags, closing item 17; item 18 is next.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the

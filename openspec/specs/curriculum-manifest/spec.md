@@ -92,8 +92,8 @@ manifest is populated in full while generators arrive one unit at a time.
 
 ### Requirement: Stage capability requirements are recorded
 
-Each stage SHALL record the capabilities its skills require — choice input, KaTeX rendering,
-fraction keypad input, diagram rendering, expression input, number-line input,
+Each stage SHALL record the capabilities its skills require — choice input, structured math
+notation, fraction keypad input, diagram rendering, expression input, number-line input,
 coordinate-plane input, chart rendering, and timed mode. Recording a requirement SHALL NOT
 imply it is built.
 
@@ -127,6 +127,20 @@ introduces, so the set can be read off the stage rather than assembled from earl
 
 - **WHEN** a capability becomes available and every skill needing it has no generator
 - **THEN** no skill changes from `planned` to `implemented`
+- **AND** the set of skills offered to the learner is unchanged
+
+#### Scenario: Consumer stages record the built math notation capability
+
+- **WHEN** Stages D, E, F, and G are inspected
+- **THEN** each lists `math-notation` as a required capability
+- **AND** `math-notation` is marked available
+- **AND** none lists the rejected `katex` capability name
+
+#### Scenario: Stage D records built fraction input without unlocking
+
+- **WHEN** Stage D is inspected after math notation and fraction input become available
+- **THEN** it lists `fraction-input` as a required available capability
+- **AND** its unavailable `diagram` requirement keeps the stage from becoming playable
 - **AND** the set of skills offered to the learner is unchanged
 
 ### Requirement: Skills carry pacing metadata
@@ -193,4 +207,3 @@ unit — regardless of the order their generators were written or registered in.
 - **WHEN** the derived structure is read
 - **THEN** its stages, each stage's units, and each unit's skills are in the order the
   manifest declares them
-
