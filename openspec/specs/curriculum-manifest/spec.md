@@ -138,10 +138,17 @@ introduces, so the set can be read off the stage rather than assembled from earl
 
 #### Scenario: Stage D records built fraction input without unlocking
 
-- **WHEN** Stage D is inspected after math notation and fraction input become available
-- **THEN** it lists `fraction-input` as a required available capability
-- **AND** its unavailable `diagram` requirement keeps the stage from becoming playable
+- **WHEN** Stage D is inspected after math notation, fraction input, and diagram rendering
+  become available
+- **THEN** it lists `fraction-input` and `diagram` as required available capabilities
+- **AND** its skills without generators remain planned
 - **AND** the set of skills offered to the learner is unchanged
+
+#### Scenario: Diagram availability is recorded without content
+
+- **WHEN** the diagram renderer and capability flag are present before any Stage D generator
+- **THEN** Stage D has no unavailable capability requirement
+- **AND** no Stage D skill becomes playable until its generator is registered
 
 ### Requirement: Skills carry pacing metadata
 
