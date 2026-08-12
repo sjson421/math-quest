@@ -18,10 +18,11 @@ lands, and note decisions inline rather than only in chat.
   amending built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED`
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
-- `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — twenty-eight changes have shipped,
-  the latest being `2026-08-10-add-stage-d-unit-8a`, archived 2026-08-12. It adds Unit 8's
-  first six fraction-operation skills; the second half of Unit 8 is next.
+- `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Twenty-nine changes
+  have shipped; the latest archive is `2026-08-12-add-stage-d-unit-8b`. It completes Unit 8
+  with mixed-number conversion and arithmetic, fraction multiplication and division, and
+  fixed-frame fraction stories. Unit 9 is next.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
