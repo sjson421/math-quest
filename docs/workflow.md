@@ -6,11 +6,12 @@ commands. Use `openspec-propose` → `openspec-apply-change` →
 `openspec-archive-change`. Task lists are the running record — mark each item done as it
 lands, and note decisions inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, twenty-four capabilities —
+- `openspec/specs/` is the **baseline**: what the system does today, twenty-five capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
   `unit-02-subtraction`, `unit-03-multiplication`, `unit-04-division`,
   `unit-05-order-of-operations`, `unit-06-negatives`, `unit-07-fractions-meaning`,
+  `unit-08-fraction-operations`,
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`,
   `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`. A change
@@ -18,9 +19,9 @@ lands, and note decisions inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; `openspec/changes/archive/YYYY-MM-DD-<name>/`
-  holds shipped changes. **The active queue is empty** — twenty-seven changes have shipped,
-  the latest being `add-stage-d-unit-7b`, archived 2026-08-10. It completes Unit 7 with
-  lowest-terms and fraction-comparison skills; Unit 8 is next.
+  holds shipped changes. **The active queue is empty** — twenty-eight changes have shipped,
+  the latest being `2026-08-10-add-stage-d-unit-8a`, archived 2026-08-12. It adds Unit 8's
+  first six fraction-operation skills; the second half of Unit 8 is next.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
