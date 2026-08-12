@@ -188,6 +188,44 @@ export type FractionData =
     }
   /** An improper fraction whose mixed-number form is the answer. */
   | { operation: 'improper-to-mixed'; numerator: number; denominator: number }
+  /** A displayed mixed number whose improper-fraction form is the answer. */
+  | { operation: 'mixed-to-improper'; whole: number; numerator: number; denominator: number }
+  /** Two displayed mixed numbers whose exact sum is the answer. */
+  | {
+      operation: 'add-mixed'
+      leftWhole: number
+      leftNumerator: number
+      leftDenominator: number
+      rightWhole: number
+      rightNumerator: number
+      rightDenominator: number
+    }
+  /** Two displayed mixed numbers whose exact difference is the answer. */
+  | {
+      operation: 'sub-mixed'
+      leftWhole: number
+      leftNumerator: number
+      leftDenominator: number
+      rightWhole: number
+      rightNumerator: number
+      rightDenominator: number
+    }
+  /** Two displayed fractions whose exact product is the answer. */
+  | {
+      operation: 'multiply'
+      leftNumerator: number
+      leftDenominator: number
+      rightNumerator: number
+      rightDenominator: number
+    }
+  /** Two displayed fractions whose exact quotient is the answer. */
+  | {
+      operation: 'divide'
+      leftNumerator: number
+      leftDenominator: number
+      rightNumerator: number
+      rightDenominator: number
+    }
 
 /** How the problem is presented. Column layout matches how arithmetic is taught. */
 export type Display =

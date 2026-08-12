@@ -70,7 +70,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(76)
+    expect(documentedAsBuilt).toHaveLength(82)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -167,7 +167,7 @@ describe('the skills that are built', () => {
     expect(declaring.some((skill) => !generators.has(skill.id))).toBe(true)
   })
 
-  it('implements exactly the fifteen Stage D generators that have landed', () => {
+  it('implements exactly the twenty-one Stage D generators that have landed', () => {
     const stage = manifestIndex.get('fraction-meaning')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unavailable = (stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))
@@ -192,11 +192,17 @@ describe('the skills that are built', () => {
       'add-frac-diff-den',
       'sub-frac-diff-den',
       'improper-to-mixed',
+      'mixed-to-improper',
+      'add-mixed',
+      'sub-mixed',
+      'mult-fractions',
+      'div-fractions',
+      'fraction-words',
     ])
     expect(stageIds.filter((id) => skillState(id) === 'implemented')).toEqual(
       stageIds.filter((id) => generators.has(id)),
     )
-    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(35)
+    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(29)
     const unit8 = stage?.units.find((unit) => unit.id === 'unit-8')
     const unit8Ids = unit8?.skills.map((skill) => skill.id) ?? []
     expect(unit8Ids.filter((id) => skillState(id) === 'implemented')).toEqual([
@@ -206,9 +212,15 @@ describe('the skills that are built', () => {
       'add-frac-diff-den',
       'sub-frac-diff-den',
       'improper-to-mixed',
+      'mixed-to-improper',
+      'add-mixed',
+      'sub-mixed',
+      'mult-fractions',
+      'div-fractions',
+      'fraction-words',
     ])
-    expect(unit8Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(6)
-    expect(implementedSkillIds).toHaveLength(76)
+    expect(unit8Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
+    expect(implementedSkillIds).toHaveLength(82)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -260,9 +272,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 125 skills out of the skill tree entirely', () => {
+  it('leaves the other 119 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(76)
+    expect(offered).toHaveLength(82)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {

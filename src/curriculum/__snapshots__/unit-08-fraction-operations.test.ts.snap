@@ -641,6 +641,345 @@ miss     adds-denominators = 0.25   The denominator names the size of the parts 
 miss     copies-addend = 0.4166666666666667   That is one of the addends. Add the numerators."
 `;
 
+exports[`recorded output: add-mixed > matches the wording recorded when the skill landed 1`] = `
+"--- add-mixed · seed 1 · difficulty 1
+prompt   What is the sum?
+display  math "2 and 1 over 3, plus, 2 and 1 over 3" row(row("2", fraction("1", "3")), "+", row("2", fraction("1", "3"))) [add-mixed 2 1/3 + 2 1/3]
+answer   exact 14/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [2 + 2 = 4]
+step 2   Add the fraction parts.   [1/3 + 1/3 = 2/3]
+step 3   Combine the whole and fraction parts.   [4 2/3]
+miss     added-wholes-only = 4   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.6666666666666666   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 12345 · difficulty 1
+prompt   What is the sum?
+display  math "1 and 1 over 5, plus, 2 and 2 over 5" row(row("1", fraction("1", "5")), "+", row("2", fraction("2", "5"))) [add-mixed 1 1/5 + 2 2/5]
+answer   exact 18/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [1 + 2 = 3]
+step 2   Add the fraction parts.   [1/5 + 2/5 = 3/5]
+step 3   Combine the whole and fraction parts.   [3 3/5]
+miss     added-wholes-only = 3   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.6   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 67890 · difficulty 1
+prompt   What is the sum?
+display  math "1 and 1 over 3, plus, 2 and 1 over 3" row(row("1", fraction("1", "3")), "+", row("2", fraction("1", "3"))) [add-mixed 1 1/3 + 2 1/3]
+answer   exact 11/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [1 + 2 = 3]
+step 2   Add the fraction parts.   [1/3 + 1/3 = 2/3]
+step 3   Combine the whole and fraction parts.   [3 2/3]
+miss     added-wholes-only = 3   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.6666666666666666   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 424242 · difficulty 1
+prompt   What is the sum?
+display  math "1 and 1 over 3, plus, 2 and 1 over 3" row(row("1", fraction("1", "3")), "+", row("2", fraction("1", "3"))) [add-mixed 1 1/3 + 2 1/3]
+answer   exact 11/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [1 + 2 = 3]
+step 2   Add the fraction parts.   [1/3 + 1/3 = 2/3]
+step 3   Combine the whole and fraction parts.   [3 2/3]
+miss     added-wholes-only = 3   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.6666666666666666   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 987654321 · difficulty 1
+prompt   What is the sum?
+display  math "1 and 1 over 5, plus, 2 and 1 over 5" row(row("1", fraction("1", "5")), "+", row("2", fraction("1", "5"))) [add-mixed 1 1/5 + 2 1/5]
+answer   exact 17/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [1 + 2 = 3]
+step 2   Add the fraction parts.   [1/5 + 1/5 = 2/5]
+step 3   Combine the whole and fraction parts.   [3 2/5]
+miss     added-wholes-only = 3   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.4   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 1 · difficulty 2
+prompt   What is the sum?
+display  math "2 and 1 over 5, plus, 3 and 1 over 5" row(row("2", fraction("1", "5")), "+", row("3", fraction("1", "5"))) [add-mixed 2 1/5 + 3 1/5]
+answer   exact 27/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [2 + 3 = 5]
+step 2   Add the fraction parts.   [1/5 + 1/5 = 2/5]
+step 3   Combine the whole and fraction parts.   [5 2/5]
+miss     added-wholes-only = 5   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.4   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 12345 · difficulty 2
+prompt   What is the sum?
+display  math "2 and 2 over 5, plus, 2 and 2 over 5" row(row("2", fraction("2", "5")), "+", row("2", fraction("2", "5"))) [add-mixed 2 2/5 + 2 2/5]
+answer   exact 24/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [2 + 2 = 4]
+step 2   Add the fraction parts.   [2/5 + 2/5 = 4/5]
+step 3   Combine the whole and fraction parts.   [4 4/5]
+miss     added-wholes-only = 4   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.8   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 67890 · difficulty 2
+prompt   What is the sum?
+display  math "2 and 2 over 5, plus, 2 and 1 over 5" row(row("2", fraction("2", "5")), "+", row("2", fraction("1", "5"))) [add-mixed 2 2/5 + 2 1/5]
+answer   exact 23/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [2 + 2 = 4]
+step 2   Add the fraction parts.   [2/5 + 1/5 = 3/5]
+step 3   Combine the whole and fraction parts.   [4 3/5]
+miss     added-wholes-only = 4   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.6   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 424242 · difficulty 2
+prompt   What is the sum?
+display  math "2 and 1 over 5, plus, 1 and 3 over 5" row(row("2", fraction("1", "5")), "+", row("1", fraction("3", "5"))) [add-mixed 2 1/5 + 1 3/5]
+answer   exact 19/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [2 + 1 = 3]
+step 2   Add the fraction parts.   [1/5 + 3/5 = 4/5]
+step 3   Combine the whole and fraction parts.   [3 4/5]
+miss     added-wholes-only = 3   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.8   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 987654321 · difficulty 2
+prompt   What is the sum?
+display  math "2 and 1 over 5, plus, 2 and 3 over 5" row(row("2", fraction("1", "5")), "+", row("2", fraction("3", "5"))) [add-mixed 2 1/5 + 2 3/5]
+answer   exact 24/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [2 + 2 = 4]
+step 2   Add the fraction parts.   [1/5 + 3/5 = 4/5]
+step 3   Combine the whole and fraction parts.   [4 4/5]
+miss     added-wholes-only = 4   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.8   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 1 · difficulty 3
+prompt   What is the sum?
+display  math "4 and 2 over 5, plus, 4 and 1 over 5" row(row("4", fraction("2", "5")), "+", row("4", fraction("1", "5"))) [add-mixed 4 2/5 + 4 1/5]
+answer   exact 43/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [4 + 4 = 8]
+step 2   Add the fraction parts.   [2/5 + 1/5 = 3/5]
+step 3   Combine the whole and fraction parts.   [8 3/5]
+miss     added-wholes-only = 8   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.6   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 12345 · difficulty 3
+prompt   What is the sum?
+display  math "2 and 2 over 7, plus, 4 and 1 over 7" row(row("2", fraction("2", "7")), "+", row("4", fraction("1", "7"))) [add-mixed 2 2/7 + 4 1/7]
+answer   exact 45/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [2 + 4 = 6]
+step 2   Add the fraction parts.   [2/7 + 1/7 = 3/7]
+step 3   Combine the whole and fraction parts.   [6 3/7]
+miss     added-wholes-only = 6   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.42857142857142855   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 67890 · difficulty 3
+prompt   What is the sum?
+display  math "3 and 4 over 7, plus, 2 and 6 over 7" row(row("3", fraction("4", "7")), "+", row("2", fraction("6", "7"))) [add-mixed 3 4/7 + 2 6/7]
+answer   exact 45/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [3 + 2 = 5]
+step 2   Add the fraction parts.   [4/7 + 6/7 = 10/7]
+step 3   Regroup the improper fraction as one whole.   [10/7 = 1 3/7]
+step 4   Combine the whole and fraction parts.   [6 3/7]
+miss     added-wholes-only = 5   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.4285714285714286   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 424242 · difficulty 3
+prompt   What is the sum?
+display  math "3 and 3 over 5, plus, 3 and 3 over 5" row(row("3", fraction("3", "5")), "+", row("3", fraction("3", "5"))) [add-mixed 3 3/5 + 3 3/5]
+answer   exact 36/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [3 + 3 = 6]
+step 2   Add the fraction parts.   [3/5 + 3/5 = 6/5]
+step 3   Regroup the improper fraction as one whole.   [6/5 = 1 1/5]
+step 4   Combine the whole and fraction parts.   [7 1/5]
+miss     added-wholes-only = 6   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.2   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 987654321 · difficulty 3
+prompt   What is the sum?
+display  math "4 and 1 over 5, plus, 3 and 1 over 5" row(row("4", fraction("1", "5")), "+", row("3", fraction("1", "5"))) [add-mixed 4 1/5 + 3 1/5]
+answer   exact 37/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [4 + 3 = 7]
+step 2   Add the fraction parts.   [1/5 + 1/5 = 2/5]
+step 3   Combine the whole and fraction parts.   [7 2/5]
+miss     added-wholes-only = 7   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 0.4   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 1 · difficulty 4
+prompt   What is the sum?
+display  math "4 and 2 over 9, plus, 6 and 8 over 9" row(row("4", fraction("2", "9")), "+", row("6", fraction("8", "9"))) [add-mixed 4 2/9 + 6 8/9]
+answer   exact 100/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [4 + 6 = 10]
+step 2   Add the fraction parts.   [2/9 + 8/9 = 10/9]
+step 3   Regroup the improper fraction as one whole.   [10/9 = 1 1/9]
+step 4   Combine the whole and fraction parts.   [11 1/9]
+miss     added-wholes-only = 10   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.1111111111111112   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 12345 · difficulty 4
+prompt   What is the sum?
+display  math "6 and 5 over 7, plus, 4 and 4 over 7" row(row("6", fraction("5", "7")), "+", row("4", fraction("4", "7"))) [add-mixed 6 5/7 + 4 4/7]
+answer   exact 79/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [6 + 4 = 10]
+step 2   Add the fraction parts.   [5/7 + 4/7 = 9/7]
+step 3   Regroup the improper fraction as one whole.   [9/7 = 1 2/7]
+step 4   Combine the whole and fraction parts.   [11 2/7]
+miss     added-wholes-only = 10   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.2857142857142858   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 67890 · difficulty 4
+prompt   What is the sum?
+display  math "3 and 5 over 7, plus, 3 and 5 over 7" row(row("3", fraction("5", "7")), "+", row("3", fraction("5", "7"))) [add-mixed 3 5/7 + 3 5/7]
+answer   exact 52/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [3 + 3 = 6]
+step 2   Add the fraction parts.   [5/7 + 5/7 = 10/7]
+step 3   Regroup the improper fraction as one whole.   [10/7 = 1 3/7]
+step 4   Combine the whole and fraction parts.   [7 3/7]
+miss     added-wholes-only = 6   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.4285714285714286   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 424242 · difficulty 4
+prompt   What is the sum?
+display  math "5 and 3 over 7, plus, 3 and 6 over 7" row(row("5", fraction("3", "7")), "+", row("3", fraction("6", "7"))) [add-mixed 5 3/7 + 3 6/7]
+answer   exact 65/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [5 + 3 = 8]
+step 2   Add the fraction parts.   [3/7 + 6/7 = 9/7]
+step 3   Regroup the improper fraction as one whole.   [9/7 = 1 2/7]
+step 4   Combine the whole and fraction parts.   [9 2/7]
+miss     added-wholes-only = 8   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.2857142857142858   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 987654321 · difficulty 4
+prompt   What is the sum?
+display  math "4 and 5 over 9, plus, 3 and 8 over 9" row(row("4", fraction("5", "9")), "+", row("3", fraction("8", "9"))) [add-mixed 4 5/9 + 3 8/9]
+answer   exact 76/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [4 + 3 = 7]
+step 2   Add the fraction parts.   [5/9 + 8/9 = 13/9]
+step 3   Regroup the improper fraction as one whole.   [13/9 = 1 4/9]
+step 4   Combine the whole and fraction parts.   [8 4/9]
+miss     added-wholes-only = 7   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.4444444444444444   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 1 · difficulty 5
+prompt   What is the sum?
+display  math "6 and 2 over 11, plus, 8 and 10 over 11" row(row("6", fraction("2", "11")), "+", row("8", fraction("10", "11"))) [add-mixed 6 2/11 + 8 10/11]
+answer   exact 166/11 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [6 + 8 = 14]
+step 2   Add the fraction parts.   [2/11 + 10/11 = 12/11]
+step 3   Regroup the improper fraction as one whole.   [12/11 = 1 1/11]
+step 4   Combine the whole and fraction parts.   [15 1/11]
+miss     added-wholes-only = 14   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.0909090909090908   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 12345 · difficulty 5
+prompt   What is the sum?
+display  math "7 and 7 over 9, plus, 6 and 4 over 9" row(row("7", fraction("7", "9")), "+", row("6", fraction("4", "9"))) [add-mixed 7 7/9 + 6 4/9]
+answer   exact 128/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [7 + 6 = 13]
+step 2   Add the fraction parts.   [7/9 + 4/9 = 11/9]
+step 3   Regroup the improper fraction as one whole.   [11/9 = 1 2/9]
+step 4   Combine the whole and fraction parts.   [14 2/9]
+miss     added-wholes-only = 13   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.2222222222222223   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 67890 · difficulty 5
+prompt   What is the sum?
+display  math "5 and 7 over 9, plus, 5 and 7 over 9" row(row("5", fraction("7", "9")), "+", row("5", fraction("7", "9"))) [add-mixed 5 7/9 + 5 7/9]
+answer   exact 104/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [5 + 5 = 10]
+step 2   Add the fraction parts.   [7/9 + 7/9 = 14/9]
+step 3   Regroup the improper fraction as one whole.   [14/9 = 1 5/9]
+step 4   Combine the whole and fraction parts.   [11 5/9]
+miss     added-wholes-only = 10   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.5555555555555556   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 424242 · difficulty 5
+prompt   What is the sum?
+display  math "6 and 4 over 9, plus, 5 and 7 over 9" row(row("6", fraction("4", "9")), "+", row("5", fraction("7", "9"))) [add-mixed 6 4/9 + 5 7/9]
+answer   exact 110/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [6 + 5 = 11]
+step 2   Add the fraction parts.   [4/9 + 7/9 = 11/9]
+step 3   Regroup the improper fraction as one whole.   [11/9 = 1 2/9]
+step 4   Combine the whole and fraction parts.   [12 2/9]
+miss     added-wholes-only = 11   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.2222222222222223   The fraction parts are only part of the sum; add the wholes too.
+
+--- add-mixed · seed 987654321 · difficulty 5
+prompt   What is the sum?
+display  math "5 and 7 over 11, plus, 5 and 6 over 11" row(row("5", fraction("7", "11")), "+", row("5", fraction("6", "11"))) [add-mixed 5 7/11 + 5 6/11]
+answer   exact 123/11 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Add the whole parts and fraction parts, then regroup if needed.
+step 1   Add the whole parts.   [5 + 5 = 10]
+step 2   Add the fraction parts.   [7/11 + 6/11 = 13/11]
+step 3   Regroup the improper fraction as one whole.   [13/11 = 1 2/11]
+step 4   Combine the whole and fraction parts.   [11 2/11]
+miss     added-wholes-only = 10   The whole parts are only part of the sum; add the fractions too.
+miss     added-fractions-only = 1.1818181818181819   The fraction parts are only part of the sum; add the wholes too."
+`;
+
 exports[`recorded output: common-denominator > matches the wording recorded when the skill landed 1`] = `
 "--- common-denominator · seed 1 · difficulty 1
 prompt   What is the least common denominator?
@@ -866,6 +1205,673 @@ input    keypad
 hint     Find the smallest number both denominators divide evenly into.
 step 1   The least common denominator is the smallest number both divide.   [lcm(5, 10) = 10]
 miss     product-not-lcm = 50   The product is a common denominator, but not the least one."
+`;
+
+exports[`recorded output: div-fractions > matches the wording recorded when the skill landed 1`] = `
+"--- div-fractions · seed 1 · difficulty 1
+prompt   What is the quotient?
+display  math "2 over 3, divided by, 1 over 2" row(fraction("2", "3"), "÷", fraction("1", "2")) [divide 2/3 ÷ 1/2]
+answer   exact 4/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [2/3 × 2/1]
+step 2   Multiply straight across.   [4/3]
+miss     flipped-first = 0.75   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.3333333333333333   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 12345 · difficulty 1
+prompt   What is the quotient?
+display  math "1 over 4, divided by, 1 over 2" row(fraction("1", "4"), "÷", fraction("1", "2")) [divide 1/4 ÷ 1/2]
+answer   exact 1/2 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/4 × 2/1]
+step 2   Multiply straight across.   [2/4]
+step 3   Reduce to lowest terms.   [2/4 = 1/2]
+miss     flipped-first = 2   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.125   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 67890 · difficulty 1
+prompt   What is the quotient?
+display  math "1 over 2, divided by, 3 over 4" row(fraction("1", "2"), "÷", fraction("3", "4")) [divide 1/2 ÷ 3/4]
+answer   exact 2/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/2 × 4/3]
+step 2   Multiply straight across.   [4/6]
+step 3   Reduce to lowest terms.   [4/6 = 2/3]
+miss     flipped-first = 1.5   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.375   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 424242 · difficulty 1
+prompt   What is the quotient?
+display  math "1 over 3, divided by, 2 over 3" row(fraction("1", "3"), "÷", fraction("2", "3")) [divide 1/3 ÷ 2/3]
+answer   exact 1/2 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/3 × 3/2]
+step 2   Multiply straight across.   [3/6]
+step 3   Reduce to lowest terms.   [3/6 = 1/2]
+miss     flipped-first = 2   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.2222222222222222   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 987654321 · difficulty 1
+prompt   What is the quotient?
+display  math "1 over 4, divided by, 1 over 2" row(fraction("1", "4"), "÷", fraction("1", "2")) [divide 1/4 ÷ 1/2]
+answer   exact 1/2 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/4 × 2/1]
+step 2   Multiply straight across.   [2/4]
+step 3   Reduce to lowest terms.   [2/4 = 1/2]
+miss     flipped-first = 2   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.125   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 1 · difficulty 2
+prompt   What is the quotient?
+display  math "3 over 4, divided by, 1 over 2" row(fraction("3", "4"), "÷", fraction("1", "2")) [divide 3/4 ÷ 1/2]
+answer   exact 3/2 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [3/4 × 2/1]
+step 2   Multiply straight across.   [6/4]
+step 3   Reduce to lowest terms.   [6/4 = 3/2]
+miss     flipped-first = 0.6666666666666666   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.375   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 12345 · difficulty 2
+prompt   What is the quotient?
+display  math "2 over 5, divided by, 2 over 3" row(fraction("2", "5"), "÷", fraction("2", "3")) [divide 2/5 ÷ 2/3]
+answer   exact 3/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [2/5 × 3/2]
+step 2   Multiply straight across.   [6/10]
+step 3   Reduce to lowest terms.   [6/10 = 3/5]
+miss     flipped-first = 1.6666666666666667   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.26666666666666666   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 67890 · difficulty 2
+prompt   What is the quotient?
+display  math "1 over 3, divided by, 1 over 4" row(fraction("1", "3"), "÷", fraction("1", "4")) [divide 1/3 ÷ 1/4]
+answer   exact 4/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/3 × 4/1]
+step 2   Multiply straight across.   [4/3]
+miss     flipped-first = 0.75   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.08333333333333333   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 424242 · difficulty 2
+prompt   What is the quotient?
+display  math "1 over 3, divided by, 3 over 4" row(fraction("1", "3"), "÷", fraction("3", "4")) [divide 1/3 ÷ 3/4]
+answer   exact 4/9 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/3 × 4/3]
+step 2   Multiply straight across.   [4/9]
+miss     flipped-first = 2.25   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.25   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 987654321 · difficulty 2
+prompt   What is the quotient?
+display  math "1 over 5, divided by, 1 over 2" row(fraction("1", "5"), "÷", fraction("1", "2")) [divide 1/5 ÷ 1/2]
+answer   exact 2/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/5 × 2/1]
+step 2   Multiply straight across.   [2/5]
+miss     flipped-first = 2.5   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.1   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 1 · difficulty 3
+prompt   What is the quotient?
+display  math "5 over 6, divided by, 2 over 3" row(fraction("5", "6"), "÷", fraction("2", "3")) [divide 5/6 ÷ 2/3]
+answer   exact 5/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [5/6 × 3/2]
+step 2   Multiply straight across.   [15/12]
+step 3   Reduce to lowest terms.   [15/12 = 5/4]
+miss     flipped-first = 0.8   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.5555555555555556   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 12345 · difficulty 3
+prompt   What is the quotient?
+display  math "3 over 7, divided by, 3 over 4" row(fraction("3", "7"), "÷", fraction("3", "4")) [divide 3/7 ÷ 3/4]
+answer   exact 4/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [3/7 × 4/3]
+step 2   Multiply straight across.   [12/21]
+step 3   Reduce to lowest terms.   [12/21 = 4/7]
+miss     flipped-first = 1.75   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.32142857142857145   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 67890 · difficulty 3
+prompt   What is the quotient?
+display  math "1 over 4, divided by, 2 over 5" row(fraction("1", "4"), "÷", fraction("2", "5")) [divide 1/4 ÷ 2/5]
+answer   exact 5/8 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/4 × 5/2]
+step 2   Multiply straight across.   [5/8]
+miss     flipped-first = 1.6   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.1   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 424242 · difficulty 3
+prompt   What is the quotient?
+display  math "1 over 3, divided by, 3 over 4" row(fraction("1", "3"), "÷", fraction("3", "4")) [divide 1/3 ÷ 3/4]
+answer   exact 4/9 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/3 × 4/3]
+step 2   Multiply straight across.   [4/9]
+miss     flipped-first = 2.25   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.25   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 987654321 · difficulty 3
+prompt   What is the quotient?
+display  math "1 over 7, divided by, 2 over 3" row(fraction("1", "7"), "÷", fraction("2", "3")) [divide 1/7 ÷ 2/3]
+answer   exact 3/14 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/7 × 3/2]
+step 2   Multiply straight across.   [3/14]
+miss     flipped-first = 4.666666666666667   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.09523809523809523   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 1 · difficulty 4
+prompt   What is the quotient?
+display  math "4 over 7, divided by, 3 over 4" row(fraction("4", "7"), "÷", fraction("3", "4")) [divide 4/7 ÷ 3/4]
+answer   exact 16/21 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [4/7 × 4/3]
+step 2   Multiply straight across.   [16/21]
+miss     flipped-first = 1.3125   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.42857142857142855   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 12345 · difficulty 4
+prompt   What is the quotient?
+display  math "4 over 9, divided by, 4 over 5" row(fraction("4", "9"), "÷", fraction("4", "5")) [divide 4/9 ÷ 4/5]
+answer   exact 5/9 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [4/9 × 5/4]
+step 2   Multiply straight across.   [20/36]
+step 3   Reduce to lowest terms.   [20/36 = 5/9]
+miss     flipped-first = 1.8   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.35555555555555557   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 67890 · difficulty 4
+prompt   What is the quotient?
+display  math "1 over 6, divided by, 3 over 7" row(fraction("1", "6"), "÷", fraction("3", "7")) [divide 1/6 ÷ 3/7]
+answer   exact 7/18 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/6 × 7/3]
+step 2   Multiply straight across.   [7/18]
+miss     flipped-first = 2.5714285714285716   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.07142857142857142   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 424242 · difficulty 4
+prompt   What is the quotient?
+display  math "1 over 4, divided by, 3 over 5" row(fraction("1", "4"), "÷", fraction("3", "5")) [divide 1/4 ÷ 3/5]
+answer   exact 5/12 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/4 × 5/3]
+step 2   Multiply straight across.   [5/12]
+miss     flipped-first = 2.4   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.15   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 987654321 · difficulty 4
+prompt   What is the quotient?
+display  math "1 over 9, divided by, 3 over 4" row(fraction("1", "9"), "÷", fraction("3", "4")) [divide 1/9 ÷ 3/4]
+answer   exact 4/27 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/9 × 4/3]
+step 2   Multiply straight across.   [4/27]
+miss     flipped-first = 6.75   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.08333333333333333   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 1 · difficulty 5
+prompt   What is the quotient?
+display  math "7 over 10, divided by, 5 over 6" row(fraction("7", "10"), "÷", fraction("5", "6")) [divide 7/10 ÷ 5/6]
+answer   exact 21/25 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [7/10 × 6/5]
+step 2   Multiply straight across.   [42/50]
+step 3   Reduce to lowest terms.   [42/50 = 21/25]
+miss     flipped-first = 1.1904761904761905   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.5833333333333334   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 12345 · difficulty 5
+prompt   What is the quotient?
+display  math "5 over 12, divided by, 7 over 8" row(fraction("5", "12"), "÷", fraction("7", "8")) [divide 5/12 ÷ 7/8]
+answer   exact 10/21 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [5/12 × 8/7]
+step 2   Multiply straight across.   [40/84]
+step 3   Reduce to lowest terms.   [40/84 = 10/21]
+miss     flipped-first = 2.1   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.3645833333333333   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 67890 · difficulty 5
+prompt   What is the quotient?
+display  math "3 over 8, divided by, 3 over 10" row(fraction("3", "8"), "÷", fraction("3", "10")) [divide 3/8 ÷ 3/10]
+answer   exact 5/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [3/8 × 10/3]
+step 2   Multiply straight across.   [30/24]
+step 3   Reduce to lowest terms.   [30/24 = 5/4]
+miss     flipped-first = 0.8   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.1125   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 424242 · difficulty 5
+prompt   What is the quotient?
+display  math "1 over 6, divided by, 4 over 7" row(fraction("1", "6"), "÷", fraction("4", "7")) [divide 1/6 ÷ 4/7]
+answer   exact 7/24 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/6 × 7/4]
+step 2   Multiply straight across.   [7/24]
+miss     flipped-first = 3.4285714285714284   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.09523809523809523   Change division to multiplication after flipping the second fraction.
+
+--- div-fractions · seed 987654321 · difficulty 5
+prompt   What is the quotient?
+display  math "1 over 12, divided by, 5 over 6" row(fraction("1", "12"), "÷", fraction("5", "6")) [divide 1/12 ÷ 5/6]
+answer   exact 1/10 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Keep the first fraction, change to multiplication, then flip the second.
+step 1   Keep the first fraction and flip the second.   [1/12 × 6/5]
+step 2   Multiply straight across.   [6/60]
+step 3   Reduce to lowest terms.   [6/60 = 1/10]
+miss     flipped-first = 10   Keep the first fraction and flip only the second one.
+miss     multiplied-without-flip = 0.06944444444444445   Change division to multiplication after flipping the second fraction."
+`;
+
+exports[`recorded output: fraction-words > matches the wording recorded when the skill landed 1`] = `
+"--- fraction-words · seed 1 · difficulty 1
+prompt   What fraction of the beds are planted?
+display  story [1 ÷ 7] "A garden has 7 beds, and 1 is planted. A greenhouse has 5. What fraction are planted?"
+answer   exact 1/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 1 planted bed over all 7 garden beds.
+step 1   Identify the named part and the whole.   [1 out of 7]
+step 2   Write the part over the whole, then reduce.   [1/7 = 1/7]
+step 3   The greenhouse's 5 is separate.
+miss     wrong-operation = 7   That multiplies the counts. A fraction compares planted beds with all garden beds.
+miss     distractor-pair = 0.2   The 5 belongs to a separate count, not this whole.
+miss     answered-part = 1   That is the part count. Write it over the whole of 7.
+
+--- fraction-words · seed 12345 · difficulty 1
+prompt   What fraction of the tools are inspected?
+display  story [3 ÷ 8] "A workshop has 8 tools, and 3 are inspected. A nearby shop has 4. What fraction are inspected?"
+answer   exact 3/8 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 3 inspected tools over all 8 tools.
+step 1   Identify the named part and the whole.   [3 out of 8]
+step 2   Write the part over the whole, then reduce.   [3/8 = 3/8]
+step 3   The nearby shop's 4 is separate.
+miss     wrong-operation = 24   That multiplies the counts. A fraction compares inspected tools with all workshop tools.
+miss     distractor-pair = 0.75   The 4 belongs to a separate count, not this whole.
+miss     answered-part = 3   That is the part count. Write it over the whole of 8.
+
+--- fraction-words · seed 67890 · difficulty 1
+prompt   What fraction of the desks are occupied?
+display  story [3 ÷ 5] "A floor has 5 desks, and 3 are occupied. Another floor has 4. What fraction are occupied?"
+answer   exact 3/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 3 occupied desks over all 5 desks.
+step 1   Identify the named part and the whole.   [3 out of 5]
+step 2   Write the part over the whole, then reduce.   [3/5 = 3/5]
+step 3   The other floor's 4 is separate.
+miss     wrong-operation = 15   That multiplies the counts. A fraction compares occupied desks with all desks.
+miss     distractor-pair = 0.75   The 4 belongs to a separate count, not this whole.
+miss     answered-part = 3   That is the part count. Write it over the whole of 5.
+
+--- fraction-words · seed 424242 · difficulty 1
+prompt   What fraction of the applications are approved?
+display  story [1 ÷ 4] "A team reviews 4 applications, and 1 is approved. Another team reviews 3. What fraction are approved?"
+answer   exact 1/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 1 approved application over all 4 applications.
+step 1   Identify the named part and the whole.   [1 out of 4]
+step 2   Write the part over the whole, then reduce.   [1/4 = 1/4]
+step 3   The other team's 3 is separate.
+miss     wrong-operation = 4   That multiplies the counts. A fraction compares approved applications with all reviewed applications.
+miss     distractor-pair = 0.3333333333333333   The 3 belongs to a separate count, not this whole.
+miss     answered-part = 1   That is the part count. Write it over the whole of 4.
+
+--- fraction-words · seed 987654321 · difficulty 1
+prompt   What fraction of the beds are planted?
+display  story [1 ÷ 8] "A garden has 8 beds, and 1 is planted. A greenhouse has 2. What fraction are planted?"
+answer   exact 1/8 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 1 planted bed over all 8 garden beds.
+step 1   Identify the named part and the whole.   [1 out of 8]
+step 2   Write the part over the whole, then reduce.   [1/8 = 1/8]
+step 3   The greenhouse's 2 is separate.
+miss     wrong-operation = 8   That multiplies the counts. A fraction compares planted beds with all garden beds.
+miss     distractor-pair = 0.5   The 2 belongs to a separate count, not this whole.
+miss     answered-part = 1   That is the part count. Write it over the whole of 8.
+
+--- fraction-words · seed 1 · difficulty 2
+prompt   What fraction of the beds are planted?
+display  story [1 ÷ 10] "A garden has 10 beds, and 1 is planted. A greenhouse has 7. What fraction are planted?"
+answer   exact 1/10 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 1 planted bed over all 10 garden beds.
+step 1   Identify the named part and the whole.   [1 out of 10]
+step 2   Write the part over the whole, then reduce.   [1/10 = 1/10]
+step 3   The greenhouse's 7 is separate.
+miss     wrong-operation = 10   That multiplies the counts. A fraction compares planted beds with all garden beds.
+miss     distractor-pair = 0.14285714285714285   The 7 belongs to a separate count, not this whole.
+miss     answered-part = 1   That is the part count. Write it over the whole of 10.
+
+--- fraction-words · seed 12345 · difficulty 2
+prompt   What fraction of the tools are inspected?
+display  story [4 ÷ 12] "A workshop has 12 tools, and 4 are inspected. A nearby shop has 6. What fraction are inspected?"
+answer   exact 1/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 4 inspected tools over all 12 tools.
+step 1   Identify the named part and the whole.   [4 out of 12]
+step 2   Write the part over the whole, then reduce.   [4/12 = 1/3]
+step 3   The nearby shop's 6 is separate.
+miss     wrong-operation = 48   That multiplies the counts. A fraction compares inspected tools with all workshop tools.
+miss     distractor-pair = 0.6666666666666666   The 6 belongs to a separate count, not this whole.
+miss     answered-part = 4   That is the part count. Write it over the whole of 12.
+
+--- fraction-words · seed 67890 · difficulty 2
+prompt   What fraction of the desks are occupied?
+display  story [5 ÷ 8] "A floor has 8 desks, and 5 are occupied. Another floor has 5. What fraction are occupied?"
+answer   exact 5/8 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 5 occupied desks over all 8 desks.
+step 1   Identify the named part and the whole.   [5 out of 8]
+step 2   Write the part over the whole, then reduce.   [5/8 = 5/8]
+step 3   The other floor's 5 is separate.
+miss     wrong-operation = 40   That multiplies the counts. A fraction compares occupied desks with all desks.
+miss     distractor-pair = 1   The 5 belongs to a separate count, not this whole.
+miss     answered-part = 5   That is the part count. Write it over the whole of 8.
+
+--- fraction-words · seed 424242 · difficulty 2
+prompt   What fraction of the applications are approved?
+display  story [2 ÷ 6] "A team reviews 6 applications, and 2 are approved. Another team reviews 3. What fraction are approved?"
+answer   exact 1/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 2 approved applications over all 6 applications.
+step 1   Identify the named part and the whole.   [2 out of 6]
+step 2   Write the part over the whole, then reduce.   [2/6 = 1/3]
+step 3   The other team's 3 is separate.
+miss     wrong-operation = 12   That multiplies the counts. A fraction compares approved applications with all reviewed applications.
+miss     distractor-pair = 0.6666666666666666   The 3 belongs to a separate count, not this whole.
+miss     answered-part = 2   That is the part count. Write it over the whole of 6.
+
+--- fraction-words · seed 987654321 · difficulty 2
+prompt   What fraction of the beds are planted?
+display  story [2 ÷ 12] "A garden has 12 beds, and 2 are planted. A greenhouse has 2. What fraction are planted?"
+answer   exact 1/6 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 2 planted beds over all 12 garden beds.
+step 1   Identify the named part and the whole.   [2 out of 12]
+step 2   Write the part over the whole, then reduce.   [2/12 = 1/6]
+step 3   The greenhouse's 2 is separate.
+miss     wrong-operation = 24   That multiplies the counts. A fraction compares planted beds with all garden beds.
+miss     distractor-pair = 1   The 2 belongs to a separate count, not this whole.
+miss     answered-part = 2   That is the part count. Write it over the whole of 12.
+
+--- fraction-words · seed 1 · difficulty 3
+prompt   What fraction of the beds are planted?
+display  story [1 ÷ 15] "A garden has 15 beds, and 1 is planted. A greenhouse has 10. What fraction are planted?"
+answer   exact 1/15 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 1 planted bed over all 15 garden beds.
+step 1   Identify the named part and the whole.   [1 out of 15]
+step 2   Write the part over the whole, then reduce.   [1/15 = 1/15]
+step 3   The greenhouse's 10 is separate.
+miss     wrong-operation = 15   That multiplies the counts. A fraction compares planted beds with all garden beds.
+miss     distractor-pair = 0.1   The 10 belongs to a separate count, not this whole.
+miss     answered-part = 1   That is the part count. Write it over the whole of 15.
+
+--- fraction-words · seed 12345 · difficulty 3
+prompt   What fraction of the tools are inspected?
+display  story [6 ÷ 18] "A workshop has 18 tools, and 6 are inspected. A nearby shop has 9. What fraction are inspected?"
+answer   exact 1/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 6 inspected tools over all 18 tools.
+step 1   Identify the named part and the whole.   [6 out of 18]
+step 2   Write the part over the whole, then reduce.   [6/18 = 1/3]
+step 3   The nearby shop's 9 is separate.
+miss     wrong-operation = 108   That multiplies the counts. A fraction compares inspected tools with all workshop tools.
+miss     distractor-pair = 0.6666666666666666   The 9 belongs to a separate count, not this whole.
+miss     answered-part = 6   That is the part count. Write it over the whole of 18.
+
+--- fraction-words · seed 67890 · difficulty 3
+prompt   What fraction of the desks are occupied?
+display  story [8 ÷ 13] "A floor has 13 desks, and 8 are occupied. Another floor has 7. What fraction are occupied?"
+answer   exact 8/13 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 8 occupied desks over all 13 desks.
+step 1   Identify the named part and the whole.   [8 out of 13]
+step 2   Write the part over the whole, then reduce.   [8/13 = 8/13]
+step 3   The other floor's 7 is separate.
+miss     wrong-operation = 104   That multiplies the counts. A fraction compares occupied desks with all desks.
+miss     distractor-pair = 1.1428571428571428   The 7 belongs to a separate count, not this whole.
+miss     answered-part = 8   That is the part count. Write it over the whole of 13.
+
+--- fraction-words · seed 424242 · difficulty 3
+prompt   What fraction of the applications are approved?
+display  story [3 ÷ 11] "A team reviews 11 applications, and 3 are approved. Another team reviews 4. What fraction are approved?"
+answer   exact 3/11 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 3 approved applications over all 11 applications.
+step 1   Identify the named part and the whole.   [3 out of 11]
+step 2   Write the part over the whole, then reduce.   [3/11 = 3/11]
+step 3   The other team's 4 is separate.
+miss     wrong-operation = 33   That multiplies the counts. A fraction compares approved applications with all reviewed applications.
+miss     distractor-pair = 0.75   The 4 belongs to a separate count, not this whole.
+miss     answered-part = 3   That is the part count. Write it over the whole of 11.
+
+--- fraction-words · seed 987654321 · difficulty 3
+prompt   What fraction of the beds are planted?
+display  story [3 ÷ 18] "A garden has 18 beds, and 3 are planted. A greenhouse has 2. What fraction are planted?"
+answer   exact 1/6 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 3 planted beds over all 18 garden beds.
+step 1   Identify the named part and the whole.   [3 out of 18]
+step 2   Write the part over the whole, then reduce.   [3/18 = 1/6]
+step 3   The greenhouse's 2 is separate.
+miss     wrong-operation = 54   That multiplies the counts. A fraction compares planted beds with all garden beds.
+miss     distractor-pair = 1.5   The 2 belongs to a separate count, not this whole.
+miss     answered-part = 3   That is the part count. Write it over the whole of 18.
+
+--- fraction-words · seed 1 · difficulty 4
+prompt   What fraction of the beds are planted?
+display  story [1 ÷ 22] "A garden has 22 beds, and 1 is planted. A greenhouse has 14. What fraction are planted?"
+answer   exact 1/22 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 1 planted bed over all 22 garden beds.
+step 1   Identify the named part and the whole.   [1 out of 22]
+step 2   Write the part over the whole, then reduce.   [1/22 = 1/22]
+step 3   The greenhouse's 14 is separate.
+miss     wrong-operation = 22   That multiplies the counts. A fraction compares planted beds with all garden beds.
+miss     distractor-pair = 0.07142857142857142   The 14 belongs to a separate count, not this whole.
+miss     answered-part = 1   That is the part count. Write it over the whole of 22.
+
+--- fraction-words · seed 12345 · difficulty 4
+prompt   What fraction of the tools are inspected?
+display  story [8 ÷ 26] "A workshop has 26 tools, and 8 are inspected. A nearby shop has 13. What fraction are inspected?"
+answer   exact 4/13 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 8 inspected tools over all 26 tools.
+step 1   Identify the named part and the whole.   [8 out of 26]
+step 2   Write the part over the whole, then reduce.   [8/26 = 4/13]
+step 3   The nearby shop's 13 is separate.
+miss     wrong-operation = 208   That multiplies the counts. A fraction compares inspected tools with all workshop tools.
+miss     distractor-pair = 0.6153846153846154   The 13 belongs to a separate count, not this whole.
+miss     answered-part = 8   That is the part count. Write it over the whole of 26.
+
+--- fraction-words · seed 67890 · difficulty 4
+prompt   What fraction of the desks are occupied?
+display  story [12 ÷ 20] "A floor has 20 desks, and 12 are occupied. Another floor has 10. What fraction are occupied?"
+answer   exact 3/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 12 occupied desks over all 20 desks.
+step 1   Identify the named part and the whole.   [12 out of 20]
+step 2   Write the part over the whole, then reduce.   [12/20 = 3/5]
+step 3   The other floor's 10 is separate.
+miss     wrong-operation = 240   That multiplies the counts. A fraction compares occupied desks with all desks.
+miss     distractor-pair = 1.2   The 10 belongs to a separate count, not this whole.
+miss     answered-part = 12   That is the part count. Write it over the whole of 20.
+
+--- fraction-words · seed 424242 · difficulty 4
+prompt   What fraction of the applications are approved?
+display  story [4 ÷ 17] "A team reviews 17 applications, and 4 are approved. Another team reviews 6. What fraction are approved?"
+answer   exact 4/17 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 4 approved applications over all 17 applications.
+step 1   Identify the named part and the whole.   [4 out of 17]
+step 2   Write the part over the whole, then reduce.   [4/17 = 4/17]
+step 3   The other team's 6 is separate.
+miss     wrong-operation = 68   That multiplies the counts. A fraction compares approved applications with all reviewed applications.
+miss     distractor-pair = 0.6666666666666666   The 6 belongs to a separate count, not this whole.
+miss     answered-part = 4   That is the part count. Write it over the whole of 17.
+
+--- fraction-words · seed 987654321 · difficulty 4
+prompt   What fraction of the beds are planted?
+display  story [4 ÷ 26] "A garden has 26 beds, and 4 are planted. A greenhouse has 2. What fraction are planted?"
+answer   exact 2/13 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 4 planted beds over all 26 garden beds.
+step 1   Identify the named part and the whole.   [4 out of 26]
+step 2   Write the part over the whole, then reduce.   [4/26 = 2/13]
+step 3   The greenhouse's 2 is separate.
+miss     wrong-operation = 104   That multiplies the counts. A fraction compares planted beds with all garden beds.
+miss     distractor-pair = 2   The 2 belongs to a separate count, not this whole.
+miss     answered-part = 4   That is the part count. Write it over the whole of 26.
+
+--- fraction-words · seed 1 · difficulty 5
+prompt   What fraction of the beds are planted?
+display  story [1 ÷ 34] "A garden has 34 beds, and 1 is planted. A greenhouse has 22. What fraction are planted?"
+answer   exact 1/34 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 1 planted bed over all 34 garden beds.
+step 1   Identify the named part and the whole.   [1 out of 34]
+step 2   Write the part over the whole, then reduce.   [1/34 = 1/34]
+step 3   The greenhouse's 22 is separate.
+miss     wrong-operation = 34   That multiplies the counts. A fraction compares planted beds with all garden beds.
+miss     distractor-pair = 0.045454545454545456   The 22 belongs to a separate count, not this whole.
+miss     answered-part = 1   That is the part count. Write it over the whole of 34.
+
+--- fraction-words · seed 12345 · difficulty 5
+prompt   What fraction of the tools are inspected?
+display  story [12 ÷ 40] "A workshop has 40 tools, and 12 are inspected. A nearby shop has 20. What fraction are inspected?"
+answer   exact 3/10 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 12 inspected tools over all 40 tools.
+step 1   Identify the named part and the whole.   [12 out of 40]
+step 2   Write the part over the whole, then reduce.   [12/40 = 3/10]
+step 3   The nearby shop's 20 is separate.
+miss     wrong-operation = 480   That multiplies the counts. A fraction compares inspected tools with all workshop tools.
+miss     distractor-pair = 0.6   The 20 belongs to a separate count, not this whole.
+miss     answered-part = 12   That is the part count. Write it over the whole of 40.
+
+--- fraction-words · seed 67890 · difficulty 5
+prompt   What fraction of the desks are occupied?
+display  story [18 ÷ 30] "A floor has 30 desks, and 18 are occupied. Another floor has 15. What fraction are occupied?"
+answer   exact 3/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 18 occupied desks over all 30 desks.
+step 1   Identify the named part and the whole.   [18 out of 30]
+step 2   Write the part over the whole, then reduce.   [18/30 = 3/5]
+step 3   The other floor's 15 is separate.
+miss     wrong-operation = 540   That multiplies the counts. A fraction compares occupied desks with all desks.
+miss     distractor-pair = 1.2   The 15 belongs to a separate count, not this whole.
+miss     answered-part = 18   That is the part count. Write it over the whole of 30.
+
+--- fraction-words · seed 424242 · difficulty 5
+prompt   What fraction of the applications are approved?
+display  story [6 ÷ 26] "A team reviews 26 applications, and 6 are approved. Another team reviews 8. What fraction are approved?"
+answer   exact 3/13 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 6 approved applications over all 26 applications.
+step 1   Identify the named part and the whole.   [6 out of 26]
+step 2   Write the part over the whole, then reduce.   [6/26 = 3/13]
+step 3   The other team's 8 is separate.
+miss     wrong-operation = 156   That multiplies the counts. A fraction compares approved applications with all reviewed applications.
+miss     distractor-pair = 0.75   The 8 belongs to a separate count, not this whole.
+miss     answered-part = 6   That is the part count. Write it over the whole of 26.
+
+--- fraction-words · seed 987654321 · difficulty 5
+prompt   What fraction of the beds are planted?
+display  story [6 ÷ 40] "A garden has 40 beds, and 6 are planted. A greenhouse has 2. What fraction are planted?"
+answer   exact 3/20 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write the 6 planted beds over all 40 garden beds.
+step 1   Identify the named part and the whole.   [6 out of 40]
+step 2   Write the part over the whole, then reduce.   [6/40 = 3/20]
+step 3   The greenhouse's 2 is separate.
+miss     wrong-operation = 240   That multiplies the counts. A fraction compares planted beds with all garden beds.
+miss     distractor-pair = 3   The 2 belongs to a separate count, not this whole.
+miss     answered-part = 6   That is the part count. Write it over the whole of 40."
 `;
 
 exports[`recorded output: improper-to-mixed > matches the wording recorded when the skill landed 1`] = `
@@ -1193,6 +2199,641 @@ step 2   The quotient is the whole part.   [2]
 step 3   The remainder becomes the fraction numerator.   [1/10]
 miss     quotient-remainder-swapped = 1.2   The quotient is the whole part; the remainder is the fraction numerator.
 miss     whole-with-original-fraction = 4.1   Only the remainder becomes the fraction part."
+`;
+
+exports[`recorded output: mixed-to-improper > matches the wording recorded when the skill landed 1`] = `
+"--- mixed-to-improper · seed 1 · difficulty 1
+prompt   Write this as an improper fraction.
+display  math "2 and 1 over 3" row("2", fraction("1", "3")) [mixed-to-improper 2 1/3]
+answer   exact 7/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [2 × 3 = 6]
+step 2   Add the numerator.   [6 + 1 = 7]
+step 3   Keep the denominator.   [7/3]
+miss     dropped-numerator = 2   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.6666666666666666   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 12345 · difficulty 1
+prompt   Write this as an improper fraction.
+display  math "1 and 1 over 4" row("1", fraction("1", "4")) [mixed-to-improper 1 1/4]
+answer   exact 5/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [1 × 4 = 4]
+step 2   Add the numerator.   [4 + 1 = 5]
+step 3   Keep the denominator.   [5/4]
+miss     dropped-numerator = 1   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.25   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 67890 · difficulty 1
+prompt   Write this as an improper fraction.
+display  math "1 and 2 over 3" row("1", fraction("2", "3")) [mixed-to-improper 1 2/3]
+answer   exact 5/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [1 × 3 = 3]
+step 2   Add the numerator.   [3 + 2 = 5]
+step 3   Keep the denominator.   [5/3]
+miss     dropped-numerator = 1   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.6666666666666666   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 424242 · difficulty 1
+prompt   Write this as an improper fraction.
+display  math "1 and 1 over 2" row("1", fraction("1", "2")) [mixed-to-improper 1 1/2]
+answer   exact 3/2 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [1 × 2 = 2]
+step 2   Add the numerator.   [2 + 1 = 3]
+step 3   Keep the denominator.   [3/2]
+miss     dropped-numerator = 1   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.5   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 987654321 · difficulty 1
+prompt   Write this as an improper fraction.
+display  math "1 and 1 over 4" row("1", fraction("1", "4")) [mixed-to-improper 1 1/4]
+answer   exact 5/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [1 × 4 = 4]
+step 2   Add the numerator.   [4 + 1 = 5]
+step 3   Keep the denominator.   [5/4]
+miss     dropped-numerator = 1   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.25   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 1 · difficulty 2
+prompt   Write this as an improper fraction.
+display  math "2 and 1 over 4" row("2", fraction("1", "4")) [mixed-to-improper 2 1/4]
+answer   exact 9/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [2 × 4 = 8]
+step 2   Add the numerator.   [8 + 1 = 9]
+step 3   Keep the denominator.   [9/4]
+miss     dropped-numerator = 2   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.5   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 12345 · difficulty 2
+prompt   Write this as an improper fraction.
+display  math "2 and 2 over 5" row("2", fraction("2", "5")) [mixed-to-improper 2 2/5]
+answer   exact 12/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [2 × 5 = 10]
+step 2   Add the numerator.   [10 + 2 = 12]
+step 3   Keep the denominator.   [12/5]
+miss     dropped-numerator = 2   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.8   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 67890 · difficulty 2
+prompt   Write this as an improper fraction.
+display  math "2 and 2 over 3" row("2", fraction("2", "3")) [mixed-to-improper 2 2/3]
+answer   exact 8/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [2 × 3 = 6]
+step 2   Add the numerator.   [6 + 2 = 8]
+step 3   Keep the denominator.   [8/3]
+miss     dropped-numerator = 2   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 1.3333333333333333   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 424242 · difficulty 2
+prompt   Write this as an improper fraction.
+display  math "1 and 1 over 2" row("1", fraction("1", "2")) [mixed-to-improper 1 1/2]
+answer   exact 3/2 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [1 × 2 = 2]
+step 2   Add the numerator.   [2 + 1 = 3]
+step 3   Keep the denominator.   [3/2]
+miss     dropped-numerator = 1   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.5   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 987654321 · difficulty 2
+prompt   Write this as an improper fraction.
+display  math "1 and 1 over 5" row("1", fraction("1", "5")) [mixed-to-improper 1 1/5]
+answer   exact 6/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [1 × 5 = 5]
+step 2   Add the numerator.   [5 + 1 = 6]
+step 3   Keep the denominator.   [6/5]
+miss     dropped-numerator = 1   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.2   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 1 · difficulty 3
+prompt   Write this as an improper fraction.
+display  math "3 and 1 over 5" row("3", fraction("1", "5")) [mixed-to-improper 3 1/5]
+answer   exact 16/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [3 × 5 = 15]
+step 2   Add the numerator.   [15 + 1 = 16]
+step 3   Keep the denominator.   [16/5]
+miss     dropped-numerator = 3   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.6   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 12345 · difficulty 3
+prompt   Write this as an improper fraction.
+display  math "3 and 1 over 6" row("3", fraction("1", "6")) [mixed-to-improper 3 1/6]
+answer   exact 19/6 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [3 × 6 = 18]
+step 2   Add the numerator.   [18 + 1 = 19]
+step 3   Keep the denominator.   [19/6]
+miss     dropped-numerator = 3   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.5   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 67890 · difficulty 3
+prompt   Write this as an improper fraction.
+display  math "3 and 3 over 4" row("3", fraction("3", "4")) [mixed-to-improper 3 3/4]
+answer   exact 15/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [3 × 4 = 12]
+step 2   Add the numerator.   [12 + 3 = 15]
+step 3   Keep the denominator.   [15/4]
+miss     dropped-numerator = 3   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 2.25   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 424242 · difficulty 3
+prompt   Write this as an improper fraction.
+display  math "2 and 1 over 3" row("2", fraction("1", "3")) [mixed-to-improper 2 1/3]
+answer   exact 7/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [2 × 3 = 6]
+step 2   Add the numerator.   [6 + 1 = 7]
+step 3   Keep the denominator.   [7/3]
+miss     dropped-numerator = 2   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.6666666666666666   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 987654321 · difficulty 3
+prompt   Write this as an improper fraction.
+display  math "2 and 1 over 6" row("2", fraction("1", "6")) [mixed-to-improper 2 1/6]
+answer   exact 13/6 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [2 × 6 = 12]
+step 2   Add the numerator.   [12 + 1 = 13]
+step 3   Keep the denominator.   [13/6]
+miss     dropped-numerator = 2   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.3333333333333333   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 1 · difficulty 4
+prompt   Write this as an improper fraction.
+display  math "4 and 1 over 7" row("4", fraction("1", "7")) [mixed-to-improper 4 1/7]
+answer   exact 29/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [4 × 7 = 28]
+step 2   Add the numerator.   [28 + 1 = 29]
+step 3   Keep the denominator.   [29/7]
+miss     dropped-numerator = 4   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.5714285714285714   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 12345 · difficulty 4
+prompt   Write this as an improper fraction.
+display  math "3 and 3 over 8" row("3", fraction("3", "8")) [mixed-to-improper 3 3/8]
+answer   exact 27/8 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [3 × 8 = 24]
+step 2   Add the numerator.   [24 + 3 = 27]
+step 3   Keep the denominator.   [27/8]
+miss     dropped-numerator = 3   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 1.125   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 67890 · difficulty 4
+prompt   Write this as an improper fraction.
+display  math "3 and 3 over 5" row("3", fraction("3", "5")) [mixed-to-improper 3 3/5]
+answer   exact 18/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [3 × 5 = 15]
+step 2   Add the numerator.   [15 + 3 = 18]
+step 3   Keep the denominator.   [18/5]
+miss     dropped-numerator = 3   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 1.8   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 424242 · difficulty 4
+prompt   Write this as an improper fraction.
+display  math "2 and 1 over 4" row("2", fraction("1", "4")) [mixed-to-improper 2 1/4]
+answer   exact 9/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [2 × 4 = 8]
+step 2   Add the numerator.   [8 + 1 = 9]
+step 3   Keep the denominator.   [9/4]
+miss     dropped-numerator = 2   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.5   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 987654321 · difficulty 4
+prompt   Write this as an improper fraction.
+display  math "2 and 1 over 8" row("2", fraction("1", "8")) [mixed-to-improper 2 1/8]
+answer   exact 17/8 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [2 × 8 = 16]
+step 2   Add the numerator.   [16 + 1 = 17]
+step 3   Keep the denominator.   [17/8]
+miss     dropped-numerator = 2   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.25   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 1 · difficulty 5
+prompt   Write this as an improper fraction.
+display  math "5 and 1 over 8" row("5", fraction("1", "8")) [mixed-to-improper 5 1/8]
+answer   exact 41/8 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [5 × 8 = 40]
+step 2   Add the numerator.   [40 + 1 = 41]
+step 3   Keep the denominator.   [41/8]
+miss     dropped-numerator = 5   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.625   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 12345 · difficulty 5
+prompt   Write this as an improper fraction.
+display  math "5 and 3 over 10" row("5", fraction("3", "10")) [mixed-to-improper 5 3/10]
+answer   exact 53/10 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [5 × 10 = 50]
+step 2   Add the numerator.   [50 + 3 = 53]
+step 3   Keep the denominator.   [53/10]
+miss     dropped-numerator = 5   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 1.5   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 67890 · difficulty 5
+prompt   Write this as an improper fraction.
+display  math "4 and 4 over 7" row("4", fraction("4", "7")) [mixed-to-improper 4 4/7]
+answer   exact 32/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [4 × 7 = 28]
+step 2   Add the numerator.   [28 + 4 = 32]
+step 3   Keep the denominator.   [32/7]
+miss     dropped-numerator = 4   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 2.2857142857142856   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 424242 · difficulty 5
+prompt   Write this as an improper fraction.
+display  math "3 and 1 over 5" row("3", fraction("1", "5")) [mixed-to-improper 3 1/5]
+answer   exact 16/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [3 × 5 = 15]
+step 2   Add the numerator.   [15 + 1 = 16]
+step 3   Keep the denominator.   [16/5]
+miss     dropped-numerator = 3   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.6   Multiply the whole by the denominator, not the numerator.
+
+--- mixed-to-improper · seed 987654321 · difficulty 5
+prompt   Write this as an improper fraction.
+display  math "3 and 1 over 10" row("3", fraction("1", "10")) [mixed-to-improper 3 1/10]
+answer   exact 31/10 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the whole by the denominator, then add the numerator.
+step 1   Multiply the whole by the denominator.   [3 × 10 = 30]
+step 2   Add the numerator.   [30 + 1 = 31]
+step 3   Keep the denominator.   [31/10]
+miss     dropped-numerator = 3   The fraction part still contributes to the new numerator.
+miss     multiplied-by-numerator = 0.3   Multiply the whole by the denominator, not the numerator."
+`;
+
+exports[`recorded output: mult-fractions > matches the wording recorded when the skill landed 1`] = `
+"--- mult-fractions · seed 1 · difficulty 1
+prompt   What is the product?
+display  math "2 over 3, times, 1 over 2" row(fraction("2", "3"), "×", fraction("1", "2")) [multiply 2/3 × 1/2]
+answer   exact 1/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [2 × 1 = 2]
+step 2   Multiply the denominators.   [3 × 2 = 6]
+step 3   Reduce to lowest terms.   [2/6 = 1/3]
+miss     added-instead = 0.6   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.6666666666666666   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 12345 · difficulty 1
+prompt   What is the product?
+display  math "1 over 4, times, 1 over 2" row(fraction("1", "4"), "×", fraction("1", "2")) [multiply 1/4 × 1/2]
+answer   exact 1/8 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 1 = 1]
+step 2   Multiply the denominators.   [4 × 2 = 8]
+miss     added-instead = 0.3333333333333333   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.25   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 67890 · difficulty 1
+prompt   What is the product?
+display  math "1 over 3, times, 1 over 3" row(fraction("1", "3"), "×", fraction("1", "3")) [multiply 1/3 × 1/3]
+answer   exact 1/9 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 1 = 1]
+step 2   Multiply the denominators.   [3 × 3 = 9]
+miss     added-instead = 0.3333333333333333   Multiplication works straight across; multiply both tops and both bottoms.
+
+--- mult-fractions · seed 424242 · difficulty 1
+prompt   What is the product?
+display  math "1 over 2, times, 1 over 2" row(fraction("1", "2"), "×", fraction("1", "2")) [multiply 1/2 × 1/2]
+answer   exact 1/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 1 = 1]
+step 2   Multiply the denominators.   [2 × 2 = 4]
+miss     added-instead = 0.5   Multiplication works straight across; multiply both tops and both bottoms.
+
+--- mult-fractions · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  math "1 over 4, times, 1 over 2" row(fraction("1", "4"), "×", fraction("1", "2")) [multiply 1/4 × 1/2]
+answer   exact 1/8 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 1 = 1]
+step 2   Multiply the denominators.   [4 × 2 = 8]
+miss     added-instead = 0.3333333333333333   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.25   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 1 · difficulty 2
+prompt   What is the product?
+display  math "3 over 4, times, 1 over 2" row(fraction("3", "4"), "×", fraction("1", "2")) [multiply 3/4 × 1/2]
+answer   exact 3/8 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [3 × 1 = 3]
+step 2   Multiply the denominators.   [4 × 2 = 8]
+miss     added-instead = 0.6666666666666666   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.75   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 12345 · difficulty 2
+prompt   What is the product?
+display  math "2 over 5, times, 2 over 3" row(fraction("2", "5"), "×", fraction("2", "3")) [multiply 2/5 × 2/3]
+answer   exact 4/15 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [2 × 2 = 4]
+step 2   Multiply the denominators.   [5 × 3 = 15]
+miss     added-instead = 0.5   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.8   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 67890 · difficulty 2
+prompt   What is the product?
+display  math "1 over 3, times, 1 over 4" row(fraction("1", "3"), "×", fraction("1", "4")) [multiply 1/3 × 1/4]
+answer   exact 1/12 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 1 = 1]
+step 2   Multiply the denominators.   [3 × 4 = 12]
+miss     added-instead = 0.2857142857142857   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.3333333333333333   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 424242 · difficulty 2
+prompt   What is the product?
+display  math "1 over 2, times, 1 over 2" row(fraction("1", "2"), "×", fraction("1", "2")) [multiply 1/2 × 1/2]
+answer   exact 1/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 1 = 1]
+step 2   Multiply the denominators.   [2 × 2 = 4]
+miss     added-instead = 0.5   Multiplication works straight across; multiply both tops and both bottoms.
+
+--- mult-fractions · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  math "1 over 5, times, 1 over 2" row(fraction("1", "5"), "×", fraction("1", "2")) [multiply 1/5 × 1/2]
+answer   exact 1/10 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 1 = 1]
+step 2   Multiply the denominators.   [5 × 2 = 10]
+miss     added-instead = 0.2857142857142857   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.2   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 1 · difficulty 3
+prompt   What is the product?
+display  math "5 over 6, times, 2 over 3" row(fraction("5", "6"), "×", fraction("2", "3")) [multiply 5/6 × 2/3]
+answer   exact 5/9 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [5 × 2 = 10]
+step 2   Multiply the denominators.   [6 × 3 = 18]
+step 3   Reduce to lowest terms.   [10/18 = 5/9]
+miss     added-instead = 0.7777777777777778   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 1.6666666666666667   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 12345 · difficulty 3
+prompt   What is the product?
+display  math "3 over 7, times, 3 over 4" row(fraction("3", "7"), "×", fraction("3", "4")) [multiply 3/7 × 3/4]
+answer   exact 9/28 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [3 × 3 = 9]
+step 2   Multiply the denominators.   [7 × 4 = 28]
+miss     added-instead = 0.5454545454545454   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 1.2857142857142858   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 67890 · difficulty 3
+prompt   What is the product?
+display  math "1 over 4, times, 2 over 5" row(fraction("1", "4"), "×", fraction("2", "5")) [multiply 1/4 × 2/5]
+answer   exact 1/10 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 2 = 2]
+step 2   Multiply the denominators.   [4 × 5 = 20]
+step 3   Reduce to lowest terms.   [2/20 = 1/10]
+miss     added-instead = 0.3333333333333333   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.5   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 424242 · difficulty 3
+prompt   What is the product?
+display  math "1 over 3, times, 3 over 4" row(fraction("1", "3"), "×", fraction("3", "4")) [multiply 1/3 × 3/4]
+answer   exact 1/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 3 = 3]
+step 2   Multiply the denominators.   [3 × 4 = 12]
+step 3   Reduce to lowest terms.   [3/12 = 1/4]
+miss     added-instead = 0.5714285714285714   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 1   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  math "1 over 7, times, 2 over 3" row(fraction("1", "7"), "×", fraction("2", "3")) [multiply 1/7 × 2/3]
+answer   exact 2/21 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 2 = 2]
+step 2   Multiply the denominators.   [7 × 3 = 21]
+miss     added-instead = 0.3   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.2857142857142857   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 1 · difficulty 4
+prompt   What is the product?
+display  math "4 over 7, times, 3 over 4" row(fraction("4", "7"), "×", fraction("3", "4")) [multiply 4/7 × 3/4]
+answer   exact 3/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [4 × 3 = 12]
+step 2   Multiply the denominators.   [7 × 4 = 28]
+step 3   Reduce to lowest terms.   [12/28 = 3/7]
+miss     added-instead = 0.6363636363636364   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 1.7142857142857142   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 12345 · difficulty 4
+prompt   What is the product?
+display  math "4 over 9, times, 4 over 5" row(fraction("4", "9"), "×", fraction("4", "5")) [multiply 4/9 × 4/5]
+answer   exact 16/45 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [4 × 4 = 16]
+step 2   Multiply the denominators.   [9 × 5 = 45]
+miss     added-instead = 0.5714285714285714   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 1.7777777777777777   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 67890 · difficulty 4
+prompt   What is the product?
+display  math "1 over 6, times, 3 over 7" row(fraction("1", "6"), "×", fraction("3", "7")) [multiply 1/6 × 3/7]
+answer   exact 1/14 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 3 = 3]
+step 2   Multiply the denominators.   [6 × 7 = 42]
+step 3   Reduce to lowest terms.   [3/42 = 1/14]
+miss     added-instead = 0.3076923076923077   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.5   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 424242 · difficulty 4
+prompt   What is the product?
+display  math "1 over 4, times, 3 over 5" row(fraction("1", "4"), "×", fraction("3", "5")) [multiply 1/4 × 3/5]
+answer   exact 3/20 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 3 = 3]
+step 2   Multiply the denominators.   [4 × 5 = 20]
+miss     added-instead = 0.4444444444444444   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.75   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  math "1 over 9, times, 3 over 4" row(fraction("1", "9"), "×", fraction("3", "4")) [multiply 1/9 × 3/4]
+answer   exact 1/12 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 3 = 3]
+step 2   Multiply the denominators.   [9 × 4 = 36]
+step 3   Reduce to lowest terms.   [3/36 = 1/12]
+miss     added-instead = 0.3076923076923077   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.3333333333333333   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 1 · difficulty 5
+prompt   What is the product?
+display  math "7 over 10, times, 5 over 6" row(fraction("7", "10"), "×", fraction("5", "6")) [multiply 7/10 × 5/6]
+answer   exact 7/12 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [7 × 5 = 35]
+step 2   Multiply the denominators.   [10 × 6 = 60]
+step 3   Reduce to lowest terms.   [35/60 = 7/12]
+miss     added-instead = 0.75   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 3.5   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 12345 · difficulty 5
+prompt   What is the product?
+display  math "5 over 12, times, 7 over 8" row(fraction("5", "12"), "×", fraction("7", "8")) [multiply 5/12 × 7/8]
+answer   exact 35/96 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [5 × 7 = 35]
+step 2   Multiply the denominators.   [12 × 8 = 96]
+miss     added-instead = 0.6   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 2.9166666666666665   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 67890 · difficulty 5
+prompt   What is the product?
+display  math "3 over 8, times, 3 over 10" row(fraction("3", "8"), "×", fraction("3", "10")) [multiply 3/8 × 3/10]
+answer   exact 9/80 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [3 × 3 = 9]
+step 2   Multiply the denominators.   [8 × 10 = 80]
+miss     added-instead = 0.3333333333333333   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 1.125   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 424242 · difficulty 5
+prompt   What is the product?
+display  math "1 over 6, times, 4 over 7" row(fraction("1", "6"), "×", fraction("4", "7")) [multiply 1/6 × 4/7]
+answer   exact 2/21 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 4 = 4]
+step 2   Multiply the denominators.   [6 × 7 = 42]
+step 3   Reduce to lowest terms.   [4/42 = 2/21]
+miss     added-instead = 0.38461538461538464   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.6666666666666666   Multiply the denominators too, then reduce the result.
+
+--- mult-fractions · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  math "1 over 12, times, 5 over 6" row(fraction("1", "12"), "×", fraction("5", "6")) [multiply 1/12 × 5/6]
+answer   exact 5/72 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the numerators, multiply the denominators, then reduce.
+step 1   Multiply the numerators.   [1 × 5 = 5]
+step 2   Multiply the denominators.   [12 × 6 = 72]
+miss     added-instead = 0.3333333333333333   Multiplication works straight across; multiply both tops and both bottoms.
+miss     kept-one-denominator = 0.4166666666666667   Multiply the denominators too, then reduce the result."
 `;
 
 exports[`recorded output: sub-frac-diff-den > matches the wording recorded when the skill landed 1`] = `
@@ -1829,4 +3470,306 @@ step 2   Keep the denominator.   [4/12]
 step 3   Reduce to lowest terms.   [4/12 = 1/3]
 miss     flipped-order = -0.3333333333333333   Subtract the second numerator from the first.
 miss     copies-subtrahend = 0.08333333333333333   That is the subtrahend. Subtract it from the first numerator."
+`;
+
+exports[`recorded output: sub-mixed > matches the wording recorded when the skill landed 1`] = `
+"--- sub-mixed · seed 1 · difficulty 1
+prompt   What is the difference?
+display  math "5 and 1 over 3, minus, 2 and 2 over 3" row(row("5", fraction("1", "3")), "−", row("2", fraction("2", "3"))) [sub-mixed 5 1/3 − 2 2/3]
+answer   exact 8/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 3 fraction pieces.   [5 1/3 = 4 4/3]
+step 2   Subtract the whole and fraction parts.   [4 4/3 − 2 2/3 = 2 2/3]
+miss     reversed-fraction-without-borrowing = 3.3333333333333335   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2   One borrowed whole adds 3 fraction pieces, not one.
+
+--- sub-mixed · seed 12345 · difficulty 1
+prompt   What is the difference?
+display  math "4 and 1 over 5, minus, 1 and 3 over 5" row(row("4", fraction("1", "5")), "−", row("1", fraction("3", "5"))) [sub-mixed 4 1/5 − 1 3/5]
+answer   exact 13/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [4 1/5 = 3 6/5]
+step 2   Subtract the whole and fraction parts.   [3 6/5 − 1 3/5 = 2 3/5]
+miss     reversed-fraction-without-borrowing = 3.4   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 1.8   One borrowed whole adds 5 fraction pieces, not one.
+
+--- sub-mixed · seed 67890 · difficulty 1
+prompt   What is the difference?
+display  math "4 and 1 over 3, minus, 1 and 2 over 3" row(row("4", fraction("1", "3")), "−", row("1", fraction("2", "3"))) [sub-mixed 4 1/3 − 1 2/3]
+answer   exact 8/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 3 fraction pieces.   [4 1/3 = 3 4/3]
+step 2   Subtract the whole and fraction parts.   [3 4/3 − 1 2/3 = 2 2/3]
+miss     reversed-fraction-without-borrowing = 3.3333333333333335   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2   One borrowed whole adds 3 fraction pieces, not one.
+
+--- sub-mixed · seed 424242 · difficulty 1
+prompt   What is the difference?
+display  math "4 and 1 over 3, minus, 1 and 2 over 3" row(row("4", fraction("1", "3")), "−", row("1", fraction("2", "3"))) [sub-mixed 4 1/3 − 1 2/3]
+answer   exact 8/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 3 fraction pieces.   [4 1/3 = 3 4/3]
+step 2   Subtract the whole and fraction parts.   [3 4/3 − 1 2/3 = 2 2/3]
+miss     reversed-fraction-without-borrowing = 3.3333333333333335   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2   One borrowed whole adds 3 fraction pieces, not one.
+
+--- sub-mixed · seed 987654321 · difficulty 1
+prompt   What is the difference?
+display  math "4 and 1 over 5, minus, 1 and 2 over 5" row(row("4", fraction("1", "5")), "−", row("1", fraction("2", "5"))) [sub-mixed 4 1/5 − 1 2/5]
+answer   exact 14/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [4 1/5 = 3 6/5]
+step 2   Subtract the whole and fraction parts.   [3 6/5 − 1 2/5 = 2 4/5]
+miss     reversed-fraction-without-borrowing = 3.2   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2   One borrowed whole adds 5 fraction pieces, not one.
+
+--- sub-mixed · seed 1 · difficulty 2
+prompt   What is the difference?
+display  math "6 and 1 over 5, minus, 2 and 2 over 5" row(row("6", fraction("1", "5")), "−", row("2", fraction("2", "5"))) [sub-mixed 6 1/5 − 2 2/5]
+answer   exact 19/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [6 1/5 = 5 6/5]
+step 2   Subtract the whole and fraction parts.   [5 6/5 − 2 2/5 = 3 4/5]
+miss     reversed-fraction-without-borrowing = 4.2   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 3   One borrowed whole adds 5 fraction pieces, not one.
+
+--- sub-mixed · seed 12345 · difficulty 2
+prompt   What is the difference?
+display  math "5 and 2 over 5, minus, 2 and 4 over 5" row(row("5", fraction("2", "5")), "−", row("2", fraction("4", "5"))) [sub-mixed 5 2/5 − 2 4/5]
+answer   exact 13/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [5 2/5 = 4 7/5]
+step 2   Subtract the whole and fraction parts.   [4 7/5 − 2 4/5 = 2 3/5]
+miss     reversed-fraction-without-borrowing = 3.4   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 1.8   One borrowed whole adds 5 fraction pieces, not one.
+
+--- sub-mixed · seed 67890 · difficulty 2
+prompt   What is the difference?
+display  math "5 and 2 over 5, minus, 2 and 3 over 5" row(row("5", fraction("2", "5")), "−", row("2", fraction("3", "5"))) [sub-mixed 5 2/5 − 2 3/5]
+answer   exact 14/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [5 2/5 = 4 7/5]
+step 2   Subtract the whole and fraction parts.   [4 7/5 − 2 3/5 = 2 4/5]
+miss     reversed-fraction-without-borrowing = 3.2   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2   One borrowed whole adds 5 fraction pieces, not one.
+
+--- sub-mixed · seed 424242 · difficulty 2
+prompt   What is the difference?
+display  math "4 and 1 over 5, minus, 2 and 4 over 5" row(row("4", fraction("1", "5")), "−", row("2", fraction("4", "5"))) [sub-mixed 4 1/5 − 2 4/5]
+answer   exact 7/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [4 1/5 = 3 6/5]
+step 2   Subtract the whole and fraction parts.   [3 6/5 − 2 4/5 = 1 2/5]
+miss     reversed-fraction-without-borrowing = 2.6   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 0.6   One borrowed whole adds 5 fraction pieces, not one.
+
+--- sub-mixed · seed 987654321 · difficulty 2
+prompt   What is the difference?
+display  math "5 and 1 over 5, minus, 2 and 4 over 5" row(row("5", fraction("1", "5")), "−", row("2", fraction("4", "5"))) [sub-mixed 5 1/5 − 2 4/5]
+answer   exact 12/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [5 1/5 = 4 6/5]
+step 2   Subtract the whole and fraction parts.   [4 6/5 − 2 4/5 = 2 2/5]
+miss     reversed-fraction-without-borrowing = 3.6   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 1.6   One borrowed whole adds 5 fraction pieces, not one.
+
+--- sub-mixed · seed 1 · difficulty 3
+prompt   What is the difference?
+display  math "8 and 1 over 7, minus, 3 and 2 over 7" row(row("8", fraction("1", "7")), "−", row("3", fraction("2", "7"))) [sub-mixed 8 1/7 − 3 2/7]
+answer   exact 34/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 7 fraction pieces.   [8 1/7 = 7 8/7]
+step 2   Subtract the whole and fraction parts.   [7 8/7 − 3 2/7 = 4 6/7]
+miss     reversed-fraction-without-borrowing = 5.142857142857143   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 4   One borrowed whole adds 7 fraction pieces, not one.
+
+--- sub-mixed · seed 12345 · difficulty 3
+prompt   What is the difference?
+display  math "7 and 2 over 7, minus, 2 and 3 over 7" row(row("7", fraction("2", "7")), "−", row("2", fraction("3", "7"))) [sub-mixed 7 2/7 − 2 3/7]
+answer   exact 34/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 7 fraction pieces.   [7 2/7 = 6 9/7]
+step 2   Subtract the whole and fraction parts.   [6 9/7 − 2 3/7 = 4 6/7]
+miss     reversed-fraction-without-borrowing = 5.142857142857143   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 4   One borrowed whole adds 7 fraction pieces, not one.
+
+--- sub-mixed · seed 67890 · difficulty 3
+prompt   What is the difference?
+display  math "5 and 2 over 7, minus, 3 and 3 over 7" row(row("5", fraction("2", "7")), "−", row("3", fraction("3", "7"))) [sub-mixed 5 2/7 − 3 3/7]
+answer   exact 13/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 7 fraction pieces.   [5 2/7 = 4 9/7]
+step 2   Subtract the whole and fraction parts.   [4 9/7 − 3 3/7 = 1 6/7]
+miss     reversed-fraction-without-borrowing = 2.142857142857143   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 1   One borrowed whole adds 7 fraction pieces, not one.
+
+--- sub-mixed · seed 424242 · difficulty 3
+prompt   What is the difference?
+display  math "6 and 1 over 5, minus, 2 and 3 over 5" row(row("6", fraction("1", "5")), "−", row("2", fraction("3", "5"))) [sub-mixed 6 1/5 − 2 3/5]
+answer   exact 18/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [6 1/5 = 5 6/5]
+step 2   Subtract the whole and fraction parts.   [5 6/5 − 2 3/5 = 3 3/5]
+miss     reversed-fraction-without-borrowing = 4.4   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2.8   One borrowed whole adds 5 fraction pieces, not one.
+
+--- sub-mixed · seed 987654321 · difficulty 3
+prompt   What is the difference?
+display  math "8 and 1 over 5, minus, 4 and 2 over 5" row(row("8", fraction("1", "5")), "−", row("4", fraction("2", "5"))) [sub-mixed 8 1/5 − 4 2/5]
+answer   exact 19/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [8 1/5 = 7 6/5]
+step 2   Subtract the whole and fraction parts.   [7 6/5 − 4 2/5 = 3 4/5]
+miss     reversed-fraction-without-borrowing = 4.2   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 3   One borrowed whole adds 5 fraction pieces, not one.
+
+--- sub-mixed · seed 1 · difficulty 4
+prompt   What is the difference?
+display  math "10 and 1 over 9, minus, 4 and 2 over 9" row(row("10", fraction("1", "9")), "−", row("4", fraction("2", "9"))) [sub-mixed 10 1/9 − 4 2/9]
+answer   exact 53/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 9 fraction pieces.   [10 1/9 = 9 10/9]
+step 2   Subtract the whole and fraction parts.   [9 10/9 − 4 2/9 = 5 8/9]
+miss     reversed-fraction-without-borrowing = 6.111111111111111   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 5   One borrowed whole adds 9 fraction pieces, not one.
+
+--- sub-mixed · seed 12345 · difficulty 4
+prompt   What is the difference?
+display  math "10 and 2 over 7, minus, 5 and 5 over 7" row(row("10", fraction("2", "7")), "−", row("5", fraction("5", "7"))) [sub-mixed 10 2/7 − 5 5/7]
+answer   exact 32/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 7 fraction pieces.   [10 2/7 = 9 9/7]
+step 2   Subtract the whole and fraction parts.   [9 9/7 − 5 5/7 = 4 4/7]
+miss     reversed-fraction-without-borrowing = 5.428571428571429   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 3.7142857142857144   One borrowed whole adds 7 fraction pieces, not one.
+
+--- sub-mixed · seed 67890 · difficulty 4
+prompt   What is the difference?
+display  math "7 and 2 over 7, minus, 3 and 6 over 7" row(row("7", fraction("2", "7")), "−", row("3", fraction("6", "7"))) [sub-mixed 7 2/7 − 3 6/7]
+answer   exact 24/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 7 fraction pieces.   [7 2/7 = 6 9/7]
+step 2   Subtract the whole and fraction parts.   [6 9/7 − 3 6/7 = 3 3/7]
+miss     reversed-fraction-without-borrowing = 4.571428571428571   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2.5714285714285716   One borrowed whole adds 7 fraction pieces, not one.
+
+--- sub-mixed · seed 424242 · difficulty 4
+prompt   What is the difference?
+display  math "8 and 1 over 7, minus, 4 and 4 over 7" row(row("8", fraction("1", "7")), "−", row("4", fraction("4", "7"))) [sub-mixed 8 1/7 − 4 4/7]
+answer   exact 25/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 7 fraction pieces.   [8 1/7 = 7 8/7]
+step 2   Subtract the whole and fraction parts.   [7 8/7 − 4 4/7 = 3 4/7]
+miss     reversed-fraction-without-borrowing = 4.428571428571429   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2.7142857142857144   One borrowed whole adds 7 fraction pieces, not one.
+
+--- sub-mixed · seed 987654321 · difficulty 4
+prompt   What is the difference?
+display  math "7 and 2 over 9, minus, 3 and 4 over 9" row(row("7", fraction("2", "9")), "−", row("3", fraction("4", "9"))) [sub-mixed 7 2/9 − 3 4/9]
+answer   exact 34/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 9 fraction pieces.   [7 2/9 = 6 11/9]
+step 2   Subtract the whole and fraction parts.   [6 11/9 − 3 4/9 = 3 7/9]
+miss     reversed-fraction-without-borrowing = 4.222222222222222   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2.888888888888889   One borrowed whole adds 9 fraction pieces, not one.
+
+--- sub-mixed · seed 1 · difficulty 5
+prompt   What is the difference?
+display  math "12 and 1 over 11, minus, 5 and 2 over 11" row(row("12", fraction("1", "11")), "−", row("5", fraction("2", "11"))) [sub-mixed 12 1/11 − 5 2/11]
+answer   exact 76/11 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 11 fraction pieces.   [12 1/11 = 11 12/11]
+step 2   Subtract the whole and fraction parts.   [11 12/11 − 5 2/11 = 6 10/11]
+miss     reversed-fraction-without-borrowing = 7.090909090909091   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 6   One borrowed whole adds 11 fraction pieces, not one.
+
+--- sub-mixed · seed 12345 · difficulty 5
+prompt   What is the difference?
+display  math "12 and 2 over 9, minus, 7 and 7 over 9" row(row("12", fraction("2", "9")), "−", row("7", fraction("7", "9"))) [sub-mixed 12 2/9 − 7 7/9]
+answer   exact 40/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 9 fraction pieces.   [12 2/9 = 11 11/9]
+step 2   Subtract the whole and fraction parts.   [11 11/9 − 7 7/9 = 4 4/9]
+miss     reversed-fraction-without-borrowing = 5.555555555555555   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 3.5555555555555554   One borrowed whole adds 9 fraction pieces, not one.
+
+--- sub-mixed · seed 67890 · difficulty 5
+prompt   What is the difference?
+display  math "8 and 4 over 9, minus, 4 and 5 over 9" row(row("8", fraction("4", "9")), "−", row("4", fraction("5", "9"))) [sub-mixed 8 4/9 − 4 5/9]
+answer   exact 35/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 9 fraction pieces.   [8 4/9 = 7 13/9]
+step 2   Subtract the whole and fraction parts.   [7 13/9 − 4 5/9 = 3 8/9]
+miss     reversed-fraction-without-borrowing = 4.111111111111111   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 3   One borrowed whole adds 9 fraction pieces, not one.
+
+--- sub-mixed · seed 424242 · difficulty 5
+prompt   What is the difference?
+display  math "10 and 1 over 9, minus, 6 and 5 over 9" row(row("10", fraction("1", "9")), "−", row("6", fraction("5", "9"))) [sub-mixed 10 1/9 − 6 5/9]
+answer   exact 32/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 9 fraction pieces.   [10 1/9 = 9 10/9]
+step 2   Subtract the whole and fraction parts.   [9 10/9 − 6 5/9 = 3 5/9]
+miss     reversed-fraction-without-borrowing = 4.444444444444445   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2.6666666666666665   One borrowed whole adds 9 fraction pieces, not one.
+
+--- sub-mixed · seed 987654321 · difficulty 5
+prompt   What is the difference?
+display  math "9 and 2 over 11, minus, 5 and 10 over 11" row(row("9", fraction("2", "11")), "−", row("5", fraction("10", "11"))) [sub-mixed 9 2/11 − 5 10/11]
+answer   exact 36/11 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 11 fraction pieces.   [9 2/11 = 8 13/11]
+step 2   Subtract the whole and fraction parts.   [8 13/11 − 5 10/11 = 3 3/11]
+miss     reversed-fraction-without-borrowing = 4.7272727272727275   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2.3636363636363638   One borrowed whole adds 11 fraction pieces, not one."
 `;

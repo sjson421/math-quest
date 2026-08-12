@@ -34,6 +34,22 @@ const operationData = (problem: Problem) => {
   return data
 }
 
+const mixedOperationData = (problem: Problem) => {
+  const data = fractionData(problem)
+  if (data.operation !== 'add-mixed' && data.operation !== 'sub-mixed') {
+    throw new Error('expected mixed-number operation data')
+  }
+  return data
+}
+
+const productData = (problem: Problem) => {
+  const data = fractionData(problem)
+  if (data.operation !== 'multiply' && data.operation !== 'divide') {
+    throw new Error('expected fraction product data')
+  }
+  return data
+}
+
 const textValue = (notation: MathNotation): string => {
   if (notation.kind !== 'text') throw new Error('expected text notation')
   return notation.value
@@ -465,7 +481,309 @@ describe('improper-to-mixed', () => {
   })
 })
 
-describe('the six-skill unit', () => {
+describe('mixed-to-improper', () => {
+  it('displays a reduced mixed number and derives its exact improper fraction', () => {
+    for (const problem of everyProblem('mixed-to-improper')) {
+      const data = fractionData(problem)
+      if (data.operation !== 'mixed-to-improper') throw new Error('expected mixed conversion data')
+
+      expect(gcd(data.numerator, data.denominator)).toBe(1)
+      expect(exact(problem)).toEqual(rational(data.whole * data.denominator + data.numerator, data.denominator))
+      expect(problem.answer).toMatchObject({ requireSimplified: true })
+      expect(problem.keypad).toEqual({ allowFraction: true })
+    }
+  })
+
+  it('diagnoses omitting the numerator and multiplying by the wrong part', () => {
+    for (const problem of everyProblem('mixed-to-improper')) {
+      const data = fractionData(problem)
+      if (data.operation !== 'mixed-to-improper') throw new Error('expected mixed conversion data')
+
+      expect(diagnose(problem, String(data.whole))?.tag).toBe('dropped-numerator')
+      expect(diagnose(problem, `${data.whole * data.numerator}/${data.denominator}`)?.tag).toBe(
+        'multiplied-by-numerator',
+      )
+    }
+  })
+})
+
+describe('add-mixed', () => {
+  it('adds every displayed whole and fraction part into a reduced mixed answer', () => {
+    for (const problem of everyProblem('add-mixed')) {
+      const data = mixedOperationData(problem)
+      if (data.operation !== 'add-mixed') throw new Error('expected mixed addition data')
+      const denominator = data.leftDenominator
+      const numerator =
+        (data.leftWhole + data.rightWhole) * denominator + data.leftNumerator + data.rightNumerator
+
+      expect(data.rightDenominator).toBe(denominator)
+      expect(exact(problem)).toEqual(rational(numerator, denominator))
+      expect(problem.answer).toMatchObject({ requireMixed: true, requireSimplified: true })
+      expect(problem.keypad).toEqual({ allowMixed: true })
+      expect(gcd(numerator, denominator)).toBe(1)
+    }
+  })
+
+  it('covers no-carry work low and carry work high', () => {
+    const problems = everyProblem('add-mixed')
+    for (const problem of problems.filter(({ difficulty }) => difficulty <= 2)) {
+      const data = mixedOperationData(problem)
+      expect(data.leftNumerator + data.rightNumerator).toBeLessThan(data.leftDenominator)
+    }
+    for (const problem of problems.filter(({ difficulty }) => difficulty >= 4)) {
+      const data = mixedOperationData(problem)
+      expect(data.leftNumerator + data.rightNumerator).toBeGreaterThan(data.leftDenominator)
+    }
+  })
+
+  it('uses the mixed-form response for an unregrouped fractional part', () => {
+    for (const problem of everyProblem('add-mixed').filter(({ difficulty }) => difficulty >= 4)) {
+      const data = mixedOperationData(problem)
+      const whole = data.leftWhole + data.rightWhole
+      const numerator = data.leftNumerator + data.rightNumerator
+      expect(checkAnswer(problem.answer, `${whole} ${numerator}/${data.leftDenominator}`).status).toBe('not-mixed')
+    }
+  })
+
+  it('diagnoses answers containing only the whole or fractional sum', () => {
+    for (const problem of everyProblem('add-mixed')) {
+      const data = mixedOperationData(problem)
+      expect(diagnose(problem, String(data.leftWhole + data.rightWhole))?.tag).toBe('added-wholes-only')
+      expect(
+        diagnose(problem, `${data.leftNumerator + data.rightNumerator}/${data.leftDenominator}`)?.tag,
+      ).toBe('added-fractions-only')
+    }
+  })
+})
+
+describe('sub-mixed', () => {
+  it('borrows on every draw and derives a positive reduced mixed answer', () => {
+    for (const problem of everyProblem('sub-mixed')) {
+      const data = mixedOperationData(problem)
+      if (data.operation !== 'sub-mixed') throw new Error('expected mixed subtraction data')
+      const denominator = data.leftDenominator
+      const numerator =
+        (data.leftWhole - data.rightWhole) * denominator + data.leftNumerator - data.rightNumerator
+
+      expect(data.rightDenominator).toBe(denominator)
+      expect(data.leftNumerator).toBeLessThan(data.rightNumerator)
+      expect(data.leftWhole - data.rightWhole).toBeGreaterThanOrEqual(2)
+      expect(exact(problem)).toEqual(rational(numerator, denominator))
+      expect(exact(problem).n).toBeGreaterThan(exact(problem).d)
+      expect(gcd(numerator, denominator)).toBe(1)
+      expect(problem.answer).toMatchObject({ requireMixed: true, requireSimplified: true })
+      expect(problem.keypad).toEqual({ allowMixed: true })
+    }
+  })
+
+  it('keeps both positive borrowing predictions distinct and diagnosable', () => {
+    for (const problem of everyProblem('sub-mixed')) {
+      const data = mixedOperationData(problem)
+      const denominator = data.leftDenominator
+      const gap = data.leftWhole - data.rightWhole
+      const reversed = gap * denominator + data.rightNumerator - data.leftNumerator
+      const onePiece = (gap - 1) * denominator + data.leftNumerator + 1 - data.rightNumerator
+
+      expect(reversed).toBeGreaterThan(0)
+      expect(onePiece).toBeGreaterThan(0)
+      expect(problem.misconceptions?.map(({ tag }) => tag)).toEqual([
+        'reversed-fraction-without-borrowing',
+        'borrowed-one-piece',
+      ])
+      expect(diagnose(problem, `${reversed}/${denominator}`)?.tag).toBe(
+        'reversed-fraction-without-borrowing',
+      )
+      expect(diagnose(problem, `${onePiece}/${denominator}`)?.tag).toBe('borrowed-one-piece')
+    }
+  })
+})
+
+describe('mult-fractions', () => {
+  it('multiplies reduced proper fractions straight across', () => {
+    for (const problem of everyProblem('mult-fractions')) {
+      const data = productData(problem)
+      if (data.operation !== 'multiply') throw new Error('expected multiplication data')
+
+      expect(data.leftNumerator).toBeLessThan(data.leftDenominator)
+      expect(data.rightNumerator).toBeLessThan(data.rightDenominator)
+      expect(gcd(data.leftNumerator, data.leftDenominator)).toBe(1)
+      expect(gcd(data.rightNumerator, data.rightDenominator)).toBe(1)
+      expect(exact(problem)).toEqual(
+        rational(data.leftNumerator * data.rightNumerator, data.leftDenominator * data.rightDenominator),
+      )
+      expect(problem.answer).toMatchObject({ requireSimplified: true })
+      expect(problem.keypad).toEqual({ allowFraction: true })
+    }
+  })
+
+  it('diagnoses addition and keeping one denominator where each survives', () => {
+    const seen = new Set<string>()
+    for (const problem of everyProblem('mult-fractions')) {
+      const data = productData(problem)
+      const tags = new Set(problem.misconceptions?.map(({ tag }) => tag) ?? [])
+      if (tags.has('added-instead')) {
+        expect(
+          diagnose(
+            problem,
+            `${data.leftNumerator + data.rightNumerator}/${data.leftDenominator + data.rightDenominator}`,
+          )?.tag,
+        ).toBe('added-instead')
+        seen.add('added-instead')
+      }
+      if (tags.has('kept-one-denominator')) {
+        expect(diagnose(problem, `${data.leftNumerator * data.rightNumerator}/${data.leftDenominator}`)?.tag).toBe(
+          'kept-one-denominator',
+        )
+        seen.add('kept-one-denominator')
+      }
+    }
+    expect(seen).toEqual(new Set(['added-instead', 'kept-one-denominator']))
+  })
+})
+
+describe('div-fractions', () => {
+  it('keeps the first fraction, flips the unequal second, and divides exactly', () => {
+    for (const problem of everyProblem('div-fractions')) {
+      const data = productData(problem)
+      if (data.operation !== 'divide') throw new Error('expected division data')
+
+      expect(data.leftNumerator * data.rightDenominator).not.toBe(
+        data.rightNumerator * data.leftDenominator,
+      )
+      expect(exact(problem)).toEqual(
+        rational(data.leftNumerator * data.rightDenominator, data.leftDenominator * data.rightNumerator),
+      )
+      expect(problem.answer).toMatchObject({ requireSimplified: true })
+      expect(problem.keypad).toEqual({ allowFraction: true })
+    }
+  })
+
+  it('keeps both wall predictions distinct and diagnosable on every draw', () => {
+    for (const problem of everyProblem('div-fractions')) {
+      const data = productData(problem)
+      const flippedFirstNumerator = data.leftDenominator * data.rightNumerator
+      const flippedFirstDenominator = data.leftNumerator * data.rightDenominator
+      const straightNumerator = data.leftNumerator * data.rightNumerator
+      const straightDenominator = data.leftDenominator * data.rightDenominator
+
+      expect(problem.misconceptions?.map(({ tag }) => tag)).toEqual([
+        'flipped-first',
+        'multiplied-without-flip',
+      ])
+      expect(diagnose(problem, `${flippedFirstNumerator}/${flippedFirstDenominator}`)?.tag).toBe('flipped-first')
+      expect(diagnose(problem, `${straightNumerator}/${straightDenominator}`)?.tag).toBe(
+        'multiplied-without-flip',
+      )
+    }
+  })
+})
+
+const mixedDenominatorBounds: Record<Difficulty, readonly [number, number]> = {
+  1: [3, 5],
+  2: [4, 6],
+  3: [5, 8],
+  4: [6, 10],
+  5: [8, 12],
+}
+
+const productDenominatorBounds: Record<Difficulty, readonly [number, number]> = {
+  1: [2, 4],
+  2: [2, 5],
+  3: [3, 7],
+  4: [4, 9],
+  5: [6, 12],
+}
+
+describe('new fraction-operation draw bounds', () => {
+  it('keeps mixed conversion inside its denominator ladder', () => {
+    for (const problem of everyProblem('mixed-to-improper')) {
+      const data = fractionData(problem)
+      if (data.operation !== 'mixed-to-improper') throw new Error('expected mixed conversion data')
+      const [min, max] = denominatorBounds[problem.difficulty]
+      expect(data.denominator).toBeGreaterThanOrEqual(min)
+      expect(data.denominator).toBeLessThanOrEqual(max)
+    }
+  })
+
+  it('keeps mixed arithmetic inside its denominator ladder', () => {
+    for (const skillId of ['add-mixed', 'sub-mixed']) {
+      for (const problem of everyProblem(skillId)) {
+        const data = mixedOperationData(problem)
+        const [min, max] = mixedDenominatorBounds[problem.difficulty]
+        expect(data.leftDenominator).toBeGreaterThanOrEqual(min)
+        expect(data.leftDenominator).toBeLessThanOrEqual(max)
+      }
+    }
+  })
+
+  it('keeps multiplication and division inside their denominator ladder', () => {
+    for (const skillId of ['mult-fractions', 'div-fractions']) {
+      for (const problem of everyProblem(skillId)) {
+        const data = productData(problem)
+        const [min, max] = productDenominatorBounds[problem.difficulty]
+        expect(data.leftDenominator).toBeGreaterThanOrEqual(min)
+        expect(data.leftDenominator).toBeLessThanOrEqual(max)
+        expect(data.rightDenominator).toBeGreaterThanOrEqual(min)
+        expect(data.rightDenominator).toBeLessThanOrEqual(max)
+      }
+    }
+  })
+})
+
+describe('fraction-words', () => {
+  const wholeBounds: Record<Difficulty, readonly [number, number]> = {
+    1: [4, 8],
+    2: [6, 12],
+    3: [10, 18],
+    4: [16, 26],
+    5: [24, 40],
+  }
+
+  it('carries a proper part and whole and answers with their exact fraction', () => {
+    for (const problem of everyProblem('fraction-words')) {
+      if (problem.display.kind !== 'story') throw new Error('expected a fraction story')
+      const [part, whole] = problem.display.operands
+      const [min, max] = wholeBounds[problem.difficulty]
+
+      expect(problem.display.operator).toBe('÷')
+      expect(part).toBeGreaterThan(0)
+      expect(part).toBeLessThan(whole)
+      expect(whole).toBeGreaterThanOrEqual(min)
+      expect(whole).toBeLessThanOrEqual(max)
+      expect(exact(problem)).toEqual(rational(part, whole))
+      expect(problem.answer).toMatchObject({ requireSimplified: true })
+      expect(problem.keypad).toEqual({ allowFraction: true })
+    }
+  })
+
+  it('keeps prose, operands, and all three frame-owned diagnoses aligned', () => {
+    for (const problem of everyProblem('fraction-words')) {
+      if (problem.display.kind !== 'story') throw new Error('expected a fraction story')
+      const [part, whole] = problem.display.operands
+      const numbers = problem.display.text.match(/\d+/g)?.map(Number) ?? []
+      const distractor = numbers[2]
+
+      expect(numbers.slice(0, 2)).toEqual([whole, part])
+      expect(distractor).toBeGreaterThan(1)
+      expect(distractor).not.toBe(whole)
+      expect(problem.misconceptions?.map(({ tag }) => tag)).toEqual([
+        'wrong-operation',
+        'distractor-pair',
+        'answered-part',
+      ])
+      expect(diagnose(problem, String(part * whole))?.tag).toBe('wrong-operation')
+      expect(diagnose(problem, `${part}/${distractor}`)?.tag).toBe('distractor-pair')
+      expect(diagnose(problem, String(part))?.tag).toBe('answered-part')
+    }
+  })
+
+  it('draws every authored frame across the sampled problems', () => {
+    const prompts = new Set(everyProblem('fraction-words').map(({ prompt }) => prompt))
+    expect(prompts.size).toBeGreaterThanOrEqual(8)
+  })
+})
+
+describe('the fraction-operation unit', () => {
   it('uses the intended input mode for every skill', () => {
     expect(unit08.map((skill) => `${skill.id} ${everyProblem(skill.id)[0].inputMode}`)).toEqual([
       'add-frac-same-den keypad',
@@ -474,6 +792,12 @@ describe('the six-skill unit', () => {
       'add-frac-diff-den keypad',
       'sub-frac-diff-den keypad',
       'improper-to-mixed keypad',
+      'mixed-to-improper keypad',
+      'add-mixed keypad',
+      'sub-mixed keypad',
+      'mult-fractions keypad',
+      'div-fractions keypad',
+      'fraction-words keypad',
     ])
   })
 
@@ -483,18 +807,42 @@ describe('the six-skill unit', () => {
 
   it('widens each skill from difficulty one to five', () => {
     const magnitude = (problem: Problem) => {
+      if (problem.display.kind === 'story') {
+        return problem.display.operands.reduce((sum, value) => sum + value, 0) / problem.display.operands.length
+      }
       if (problem.display.kind !== 'math' || !problem.display.fraction) {
         throw new Error('expected fraction operation data')
       }
       const data = problem.display.fraction
-      const values =
-        data.operation === 'add' || data.operation === 'sub' || data.operation === 'common-denominator'
-          ? [data.leftNumerator, data.leftDenominator, data.rightNumerator, data.rightDenominator]
-          : data.operation === 'improper-to-mixed'
-            ? [data.numerator, data.denominator]
-            : (() => {
-                throw new Error(`unexpected unit-8 operation: ${data.operation}`)
-              })()
+      let values: number[]
+      switch (data.operation) {
+        case 'add':
+        case 'sub':
+        case 'common-denominator':
+        case 'multiply':
+        case 'divide':
+          values = [data.leftNumerator, data.leftDenominator, data.rightNumerator, data.rightDenominator]
+          break
+        case 'improper-to-mixed':
+          values = [data.numerator, data.denominator]
+          break
+        case 'mixed-to-improper':
+          values = [data.whole, data.numerator, data.denominator]
+          break
+        case 'add-mixed':
+        case 'sub-mixed':
+          values = [
+            data.leftWhole,
+            data.leftNumerator,
+            data.leftDenominator,
+            data.rightWhole,
+            data.rightNumerator,
+            data.rightDenominator,
+          ]
+          break
+        default:
+          throw new Error(`unexpected unit-8 operation: ${data.operation}`)
+      }
       return values.reduce((sum, value) => sum + value, 0) / values.length
     }
 

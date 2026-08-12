@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 76 of 201 skills are playable.** Stages A, B and C, all nine conceptual skills in
-Stage D's Unit 7, and Unit 8's first six operation skills are playable. Choice input,
+**Status: 82 of 201 skills are playable.** Stages A, B and C and Stage D's Units 7 and 8 are
+playable. Choice input,
 number-line input, math notation, fraction input and diagrams are built, so
 `AVAILABLE_CAPABILITIES` holds
 `choice-input`, `number-line`, `math-notation`, `fraction-input` and `diagram`. The three
@@ -14,7 +14,8 @@ fraction slash when a problem asks for one, and a space key for mixed-number ent
 `requireMixed` form checking). Unit 7 uses all three answer controls: fraction
 meaning, diagram reading and lowest terms use the pad; vocabulary, visual equivalence and both
 comparisons use choices; and a fraction is placed on an exact rational line. Unit 8's
-operation skills have landed, and the second half of the unit stays planned.
+operation skills are complete, including mixed-number arithmetic, multiplication, division,
+and fixed-frame fraction stories. Unit 9 is next.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 

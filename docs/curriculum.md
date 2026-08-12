@@ -267,12 +267,12 @@ in lowest terms. Fraction operations wait for Unit 8.
 | 8.4 | `add-frac-diff-den` | | ✅ ⚠️ **major wall** |
 | 8.5 | `sub-frac-diff-den` | | ✅ |
 | 8.6 | `improper-to-mixed` | | ✅ |
-| 8.7 | `mixed-to-improper` | | |
-| 8.8 | `add-mixed` | | |
-| 8.9 | `sub-mixed` | | ⚠️ borrowing from the whole |
-| 8.10 | `mult-fractions` | Straight across | easier than adding — placed after for confidence |
-| 8.11 | `div-fractions` | Keep, change, flip | ⚠️ flipping the wrong fraction |
-| 8.12 | `fraction-words` | Word problems | |
+| 8.7 | `mixed-to-improper` | | ✅ |
+| 8.8 | `add-mixed` | | ✅ |
+| 8.9 | `sub-mixed` | | ✅ ⚠️ borrowing from the whole |
+| 8.10 | `mult-fractions` | Straight across | ✅ easier than adding — placed after for confidence |
+| 8.11 | `div-fractions` | Keep, change, flip | ✅ ⚠️ flipping the wrong fraction |
+| 8.12 | `fraction-words` | Word problems | ✅ |
 
 ### Unit 9 — Decimals (12)
 

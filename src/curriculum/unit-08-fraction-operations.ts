@@ -1,17 +1,24 @@
 import { intAnswer } from '../lib/answer'
 import { gcd, rational } from '../lib/rational'
 import type { FractionData, MathNotation, Misconception } from '../lib/types'
-import { band, defineSkill, type BuildContext, type ProblemSpec } from './engine'
+import {
+  band,
+  defineSkill,
+  fractionStoryProblem,
+  pickFrame,
+  type BuildContext,
+  type ProblemSpec,
+} from './engine'
+import { FRACTION_FRAMES } from './phrasing/fractions'
 
 /**
  * Unit 8 · Fractions: Operations.
  *
- * The first arithmetic of the course: adding and subtracting like fractions,
- * finding a common denominator, adding and subtracting unlike fractions, and
- * converting an improper fraction to a mixed number. Every answer stays
- * recomputable from structured source values — the arithmetic is never trusted
- * from the generator, and the two wall skills retain two diagnosable mistakes
- * on every draw by construction.
+ * The first fraction arithmetic of the course: like and unlike operations,
+ * mixed-number conversions and operations, fraction products and quotients,
+ * and fixed-frame stories. Every answer stays recomputable from structured
+ * source values — the arithmetic is never trusted from the generator, and wall
+ * skills retain two diagnosable mistakes on every draw by construction.
  */
 
 const text = (value: string): MathNotation => ({ kind: 'text', value })
@@ -20,6 +27,11 @@ const fraction = (numerator: string, denominator: string): MathNotation => ({
   kind: 'fraction',
   numerator: text(numerator),
   denominator: text(denominator),
+})
+
+const mixedNumber = (whole: number, numerator: number, denominator: number): MathNotation => ({
+  kind: 'row',
+  children: [text(String(whole)), fraction(String(numerator), String(denominator))],
 })
 
 /**
@@ -38,6 +50,13 @@ const reducedNumerator = ({ rng }: BuildContext, denominator: number, min = 1, m
 const exactFraction = (numerator: number, denominator: number) => ({
   kind: 'exact' as const,
   ...rational(numerator, denominator),
+  requireSimplified: true as const,
+})
+
+const exactMixed = (numerator: number, denominator: number) => ({
+  kind: 'exact' as const,
+  ...rational(numerator, denominator),
+  requireMixed: true as const,
   requireSimplified: true as const,
 })
 
@@ -76,6 +95,44 @@ const operationDisplay = (data: Extract<FractionData, { operation: 'add' | 'sub'
   label:
     `${data.leftNumerator} over ${data.leftDenominator}, ` +
     `${data.operation === 'add' ? 'plus' : 'minus'}, ` +
+    `${data.rightNumerator} over ${data.rightDenominator}`,
+  fraction: data,
+})
+
+const mixedOperationDisplay = (
+  data: Extract<FractionData, { operation: 'add-mixed' }> | Extract<FractionData, { operation: 'sub-mixed' }>,
+): ProblemSpec['display'] => ({
+  kind: 'math',
+  notation: {
+    kind: 'row',
+    children: [
+      mixedNumber(data.leftWhole, data.leftNumerator, data.leftDenominator),
+      text(data.operation === 'add-mixed' ? '+' : '−'),
+      mixedNumber(data.rightWhole, data.rightNumerator, data.rightDenominator),
+    ],
+  },
+  label:
+    `${data.leftWhole} and ${data.leftNumerator} over ${data.leftDenominator}, ` +
+    `${data.operation === 'add-mixed' ? 'plus' : 'minus'}, ` +
+    `${data.rightWhole} and ${data.rightNumerator} over ${data.rightDenominator}`,
+  fraction: data,
+})
+
+const productDisplay = (
+  data: Extract<FractionData, { operation: 'multiply' }> | Extract<FractionData, { operation: 'divide' }>,
+): ProblemSpec['display'] => ({
+  kind: 'math',
+  notation: {
+    kind: 'row',
+    children: [
+      fraction(String(data.leftNumerator), String(data.leftDenominator)),
+      text(data.operation === 'multiply' ? '×' : '÷'),
+      fraction(String(data.rightNumerator), String(data.rightDenominator)),
+    ],
+  },
+  label:
+    `${data.leftNumerator} over ${data.leftDenominator}, ` +
+    `${data.operation === 'multiply' ? 'times' : 'divided by'}, ` +
     `${data.rightNumerator} over ${data.rightDenominator}`,
   fraction: data,
 })
@@ -539,6 +596,402 @@ const improperToMixed = defineSkill({
   },
 })
 
+const mixedToImproper = defineSkill({
+  id: 'mixed-to-improper',
+  name: 'Mixed to Improper',
+  blurb: '1 and 3/4 becomes 7/4',
+  build(context) {
+    const [denMin, denMax] = band(context.difficulty, {
+      1: [2, 4],
+      2: [2, 5],
+      3: [3, 6],
+      4: [4, 8],
+      5: [5, 10],
+    })
+    const [wholeMin, wholeMax] = band(context.difficulty, {
+      1: [1, 2],
+      2: [1, 3],
+      3: [2, 4],
+      4: [2, 5],
+      5: [3, 7],
+    })
+    const denominator = context.rng.int(denMin, denMax)
+    const numerator = reducedNumerator(context, denominator)
+    const whole = context.rng.int(wholeMin, wholeMax)
+    const improperNumerator = whole * denominator + numerator
+    const data: Extract<FractionData, { operation: 'mixed-to-improper' }> = {
+      operation: 'mixed-to-improper',
+      whole,
+      numerator,
+      denominator,
+    }
+
+    return {
+      prompt: 'Write this as an improper fraction.',
+      display: {
+        kind: 'math',
+        notation: mixedNumber(whole, numerator, denominator),
+        label: `${whole} and ${numerator} over ${denominator}`,
+        fraction: data,
+      },
+      answer: exactFraction(improperNumerator, denominator),
+      keypad: { allowFraction: true },
+      misconceptions: [
+        {
+          value: whole,
+          tag: 'dropped-numerator',
+          nudge: 'The fraction part still contributes to the new numerator.',
+        },
+        {
+          value: (whole * numerator) / denominator,
+          tag: 'multiplied-by-numerator',
+          nudge: 'Multiply the whole by the denominator, not the numerator.',
+        },
+      ],
+      hint: 'Multiply the whole by the denominator, then add the numerator.',
+      solution: [
+        {
+          text: 'Multiply the whole by the denominator.',
+          detail: `${whole} × ${denominator} = ${whole * denominator}`,
+        },
+        {
+          text: 'Add the numerator.',
+          detail: `${whole * denominator} + ${numerator} = ${improperNumerator}`,
+        },
+        {
+          text: 'Keep the denominator.',
+          detail: `${improperNumerator}/${denominator}`,
+        },
+      ],
+    }
+  },
+})
+
+const mixedPair = (
+  context: BuildContext,
+  accepts: (left: number, right: number, denominator: number) => boolean,
+  failure: string,
+) => {
+  const [min, max] = band(context.difficulty, {
+    1: [3, 5],
+    2: [4, 6],
+    3: [5, 8],
+    4: [6, 10],
+    5: [8, 12],
+  })
+  for (let attempt = 0; attempt < 200; attempt += 1) {
+    const denominator = context.rng.int(min, max)
+    const numerators = Array.from({ length: denominator - 1 }, (_, i) => i + 1).filter(
+      (candidate) => gcd(candidate, denominator) === 1,
+    )
+    const pairs = numerators.flatMap((left) =>
+      numerators
+        .filter((right) => accepts(left, right, denominator))
+        .map((right) => [left, right] as const),
+    )
+    if (pairs.length > 0) {
+      const [leftNumerator, rightNumerator] = context.rng.pick(pairs)
+      return { denominator, leftNumerator, rightNumerator }
+    }
+  }
+  throw new Error(failure)
+}
+
+const addMixed = defineSkill({
+  id: 'add-mixed',
+  name: 'Adding Mixed Numbers',
+  blurb: '1 1/2 + 2 1/4',
+  build(context) {
+    const carry = context.difficulty >= 4 || (context.difficulty === 3 && context.rng.bool())
+    const { denominator, leftNumerator, rightNumerator } = mixedPair(
+      context,
+      (left, right, divisor) => {
+        const sum = left + right
+        return (carry ? sum > divisor : sum < divisor) && gcd(sum % divisor, divisor) === 1
+      },
+      `add-mixed: no ${carry ? 'carry' : 'non-carry'} pair in 200 draws`,
+    )
+    const [wholeMin, wholeMax] = band(context.difficulty, {
+      1: [1, 2],
+      2: [1, 3],
+      3: [2, 4],
+      4: [2, 6],
+      5: [3, 8],
+    })
+    const leftWhole = context.rng.int(wholeMin, wholeMax)
+    const rightWhole = context.rng.int(wholeMin, wholeMax)
+    const fractionalSum = leftNumerator + rightNumerator
+    const resultNumerator = (leftWhole + rightWhole) * denominator + fractionalSum
+    const resultWhole = Math.floor(resultNumerator / denominator)
+    const resultRemainder = resultNumerator % denominator
+    const data: Extract<FractionData, { operation: 'add-mixed' }> = {
+      operation: 'add-mixed',
+      leftWhole,
+      leftNumerator,
+      leftDenominator: denominator,
+      rightWhole,
+      rightNumerator,
+      rightDenominator: denominator,
+    }
+
+    return {
+      prompt: 'What is the sum?',
+      display: mixedOperationDisplay(data),
+      answer: exactMixed(resultNumerator, denominator),
+      keypad: { allowMixed: true },
+      misconceptions: [
+        {
+          value: leftWhole + rightWhole,
+          tag: 'added-wholes-only',
+          nudge: 'The whole parts are only part of the sum; add the fractions too.',
+        },
+        {
+          value: fractionalSum / denominator,
+          tag: 'added-fractions-only',
+          nudge: 'The fraction parts are only part of the sum; add the wholes too.',
+        },
+      ],
+      hint: 'Add the whole parts and fraction parts, then regroup if needed.',
+      solution: [
+        {
+          text: 'Add the whole parts.',
+          detail: `${leftWhole} + ${rightWhole} = ${leftWhole + rightWhole}`,
+        },
+        {
+          text: 'Add the fraction parts.',
+          detail: `${leftNumerator}/${denominator} + ${rightNumerator}/${denominator} = ${fractionalSum}/${denominator}`,
+        },
+        ...(carry
+          ? [
+              {
+                text: 'Regroup the improper fraction as one whole.',
+                detail: `${fractionalSum}/${denominator} = 1 ${resultRemainder}/${denominator}`,
+              },
+            ]
+          : []),
+        {
+          text: 'Combine the whole and fraction parts.',
+          detail: `${resultWhole} ${resultRemainder}/${denominator}`,
+        },
+      ],
+    }
+  },
+})
+
+const subMixed = defineSkill({
+  id: 'sub-mixed',
+  name: 'Subtracting Mixed Numbers',
+  blurb: 'Borrow from the whole',
+  build(context) {
+    const { denominator, leftNumerator, rightNumerator } = mixedPair(
+      context,
+      (left, right, divisor) =>
+        left < right && gcd(divisor + left - right, divisor) === 1,
+      'sub-mixed: no borrow pair in 200 draws',
+    )
+    const [rightMin, rightMax] = band(context.difficulty, {
+      1: [1, 2],
+      2: [1, 3],
+      3: [2, 4],
+      4: [2, 5],
+      5: [3, 7],
+    })
+    const [gapMin, gapMax] = band(context.difficulty, {
+      1: [2, 3],
+      2: [2, 4],
+      3: [2, 5],
+      4: [3, 6],
+      5: [3, 7],
+    })
+    const rightWhole = context.rng.int(rightMin, rightMax)
+    const wholeGap = context.rng.int(gapMin, gapMax)
+    const leftWhole = rightWhole + wholeGap
+    const resultNumerator = wholeGap * denominator + leftNumerator - rightNumerator
+    const resultWhole = wholeGap - 1
+    const resultRemainder = denominator + leftNumerator - rightNumerator
+    const data: Extract<FractionData, { operation: 'sub-mixed' }> = {
+      operation: 'sub-mixed',
+      leftWhole,
+      leftNumerator,
+      leftDenominator: denominator,
+      rightWhole,
+      rightNumerator,
+      rightDenominator: denominator,
+    }
+
+    return {
+      prompt: 'What is the difference?',
+      display: mixedOperationDisplay(data),
+      answer: exactMixed(resultNumerator, denominator),
+      keypad: { allowMixed: true },
+      misconceptions: [
+        {
+          value: (wholeGap * denominator + rightNumerator - leftNumerator) / denominator,
+          tag: 'reversed-fraction-without-borrowing',
+          nudge: 'The smaller fraction part means one whole must be borrowed first.',
+        },
+        {
+          value: ((wholeGap - 1) * denominator + leftNumerator + 1 - rightNumerator) / denominator,
+          tag: 'borrowed-one-piece',
+          nudge: `One borrowed whole adds ${denominator} fraction pieces, not one.`,
+        },
+      ],
+      hint: 'Borrow one whole, then subtract the whole and fraction parts.',
+      solution: [
+        {
+          text: `Borrow one whole as ${denominator} fraction pieces.`,
+          detail: `${leftWhole} ${leftNumerator}/${denominator} = ${leftWhole - 1} ${leftNumerator + denominator}/${denominator}`,
+        },
+        {
+          text: 'Subtract the whole and fraction parts.',
+          detail:
+            `${leftWhole - 1} ${leftNumerator + denominator}/${denominator} − ` +
+            `${rightWhole} ${rightNumerator}/${denominator} = ${resultWhole} ${resultRemainder}/${denominator}`,
+        },
+      ],
+    }
+  },
+})
+
+const fractionOperands = (context: BuildContext, unequal = false) => {
+  const [min, max] = band(context.difficulty, {
+    1: [2, 4],
+    2: [2, 5],
+    3: [3, 7],
+    4: [4, 9],
+    5: [6, 12],
+  })
+  for (let attempt = 0; attempt < 200; attempt += 1) {
+    const leftDenominator = context.rng.int(min, max)
+    const rightDenominator = context.rng.int(min, max)
+    const leftNumerator = reducedNumerator(context, leftDenominator)
+    const rightNumerator = reducedNumerator(context, rightDenominator)
+    if (
+      unequal &&
+      leftNumerator * rightDenominator === rightNumerator * leftDenominator
+    ) {
+      continue
+    }
+    return { leftNumerator, leftDenominator, rightNumerator, rightDenominator }
+  }
+  throw new Error('fraction operation: no unequal pair in 200 draws')
+}
+
+const multFractions = defineSkill({
+  id: 'mult-fractions',
+  name: 'Multiplying Fractions',
+  blurb: 'Straight across',
+  build(context) {
+    const operands = fractionOperands(context)
+    const { leftNumerator, leftDenominator, rightNumerator, rightDenominator } = operands
+    const data: Extract<FractionData, { operation: 'multiply' }> = { operation: 'multiply', ...operands }
+    const resultNumerator = leftNumerator * rightNumerator
+    const resultDenominator = leftDenominator * rightDenominator
+
+    return {
+      prompt: 'What is the product?',
+      display: productDisplay(data),
+      answer: exactFraction(resultNumerator, resultDenominator),
+      keypad: { allowFraction: true },
+      misconceptions: [
+        {
+          value: (leftNumerator + rightNumerator) / (leftDenominator + rightDenominator),
+          tag: 'added-instead',
+          nudge: 'Multiplication works straight across; multiply both tops and both bottoms.',
+        },
+        {
+          value: resultNumerator / leftDenominator,
+          tag: 'kept-one-denominator',
+          nudge: 'Multiply the denominators too, then reduce the result.',
+        },
+      ],
+      hint: 'Multiply the numerators, multiply the denominators, then reduce.',
+      solution: [
+        {
+          text: 'Multiply the numerators.',
+          detail: `${leftNumerator} × ${rightNumerator} = ${resultNumerator}`,
+        },
+        {
+          text: 'Multiply the denominators.',
+          detail: `${leftDenominator} × ${rightDenominator} = ${resultDenominator}`,
+        },
+        ...reductionStep(resultNumerator, resultDenominator),
+      ],
+    }
+  },
+})
+
+const divFractions = defineSkill({
+  id: 'div-fractions',
+  name: 'Dividing Fractions',
+  blurb: 'Keep, change, flip',
+  build(context) {
+    const operands = fractionOperands(context, true)
+    const { leftNumerator, leftDenominator, rightNumerator, rightDenominator } = operands
+    const data: Extract<FractionData, { operation: 'divide' }> = { operation: 'divide', ...operands }
+    const resultNumerator = leftNumerator * rightDenominator
+    const resultDenominator = leftDenominator * rightNumerator
+
+    return {
+      prompt: 'What is the quotient?',
+      display: productDisplay(data),
+      answer: exactFraction(resultNumerator, resultDenominator),
+      keypad: { allowFraction: true },
+      misconceptions: [
+        {
+          value: (leftDenominator * rightNumerator) / (leftNumerator * rightDenominator),
+          tag: 'flipped-first',
+          nudge: 'Keep the first fraction and flip only the second one.',
+        },
+        {
+          value: (leftNumerator * rightNumerator) / (leftDenominator * rightDenominator),
+          tag: 'multiplied-without-flip',
+          nudge: 'Change division to multiplication after flipping the second fraction.',
+        },
+      ],
+      hint: 'Keep the first fraction, change to multiplication, then flip the second.',
+      solution: [
+        {
+          text: 'Keep the first fraction and flip the second.',
+          detail: `${leftNumerator}/${leftDenominator} × ${rightDenominator}/${rightNumerator}`,
+        },
+        {
+          text: 'Multiply straight across.',
+          detail: `${resultNumerator}/${resultDenominator}`,
+        },
+        ...reductionStep(resultNumerator, resultDenominator),
+      ],
+    }
+  },
+})
+
+const fractionWords = defineSkill({
+  id: 'fraction-words',
+  name: 'Fraction Word Problems',
+  blurb: 'Spot the fraction',
+  build({ rng, difficulty }) {
+    const [wholeMin, wholeMax] = band(difficulty, {
+      1: [4, 8],
+      2: [6, 12],
+      3: [10, 18],
+      4: [16, 26],
+      5: [24, 40],
+    })
+    const whole = rng.int(wholeMin, wholeMax)
+    const part = rng.int(1, whole - 1)
+    const distractors = Array.from({ length: wholeMax - 1 }, (_, i) => i + 2).filter(
+      (candidate) => candidate !== whole,
+    )
+    const distractor = rng.pick(distractors)
+    const frame = pickFrame(rng, FRACTION_FRAMES)
+
+    return {
+      ...fractionStoryProblem(frame, { a: part, b: whole, distractor }),
+      keypad: { allowFraction: true },
+    }
+  },
+})
+
 export const unit08 = [
   addFracSameDen,
   subFracSameDen,
@@ -546,4 +999,10 @@ export const unit08 = [
   addFracDiffDen,
   subFracDiffDen,
   improperToMixed,
+  mixedToImproper,
+  addMixed,
+  subMixed,
+  multFractions,
+  divFractions,
+  fractionWords,
 ]

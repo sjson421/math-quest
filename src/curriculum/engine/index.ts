@@ -91,6 +91,7 @@ export {
   CHECK_QUANTITIES,
   applyOperator,
   countOf,
+  fractionStoryProblem,
   pickFrame,
   storyMisconceptions,
   storyProblem,

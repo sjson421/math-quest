@@ -26,6 +26,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "add-frac-same-den": [
     "compare-diff-den",
   ],
+  "add-mixed": [
+    "mixed-to-improper",
+  ],
   "add-neg-pos": [
     "compare-negatives",
   ],
@@ -62,6 +65,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "div-facts": [
     "div-meaning",
   ],
+  "div-fractions": [
+    "mult-fractions",
+  ],
   "div-meaning": [
     "mult-words",
   ],
@@ -92,6 +98,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "fraction-of-shape": [
     "fraction-meaning",
   ],
+  "fraction-words": [
+    "div-fractions",
+  ],
   "fractions-numberline": [
     "name-parts",
   ],
@@ -107,6 +116,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "long-div-remainder": [
     "long-div-1digit",
   ],
+  "mixed-to-improper": [
+    "improper-to-mixed",
+  ],
   "mult-2by1": [
     "mult-by-10-100",
   ],
@@ -115,6 +127,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "mult-by-10-100": [
     "times-mixed",
+  ],
+  "mult-fractions": [
+    "sub-mixed",
   ],
   "mult-meaning": [
     "sub-words",
@@ -185,6 +200,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "sub-frac-same-den": [
     "add-frac-same-den",
+  ],
+  "sub-mixed": [
+    "add-mixed",
   ],
   "sub-negatives": [
     "add-two-negs",

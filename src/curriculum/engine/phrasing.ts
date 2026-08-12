@@ -1,4 +1,5 @@
 import { intAnswer } from '../../lib/answer'
+import { rational, toNumber } from '../../lib/rational'
 import type { Rng } from '../../lib/rng'
 import type { Misconception, Operator, SolutionStep } from '../../lib/types'
 import type { ProblemSpec } from './problem'
@@ -152,6 +153,34 @@ export function storyProblem(frame: Frame, q: Quantities): ProblemSpec {
     misconceptions: storyMisconceptions(frame, q),
     hint: frame.hint(q),
     solution: frame.solution(q, answer),
+  }
+}
+
+/**
+ * Build a part-over-whole story without weakening the whole-number builder.
+ *
+ * The display still carries integer operands and division for independent
+ * verification. Only the answer contract differs: this operation is meant to
+ * produce a proper exact fraction rather than divide evenly.
+ */
+export function fractionStoryProblem(frame: Frame, q: Quantities): ProblemSpec {
+  if (frame.operator !== '÷') {
+    throw new Error(`fraction stories require division frames, found ${frame.operator}`)
+  }
+  const answer = rational(q.a, q.b)
+
+  return {
+    prompt: frame.prompt,
+    display: {
+      kind: 'story',
+      text: frame.text(q),
+      operands: [q.a, q.b],
+      operator: '÷',
+    },
+    answer: { kind: 'exact', ...answer, requireSimplified: true },
+    misconceptions: storyMisconceptions(frame, q),
+    hint: frame.hint(q),
+    solution: frame.solution(q, toNumber(answer)),
   }
 }
 

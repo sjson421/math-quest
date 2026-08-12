@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   CHECK_QUANTITIES,
   applyOperator,
+  fractionStoryProblem,
   storyMisconceptions,
   storyProblem,
   type Frame,
@@ -13,6 +14,7 @@ import type { ContentLocation } from '../../lib/content-rules'
 import type { Operator, Problem } from '../../lib/types'
 import { ADDITION_FRAMES } from './addition'
 import { DIVISION_FRAMES } from './division'
+import { FRACTION_FRAMES } from './fractions'
 import { MULTIPLICATION_FRAMES } from './multiplication'
 import { SUBTRACTION_FRAMES } from './subtraction'
 
@@ -34,18 +36,33 @@ import { SUBTRACTION_FRAMES } from './subtraction'
  * where a word is introduced relative to where it is used, so a bank checked
  * under another unit's number is checked under the wrong rule.
  */
-type Bank = { name: string; skillId: string; unitId: string; frames: Frame[] }
+type Bank = {
+  name: string
+  skillId: string
+  unitId: string
+  kind: 'whole' | 'fraction'
+  frames: Frame[]
+}
 
 const banks: Bank[] = [
-  { name: 'addition', skillId: 'add-words', unitId: 'unit-1', frames: ADDITION_FRAMES },
-  { name: 'subtraction', skillId: 'sub-words', unitId: 'unit-2', frames: SUBTRACTION_FRAMES },
+  { name: 'addition', skillId: 'add-words', unitId: 'unit-1', kind: 'whole', frames: ADDITION_FRAMES },
+  { name: 'subtraction', skillId: 'sub-words', unitId: 'unit-2', kind: 'whole', frames: SUBTRACTION_FRAMES },
   {
     name: 'multiplication',
     skillId: 'mult-words',
     unitId: 'unit-3',
+    kind: 'whole',
     frames: MULTIPLICATION_FRAMES,
   },
-  { name: 'division', skillId: 'div-words', unitId: 'unit-4', frames: DIVISION_FRAMES },
+  { name: 'division', skillId: 'div-words', unitId: 'unit-4', kind: 'whole', frames: DIVISION_FRAMES },
+  { name: 'fractions', skillId: 'fraction-words', unitId: 'unit-8', kind: 'fraction', frames: FRACTION_FRAMES },
+]
+
+const FRACTION_CHECK_QUANTITIES: Quantities[] = [
+  { a: 1, b: 4, distractor: 2 },
+  { a: 2, b: 5, distractor: 3 },
+  { a: 5, b: 12, distractor: 7 },
+  { a: 18, b: 30, distractor: 11 },
 ]
 
 const locationFor = (skillId: string, unitId: string): ContentLocation => {
@@ -54,9 +71,9 @@ const locationFor = (skillId: string, unitId: string): ContentLocation => {
   return { skill, unit: { id: unitId } }
 }
 
-const problemFor = (frame: Frame, q: Quantities, skillId: string): Problem => ({
-  ...storyProblem(frame, q),
-  skillId,
+const problemFor = (bank: Bank, frame: Frame, q: Quantities): Problem => ({
+  ...(bank.kind === 'fraction' ? fractionStoryProblem(frame, q) : storyProblem(frame, q)),
+  skillId: bank.skillId,
   inputMode: 'keypad',
   difficulty: 1,
 })
@@ -66,14 +83,14 @@ const problemFor = (frame: Frame, q: Quantities, skillId: string): Problem => ({
  * in a bank shares one. A bank whose frames disagree is a bug in the bank, and
  * is caught here rather than by quietly checking half of it wrongly.
  */
-function quantitiesFor(frames: Frame[]): { operator: Operator; sets: Quantities[] } {
+function quantitiesFor({ frames, kind }: Bank): { operator: Operator; sets: Quantities[] } {
   const operators = [...new Set(frames.map((f) => f.operator))]
   if (operators.length !== 1) {
     throw new Error(`a bank must share one operator, found ${operators.join(', ')}`)
   }
 
   const operator = operators[0]
-  const sets = CHECK_QUANTITIES[operator]
+  const sets = kind === 'fraction' ? FRACTION_CHECK_QUANTITIES : CHECK_QUANTITIES[operator]
   if (!sets) {
     throw new Error(`no check quantities are declared for the ${operator} operator`)
   }
@@ -81,13 +98,14 @@ function quantitiesFor(frames: Frame[]): { operator: Operator; sets: Quantities[
 }
 
 /** Every violation across the bank, each labelled with the frame that caused it. */
-function checkBank({ skillId, unitId, frames }: Bank): string[] {
+function checkBank(bank: Bank): string[] {
+  const { skillId, unitId, frames } = bank
   const at = locationFor(skillId, unitId)
-  const { sets } = quantitiesFor(frames)
+  const { sets } = quantitiesFor(bank)
 
   return frames.flatMap((frame) =>
     sets.flatMap((q) =>
-      formatViolations(checkContent(problemFor(frame, q, skillId), at)).map(
+      formatViolations(checkContent(problemFor(bank, frame, q), at)).map(
         (violation) => `${frame.id}: ${violation}`,
       ),
     ),
@@ -120,9 +138,15 @@ it('checks every authored bank, not only the first', async () => {
   expect(exported.filter(({ frames }) => frames)).toHaveLength(banks.length)
 })
 
+it('rejects a whole-number frame in the fraction builder', () => {
+  expect(() =>
+    fractionStoryProblem(ADDITION_FRAMES[0], { a: 2, b: 5, distractor: 3 }),
+  ).toThrow('fraction stories require division frames')
+})
+
 describe.each(banks)('the $name frame bank', (bank: Bank) => {
-  const { skillId, frames } = bank
-  const { operator, sets } = quantitiesFor(frames)
+  const { frames } = bank
+  const { operator, sets } = quantitiesFor(bank)
   it('has enough frames that a lesson does not read as one sentence', () => {
     // Ten problems in a lesson, so fewer than eight frames guarantees repeats
     // that a learner will notice.
@@ -169,7 +193,7 @@ describe.each(banks)('the $name frame bank', (bank: Bank) => {
   it('predicts three comprehension errors per frame, none equal to the answer', () => {
     for (const frame of frames) {
       for (const q of sets) {
-        const problem = problemFor(frame, q, skillId)
+        const problem = problemFor(bank, frame, q)
         const values = (problem.misconceptions ?? []).map((m) => m.value)
         // The bank's own operation, not addition's. Checking a subtraction bank
         // against `a + b` asks whether it predicts a value it never could.
@@ -189,7 +213,7 @@ describe.each(banks)('the $name frame bank', (bank: Bank) => {
     })
   }
 
-  if (operator === '÷') {
+  if (operator === '÷' && bank.kind === 'whole') {
     it('divides exactly by both the second quantity and the distractor', () => {
       // The division equivalent of the rule above. `a ÷ distractor` is one of
       // the three predicted values, so a distractor that does not divide the
@@ -207,6 +231,38 @@ describe.each(banks)('the $name frame bank', (bank: Bank) => {
       }
     })
   }
+
+  if (bank.kind === 'fraction') {
+    it('uses singular grammar when the named part is one item', () => {
+      const singleton = { a: 1, b: 4, distractor: 2 }
+      const pluralAfterOne =
+        /\b1 (?:are|complete tasks|overdue invoices|occupied desks|completed modules|restocked shelves|approved applications|inspected tools|planted beds)\b/
+      for (const frame of frames) {
+        expect(frame.text(singleton), frame.id).not.toMatch(pluralAfterOne)
+        expect(frame.hint(singleton), frame.id).not.toMatch(pluralAfterOne)
+      }
+    })
+
+    it('uses positive proper part-over-whole quantities', () => {
+      for (const q of sets) {
+        expect(q.a).toBeGreaterThan(0)
+        expect(q.a).toBeLessThan(q.b)
+        expect(q.distractor).toBeGreaterThan(1)
+        expect(q.distractor).not.toBe(q.b)
+      }
+    })
+
+    it('keeps all three fraction comprehension predictions distinct', () => {
+      for (const frame of frames) {
+        for (const q of sets) {
+          const problem = problemFor(bank, frame, q)
+          const values = problem.misconceptions?.map(({ value }) => value) ?? []
+          expect(new Set(values).size, frame.id).toBe(3)
+          expect(values, frame.id).not.toContain(q.a / q.b)
+        }
+      }
+    })
+  }
 })
 
 describe('the frame check itself', () => {
@@ -218,7 +274,7 @@ describe('the frame check itself', () => {
   })
 
   const check = (frames: Frame[]) =>
-    checkBank({ name: 'broken', skillId: 'add-words', unitId: 'unit-1', frames }).join('\n')
+    checkBank({ name: 'broken', skillId: 'add-words', unitId: 'unit-1', kind: 'whole', frames }).join('\n')
 
   it('catches an over-long solution step and names the frame', () => {
     const problems = check([
@@ -271,7 +327,7 @@ describe('the frame check itself', () => {
       },
     ]
 
-    const bank = { name: 'broken', skillId: 'sub-words', unitId: 'unit-2', frames }
+    const bank = { name: 'broken', skillId: 'sub-words', unitId: 'unit-2', kind: 'whole' as const, frames }
     expect(checkBank(bank).join('\n')).toContain(
       'deliberately-broken: sub-words [hint-sentences]',
     )
@@ -286,7 +342,7 @@ describe('the frame check itself', () => {
       },
     ]
 
-    const bank = { name: 'broken', skillId: 'mult-words', unitId: 'unit-3', frames }
+    const bank = { name: 'broken', skillId: 'mult-words', unitId: 'unit-3', kind: 'whole' as const, frames }
     expect(checkBank(bank).join('\n')).toContain(
       'deliberately-broken-multiplication: mult-words [hint-sentences]',
     )
@@ -301,7 +357,7 @@ describe('the frame check itself', () => {
       },
     ]
 
-    const bank = { name: 'broken', skillId: 'div-words', unitId: 'unit-4', frames }
+    const bank = { name: 'broken', skillId: 'div-words', unitId: 'unit-4', kind: 'whole' as const, frames }
     expect(checkBank(bank).join('\n')).toContain(
       'deliberately-broken-division: div-words [hint-sentences]',
     )
@@ -341,6 +397,7 @@ describe('the frame check itself', () => {
       name: 'mixed',
       skillId: 'add-words',
       unitId: 'unit-1',
+      kind: 'whole' as const,
       frames: [ADDITION_FRAMES[0], SUBTRACTION_FRAMES[0]],
     }
     expect(() => checkBank(mixed)).toThrow('a bank must share one operator')

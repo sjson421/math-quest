@@ -270,6 +270,11 @@ const notationFraction = (numerator: string, denominator: string): MathNotation 
   denominator: notationText(denominator),
 })
 
+const notationMixed = (whole: number, numerator: number, denominator: number): MathNotation => ({
+  kind: 'row',
+  children: [notationText(String(whole)), notationFraction(String(numerator), String(denominator))],
+})
+
 /**
  * The exact notation and spoken label a fraction operation claims to show.
  *
@@ -356,6 +361,66 @@ function expectedFractionDisplay(data: FractionData): {
       notation: notationFraction(String(data.numerator), String(data.denominator)),
       label: `${data.numerator} over ${data.denominator}`,
       answer: toNumber(rational(data.numerator, data.denominator)),
+    }
+  }
+
+  if (data.operation === 'mixed-to-improper') {
+    return {
+      notation: notationMixed(data.whole, data.numerator, data.denominator),
+      label: `${data.whole} and ${data.numerator} over ${data.denominator}`,
+      answer: (data.whole * data.denominator + data.numerator) / data.denominator,
+    }
+  }
+
+  if (data.operation === 'add-mixed' || data.operation === 'sub-mixed') {
+    const leftNumerator = data.leftWhole * data.leftDenominator + data.leftNumerator
+    const rightNumerator = data.rightWhole * data.rightDenominator + data.rightNumerator
+    const result = rational(
+      leftNumerator * data.rightDenominator +
+        (data.operation === 'add-mixed' ? 1 : -1) * rightNumerator * data.leftDenominator,
+      data.leftDenominator * data.rightDenominator,
+    )
+
+    return {
+      notation: {
+        kind: 'row',
+        children: [
+          notationMixed(data.leftWhole, data.leftNumerator, data.leftDenominator),
+          notationText(data.operation === 'add-mixed' ? '+' : '−'),
+          notationMixed(data.rightWhole, data.rightNumerator, data.rightDenominator),
+        ],
+      },
+      label:
+        `${data.leftWhole} and ${data.leftNumerator} over ${data.leftDenominator}, ` +
+        `${data.operation === 'add-mixed' ? 'plus' : 'minus'}, ` +
+        `${data.rightWhole} and ${data.rightNumerator} over ${data.rightDenominator}`,
+      answer: toNumber(result),
+    }
+  }
+
+  if (data.operation === 'multiply' || data.operation === 'divide') {
+    const left = rational(data.leftNumerator, data.leftDenominator)
+    const right = rational(data.rightNumerator, data.rightDenominator)
+    const answer = toNumber(
+      data.operation === 'multiply'
+        ? rational(left.n * right.n, left.d * right.d)
+        : rational(left.n * right.d, left.d * right.n),
+    )
+
+    return {
+      notation: {
+        kind: 'row',
+        children: [
+          notationFraction(String(data.leftNumerator), String(data.leftDenominator)),
+          notationText(data.operation === 'multiply' ? '×' : '÷'),
+          notationFraction(String(data.rightNumerator), String(data.rightDenominator)),
+        ],
+      },
+      label:
+        `${data.leftNumerator} over ${data.leftDenominator}, ` +
+        `${data.operation === 'multiply' ? 'times' : 'divided by'}, ` +
+        `${data.rightNumerator} over ${data.rightDenominator}`,
+      answer,
     }
   }
 
@@ -578,18 +643,53 @@ function sourceMagnitude(problem: Problem): number {
 
   if (problem.display.kind === 'math' && problem.display.fraction) {
     const data = problem.display.fraction
-    const values =
-      data.operation === 'compare' ||
-      data.operation === 'add' ||
-      data.operation === 'sub' ||
-      data.operation === 'common-denominator'
-        ? [data.leftNumerator, data.leftDenominator, data.rightNumerator, data.rightDenominator]
-        : [data.numerator, data.denominator]
-    if (data.operation === 'scale-missing') values.push(data.factor)
+    let values: number[]
+    switch (data.operation) {
+      case 'compare':
+      case 'add':
+      case 'sub':
+      case 'common-denominator':
+      case 'multiply':
+      case 'divide':
+        values = [data.leftNumerator, data.leftDenominator, data.rightNumerator, data.rightDenominator]
+        break
+      case 'add-mixed':
+      case 'sub-mixed':
+        values = [
+          data.leftWhole,
+          data.leftNumerator,
+          data.leftDenominator,
+          data.rightWhole,
+          data.rightNumerator,
+          data.rightDenominator,
+        ]
+        break
+      case 'mixed-to-improper':
+        values = [data.whole, data.numerator, data.denominator]
+        break
+      case 'scale-missing':
+        values = [data.numerator, data.denominator, data.factor]
+        break
+      case 'read':
+      case 'place':
+      case 'simplify':
+      case 'name-part':
+      case 'improper-to-mixed':
+        values = [data.numerator, data.denominator]
+        break
+      default: {
+        const unhandled: never = data
+        throw new Error(`Unknown fraction operation: ${JSON.stringify(unhandled)}`)
+      }
+    }
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
   if (problem.display.kind === 'diagram') return problem.display.diagram.parts
+
+  if (problem.display.kind === 'story') {
+    return problem.display.operands.reduce((sum, value) => sum + Math.abs(value), 0) / problem.display.operands.length
+  }
 
   const value = answerValue(problem)
   if (typeof value !== 'number') {
@@ -984,6 +1084,234 @@ describe('fraction operation answer verification', () => {
         },
       }),
     ).toContain('stated 1.25, derived 1.75')
+  })
+
+  const mixedToImproperProblem = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-mixed-to-improper',
+    prompt: 'Write this as an improper fraction.',
+    display: {
+      kind: 'math',
+      notation: notationMixed(2, 3, 4),
+      label: '2 and 3 over 4',
+      fraction: { operation: 'mixed-to-improper', whole: 2, numerator: 3, denominator: 4 },
+    },
+    answer: { kind: 'exact', n: 11, d: 4, requireSimplified: true },
+    inputMode: 'keypad',
+    keypad: { allowFraction: true },
+    hint: 'Multiply the whole by the denominator, then add the numerator.',
+    solution: [{ text: 'Multiply, then add the numerator.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('derives an improper fraction from every displayed mixed-number part', () => {
+    expect(answerMismatch(mixedToImproperProblem())).toBeUndefined()
+    expect(
+      answerMismatch({
+        ...mixedToImproperProblem(),
+        answer: { kind: 'exact', n: 10, d: 4, requireSimplified: true },
+      }),
+    ).toContain('stated 2.5, derived 2.75')
+  })
+
+  it('rejects mixed-to-improper label and operand disagreement', () => {
+    const mutations = [
+      (problem: Problem) => {
+        if (problem.display.kind !== 'math') throw new Error('expected math display')
+        problem.display.label = '2 and 1 over 4'
+      },
+      (problem: Problem) => {
+        if (
+          problem.display.kind !== 'math' ||
+          problem.display.fraction?.operation !== 'mixed-to-improper'
+        ) {
+          throw new Error('expected mixed-to-improper data')
+        }
+        problem.display.fraction.numerator = 1
+      },
+    ]
+
+    for (const mutate of mutations) {
+      const problem = structuredClone(mixedToImproperProblem())
+      mutate(problem)
+      expect(() => answerMismatch(problem)).toThrow('visible fraction notation disagrees')
+    }
+  })
+
+  const mixedOperationProblem = (
+    operation: 'add-mixed' | 'sub-mixed',
+    overrides: Partial<Problem> = {},
+  ): Problem => ({
+    skillId: `synthetic-${operation}`,
+    prompt: operation === 'add-mixed' ? 'What is the sum?' : 'What is the difference?',
+    display: {
+      kind: 'math',
+      notation: {
+        kind: 'row',
+        children: [
+          notationMixed(3, 1, 2),
+          notationText(operation === 'add-mixed' ? '+' : '−'),
+          notationMixed(2, 1, 4),
+        ],
+      },
+      label: `3 and 1 over 2, ${operation === 'add-mixed' ? 'plus' : 'minus'}, 2 and 1 over 4`,
+      fraction: {
+        operation,
+        leftWhole: 3,
+        leftNumerator: 1,
+        leftDenominator: 2,
+        rightWhole: 2,
+        rightNumerator: 1,
+        rightDenominator: 4,
+      },
+    },
+    answer:
+      operation === 'add-mixed'
+        ? { kind: 'exact', n: 23, d: 4, requireMixed: true, requireSimplified: true }
+        : { kind: 'exact', n: 5, d: 4, requireMixed: true, requireSimplified: true },
+    inputMode: 'keypad',
+    keypad: { allowMixed: true },
+    hint: 'Add the whole and fractional parts.',
+    solution: [{ text: 'Add both mixed numbers exactly.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it.each(['add-mixed', 'sub-mixed'] as const)(
+    'derives %s from both displayed mixed numbers',
+    (operation) => {
+      expect(answerMismatch(mixedOperationProblem(operation))).toBeUndefined()
+    },
+  )
+
+  it('rejects mixed-operation notation, label, operator, operand, and answer disagreement', () => {
+    const mutations = [
+      (problem: Problem) => {
+        if (problem.display.kind !== 'math') throw new Error('expected math display')
+        problem.display.notation = {
+          kind: 'row',
+          children: [notationMixed(3, 1, 3), notationText('+'), notationMixed(2, 1, 4)],
+        }
+      },
+      (problem: Problem) => {
+        if (problem.display.kind !== 'math') throw new Error('expected math display')
+        problem.display.label = '3 and 1 over 2, plus, 2 and 3 over 4'
+      },
+      (problem: Problem) => {
+        if (problem.display.kind !== 'math' || problem.display.fraction?.operation !== 'add-mixed') {
+          throw new Error('expected mixed addition data')
+        }
+        problem.display.fraction = { ...problem.display.fraction, operation: 'sub-mixed' }
+      },
+      (problem: Problem) => {
+        if (problem.display.kind !== 'math' || problem.display.fraction?.operation !== 'add-mixed') {
+          throw new Error('expected mixed addition data')
+        }
+        problem.display.fraction.rightNumerator = 3
+      },
+    ]
+
+    for (const mutate of mutations) {
+      const problem = structuredClone(mixedOperationProblem('add-mixed'))
+      mutate(problem)
+      expect(() => answerMismatch(problem)).toThrow('visible fraction notation disagrees')
+    }
+
+    expect(
+      answerMismatch({
+        ...mixedOperationProblem('sub-mixed'),
+        answer: { kind: 'exact', n: 3, d: 4, requireMixed: true, requireSimplified: true },
+      }),
+    ).toContain('stated 0.75, derived 1.25')
+  })
+
+  const multiplyProblem = (operation: 'multiply' | 'divide', overrides: Partial<Problem> = {}): Problem => ({
+    skillId: `synthetic-fraction-${operation}`,
+    prompt: operation === 'multiply' ? 'What is the product?' : 'What is the quotient?',
+    display: {
+      kind: 'math',
+      notation: {
+        kind: 'row',
+        children: [
+          notationFraction('2', '3'),
+          notationText(operation === 'multiply' ? '×' : '÷'),
+          notationFraction('4', '5'),
+        ],
+      },
+      label: `2 over 3, ${operation === 'multiply' ? 'times' : 'divided by'}, 4 over 5`,
+      fraction: {
+        operation,
+        leftNumerator: 2,
+        leftDenominator: 3,
+        rightNumerator: 4,
+        rightDenominator: 5,
+      } as Extract<FractionData, { operation: 'multiply' }> | Extract<FractionData, { operation: 'divide' }>,
+    },
+    answer:
+      operation === 'multiply'
+        ? { kind: 'exact', n: 8, d: 15, requireSimplified: true }
+        : { kind: 'exact', n: 5, d: 6, requireSimplified: true },
+    inputMode: 'keypad',
+    keypad: { allowFraction: true },
+    hint: 'Use the displayed operation.',
+    solution: [{ text: 'Compute from both displayed fractions.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('derives fraction multiplication and division from operand order', () => {
+    expect(answerMismatch(multiplyProblem('multiply'))).toBeUndefined()
+    expect(answerMismatch(multiplyProblem('divide'))).toBeUndefined()
+    expect(
+      answerMismatch({
+        ...multiplyProblem('divide'),
+        answer: { kind: 'exact', n: 8, d: 15, requireSimplified: true },
+      }),
+    ).toContain('stated 0.5333333333333333, derived 0.8333333333333334')
+  })
+
+  it('rejects product-operation notation, label, operator, and operand disagreement', () => {
+    const mutations = [
+      (problem: Problem) => {
+        if (problem.display.kind !== 'math') throw new Error('expected math display')
+        problem.display.notation = {
+          kind: 'row',
+          children: [notationFraction('2', '3'), notationText('÷'), notationFraction('4', '5')],
+        }
+      },
+      (problem: Problem) => {
+        if (problem.display.kind !== 'math') throw new Error('expected math display')
+        problem.display.label = '2 over 3, divided by, 4 over 5'
+      },
+      (problem: Problem) => {
+        if (problem.display.kind !== 'math' || problem.display.fraction?.operation !== 'multiply') {
+          throw new Error('expected multiplication data')
+        }
+        problem.display.fraction = { ...problem.display.fraction, operation: 'divide' }
+      },
+      (problem: Problem) => {
+        if (problem.display.kind !== 'math' || problem.display.fraction?.operation !== 'multiply') {
+          throw new Error('expected multiplication data')
+        }
+        problem.display.fraction.rightNumerator = 3
+      },
+    ]
+
+    for (const mutate of mutations) {
+      const problem = structuredClone(multiplyProblem('multiply'))
+      mutate(problem)
+      expect(() => answerMismatch(problem)).toThrow('visible fraction notation disagrees')
+    }
+  })
+
+  it('rejects malformed new fraction-operation data', () => {
+    const problem = multiplyProblem('divide')
+    if (problem.display.kind !== 'math' || problem.display.fraction?.operation !== 'divide') {
+      throw new Error('expected division data')
+    }
+    problem.display.fraction.rightNumerator = 0
+
+    expect(() => answerMismatch(problem)).toThrow('zero denominator')
   })
 })
 

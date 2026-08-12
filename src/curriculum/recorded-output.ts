@@ -94,6 +94,22 @@ const formatFractionData = (data: FractionData): string => {
       )
     case 'improper-to-mixed':
       return `${data.operation} ${data.numerator}/${data.denominator}`
+    case 'mixed-to-improper':
+      return `${data.operation} ${data.whole} ${data.numerator}/${data.denominator}`
+    case 'add-mixed':
+    case 'sub-mixed':
+      return (
+        `${data.operation} ${data.leftWhole} ${data.leftNumerator}/${data.leftDenominator} ` +
+        `${data.operation === 'add-mixed' ? '+' : '−'} ` +
+        `${data.rightWhole} ${data.rightNumerator}/${data.rightDenominator}`
+      )
+    case 'multiply':
+    case 'divide':
+      return (
+        `${data.operation} ${data.leftNumerator}/${data.leftDenominator} ` +
+        `${data.operation === 'multiply' ? '×' : '÷'} ` +
+        `${data.rightNumerator}/${data.rightDenominator}`
+      )
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled fraction data: ${JSON.stringify(unhandled)}`)
