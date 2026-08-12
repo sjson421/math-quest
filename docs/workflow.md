@@ -7,12 +7,12 @@ commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archi
 Task lists are the running record — mark each item done as it lands, and note decisions
 inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, twenty-five capabilities —
+- `openspec/specs/` is the **baseline**: what the system does today, twenty-six capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
   `unit-02-subtraction`, `unit-03-multiplication`, `unit-04-division`,
   `unit-05-order-of-operations`, `unit-06-negatives`, `unit-07-fractions-meaning`,
-  `unit-08-fraction-operations`,
+  `unit-08-fraction-operations`, `unit-09-decimals`,
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`,
   `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`. A change
@@ -20,10 +20,10 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Twenty-nine changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-one changes
   have shipped; the latest archive is
-  `2026-08-12-agent-native-roadmap-shipping`. It gives Codex, Claude, and Pi native entry
-  points for one shared shipping contract. Unit 8's second half remains the next curriculum
+  `2026-08-12-add-stage-d-unit-9a`. It adds decimal place value, reading, comparison,
+  rounding, addition, and subtraction. Unit 9's second half remains the next curriculum
   change.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
