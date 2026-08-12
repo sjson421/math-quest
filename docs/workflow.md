@@ -1,10 +1,11 @@
 # OpenSpec workflow
 
-Work is planned as **OpenSpec changes**. `.agents/skills/` is the canonical Codex surface;
-`.claude/skills/` mirrors its behavior and `.claude/commands/opsx/` retains Claude slash
-commands. Use `openspec-propose` → `openspec-apply-change` →
-`openspec-archive-change`. Task lists are the running record — mark each item done as it
-lands, and note decisions inline rather than only in chat.
+Work is planned as **OpenSpec changes**. Repository-wide agent workflows live under
+`docs/agent-workflows/`; `.agents/skills/`, `.claude/skills/`, and `.pi/skills/` provide
+Codex-, Claude-, and Pi-native entry points. `.claude/commands/opsx/` retains Claude slash
+commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archive-change`.
+Task lists are the running record — mark each item done as it lands, and note decisions
+inline rather than only in chat.
 
 - `openspec/specs/` is the **baseline**: what the system does today, twenty-five capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
@@ -20,9 +21,10 @@ lands, and note decisions inline rather than only in chat.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
   `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Twenty-nine changes
-  have shipped; the latest archive is `2026-08-12-add-stage-d-unit-8b`. It completes Unit 8
-  with mixed-number conversion and arithmetic, fraction multiplication and division, and
-  fixed-frame fraction stories. Unit 9 is next.
+  have shipped; the latest archive is
+  `2026-08-12-agent-native-roadmap-shipping`. It gives Codex, Claude, and Pi native entry
+  points for one shared shipping contract. Unit 8's second half remains the next curriculum
+  change.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
@@ -49,4 +51,8 @@ lands, and note decisions inline rather than only in chat.
   read-only reviewer by default. Two or three are allowed only for disjoint path domains
   without overlapping files. Reviewers get no conversation history: only repository root,
   baseline SHA, assigned paths, focused questions, and a concise `file:line` format. They run
-  on `gpt-5.6-terra` at medium reasoning; the parent verifies every finding.
+  on the environment's default model at medium reasoning (never a model name pinned in
+  these documents — a pinned release model may not exist under the installed router/provider),
+  and the parent verifies every finding. Pi may fall back to the same review inline only
+  when its subagent tool or launch infrastructure is unavailable; it records the reason and
+  reports the degraded assurance rather than presenting the pass as independent.

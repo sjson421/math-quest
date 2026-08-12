@@ -9,8 +9,9 @@ port is free. Recheck phase 1 user-owned paths: they remain modified, unstaged, 
 byte-identical to their baseline state.
 
 Delete nothing in the repository: no `git clean`, broad checkout, hard reset, or recursive
-removal. Keep external scratch space until the workflow ends, then clear it and report that.
-Proceed only when the tree contains this change plus untouched baseline work.
+removal. Keep external scratch space until the workflow ends, then clear only run-owned
+scratch and report that. Proceed only when the tree contains this change plus untouched
+baseline work.
 
 ## Phase 9: Ship
 
@@ -35,7 +36,7 @@ Archive dates reflect the actual archive date.
 ## Final report
 
 Report selected item/increment, exploration decision and re-entry, change name,
-implementation, audit/review corrections, exact gate results, screenshot observations, both
-commit SHAs and subjects, both pushes, archive path, cleanup outcome, stopped processes and
-cleared scratch space, and every pre-existing path still untouched. If no user-visible
-surface changed, state that visual review was not applicable.
+implementation, audit/review corrections, review mode and fallbacks, exact gate results,
+screenshot observations, both commit SHAs and subjects, both pushes, archive path, cleanup
+outcome, stopped processes and cleared scratch space, and every pre-existing path still
+untouched. If no user-visible surface changed, state that visual review was not applicable.

@@ -10,8 +10,8 @@ and answer questions from code when possible. Ask only for a product decision th
 repository cannot settle, and stop rather than guess. Do not write application code or
 OpenSpec artifacts.
 
-Explore inline by default. If independent reading is genuinely needed, follow the agent
-contract in `SKILL.md`; domain path sets must be disjoint. Verify every returned claim.
+Explore inline by default. If independent reading is genuinely needed, follow the shared
+independent review contract; domain path sets must be disjoint. Verify every returned claim.
 
 End with the problem understood, chosen approach and rejected alternatives, constraints
 and invariants with file evidence, and any open question. This summary feeds proposal.

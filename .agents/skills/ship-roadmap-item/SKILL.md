@@ -5,72 +5,30 @@ description: Use when asked to implement or ship the first unchecked item in Mat
 
 # Ship Roadmap Item
 
-Take the first unchecked roadmap item from planning through a verified push to `main`.
-Preserve every phase and finish its gate before entering the next.
+Use the shared contract with Codex-native tracking, skills, and delegation.
 
-## Workflow control
+## Shared resources
 
-Create a plan with exactly these ten phases and keep exactly one `in_progress`:
+Read [the shared contract](../../../docs/agent-workflows/ship-roadmap-item/core.md)
+immediately. Read these directly linked references only when their phase group begins:
 
-| Phase | Gate | Read on entry |
-| --- | --- | --- |
-| 1. Select | Exact scope and clean baseline recorded | `references/select.md` |
-| 2. Explore (as needed) | Questions resolved or skip justified | `references/explore.md` |
-| 3. Propose | Required OpenSpec artifacts exist | `references/propose-audit.md` |
-| 4. Audit | Assumptions verified and OpenSpec validates | already loaded |
-| 5. Apply | Every implementation task is complete | `references/apply.md` |
-| 6. Simplify | Behavior-preserving cleanup is verified | `references/simplify.md` |
-| 7. Review | Diff and every verification gate pass | `references/review.md` |
-| 8. Clean up | Only intended changes remain | `references/finish.md` |
-| 9. Ship | Intended files are committed and pushed | already loaded |
-| 10. Archive | Deltas are synced and change is archived | already loaded |
+- Phase 1: [select](../../../docs/agent-workflows/ship-roadmap-item/select.md)
+- Phase 2: [explore](../../../docs/agent-workflows/ship-roadmap-item/explore.md)
+- Phases 3–4: [propose and audit](../../../docs/agent-workflows/ship-roadmap-item/propose-audit.md)
+- Phase 5: [apply](../../../docs/agent-workflows/ship-roadmap-item/apply.md)
+- Phase 6: [simplify](../../../docs/agent-workflows/ship-roadmap-item/simplify.md)
+- Phase 7: [review](../../../docs/agent-workflows/ship-roadmap-item/review.md)
+- Phases 8–10: [finish](../../../docs/agent-workflows/ship-roadmap-item/finish.md)
 
-Reference paths are relative to this file. Read a reference only when its phase group is
-entered; never preload later references or follow references from references.
+## Codex adapter
 
-Carry these values between phases:
+Create an `update_plan` plan with the shared contract's exact ten phases. Keep exactly one
+entry `in_progress`, and never mark a phase complete before its gate passes.
 
-- exact selected roadmap text and selected increment
-- initial branch, HEAD, status, diff, and user-owned paths
-- phase 2 summary or explicit skip reason
-- OpenSpec change name and artifact paths
+Invoke the named OpenSpec skills through Codex's skill mechanism. In phase 6, invoke
+`$simplify` on this run's changed paths, but this adapter controls reviewer launch: omit any
+`model` field even if another cleanup instruction suggests one.
 
-Do not add, combine, silently skip, or retroactively complete phases. Phase 2 alone may be
-skipped under its reference's rules. A later phase may re-enter phase 2 for one unresolved
-question, then must resume through the phase that owns any affected artifact or code.
-Roadmap maintenance is not a phase; perform it only when the audited change includes it.
-
-## Required skills
-
-Use the normal skill names when their phase begins:
-
-- Phase 2: `openspec-explore`
-- Phase 3: `openspec-propose`
-- Phase 4: `openspec-audit-proposal`
-- Phase 5: `openspec-apply-change`
-- Phase 6: `simplify`
-- Phase 10: `openspec-archive-change`
-
-## Agent contract
-
-Work inline unless an applicable phase calls for independent review. Default to one
-read-only reviewer. Use two or three only when changed paths form disjoint domains with no
-overlapping file; every reviewer applies reuse, quality, and efficiency checks to its own
-domain. Never split by perspective over the same paths.
-
-Every delegated reviewer MUST use no inherited turns, `gpt-5.6-terra`, and medium
-reasoning. Pass only the repository root, baseline SHA, explicit assigned paths, focused
-questions, and concise output format. Never paste the full diff, artifacts, parent
-conclusions, user history, or unrelated paths. Require concise `file:line` findings and no
-edits. Treat results as claims: the parent verifies every finding before accepting or
-fixing it.
-
-## Stop conditions
-
-Stop in the current phase with a coherent tree when a finding cannot be fixed or rejected,
-a required product decision is unresolved, scope must materially expand, a gate cannot be
-made green in scope, user-owned work cannot be isolated, temporary work cannot be safely
-reverted, origin advanced after verification, pushing requires conflict/history rewriting,
-or archive sync does not match its delta. Never use a later phase to hide an incomplete
-earlier phase. A blocked archive leaves the already-shipped implementation in place and the
-change active.
+For every independent reviewer, call `spawn_agent` with `fork_turns: "none"` and
+`reasoning_effort: "medium"`; omit `model`. Pass only the fields permitted by the shared
+contract, require no edits, and verify every returned claim locally.
