@@ -17,9 +17,12 @@ how many are playable is a fact about the code, and the status line of
 [`docs/roadmap.md`](docs/roadmap.md) is where it is written down, deliberately in only one
 place.
 
-Stages A, B, and C and Stage D's conceptual fraction unit are playable. Structured math
-notation, fraction input, and shaded-shape diagram rendering are built; fraction operations are
-next. Later stages still
+Stages A, B, and C and Stage D's conceptual fraction unit are playable, and so is the
+first half of Unit 8: like- and unlike-denominator addition and subtraction, finding a
+common denominator, and improper-to-mixed conversion. Structured math notation, fraction
+input, and shaded-shape diagram rendering are built, and the keypad now offers mixed-number
+entry (a space key, with `requireMixed` form checking); mixed-number arithmetic and fraction
+multiplication and division are next. Later stages still
 need expression input, a tap-to-plot coordinate plane, charts, and timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining

@@ -7,7 +7,21 @@ export type Difficulty = 1 | 2 | 3 | 4 | 5
 
 export type Answer =
   /** Exact rational match — covers integers and fractions alike. */
-  | { kind: 'exact'; n: number; d: number; requireSimplified?: boolean }
+  | {
+      kind: 'exact'
+      n: number
+      d: number
+      requireSimplified?: boolean
+      /**
+       * The answer must be written as a whole part plus a proper fraction.
+       *
+       * The value check is exact-rational, so `7/4` and `1 3/4` are the same
+       * answer to it; this flag makes `improper-to-mixed` teach the form rather
+       * than accept the prompt retyped. The written entry must decompose into
+       * the same whole part and remainder — see `checkAnswer`.
+       */
+      requireMixed?: boolean
+    }
   /** Numeric match within a tolerance, for irrational or rounded results. */
   | { kind: 'approx'; value: number; tolerance: number }
   /** Multiple choice. */
@@ -93,7 +107,11 @@ export type WholeNumberData =
    * its value. `47 ÷ 5` evaluates to 9.4; the remainder is 2 and the whole
    * quotient is 9, and neither can be reached by evaluating what is on screen.
    */
-  | { operation: 'divide-remainder' | 'divide-quotient'; dividend: number; divisor: number }
+  | {
+      operation: 'divide-remainder' | 'divide-quotient'
+      dividend: number
+      divisor: number
+    }
   /** The first `count` multiples of `value`, counted from `value` itself. */
   | { operation: 'multiples'; value: number; count: number }
 
@@ -139,6 +157,37 @@ export type FractionData =
       rightNumerator: number
       rightDenominator: number
     }
+  /**
+   * Fraction arithmetic: both displayed fractions and the operator, so the
+   * result is re-derived over the common denominator without trusting the
+   * generator. Separate `add` and `sub` arms so a compound `===` check narrows
+   * reliably; the denominator relationship (like or unlike) is a draw property,
+   * and recomputation over the LCM works for both.
+   */
+  | {
+      operation: 'add'
+      leftNumerator: number
+      leftDenominator: number
+      rightNumerator: number
+      rightDenominator: number
+    }
+  | {
+      operation: 'sub'
+      leftNumerator: number
+      leftDenominator: number
+      rightNumerator: number
+      rightDenominator: number
+    }
+  /** Two fractions whose least common denominator is the answer. */
+  | {
+      operation: 'common-denominator'
+      leftNumerator: number
+      leftDenominator: number
+      rightNumerator: number
+      rightDenominator: number
+    }
+  /** An improper fraction whose mixed-number form is the answer. */
+  | { operation: 'improper-to-mixed'; numerator: number; denominator: number }
 
 /** How the problem is presented. Column layout matches how arithmetic is taught. */
 export type Display =
@@ -154,7 +203,12 @@ export type Display =
    */
   | { kind: 'story'; text: string; operands: number[]; operator: Operator }
   /** Structured notation with the one complete name assistive technology reads. */
-  | { kind: 'math'; notation: MathNotation; label: string; fraction?: FractionData }
+  | {
+      kind: 'math'
+      notation: MathNotation
+      label: string
+      fraction?: FractionData
+    }
   /** A shaded equal-part shape whose visible fraction is carried as data. */
   | { kind: 'diagram'; diagram: ShapeDiagram }
 

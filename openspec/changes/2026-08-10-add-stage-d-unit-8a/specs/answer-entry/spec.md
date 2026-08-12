@@ -1,0 +1,189 @@
+## MODIFIED Requirements
+
+### Requirement: A problem declares what its answer may contain
+
+A problem SHALL be able to declare the character classes its answer may use — a negative sign,
+a decimal point, a fraction slash, and a space separating a whole part from a proper fraction
+(mixed-number entry). A problem that declares nothing SHALL be answerable with whole digits
+only.
+
+A problem SHALL permit a sign whenever a negative value is a plausible answer to it — either
+the correct answer, or a mistake the generator predicts. Permitting it only where the correct
+answer is negative withholds the key on exactly the problems where the sign is the question:
+the mistake `−3 + 5` invites is `−8`, and subtracting a negative invites negating the whole
+result. A learner making either cannot enter it, so it is never named — and worse, the absent
+key tells them the answer is not negative, which is the one thing those skills are asking.
+
+The declaration belongs to the problem rather than to the skill, the unit, or a stage-wide
+capability. A generator knows the shape of the answer it has just computed and the mistakes it
+has just predicted; nothing above it does, and a course that gated the minus key on a stage
+would hold the key off every skill in the stage or force it onto all of them.
+
+The space key and the sign key SHALL occupy the same adaptive cell of the pad, so a problem
+SHALL declare at most one of mixed-number entry and a sign. A mixed-number problem's answers
+and predicted mistakes are positive; a problem that needs both is out of scope for the
+declared surface and must resolve the cell conflict before declaring both.
+
+Whole digits only is the default because it is what most skills built so far want, so a
+generator that says nothing keeps behaving exactly as it did.
+
+#### Scenario: A problem that declares nothing takes whole digits
+
+- **WHEN** a problem carries no answer-entry declaration
+- **THEN** its answer may contain digits only
+- **AND** no sign, decimal point, or fraction slash can be entered
+
+#### Scenario: A problem declares the classes its answer needs
+
+- **WHEN** a problem's answer is negative and it declares that a sign is allowed
+- **THEN** a sign may be entered for that problem
+- **AND** the declaration applies to that problem alone, not to the skill or the stage
+
+#### Scenario: A predicted negative mistake is enterable
+
+- **WHEN** a problem's correct answer is positive but it predicts a mistake below zero
+- **THEN** the problem permits a sign to be entered
+- **AND** a learner submitting that predicted value is diagnosed rather than blocked
+
+#### Scenario: A mixed-number answer declares a space
+
+- **WHEN** a problem's answer is a mixed number and it declares mixed-number entry
+- **THEN** a space may be entered for that problem
+- **AND** the space key occupies the cell the sign would otherwise use
+
+#### Scenario: A problem does not declare both sign and mixed entry
+
+- **WHEN** a problem declares mixed-number entry
+- **THEN** it does not also declare a sign for that problem
+
+### Requirement: The pad offers exactly the keys the problem permits
+
+The answer pad SHALL show a key for a character class only when the current problem permits
+that class, and SHALL keep its layout stable whether or not a key is shown.
+
+A key that cannot be used is worse than absent: it invites a tap that does nothing, which
+reads as the app being broken. A pad that reflows as the course advances is a second problem —
+the digits must stay where the learner's thumb expects them.
+
+#### Scenario: A permitted class gets a key
+
+- **WHEN** the current problem permits a fraction slash
+- **THEN** the pad shows a fraction key
+
+#### Scenario: An unpermitted class gets no key
+
+- **WHEN** the current problem permits no decimal point
+- **THEN** the pad shows no decimal key
+- **AND** the digit keys stay in the same positions they occupy for every other problem
+
+#### Scenario: A permitted space gets its key in the adaptive cell
+
+- **WHEN** the current problem permits mixed-number entry
+- **THEN** the pad shows a space key in the cell the sign otherwise occupies
+- **AND** the digit keys stay in the same positions they occupy for every other problem
+
+### Requirement: What the pad shows and what entry accepts are one rule
+
+The rules governing which keys are displayed and the rules governing which characters an entry
+may accept SHALL be the same declaration, read from the current problem in both places.
+
+Two copies of this rule would drift, and drift here is invisible: a pad that offers a key the
+entry logic silently discards looks identical to a broken key.
+
+The space SHALL be accepted only where a mixed number can be formed: at most once, after at
+least one whole-part digit and before the fraction's numerator, so `3 1/2` is enterable and a
+second space, a space before any digit, a space after the slash, or a space in a
+sign-prefixed entry are not.
+
+#### Scenario: A disallowed character is refused however it arrives
+
+- **WHEN** a key press for a class the current problem does not permit reaches the entry
+- **THEN** the entry is left unchanged
+
+#### Scenario: Display and entry read the same declaration
+
+- **WHEN** the current problem's declaration permits a class
+- **THEN** that class both appears on the pad and is accepted into the entry
+
+#### Scenario: A space is refused outside mixed-number grammar
+
+- **WHEN** a learner taps the space key with an empty entry, after the slash, or twice
+- **THEN** the entry is left unchanged
+
+### Requirement: An answer that is right in value but wrong in form is answered as such
+
+When a submitted answer matches the expected value but not the form the skill is teaching, the
+lesson SHALL respond to that specifically: it SHALL tell the learner the value is right and ask
+for the form, and it SHALL NOT show the worked solution.
+
+A skill SHALL be able to require lowest terms and SHALL be able to require mixed form; each
+requirement has its own response naming the form the entry is missing. When both apply, an
+entry missing the mixed form is answered about the mixed form before any reduction question.
+
+The lesson SHALL treat a right value in the wrong form as not yet complete — the correct-answer
+count does not advance and the problem returns later in the session, exactly as any other
+unfinished problem does. The attempt SHALL be recorded as incorrect, with no misconception tag,
+since the mistake is one the generator did not predict a value for.
+
+Withholding the worked solution is the point. Partial simplification is the named wall at
+`simplify-fractions`, and a learner who reached the right value has done the arithmetic; handing
+them the full working answers a question they did not get wrong and removes the only step left
+to take. The same holds for a learner who computed the amount but not the mixed form it is
+taught in.
+
+#### Scenario: An unreduced answer is acknowledged, not corrected
+
+- **WHEN** a learner submits a numerically correct answer that is not in the required form
+- **THEN** the learner is told the value is right and asked for the required form
+- **AND** the worked solution is not shown
+
+#### Scenario: An unreduced answer does not complete the problem
+
+- **WHEN** a learner submits a numerically correct answer that is not in the required form
+- **THEN** the correct-answer count does not advance
+- **AND** the problem returns later in the same session
+- **AND** the attempt is recorded as incorrect with no misconception tag
+
+#### Scenario: An improper entry is asked for in mixed form
+
+- **WHEN** a learner submits a numerically correct answer as an improper fraction where mixed
+  form is required
+- **THEN** the learner is told the value is right and asked for mixed form
+- **AND** the worked solution is not shown and the problem does not complete
+
+#### Scenario: A mixed entry is answered about reduction, not form
+
+- **WHEN** a learner submits a numerically correct answer in mixed form that is not reduced
+- **THEN** the learner is told the value is right and asked for lowest terms
+- **AND** the mixed-form question is not asked again
+
+### Requirement: Numeric mistakes are diagnosed in every permitted entry form
+
+A finite predicted misconception value SHALL be matchable from any submitted integer, decimal,
+simple-fraction, or mixed-number form that represents that value exactly enough for the
+existing numeric prediction. Parsing the entry for diagnosis SHALL preserve the existing
+behavior for whole-number entries and numeric choice ids, and an unparseable entry SHALL match
+no misconception.
+
+#### Scenario: A slash-form mistake receives its diagnosis
+
+- **WHEN** a learner submits a valid fraction equal to a predicted misconception value
+- **THEN** the lesson returns that misconception's specific feedback
+- **AND** records its stable tag with the incorrect attempt
+
+#### Scenario: A mixed-form mistake receives its diagnosis
+
+- **WHEN** a learner submits a valid mixed number equal to a predicted misconception value
+- **THEN** the lesson returns that misconception's specific feedback
+- **AND** records its stable tag with the incorrect attempt
+
+#### Scenario: Existing scalar diagnosis remains intact
+
+- **WHEN** a learner submits an integer, decimal, or numeric choice id matching a prediction
+- **THEN** diagnosis produces the same matching misconception as before
+
+#### Scenario: An unfinished fraction has no diagnosis
+
+- **WHEN** a learner submits a fraction entry that cannot yet be parsed
+- **THEN** no misconception is matched
+- **AND** the existing unfinished-entry response remains responsible for the submission

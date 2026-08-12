@@ -15,7 +15,7 @@ import {
   startLessonSession,
 } from '../lib/lesson'
 import { createSubmissionGate } from '../lib/submission-gate'
-import { responseTo } from '../lib/submit'
+import { feedbackText, responseTo } from '../lib/submit'
 import type { Difficulty, Misconception, SkillGenerator } from '../lib/types'
 import { difficultyFor, useProgress, type LessonOutcome } from '../store/progress'
 import { ChoiceInput } from './ChoiceInput'
@@ -70,6 +70,9 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
   const [submissionGate] = useState(createSubmissionGate)
 
   const response = feedback && responseTo[feedback.status]
+  const feedbackCopy = feedback
+    ? feedbackText(feedback.status, feedback.misconception?.nudge)
+    : undefined
 
   /**
    * The entry survives, so the pad stays up rather than a panel taking over —
@@ -305,19 +308,10 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
             transition={{ type: 'spring', stiffness: 260, damping: 28 }}
             className="bg-butter-soft rounded-t-[2rem] px-5 pt-5 pb-6 shadow-[0_-4px_20px_rgba(180,140,165,0.18)]"
           >
-            {feedback.status === 'not-simplified' ? (
+            {feedbackCopy && (
               <>
-                <p className="font-bold text-lg mb-1">Right value — now reduce it</p>
-                <p className="text-ink-soft mb-3">
-                  That is the correct amount. Write it in its simplest form.
-                </p>
-              </>
-            ) : (
-              <>
-                <p className="font-bold text-lg mb-1">Not quite — let's look together</p>
-                <p className="text-ink-soft mb-3">
-                  {feedback.misconception?.nudge ?? 'Here is how this one works out.'}
-                </p>
+                <p className="font-bold text-lg mb-1">{feedbackCopy.title}</p>
+                <p className="text-ink-soft mb-3">{feedbackCopy.body}</p>
               </>
             )}
 

@@ -2,18 +2,11 @@ import { describe, expect, it } from 'vitest'
 import { allSkills, manifestIndex } from './index'
 import { checkContent, formatViolations } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
-import { checkAnswer } from '../lib/answer'
+import { checkAnswer, intAnswer } from '../lib/answer'
 import { makeRng } from '../lib/rng'
-import { equals, format as formatRational, toNumber, rational } from '../lib/rational'
+import { equals, format as formatRational, gcd, toNumber, rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
-import type {
-  Difficulty,
-  FractionData,
-  MathNotation,
-  Problem,
-  SkillGenerator,
-  WholeNumberData,
-} from '../lib/types'
+import type { Difficulty, FractionData, MathNotation, Problem, SkillGenerator, WholeNumberData } from '../lib/types'
 
 const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 const ITERATIONS = 200 // per skill per difficulty → 1000 problems per skill
@@ -39,10 +32,8 @@ function alwaysFiltered(skill: SkillGenerator): string[] {
   for (const difficulty of DIFFICULTIES) {
     for (let i = 0; i < ITERATIONS; i += 1) {
       const seed = seedFor(i, difficulty)
-      for (const m of skill.generate(makeRng(seed), difficulty).misconceptions ?? [])
-        declared.add(m.tag)
-      for (const m of generateProblem(skill, seed, difficulty).misconceptions ?? [])
-        surviving.add(m.tag)
+      for (const m of skill.generate(makeRng(seed), difficulty).misconceptions ?? []) declared.add(m.tag)
+      for (const m of generateProblem(skill, seed, difficulty).misconceptions ?? []) surviving.add(m.tag)
     }
   }
 
@@ -59,9 +50,26 @@ function alwaysFiltered(skill: SkillGenerator): string[] {
  */
 function numberWords(value: number): string {
   const ones = [
-    'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
-    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
-    'seventeen', 'eighteen', 'nineteen',
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+    'ten',
+    'eleven',
+    'twelve',
+    'thirteen',
+    'fourteen',
+    'fifteen',
+    'sixteen',
+    'seventeen',
+    'eighteen',
+    'nineteen',
   ]
   const tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
 
@@ -87,21 +95,17 @@ const expandedText = (value: number) =>
  * the arithmetic above is recomputed rather than imported: a helper used by both
  * the generator and its check verifies nothing about the generator.
  */
-const factorsOf = (n: number) =>
-  Array.from({ length: n }, (_, i) => i + 1).filter((d) => n % d === 0)
+const factorsOf = (n: number) => Array.from({ length: n }, (_, i) => i + 1).filter((d) => n % d === 0)
 
-const multiplesOf = (n: number, count: number) =>
-  Array.from({ length: count }, (_, i) => n * (i + 1))
+const multiplesOf = (n: number, count: number) => Array.from({ length: count }, (_, i) => n * (i + 1))
 
 function choiceIdFor(problem: Problem, label: string): string {
   const choices = problem.choices ?? []
   const ids = choices.map((choice) => choice.id)
-  if (new Set(ids).size !== ids.length)
-    throw new Error(`${problem.skillId}: choice ids are not unique`)
+  if (new Set(ids).size !== ids.length) throw new Error(`${problem.skillId}: choice ids are not unique`)
 
   const matching = choices.filter((choice) => choice.label === label)
-  if (matching.length !== 1)
-    throw new Error(`${problem.skillId}: expected exactly one choice labelled "${label}"`)
+  if (matching.length !== 1) throw new Error(`${problem.skillId}: expected exactly one choice labelled "${label}"`)
   return matching[0].id
 }
 
@@ -280,11 +284,7 @@ function expectedFractionDisplay(data: FractionData): {
   if (data.operation === 'compare') {
     const left = rational(data.leftNumerator, data.leftDenominator)
     const right = rational(data.rightNumerator, data.rightDenominator)
-    const relation = left.n * right.d < right.n * left.d
-      ? '<'
-      : left.n * right.d > right.n * left.d
-        ? '>'
-        : '='
+    const relation = left.n * right.d < right.n * left.d ? '<' : left.n * right.d > right.n * left.d ? '>' : '='
 
     return {
       notation: {
@@ -295,11 +295,67 @@ function expectedFractionDisplay(data: FractionData): {
           notationFraction(String(data.rightNumerator), String(data.rightDenominator)),
         ],
       },
-      label: (
+      label:
         `${data.leftNumerator} over ${data.leftDenominator}, blank, ` +
-        `${data.rightNumerator} over ${data.rightDenominator}`
-      ),
+        `${data.rightNumerator} over ${data.rightDenominator}`,
       answer: relation,
+    }
+  }
+
+  if (data.operation === 'add' || data.operation === 'sub') {
+    // Re-derive the result over the least common denominator from the two
+    // displayed fractions alone — never from the generator's stated answer.
+    const left = rational(data.leftNumerator, data.leftDenominator)
+    const right = rational(data.rightNumerator, data.rightDenominator)
+    const lcm = (left.d * right.d) / gcd(left.d, right.d)
+    const sum = (left.n * (lcm / left.d) + (data.operation === 'add' ? 1 : -1) * right.n * (lcm / right.d)) / lcm
+
+    return {
+      notation: {
+        kind: 'row',
+        children: [
+          notationFraction(String(data.leftNumerator), String(data.leftDenominator)),
+          notationText(data.operation === 'add' ? '+' : '−'),
+          notationFraction(String(data.rightNumerator), String(data.rightDenominator)),
+        ],
+      },
+      label:
+        `${data.leftNumerator} over ${data.leftDenominator}, ` +
+        `${data.operation === 'add' ? 'plus' : 'minus'}, ` +
+        `${data.rightNumerator} over ${data.rightDenominator}`,
+      answer: sum,
+    }
+  }
+
+  if (data.operation === 'common-denominator') {
+    const left = rational(data.leftNumerator, data.leftDenominator)
+    const right = rational(data.rightNumerator, data.rightDenominator)
+    const lcm = (left.d * right.d) / gcd(left.d, right.d)
+
+    return {
+      notation: {
+        kind: 'row',
+        children: [
+          notationFraction(String(data.leftNumerator), String(data.leftDenominator)),
+          notationText('and'),
+          notationFraction(String(data.rightNumerator), String(data.rightDenominator)),
+        ],
+      },
+      label:
+        `${data.leftNumerator} over ${data.leftDenominator}, and, ` +
+        `${data.rightNumerator} over ${data.rightDenominator}`,
+      answer: lcm,
+    }
+  }
+
+  if (data.operation === 'improper-to-mixed') {
+    // The question displays the source improper fraction; the mixed form is
+    // the answer, derived from it here and enforced by `requireMixed` in the
+    // answer checker. The displayed notation must be the source fraction.
+    return {
+      notation: notationFraction(String(data.numerator), String(data.denominator)),
+      label: `${data.numerator} over ${data.denominator}`,
+      answer: toNumber(rational(data.numerator, data.denominator)),
     }
   }
 
@@ -340,14 +396,10 @@ function expectedFractionDisplay(data: FractionData): {
       : data.missing === 'numerator'
         ? numerator
         : denominator
-  const baseNumerator =
-    data.direction === 'down' && data.missing === 'numerator' ? '?' : String(numerator)
-  const baseDenominator =
-    data.direction === 'down' && data.missing === 'denominator' ? '?' : String(denominator)
-  const largeNumerator =
-    data.direction === 'up' && data.missing === 'numerator' ? '?' : String(scaledNumerator)
-  const largeDenominator =
-    data.direction === 'up' && data.missing === 'denominator' ? '?' : String(scaledDenominator)
+  const baseNumerator = data.direction === 'down' && data.missing === 'numerator' ? '?' : String(numerator)
+  const baseDenominator = data.direction === 'down' && data.missing === 'denominator' ? '?' : String(denominator)
+  const largeNumerator = data.direction === 'up' && data.missing === 'numerator' ? '?' : String(scaledNumerator)
+  const largeDenominator = data.direction === 'up' && data.missing === 'denominator' ? '?' : String(scaledDenominator)
   const left =
     data.direction === 'up'
       ? notationFraction(baseNumerator, baseDenominator)
@@ -361,9 +413,7 @@ function expectedFractionDisplay(data: FractionData): {
       ? `${baseNumerator} over ${baseDenominator}`
       : `${scaledNumerator} over ${scaledDenominator}`
   const rightLabel =
-    data.direction === 'up'
-      ? `${largeNumerator} over ${largeDenominator}`
-      : `${baseNumerator} over ${baseDenominator}`
+    data.direction === 'up' ? `${largeNumerator} over ${largeDenominator}` : `${baseNumerator} over ${baseDenominator}`
 
   return {
     notation: { kind: 'row', children: [left, notationText('='), right] },
@@ -380,9 +430,7 @@ function recompute(problem: Problem): number | string {
     const expectedText = displayedText(data)
 
     if (display.text !== expectedText)
-      throw new Error(
-        `${problem.skillId}: visible text "${display.text}" does not match "${expectedText}"`,
-      )
+      throw new Error(`${problem.skillId}: visible text "${display.text}" does not match "${expectedText}"`)
 
     switch (data.operation) {
       case 'read':
@@ -393,10 +441,7 @@ function recompute(problem: Problem): number | string {
       case 'hundreds-digit':
         return Math.floor(data.value / 100) % 10
       case 'compare':
-        return choiceIdFor(
-          problem,
-          data.left < data.right ? '<' : data.left > data.right ? '>' : '=',
-        )
+        return choiceIdFor(problem, data.left < data.right ? '<' : data.left > data.right ? '>' : '=')
       case 'order-ascending':
         return choiceIdFor(problem, [...data.values].sort((x, y) => x - y).join(', '))
       case 'round-to-10':
@@ -431,30 +476,21 @@ function recompute(problem: Problem): number | string {
     try {
       return evaluateExpression(display.text)
     } catch (error) {
-      throw new Error(
-        `${problem.skillId}: cannot evaluate "${display.text}" — ${(error as Error).message}`,
-      )
+      throw new Error(`${problem.skillId}: cannot evaluate "${display.text}" — ${(error as Error).message}`)
     }
   }
 
   if (display.kind === 'math') {
     if (!display.fraction) {
-      throw new Error(
-        `${problem.skillId}: a math display needs operation-specific data for independent verification`,
-      )
+      throw new Error(`${problem.skillId}: a math display needs operation-specific data for independent verification`)
     }
 
     const expected = expectedFractionDisplay(display.fraction)
-    if (
-      JSON.stringify(display.notation) !== JSON.stringify(expected.notation) ||
-      display.label !== expected.label
-    ) {
+    if (JSON.stringify(display.notation) !== JSON.stringify(expected.notation) || display.label !== expected.label) {
       throw new Error(`${problem.skillId}: visible fraction notation disagrees with its data`)
     }
 
-    return typeof expected.answer === 'string'
-      ? choiceIdFor(problem, expected.answer)
-      : expected.answer
+    return typeof expected.answer === 'string' ? choiceIdFor(problem, expected.answer) : expected.answer
   }
 
   if (display.kind === 'diagram') {
@@ -466,9 +502,7 @@ function recompute(problem: Problem): number | string {
       return equals(rational(choice.value.n, choice.value.d), visible)
     })
     if (matches.length !== 1) {
-      throw new Error(
-        `${problem.skillId}: expected one choice matching the diagram, found ${matches.length}`,
-      )
+      throw new Error(`${problem.skillId}: expected one choice matching the diagram, found ${matches.length}`)
     }
     return matches[0].id
   }
@@ -544,14 +578,13 @@ function sourceMagnitude(problem: Problem): number {
 
   if (problem.display.kind === 'math' && problem.display.fraction) {
     const data = problem.display.fraction
-    const values = data.operation === 'compare'
-      ? [
-          data.leftNumerator,
-          data.leftDenominator,
-          data.rightNumerator,
-          data.rightDenominator,
-        ]
-      : [data.numerator, data.denominator]
+    const values =
+      data.operation === 'compare' ||
+      data.operation === 'add' ||
+      data.operation === 'sub' ||
+      data.operation === 'common-denominator'
+        ? [data.leftNumerator, data.leftDenominator, data.rightNumerator, data.rightDenominator]
+        : [data.numerator, data.denominator]
     if (data.operation === 'scale-missing') values.push(data.factor)
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
@@ -575,9 +608,7 @@ function scalingProblems(skill: SkillGenerator): string[] {
 
   const low = magnitude(1)
   const high = magnitude(5)
-  return high > low
-    ? []
-    : [`${skill.id}: difficulty 5 magnitude ${high} is not above difficulty 1 magnitude ${low}`]
+  return high > low ? [] : [`${skill.id}: difficulty 5 magnitude ${high} is not above difficulty 1 magnitude ${low}`]
 }
 
 describe('diagram answer verification', () => {
@@ -597,15 +628,11 @@ describe('diagram answer verification', () => {
   })
 
   it('names a stated answer that disagrees with the visible part counts', () => {
-    expect(answerMismatch(problem(4, 3, { n: 1, d: 1 }))).toContain(
-      'synthetic-diagram: stated 1, derived 0.75',
-    )
+    expect(answerMismatch(problem(4, 3, { n: 1, d: 1 }))).toContain('synthetic-diagram: stated 1, derived 0.75')
   })
 
   it('rejects invalid visible counts instead of trusting the stated answer', () => {
-    expect(() => answerMismatch(problem(0, 0, { n: 0, d: 1 }))).toThrow(
-      /parts must be a positive whole number/,
-    )
+    expect(() => answerMismatch(problem(0, 0, { n: 0, d: 1 }))).toThrow(/parts must be a positive whole number/)
   })
 })
 
@@ -727,7 +754,10 @@ describe('fraction math answer verification', () => {
 
   it('names a comparison answer that disagrees with the exact values', () => {
     expect(
-      answerMismatch({ ...compareProblem(), answer: { kind: 'choice', id: '-1' } }),
+      answerMismatch({
+        ...compareProblem(),
+        answer: { kind: 'choice', id: '-1' },
+      }),
     ).toContain('stated -1, derived 1')
   })
 
@@ -742,16 +772,242 @@ describe('fraction math answer verification', () => {
   })
 })
 
+describe('fraction operation answer verification', () => {
+  const addProblem = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-fraction-add',
+    prompt: 'What is the sum?',
+    display: {
+      kind: 'math',
+      notation: {
+        kind: 'row',
+        children: [notationFraction('1', '5'), notationText('+'), notationFraction('2', '5')],
+      },
+      label: '1 over 5, plus, 2 over 5',
+      fraction: {
+        operation: 'add',
+        leftNumerator: 1,
+        leftDenominator: 5,
+        rightNumerator: 2,
+        rightDenominator: 5,
+      },
+    },
+    answer: { kind: 'exact', n: 3, d: 5, requireSimplified: true },
+    inputMode: 'keypad',
+    keypad: { allowFraction: true },
+    hint: 'Add the numerators; the denominator stays.',
+    solution: [{ text: 'Add the numerators over the same denominator.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('derives an addition answer from both displayed fractions', () => {
+    expect(answerMismatch(addProblem())).toBeUndefined()
+    // Unlike denominators re-derive over the LCM, not the generator's words.
+    const unlike = addProblem({
+      display: {
+        kind: 'math',
+        notation: {
+          kind: 'row',
+          children: [notationFraction('1', '2'), notationText('+'), notationFraction('1', '3')],
+        },
+        label: '1 over 2, plus, 1 over 3',
+        fraction: {
+          operation: 'add',
+          leftNumerator: 1,
+          leftDenominator: 2,
+          rightNumerator: 1,
+          rightDenominator: 3,
+        },
+      },
+      answer: { kind: 'exact', n: 5, d: 6, requireSimplified: true },
+    })
+    expect(answerMismatch(unlike)).toBeUndefined()
+  })
+
+  it('names an addition answer that disagrees with the displayed fractions', () => {
+    expect(
+      answerMismatch({
+        ...addProblem(),
+        answer: { kind: 'exact', n: 3, d: 10 },
+      }),
+    ).toContain('stated 0.3, derived 0.6')
+  })
+
+  it('rejects addition notation that disagrees with its operation data', () => {
+    const problem = addProblem()
+    if (problem.display.kind !== 'math') throw new Error('expected math display')
+    problem.display.notation = {
+      kind: 'row',
+      children: [notationFraction('1', '4'), notationText('+'), notationFraction('2', '5')],
+    }
+
+    expect(() => answerMismatch(problem)).toThrow('visible fraction notation disagrees')
+  })
+
+  it('rejects malformed addition semantic data', () => {
+    const problem = addProblem()
+    if (problem.display.kind !== 'math' || problem.display.fraction?.operation !== 'add') {
+      throw new Error('expected addition data')
+    }
+    problem.display.fraction.rightDenominator = 0
+
+    expect(() => answerMismatch(problem)).toThrow('zero denominator')
+  })
+
+  const subProblem = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-fraction-sub',
+    prompt: 'What is the difference?',
+    display: {
+      kind: 'math',
+      notation: {
+        kind: 'row',
+        children: [notationFraction('3', '4'), notationText('−'), notationFraction('1', '3')],
+      },
+      label: '3 over 4, minus, 1 over 3',
+      fraction: {
+        operation: 'sub',
+        leftNumerator: 3,
+        leftDenominator: 4,
+        rightNumerator: 1,
+        rightDenominator: 3,
+      },
+    },
+    answer: { kind: 'exact', n: 5, d: 12, requireSimplified: true },
+    inputMode: 'keypad',
+    keypad: { allowFraction: true, allowNegative: true },
+    hint: 'Subtract over a common denominator.',
+    solution: [{ text: 'Rewrite both over twelfths, then subtract.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('derives a subtraction answer from both displayed fractions', () => {
+    expect(answerMismatch(subProblem())).toBeUndefined()
+  })
+
+  it('names a subtraction answer that disagrees with the displayed fractions', () => {
+    expect(
+      answerMismatch({
+        ...subProblem(),
+        answer: { kind: 'exact', n: 1, d: 3 },
+      }),
+    ).toContain('stated 0.3333333333333333, derived 0.4166666666666667')
+  })
+
+  const lcdProblem = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-fraction-lcd',
+    prompt: 'What is the least common denominator?',
+    display: {
+      kind: 'math',
+      notation: {
+        kind: 'row',
+        children: [notationFraction('1', '2'), notationText('and'), notationFraction('1', '3')],
+      },
+      label: '1 over 2, and, 1 over 3',
+      fraction: {
+        operation: 'common-denominator',
+        leftNumerator: 1,
+        leftDenominator: 2,
+        rightNumerator: 1,
+        rightDenominator: 3,
+      },
+    },
+    answer: intAnswer(6),
+    inputMode: 'keypad',
+    hint: 'Find the smallest number both denominators divide.',
+    solution: [{ text: '6 is divisible by 2 and by 3.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('derives the least common denominator from both displayed fractions', () => {
+    expect(answerMismatch(lcdProblem())).toBeUndefined()
+  })
+
+  it('names a common-denominator answer that disagrees with the display', () => {
+    expect(answerMismatch({ ...lcdProblem(), answer: intAnswer(12) })).toContain('stated 12, derived 6')
+  })
+
+  const mixedProblem = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-fraction-mixed',
+    prompt: 'Write this as a mixed number.',
+    display: {
+      kind: 'math',
+      notation: notationFraction('7', '4'),
+      label: '7 over 4',
+      fraction: {
+        operation: 'improper-to-mixed',
+        numerator: 7,
+        denominator: 4,
+      },
+    },
+    answer: {
+      kind: 'exact',
+      n: 7,
+      d: 4,
+      requireMixed: true,
+      requireSimplified: true,
+    },
+    inputMode: 'keypad',
+    keypad: { allowMixed: true },
+    hint: 'Divide the numerator by the denominator.',
+    solution: [{ text: '7 divided by 4 is 1 with 3 left over.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('derives the source value from the carried improper fraction', () => {
+    expect(answerMismatch(mixedProblem())).toBeUndefined()
+  })
+
+  it('rejects a mixed-form display, which would show the answer instead of the question', () => {
+    const problem = mixedProblem()
+    if (problem.display.kind !== 'math') throw new Error('expected math display')
+    problem.display.notation = {
+      kind: 'row',
+      children: [notationText('1'), notationFraction('3', '4')],
+    }
+
+    expect(() => answerMismatch(problem)).toThrow('visible fraction notation disagrees')
+  })
+
+  it('names a mixed answer that disagrees with the source fraction', () => {
+    expect(
+      answerMismatch({
+        ...mixedProblem(),
+        answer: {
+          kind: 'exact',
+          n: 5,
+          d: 4,
+          requireMixed: true,
+          requireSimplified: true,
+        },
+      }),
+    ).toContain('stated 1.25, derived 1.75')
+  })
+})
+
 describe('value-bearing diagram choice verification', () => {
   const problem = (secondValue = rational(1, 3)): Problem => ({
     skillId: 'synthetic-equivalent-visual',
     prompt: 'Which description names the same amount?',
-    display: { kind: 'diagram', diagram: { kind: 'bar', parts: 4, shadedParts: 2 } },
+    display: {
+      kind: 'diagram',
+      diagram: { kind: 'bar', parts: 4, shadedParts: 2 },
+    },
     answer: { kind: 'choice', id: 'half' },
     inputMode: 'choice',
     choices: [
-      { id: 'half', label: '1 shaded part in every 2 equal parts', value: rational(1, 2) },
-      { id: 'other', label: '1 shaded part in every 3 equal parts', value: secondValue },
+      {
+        id: 'half',
+        label: '1 shaded part in every 2 equal parts',
+        value: rational(1, 2),
+      },
+      {
+        id: 'other',
+        label: '1 shaded part in every 3 equal parts',
+        value: secondValue,
+      },
     ],
     hint: 'Compare each description with the shaded amount.',
     solution: [{ text: 'Two fourths names the same amount as one half.' }],
@@ -763,23 +1019,19 @@ describe('value-bearing diagram choice verification', () => {
   })
 
   it('names a stated choice that disagrees with the diagram value', () => {
-    expect(
-      answerMismatch({ ...problem(), answer: { kind: 'choice', id: 'other' } }),
-    ).toContain('stated other, derived half')
+    expect(answerMismatch({ ...problem(), answer: { kind: 'choice', id: 'other' } })).toContain(
+      'stated other, derived half',
+    )
   })
 
   it('rejects duplicate equivalent choices', () => {
-    expect(() => answerMismatch(problem(rational(2, 4)))).toThrow(
-      'expected one choice matching the diagram, found 2',
-    )
+    expect(() => answerMismatch(problem(rational(2, 4)))).toThrow('expected one choice matching the diagram, found 2')
   })
 })
 
 describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, skill) => {
   const sample = (difficulty: Difficulty) =>
-    Array.from({ length: ITERATIONS }, (_, i) =>
-      generateProblem(skill, seedFor(i, difficulty), difficulty),
-    )
+    Array.from({ length: ITERATIONS }, (_, i) => generateProblem(skill, seedFor(i, difficulty), difficulty))
 
   const all = DIFFICULTIES.flatMap(sample)
 
@@ -793,7 +1045,16 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
     for (const problem of all) {
       const typed =
         problem.answer.kind === 'exact'
-          ? formatRational(rational(problem.answer.n, problem.answer.d))
+          ? problem.answer.requireMixed
+            ? // The mixed-form requirement makes the improper fraction a
+              // `not-mixed` response, and reducible sources need the reduced
+              // fraction part, so the acceptable form is what is typed.
+              (() => {
+                const whole = Math.floor(problem.answer.n / problem.answer.d)
+                const factor = gcd(problem.answer.n, problem.answer.d)
+                return `${whole} ${(problem.answer.n % problem.answer.d) / factor}/` + `${problem.answer.d / factor}`
+              })()
+            : formatRational(rational(problem.answer.n, problem.answer.d))
           : String(answerValue(problem))
       expect(checkAnswer(problem.answer, typed).status).toBe('correct')
     }
@@ -855,9 +1116,7 @@ describe('alwaysFiltered', () => {
   // A checker that returns "no problems" looks exactly like a clean codebase —
   // which is precisely how the assertions this replaced went unnoticed. These
   // are the synthetic skills proving it names the offender.
-  const skillPredicting = (
-    build: (sum: number) => { value: number; tag: string }[],
-  ): SkillGenerator => ({
+  const skillPredicting = (build: (sum: number) => { value: number; tag: string }[]): SkillGenerator => ({
     id: 'synthetic',
     name: 'Synthetic',
     blurb: 'For testing the checker',
@@ -892,9 +1151,7 @@ describe('alwaysFiltered', () => {
     // `add-3digit` is this case: its forgot-carry predictions equal the answer
     // whenever that column does not carry, and are real diagnoses otherwise.
     // Collapsing sometimes is the design, not a defect.
-    const skill = skillPredicting((sum) => [
-      { value: sum % 2 === 0 ? sum : sum - 1, tag: 'sometimes' },
-    ])
+    const skill = skillPredicting((sum) => [{ value: sum % 2 === 0 ? sum : sum - 1, tag: 'sometimes' }])
 
     expect(alwaysFiltered(skill)).toEqual([])
   })
@@ -978,9 +1235,7 @@ describe('recompute', () => {
       },
     })
 
-    expect(() => recompute(candidate)).toThrow(
-      'synthetic-math: a math display needs operation-specific data',
-    )
+    expect(() => recompute(candidate)).toThrow('synthetic-math: a math display needs operation-specific data')
   })
 
   it('catches a story whose stated answer disagrees with its operands', () => {
@@ -1086,9 +1341,7 @@ describe('recompute', () => {
       choices,
     })
 
-    expect(() => recompute(comparison)).toThrow(
-      'synthetic-whole: expected exactly one choice labelled "<"',
-    )
+    expect(() => recompute(comparison)).toThrow('synthetic-whole: expected exactly one choice labelled "<"')
   })
 
   it('derives a remainder rather than evaluating the division shown', () => {
@@ -1099,7 +1352,11 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '47 ÷ 5',
-        wholeNumber: { operation: 'divide-remainder', dividend: 47, divisor: 5 },
+        wholeNumber: {
+          operation: 'divide-remainder',
+          dividend: 47,
+          divisor: 5,
+        },
       },
       answer: { kind: 'exact', n: 2, d: 1 },
     })
@@ -1113,7 +1370,11 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '47 ÷ 5',
-        wholeNumber: { operation: 'divide-remainder', dividend: 47, divisor: 5 },
+        wholeNumber: {
+          operation: 'divide-remainder',
+          dividend: 47,
+          divisor: 5,
+        },
       },
       // 9 is the quotient, which is exactly the confusion the skill diagnoses —
       // and an answer key that made it would be shipped without this branch.
@@ -1142,7 +1403,11 @@ describe('recompute', () => {
       display: {
         kind: 'inline',
         text: '47 ÷ 6',
-        wholeNumber: { operation: 'divide-remainder', dividend: 47, divisor: 5 },
+        wholeNumber: {
+          operation: 'divide-remainder',
+          dividend: 47,
+          divisor: 5,
+        },
       },
     })
 

@@ -210,6 +210,17 @@ describe('diagnose', () => {
     expect(diagnose(fractional, '0.25')?.tag).toBe('one-quarter')
   })
 
+  it('matches a mixed-number entry through the answer parser', () => {
+    const fractional = generateProblem(
+      skillPredicting([miss(1.5, 'one-and-a-half'), miss(3.25, 'three-and-a-quarter')], 1),
+      1,
+      1,
+    )
+
+    expect(diagnose(fractional, '1 1/2')?.tag).toBe('one-and-a-half')
+    expect(diagnose(fractional, '3 1/4')?.tag).toBe('three-and-a-quarter')
+  })
+
   it('returns nothing for a wrong answer it did not predict', () => {
     expect(diagnose(problem, '99')).toBeUndefined()
   })

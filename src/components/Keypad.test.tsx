@@ -59,6 +59,23 @@ describe('Keypad', () => {
     expect(has(html, '.')).toBe(false)
   })
 
+  it('offers the space key and the slash when mixed entry is allowed', () => {
+    const html = render({ allowMixed: true })
+    expect(has(html, 'Space')).toBe(true)
+    expect(html).toContain('>␣</button>')
+    expect(has(html, '/')).toBe(true)
+    // The sign cell is the space's: a mixed problem shows no sign.
+    expect(has(html, '−')).toBe(false)
+    expect(has(html, '.')).toBe(false)
+  })
+
+  it('keeps the digits in the same places for mixed entry too', () => {
+    const html = render({ allowMixed: true })
+    const ranks = DIGITS.map((d) => positionOf(html, d))
+    expect(ranks.every((i) => i >= 0)).toBe(true)
+    expect([...ranks].sort((a, b) => a - b)).toEqual(ranks)
+  })
+
   it('gives the fraction key the one slot when both it and the decimal are allowed', () => {
     // One slot, and a fraction skill wants the slash. `applyKey` would accept
     // either character; the pad has to pick, and this pins which.

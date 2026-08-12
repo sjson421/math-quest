@@ -19,6 +19,48 @@ export type SubmitResponse = {
   keepsEntry: boolean
 }
 
+export type FeedbackText = {
+  title: string
+  body: string
+}
+
+/**
+ * Learner-facing copy for a submitted result.
+ *
+ * Kept beside the response policy because both are exhaustive over the same
+ * status union. A new checker result must state both what the lesson does and
+ * what it says instead of falling through to generic wrong-answer copy.
+ */
+export function feedbackText(
+  status: CheckResult['status'],
+  misconceptionNudge?: string,
+): FeedbackText | undefined {
+  switch (status) {
+    case 'correct':
+    case 'unparseable':
+      return undefined
+    case 'incorrect':
+      return {
+        title: "Not quite — let's look together",
+        body: misconceptionNudge ?? 'Here is how this one works out.',
+      }
+    case 'not-simplified':
+      return {
+        title: 'Right value — now reduce it',
+        body: 'That is the correct amount. Write it in its simplest form.',
+      }
+    case 'not-mixed':
+      return {
+        title: 'Right value — now write it as a mixed number',
+        body: 'That is the correct amount. Write it as a whole number and a fraction.',
+      }
+    default: {
+      const unhandled: never = status
+      throw new Error(`Unhandled feedback status: ${unhandled}`)
+    }
+  }
+}
+
 /**
  * Keyed on the status union on purpose.
  *
@@ -50,6 +92,17 @@ export const responseTo: Record<CheckResult['status'], SubmitResponse> = {
   // arithmetic was correct; handing it back answers a question the learner did
   // not get wrong and removes the one step they still have to take.
   'not-simplified': {
+    advances: false,
+    record: 'incorrect',
+    requeues: true,
+    showsSolution: false,
+    keepsEntry: false,
+  },
+
+  // The same shape of miss for the unit that teaches mixed form: the value is
+  // right but written as an improper fraction, and the missing step is the
+  // conversion itself, which the worked solution would answer.
+  'not-mixed': {
     advances: false,
     record: 'incorrect',
     requeues: true,

@@ -1,0 +1,1832 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: add-frac-diff-den > matches the wording recorded when the skill landed 1`] = `
+"--- add-frac-diff-den · seed 1 · difficulty 1
+prompt   What is the sum?
+display  math "1 over 3, plus, 1 over 2" row(fraction("1", "3"), "+", fraction("1", "2")) [add 1/3 + 1/2]
+answer   exact 5/6 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/3 → 2/6 and 1/2 → 3/6]
+step 2   Add the scaled numerators.   [2 + 3 = 5]
+step 3   Put the sum over the common denominator.   [5/6]
+miss     adds-across = 0.4   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.3333333333333333   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 12345 · difficulty 1
+prompt   What is the sum?
+display  math "1 over 4, plus, 2 over 3" row(fraction("1", "4"), "+", fraction("2", "3")) [add 1/4 + 2/3]
+answer   exact 11/12 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/4 → 3/12 and 2/3 → 8/12]
+step 2   Add the scaled numerators.   [3 + 8 = 11]
+step 3   Put the sum over the common denominator.   [11/12]
+miss     adds-across = 0.42857142857142855   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.25   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 67890 · difficulty 1
+prompt   What is the sum?
+display  math "1 over 3, plus, 1 over 4" row(fraction("1", "3"), "+", fraction("1", "4")) [add 1/3 + 1/4]
+answer   exact 7/12 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/3 → 4/12 and 1/4 → 3/12]
+step 2   Add the scaled numerators.   [4 + 3 = 7]
+step 3   Put the sum over the common denominator.   [7/12]
+miss     adds-across = 0.2857142857142857   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.16666666666666666   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 424242 · difficulty 1
+prompt   What is the sum?
+display  math "1 over 2, plus, 1 over 3" row(fraction("1", "2"), "+", fraction("1", "3")) [add 1/2 + 1/3]
+answer   exact 5/6 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/2 → 3/6 and 1/3 → 2/6]
+step 2   Add the scaled numerators.   [3 + 2 = 5]
+step 3   Put the sum over the common denominator.   [5/6]
+miss     adds-across = 0.4   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.3333333333333333   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 987654321 · difficulty 1
+prompt   What is the sum?
+display  math "1 over 4, plus, 2 over 3" row(fraction("1", "4"), "+", fraction("2", "3")) [add 1/4 + 2/3]
+answer   exact 11/12 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/4 → 3/12 and 2/3 → 8/12]
+step 2   Add the scaled numerators.   [3 + 8 = 11]
+step 3   Put the sum over the common denominator.   [11/12]
+miss     adds-across = 0.42857142857142855   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.25   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 1 · difficulty 2
+prompt   What is the sum?
+display  math "1 over 4, plus, 2 over 3" row(fraction("1", "4"), "+", fraction("2", "3")) [add 1/4 + 2/3]
+answer   exact 11/12 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/4 → 3/12 and 2/3 → 8/12]
+step 2   Add the scaled numerators.   [3 + 8 = 11]
+step 3   Put the sum over the common denominator.   [11/12]
+miss     adds-across = 0.42857142857142855   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.25   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 12345 · difficulty 2
+prompt   What is the sum?
+display  math "1 over 5, plus, 1 over 2" row(fraction("1", "5"), "+", fraction("1", "2")) [add 1/5 + 1/2]
+answer   exact 7/10 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/5 → 2/10 and 1/2 → 5/10]
+step 2   Add the scaled numerators.   [2 + 5 = 7]
+step 3   Put the sum over the common denominator.   [7/10]
+miss     adds-across = 0.2857142857142857   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.2   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 67890 · difficulty 2
+prompt   What is the sum?
+display  math "1 over 3, plus, 1 over 4" row(fraction("1", "3"), "+", fraction("1", "4")) [add 1/3 + 1/4]
+answer   exact 7/12 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/3 → 4/12 and 1/4 → 3/12]
+step 2   Add the scaled numerators.   [4 + 3 = 7]
+step 3   Put the sum over the common denominator.   [7/12]
+miss     adds-across = 0.2857142857142857   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.16666666666666666   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 424242 · difficulty 2
+prompt   What is the sum?
+display  math "1 over 2, plus, 1 over 3" row(fraction("1", "2"), "+", fraction("1", "3")) [add 1/2 + 1/3]
+answer   exact 5/6 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/2 → 3/6 and 1/3 → 2/6]
+step 2   Add the scaled numerators.   [3 + 2 = 5]
+step 3   Put the sum over the common denominator.   [5/6]
+miss     adds-across = 0.4   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.3333333333333333   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 987654321 · difficulty 2
+prompt   What is the sum?
+display  math "1 over 5, plus, 1 over 2" row(fraction("1", "5"), "+", fraction("1", "2")) [add 1/5 + 1/2]
+answer   exact 7/10 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/5 → 2/10 and 1/2 → 5/10]
+step 2   Add the scaled numerators.   [2 + 5 = 7]
+step 3   Put the sum over the common denominator.   [7/10]
+miss     adds-across = 0.2857142857142857   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.2   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 1 · difficulty 3
+prompt   What is the sum?
+display  math "3 over 5, plus, 2 over 3" row(fraction("3", "5"), "+", fraction("2", "3")) [add 3/5 + 2/3]
+answer   exact 19/15 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [3/5 → 9/15 and 2/3 → 10/15]
+step 2   Add the scaled numerators.   [9 + 10 = 19]
+step 3   Put the sum over the common denominator.   [19/15]
+miss     adds-across = 0.625   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.3333333333333333   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 12345 · difficulty 3
+prompt   What is the sum?
+display  math "1 over 6, plus, 4 over 5" row(fraction("1", "6"), "+", fraction("4", "5")) [add 1/6 + 4/5]
+answer   exact 29/30 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/6 → 5/30 and 4/5 → 24/30]
+step 2   Add the scaled numerators.   [5 + 24 = 29]
+step 3   Put the sum over the common denominator.   [29/30]
+miss     adds-across = 0.45454545454545453   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.16666666666666666   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 67890 · difficulty 3
+prompt   What is the sum?
+display  math "1 over 4, plus, 2 over 5" row(fraction("1", "4"), "+", fraction("2", "5")) [add 1/4 + 2/5]
+answer   exact 13/20 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/4 → 5/20 and 2/5 → 8/20]
+step 2   Add the scaled numerators.   [5 + 8 = 13]
+step 3   Put the sum over the common denominator.   [13/20]
+miss     adds-across = 0.3333333333333333   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.15   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 424242 · difficulty 3
+prompt   What is the sum?
+display  math "1 over 3, plus, 3 over 4" row(fraction("1", "3"), "+", fraction("3", "4")) [add 1/3 + 3/4]
+answer   exact 13/12 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/3 → 4/12 and 3/4 → 9/12]
+step 2   Add the scaled numerators.   [4 + 9 = 13]
+step 3   Put the sum over the common denominator.   [13/12]
+miss     adds-across = 0.5714285714285714   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.3333333333333333   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 987654321 · difficulty 3
+prompt   What is the sum?
+display  math "1 over 6, plus, 4 over 5" row(fraction("1", "6"), "+", fraction("4", "5")) [add 1/6 + 4/5]
+answer   exact 29/30 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/6 → 5/30 and 4/5 → 24/30]
+step 2   Add the scaled numerators.   [5 + 24 = 29]
+step 3   Put the sum over the common denominator.   [29/30]
+miss     adds-across = 0.45454545454545453   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.16666666666666666   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 1 · difficulty 4
+prompt   What is the sum?
+display  math "4 over 7, plus, 3 over 4" row(fraction("4", "7"), "+", fraction("3", "4")) [add 4/7 + 3/4]
+answer   exact 37/28 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [4/7 → 16/28 and 3/4 → 21/28]
+step 2   Add the scaled numerators.   [16 + 21 = 37]
+step 3   Put the sum over the common denominator.   [37/28]
+miss     adds-across = 0.6363636363636364   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.25   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 12345 · difficulty 4
+prompt   What is the sum?
+display  math "3 over 8, plus, 4 over 5" row(fraction("3", "8"), "+", fraction("4", "5")) [add 3/8 + 4/5]
+answer   exact 47/40 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [3/8 → 15/40 and 4/5 → 32/40]
+step 2   Add the scaled numerators.   [15 + 32 = 47]
+step 3   Put the sum over the common denominator.   [47/40]
+miss     adds-across = 0.5384615384615384   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.175   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 67890 · difficulty 4
+prompt   What is the sum?
+display  math "2 over 5, plus, 3 over 7" row(fraction("2", "5"), "+", fraction("3", "7")) [add 2/5 + 3/7]
+answer   exact 29/35 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [2/5 → 14/35 and 3/7 → 15/35]
+step 2   Add the scaled numerators.   [14 + 15 = 29]
+step 3   Put the sum over the common denominator.   [29/35]
+miss     adds-across = 0.4166666666666667   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.14285714285714285   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 424242 · difficulty 4
+prompt   What is the sum?
+display  math "1 over 4, plus, 3 over 5" row(fraction("1", "4"), "+", fraction("3", "5")) [add 1/4 + 3/5]
+answer   exact 17/20 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/4 → 5/20 and 3/5 → 12/20]
+step 2   Add the scaled numerators.   [5 + 12 = 17]
+step 3   Put the sum over the common denominator.   [17/20]
+miss     adds-across = 0.4444444444444444   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.2   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 987654321 · difficulty 4
+prompt   What is the sum?
+display  math "1 over 8, plus, 4 over 5" row(fraction("1", "8"), "+", fraction("4", "5")) [add 1/8 + 4/5]
+answer   exact 37/40 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/8 → 5/40 and 4/5 → 32/40]
+step 2   Add the scaled numerators.   [5 + 32 = 37]
+step 3   Put the sum over the common denominator.   [37/40]
+miss     adds-across = 0.38461538461538464   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.125   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 1 · difficulty 5
+prompt   What is the sum?
+display  math "5 over 8, plus, 4 over 5" row(fraction("5", "8"), "+", fraction("4", "5")) [add 5/8 + 4/5]
+answer   exact 57/40 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [5/8 → 25/40 and 4/5 → 32/40]
+step 2   Add the scaled numerators.   [25 + 32 = 57]
+step 3   Put the sum over the common denominator.   [57/40]
+miss     adds-across = 0.6923076923076923   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.225   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 12345 · difficulty 5
+prompt   What is the sum?
+display  math "3 over 10, plus, 5 over 7" row(fraction("3", "10"), "+", fraction("5", "7")) [add 3/10 + 5/7]
+answer   exact 71/70 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [3/10 → 21/70 and 5/7 → 50/70]
+step 2   Add the scaled numerators.   [21 + 50 = 71]
+step 3   Put the sum over the common denominator.   [71/70]
+miss     adds-across = 0.47058823529411764   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.11428571428571428   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 67890 · difficulty 5
+prompt   What is the sum?
+display  math "3 over 7, plus, 3 over 8" row(fraction("3", "7"), "+", fraction("3", "8")) [add 3/7 + 3/8]
+answer   exact 45/56 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [3/7 → 24/56 and 3/8 → 21/56]
+step 2   Add the scaled numerators.   [24 + 21 = 45]
+step 3   Put the sum over the common denominator.   [45/56]
+miss     adds-across = 0.4   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.10714285714285714   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 424242 · difficulty 5
+prompt   What is the sum?
+display  math "1 over 5, plus, 5 over 6" row(fraction("1", "5"), "+", fraction("5", "6")) [add 1/5 + 5/6]
+answer   exact 31/30 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/5 → 6/30 and 5/6 → 25/30]
+step 2   Add the scaled numerators.   [6 + 25 = 31]
+step 3   Put the sum over the common denominator.   [31/30]
+miss     adds-across = 0.5454545454545454   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.2   Each numerator must be scaled to the common denominator first.
+
+--- add-frac-diff-den · seed 987654321 · difficulty 5
+prompt   What is the sum?
+display  math "1 over 10, plus, 6 over 7" row(fraction("1", "10"), "+", fraction("6", "7")) [add 1/10 + 6/7]
+answer   exact 67/70 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Rewrite both fractions over the same denominator, then add.
+step 1   Rewrite each fraction over the common denominator.   [1/10 → 7/70 and 6/7 → 60/70]
+step 2   Add the scaled numerators.   [7 + 60 = 67]
+step 3   Put the sum over the common denominator.   [67/70]
+miss     adds-across = 0.4117647058823529   The denominators name different sizes — they are not added directly.
+miss     unscaled-numerators = 0.1   Each numerator must be scaled to the common denominator first."
+`;
+
+exports[`recorded output: add-frac-same-den > matches the wording recorded when the skill landed 1`] = `
+"--- add-frac-same-den · seed 1 · difficulty 1
+prompt   What is the sum?
+display  math "2 over 7, plus, 3 over 7" row(fraction("2", "7"), "+", fraction("3", "7")) [add 2/7 + 3/7]
+answer   exact 5/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [2 + 3 = 5]
+step 2   Keep the denominator.   [5/7]
+miss     adds-denominators = 0.35714285714285715   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.42857142857142855   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 12345 · difficulty 1
+prompt   What is the sum?
+display  math "2 over 7, plus, 3 over 7" row(fraction("2", "7"), "+", fraction("3", "7")) [add 2/7 + 3/7]
+answer   exact 5/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [2 + 3 = 5]
+step 2   Keep the denominator.   [5/7]
+miss     adds-denominators = 0.35714285714285715   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.42857142857142855   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 67890 · difficulty 1
+prompt   What is the sum?
+display  math "3 over 5, plus, 1 over 5" row(fraction("3", "5"), "+", fraction("1", "5")) [add 3/5 + 1/5]
+answer   exact 4/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [3 + 1 = 4]
+step 2   Keep the denominator.   [4/5]
+miss     adds-denominators = 0.4   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.2   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 424242 · difficulty 1
+prompt   What is the sum?
+display  math "1 over 5, plus, 2 over 5" row(fraction("1", "5"), "+", fraction("2", "5")) [add 1/5 + 2/5]
+answer   exact 3/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 2 = 3]
+step 2   Keep the denominator.   [3/5]
+miss     adds-denominators = 0.3   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.4   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 987654321 · difficulty 1
+prompt   What is the sum?
+display  math "1 over 7, plus, 2 over 7" row(fraction("1", "7"), "+", fraction("2", "7")) [add 1/7 + 2/7]
+answer   exact 3/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 2 = 3]
+step 2   Keep the denominator.   [3/7]
+miss     adds-denominators = 0.21428571428571427   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.2857142857142857   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 1 · difficulty 2
+prompt   What is the sum?
+display  math "1 over 7, plus, 4 over 7" row(fraction("1", "7"), "+", fraction("4", "7")) [add 1/7 + 4/7]
+answer   exact 5/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 4 = 5]
+step 2   Keep the denominator.   [5/7]
+miss     adds-denominators = 0.35714285714285715   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.5714285714285714   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 12345 · difficulty 2
+prompt   What is the sum?
+display  math "3 over 8, plus, 1 over 8" row(fraction("3", "8"), "+", fraction("1", "8")) [add 3/8 + 1/8]
+answer   exact 1/2 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [3 + 1 = 4]
+step 2   Keep the denominator.   [4/8]
+step 3   Reduce to lowest terms.   [4/8 = 1/2]
+miss     adds-denominators = 0.25   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.125   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 67890 · difficulty 2
+prompt   What is the sum?
+display  math "3 over 5, plus, 1 over 5" row(fraction("3", "5"), "+", fraction("1", "5")) [add 3/5 + 1/5]
+answer   exact 4/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [3 + 1 = 4]
+step 2   Keep the denominator.   [4/5]
+miss     adds-denominators = 0.4   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.2   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 424242 · difficulty 2
+prompt   What is the sum?
+display  math "1 over 5, plus, 2 over 5" row(fraction("1", "5"), "+", fraction("2", "5")) [add 1/5 + 2/5]
+answer   exact 3/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 2 = 3]
+step 2   Keep the denominator.   [3/5]
+miss     adds-denominators = 0.3   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.4   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 987654321 · difficulty 2
+prompt   What is the sum?
+display  math "1 over 8, plus, 3 over 8" row(fraction("1", "8"), "+", fraction("3", "8")) [add 1/8 + 3/8]
+answer   exact 1/2 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 3 = 4]
+step 2   Keep the denominator.   [4/8]
+step 3   Reduce to lowest terms.   [4/8 = 1/2]
+miss     adds-denominators = 0.25   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.375   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 1 · difficulty 3
+prompt   What is the sum?
+display  math "1 over 8, plus, 5 over 8" row(fraction("1", "8"), "+", fraction("5", "8")) [add 1/8 + 5/8]
+answer   exact 3/4 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 5 = 6]
+step 2   Keep the denominator.   [6/8]
+step 3   Reduce to lowest terms.   [6/8 = 3/4]
+miss     adds-denominators = 0.375   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.625   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 12345 · difficulty 3
+prompt   What is the sum?
+display  math "2 over 9, plus, 4 over 9" row(fraction("2", "9"), "+", fraction("4", "9")) [add 2/9 + 4/9]
+answer   exact 2/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [2 + 4 = 6]
+step 2   Keep the denominator.   [6/9]
+step 3   Reduce to lowest terms.   [6/9 = 2/3]
+miss     adds-denominators = 0.3333333333333333   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.4444444444444444   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 67890 · difficulty 3
+prompt   What is the sum?
+display  math "3 over 5, plus, 1 over 5" row(fraction("3", "5"), "+", fraction("1", "5")) [add 3/5 + 1/5]
+answer   exact 4/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [3 + 1 = 4]
+step 2   Keep the denominator.   [4/5]
+miss     adds-denominators = 0.4   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.2   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 424242 · difficulty 3
+prompt   What is the sum?
+display  math "1 over 5, plus, 2 over 5" row(fraction("1", "5"), "+", fraction("2", "5")) [add 1/5 + 2/5]
+answer   exact 3/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 2 = 3]
+step 2   Keep the denominator.   [3/5]
+miss     adds-denominators = 0.3   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.4   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 987654321 · difficulty 3
+prompt   What is the sum?
+display  math "1 over 9, plus, 2 over 9" row(fraction("1", "9"), "+", fraction("2", "9")) [add 1/9 + 2/9]
+answer   exact 1/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 2 = 3]
+step 2   Keep the denominator.   [3/9]
+step 3   Reduce to lowest terms.   [3/9 = 1/3]
+miss     adds-denominators = 0.16666666666666666   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.2222222222222222   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 1 · difficulty 4
+prompt   What is the sum?
+display  math "1 over 9, plus, 5 over 9" row(fraction("1", "9"), "+", fraction("5", "9")) [add 1/9 + 5/9]
+answer   exact 2/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 5 = 6]
+step 2   Keep the denominator.   [6/9]
+step 3   Reduce to lowest terms.   [6/9 = 2/3]
+miss     adds-denominators = 0.3333333333333333   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.5555555555555556   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 12345 · difficulty 4
+prompt   What is the sum?
+display  math "3 over 10, plus, 1 over 10" row(fraction("3", "10"), "+", fraction("1", "10")) [add 3/10 + 1/10]
+answer   exact 2/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [3 + 1 = 4]
+step 2   Keep the denominator.   [4/10]
+step 3   Reduce to lowest terms.   [4/10 = 2/5]
+miss     adds-denominators = 0.2   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.1   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 67890 · difficulty 4
+prompt   What is the sum?
+display  math "4 over 7, plus, 1 over 7" row(fraction("4", "7"), "+", fraction("1", "7")) [add 4/7 + 1/7]
+answer   exact 5/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [4 + 1 = 5]
+step 2   Keep the denominator.   [5/7]
+miss     adds-denominators = 0.35714285714285715   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.14285714285714285   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 424242 · difficulty 4
+prompt   What is the sum?
+display  math "4 over 7, plus, 1 over 7" row(fraction("4", "7"), "+", fraction("1", "7")) [add 4/7 + 1/7]
+answer   exact 5/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [4 + 1 = 5]
+step 2   Keep the denominator.   [5/7]
+miss     adds-denominators = 0.35714285714285715   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.14285714285714285   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 987654321 · difficulty 4
+prompt   What is the sum?
+display  math "1 over 10, plus, 3 over 10" row(fraction("1", "10"), "+", fraction("3", "10")) [add 1/10 + 3/10]
+answer   exact 2/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 3 = 4]
+step 2   Keep the denominator.   [4/10]
+step 3   Reduce to lowest terms.   [4/10 = 2/5]
+miss     adds-denominators = 0.2   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.3   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 1 · difficulty 5
+prompt   What is the sum?
+display  math "1 over 10, plus, 7 over 10" row(fraction("1", "10"), "+", fraction("7", "10")) [add 1/10 + 7/10]
+answer   exact 4/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 7 = 8]
+step 2   Keep the denominator.   [8/10]
+step 3   Reduce to lowest terms.   [8/10 = 4/5]
+miss     adds-denominators = 0.4   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.7   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 12345 · difficulty 5
+prompt   What is the sum?
+display  math "5 over 12, plus, 1 over 12" row(fraction("5", "12"), "+", fraction("1", "12")) [add 5/12 + 1/12]
+answer   exact 1/2 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [5 + 1 = 6]
+step 2   Keep the denominator.   [6/12]
+step 3   Reduce to lowest terms.   [6/12 = 1/2]
+miss     adds-denominators = 0.25   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.08333333333333333   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 67890 · difficulty 5
+prompt   What is the sum?
+display  math "5 over 9, plus, 1 over 9" row(fraction("5", "9"), "+", fraction("1", "9")) [add 5/9 + 1/9]
+answer   exact 2/3 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [5 + 1 = 6]
+step 2   Keep the denominator.   [6/9]
+step 3   Reduce to lowest terms.   [6/9 = 2/3]
+miss     adds-denominators = 0.3333333333333333   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.1111111111111111   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 424242 · difficulty 5
+prompt   What is the sum?
+display  math "2 over 7, plus, 1 over 7" row(fraction("2", "7"), "+", fraction("1", "7")) [add 2/7 + 1/7]
+answer   exact 3/7 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [2 + 1 = 3]
+step 2   Keep the denominator.   [3/7]
+miss     adds-denominators = 0.21428571428571427   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.14285714285714285   That is one of the addends. Add the numerators.
+
+--- add-frac-same-den · seed 987654321 · difficulty 5
+prompt   What is the sum?
+display  math "1 over 12, plus, 5 over 12" row(fraction("1", "12"), "+", fraction("5", "12")) [add 1/12 + 5/12]
+answer   exact 1/2 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Add the numerators, and the denominator stays the same.
+step 1   The denominators match, so add the numerators.   [1 + 5 = 6]
+step 2   Keep the denominator.   [6/12]
+step 3   Reduce to lowest terms.   [6/12 = 1/2]
+miss     adds-denominators = 0.25   The denominator names the size of the parts — it stays the same.
+miss     copies-addend = 0.4166666666666667   That is one of the addends. Add the numerators."
+`;
+
+exports[`recorded output: common-denominator > matches the wording recorded when the skill landed 1`] = `
+"--- common-denominator · seed 1 · difficulty 1
+prompt   What is the least common denominator?
+display  math "1 over 2, and, 3 over 4" row(fraction("1", "2"), "and", fraction("3", "4")) [common-denominator 1/2 and 3/4]
+answer   exact 4/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(2, 4) = 4]
+miss     product-not-lcm = 8   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 12345 · difficulty 1
+prompt   What is the least common denominator?
+display  math "1 over 2, and, 3 over 4" row(fraction("1", "2"), "and", fraction("3", "4")) [common-denominator 1/2 and 3/4]
+answer   exact 4/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(2, 4) = 4]
+miss     product-not-lcm = 8   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 67890 · difficulty 1
+prompt   What is the least common denominator?
+display  math "1 over 3, and, 1 over 2" row(fraction("1", "3"), "and", fraction("1", "2")) [common-denominator 1/3 and 1/2]
+answer   exact 6/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(3, 2) = 6]
+miss     larger-denominator = 3   Check that the smaller denominator divides evenly into it.
+
+--- common-denominator · seed 424242 · difficulty 1
+prompt   What is the least common denominator?
+display  math "1 over 2, and, 1 over 3" row(fraction("1", "2"), "and", fraction("1", "3")) [common-denominator 1/2 and 1/3]
+answer   exact 6/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(2, 3) = 6]
+miss     larger-denominator = 3   Check that the smaller denominator divides evenly into it.
+
+--- common-denominator · seed 987654321 · difficulty 1
+prompt   What is the least common denominator?
+display  math "1 over 2, and, 3 over 4" row(fraction("1", "2"), "and", fraction("3", "4")) [common-denominator 1/2 and 3/4]
+answer   exact 4/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(2, 4) = 4]
+miss     product-not-lcm = 8   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 1 · difficulty 2
+prompt   What is the least common denominator?
+display  math "1 over 2, and, 3 over 4" row(fraction("1", "2"), "and", fraction("3", "4")) [common-denominator 1/2 and 3/4]
+answer   exact 4/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(2, 4) = 4]
+miss     product-not-lcm = 8   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 12345 · difficulty 2
+prompt   What is the least common denominator?
+display  math "1 over 2, and, 3 over 4" row(fraction("1", "2"), "and", fraction("3", "4")) [common-denominator 1/2 and 3/4]
+answer   exact 4/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(2, 4) = 4]
+miss     product-not-lcm = 8   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 67890 · difficulty 2
+prompt   What is the least common denominator?
+display  math "1 over 4, and, 1 over 3" row(fraction("1", "4"), "and", fraction("1", "3")) [common-denominator 1/4 and 1/3]
+answer   exact 12/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(4, 3) = 12]
+miss     larger-denominator = 4   Check that the smaller denominator divides evenly into it.
+
+--- common-denominator · seed 424242 · difficulty 2
+prompt   What is the least common denominator?
+display  math "1 over 2, and, 1 over 3" row(fraction("1", "2"), "and", fraction("1", "3")) [common-denominator 1/2 and 1/3]
+answer   exact 6/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(2, 3) = 6]
+miss     larger-denominator = 3   Check that the smaller denominator divides evenly into it.
+
+--- common-denominator · seed 987654321 · difficulty 2
+prompt   What is the least common denominator?
+display  math "1 over 2, and, 3 over 4" row(fraction("1", "2"), "and", fraction("3", "4")) [common-denominator 1/2 and 3/4]
+answer   exact 4/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(2, 4) = 4]
+miss     product-not-lcm = 8   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 1 · difficulty 3
+prompt   What is the least common denominator?
+display  math "2 over 3, and, 5 over 6" row(fraction("2", "3"), "and", fraction("5", "6")) [common-denominator 2/3 and 5/6]
+answer   exact 6/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(3, 6) = 6]
+miss     product-not-lcm = 18   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 12345 · difficulty 3
+prompt   What is the least common denominator?
+display  math "2 over 3, and, 5 over 6" row(fraction("2", "3"), "and", fraction("5", "6")) [common-denominator 2/3 and 5/6]
+answer   exact 6/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(3, 6) = 6]
+miss     product-not-lcm = 18   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 67890 · difficulty 3
+prompt   What is the least common denominator?
+display  math "2 over 5, and, 1 over 4" row(fraction("2", "5"), "and", fraction("1", "4")) [common-denominator 2/5 and 1/4]
+answer   exact 20/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(5, 4) = 20]
+miss     larger-denominator = 5   Check that the smaller denominator divides evenly into it.
+
+--- common-denominator · seed 424242 · difficulty 3
+prompt   What is the least common denominator?
+display  math "2 over 3, and, 1 over 4" row(fraction("2", "3"), "and", fraction("1", "4")) [common-denominator 2/3 and 1/4]
+answer   exact 12/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(3, 4) = 12]
+miss     larger-denominator = 4   Check that the smaller denominator divides evenly into it.
+
+--- common-denominator · seed 987654321 · difficulty 3
+prompt   What is the least common denominator?
+display  math "2 over 3, and, 5 over 6" row(fraction("2", "3"), "and", fraction("5", "6")) [common-denominator 2/3 and 5/6]
+answer   exact 6/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(3, 6) = 6]
+miss     product-not-lcm = 18   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 1 · difficulty 4
+prompt   What is the least common denominator?
+display  math "3 over 4, and, 7 over 8" row(fraction("3", "4"), "and", fraction("7", "8")) [common-denominator 3/4 and 7/8]
+answer   exact 8/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(4, 8) = 8]
+miss     product-not-lcm = 32   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 12345 · difficulty 4
+prompt   What is the least common denominator?
+display  math "3 over 4, and, 5 over 8" row(fraction("3", "4"), "and", fraction("5", "8")) [common-denominator 3/4 and 5/8]
+answer   exact 8/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(4, 8) = 8]
+miss     product-not-lcm = 32   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 67890 · difficulty 4
+prompt   What is the least common denominator?
+display  math "1 over 6, and, 1 over 5" row(fraction("1", "6"), "and", fraction("1", "5")) [common-denominator 1/6 and 1/5]
+answer   exact 30/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(6, 5) = 30]
+miss     larger-denominator = 6   Check that the smaller denominator divides evenly into it.
+
+--- common-denominator · seed 424242 · difficulty 4
+prompt   What is the least common denominator?
+display  math "3 over 5, and, 1 over 4" row(fraction("3", "5"), "and", fraction("1", "4")) [common-denominator 3/5 and 1/4]
+answer   exact 20/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(5, 4) = 20]
+miss     larger-denominator = 5   Check that the smaller denominator divides evenly into it.
+
+--- common-denominator · seed 987654321 · difficulty 4
+prompt   What is the least common denominator?
+display  math "3 over 4, and, 5 over 8" row(fraction("3", "4"), "and", fraction("5", "8")) [common-denominator 3/4 and 5/8]
+answer   exact 8/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(4, 8) = 8]
+miss     product-not-lcm = 32   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 1 · difficulty 5
+prompt   What is the least common denominator?
+display  math "4 over 5, and, 9 over 10" row(fraction("4", "5"), "and", fraction("9", "10")) [common-denominator 4/5 and 9/10]
+answer   exact 10/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(5, 10) = 10]
+miss     product-not-lcm = 50   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 12345 · difficulty 5
+prompt   What is the least common denominator?
+display  math "4 over 5, and, 7 over 10" row(fraction("4", "5"), "and", fraction("7", "10")) [common-denominator 4/5 and 7/10]
+answer   exact 10/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(5, 10) = 10]
+miss     product-not-lcm = 50   The product is a common denominator, but not the least one.
+
+--- common-denominator · seed 67890 · difficulty 5
+prompt   What is the least common denominator?
+display  math "3 over 8, and, 1 over 7" row(fraction("3", "8"), "and", fraction("1", "7")) [common-denominator 3/8 and 1/7]
+answer   exact 56/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(8, 7) = 56]
+miss     larger-denominator = 8   Check that the smaller denominator divides evenly into it.
+
+--- common-denominator · seed 424242 · difficulty 5
+prompt   What is the least common denominator?
+display  math "5 over 6, and, 2 over 5" row(fraction("5", "6"), "and", fraction("2", "5")) [common-denominator 5/6 and 2/5]
+answer   exact 30/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(6, 5) = 30]
+miss     larger-denominator = 6   Check that the smaller denominator divides evenly into it.
+
+--- common-denominator · seed 987654321 · difficulty 5
+prompt   What is the least common denominator?
+display  math "4 over 5, and, 7 over 10" row(fraction("4", "5"), "and", fraction("7", "10")) [common-denominator 4/5 and 7/10]
+answer   exact 10/1
+input    keypad
+hint     Find the smallest number both denominators divide evenly into.
+step 1   The least common denominator is the smallest number both divide.   [lcm(5, 10) = 10]
+miss     product-not-lcm = 50   The product is a common denominator, but not the least one."
+`;
+
+exports[`recorded output: improper-to-mixed > matches the wording recorded when the skill landed 1`] = `
+"--- improper-to-mixed · seed 1 · difficulty 1
+prompt   Write this as a mixed number.
+display  math "5 over 3" fraction("5", "3") [improper-to-mixed 5/3]
+answer   exact 5/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [5 ÷ 3 = 1 remainder 2]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [2/3]
+miss     quotient-remainder-swapped = 2.3333333333333335   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 2.6666666666666665   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 12345 · difficulty 1
+prompt   Write this as a mixed number.
+display  math "6 over 4" fraction("6", "4") [improper-to-mixed 6/4]
+answer   exact 6/4 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [6 ÷ 4 = 1 remainder 2]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [2/4]
+step 4   Reduce to lowest terms.   [2/4 = 1/2]
+miss     quotient-remainder-swapped = 2.25   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 2.5   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 67890 · difficulty 1
+prompt   Write this as a mixed number.
+display  math "7 over 3" fraction("7", "3") [improper-to-mixed 7/3]
+answer   exact 7/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [7 ÷ 3 = 2 remainder 1]
+step 2   The quotient is the whole part.   [2]
+step 3   The remainder becomes the fraction numerator.   [1/3]
+miss     quotient-remainder-swapped = 1.6666666666666667   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 4.333333333333333   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 424242 · difficulty 1
+prompt   Write this as a mixed number.
+display  math "3 over 2" fraction("3", "2") [improper-to-mixed 3/2]
+answer   exact 3/2 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [3 ÷ 2 = 1 remainder 1]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [1/2]
+miss     whole-with-original-fraction = 2.5   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 987654321 · difficulty 1
+prompt   Write this as a mixed number.
+display  math "5 over 4" fraction("5", "4") [improper-to-mixed 5/4]
+answer   exact 5/4 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [5 ÷ 4 = 1 remainder 1]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [1/4]
+miss     whole-with-original-fraction = 2.25   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 1 · difficulty 2
+prompt   Write this as a mixed number.
+display  math "6 over 4" fraction("6", "4") [improper-to-mixed 6/4]
+answer   exact 6/4 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [6 ÷ 4 = 1 remainder 2]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [2/4]
+step 4   Reduce to lowest terms.   [2/4 = 1/2]
+miss     quotient-remainder-swapped = 2.25   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 2.5   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 12345 · difficulty 2
+prompt   Write this as a mixed number.
+display  math "7 over 5" fraction("7", "5") [improper-to-mixed 7/5]
+answer   exact 7/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [7 ÷ 5 = 1 remainder 2]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [2/5]
+miss     quotient-remainder-swapped = 2.2   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 2.4   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 67890 · difficulty 2
+prompt   Write this as a mixed number.
+display  math "7 over 3" fraction("7", "3") [improper-to-mixed 7/3]
+answer   exact 7/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [7 ÷ 3 = 2 remainder 1]
+step 2   The quotient is the whole part.   [2]
+step 3   The remainder becomes the fraction numerator.   [1/3]
+miss     quotient-remainder-swapped = 1.6666666666666667   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 4.333333333333333   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 424242 · difficulty 2
+prompt   Write this as a mixed number.
+display  math "3 over 2" fraction("3", "2") [improper-to-mixed 3/2]
+answer   exact 3/2 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [3 ÷ 2 = 1 remainder 1]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [1/2]
+miss     whole-with-original-fraction = 2.5   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 987654321 · difficulty 2
+prompt   Write this as a mixed number.
+display  math "6 over 5" fraction("6", "5") [improper-to-mixed 6/5]
+answer   exact 6/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [6 ÷ 5 = 1 remainder 1]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [1/5]
+miss     whole-with-original-fraction = 2.2   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 1 · difficulty 3
+prompt   Write this as a mixed number.
+display  math "8 over 5" fraction("8", "5") [improper-to-mixed 8/5]
+answer   exact 8/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [8 ÷ 5 = 1 remainder 3]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [3/5]
+miss     quotient-remainder-swapped = 3.2   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 2.6   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 12345 · difficulty 3
+prompt   Write this as a mixed number.
+display  math "9 over 6" fraction("9", "6") [improper-to-mixed 9/6]
+answer   exact 9/6 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [9 ÷ 6 = 1 remainder 3]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [3/6]
+step 4   Reduce to lowest terms.   [3/6 = 1/2]
+miss     quotient-remainder-swapped = 3.1666666666666665   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 2.5   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 67890 · difficulty 3
+prompt   Write this as a mixed number.
+display  math "10 over 4" fraction("10", "4") [improper-to-mixed 10/4]
+answer   exact 10/4 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [10 ÷ 4 = 2 remainder 2]
+step 2   The quotient is the whole part.   [2]
+step 3   The remainder becomes the fraction numerator.   [2/4]
+step 4   Reduce to lowest terms.   [2/4 = 1/2]
+miss     whole-with-original-fraction = 4.5   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 424242 · difficulty 3
+prompt   Write this as a mixed number.
+display  math "4 over 3" fraction("4", "3") [improper-to-mixed 4/3]
+answer   exact 4/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [4 ÷ 3 = 1 remainder 1]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [1/3]
+miss     whole-with-original-fraction = 2.3333333333333335   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 987654321 · difficulty 3
+prompt   Write this as a mixed number.
+display  math "7 over 6" fraction("7", "6") [improper-to-mixed 7/6]
+answer   exact 7/6 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [7 ÷ 6 = 1 remainder 1]
+step 2   The quotient is the whole part.   [1]
+step 3   The remainder becomes the fraction numerator.   [1/6]
+miss     whole-with-original-fraction = 2.1666666666666665   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 1 · difficulty 4
+prompt   Write this as a mixed number.
+display  math "18 over 7" fraction("18", "7") [improper-to-mixed 18/7]
+answer   exact 18/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [18 ÷ 7 = 2 remainder 4]
+step 2   The quotient is the whole part.   [2]
+step 3   The remainder becomes the fraction numerator.   [4/7]
+miss     quotient-remainder-swapped = 4.285714285714286   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 4.571428571428571   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 12345 · difficulty 4
+prompt   Write this as a mixed number.
+display  math "20 over 8" fraction("20", "8") [improper-to-mixed 20/8]
+answer   exact 20/8 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [20 ÷ 8 = 2 remainder 4]
+step 2   The quotient is the whole part.   [2]
+step 3   The remainder becomes the fraction numerator.   [4/8]
+step 4   Reduce to lowest terms.   [4/8 = 1/2]
+miss     quotient-remainder-swapped = 4.25   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 4.5   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 67890 · difficulty 4
+prompt   Write this as a mixed number.
+display  math "17 over 5" fraction("17", "5") [improper-to-mixed 17/5]
+answer   exact 17/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [17 ÷ 5 = 3 remainder 2]
+step 2   The quotient is the whole part.   [3]
+step 3   The remainder becomes the fraction numerator.   [2/5]
+miss     quotient-remainder-swapped = 2.6   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 6.4   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 424242 · difficulty 4
+prompt   Write this as a mixed number.
+display  math "9 over 4" fraction("9", "4") [improper-to-mixed 9/4]
+answer   exact 9/4 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [9 ÷ 4 = 2 remainder 1]
+step 2   The quotient is the whole part.   [2]
+step 3   The remainder becomes the fraction numerator.   [1/4]
+miss     quotient-remainder-swapped = 1.5   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 4.25   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 987654321 · difficulty 4
+prompt   Write this as a mixed number.
+display  math "17 over 8" fraction("17", "8") [improper-to-mixed 17/8]
+answer   exact 17/8 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [17 ÷ 8 = 2 remainder 1]
+step 2   The quotient is the whole part.   [2]
+step 3   The remainder becomes the fraction numerator.   [1/8]
+miss     quotient-remainder-swapped = 1.25   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 4.125   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 1 · difficulty 5
+prompt   Write this as a mixed number.
+display  math "20 over 8" fraction("20", "8") [improper-to-mixed 20/8]
+answer   exact 20/8 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [20 ÷ 8 = 2 remainder 4]
+step 2   The quotient is the whole part.   [2]
+step 3   The remainder becomes the fraction numerator.   [4/8]
+step 4   Reduce to lowest terms.   [4/8 = 1/2]
+miss     quotient-remainder-swapped = 4.25   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 4.5   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 12345 · difficulty 5
+prompt   Write this as a mixed number.
+display  math "35 over 10" fraction("35", "10") [improper-to-mixed 35/10]
+answer   exact 35/10 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [35 ÷ 10 = 3 remainder 5]
+step 2   The quotient is the whole part.   [3]
+step 3   The remainder becomes the fraction numerator.   [5/10]
+step 4   Reduce to lowest terms.   [5/10 = 1/2]
+miss     quotient-remainder-swapped = 5.3   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 6.5   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 67890 · difficulty 5
+prompt   Write this as a mixed number.
+display  math "31 over 7" fraction("31", "7") [improper-to-mixed 31/7]
+answer   exact 31/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [31 ÷ 7 = 4 remainder 3]
+step 2   The quotient is the whole part.   [4]
+step 3   The remainder becomes the fraction numerator.   [3/7]
+miss     quotient-remainder-swapped = 3.5714285714285716   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 8.428571428571429   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 424242 · difficulty 5
+prompt   Write this as a mixed number.
+display  math "11 over 5" fraction("11", "5") [improper-to-mixed 11/5]
+answer   exact 11/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [11 ÷ 5 = 2 remainder 1]
+step 2   The quotient is the whole part.   [2]
+step 3   The remainder becomes the fraction numerator.   [1/5]
+miss     quotient-remainder-swapped = 1.4   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 4.2   Only the remainder becomes the fraction part.
+
+--- improper-to-mixed · seed 987654321 · difficulty 5
+prompt   Write this as a mixed number.
+display  math "21 over 10" fraction("21", "10") [improper-to-mixed 21/10]
+answer   exact 21/10 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Divide the numerator by the denominator — the quotient is the whole part.
+step 1   Divide the numerator by the denominator.   [21 ÷ 10 = 2 remainder 1]
+step 2   The quotient is the whole part.   [2]
+step 3   The remainder becomes the fraction numerator.   [1/10]
+miss     quotient-remainder-swapped = 1.2   The quotient is the whole part; the remainder is the fraction numerator.
+miss     whole-with-original-fraction = 4.1   Only the remainder becomes the fraction part."
+`;
+
+exports[`recorded output: sub-frac-diff-den > matches the wording recorded when the skill landed 1`] = `
+"--- sub-frac-diff-den · seed 1 · difficulty 1
+prompt   What is the difference?
+display  math "2 over 3, minus, 1 over 2" row(fraction("2", "3"), "−", fraction("1", "2")) [sub 2/3 − 1/2]
+answer   exact 1/6 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [2/3 → 4/6 and 1/2 → 3/6]
+step 2   Subtract the scaled numerators.   [4 − 3 = 1]
+step 3   Put the difference over the common denominator.   [1/6]
+miss     flipped-order = -0.16666666666666666   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.1666666666666667   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 12345 · difficulty 1
+prompt   What is the difference?
+display  math "3 over 4, minus, 1 over 3" row(fraction("3", "4"), "−", fraction("1", "3")) [sub 3/4 − 1/3]
+answer   exact 5/12 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [3/4 → 9/12 and 1/3 → 4/12]
+step 2   Subtract the scaled numerators.   [9 − 4 = 5]
+step 3   Put the difference over the common denominator.   [5/12]
+miss     flipped-order = -0.4166666666666667   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.0833333333333333   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 67890 · difficulty 1
+prompt   What is the difference?
+display  math "1 over 3, minus, 1 over 4" row(fraction("1", "3"), "−", fraction("1", "4")) [sub 1/3 − 1/4]
+answer   exact 1/12 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [1/3 → 4/12 and 1/4 → 3/12]
+step 2   Subtract the scaled numerators.   [4 − 3 = 1]
+step 3   Put the difference over the common denominator.   [1/12]
+miss     flipped-order = -0.08333333333333333   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 0.5833333333333334   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 424242 · difficulty 1
+prompt   What is the difference?
+display  math "1 over 2, minus, 1 over 3" row(fraction("1", "2"), "−", fraction("1", "3")) [sub 1/2 − 1/3]
+answer   exact 1/6 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [1/2 → 3/6 and 1/3 → 2/6]
+step 2   Subtract the scaled numerators.   [3 − 2 = 1]
+step 3   Put the difference over the common denominator.   [1/6]
+miss     flipped-order = -0.16666666666666666   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 0.8333333333333334   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 987654321 · difficulty 1
+prompt   What is the difference?
+display  math "3 over 4, minus, 1 over 3" row(fraction("3", "4"), "−", fraction("1", "3")) [sub 3/4 − 1/3]
+answer   exact 5/12 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [3/4 → 9/12 and 1/3 → 4/12]
+step 2   Subtract the scaled numerators.   [9 − 4 = 5]
+step 3   Put the difference over the common denominator.   [5/12]
+miss     flipped-order = -0.4166666666666667   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.0833333333333333   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 1 · difficulty 2
+prompt   What is the difference?
+display  math "3 over 4, minus, 2 over 3" row(fraction("3", "4"), "−", fraction("2", "3")) [sub 3/4 − 2/3]
+answer   exact 1/12 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [3/4 → 9/12 and 2/3 → 8/12]
+step 2   Subtract the scaled numerators.   [9 − 8 = 1]
+step 3   Put the difference over the common denominator.   [1/12]
+miss     flipped-order = -0.08333333333333333   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.4166666666666667   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 12345 · difficulty 2
+prompt   What is the difference?
+display  math "4 over 5, minus, 1 over 2" row(fraction("4", "5"), "−", fraction("1", "2")) [sub 4/5 − 1/2]
+answer   exact 3/10 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [4/5 → 8/10 and 1/2 → 5/10]
+step 2   Subtract the scaled numerators.   [8 − 5 = 3]
+step 3   Put the difference over the common denominator.   [3/10]
+miss     flipped-order = -0.3   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.3   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 67890 · difficulty 2
+prompt   What is the difference?
+display  math "1 over 3, minus, 1 over 4" row(fraction("1", "3"), "−", fraction("1", "4")) [sub 1/3 − 1/4]
+answer   exact 1/12 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [1/3 → 4/12 and 1/4 → 3/12]
+step 2   Subtract the scaled numerators.   [4 − 3 = 1]
+step 3   Put the difference over the common denominator.   [1/12]
+miss     flipped-order = -0.08333333333333333   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 0.5833333333333334   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 424242 · difficulty 2
+prompt   What is the difference?
+display  math "1 over 2, minus, 1 over 3" row(fraction("1", "2"), "−", fraction("1", "3")) [sub 1/2 − 1/3]
+answer   exact 1/6 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [1/2 → 3/6 and 1/3 → 2/6]
+step 2   Subtract the scaled numerators.   [3 − 2 = 1]
+step 3   Put the difference over the common denominator.   [1/6]
+miss     flipped-order = -0.16666666666666666   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 0.8333333333333334   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 987654321 · difficulty 2
+prompt   What is the difference?
+display  math "4 over 5, minus, 1 over 2" row(fraction("4", "5"), "−", fraction("1", "2")) [sub 4/5 − 1/2]
+answer   exact 3/10 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [4/5 → 8/10 and 1/2 → 5/10]
+step 2   Subtract the scaled numerators.   [8 − 5 = 3]
+step 3   Put the difference over the common denominator.   [3/10]
+miss     flipped-order = -0.3   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.3   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 1 · difficulty 3
+prompt   What is the difference?
+display  math "4 over 5, minus, 2 over 3" row(fraction("4", "5"), "−", fraction("2", "3")) [sub 4/5 − 2/3]
+answer   exact 2/15 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [4/5 → 12/15 and 2/3 → 10/15]
+step 2   Subtract the scaled numerators.   [12 − 10 = 2]
+step 3   Put the difference over the common denominator.   [2/15]
+miss     flipped-order = -0.13333333333333333   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.4666666666666666   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 12345 · difficulty 3
+prompt   What is the difference?
+display  math "5 over 6, minus, 2 over 5" row(fraction("5", "6"), "−", fraction("2", "5")) [sub 5/6 − 2/5]
+answer   exact 13/30 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [5/6 → 25/30 and 2/5 → 12/30]
+step 2   Subtract the scaled numerators.   [25 − 12 = 13]
+step 3   Put the difference over the common denominator.   [13/30]
+miss     flipped-order = -0.43333333333333335   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.2333333333333334   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 67890 · difficulty 3
+prompt   What is the difference?
+display  math "3 over 4, minus, 2 over 5" row(fraction("3", "4"), "−", fraction("2", "5")) [sub 3/4 − 2/5]
+answer   exact 7/20 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [3/4 → 15/20 and 2/5 → 8/20]
+step 2   Subtract the scaled numerators.   [15 − 8 = 7]
+step 3   Put the difference over the common denominator.   [7/20]
+miss     flipped-order = -0.35   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.15   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 424242 · difficulty 3
+prompt   What is the difference?
+display  math "2 over 3, minus, 1 over 4" row(fraction("2", "3"), "−", fraction("1", "4")) [sub 2/3 − 1/4]
+answer   exact 5/12 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [2/3 → 8/12 and 1/4 → 3/12]
+step 2   Subtract the scaled numerators.   [8 − 3 = 5]
+step 3   Put the difference over the common denominator.   [5/12]
+miss     flipped-order = -0.4166666666666667   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 0.9166666666666666   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 987654321 · difficulty 3
+prompt   What is the difference?
+display  math "5 over 6, minus, 1 over 5" row(fraction("5", "6"), "−", fraction("1", "5")) [sub 5/6 − 1/5]
+answer   exact 19/30 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [5/6 → 25/30 and 1/5 → 6/30]
+step 2   Subtract the scaled numerators.   [25 − 6 = 19]
+step 3   Put the difference over the common denominator.   [19/30]
+miss     flipped-order = -0.6333333333333333   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.0333333333333334   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 1 · difficulty 4
+prompt   What is the difference?
+display  math "6 over 7, minus, 3 over 4" row(fraction("6", "7"), "−", fraction("3", "4")) [sub 6/7 − 3/4]
+answer   exact 3/28 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [6/7 → 24/28 and 3/4 → 21/28]
+step 2   Subtract the scaled numerators.   [24 − 21 = 3]
+step 3   Put the difference over the common denominator.   [3/28]
+miss     flipped-order = -0.10714285714285714   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.6071428571428572   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 12345 · difficulty 4
+prompt   What is the difference?
+display  math "7 over 8, minus, 2 over 5" row(fraction("7", "8"), "−", fraction("2", "5")) [sub 7/8 − 2/5]
+answer   exact 19/40 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [7/8 → 35/40 and 2/5 → 16/40]
+step 2   Subtract the scaled numerators.   [35 − 16 = 19]
+step 3   Put the difference over the common denominator.   [19/40]
+miss     flipped-order = -0.475   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.275   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 67890 · difficulty 4
+prompt   What is the difference?
+display  math "3 over 5, minus, 2 over 7" row(fraction("3", "5"), "−", fraction("2", "7")) [sub 3/5 − 2/7]
+answer   exact 11/35 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [3/5 → 21/35 and 2/7 → 10/35]
+step 2   Subtract the scaled numerators.   [21 − 10 = 11]
+step 3   Put the difference over the common denominator.   [11/35]
+miss     flipped-order = -0.3142857142857143   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 0.8857142857142857   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 424242 · difficulty 4
+prompt   What is the difference?
+display  math "3 over 4, minus, 1 over 5" row(fraction("3", "4"), "−", fraction("1", "5")) [sub 3/4 − 1/5]
+answer   exact 11/20 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [3/4 → 15/20 and 1/5 → 4/20]
+step 2   Subtract the scaled numerators.   [15 − 4 = 11]
+step 3   Put the difference over the common denominator.   [11/20]
+miss     flipped-order = -0.55   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 0.95   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 987654321 · difficulty 4
+prompt   What is the difference?
+display  math "7 over 8, minus, 1 over 5" row(fraction("7", "8"), "−", fraction("1", "5")) [sub 7/8 − 1/5]
+answer   exact 27/40 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [7/8 → 35/40 and 1/5 → 8/40]
+step 2   Subtract the scaled numerators.   [35 − 8 = 27]
+step 3   Put the difference over the common denominator.   [27/40]
+miss     flipped-order = -0.675   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.075   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 1 · difficulty 5
+prompt   What is the difference?
+display  math "7 over 8, minus, 3 over 5" row(fraction("7", "8"), "−", fraction("3", "5")) [sub 7/8 − 3/5]
+answer   exact 11/40 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [7/8 → 35/40 and 3/5 → 24/40]
+step 2   Subtract the scaled numerators.   [35 − 24 = 11]
+step 3   Put the difference over the common denominator.   [11/40]
+miss     flipped-order = -0.275   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.475   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 12345 · difficulty 5
+prompt   What is the difference?
+display  math "9 over 10, minus, 3 over 7" row(fraction("9", "10"), "−", fraction("3", "7")) [sub 9/10 − 3/7]
+answer   exact 33/70 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [9/10 → 63/70 and 3/7 → 30/70]
+step 2   Subtract the scaled numerators.   [63 − 30 = 33]
+step 3   Put the difference over the common denominator.   [33/70]
+miss     flipped-order = -0.4714285714285714   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.3285714285714285   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 67890 · difficulty 5
+prompt   What is the difference?
+display  math "4 over 7, minus, 3 over 8" row(fraction("4", "7"), "−", fraction("3", "8")) [sub 4/7 − 3/8]
+answer   exact 11/56 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [4/7 → 32/56 and 3/8 → 21/56]
+step 2   Subtract the scaled numerators.   [32 − 21 = 11]
+step 3   Put the difference over the common denominator.   [11/56]
+miss     flipped-order = -0.19642857142857142   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 0.9464285714285714   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 424242 · difficulty 5
+prompt   What is the difference?
+display  math "3 over 5, minus, 1 over 6" row(fraction("3", "5"), "−", fraction("1", "6")) [sub 3/5 − 1/6]
+answer   exact 13/30 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [3/5 → 18/30 and 1/6 → 5/30]
+step 2   Subtract the scaled numerators.   [18 − 5 = 13]
+step 3   Put the difference over the common denominator.   [13/30]
+miss     flipped-order = -0.43333333333333335   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 0.7666666666666667   The problem asks for a difference — subtract the numerators.
+
+--- sub-frac-diff-den · seed 987654321 · difficulty 5
+prompt   What is the difference?
+display  math "9 over 10, minus, 1 over 7" row(fraction("9", "10"), "−", fraction("1", "7")) [sub 9/10 − 1/7]
+answer   exact 53/70 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Rewrite both fractions over the same denominator, then subtract.
+step 1   Rewrite each fraction over the common denominator.   [9/10 → 63/70 and 1/7 → 10/70]
+step 2   Subtract the scaled numerators.   [63 − 10 = 53]
+step 3   Put the difference over the common denominator.   [53/70]
+miss     flipped-order = -0.7571428571428571   Subtract the second fraction from the first, not the other way round.
+miss     added-instead = 1.042857142857143   The problem asks for a difference — subtract the numerators."
+`;
+
+exports[`recorded output: sub-frac-same-den > matches the wording recorded when the skill landed 1`] = `
+"--- sub-frac-same-den · seed 1 · difficulty 1
+prompt   What is the difference?
+display  math "5 over 6, minus, 1 over 6" row(fraction("5", "6"), "−", fraction("1", "6")) [sub 5/6 − 1/6]
+answer   exact 2/3 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [5 − 1 = 4]
+step 2   Keep the denominator.   [4/6]
+step 3   Reduce to lowest terms.   [4/6 = 2/3]
+miss     flipped-order = -0.6666666666666666   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.16666666666666666   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 12345 · difficulty 1
+prompt   What is the difference?
+display  math "3 over 7, minus, 1 over 7" row(fraction("3", "7"), "−", fraction("1", "7")) [sub 3/7 − 1/7]
+answer   exact 2/7 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [3 − 1 = 2]
+step 2   Keep the denominator.   [2/7]
+miss     flipped-order = -0.2857142857142857   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.14285714285714285   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 67890 · difficulty 1
+prompt   What is the difference?
+display  math "5 over 6, minus, 1 over 6" row(fraction("5", "6"), "−", fraction("1", "6")) [sub 5/6 − 1/6]
+answer   exact 2/3 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [5 − 1 = 4]
+step 2   Keep the denominator.   [4/6]
+step 3   Reduce to lowest terms.   [4/6 = 2/3]
+miss     flipped-order = -0.6666666666666666   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.16666666666666666   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 424242 · difficulty 1
+prompt   What is the difference?
+display  math "2 over 5, minus, 1 over 5" row(fraction("2", "5"), "−", fraction("1", "5")) [sub 2/5 − 1/5]
+answer   exact 1/5 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [2 − 1 = 1]
+step 2   Keep the denominator.   [1/5]
+miss     flipped-order = -0.2   Subtract the second numerator from the first.
+
+--- sub-frac-same-den · seed 987654321 · difficulty 1
+prompt   What is the difference?
+display  math "2 over 7, minus, 1 over 7" row(fraction("2", "7"), "−", fraction("1", "7")) [sub 2/7 − 1/7]
+answer   exact 1/7 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [2 − 1 = 1]
+step 2   Keep the denominator.   [1/7]
+miss     flipped-order = -0.14285714285714285   Subtract the second numerator from the first.
+
+--- sub-frac-same-den · seed 1 · difficulty 2
+prompt   What is the difference?
+display  math "2 over 7, minus, 1 over 7" row(fraction("2", "7"), "−", fraction("1", "7")) [sub 2/7 − 1/7]
+answer   exact 1/7 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [2 − 1 = 1]
+step 2   Keep the denominator.   [1/7]
+miss     flipped-order = -0.14285714285714285   Subtract the second numerator from the first.
+
+--- sub-frac-same-den · seed 12345 · difficulty 2
+prompt   What is the difference?
+display  math "3 over 8, minus, 1 over 8" row(fraction("3", "8"), "−", fraction("1", "8")) [sub 3/8 − 1/8]
+answer   exact 1/4 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [3 − 1 = 2]
+step 2   Keep the denominator.   [2/8]
+step 3   Reduce to lowest terms.   [2/8 = 1/4]
+miss     flipped-order = -0.25   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.125   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 67890 · difficulty 2
+prompt   What is the difference?
+display  math "5 over 6, minus, 1 over 6" row(fraction("5", "6"), "−", fraction("1", "6")) [sub 5/6 − 1/6]
+answer   exact 2/3 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [5 − 1 = 4]
+step 2   Keep the denominator.   [4/6]
+step 3   Reduce to lowest terms.   [4/6 = 2/3]
+miss     flipped-order = -0.6666666666666666   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.16666666666666666   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 424242 · difficulty 2
+prompt   What is the difference?
+display  math "2 over 5, minus, 1 over 5" row(fraction("2", "5"), "−", fraction("1", "5")) [sub 2/5 − 1/5]
+answer   exact 1/5 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [2 − 1 = 1]
+step 2   Keep the denominator.   [1/5]
+miss     flipped-order = -0.2   Subtract the second numerator from the first.
+
+--- sub-frac-same-den · seed 987654321 · difficulty 2
+prompt   What is the difference?
+display  math "3 over 8, minus, 1 over 8" row(fraction("3", "8"), "−", fraction("1", "8")) [sub 3/8 − 1/8]
+answer   exact 1/4 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [3 − 1 = 2]
+step 2   Keep the denominator.   [2/8]
+step 3   Reduce to lowest terms.   [2/8 = 1/4]
+miss     flipped-order = -0.25   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.125   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 1 · difficulty 3
+prompt   What is the difference?
+display  math "3 over 8, minus, 1 over 8" row(fraction("3", "8"), "−", fraction("1", "8")) [sub 3/8 − 1/8]
+answer   exact 1/4 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [3 − 1 = 2]
+step 2   Keep the denominator.   [2/8]
+step 3   Reduce to lowest terms.   [2/8 = 1/4]
+miss     flipped-order = -0.25   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.125   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 12345 · difficulty 3
+prompt   What is the difference?
+display  math "4 over 9, minus, 1 over 9" row(fraction("4", "9"), "−", fraction("1", "9")) [sub 4/9 − 1/9]
+answer   exact 1/3 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [4 − 1 = 3]
+step 2   Keep the denominator.   [3/9]
+step 3   Reduce to lowest terms.   [3/9 = 1/3]
+miss     flipped-order = -0.3333333333333333   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.1111111111111111   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 67890 · difficulty 3
+prompt   What is the difference?
+display  math "5 over 6, minus, 1 over 6" row(fraction("5", "6"), "−", fraction("1", "6")) [sub 5/6 − 1/6]
+answer   exact 2/3 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [5 − 1 = 4]
+step 2   Keep the denominator.   [4/6]
+step 3   Reduce to lowest terms.   [4/6 = 2/3]
+miss     flipped-order = -0.6666666666666666   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.16666666666666666   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 424242 · difficulty 3
+prompt   What is the difference?
+display  math "2 over 5, minus, 1 over 5" row(fraction("2", "5"), "−", fraction("1", "5")) [sub 2/5 − 1/5]
+answer   exact 1/5 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [2 − 1 = 1]
+step 2   Keep the denominator.   [1/5]
+miss     flipped-order = -0.2   Subtract the second numerator from the first.
+
+--- sub-frac-same-den · seed 987654321 · difficulty 3
+prompt   What is the difference?
+display  math "2 over 9, minus, 1 over 9" row(fraction("2", "9"), "−", fraction("1", "9")) [sub 2/9 − 1/9]
+answer   exact 1/9 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [2 − 1 = 1]
+step 2   Keep the denominator.   [1/9]
+miss     flipped-order = -0.1111111111111111   Subtract the second numerator from the first.
+
+--- sub-frac-same-den · seed 1 · difficulty 4
+prompt   What is the difference?
+display  math "2 over 9, minus, 1 over 9" row(fraction("2", "9"), "−", fraction("1", "9")) [sub 2/9 − 1/9]
+answer   exact 1/9 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [2 − 1 = 1]
+step 2   Keep the denominator.   [1/9]
+miss     flipped-order = -0.1111111111111111   Subtract the second numerator from the first.
+
+--- sub-frac-same-den · seed 12345 · difficulty 4
+prompt   What is the difference?
+display  math "3 over 10, minus, 1 over 10" row(fraction("3", "10"), "−", fraction("1", "10")) [sub 3/10 − 1/10]
+answer   exact 1/5 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [3 − 1 = 2]
+step 2   Keep the denominator.   [2/10]
+step 3   Reduce to lowest terms.   [2/10 = 1/5]
+miss     flipped-order = -0.2   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.1   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 67890 · difficulty 4
+prompt   What is the difference?
+display  math "4 over 7, minus, 2 over 7" row(fraction("4", "7"), "−", fraction("2", "7")) [sub 4/7 − 2/7]
+answer   exact 2/7 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [4 − 2 = 2]
+step 2   Keep the denominator.   [2/7]
+miss     flipped-order = -0.2857142857142857   Subtract the second numerator from the first.
+
+--- sub-frac-same-den · seed 424242 · difficulty 4
+prompt   What is the difference?
+display  math "5 over 6, minus, 1 over 6" row(fraction("5", "6"), "−", fraction("1", "6")) [sub 5/6 − 1/6]
+answer   exact 2/3 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [5 − 1 = 4]
+step 2   Keep the denominator.   [4/6]
+step 3   Reduce to lowest terms.   [4/6 = 2/3]
+miss     flipped-order = -0.6666666666666666   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.16666666666666666   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 987654321 · difficulty 4
+prompt   What is the difference?
+display  math "3 over 10, minus, 1 over 10" row(fraction("3", "10"), "−", fraction("1", "10")) [sub 3/10 − 1/10]
+answer   exact 1/5 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [3 − 1 = 2]
+step 2   Keep the denominator.   [2/10]
+step 3   Reduce to lowest terms.   [2/10 = 1/5]
+miss     flipped-order = -0.2   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.1   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 1 · difficulty 5
+prompt   What is the difference?
+display  math "3 over 10, minus, 1 over 10" row(fraction("3", "10"), "−", fraction("1", "10")) [sub 3/10 − 1/10]
+answer   exact 1/5 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [3 − 1 = 2]
+step 2   Keep the denominator.   [2/10]
+step 3   Reduce to lowest terms.   [2/10 = 1/5]
+miss     flipped-order = -0.2   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.1   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 12345 · difficulty 5
+prompt   What is the difference?
+display  math "5 over 12, minus, 1 over 12" row(fraction("5", "12"), "−", fraction("1", "12")) [sub 5/12 − 1/12]
+answer   exact 1/3 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [5 − 1 = 4]
+step 2   Keep the denominator.   [4/12]
+step 3   Reduce to lowest terms.   [4/12 = 1/3]
+miss     flipped-order = -0.3333333333333333   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.08333333333333333   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 67890 · difficulty 5
+prompt   What is the difference?
+display  math "5 over 9, minus, 2 over 9" row(fraction("5", "9"), "−", fraction("2", "9")) [sub 5/9 − 2/9]
+answer   exact 1/3 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [5 − 2 = 3]
+step 2   Keep the denominator.   [3/9]
+step 3   Reduce to lowest terms.   [3/9 = 1/3]
+miss     flipped-order = -0.3333333333333333   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.2222222222222222   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 424242 · difficulty 5
+prompt   What is the difference?
+display  math "3 over 7, minus, 1 over 7" row(fraction("3", "7"), "−", fraction("1", "7")) [sub 3/7 − 1/7]
+answer   exact 2/7 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [3 − 1 = 2]
+step 2   Keep the denominator.   [2/7]
+miss     flipped-order = -0.2857142857142857   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.14285714285714285   That is the subtrahend. Subtract it from the first numerator.
+
+--- sub-frac-same-den · seed 987654321 · difficulty 5
+prompt   What is the difference?
+display  math "5 over 12, minus, 1 over 12" row(fraction("5", "12"), "−", fraction("1", "12")) [sub 5/12 − 1/12]
+answer   exact 1/3 (simplified)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Subtract the numerators, and the denominator stays the same.
+step 1   The denominators match, so subtract the numerators.   [5 − 1 = 4]
+step 2   Keep the denominator.   [4/12]
+step 3   Reduce to lowest terms.   [4/12 = 1/3]
+miss     flipped-order = -0.3333333333333333   Subtract the second numerator from the first.
+miss     copies-subtrahend = 0.08333333333333333   That is the subtrahend. Subtract it from the first numerator."
+`;

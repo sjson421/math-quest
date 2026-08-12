@@ -33,21 +33,39 @@ const KEY_STYLE =
   'flex items-center justify-center rounded-3xl bg-white text-ink font-bold shadow-[0_3px_0_0_var(--color-cream-deep)] active:shadow-none active:translate-y-[3px] transition-[transform,box-shadow] duration-75 h-16 text-3xl select-none'
 
 export function Keypad({ value, onEntry, onSubmit, disabled, rules }: Props) {
-  const { allowFraction = false, allowNegative = false, allowDecimal = false } = rules ?? {}
+  const {
+    allowFraction = false,
+    allowNegative = false,
+    allowDecimal = false,
+    allowMixed = false,
+  } = rules ?? {}
+  // A mixed number always contains a fraction, so mixed entry implies the
+  // slash — the same effective rule applyKey applies.
+  const fractionAllowed = allowFraction || allowMixed
 
   const press = (k: string) => {
     tap()
     onEntry((prev) => applyKey(prev, k, rules))
   }
 
-  const Key = ({ label, k, className = '' }: { label: string; k: string; className?: string }) => (
+  const Key = ({
+    label,
+    k,
+    ariaLabel = label,
+    className = '',
+  }: {
+    label: string
+    k: string
+    ariaLabel?: string
+    className?: string
+  }) => (
     <motion.button
       type="button"
       whileTap={{ scale: 0.94 }}
       className={`${KEY_STYLE} ${className}`}
       onClick={() => press(k)}
       disabled={disabled}
-      aria-label={label}
+      aria-label={ariaLabel}
     >
       {label}
     </motion.button>
@@ -88,10 +106,18 @@ export function Keypad({ value, onEntry, onSubmit, disabled, rules }: Props) {
           Check
         </motion.button>
 
-        {/* Bottom row adapts to the unit: whole-number skills need none of these. */}
-        {allowNegative ? <Key label="−" k="-" /> : <span aria-hidden />}
+        {/* Bottom row adapts to the unit: whole-number skills need none of these.
+            The space key takes the cell the sign otherwise uses — a problem
+            declares allowMixed or allowNegative, never both. */}
+        {allowNegative ? (
+          <Key label="−" k="-" />
+        ) : allowMixed ? (
+          <Key label="␣" ariaLabel="Space" k=" " />
+        ) : (
+          <span aria-hidden />
+        )}
         <Key label="0" k="0" />
-        {allowFraction ? (
+        {fractionAllowed ? (
           <Key label="/" k="/" />
         ) : allowDecimal ? (
           <Key label="." k="." />

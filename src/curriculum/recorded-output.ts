@@ -3,13 +3,7 @@ import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
 import { shapeDiagramLabel } from '../lib/shape-diagram'
-import type {
-  Difficulty,
-  FractionData,
-  MathNotation,
-  Problem,
-  SkillGenerator,
-} from '../lib/types'
+import type { Difficulty, FractionData, MathNotation, Problem, SkillGenerator } from '../lib/types'
 
 /**
  * The shared half of the per-unit wording gates.
@@ -87,6 +81,19 @@ const formatFractionData = (data: FractionData): string => {
         `${data.operation} ${data.leftNumerator}/${data.leftDenominator} ` +
         `? ${data.rightNumerator}/${data.rightDenominator}`
       )
+    case 'add':
+    case 'sub':
+      return (
+        `${data.operation} ${data.leftNumerator}/${data.leftDenominator} ` +
+        `${data.operation === 'add' ? '+' : '−'} ${data.rightNumerator}/${data.rightDenominator}`
+      )
+    case 'common-denominator':
+      return (
+        `${data.operation} ${data.leftNumerator}/${data.leftDenominator} ` +
+        `and ${data.rightNumerator}/${data.rightDenominator}`
+      )
+    case 'improper-to-mixed':
+      return `${data.operation} ${data.numerator}/${data.denominator}`
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled fraction data: ${JSON.stringify(unhandled)}`)
@@ -157,7 +164,11 @@ const formatNumberLine = (spec: NumberLineSpec): string => {
 const formatAnswer = (answer: Problem['answer']): string => {
   switch (answer.kind) {
     case 'exact':
-      return `exact ${answer.n}/${answer.d}${answer.requireSimplified ? ' (simplified)' : ''}`
+      return (
+        `exact ${answer.n}/${answer.d}` +
+        (answer.requireSimplified ? ' (simplified)' : '') +
+        (answer.requireMixed ? ' (mixed)' : '')
+      )
     case 'approx':
       return `approx ${answer.value} ±${answer.tolerance}`
     case 'choice':

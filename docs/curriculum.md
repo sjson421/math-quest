@@ -261,12 +261,12 @@ in lowest terms. Fraction operations wait for Unit 8.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 8.1 | `add-frac-same-den` | | ⚠️ adding denominators too |
-| 8.2 | `sub-frac-same-den` | | |
-| 8.3 | `common-denominator` | Find the LCD | |
-| 8.4 | `add-frac-diff-den` | | ⚠️ **major wall** |
-| 8.5 | `sub-frac-diff-den` | | |
-| 8.6 | `improper-to-mixed` | | |
+| 8.1 | `add-frac-same-den` | | ✅ ⚠️ adding denominators too |
+| 8.2 | `sub-frac-same-den` | | ✅ |
+| 8.3 | `common-denominator` | Find the LCD | ✅ |
+| 8.4 | `add-frac-diff-den` | | ✅ ⚠️ **major wall** |
+| 8.5 | `sub-frac-diff-den` | | ✅ |
+| 8.6 | `improper-to-mixed` | | ✅ |
 | 8.7 | `mixed-to-improper` | | |
 | 8.8 | `add-mixed` | | |
 | 8.9 | `sub-mixed` | | ⚠️ borrowing from the whole |
@@ -529,7 +529,7 @@ Ship by stage; each stage is independently useful.
 |---|---|---|
 | Choice input | A (Unit 0.5) | Built — declared per problem via `inputMode` |
 | Math notation rendering | D (Unit 7) | Built — structured React/CSS via `Display` |
-| Fraction keypad mode | D (Unit 8) | Built and available — declared per problem via `allowFraction` |
+| Fraction keypad mode | D (Unit 8) | Built and available — declared per problem via `allowFraction`; mixed-number entry via `allowMixed` (a space key in the pad's adaptive cell, with `requireMixed` form checking) |
 | Diagram rendering | D (Unit 7.2) | Built — typed shaded bars, circles and grids via `Display` |
 | Expression input | E (Unit 13) | Variables on the keypad |
 | Number-line input | C (Unit 6.1) | Built — declared per problem via `numberLine` |

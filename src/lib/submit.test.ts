@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { CheckResult } from './answer'
-import { responseTo } from './submit'
+import { feedbackText, responseTo } from './submit'
 
 describe('responseTo', () => {
   it('covers every status checkAnswer can return', () => {
@@ -10,6 +10,7 @@ describe('responseTo', () => {
       'correct',
       'incorrect',
       'not-simplified',
+      'not-mixed',
       'unparseable',
     ]
     expect(Object.keys(responseTo).sort()).toEqual([...statuses].sort())
@@ -19,6 +20,7 @@ describe('responseTo', () => {
     expect(responseTo.correct.advances).toBe(true)
     expect(responseTo.incorrect.advances).toBe(false)
     expect(responseTo['not-simplified'].advances).toBe(false)
+    expect(responseTo['not-mixed'].advances).toBe(false)
     expect(responseTo.unparseable.advances).toBe(false)
   })
 
@@ -26,6 +28,7 @@ describe('responseTo', () => {
     expect(responseTo.incorrect.showsSolution).toBe(true)
     expect(responseTo.correct.showsSolution).toBe(false)
     expect(responseTo['not-simplified'].showsSolution).toBe(false)
+    expect(responseTo['not-mixed'].showsSolution).toBe(false)
     expect(responseTo.unparseable.showsSolution).toBe(false)
   })
 
@@ -41,6 +44,14 @@ describe('responseTo', () => {
     it('withholds the worked solution, which a plain wrong answer shows', () => {
       expect(response.showsSolution).toBe(false)
       expect(responseTo.incorrect.showsSolution).toBe(true)
+    })
+  })
+
+  it('gives mixed form the full wrong-form policy and specific lesson copy', () => {
+    expect(responseTo['not-mixed']).toEqual(responseTo['not-simplified'])
+    expect(feedbackText('not-mixed')).toEqual({
+      title: 'Right value — now write it as a mixed number',
+      body: 'That is the correct amount. Write it as a whole number and a fraction.',
     })
   })
 

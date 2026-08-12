@@ -3,8 +3,7 @@ import { applyKey, entryLabel } from './keypad'
 import { tickEntry, tickLabel } from './number-line'
 import { rational } from './rational'
 
-const type = (keys: string, rules = {}) =>
-  [...keys].reduce((acc, k) => applyKey(acc, k, rules), '')
+const type = (keys: string, rules = {}) => [...keys].reduce((acc, k) => applyKey(acc, k, rules), '')
 
 describe('applyKey', () => {
   it('appends digits in order', () => {
@@ -49,6 +48,44 @@ describe('applyKey', () => {
     expect(applyKey('', '/', rules)).toBe('')
     expect(applyKey('3', '/', rules)).toBe('3/')
     expect(applyKey('3/4', '/', rules)).toBe('3/4')
+  })
+
+  describe('the mixed-number space', () => {
+    const rules = { allowMixed: true }
+
+    it('builds a whole part, a space, and a fraction', () => {
+      expect(type('1 1/2', rules)).toBe('1 1/2')
+    })
+
+    it('refuses a space outside mixed grammar', () => {
+      expect(applyKey('', ' ', rules)).toBe('')
+      expect(applyKey('-1', ' ', rules)).toBe('-1')
+      expect(applyKey('1/2', ' ', rules)).toBe('1/2')
+      expect(applyKey('1 2', ' ', rules)).toBe('1 2')
+    })
+
+    it('is refused entirely when the problem does not declare it', () => {
+      expect(applyKey('3', ' ')).toBe('3')
+    })
+
+    it('implies the fraction slash, like the pad display', () => {
+      expect(type('1 1/2', rules)).toBe('1 1/2')
+      expect(applyKey('1 ', '/', rules)).toBe('1 ')
+      expect(applyKey('1 1', '/', rules)).toBe('1 1/')
+    })
+
+    it('excludes only the new space from the existing maxLength behavior', () => {
+      const tight = { allowMixed: true, maxLength: 4 }
+      // Three digits and the slash fit; the new separator costs no character.
+      expect(type('1 1/2', tight)).toBe('1 1/2')
+      // A fifth pre-existing character is still refused where the limit ends.
+      expect(type('12 3/4', tight)).toBe('12 3/')
+    })
+  })
+
+  it('keeps fraction and decimal punctuation inside the existing maxLength cap', () => {
+    expect(type('12/34', { allowFraction: true, maxLength: 4 })).toBe('12/3')
+    expect(type('12.34', { allowDecimal: true, maxLength: 4 })).toBe('12.3')
   })
 
   it('caps length without counting the sign', () => {

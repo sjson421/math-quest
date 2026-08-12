@@ -5,6 +5,15 @@ export type KeypadRules = {
   allowFraction?: boolean
   allowNegative?: boolean
   allowDecimal?: boolean
+  /**
+   * Mixed-number entry: a space separating a whole part from a proper fraction.
+   *
+   * Implies the fraction slash, which a mixed number always contains. The space
+   * key takes the adaptive cell the sign otherwise uses, so a problem declares
+   * `allowMixed` or `allowNegative`, never both. Unit 8's mixed answers and the
+   * mistakes they predict are positive.
+   */
+  allowMixed?: boolean
 }
 
 /**
@@ -32,7 +41,13 @@ export const entryLabel = (value: string): string => value.replace('-', '−')
  * when someone types quickly on a phone.
  */
 export function applyKey(value: string, key: KeypadKey, rules: KeypadRules = {}): string {
-  const { maxLength = 10, allowFraction = false, allowNegative = false, allowDecimal = false } = rules
+  const {
+    maxLength = 10,
+    allowFraction = false,
+    allowNegative = false,
+    allowDecimal = false,
+    allowMixed = false,
+  } = rules
 
   if (key === 'back') return value.slice(0, -1)
   if (key === 'clear') return ''
@@ -43,6 +58,16 @@ export function applyKey(value: string, key: KeypadKey, rules: KeypadRules = {})
     return value.startsWith('-') ? value.slice(1) : `-${value}`
   }
 
+  if (key === ' ') {
+    // Only where a mixed number can be formed: whole digits first, the space
+    // once, then the fraction. Nothing before a digit, nothing after the slash,
+    // nothing twice, and no sign-prefixed entry (the pad never offers both).
+    if (!allowMixed) return value
+    if (value === '' || value.startsWith('-')) return value
+    if (value.includes(' ') || value.includes('/')) return value
+    return `${value} `
+  }
+
   if (key === '.') {
     if (!allowDecimal) return value
     // One decimal point per number part (so "1/2.5" stays impossible too).
@@ -51,12 +76,17 @@ export function applyKey(value: string, key: KeypadKey, rules: KeypadRules = {})
   }
 
   if (key === '/') {
-    if (!allowFraction || value.includes('/')) return value
+    // A mixed number always contains a fraction, so mixed entry implies the
+    // slash — the same effective rule the pad's key display uses.
+    if ((!allowFraction && !allowMixed) || value.includes('/')) return value
     // A fraction needs a numerator first.
-    if (value === '' || value === '-') return value
+    if (value === '' || value === '-' || value.endsWith(' ')) return value
   }
 
-  if (value.replace('-', '').length >= maxLength) return value
+  // Mixed entry adds one separator, so exclude only that new space from the
+  // established non-sign character limit. Slashes and decimal points keep
+  // consuming the limit exactly as they did before mixed entry existed.
+  if (value.replace(/[- ]/g, '').length >= maxLength) return value
 
   return value + key
 }

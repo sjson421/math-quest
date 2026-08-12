@@ -20,6 +20,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "add-facts-small": [
     "round-to-100",
   ],
+  "add-frac-diff-den": [
+    "common-denominator",
+  ],
+  "add-frac-same-den": [
+    "compare-diff-den",
+  ],
   "add-neg-pos": [
     "compare-negatives",
   ],
@@ -34,6 +40,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "add-words": [
     "add-three-numbers",
+  ],
+  "common-denominator": [
+    "sub-frac-same-den",
   ],
   "compare-diff-den": [
     "compare-same-den",
@@ -85,6 +94,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "fractions-numberline": [
     "name-parts",
+  ],
+  "improper-to-mixed": [
+    "sub-frac-diff-den",
   ],
   "long-div-1digit": [
     "div-by-10-100",
@@ -167,6 +179,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "sub-facts-small": [
     "add-words",
+  ],
+  "sub-frac-diff-den": [
+    "add-frac-diff-den",
+  ],
+  "sub-frac-same-den": [
+    "add-frac-same-den",
   ],
   "sub-negatives": [
     "add-two-negs",

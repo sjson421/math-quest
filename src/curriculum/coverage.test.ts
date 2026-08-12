@@ -58,9 +58,7 @@ describe('manifest entries without a generator', () => {
 
   it('account for every manifest skill, with nothing unresolved', () => {
     expect(skillStates.size).toBe(manifestSkills.length)
-    expect(
-      manifestSkills.filter((skill) => !skillStates.has(skill.id)).map((s) => s.id),
-    ).toEqual([])
+    expect(manifestSkills.filter((skill) => !skillStates.has(skill.id)).map((s) => s.id)).toEqual([])
   })
 
   it('reads an unknown id as planned', () => {
@@ -72,7 +70,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(70)
+    expect(documentedAsBuilt).toHaveLength(76)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -114,9 +112,7 @@ describe('the skills that are built', () => {
         return entry?.name !== generator.name || entry.blurb !== generator.blurb
       })
       .map((generator) => generator.id)
-    const longBlurbs = allSkills
-      .filter((generator) => generator.blurb.length > 32)
-      .map((generator) => generator.id)
+    const longBlurbs = allSkills.filter((generator) => generator.blurb.length > 32).map((generator) => generator.id)
 
     expect(mismatches).toEqual([])
     expect(longBlurbs).toEqual([])
@@ -139,9 +135,7 @@ describe('the skills that are built', () => {
     // requirement is met, so it asks that directly — a stage naming an unbuilt
     // capability would send all 44 of its skills back to `planned`.
     const stage = manifestIndex.get('add-facts')?.stage
-    const unbuilt = (stage?.requires ?? []).filter(
-      (capability) => !AVAILABLE_CAPABILITIES.has(capability),
-    )
+    const unbuilt = (stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))
 
     expect(stage?.requires).toEqual(['choice-input'])
     expect(unbuilt).toEqual([])
@@ -173,12 +167,10 @@ describe('the skills that are built', () => {
     expect(declaring.some((skill) => !generators.has(skill.id))).toBe(true)
   })
 
-  it('implements exactly the nine Stage D generators that have landed', () => {
+  it('implements exactly the fifteen Stage D generators that have landed', () => {
     const stage = manifestIndex.get('fraction-meaning')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
-    const unavailable = (stage?.requires ?? []).filter(
-      (capability) => !AVAILABLE_CAPABILITIES.has(capability),
-    )
+    const unavailable = (stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))
 
     expect(AVAILABLE_CAPABILITIES.has('math-notation')).toBe(true)
     expect(AVAILABLE_CAPABILITIES.has('fraction-input')).toBe(true)
@@ -194,28 +186,38 @@ describe('the skills that are built', () => {
       'simplify-fractions',
       'compare-same-den',
       'compare-diff-den',
+      'add-frac-same-den',
+      'sub-frac-same-den',
+      'common-denominator',
+      'add-frac-diff-den',
+      'sub-frac-diff-den',
+      'improper-to-mixed',
     ])
     expect(stageIds.filter((id) => skillState(id) === 'implemented')).toEqual(
       stageIds.filter((id) => generators.has(id)),
     )
-    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(41)
+    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(35)
     const unit8 = stage?.units.find((unit) => unit.id === 'unit-8')
-    expect(unit8?.skills.every((skill) => skillState(skill.id) === 'planned')).toBe(true)
-    expect(implementedSkillIds).toHaveLength(70)
+    const unit8Ids = unit8?.skills.map((skill) => skill.id) ?? []
+    expect(unit8Ids.filter((id) => skillState(id) === 'implemented')).toEqual([
+      'add-frac-same-den',
+      'sub-frac-same-den',
+      'common-denominator',
+      'add-frac-diff-den',
+      'sub-frac-diff-den',
+      'improper-to-mixed',
+    ])
+    expect(unit8Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(6)
+    expect(implementedSkillIds).toHaveLength(76)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
     // The capability shipped unlocking nothing, because a declared capability
     // is not a declared line. `negatives-numberline` is the first skill
     // anywhere to carry one.
-    const drawing = allSkills.filter(
-      (generator) => generateProblem(generator, 1, 3).numberLine !== undefined,
-    )
+    const drawing = allSkills.filter((generator) => generateProblem(generator, 1, 3).numberLine !== undefined)
 
-    expect(drawing.map((generator) => generator.id)).toEqual([
-      'negatives-numberline',
-      'fractions-numberline',
-    ])
+    expect(drawing.map((generator) => generator.id)).toEqual(['negatives-numberline', 'fractions-numberline'])
   })
 
   it('implements Stage A because its choice input capability is available', () => {
@@ -228,9 +230,7 @@ describe('the skills that are built', () => {
 })
 
 describe('what the learner is offered', () => {
-  const offered = course.flatMap(({ units }) =>
-    units.flatMap(({ skills }) => skills.map((skill) => skill.id)),
-  )
+  const offered = course.flatMap(({ units }) => units.flatMap(({ skills }) => skills.map((skill) => skill.id)))
 
   it('offers only implemented skills', () => {
     const notPlayable = offered.filter((id) => skillState(id) !== 'implemented')
@@ -260,21 +260,18 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 131 skills out of the skill tree entirely', () => {
+  it('leaves the other 125 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(70)
+    expect(offered).toHaveLength(76)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
     const located = course.flatMap(({ stage, units }) =>
-      units.flatMap(({ unit, skills }) =>
-        skills.map((skill) => [skill.id, unit.id, stage.id] as const),
-      ),
+      units.flatMap(({ unit, skills }) => skills.map((skill) => [skill.id, unit.id, stage.id] as const)),
     )
     const misfiled = located.filter(
       ([id, unitId, stageId]) =>
-        manifestIndex.get(id)?.unit.id !== unitId ||
-        manifestIndex.get(id)?.stage.id !== stageId,
+        manifestIndex.get(id)?.unit.id !== unitId || manifestIndex.get(id)?.stage.id !== stageId,
     )
 
     expect(misfiled).toEqual([])
@@ -288,13 +285,8 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['compare-diff-den', 'unit-7', 'stage-d'])
   })
 
-  it('shows the eight built units, and no stage or unit that has nothing to play', () => {
-    expect(course.map(({ stage }) => stage.id)).toEqual([
-      'stage-a',
-      'stage-b',
-      'stage-c',
-      'stage-d',
-    ])
+  it('shows the nine built units, and no stage or unit that has nothing to play', () => {
+    expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b', 'stage-c', 'stage-d'])
     expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
       'unit-0',
       'unit-1',
@@ -304,6 +296,7 @@ describe('what the learner is offered', () => {
       'unit-5',
       'unit-6',
       'unit-7',
+      'unit-8',
     ])
   })
 })
@@ -330,9 +323,7 @@ describe('the unlock graph the store gates on', () => {
     // Restricted to implemented skills because the other 134 have no edges that
     // can gate anyone yet. Committed so the next change that moves an edge has
     // to look at it — this is the review surface for a re-lock.
-    const graph = Object.fromEntries(
-      implementedSkillIds.map((id) => [id, unlockPrerequisites.get(id)]),
-    )
+    const graph = Object.fromEntries(implementedSkillIds.map((id) => [id, unlockPrerequisites.get(id)]))
 
     expect(graph).toMatchSnapshot()
   })

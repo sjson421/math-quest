@@ -366,14 +366,18 @@ describe('the nine-skill unit', () => {
     const magnitude = (problem: Problem) => {
       if (problem.display.kind === 'diagram') return problem.display.diagram.parts
       const data = fractionData(problem)
-      const values = data.operation === 'compare'
-        ? [
-            data.leftNumerator,
-            data.leftDenominator,
-            data.rightNumerator,
-            data.rightDenominator,
-          ]
-        : [data.numerator, data.denominator]
+      const values =
+        data.operation === 'compare' ||
+        data.operation === 'add' ||
+        data.operation === 'sub' ||
+        data.operation === 'common-denominator'
+          ? [
+              data.leftNumerator,
+              data.leftDenominator,
+              data.rightNumerator,
+              data.rightDenominator,
+            ]
+          : [data.numerator, data.denominator]
       if (data.operation === 'scale-missing') values.push(data.factor)
       return values.reduce((sum, value) => sum + value, 0) / values.length
     }

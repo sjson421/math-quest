@@ -21,6 +21,7 @@ import { unit04 } from './unit-04-division'
 import { unit05 } from './unit-05-order-of-operations'
 import { unit06 } from './unit-06-negatives'
 import { unit07 } from './unit-07-fractions-meaning'
+import { unit08 } from './unit-08-fraction-operations'
 import {
   indexSkills,
   resolveCourseTree,
@@ -45,6 +46,7 @@ export const allSkills: SkillGenerator[] = [
   ...unit05,
   ...unit06,
   ...unit07,
+  ...unit08,
 ]
 
 /**
@@ -82,9 +84,7 @@ export function skillState(id: string): SkillState {
 }
 
 /** Manifest ids that can be played today, in curriculum order. */
-export const implementedSkillIds = [...skillStates]
-  .filter(([, state]) => state === 'implemented')
-  .map(([id]) => id)
+export const implementedSkillIds = [...skillStates].filter(([, state]) => state === 'implemented').map(([id]) => id)
 
 /**
  * What must be mastered before each skill opens — the runtime unlock graph.
@@ -105,8 +105,10 @@ export const implementedSkillIds = [...skillStates]
  * collapses them, and this is that function's result over the live registry.
  * Reach for this one when the question is "can the learner start this yet".
  */
-export const unlockPrerequisites: ReadonlyMap<string, readonly string[]> =
-  resolveUnlockPrerequisites(resolvePrerequisites(stages), skillStates)
+export const unlockPrerequisites: ReadonlyMap<string, readonly string[]> = resolveUnlockPrerequisites(
+  resolvePrerequisites(stages),
+  skillStates,
+)
 
 /**
  * The course the learner can navigate — stages, their units, and the playable
