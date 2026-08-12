@@ -278,12 +278,12 @@ in lowest terms. Fraction operations wait for Unit 8.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 9.1 | `decimal-place-value` | Tenths, hundredths | |
-| 9.2 | `read-decimals` | | `quick` |
-| 9.3 | `compare-decimals` | | ⚠️ 0.9 vs 0.15 (longer = bigger) |
-| 9.4 | `round-decimals` | | |
-| 9.5 | `add-decimals` | Line up the points | |
-| 9.6 | `sub-decimals` | | |
+| 9.1 | `decimal-place-value` | Tenths, hundredths | ✅ |
+| 9.2 | `read-decimals` | | ✅ `quick` |
+| 9.3 | `compare-decimals` | | ✅ ⚠️ 0.9 vs 0.15 (longer = bigger) |
+| 9.4 | `round-decimals` | | ✅ |
+| 9.5 | `add-decimals` | Line up the points | ✅ |
+| 9.6 | `sub-decimals` | | ✅ |
 | 9.7 | `mult-decimals` | Count the places | ⚠️ misplacing the point |
 | 9.8 | `div-decimal-by-whole` | | |
 | 9.9 | `div-by-decimal` | Shift both | ⚠️ |

@@ -22,6 +22,7 @@ import { unit05 } from './unit-05-order-of-operations'
 import { unit06 } from './unit-06-negatives'
 import { unit07 } from './unit-07-fractions-meaning'
 import { unit08 } from './unit-08-fraction-operations'
+import { unit09 } from './unit-09-decimals'
 import {
   indexSkills,
   resolveCourseTree,
@@ -47,6 +48,7 @@ export const allSkills: SkillGenerator[] = [
   ...unit06,
   ...unit07,
   ...unit08,
+  ...unit09,
 ]
 
 /**

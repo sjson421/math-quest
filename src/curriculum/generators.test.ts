@@ -6,7 +6,16 @@ import { checkAnswer, intAnswer } from '../lib/answer'
 import { makeRng } from '../lib/rng'
 import { equals, format as formatRational, gcd, toNumber, rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
-import type { Difficulty, FractionData, MathNotation, Problem, SkillGenerator, WholeNumberData } from '../lib/types'
+import type {
+  DecimalData,
+  DecimalValue,
+  Difficulty,
+  FractionData,
+  MathNotation,
+  Problem,
+  SkillGenerator,
+  WholeNumberData,
+} from '../lib/types'
 
 const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 const ITERATIONS = 200 // per skill per difficulty → 1000 problems per skill
@@ -118,6 +127,65 @@ function choiceIdFor(problem: Problem, label: string): string {
  * untouched, so every display that shipped before Unit 6 is unaffected.
  */
 const drawn = (value: number): string => String(value).replace('-', '−')
+
+const decimalPower = (scale: number) => 10 ** scale
+
+function checkedDecimal(value: DecimalValue): string {
+  if (!Number.isSafeInteger(value.coefficient) || value.coefficient < 0) {
+    throw new Error('decimal coefficient must be a nonnegative safe integer')
+  }
+  if (value.scale !== 1 && value.scale !== 2) throw new Error('decimal scale must be 1 or 2')
+  const denominator = decimalPower(value.scale)
+  return `${Math.floor(value.coefficient / denominator)}.${String(value.coefficient % denominator).padStart(value.scale, '0')}`
+}
+
+function decimalWords(value: DecimalValue): string {
+  const denominator = decimalPower(value.scale)
+  const whole = Math.floor(value.coefficient / denominator)
+  const fraction = value.coefficient % denominator
+  const place = value.scale === 1 ? (fraction === 1 ? 'tenth' : 'tenths') : fraction === 1 ? 'hundredth' : 'hundredths'
+  return `${numberWords(whole)} and ${numberWords(fraction)} ${place}`
+}
+
+const decimalNumber = (value: DecimalValue) => value.coefficient / decimalPower(value.scale)
+
+function expectedDecimal(data: DecimalData): { text?: string; answer: number | string } {
+  switch (data.operation) {
+    case 'digit': {
+      const digits = String(data.value.coefficient % decimalPower(data.value.scale)).padStart(data.value.scale, '0')
+      const at = data.place === 'tenths' ? 0 : 1
+      return { text: checkedDecimal(data.value), answer: Number(digits[at] ?? '0') }
+    }
+    case 'read':
+      return { text: decimalWords(data.value), answer: decimalNumber(data.value) }
+    case 'compare': {
+      const left = data.left.coefficient * decimalPower(data.right.scale)
+      const right = data.right.coefficient * decimalPower(data.left.scale)
+      const symbol = left < right ? '<' : left > right ? '>' : '='
+      return {
+        text: `${checkedDecimal(data.left)} ? ${checkedDecimal(data.right)}`,
+        answer: symbol,
+      }
+    }
+    case 'round': {
+      const factor = decimalPower(data.value.scale - data.targetScale)
+      const rounded = Math.floor((data.value.coefficient + factor / 2) / factor)
+      return { text: checkedDecimal(data.value), answer: rounded / decimalPower(data.targetScale) }
+    }
+    case 'add':
+    case 'sub': {
+      const scale = Math.max(data.left.scale, data.right.scale)
+      const left = data.left.coefficient * decimalPower(scale - data.left.scale)
+      const right = data.right.coefficient * decimalPower(scale - data.right.scale)
+      const coefficient = data.operation === 'add' ? left + right : left - right
+      return { answer: coefficient / decimalPower(scale) }
+    }
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unknown decimal operation: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
 
 /**
  * What the learner must be looking at for the carried data to describe it.
@@ -490,6 +558,14 @@ function expectedFractionDisplay(data: FractionData): {
 function recompute(problem: Problem): number | string {
   const { display } = problem
 
+  if (display.kind === 'inline' && display.decimal) {
+    const expected = expectedDecimal(display.decimal)
+    if (display.text !== expected.text) {
+      throw new Error(`${problem.skillId}: visible decimal text disagrees with its data`)
+    }
+    return typeof expected.answer === 'string' ? choiceIdFor(problem, expected.answer) : expected.answer
+  }
+
   if (display.kind === 'inline' && display.wholeNumber) {
     const data = display.wholeNumber
     const expectedText = displayedText(data)
@@ -572,6 +648,10 @@ function recompute(problem: Problem): number | string {
     return matches[0].id
   }
 
+  if (display.kind === 'decimal-column') {
+    return expectedDecimal(display.decimal).answer
+  }
+
   // A story carries its quantities precisely so this stays possible. Reading
   // them out of the prose would not work: a word problem mentions numbers the
   // answer does not use, which is most of what makes it a word problem.
@@ -636,6 +716,23 @@ function sourceValues(data: WholeNumberData): number[] {
 }
 
 function sourceMagnitude(problem: Problem): number {
+  if (problem.display.kind === 'inline' && problem.display.decimal) {
+    const data = problem.display.decimal
+    const values =
+      data.operation === 'compare'
+        ? [decimalNumber(data.left), decimalNumber(data.right)]
+        : data.operation === 'add' || data.operation === 'sub'
+          ? [decimalNumber(data.left), decimalNumber(data.right)]
+          : [decimalNumber(data.value)]
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
+
+  if (problem.display.kind === 'decimal-column') {
+    return (
+      (decimalNumber(problem.display.decimal.left) + decimalNumber(problem.display.decimal.right)) / 2
+    )
+  }
+
   if (problem.display.kind === 'inline' && problem.display.wholeNumber) {
     const values = sourceValues(problem.display.wholeNumber)
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
@@ -710,6 +807,53 @@ function scalingProblems(skill: SkillGenerator): string[] {
   const high = magnitude(5)
   return high > low ? [] : [`${skill.id}: difficulty 5 magnitude ${high} is not above difficulty 1 magnitude ${low}`]
 }
+
+describe('decimal answer verification', () => {
+  const addition = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-decimal-add',
+    prompt: 'What is the sum?',
+    display: {
+      kind: 'decimal-column',
+      decimal: {
+        operation: 'add',
+        left: { coefficient: 1, scale: 1 },
+        right: { coefficient: 2, scale: 1 },
+      },
+    },
+    answer: { kind: 'exact', n: 3, d: 10 },
+    inputMode: 'keypad',
+    keypad: { allowDecimal: true },
+    hint: 'Line up the decimal points before adding.',
+    solution: [{ text: 'Add equal places.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('recomputes 0.1 + 0.2 exactly from integer source digits', () => {
+    expect(answerMismatch(addition())).toBeUndefined()
+  })
+
+  it('names a decimal answer that disagrees with the source digits', () => {
+    expect(answerMismatch(addition({ answer: { kind: 'exact', n: 4, d: 10 } }))).toContain(
+      'synthetic-decimal-add: stated 0.4, derived 0.3',
+    )
+  })
+
+  it('rejects inline text that drops a retained decimal place', () => {
+    const problem: Problem = {
+      ...addition(),
+      skillId: 'synthetic-decimal-read',
+      display: {
+        kind: 'inline',
+        text: 'three and four tenths',
+        decimal: { operation: 'read', value: { coefficient: 304, scale: 2 } },
+      },
+      answer: { kind: 'exact', n: 76, d: 25 },
+    }
+
+    expect(() => answerMismatch(problem)).toThrow('visible decimal text disagrees with its data')
+  })
+})
 
 describe('diagram answer verification', () => {
   const problem = (parts: number, shadedParts: number, answer = { n: 3, d: 4 }): Problem => ({

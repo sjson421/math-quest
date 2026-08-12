@@ -70,7 +70,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(82)
+    expect(documentedAsBuilt).toHaveLength(88)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -81,10 +81,11 @@ describe('the skills that are built', () => {
     // the bottom band with no headroom left, and the failure is a wrapped problem
     // on a phone, found by a person rather than by CI. This runs the measurement.
     //
-    // `read-numbers` is exempt and is the only exemption: it spells a number out
-    // in words, it is what the bottom band was built for, and it has shipped
-    // there. Every other inline display is arithmetic, whose widest today is the
-    // 18 characters of a `pemdas` expression.
+    // Reading skills are prose rather than arithmetic. `read-numbers` keeps its
+    // shipped smallest-band behavior; `read-decimals` has a bounded wrapping
+    // layout pinned in `ProblemView.test.tsx`. Every other inline display is
+    // arithmetic, whose widest today is the 18 characters of a `pemdas`
+    // expression.
     const widest = new Map<string, string>()
 
     for (const generator of allSkills) {
@@ -99,7 +100,7 @@ describe('the skills that are built', () => {
     }
 
     const tooWide = [...widest]
-      .filter(([id, text]) => id !== 'read-numbers' && text.length > 18)
+      .filter(([id, text]) => !['read-numbers', 'read-decimals'].includes(id) && text.length > 18)
       .map(([id, text]) => `${id}: "${text}" is ${text.length} characters`)
 
     expect(tooWide, 'widen the ProblemView size bands, or narrow the draw').toEqual([])
@@ -167,7 +168,7 @@ describe('the skills that are built', () => {
     expect(declaring.some((skill) => !generators.has(skill.id))).toBe(true)
   })
 
-  it('implements exactly the twenty-one Stage D generators that have landed', () => {
+  it('implements exactly the twenty-seven Stage D generators that have landed', () => {
     const stage = manifestIndex.get('fraction-meaning')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unavailable = (stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))
@@ -198,11 +199,17 @@ describe('the skills that are built', () => {
       'mult-fractions',
       'div-fractions',
       'fraction-words',
+      'decimal-place-value',
+      'read-decimals',
+      'compare-decimals',
+      'round-decimals',
+      'add-decimals',
+      'sub-decimals',
     ])
     expect(stageIds.filter((id) => skillState(id) === 'implemented')).toEqual(
       stageIds.filter((id) => generators.has(id)),
     )
-    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(29)
+    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(23)
     const unit8 = stage?.units.find((unit) => unit.id === 'unit-8')
     const unit8Ids = unit8?.skills.map((skill) => skill.id) ?? []
     expect(unit8Ids.filter((id) => skillState(id) === 'implemented')).toEqual([
@@ -220,7 +227,18 @@ describe('the skills that are built', () => {
       'fraction-words',
     ])
     expect(unit8Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(82)
+    const unit9 = stage?.units.find((unit) => unit.id === 'unit-9')
+    const unit9Ids = unit9?.skills.map((skill) => skill.id) ?? []
+    expect(unit9Ids.filter((id) => skillState(id) === 'implemented')).toEqual([
+      'decimal-place-value',
+      'read-decimals',
+      'compare-decimals',
+      'round-decimals',
+      'add-decimals',
+      'sub-decimals',
+    ])
+    expect(unit9Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(6)
+    expect(implementedSkillIds).toHaveLength(88)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -272,9 +290,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 119 skills out of the skill tree entirely', () => {
+  it('leaves the other 113 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(82)
+    expect(offered).toHaveLength(88)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -297,7 +315,7 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['compare-diff-den', 'unit-7', 'stage-d'])
   })
 
-  it('shows the nine built units, and no stage or unit that has nothing to play', () => {
+  it('shows the ten built units, and no stage or unit that has nothing to play', () => {
     expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b', 'stage-c', 'stage-d'])
     expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
       'unit-0',
@@ -309,6 +327,7 @@ describe('what the learner is offered', () => {
       'unit-6',
       'unit-7',
       'unit-8',
+      'unit-9',
     ])
   })
 })

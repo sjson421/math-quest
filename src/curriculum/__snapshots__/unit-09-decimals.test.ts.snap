@@ -1,0 +1,1850 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: add-decimals > matches the wording recorded when the skill landed 1`] = `
+"--- add-decimals · seed 1 · difficulty 1
+prompt   What is the sum?
+display  decimal-column [add 1.58 + 2.90]
+answer   exact 112/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   1.58 + 2.90 = 4.48.
+miss     misaligned-places = 1.87   Line up the decimal points before working by place.
+miss     copied-addend = 1.58   That is one addend; combine both values.
+
+--- add-decimals · seed 12345 · difficulty 1
+prompt   What is the sum?
+display  decimal-column [add 1.45 + 2.40]
+answer   exact 77/20
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   1.45 + 2.40 = 3.85.
+miss     misaligned-places = 1.69   Line up the decimal points before working by place.
+miss     copied-addend = 1.45   That is one addend; combine both values.
+
+--- add-decimals · seed 67890 · difficulty 1
+prompt   What is the sum?
+display  decimal-column [add 1.80 + 1.09]
+answer   exact 289/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   1.80 + 1.09 = 2.89.
+miss     misaligned-places = 1.27   Line up the decimal points before working by place.
+miss     copied-addend = 1.8   That is one addend; combine both values.
+
+--- add-decimals · seed 424242 · difficulty 1
+prompt   What is the sum?
+display  decimal-column [add 0.70 + 0.55]
+answer   exact 5/4
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   0.70 + 0.55 = 1.25.
+miss     misaligned-places = 0.62   Line up the decimal points before working by place.
+miss     copied-addend = 0.7   That is one addend; combine both values.
+
+--- add-decimals · seed 987654321 · difficulty 1
+prompt   What is the sum?
+display  decimal-column [add 0.05 + 2.70]
+answer   exact 11/4
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   0.05 + 2.70 = 2.75.
+miss     misaligned-places = 0.32   Line up the decimal points before working by place.
+miss     copied-addend = 0.05   That is one addend; combine both values.
+
+--- add-decimals · seed 1 · difficulty 2
+prompt   What is the sum?
+display  decimal-column [add 3.16 + 5.80]
+answer   exact 224/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   3.16 + 5.80 = 8.96.
+miss     misaligned-places = 3.74   Line up the decimal points before working by place.
+miss     copied-addend = 3.16   That is one addend; combine both values.
+
+--- add-decimals · seed 12345 · difficulty 2
+prompt   What is the sum?
+display  decimal-column [add 2.91 + 4.90]
+answer   exact 781/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   2.91 + 4.90 = 7.81.
+miss     misaligned-places = 3.4   Line up the decimal points before working by place.
+miss     copied-addend = 2.91   That is one addend; combine both values.
+
+--- add-decimals · seed 67890 · difficulty 2
+prompt   What is the sum?
+display  decimal-column [add 3.50 + 2.18]
+answer   exact 142/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   3.50 + 2.18 = 5.68.
+miss     misaligned-places = 2.53   Line up the decimal points before working by place.
+miss     copied-addend = 3.5   That is one addend; combine both values.
+
+--- add-decimals · seed 424242 · difficulty 2
+prompt   What is the sum?
+display  decimal-column [add 1.40 + 1.11]
+answer   exact 251/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   1.40 + 1.11 = 2.51.
+miss     misaligned-places = 1.25   Line up the decimal points before working by place.
+miss     copied-addend = 1.4   That is one addend; combine both values.
+
+--- add-decimals · seed 987654321 · difficulty 2
+prompt   What is the sum?
+display  decimal-column [add 0.10 + 5.40]
+answer   exact 11/2
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   0.10 + 5.40 = 5.50.
+miss     misaligned-places = 0.64   Line up the decimal points before working by place.
+miss     copied-addend = 0.1   That is one addend; combine both values.
+
+--- add-decimals · seed 1 · difficulty 3
+prompt   What is the sum?
+display  decimal-column [add 7.33 + 12.70]
+answer   exact 2003/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   7.33 + 12.70 = 20.03.
+miss     misaligned-places = 8.6   Line up the decimal points before working by place.
+miss     copied-addend = 7.33   That is one addend; combine both values.
+
+--- add-decimals · seed 12345 · difficulty 3
+prompt   What is the sum?
+display  decimal-column [add 6.81 + 10.80]
+answer   exact 1761/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   6.81 + 10.80 = 17.61.
+miss     misaligned-places = 7.89   Line up the decimal points before working by place.
+miss     copied-addend = 6.81   That is one addend; combine both values.
+
+--- add-decimals · seed 67890 · difficulty 3
+prompt   What is the sum?
+display  decimal-column [add 8.10 + 5.36]
+answer   exact 673/50
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   8.10 + 5.36 = 13.46.
+miss     misaligned-places = 6.17   Line up the decimal points before working by place.
+miss     copied-addend = 8.1   That is one addend; combine both values.
+
+--- add-decimals · seed 424242 · difficulty 3
+prompt   What is the sum?
+display  decimal-column [add 3.90 + 3.21]
+answer   exact 711/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   3.90 + 3.21 = 7.11.
+miss     misaligned-places = 3.6   Line up the decimal points before working by place.
+miss     copied-addend = 3.9   That is one addend; combine both values.
+
+--- add-decimals · seed 987654321 · difficulty 3
+prompt   What is the sum?
+display  decimal-column [add 1.19 + 11.90]
+answer   exact 1309/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   1.19 + 11.90 = 13.09.
+miss     misaligned-places = 2.38   Line up the decimal points before working by place.
+miss     copied-addend = 1.19   That is one addend; combine both values.
+
+--- add-decimals · seed 1 · difficulty 4
+prompt   What is the sum?
+display  decimal-column [add 17.30 + 30.40]
+answer   exact 477/10
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   17.30 + 30.40 = 47.70.
+miss     misaligned-places = 20.34   Line up the decimal points before working by place.
+miss     copied-addend = 17.3   That is one addend; combine both values.
+
+--- add-decimals · seed 12345 · difficulty 4
+prompt   What is the sum?
+display  decimal-column [add 16.04 + 25.70]
+answer   exact 2087/50
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   16.04 + 25.70 = 41.74.
+miss     misaligned-places = 18.61   Line up the decimal points before working by place.
+miss     copied-addend = 16.04   That is one addend; combine both values.
+
+--- add-decimals · seed 67890 · difficulty 4
+prompt   What is the sum?
+display  decimal-column [add 19.10 + 12.53]
+answer   exact 3163/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   19.10 + 12.53 = 31.63.
+miss     misaligned-places = 14.44   Line up the decimal points before working by place.
+miss     copied-addend = 19.1   That is one addend; combine both values.
+
+--- add-decimals · seed 424242 · difficulty 4
+prompt   What is the sum?
+display  decimal-column [add 8.90 + 7.33]
+answer   exact 1623/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   8.90 + 7.33 = 16.23.
+miss     misaligned-places = 8.22   Line up the decimal points before working by place.
+miss     copied-addend = 8.9   That is one addend; combine both values.
+
+--- add-decimals · seed 987654321 · difficulty 4
+prompt   What is the sum?
+display  decimal-column [add 2.45 + 28.50]
+answer   exact 619/20
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   2.45 + 28.50 = 30.95.
+miss     misaligned-places = 5.3   Line up the decimal points before working by place.
+miss     copied-addend = 2.45   That is one addend; combine both values.
+
+--- add-decimals · seed 1 · difficulty 5
+prompt   What is the sum?
+display  decimal-column [add 34.54 + 59.90]
+answer   exact 2361/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   34.54 + 59.90 = 94.44.
+miss     misaligned-places = 40.53   Line up the decimal points before working by place.
+miss     copied-addend = 34.54   That is one addend; combine both values.
+
+--- add-decimals · seed 12345 · difficulty 5
+prompt   What is the sum?
+display  decimal-column [add 32.12 + 50.80]
+answer   exact 2073/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   32.12 + 50.80 = 82.92.
+miss     misaligned-places = 37.2   Line up the decimal points before working by place.
+miss     copied-addend = 32.12   That is one addend; combine both values.
+
+--- add-decimals · seed 67890 · difficulty 5
+prompt   What is the sum?
+display  decimal-column [add 38.10 + 25.34]
+answer   exact 1586/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   38.10 + 25.34 = 63.44.
+miss     misaligned-places = 29.15   Line up the decimal points before working by place.
+miss     copied-addend = 38.1   That is one addend; combine both values.
+
+--- add-decimals · seed 424242 · difficulty 5
+prompt   What is the sum?
+display  decimal-column [add 18.30 + 15.29]
+answer   exact 3359/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   18.30 + 15.29 = 33.59.
+miss     misaligned-places = 17.12   Line up the decimal points before working by place.
+miss     copied-addend = 18.3   That is one addend; combine both values.
+
+--- add-decimals · seed 987654321 · difficulty 5
+prompt   What is the sum?
+display  decimal-column [add 5.86 + 56.10]
+answer   exact 1549/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   5.86 + 56.10 = 61.96.
+miss     misaligned-places = 11.47   Line up the decimal points before working by place.
+miss     copied-addend = 5.86   That is one addend; combine both values."
+`;
+
+exports[`recorded output: compare-decimals > matches the wording recorded when the skill landed 1`] = `
+"--- compare-decimals · seed 1 · difficulty 1
+prompt   Choose the symbol that makes this true.
+display  inline "1.19 ? 1.2" [compare 1.19 ? 1.2]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   0 = =
+choice   -1 = <
+step 1   Write both decimals with two places.
+step 2   1.19 < 1.20.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 12345 · difficulty 1
+prompt   Choose the symbol that makes this true.
+display  inline "2.18 ? 2.4" [compare 2.18 ? 2.4]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   2.18 < 2.40.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 67890 · difficulty 1
+prompt   Choose the symbol that makes this true.
+display  inline "1.6 ? 1.24" [compare 1.6 ? 1.24]
+answer   choice 1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   0 = =
+choice   -1 = <
+choice   1 = >
+step 1   Write both decimals with two places.
+step 2   1.60 > 1.24.
+miss     longer-means-bigger = -1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 424242 · difficulty 1
+prompt   Choose the symbol that makes this true.
+display  inline "0.3 ? 0.06" [compare 0.3 ? 0.06]
+answer   choice 1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   0.30 > 0.06.
+miss     longer-means-bigger = -1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 987654321 · difficulty 1
+prompt   Choose the symbol that makes this true.
+display  inline "2.09 ? 2.3" [compare 2.09 ? 2.3]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   2.09 < 2.30.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 1 · difficulty 2
+prompt   Choose the symbol that makes this true.
+display  inline "3.19 ? 3.2" [compare 3.19 ? 3.2]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   0 = =
+choice   -1 = <
+step 1   Write both decimals with two places.
+step 2   3.19 < 3.20.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 12345 · difficulty 2
+prompt   Choose the symbol that makes this true.
+display  inline "5.18 ? 5.4" [compare 5.18 ? 5.4]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   5.18 < 5.40.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 67890 · difficulty 2
+prompt   Choose the symbol that makes this true.
+display  inline "2.6 ? 2.24" [compare 2.6 ? 2.24]
+answer   choice 1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   0 = =
+choice   -1 = <
+choice   1 = >
+step 1   Write both decimals with two places.
+step 2   2.60 > 2.24.
+miss     longer-means-bigger = -1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 424242 · difficulty 2
+prompt   Choose the symbol that makes this true.
+display  inline "0.3 ? 0.06" [compare 0.3 ? 0.06]
+answer   choice 1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   0.30 > 0.06.
+miss     longer-means-bigger = -1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 987654321 · difficulty 2
+prompt   Choose the symbol that makes this true.
+display  inline "5.09 ? 5.3" [compare 5.09 ? 5.3]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   5.09 < 5.30.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 1 · difficulty 3
+prompt   Choose the symbol that makes this true.
+display  inline "8.19 ? 8.2" [compare 8.19 ? 8.2]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   0 = =
+choice   -1 = <
+step 1   Write both decimals with two places.
+step 2   8.19 < 8.20.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 12345 · difficulty 3
+prompt   Choose the symbol that makes this true.
+display  inline "12.18 ? 12.4" [compare 12.18 ? 12.4]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   12.18 < 12.40.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 67890 · difficulty 3
+prompt   Choose the symbol that makes this true.
+display  inline "5.6 ? 5.24" [compare 5.6 ? 5.24]
+answer   choice 1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   0 = =
+choice   -1 = <
+choice   1 = >
+step 1   Write both decimals with two places.
+step 2   5.60 > 5.24.
+miss     longer-means-bigger = -1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 424242 · difficulty 3
+prompt   Choose the symbol that makes this true.
+display  inline "2.3 ? 2.06" [compare 2.3 ? 2.06]
+answer   choice 1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   2.30 > 2.06.
+miss     longer-means-bigger = -1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 987654321 · difficulty 3
+prompt   Choose the symbol that makes this true.
+display  inline "12.09 ? 12.3" [compare 12.09 ? 12.3]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   12.09 < 12.30.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 1 · difficulty 4
+prompt   Choose the symbol that makes this true.
+display  inline "20.19 ? 20.2" [compare 20.19 ? 20.2]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   0 = =
+choice   -1 = <
+step 1   Write both decimals with two places.
+step 2   20.19 < 20.20.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 12345 · difficulty 4
+prompt   Choose the symbol that makes this true.
+display  inline "30.18 ? 30.4" [compare 30.18 ? 30.4]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   30.18 < 30.40.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 67890 · difficulty 4
+prompt   Choose the symbol that makes this true.
+display  inline "13.6 ? 13.24" [compare 13.6 ? 13.24]
+answer   choice 1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   0 = =
+choice   -1 = <
+choice   1 = >
+step 1   Write both decimals with two places.
+step 2   13.60 > 13.24.
+miss     longer-means-bigger = -1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 424242 · difficulty 4
+prompt   Choose the symbol that makes this true.
+display  inline "5.3 ? 5.06" [compare 5.3 ? 5.06]
+answer   choice 1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   5.30 > 5.06.
+miss     longer-means-bigger = -1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 987654321 · difficulty 4
+prompt   Choose the symbol that makes this true.
+display  inline "29.09 ? 29.3" [compare 29.09 ? 29.3]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   29.09 < 29.30.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 1 · difficulty 5
+prompt   Choose the symbol that makes this true.
+display  inline "40.19 ? 40.2" [compare 40.19 ? 40.2]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   0 = =
+choice   -1 = <
+step 1   Write both decimals with two places.
+step 2   40.19 < 40.20.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 12345 · difficulty 5
+prompt   Choose the symbol that makes this true.
+display  inline "59.18 ? 59.4" [compare 59.18 ? 59.4]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   59.18 < 59.40.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 67890 · difficulty 5
+prompt   Choose the symbol that makes this true.
+display  inline "27.6 ? 27.24" [compare 27.6 ? 27.24]
+answer   choice 1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   0 = =
+choice   -1 = <
+choice   1 = >
+step 1   Write both decimals with two places.
+step 2   27.60 > 27.24.
+miss     longer-means-bigger = -1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 424242 · difficulty 5
+prompt   Choose the symbol that makes this true.
+display  inline "12.3 ? 12.06" [compare 12.3 ? 12.06]
+answer   choice 1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   12.30 > 12.06.
+miss     longer-means-bigger = -1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places.
+
+--- compare-decimals · seed 987654321 · difficulty 5
+prompt   Choose the symbol that makes this true.
+display  inline "58.09 ? 58.3" [compare 58.09 ? 58.3]
+answer   choice -1
+input    choice
+hint     Add a trailing zero, then compare each place.
+choice   1 = >
+choice   -1 = <
+choice   0 = =
+step 1   Write both decimals with two places.
+step 2   58.09 < 58.30.
+miss     longer-means-bigger = 1   More written digits do not make a decimal larger.
+miss     called-equal = 0   Add a trailing zero, then compare equal places."
+`;
+
+exports[`recorded output: decimal-place-value > matches the wording recorded when the skill landed 1`] = `
+"--- decimal-place-value · seed 1 · difficulty 1
+prompt   Which digit is in the tenths place?
+display  inline "1.9" [digit 1.9 tenths]
+answer   exact 9/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 9.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 90   Enter the digit itself, which is 9.
+
+--- decimal-place-value · seed 12345 · difficulty 1
+prompt   Which digit is in the tenths place?
+display  inline "2.9" [digit 2.9 tenths]
+answer   exact 9/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 9.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 90   Enter the digit itself, which is 9.
+
+--- decimal-place-value · seed 67890 · difficulty 1
+prompt   Which digit is in the tenths place?
+display  inline "1.2" [digit 1.2 tenths]
+answer   exact 2/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 2.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 20   Enter the digit itself, which is 2.
+
+--- decimal-place-value · seed 424242 · difficulty 1
+prompt   Which digit is in the tenths place?
+display  inline "0.4" [digit 0.4 tenths]
+answer   exact 4/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 4.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 40   Enter the digit itself, which is 4.
+
+--- decimal-place-value · seed 987654321 · difficulty 1
+prompt   Which digit is in the tenths place?
+display  inline "2.8" [digit 2.8 tenths]
+answer   exact 8/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 8.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 80   Enter the digit itself, which is 8.
+
+--- decimal-place-value · seed 1 · difficulty 2
+prompt   Which digit is in the tenths place?
+display  inline "3.16" [digit 3.16 tenths]
+answer   exact 1/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 1.
+miss     adjacent-place = 6   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 10   Enter the digit itself, which is 1.
+
+--- decimal-place-value · seed 12345 · difficulty 2
+prompt   Which digit is in the tenths place?
+display  inline "1.9" [digit 1.9 tenths]
+answer   exact 9/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 9.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 90   Enter the digit itself, which is 9.
+
+--- decimal-place-value · seed 67890 · difficulty 2
+prompt   Which digit is in the hundredths place?
+display  inline "2.18" [digit 2.18 hundredths]
+answer   exact 8/1
+input    keypad
+hint     The hundredths place is second after the point.
+step 1   Start at the decimal point.
+step 2   The hundredths digit is 8.
+miss     adjacent-place = 1   That is the tenths digit; move one place.
+miss     place-value-not-digit = 0.08   Enter the digit itself, which is 8.
+
+--- decimal-place-value · seed 424242 · difficulty 2
+prompt   Which digit is in the tenths place?
+display  inline "3.86" [digit 3.86 tenths]
+answer   exact 8/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 8.
+miss     adjacent-place = 6   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 80   Enter the digit itself, which is 8.
+
+--- decimal-place-value · seed 987654321 · difficulty 2
+prompt   Which digit is in the tenths place?
+display  inline "0.8" [digit 0.8 tenths]
+answer   exact 8/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 8.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 80   Enter the digit itself, which is 8.
+
+--- decimal-place-value · seed 1 · difficulty 3
+prompt   Which digit is in the tenths place?
+display  inline "12.62" [digit 12.62 tenths]
+answer   exact 6/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 6.
+miss     adjacent-place = 2   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 60   Enter the digit itself, which is 6.
+
+--- decimal-place-value · seed 12345 · difficulty 3
+prompt   Which digit is in the tenths place?
+display  inline "4.7" [digit 4.7 tenths]
+answer   exact 7/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 7.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 70   Enter the digit itself, which is 7.
+
+--- decimal-place-value · seed 67890 · difficulty 3
+prompt   Which digit is in the hundredths place?
+display  inline "5.36" [digit 5.36 hundredths]
+answer   exact 6/1
+input    keypad
+hint     The hundredths place is second after the point.
+step 1   Start at the decimal point.
+step 2   The hundredths digit is 6.
+miss     adjacent-place = 3   That is the tenths digit; move one place.
+miss     place-value-not-digit = 0.06   Enter the digit itself, which is 6.
+
+--- decimal-place-value · seed 424242 · difficulty 3
+prompt   Which digit is in the tenths place?
+display  inline "3.21" [digit 3.21 tenths]
+answer   exact 2/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 2.
+miss     adjacent-place = 1   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 20   Enter the digit itself, which is 2.
+
+--- decimal-place-value · seed 987654321 · difficulty 3
+prompt   Which digit is in the tenths place?
+display  inline "2.7" [digit 2.7 tenths]
+answer   exact 7/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 7.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 70   Enter the digit itself, which is 7.
+
+--- decimal-place-value · seed 1 · difficulty 4
+prompt   Which digit is in the tenths place?
+display  inline "17.30" [digit 17.30 tenths]
+answer   exact 3/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 3.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 30   Enter the digit itself, which is 3.
+
+--- decimal-place-value · seed 12345 · difficulty 4
+prompt   Which digit is in the tenths place?
+display  inline "10.9" [digit 10.9 tenths]
+answer   exact 9/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 9.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 90   Enter the digit itself, which is 9.
+
+--- decimal-place-value · seed 67890 · difficulty 4
+prompt   Which digit is in the hundredths place?
+display  inline "12.53" [digit 12.53 hundredths]
+answer   exact 3/1
+input    keypad
+hint     The hundredths place is second after the point.
+step 1   Start at the decimal point.
+step 2   The hundredths digit is 3.
+miss     adjacent-place = 5   That is the tenths digit; move one place.
+miss     place-value-not-digit = 0.03   Enter the digit itself, which is 3.
+
+--- decimal-place-value · seed 424242 · difficulty 4
+prompt   Which digit is in the tenths place?
+display  inline "20.67" [digit 20.67 tenths]
+answer   exact 6/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 6.
+miss     adjacent-place = 7   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 60   Enter the digit itself, which is 6.
+
+--- decimal-place-value · seed 987654321 · difficulty 4
+prompt   Which digit is in the tenths place?
+display  inline "5.9" [digit 5.9 tenths]
+answer   exact 9/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 9.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 90   Enter the digit itself, which is 9.
+
+--- decimal-place-value · seed 1 · difficulty 5
+prompt   Which digit is in the tenths place?
+display  inline "34.54" [digit 34.54 tenths]
+answer   exact 5/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 5.
+miss     adjacent-place = 4   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 50   Enter the digit itself, which is 5.
+
+--- decimal-place-value · seed 12345 · difficulty 5
+prompt   Which digit is in the tenths place?
+display  inline "22.2" [digit 22.2 tenths]
+answer   exact 2/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 2.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 20   Enter the digit itself, which is 2.
+
+--- decimal-place-value · seed 67890 · difficulty 5
+prompt   Which digit is in the hundredths place?
+display  inline "25.34" [digit 25.34 hundredths]
+answer   exact 4/1
+input    keypad
+hint     The hundredths place is second after the point.
+step 1   Start at the decimal point.
+step 2   The hundredths digit is 4.
+miss     adjacent-place = 3   That is the tenths digit; move one place.
+miss     place-value-not-digit = 0.04   Enter the digit itself, which is 4.
+
+--- decimal-place-value · seed 424242 · difficulty 5
+prompt   Which digit is in the tenths place?
+display  inline "15.29" [digit 15.29 tenths]
+answer   exact 2/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 2.
+miss     adjacent-place = 9   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 20   Enter the digit itself, which is 2.
+
+--- decimal-place-value · seed 987654321 · difficulty 5
+prompt   Which digit is in the tenths place?
+display  inline "12.6" [digit 12.6 tenths]
+answer   exact 6/1
+input    keypad
+hint     The tenths place is first after the point.
+step 1   Start at the decimal point.
+step 2   The tenths digit is 6.
+miss     adjacent-place = 0   That is the hundredths digit; move one place.
+miss     place-value-not-digit = 60   Enter the digit itself, which is 6."
+`;
+
+exports[`recorded output: read-decimals > matches the wording recorded when the skill landed 1`] = `
+"--- read-decimals · seed 1 · difficulty 1
+prompt   Write this decimal in digits.
+display  inline "one and nine tenths" [read 1.9]
+answer   exact 19/10
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 9 in the tenths places.
+step 3   The decimal is 1.9.
+miss     dropped-decimal-point = 10   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 12345 · difficulty 1
+prompt   Write this decimal in digits.
+display  inline "two and nine tenths" [read 2.9]
+answer   exact 29/10
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 9 in the tenths places.
+step 3   The decimal is 2.9.
+miss     dropped-decimal-point = 11   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 67890 · difficulty 1
+prompt   Write this decimal in digits.
+display  inline "one and two tenths" [read 1.2]
+answer   exact 6/5
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 2 in the tenths places.
+step 3   The decimal is 1.2.
+miss     dropped-decimal-point = 3   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 424242 · difficulty 1
+prompt   Write this decimal in digits.
+display  inline "zero and four tenths" [read 0.4]
+answer   exact 2/5
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 4 in the tenths places.
+step 3   The decimal is 0.4.
+miss     dropped-decimal-point = 4   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 987654321 · difficulty 1
+prompt   Write this decimal in digits.
+display  inline "two and eight tenths" [read 2.8]
+answer   exact 14/5
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 8 in the tenths places.
+step 3   The decimal is 2.8.
+miss     dropped-decimal-point = 10   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 1 · difficulty 2
+prompt   Write this decimal in digits.
+display  inline "zero and two hundredths" [read 0.02]
+answer   exact 1/50
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 2 in the hundredths places.
+step 3   The decimal is 0.02.
+miss     used-tenths-place = 0.2   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 2   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 12345 · difficulty 2
+prompt   Write this decimal in digits.
+display  inline "one and nine tenths" [read 1.9]
+answer   exact 19/10
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 9 in the tenths places.
+step 3   The decimal is 1.9.
+miss     dropped-decimal-point = 10   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 67890 · difficulty 2
+prompt   Write this decimal in digits.
+display  inline "three and fifty-four hundredths" [read 3.54]
+answer   exact 177/50
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 54 in the hundredths places.
+step 3   The decimal is 3.54.
+miss     used-tenths-place = 8.4   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 57   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 424242 · difficulty 2
+prompt   Write this decimal in digits.
+display  inline "one and forty-two hundredths" [read 1.42]
+answer   exact 71/50
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 42 in the hundredths places.
+step 3   The decimal is 1.42.
+miss     used-tenths-place = 5.2   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 43   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 987654321 · difficulty 2
+prompt   Write this decimal in digits.
+display  inline "zero and eight tenths" [read 0.8]
+answer   exact 4/5
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 8 in the tenths places.
+step 3   The decimal is 0.8.
+miss     dropped-decimal-point = 8   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 1 · difficulty 3
+prompt   Write this decimal in digits.
+display  inline "one and four hundredths" [read 1.04]
+answer   exact 26/25
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 4 in the hundredths places.
+step 3   The decimal is 1.04.
+miss     used-tenths-place = 1.4   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 5   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 12345 · difficulty 3
+prompt   Write this decimal in digits.
+display  inline "four and seven tenths" [read 4.7]
+answer   exact 47/10
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 7 in the tenths places.
+step 3   The decimal is 4.7.
+miss     dropped-decimal-point = 11   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 67890 · difficulty 3
+prompt   Write this decimal in digits.
+display  inline "eight and nine hundredths" [read 8.09]
+answer   exact 809/100
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 9 in the hundredths places.
+step 3   The decimal is 8.09.
+miss     used-tenths-place = 8.9   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 17   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 424242 · difficulty 3
+prompt   Write this decimal in digits.
+display  inline "three and eighty-four hundredths" [read 3.84]
+answer   exact 96/25
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 84 in the hundredths places.
+step 3   The decimal is 3.84.
+miss     used-tenths-place = 11.4   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 87   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 987654321 · difficulty 3
+prompt   Write this decimal in digits.
+display  inline "two and seven tenths" [read 2.7]
+answer   exact 27/10
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 7 in the tenths places.
+step 3   The decimal is 2.7.
+miss     dropped-decimal-point = 9   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 1 · difficulty 4
+prompt   Write this decimal in digits.
+display  inline "two and eight hundredths" [read 2.08]
+answer   exact 52/25
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 8 in the hundredths places.
+step 3   The decimal is 2.08.
+miss     used-tenths-place = 2.8   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 10   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 12345 · difficulty 4
+prompt   Write this decimal in digits.
+display  inline "ten and nine tenths" [read 10.9]
+answer   exact 109/10
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 9 in the tenths places.
+step 3   The decimal is 10.9.
+miss     dropped-decimal-point = 19   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 67890 · difficulty 4
+prompt   Write this decimal in digits.
+display  inline "nineteen and thirteen hundredths" [read 19.13]
+answer   exact 1913/100
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 13 in the hundredths places.
+step 3   The decimal is 19.13.
+miss     used-tenths-place = 20.3   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 32   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 424242 · difficulty 4
+prompt   Write this decimal in digits.
+display  inline "eight and eighty-six hundredths" [read 8.86]
+answer   exact 443/50
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 86 in the hundredths places.
+step 3   The decimal is 8.86.
+miss     used-tenths-place = 16.6   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 94   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 987654321 · difficulty 4
+prompt   Write this decimal in digits.
+display  inline "five and nine tenths" [read 5.9]
+answer   exact 59/10
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 9 in the tenths places.
+step 3   The decimal is 5.9.
+miss     dropped-decimal-point = 14   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 1 · difficulty 5
+prompt   Write this decimal in digits.
+display  inline "five and sixteen hundredths" [read 5.16]
+answer   exact 129/25
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 16 in the hundredths places.
+step 3   The decimal is 5.16.
+miss     used-tenths-place = 6.6   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 21   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 12345 · difficulty 5
+prompt   Write this decimal in digits.
+display  inline "twenty-two and two tenths" [read 22.2]
+answer   exact 111/5
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 2 in the tenths places.
+step 3   The decimal is 22.2.
+miss     dropped-decimal-point = 24   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 67890 · difficulty 5
+prompt   Write this decimal in digits.
+display  inline "thirty-eight and seven hundredths" [read 38.07]
+answer   exact 3807/100
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 7 in the hundredths places.
+step 3   The decimal is 38.07.
+miss     used-tenths-place = 38.7   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 45   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 424242 · difficulty 5
+prompt   Write this decimal in digits.
+display  inline "eighteen and twenty-four hundredths" [read 18.24]
+answer   exact 456/25
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 24 in the hundredths places.
+step 3   The decimal is 18.24.
+miss     used-tenths-place = 20.4   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 42   The word "and" marks where the decimal point belongs.
+
+--- read-decimals · seed 987654321 · difficulty 5
+prompt   Write this decimal in digits.
+display  inline "twelve and six tenths" [read 12.6]
+answer   exact 63/5
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 6 in the tenths places.
+step 3   The decimal is 12.6.
+miss     dropped-decimal-point = 18   The word "and" marks where the decimal point belongs."
+`;
+
+exports[`recorded output: round-decimals > matches the wording recorded when the skill landed 1`] = `
+"--- round-decimals · seed 1 · difficulty 1
+prompt   Round to the nearest whole number.
+display  inline "1.9" [round 1.9 to whole]
+answer   exact 2/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   1.9 rounds to 2.
+miss     rounded-wrong-direction = 1   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 1.9   Finish at the ones place.
+
+--- round-decimals · seed 12345 · difficulty 1
+prompt   Round to the nearest whole number.
+display  inline "2.9" [round 2.9 to whole]
+answer   exact 3/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   2.9 rounds to 3.
+miss     rounded-wrong-direction = 2   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 2.9   Finish at the ones place.
+
+--- round-decimals · seed 67890 · difficulty 1
+prompt   Round to the nearest whole number.
+display  inline "1.2" [round 1.2 to whole]
+answer   exact 1/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   1.2 rounds to 1.
+miss     rounded-wrong-direction = 2   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 1.2   Finish at the ones place.
+
+--- round-decimals · seed 424242 · difficulty 1
+prompt   Round to the nearest whole number.
+display  inline "0.4" [round 0.4 to whole]
+answer   exact 0/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   0.4 rounds to 0.
+miss     rounded-wrong-direction = 1   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 0.4   Finish at the ones place.
+
+--- round-decimals · seed 987654321 · difficulty 1
+prompt   Round to the nearest whole number.
+display  inline "2.8" [round 2.8 to whole]
+answer   exact 3/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   2.8 rounds to 3.
+miss     rounded-wrong-direction = 2   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 2.8   Finish at the ones place.
+
+--- round-decimals · seed 1 · difficulty 2
+prompt   Round to the nearest whole number.
+display  inline "3.7" [round 3.7 to whole]
+answer   exact 4/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   3.7 rounds to 4.
+miss     rounded-wrong-direction = 3   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 3.7   Finish at the ones place.
+
+--- round-decimals · seed 12345 · difficulty 2
+prompt   Round to the nearest whole number.
+display  inline "5.8" [round 5.8 to whole]
+answer   exact 6/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   5.8 rounds to 6.
+miss     rounded-wrong-direction = 5   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 5.8   Finish at the ones place.
+
+--- round-decimals · seed 67890 · difficulty 2
+prompt   Round to the nearest whole number.
+display  inline "2.4" [round 2.4 to whole]
+answer   exact 2/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   2.4 rounds to 2.
+miss     rounded-wrong-direction = 3   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 2.4   Finish at the ones place.
+
+--- round-decimals · seed 424242 · difficulty 2
+prompt   Round to the nearest whole number.
+display  inline "0.8" [round 0.8 to whole]
+answer   exact 1/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   0.8 rounds to 1.
+miss     rounded-wrong-direction = 0   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 0.8   Finish at the ones place.
+
+--- round-decimals · seed 987654321 · difficulty 2
+prompt   Round to the nearest whole number.
+display  inline "5.7" [round 5.7 to whole]
+answer   exact 6/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   5.7 rounds to 6.
+miss     rounded-wrong-direction = 5   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 5.7   Finish at the ones place.
+
+--- round-decimals · seed 1 · difficulty 3
+prompt   Round to the nearest tenth.
+display  inline "1.04" [round 1.04 to tenth]
+answer   exact 1/1
+input    keypad
+keypad   allowDecimal=true
+hint     A next digit of 5 or more rounds up.
+step 1   Check the hundredths digit.
+step 2   1.04 rounds to 1.0.
+miss     rounded-wrong-direction = 1.1   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 1.04   Finish at the tenths place.
+
+--- round-decimals · seed 12345 · difficulty 3
+prompt   Round to the nearest tenth.
+display  inline "4.68" [round 4.68 to tenth]
+answer   exact 47/10
+input    keypad
+keypad   allowDecimal=true
+hint     A next digit of 5 or more rounds up.
+step 1   Check the hundredths digit.
+step 2   4.68 rounds to 4.7.
+miss     rounded-wrong-direction = 4.6   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 4.68   Finish at the tenths place.
+
+--- round-decimals · seed 67890 · difficulty 3
+prompt   Round to the nearest whole number.
+display  inline "8.1" [round 8.1 to whole]
+answer   exact 8/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   8.1 rounds to 8.
+miss     rounded-wrong-direction = 9   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 8.1   Finish at the ones place.
+
+--- round-decimals · seed 424242 · difficulty 3
+prompt   Round to the nearest whole number.
+display  inline "3.9" [round 3.9 to whole]
+answer   exact 4/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   3.9 rounds to 4.
+miss     rounded-wrong-direction = 3   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 3.9   Finish at the ones place.
+
+--- round-decimals · seed 987654321 · difficulty 3
+prompt   Round to the nearest tenth.
+display  inline "2.62" [round 2.62 to tenth]
+answer   exact 13/5
+input    keypad
+keypad   allowDecimal=true
+hint     A next digit of 5 or more rounds up.
+step 1   Check the hundredths digit.
+step 2   2.62 rounds to 2.6.
+miss     rounded-wrong-direction = 2.7   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 2.62   Finish at the tenths place.
+
+--- round-decimals · seed 1 · difficulty 4
+prompt   Round to the nearest tenth.
+display  inline "2.08" [round 2.08 to tenth]
+answer   exact 21/10
+input    keypad
+keypad   allowDecimal=true
+hint     A next digit of 5 or more rounds up.
+step 1   Check the hundredths digit.
+step 2   2.08 rounds to 2.1.
+miss     rounded-wrong-direction = 2   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 2.08   Finish at the tenths place.
+
+--- round-decimals · seed 12345 · difficulty 4
+prompt   Round to the nearest tenth.
+display  inline "16.04" [round 16.04 to tenth]
+answer   exact 16/1
+input    keypad
+keypad   allowDecimal=true
+hint     A next digit of 5 or more rounds up.
+step 1   Check the hundredths digit.
+step 2   16.04 rounds to 16.0.
+miss     rounded-wrong-direction = 16.1   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 16.04   Finish at the tenths place.
+
+--- round-decimals · seed 67890 · difficulty 4
+prompt   Round to the nearest whole number.
+display  inline "19.1" [round 19.1 to whole]
+answer   exact 19/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   19.1 rounds to 19.
+miss     rounded-wrong-direction = 20   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 19.1   Finish at the ones place.
+
+--- round-decimals · seed 424242 · difficulty 4
+prompt   Round to the nearest whole number.
+display  inline "8.9" [round 8.9 to whole]
+answer   exact 9/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   8.9 rounds to 9.
+miss     rounded-wrong-direction = 8   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 8.9   Finish at the ones place.
+
+--- round-decimals · seed 987654321 · difficulty 4
+prompt   Round to the nearest tenth.
+display  inline "5.92" [round 5.92 to tenth]
+answer   exact 59/10
+input    keypad
+keypad   allowDecimal=true
+hint     A next digit of 5 or more rounds up.
+step 1   Check the hundredths digit.
+step 2   5.92 rounds to 5.9.
+miss     rounded-wrong-direction = 6   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 5.92   Finish at the tenths place.
+
+--- round-decimals · seed 1 · difficulty 5
+prompt   Round to the nearest tenth.
+display  inline "5.16" [round 5.16 to tenth]
+answer   exact 26/5
+input    keypad
+keypad   allowDecimal=true
+hint     A next digit of 5 or more rounds up.
+step 1   Check the hundredths digit.
+step 2   5.16 rounds to 5.2.
+miss     rounded-wrong-direction = 5.1   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 5.16   Finish at the tenths place.
+
+--- round-decimals · seed 12345 · difficulty 5
+prompt   Round to the nearest tenth.
+display  inline "22.18" [round 22.18 to tenth]
+answer   exact 111/5
+input    keypad
+keypad   allowDecimal=true
+hint     A next digit of 5 or more rounds up.
+step 1   Check the hundredths digit.
+step 2   22.18 rounds to 22.2.
+miss     rounded-wrong-direction = 22.1   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 22.18   Finish at the tenths place.
+
+--- round-decimals · seed 67890 · difficulty 5
+prompt   Round to the nearest whole number.
+display  inline "38.1" [round 38.1 to whole]
+answer   exact 38/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   38.1 rounds to 38.
+miss     rounded-wrong-direction = 39   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 38.1   Finish at the ones place.
+
+--- round-decimals · seed 424242 · difficulty 5
+prompt   Round to the nearest whole number.
+display  inline "18.3" [round 18.3 to whole]
+answer   exact 18/1
+input    keypad
+keypad   allowDecimal=false
+hint     A next digit of 5 or more rounds up.
+step 1   Check the tenths digit.
+step 2   18.3 rounds to 18.
+miss     rounded-wrong-direction = 19   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 18.3   Finish at the ones place.
+
+--- round-decimals · seed 987654321 · difficulty 5
+prompt   Round to the nearest tenth.
+display  inline "12.56" [round 12.56 to tenth]
+answer   exact 63/5
+input    keypad
+keypad   allowDecimal=true
+hint     A next digit of 5 or more rounds up.
+step 1   Check the hundredths digit.
+step 2   12.56 rounds to 12.6.
+miss     rounded-wrong-direction = 12.5   Use the next digit to decide which neighbor is nearer.
+miss     not-rounded = 12.56   Finish at the tenths place."
+`;
+
+exports[`recorded output: sub-decimals > matches the wording recorded when the skill landed 1`] = `
+"--- sub-decimals · seed 1 · difficulty 1
+prompt   What is the difference?
+display  decimal-column [sub 2.90 − 1.58]
+answer   exact 33/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   2.90 − 1.58 = 1.32.
+miss     misaligned-places = 1.29   Line up the decimal points before working by place.
+miss     copied-subtrahend = 1.58   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 12345 · difficulty 1
+prompt   What is the difference?
+display  decimal-column [sub 2.40 − 1.45]
+answer   exact 19/20
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   2.40 − 1.45 = 0.95.
+miss     misaligned-places = 1.21   Line up the decimal points before working by place.
+miss     copied-subtrahend = 1.45   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 67890 · difficulty 1
+prompt   What is the difference?
+display  decimal-column [sub 1.80 − 1.09]
+answer   exact 71/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   1.80 − 1.09 = 0.71.
+miss     misaligned-places = 0.91   Line up the decimal points before working by place.
+miss     copied-subtrahend = 1.09   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 424242 · difficulty 1
+prompt   What is the difference?
+display  decimal-column [sub 0.70 − 0.55]
+answer   exact 3/20
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   0.70 − 0.55 = 0.15.
+miss     misaligned-places = 0.48   Line up the decimal points before working by place.
+miss     copied-subtrahend = 0.55   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 987654321 · difficulty 1
+prompt   What is the difference?
+display  decimal-column [sub 2.70 − 0.05]
+answer   exact 53/20
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   2.70 − 0.05 = 2.65.
+miss     misaligned-places = 0.22   Line up the decimal points before working by place.
+miss     copied-subtrahend = 0.05   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 1 · difficulty 2
+prompt   What is the difference?
+display  decimal-column [sub 5.80 − 3.16]
+answer   exact 66/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   5.80 − 3.16 = 2.64.
+miss     misaligned-places = 2.58   Line up the decimal points before working by place.
+miss     copied-subtrahend = 3.16   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 12345 · difficulty 2
+prompt   What is the difference?
+display  decimal-column [sub 4.90 − 2.91]
+answer   exact 199/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   4.90 − 2.91 = 1.99.
+miss     misaligned-places = 2.42   Line up the decimal points before working by place.
+miss     copied-subtrahend = 2.91   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 67890 · difficulty 2
+prompt   What is the difference?
+display  decimal-column [sub 3.50 − 2.18]
+answer   exact 33/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   3.50 − 2.18 = 1.32.
+miss     misaligned-places = 1.83   Line up the decimal points before working by place.
+miss     copied-subtrahend = 2.18   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 424242 · difficulty 2
+prompt   What is the difference?
+display  decimal-column [sub 1.40 − 1.11]
+answer   exact 29/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   1.40 − 1.11 = 0.29.
+miss     misaligned-places = 0.97   Line up the decimal points before working by place.
+miss     copied-subtrahend = 1.11   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 987654321 · difficulty 2
+prompt   What is the difference?
+display  decimal-column [sub 5.40 − 0.10]
+answer   exact 53/10
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   5.40 − 0.10 = 5.30.
+miss     misaligned-places = 0.44   Line up the decimal points before working by place.
+miss     copied-subtrahend = 0.1   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 1 · difficulty 3
+prompt   What is the difference?
+display  decimal-column [sub 12.70 − 7.33]
+answer   exact 537/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   12.70 − 7.33 = 5.37.
+miss     misaligned-places = 6.06   Line up the decimal points before working by place.
+miss     copied-subtrahend = 7.33   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 12345 · difficulty 3
+prompt   What is the difference?
+display  decimal-column [sub 10.80 − 6.81]
+answer   exact 399/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   10.80 − 6.81 = 3.99.
+miss     misaligned-places = 5.73   Line up the decimal points before working by place.
+miss     copied-subtrahend = 6.81   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 67890 · difficulty 3
+prompt   What is the difference?
+display  decimal-column [sub 8.10 − 5.36]
+answer   exact 137/50
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   8.10 − 5.36 = 2.74.
+miss     misaligned-places = 4.55   Line up the decimal points before working by place.
+miss     copied-subtrahend = 5.36   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 424242 · difficulty 3
+prompt   What is the difference?
+display  decimal-column [sub 3.90 − 3.21]
+answer   exact 69/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   3.90 − 3.21 = 0.69.
+miss     misaligned-places = 2.82   Line up the decimal points before working by place.
+miss     copied-subtrahend = 3.21   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 987654321 · difficulty 3
+prompt   What is the difference?
+display  decimal-column [sub 11.90 − 1.19]
+answer   exact 1071/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   11.90 − 1.19 = 10.71.
+miss     misaligned-places = 0   Line up the decimal points before working by place.
+miss     copied-subtrahend = 1.19   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 1 · difficulty 4
+prompt   What is the difference?
+display  decimal-column [sub 30.40 − 17.30]
+answer   exact 131/10
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   30.40 − 17.30 = 13.10.
+miss     misaligned-places = 14.26   Line up the decimal points before working by place.
+miss     copied-subtrahend = 17.3   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 12345 · difficulty 4
+prompt   What is the difference?
+display  decimal-column [sub 25.70 − 16.04]
+answer   exact 483/50
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   25.70 − 16.04 = 9.66.
+miss     misaligned-places = 13.47   Line up the decimal points before working by place.
+miss     copied-subtrahend = 16.04   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 67890 · difficulty 4
+prompt   What is the difference?
+display  decimal-column [sub 19.10 − 12.53]
+answer   exact 657/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   19.10 − 12.53 = 6.57.
+miss     misaligned-places = 10.62   Line up the decimal points before working by place.
+miss     copied-subtrahend = 12.53   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 424242 · difficulty 4
+prompt   What is the difference?
+display  decimal-column [sub 8.90 − 7.33]
+answer   exact 157/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   8.90 − 7.33 = 1.57.
+miss     misaligned-places = 6.44   Line up the decimal points before working by place.
+miss     copied-subtrahend = 7.33   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 987654321 · difficulty 4
+prompt   What is the difference?
+display  decimal-column [sub 28.50 − 2.45]
+answer   exact 521/20
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   28.50 − 2.45 = 26.05.
+miss     misaligned-places = 0.4   Line up the decimal points before working by place.
+miss     copied-subtrahend = 2.45   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 1 · difficulty 5
+prompt   What is the difference?
+display  decimal-column [sub 59.90 − 34.54]
+answer   exact 634/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   59.90 − 34.54 = 25.36.
+miss     misaligned-places = 28.55   Line up the decimal points before working by place.
+miss     copied-subtrahend = 34.54   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 12345 · difficulty 5
+prompt   What is the difference?
+display  decimal-column [sub 50.80 − 32.12]
+answer   exact 467/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   50.80 − 32.12 = 18.68.
+miss     misaligned-places = 27.04   Line up the decimal points before working by place.
+miss     copied-subtrahend = 32.12   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 67890 · difficulty 5
+prompt   What is the difference?
+display  decimal-column [sub 38.10 − 25.34]
+answer   exact 319/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   38.10 − 25.34 = 12.76.
+miss     misaligned-places = 21.53   Line up the decimal points before working by place.
+miss     copied-subtrahend = 25.34   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 424242 · difficulty 5
+prompt   What is the difference?
+display  decimal-column [sub 18.30 − 15.29]
+answer   exact 301/100
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   18.30 − 15.29 = 3.01.
+miss     misaligned-places = 13.46   Line up the decimal points before working by place.
+miss     copied-subtrahend = 15.29   That is the amount being subtracted; find the difference.
+
+--- sub-decimals · seed 987654321 · difficulty 5
+prompt   What is the difference?
+display  decimal-column [sub 56.10 − 5.86]
+answer   exact 1256/25
+input    keypad
+keypad   allowDecimal=true
+hint     Line up the decimal points, then work by place.
+step 1   Line up the decimal points.
+step 2   56.10 − 5.86 = 50.24.
+miss     misaligned-places = 0.25   Line up the decimal points before working by place.
+miss     copied-subtrahend = 5.86   That is the amount being subtracted; find the difference."
+`;

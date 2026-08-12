@@ -1,4 +1,5 @@
 import type { Display, Problem } from '../lib/types'
+import { decimalColumnText } from '../lib/decimal'
 import { entrySpokenLabel, fractionEntryNotation } from '../lib/math-notation'
 import { MathNotation } from './MathNotation'
 import { ShapeDiagram } from './ShapeDiagram'
@@ -26,6 +27,8 @@ export function ProblemView({
       return <InlineView display={display} entry={entry} entryMode={entryMode} />
     case 'column':
       return <ColumnView display={display} entry={entry} entryMode={entryMode} />
+    case 'decimal-column':
+      return <DecimalColumnView display={display} entry={entry} entryMode={entryMode} />
     case 'story':
       return <StoryView display={display} entry={entry} entryMode={entryMode} />
     case 'math':
@@ -63,6 +66,18 @@ function InlineView({
   entry,
   entryMode,
 }: { display: Of<'inline'> } & EntryProps) {
+  if (display.decimal?.operation === 'read') {
+    return (
+      <div className="flex max-w-xs flex-col items-center gap-4 text-center">
+        <span className="text-balance text-2xl font-bold leading-snug">{display.text}</span>
+        <div className="flex items-baseline justify-center gap-3 text-4xl">
+          <span className="font-bold text-ink-faint">=</span>
+          <EntrySlot value={entry} mode={entryMode} />
+        </div>
+      </div>
+    )
+  }
+
   // Sized so the expression, the equals sign and the answer slot fit one line at
   // 375px — the phone this is installed on.
   //
@@ -173,40 +188,45 @@ function DiagramView({ display, entry, entryMode }: { display: Of<'diagram'> } &
 }
 
 function ColumnView({ display, entry, entryMode }: { display: Of<'column'> } & EntryProps) {
-  const width = Math.max(...display.operands.map((n) => String(n).length))
+  const values = display.operands.map(String)
+  return <FormattedColumn values={values} operator={display.operator} entry={entry} entryMode={entryMode} />
+}
 
-  // A stack of three is a row taller than any column the course had before it,
-  // and at 6xl that row pushes "Show me a hint" underneath the keypad on a
-  // phone — the hint becomes unreachable on exactly the skill whose hint
-  // explains the carry. One size down buys back the row and still reads as
-  // stacked digits, which is most of the explanation.
-  //
-  // Only the root size branches. Everything inside sizes in `em`, so the
-  // operator, the rule and the answer slot follow it down on their own — which
-  // is also what makes a fourth row cost one number here rather than four.
-  const rows = display.operands.length
+function DecimalColumnView({ display, entry, entryMode }: { display: Of<'decimal-column'> } & EntryProps) {
+  const values = decimalColumnText(display.decimal)
+  const operator = display.decimal.operation === 'add' ? '+' : '−'
+  return <FormattedColumn values={values} operator={operator} entry={entry} entryMode={entryMode} />
+}
+
+function FormattedColumn({
+  values,
+  operator,
+  entry,
+  entryMode,
+}: {
+  values: readonly string[]
+  operator: '+' | '−' | '×' | '÷'
+} & EntryProps) {
+  const width = Math.max(...values.map((value) => value.length))
+  // A stack of three is a row taller than any two-operand column. One size down
+  // keeps the hint reachable while every nested measurement follows in `em`.
+  const size = values.length > 2 ? 'text-5xl' : 'text-6xl'
 
   return (
     <div
-      className={`inline-flex flex-col items-end font-bold tabular-nums leading-tight ${
-        rows > 2 ? 'text-5xl' : 'text-6xl'
-      }`}
-      // Digits are split into per-character spans to keep places aligned, which
-      // reads as "3, 8, plus, 1, 1" without this.
+      className={`inline-flex flex-col items-end font-bold tabular-nums leading-tight ${size}`}
+      // Per-character spans align places; the complete expression lives here
+      // so assistive technology does not read each digit as a separate item.
       role="math"
-      aria-label={`${display.operands.join(` ${display.operator} `)} equals ${entrySpokenLabel(entry)}`}
+      aria-label={`${values.join(` ${operator} `)} equals ${entrySpokenLabel(entry)}`}
     >
-      {display.operands.map((operand, i) => (
+      {values.map((value, i) => (
         <div key={i} className="flex items-center gap-4" aria-hidden>
-          <span className="w-8 text-ink-soft text-[0.8em]">
-            {i === display.operands.length - 1 ? display.operator : ''}
-          </span>
-          <Digits value={String(operand)} width={width} />
+          <span className="w-8 text-ink-soft text-[0.8em]">{i === values.length - 1 ? operator : ''}</span>
+          <Digits value={value} width={width} />
         </div>
       ))}
-
       <div className="h-1.5 self-stretch rounded-full bg-ink-faint my-[0.2em]" aria-hidden />
-
       <div className="flex items-center gap-4" aria-hidden>
         <span className="w-8" />
         <EntrySlot value={entry} mode={entryMode} minWidth={width} />

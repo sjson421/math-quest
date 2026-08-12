@@ -17,11 +17,12 @@ how many are playable is a fact about the code, and the status line of
 [`docs/roadmap.md`](docs/roadmap.md) is where it is written down, deliberately in only one
 place.
 
-Stages A, B, and C and Stage D's first two units are playable. Unit 8 now covers like- and
+Stages A, B, and C, Stage D's first two units, and the first half of Unit 9 are playable. Unit 8 covers like- and
 unlike-denominator addition and subtraction, mixed-number conversion and arithmetic,
 fraction multiplication and division, and fixed-frame word problems. Structured math
 notation, fraction input, and shaded-shape diagram rendering are built, and the keypad offers
-mixed-number entry with `requireMixed` form checking. Unit 9 decimals are next. Later stages still
+mixed-number entry with `requireMixed` form checking. Unit 9 now covers decimal place value,
+reading, comparison, rounding, addition, and subtraction. Decimal multiplication is next. Later stages still
 need expression input, a tap-to-plot coordinate plane, charts, and timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining

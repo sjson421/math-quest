@@ -3,7 +3,8 @@ import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
 import { shapeDiagramLabel } from '../lib/shape-diagram'
-import type { Difficulty, FractionData, MathNotation, Problem, SkillGenerator } from '../lib/types'
+import { decimalColumnText, decimalText } from '../lib/decimal'
+import type { DecimalData, Difficulty, FractionData, MathNotation, Problem, SkillGenerator } from '../lib/types'
 
 /**
  * The shared half of the per-unit wording gates.
@@ -117,12 +118,36 @@ const formatFractionData = (data: FractionData): string => {
   }
 }
 
+const formatDecimalData = (data: DecimalData): string => {
+  switch (data.operation) {
+    case 'digit':
+      return `${data.operation} ${decimalText(data.value)} ${data.place}`
+    case 'read':
+      return `${data.operation} ${decimalText(data.value)}`
+    case 'compare':
+      return `${data.operation} ${decimalText(data.left)} ? ${decimalText(data.right)}`
+    case 'round':
+      return `${data.operation} ${decimalText(data.value)} to ${data.targetScale === 0 ? 'whole' : 'tenth'}`
+    case 'add':
+    case 'sub': {
+      const [left, right] = decimalColumnText(data)
+      return `${data.operation} ${left} ${data.operation === 'add' ? '+' : '−'} ${right}`
+    }
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled decimal data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 const formatDisplay = (display: Problem['display']): string => {
   switch (display.kind) {
     case 'inline':
-      return `inline "${display.text}"`
+      return `inline "${display.text}"${display.decimal ? ` [${formatDecimalData(display.decimal)}]` : ''}`
     case 'column':
       return `column ${display.operands.join(` ${display.operator} `)}`
+    case 'decimal-column':
+      return `decimal-column [${formatDecimalData(display.decimal)}]`
     case 'story':
       return `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
     case 'math':

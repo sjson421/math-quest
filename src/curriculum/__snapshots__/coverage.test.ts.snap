@@ -14,6 +14,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "add-3digit": [
     "add-2digit-carry",
   ],
+  "add-decimals": [
+    "round-decimals",
+  ],
   "add-facts": [
     "add-facts-small",
   ],
@@ -47,6 +50,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "common-denominator": [
     "sub-frac-same-den",
   ],
+  "compare-decimals": [
+    "read-decimals",
+  ],
   "compare-diff-den": [
     "compare-same-den",
   ],
@@ -58,6 +64,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "compare-same-den": [
     "simplify-fractions",
+  ],
+  "decimal-place-value": [
+    "fraction-words",
   ],
   "div-by-10-100": [
     "div-remainder",
@@ -167,7 +176,13 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "primes": [
     "multiples",
   ],
+  "read-decimals": [
+    "decimal-place-value",
+  ],
   "read-numbers": [],
+  "round-decimals": [
+    "compare-decimals",
+  ],
   "round-to-10": [
     "order-numbers",
   ],
@@ -188,6 +203,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "sub-across-zero": [
     "sub-3digit-borrow",
+  ],
+  "sub-decimals": [
+    "add-decimals",
   ],
   "sub-facts": [
     "sub-facts-small",

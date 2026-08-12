@@ -20,6 +20,43 @@ describe('ProblemView', () => {
     expect(html).toContain('=')
   })
 
+  it('wraps decimal-reading prose above its answer slot', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'inline',
+          text: 'three and four hundredths',
+          decimal: { operation: 'read', value: { coefficient: 304, scale: 2 } },
+        }}
+        entry="3.04"
+      />,
+    )
+
+    expect(html).toContain('three and four hundredths')
+    expect(html).toContain('max-w-xs')
+    expect(html).toContain('flex-col')
+    expect(html).toContain('text-balance')
+  })
+
+  it('aligns exact decimal columns without dropping a trailing zero', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'decimal-column',
+          decimal: {
+            operation: 'add',
+            left: { coefficient: 12, scale: 1 },
+            right: { coefficient: 35, scale: 2 },
+          },
+        }}
+        entry="1.55"
+      />,
+    )
+
+    expect(html).toContain('aria-label="1.20 + 0.35 equals 1.55"')
+    expect(html).toContain('role="math"')
+  })
+
   it.each([
     ['347', { operation: 'tens-digit', value: 347 }],
     ['347 ? 354', { operation: 'compare', left: 347, right: 354 }],

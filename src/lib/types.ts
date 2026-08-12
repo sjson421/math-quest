@@ -117,6 +117,27 @@ export type WholeNumberData =
 
 export type WholeNumberOperation = WholeNumberData['operation']
 
+/** A nonnegative decimal as written, including a meaningful trailing zero. */
+export type DecimalValue = {
+  coefficient: number
+  scale: 1 | 2
+}
+
+/** The decimal property or operation a display asks about. */
+export type DecimalData =
+  | {
+      operation: 'digit'
+      value: DecimalValue
+      place: 'tenths' | 'hundredths'
+    }
+  | { operation: 'read'; value: DecimalValue }
+  | { operation: 'compare'; left: DecimalValue; right: DecimalValue }
+  | { operation: 'round'; value: DecimalValue; targetScale: 0 | 1 }
+  | { operation: 'add'; left: DecimalValue; right: DecimalValue }
+  | { operation: 'sub'; left: DecimalValue; right: DecimalValue }
+
+export type DecimalArithmeticData = Extract<DecimalData, { operation: 'add' | 'sub' }>
+
 /**
  * Structured notation for the closed expression surface used by Stages D–G.
  *
@@ -229,8 +250,10 @@ export type FractionData =
 
 /** How the problem is presented. Column layout matches how arithmetic is taught. */
 export type Display =
-  | { kind: 'inline'; text: string; wholeNumber?: WholeNumberData }
+  | { kind: 'inline'; text: string; wholeNumber?: WholeNumberData; decimal?: DecimalData }
   | { kind: 'column'; operands: number[]; operator: Operator }
+  /** Decimal columns render from exact source data so trailing zeroes survive. */
+  | { kind: 'decimal-column'; decimal: DecimalArithmeticData }
   /**
    * A word problem: prose for the learner, operands for everything else.
    *

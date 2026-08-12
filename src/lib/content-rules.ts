@@ -139,6 +139,7 @@ function displayText(display: Display): string {
     case 'diagram':
       return shapeDiagramLabel(display.diagram)
     case 'column':
+    case 'decimal-column':
       return ''
     default: {
       const unhandled: never = display
