@@ -22,11 +22,11 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-five changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-six changes
   have shipped; the latest archive is
-  `2026-08-13-add-stage-d-unit-11a`. It adds directed and simplified ratios, unit rates,
-  proportions, scale drawings, and unit conversion. Unit 11b's ratio word problems are the
-  next curriculum change.
+  `2026-08-13-add-ratio-word-problems`. It closes Stage D with authored ratio stories that
+  distinguish part-to-part from part-to-whole comparisons. Expression input is the next
+  roadmap change.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
