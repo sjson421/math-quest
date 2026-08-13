@@ -157,6 +157,12 @@ introduces, so the set can be read off the stage rather than assembled from earl
 - **AND** its skills without generators remain planned
 - **AND** the set of skills offered to the learner is unchanged
 
+#### Scenario: Stage E records built fraction input when Unit 12 consumes it
+
+- **WHEN** `zero-neg-exponents` requires an exact reciprocal through fraction entry
+- **THEN** Stage E lists `fraction-input` as a required available capability
+- **AND** no new capability implementation or availability flag is needed
+
 ### Requirement: Skills carry pacing metadata
 
 Each skill SHALL record whether it is a `quick` skill and whether it is a known

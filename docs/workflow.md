@@ -23,11 +23,11 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-eight changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-nine changes
   have shipped; the latest archive is
-  `2026-08-13-add-expression-input`. It ships roadmap item 20b: the expression keypad, the
-  `expression` answer kind, and the parser/canonical-form comparison — capability-only, no
-  Unit 13 generator yet (roadmap item 21).
+  `2026-08-13-complete-unit-12-exponents-roots`. It ships roadmap item 21's 12b increment:
+  power-of-power, zero and negative exponents, scientific notation, and full order of
+  operations with exponents. Unit 12 is complete; item 21 remains open for Units 13–15.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
