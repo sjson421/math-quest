@@ -22,11 +22,11 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-six changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-seven changes
   have shipped; the latest archive is
-  `2026-08-13-add-ratio-word-problems`. It closes Stage D with authored ratio stories that
-  distinguish part-to-part from part-to-whole comparisons. Expression input is the next
-  roadmap change.
+  `2026-08-13-extend-diagnosis-to-expressions`. It generalizes `Misconception.value` and the
+  diagnosis path to carry non-numeric predictions, ahead of the expression input mode itself
+  (roadmap item 20b) and the Unit 13 content that needs it (item 21).
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
