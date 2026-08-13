@@ -23,8 +23,9 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty changes
-  have shipped; the latest archive is
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-one changes
+  have shipped — `ls openspec/changes/archive/` is the authority, and this line has run one
+  behind before; the latest archive is
   `2026-08-13-add-unit-13a-expressions-intro`. It ships roadmap item 21's 13a increment:
   variable-meaning, expression evaluation, words-to-expression, identify-like-terms,
   combine-like-terms, and distributive — the first content to consume `expression-input`.

@@ -436,11 +436,18 @@ export type Display =
    * deliberately mentions quantities the answer does not use. Arithmetic
    * stories carry operands and one operator; percent stories carry a named
    * relationship instead.
+   *
+   * A story is also the right shape for a phrase the learner translates rather
+   * than computes. `inline` appends an `= answer` frame, which is true of every
+   * skill whose answer is the value of what is shown and false of one whose
+   * answer is a rewriting of it: `13.3` would read `6 = x-6`. Story text takes
+   * no such frame.
    */
   | ({ kind: 'story'; text: string } & (
-      | { operands: number[]; operator: Operator; percent?: never; ratio?: never }
-      | { percent: PercentData; operands?: never; operator?: never; ratio?: never }
-      | { ratio: RatioData; operands?: never; operator?: never; percent?: never }
+      | { operands: number[]; operator: Operator; percent?: never; ratio?: never; algebra?: never }
+      | { percent: PercentData; operands?: never; operator?: never; ratio?: never; algebra?: never }
+      | { ratio: RatioData; operands?: never; operator?: never; percent?: never; algebra?: never }
+      | { algebra: AlgebraData; operands?: never; operator?: never; percent?: never; ratio?: never }
     ))
   /** Structured notation with the one complete name assistive technology reads. */
   | ({

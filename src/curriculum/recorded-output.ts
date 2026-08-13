@@ -5,6 +5,7 @@ import { format as formatRational } from '../lib/rational'
 import { shapeDiagramLabel } from '../lib/shape-diagram'
 import { decimalColumnText, decimalText } from '../lib/decimal'
 import type {
+  AlgebraData,
   DecimalData,
   Difficulty,
   FractionData,
@@ -251,10 +252,35 @@ const formatRatioData = (data: RatioData): string => {
   }
 }
 
+const formatAlgebraData = (data: AlgebraData): string => {
+  switch (data.operation) {
+    case 'substitute-term':
+      return `${data.operation} ${data.coefficient}x @ x=${data.value}`
+    case 'substitute-expression':
+      return `${data.operation} ${data.coefficient}x ${data.adds ? '+' : '-'} ${data.constant} @ x=${data.value}`
+    case 'words-to-expression':
+      return `${data.operation} ${data.n} ${data.lessThan ? 'less-than' : 'subtracted-from'}`
+    case 'identify-like-terms':
+      return `${data.operation} ${data.targetCoefficient}${data.targetLetter} → ${data.matchCoefficient}${data.targetLetter}`
+    case 'combine-like-terms':
+      return `${data.operation} ${data.first}x + ${data.second}x + ${data.constant}`
+    case 'distributive':
+      return `${data.operation} ${data.coefficient}(x + ${data.constant})`
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled algebra data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 const formatDisplay = (display: Problem['display']): string => {
   switch (display.kind) {
     case 'inline':
-      return `inline "${display.text}"${display.decimal ? ` [${formatDecimalData(display.decimal)}]` : ''}`
+      return (
+        `inline "${display.text}"` +
+        (display.decimal ? ` [${formatDecimalData(display.decimal)}]` : '') +
+        (display.algebra ? ` [${formatAlgebraData(display.algebra)}]` : '')
+      )
     case 'column':
       return `column ${display.operands.join(` ${display.operator} `)}`
     case 'decimal-column':
@@ -262,6 +288,7 @@ const formatDisplay = (display: Problem['display']): string => {
     case 'story':
       if (display.percent) return `story [${formatPercentData(display.percent)}] "${display.text}"`
       if (display.ratio) return `story [${formatRatioData(display.ratio)}] "${display.text}"`
+      if (display.algebra) return `story [${formatAlgebraData(display.algebra)}] "${display.text}"`
       return `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
     case 'math':
       return (

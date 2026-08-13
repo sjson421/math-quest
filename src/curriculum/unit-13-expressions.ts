@@ -15,6 +15,17 @@ import { band, defineSkill, type BuildContext, type Ladder } from './engine'
 
 const VARIABLE = 'x'
 
+/**
+ * A term as it is written, not as it is stored.
+ *
+ * A coefficient of one is not shown — `x`, never `1x`. Shared rather than
+ * inlined per generator because this is the unit that teaches the notation:
+ * one skill writing `1x` while the next writes `x` teaches that they are
+ * different terms, which is exactly the confusion 13.4 and 13.5 are for.
+ */
+const term = (coefficient: number, letter: string = VARIABLE): string =>
+  coefficient === 1 ? letter : `${coefficient}${letter}`
+
 const VALUE_BAND: Ladder = {
   1: [1, 4],
   2: [2, 6],
@@ -40,14 +51,13 @@ const variableMeaning = defineSkill({
     const [valueMin, valueMax] = band(context.difficulty, VALUE_BAND)
     const coeff = context.rng.int(coeffMin, coeffMax)
     const value = context.rng.int(valueMin, valueMax)
-    const term = coeff === 1 ? VARIABLE : `${coeff}${VARIABLE}`
     const answer = coeff * value
 
     return {
       prompt: `If x = ${value}, what does this expression equal?`,
       display: {
         kind: 'inline',
-        text: term,
+        text: term(coeff),
         algebra: { operation: 'substitute-term', coefficient: coeff, value },
       },
       answer: intAnswer(answer),
@@ -77,17 +87,25 @@ const evaluateExpression = defineSkill({
     const [constMin, constMax] = band(context.difficulty, CONSTANT_BAND)
     const [valueMin, valueMax] = band(context.difficulty, VALUE_BAND)
     const coeff = context.rng.int(coeffMin, coeffMax)
-    const constant = context.rng.int(constMin, constMax)
     const value = context.rng.int(valueMin, valueMax)
     const adds = context.rng.bool()
-    const answer = adds ? coeff * value + constant : coeff * value - constant
-    const term = `${coeff}${VARIABLE} ${adds ? '+' : '−'} ${constant}`
+    const substituted = coeff * value
+    // A subtraction has to land at or above zero. The keypad this answers on
+    // shows no sign key unless the problem declares `allowNegative`, so a
+    // negative answer here is one the learner cannot type at all — and 13.2 is
+    // about substituting, not about signs. Negative results are 13.7's subject.
+    // Drawn against the substituted value rather than clamped after the fact,
+    // so the constant stays uniform over whatever range is left.
+    const constant = adds
+      ? context.rng.int(constMin, constMax)
+      : context.rng.int(Math.min(constMin, substituted), Math.min(constMax, substituted))
+    const answer = adds ? substituted + constant : substituted - constant
 
     return {
       prompt: `If x = ${value}, what is the value of this expression?`,
       display: {
         kind: 'inline',
-        text: term,
+        text: `${term(coeff)} ${adds ? '+' : '−'} ${constant}`,
         algebra: { operation: 'substitute-expression', coefficient: coeff, constant, adds, value },
       },
       answer: intAnswer(answer),
@@ -122,8 +140,13 @@ const wordsToExpression = defineSkill({
     const added = lessThan ? `x+${n}` : `${n}+x`
 
     return {
-      prompt: `Write the expression for "${phrase}".`,
-      display: { kind: 'inline', text: String(n), algebra: { operation: 'words-to-expression', n, lessThan } },
+      // The phrase is the problem, so it goes in the display, and the prompt
+      // says what to do with it. A `story` rather than an `inline`: inline
+      // frames its text as `text = answer`, which would put `6 = x-6` on
+      // screen — false as an equation, and it leads with the operand this
+      // skill's whole difficulty is about not leading with.
+      prompt: 'Write the expression.',
+      display: { kind: 'story', text: phrase, algebra: { operation: 'words-to-expression', n, lessThan } },
       answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'expanded' },
       inputMode: 'expression',
       expression: { variable: VARIABLE },
@@ -160,9 +183,9 @@ const identifyLikeTerms = defineSkill({
     const otherCoeff = context.rng.int(coeffMin, coeffMax)
     const constant = context.rng.int(constMin, constMax)
 
-    const target = `${targetCoeff}${targetLetter}`
-    const match = `${matchCoeff}${targetLetter}`
-    const otherTerm = `${otherCoeff}${otherLetter}`
+    const target = term(targetCoeff, targetLetter)
+    const match = term(matchCoeff, targetLetter)
+    const otherTerm = term(otherCoeff, otherLetter)
     const constantTerm = `${constant}`
 
     return {
@@ -209,7 +232,7 @@ const combineLikeTerms = defineSkill({
       prompt: 'Combine the like terms.',
       display: {
         kind: 'inline',
-        text: `${first}${VARIABLE} + ${second}${VARIABLE} + ${constant}`,
+        text: `${term(first)} + ${term(second)} + ${constant}`,
         algebra: { operation: 'combine-like-terms', first, second, constant },
       },
       answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'expanded' },
@@ -229,8 +252,8 @@ const combineLikeTerms = defineSkill({
       ],
       hint: 'Add the coefficients of the matching x terms and keep the constant separate.',
       solution: [
-        { text: 'Add the two x terms.', detail: `${first}x + ${second}x = ${combined}x` },
-        { text: 'Keep the constant separate.', detail: `${combined}x + ${constant}` },
+        { text: 'Add the two x terms.', detail: `${term(first)} + ${term(second)} = ${term(combined)}` },
+        { text: 'Keep the constant separate.', detail: `${term(combined)} + ${constant}` },
       ],
     }
   },
@@ -282,7 +305,7 @@ const distributive = defineSkill({
       ],
       hint: 'Multiply the number outside by both terms inside.',
       solution: [
-        { text: 'Multiply by the first term.', detail: `${coeff} × x = ${coeff}x` },
+        { text: 'Multiply by the first term.', detail: `${coeff} × x = ${term(coeff)}` },
         { text: 'Multiply by the second term.', detail: `${coeff} × ${constant} = ${product}` },
       ],
     }

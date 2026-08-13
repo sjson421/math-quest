@@ -1047,7 +1047,7 @@ function recompute(problem: Problem): number | string {
     }
   }
 
-  if (display.kind === 'inline' && display.algebra) {
+  if ((display.kind === 'inline' || display.kind === 'story') && display.algebra) {
     const data: AlgebraData = display.algebra
     switch (data.operation) {
       case 'substitute-term':
@@ -1057,7 +1057,14 @@ function recompute(problem: Problem): number | string {
       case 'words-to-expression':
         return data.lessThan ? `x-${data.n}` : `${data.n}-x`
       case 'identify-like-terms':
-        return choiceIdFor(problem, `${data.matchCoefficient}${data.targetLetter}`)
+        // A coefficient of one is not written, so the matching choice is `y`,
+        // not `1y`. Rebuilt here rather than imported, so the verifier still
+        // derives the id from the source operands rather than trusting the
+        // generator's own formatting.
+        return choiceIdFor(
+          problem,
+          data.matchCoefficient === 1 ? data.targetLetter : `${data.matchCoefficient}${data.targetLetter}`,
+        )
       case 'combine-like-terms':
         return `${data.first + data.second}x+${data.constant}`
       case 'distributive':
@@ -1294,7 +1301,7 @@ function sourceMagnitude(problem: Problem): number {
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
-  if (problem.display.kind === 'inline' && problem.display.algebra) {
+  if ((problem.display.kind === 'inline' || problem.display.kind === 'story') && problem.display.algebra) {
     const data: AlgebraData = problem.display.algebra
     const values: number[] = (() => {
       switch (data.operation) {
