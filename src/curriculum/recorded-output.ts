@@ -11,6 +11,7 @@ import type {
   MathNotation,
   PercentData,
   Problem,
+  RatioData,
   SkillGenerator,
 } from '../lib/types'
 
@@ -178,6 +179,36 @@ const formatPercentData = (data: PercentData): string => {
   }
 }
 
+const formatRatioData = (data: RatioData): string => {
+  switch (data.operation) {
+    case 'write-ratio':
+      return `${data.operation} ${data.first} ${data.firstLabel} to ${data.second} ${data.secondLabel}`
+    case 'simplify-ratio':
+      return `${data.operation} ${data.first}:${data.second}`
+    case 'unit-rate':
+      return (
+        `${data.operation} ${data.firstCount} for ${data.firstCents} cents vs ` +
+        `${data.secondCount} for ${data.secondCents} cents`
+      )
+    case 'solve-proportion':
+      return (
+        `${data.operation} ${data.leftNumerator}/${data.leftDenominator} = ` +
+        `${data.rightNumerator}/${data.rightDenominator} missing-${data.missing}`
+      )
+    case 'scale-drawing':
+      return `${data.operation} 1:${data.scale} ${data.direction} given-${data.given}`
+    case 'unit-conversion':
+      return (
+        `${data.operation} 1 ${data.largeSingular}:${data.factor} ${data.smallPlural} ` +
+        `${data.direction} given-${data.given}`
+      )
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled ratio data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 const formatDisplay = (display: Problem['display']): string => {
   switch (display.kind) {
     case 'inline':
@@ -187,13 +218,14 @@ const formatDisplay = (display: Problem['display']): string => {
     case 'decimal-column':
       return `decimal-column [${formatDecimalData(display.decimal)}]`
     case 'story':
-      return display.percent
-        ? `story [${formatPercentData(display.percent)}] "${display.text}"`
-        : `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
+      if (display.percent) return `story [${formatPercentData(display.percent)}] "${display.text}"`
+      if (display.ratio) return `story [${formatRatioData(display.ratio)}] "${display.text}"`
+      return `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
     case 'math':
       return (
         `math "${display.label}" ${formatNotation(display.notation)}` +
-        (display.fraction ? ` [${formatFractionData(display.fraction)}]` : '')
+        (display.fraction ? ` [${formatFractionData(display.fraction)}]` : '') +
+        (display.ratio ? ` [${formatRatioData(display.ratio)}]` : '')
       )
     case 'diagram':
       return (

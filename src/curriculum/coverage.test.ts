@@ -70,7 +70,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(104)
+    expect(documentedAsBuilt).toHaveLength(110)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -221,11 +221,17 @@ describe('the skills that are built', () => {
       'percent-change',
       'discount-tax-tip',
       'simple-interest',
+      'write-ratios',
+      'simplify-ratios',
+      'unit-rate',
+      'solve-proportions',
+      'scale-drawings',
+      'unit-conversion',
     ])
     expect(stageIds.filter((id) => skillState(id) === 'implemented')).toEqual(
       stageIds.filter((id) => generators.has(id)),
     )
-    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(7)
+    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(1)
     const unit8 = stage?.units.find((unit) => unit.id === 'unit-8')
     const unit8Ids = unit8?.skills.map((skill) => skill.id) ?? []
     expect(unit8Ids.filter((id) => skillState(id) === 'implemented')).toEqual([
@@ -275,7 +281,18 @@ describe('the skills that are built', () => {
       'simple-interest',
     ])
     expect(unit10Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(104)
+    const unit11 = stage?.units.find((unit) => unit.id === 'unit-11')
+    const unit11Ids = unit11?.skills.map((skill) => skill.id) ?? []
+    expect(unit11Ids.filter((id) => skillState(id) === 'implemented')).toEqual([
+      'write-ratios',
+      'simplify-ratios',
+      'unit-rate',
+      'solve-proportions',
+      'scale-drawings',
+      'unit-conversion',
+    ])
+    expect(unit11Ids.filter((id) => skillState(id) === 'planned')).toEqual(['ratio-words'])
+    expect(implementedSkillIds).toHaveLength(110)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -327,9 +344,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 97 skills out of the skill tree entirely', () => {
+  it('leaves the other 91 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(104)
+    expect(offered).toHaveLength(110)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -352,7 +369,7 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['compare-diff-den', 'unit-7', 'stage-d'])
   })
 
-  it('shows the eleven built units, and no stage or unit that has nothing to play', () => {
+  it('shows the twelve built units, and no stage or unit that has nothing to play', () => {
     expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b', 'stage-c', 'stage-d'])
     expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
       'unit-0',
@@ -366,6 +383,7 @@ describe('what the learner is offered', () => {
       'unit-8',
       'unit-9',
       'unit-10',
+      'unit-11',
     ])
   })
 })

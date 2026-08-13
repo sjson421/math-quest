@@ -182,6 +182,48 @@ export type PercentData =
   | { operation: 'discount' | 'tax' | 'tip'; baseCents: number; percent: number }
   | { operation: 'simple-interest'; principalCents: number; percent: number; years: number }
 
+/** The source quantities behind Unit 11's ratio and proportion displays. */
+export type RatioData =
+  | {
+      operation: 'write-ratio'
+      firstLabel: string
+      secondLabel: string
+      first: number
+      second: number
+    }
+  | { operation: 'simplify-ratio'; first: number; second: number }
+  | {
+      operation: 'unit-rate'
+      firstCount: number
+      firstCents: number
+      secondCount: number
+      secondCents: number
+    }
+  | {
+      operation: 'solve-proportion'
+      leftNumerator: number
+      leftDenominator: number
+      rightNumerator: number
+      rightDenominator: number
+      missing: 'leftNumerator' | 'leftDenominator' | 'rightNumerator' | 'rightDenominator'
+    }
+  | {
+      operation: 'scale-drawing'
+      scale: number
+      given: number
+      direction: 'drawing-to-actual' | 'actual-to-drawing'
+    }
+  | {
+      operation: 'unit-conversion'
+      factor: number
+      given: number
+      direction: 'large-to-small' | 'small-to-large'
+      largeSingular: string
+      largePlural: string
+      smallSingular: string
+      smallPlural: string
+    }
+
 /**
  * Structured notation for the closed expression surface used by Stages D–G.
  *
@@ -309,16 +351,20 @@ export type Display =
    * relationship instead.
    */
   | ({ kind: 'story'; text: string } & (
-      | { operands: number[]; operator: Operator; percent?: never }
-      | { percent: PercentData; operands?: never; operator?: never }
+      | { operands: number[]; operator: Operator; percent?: never; ratio?: never }
+      | { percent: PercentData; operands?: never; operator?: never; ratio?: never }
+      | { ratio: RatioData; operands?: never; operator?: never; percent?: never }
     ))
   /** Structured notation with the one complete name assistive technology reads. */
-  | {
+  | ({
       kind: 'math'
       notation: MathNotation
       label: string
-      fraction?: FractionData
-    }
+    } & (
+      | { fraction: FractionData; ratio?: never }
+      | { ratio: RatioData; fraction?: never }
+      | { fraction?: never; ratio?: never }
+    ))
   /** A shaded equal-part shape whose visible fraction is carried as data. */
   | { kind: 'diagram'; diagram: ShapeDiagram }
 

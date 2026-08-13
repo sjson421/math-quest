@@ -14,6 +14,7 @@ import type {
   MathNotation,
   PercentData,
   Problem,
+  RatioData,
   SkillGenerator,
   WholeNumberData,
 } from '../lib/types'
@@ -643,6 +644,117 @@ function expectedFractionDisplay(data: FractionData): {
   }
 }
 
+function expectedRatioDisplay(data: RatioData): {
+  text?: string
+  notation?: MathNotation
+  label?: string
+  answer: number | string
+  values: number[]
+} {
+  switch (data.operation) {
+    case 'write-ratio':
+      return {
+        text:
+          `${data.first} ${data.firstLabel} and ${data.second} ${data.secondLabel}; ` +
+          `compare ${data.firstLabel} to ${data.secondLabel}.`,
+        answer: data.first / data.second,
+        values: [data.first, data.second],
+      }
+    case 'simplify-ratio':
+      return {
+        notation: {
+          kind: 'row',
+          children: [notationText(String(data.first)), notationText(':'), notationText(String(data.second))],
+        },
+        label: `${data.first} to ${data.second}`,
+        answer: data.first / data.second,
+        values: [data.first, data.second],
+      }
+    case 'unit-rate': {
+      const firstRate = data.firstCents / data.firstCount
+      const secondRate = data.secondCents / data.secondCount
+      return {
+        text:
+          `Offer A: ${data.firstCount} items for ${dollars(data.firstCents)}. ` +
+          `Offer B: ${data.secondCount} items for ${dollars(data.secondCents)}.`,
+        answer: firstRate < secondRate ? 'Offer A' : 'Offer B',
+        values: [data.firstCount, data.firstCents, data.secondCount, data.secondCents],
+      }
+    }
+    case 'solve-proportion': {
+      const answer = (() => {
+        switch (data.missing) {
+          case 'leftNumerator':
+            return data.rightNumerator * data.leftDenominator / data.rightDenominator
+          case 'leftDenominator':
+            return data.leftNumerator * data.rightDenominator / data.rightNumerator
+          case 'rightNumerator':
+            return data.leftNumerator * data.rightDenominator / data.leftDenominator
+          case 'rightDenominator':
+            return data.rightNumerator * data.leftDenominator / data.leftNumerator
+          default: {
+            const unhandled: never = data.missing
+            throw new Error(`Unknown missing proportion term: ${JSON.stringify(unhandled)}`)
+          }
+        }
+      })()
+      if (!Number.isInteger(answer) || answer <= 0) {
+        throw new Error(`proportion does not derive a positive whole-number answer: ${answer}`)
+      }
+      const shown = (field: RatioData & { operation: 'solve-proportion' }, key: typeof data.missing) =>
+        field.missing === key ? '?' : String(field[key])
+      const leftNumerator = shown(data, 'leftNumerator')
+      const leftDenominator = shown(data, 'leftDenominator')
+      const rightNumerator = shown(data, 'rightNumerator')
+      const rightDenominator = shown(data, 'rightDenominator')
+      return {
+        notation: {
+          kind: 'row',
+          children: [
+            notationFraction(leftNumerator, leftDenominator),
+            notationText('='),
+            notationFraction(rightNumerator, rightDenominator),
+          ],
+        },
+        label: (
+          `${leftNumerator} over ${leftDenominator} equals ` +
+          `${rightNumerator} over ${rightDenominator}`
+        ).replace('?', 'blank'),
+        answer,
+        values: [data.leftNumerator, data.leftDenominator, data.rightNumerator, data.rightDenominator],
+      }
+    }
+    case 'scale-drawing': {
+      const drawing = data.direction === 'drawing-to-actual' ? data.given : data.given / data.scale
+      const actual = data.direction === 'drawing-to-actual' ? data.given * data.scale : data.given
+      return {
+        text:
+          `Scale: 1 cm on the drawing represents ${data.scale} m. ` +
+          `${data.direction === 'drawing-to-actual' ? `The drawing length is ${drawing} cm.` : `The actual length is ${actual} m.`}`,
+        answer: data.direction === 'drawing-to-actual' ? actual : drawing,
+        values: [data.scale, data.given],
+      }
+    }
+    case 'unit-conversion': {
+      const large = data.direction === 'large-to-small' ? data.given : data.given / data.factor
+      const small = data.direction === 'large-to-small' ? data.given * data.factor : data.given
+      const relation = `1 ${data.largeSingular} equals ${data.factor} ${data.smallPlural}.`
+      const amount = data.direction === 'large-to-small'
+        ? `${large} ${large === 1 ? data.largeSingular : data.largePlural}`
+        : `${small} ${small === 1 ? data.smallSingular : data.smallPlural}`
+      return {
+        text: `${relation} Convert ${amount}.`,
+        answer: data.direction === 'large-to-small' ? small : large,
+        values: [data.factor, data.given],
+      }
+    }
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unknown ratio operation: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 function recompute(problem: Problem): number | string {
   const { display } = problem
 
@@ -717,6 +829,14 @@ function recompute(problem: Problem): number | string {
   }
 
   if (display.kind === 'math') {
+    if (display.ratio) {
+      const expected = expectedRatioDisplay(display.ratio)
+      if (JSON.stringify(display.notation) !== JSON.stringify(expected.notation) || display.label !== expected.label) {
+        throw new Error(`${problem.skillId}: visible ratio notation disagrees with its data`)
+      }
+      return typeof expected.answer === 'string' ? choiceIdFor(problem, expected.answer) : expected.answer
+    }
+
     if (!display.fraction) {
       throw new Error(`${problem.skillId}: a math display needs operation-specific data for independent verification`)
     }
@@ -753,6 +873,14 @@ function recompute(problem: Problem): number | string {
       throw new Error(`${problem.skillId}: visible percent text disagrees with its data`)
     }
     return expected.answer
+  }
+
+  if (display.kind === 'story' && display.ratio) {
+    const expected = expectedRatioDisplay(display.ratio)
+    if (display.text !== expected.text) {
+      throw new Error(`${problem.skillId}: visible ratio text disagrees with its data`)
+    }
+    return typeof expected.answer === 'string' ? choiceIdFor(problem, expected.answer) : expected.answer
   }
 
   // A story carries its quantities precisely so this stays possible. Reading
@@ -898,12 +1026,19 @@ function sourceMagnitude(problem: Problem): number {
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
+  if (problem.display.kind === 'math' && problem.display.ratio) {
+    const values = expectedRatioDisplay(problem.display.ratio).values
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
+
   if (problem.display.kind === 'diagram') return problem.display.diagram.parts
 
   if (problem.display.kind === 'story') {
     const values = problem.display.percent
       ? expectedPercent(problem.display.percent).values
-      : problem.display.operands
+      : problem.display.ratio
+        ? expectedRatioDisplay(problem.display.ratio).values
+        : problem.display.operands
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
@@ -1019,6 +1154,98 @@ describe('percent story answer verification', () => {
     }
 
     expect(answerMismatch(problem)).toBeUndefined()
+  })
+})
+
+describe('ratio and proportion answer verification', () => {
+  const writeRatio = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-write-ratio',
+    prompt: 'Write the ratio.',
+    display: {
+      kind: 'story',
+      text: '3 red tiles and 5 blue tiles; compare red tiles to blue tiles.',
+      ratio: {
+        operation: 'write-ratio',
+        firstLabel: 'red tiles',
+        secondLabel: 'blue tiles',
+        first: 3,
+        second: 5,
+      },
+    },
+    answer: { kind: 'exact', n: 3, d: 5, requireFraction: true },
+    inputMode: 'keypad',
+    keypad: { allowFraction: true },
+    hint: 'Keep the requested comparison order.',
+    solution: [{ text: 'Write the first count over the second.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  const proportion = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-proportion',
+    prompt: 'Find the missing value.',
+    display: {
+      kind: 'math',
+      notation: {
+        kind: 'row',
+        children: [notationFraction('3', '4'), notationText('='), notationFraction('?', '20')],
+      },
+      label: '3 over 4 equals blank over 20',
+      ratio: {
+        operation: 'solve-proportion',
+        leftNumerator: 3,
+        leftDenominator: 4,
+        rightNumerator: 15,
+        rightDenominator: 20,
+        missing: 'rightNumerator',
+      },
+    },
+    answer: intAnswer(15),
+    inputMode: 'keypad',
+    hint: 'Cross-multiply, then divide.',
+    solution: [{ text: 'Cross-multiply the known diagonal.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('recomputes prose and notation answers from structured ratio data', () => {
+    expect(answerMismatch(writeRatio())).toBeUndefined()
+    expect(answerMismatch(proportion())).toBeUndefined()
+  })
+
+  it('rejects ratio prose and notation that disagree with their data', () => {
+    const prose = writeRatio()
+    if (prose.display.kind !== 'story') throw new Error('expected story display')
+    prose.display.text = '5 red tiles and 3 blue tiles; compare red tiles to blue tiles.'
+
+    const notation = proportion()
+    if (notation.display.kind !== 'math') throw new Error('expected math display')
+    notation.display.notation = {
+      kind: 'row',
+      children: [notationFraction('3', '4'), notationText('='), notationFraction('?', '16')],
+    }
+
+    expect(() => answerMismatch(prose)).toThrow('visible ratio text disagrees with its data')
+    expect(() => answerMismatch(notation)).toThrow('visible ratio notation disagrees with its data')
+  })
+
+  it('names a stated ratio answer that disagrees with the displayed sources', () => {
+    expect(answerMismatch(writeRatio({ answer: { kind: 'exact', n: 5, d: 3 } }))).toContain(
+      'synthetic-write-ratio: stated 1.6666666666666667, derived 0.6',
+    )
+    expect(answerMismatch(proportion({ answer: intAnswer(12) }))).toContain(
+      'synthetic-proportion: stated 12, derived 15',
+    )
+  })
+
+  it('does not trust a hidden proportion term that agrees with a wrong stated answer', () => {
+    const problem = proportion({ answer: intAnswer(12) })
+    if (problem.display.kind !== 'math' || problem.display.ratio?.operation !== 'solve-proportion') {
+      throw new Error('expected proportion display')
+    }
+    problem.display.ratio.rightNumerator = 12
+
+    expect(answerMismatch(problem)).toContain('synthetic-proportion: stated 12, derived 15')
   })
 })
 

@@ -150,7 +150,10 @@ function MathView({ display, entry, entryMode }: { display: Of<'math'> } & Entry
     )
   }
 
-  if (display.fraction?.operation === 'scale-missing') {
+  if (
+    display.fraction?.operation === 'scale-missing' ||
+    display.ratio?.operation === 'solve-proportion'
+  ) {
     return (
       <div className="flex flex-col items-center justify-center gap-3 max-w-full">
         <MathNotation notation={display.notation} label={display.label} />

@@ -9,9 +9,9 @@
  * gates the whole stage, and later units keep reaching back for the others — `name-parts`
  * and `compare-decimals` need choice input, `fractions-numberline` needs the
  * number line, `fraction-to-decimal` and `percent-to-fraction` need fraction
- * input, and `scale-drawings` needs a diagram. Every skill here stays `planned`
- * until the three unbuilt ones land, which is the accurate report rather than a
- * defect.
+ * input, and `fraction-of-shape` and `equivalent-visual` need diagrams. A
+ * stage-wide requirement records every capability used anywhere in the stage;
+ * each skill still becomes playable only when its own generator lands.
  *
  * Units run in a straight line, so `percent-to-decimal` reaches decimals through
  * Unit 10's dependency on Unit 9 rather than by a second edge.

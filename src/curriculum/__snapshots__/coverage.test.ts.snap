@@ -234,11 +234,20 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "round-to-100": [
     "round-to-10",
   ],
+  "scale-drawings": [
+    "solve-proportions",
+  ],
   "simple-interest": [
     "discount-tax-tip",
   ],
   "simplify-fractions": [
     "equivalent-multiply",
+  ],
+  "simplify-ratios": [
+    "write-ratios",
+  ],
+  "solve-proportions": [
+    "unit-rate",
   ],
   "sub-2digit-borrow": [
     "sub-2digit-noborrow",
@@ -309,8 +318,17 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "two-operations": [
     "div-words",
   ],
+  "unit-conversion": [
+    "scale-drawings",
+  ],
+  "unit-rate": [
+    "simplify-ratios",
+  ],
   "with-parentheses": [
     "two-operations",
+  ],
+  "write-ratios": [
+    "simple-interest",
   ],
 }
 `;

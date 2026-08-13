@@ -1,0 +1,1588 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: scale-drawings > matches the wording recorded when the skill landed 1`] = `
+"--- scale-drawings · seed 1 · difficulty 1
+prompt   Find the drawing length in centimeters.
+display  story [scale-drawing 1:5 actual-to-drawing given-10] "Scale: 1 cm on the drawing represents 5 m. The actual length is 10 m."
+answer   exact 2/1
+input    keypad
+hint     Divide by the scale factor.
+step 1   Divide by the scale factor.   [10 ÷ 5 = 2]
+miss     used-opposite-scale-direction = 50   Drawing length is smaller, so divide.
+
+--- scale-drawings · seed 12345 · difficulty 1
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:6 drawing-to-actual given-24] "Scale: 1 cm on the drawing represents 6 m. The drawing length is 24 cm."
+answer   exact 144/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [24 × 6 = 144]
+miss     used-opposite-scale-direction = 4   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 67890 · difficulty 1
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:3 drawing-to-actual given-21] "Scale: 1 cm on the drawing represents 3 m. The drawing length is 21 cm."
+answer   exact 63/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [21 × 3 = 63]
+miss     used-opposite-scale-direction = 7   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 424242 · difficulty 1
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:2 drawing-to-actual given-8] "Scale: 1 cm on the drawing represents 2 m. The drawing length is 8 cm."
+answer   exact 16/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [8 × 2 = 16]
+miss     used-opposite-scale-direction = 4   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 987654321 · difficulty 1
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:6 drawing-to-actual given-18] "Scale: 1 cm on the drawing represents 6 m. The drawing length is 18 cm."
+answer   exact 108/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [18 × 6 = 108]
+miss     used-opposite-scale-direction = 3   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 1 · difficulty 2
+prompt   Find the drawing length in centimeters.
+display  story [scale-drawing 1:7 actual-to-drawing given-21] "Scale: 1 cm on the drawing represents 7 m. The actual length is 21 m."
+answer   exact 3/1
+input    keypad
+hint     Divide by the scale factor.
+step 1   Divide by the scale factor.   [21 ÷ 7 = 3]
+miss     used-opposite-scale-direction = 147   Drawing length is smaller, so divide.
+
+--- scale-drawings · seed 12345 · difficulty 2
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:9 drawing-to-actual given-54] "Scale: 1 cm on the drawing represents 9 m. The drawing length is 54 cm."
+answer   exact 486/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [54 × 9 = 486]
+miss     used-opposite-scale-direction = 6   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 67890 · difficulty 2
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:5 drawing-to-actual given-50] "Scale: 1 cm on the drawing represents 5 m. The drawing length is 50 cm."
+answer   exact 250/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [50 × 5 = 250]
+miss     used-opposite-scale-direction = 10   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 424242 · difficulty 2
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:3 drawing-to-actual given-18] "Scale: 1 cm on the drawing represents 3 m. The drawing length is 18 cm."
+answer   exact 54/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [18 × 3 = 54]
+miss     used-opposite-scale-direction = 6   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 987654321 · difficulty 2
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:9 drawing-to-actual given-36] "Scale: 1 cm on the drawing represents 9 m. The drawing length is 36 cm."
+answer   exact 324/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [36 × 9 = 324]
+miss     used-opposite-scale-direction = 4   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 1 · difficulty 3
+prompt   Find the drawing length in centimeters.
+display  story [scale-drawing 1:8 actual-to-drawing given-32] "Scale: 1 cm on the drawing represents 8 m. The actual length is 32 m."
+answer   exact 4/1
+input    keypad
+hint     Divide by the scale factor.
+step 1   Divide by the scale factor.   [32 ÷ 8 = 4]
+miss     used-opposite-scale-direction = 256   Drawing length is smaller, so divide.
+
+--- scale-drawings · seed 12345 · difficulty 3
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:12 drawing-to-actual given-108] "Scale: 1 cm on the drawing represents 12 m. The drawing length is 108 cm."
+answer   exact 1296/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [108 × 12 = 1296]
+miss     used-opposite-scale-direction = 9   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 67890 · difficulty 3
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:6 drawing-to-actual given-84] "Scale: 1 cm on the drawing represents 6 m. The drawing length is 84 cm."
+answer   exact 504/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [84 × 6 = 504]
+miss     used-opposite-scale-direction = 14   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 424242 · difficulty 3
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:3 drawing-to-actual given-24] "Scale: 1 cm on the drawing represents 3 m. The drawing length is 24 cm."
+answer   exact 72/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [24 × 3 = 72]
+miss     used-opposite-scale-direction = 8   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 987654321 · difficulty 3
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:12 drawing-to-actual given-72] "Scale: 1 cm on the drawing represents 12 m. The drawing length is 72 cm."
+answer   exact 864/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [72 × 12 = 864]
+miss     used-opposite-scale-direction = 6   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 1 · difficulty 4
+prompt   Find the drawing length in centimeters.
+display  story [scale-drawing 1:10 actual-to-drawing given-50] "Scale: 1 cm on the drawing represents 10 m. The actual length is 50 m."
+answer   exact 5/1
+input    keypad
+hint     Divide by the scale factor.
+step 1   Divide by the scale factor.   [50 ÷ 10 = 5]
+miss     used-opposite-scale-direction = 500   Drawing length is smaller, so divide.
+
+--- scale-drawings · seed 12345 · difficulty 4
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:15 drawing-to-actual given-165] "Scale: 1 cm on the drawing represents 15 m. The drawing length is 165 cm."
+answer   exact 2475/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [165 × 15 = 2475]
+miss     used-opposite-scale-direction = 11   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 67890 · difficulty 4
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:7 drawing-to-actual given-119] "Scale: 1 cm on the drawing represents 7 m. The drawing length is 119 cm."
+answer   exact 833/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [119 × 7 = 833]
+miss     used-opposite-scale-direction = 17   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 424242 · difficulty 4
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:3 drawing-to-actual given-27] "Scale: 1 cm on the drawing represents 3 m. The drawing length is 27 cm."
+answer   exact 81/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [27 × 3 = 81]
+miss     used-opposite-scale-direction = 9   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 987654321 · difficulty 4
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:15 drawing-to-actual given-105] "Scale: 1 cm on the drawing represents 15 m. The drawing length is 105 cm."
+answer   exact 1575/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [105 × 15 = 1575]
+miss     used-opposite-scale-direction = 7   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 1 · difficulty 5
+prompt   Find the drawing length in centimeters.
+display  story [scale-drawing 1:12 actual-to-drawing given-72] "Scale: 1 cm on the drawing represents 12 m. The actual length is 72 m."
+answer   exact 6/1
+input    keypad
+hint     Divide by the scale factor.
+step 1   Divide by the scale factor.   [72 ÷ 12 = 6]
+miss     used-opposite-scale-direction = 864   Drawing length is smaller, so divide.
+
+--- scale-drawings · seed 12345 · difficulty 5
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:18 drawing-to-actual given-234] "Scale: 1 cm on the drawing represents 18 m. The drawing length is 234 cm."
+answer   exact 4212/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [234 × 18 = 4212]
+miss     used-opposite-scale-direction = 13   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 67890 · difficulty 5
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:8 drawing-to-actual given-160] "Scale: 1 cm on the drawing represents 8 m. The drawing length is 160 cm."
+answer   exact 1280/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [160 × 8 = 1280]
+miss     used-opposite-scale-direction = 20   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 424242 · difficulty 5
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:4 drawing-to-actual given-44] "Scale: 1 cm on the drawing represents 4 m. The drawing length is 44 cm."
+answer   exact 176/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [44 × 4 = 176]
+miss     used-opposite-scale-direction = 11   Actual length is larger, so multiply.
+
+--- scale-drawings · seed 987654321 · difficulty 5
+prompt   Find the actual length in meters.
+display  story [scale-drawing 1:18 drawing-to-actual given-162] "Scale: 1 cm on the drawing represents 18 m. The drawing length is 162 cm."
+answer   exact 2916/1
+input    keypad
+hint     Multiply by the scale factor.
+step 1   Multiply by the scale factor.   [162 × 18 = 2916]
+miss     used-opposite-scale-direction = 9   Actual length is larger, so multiply."
+`;
+
+exports[`recorded output: simplify-ratios > matches the wording recorded when the skill landed 1`] = `
+"--- simplify-ratios · seed 1 · difficulty 1
+prompt   Write this ratio in lowest terms.
+display  math "16 to 20" row("16", ":", "20") [simplify-ratio 16:20]
+answer   exact 4/5 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 4]
+step 2   Divide both terms by that factor.   [16:20 = 4:5]
+step 3   Enter the simplified ratio as a fraction.   [4/5]
+miss     divided-first-term-only = 0.2   Divide both terms by 4, not only the first.
+miss     divided-second-term-only = 3.2   Divide both terms by 4, not only the second.
+
+--- simplify-ratios · seed 12345 · difficulty 1
+prompt   Write this ratio in lowest terms.
+display  math "15 to 12" row("15", ":", "12") [simplify-ratio 15:12]
+answer   exact 5/4 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 3]
+step 2   Divide both terms by that factor.   [15:12 = 5:4]
+step 3   Enter the simplified ratio as a fraction.   [5/4]
+miss     divided-first-term-only = 0.4166666666666667   Divide both terms by 3, not only the first.
+miss     divided-second-term-only = 3.75   Divide both terms by 3, not only the second.
+
+--- simplify-ratios · seed 67890 · difficulty 1
+prompt   Write this ratio in lowest terms.
+display  math "4 to 14" row("4", ":", "14") [simplify-ratio 4:14]
+answer   exact 2/7 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 2]
+step 2   Divide both terms by that factor.   [4:14 = 2:7]
+step 3   Enter the simplified ratio as a fraction.   [2/7]
+miss     divided-first-term-only = 0.14285714285714285   Divide both terms by 2, not only the first.
+miss     divided-second-term-only = 0.5714285714285714   Divide both terms by 2, not only the second.
+
+--- simplify-ratios · seed 424242 · difficulty 1
+prompt   Write this ratio in lowest terms.
+display  math "2 to 6" row("2", ":", "6") [simplify-ratio 2:6]
+answer   exact 1/3 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 2]
+step 2   Divide both terms by that factor.   [2:6 = 1:3]
+step 3   Enter the simplified ratio as a fraction.   [1/3]
+miss     divided-first-term-only = 0.16666666666666666   Divide both terms by 2, not only the first.
+miss     divided-second-term-only = 0.6666666666666666   Divide both terms by 2, not only the second.
+
+--- simplify-ratios · seed 987654321 · difficulty 1
+prompt   Write this ratio in lowest terms.
+display  math "10 to 4" row("10", ":", "4") [simplify-ratio 10:4]
+answer   exact 5/2 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 2]
+step 2   Divide both terms by that factor.   [10:4 = 5:2]
+step 3   Enter the simplified ratio as a fraction.   [5/2]
+miss     divided-first-term-only = 1.25   Divide both terms by 2, not only the first.
+miss     divided-second-term-only = 5   Divide both terms by 2, not only the second.
+
+--- simplify-ratios · seed 1 · difficulty 2
+prompt   Write this ratio in lowest terms.
+display  math "20 to 12" row("20", ":", "12") [simplify-ratio 20:12]
+answer   exact 5/3 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 4]
+step 2   Divide both terms by that factor.   [20:12 = 5:3]
+step 3   Enter the simplified ratio as a fraction.   [5/3]
+miss     divided-first-term-only = 0.4166666666666667   Divide both terms by 4, not only the first.
+miss     divided-second-term-only = 6.666666666666667   Divide both terms by 4, not only the second.
+
+--- simplify-ratios · seed 12345 · difficulty 2
+prompt   Write this ratio in lowest terms.
+display  math "21 to 15" row("21", ":", "15") [simplify-ratio 21:15]
+answer   exact 7/5 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 3]
+step 2   Divide both terms by that factor.   [21:15 = 7:5]
+step 3   Enter the simplified ratio as a fraction.   [7/5]
+miss     divided-first-term-only = 0.4666666666666667   Divide both terms by 3, not only the first.
+miss     divided-second-term-only = 4.2   Divide both terms by 3, not only the second.
+
+--- simplify-ratios · seed 67890 · difficulty 2
+prompt   Write this ratio in lowest terms.
+display  math "12 to 21" row("12", ":", "21") [simplify-ratio 12:21]
+answer   exact 4/7 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 3]
+step 2   Divide both terms by that factor.   [12:21 = 4:7]
+step 3   Enter the simplified ratio as a fraction.   [4/7]
+miss     divided-first-term-only = 0.19047619047619047   Divide both terms by 3, not only the first.
+miss     divided-second-term-only = 1.7142857142857142   Divide both terms by 3, not only the second.
+
+--- simplify-ratios · seed 424242 · difficulty 2
+prompt   Write this ratio in lowest terms.
+display  math "8 to 20" row("8", ":", "20") [simplify-ratio 8:20]
+answer   exact 2/5 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 4]
+step 2   Divide both terms by that factor.   [8:20 = 2:5]
+step 3   Enter the simplified ratio as a fraction.   [2/5]
+miss     divided-first-term-only = 0.1   Divide both terms by 4, not only the first.
+miss     divided-second-term-only = 1.6   Divide both terms by 4, not only the second.
+
+--- simplify-ratios · seed 987654321 · difficulty 2
+prompt   Write this ratio in lowest terms.
+display  math "14 to 8" row("14", ":", "8") [simplify-ratio 14:8]
+answer   exact 7/4 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 2]
+step 2   Divide both terms by that factor.   [14:8 = 7:4]
+step 3   Enter the simplified ratio as a fraction.   [7/4]
+miss     divided-first-term-only = 0.875   Divide both terms by 2, not only the first.
+miss     divided-second-term-only = 3.5   Divide both terms by 2, not only the second.
+
+--- simplify-ratios · seed 1 · difficulty 3
+prompt   Write this ratio in lowest terms.
+display  math "28 to 16" row("28", ":", "16") [simplify-ratio 28:16]
+answer   exact 7/4 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 4]
+step 2   Divide both terms by that factor.   [28:16 = 7:4]
+step 3   Enter the simplified ratio as a fraction.   [7/4]
+miss     divided-first-term-only = 0.4375   Divide both terms by 4, not only the first.
+miss     divided-second-term-only = 7   Divide both terms by 4, not only the second.
+
+--- simplify-ratios · seed 12345 · difficulty 3
+prompt   Write this ratio in lowest terms.
+display  math "54 to 48" row("54", ":", "48") [simplify-ratio 54:48]
+answer   exact 9/8 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 6]
+step 2   Divide both terms by that factor.   [54:48 = 9:8]
+step 3   Enter the simplified ratio as a fraction.   [9/8]
+miss     divided-first-term-only = 0.1875   Divide both terms by 6, not only the first.
+miss     divided-second-term-only = 6.75   Divide both terms by 6, not only the second.
+
+--- simplify-ratios · seed 67890 · difficulty 3
+prompt   Write this ratio in lowest terms.
+display  math "15 to 27" row("15", ":", "27") [simplify-ratio 15:27]
+answer   exact 5/9 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 3]
+step 2   Divide both terms by that factor.   [15:27 = 5:9]
+step 3   Enter the simplified ratio as a fraction.   [5/9]
+miss     divided-first-term-only = 0.18518518518518517   Divide both terms by 3, not only the first.
+miss     divided-second-term-only = 1.6666666666666667   Divide both terms by 3, not only the second.
+
+--- simplify-ratios · seed 424242 · difficulty 3
+prompt   Write this ratio in lowest terms.
+display  math "15 to 25" row("15", ":", "25") [simplify-ratio 15:25]
+answer   exact 3/5 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 5]
+step 2   Divide both terms by that factor.   [15:25 = 3:5]
+step 3   Enter the simplified ratio as a fraction.   [3/5]
+miss     divided-first-term-only = 0.12   Divide both terms by 5, not only the first.
+miss     divided-second-term-only = 3   Divide both terms by 5, not only the second.
+
+--- simplify-ratios · seed 987654321 · difficulty 3
+prompt   Write this ratio in lowest terms.
+display  math "18 to 10" row("18", ":", "10") [simplify-ratio 18:10]
+answer   exact 9/5 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 2]
+step 2   Divide both terms by that factor.   [18:10 = 9:5]
+step 3   Enter the simplified ratio as a fraction.   [9/5]
+miss     divided-first-term-only = 0.9   Divide both terms by 2, not only the first.
+miss     divided-second-term-only = 3.6   Divide both terms by 2, not only the second.
+
+--- simplify-ratios · seed 1 · difficulty 4
+prompt   Write this ratio in lowest terms.
+display  math "45 to 25" row("45", ":", "25") [simplify-ratio 45:25]
+answer   exact 9/5 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 5]
+step 2   Divide both terms by that factor.   [45:25 = 9:5]
+step 3   Enter the simplified ratio as a fraction.   [9/5]
+miss     divided-first-term-only = 0.36   Divide both terms by 5, not only the first.
+miss     divided-second-term-only = 9   Divide both terms by 5, not only the second.
+
+--- simplify-ratios · seed 12345 · difficulty 4
+prompt   Write this ratio in lowest terms.
+display  math "60 to 65" row("60", ":", "65") [simplify-ratio 60:65]
+answer   exact 12/13 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 5]
+step 2   Divide both terms by that factor.   [60:65 = 12:13]
+step 3   Enter the simplified ratio as a fraction.   [12/13]
+miss     divided-first-term-only = 0.18461538461538463   Divide both terms by 5, not only the first.
+miss     divided-second-term-only = 4.615384615384615   Divide both terms by 5, not only the second.
+
+--- simplify-ratios · seed 67890 · difficulty 4
+prompt   Write this ratio in lowest terms.
+display  math "28 to 44" row("28", ":", "44") [simplify-ratio 28:44]
+answer   exact 7/11 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 4]
+step 2   Divide both terms by that factor.   [28:44 = 7:11]
+step 3   Enter the simplified ratio as a fraction.   [7/11]
+miss     divided-first-term-only = 0.1590909090909091   Divide both terms by 4, not only the first.
+miss     divided-second-term-only = 2.5454545454545454   Divide both terms by 4, not only the second.
+
+--- simplify-ratios · seed 424242 · difficulty 4
+prompt   Write this ratio in lowest terms.
+display  math "15 to 21" row("15", ":", "21") [simplify-ratio 15:21]
+answer   exact 5/7 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 3]
+step 2   Divide both terms by that factor.   [15:21 = 5:7]
+step 3   Enter the simplified ratio as a fraction.   [5/7]
+miss     divided-first-term-only = 0.23809523809523808   Divide both terms by 3, not only the first.
+miss     divided-second-term-only = 2.142857142857143   Divide both terms by 3, not only the second.
+
+--- simplify-ratios · seed 987654321 · difficulty 4
+prompt   Write this ratio in lowest terms.
+display  math "84 to 35" row("84", ":", "35") [simplify-ratio 84:35]
+answer   exact 12/5 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 7]
+step 2   Divide both terms by that factor.   [84:35 = 12:5]
+step 3   Enter the simplified ratio as a fraction.   [12/5]
+miss     divided-first-term-only = 0.34285714285714286   Divide both terms by 7, not only the first.
+miss     divided-second-term-only = 16.8   Divide both terms by 7, not only the second.
+
+--- simplify-ratios · seed 1 · difficulty 5
+prompt   Write this ratio in lowest terms.
+display  math "60 to 35" row("60", ":", "35") [simplify-ratio 60:35]
+answer   exact 12/7 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 5]
+step 2   Divide both terms by that factor.   [60:35 = 12:7]
+step 3   Enter the simplified ratio as a fraction.   [12/7]
+miss     divided-first-term-only = 0.34285714285714286   Divide both terms by 5, not only the first.
+miss     divided-second-term-only = 8.571428571428571   Divide both terms by 5, not only the second.
+
+--- simplify-ratios · seed 12345 · difficulty 5
+prompt   Write this ratio in lowest terms.
+display  math "112 to 91" row("112", ":", "91") [simplify-ratio 112:91]
+answer   exact 16/13 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 7]
+step 2   Divide both terms by that factor.   [112:91 = 16:13]
+step 3   Enter the simplified ratio as a fraction.   [16/13]
+miss     divided-first-term-only = 0.17582417582417584   Divide both terms by 7, not only the first.
+miss     divided-second-term-only = 8.615384615384615   Divide both terms by 7, not only the second.
+
+--- simplify-ratios · seed 67890 · difficulty 5
+prompt   Write this ratio in lowest terms.
+display  math "40 to 44" row("40", ":", "44") [simplify-ratio 40:44]
+answer   exact 10/11 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 4]
+step 2   Divide both terms by that factor.   [40:44 = 10:11]
+step 3   Enter the simplified ratio as a fraction.   [10/11]
+miss     divided-first-term-only = 0.22727272727272727   Divide both terms by 4, not only the first.
+miss     divided-second-term-only = 3.6363636363636362   Divide both terms by 4, not only the second.
+
+--- simplify-ratios · seed 424242 · difficulty 5
+prompt   Write this ratio in lowest terms.
+display  math "21 to 30" row("21", ":", "30") [simplify-ratio 21:30]
+answer   exact 7/10 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 3]
+step 2   Divide both terms by that factor.   [21:30 = 7:10]
+step 3   Enter the simplified ratio as a fraction.   [7/10]
+miss     divided-first-term-only = 0.23333333333333334   Divide both terms by 3, not only the first.
+miss     divided-second-term-only = 2.1   Divide both terms by 3, not only the second.
+
+--- simplify-ratios · seed 987654321 · difficulty 5
+prompt   Write this ratio in lowest terms.
+display  math "128 to 56" row("128", ":", "56") [simplify-ratio 128:56]
+answer   exact 16/7 (simplified) (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Divide both terms by their greatest common factor.
+step 1   Find the greatest common factor.   [GCF = 8]
+step 2   Divide both terms by that factor.   [128:56 = 16:7]
+step 3   Enter the simplified ratio as a fraction.   [16/7]
+miss     divided-first-term-only = 0.2857142857142857   Divide both terms by 8, not only the first.
+miss     divided-second-term-only = 18.285714285714285   Divide both terms by 8, not only the second."
+`;
+
+exports[`recorded output: solve-proportions > matches the wording recorded when the skill landed 1`] = `
+"--- solve-proportions · seed 1 · difficulty 1
+prompt   Find the missing value.
+display  math "4 over 3 equals 16 over blank" row(fraction("4", "3"), "=", fraction("16", "?")) [solve-proportion 4/3 = 16/12 missing-rightDenominator]
+answer   exact 12/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [3 × 16 = 48]
+step 2   Divide by the number beside the blank.   [48 ÷ 4 = 12]
+miss     added-scale-factor = 7   The ratio scales by multiplication, not by adding 4.
+
+--- solve-proportions · seed 12345 · difficulty 1
+prompt   Find the missing value.
+display  math "5 over 4 equals 15 over blank" row(fraction("5", "4"), "=", fraction("15", "?")) [solve-proportion 5/4 = 15/12 missing-rightDenominator]
+answer   exact 12/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [4 × 15 = 60]
+step 2   Divide by the number beside the blank.   [60 ÷ 5 = 12]
+miss     added-scale-factor = 7   The ratio scales by multiplication, not by adding 3.
+
+--- solve-proportions · seed 67890 · difficulty 1
+prompt   Find the missing value.
+display  math "3 over 5 equals blank over 15" row(fraction("3", "5"), "=", fraction("?", "15")) [solve-proportion 3/5 = 9/15 missing-rightNumerator]
+answer   exact 9/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [3 × 15 = 45]
+step 2   Divide by the number beside the blank.   [45 ÷ 5 = 9]
+miss     added-scale-factor = 6   The ratio scales by multiplication, not by adding 3.
+
+--- solve-proportions · seed 424242 · difficulty 1
+prompt   Find the missing value.
+display  math "2 over 5 equals blank over 20" row(fraction("2", "5"), "=", fraction("?", "20")) [solve-proportion 2/5 = 8/20 missing-rightNumerator]
+answer   exact 8/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [2 × 20 = 40]
+step 2   Divide by the number beside the blank.   [40 ÷ 5 = 8]
+miss     added-scale-factor = 6   The ratio scales by multiplication, not by adding 4.
+
+--- solve-proportions · seed 987654321 · difficulty 1
+prompt   Find the missing value.
+display  math "5 over 3 equals 10 over blank" row(fraction("5", "3"), "=", fraction("10", "?")) [solve-proportion 5/3 = 10/6 missing-rightDenominator]
+answer   exact 6/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [3 × 10 = 30]
+step 2   Divide by the number beside the blank.   [30 ÷ 5 = 6]
+miss     added-scale-factor = 5   The ratio scales by multiplication, not by adding 2.
+
+--- solve-proportions · seed 1 · difficulty 2
+prompt   Find the missing value.
+display  math "6 over 7 equals 36 over blank" row(fraction("6", "7"), "=", fraction("36", "?")) [solve-proportion 6/7 = 36/42 missing-rightDenominator]
+answer   exact 42/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [7 × 36 = 252]
+step 2   Divide by the number beside the blank.   [252 ÷ 6 = 42]
+miss     added-scale-factor = 13   The ratio scales by multiplication, not by adding 6.
+
+--- solve-proportions · seed 12345 · difficulty 2
+prompt   Find the missing value.
+display  math "7 over 6 equals 28 over blank" row(fraction("7", "6"), "=", fraction("28", "?")) [solve-proportion 7/6 = 28/24 missing-rightDenominator]
+answer   exact 24/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [6 × 28 = 168]
+step 2   Divide by the number beside the blank.   [168 ÷ 7 = 24]
+miss     added-scale-factor = 10   The ratio scales by multiplication, not by adding 4.
+
+--- solve-proportions · seed 67890 · difficulty 2
+prompt   Find the missing value.
+display  math "4 over 9 equals 8 over blank" row(fraction("4", "9"), "=", fraction("8", "?")) [solve-proportion 4/9 = 8/18 missing-rightDenominator]
+answer   exact 18/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [9 × 8 = 72]
+step 2   Divide by the number beside the blank.   [72 ÷ 4 = 18]
+miss     added-scale-factor = 11   The ratio scales by multiplication, not by adding 2.
+
+--- solve-proportions · seed 424242 · difficulty 2
+prompt   Find the missing value.
+display  math "3 over 5 equals 6 over blank" row(fraction("3", "5"), "=", fraction("6", "?")) [solve-proportion 3/5 = 6/10 missing-rightDenominator]
+answer   exact 10/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [5 × 6 = 30]
+step 2   Divide by the number beside the blank.   [30 ÷ 3 = 10]
+miss     added-scale-factor = 7   The ratio scales by multiplication, not by adding 2.
+
+--- solve-proportions · seed 987654321 · difficulty 2
+prompt   Find the missing value.
+display  math "7 over 4 equals 14 over blank" row(fraction("7", "4"), "=", fraction("14", "?")) [solve-proportion 7/4 = 14/8 missing-rightDenominator]
+answer   exact 8/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [4 × 14 = 56]
+step 2   Divide by the number beside the blank.   [56 ÷ 7 = 8]
+miss     added-scale-factor = 6   The ratio scales by multiplication, not by adding 2.
+
+--- solve-proportions · seed 1 · difficulty 3
+prompt   Find the missing value.
+display  math "7 over 5 equals 35 over blank" row(fraction("7", "5"), "=", fraction("35", "?")) [solve-proportion 7/5 = 35/25 missing-rightDenominator]
+answer   exact 25/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [5 × 35 = 175]
+step 2   Divide by the number beside the blank.   [175 ÷ 7 = 25]
+miss     added-scale-factor = 10   The ratio scales by multiplication, not by adding 5.
+
+--- solve-proportions · seed 12345 · difficulty 3
+prompt   Find the missing value.
+display  math "9 over 7 equals 36 over blank" row(fraction("9", "7"), "=", fraction("36", "?")) [solve-proportion 9/7 = 36/28 missing-rightDenominator]
+answer   exact 28/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [7 × 36 = 252]
+step 2   Divide by the number beside the blank.   [252 ÷ 9 = 28]
+miss     added-scale-factor = 11   The ratio scales by multiplication, not by adding 4.
+
+--- solve-proportions · seed 67890 · difficulty 3
+prompt   Find the missing value.
+display  math "6 over 7 equals blank over 28" row(fraction("6", "7"), "=", fraction("?", "28")) [solve-proportion 6/7 = 24/28 missing-rightNumerator]
+answer   exact 24/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [6 × 28 = 168]
+step 2   Divide by the number beside the blank.   [168 ÷ 7 = 24]
+miss     added-scale-factor = 10   The ratio scales by multiplication, not by adding 4.
+
+--- solve-proportions · seed 424242 · difficulty 3
+prompt   Find the missing value.
+display  math "4 over 7 equals blank over 35" row(fraction("4", "7"), "=", fraction("?", "35")) [solve-proportion 4/7 = 20/35 missing-rightNumerator]
+answer   exact 20/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [4 × 35 = 140]
+step 2   Divide by the number beside the blank.   [140 ÷ 7 = 20]
+miss     added-scale-factor = 9   The ratio scales by multiplication, not by adding 5.
+
+--- solve-proportions · seed 987654321 · difficulty 3
+prompt   Find the missing value.
+display  math "9 over 5 equals 63 over blank" row(fraction("9", "5"), "=", fraction("63", "?")) [solve-proportion 9/5 = 63/35 missing-rightDenominator]
+answer   exact 35/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [5 × 63 = 315]
+step 2   Divide by the number beside the blank.   [315 ÷ 9 = 35]
+miss     added-scale-factor = 12   The ratio scales by multiplication, not by adding 7.
+
+--- solve-proportions · seed 1 · difficulty 4
+prompt   Find the missing value.
+display  math "10 over 7 equals 50 over blank" row(fraction("10", "7"), "=", fraction("50", "?")) [solve-proportion 10/7 = 50/35 missing-rightDenominator]
+answer   exact 35/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [7 × 50 = 350]
+step 2   Divide by the number beside the blank.   [350 ÷ 10 = 35]
+miss     added-scale-factor = 12   The ratio scales by multiplication, not by adding 5.
+
+--- solve-proportions · seed 12345 · difficulty 4
+prompt   Find the missing value.
+display  math "12 over 11 equals 84 over blank" row(fraction("12", "11"), "=", fraction("84", "?")) [solve-proportion 12/11 = 84/77 missing-rightDenominator]
+answer   exact 77/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [11 × 84 = 924]
+step 2   Divide by the number beside the blank.   [924 ÷ 12 = 77]
+miss     added-scale-factor = 18   The ratio scales by multiplication, not by adding 7.
+
+--- solve-proportions · seed 67890 · difficulty 4
+prompt   Find the missing value.
+display  math "8 over 7 equals blank over 49" row(fraction("8", "7"), "=", fraction("?", "49")) [solve-proportion 8/7 = 56/49 missing-rightNumerator]
+answer   exact 56/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [8 × 49 = 392]
+step 2   Divide by the number beside the blank.   [392 ÷ 7 = 56]
+miss     added-scale-factor = 15   The ratio scales by multiplication, not by adding 7.
+
+--- solve-proportions · seed 424242 · difficulty 4
+prompt   Find the missing value.
+display  math "6 over 7 equals 30 over blank" row(fraction("6", "7"), "=", fraction("30", "?")) [solve-proportion 6/7 = 30/35 missing-rightDenominator]
+answer   exact 35/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [7 × 30 = 210]
+step 2   Divide by the number beside the blank.   [210 ÷ 6 = 35]
+miss     added-scale-factor = 12   The ratio scales by multiplication, not by adding 5.
+
+--- solve-proportions · seed 987654321 · difficulty 4
+prompt   Find the missing value.
+display  math "12 over 7 equals 96 over blank" row(fraction("12", "7"), "=", fraction("96", "?")) [solve-proportion 12/7 = 96/56 missing-rightDenominator]
+answer   exact 56/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [7 × 96 = 672]
+step 2   Divide by the number beside the blank.   [672 ÷ 12 = 56]
+miss     added-scale-factor = 15   The ratio scales by multiplication, not by adding 8.
+
+--- solve-proportions · seed 1 · difficulty 5
+prompt   Find the missing value.
+display  math "13 over 9 equals 78 over blank" row(fraction("13", "9"), "=", fraction("78", "?")) [solve-proportion 13/9 = 78/54 missing-rightDenominator]
+answer   exact 54/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [9 × 78 = 702]
+step 2   Divide by the number beside the blank.   [702 ÷ 13 = 54]
+miss     added-scale-factor = 15   The ratio scales by multiplication, not by adding 6.
+
+--- solve-proportions · seed 12345 · difficulty 5
+prompt   Find the missing value.
+display  math "16 over 17 equals blank over 102" row(fraction("16", "17"), "=", fraction("?", "102")) [solve-proportion 16/17 = 96/102 missing-rightNumerator]
+answer   exact 96/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [16 × 102 = 1632]
+step 2   Divide by the number beside the blank.   [1632 ÷ 17 = 96]
+miss     added-scale-factor = 22   The ratio scales by multiplication, not by adding 6.
+
+--- solve-proportions · seed 67890 · difficulty 5
+prompt   Find the missing value.
+display  math "11 over 15 equals blank over 60" row(fraction("11", "15"), "=", fraction("?", "60")) [solve-proportion 11/15 = 44/60 missing-rightNumerator]
+answer   exact 44/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [11 × 60 = 660]
+step 2   Divide by the number beside the blank.   [660 ÷ 15 = 44]
+miss     added-scale-factor = 15   The ratio scales by multiplication, not by adding 4.
+
+--- solve-proportions · seed 424242 · difficulty 5
+prompt   Find the missing value.
+display  math "9 over 11 equals 27 over blank" row(fraction("9", "11"), "=", fraction("27", "?")) [solve-proportion 9/11 = 27/33 missing-rightDenominator]
+answer   exact 33/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [11 × 27 = 297]
+step 2   Divide by the number beside the blank.   [297 ÷ 9 = 33]
+miss     added-scale-factor = 14   The ratio scales by multiplication, not by adding 3.
+
+--- solve-proportions · seed 987654321 · difficulty 5
+prompt   Find the missing value.
+display  math "16 over 9 equals 144 over blank" row(fraction("16", "9"), "=", fraction("144", "?")) [solve-proportion 16/9 = 144/81 missing-rightDenominator]
+answer   exact 81/1
+input    keypad
+hint     Cross-multiply, then divide by the remaining number.
+step 1   Multiply across the known diagonal.   [9 × 144 = 1296]
+step 2   Divide by the number beside the blank.   [1296 ÷ 16 = 81]
+miss     added-scale-factor = 18   The ratio scales by multiplication, not by adding 9."
+`;
+
+exports[`recorded output: unit-conversion > matches the wording recorded when the skill landed 1`] = `
+"--- unit-conversion · seed 1 · difficulty 1
+prompt   How many yards is that?
+display  story [unit-conversion 1 yard:3 feet small-to-large given-6] "1 yard equals 3 feet. Convert 6 feet."
+answer   exact 2/1
+input    keypad
+hint     Divide by the stated conversion factor.
+step 1   Divide by the conversion factor.   [6 ÷ 3 = 2]
+miss     used-opposite-conversion-direction = 18   Larger units need a smaller count, so divide.
+
+--- unit-conversion · seed 12345 · difficulty 1
+prompt   How many feet is that?
+display  story [unit-conversion 1 yard:3 feet large-to-small given-15] "1 yard equals 3 feet. Convert 15 yards."
+answer   exact 45/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [15 × 3 = 45]
+miss     used-opposite-conversion-direction = 5   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 67890 · difficulty 1
+prompt   How many cups is that?
+display  story [unit-conversion 1 pint:2 cups large-to-small given-16] "1 pint equals 2 cups. Convert 16 pints."
+answer   exact 32/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [16 × 2 = 32]
+miss     used-opposite-conversion-direction = 8   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 424242 · difficulty 1
+prompt   How many cups is that?
+display  story [unit-conversion 1 pint:2 cups large-to-small given-8] "1 pint equals 2 cups. Convert 8 pints."
+answer   exact 16/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [8 × 2 = 16]
+miss     used-opposite-conversion-direction = 4   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 987654321 · difficulty 1
+prompt   How many feet is that?
+display  story [unit-conversion 1 yard:3 feet large-to-small given-9] "1 yard equals 3 feet. Convert 9 yards."
+answer   exact 27/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [9 × 3 = 27]
+miss     used-opposite-conversion-direction = 3   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 1 · difficulty 2
+prompt   How many gallons is that?
+display  story [unit-conversion 1 gallon:4 quarts small-to-large given-12] "1 gallon equals 4 quarts. Convert 12 quarts."
+answer   exact 3/1
+input    keypad
+hint     Divide by the stated conversion factor.
+step 1   Divide by the conversion factor.   [12 ÷ 4 = 3]
+miss     used-opposite-conversion-direction = 48   Larger units need a smaller count, so divide.
+
+--- unit-conversion · seed 12345 · difficulty 2
+prompt   How many inches is that?
+display  story [unit-conversion 1 foot:12 inches large-to-small given-84] "1 foot equals 12 inches. Convert 84 feet."
+answer   exact 1008/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [84 × 12 = 1008]
+miss     used-opposite-conversion-direction = 7   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 67890 · difficulty 2
+prompt   How many feet is that?
+display  story [unit-conversion 1 yard:3 feet large-to-small given-36] "1 yard equals 3 feet. Convert 36 yards."
+answer   exact 108/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [36 × 3 = 108]
+miss     used-opposite-conversion-direction = 12   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 424242 · difficulty 2
+prompt   How many cups is that?
+display  story [unit-conversion 1 pint:2 cups large-to-small given-12] "1 pint equals 2 cups. Convert 12 pints."
+answer   exact 24/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [12 × 2 = 24]
+miss     used-opposite-conversion-direction = 6   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 987654321 · difficulty 2
+prompt   How many inches is that?
+display  story [unit-conversion 1 foot:12 inches large-to-small given-60] "1 foot equals 12 inches. Convert 60 feet."
+answer   exact 720/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [60 × 12 = 720]
+miss     used-opposite-conversion-direction = 5   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 1 · difficulty 3
+prompt   How many feet is that?
+display  story [unit-conversion 1 foot:12 inches small-to-large given-48] "1 foot equals 12 inches. Convert 48 inches."
+answer   exact 4/1
+input    keypad
+hint     Divide by the stated conversion factor.
+step 1   Divide by the conversion factor.   [48 ÷ 12 = 4]
+miss     used-opposite-conversion-direction = 576   Larger units need a smaller count, so divide.
+
+--- unit-conversion · seed 12345 · difficulty 3
+prompt   How many centimeters is that?
+display  story [unit-conversion 1 meter:100 centimeters large-to-small given-1000] "1 meter equals 100 centimeters. Convert 1000 meters."
+answer   exact 100000/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [1000 × 100 = 100000]
+miss     used-opposite-conversion-direction = 10   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 67890 · difficulty 3
+prompt   How many quarts is that?
+display  story [unit-conversion 1 gallon:4 quarts large-to-small given-64] "1 gallon equals 4 quarts. Convert 64 gallons."
+answer   exact 256/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [64 × 4 = 256]
+miss     used-opposite-conversion-direction = 16   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 424242 · difficulty 3
+prompt   How many cups is that?
+display  story [unit-conversion 1 pint:2 cups large-to-small given-16] "1 pint equals 2 cups. Convert 16 pints."
+answer   exact 32/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [16 × 2 = 32]
+miss     used-opposite-conversion-direction = 8   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 987654321 · difficulty 3
+prompt   How many centimeters is that?
+display  story [unit-conversion 1 meter:100 centimeters large-to-small given-600] "1 meter equals 100 centimeters. Convert 600 meters."
+answer   exact 60000/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [600 × 100 = 60000]
+miss     used-opposite-conversion-direction = 6   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 1 · difficulty 4
+prompt   How many meters is that?
+display  story [unit-conversion 1 meter:100 centimeters small-to-large given-500] "1 meter equals 100 centimeters. Convert 500 centimeters."
+answer   exact 5/1
+input    keypad
+hint     Divide by the stated conversion factor.
+step 1   Divide by the conversion factor.   [500 ÷ 100 = 5]
+miss     used-opposite-conversion-direction = 50000   Larger units need a smaller count, so divide.
+
+--- unit-conversion · seed 12345 · difficulty 4
+prompt   How many milliliters is that?
+display  story [unit-conversion 1 liter:1000 milliliters large-to-small given-12000] "1 liter equals 1000 milliliters. Convert 12000 liters."
+answer   exact 12000000/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [12000 × 1000 = 12000000]
+miss     used-opposite-conversion-direction = 12   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 67890 · difficulty 4
+prompt   How many inches is that?
+display  story [unit-conversion 1 foot:12 inches large-to-small given-240] "1 foot equals 12 inches. Convert 240 feet."
+answer   exact 2880/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [240 × 12 = 2880]
+miss     used-opposite-conversion-direction = 20   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 424242 · difficulty 4
+prompt   How many feet is that?
+display  story [unit-conversion 1 yard:3 feet large-to-small given-33] "1 yard equals 3 feet. Convert 33 yards."
+answer   exact 99/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [33 × 3 = 99]
+miss     used-opposite-conversion-direction = 11   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 987654321 · difficulty 4
+prompt   How many milliliters is that?
+display  story [unit-conversion 1 liter:1000 milliliters large-to-small given-8000] "1 liter equals 1000 milliliters. Convert 8000 liters."
+answer   exact 8000000/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [8000 × 1000 = 8000000]
+miss     used-opposite-conversion-direction = 8   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 1 · difficulty 5
+prompt   How many kilometers is that?
+display  story [unit-conversion 1 kilometer:1000 meters small-to-large given-6000] "1 kilometer equals 1000 meters. Convert 6000 meters."
+answer   exact 6/1
+input    keypad
+hint     Divide by the stated conversion factor.
+step 1   Divide by the conversion factor.   [6000 ÷ 1000 = 6]
+miss     used-opposite-conversion-direction = 6000000   Larger units need a smaller count, so divide.
+
+--- unit-conversion · seed 12345 · difficulty 5
+prompt   How many pints is that?
+display  story [unit-conversion 1 quart:2 pints large-to-small given-30] "1 quart equals 2 pints. Convert 30 quarts."
+answer   exact 60/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [30 × 2 = 60]
+miss     used-opposite-conversion-direction = 15   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 67890 · difficulty 5
+prompt   How many inches is that?
+display  story [unit-conversion 1 foot:12 inches large-to-small given-288] "1 foot equals 12 inches. Convert 288 feet."
+answer   exact 3456/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [288 × 12 = 3456]
+miss     used-opposite-conversion-direction = 24   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 424242 · difficulty 5
+prompt   How many feet is that?
+display  story [unit-conversion 1 yard:3 feet large-to-small given-39] "1 yard equals 3 feet. Convert 39 yards."
+answer   exact 117/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [39 × 3 = 117]
+miss     used-opposite-conversion-direction = 13   Smaller units need a larger count, so multiply.
+
+--- unit-conversion · seed 987654321 · difficulty 5
+prompt   How many pints is that?
+display  story [unit-conversion 1 quart:2 pints large-to-small given-20] "1 quart equals 2 pints. Convert 20 quarts."
+answer   exact 40/1
+input    keypad
+hint     Multiply by the stated conversion factor.
+step 1   Multiply by the conversion factor.   [20 × 2 = 40]
+miss     used-opposite-conversion-direction = 10   Smaller units need a larger count, so multiply."
+`;
+
+exports[`recorded output: unit-rate > matches the wording recorded when the skill landed 1`] = `
+"--- unit-rate · seed 1 · difficulty 1
+prompt   Which offer is the better value?
+display  story [unit-rate 4 for 1600 cents vs 6 for 1200 cents] "Offer A: 4 items for $16.00. Offer B: 6 items for $12.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $4; B: $2]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 12345 · difficulty 1
+prompt   Which offer is the better value?
+display  story [unit-rate 3 for 1500 cents vs 6 for 1800 cents] "Offer A: 3 items for $15.00. Offer B: 6 items for $18.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $5; B: $3]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 67890 · difficulty 1
+prompt   Which offer is the better value?
+display  story [unit-rate 3 for 900 cents vs 2 for 800 cents] "Offer A: 3 items for $9.00. Offer B: 2 items for $8.00."
+answer   choice offer-a
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $3; B: $4]
+step 2   Choose the lower price per item.   [Offer A]
+
+--- unit-rate · seed 424242 · difficulty 1
+prompt   Which offer is the better value?
+display  story [unit-rate 3 for 600 cents vs 5 for 2000 cents] "Offer A: 3 items for $6.00. Offer B: 5 items for $20.00."
+answer   choice offer-a
+input    choice
+hint     Divide each price by its item count.
+choice   offer-b = Offer B
+choice   offer-a = Offer A
+step 1   Find each price per item.   [A: $2; B: $4]
+step 2   Choose the lower price per item.   [Offer A]
+
+--- unit-rate · seed 987654321 · difficulty 1
+prompt   Which offer is the better value?
+display  story [unit-rate 2 for 1000 cents vs 6 for 1200 cents] "Offer A: 2 items for $10.00. Offer B: 6 items for $12.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $5; B: $2]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 1 · difficulty 2
+prompt   Which offer is the better value?
+display  story [unit-rate 4 for 2400 cents vs 7 for 2100 cents] "Offer A: 4 items for $24.00. Offer B: 7 items for $21.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $6; B: $3]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 12345 · difficulty 2
+prompt   Which offer is the better value?
+display  story [unit-rate 4 for 3200 cents vs 6 for 2400 cents] "Offer A: 4 items for $32.00. Offer B: 6 items for $24.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $8; B: $4]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 67890 · difficulty 2
+prompt   Which offer is the better value?
+display  story [unit-rate 3 for 1500 cents vs 4 for 2400 cents] "Offer A: 3 items for $15.00. Offer B: 4 items for $24.00."
+answer   choice offer-a
+input    choice
+hint     Divide each price by its item count.
+choice   offer-b = Offer B
+choice   offer-a = Offer A
+step 1   Find each price per item.   [A: $5; B: $6]
+step 2   Choose the lower price per item.   [Offer A]
+
+--- unit-rate · seed 424242 · difficulty 2
+prompt   Which offer is the better value?
+display  story [unit-rate 2 for 600 cents vs 5 for 2000 cents] "Offer A: 2 items for $6.00. Offer B: 5 items for $20.00."
+answer   choice offer-a
+input    choice
+hint     Divide each price by its item count.
+choice   offer-b = Offer B
+choice   offer-a = Offer A
+step 1   Find each price per item.   [A: $3; B: $4]
+step 2   Choose the lower price per item.   [Offer A]
+
+--- unit-rate · seed 987654321 · difficulty 2
+prompt   Which offer is the better value?
+display  story [unit-rate 2 for 1600 cents vs 7 for 2100 cents] "Offer A: 2 items for $16.00. Offer B: 7 items for $21.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $8; B: $3]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 1 · difficulty 3
+prompt   Which offer is the better value?
+display  story [unit-rate 5 for 5000 cents vs 8 for 4000 cents] "Offer A: 5 items for $50.00. Offer B: 8 items for $40.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $10; B: $5]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 12345 · difficulty 3
+prompt   Which offer is the better value?
+display  story [unit-rate 4 for 4800 cents vs 7 for 4900 cents] "Offer A: 4 items for $48.00. Offer B: 7 items for $49.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $12; B: $7]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 67890 · difficulty 3
+prompt   Which offer is the better value?
+display  story [unit-rate 4 for 3200 cents vs 2 for 1800 cents] "Offer A: 4 items for $32.00. Offer B: 2 items for $18.00."
+answer   choice offer-a
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $8; B: $9]
+step 2   Choose the lower price per item.   [Offer A]
+
+--- unit-rate · seed 424242 · difficulty 3
+prompt   Which offer is the better value?
+display  story [unit-rate 4 for 2400 cents vs 6 for 6000 cents] "Offer A: 4 items for $24.00. Offer B: 6 items for $60.00."
+answer   choice offer-a
+input    choice
+hint     Divide each price by its item count.
+choice   offer-b = Offer B
+choice   offer-a = Offer A
+step 1   Find each price per item.   [A: $6; B: $10]
+step 2   Choose the lower price per item.   [Offer A]
+
+--- unit-rate · seed 987654321 · difficulty 3
+prompt   Which offer is the better value?
+display  story [unit-rate 2 for 2400 cents vs 8 for 4800 cents] "Offer A: 2 items for $24.00. Offer B: 8 items for $48.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $12; B: $6]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 1 · difficulty 4
+prompt   Which offer is the better value?
+display  story [unit-rate 5 for 7000 cents vs 9 for 7200 cents] "Offer A: 5 items for $70.00. Offer B: 9 items for $72.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $14; B: $8]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 12345 · difficulty 4
+prompt   Which offer is the better value?
+display  story [unit-rate 5 for 9000 cents vs 8 for 8800 cents] "Offer A: 5 items for $90.00. Offer B: 8 items for $88.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $18; B: $11]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 67890 · difficulty 4
+prompt   Which offer is the better value?
+display  story [unit-rate 4 for 4800 cents vs 2 for 2800 cents] "Offer A: 4 items for $48.00. Offer B: 2 items for $28.00."
+answer   choice offer-a
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $12; B: $14]
+step 2   Choose the lower price per item.   [Offer A]
+
+--- unit-rate · seed 424242 · difficulty 4
+prompt   Which offer is the better value?
+display  story [unit-rate 3 for 2700 cents vs 7 for 7000 cents] "Offer A: 3 items for $27.00. Offer B: 7 items for $70.00."
+answer   choice offer-a
+input    choice
+hint     Divide each price by its item count.
+choice   offer-b = Offer B
+choice   offer-a = Offer A
+step 1   Find each price per item.   [A: $9; B: $10]
+step 2   Choose the lower price per item.   [Offer A]
+
+--- unit-rate · seed 987654321 · difficulty 4
+prompt   Which offer is the better value?
+display  story [unit-rate 2 for 3600 cents vs 9 for 8100 cents] "Offer A: 2 items for $36.00. Offer B: 9 items for $81.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $18; B: $9]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 1 · difficulty 5
+prompt   Which offer is the better value?
+display  story [unit-rate 6 for 12000 cents vs 10 for 12000 cents] "Offer A: 6 items for $120.00. Offer B: 10 items for $120.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $20; B: $12]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 12345 · difficulty 5
+prompt   Which offer is the better value?
+display  story [unit-rate 5 for 12500 cents vs 9 for 14400 cents] "Offer A: 5 items for $125.00. Offer B: 9 items for $144.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $25; B: $16]
+step 2   Choose the lower price per item.   [Offer B]
+
+--- unit-rate · seed 67890 · difficulty 5
+prompt   Which offer is the better value?
+display  story [unit-rate 4 for 6800 cents vs 5 for 10000 cents] "Offer A: 4 items for $68.00. Offer B: 5 items for $100.00."
+answer   choice offer-a
+input    choice
+hint     Divide each price by its item count.
+choice   offer-b = Offer B
+choice   offer-a = Offer A
+step 1   Find each price per item.   [A: $17; B: $20]
+step 2   Choose the lower price per item.   [Offer A]
+
+--- unit-rate · seed 424242 · difficulty 5
+prompt   Which offer is the better value?
+display  story [unit-rate 3 for 3900 cents vs 7 for 10500 cents] "Offer A: 3 items for $39.00. Offer B: 7 items for $105.00."
+answer   choice offer-a
+input    choice
+hint     Divide each price by its item count.
+choice   offer-b = Offer B
+choice   offer-a = Offer A
+step 1   Find each price per item.   [A: $13; B: $15]
+step 2   Choose the lower price per item.   [Offer A]
+
+--- unit-rate · seed 987654321 · difficulty 5
+prompt   Which offer is the better value?
+display  story [unit-rate 2 for 5000 cents vs 10 for 13000 cents] "Offer A: 2 items for $50.00. Offer B: 10 items for $130.00."
+answer   choice offer-b
+input    choice
+hint     Divide each price by its item count.
+choice   offer-a = Offer A
+choice   offer-b = Offer B
+step 1   Find each price per item.   [A: $25; B: $13]
+step 2   Choose the lower price per item.   [Offer B]"
+`;
+
+exports[`recorded output: write-ratios > matches the wording recorded when the skill landed 1`] = `
+"--- write-ratios · seed 1 · difficulty 1
+prompt   Write the requested ratio.
+display  story [write-ratio 2 morning buses to 5 evening buses] "2 morning buses and 5 evening buses; compare morning buses to evening buses."
+answer   exact 2/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [morning buses to evening buses]
+step 2   Write the first count over the second.   [2/5]
+miss     reversed-ratio-order = 2.5   Put morning buses first because that comparison was requested first.
+
+--- write-ratios · seed 12345 · difficulty 1
+prompt   Write the requested ratio.
+display  story [write-ratio 4 paper files to 5 digital files] "4 paper files and 5 digital files; compare paper files to digital files."
+answer   exact 4/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [paper files to digital files]
+step 2   Write the first count over the second.   [4/5]
+miss     reversed-ratio-order = 1.25   Put paper files first because that comparison was requested first.
+
+--- write-ratios · seed 67890 · difficulty 1
+prompt   Write the requested ratio.
+display  story [write-ratio 6 large boxes to 4 small boxes] "6 large boxes and 4 small boxes; compare large boxes to small boxes."
+answer   exact 3/2 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [large boxes to small boxes]
+step 2   Write the first count over the second.   [6/4]
+miss     reversed-ratio-order = 0.6666666666666666   Put large boxes first because that comparison was requested first.
+
+--- write-ratios · seed 424242 · difficulty 1
+prompt   Write the requested ratio.
+display  story [write-ratio 3 red tiles to 6 blue tiles] "3 red tiles and 6 blue tiles; compare red tiles to blue tiles."
+answer   exact 1/2 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [red tiles to blue tiles]
+step 2   Write the first count over the second.   [3/6]
+miss     reversed-ratio-order = 2   Put red tiles first because that comparison was requested first.
+
+--- write-ratios · seed 987654321 · difficulty 1
+prompt   Write the requested ratio.
+display  story [write-ratio 2 paper files to 8 digital files] "2 paper files and 8 digital files; compare paper files to digital files."
+answer   exact 1/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [paper files to digital files]
+step 2   Write the first count over the second.   [2/8]
+miss     reversed-ratio-order = 4   Put paper files first because that comparison was requested first.
+
+--- write-ratios · seed 1 · difficulty 2
+prompt   Write the requested ratio.
+display  story [write-ratio 3 morning buses to 8 evening buses] "3 morning buses and 8 evening buses; compare morning buses to evening buses."
+answer   exact 3/8 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [morning buses to evening buses]
+step 2   Write the first count over the second.   [3/8]
+miss     reversed-ratio-order = 2.6666666666666665   Put morning buses first because that comparison was requested first.
+
+--- write-ratios · seed 12345 · difficulty 2
+prompt   Write the requested ratio.
+display  story [write-ratio 6 paper files to 7 digital files] "6 paper files and 7 digital files; compare paper files to digital files."
+answer   exact 6/7 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [paper files to digital files]
+step 2   Write the first count over the second.   [6/7]
+miss     reversed-ratio-order = 1.1666666666666667   Put paper files first because that comparison was requested first.
+
+--- write-ratios · seed 67890 · difficulty 2
+prompt   Write the requested ratio.
+display  story [write-ratio 8 large boxes to 6 small boxes] "8 large boxes and 6 small boxes; compare large boxes to small boxes."
+answer   exact 4/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [large boxes to small boxes]
+step 2   Write the first count over the second.   [8/6]
+miss     reversed-ratio-order = 0.75   Put large boxes first because that comparison was requested first.
+
+--- write-ratios · seed 424242 · difficulty 2
+prompt   Write the requested ratio.
+display  story [write-ratio 5 red tiles to 4 blue tiles] "5 red tiles and 4 blue tiles; compare red tiles to blue tiles."
+answer   exact 5/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [red tiles to blue tiles]
+step 2   Write the first count over the second.   [5/4]
+miss     reversed-ratio-order = 0.8   Put red tiles first because that comparison was requested first.
+
+--- write-ratios · seed 987654321 · difficulty 2
+prompt   Write the requested ratio.
+display  story [write-ratio 4 paper files to 3 digital files] "4 paper files and 3 digital files; compare paper files to digital files."
+answer   exact 4/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [paper files to digital files]
+step 2   Write the first count over the second.   [4/3]
+miss     reversed-ratio-order = 0.75   Put paper files first because that comparison was requested first.
+
+--- write-ratios · seed 1 · difficulty 3
+prompt   Write the requested ratio.
+display  story [write-ratio 5 morning buses to 12 evening buses] "5 morning buses and 12 evening buses; compare morning buses to evening buses."
+answer   exact 5/12 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [morning buses to evening buses]
+step 2   Write the first count over the second.   [5/12]
+miss     reversed-ratio-order = 2.4   Put morning buses first because that comparison was requested first.
+
+--- write-ratios · seed 12345 · difficulty 3
+prompt   Write the requested ratio.
+display  story [write-ratio 9 paper files to 11 digital files] "9 paper files and 11 digital files; compare paper files to digital files."
+answer   exact 9/11 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [paper files to digital files]
+step 2   Write the first count over the second.   [9/11]
+miss     reversed-ratio-order = 1.2222222222222223   Put paper files first because that comparison was requested first.
+
+--- write-ratios · seed 67890 · difficulty 3
+prompt   Write the requested ratio.
+display  story [write-ratio 13 large boxes to 10 small boxes] "13 large boxes and 10 small boxes; compare large boxes to small boxes."
+answer   exact 13/10 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [large boxes to small boxes]
+step 2   Write the first count over the second.   [13/10]
+miss     reversed-ratio-order = 0.7692307692307693   Put large boxes first because that comparison was requested first.
+
+--- write-ratios · seed 424242 · difficulty 3
+prompt   Write the requested ratio.
+display  story [write-ratio 8 red tiles to 7 blue tiles] "8 red tiles and 7 blue tiles; compare red tiles to blue tiles."
+answer   exact 8/7 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [red tiles to blue tiles]
+step 2   Write the first count over the second.   [8/7]
+miss     reversed-ratio-order = 0.875   Put red tiles first because that comparison was requested first.
+
+--- write-ratios · seed 987654321 · difficulty 3
+prompt   Write the requested ratio.
+display  story [write-ratio 6 paper files to 5 digital files] "6 paper files and 5 digital files; compare paper files to digital files."
+answer   exact 6/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [paper files to digital files]
+step 2   Write the first count over the second.   [6/5]
+miss     reversed-ratio-order = 0.8333333333333334   Put paper files first because that comparison was requested first.
+
+--- write-ratios · seed 1 · difficulty 4
+prompt   Write the requested ratio.
+display  story [write-ratio 8 morning buses to 19 evening buses] "8 morning buses and 19 evening buses; compare morning buses to evening buses."
+answer   exact 8/19 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [morning buses to evening buses]
+step 2   Write the first count over the second.   [8/19]
+miss     reversed-ratio-order = 2.375   Put morning buses first because that comparison was requested first.
+
+--- write-ratios · seed 12345 · difficulty 4
+prompt   Write the requested ratio.
+display  story [write-ratio 14 paper files to 18 digital files] "14 paper files and 18 digital files; compare paper files to digital files."
+answer   exact 7/9 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [paper files to digital files]
+step 2   Write the first count over the second.   [14/18]
+miss     reversed-ratio-order = 1.2857142857142858   Put paper files first because that comparison was requested first.
+
+--- write-ratios · seed 67890 · difficulty 4
+prompt   Write the requested ratio.
+display  story [write-ratio 20 large boxes to 15 small boxes] "20 large boxes and 15 small boxes; compare large boxes to small boxes."
+answer   exact 4/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [large boxes to small boxes]
+step 2   Write the first count over the second.   [20/15]
+miss     reversed-ratio-order = 0.75   Put large boxes first because that comparison was requested first.
+
+--- write-ratios · seed 424242 · difficulty 4
+prompt   Write the requested ratio.
+display  story [write-ratio 12 red tiles to 11 blue tiles] "12 red tiles and 11 blue tiles; compare red tiles to blue tiles."
+answer   exact 12/11 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [red tiles to blue tiles]
+step 2   Write the first count over the second.   [12/11]
+miss     reversed-ratio-order = 0.9166666666666666   Put red tiles first because that comparison was requested first.
+
+--- write-ratios · seed 987654321 · difficulty 4
+prompt   Write the requested ratio.
+display  story [write-ratio 10 paper files to 8 digital files] "10 paper files and 8 digital files; compare paper files to digital files."
+answer   exact 5/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [paper files to digital files]
+step 2   Write the first count over the second.   [10/8]
+miss     reversed-ratio-order = 0.8   Put paper files first because that comparison was requested first.
+
+--- write-ratios · seed 1 · difficulty 5
+prompt   Write the requested ratio.
+display  story [write-ratio 12 morning buses to 27 evening buses] "12 morning buses and 27 evening buses; compare morning buses to evening buses."
+answer   exact 4/9 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [morning buses to evening buses]
+step 2   Write the first count over the second.   [12/27]
+miss     reversed-ratio-order = 2.25   Put morning buses first because that comparison was requested first.
+
+--- write-ratios · seed 12345 · difficulty 5
+prompt   Write the requested ratio.
+display  story [write-ratio 20 paper files to 26 digital files] "20 paper files and 26 digital files; compare paper files to digital files."
+answer   exact 10/13 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [paper files to digital files]
+step 2   Write the first count over the second.   [20/26]
+miss     reversed-ratio-order = 1.3   Put paper files first because that comparison was requested first.
+
+--- write-ratios · seed 67890 · difficulty 5
+prompt   Write the requested ratio.
+display  story [write-ratio 29 large boxes to 22 small boxes] "29 large boxes and 22 small boxes; compare large boxes to small boxes."
+answer   exact 29/22 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [large boxes to small boxes]
+step 2   Write the first count over the second.   [29/22]
+miss     reversed-ratio-order = 0.7586206896551724   Put large boxes first because that comparison was requested first.
+
+--- write-ratios · seed 424242 · difficulty 5
+prompt   Write the requested ratio.
+display  story [write-ratio 18 red tiles to 17 blue tiles] "18 red tiles and 17 blue tiles; compare red tiles to blue tiles."
+answer   exact 18/17 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [red tiles to blue tiles]
+step 2   Write the first count over the second.   [18/17]
+miss     reversed-ratio-order = 0.9444444444444444   Put red tiles first because that comparison was requested first.
+
+--- write-ratios · seed 987654321 · difficulty 5
+prompt   Write the requested ratio.
+display  story [write-ratio 15 paper files to 12 digital files] "15 paper files and 12 digital files; compare paper files to digital files."
+answer   exact 5/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Write the first requested count over the second.
+step 1   Keep the requested order.   [paper files to digital files]
+step 2   Write the first count over the second.   [15/12]
+miss     reversed-ratio-order = 0.8   Put paper files first because that comparison was requested first."
+`;
