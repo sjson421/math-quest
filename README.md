@@ -17,15 +17,15 @@ how many are playable is a fact about the code, and the status line of
 [`docs/roadmap.md`](docs/roadmap.md) is where it is written down, deliberately in only one
 place.
 
-Stages A, B, and C, and Stage D's Units 7, 8, 9, and the start of Unit 10 are playable. Unit 8
+Stages A, B, and C, and Stage D's Units 7–10 are playable. Unit 8
 covers like- and unlike-denominator addition and subtraction, mixed-number conversion and
 arithmetic, fraction multiplication and division, and fixed-frame word problems. Structured
 math notation, fraction input, and shaded-shape diagram rendering are built, and the keypad
 offers mixed-number entry with `requireMixed` form checking. Unit 9 is complete: decimal
 place value, reading, comparison, rounding, the four operations, decimal/fraction conversion,
-and a money word problem. Unit 10 now covers what a percent is, both conversions to and from
-decimal and fraction form, and finding a percent of a quantity. Later stages still need
-expression input, a tap-to-plot coordinate plane, charts, and timed mode.
+and a money word problem. Unit 10 is complete: percent meaning and conversions, inverse
+percent relationships, percent change, discount/tax/tip, and simple interest. Later stages
+still need expression input, a tap-to-plot coordinate plane, charts, and timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
 milestone, what blocks what, and the unbuilt product features (dress-up, skip-ahead,

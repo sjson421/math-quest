@@ -4,15 +4,16 @@ import { gcd, rational } from '../lib/rational'
 import { band, defineSkill, type BuildContext } from './engine'
 
 /**
- * Unit 10 · Percents — increment 10a.
+ * Unit 10 · Percents.
  *
  * The first four skills read a percent as N parts out of 100 and convert it to
  * and from the two other rational notations; `percent-of` applies it to a
- * quantity. Every answer is a plain whole number, an existing decimal `exact`
- * answer, or an existing fraction `exact` answer — no new capability or
- * `Answer` flag. Percent text ("N%", "N% of M") is not an arithmetic
+ * quantity. The remaining five reverse those relationships and apply them to
+ * percent change, money, and simple interest. Every answer is a plain whole
+ * number, an existing decimal `exact` answer, or an existing fraction `exact`
+ * answer — no new capability or `Answer` flag. Percent text is not an arithmetic
  * expression the independent verifier can evaluate, so each display also
- * carries `wholeNumber`/`decimal` semantic data — the same mechanism Unit 0's
+ * carries structured semantic data — the same mechanism Unit 0's
  * `absolute-value` and Unit 9's `display` operation use for the same reason.
  */
 
@@ -199,4 +200,349 @@ const percentOf = defineSkill({
   },
 })
 
-export const unit10 = [percentMeaning, percentToDecimal, decimalToPercent, percentToFraction, percentOf]
+/** Rates whose inverse predictions are distinct, finite keypad decimals. */
+const INVERSE_PERCENT_BAND = {
+  1: [20, 25, 50],
+  2: [20, 25, 40, 50],
+  3: [5, 20, 25, 40, 50],
+  4: [5, 20, 25, 40, 50, 80],
+  5: [5, 20, 25, 40, 50, 80],
+} satisfies Record<BuildContext['difficulty'], readonly number[]>
+
+const relationScaleBand = (context: BuildContext) =>
+  band(context.difficulty, {
+    1: [2, 6],
+    2: [3, 10],
+    3: [5, 15],
+    4: [8, 22],
+    5: [12, 32],
+  })
+
+const scalePercent = (context: BuildContext, percent: number) => {
+  const g = gcd(100, percent)
+  const [minScale, maxScale] = relationScaleBand(context)
+  const scale = context.rng.int(minScale, maxScale)
+
+  return {
+    whole: (100 / g) * scale,
+    part: (percent / g) * scale,
+  }
+}
+
+const drawPercentRelation = (context: BuildContext) => {
+  const percent = context.rng.pick(INVERSE_PERCENT_BAND[context.difficulty])
+
+  return {
+    percent,
+    ...scalePercent(context, percent),
+  }
+}
+
+const findThePercent = defineSkill({
+  id: 'find-the-percent',
+  name: 'Finding the Percent',
+  blurb: '12 is what percent of 60',
+  build(context) {
+    const { percent, whole, part } = drawPercentRelation(context)
+    const ratio = part / whole
+
+    return {
+      prompt: 'Find the percent.',
+      display: {
+        kind: 'story',
+        text: `${part} is what percent of ${whole}?`,
+        percent: { operation: 'find-percent', part, whole },
+      },
+      answer: intAnswer(percent),
+      // Both wall predictions can be decimal, so the pad has to make the
+      // diagnosed entries possible even though the correct answer is whole.
+      keypad: { allowDecimal: true },
+      misconceptions: [
+        {
+          value: ratio,
+          tag: 'left-as-ratio',
+          nudge: 'That is the decimal form; multiply it by 100 for the percent.',
+        },
+        {
+          value: whole / part,
+          tag: 'divided-whole-by-part',
+          nudge: 'Divide the part by the whole, in that order.',
+        },
+      ],
+      hint: 'Divide the part by the whole, then multiply by 100.',
+      solution: [
+        { text: 'Divide the part by the whole.', detail: `${part} ÷ ${whole} = ${decimalText({ coefficient: percent, scale: 2 })}` },
+        { text: 'Multiply the decimal by 100.', detail: `${decimalText({ coefficient: percent, scale: 2 })} × 100 = ${percent}%` },
+      ],
+    }
+  },
+})
+
+const findTheWhole = defineSkill({
+  id: 'find-the-whole',
+  name: 'Finding the Whole',
+  blurb: '20% is 15 — find the total',
+  build(context) {
+    const { percent, whole, part } = drawPercentRelation(context)
+
+    return {
+      prompt: 'Find the whole.',
+      display: {
+        kind: 'story',
+        text: `${part} is ${percent}% of what number?`,
+        percent: { operation: 'find-whole', percent, part },
+      },
+      answer: intAnswer(whole),
+      keypad: { allowDecimal: true },
+      misconceptions: [
+        {
+          value: (part * percent) / 100,
+          tag: 'applied-percent-again',
+          nudge: 'That takes the percent of the part; reverse the operation instead.',
+        },
+        {
+          value: part / percent,
+          tag: 'used-whole-percent',
+          nudge: 'Write the percent as a decimal before dividing the part.',
+        },
+      ],
+      hint: 'Divide the part by the percent written as a decimal.',
+      solution: [
+        { text: 'Write the percent as a decimal.', detail: `${percent}% → ${decimalText({ coefficient: percent, scale: 2 })}` },
+        { text: 'Divide the part by that decimal.', detail: `${part} ÷ ${decimalText({ coefficient: percent, scale: 2 })} = ${whole}` },
+      ],
+    }
+  },
+})
+
+type PercentChangePair = {
+  percent: number
+  increase: boolean
+}
+
+/**
+ * Each pair makes change ÷ current terminate, so the wrong-base diagnosis can
+ * be entered exactly through the keypad. Higher bands widen the rate set while
+ * `relationScaleBand` grows the displayed values.
+ */
+const PERCENT_CHANGE_BAND = {
+  1: [{ percent: 25, increase: true }, { percent: 20, increase: false }],
+  2: [
+    { percent: 25, increase: true },
+    { percent: 28, increase: true },
+    { percent: 20, increase: false },
+    { percent: 36, increase: false },
+  ],
+  3: [
+    { percent: 25, increase: true },
+    { percent: 28, increase: true },
+    { percent: 60, increase: true },
+    { percent: 20, increase: false },
+    { percent: 36, increase: false },
+    { percent: 50, increase: false },
+  ],
+  4: [
+    { percent: 25, increase: true },
+    { percent: 28, increase: true },
+    { percent: 60, increase: true },
+    { percent: 20, increase: false },
+    { percent: 36, increase: false },
+    { percent: 50, increase: false },
+  ],
+  5: [
+    { percent: 25, increase: true },
+    { percent: 28, increase: true },
+    { percent: 60, increase: true },
+    { percent: 20, increase: false },
+    { percent: 36, increase: false },
+    { percent: 50, increase: false },
+  ],
+} satisfies Record<BuildContext['difficulty'], readonly PercentChangePair[]>
+
+const drawPercentChange = (context: BuildContext) => {
+  const { percent, increase } = context.rng.pick(PERCENT_CHANGE_BAND[context.difficulty])
+  const { whole: original, part: change } = scalePercent(context, percent)
+
+  return {
+    percent,
+    original,
+    change,
+    current: increase ? original + change : original - change,
+  }
+}
+
+const percentChange = defineSkill({
+  id: 'percent-change',
+  name: 'Percent Change',
+  blurb: 'Increase and decrease',
+  build(context) {
+    const { percent, original, change, current } = drawPercentChange(context)
+
+    return {
+      prompt: 'Find the percent change.',
+      display: {
+        kind: 'story',
+        text: `A value changes from ${original} to ${current}.`,
+        percent: { operation: 'percent-change', original, current },
+      },
+      answer: intAnswer(percent),
+      keypad: { allowDecimal: true },
+      misconceptions: [
+        {
+          value: (change * 100) / current,
+          tag: 'used-new-value-as-base',
+          nudge: 'Use the original value as the base, not the new value.',
+        },
+      ],
+      hint: 'Divide the change by the original value, then multiply by 100.',
+      solution: [
+        { text: 'Find the positive amount of change.', detail: `|${current} − ${original}| = ${change}` },
+        { text: 'Divide by the original value.', detail: `${change} ÷ ${original} = ${decimalText({ coefficient: percent, scale: 2 })}` },
+        { text: 'Multiply the decimal by 100.', detail: `${decimalText({ coefficient: percent, scale: 2 })} × 100 = ${percent}%` },
+      ],
+    }
+  },
+})
+
+const APPLIED_PERCENT_BAND = {
+  1: [10, 20],
+  2: [10, 15, 20],
+  3: [5, 10, 15, 20, 25],
+  4: [5, 10, 15, 20, 25, 30],
+  5: [5, 10, 15, 20, 25, 30, 40],
+} satisfies Record<BuildContext['difficulty'], readonly number[]>
+
+const moneyBand = (context: BuildContext) =>
+  band(context.difficulty, {
+    1: [10, 40],
+    2: [20, 80],
+    3: [30, 150],
+    4: [50, 300],
+    5: [100, 600],
+  })
+
+const dollars = (cents: number) =>
+  `$${Math.floor(cents / 100)}.${String(cents % 100).padStart(2, '0')}`
+
+const discountTaxTip = defineSkill({
+  id: 'discount-tax-tip',
+  name: 'Discount, Tax & Tip',
+  blurb: 'Percents applied to a bill',
+  build(context) {
+    const operation = context.rng.pick(['discount', 'tax', 'tip'] as const)
+    const percent = context.rng.pick(APPLIED_PERCENT_BAND[context.difficulty])
+    const [minDollars, maxDollars] = moneyBand(context)
+    const baseCents = context.rng.int(minDollars, maxDollars) * 100
+    const adjustmentCents = (baseCents * percent) / 100
+    const subtract = operation === 'discount'
+    const finalCents = subtract ? baseCents - adjustmentCents : baseCents + adjustmentCents
+    const oppositeCents = subtract ? baseCents + adjustmentCents : baseCents - adjustmentCents
+    const text =
+      operation === 'discount'
+        ? `An item costs ${dollars(baseCents)} with a ${percent}% discount.`
+        : operation === 'tax'
+          ? `A ${dollars(baseCents)} purchase has ${percent}% sales tax.`
+          : `A ${dollars(baseCents)} bill has a ${percent}% tip.`
+
+    return {
+      prompt: operation === 'discount' ? 'What is the final price?' : 'What is the final total?',
+      display: { kind: 'story', text, percent: { operation, baseCents, percent } },
+      answer: exactAnswer(finalCents, 2),
+      keypad: { allowDecimal: true },
+      misconceptions: [
+        {
+          value: adjustmentCents / 100,
+          tag: 'answered-adjustment-only',
+          nudge: `That is the ${operation === 'discount' ? 'discount' : operation}; apply it to the original amount.`,
+        },
+        {
+          value: oppositeCents / 100,
+          tag: 'used-opposite-direction',
+          nudge:
+            operation === 'discount'
+              ? 'Subtract the percent amount from the original amount.'
+              : 'Add the percent amount to the original amount.',
+        },
+      ],
+      hint: `${operation === 'discount' ? 'Subtract' : 'Add'} the percent amount ${operation === 'discount' ? 'from' : 'to'} the original amount.`,
+      solution: [
+        { text: `Find the ${operation === 'discount' ? 'discount' : operation} amount.`, detail: `${dollars(baseCents)} × ${percent}% = ${dollars(adjustmentCents)}` },
+        { text: `${operation === 'discount' ? 'Subtract it from' : 'Add it to'} the original amount.`, detail: `${dollars(baseCents)} ${subtract ? '−' : '+'} ${dollars(adjustmentCents)} = ${dollars(finalCents)}` },
+      ],
+    }
+  },
+})
+
+const principalBand = (context: BuildContext) =>
+  band(context.difficulty, {
+    1: [100, 500],
+    2: [200, 1000],
+    3: [500, 2500],
+    4: [1000, 5000],
+    5: [2500, 10000],
+  })
+
+const INTEREST_RATE_BAND = {
+  1: [2, 5],
+  2: [2, 4, 5],
+  3: [3, 4, 5, 6],
+  4: [3, 4, 5, 6, 8],
+  5: [4, 5, 6, 8, 10],
+} satisfies Record<BuildContext['difficulty'], readonly number[]>
+
+const simpleInterest = defineSkill({
+  id: 'simple-interest',
+  name: 'Simple Interest',
+  blurb: 'I = Prt',
+  build(context) {
+    const [minPrincipal, maxPrincipal] = principalBand(context)
+    const principalCents = context.rng.int(minPrincipal, maxPrincipal) * 100
+    const percent = context.rng.pick(INTEREST_RATE_BAND[context.difficulty])
+    const years = context.rng.int(1, context.difficulty + 1)
+    const interestCents = (principalCents * percent * years) / 100
+
+    return {
+      prompt: 'How much simple interest is earned?',
+      display: {
+        kind: 'story',
+        text:
+          `I = Prt. P = ${dollars(principalCents)}, r = ${percent}%, ` +
+          `t = ${years} ${years === 1 ? 'year' : 'years'}.`,
+        percent: { operation: 'simple-interest', principalCents, percent, years },
+      },
+      answer: exactAnswer(interestCents, 2),
+      keypad: { allowDecimal: true },
+      misconceptions: [
+        {
+          value: interestCents,
+          tag: 'used-whole-percent-rate',
+          nudge: 'Write the percent rate as a decimal before multiplying.',
+        },
+        {
+          value: (principalCents + interestCents) / 100,
+          tag: 'answered-final-balance',
+          nudge: 'That includes the principal; the question asks for interest only.',
+        },
+      ],
+      hint: 'Use I = Prt with the rate written as a decimal.',
+      solution: [
+        { text: 'Use the given formula.', detail: 'I = Prt' },
+        { text: 'Write the rate as a decimal.', detail: `${percent}% → ${decimalText({ coefficient: percent, scale: 2 })}` },
+        { text: 'Multiply principal, rate, and time.', detail: `${dollars(principalCents)} × ${decimalText({ coefficient: percent, scale: 2 })} × ${years} = ${dollars(interestCents)}` },
+      ],
+    }
+  },
+})
+
+export const unit10 = [
+  percentMeaning,
+  percentToDecimal,
+  decimalToPercent,
+  percentToFraction,
+  percentOf,
+  findThePercent,
+  findTheWhole,
+  percentChange,
+  discountTaxTip,
+  simpleInterest,
+]

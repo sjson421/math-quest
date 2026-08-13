@@ -126,7 +126,7 @@ describe('division stories', () => {
     // does not divide, that prediction is a fraction nothing on a whole-number
     // pad can produce — a diagnosis that sits in the bank and never once fires.
     for (const problem of everyProblem('div-words')) {
-      if (problem.display.kind !== 'story') throw new Error('expected a story problem')
+      if (problem.display.kind !== 'story' || !problem.display.operands) throw new Error('expected a story problem')
       const [total, groups] = problem.display.operands
       const distractorPair = (problem.misconceptions ?? []).find(
         (m) => m.tag === 'distractor-pair',
@@ -142,7 +142,7 @@ describe('division stories', () => {
     // was 4 and so was the answer, so the sentence said the answer out loud
     // meaning something else, and a learner could be right for the wrong reason.
     for (const problem of everyProblem('div-words')) {
-      if (problem.display.kind !== 'story') throw new Error('expected a story problem')
+      if (problem.display.kind !== 'story' || !problem.display.operands) throw new Error('expected a story problem')
       const [total, groups] = problem.display.operands
       const share = total / groups
       // Whatever the sentence names that is neither the total nor the group

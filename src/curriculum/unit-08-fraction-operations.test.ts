@@ -741,7 +741,7 @@ describe('fraction-words', () => {
 
   it('carries a proper part and whole and answers with their exact fraction', () => {
     for (const problem of everyProblem('fraction-words')) {
-      if (problem.display.kind !== 'story') throw new Error('expected a fraction story')
+      if (problem.display.kind !== 'story' || !problem.display.operands) throw new Error('expected a fraction story')
       const [part, whole] = problem.display.operands
       const [min, max] = wholeBounds[problem.difficulty]
 
@@ -758,7 +758,7 @@ describe('fraction-words', () => {
 
   it('keeps prose, operands, and all three frame-owned diagnoses aligned', () => {
     for (const problem of everyProblem('fraction-words')) {
-      if (problem.display.kind !== 'story') throw new Error('expected a fraction story')
+      if (problem.display.kind !== 'story' || !problem.display.operands) throw new Error('expected a fraction story')
       const [part, whole] = problem.display.operands
       const numbers = problem.display.text.match(/\d+/g)?.map(Number) ?? []
       const distractor = numbers[2]
@@ -807,7 +807,7 @@ describe('the fraction-operation unit', () => {
 
   it('widens each skill from difficulty one to five', () => {
     const magnitude = (problem: Problem) => {
-      if (problem.display.kind === 'story') {
+      if (problem.display.kind === 'story' && problem.display.operands) {
         return problem.display.operands.reduce((sum, value) => sum + value, 0) / problem.display.operands.length
       }
       if (problem.display.kind !== 'math' || !problem.display.fraction) {

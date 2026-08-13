@@ -2,7 +2,7 @@
 
 What is left, in the order it should be done.
 
-**Status: 94 of 201 skills are playable.** Stages A, B and C, and Stage D's Units 7, 8 and 9
+**Status: 104 of 201 skills are playable.** Stages A, B and C, and Stage D's Units 7–10
 are playable. Choice input,
 number-line input, math notation, fraction input and diagrams are built, so
 `AVAILABLE_CAPABILITIES` holds
@@ -19,7 +19,9 @@ comparisons use choices; and a fraction is placed on an exact rational line. Uni
 operation skills are complete, including mixed-number arithmetic, multiplication, division,
 and fixed-frame fraction stories. Unit 9 is now complete: place value, reading, comparison,
 rounding, addition, subtraction, multiplication, division, decimal/fraction conversion and a
-money-applied word problem, all with exact base-ten data. Units 10 and 11 are next.
+money-applied word problem, all with exact base-ten data. Unit 10 is complete: meaning,
+conversions, inverse percent relationships, percent change, discount/tax/tip and simple
+interest with its supplied GED formula. Unit 11 is next.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 

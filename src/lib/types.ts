@@ -169,6 +169,20 @@ export type DecimalData =
 export type DecimalArithmeticData = Extract<DecimalData, { operation: 'add' | 'sub' | 'mult' }>
 
 /**
+ * The source quantities behind prose-shaped percent problems.
+ *
+ * Story text is for the learner, not a data format. These named arms let the
+ * generator checks reconstruct both that text and its answer without parsing
+ * English or trusting the arithmetic that authored the problem.
+ */
+export type PercentData =
+  | { operation: 'find-percent'; part: number; whole: number }
+  | { operation: 'find-whole'; percent: number; part: number }
+  | { operation: 'percent-change'; original: number; current: number }
+  | { operation: 'discount' | 'tax' | 'tip'; baseCents: number; percent: number }
+  | { operation: 'simple-interest'; principalCents: number; percent: number; years: number }
+
+/**
  * Structured notation for the closed expression surface used by Stages D–G.
  *
  * Generators build this tree directly rather than passing TeX or a string to a
@@ -290,9 +304,14 @@ export type Display =
    * The operands are not redundant with the text. The answer has to be
    * recomputable from what is displayed without trusting the generator, and
    * nothing can do that by reading English — least of all a sentence that
-   * deliberately mentions quantities the answer does not use.
+   * deliberately mentions quantities the answer does not use. Arithmetic
+   * stories carry operands and one operator; percent stories carry a named
+   * relationship instead.
    */
-  | { kind: 'story'; text: string; operands: number[]; operator: Operator }
+  | ({ kind: 'story'; text: string } & (
+      | { operands: number[]; operator: Operator; percent?: never }
+      | { percent: PercentData; operands?: never; operator?: never }
+    ))
   /** Structured notation with the one complete name assistive technology reads. */
   | {
       kind: 'math'

@@ -328,7 +328,7 @@ describe('decimal-to-fraction', () => {
 describe('money-problems', () => {
   it('carries an integer-cent price and quantity whose product matches the stated dollar answer', () => {
     for (const problem of problems('money-problems')) {
-      if (problem.display.kind !== 'story') throw new Error('expected story display')
+      if (problem.display.kind !== 'story' || !problem.display.operands) throw new Error('expected story display')
       const [priceCents, quantity] = problem.display.operands
       expect(problem.display.operator).toBe('×')
       expect(exact(problem)).toEqual(rational(priceCents * quantity, 100))
@@ -338,7 +338,7 @@ describe('money-problems', () => {
 
   it('predicts the price alone and the price times the wrong quantity, in dollars', () => {
     for (const problem of problems('money-problems')) {
-      if (problem.display.kind !== 'story') throw new Error('expected story display')
+      if (problem.display.kind !== 'story' || !problem.display.operands) throw new Error('expected story display')
       const [priceCents] = problem.display.operands
       const answeredPart = problem.misconceptions?.find(({ tag }) => tag === 'answered-part')
       expect(answeredPart?.value).toBe(priceCents / 100)

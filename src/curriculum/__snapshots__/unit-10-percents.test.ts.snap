@@ -252,6 +252,1214 @@ miss     unmoved-point = 0.95   Move the decimal point two places right before w
 miss     shifted-one-place = 9.5   Move the decimal point two places right, not one."
 `;
 
+exports[`recorded output: discount-tax-tip > matches the wording recorded when the skill landed 1`] = `
+"--- discount-tax-tip · seed 1 · difficulty 1
+prompt   What is the final total?
+display  story [tax 2600 cents at 10%] "A $26.00 purchase has 10% sales tax."
+answer   exact 143/5
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tax amount.   [$26.00 × 10% = $2.60]
+step 2   Add it to the original amount.   [$26.00 + $2.60 = $28.60]
+miss     answered-adjustment-only = 2.6   That is the tax; apply it to the original amount.
+miss     used-opposite-direction = 23.4   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 12345 · difficulty 1
+prompt   What is the final total?
+display  story [tip 2500 cents at 10%] "A $25.00 bill has a 10% tip."
+answer   exact 55/2
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tip amount.   [$25.00 × 10% = $2.50]
+step 2   Add it to the original amount.   [$25.00 + $2.50 = $27.50]
+miss     answered-adjustment-only = 2.5   That is the tip; apply it to the original amount.
+miss     used-opposite-direction = 22.5   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 67890 · difficulty 1
+prompt   What is the final total?
+display  story [tax 2100 cents at 20%] "A $21.00 purchase has 20% sales tax."
+answer   exact 126/5
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tax amount.   [$21.00 × 20% = $4.20]
+step 2   Add it to the original amount.   [$21.00 + $4.20 = $25.20]
+miss     answered-adjustment-only = 4.2   That is the tax; apply it to the original amount.
+miss     used-opposite-direction = 16.8   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 424242 · difficulty 1
+prompt   What is the final price?
+display  story [discount 1500 cents at 10%] "An item costs $15.00 with a 10% discount."
+answer   exact 27/2
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the percent amount from the original amount.
+step 1   Find the discount amount.   [$15.00 × 10% = $1.50]
+step 2   Subtract it from the original amount.   [$15.00 − $1.50 = $13.50]
+miss     answered-adjustment-only = 1.5   That is the discount; apply it to the original amount.
+miss     used-opposite-direction = 16.5   Subtract the percent amount from the original amount.
+
+--- discount-tax-tip · seed 987654321 · difficulty 1
+prompt   What is the final total?
+display  story [tip 1000 cents at 10%] "A $10.00 bill has a 10% tip."
+answer   exact 11/1
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tip amount.   [$10.00 × 10% = $1.00]
+step 2   Add it to the original amount.   [$10.00 + $1.00 = $11.00]
+miss     answered-adjustment-only = 1   That is the tip; apply it to the original amount.
+miss     used-opposite-direction = 9   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 1 · difficulty 2
+prompt   What is the final total?
+display  story [tax 5200 cents at 10%] "A $52.00 purchase has 10% sales tax."
+answer   exact 286/5
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tax amount.   [$52.00 × 10% = $5.20]
+step 2   Add it to the original amount.   [$52.00 + $5.20 = $57.20]
+miss     answered-adjustment-only = 5.2   That is the tax; apply it to the original amount.
+miss     used-opposite-direction = 46.8   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 12345 · difficulty 2
+prompt   What is the final total?
+display  story [tip 4900 cents at 10%] "A $49.00 bill has a 10% tip."
+answer   exact 539/10
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tip amount.   [$49.00 × 10% = $4.90]
+step 2   Add it to the original amount.   [$49.00 + $4.90 = $53.90]
+miss     answered-adjustment-only = 4.9   That is the tip; apply it to the original amount.
+miss     used-opposite-direction = 44.1   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 67890 · difficulty 2
+prompt   What is the final total?
+display  story [tax 4200 cents at 15%] "A $42.00 purchase has 15% sales tax."
+answer   exact 483/10
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tax amount.   [$42.00 × 15% = $6.30]
+step 2   Add it to the original amount.   [$42.00 + $6.30 = $48.30]
+miss     answered-adjustment-only = 6.3   That is the tax; apply it to the original amount.
+miss     used-opposite-direction = 35.7   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 424242 · difficulty 2
+prompt   What is the final price?
+display  story [discount 3100 cents at 10%] "An item costs $31.00 with a 10% discount."
+answer   exact 279/10
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the percent amount from the original amount.
+step 1   Find the discount amount.   [$31.00 × 10% = $3.10]
+step 2   Subtract it from the original amount.   [$31.00 − $3.10 = $27.90]
+miss     answered-adjustment-only = 3.1   That is the discount; apply it to the original amount.
+miss     used-opposite-direction = 34.1   Subtract the percent amount from the original amount.
+
+--- discount-tax-tip · seed 987654321 · difficulty 2
+prompt   What is the final total?
+display  story [tip 2000 cents at 10%] "A $20.00 bill has a 10% tip."
+answer   exact 22/1
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tip amount.   [$20.00 × 10% = $2.00]
+step 2   Add it to the original amount.   [$20.00 + $2.00 = $22.00]
+miss     answered-adjustment-only = 2   That is the tip; apply it to the original amount.
+miss     used-opposite-direction = 18   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 1 · difficulty 3
+prompt   What is the final total?
+display  story [tax 9300 cents at 5%] "A $93.00 purchase has 5% sales tax."
+answer   exact 1953/20
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tax amount.   [$93.00 × 5% = $4.65]
+step 2   Add it to the original amount.   [$93.00 + $4.65 = $97.65]
+miss     answered-adjustment-only = 4.65   That is the tax; apply it to the original amount.
+miss     used-opposite-direction = 88.35   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 12345 · difficulty 3
+prompt   What is the final total?
+display  story [tip 8800 cents at 10%] "A $88.00 bill has a 10% tip."
+answer   exact 484/5
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tip amount.   [$88.00 × 10% = $8.80]
+step 2   Add it to the original amount.   [$88.00 + $8.80 = $96.80]
+miss     answered-adjustment-only = 8.8   That is the tip; apply it to the original amount.
+miss     used-opposite-direction = 79.2   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 67890 · difficulty 3
+prompt   What is the final total?
+display  story [tax 7300 cents at 15%] "A $73.00 purchase has 15% sales tax."
+answer   exact 1679/20
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tax amount.   [$73.00 × 15% = $10.95]
+step 2   Add it to the original amount.   [$73.00 + $10.95 = $83.95]
+miss     answered-adjustment-only = 10.95   That is the tax; apply it to the original amount.
+miss     used-opposite-direction = 62.05   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 424242 · difficulty 3
+prompt   What is the final price?
+display  story [discount 5200 cents at 10%] "An item costs $52.00 with a 10% discount."
+answer   exact 234/5
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the percent amount from the original amount.
+step 1   Find the discount amount.   [$52.00 × 10% = $5.20]
+step 2   Subtract it from the original amount.   [$52.00 − $5.20 = $46.80]
+miss     answered-adjustment-only = 5.2   That is the discount; apply it to the original amount.
+miss     used-opposite-direction = 57.2   Subtract the percent amount from the original amount.
+
+--- discount-tax-tip · seed 987654321 · difficulty 3
+prompt   What is the final total?
+display  story [tip 3100 cents at 5%] "A $31.00 bill has a 5% tip."
+answer   exact 651/20
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tip amount.   [$31.00 × 5% = $1.55]
+step 2   Add it to the original amount.   [$31.00 + $1.55 = $32.55]
+miss     answered-adjustment-only = 1.55   That is the tip; apply it to the original amount.
+miss     used-opposite-direction = 29.45   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 1 · difficulty 4
+prompt   What is the final total?
+display  story [tax 18200 cents at 5%] "A $182.00 purchase has 5% sales tax."
+answer   exact 1911/10
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tax amount.   [$182.00 × 5% = $9.10]
+step 2   Add it to the original amount.   [$182.00 + $9.10 = $191.10]
+miss     answered-adjustment-only = 9.1   That is the tax; apply it to the original amount.
+miss     used-opposite-direction = 172.9   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 12345 · difficulty 4
+prompt   What is the final total?
+display  story [tip 17100 cents at 10%] "A $171.00 bill has a 10% tip."
+answer   exact 1881/10
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tip amount.   [$171.00 × 10% = $17.10]
+step 2   Add it to the original amount.   [$171.00 + $17.10 = $188.10]
+miss     answered-adjustment-only = 17.1   That is the tip; apply it to the original amount.
+miss     used-opposite-direction = 153.9   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 67890 · difficulty 4
+prompt   What is the final total?
+display  story [tax 14100 cents at 20%] "A $141.00 purchase has 20% sales tax."
+answer   exact 846/5
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tax amount.   [$141.00 × 20% = $28.20]
+step 2   Add it to the original amount.   [$141.00 + $28.20 = $169.20]
+miss     answered-adjustment-only = 28.2   That is the tax; apply it to the original amount.
+miss     used-opposite-direction = 112.8   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 424242 · difficulty 4
+prompt   What is the final price?
+display  story [discount 9600 cents at 10%] "An item costs $96.00 with a 10% discount."
+answer   exact 432/5
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the percent amount from the original amount.
+step 1   Find the discount amount.   [$96.00 × 10% = $9.60]
+step 2   Subtract it from the original amount.   [$96.00 − $9.60 = $86.40]
+miss     answered-adjustment-only = 9.6   That is the discount; apply it to the original amount.
+miss     used-opposite-direction = 105.6   Subtract the percent amount from the original amount.
+
+--- discount-tax-tip · seed 987654321 · difficulty 4
+prompt   What is the final total?
+display  story [tip 5300 cents at 5%] "A $53.00 bill has a 5% tip."
+answer   exact 1113/20
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tip amount.   [$53.00 × 5% = $2.65]
+step 2   Add it to the original amount.   [$53.00 + $2.65 = $55.65]
+miss     answered-adjustment-only = 2.65   That is the tip; apply it to the original amount.
+miss     used-opposite-direction = 50.35   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 1 · difficulty 5
+prompt   What is the final total?
+display  story [tax 36400 cents at 5%] "A $364.00 purchase has 5% sales tax."
+answer   exact 1911/5
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tax amount.   [$364.00 × 5% = $18.20]
+step 2   Add it to the original amount.   [$364.00 + $18.20 = $382.20]
+miss     answered-adjustment-only = 18.2   That is the tax; apply it to the original amount.
+miss     used-opposite-direction = 345.8   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 12345 · difficulty 5
+prompt   What is the final total?
+display  story [tip 34200 cents at 15%] "A $342.00 bill has a 15% tip."
+answer   exact 3933/10
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tip amount.   [$342.00 × 15% = $51.30]
+step 2   Add it to the original amount.   [$342.00 + $51.30 = $393.30]
+miss     answered-adjustment-only = 51.3   That is the tip; apply it to the original amount.
+miss     used-opposite-direction = 290.7   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 67890 · difficulty 5
+prompt   What is the final total?
+display  story [tax 28100 cents at 25%] "A $281.00 purchase has 25% sales tax."
+answer   exact 1405/4
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tax amount.   [$281.00 × 25% = $70.25]
+step 2   Add it to the original amount.   [$281.00 + $70.25 = $351.25]
+miss     answered-adjustment-only = 70.25   That is the tax; apply it to the original amount.
+miss     used-opposite-direction = 210.75   Add the percent amount to the original amount.
+
+--- discount-tax-tip · seed 424242 · difficulty 5
+prompt   What is the final price?
+display  story [discount 19200 cents at 10%] "An item costs $192.00 with a 10% discount."
+answer   exact 864/5
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the percent amount from the original amount.
+step 1   Find the discount amount.   [$192.00 × 10% = $19.20]
+step 2   Subtract it from the original amount.   [$192.00 − $19.20 = $172.80]
+miss     answered-adjustment-only = 19.2   That is the discount; apply it to the original amount.
+miss     used-opposite-direction = 211.2   Subtract the percent amount from the original amount.
+
+--- discount-tax-tip · seed 987654321 · difficulty 5
+prompt   What is the final total?
+display  story [tip 10700 cents at 5%] "A $107.00 bill has a 5% tip."
+answer   exact 2247/20
+input    keypad
+keypad   allowDecimal=true
+hint     Add the percent amount to the original amount.
+step 1   Find the tip amount.   [$107.00 × 5% = $5.35]
+step 2   Add it to the original amount.   [$107.00 + $5.35 = $112.35]
+miss     answered-adjustment-only = 5.35   That is the tip; apply it to the original amount.
+miss     used-opposite-direction = 101.65   Add the percent amount to the original amount."
+`;
+
+exports[`recorded output: find-the-percent > matches the wording recorded when the skill landed 1`] = `
+"--- find-the-percent · seed 1 · difficulty 1
+prompt   Find the percent.
+display  story [find-percent 2/8] "2 is what percent of 8?"
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [2 ÷ 8 = 0.25]
+step 2   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     left-as-ratio = 0.25   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 4   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 12345 · difficulty 1
+prompt   Find the percent.
+display  story [find-percent 3/6] "3 is what percent of 6?"
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [3 ÷ 6 = 0.50]
+step 2   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     left-as-ratio = 0.5   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 2   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 67890 · difficulty 1
+prompt   Find the percent.
+display  story [find-percent 4/16] "4 is what percent of 16?"
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [4 ÷ 16 = 0.25]
+step 2   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     left-as-ratio = 0.25   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 4   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 424242 · difficulty 1
+prompt   Find the percent.
+display  story [find-percent 3/15] "3 is what percent of 15?"
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [3 ÷ 15 = 0.20]
+step 2   Multiply the decimal by 100.   [0.20 × 100 = 20%]
+miss     left-as-ratio = 0.2   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 5   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 987654321 · difficulty 1
+prompt   Find the percent.
+display  story [find-percent 2/4] "2 is what percent of 4?"
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [2 ÷ 4 = 0.50]
+step 2   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     left-as-ratio = 0.5   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 2   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 1 · difficulty 2
+prompt   Find the percent.
+display  story [find-percent 6/15] "6 is what percent of 15?"
+answer   exact 40/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [6 ÷ 15 = 0.40]
+step 2   Multiply the decimal by 100.   [0.40 × 100 = 40%]
+miss     left-as-ratio = 0.4   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 2.5   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 12345 · difficulty 2
+prompt   Find the percent.
+display  story [find-percent 5/10] "5 is what percent of 10?"
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [5 ÷ 10 = 0.50]
+step 2   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     left-as-ratio = 0.5   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 2   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 67890 · difficulty 2
+prompt   Find the percent.
+display  story [find-percent 7/28] "7 is what percent of 28?"
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [7 ÷ 28 = 0.25]
+step 2   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     left-as-ratio = 0.25   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 4   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 424242 · difficulty 2
+prompt   Find the percent.
+display  story [find-percent 4/20] "4 is what percent of 20?"
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [4 ÷ 20 = 0.20]
+step 2   Multiply the decimal by 100.   [0.20 × 100 = 20%]
+miss     left-as-ratio = 0.2   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 5   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 987654321 · difficulty 2
+prompt   Find the percent.
+display  story [find-percent 4/8] "4 is what percent of 8?"
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [4 ÷ 8 = 0.50]
+step 2   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     left-as-ratio = 0.5   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 2   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 1 · difficulty 3
+prompt   Find the percent.
+display  story [find-percent 10/25] "10 is what percent of 25?"
+answer   exact 40/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [10 ÷ 25 = 0.40]
+step 2   Multiply the decimal by 100.   [0.40 × 100 = 40%]
+miss     left-as-ratio = 0.4   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 2.5   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 12345 · difficulty 3
+prompt   Find the percent.
+display  story [find-percent 8/16] "8 is what percent of 16?"
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [8 ÷ 16 = 0.50]
+step 2   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     left-as-ratio = 0.5   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 2   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 67890 · difficulty 3
+prompt   Find the percent.
+display  story [find-percent 11/55] "11 is what percent of 55?"
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [11 ÷ 55 = 0.20]
+step 2   Multiply the decimal by 100.   [0.20 × 100 = 20%]
+miss     left-as-ratio = 0.2   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 5   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 424242 · difficulty 3
+prompt   Find the percent.
+display  story [find-percent 7/140] "7 is what percent of 140?"
+answer   exact 5/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [7 ÷ 140 = 0.05]
+step 2   Multiply the decimal by 100.   [0.05 × 100 = 5%]
+miss     left-as-ratio = 0.05   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 20   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 987654321 · difficulty 3
+prompt   Find the percent.
+display  story [find-percent 6/12] "6 is what percent of 12?"
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [6 ÷ 12 = 0.50]
+step 2   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     left-as-ratio = 0.5   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 2   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 1 · difficulty 4
+prompt   Find the percent.
+display  story [find-percent 16/40] "16 is what percent of 40?"
+answer   exact 40/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [16 ÷ 40 = 0.40]
+step 2   Multiply the decimal by 100.   [0.40 × 100 = 40%]
+miss     left-as-ratio = 0.4   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 2.5   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 12345 · difficulty 4
+prompt   Find the percent.
+display  story [find-percent 48/60] "48 is what percent of 60?"
+answer   exact 80/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [48 ÷ 60 = 0.80]
+step 2   Multiply the decimal by 100.   [0.80 × 100 = 80%]
+miss     left-as-ratio = 0.8   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 1.25   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 67890 · difficulty 4
+prompt   Find the percent.
+display  story [find-percent 16/64] "16 is what percent of 64?"
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [16 ÷ 64 = 0.25]
+step 2   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     left-as-ratio = 0.25   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 4   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 424242 · difficulty 4
+prompt   Find the percent.
+display  story [find-percent 11/220] "11 is what percent of 220?"
+answer   exact 5/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [11 ÷ 220 = 0.05]
+step 2   Multiply the decimal by 100.   [0.05 × 100 = 5%]
+miss     left-as-ratio = 0.05   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 20   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 987654321 · difficulty 4
+prompt   Find the percent.
+display  story [find-percent 40/50] "40 is what percent of 50?"
+answer   exact 80/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [40 ÷ 50 = 0.80]
+step 2   Multiply the decimal by 100.   [0.80 × 100 = 80%]
+miss     left-as-ratio = 0.8   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 1.25   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 1 · difficulty 5
+prompt   Find the percent.
+display  story [find-percent 24/60] "24 is what percent of 60?"
+answer   exact 40/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [24 ÷ 60 = 0.40]
+step 2   Multiply the decimal by 100.   [0.40 × 100 = 40%]
+miss     left-as-ratio = 0.4   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 2.5   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 12345 · difficulty 5
+prompt   Find the percent.
+display  story [find-percent 72/90] "72 is what percent of 90?"
+answer   exact 80/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [72 ÷ 90 = 0.80]
+step 2   Multiply the decimal by 100.   [0.80 × 100 = 80%]
+miss     left-as-ratio = 0.8   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 1.25   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 67890 · difficulty 5
+prompt   Find the percent.
+display  story [find-percent 24/96] "24 is what percent of 96?"
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [24 ÷ 96 = 0.25]
+step 2   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     left-as-ratio = 0.25   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 4   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 424242 · difficulty 5
+prompt   Find the percent.
+display  story [find-percent 16/320] "16 is what percent of 320?"
+answer   exact 5/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [16 ÷ 320 = 0.05]
+step 2   Multiply the decimal by 100.   [0.05 × 100 = 5%]
+miss     left-as-ratio = 0.05   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 20   Divide the part by the whole, in that order.
+
+--- find-the-percent · seed 987654321 · difficulty 5
+prompt   Find the percent.
+display  story [find-percent 56/70] "56 is what percent of 70?"
+answer   exact 80/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the whole, then multiply by 100.
+step 1   Divide the part by the whole.   [56 ÷ 70 = 0.80]
+step 2   Multiply the decimal by 100.   [0.80 × 100 = 80%]
+miss     left-as-ratio = 0.8   That is the decimal form; multiply it by 100 for the percent.
+miss     divided-whole-by-part = 1.25   Divide the part by the whole, in that order."
+`;
+
+exports[`recorded output: find-the-whole > matches the wording recorded when the skill landed 1`] = `
+"--- find-the-whole · seed 1 · difficulty 1
+prompt   Find the whole.
+display  story [find-whole 2 at 25%] "2 is 25% of what number?"
+answer   exact 8/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [25% → 0.25]
+step 2   Divide the part by that decimal.   [2 ÷ 0.25 = 8]
+miss     applied-percent-again = 0.5   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.08   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 12345 · difficulty 1
+prompt   Find the whole.
+display  story [find-whole 3 at 50%] "3 is 50% of what number?"
+answer   exact 6/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [50% → 0.50]
+step 2   Divide the part by that decimal.   [3 ÷ 0.50 = 6]
+miss     applied-percent-again = 1.5   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.06   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 67890 · difficulty 1
+prompt   Find the whole.
+display  story [find-whole 4 at 25%] "4 is 25% of what number?"
+answer   exact 16/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [25% → 0.25]
+step 2   Divide the part by that decimal.   [4 ÷ 0.25 = 16]
+miss     applied-percent-again = 1   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.16   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 424242 · difficulty 1
+prompt   Find the whole.
+display  story [find-whole 3 at 20%] "3 is 20% of what number?"
+answer   exact 15/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [20% → 0.20]
+step 2   Divide the part by that decimal.   [3 ÷ 0.20 = 15]
+miss     applied-percent-again = 0.6   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.15   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 987654321 · difficulty 1
+prompt   Find the whole.
+display  story [find-whole 2 at 50%] "2 is 50% of what number?"
+answer   exact 4/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [50% → 0.50]
+step 2   Divide the part by that decimal.   [2 ÷ 0.50 = 4]
+miss     applied-percent-again = 1   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.04   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 1 · difficulty 2
+prompt   Find the whole.
+display  story [find-whole 6 at 40%] "6 is 40% of what number?"
+answer   exact 15/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [40% → 0.40]
+step 2   Divide the part by that decimal.   [6 ÷ 0.40 = 15]
+miss     applied-percent-again = 2.4   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.15   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 12345 · difficulty 2
+prompt   Find the whole.
+display  story [find-whole 5 at 50%] "5 is 50% of what number?"
+answer   exact 10/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [50% → 0.50]
+step 2   Divide the part by that decimal.   [5 ÷ 0.50 = 10]
+miss     applied-percent-again = 2.5   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.1   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 67890 · difficulty 2
+prompt   Find the whole.
+display  story [find-whole 7 at 25%] "7 is 25% of what number?"
+answer   exact 28/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [25% → 0.25]
+step 2   Divide the part by that decimal.   [7 ÷ 0.25 = 28]
+miss     applied-percent-again = 1.75   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.28   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 424242 · difficulty 2
+prompt   Find the whole.
+display  story [find-whole 4 at 20%] "4 is 20% of what number?"
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [20% → 0.20]
+step 2   Divide the part by that decimal.   [4 ÷ 0.20 = 20]
+miss     applied-percent-again = 0.8   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.2   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 987654321 · difficulty 2
+prompt   Find the whole.
+display  story [find-whole 4 at 50%] "4 is 50% of what number?"
+answer   exact 8/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [50% → 0.50]
+step 2   Divide the part by that decimal.   [4 ÷ 0.50 = 8]
+miss     applied-percent-again = 2   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.08   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 1 · difficulty 3
+prompt   Find the whole.
+display  story [find-whole 10 at 40%] "10 is 40% of what number?"
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [40% → 0.40]
+step 2   Divide the part by that decimal.   [10 ÷ 0.40 = 25]
+miss     applied-percent-again = 4   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.25   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 12345 · difficulty 3
+prompt   Find the whole.
+display  story [find-whole 8 at 50%] "8 is 50% of what number?"
+answer   exact 16/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [50% → 0.50]
+step 2   Divide the part by that decimal.   [8 ÷ 0.50 = 16]
+miss     applied-percent-again = 4   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.16   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 67890 · difficulty 3
+prompt   Find the whole.
+display  story [find-whole 11 at 20%] "11 is 20% of what number?"
+answer   exact 55/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [20% → 0.20]
+step 2   Divide the part by that decimal.   [11 ÷ 0.20 = 55]
+miss     applied-percent-again = 2.2   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.55   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 424242 · difficulty 3
+prompt   Find the whole.
+display  story [find-whole 7 at 5%] "7 is 5% of what number?"
+answer   exact 140/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [5% → 0.05]
+step 2   Divide the part by that decimal.   [7 ÷ 0.05 = 140]
+miss     applied-percent-again = 0.35   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 1.4   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 987654321 · difficulty 3
+prompt   Find the whole.
+display  story [find-whole 6 at 50%] "6 is 50% of what number?"
+answer   exact 12/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [50% → 0.50]
+step 2   Divide the part by that decimal.   [6 ÷ 0.50 = 12]
+miss     applied-percent-again = 3   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.12   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 1 · difficulty 4
+prompt   Find the whole.
+display  story [find-whole 16 at 40%] "16 is 40% of what number?"
+answer   exact 40/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [40% → 0.40]
+step 2   Divide the part by that decimal.   [16 ÷ 0.40 = 40]
+miss     applied-percent-again = 6.4   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.4   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 12345 · difficulty 4
+prompt   Find the whole.
+display  story [find-whole 48 at 80%] "48 is 80% of what number?"
+answer   exact 60/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [80% → 0.80]
+step 2   Divide the part by that decimal.   [48 ÷ 0.80 = 60]
+miss     applied-percent-again = 38.4   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.6   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 67890 · difficulty 4
+prompt   Find the whole.
+display  story [find-whole 16 at 25%] "16 is 25% of what number?"
+answer   exact 64/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [25% → 0.25]
+step 2   Divide the part by that decimal.   [16 ÷ 0.25 = 64]
+miss     applied-percent-again = 4   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.64   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 424242 · difficulty 4
+prompt   Find the whole.
+display  story [find-whole 11 at 5%] "11 is 5% of what number?"
+answer   exact 220/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [5% → 0.05]
+step 2   Divide the part by that decimal.   [11 ÷ 0.05 = 220]
+miss     applied-percent-again = 0.55   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 2.2   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 987654321 · difficulty 4
+prompt   Find the whole.
+display  story [find-whole 40 at 80%] "40 is 80% of what number?"
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [80% → 0.80]
+step 2   Divide the part by that decimal.   [40 ÷ 0.80 = 50]
+miss     applied-percent-again = 32   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.5   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 1 · difficulty 5
+prompt   Find the whole.
+display  story [find-whole 24 at 40%] "24 is 40% of what number?"
+answer   exact 60/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [40% → 0.40]
+step 2   Divide the part by that decimal.   [24 ÷ 0.40 = 60]
+miss     applied-percent-again = 9.6   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.6   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 12345 · difficulty 5
+prompt   Find the whole.
+display  story [find-whole 72 at 80%] "72 is 80% of what number?"
+answer   exact 90/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [80% → 0.80]
+step 2   Divide the part by that decimal.   [72 ÷ 0.80 = 90]
+miss     applied-percent-again = 57.6   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.9   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 67890 · difficulty 5
+prompt   Find the whole.
+display  story [find-whole 24 at 25%] "24 is 25% of what number?"
+answer   exact 96/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [25% → 0.25]
+step 2   Divide the part by that decimal.   [24 ÷ 0.25 = 96]
+miss     applied-percent-again = 6   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.96   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 424242 · difficulty 5
+prompt   Find the whole.
+display  story [find-whole 16 at 5%] "16 is 5% of what number?"
+answer   exact 320/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [5% → 0.05]
+step 2   Divide the part by that decimal.   [16 ÷ 0.05 = 320]
+miss     applied-percent-again = 0.8   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 3.2   Write the percent as a decimal before dividing the part.
+
+--- find-the-whole · seed 987654321 · difficulty 5
+prompt   Find the whole.
+display  story [find-whole 56 at 80%] "56 is 80% of what number?"
+answer   exact 70/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the part by the percent written as a decimal.
+step 1   Write the percent as a decimal.   [80% → 0.80]
+step 2   Divide the part by that decimal.   [56 ÷ 0.80 = 70]
+miss     applied-percent-again = 44.8   That takes the percent of the part; reverse the operation instead.
+miss     used-whole-percent = 0.7   Write the percent as a decimal before dividing the part."
+`;
+
+exports[`recorded output: percent-change > matches the wording recorded when the skill landed 1`] = `
+"--- percent-change · seed 1 · difficulty 1
+prompt   Find the percent change.
+display  story [percent-change 10 to 8] "A value changes from 10 to 8."
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|8 − 10| = 2]
+step 2   Divide by the original value.   [2 ÷ 10 = 0.20]
+step 3   Multiply the decimal by 100.   [0.20 × 100 = 20%]
+miss     used-new-value-as-base = 25   Use the original value as the base, not the new value.
+
+--- percent-change · seed 12345 · difficulty 1
+prompt   Find the percent change.
+display  story [percent-change 15 to 12] "A value changes from 15 to 12."
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|12 − 15| = 3]
+step 2   Divide by the original value.   [3 ÷ 15 = 0.20]
+step 3   Multiply the decimal by 100.   [0.20 × 100 = 20%]
+miss     used-new-value-as-base = 25   Use the original value as the base, not the new value.
+
+--- percent-change · seed 67890 · difficulty 1
+prompt   Find the percent change.
+display  story [percent-change 16 to 20] "A value changes from 16 to 20."
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|20 − 16| = 4]
+step 2   Divide by the original value.   [4 ÷ 16 = 0.25]
+step 3   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     used-new-value-as-base = 20   Use the original value as the base, not the new value.
+
+--- percent-change · seed 424242 · difficulty 1
+prompt   Find the percent change.
+display  story [percent-change 12 to 15] "A value changes from 12 to 15."
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|15 − 12| = 3]
+step 2   Divide by the original value.   [3 ÷ 12 = 0.25]
+step 3   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     used-new-value-as-base = 20   Use the original value as the base, not the new value.
+
+--- percent-change · seed 987654321 · difficulty 1
+prompt   Find the percent change.
+display  story [percent-change 10 to 8] "A value changes from 10 to 8."
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|8 − 10| = 2]
+step 2   Divide by the original value.   [2 ÷ 10 = 0.20]
+step 3   Multiply the decimal by 100.   [0.20 × 100 = 20%]
+miss     used-new-value-as-base = 25   Use the original value as the base, not the new value.
+
+--- percent-change · seed 1 · difficulty 2
+prompt   Find the percent change.
+display  story [percent-change 15 to 12] "A value changes from 15 to 12."
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|12 − 15| = 3]
+step 2   Divide by the original value.   [3 ÷ 15 = 0.20]
+step 3   Multiply the decimal by 100.   [0.20 × 100 = 20%]
+miss     used-new-value-as-base = 25   Use the original value as the base, not the new value.
+
+--- percent-change · seed 12345 · difficulty 2
+prompt   Find the percent change.
+display  story [percent-change 125 to 80] "A value changes from 125 to 80."
+answer   exact 36/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|80 − 125| = 45]
+step 2   Divide by the original value.   [45 ÷ 125 = 0.36]
+step 3   Multiply the decimal by 100.   [0.36 × 100 = 36%]
+miss     used-new-value-as-base = 56.25   Use the original value as the base, not the new value.
+
+--- percent-change · seed 67890 · difficulty 2
+prompt   Find the percent change.
+display  story [percent-change 175 to 224] "A value changes from 175 to 224."
+answer   exact 28/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|224 − 175| = 49]
+step 2   Divide by the original value.   [49 ÷ 175 = 0.28]
+step 3   Multiply the decimal by 100.   [0.28 × 100 = 28%]
+miss     used-new-value-as-base = 21.875   Use the original value as the base, not the new value.
+
+--- percent-change · seed 424242 · difficulty 2
+prompt   Find the percent change.
+display  story [percent-change 16 to 20] "A value changes from 16 to 20."
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|20 − 16| = 4]
+step 2   Divide by the original value.   [4 ÷ 16 = 0.25]
+step 3   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     used-new-value-as-base = 20   Use the original value as the base, not the new value.
+
+--- percent-change · seed 987654321 · difficulty 2
+prompt   Find the percent change.
+display  story [percent-change 100 to 64] "A value changes from 100 to 64."
+answer   exact 36/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|64 − 100| = 36]
+step 2   Divide by the original value.   [36 ÷ 100 = 0.36]
+step 3   Multiply the decimal by 100.   [0.36 × 100 = 36%]
+miss     used-new-value-as-base = 56.25   Use the original value as the base, not the new value.
+
+--- percent-change · seed 1 · difficulty 3
+prompt   Find the percent change.
+display  story [percent-change 25 to 20] "A value changes from 25 to 20."
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|20 − 25| = 5]
+step 2   Divide by the original value.   [5 ÷ 25 = 0.20]
+step 3   Multiply the decimal by 100.   [0.20 × 100 = 20%]
+miss     used-new-value-as-base = 25   Use the original value as the base, not the new value.
+
+--- percent-change · seed 12345 · difficulty 3
+prompt   Find the percent change.
+display  story [percent-change 16 to 8] "A value changes from 16 to 8."
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|8 − 16| = 8]
+step 2   Divide by the original value.   [8 ÷ 16 = 0.50]
+step 3   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     used-new-value-as-base = 100   Use the original value as the base, not the new value.
+
+--- percent-change · seed 67890 · difficulty 3
+prompt   Find the percent change.
+display  story [percent-change 55 to 88] "A value changes from 55 to 88."
+answer   exact 60/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|88 − 55| = 33]
+step 2   Divide by the original value.   [33 ÷ 55 = 0.60]
+step 3   Multiply the decimal by 100.   [0.60 × 100 = 60%]
+miss     used-new-value-as-base = 37.5   Use the original value as the base, not the new value.
+
+--- percent-change · seed 424242 · difficulty 3
+prompt   Find the percent change.
+display  story [percent-change 28 to 35] "A value changes from 28 to 35."
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|35 − 28| = 7]
+step 2   Divide by the original value.   [7 ÷ 28 = 0.25]
+step 3   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     used-new-value-as-base = 20   Use the original value as the base, not the new value.
+
+--- percent-change · seed 987654321 · difficulty 3
+prompt   Find the percent change.
+display  story [percent-change 12 to 6] "A value changes from 12 to 6."
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|6 − 12| = 6]
+step 2   Divide by the original value.   [6 ÷ 12 = 0.50]
+step 3   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     used-new-value-as-base = 100   Use the original value as the base, not the new value.
+
+--- percent-change · seed 1 · difficulty 4
+prompt   Find the percent change.
+display  story [percent-change 40 to 32] "A value changes from 40 to 32."
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|32 − 40| = 8]
+step 2   Divide by the original value.   [8 ÷ 40 = 0.20]
+step 3   Multiply the decimal by 100.   [0.20 × 100 = 20%]
+miss     used-new-value-as-base = 25   Use the original value as the base, not the new value.
+
+--- percent-change · seed 12345 · difficulty 4
+prompt   Find the percent change.
+display  story [percent-change 24 to 12] "A value changes from 24 to 12."
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|12 − 24| = 12]
+step 2   Divide by the original value.   [12 ÷ 24 = 0.50]
+step 3   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     used-new-value-as-base = 100   Use the original value as the base, not the new value.
+
+--- percent-change · seed 67890 · difficulty 4
+prompt   Find the percent change.
+display  story [percent-change 80 to 128] "A value changes from 80 to 128."
+answer   exact 60/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|128 − 80| = 48]
+step 2   Divide by the original value.   [48 ÷ 80 = 0.60]
+step 3   Multiply the decimal by 100.   [0.60 × 100 = 60%]
+miss     used-new-value-as-base = 37.5   Use the original value as the base, not the new value.
+
+--- percent-change · seed 424242 · difficulty 4
+prompt   Find the percent change.
+display  story [percent-change 44 to 55] "A value changes from 44 to 55."
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|55 − 44| = 11]
+step 2   Divide by the original value.   [11 ÷ 44 = 0.25]
+step 3   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     used-new-value-as-base = 20   Use the original value as the base, not the new value.
+
+--- percent-change · seed 987654321 · difficulty 4
+prompt   Find the percent change.
+display  story [percent-change 20 to 10] "A value changes from 20 to 10."
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|10 − 20| = 10]
+step 2   Divide by the original value.   [10 ÷ 20 = 0.50]
+step 3   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     used-new-value-as-base = 100   Use the original value as the base, not the new value.
+
+--- percent-change · seed 1 · difficulty 5
+prompt   Find the percent change.
+display  story [percent-change 60 to 48] "A value changes from 60 to 48."
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|48 − 60| = 12]
+step 2   Divide by the original value.   [12 ÷ 60 = 0.20]
+step 3   Multiply the decimal by 100.   [0.20 × 100 = 20%]
+miss     used-new-value-as-base = 25   Use the original value as the base, not the new value.
+
+--- percent-change · seed 12345 · difficulty 5
+prompt   Find the percent change.
+display  story [percent-change 36 to 18] "A value changes from 36 to 18."
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|18 − 36| = 18]
+step 2   Divide by the original value.   [18 ÷ 36 = 0.50]
+step 3   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     used-new-value-as-base = 100   Use the original value as the base, not the new value.
+
+--- percent-change · seed 67890 · difficulty 5
+prompt   Find the percent change.
+display  story [percent-change 120 to 192] "A value changes from 120 to 192."
+answer   exact 60/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|192 − 120| = 72]
+step 2   Divide by the original value.   [72 ÷ 120 = 0.60]
+step 3   Multiply the decimal by 100.   [0.60 × 100 = 60%]
+miss     used-new-value-as-base = 37.5   Use the original value as the base, not the new value.
+
+--- percent-change · seed 424242 · difficulty 5
+prompt   Find the percent change.
+display  story [percent-change 64 to 80] "A value changes from 64 to 80."
+answer   exact 25/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|80 − 64| = 16]
+step 2   Divide by the original value.   [16 ÷ 64 = 0.25]
+step 3   Multiply the decimal by 100.   [0.25 × 100 = 25%]
+miss     used-new-value-as-base = 20   Use the original value as the base, not the new value.
+
+--- percent-change · seed 987654321 · difficulty 5
+prompt   Find the percent change.
+display  story [percent-change 28 to 14] "A value changes from 28 to 14."
+answer   exact 50/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide the change by the original value, then multiply by 100.
+step 1   Find the positive amount of change.   [|14 − 28| = 14]
+step 2   Divide by the original value.   [14 ÷ 28 = 0.50]
+step 3   Multiply the decimal by 100.   [0.50 × 100 = 50%]
+miss     used-new-value-as-base = 100   Use the original value as the base, not the new value."
+`;
+
 exports[`recorded output: percent-meaning > matches the wording recorded when the skill landed 1`] = `
 "--- percent-meaning · seed 1 · difficulty 1
 prompt   Write this percent as parts out of 100.
@@ -1258,4 +2466,331 @@ hint     Write it over 100, then simplify.
 step 1   Write the percent over 100.   [95/100]
 step 2   Simplify to lowest terms.
 miss     numerator-only = 95   Use 100 as the denominator, then simplify 95/100."
+`;
+
+exports[`recorded output: simple-interest > matches the wording recorded when the skill landed 1`] = `
+"--- simple-interest · seed 1 · difficulty 1
+prompt   How much simple interest is earned?
+display  story [simple-interest 35100 cents at 2% for 2 years] "I = Prt. P = $351.00, r = 2%, t = 2 years."
+answer   exact 351/25
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [2% → 0.02]
+step 3   Multiply principal, rate, and time.   [$351.00 × 0.02 × 2 = $14.04]
+miss     used-whole-percent-rate = 1404   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 365.04   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 12345 · difficulty 1
+prompt   How much simple interest is earned?
+display  story [simple-interest 49200 cents at 2% for 1 years] "I = Prt. P = $492.00, r = 2%, t = 1 year."
+answer   exact 246/25
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [2% → 0.02]
+step 3   Multiply principal, rate, and time.   [$492.00 × 0.02 × 1 = $9.84]
+miss     used-whole-percent-rate = 984   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 501.84   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 67890 · difficulty 1
+prompt   How much simple interest is earned?
+display  story [simple-interest 25700 cents at 5% for 1 years] "I = Prt. P = $257.00, r = 5%, t = 1 year."
+answer   exact 257/20
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [5% → 0.05]
+step 3   Multiply principal, rate, and time.   [$257.00 × 0.05 × 1 = $12.85]
+miss     used-whole-percent-rate = 1285   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 269.85   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 424242 · difficulty 1
+prompt   How much simple interest is earned?
+display  story [simple-interest 15100 cents at 2% for 1 years] "I = Prt. P = $151.00, r = 2%, t = 1 year."
+answer   exact 151/50
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [2% → 0.02]
+step 3   Multiply principal, rate, and time.   [$151.00 × 0.02 × 1 = $3.02]
+miss     used-whole-percent-rate = 302   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 154.02   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 987654321 · difficulty 1
+prompt   How much simple interest is earned?
+display  story [simple-interest 48100 cents at 2% for 1 years] "I = Prt. P = $481.00, r = 2%, t = 1 year."
+answer   exact 481/50
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [2% → 0.02]
+step 3   Multiply principal, rate, and time.   [$481.00 × 0.02 × 1 = $9.62]
+miss     used-whole-percent-rate = 962   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 490.62   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 1 · difficulty 2
+prompt   How much simple interest is earned?
+display  story [simple-interest 70200 cents at 2% for 2 years] "I = Prt. P = $702.00, r = 2%, t = 2 years."
+answer   exact 702/25
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [2% → 0.02]
+step 3   Multiply principal, rate, and time.   [$702.00 × 0.02 × 2 = $28.08]
+miss     used-whole-percent-rate = 2808   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 730.08   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 12345 · difficulty 2
+prompt   How much simple interest is earned?
+display  story [simple-interest 98400 cents at 2% for 2 years] "I = Prt. P = $984.00, r = 2%, t = 2 years."
+answer   exact 984/25
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [2% → 0.02]
+step 3   Multiply principal, rate, and time.   [$984.00 × 0.02 × 2 = $39.36]
+miss     used-whole-percent-rate = 3936   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 1023.36   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 67890 · difficulty 2
+prompt   How much simple interest is earned?
+display  story [simple-interest 51500 cents at 4% for 2 years] "I = Prt. P = $515.00, r = 4%, t = 2 years."
+answer   exact 206/5
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [4% → 0.04]
+step 3   Multiply principal, rate, and time.   [$515.00 × 0.04 × 2 = $41.20]
+miss     used-whole-percent-rate = 4120   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 556.2   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 424242 · difficulty 2
+prompt   How much simple interest is earned?
+display  story [simple-interest 30300 cents at 2% for 1 years] "I = Prt. P = $303.00, r = 2%, t = 1 year."
+answer   exact 303/50
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [2% → 0.02]
+step 3   Multiply principal, rate, and time.   [$303.00 × 0.02 × 1 = $6.06]
+miss     used-whole-percent-rate = 606   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 309.06   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 987654321 · difficulty 2
+prompt   How much simple interest is earned?
+display  story [simple-interest 96200 cents at 2% for 1 years] "I = Prt. P = $962.00, r = 2%, t = 1 year."
+answer   exact 481/25
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [2% → 0.02]
+step 3   Multiply principal, rate, and time.   [$962.00 × 0.02 × 1 = $19.24]
+miss     used-whole-percent-rate = 1924   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 981.24   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 1 · difficulty 3
+prompt   How much simple interest is earned?
+display  story [simple-interest 175400 cents at 3% for 3 years] "I = Prt. P = $1754.00, r = 3%, t = 3 years."
+answer   exact 7893/50
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [3% → 0.03]
+step 3   Multiply principal, rate, and time.   [$1754.00 × 0.03 × 3 = $157.86]
+miss     used-whole-percent-rate = 15786   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 1911.86   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 12345 · difficulty 3
+prompt   How much simple interest is earned?
+display  story [simple-interest 246000 cents at 4% for 2 years] "I = Prt. P = $2460.00, r = 4%, t = 2 years."
+answer   exact 984/5
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [4% → 0.04]
+step 3   Multiply principal, rate, and time.   [$2460.00 × 0.04 × 2 = $196.80]
+miss     used-whole-percent-rate = 19680   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 2656.8   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 67890 · difficulty 3
+prompt   How much simple interest is earned?
+display  story [simple-interest 128700 cents at 5% for 2 years] "I = Prt. P = $1287.00, r = 5%, t = 2 years."
+answer   exact 1287/10
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [5% → 0.05]
+step 3   Multiply principal, rate, and time.   [$1287.00 × 0.05 × 2 = $128.70]
+miss     used-whole-percent-rate = 12870   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 1415.7   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 424242 · difficulty 3
+prompt   How much simple interest is earned?
+display  story [simple-interest 75700 cents at 3% for 1 years] "I = Prt. P = $757.00, r = 3%, t = 1 year."
+answer   exact 2271/100
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [3% → 0.03]
+step 3   Multiply principal, rate, and time.   [$757.00 × 0.03 × 1 = $22.71]
+miss     used-whole-percent-rate = 2271   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 779.71   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 987654321 · difficulty 3
+prompt   How much simple interest is earned?
+display  story [simple-interest 240300 cents at 3% for 1 years] "I = Prt. P = $2403.00, r = 3%, t = 1 year."
+answer   exact 7209/100
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [3% → 0.03]
+step 3   Multiply principal, rate, and time.   [$2403.00 × 0.03 × 1 = $72.09]
+miss     used-whole-percent-rate = 7209   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 2475.09   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 1 · difficulty 4
+prompt   How much simple interest is earned?
+display  story [simple-interest 350800 cents at 3% for 3 years] "I = Prt. P = $3508.00, r = 3%, t = 3 years."
+answer   exact 7893/25
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [3% → 0.03]
+step 3   Multiply principal, rate, and time.   [$3508.00 × 0.03 × 3 = $315.72]
+miss     used-whole-percent-rate = 31572   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 3823.72   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 12345 · difficulty 4
+prompt   How much simple interest is earned?
+display  story [simple-interest 491900 cents at 4% for 3 years] "I = Prt. P = $4919.00, r = 4%, t = 3 years."
+answer   exact 14757/25
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [4% → 0.04]
+step 3   Multiply principal, rate, and time.   [$4919.00 × 0.04 × 3 = $590.28]
+miss     used-whole-percent-rate = 59028   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 5509.28   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 67890 · difficulty 4
+prompt   How much simple interest is earned?
+display  story [simple-interest 257400 cents at 5% for 2 years] "I = Prt. P = $2574.00, r = 5%, t = 2 years."
+answer   exact 1287/5
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [5% → 0.05]
+step 3   Multiply principal, rate, and time.   [$2574.00 × 0.05 × 2 = $257.40]
+miss     used-whole-percent-rate = 25740   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 2831.4   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 424242 · difficulty 4
+prompt   How much simple interest is earned?
+display  story [simple-interest 151400 cents at 4% for 1 years] "I = Prt. P = $1514.00, r = 4%, t = 1 year."
+answer   exact 1514/25
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [4% → 0.04]
+step 3   Multiply principal, rate, and time.   [$1514.00 × 0.04 × 1 = $60.56]
+miss     used-whole-percent-rate = 6056   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 1574.56   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 987654321 · difficulty 4
+prompt   How much simple interest is earned?
+display  story [simple-interest 480600 cents at 3% for 1 years] "I = Prt. P = $4806.00, r = 3%, t = 1 year."
+answer   exact 7209/50
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [3% → 0.03]
+step 3   Multiply principal, rate, and time.   [$4806.00 × 0.03 × 1 = $144.18]
+miss     used-whole-percent-rate = 14418   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 4950.18   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 1 · difficulty 5
+prompt   How much simple interest is earned?
+display  story [simple-interest 720300 cents at 4% for 4 years] "I = Prt. P = $7203.00, r = 4%, t = 4 years."
+answer   exact 28812/25
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [4% → 0.04]
+step 3   Multiply principal, rate, and time.   [$7203.00 × 0.04 × 4 = $1152.48]
+miss     used-whole-percent-rate = 115248   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 8355.48   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 12345 · difficulty 5
+prompt   How much simple interest is earned?
+display  story [simple-interest 984800 cents at 5% for 3 years] "I = Prt. P = $9848.00, r = 5%, t = 3 years."
+answer   exact 7386/5
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [5% → 0.05]
+step 3   Multiply principal, rate, and time.   [$9848.00 × 0.05 × 3 = $1477.20]
+miss     used-whole-percent-rate = 147720   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 11325.2   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 67890 · difficulty 5
+prompt   How much simple interest is earned?
+display  story [simple-interest 545100 cents at 6% for 3 years] "I = Prt. P = $5451.00, r = 6%, t = 3 years."
+answer   exact 49059/50
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [6% → 0.06]
+step 3   Multiply principal, rate, and time.   [$5451.00 × 0.06 × 3 = $981.18]
+miss     used-whole-percent-rate = 98118   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 6432.18   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 424242 · difficulty 5
+prompt   How much simple interest is earned?
+display  story [simple-interest 346500 cents at 5% for 2 years] "I = Prt. P = $3465.00, r = 5%, t = 2 years."
+answer   exact 693/2
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [5% → 0.05]
+step 3   Multiply principal, rate, and time.   [$3465.00 × 0.05 × 2 = $346.50]
+miss     used-whole-percent-rate = 34650   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 3811.5   That includes the principal; the question asks for interest only.
+
+--- simple-interest · seed 987654321 · difficulty 5
+prompt   How much simple interest is earned?
+display  story [simple-interest 963600 cents at 4% for 1 years] "I = Prt. P = $9636.00, r = 4%, t = 1 year."
+answer   exact 9636/25
+input    keypad
+keypad   allowDecimal=true
+hint     Use I = Prt with the rate written as a decimal.
+step 1   Use the given formula.   [I = Prt]
+step 2   Write the rate as a decimal.   [4% → 0.04]
+step 3   Multiply principal, rate, and time.   [$9636.00 × 0.04 × 1 = $385.44]
+miss     used-whole-percent-rate = 38544   Write the percent rate as a decimal before multiplying.
+miss     answered-final-balance = 10021.44   That includes the principal; the question asks for interest only."
 `;

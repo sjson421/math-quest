@@ -74,6 +74,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "decimal-to-percent": [
     "percent-to-decimal",
   ],
+  "discount-tax-tip": [
+    "percent-change",
+  ],
   "div-by-10-100": [
     "div-remainder",
   ],
@@ -112,6 +115,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "factors": [
     "long-div-2digit",
+  ],
+  "find-the-percent": [
+    "percent-of",
+  ],
+  "find-the-whole": [
+    "find-the-percent",
   ],
   "fraction-meaning": [
     "negatives-mixed",
@@ -188,6 +197,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "pemdas": [
     "with-parentheses",
   ],
+  "percent-change": [
+    "find-the-whole",
+  ],
   "percent-meaning": [
     "money-problems",
   ],
@@ -221,6 +233,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "round-to-100": [
     "round-to-10",
+  ],
+  "simple-interest": [
+    "discount-tax-tip",
   ],
   "simplify-fractions": [
     "equivalent-multiply",

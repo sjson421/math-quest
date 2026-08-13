@@ -300,11 +300,11 @@ in lowest terms. Fraction operations wait for Unit 8.
 | 10.3 | `decimal-to-percent` | | ✅ ⚠️ shifting the wrong way |
 | 10.4 | `percent-to-fraction` | | ✅ |
 | 10.5 | `percent-of` | 15% of 80 | ✅ |
-| 10.6 | `find-the-percent` | 12 is what % of 60 | ⚠️ which number divides |
-| 10.7 | `find-the-whole` | 20% is 15, find total | ⚠️ **major wall** |
-| 10.8 | `percent-change` | Increase / decrease | |
-| 10.9 | `discount-tax-tip` | Applied | |
-| 10.10 | `simple-interest` | I = Prt | on the GED formula sheet |
+| 10.6 | `find-the-percent` | 12 is what % of 60 | ✅ ⚠️ which number divides |
+| 10.7 | `find-the-whole` | 20% is 15, find total | ✅ ⚠️ **major wall** |
+| 10.8 | `percent-change` | Increase / decrease | ✅ |
+| 10.9 | `discount-tax-tip` | Applied | ✅ |
+| 10.10 | `simple-interest` | I = Prt | ✅ on the GED formula sheet |
 
 ### Unit 11 — Ratios & Proportions (7)
 

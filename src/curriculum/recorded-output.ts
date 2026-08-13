@@ -4,7 +4,15 @@ import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 import { format as formatRational } from '../lib/rational'
 import { shapeDiagramLabel } from '../lib/shape-diagram'
 import { decimalColumnText, decimalText } from '../lib/decimal'
-import type { DecimalData, Difficulty, FractionData, MathNotation, Problem, SkillGenerator } from '../lib/types'
+import type {
+  DecimalData,
+  Difficulty,
+  FractionData,
+  MathNotation,
+  PercentData,
+  Problem,
+  SkillGenerator,
+} from '../lib/types'
 
 /**
  * The shared half of the per-unit wording gates.
@@ -149,6 +157,27 @@ const formatDecimalData = (data: DecimalData): string => {
   }
 }
 
+const formatPercentData = (data: PercentData): string => {
+  switch (data.operation) {
+    case 'find-percent':
+      return `${data.operation} ${data.part}/${data.whole}`
+    case 'find-whole':
+      return `${data.operation} ${data.part} at ${data.percent}%`
+    case 'percent-change':
+      return `${data.operation} ${data.original} to ${data.current}`
+    case 'discount':
+    case 'tax':
+    case 'tip':
+      return `${data.operation} ${data.baseCents} cents at ${data.percent}%`
+    case 'simple-interest':
+      return `${data.operation} ${data.principalCents} cents at ${data.percent}% for ${data.years} years`
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled percent data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 const formatDisplay = (display: Problem['display']): string => {
   switch (display.kind) {
     case 'inline':
@@ -158,7 +187,9 @@ const formatDisplay = (display: Problem['display']): string => {
     case 'decimal-column':
       return `decimal-column [${formatDecimalData(display.decimal)}]`
     case 'story':
-      return `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
+      return display.percent
+        ? `story [${formatPercentData(display.percent)}] "${display.text}"`
+        : `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
     case 'math':
       return (
         `math "${display.label}" ${formatNotation(display.notation)}` +

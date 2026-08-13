@@ -12,6 +12,7 @@ import type {
   Difficulty,
   FractionData,
   MathNotation,
+  PercentData,
   Problem,
   SkillGenerator,
   WholeNumberData,
@@ -207,6 +208,62 @@ function expectedDecimal(data: DecimalData): { text?: string; answer: number | s
     default: {
       const unhandled: never = data
       throw new Error(`Unknown decimal operation: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
+const dollars = (cents: number) =>
+  `$${Math.floor(cents / 100)}.${String(cents % 100).padStart(2, '0')}`
+
+function expectedPercent(data: PercentData): { text: string; answer: number; values: number[] } {
+  switch (data.operation) {
+    case 'find-percent':
+      return {
+        text: `${data.part} is what percent of ${data.whole}?`,
+        answer: (data.part * 100) / data.whole,
+        values: [data.part, data.whole],
+      }
+    case 'find-whole':
+      return {
+        text: `${data.part} is ${data.percent}% of what number?`,
+        answer: (data.part * 100) / data.percent,
+        values: [data.part, data.percent],
+      }
+    case 'percent-change':
+      return {
+        text: `A value changes from ${data.original} to ${data.current}.`,
+        answer: (Math.abs(data.current - data.original) * 100) / data.original,
+        values: [data.original, data.current],
+      }
+    case 'discount':
+      return {
+        text: `An item costs ${dollars(data.baseCents)} with a ${data.percent}% discount.`,
+        answer: (data.baseCents * (100 - data.percent)) / 10000,
+        values: [data.baseCents, data.percent],
+      }
+    case 'tax':
+      return {
+        text: `A ${dollars(data.baseCents)} purchase has ${data.percent}% sales tax.`,
+        answer: (data.baseCents * (100 + data.percent)) / 10000,
+        values: [data.baseCents, data.percent],
+      }
+    case 'tip':
+      return {
+        text: `A ${dollars(data.baseCents)} bill has a ${data.percent}% tip.`,
+        answer: (data.baseCents * (100 + data.percent)) / 10000,
+        values: [data.baseCents, data.percent],
+      }
+    case 'simple-interest':
+      return {
+        text:
+          `I = Prt. P = ${dollars(data.principalCents)}, r = ${data.percent}%, ` +
+          `t = ${data.years} ${data.years === 1 ? 'year' : 'years'}.`,
+        answer: (data.principalCents * data.percent * data.years) / 10000,
+        values: [data.principalCents, data.percent, data.years],
+      }
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unknown percent operation: ${JSON.stringify(unhandled)}`)
     }
   }
 }
@@ -690,6 +747,14 @@ function recompute(problem: Problem): number | string {
     return expectedDecimal(display.decimal).answer
   }
 
+  if (display.kind === 'story' && display.percent) {
+    const expected = expectedPercent(display.percent)
+    if (display.text !== expected.text) {
+      throw new Error(`${problem.skillId}: visible percent text disagrees with its data`)
+    }
+    return expected.answer
+  }
+
   // A story carries its quantities precisely so this stays possible. Reading
   // them out of the prose would not work: a word problem mentions numbers the
   // answer does not use, which is most of what makes it a word problem.
@@ -836,7 +901,10 @@ function sourceMagnitude(problem: Problem): number {
   if (problem.display.kind === 'diagram') return problem.display.diagram.parts
 
   if (problem.display.kind === 'story') {
-    return problem.display.operands.reduce((sum, value) => sum + Math.abs(value), 0) / problem.display.operands.length
+    const values = problem.display.percent
+      ? expectedPercent(problem.display.percent).values
+      : problem.display.operands
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
   const value = answerValue(problem)
@@ -903,6 +971,54 @@ describe('decimal answer verification', () => {
     }
 
     expect(() => answerMismatch(problem)).toThrow('visible decimal text disagrees with its data')
+  })
+})
+
+describe('percent story answer verification', () => {
+  const findPercent = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-find-percent',
+    prompt: 'Find the percent.',
+    display: {
+      kind: 'story',
+      text: '12 is what percent of 60?',
+      percent: { operation: 'find-percent', part: 12, whole: 60 },
+    },
+    answer: intAnswer(20),
+    inputMode: 'keypad',
+    keypad: { allowDecimal: true },
+    hint: 'Divide the part by the whole, then multiply by 100.',
+    solution: [{ text: 'Divide the part by the whole.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('recomputes a percent answer from named source quantities', () => {
+    expect(answerMismatch(findPercent())).toBeUndefined()
+  })
+
+  it('names a percent answer that disagrees with its source quantities', () => {
+    expect(answerMismatch(findPercent({ answer: intAnswer(25) }))).toContain(
+      'synthetic-find-percent: stated 25, derived 20',
+    )
+  })
+
+  it('rejects percent prose that disagrees with its source quantities', () => {
+    const problem = findPercent()
+    if (problem.display.kind !== 'story') throw new Error('expected story display')
+    problem.display.text = '15 is what percent of 60?'
+
+    expect(() => answerMismatch(problem)).toThrow('visible percent text disagrees with its data')
+  })
+
+  it('keeps existing one-operator arithmetic stories independently verifiable', () => {
+    const problem: Problem = {
+      ...findPercent(),
+      skillId: 'synthetic-arithmetic-story',
+      display: { kind: 'story', text: 'Twelve items split among three groups.', operands: [12, 3], operator: '÷' },
+      answer: intAnswer(4),
+    }
+
+    expect(answerMismatch(problem)).toBeUndefined()
   })
 })
 

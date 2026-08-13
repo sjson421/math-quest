@@ -70,7 +70,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(99)
+    expect(documentedAsBuilt).toHaveLength(104)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -168,7 +168,7 @@ describe('the skills that are built', () => {
     expect(declaring.some((skill) => !generators.has(skill.id))).toBe(true)
   })
 
-  it('implements exactly the thirty-eight Stage D generators that have landed', () => {
+  it('implements exactly the Stage D generators that have landed', () => {
     const stage = manifestIndex.get('fraction-meaning')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unavailable = (stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))
@@ -216,11 +216,16 @@ describe('the skills that are built', () => {
       'decimal-to-percent',
       'percent-to-fraction',
       'percent-of',
+      'find-the-percent',
+      'find-the-whole',
+      'percent-change',
+      'discount-tax-tip',
+      'simple-interest',
     ])
     expect(stageIds.filter((id) => skillState(id) === 'implemented')).toEqual(
       stageIds.filter((id) => generators.has(id)),
     )
-    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(12)
+    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(7)
     const unit8 = stage?.units.find((unit) => unit.id === 'unit-8')
     const unit8Ids = unit8?.skills.map((skill) => skill.id) ?? []
     expect(unit8Ids.filter((id) => skillState(id) === 'implemented')).toEqual([
@@ -263,9 +268,14 @@ describe('the skills that are built', () => {
       'decimal-to-percent',
       'percent-to-fraction',
       'percent-of',
+      'find-the-percent',
+      'find-the-whole',
+      'percent-change',
+      'discount-tax-tip',
+      'simple-interest',
     ])
-    expect(unit10Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(5)
-    expect(implementedSkillIds).toHaveLength(99)
+    expect(unit10Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
+    expect(implementedSkillIds).toHaveLength(104)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -317,9 +327,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 107 skills out of the skill tree entirely', () => {
+  it('leaves the other 97 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(99)
+    expect(offered).toHaveLength(104)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -379,9 +389,9 @@ describe('the unlock graph the store gates on', () => {
   })
 
   it('matches the committed snapshot for the skills that are built', () => {
-    // Restricted to implemented skills because the other 134 have no edges that
-    // can gate anyone yet. Committed so the next change that moves an edge has
-    // to look at it — this is the review surface for a re-lock.
+    // Restricted to implemented skills because planned skills have no edges
+    // that can gate anyone yet. Committed so the next change that moves an edge
+    // has to look at it — this is the review surface for a re-lock.
     const graph = Object.fromEntries(implementedSkillIds.map((id) => [id, unlockPrerequisites.get(id)]))
 
     expect(graph).toMatchSnapshot()
