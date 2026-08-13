@@ -306,7 +306,7 @@ describe('the wording gate itself', () => {
   it('notices a changed ordering diagnosis', () => {
     const problem = generateProblem(skill('two-operations'), 1, 1)
     const misconceptions = (problem.misconceptions ?? []).map((m, i) =>
-      i === 0 ? { ...m, value: m.value + 1 } : m,
+      i === 0 && typeof m.value === 'number' ? { ...m, value: m.value + 1 } : m,
     )
     expect(format({ ...problem, misconceptions }, 1)).not.toBe(format(problem, 1))
   })

@@ -23,6 +23,12 @@ const miss = (value: number, tag: string): Misconception => ({
   nudge: `nudge for ${tag}`,
 })
 
+const missText = (value: string, tag: string): Misconception => ({
+  value: { kind: 'text', value },
+  tag,
+  nudge: `nudge for ${tag}`,
+})
+
 /** A skill that predicts exactly what the test tells it to, ignoring the rng. */
 function skillPredicting(misconceptions: Misconception[], answer = 12): SkillGenerator {
   return {
@@ -184,6 +190,32 @@ describe('generateProblem drops predictions that cannot help', () => {
 
     expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['numeric-mistake'])
   })
+
+  it('carries a non-numeric prediction through unfiltered', () => {
+    const skill = skillPredicting([missText('2x + 3', 'did-not-distribute')])
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['did-not-distribute'])
+  })
+
+  it('drops a blank or whitespace-only non-numeric prediction', () => {
+    const skill = skillPredicting([missText('', 'blank'), missText('   ', 'also-blank'), missText('2x', 'kept')])
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['kept'])
+  })
+
+  it('keeps the first of two non-numeric predictions sharing a value', () => {
+    const skill = skillPredicting([missText('2x + 3', 'first'), missText('2x + 3', 'second'), missText('3x', 'other')])
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['first', 'other'])
+  })
+
+  it('does not let a numeric and a non-numeric prediction collide', () => {
+    // Value 5 and text "5" look alike but must not dedup or filter against
+    // each other — each kind's Set is independent.
+    const skill = skillPredicting([miss(5, 'numeric-five'), missText('5', 'text-five')])
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['numeric-five', 'text-five'])
+  })
 })
 
 describe('diagnose', () => {
@@ -237,5 +269,13 @@ describe('diagnose', () => {
     const filtered = generateProblem(skillPredicting([miss(12, 'equals-answer')]), 1, 1)
 
     expect(diagnose(filtered, '12')).toBeUndefined()
+  })
+
+  it('matches a non-numeric prediction by trimmed exact text', () => {
+    const withText = generateProblem(skillPredicting([missText('2x + 3', 'did-not-distribute')]), 1, 1)
+
+    expect(diagnose(withText, '2x + 3')?.tag).toBe('did-not-distribute')
+    expect(diagnose(withText, '  2x + 3  ')?.tag).toBe('did-not-distribute')
+    expect(diagnose(withText, '2x+3')).toBeUndefined()
   })
 })

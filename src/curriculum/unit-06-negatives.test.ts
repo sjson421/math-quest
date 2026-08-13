@@ -144,7 +144,7 @@ describe('what the unit guarantees about every problem it makes', () => {
       .flatMap((problem) => [
         problem.answer.kind === 'exact' && problem.answer.d !== 1 ? problem.skillId : '',
         ...(problem.misconceptions ?? [])
-          .filter((m) => !Number.isInteger(m.value))
+          .filter((m) => typeof m.value === 'number' && !Number.isInteger(m.value))
           .map(() => problem.skillId),
       ])
       .filter(Boolean)
@@ -179,7 +179,7 @@ describe('what the unit guarantees about every problem it makes', () => {
       .filter((problem) => {
         const plausible =
           exactValue(problem) < 0 ||
-          (problem.misconceptions ?? []).some((m) => m.value < 0)
+          (problem.misconceptions ?? []).some((m) => typeof m.value === 'number' && m.value < 0)
         return plausible !== (problem.keypad?.allowNegative === true)
       })
       .map((problem) => `${problem.skillId}: ${shown(problem)}`)
@@ -308,7 +308,9 @@ describe('the number line the reading skill draws', () => {
         const tickList = ticks(spec)
         const wanted = [
           exactValue(problem),
-          ...(problem.misconceptions ?? []).map((m) => m.value),
+          ...(problem.misconceptions ?? [])
+            .filter((m) => typeof m.value === 'number')
+            .map((m) => m.value),
         ]
         return wanted
           .filter((value) => !placement(tickList, String(value)).canConfirm)

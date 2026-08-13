@@ -58,8 +58,13 @@ export type Choice = {
  * diagnostic benefit of multiple choice, without giving up free response.
  */
 export type Misconception = {
-  /** The wrong value this mistake produces. */
-  value: number
+  /**
+   * The wrong value this mistake produces. A plain number for arithmetic
+   * mistakes; `{ kind: 'text' }` for a mistake whose result isn't a scalar
+   * (e.g. an unsimplified expression) — matched by exact string, not by
+   * numeric or algebraic equivalence.
+   */
+  value: number | { kind: 'text'; value: string }
   /** Stable tag for tracking recurring errors across sessions. */
   tag: string
   /** Shown to the learner. Warm, specific, never scolding. */

@@ -28,12 +28,20 @@ export function generateProblem(
         ? problem.answer.value
         : Number(problem.answer.id)
 
-  const seen = new Set<number>()
+  const seenNumbers = new Set<number>()
+  const seenText = new Set<string>()
   const misconceptions = problem.misconceptions.filter((m) => {
-    if (!Number.isFinite(m.value)) return false
-    if (m.value === correct) return false
-    if (seen.has(m.value)) return false
-    seen.add(m.value)
+    if (typeof m.value === 'number') {
+      if (!Number.isFinite(m.value)) return false
+      if (m.value === correct) return false
+      if (seenNumbers.has(m.value)) return false
+      seenNumbers.add(m.value)
+      return true
+    }
+    const text = m.value.value.trim()
+    if (!text) return false
+    if (seenText.has(text)) return false
+    seenText.add(text)
     return true
   })
 
@@ -42,8 +50,10 @@ export function generateProblem(
 
 /** Match a wrong entry against this problem's predicted mistakes. */
 export function diagnose(problem: Problem, raw: string) {
+  const trimmed = raw.trim()
   const parsed = parseInput(raw)
-  if (parsed.kind === 'invalid') return undefined
-  const value = toNumber(parsed.value)
-  return problem.misconceptions?.find((m) => m.value === value)
+  const value = parsed.kind === 'invalid' ? undefined : toNumber(parsed.value)
+  return problem.misconceptions?.find((m) =>
+    typeof m.value === 'number' ? m.value === value : m.value.value === trimmed,
+  )
 }

@@ -58,7 +58,7 @@ const padFor = (
   answer: number,
   misconceptions: readonly Misconception[],
 ): KeypadRules | undefined =>
-  answer < 0 || misconceptions.some((m) => m.value < 0)
+  answer < 0 || misconceptions.some((m) => typeof m.value === 'number' && m.value < 0)
     ? { allowNegative: true }
     : undefined
 
