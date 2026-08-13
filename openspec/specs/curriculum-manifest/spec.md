@@ -150,6 +150,13 @@ introduces, so the set can be read off the stage rather than assembled from earl
 - **THEN** Stage D has no unavailable capability requirement
 - **AND** no Stage D skill becomes playable until its generator is registered
 
+#### Scenario: Stage E records built expression input without unlocking
+
+- **WHEN** Stage E is inspected after `expression-input` becomes available
+- **THEN** it lists `expression-input` as a required available capability
+- **AND** its skills without generators remain planned
+- **AND** the set of skills offered to the learner is unchanged
+
 ### Requirement: Skills carry pacing metadata
 
 Each skill SHALL record whether it is a `quick` skill and whether it is a known

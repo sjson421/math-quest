@@ -4,10 +4,12 @@ What is left, in the order it should be done.
 
 **Status: 111 of 201 skills are playable.** Stages A, B and C and Stage D are playable.
 Choice input,
-number-line input, math notation, fraction input and diagrams are built, so
-`AVAILABLE_CAPABILITIES` holds
-`choice-input`, `number-line`, `math-notation`, `fraction-input` and `diagram`. The three
-answer-control modes all have content: `negatives-numberline` is the first skill anywhere to
+number-line input, math notation, fraction input, diagrams and expression input are built,
+so `AVAILABLE_CAPABILITIES` holds
+`choice-input`, `number-line`, `math-notation`, `fraction-input`, `diagram` and
+`expression-input` — the last of these unlocks nothing on its own, since Unit 13 (item 21)
+has not shipped a generator yet. The three content-bearing answer-control modes all have
+content: `negatives-numberline` is the first skill anywhere to
 declare a line, comparison, ordering, factors, multiples, primes and negative comparison use
 choices, and everything else uses the keypad. The pad offers a sign, a decimal point or a
 fraction slash when a problem asks for one, and a space key for mixed-number entry (with
@@ -24,7 +26,7 @@ conversions, inverse percent relationships, percent change, discount/tax/tip and
 interest with its supplied GED formula. Unit 11 covers writing and simplifying ratios,
 best-value unit rates, proportions, scale drawings, and a fixed stated set of within-system
 unit conversions, then closes with fixed-frame ratio stories distinguishing part-to-part from
-part-to-whole. Expression input is next.
+part-to-whole. Expression input is built; Unit 13 is next.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -730,7 +732,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
         rather than proportion. `ratio-words` (11.7) is a wall on part-to-part vs part-to-whole
         and is the last phrasing-bank consumer in the stage.
 
-- [ ] **20 · Expression input** — M — **two increments**
+- [x] **20 · Expression input** — M — **two increments**
 
       Variables on the keypad. First needed at Unit 13.
 

@@ -7,7 +7,7 @@ commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archi
 Task lists are the running record — mark each item done as it lands, and note decisions
 inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, twenty-eight
+- `openspec/specs/` is the **baseline**: what the system does today, twenty-nine
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
@@ -17,16 +17,17 @@ inline rather than only in chat.
   `unit-11-ratios-proportions`,
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`,
-  `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`. A change
+  `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`,
+  `expression-input`. A change
   amending built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED`
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-seven changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-eight changes
   have shipped; the latest archive is
-  `2026-08-13-extend-diagnosis-to-expressions`. It generalizes `Misconception.value` and the
-  diagnosis path to carry non-numeric predictions, ahead of the expression input mode itself
-  (roadmap item 20b) and the Unit 13 content that needs it (item 21).
+  `2026-08-13-add-expression-input`. It ships roadmap item 20b: the expression keypad, the
+  `expression` answer kind, and the parser/canonical-form comparison — capability-only, no
+  Unit 13 generator yet (roadmap item 21).
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
