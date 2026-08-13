@@ -7,14 +7,14 @@ commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archi
 Task lists are the running record — mark each item done as it lands, and note decisions
 inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, thirty
+- `openspec/specs/` is the **baseline**: what the system does today, thirty-one
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
   `unit-02-subtraction`, `unit-03-multiplication`, `unit-04-division`,
   `unit-05-order-of-operations`, `unit-06-negatives`, `unit-07-fractions-meaning`,
   `unit-08-fraction-operations`, `unit-09-decimals`, `unit-10-percents`,
-  `unit-11-ratios-proportions`, `unit-12-exponents-roots`,
+  `unit-11-ratios-proportions`, `unit-12-exponents-roots`, `unit-13-expressions`,
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`,
   `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`,
@@ -23,11 +23,12 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-nine changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty changes
   have shipped; the latest archive is
-  `2026-08-13-complete-unit-12-exponents-roots`. It ships roadmap item 21's 12b increment:
-  power-of-power, zero and negative exponents, scientific notation, and full order of
-  operations with exponents. Unit 12 is complete; item 21 remains open for Units 13–15.
+  `2026-08-13-add-unit-13a-expressions-intro`. It ships roadmap item 21's 13a increment:
+  variable-meaning, expression evaluation, words-to-expression, identify-like-terms,
+  combine-like-terms, and distributive — the first content to consume `expression-input`.
+  Unit 13a is complete; item 21 remains open for 13b, 14a, 14b, and 15.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the

@@ -53,32 +53,36 @@ right instead of reversed.
 - **THEN** the exact answer is `x - 5`
 - **AND** a predicted misconception is the reversed form `5 - x`
 
-### Requirement: Like terms are identified by matching variable part
+### Requirement: Like terms are identified by matching variable letter
 
-An `identify-like-terms` problem SHALL display a target term and a set of choices and
-require selecting the choice that shares the target's variable part (same variable raised
-to the same implicit power), through the existing choice input.
+An `identify-like-terms` problem SHALL display a target term and a set of choices — one
+sharing the target's variable letter, one using a different variable letter, and one a plain
+constant with no variable — and require selecting the choice that shares the target's
+variable letter, through the existing choice input.
 
-#### Scenario: A matching variable part is the correct choice
+#### Scenario: A matching variable letter is the correct choice
 
-- **WHEN** the target term is `3x` and the choices include `5x`, `5x^2`, and `5y`
+- **WHEN** the target term is `3x` and the choices include `5x`, `5y`, and `9`
 - **THEN** `5x` is the correct choice
 
 ### Requirement: Combining like terms and distributing answer as an expanded expression
 
-A `combine-like-terms` problem SHALL display a sum of terms and require their combined form
-through `inputMode: 'expression'` with comparison form `expanded`. A `distributive` problem
-SHALL display a coefficient applied to a parenthesized sum and require the distributed form
-the same way. Each, as a wall, SHALL predict at least two distinct surviving misconceptions:
-`combine-like-terms` including the value produced by collapsing unlike terms into one term,
-and `distributive` including the value produced by distributing to only the first term
-inside the parentheses.
+A `combine-like-terms` problem SHALL display a sum of two terms in the declared variable
+plus a constant and require their combined form through `inputMode: 'expression'` with
+comparison form `expanded` — keeping within the grammar's single-variable limit, the
+"unlike terms" being combined are the variable terms and the constant, not two different
+variable letters. A `distributive` problem SHALL display a coefficient applied to a
+parenthesized sum of the variable and a constant and require the distributed form the same
+way. Each, as a wall, SHALL predict at least two distinct surviving misconceptions:
+`combine-like-terms` including the value produced by folding the constant into the
+variable term's coefficient, and `distributive` including the value produced by
+distributing to only the first term inside the parentheses.
 
-#### Scenario: Combining like terms predicts an unlike-term collapse
+#### Scenario: Combining like terms predicts the constant folded into the coefficient
 
-- **WHEN** a problem displays `3x + 2y + 2x`
-- **THEN** the exact answer is `5x + 2y`
-- **AND** a predicted misconception collapses `x` and `y` terms into one, e.g. `7xy`
+- **WHEN** a problem displays `3x + 2x + 4`
+- **THEN** the exact answer is `5x + 4`
+- **AND** a predicted misconception folds the constant into the coefficient, e.g. `9x`
 
 #### Scenario: Distributing predicts a first-term-only miss
 
