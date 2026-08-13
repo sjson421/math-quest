@@ -202,6 +202,8 @@ const formatRatioData = (data: RatioData): string => {
         `${data.operation} 1 ${data.largeSingular}:${data.factor} ${data.smallPlural} ` +
         `${data.direction} given-${data.given}`
       )
+    case 'ratio-word':
+      return `${data.operation} ${data.frameId} ${data.first}:${data.second} ${data.comparison}`
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled ratio data: ${JSON.stringify(unhandled)}`)

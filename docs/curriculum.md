@@ -316,7 +316,7 @@ in lowest terms. Fraction operations wait for Unit 8.
 | 11.4 | `solve-proportions` | Cross-multiply | ✅ |
 | 11.5 | `scale-drawings` | | ✅ |
 | 11.6 | `unit-conversion` | | ✅ |
-| 11.7 | `ratio-words` | Word problems | ⚠️ part-to-part vs part-to-whole |
+| 11.7 | `ratio-words` | Word problems | ✅ · ⚠️ part-to-part vs part-to-whole |
 
 ---
 

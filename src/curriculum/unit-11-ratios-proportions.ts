@@ -3,12 +3,13 @@ import { constrain } from '../lib/rng'
 import { gcd, rational } from '../lib/rational'
 import type { MathNotation, RatioData } from '../lib/types'
 import { band, defineSkill, type BuildContext, type ProblemSpec } from './engine'
+import { RATIO_FRAMES, ratioStoryProblem } from './phrasing/ratios'
 
 /**
- * Unit 11a · Ratios & Proportions.
+ * Unit 11 · Ratios & Proportions.
  *
- * The six generators move from writing one directed comparison through equivalent
- * ratios, rates, scale drawings, and measurement conversion. Every prose or
+ * The seven generators move from writing one directed comparison through equivalent
+ * ratios, rates, scale drawings, measurement conversion, and ratio stories. Every prose or
  * notation display carries its source relation separately, so the global verifier
  * can rebuild both what the learner sees and the answer without trusting this file.
  */
@@ -37,6 +38,16 @@ const countBand = (context: BuildContext) =>
     5: [12, 40],
   })
 
+const drawRatioCounts = (context: BuildContext) => {
+  const [min, max] = countBand(context)
+  const first = context.rng.int(min, max)
+  const second = constrain(
+    () => context.rng.int(min, max),
+    (candidate) => candidate !== first && first % candidate !== 0,
+  )
+  return { first, second }
+}
+
 const CATEGORY_PAIRS = [
   ['red tiles', 'blue tiles'],
   ['large boxes', 'small boxes'],
@@ -49,13 +60,8 @@ const writeRatios = defineSkill({
   name: 'Writing Ratios',
   blurb: 'Express a comparison',
   build(context) {
-    const [min, max] = countBand(context)
     const [firstLabel, secondLabel] = context.rng.pick(CATEGORY_PAIRS)
-    const first = context.rng.int(min, max)
-    const second = constrain(
-      () => context.rng.int(min, max),
-      (candidate) => candidate !== first && first % candidate !== 0,
-    )
+    const { first, second } = drawRatioCounts(context)
     const data: RatioData = {
       operation: 'write-ratio',
       firstLabel,
@@ -402,6 +408,19 @@ const unitConversion = defineSkill({
   },
 })
 
+const ratioWords = defineSkill({
+  id: 'ratio-words',
+  name: 'Ratio Word Problems',
+  blurb: 'Spot the ratio',
+  build(context) {
+    const { first, second } = drawRatioCounts(context)
+    const frame = context.rng.pick(RATIO_FRAMES)
+    const comparison = context.rng.bool() ? 'part-to-part' as const : 'part-to-whole' as const
+
+    return ratioStoryProblem(frame, { first, second }, comparison)
+  },
+})
+
 export const unit11 = [
   writeRatios,
   simplifyRatios,
@@ -409,4 +428,5 @@ export const unit11 = [
   solveProportions,
   scaleDrawings,
   unitConversion,
+  ratioWords,
 ]

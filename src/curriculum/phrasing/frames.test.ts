@@ -8,6 +8,14 @@ import {
   type Frame,
   type Quantities,
 } from '../engine'
+import {
+  RATIO_FRAMES,
+  ratioStoryProblem,
+  ratioText,
+  type RatioComparison,
+  type RatioFrame,
+  type RatioQuantities,
+} from './ratios'
 import { skillById } from '../manifest/index'
 import { checkContent, formatViolations } from '../../lib/content-rules'
 import type { ContentLocation } from '../../lib/content-rules'
@@ -60,12 +68,61 @@ const banks: Bank[] = [
   { name: 'money', skillId: 'money-problems', unitId: 'unit-9', kind: 'whole', frames: MONEY_FRAMES },
 ]
 
+type RatioBank = {
+  name: string
+  frames: RatioFrame[]
+}
+
+const ratioBanks: RatioBank[] = [
+  { name: 'ratio', frames: RATIO_FRAMES },
+]
+
+const registeredFrameArrays: ReadonlyArray<readonly (Frame | RatioFrame)[]> = [
+  ...banks.map(({ frames }) => frames),
+  ...ratioBanks.map(({ frames }) => frames),
+]
+
+type FrameArray = Frame[] | RatioFrame[]
+
+type ExportedFrameArray = {
+  path: string
+  exportName: string
+  frames: FrameArray
+}
+
+const isFrameArray = (value: unknown): value is FrameArray =>
+  Array.isArray(value) &&
+  value.length > 0 &&
+  ('nudges' in value[0] || 'partToPartText' in value[0])
+
+const exportedFrameArrays = (
+  path: string,
+  module: Record<string, unknown>,
+): ExportedFrameArray[] =>
+  Object.entries(module).flatMap(([exportName, value]) =>
+    isFrameArray(value) ? [{ path, exportName, frames: value }] : [],
+  )
+
+const unregisteredFrameArrays = (exported: ExportedFrameArray[]): string[] =>
+  exported
+    .filter(({ frames }) => !registeredFrameArrays.includes(frames))
+    .map(({ path, exportName }) => `${path}#${exportName}`)
+
 const FRACTION_CHECK_QUANTITIES: Quantities[] = [
   { a: 1, b: 4, distractor: 2 },
   { a: 2, b: 5, distractor: 3 },
   { a: 5, b: 12, distractor: 7 },
   { a: 18, b: 30, distractor: 11 },
 ]
+
+const RATIO_CHECK_QUANTITIES: RatioQuantities[] = [
+  { first: 2, second: 3 },
+  { first: 11, second: 7 },
+  { first: 28, second: 19 },
+  { first: 75, second: 46 },
+]
+
+const RATIO_COMPARISONS: RatioComparison[] = ['part-to-part', 'part-to-whole']
 
 const locationFor = (skillId: string, unitId: string): ContentLocation => {
   const skill = skillById.get(skillId)
@@ -114,6 +171,31 @@ function checkBank(bank: Bank): string[] {
   )
 }
 
+const ratioProblemFor = (
+  frame: RatioFrame,
+  q: RatioQuantities,
+  comparison: RatioComparison,
+): Problem => ({
+  ...ratioStoryProblem(frame, q, comparison),
+  skillId: 'ratio-words',
+  inputMode: 'keypad',
+  difficulty: 1,
+})
+
+function checkRatioBank(frames: RatioFrame[]): string[] {
+  const at = locationFor('ratio-words', 'unit-11')
+
+  return frames.flatMap((frame) =>
+    RATIO_CHECK_QUANTITIES.flatMap((q) =>
+      RATIO_COMPARISONS.flatMap((comparison) =>
+        formatViolations(checkContent(ratioProblemFor(frame, q, comparison), at)).map(
+          (violation) => `${frame.id}: ${violation}`,
+        ),
+      ),
+    ),
+  )
+}
+
 it('checks every authored bank, not only the first', async () => {
   // A checker that returns "no problems" looks exactly like a clean codebase.
   // The banks are registered by hand above, so a third one authored and not
@@ -122,22 +204,24 @@ it('checks every authored bank, not only the first', async () => {
   const authored = import.meta.glob('./*.ts', { eager: false })
   const modules = Object.keys(authored).filter((path) => !path.endsWith('.test.ts'))
 
-  const exported = await Promise.all(
-    modules.map(async (path) => {
-      const module = (await authored[path]()) as Record<string, unknown>
-      const found = Object.values(module).find(
-        (value): value is Frame[] => Array.isArray(value) && value.length > 0 && 'nudges' in value[0],
-      )
-      return { path, frames: found }
-    }),
-  )
+  const exported = (await Promise.all(
+    modules.map(async (path) =>
+      exportedFrameArrays(path, (await authored[path]()) as Record<string, unknown>),
+    ),
+  )).flat()
 
-  const unregistered = exported
-    .filter(({ frames }) => frames && !banks.some((bank) => bank.frames === frames))
-    .map(({ path }) => path)
+  expect(unregisteredFrameArrays(exported), 'add these to `banks` so they are checked').toEqual([])
+  expect(exported).toHaveLength(registeredFrameArrays.length)
+})
 
-  expect(unregistered, 'add these to `banks` so they are checked').toEqual([])
-  expect(exported.filter(({ frames }) => frames)).toHaveLength(banks.length)
+it('finds a second unregistered frame bank exported from one module', () => {
+  const extra = [RATIO_FRAMES[0]]
+  const exported = exportedFrameArrays('./ratios.ts', {
+    RATIO_FRAMES,
+    EXTRA_RATIO_FRAMES: extra,
+  })
+
+  expect(unregisteredFrameArrays(exported)).toEqual(['./ratios.ts#EXTRA_RATIO_FRAMES'])
 })
 
 it('rejects a whole-number frame in the fraction builder', () => {
@@ -265,6 +349,65 @@ describe.each(banks)('the $name frame bank', (bank: Bank) => {
       }
     })
   }
+})
+
+describe.each(ratioBanks)('the $name frame bank', ({ frames }) => {
+  it('has enough distinct frames for a standard lesson', () => {
+    expect(frames.length).toBeGreaterThanOrEqual(8)
+    expect(new Set(frames.map(({ id }) => id)).size).toBe(frames.length)
+  })
+
+  it('satisfies the content contract in both comparison modes', () => {
+    expect(checkRatioBank(frames)).toEqual([])
+  })
+
+  it('states both category counts and their combined whole', () => {
+    for (const frame of frames) {
+      for (const q of RATIO_CHECK_QUANTITIES) {
+        for (const comparison of RATIO_COMPARISONS) {
+          const text = ratioText(frame, q, comparison)
+          expect(text, `${frame.id} omits its first count`).toContain(String(q.first))
+          expect(text, `${frame.id} omits its second count`).toContain(String(q.second))
+          expect(text, `${frame.id} omits its total`).toContain(String(q.first + q.second))
+        }
+      }
+    }
+  })
+
+  it('carries the same counts and comparison as the visible story', () => {
+    for (const frame of frames) {
+      for (const q of RATIO_CHECK_QUANTITIES) {
+        for (const comparison of RATIO_COMPARISONS) {
+          const problem = ratioProblemFor(frame, q, comparison)
+          if (problem.display.kind !== 'story' || problem.display.ratio?.operation !== 'ratio-word') {
+            throw new Error('expected ratio-word story')
+          }
+          expect(problem.display.text).toBe(ratioText(frame, q, comparison))
+          expect(problem.display.ratio).toEqual({
+            operation: 'ratio-word',
+            frameId: frame.id,
+            ...q,
+            comparison,
+          })
+        }
+      }
+    }
+  })
+
+  it('keeps both wall predictions distinct from each other and the answer', () => {
+    for (const frame of frames) {
+      for (const q of RATIO_CHECK_QUANTITIES) {
+        for (const comparison of RATIO_COMPARISONS) {
+          const problem = ratioProblemFor(frame, q, comparison)
+          const values = problem.misconceptions?.map(({ value }) => value) ?? []
+          const denominator = comparison === 'part-to-part' ? q.second : q.first + q.second
+          expect(values, `${frame.id} ${comparison}`).toHaveLength(2)
+          expect(new Set(values).size, `${frame.id} ${comparison}`).toBe(2)
+          expect(values, `${frame.id} ${comparison}`).not.toContain(q.first / denominator)
+        }
+      }
+    }
+  })
 })
 
 describe('the frame check itself', () => {

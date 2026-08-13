@@ -221,6 +221,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "primes": [
     "multiples",
   ],
+  "ratio-words": [
+    "unit-conversion",
+  ],
   "read-decimals": [
     "decimal-place-value",
   ],

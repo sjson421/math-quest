@@ -223,6 +223,13 @@ export type RatioData =
       smallSingular: string
       smallPlural: string
     }
+  | {
+      operation: 'ratio-word'
+      frameId: string
+      first: number
+      second: number
+      comparison: 'part-to-part' | 'part-to-whole'
+    }
 
 /**
  * Structured notation for the closed expression surface used by Stages D–G.

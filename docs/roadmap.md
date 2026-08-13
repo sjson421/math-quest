@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 110 of 201 skills are playable.** Stages A, B and C, Stage D's Units 7–10, and
-Unit 11's first six skills are playable. Choice input,
+**Status: 111 of 201 skills are playable.** Stages A, B and C and Stage D are playable.
+Choice input,
 number-line input, math notation, fraction input and diagrams are built, so
 `AVAILABLE_CAPABILITIES` holds
 `choice-input`, `number-line`, `math-notation`, `fraction-input` and `diagram`. The three
@@ -21,9 +21,10 @@ and fixed-frame fraction stories. Unit 9 is now complete: place value, reading, 
 rounding, addition, subtraction, multiplication, division, decimal/fraction conversion and a
 money-applied word problem, all with exact base-ten data. Unit 10 is complete: meaning,
 conversions, inverse percent relationships, percent change, discount/tax/tip and simple
-interest with its supplied GED formula. Unit 11a now covers writing and simplifying ratios,
+interest with its supplied GED formula. Unit 11 covers writing and simplifying ratios,
 best-value unit rates, proportions, scale drawings, and a fixed stated set of within-system
-unit conversions. `ratio-words` is next.
+unit conversions, then closes with fixed-frame ratio stories distinguishing part-to-part from
+part-to-whole. Expression input is next.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -683,7 +684,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
       cover empty, whole, dense and prime-count figures at 375px. The capability flag changes no
       playable skill on its own, so the status remains 61 until Unit 7 gains generators.
 
-- [ ] **19 · Stage D · Units 7–11** — XL — 50 skills, ten changes
+- [x] **19 · Stage D · Units 7–11** — XL — 50 skills, ten changes — **shipped 2026-08-13**
 
       The biggest block in the course. Unit 7 builds meaning before operations, with
       simplification as its closing bridge. Unit 8 needs the fraction keypad from item 3,

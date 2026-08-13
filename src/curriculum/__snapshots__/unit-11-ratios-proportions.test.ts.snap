@@ -1,5 +1,307 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`recorded output: ratio-words > matches the wording recorded when the skill landed 1`] = `
+"--- ratio-words · seed 1 · difficulty 1
+prompt   Write the requested budget ratio.
+display  story [ratio-word budget-status 6:5 part-to-whole] "A budget has 6 approved requests and 5 deferred requests, 11 requests in all. Write approved to all requests."
+answer   exact 6/11 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put approved requests over all requests.
+step 1   Identify the two quantities being compared.   [approved requests to all requests]
+step 2   Write the first quantity over the second.   [6/11]
+miss     confused-part-and-whole = 1.2   Compare approved requests with all requests, not only deferred requests.
+miss     reversed-ratio-order = 1.8333333333333333   Keep approved requests first because the question names it first.
+
+--- ratio-words · seed 12345 · difficulty 1
+prompt   Write the requested delivery ratio.
+display  story [ratio-word delivery-status 8:5 part-to-whole] "A route has 8 delivered orders and 5 pending orders, 13 orders in all. Write delivered to all orders."
+answer   exact 8/13 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put delivered orders over all orders.
+step 1   Identify the two quantities being compared.   [delivered orders to all orders]
+step 2   Write the first quantity over the second.   [8/13]
+miss     confused-part-and-whole = 1.6   Compare delivered orders with all orders, not only pending orders.
+miss     reversed-ratio-order = 1.625   Keep delivered orders first because the question names it first.
+
+--- ratio-words · seed 67890 · difficulty 1
+prompt   Write the requested shift ratio.
+display  story [ratio-word work-schedule 4:6 part-to-part] "A schedule has 4 day shifts and 6 night shifts, 10 shifts in all. Write day to night."
+answer   exact 2/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put day shifts over night shifts.
+step 1   Identify the two quantities being compared.   [day shifts to night shifts]
+step 2   Write the first quantity over the second.   [4/6]
+miss     confused-part-and-whole = 0.4   Compare day shifts with night shifts, not all shifts.
+miss     reversed-ratio-order = 1.5   Keep day shifts first because the question names it first.
+
+--- ratio-words · seed 424242 · difficulty 1
+prompt   Write the requested invoice ratio.
+display  story [ratio-word invoice-status 2:3 part-to-whole] "An office has 2 paid invoices and 3 unpaid invoices, 5 invoices in all. Write paid to all invoices."
+answer   exact 2/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put paid invoices over all invoices.
+step 1   Identify the two quantities being compared.   [paid invoices to all invoices]
+step 2   Write the first quantity over the second.   [2/5]
+miss     confused-part-and-whole = 0.6666666666666666   Compare paid invoices with all invoices, not only unpaid invoices.
+miss     reversed-ratio-order = 2.5   Keep paid invoices first because the question names it first.
+
+--- ratio-words · seed 987654321 · difficulty 1
+prompt   Write the requested file ratio.
+display  story [ratio-word file-storage 8:6 part-to-part] "An archive has 8 digital files and 6 paper files, 14 files in all. Write digital to paper."
+answer   exact 4/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put digital files over paper files.
+step 1   Identify the two quantities being compared.   [digital files to paper files]
+step 2   Write the first quantity over the second.   [8/6]
+miss     confused-part-and-whole = 0.5714285714285714   Compare digital files with paper files, not all files.
+miss     reversed-ratio-order = 0.75   Keep digital files first because the question names it first.
+
+--- ratio-words · seed 1 · difficulty 2
+prompt   Write the requested budget ratio.
+display  story [ratio-word budget-status 9:8 part-to-whole] "A budget has 9 approved requests and 8 deferred requests, 17 requests in all. Write approved to all requests."
+answer   exact 9/17 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put approved requests over all requests.
+step 1   Identify the two quantities being compared.   [approved requests to all requests]
+step 2   Write the first quantity over the second.   [9/17]
+miss     confused-part-and-whole = 1.125   Compare approved requests with all requests, not only deferred requests.
+miss     reversed-ratio-order = 1.8888888888888888   Keep approved requests first because the question names it first.
+
+--- ratio-words · seed 12345 · difficulty 2
+prompt   Write the requested delivery ratio.
+display  story [ratio-word delivery-status 12:7 part-to-whole] "A route has 12 delivered orders and 7 pending orders, 19 orders in all. Write delivered to all orders."
+answer   exact 12/19 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put delivered orders over all orders.
+step 1   Identify the two quantities being compared.   [delivered orders to all orders]
+step 2   Write the first quantity over the second.   [12/19]
+miss     confused-part-and-whole = 1.7142857142857142   Compare delivered orders with all orders, not only pending orders.
+miss     reversed-ratio-order = 1.5833333333333333   Keep delivered orders first because the question names it first.
+
+--- ratio-words · seed 67890 · difficulty 2
+prompt   Write the requested shift ratio.
+display  story [ratio-word work-schedule 6:8 part-to-part] "A schedule has 6 day shifts and 8 night shifts, 14 shifts in all. Write day to night."
+answer   exact 3/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put day shifts over night shifts.
+step 1   Identify the two quantities being compared.   [day shifts to night shifts]
+step 2   Write the first quantity over the second.   [6/8]
+miss     confused-part-and-whole = 0.42857142857142855   Compare day shifts with night shifts, not all shifts.
+miss     reversed-ratio-order = 1.3333333333333333   Keep day shifts first because the question names it first.
+
+--- ratio-words · seed 424242 · difficulty 2
+prompt   Write the requested invoice ratio.
+display  story [ratio-word invoice-status 4:5 part-to-whole] "An office has 4 paid invoices and 5 unpaid invoices, 9 invoices in all. Write paid to all invoices."
+answer   exact 4/9 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put paid invoices over all invoices.
+step 1   Identify the two quantities being compared.   [paid invoices to all invoices]
+step 2   Write the first quantity over the second.   [4/9]
+miss     confused-part-and-whole = 0.8   Compare paid invoices with all invoices, not only unpaid invoices.
+miss     reversed-ratio-order = 2.25   Keep paid invoices first because the question names it first.
+
+--- ratio-words · seed 987654321 · difficulty 2
+prompt   Write the requested file ratio.
+display  story [ratio-word file-storage 12:9 part-to-part] "An archive has 12 digital files and 9 paper files, 21 files in all. Write digital to paper."
+answer   exact 4/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put digital files over paper files.
+step 1   Identify the two quantities being compared.   [digital files to paper files]
+step 2   Write the first quantity over the second.   [12/9]
+miss     confused-part-and-whole = 0.5714285714285714   Compare digital files with paper files, not all files.
+miss     reversed-ratio-order = 0.75   Keep digital files first because the question names it first.
+
+--- ratio-words · seed 1 · difficulty 3
+prompt   Write the requested stock ratio.
+display  story [ratio-word warehouse-stock 13:5 part-to-whole] "A warehouse has 13 full pallets and 5 empty pallets, 18 pallets in all. Write full to all pallets."
+answer   exact 13/18 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put full pallets over all pallets.
+step 1   Identify the two quantities being compared.   [full pallets to all pallets]
+step 2   Write the first quantity over the second.   [13/18]
+miss     confused-part-and-whole = 2.6   Compare full pallets with all pallets, not only empty pallets.
+miss     reversed-ratio-order = 1.3846153846153846   Keep full pallets first because the question names it first.
+
+--- ratio-words · seed 12345 · difficulty 3
+prompt   Write the requested delivery ratio.
+display  story [ratio-word delivery-status 18:11 part-to-whole] "A route has 18 delivered orders and 11 pending orders, 29 orders in all. Write delivered to all orders."
+answer   exact 18/29 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put delivered orders over all orders.
+step 1   Identify the two quantities being compared.   [delivered orders to all orders]
+step 2   Write the first quantity over the second.   [18/29]
+miss     confused-part-and-whole = 1.6363636363636365   Compare delivered orders with all orders, not only pending orders.
+miss     reversed-ratio-order = 1.6111111111111112   Keep delivered orders first because the question names it first.
+
+--- ratio-words · seed 67890 · difficulty 3
+prompt   Write the requested shift ratio.
+display  story [ratio-word work-schedule 10:13 part-to-part] "A schedule has 10 day shifts and 13 night shifts, 23 shifts in all. Write day to night."
+answer   exact 10/13 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put day shifts over night shifts.
+step 1   Identify the two quantities being compared.   [day shifts to night shifts]
+step 2   Write the first quantity over the second.   [10/13]
+miss     confused-part-and-whole = 0.43478260869565216   Compare day shifts with night shifts, not all shifts.
+miss     reversed-ratio-order = 1.3   Keep day shifts first because the question names it first.
+
+--- ratio-words · seed 424242 · difficulty 3
+prompt   Write the requested invoice ratio.
+display  story [ratio-word invoice-status 6:8 part-to-whole] "An office has 6 paid invoices and 8 unpaid invoices, 14 invoices in all. Write paid to all invoices."
+answer   exact 3/7 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put paid invoices over all invoices.
+step 1   Identify the two quantities being compared.   [paid invoices to all invoices]
+step 2   Write the first quantity over the second.   [6/14]
+miss     confused-part-and-whole = 0.75   Compare paid invoices with all invoices, not only unpaid invoices.
+miss     reversed-ratio-order = 2.3333333333333335   Keep paid invoices first because the question names it first.
+
+--- ratio-words · seed 987654321 · difficulty 3
+prompt   Write the requested budget ratio.
+display  story [ratio-word budget-status 18:5 part-to-whole] "A budget has 18 approved requests and 5 deferred requests, 23 requests in all. Write approved to all requests."
+answer   exact 18/23 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put approved requests over all requests.
+step 1   Identify the two quantities being compared.   [approved requests to all requests]
+step 2   Write the first quantity over the second.   [18/23]
+miss     confused-part-and-whole = 3.6   Compare approved requests with all requests, not only deferred requests.
+miss     reversed-ratio-order = 1.2777777777777777   Keep approved requests first because the question names it first.
+
+--- ratio-words · seed 1 · difficulty 4
+prompt   Write the requested stock ratio.
+display  story [ratio-word warehouse-stock 21:8 part-to-whole] "A warehouse has 21 full pallets and 8 empty pallets, 29 pallets in all. Write full to all pallets."
+answer   exact 21/29 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put full pallets over all pallets.
+step 1   Identify the two quantities being compared.   [full pallets to all pallets]
+step 2   Write the first quantity over the second.   [21/29]
+miss     confused-part-and-whole = 2.625   Compare full pallets with all pallets, not only empty pallets.
+miss     reversed-ratio-order = 1.380952380952381   Keep full pallets first because the question names it first.
+
+--- ratio-words · seed 12345 · difficulty 4
+prompt   Write the requested delivery ratio.
+display  story [ratio-word delivery-status 28:18 part-to-whole] "A route has 28 delivered orders and 18 pending orders, 46 orders in all. Write delivered to all orders."
+answer   exact 14/23 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put delivered orders over all orders.
+step 1   Identify the two quantities being compared.   [delivered orders to all orders]
+step 2   Write the first quantity over the second.   [28/46]
+miss     confused-part-and-whole = 1.5555555555555556   Compare delivered orders with all orders, not only pending orders.
+miss     reversed-ratio-order = 1.6428571428571428   Keep delivered orders first because the question names it first.
+
+--- ratio-words · seed 67890 · difficulty 4
+prompt   Write the requested shift ratio.
+display  story [ratio-word work-schedule 16:20 part-to-part] "A schedule has 16 day shifts and 20 night shifts, 36 shifts in all. Write day to night."
+answer   exact 4/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put day shifts over night shifts.
+step 1   Identify the two quantities being compared.   [day shifts to night shifts]
+step 2   Write the first quantity over the second.   [16/20]
+miss     confused-part-and-whole = 0.4444444444444444   Compare day shifts with night shifts, not all shifts.
+miss     reversed-ratio-order = 1.25   Keep day shifts first because the question names it first.
+
+--- ratio-words · seed 424242 · difficulty 4
+prompt   Write the requested invoice ratio.
+display  story [ratio-word invoice-status 10:12 part-to-whole] "An office has 10 paid invoices and 12 unpaid invoices, 22 invoices in all. Write paid to all invoices."
+answer   exact 5/11 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put paid invoices over all invoices.
+step 1   Identify the two quantities being compared.   [paid invoices to all invoices]
+step 2   Write the first quantity over the second.   [10/22]
+miss     confused-part-and-whole = 0.8333333333333334   Compare paid invoices with all invoices, not only unpaid invoices.
+miss     reversed-ratio-order = 2.2   Keep paid invoices first because the question names it first.
+
+--- ratio-words · seed 987654321 · difficulty 4
+prompt   Write the requested project ratio.
+display  story [ratio-word project-status 27:10 part-to-whole] "A project has 27 completed tasks and 10 open tasks, 37 tasks in all. Write completed to all tasks."
+answer   exact 27/37 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put completed tasks over all tasks.
+step 1   Identify the two quantities being compared.   [completed tasks to all tasks]
+step 2   Write the first quantity over the second.   [27/37]
+miss     confused-part-and-whole = 2.7   Compare completed tasks with all tasks, not only open tasks.
+miss     reversed-ratio-order = 1.3703703703703705   Keep completed tasks first because the question names it first.
+
+--- ratio-words · seed 1 · difficulty 5
+prompt   Write the requested stock ratio.
+display  story [ratio-word warehouse-stock 30:12 part-to-whole] "A warehouse has 30 full pallets and 12 empty pallets, 42 pallets in all. Write full to all pallets."
+answer   exact 5/7 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put full pallets over all pallets.
+step 1   Identify the two quantities being compared.   [full pallets to all pallets]
+step 2   Write the first quantity over the second.   [30/42]
+miss     confused-part-and-whole = 2.5   Compare full pallets with all pallets, not only empty pallets.
+miss     reversed-ratio-order = 1.4   Keep full pallets first because the question names it first.
+
+--- ratio-words · seed 12345 · difficulty 5
+prompt   Write the requested delivery ratio.
+display  story [ratio-word delivery-status 40:26 part-to-whole] "A route has 40 delivered orders and 26 pending orders, 66 orders in all. Write delivered to all orders."
+answer   exact 20/33 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put delivered orders over all orders.
+step 1   Identify the two quantities being compared.   [delivered orders to all orders]
+step 2   Write the first quantity over the second.   [40/66]
+miss     confused-part-and-whole = 1.5384615384615385   Compare delivered orders with all orders, not only pending orders.
+miss     reversed-ratio-order = 1.65   Keep delivered orders first because the question names it first.
+
+--- ratio-words · seed 67890 · difficulty 5
+prompt   Write the requested shift ratio.
+display  story [ratio-word work-schedule 23:29 part-to-part] "A schedule has 23 day shifts and 29 night shifts, 52 shifts in all. Write day to night."
+answer   exact 23/29 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put day shifts over night shifts.
+step 1   Identify the two quantities being compared.   [day shifts to night shifts]
+step 2   Write the first quantity over the second.   [23/29]
+miss     confused-part-and-whole = 0.4423076923076923   Compare day shifts with night shifts, not all shifts.
+miss     reversed-ratio-order = 1.2608695652173914   Keep day shifts first because the question names it first.
+
+--- ratio-words · seed 424242 · difficulty 5
+prompt   Write the requested invoice ratio.
+display  story [ratio-word invoice-status 15:18 part-to-whole] "An office has 15 paid invoices and 18 unpaid invoices, 33 invoices in all. Write paid to all invoices."
+answer   exact 5/11 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put paid invoices over all invoices.
+step 1   Identify the two quantities being compared.   [paid invoices to all invoices]
+step 2   Write the first quantity over the second.   [15/33]
+miss     confused-part-and-whole = 0.8333333333333334   Compare paid invoices with all invoices, not only unpaid invoices.
+miss     reversed-ratio-order = 2.2   Keep paid invoices first because the question names it first.
+
+--- ratio-words · seed 987654321 · difficulty 5
+prompt   Write the requested project ratio.
+display  story [ratio-word project-status 39:15 part-to-whole] "A project has 39 completed tasks and 15 open tasks, 54 tasks in all. Write completed to all tasks."
+answer   exact 13/18 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Put completed tasks over all tasks.
+step 1   Identify the two quantities being compared.   [completed tasks to all tasks]
+step 2   Write the first quantity over the second.   [39/54]
+miss     confused-part-and-whole = 2.6   Compare completed tasks with all tasks, not only open tasks.
+miss     reversed-ratio-order = 1.3846153846153846   Keep completed tasks first because the question names it first."
+`;
+
 exports[`recorded output: scale-drawings > matches the wording recorded when the skill landed 1`] = `
 "--- scale-drawings · seed 1 · difficulty 1
 prompt   Find the drawing length in centimeters.

@@ -5,6 +5,7 @@ import { gcd, rational } from '../lib/rational'
 import type { Difficulty, Problem, RatioData } from '../lib/types'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit11 } from './unit-11-ratios-proportions'
+import { RATIO_FRAMES, ratioWordText } from './phrasing/ratios'
 
 describe.each(unit11.map((skill) => [skill.id, skill] as const))('recorded output: %s', (_id, skill) => {
   it('matches the wording recorded when the skill landed', () => {
@@ -184,6 +185,75 @@ describe('unit-conversion', () => {
   })
 })
 
-it('records every field Unit 11a sets', () => {
+describe('ratio-words', () => {
+  it('derives both requested comparisons and keeps both wall diagnoses available', () => {
+    const comparisons = new Set<string>()
+    const frames = new Set<string>()
+
+    for (const problem of problems('ratio-words')) {
+      const data = ratioData(problem)
+      if (data.operation !== 'ratio-word') throw new Error('expected ratio-word data')
+      const whole = data.first + data.second
+      const denominator = data.comparison === 'part-to-part' ? data.second : whole
+      const alternateDenominator = data.comparison === 'part-to-part' ? whole : data.second
+      const reversedNumerator = data.comparison === 'part-to-part' ? data.second : whole
+
+      expect(exact(problem)).toEqual(rational(data.first, denominator))
+      expect(problem.answer).toMatchObject({ requireFraction: true })
+      expect(problem.keypad).toEqual({ allowFraction: true })
+      expect(problem.display.kind === 'story' ? problem.display.text : '').toBe(ratioWordText(data))
+      expect(diagnose(problem, `${data.first}/${alternateDenominator}`)?.tag)
+        .toBe('confused-part-and-whole')
+      expect(diagnose(problem, `${reversedNumerator}/${data.first}`)?.tag)
+        .toBe('reversed-ratio-order')
+      expect(problem.misconceptions?.map(({ tag }) => tag)).toEqual([
+        'confused-part-and-whole',
+        'reversed-ratio-order',
+      ])
+      comparisons.add(data.comparison)
+      frames.add(data.frameId)
+    }
+
+    expect(comparisons).toEqual(new Set(['part-to-part', 'part-to-whole']))
+    expect(frames).toEqual(new Set(RATIO_FRAMES.map(({ id }) => id)))
+  })
+
+  it('keeps counts inside each band and grows them with difficulty', () => {
+    const bounds: Record<Difficulty, readonly [number, number]> = {
+      1: [2, 8],
+      2: [3, 12],
+      3: [5, 18],
+      4: [8, 28],
+      5: [12, 40],
+    }
+
+    for (const problem of problems('ratio-words')) {
+      const data = ratioData(problem)
+      if (data.operation !== 'ratio-word') throw new Error('expected ratio-word data')
+      const [min, max] = bounds[problem.difficulty]
+      expect(data.first).toBeGreaterThanOrEqual(min)
+      expect(data.first).toBeLessThanOrEqual(max)
+      expect(data.second).toBeGreaterThanOrEqual(min)
+      expect(data.second).toBeLessThanOrEqual(max)
+      expect(data.first).not.toBe(data.second)
+    }
+
+    expect(meanAt('ratio-words', 5, (data) => data.operation === 'ratio-word' ? data.first + data.second : 0))
+      .toBeGreaterThan(meanAt('ratio-words', 1, (data) => data.operation === 'ratio-word' ? data.first + data.second : 0))
+  })
+
+  it('is deterministic and varied across the seeded sample', () => {
+    const skill = unit11.find(({ id }) => id === 'ratio-words')
+    if (!skill) throw new Error('missing ratio-words')
+
+    for (const difficulty of difficulties) {
+      expect(generateProblem(skill, 424242, difficulty)).toEqual(generateProblem(skill, 424242, difficulty))
+    }
+    expect(new Set(problems('ratio-words').map((problem) => JSON.stringify(problem.display))).size)
+      .toBeGreaterThan(100)
+  })
+})
+
+it('records every field Unit 11 sets', () => {
   expect(unrenderedKeys(unit11)).toEqual([])
 })

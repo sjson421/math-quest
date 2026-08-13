@@ -6,6 +6,7 @@ import { checkAnswer, intAnswer } from '../lib/answer'
 import { makeRng } from '../lib/rng'
 import { equals, format as formatRational, gcd, toNumber, rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
+import { ratioWordText } from './phrasing/ratios'
 import type {
   DecimalData,
   DecimalValue,
@@ -748,6 +749,14 @@ function expectedRatioDisplay(data: RatioData): {
         values: [data.factor, data.given],
       }
     }
+    case 'ratio-word': {
+      const denominator = data.comparison === 'part-to-part' ? data.second : data.first + data.second
+      return {
+        text: ratioWordText(data),
+        answer: data.first / denominator,
+        values: [data.first, data.second],
+      }
+    }
     default: {
       const unhandled: never = data
       throw new Error(`Unknown ratio operation: ${JSON.stringify(unhandled)}`)
@@ -1208,9 +1217,33 @@ describe('ratio and proportion answer verification', () => {
     ...overrides,
   })
 
+  const ratioWord = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-ratio-word',
+    prompt: 'Write the requested project ratio.',
+    display: {
+      kind: 'story',
+      text: 'A project has 3 completed tasks and 2 open tasks, 5 tasks in all. Write completed to all tasks.',
+      ratio: {
+        operation: 'ratio-word',
+        frameId: 'project-status',
+        first: 3,
+        second: 2,
+        comparison: 'part-to-whole',
+      },
+    },
+    answer: { kind: 'exact', n: 3, d: 5, requireFraction: true },
+    inputMode: 'keypad',
+    keypad: { allowFraction: true },
+    hint: 'Put completed tasks over all tasks.',
+    solution: [{ text: 'Write the first quantity over the second.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
   it('recomputes prose and notation answers from structured ratio data', () => {
     expect(answerMismatch(writeRatio())).toBeUndefined()
     expect(answerMismatch(proportion())).toBeUndefined()
+    expect(answerMismatch(ratioWord())).toBeUndefined()
   })
 
   it('rejects ratio prose and notation that disagree with their data', () => {
@@ -1227,6 +1260,11 @@ describe('ratio and proportion answer verification', () => {
 
     expect(() => answerMismatch(prose)).toThrow('visible ratio text disagrees with its data')
     expect(() => answerMismatch(notation)).toThrow('visible ratio notation disagrees with its data')
+
+    const word = ratioWord()
+    if (word.display.kind !== 'story') throw new Error('expected story display')
+    word.display.text = 'A project has 3 completed tasks and 2 open tasks, 5 tasks in all. Write completed to open.'
+    expect(() => answerMismatch(word)).toThrow('visible ratio text disagrees with its data')
   })
 
   it('names a stated ratio answer that disagrees with the displayed sources', () => {
@@ -1235,6 +1273,9 @@ describe('ratio and proportion answer verification', () => {
     )
     expect(answerMismatch(proportion({ answer: intAnswer(12) }))).toContain(
       'synthetic-proportion: stated 12, derived 15',
+    )
+    expect(answerMismatch(ratioWord({ answer: { kind: 'exact', n: 3, d: 2 } }))).toContain(
+      'synthetic-ratio-word: stated 1.5, derived 0.6',
     )
   })
 
