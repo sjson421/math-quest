@@ -195,6 +195,157 @@ describe.each([
   })
 })
 
+describe('mult-decimals', () => {
+  it('derives an exact product from independently reconstructed coefficients', () => {
+    for (const problem of problems('mult-decimals')) {
+      const data = decimalData(problem)
+      if (data.operation !== 'mult' || problem.display.kind !== 'decimal-column') throw new Error('expected mult data')
+      const result = data.left.coefficient * data.right.coefficient
+      expect(exact(problem)).toEqual(rational(result, power(2)))
+      expect(problem.keypad).toEqual({ allowDecimal: true })
+      expect(data.left.scale).toBe(1)
+      expect(data.right.scale).toBe(1)
+    }
+  })
+
+  it('predicts both directions of a misplaced decimal point, always distinct', () => {
+    for (const problem of problems('mult-decimals')) {
+      const data = decimalData(problem)
+      if (data.operation !== 'mult') throw new Error('expected mult data')
+      const result = data.left.coefficient * data.right.coefficient
+      const answer = exact(problem)
+      const tooBig = problem.misconceptions?.find(({ tag }) => tag === 'misplaced-point-fewer-places')
+      const tooSmall = problem.misconceptions?.find(({ tag }) => tag === 'misplaced-point-extra-place')
+      expect(tooBig?.value).toBe(result / power(1))
+      expect(tooSmall?.value).toBe(result / power(3))
+      expect(tooBig?.value).not.toBe(answer.n / answer.d)
+      expect(tooSmall?.value).not.toBe(tooBig?.value)
+    }
+  })
+
+  it('grows operand magnitude with difficulty', () => {
+    const all = problems('mult-decimals')
+    const magnitude = (difficulty: Difficulty) => {
+      const at = all.filter((p) => p.difficulty === difficulty)
+      const left = (p: Problem) => number((decimalData(p) as Extract<DecimalData, { operation: 'mult' }>).left)
+      return at.reduce((sum, p) => sum + left(p), 0) / at.length
+    }
+    expect(magnitude(5)).toBeGreaterThan(magnitude(1))
+  })
+})
+
+describe('div-decimal-by-whole', () => {
+  it('constructs an exact quotient from a whole-number divisor', () => {
+    for (const problem of problems('div-decimal-by-whole')) {
+      const data = decimalData(problem)
+      if (data.operation !== 'div-whole' || problem.display.kind !== 'inline') throw new Error('expected div-whole data')
+      expect(problem.display.text).toBe(`${text(data.dividend)} ÷ ${data.divisor}`)
+      expect(data.dividend.coefficient % data.divisor).toBe(0)
+      expect(exact(problem)).toEqual(rational(data.dividend.coefficient / data.divisor, power(data.dividend.scale)))
+      expect(problem.keypad).toEqual({ allowDecimal: true })
+    }
+  })
+})
+
+describe('div-by-decimal', () => {
+  it('constructs an exact whole-number quotient by shifting both points', () => {
+    for (const problem of problems('div-by-decimal')) {
+      const data = decimalData(problem)
+      if (data.operation !== 'div-decimal' || problem.display.kind !== 'inline') throw new Error('expected div-decimal data')
+      expect(problem.display.text).toBe(`${text(data.dividend)} ÷ ${text(data.divisor)}`)
+      const quotient = (data.dividend.coefficient * power(data.divisor.scale)) / (data.divisor.coefficient * power(data.dividend.scale))
+      expect(Number.isInteger(quotient)).toBe(true)
+      expect(exact(problem)).toEqual(rational(quotient, 1))
+    }
+  })
+
+  it('predicts shifting only one point, in both directions, always distinct from the answer', () => {
+    for (const problem of problems('div-by-decimal')) {
+      const data = decimalData(problem)
+      if (data.operation !== 'div-decimal') throw new Error('expected div-decimal data')
+      const quotient = exact(problem).n
+      const shift = power(data.divisor.scale)
+      const shiftedDivisorOnly = problem.misconceptions?.find(({ tag }) => tag === 'shifted-divisor-only')
+      const shiftedDividendOnly = problem.misconceptions?.find(({ tag }) => tag === 'shifted-dividend-only')
+      expect(shiftedDivisorOnly?.value).toBe(quotient / shift)
+      expect(shiftedDividendOnly?.value).toBe(quotient * shift)
+      expect(shiftedDivisorOnly?.value).not.toBe(quotient)
+      expect(shiftedDividendOnly?.value).not.toBe(shiftedDivisorOnly?.value)
+    }
+  })
+})
+
+describe('fraction-to-decimal', () => {
+  it('converts a terminating fraction to its exact decimal, requiring decimal notation', () => {
+    for (const problem of problems('fraction-to-decimal')) {
+      if (problem.display.kind !== 'math' || problem.display.fraction?.operation !== 'simplify') {
+        throw new Error('expected fraction display')
+      }
+      const { numerator, denominator } = problem.display.fraction
+      expect(exact(problem)).toEqual(rational(numerator * 100, denominator * 100))
+      if (problem.answer.kind !== 'exact') throw new Error('expected exact answer')
+      expect(problem.answer.requireDecimal).toBe(true)
+      const asFraction = `${numerator}/${denominator}`
+      expect(checkAnswer(problem.answer, asFraction).status).toBe('not-decimal')
+    }
+  })
+
+  it('grows the denominator band with difficulty', () => {
+    const denominatorsAt = (difficulty: Difficulty) =>
+      problems('fraction-to-decimal')
+        .filter((p) => p.difficulty === difficulty)
+        .map((p) => (p.display.kind === 'math' && p.display.fraction?.operation === 'simplify' ? p.display.fraction.denominator : 0))
+    const meanAt = (difficulty: Difficulty) => {
+      const values = denominatorsAt(difficulty)
+      return values.reduce((sum, v) => sum + v, 0) / values.length
+    }
+    expect(meanAt(5)).toBeGreaterThan(meanAt(1))
+  })
+})
+
+describe('decimal-to-fraction', () => {
+  it('converts a decimal to its exact fraction, requiring fraction notation', () => {
+    for (const problem of problems('decimal-to-fraction')) {
+      const data = decimalData(problem)
+      if (data.operation !== 'display' || problem.display.kind !== 'inline') throw new Error('expected display data')
+      expect(problem.display.text).toBe(text(data.value))
+      expect(exact(problem)).toEqual(rational(data.value.coefficient, power(data.value.scale)))
+      if (problem.answer.kind !== 'exact') throw new Error('expected exact answer')
+      expect(problem.answer.requireFraction).toBe(true)
+      expect(checkAnswer(problem.answer, text(data.value)).status).toBe('not-fraction')
+    }
+  })
+
+  it('never draws a whole number, which would have no fractional part to name', () => {
+    for (const problem of problems('decimal-to-fraction')) {
+      const data = decimalData(problem)
+      if (data.operation !== 'display') throw new Error('expected display data')
+      expect(data.value.coefficient % power(data.value.scale)).not.toBe(0)
+    }
+  })
+})
+
+describe('money-problems', () => {
+  it('carries an integer-cent price and quantity whose product matches the stated dollar answer', () => {
+    for (const problem of problems('money-problems')) {
+      if (problem.display.kind !== 'story') throw new Error('expected story display')
+      const [priceCents, quantity] = problem.display.operands
+      expect(problem.display.operator).toBe('×')
+      expect(exact(problem)).toEqual(rational(priceCents * quantity, 100))
+      expect(problem.keypad).toEqual({ allowDecimal: true })
+    }
+  })
+
+  it('predicts the price alone and the price times the wrong quantity, in dollars', () => {
+    for (const problem of problems('money-problems')) {
+      if (problem.display.kind !== 'story') throw new Error('expected story display')
+      const [priceCents] = problem.display.operands
+      const answeredPart = problem.misconceptions?.find(({ tag }) => tag === 'answered-part')
+      expect(answeredPart?.value).toBe(priceCents / 100)
+    }
+  })
+})
+
 it('records every field Unit 9 sets', () => {
   expect(unrenderedKeys(unit09)).toEqual([])
 })

@@ -68,8 +68,17 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "decimal-place-value": [
     "fraction-words",
   ],
+  "decimal-to-fraction": [
+    "fraction-to-decimal",
+  ],
   "div-by-10-100": [
     "div-remainder",
+  ],
+  "div-by-decimal": [
+    "div-decimal-by-whole",
+  ],
+  "div-decimal-by-whole": [
+    "mult-decimals",
   ],
   "div-facts": [
     "div-meaning",
@@ -107,6 +116,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "fraction-of-shape": [
     "fraction-meaning",
   ],
+  "fraction-to-decimal": [
+    "div-by-decimal",
+  ],
   "fraction-words": [
     "div-fractions",
   ],
@@ -128,6 +140,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "mixed-to-improper": [
     "improper-to-mixed",
   ],
+  "money-problems": [
+    "decimal-to-fraction",
+  ],
   "mult-2by1": [
     "mult-by-10-100",
   ],
@@ -136,6 +151,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "mult-by-10-100": [
     "times-mixed",
+  ],
+  "mult-decimals": [
+    "sub-decimals",
   ],
   "mult-fractions": [
     "sub-mixed",

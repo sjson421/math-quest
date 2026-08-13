@@ -2,9 +2,10 @@ import { intAnswer } from '../lib/answer'
 import { decimalText } from '../lib/decimal'
 import { rational } from '../lib/rational'
 import { constrain } from '../lib/rng'
-import type { DecimalArithmeticData, DecimalData, DecimalValue, Misconception } from '../lib/types'
-import { band, defineSkill, type BuildContext } from './engine'
+import type { DecimalArithmeticData, DecimalData, DecimalValue, MathNotation, Misconception } from '../lib/types'
+import { applyOperator, band, defineSkill, pickFrame, storyProblem, type BuildContext, type ProblemSpec } from './engine'
 import { numberWords } from './unit-00-numbers'
+import { MONEY_FRAMES } from './phrasing/money'
 
 const power = (scale: number) => 10 ** scale
 const valueOf = (value: DecimalValue) => value.coefficient / power(value.scale)
@@ -286,6 +287,244 @@ const subDecimals = defineSkill({
   build: (context) => arithmetic('sub', context),
 })
 
+const multDecimals = defineSkill({
+  id: 'mult-decimals',
+  name: 'Multiplying Decimals',
+  blurb: 'Count the places',
+  build(context) {
+    // Both operands stay at tenths, so the product's two decimal places stay
+    // within the hundredths this unit covers rather than reaching thousandths.
+    const left = drawDecimal(context, 1)
+    const right = drawDecimal(context, 1)
+    const scale = 2
+    const result = left.coefficient * right.coefficient
+    const data: DecimalData = { operation: 'mult', left, right }
+
+    return {
+      prompt: 'What is the product?',
+      display: { kind: 'decimal-column' as const, decimal: data },
+      answer: exactAnswer(result, scale),
+      keypad: { allowDecimal: true },
+      misconceptions: [
+        {
+          value: result / power(scale - 1),
+          tag: 'misplaced-point-fewer-places',
+          nudge: 'Count the total decimal places in both factors before placing the point.',
+        },
+        {
+          value: result / power(scale + 1),
+          tag: 'misplaced-point-extra-place',
+          nudge: 'Count the total decimal places in both factors — that is one fewer than shown here.',
+        },
+      ],
+      hint: 'Multiply as whole numbers, then count the total decimal places.',
+      solution: [
+        { text: 'Multiply as whole numbers.', detail: `${left.coefficient} × ${right.coefficient} = ${result}` },
+        { text: 'Count the total decimal places in both factors.', detail: '1 place + 1 place = 2 places' },
+        { text: `${decimalText(left)} × ${decimalText(right)} = ${decimalText({ coefficient: result, scale })}.` },
+      ],
+    }
+  },
+})
+
+const divDecimalByWhole = defineSkill({
+  id: 'div-decimal-by-whole',
+  name: 'Dividing a Decimal',
+  blurb: 'Divide by a whole number',
+  build(context) {
+    const [, maxWhole] = wholeBounds(context)
+    const divisor = context.rng.int(2, Math.max(3, maxWhole))
+    const quotient = drawDecimal(context, context.rng.bool() ? 1 : 2)
+    const dividend: DecimalValue = { coefficient: quotient.coefficient * divisor, scale: quotient.scale }
+    const data: DecimalData = { operation: 'div-whole', dividend, divisor }
+
+    return {
+      prompt: 'What is the quotient?',
+      display: inlineDecimal(`${decimalText(dividend)} ÷ ${divisor}`, data),
+      answer: exactAnswer(quotient.coefficient, quotient.scale),
+      keypad: { allowDecimal: true },
+      misconceptions: [
+        {
+          value: valueOf(quotient) * 10,
+          tag: 'misplaced-point',
+          nudge: 'Keep the decimal point in the quotient directly above the point in the dividend.',
+        },
+      ],
+      hint: 'Divide as if there were no decimal point, then place it directly above.',
+      solution: [
+        { text: 'Divide as with whole numbers.', detail: `${dividend.coefficient} ÷ ${divisor} = ${quotient.coefficient}` },
+        { text: `Place the point directly above: ${decimalText(quotient)}.` },
+      ],
+    }
+  },
+})
+
+const divByDecimal = defineSkill({
+  id: 'div-by-decimal',
+  name: 'Dividing by a Decimal',
+  blurb: 'Shift both numbers',
+  build(context) {
+    const [minWhole, maxWhole] = wholeBounds(context)
+    const quotient = context.rng.int(Math.max(2, minWhole), Math.max(3, maxWhole))
+    const divisor = drawDecimal(context, context.rng.bool() ? 1 : 2)
+    const dividend: DecimalValue = { coefficient: quotient * divisor.coefficient, scale: divisor.scale }
+    const data: DecimalData = { operation: 'div-decimal', dividend, divisor }
+    const shift = power(divisor.scale)
+
+    return {
+      prompt: 'What is the quotient?',
+      display: inlineDecimal(`${decimalText(dividend)} ÷ ${decimalText(divisor)}`, data),
+      answer: intAnswer(quotient),
+      misconceptions: [
+        {
+          value: quotient / shift,
+          tag: 'shifted-divisor-only',
+          nudge: 'Shift the dividend the same number of places you shifted the divisor.',
+        },
+        {
+          value: quotient * shift,
+          tag: 'shifted-dividend-only',
+          nudge: 'Shift the divisor the same number of places you shifted the dividend.',
+        },
+      ],
+      hint: 'Shift the decimal point the same number of places in both numbers.',
+      solution: [
+        { text: 'Shift both points to make the divisor whole.', detail: `${decimalText(divisor)} → ${divisor.coefficient}` },
+        { text: 'Shift the dividend the same number of places.', detail: `${decimalText(dividend)} → ${dividend.coefficient}` },
+        { text: `${dividend.coefficient} ÷ ${divisor.coefficient} = ${quotient}.` },
+      ],
+    }
+  },
+})
+
+const TERMINATING_DENOMINATOR_BAND = {
+  1: [2, 4, 5, 10] as const,
+  2: [2, 4, 5, 10] as const,
+  3: [10, 20, 25] as const,
+  4: [20, 25, 50] as const,
+  5: [25, 50, 100] as const,
+} satisfies Record<BuildContext['difficulty'], readonly number[]>
+
+const fractionNotation = (numerator: number, denominator: number): MathNotation => ({
+  kind: 'fraction',
+  numerator: { kind: 'text', value: String(numerator) },
+  denominator: { kind: 'text', value: String(denominator) },
+})
+
+const fractionDisplay = (numerator: number, denominator: number): ProblemSpec['display'] => ({
+  kind: 'math',
+  notation: fractionNotation(numerator, denominator),
+  label: `${numerator} over ${denominator}`,
+  fraction: { operation: 'simplify', numerator, denominator },
+})
+
+const fractionToDecimal = defineSkill({
+  id: 'fraction-to-decimal',
+  name: 'Fraction to Decimal',
+  blurb: 'Convert by dividing',
+  build(context) {
+    const denominator = context.rng.pick(TERMINATING_DENOMINATOR_BAND[context.difficulty])
+    const numerator = context.rng.int(1, denominator - 1)
+    const coefficient = (numerator * 100) / denominator
+    const value: DecimalValue = { coefficient, scale: 2 }
+
+    return {
+      prompt: 'Write this fraction as a decimal.',
+      display: fractionDisplay(numerator, denominator),
+      answer: { ...exactAnswer(coefficient, 2), requireDecimal: true },
+      // The fraction itself must stay typable, or requireDecimal never has
+      // anything to reject — the pad and the checker read one declaration.
+      keypad: { allowDecimal: true, allowFraction: true },
+      misconceptions: [
+        {
+          value: numerator + denominator,
+          tag: 'added-instead-of-divided',
+          nudge: `Divide ${numerator} by ${denominator}; do not add them.`,
+        },
+      ],
+      hint: `Divide ${numerator} by ${denominator}.`,
+      solution: [
+        { text: 'Divide the numerator by the denominator.', detail: `${numerator} ÷ ${denominator}` },
+        { text: `The decimal is ${decimalText(value)}.` },
+      ],
+    }
+  },
+})
+
+const decimalToFraction = defineSkill({
+  id: 'decimal-to-fraction',
+  name: 'Decimal to Fraction',
+  blurb: 'Convert by place value',
+  build(context) {
+    const scale: 1 | 2 = context.difficulty === 1 ? 1 : context.rng.bool(0.6) ? 2 : 1
+    const value = constrain(
+      () => drawDecimal(context, scale),
+      (candidate) => candidate.coefficient % power(candidate.scale) !== 0,
+    )
+    const denominator = power(scale)
+
+    return {
+      prompt: 'Write this decimal as a fraction.',
+      display: inlineDecimal(decimalText(value), { operation: 'display', value }),
+      answer: { ...exactAnswer(value.coefficient, scale), requireFraction: true },
+      // Symmetric with fraction-to-decimal: the decimal form must stay typable
+      // or requireFraction never has anything to reject.
+      keypad: { allowFraction: true, allowDecimal: true },
+      misconceptions: [
+        {
+          value: value.coefficient,
+          tag: 'numerator-only',
+          nudge: `Use ${denominator} as the denominator, matching the place value.`,
+        },
+      ],
+      hint: `The denominator matches the place value: ${denominator}.`,
+      solution: [
+        {
+          text: 'Use the place value as the denominator.',
+          detail: `${scale === 1 ? 'tenths' : 'hundredths'} → ${denominator}`,
+        },
+        { text: `${decimalText(value)} = ${value.coefficient}/${denominator}.` },
+      ],
+    }
+  },
+})
+
+const moneyProblems = defineSkill({
+  id: 'money-problems',
+  name: 'Money',
+  blurb: 'Decimals applied to money',
+  build(context) {
+    const [minWhole, maxWhole] = wholeBounds(context)
+    const priceCents = context.rng.int(Math.max(50, minWhole * 100), Math.max(150, maxWhole * 100 + 99))
+    const quantity = context.rng.int(2, 12)
+    const distractor = context.rng.intExcept(2, 12, [quantity])
+    const q = { a: priceCents, b: quantity, distractor }
+    const frame = pickFrame(context.rng, MONEY_FRAMES)
+    const totalCents = applyOperator(q.a, q.b, '×')
+
+    return {
+      ...storyProblem(frame, q),
+      answer: exactAnswer(totalCents, 2),
+      keypad: { allowDecimal: true },
+      // Rescaled to dollars, not the generic engine's raw cents-and-count
+      // values: the learner types a dollar amount, so a prediction has to be
+      // one too, reusing the frame's authored nudge text for each.
+      misconceptions: [
+        {
+          value: q.a / 100,
+          tag: 'answered-part',
+          nudge: frame.nudges.answeredPart(q),
+        },
+        {
+          value: (q.a * q.distractor) / 100,
+          tag: 'distractor-pair',
+          nudge: frame.nudges.distractorPair(q),
+        },
+      ],
+    }
+  },
+})
+
 export const unit09 = [
   decimalPlaceValue,
   readDecimals,
@@ -293,4 +532,10 @@ export const unit09 = [
   roundDecimals,
   addDecimals,
   subDecimals,
+  multDecimals,
+  divDecimalByWhole,
+  divByDecimal,
+  fractionToDecimal,
+  decimalToFraction,
+  moneyProblems,
 ]

@@ -129,10 +129,18 @@ const formatDecimalData = (data: DecimalData): string => {
     case 'round':
       return `${data.operation} ${decimalText(data.value)} to ${data.targetScale === 0 ? 'whole' : 'tenth'}`
     case 'add':
-    case 'sub': {
+    case 'sub':
+    case 'mult': {
       const [left, right] = decimalColumnText(data)
-      return `${data.operation} ${left} ${data.operation === 'add' ? '+' : '−'} ${right}`
+      const symbol = data.operation === 'add' ? '+' : data.operation === 'sub' ? '−' : '×'
+      return `${data.operation} ${left} ${symbol} ${right}`
     }
+    case 'div-whole':
+      return `${data.operation} ${decimalText(data.dividend)} ÷ ${data.divisor}`
+    case 'div-decimal':
+      return `${data.operation} ${decimalText(data.dividend)} ÷ ${decimalText(data.divisor)}`
+    case 'display':
+      return `${data.operation} ${decimalText(data.value)}`
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled decimal data: ${JSON.stringify(unhandled)}`)
@@ -208,7 +216,9 @@ const formatAnswer = (answer: Problem['answer']): string => {
       return (
         `exact ${answer.n}/${answer.d}` +
         (answer.requireSimplified ? ' (simplified)' : '') +
-        (answer.requireMixed ? ' (mixed)' : '')
+        (answer.requireMixed ? ' (mixed)' : '') +
+        (answer.requireDecimal ? ' (decimal)' : '') +
+        (answer.requireFraction ? ' (fraction)' : '')
       )
     case 'approx':
       return `approx ${answer.value} ±${answer.tolerance}`

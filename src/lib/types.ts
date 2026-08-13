@@ -21,6 +21,20 @@ export type Answer =
        * the same whole part and remainder — see `checkAnswer`.
        */
       requireMixed?: boolean
+      /**
+       * The answer must be written as a decimal, not an equivalent fraction.
+       *
+       * `fraction-to-decimal` teaches the conversion itself, so retyping the
+       * displayed fraction is answered as right in value but wrong form — see
+       * `checkAnswer`. Mutually exclusive with `requireFraction` on one answer.
+       */
+      requireDecimal?: boolean
+      /**
+       * The answer must be written as a fraction, not an equivalent decimal.
+       *
+       * `decimal-to-fraction`'s counterpart to `requireDecimal`.
+       */
+      requireFraction?: boolean
     }
   /** Numeric match within a tolerance, for irrational or rounded results. */
   | { kind: 'approx'; value: number; tolerance: number }
@@ -135,8 +149,14 @@ export type DecimalData =
   | { operation: 'round'; value: DecimalValue; targetScale: 0 | 1 }
   | { operation: 'add'; left: DecimalValue; right: DecimalValue }
   | { operation: 'sub'; left: DecimalValue; right: DecimalValue }
+  | { operation: 'mult'; left: DecimalValue; right: DecimalValue }
+  /** A whole-number divisor has no decimal point, so it is a plain integer, not a `DecimalValue`. */
+  | { operation: 'div-whole'; dividend: DecimalValue; divisor: number }
+  | { operation: 'div-decimal'; dividend: DecimalValue; divisor: DecimalValue }
+  /** A plain decimal value, shown as digits rather than words or an operation. */
+  | { operation: 'display'; value: DecimalValue }
 
-export type DecimalArithmeticData = Extract<DecimalData, { operation: 'add' | 'sub' }>
+export type DecimalArithmeticData = Extract<DecimalData, { operation: 'add' | 'sub' | 'mult' }>
 
 /**
  * Structured notation for the closed expression surface used by Stages D–G.

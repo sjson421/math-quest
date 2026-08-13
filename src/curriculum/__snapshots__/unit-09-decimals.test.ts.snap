@@ -931,6 +931,1793 @@ miss     adjacent-place = 0   That is the hundredths digit; move one place.
 miss     place-value-not-digit = 60   Enter the digit itself, which is 6."
 `;
 
+exports[`recorded output: decimal-to-fraction > matches the wording recorded when the skill landed 1`] = `
+"--- decimal-to-fraction · seed 1 · difficulty 1
+prompt   Write this decimal as a fraction.
+display  inline "1.9" [display 1.9]
+answer   exact 19/10 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   1.9 = 19/10.
+miss     numerator-only = 19   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 12345 · difficulty 1
+prompt   Write this decimal as a fraction.
+display  inline "2.9" [display 2.9]
+answer   exact 29/10 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   2.9 = 29/10.
+miss     numerator-only = 29   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 67890 · difficulty 1
+prompt   Write this decimal as a fraction.
+display  inline "1.2" [display 1.2]
+answer   exact 6/5 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   1.2 = 12/10.
+miss     numerator-only = 12   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 424242 · difficulty 1
+prompt   Write this decimal as a fraction.
+display  inline "0.4" [display 0.4]
+answer   exact 2/5 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   0.4 = 4/10.
+miss     numerator-only = 4   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 987654321 · difficulty 1
+prompt   Write this decimal as a fraction.
+display  inline "2.8" [display 2.8]
+answer   exact 14/5 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   2.8 = 28/10.
+miss     numerator-only = 28   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 1 · difficulty 2
+prompt   Write this decimal as a fraction.
+display  inline "0.1" [display 0.1]
+answer   exact 1/10 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   0.1 = 1/10.
+miss     numerator-only = 1   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 12345 · difficulty 2
+prompt   Write this decimal as a fraction.
+display  inline "1.9" [display 1.9]
+answer   exact 19/10 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   1.9 = 19/10.
+miss     numerator-only = 19   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 67890 · difficulty 2
+prompt   Write this decimal as a fraction.
+display  inline "3.54" [display 3.54]
+answer   exact 177/50 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 100.
+step 1   Use the place value as the denominator.   [hundredths → 100]
+step 2   3.54 = 354/100.
+miss     numerator-only = 354   Use 100 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 424242 · difficulty 2
+prompt   Write this decimal as a fraction.
+display  inline "1.42" [display 1.42]
+answer   exact 71/50 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 100.
+step 1   Use the place value as the denominator.   [hundredths → 100]
+step 2   1.42 = 142/100.
+miss     numerator-only = 142   Use 100 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 987654321 · difficulty 2
+prompt   Write this decimal as a fraction.
+display  inline "0.8" [display 0.8]
+answer   exact 4/5 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   0.8 = 8/10.
+miss     numerator-only = 8   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 1 · difficulty 3
+prompt   Write this decimal as a fraction.
+display  inline "1.1" [display 1.1]
+answer   exact 11/10 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   1.1 = 11/10.
+miss     numerator-only = 11   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 12345 · difficulty 3
+prompt   Write this decimal as a fraction.
+display  inline "4.7" [display 4.7]
+answer   exact 47/10 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   4.7 = 47/10.
+miss     numerator-only = 47   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 67890 · difficulty 3
+prompt   Write this decimal as a fraction.
+display  inline "8.09" [display 8.09]
+answer   exact 809/100 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 100.
+step 1   Use the place value as the denominator.   [hundredths → 100]
+step 2   8.09 = 809/100.
+miss     numerator-only = 809   Use 100 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 424242 · difficulty 3
+prompt   Write this decimal as a fraction.
+display  inline "3.84" [display 3.84]
+answer   exact 96/25 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 100.
+step 1   Use the place value as the denominator.   [hundredths → 100]
+step 2   3.84 = 384/100.
+miss     numerator-only = 384   Use 100 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 987654321 · difficulty 3
+prompt   Write this decimal as a fraction.
+display  inline "2.7" [display 2.7]
+answer   exact 27/10 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   2.7 = 27/10.
+miss     numerator-only = 27   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 1 · difficulty 4
+prompt   Write this decimal as a fraction.
+display  inline "2.1" [display 2.1]
+answer   exact 21/10 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   2.1 = 21/10.
+miss     numerator-only = 21   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 12345 · difficulty 4
+prompt   Write this decimal as a fraction.
+display  inline "10.9" [display 10.9]
+answer   exact 109/10 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   10.9 = 109/10.
+miss     numerator-only = 109   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 67890 · difficulty 4
+prompt   Write this decimal as a fraction.
+display  inline "19.13" [display 19.13]
+answer   exact 1913/100 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 100.
+step 1   Use the place value as the denominator.   [hundredths → 100]
+step 2   19.13 = 1913/100.
+miss     numerator-only = 1913   Use 100 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 424242 · difficulty 4
+prompt   Write this decimal as a fraction.
+display  inline "8.86" [display 8.86]
+answer   exact 443/50 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 100.
+step 1   Use the place value as the denominator.   [hundredths → 100]
+step 2   8.86 = 886/100.
+miss     numerator-only = 886   Use 100 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 987654321 · difficulty 4
+prompt   Write this decimal as a fraction.
+display  inline "5.9" [display 5.9]
+answer   exact 59/10 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   5.9 = 59/10.
+miss     numerator-only = 59   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 1 · difficulty 5
+prompt   Write this decimal as a fraction.
+display  inline "5.2" [display 5.2]
+answer   exact 26/5 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   5.2 = 52/10.
+miss     numerator-only = 52   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 12345 · difficulty 5
+prompt   Write this decimal as a fraction.
+display  inline "22.2" [display 22.2]
+answer   exact 111/5 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   22.2 = 222/10.
+miss     numerator-only = 222   Use 10 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 67890 · difficulty 5
+prompt   Write this decimal as a fraction.
+display  inline "38.07" [display 38.07]
+answer   exact 3807/100 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 100.
+step 1   Use the place value as the denominator.   [hundredths → 100]
+step 2   38.07 = 3807/100.
+miss     numerator-only = 3807   Use 100 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 424242 · difficulty 5
+prompt   Write this decimal as a fraction.
+display  inline "18.24" [display 18.24]
+answer   exact 456/25 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 100.
+step 1   Use the place value as the denominator.   [hundredths → 100]
+step 2   18.24 = 1824/100.
+miss     numerator-only = 1824   Use 100 as the denominator, matching the place value.
+
+--- decimal-to-fraction · seed 987654321 · difficulty 5
+prompt   Write this decimal as a fraction.
+display  inline "12.6" [display 12.6]
+answer   exact 63/5 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The denominator matches the place value: 10.
+step 1   Use the place value as the denominator.   [tenths → 10]
+step 2   12.6 = 126/10.
+miss     numerator-only = 126   Use 10 as the denominator, matching the place value."
+`;
+
+exports[`recorded output: div-by-decimal > matches the wording recorded when the skill landed 1`] = `
+"--- div-by-decimal · seed 1 · difficulty 1
+prompt   What is the quotient?
+display  inline "4.8 ÷ 1.6" [div-decimal 4.8 ÷ 1.6]
+answer   exact 3/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [1.6 → 16]
+step 2   Shift the dividend the same number of places.   [4.8 → 48]
+step 3   48 ÷ 16 = 3.
+miss     shifted-divisor-only = 0.3   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 30   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 12345 · difficulty 1
+prompt   What is the quotient?
+display  inline "4.5 ÷ 1.5" [div-decimal 4.5 ÷ 1.5]
+answer   exact 3/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [1.5 → 15]
+step 2   Shift the dividend the same number of places.   [4.5 → 45]
+step 3   45 ÷ 15 = 3.
+miss     shifted-divisor-only = 0.3   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 30   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 67890 · difficulty 1
+prompt   What is the quotient?
+display  inline "2.18 ÷ 1.09" [div-decimal 2.18 ÷ 1.09]
+answer   exact 2/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [1.09 → 109]
+step 2   Shift the dividend the same number of places.   [2.18 → 218]
+step 3   218 ÷ 109 = 2.
+miss     shifted-divisor-only = 0.02   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 200   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 424242 · difficulty 1
+prompt   What is the quotient?
+display  inline "1.2 ÷ 0.6" [div-decimal 1.2 ÷ 0.6]
+answer   exact 2/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [0.6 → 6]
+step 2   Shift the dividend the same number of places.   [1.2 → 12]
+step 3   12 ÷ 6 = 2.
+miss     shifted-divisor-only = 0.2   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 20   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 987654321 · difficulty 1
+prompt   What is the quotient?
+display  inline "0.3 ÷ 0.1" [div-decimal 0.3 ÷ 0.1]
+answer   exact 3/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [0.1 → 1]
+step 2   Shift the dividend the same number of places.   [0.3 → 3]
+step 3   3 ÷ 1 = 3.
+miss     shifted-divisor-only = 0.3   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 30   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 1 · difficulty 2
+prompt   What is the quotient?
+display  inline "12.8 ÷ 3.2" [div-decimal 12.8 ÷ 3.2]
+answer   exact 4/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [3.2 → 32]
+step 2   Shift the dividend the same number of places.   [12.8 → 128]
+step 3   128 ÷ 32 = 4.
+miss     shifted-divisor-only = 0.4   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 40   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 12345 · difficulty 2
+prompt   What is the quotient?
+display  inline "14.5 ÷ 2.9" [div-decimal 14.5 ÷ 2.9]
+answer   exact 5/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [2.9 → 29]
+step 2   Shift the dividend the same number of places.   [14.5 → 145]
+step 3   145 ÷ 29 = 5.
+miss     shifted-divisor-only = 0.5   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 50   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 67890 · difficulty 2
+prompt   What is the quotient?
+display  inline "6.54 ÷ 2.18" [div-decimal 6.54 ÷ 2.18]
+answer   exact 3/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [2.18 → 218]
+step 2   Shift the dividend the same number of places.   [6.54 → 654]
+step 3   654 ÷ 218 = 3.
+miss     shifted-divisor-only = 0.03   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 300   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 424242 · difficulty 2
+prompt   What is the quotient?
+display  inline "2.2 ÷ 1.1" [div-decimal 2.2 ÷ 1.1]
+answer   exact 2/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [1.1 → 11]
+step 2   Shift the dividend the same number of places.   [2.2 → 22]
+step 3   22 ÷ 11 = 2.
+miss     shifted-divisor-only = 0.2   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 20   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 987654321 · difficulty 2
+prompt   What is the quotient?
+display  inline "0.5 ÷ 0.1" [div-decimal 0.5 ÷ 0.1]
+answer   exact 5/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [0.1 → 1]
+step 2   Shift the dividend the same number of places.   [0.5 → 5]
+step 3   5 ÷ 1 = 5.
+miss     shifted-divisor-only = 0.5   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 50   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 1 · difficulty 3
+prompt   What is the quotient?
+display  inline "58.4 ÷ 7.3" [div-decimal 58.4 ÷ 7.3]
+answer   exact 8/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [7.3 → 73]
+step 2   Shift the dividend the same number of places.   [58.4 → 584]
+step 3   584 ÷ 73 = 8.
+miss     shifted-divisor-only = 0.8   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 80   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 12345 · difficulty 3
+prompt   What is the quotient?
+display  inline "81.6 ÷ 6.8" [div-decimal 81.6 ÷ 6.8]
+answer   exact 12/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [6.8 → 68]
+step 2   Shift the dividend the same number of places.   [81.6 → 816]
+step 3   816 ÷ 68 = 12.
+miss     shifted-divisor-only = 1.2   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 120   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 67890 · difficulty 3
+prompt   What is the quotient?
+display  inline "32.16 ÷ 5.36" [div-decimal 32.16 ÷ 5.36]
+answer   exact 6/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [5.36 → 536]
+step 2   Shift the dividend the same number of places.   [32.16 → 3216]
+step 3   3216 ÷ 536 = 6.
+miss     shifted-divisor-only = 0.06   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 600   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 424242 · difficulty 3
+prompt   What is the quotient?
+display  inline "9.6 ÷ 3.2" [div-decimal 9.6 ÷ 3.2]
+answer   exact 3/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [3.2 → 32]
+step 2   Shift the dividend the same number of places.   [9.6 → 96]
+step 3   96 ÷ 32 = 3.
+miss     shifted-divisor-only = 0.3   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 30   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 987654321 · difficulty 3
+prompt   What is the quotient?
+display  inline "14.4 ÷ 1.2" [div-decimal 14.4 ÷ 1.2]
+answer   exact 12/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [1.2 → 12]
+step 2   Shift the dividend the same number of places.   [14.4 → 144]
+step 3   144 ÷ 12 = 12.
+miss     shifted-divisor-only = 1.2   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 120   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 1 · difficulty 4
+prompt   What is the quotient?
+display  inline "346.0 ÷ 17.3" [div-decimal 346.0 ÷ 17.3]
+answer   exact 20/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [17.3 → 173]
+step 2   Shift the dividend the same number of places.   [346.0 → 3460]
+step 3   3460 ÷ 173 = 20.
+miss     shifted-divisor-only = 2   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 200   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 12345 · difficulty 4
+prompt   What is the quotient?
+display  inline "480.0 ÷ 16.0" [div-decimal 480.0 ÷ 16.0]
+answer   exact 30/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [16.0 → 160]
+step 2   Shift the dividend the same number of places.   [480.0 → 4800]
+step 3   4800 ÷ 160 = 30.
+miss     shifted-divisor-only = 3   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 300   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 67890 · difficulty 4
+prompt   What is the quotient?
+display  inline "162.89 ÷ 12.53" [div-decimal 162.89 ÷ 12.53]
+answer   exact 13/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [12.53 → 1253]
+step 2   Shift the dividend the same number of places.   [162.89 → 16289]
+step 3   16289 ÷ 1253 = 13.
+miss     shifted-divisor-only = 0.13   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 1300   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 424242 · difficulty 4
+prompt   What is the quotient?
+display  inline "37.0 ÷ 7.4" [div-decimal 37.0 ÷ 7.4]
+answer   exact 5/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [7.4 → 74]
+step 2   Shift the dividend the same number of places.   [37.0 → 370]
+step 3   370 ÷ 74 = 5.
+miss     shifted-divisor-only = 0.5   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 50   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 987654321 · difficulty 4
+prompt   What is the quotient?
+display  inline "72.5 ÷ 2.5" [div-decimal 72.5 ÷ 2.5]
+answer   exact 29/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [2.5 → 25]
+step 2   Shift the dividend the same number of places.   [72.5 → 725]
+step 3   725 ÷ 25 = 29.
+miss     shifted-divisor-only = 2.9   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 290   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 1 · difficulty 5
+prompt   What is the quotient?
+display  inline "1380.0 ÷ 34.5" [div-decimal 1380.0 ÷ 34.5]
+answer   exact 40/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [34.5 → 345]
+step 2   Shift the dividend the same number of places.   [1380.0 → 13800]
+step 3   13800 ÷ 345 = 40.
+miss     shifted-divisor-only = 4   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 400   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 12345 · difficulty 5
+prompt   What is the quotient?
+display  inline "1893.9 ÷ 32.1" [div-decimal 1893.9 ÷ 32.1]
+answer   exact 59/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [32.1 → 321]
+step 2   Shift the dividend the same number of places.   [1893.9 → 18939]
+step 3   18939 ÷ 321 = 59.
+miss     shifted-divisor-only = 5.9   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 590   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 67890 · difficulty 5
+prompt   What is the quotient?
+display  inline "684.18 ÷ 25.34" [div-decimal 684.18 ÷ 25.34]
+answer   exact 27/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [25.34 → 2534]
+step 2   Shift the dividend the same number of places.   [684.18 → 68418]
+step 3   68418 ÷ 2534 = 27.
+miss     shifted-divisor-only = 0.27   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 2700   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 424242 · difficulty 5
+prompt   What is the quotient?
+display  inline "183.6 ÷ 15.3" [div-decimal 183.6 ÷ 15.3]
+answer   exact 12/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [15.3 → 153]
+step 2   Shift the dividend the same number of places.   [183.6 → 1836]
+step 3   1836 ÷ 153 = 12.
+miss     shifted-divisor-only = 1.2   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 120   Shift the divisor the same number of places you shifted the dividend.
+
+--- div-by-decimal · seed 987654321 · difficulty 5
+prompt   What is the quotient?
+display  inline "342.2 ÷ 5.9" [div-decimal 342.2 ÷ 5.9]
+answer   exact 58/1
+input    keypad
+hint     Shift the decimal point the same number of places in both numbers.
+step 1   Shift both points to make the divisor whole.   [5.9 → 59]
+step 2   Shift the dividend the same number of places.   [342.2 → 3422]
+step 3   3422 ÷ 59 = 58.
+miss     shifted-divisor-only = 5.8   Shift the dividend the same number of places you shifted the divisor.
+miss     shifted-dividend-only = 580   Shift the divisor the same number of places you shifted the dividend."
+`;
+
+exports[`recorded output: div-decimal-by-whole > matches the wording recorded when the skill landed 1`] = `
+"--- div-decimal-by-whole · seed 1 · difficulty 1
+prompt   What is the quotient?
+display  inline "4.8 ÷ 3" [div-whole 4.8 ÷ 3]
+answer   exact 8/5
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [48 ÷ 3 = 16]
+step 2   Place the point directly above: 1.6.
+miss     misplaced-point = 16   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 12345 · difficulty 1
+prompt   What is the quotient?
+display  inline "4.5 ÷ 3" [div-whole 4.5 ÷ 3]
+answer   exact 3/2
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [45 ÷ 3 = 15]
+step 2   Place the point directly above: 1.5.
+miss     misplaced-point = 15   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 67890 · difficulty 1
+prompt   What is the quotient?
+display  inline "2.18 ÷ 2" [div-whole 2.18 ÷ 2]
+answer   exact 109/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [218 ÷ 2 = 109]
+step 2   Place the point directly above: 1.09.
+miss     misplaced-point = 10.9   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 424242 · difficulty 1
+prompt   What is the quotient?
+display  inline "1.2 ÷ 2" [div-whole 1.2 ÷ 2]
+answer   exact 3/5
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [12 ÷ 2 = 6]
+step 2   Place the point directly above: 0.6.
+miss     misplaced-point = 6   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 987654321 · difficulty 1
+prompt   What is the quotient?
+display  inline "0.3 ÷ 3" [div-whole 0.3 ÷ 3]
+answer   exact 1/10
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [3 ÷ 3 = 1]
+step 2   Place the point directly above: 0.1.
+miss     misplaced-point = 1   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 1 · difficulty 2
+prompt   What is the quotient?
+display  inline "12.8 ÷ 4" [div-whole 12.8 ÷ 4]
+answer   exact 16/5
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [128 ÷ 4 = 32]
+step 2   Place the point directly above: 3.2.
+miss     misplaced-point = 32   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 12345 · difficulty 2
+prompt   What is the quotient?
+display  inline "14.5 ÷ 5" [div-whole 14.5 ÷ 5]
+answer   exact 29/10
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [145 ÷ 5 = 29]
+step 2   Place the point directly above: 2.9.
+miss     misplaced-point = 29   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 67890 · difficulty 2
+prompt   What is the quotient?
+display  inline "6.54 ÷ 3" [div-whole 6.54 ÷ 3]
+answer   exact 109/50
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [654 ÷ 3 = 218]
+step 2   Place the point directly above: 2.18.
+miss     misplaced-point = 21.8   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 424242 · difficulty 2
+prompt   What is the quotient?
+display  inline "2.2 ÷ 2" [div-whole 2.2 ÷ 2]
+answer   exact 11/10
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [22 ÷ 2 = 11]
+step 2   Place the point directly above: 1.1.
+miss     misplaced-point = 11   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 987654321 · difficulty 2
+prompt   What is the quotient?
+display  inline "0.5 ÷ 5" [div-whole 0.5 ÷ 5]
+answer   exact 1/10
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [5 ÷ 5 = 1]
+step 2   Place the point directly above: 0.1.
+miss     misplaced-point = 1   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 1 · difficulty 3
+prompt   What is the quotient?
+display  inline "58.4 ÷ 8" [div-whole 58.4 ÷ 8]
+answer   exact 73/10
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [584 ÷ 8 = 73]
+step 2   Place the point directly above: 7.3.
+miss     misplaced-point = 73   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 12345 · difficulty 3
+prompt   What is the quotient?
+display  inline "81.6 ÷ 12" [div-whole 81.6 ÷ 12]
+answer   exact 34/5
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [816 ÷ 12 = 68]
+step 2   Place the point directly above: 6.8.
+miss     misplaced-point = 68   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 67890 · difficulty 3
+prompt   What is the quotient?
+display  inline "32.16 ÷ 6" [div-whole 32.16 ÷ 6]
+answer   exact 134/25
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [3216 ÷ 6 = 536]
+step 2   Place the point directly above: 5.36.
+miss     misplaced-point = 53.6   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 424242 · difficulty 3
+prompt   What is the quotient?
+display  inline "9.6 ÷ 3" [div-whole 9.6 ÷ 3]
+answer   exact 16/5
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [96 ÷ 3 = 32]
+step 2   Place the point directly above: 3.2.
+miss     misplaced-point = 32   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 987654321 · difficulty 3
+prompt   What is the quotient?
+display  inline "14.4 ÷ 12" [div-whole 14.4 ÷ 12]
+answer   exact 6/5
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [144 ÷ 12 = 12]
+step 2   Place the point directly above: 1.2.
+miss     misplaced-point = 12   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 1 · difficulty 4
+prompt   What is the quotient?
+display  inline "346.0 ÷ 20" [div-whole 346.0 ÷ 20]
+answer   exact 173/10
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [3460 ÷ 20 = 173]
+step 2   Place the point directly above: 17.3.
+miss     misplaced-point = 173   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 12345 · difficulty 4
+prompt   What is the quotient?
+display  inline "480.0 ÷ 30" [div-whole 480.0 ÷ 30]
+answer   exact 16/1
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [4800 ÷ 30 = 160]
+step 2   Place the point directly above: 16.0.
+miss     misplaced-point = 160   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 67890 · difficulty 4
+prompt   What is the quotient?
+display  inline "162.89 ÷ 13" [div-whole 162.89 ÷ 13]
+answer   exact 1253/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [16289 ÷ 13 = 1253]
+step 2   Place the point directly above: 12.53.
+miss     misplaced-point = 125.3   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 424242 · difficulty 4
+prompt   What is the quotient?
+display  inline "37.0 ÷ 5" [div-whole 37.0 ÷ 5]
+answer   exact 37/5
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [370 ÷ 5 = 74]
+step 2   Place the point directly above: 7.4.
+miss     misplaced-point = 74   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 987654321 · difficulty 4
+prompt   What is the quotient?
+display  inline "72.5 ÷ 29" [div-whole 72.5 ÷ 29]
+answer   exact 5/2
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [725 ÷ 29 = 25]
+step 2   Place the point directly above: 2.5.
+miss     misplaced-point = 25   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 1 · difficulty 5
+prompt   What is the quotient?
+display  inline "1311.0 ÷ 38" [div-whole 1311.0 ÷ 38]
+answer   exact 69/2
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [13110 ÷ 38 = 345]
+step 2   Place the point directly above: 34.5.
+miss     misplaced-point = 345   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 12345 · difficulty 5
+prompt   What is the quotient?
+display  inline "1893.9 ÷ 59" [div-whole 1893.9 ÷ 59]
+answer   exact 321/10
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [18939 ÷ 59 = 321]
+step 2   Place the point directly above: 32.1.
+miss     misplaced-point = 321   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 67890 · difficulty 5
+prompt   What is the quotient?
+display  inline "633.50 ÷ 25" [div-whole 633.50 ÷ 25]
+answer   exact 1267/50
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [63350 ÷ 25 = 2534]
+step 2   Place the point directly above: 25.34.
+miss     misplaced-point = 253.4   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 424242 · difficulty 5
+prompt   What is the quotient?
+display  inline "137.7 ÷ 9" [div-whole 137.7 ÷ 9]
+answer   exact 153/10
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [1377 ÷ 9 = 153]
+step 2   Place the point directly above: 15.3.
+miss     misplaced-point = 153   Keep the decimal point in the quotient directly above the point in the dividend.
+
+--- div-decimal-by-whole · seed 987654321 · difficulty 5
+prompt   What is the quotient?
+display  inline "342.2 ÷ 58" [div-whole 342.2 ÷ 58]
+answer   exact 59/10
+input    keypad
+keypad   allowDecimal=true
+hint     Divide as if there were no decimal point, then place it directly above.
+step 1   Divide as with whole numbers.   [3422 ÷ 58 = 59]
+step 2   Place the point directly above: 5.9.
+miss     misplaced-point = 59   Keep the decimal point in the quotient directly above the point in the dividend."
+`;
+
+exports[`recorded output: fraction-to-decimal > matches the wording recorded when the skill landed 1`] = `
+"--- fraction-to-decimal · seed 1 · difficulty 1
+prompt   Write this fraction as a decimal.
+display  math "1 over 5" fraction("1", "5") [simplify 1/5]
+answer   exact 1/5 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 1 by 5.
+step 1   Divide the numerator by the denominator.   [1 ÷ 5]
+step 2   The decimal is 0.20.
+miss     added-instead-of-divided = 6   Divide 1 by 5; do not add them.
+
+--- fraction-to-decimal · seed 12345 · difficulty 1
+prompt   Write this fraction as a decimal.
+display  math "3 over 10" fraction("3", "10") [simplify 3/10]
+answer   exact 3/10 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 3 by 10.
+step 1   Divide the numerator by the denominator.   [3 ÷ 10]
+step 2   The decimal is 0.30.
+miss     added-instead-of-divided = 13   Divide 3 by 10; do not add them.
+
+--- fraction-to-decimal · seed 67890 · difficulty 1
+prompt   Write this fraction as a decimal.
+display  math "2 over 4" fraction("2", "4") [simplify 2/4]
+answer   exact 1/2 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 2 by 4.
+step 1   Divide the numerator by the denominator.   [2 ÷ 4]
+step 2   The decimal is 0.50.
+miss     added-instead-of-divided = 6   Divide 2 by 4; do not add them.
+
+--- fraction-to-decimal · seed 424242 · difficulty 1
+prompt   Write this fraction as a decimal.
+display  math "1 over 2" fraction("1", "2") [simplify 1/2]
+answer   exact 1/2 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 1 by 2.
+step 1   Divide the numerator by the denominator.   [1 ÷ 2]
+step 2   The decimal is 0.50.
+miss     added-instead-of-divided = 3   Divide 1 by 2; do not add them.
+
+--- fraction-to-decimal · seed 987654321 · difficulty 1
+prompt   Write this fraction as a decimal.
+display  math "2 over 10" fraction("2", "10") [simplify 2/10]
+answer   exact 1/5 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 2 by 10.
+step 1   Divide the numerator by the denominator.   [2 ÷ 10]
+step 2   The decimal is 0.20.
+miss     added-instead-of-divided = 12   Divide 2 by 10; do not add them.
+
+--- fraction-to-decimal · seed 1 · difficulty 2
+prompt   Write this fraction as a decimal.
+display  math "1 over 5" fraction("1", "5") [simplify 1/5]
+answer   exact 1/5 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 1 by 5.
+step 1   Divide the numerator by the denominator.   [1 ÷ 5]
+step 2   The decimal is 0.20.
+miss     added-instead-of-divided = 6   Divide 1 by 5; do not add them.
+
+--- fraction-to-decimal · seed 12345 · difficulty 2
+prompt   Write this fraction as a decimal.
+display  math "3 over 10" fraction("3", "10") [simplify 3/10]
+answer   exact 3/10 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 3 by 10.
+step 1   Divide the numerator by the denominator.   [3 ÷ 10]
+step 2   The decimal is 0.30.
+miss     added-instead-of-divided = 13   Divide 3 by 10; do not add them.
+
+--- fraction-to-decimal · seed 67890 · difficulty 2
+prompt   Write this fraction as a decimal.
+display  math "2 over 4" fraction("2", "4") [simplify 2/4]
+answer   exact 1/2 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 2 by 4.
+step 1   Divide the numerator by the denominator.   [2 ÷ 4]
+step 2   The decimal is 0.50.
+miss     added-instead-of-divided = 6   Divide 2 by 4; do not add them.
+
+--- fraction-to-decimal · seed 424242 · difficulty 2
+prompt   Write this fraction as a decimal.
+display  math "1 over 2" fraction("1", "2") [simplify 1/2]
+answer   exact 1/2 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 1 by 2.
+step 1   Divide the numerator by the denominator.   [1 ÷ 2]
+step 2   The decimal is 0.50.
+miss     added-instead-of-divided = 3   Divide 1 by 2; do not add them.
+
+--- fraction-to-decimal · seed 987654321 · difficulty 2
+prompt   Write this fraction as a decimal.
+display  math "2 over 10" fraction("2", "10") [simplify 2/10]
+answer   exact 1/5 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 2 by 10.
+step 1   Divide the numerator by the denominator.   [2 ÷ 10]
+step 2   The decimal is 0.20.
+miss     added-instead-of-divided = 12   Divide 2 by 10; do not add them.
+
+--- fraction-to-decimal · seed 1 · difficulty 3
+prompt   Write this fraction as a decimal.
+display  math "1 over 20" fraction("1", "20") [simplify 1/20]
+answer   exact 1/20 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 1 by 20.
+step 1   Divide the numerator by the denominator.   [1 ÷ 20]
+step 2   The decimal is 0.05.
+miss     added-instead-of-divided = 21   Divide 1 by 20; do not add them.
+
+--- fraction-to-decimal · seed 12345 · difficulty 3
+prompt   Write this fraction as a decimal.
+display  math "8 over 25" fraction("8", "25") [simplify 8/25]
+answer   exact 8/25 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 8 by 25.
+step 1   Divide the numerator by the denominator.   [8 ÷ 25]
+step 2   The decimal is 0.32.
+miss     added-instead-of-divided = 33   Divide 8 by 25; do not add them.
+
+--- fraction-to-decimal · seed 67890 · difficulty 3
+prompt   Write this fraction as a decimal.
+display  math "12 over 20" fraction("12", "20") [simplify 12/20]
+answer   exact 3/5 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 12 by 20.
+step 1   Divide the numerator by the denominator.   [12 ÷ 20]
+step 2   The decimal is 0.60.
+miss     added-instead-of-divided = 32   Divide 12 by 20; do not add them.
+
+--- fraction-to-decimal · seed 424242 · difficulty 3
+prompt   Write this fraction as a decimal.
+display  math "3 over 10" fraction("3", "10") [simplify 3/10]
+answer   exact 3/10 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 3 by 10.
+step 1   Divide the numerator by the denominator.   [3 ÷ 10]
+step 2   The decimal is 0.30.
+miss     added-instead-of-divided = 13   Divide 3 by 10; do not add them.
+
+--- fraction-to-decimal · seed 987654321 · difficulty 3
+prompt   Write this fraction as a decimal.
+display  math "4 over 25" fraction("4", "25") [simplify 4/25]
+answer   exact 4/25 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 4 by 25.
+step 1   Divide the numerator by the denominator.   [4 ÷ 25]
+step 2   The decimal is 0.16.
+miss     added-instead-of-divided = 29   Divide 4 by 25; do not add them.
+
+--- fraction-to-decimal · seed 1 · difficulty 4
+prompt   Write this fraction as a decimal.
+display  math "1 over 25" fraction("1", "25") [simplify 1/25]
+answer   exact 1/25 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 1 by 25.
+step 1   Divide the numerator by the denominator.   [1 ÷ 25]
+step 2   The decimal is 0.04.
+miss     added-instead-of-divided = 26   Divide 1 by 25; do not add them.
+
+--- fraction-to-decimal · seed 12345 · difficulty 4
+prompt   Write this fraction as a decimal.
+display  math "16 over 50" fraction("16", "50") [simplify 16/50]
+answer   exact 8/25 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 16 by 50.
+step 1   Divide the numerator by the denominator.   [16 ÷ 50]
+step 2   The decimal is 0.32.
+miss     added-instead-of-divided = 66   Divide 16 by 50; do not add them.
+
+--- fraction-to-decimal · seed 67890 · difficulty 4
+prompt   Write this fraction as a decimal.
+display  math "15 over 25" fraction("15", "25") [simplify 15/25]
+answer   exact 3/5 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 15 by 25.
+step 1   Divide the numerator by the denominator.   [15 ÷ 25]
+step 2   The decimal is 0.60.
+miss     added-instead-of-divided = 40   Divide 15 by 25; do not add them.
+
+--- fraction-to-decimal · seed 424242 · difficulty 4
+prompt   Write this fraction as a decimal.
+display  math "5 over 20" fraction("5", "20") [simplify 5/20]
+answer   exact 1/4 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 5 by 20.
+step 1   Divide the numerator by the denominator.   [5 ÷ 20]
+step 2   The decimal is 0.25.
+miss     added-instead-of-divided = 25   Divide 5 by 20; do not add them.
+
+--- fraction-to-decimal · seed 987654321 · difficulty 4
+prompt   Write this fraction as a decimal.
+display  math "7 over 50" fraction("7", "50") [simplify 7/50]
+answer   exact 7/50 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 7 by 50.
+step 1   Divide the numerator by the denominator.   [7 ÷ 50]
+step 2   The decimal is 0.14.
+miss     added-instead-of-divided = 57   Divide 7 by 50; do not add them.
+
+--- fraction-to-decimal · seed 1 · difficulty 5
+prompt   Write this fraction as a decimal.
+display  math "1 over 50" fraction("1", "50") [simplify 1/50]
+answer   exact 1/50 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 1 by 50.
+step 1   Divide the numerator by the denominator.   [1 ÷ 50]
+step 2   The decimal is 0.02.
+miss     added-instead-of-divided = 51   Divide 1 by 50; do not add them.
+
+--- fraction-to-decimal · seed 12345 · difficulty 5
+prompt   Write this fraction as a decimal.
+display  math "31 over 100" fraction("31", "100") [simplify 31/100]
+answer   exact 31/100 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 31 by 100.
+step 1   Divide the numerator by the denominator.   [31 ÷ 100]
+step 2   The decimal is 0.31.
+miss     added-instead-of-divided = 131   Divide 31 by 100; do not add them.
+
+--- fraction-to-decimal · seed 67890 · difficulty 5
+prompt   Write this fraction as a decimal.
+display  math "29 over 50" fraction("29", "50") [simplify 29/50]
+answer   exact 29/50 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 29 by 50.
+step 1   Divide the numerator by the denominator.   [29 ÷ 50]
+step 2   The decimal is 0.58.
+miss     added-instead-of-divided = 79   Divide 29 by 50; do not add them.
+
+--- fraction-to-decimal · seed 424242 · difficulty 5
+prompt   Write this fraction as a decimal.
+display  math "6 over 25" fraction("6", "25") [simplify 6/25]
+answer   exact 6/25 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 6 by 25.
+step 1   Divide the numerator by the denominator.   [6 ÷ 25]
+step 2   The decimal is 0.24.
+miss     added-instead-of-divided = 31   Divide 6 by 25; do not add them.
+
+--- fraction-to-decimal · seed 987654321 · difficulty 5
+prompt   Write this fraction as a decimal.
+display  math "14 over 100" fraction("14", "100") [simplify 14/100]
+answer   exact 7/50 (decimal)
+input    keypad
+keypad   allowDecimal=true allowFraction=true
+hint     Divide 14 by 100.
+step 1   Divide the numerator by the denominator.   [14 ÷ 100]
+step 2   The decimal is 0.14.
+miss     added-instead-of-divided = 114   Divide 14 by 100; do not add them."
+`;
+
+exports[`recorded output: money-problems > matches the wording recorded when the skill landed 1`] = `
+"--- money-problems · seed 1 · difficulty 1
+prompt   How much was spent on gym visits?
+display  story [206 × 2] "A drop-in gym visit costs $2.06, and you go 2 times this month. A friend went 8 times. How much did you spend?"
+answer   exact 103/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the visit price, $2.06, by 2 visits.
+step 1   Pick out the price and the quantity.   [$2.06 and 2]
+step 2   Multiply the price by the quantity.   [$2.06 × 2 = $4.12]
+step 3   Your friend's 8 visits are separate.
+miss     answered-part = 2.06   That is one visit. Multiply by the number of visits.
+miss     distractor-pair = 16.48   That uses your friend's 8 visits, not yours.
+
+--- money-problems · seed 12345 · difficulty 1
+prompt   How much did the paper cost?
+display  story [294 × 5] "A ream of paper costs $2.94, and an office orders 5 reams. The supply closet already has 7. How much did the order cost?"
+answer   exact 147/10
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the price, $2.94, by 5 reams.
+step 1   Pick out the price and the quantity.   [$2.94 and 5]
+step 2   Multiply the price by the quantity.   [$2.94 × 5 = $14.70]
+step 3   The closet's 7 reams were not part of this order.
+miss     answered-part = 2.94   That is one ream. Multiply by how many were ordered.
+miss     distractor-pair = 20.58   That uses the closet's 7 reams, not the order.
+
+--- money-problems · seed 67890 · difficulty 1
+prompt   How much did the tickets cost?
+display  story [148 × 8] "A movie ticket costs $1.48, and your group buys 8 of them. The theater has 5 seats free. How much did the tickets cost?"
+answer   exact 296/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the ticket price, $1.48, by 8 tickets.
+step 1   Pick out the price and the quantity.   [$1.48 and 8]
+step 2   Multiply the price by the quantity.   [$1.48 × 8 = $11.84]
+step 3   The theater's 5 free seats were not bought.
+miss     answered-part = 1.48   That is one ticket. Multiply by how many were bought.
+miss     distractor-pair = 7.4   That uses the 5 free seats, not the tickets bought.
+
+--- money-problems · seed 424242 · difficulty 1
+prompt   How much was spent on bus fare?
+display  story [82 × 4] "A bus ride costs $0.82, and you ride 4 times this week. A friend rode 3 times. How much did you spend on fares?"
+answer   exact 82/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the fare, $0.82, by 4 rides.
+step 1   Pick out the price and the quantity.   [$0.82 and 4]
+step 2   Multiply the price by the quantity.   [$0.82 × 4 = $3.28]
+step 3   Your friend's 3 rides are separate.
+miss     answered-part = 0.82   That is one fare. Multiply by the number of rides.
+miss     distractor-pair = 2.46   That uses your friend's 3 rides, not yours.
+
+--- money-problems · seed 987654321 · difficulty 1
+prompt   How much was spent on gym visits?
+display  story [287 × 3] "A drop-in gym visit costs $2.87, and you go 3 times this month. A friend went 2 times. How much did you spend?"
+answer   exact 861/100
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the visit price, $2.87, by 3 visits.
+step 1   Pick out the price and the quantity.   [$2.87 and 3]
+step 2   Multiply the price by the quantity.   [$2.87 × 3 = $8.61]
+step 3   Your friend's 2 visits are separate.
+miss     answered-part = 2.87   That is one visit. Multiply by the number of visits.
+miss     distractor-pair = 5.74   That uses your friend's 2 visits, not yours.
+
+--- money-problems · seed 1 · difficulty 2
+prompt   How much was spent on gym visits?
+display  story [394 × 2] "A drop-in gym visit costs $3.94, and you go 2 times this month. A friend went 8 times. How much did you spend?"
+answer   exact 197/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the visit price, $3.94, by 2 visits.
+step 1   Pick out the price and the quantity.   [$3.94 and 2]
+step 2   Multiply the price by the quantity.   [$3.94 × 2 = $7.88]
+step 3   Your friend's 8 visits are separate.
+miss     answered-part = 3.94   That is one visit. Multiply by the number of visits.
+miss     distractor-pair = 31.52   That uses your friend's 8 visits, not yours.
+
+--- money-problems · seed 12345 · difficulty 2
+prompt   How much did the paper cost?
+display  story [588 × 5] "A ream of paper costs $5.88, and an office orders 5 reams. The supply closet already has 7. How much did the order cost?"
+answer   exact 147/5
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the price, $5.88, by 5 reams.
+step 1   Pick out the price and the quantity.   [$5.88 and 5]
+step 2   Multiply the price by the quantity.   [$5.88 × 5 = $29.40]
+step 3   The closet's 7 reams were not part of this order.
+miss     answered-part = 5.88   That is one ream. Multiply by how many were ordered.
+miss     distractor-pair = 41.16   That uses the closet's 7 reams, not the order.
+
+--- money-problems · seed 67890 · difficulty 2
+prompt   How much did the tickets cost?
+display  story [266 × 8] "A movie ticket costs $2.66, and your group buys 8 of them. The theater has 5 seats free. How much did the tickets cost?"
+answer   exact 532/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the ticket price, $2.66, by 8 tickets.
+step 1   Pick out the price and the quantity.   [$2.66 and 8]
+step 2   Multiply the price by the quantity.   [$2.66 × 8 = $21.28]
+step 3   The theater's 5 free seats were not bought.
+miss     answered-part = 2.66   That is one ticket. Multiply by how many were bought.
+miss     distractor-pair = 13.3   That uses the 5 free seats, not the tickets bought.
+
+--- money-problems · seed 424242 · difficulty 2
+prompt   How much was spent on bus fare?
+display  story [120 × 4] "A bus ride costs $1.20, and you ride 4 times this week. A friend rode 3 times. How much did you spend on fares?"
+answer   exact 24/5
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the fare, $1.20, by 4 rides.
+step 1   Pick out the price and the quantity.   [$1.20 and 4]
+step 2   Multiply the price by the quantity.   [$1.20 × 4 = $4.80]
+step 3   Your friend's 3 rides are separate.
+miss     answered-part = 1.2   That is one fare. Multiply by the number of rides.
+miss     distractor-pair = 3.6   That uses your friend's 3 rides, not yours.
+
+--- money-problems · seed 987654321 · difficulty 2
+prompt   How much was spent on gym visits?
+display  story [573 × 3] "A drop-in gym visit costs $5.73, and you go 3 times this month. A friend went 2 times. How much did you spend?"
+answer   exact 1719/100
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the visit price, $5.73, by 3 visits.
+step 1   Pick out the price and the quantity.   [$5.73 and 3]
+step 2   Multiply the price by the quantity.   [$5.73 × 3 = $17.19]
+step 3   Your friend's 2 visits are separate.
+miss     answered-part = 5.73   That is one visit. Multiply by the number of visits.
+miss     distractor-pair = 11.46   That uses your friend's 2 visits, not yours.
+
+--- money-problems · seed 1 · difficulty 3
+prompt   How much was spent on gym visits?
+display  story [852 × 2] "A drop-in gym visit costs $8.52, and you go 2 times this month. A friend went 8 times. How much did you spend?"
+answer   exact 426/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the visit price, $8.52, by 2 visits.
+step 1   Pick out the price and the quantity.   [$8.52 and 2]
+step 2   Multiply the price by the quantity.   [$8.52 × 2 = $17.04]
+step 3   Your friend's 8 visits are separate.
+miss     answered-part = 8.52   That is one visit. Multiply by the number of visits.
+miss     distractor-pair = 68.16   That uses your friend's 8 visits, not yours.
+
+--- money-problems · seed 12345 · difficulty 3
+prompt   How much did the paper cost?
+display  story [1275 × 5] "A ream of paper costs $12.75, and an office orders 5 reams. The supply closet already has 7. How much did the order cost?"
+answer   exact 255/4
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the price, $12.75, by 5 reams.
+step 1   Pick out the price and the quantity.   [$12.75 and 5]
+step 2   Multiply the price by the quantity.   [$12.75 × 5 = $63.75]
+step 3   The closet's 7 reams were not part of this order.
+miss     answered-part = 12.75   That is one ream. Multiply by how many were ordered.
+miss     distractor-pair = 89.25   That uses the closet's 7 reams, not the order.
+
+--- money-problems · seed 67890 · difficulty 3
+prompt   How much did the tickets cost?
+display  story [572 × 8] "A movie ticket costs $5.72, and your group buys 8 of them. The theater has 5 seats free. How much did the tickets cost?"
+answer   exact 1144/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the ticket price, $5.72, by 8 tickets.
+step 1   Pick out the price and the quantity.   [$5.72 and 8]
+step 2   Multiply the price by the quantity.   [$5.72 × 8 = $45.76]
+step 3   The theater's 5 free seats were not bought.
+miss     answered-part = 5.72   That is one ticket. Multiply by how many were bought.
+miss     distractor-pair = 28.6   That uses the 5 free seats, not the tickets bought.
+
+--- money-problems · seed 424242 · difficulty 3
+prompt   How much was spent on bus fare?
+display  story [254 × 4] "A bus ride costs $2.54, and you ride 4 times this week. A friend rode 3 times. How much did you spend on fares?"
+answer   exact 254/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the fare, $2.54, by 4 rides.
+step 1   Pick out the price and the quantity.   [$2.54 and 4]
+step 2   Multiply the price by the quantity.   [$2.54 × 4 = $10.16]
+step 3   Your friend's 3 rides are separate.
+miss     answered-part = 2.54   That is one fare. Multiply by the number of rides.
+miss     distractor-pair = 7.62   That uses your friend's 3 rides, not yours.
+
+--- money-problems · seed 987654321 · difficulty 3
+prompt   How much was spent on gym visits?
+display  story [1241 × 3] "A drop-in gym visit costs $12.41, and you go 3 times this month. A friend went 2 times. How much did you spend?"
+answer   exact 3723/100
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the visit price, $12.41, by 3 visits.
+step 1   Pick out the price and the quantity.   [$12.41 and 3]
+step 2   Multiply the price by the quantity.   [$12.41 × 3 = $37.23]
+step 3   Your friend's 2 visits are separate.
+miss     answered-part = 12.41   That is one visit. Multiply by the number of visits.
+miss     distractor-pair = 24.82   That uses your friend's 2 visits, not yours.
+
+--- money-problems · seed 1 · difficulty 4
+prompt   How much was spent on gym visits?
+display  story [2018 × 2] "A drop-in gym visit costs $20.18, and you go 2 times this month. A friend went 8 times. How much did you spend?"
+answer   exact 1009/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the visit price, $20.18, by 2 visits.
+step 1   Pick out the price and the quantity.   [$20.18 and 2]
+step 2   Multiply the price by the quantity.   [$20.18 × 2 = $40.36]
+step 3   Your friend's 8 visits are separate.
+miss     answered-part = 20.18   That is one visit. Multiply by the number of visits.
+miss     distractor-pair = 161.44   That uses your friend's 8 visits, not yours.
+
+--- money-problems · seed 12345 · difficulty 4
+prompt   How much did the paper cost?
+display  story [3041 × 5] "A ream of paper costs $30.41, and an office orders 5 reams. The supply closet already has 7. How much did the order cost?"
+answer   exact 3041/20
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the price, $30.41, by 5 reams.
+step 1   Pick out the price and the quantity.   [$30.41 and 5]
+step 2   Multiply the price by the quantity.   [$30.41 × 5 = $152.05]
+step 3   The closet's 7 reams were not part of this order.
+miss     answered-part = 30.41   That is one ream. Multiply by how many were ordered.
+miss     distractor-pair = 212.87   That uses the closet's 7 reams, not the order.
+
+--- money-problems · seed 67890 · difficulty 4
+prompt   How much did the tickets cost?
+display  story [1341 × 8] "A movie ticket costs $13.41, and your group buys 8 of them. The theater has 5 seats free. How much did the tickets cost?"
+answer   exact 2682/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the ticket price, $13.41, by 8 tickets.
+step 1   Pick out the price and the quantity.   [$13.41 and 8]
+step 2   Multiply the price by the quantity.   [$13.41 × 8 = $107.28]
+step 3   The theater's 5 free seats were not bought.
+miss     answered-part = 13.41   That is one ticket. Multiply by how many were bought.
+miss     distractor-pair = 67.05   That uses the 5 free seats, not the tickets bought.
+
+--- money-problems · seed 424242 · difficulty 4
+prompt   How much was spent on bus fare?
+display  story [573 × 4] "A bus ride costs $5.73, and you ride 4 times this week. A friend rode 3 times. How much did you spend on fares?"
+answer   exact 573/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the fare, $5.73, by 4 rides.
+step 1   Pick out the price and the quantity.   [$5.73 and 4]
+step 2   Multiply the price by the quantity.   [$5.73 × 4 = $22.92]
+step 3   Your friend's 3 rides are separate.
+miss     answered-part = 5.73   That is one fare. Multiply by the number of rides.
+miss     distractor-pair = 17.19   That uses your friend's 3 rides, not yours.
+
+--- money-problems · seed 987654321 · difficulty 4
+prompt   How much was spent on gym visits?
+display  story [2959 × 3] "A drop-in gym visit costs $29.59, and you go 3 times this month. A friend went 2 times. How much did you spend?"
+answer   exact 8877/100
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the visit price, $29.59, by 3 visits.
+step 1   Pick out the price and the quantity.   [$29.59 and 3]
+step 2   Multiply the price by the quantity.   [$29.59 × 3 = $88.77]
+step 3   Your friend's 2 visits are separate.
+miss     answered-part = 29.59   That is one visit. Multiply by the number of visits.
+miss     distractor-pair = 59.18   That uses your friend's 2 visits, not yours.
+
+--- money-problems · seed 1 · difficulty 5
+prompt   How much was spent on gym visits?
+display  story [4011 × 2] "A drop-in gym visit costs $40.11, and you go 2 times this month. A friend went 8 times. How much did you spend?"
+answer   exact 4011/50
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the visit price, $40.11, by 2 visits.
+step 1   Pick out the price and the quantity.   [$40.11 and 2]
+step 2   Multiply the price by the quantity.   [$40.11 × 2 = $80.22]
+step 3   Your friend's 8 visits are separate.
+miss     answered-part = 40.11   That is one visit. Multiply by the number of visits.
+miss     distractor-pair = 320.88   That uses your friend's 8 visits, not yours.
+
+--- money-problems · seed 12345 · difficulty 5
+prompt   How much did the paper cost?
+display  story [5986 × 5] "A ream of paper costs $59.86, and an office orders 5 reams. The supply closet already has 7. How much did the order cost?"
+answer   exact 2993/10
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the price, $59.86, by 5 reams.
+step 1   Pick out the price and the quantity.   [$59.86 and 5]
+step 2   Multiply the price by the quantity.   [$59.86 × 5 = $299.30]
+step 3   The closet's 7 reams were not part of this order.
+miss     answered-part = 59.86   That is one ream. Multiply by how many were ordered.
+miss     distractor-pair = 419.02   That uses the closet's 7 reams, not the order.
+
+--- money-problems · seed 67890 · difficulty 5
+prompt   How much did the tickets cost?
+display  story [2703 × 8] "A movie ticket costs $27.03, and your group buys 8 of them. The theater has 5 seats free. How much did the tickets cost?"
+answer   exact 5406/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the ticket price, $27.03, by 8 tickets.
+step 1   Pick out the price and the quantity.   [$27.03 and 8]
+step 2   Multiply the price by the quantity.   [$27.03 × 8 = $216.24]
+step 3   The theater's 5 free seats were not bought.
+miss     answered-part = 27.03   That is one ticket. Multiply by how many were bought.
+miss     distractor-pair = 135.15   That uses the 5 free seats, not the tickets bought.
+
+--- money-problems · seed 424242 · difficulty 5
+prompt   How much was spent on bus fare?
+display  story [1220 × 4] "A bus ride costs $12.20, and you ride 4 times this week. A friend rode 3 times. How much did you spend on fares?"
+answer   exact 244/5
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the fare, $12.20, by 4 rides.
+step 1   Pick out the price and the quantity.   [$12.20 and 4]
+step 2   Multiply the price by the quantity.   [$12.20 × 4 = $48.80]
+step 3   Your friend's 3 rides are separate.
+miss     answered-part = 12.2   That is one fare. Multiply by the number of rides.
+miss     distractor-pair = 36.6   That uses your friend's 3 rides, not yours.
+
+--- money-problems · seed 987654321 · difficulty 5
+prompt   How much was spent on gym visits?
+display  story [5828 × 3] "A drop-in gym visit costs $58.28, and you go 3 times this month. A friend went 2 times. How much did you spend?"
+answer   exact 4371/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply the visit price, $58.28, by 3 visits.
+step 1   Pick out the price and the quantity.   [$58.28 and 3]
+step 2   Multiply the price by the quantity.   [$58.28 × 3 = $174.84]
+step 3   Your friend's 2 visits are separate.
+miss     answered-part = 58.28   That is one visit. Multiply by the number of visits.
+miss     distractor-pair = 116.56   That uses your friend's 2 visits, not yours."
+`;
+
+exports[`recorded output: mult-decimals > matches the wording recorded when the skill landed 1`] = `
+"--- mult-decimals · seed 1 · difficulty 1
+prompt   What is the product?
+display  decimal-column [mult 1.9 × 0.1]
+answer   exact 19/100
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [19 × 1 = 19]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   1.9 × 0.1 = 0.19.
+miss     misplaced-point-fewer-places = 1.9   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 0.019   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 12345 · difficulty 1
+prompt   What is the product?
+display  decimal-column [mult 2.9 × 0.9]
+answer   exact 261/100
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [29 × 9 = 261]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   2.9 × 0.9 = 2.61.
+miss     misplaced-point-fewer-places = 26.1   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 0.261   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 67890 · difficulty 1
+prompt   What is the product?
+display  decimal-column [mult 1.2 × 1.8]
+answer   exact 54/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [12 × 18 = 216]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   1.2 × 1.8 = 2.16.
+miss     misplaced-point-fewer-places = 21.6   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 0.216   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 424242 · difficulty 1
+prompt   What is the product?
+display  decimal-column [mult 0.4 × 0.7]
+answer   exact 7/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [4 × 7 = 28]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   0.4 × 0.7 = 0.28.
+miss     misplaced-point-fewer-places = 2.8   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 0.028   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 987654321 · difficulty 1
+prompt   What is the product?
+display  decimal-column [mult 2.8 × 0.4]
+answer   exact 28/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [28 × 4 = 112]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   2.8 × 0.4 = 1.12.
+miss     misplaced-point-fewer-places = 11.2   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 0.112   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 1 · difficulty 2
+prompt   What is the product?
+display  decimal-column [mult 3.7 × 0.1]
+answer   exact 37/100
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [37 × 1 = 37]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   3.7 × 0.1 = 0.37.
+miss     misplaced-point-fewer-places = 3.7   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 0.037   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 12345 · difficulty 2
+prompt   What is the product?
+display  decimal-column [mult 5.8 × 1.9]
+answer   exact 551/50
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [58 × 19 = 1102]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   5.8 × 1.9 = 11.02.
+miss     misplaced-point-fewer-places = 110.2   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 1.102   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 67890 · difficulty 2
+prompt   What is the product?
+display  decimal-column [mult 2.4 × 3.5]
+answer   exact 42/5
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [24 × 35 = 840]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   2.4 × 3.5 = 8.40.
+miss     misplaced-point-fewer-places = 84   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 0.84   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 424242 · difficulty 2
+prompt   What is the product?
+display  decimal-column [mult 0.8 × 1.4]
+answer   exact 28/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [8 × 14 = 112]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   0.8 × 1.4 = 1.12.
+miss     misplaced-point-fewer-places = 11.2   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 0.112   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 987654321 · difficulty 2
+prompt   What is the product?
+display  decimal-column [mult 5.7 × 0.8]
+answer   exact 114/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [57 × 8 = 456]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   5.7 × 0.8 = 4.56.
+miss     misplaced-point-fewer-places = 45.6   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 0.456   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 1 · difficulty 3
+prompt   What is the product?
+display  decimal-column [mult 8.5 × 1.1]
+answer   exact 187/20
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [85 × 11 = 935]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   8.5 × 1.1 = 9.35.
+miss     misplaced-point-fewer-places = 93.5   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 0.935   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 12345 · difficulty 3
+prompt   What is the product?
+display  decimal-column [mult 12.7 × 4.7]
+answer   exact 5969/100
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [127 × 47 = 5969]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   12.7 × 4.7 = 59.69.
+miss     misplaced-point-fewer-places = 596.9   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 5.969   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 67890 · difficulty 3
+prompt   What is the product?
+display  decimal-column [mult 5.7 × 8.1]
+answer   exact 4617/100
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [57 × 81 = 4617]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   5.7 × 8.1 = 46.17.
+miss     misplaced-point-fewer-places = 461.7   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 4.617   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 424242 · difficulty 3
+prompt   What is the product?
+display  decimal-column [mult 2.6 × 3.9]
+answer   exact 507/50
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [26 × 39 = 1014]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   2.6 × 3.9 = 10.14.
+miss     misplaced-point-fewer-places = 101.4   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 1.014   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 987654321 · difficulty 3
+prompt   What is the product?
+display  decimal-column [mult 12.4 × 2.7]
+answer   exact 837/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [124 × 27 = 3348]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   12.4 × 2.7 = 33.48.
+miss     misplaced-point-fewer-places = 334.8   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 3.348   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 1 · difficulty 4
+prompt   What is the product?
+display  decimal-column [mult 20.2 × 2.1]
+answer   exact 2121/50
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [202 × 21 = 4242]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   20.2 × 2.1 = 42.42.
+miss     misplaced-point-fewer-places = 424.2   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 4.242   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 12345 · difficulty 4
+prompt   What is the product?
+display  decimal-column [mult 30.4 × 10.9]
+answer   exact 8284/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [304 × 109 = 33136]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   30.4 × 10.9 = 331.36.
+miss     misplaced-point-fewer-places = 3313.6   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 33.136   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 67890 · difficulty 4
+prompt   What is the product?
+display  decimal-column [mult 13.4 × 19.1]
+answer   exact 12797/50
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [134 × 191 = 25594]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   13.4 × 19.1 = 255.94.
+miss     misplaced-point-fewer-places = 2559.4   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 25.594   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 424242 · difficulty 4
+prompt   What is the product?
+display  decimal-column [mult 5.8 × 8.9]
+answer   exact 2581/50
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [58 × 89 = 5162]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   5.8 × 8.9 = 51.62.
+miss     misplaced-point-fewer-places = 516.2   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 5.162   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 987654321 · difficulty 4
+prompt   What is the product?
+display  decimal-column [mult 29.5 × 5.9]
+answer   exact 3481/20
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [295 × 59 = 17405]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   29.5 × 5.9 = 174.05.
+miss     misplaced-point-fewer-places = 1740.5   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 17.405   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 1 · difficulty 5
+prompt   What is the product?
+display  decimal-column [mult 40.1 × 5.2]
+answer   exact 5213/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [401 × 52 = 20852]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   40.1 × 5.2 = 208.52.
+miss     misplaced-point-fewer-places = 2085.2   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 20.852   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 12345 · difficulty 5
+prompt   What is the product?
+display  decimal-column [mult 59.8 × 22.2]
+answer   exact 33189/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [598 × 222 = 132756]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   59.8 × 22.2 = 1327.56.
+miss     misplaced-point-fewer-places = 13275.6   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 132.756   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 67890 · difficulty 5
+prompt   What is the product?
+display  decimal-column [mult 27.0 × 38.1]
+answer   exact 10287/10
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [270 × 381 = 102870]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   27.0 × 38.1 = 1028.70.
+miss     misplaced-point-fewer-places = 10287   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 102.87   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 424242 · difficulty 5
+prompt   What is the product?
+display  decimal-column [mult 12.2 × 18.3]
+answer   exact 11163/50
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [122 × 183 = 22326]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   12.2 × 18.3 = 223.26.
+miss     misplaced-point-fewer-places = 2232.6   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 22.326   Count the total decimal places in both factors — that is one fewer than shown here.
+
+--- mult-decimals · seed 987654321 · difficulty 5
+prompt   What is the product?
+display  decimal-column [mult 58.2 × 12.6]
+answer   exact 18333/25
+input    keypad
+keypad   allowDecimal=true
+hint     Multiply as whole numbers, then count the total decimal places.
+step 1   Multiply as whole numbers.   [582 × 126 = 73332]
+step 2   Count the total decimal places in both factors.   [1 place + 1 place = 2 places]
+step 3   58.2 × 12.6 = 733.32.
+miss     misplaced-point-fewer-places = 7333.2   Count the total decimal places in both factors before placing the point.
+miss     misplaced-point-extra-place = 73.332   Count the total decimal places in both factors — that is one fewer than shown here."
+`;
+
 exports[`recorded output: read-decimals > matches the wording recorded when the skill landed 1`] = `
 "--- read-decimals · seed 1 · difficulty 1
 prompt   Write this decimal in digits.

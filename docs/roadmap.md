@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 88 of 201 skills are playable.** Stages A, B and C, Stage D's Units 7 and 8, and
-Unit 9's first six skills are playable. Choice input,
+**Status: 94 of 201 skills are playable.** Stages A, B and C, and Stage D's Units 7, 8 and 9
+are playable. Choice input,
 number-line input, math notation, fraction input and diagrams are built, so
 `AVAILABLE_CAPABILITIES` holds
 `choice-input`, `number-line`, `math-notation`, `fraction-input` and `diagram`. The three
@@ -11,12 +11,15 @@ answer-control modes all have content: `negatives-numberline` is the first skill
 declare a line, comparison, ordering, factors, multiples, primes and negative comparison use
 choices, and everything else uses the keypad. The pad offers a sign, a decimal point or a
 fraction slash when a problem asks for one, and a space key for mixed-number entry (with
-`requireMixed` form checking). Unit 7 uses all three answer controls: fraction
+`requireMixed` form checking). `requireDecimal` and `requireFraction` extend the same
+right-value-wrong-form mechanism for Unit 9's decimal/fraction conversion pair. Unit 7 uses
+all three answer controls: fraction
 meaning, diagram reading and lowest terms use the pad; vocabulary, visual equivalence and both
 comparisons use choices; and a fraction is placed on an exact rational line. Unit 8's
 operation skills are complete, including mixed-number arithmetic, multiplication, division,
-and fixed-frame fraction stories. Unit 9 now covers place value, reading, comparison,
-rounding, addition and subtraction with exact base-ten data. Decimal multiplication is next.
+and fixed-frame fraction stories. Unit 9 is now complete: place value, reading, comparison,
+rounding, addition, subtraction, multiplication, division, decimal/fraction conversion and a
+money-applied word problem, all with exact base-ten data. Units 10 and 11 are next.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 

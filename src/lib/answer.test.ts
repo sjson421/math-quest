@@ -137,6 +137,44 @@ describe('checkAnswer', () => {
     })
   })
 
+  describe('a required-notation requirement', () => {
+    const requireDecimal: Answer = { kind: 'exact', n: 3, d: 4, requireDecimal: true }
+    const requireFraction: Answer = { kind: 'exact', n: 3, d: 4, requireFraction: true }
+
+    it('rejects a fraction entry when decimal form is required', () => {
+      expect(checkAnswer(requireDecimal, '3/4').status).toBe('not-decimal')
+      expect(checkAnswer(requireDecimal, '0.75').status).toBe('correct')
+    })
+
+    it('rejects a decimal entry when fraction form is required', () => {
+      expect(checkAnswer(requireFraction, '0.75').status).toBe('not-fraction')
+      expect(checkAnswer(requireFraction, '3/4').status).toBe('correct')
+    })
+
+    it('leaves a wrong value a plain incorrect, whichever way it is written', () => {
+      expect(checkAnswer(requireDecimal, '1/2').status).toBe('incorrect')
+      expect(checkAnswer(requireFraction, '0.5').status).toBe('incorrect')
+    })
+
+    it('does not constrain an answer that does not declare the requirement', () => {
+      expect(checkAnswer(exact(3, 4), '3/4').status).toBe('correct')
+      expect(checkAnswer(exact(3, 4), '0.75').status).toBe('correct')
+    })
+
+    it('is independent of requireSimplified and requireMixed', () => {
+      const decimalAndSimplified: Answer = {
+        kind: 'exact',
+        n: 1,
+        d: 2,
+        requireDecimal: true,
+        requireSimplified: true,
+      }
+      // An unsimplified fraction entry fails the decimal check first.
+      expect(checkAnswer(decimalAndSimplified, '2/4').status).toBe('not-decimal')
+      expect(checkAnswer(decimalAndSimplified, '0.5').status).toBe('correct')
+    })
+  })
+
   it('honours tolerance for approximate answers', () => {
     const approx: Answer = { kind: 'approx', value: 1.414, tolerance: 0.01 }
     expect(checkAnswer(approx, '1.41').status).toBe('correct')

@@ -11,6 +11,8 @@ describe('responseTo', () => {
       'incorrect',
       'not-simplified',
       'not-mixed',
+      'not-decimal',
+      'not-fraction',
       'unparseable',
     ]
     expect(Object.keys(responseTo).sort()).toEqual([...statuses].sort())
@@ -52,6 +54,19 @@ describe('responseTo', () => {
     expect(feedbackText('not-mixed')).toEqual({
       title: 'Right value — now write it as a mixed number',
       body: 'That is the correct amount. Write it as a whole number and a fraction.',
+    })
+  })
+
+  it('gives decimal/fraction conversion the full wrong-form policy and specific lesson copy', () => {
+    expect(responseTo['not-decimal']).toEqual(responseTo['not-simplified'])
+    expect(responseTo['not-fraction']).toEqual(responseTo['not-simplified'])
+    expect(feedbackText('not-decimal')).toEqual({
+      title: 'Right value — now write it as a decimal',
+      body: 'That is the correct amount. Write it using a decimal point.',
+    })
+    expect(feedbackText('not-fraction')).toEqual({
+      title: 'Right value — now write it as a fraction',
+      body: 'That is the correct amount. Write it as a fraction.',
     })
   })
 

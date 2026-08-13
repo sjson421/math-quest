@@ -54,6 +54,16 @@ export function feedbackText(
         title: 'Right value — now write it as a mixed number',
         body: 'That is the correct amount. Write it as a whole number and a fraction.',
       }
+    case 'not-decimal':
+      return {
+        title: 'Right value — now write it as a decimal',
+        body: 'That is the correct amount. Write it using a decimal point.',
+      }
+    case 'not-fraction':
+      return {
+        title: 'Right value — now write it as a fraction',
+        body: 'That is the correct amount. Write it as a fraction.',
+      }
     default: {
       const unhandled: never = status
       throw new Error(`Unhandled feedback status: ${unhandled}`)
@@ -103,6 +113,24 @@ export const responseTo: Record<CheckResult['status'], SubmitResponse> = {
   // right but written as an improper fraction, and the missing step is the
   // conversion itself, which the worked solution would answer.
   'not-mixed': {
+    advances: false,
+    record: 'incorrect',
+    requeues: true,
+    showsSolution: false,
+    keepsEntry: false,
+  },
+
+  // Same shape again for the two conversion skills: the value is right but
+  // written in the notation the skill is teaching away from.
+  'not-decimal': {
+    advances: false,
+    record: 'incorrect',
+    requeues: true,
+    showsSolution: false,
+    keepsEntry: false,
+  },
+
+  'not-fraction': {
     advances: false,
     record: 'incorrect',
     requeues: true,

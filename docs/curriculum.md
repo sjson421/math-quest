@@ -284,12 +284,12 @@ in lowest terms. Fraction operations wait for Unit 8.
 | 9.4 | `round-decimals` | | ✅ |
 | 9.5 | `add-decimals` | Line up the points | ✅ |
 | 9.6 | `sub-decimals` | | ✅ |
-| 9.7 | `mult-decimals` | Count the places | ⚠️ misplacing the point |
-| 9.8 | `div-decimal-by-whole` | | |
-| 9.9 | `div-by-decimal` | Shift both | ⚠️ |
-| 9.10 | `fraction-to-decimal` | | |
-| 9.11 | `decimal-to-fraction` | | |
-| 9.12 | `money-problems` | Applied | leans on existing money intuition |
+| 9.7 | `mult-decimals` | Count the places | ✅ ⚠️ misplacing the point |
+| 9.8 | `div-decimal-by-whole` | | ✅ |
+| 9.9 | `div-by-decimal` | Shift both | ✅ ⚠️ shifting only one point |
+| 9.10 | `fraction-to-decimal` | | ✅ |
+| 9.11 | `decimal-to-fraction` | | ✅ |
+| 9.12 | `money-problems` | Applied | ✅ leans on existing money intuition |
 
 ### Unit 10 — Percents (10)
 

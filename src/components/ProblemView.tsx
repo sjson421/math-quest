@@ -1,4 +1,4 @@
-import type { Display, Problem } from '../lib/types'
+import type { DecimalArithmeticData, Display, Problem } from '../lib/types'
 import { decimalColumnText } from '../lib/decimal'
 import { entrySpokenLabel, fractionEntryNotation } from '../lib/math-notation'
 import { MathNotation } from './MathNotation'
@@ -192,9 +192,15 @@ function ColumnView({ display, entry, entryMode }: { display: Of<'column'> } & E
   return <FormattedColumn values={values} operator={display.operator} entry={entry} entryMode={entryMode} />
 }
 
+const DECIMAL_COLUMN_OPERATOR: Record<DecimalArithmeticData['operation'], '+' | '−' | '×'> = {
+  add: '+',
+  sub: '−',
+  mult: '×',
+}
+
 function DecimalColumnView({ display, entry, entryMode }: { display: Of<'decimal-column'> } & EntryProps) {
   const values = decimalColumnText(display.decimal)
-  const operator = display.decimal.operation === 'add' ? '+' : '−'
+  const operator = DECIMAL_COLUMN_OPERATOR[display.decimal.operation]
   return <FormattedColumn values={values} operator={operator} entry={entry} entryMode={entryMode} />
 }
 

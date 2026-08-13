@@ -180,6 +180,26 @@ function expectedDecimal(data: DecimalData): { text?: string; answer: number | s
       const coefficient = data.operation === 'add' ? left + right : left - right
       return { answer: coefficient / decimalPower(scale) }
     }
+    case 'mult': {
+      const coefficient = data.left.coefficient * data.right.coefficient
+      return { answer: coefficient / decimalPower(data.left.scale + data.right.scale) }
+    }
+    case 'div-whole':
+      // A single division, not `decimalNumber(dividend) / divisor` — chaining
+      // two roundings can disagree with how the exact rational answer parses.
+      return {
+        text: `${checkedDecimal(data.dividend)} ÷ ${data.divisor}`,
+        answer: data.dividend.coefficient / (data.divisor * decimalPower(data.dividend.scale)),
+      }
+    case 'div-decimal':
+      return {
+        text: `${checkedDecimal(data.dividend)} ÷ ${checkedDecimal(data.divisor)}`,
+        answer:
+          (data.dividend.coefficient * decimalPower(data.divisor.scale)) /
+          (data.divisor.coefficient * decimalPower(data.dividend.scale)),
+      }
+    case 'display':
+      return { text: checkedDecimal(data.value), answer: decimalNumber(data.value) }
     default: {
       const unhandled: never = data
       throw new Error(`Unknown decimal operation: ${JSON.stringify(unhandled)}`)
@@ -662,20 +682,27 @@ function recompute(problem: Problem): number | string {
   // widened to `string` on its way here, the compiler says so.
   const { operands, operator } = display
 
-  switch (operator) {
-    case '+':
-      return operands.reduce((a, b) => a + b)
-    case '−':
-      return operands.reduce((a, b) => a - b)
-    case '×':
-      return operands.reduce((a, b) => a * b)
-    case '÷':
-      return operands.reduce((a, b) => a / b)
-    default: {
-      const unhandled: never = operator
-      throw new Error(`Unknown operator: ${unhandled}`)
+  const raw = (() => {
+    switch (operator) {
+      case '+':
+        return operands.reduce((a, b) => a + b)
+      case '−':
+        return operands.reduce((a, b) => a - b)
+      case '×':
+        return operands.reduce((a, b) => a * b)
+      case '÷':
+        return operands.reduce((a, b) => a / b)
+      default: {
+        const unhandled: never = operator
+        throw new Error(`Unknown operator: ${unhandled}`)
+      }
     }
-  }
+  })()
+
+  // Money is the one story whose carried operands (exact cents) are not the
+  // unit of its stated answer (dollars) — see the `word-problem-phrasing`
+  // spec's carve-out for this skill.
+  return problem.skillId === 'money-problems' ? raw / 100 : raw
 }
 
 const answerValue = (problem: Problem): number | string => {
@@ -719,11 +746,15 @@ function sourceMagnitude(problem: Problem): number {
   if (problem.display.kind === 'inline' && problem.display.decimal) {
     const data = problem.display.decimal
     const values =
-      data.operation === 'compare'
+      data.operation === 'compare' || data.operation === 'add' || data.operation === 'sub'
         ? [decimalNumber(data.left), decimalNumber(data.right)]
-        : data.operation === 'add' || data.operation === 'sub'
-          ? [decimalNumber(data.left), decimalNumber(data.right)]
-          : [decimalNumber(data.value)]
+        : data.operation === 'div-whole'
+          ? [decimalNumber(data.dividend), data.divisor]
+          : data.operation === 'div-decimal'
+            ? [decimalNumber(data.dividend), decimalNumber(data.divisor)]
+            : data.operation === 'mult'
+              ? [decimalNumber(data.left), decimalNumber(data.right)]
+              : [decimalNumber(data.value)]
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
@@ -1526,7 +1557,11 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
                 const factor = gcd(problem.answer.n, problem.answer.d)
                 return `${whole} ${(problem.answer.n % problem.answer.d) / factor}/` + `${problem.answer.d / factor}`
               })()
-            : formatRational(rational(problem.answer.n, problem.answer.d))
+            : // `requireDecimal` makes a fraction-formatted entry a `not-decimal`
+              // response, so the acceptable form is a decimal string.
+              problem.answer.requireDecimal
+              ? String(toNumber(rational(problem.answer.n, problem.answer.d)))
+              : formatRational(rational(problem.answer.n, problem.answer.d))
           : String(answerValue(problem))
       expect(checkAnswer(problem.answer, typed).status).toBe('correct')
     }

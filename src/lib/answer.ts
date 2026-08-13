@@ -74,6 +74,10 @@ export type CheckResult =
   | { status: 'not-simplified' }
   /** Numerically right but not written as a mixed number. */
   | { status: 'not-mixed' }
+  /** Numerically right but written as a fraction where decimal form is required. */
+  | { status: 'not-decimal' }
+  /** Numerically right but written as a decimal where fraction form is required. */
+  | { status: 'not-fraction' }
   | { status: 'unparseable' }
 
 export function checkAnswer(answer: Answer, raw: string): CheckResult {
@@ -107,6 +111,11 @@ export function checkAnswer(answer: Answer, raw: string): CheckResult {
       parsed.rawNum % parsed.rawDen !== 0
     if (!isGenuineMixed) return { status: 'not-mixed' }
   }
+
+  // Decimal/fraction conversion skills teach the notation itself, so retyping
+  // the displayed form is the same shape of miss as an unreduced fraction.
+  if (answer.requireDecimal && parsed.wasFraction) return { status: 'not-decimal' }
+  if (answer.requireFraction && !parsed.wasFraction) return { status: 'not-fraction' }
 
   // If this skill is specifically teaching simplest form, an unreduced entry
   // like 2/4 is a teachable moment, not a plain failure.

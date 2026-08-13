@@ -15,6 +15,7 @@ import type { Operator, Problem } from '../../lib/types'
 import { ADDITION_FRAMES } from './addition'
 import { DIVISION_FRAMES } from './division'
 import { FRACTION_FRAMES } from './fractions'
+import { MONEY_FRAMES } from './money'
 import { MULTIPLICATION_FRAMES } from './multiplication'
 import { SUBTRACTION_FRAMES } from './subtraction'
 
@@ -56,6 +57,7 @@ const banks: Bank[] = [
   },
   { name: 'division', skillId: 'div-words', unitId: 'unit-4', kind: 'whole', frames: DIVISION_FRAMES },
   { name: 'fractions', skillId: 'fraction-words', unitId: 'unit-8', kind: 'fraction', frames: FRACTION_FRAMES },
+  { name: 'money', skillId: 'money-problems', unitId: 'unit-9', kind: 'whole', frames: MONEY_FRAMES },
 ]
 
 const FRACTION_CHECK_QUANTITIES: Quantities[] = [
