@@ -112,6 +112,12 @@ export type WholeNumberData =
         | 'factors'
         | 'classify-prime'
         | 'absolute-value'
+        /** "N%", answer is N itself — the identity a percent's meaning rests on. */
+        | 'percent-of-hundred'
+        /** "N out of 100", answer is N — the other framing of the same identity. */
+        | 'parts-of-hundred'
+        /** "N%", answer is N/100 — percent read as a decimal or as a fraction agree numerically. */
+        | 'percent-rational'
       value: number
     }
   | { operation: 'compare'; left: number; right: number }
@@ -128,6 +134,8 @@ export type WholeNumberData =
     }
   /** The first `count` multiples of `value`, counted from `value` itself. */
   | { operation: 'multiples'; value: number; count: number }
+  /** "P% of Q", answer is P × Q ÷ 100 — not reachable by evaluating the "of" as anything arithmetic. */
+  | { operation: 'percent-of'; percent: number; quantity: number }
 
 export type WholeNumberOperation = WholeNumberData['operation']
 
@@ -155,6 +163,8 @@ export type DecimalData =
   | { operation: 'div-decimal'; dividend: DecimalValue; divisor: DecimalValue }
   /** A plain decimal value, shown as digits rather than words or an operation. */
   | { operation: 'display'; value: DecimalValue }
+  /** A displayed decimal whose answer is the same value read as a percent (×100). */
+  | { operation: 'to-percent'; value: DecimalValue }
 
 export type DecimalArithmeticData = Extract<DecimalData, { operation: 'add' | 'sub' | 'mult' }>
 

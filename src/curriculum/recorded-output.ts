@@ -140,6 +140,7 @@ const formatDecimalData = (data: DecimalData): string => {
     case 'div-decimal':
       return `${data.operation} ${decimalText(data.dividend)} ÷ ${decimalText(data.divisor)}`
     case 'display':
+    case 'to-percent':
       return `${data.operation} ${decimalText(data.value)}`
     default: {
       const unhandled: never = data

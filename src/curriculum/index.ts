@@ -23,6 +23,7 @@ import { unit06 } from './unit-06-negatives'
 import { unit07 } from './unit-07-fractions-meaning'
 import { unit08 } from './unit-08-fraction-operations'
 import { unit09 } from './unit-09-decimals'
+import { unit10 } from './unit-10-percents'
 import {
   indexSkills,
   resolveCourseTree,
@@ -49,6 +50,7 @@ export const allSkills: SkillGenerator[] = [
   ...unit07,
   ...unit08,
   ...unit09,
+  ...unit10,
 ]
 
 /**

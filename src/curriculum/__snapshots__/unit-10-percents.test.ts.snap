@@ -1,0 +1,1261 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: decimal-to-percent > matches the wording recorded when the skill landed 1`] = `
+"--- decimal-to-percent · seed 1 · difficulty 1
+prompt   Write this decimal as a percent.
+display  inline "0.13" [to-percent 0.13]
+answer   exact 13/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.13 → 13%]
+miss     unmoved-point = 0.13   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 1.3   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 12345 · difficulty 1
+prompt   Write this decimal as a percent.
+display  inline "0.20" [to-percent 0.20]
+answer   exact 20/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.20 → 20%]
+miss     unmoved-point = 0.2   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 2   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 67890 · difficulty 1
+prompt   Write this decimal as a percent.
+display  inline "0.08" [to-percent 0.08]
+answer   exact 8/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.08 → 8%]
+miss     unmoved-point = 0.08   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 0.8   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 424242 · difficulty 1
+prompt   Write this decimal as a percent.
+display  inline "0.03" [to-percent 0.03]
+answer   exact 3/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.03 → 3%]
+miss     unmoved-point = 0.03   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 0.3   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 987654321 · difficulty 1
+prompt   Write this decimal as a percent.
+display  inline "0.20" [to-percent 0.20]
+answer   exact 20/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.20 → 20%]
+miss     unmoved-point = 0.2   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 2   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 1 · difficulty 2
+prompt   Write this decimal as a percent.
+display  inline "0.26" [to-percent 0.26]
+answer   exact 26/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.26 → 26%]
+miss     unmoved-point = 0.26   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 2.6   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 12345 · difficulty 2
+prompt   Write this decimal as a percent.
+display  inline "0.40" [to-percent 0.40]
+answer   exact 40/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.40 → 40%]
+miss     unmoved-point = 0.4   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 4   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 67890 · difficulty 2
+prompt   Write this decimal as a percent.
+display  inline "0.16" [to-percent 0.16]
+answer   exact 16/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.16 → 16%]
+miss     unmoved-point = 0.16   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 1.6   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 424242 · difficulty 2
+prompt   Write this decimal as a percent.
+display  inline "0.06" [to-percent 0.06]
+answer   exact 6/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.06 → 6%]
+miss     unmoved-point = 0.06   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 0.6   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 987654321 · difficulty 2
+prompt   Write this decimal as a percent.
+display  inline "0.39" [to-percent 0.39]
+answer   exact 39/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.39 → 39%]
+miss     unmoved-point = 0.39   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 3.9   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 1 · difficulty 3
+prompt   Write this decimal as a percent.
+display  inline "0.38" [to-percent 0.38]
+answer   exact 38/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.38 → 38%]
+miss     unmoved-point = 0.38   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 3.8   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 12345 · difficulty 3
+prompt   Write this decimal as a percent.
+display  inline "0.59" [to-percent 0.59]
+answer   exact 59/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.59 → 59%]
+miss     unmoved-point = 0.59   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 5.9   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 67890 · difficulty 3
+prompt   Write this decimal as a percent.
+display  inline "0.24" [to-percent 0.24]
+answer   exact 24/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.24 → 24%]
+miss     unmoved-point = 0.24   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 2.4   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 424242 · difficulty 3
+prompt   Write this decimal as a percent.
+display  inline "0.08" [to-percent 0.08]
+answer   exact 8/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.08 → 8%]
+miss     unmoved-point = 0.08   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 0.8   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 987654321 · difficulty 3
+prompt   Write this decimal as a percent.
+display  inline "0.58" [to-percent 0.58]
+answer   exact 58/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.58 → 58%]
+miss     unmoved-point = 0.58   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 5.8   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 1 · difficulty 4
+prompt   Write this decimal as a percent.
+display  inline "0.51" [to-percent 0.51]
+answer   exact 51/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.51 → 51%]
+miss     unmoved-point = 0.51   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 5.1   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 12345 · difficulty 4
+prompt   Write this decimal as a percent.
+display  inline "0.79" [to-percent 0.79]
+answer   exact 79/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.79 → 79%]
+miss     unmoved-point = 0.79   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 7.9   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 67890 · difficulty 4
+prompt   Write this decimal as a percent.
+display  inline "0.32" [to-percent 0.32]
+answer   exact 32/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.32 → 32%]
+miss     unmoved-point = 0.32   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 3.2   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 424242 · difficulty 4
+prompt   Write this decimal as a percent.
+display  inline "0.11" [to-percent 0.11]
+answer   exact 11/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.11 → 11%]
+miss     unmoved-point = 0.11   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 1.1   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 987654321 · difficulty 4
+prompt   Write this decimal as a percent.
+display  inline "0.77" [to-percent 0.77]
+answer   exact 77/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.77 → 77%]
+miss     unmoved-point = 0.77   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 7.7   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 1 · difficulty 5
+prompt   Write this decimal as a percent.
+display  inline "0.63" [to-percent 0.63]
+answer   exact 63/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.63 → 63%]
+miss     unmoved-point = 0.63   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 6.3   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 12345 · difficulty 5
+prompt   Write this decimal as a percent.
+display  inline "0.97" [to-percent 0.97]
+answer   exact 97/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.97 → 97%]
+miss     unmoved-point = 0.97   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 9.7   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 67890 · difficulty 5
+prompt   Write this decimal as a percent.
+display  inline "0.39" [to-percent 0.39]
+answer   exact 39/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.39 → 39%]
+miss     unmoved-point = 0.39   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 3.9   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 424242 · difficulty 5
+prompt   Write this decimal as a percent.
+display  inline "0.13" [to-percent 0.13]
+answer   exact 13/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.13 → 13%]
+miss     unmoved-point = 0.13   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 1.3   Move the decimal point two places right, not one.
+
+--- decimal-to-percent · seed 987654321 · difficulty 5
+prompt   Write this decimal as a percent.
+display  inline "0.95" [to-percent 0.95]
+answer   exact 95/1
+input    keypad
+hint     Multiply by 100: move the decimal point two places right.
+step 1   Move the decimal point two places right.   [0.95 → 95%]
+miss     unmoved-point = 0.95   Move the decimal point two places right before writing the percent.
+miss     shifted-one-place = 9.5   Move the decimal point two places right, not one."
+`;
+
+exports[`recorded output: percent-meaning > matches the wording recorded when the skill landed 1`] = `
+"--- percent-meaning · seed 1 · difficulty 1
+prompt   Write this percent as parts out of 100.
+display  inline "13%"
+answer   exact 13/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   13% means 13 out of 100.
+miss     wrote-decimal-form = 0.13   Write the count itself, 13, not a decimal.
+
+--- percent-meaning · seed 12345 · difficulty 1
+prompt   Write this percent as parts out of 100.
+display  inline "20%"
+answer   exact 20/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   20% means 20 out of 100.
+miss     wrote-decimal-form = 0.2   Write the count itself, 20, not a decimal.
+
+--- percent-meaning · seed 67890 · difficulty 1
+prompt   Write this as a percent.
+display  inline "8 out of 100"
+answer   exact 8/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   8% means 8 out of 100.
+miss     wrote-decimal-form = 0.08   Write the count itself, 8, not a decimal.
+
+--- percent-meaning · seed 424242 · difficulty 1
+prompt   Write this percent as parts out of 100.
+display  inline "3%"
+answer   exact 3/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   3% means 3 out of 100.
+miss     wrote-decimal-form = 0.03   Write the count itself, 3, not a decimal.
+
+--- percent-meaning · seed 987654321 · difficulty 1
+prompt   Write this percent as parts out of 100.
+display  inline "20%"
+answer   exact 20/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   20% means 20 out of 100.
+miss     wrote-decimal-form = 0.2   Write the count itself, 20, not a decimal.
+
+--- percent-meaning · seed 1 · difficulty 2
+prompt   Write this percent as parts out of 100.
+display  inline "26%"
+answer   exact 26/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   26% means 26 out of 100.
+miss     wrote-decimal-form = 0.26   Write the count itself, 26, not a decimal.
+
+--- percent-meaning · seed 12345 · difficulty 2
+prompt   Write this percent as parts out of 100.
+display  inline "40%"
+answer   exact 40/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   40% means 40 out of 100.
+miss     wrote-decimal-form = 0.4   Write the count itself, 40, not a decimal.
+
+--- percent-meaning · seed 67890 · difficulty 2
+prompt   Write this as a percent.
+display  inline "16 out of 100"
+answer   exact 16/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   16% means 16 out of 100.
+miss     wrote-decimal-form = 0.16   Write the count itself, 16, not a decimal.
+
+--- percent-meaning · seed 424242 · difficulty 2
+prompt   Write this percent as parts out of 100.
+display  inline "6%"
+answer   exact 6/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   6% means 6 out of 100.
+miss     wrote-decimal-form = 0.06   Write the count itself, 6, not a decimal.
+
+--- percent-meaning · seed 987654321 · difficulty 2
+prompt   Write this percent as parts out of 100.
+display  inline "39%"
+answer   exact 39/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   39% means 39 out of 100.
+miss     wrote-decimal-form = 0.39   Write the count itself, 39, not a decimal.
+
+--- percent-meaning · seed 1 · difficulty 3
+prompt   Write this percent as parts out of 100.
+display  inline "38%"
+answer   exact 38/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   38% means 38 out of 100.
+miss     wrote-decimal-form = 0.38   Write the count itself, 38, not a decimal.
+
+--- percent-meaning · seed 12345 · difficulty 3
+prompt   Write this percent as parts out of 100.
+display  inline "59%"
+answer   exact 59/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   59% means 59 out of 100.
+miss     wrote-decimal-form = 0.59   Write the count itself, 59, not a decimal.
+
+--- percent-meaning · seed 67890 · difficulty 3
+prompt   Write this as a percent.
+display  inline "24 out of 100"
+answer   exact 24/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   24% means 24 out of 100.
+miss     wrote-decimal-form = 0.24   Write the count itself, 24, not a decimal.
+
+--- percent-meaning · seed 424242 · difficulty 3
+prompt   Write this percent as parts out of 100.
+display  inline "8%"
+answer   exact 8/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   8% means 8 out of 100.
+miss     wrote-decimal-form = 0.08   Write the count itself, 8, not a decimal.
+
+--- percent-meaning · seed 987654321 · difficulty 3
+prompt   Write this percent as parts out of 100.
+display  inline "58%"
+answer   exact 58/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   58% means 58 out of 100.
+miss     wrote-decimal-form = 0.58   Write the count itself, 58, not a decimal.
+
+--- percent-meaning · seed 1 · difficulty 4
+prompt   Write this percent as parts out of 100.
+display  inline "51%"
+answer   exact 51/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   51% means 51 out of 100.
+miss     wrote-decimal-form = 0.51   Write the count itself, 51, not a decimal.
+
+--- percent-meaning · seed 12345 · difficulty 4
+prompt   Write this percent as parts out of 100.
+display  inline "79%"
+answer   exact 79/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   79% means 79 out of 100.
+miss     wrote-decimal-form = 0.79   Write the count itself, 79, not a decimal.
+
+--- percent-meaning · seed 67890 · difficulty 4
+prompt   Write this as a percent.
+display  inline "32 out of 100"
+answer   exact 32/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   32% means 32 out of 100.
+miss     wrote-decimal-form = 0.32   Write the count itself, 32, not a decimal.
+
+--- percent-meaning · seed 424242 · difficulty 4
+prompt   Write this percent as parts out of 100.
+display  inline "11%"
+answer   exact 11/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   11% means 11 out of 100.
+miss     wrote-decimal-form = 0.11   Write the count itself, 11, not a decimal.
+
+--- percent-meaning · seed 987654321 · difficulty 4
+prompt   Write this percent as parts out of 100.
+display  inline "77%"
+answer   exact 77/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   77% means 77 out of 100.
+miss     wrote-decimal-form = 0.77   Write the count itself, 77, not a decimal.
+
+--- percent-meaning · seed 1 · difficulty 5
+prompt   Write this percent as parts out of 100.
+display  inline "63%"
+answer   exact 63/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   63% means 63 out of 100.
+miss     wrote-decimal-form = 0.63   Write the count itself, 63, not a decimal.
+
+--- percent-meaning · seed 12345 · difficulty 5
+prompt   Write this percent as parts out of 100.
+display  inline "97%"
+answer   exact 97/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   97% means 97 out of 100.
+miss     wrote-decimal-form = 0.97   Write the count itself, 97, not a decimal.
+
+--- percent-meaning · seed 67890 · difficulty 5
+prompt   Write this as a percent.
+display  inline "39 out of 100"
+answer   exact 39/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   39% means 39 out of 100.
+miss     wrote-decimal-form = 0.39   Write the count itself, 39, not a decimal.
+
+--- percent-meaning · seed 424242 · difficulty 5
+prompt   Write this percent as parts out of 100.
+display  inline "13%"
+answer   exact 13/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   13% means 13 out of 100.
+miss     wrote-decimal-form = 0.13   Write the count itself, 13, not a decimal.
+
+--- percent-meaning · seed 987654321 · difficulty 5
+prompt   Write this percent as parts out of 100.
+display  inline "95%"
+answer   exact 95/1
+input    keypad
+hint     A percent is a count out of 100.
+step 1   95% means 95 out of 100.
+miss     wrote-decimal-form = 0.95   Write the count itself, 95, not a decimal."
+`;
+
+exports[`recorded output: percent-of > matches the wording recorded when the skill landed 1`] = `
+"--- percent-of · seed 1 · difficulty 1
+prompt   What is the result?
+display  inline "60% of 5"
+answer   exact 3/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [60% → 0.60]
+step 2   Multiply by the quantity.   [0.60 × 5 = 3]
+miss     added-instead-of-multiplied = 65   Multiply 5 by 60%; do not add them.
+
+--- percent-of · seed 12345 · difficulty 1
+prompt   What is the result?
+display  inline "90% of 20"
+answer   exact 18/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [90% → 0.90]
+step 2   Multiply by the quantity.   [0.90 × 20 = 18]
+miss     added-instead-of-multiplied = 110   Multiply 20 by 90%; do not add them.
+
+--- percent-of · seed 67890 · difficulty 1
+prompt   What is the result?
+display  inline "30% of 30"
+answer   exact 9/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [30% → 0.30]
+step 2   Multiply by the quantity.   [0.30 × 30 = 9]
+miss     added-instead-of-multiplied = 60   Multiply 30 by 30%; do not add them.
+
+--- percent-of · seed 424242 · difficulty 1
+prompt   What is the result?
+display  inline "10% of 10"
+answer   exact 1/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [10% → 0.10]
+step 2   Multiply by the quantity.   [0.10 × 10 = 1]
+miss     added-instead-of-multiplied = 20   Multiply 10 by 10%; do not add them.
+
+--- percent-of · seed 987654321 · difficulty 1
+prompt   What is the result?
+display  inline "90% of 10"
+answer   exact 9/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [90% → 0.90]
+step 2   Multiply by the quantity.   [0.90 × 10 = 9]
+miss     added-instead-of-multiplied = 100   Multiply 10 by 90%; do not add them.
+
+--- percent-of · seed 1 · difficulty 2
+prompt   What is the result?
+display  inline "60% of 5"
+answer   exact 3/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [60% → 0.60]
+step 2   Multiply by the quantity.   [0.60 × 5 = 3]
+miss     added-instead-of-multiplied = 65   Multiply 5 by 60%; do not add them.
+
+--- percent-of · seed 12345 · difficulty 2
+prompt   What is the result?
+display  inline "90% of 20"
+answer   exact 18/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [90% → 0.90]
+step 2   Multiply by the quantity.   [0.90 × 20 = 18]
+miss     added-instead-of-multiplied = 110   Multiply 20 by 90%; do not add them.
+
+--- percent-of · seed 67890 · difficulty 2
+prompt   What is the result?
+display  inline "30% of 40"
+answer   exact 12/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [30% → 0.30]
+step 2   Multiply by the quantity.   [0.30 × 40 = 12]
+miss     added-instead-of-multiplied = 70   Multiply 40 by 30%; do not add them.
+
+--- percent-of · seed 424242 · difficulty 2
+prompt   What is the result?
+display  inline "10% of 20"
+answer   exact 2/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [10% → 0.10]
+step 2   Multiply by the quantity.   [0.10 × 20 = 2]
+miss     added-instead-of-multiplied = 30   Multiply 20 by 10%; do not add them.
+
+--- percent-of · seed 987654321 · difficulty 2
+prompt   What is the result?
+display  inline "90% of 10"
+answer   exact 9/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [90% → 0.90]
+step 2   Multiply by the quantity.   [0.90 × 10 = 9]
+miss     added-instead-of-multiplied = 100   Multiply 10 by 90%; do not add them.
+
+--- percent-of · seed 1 · difficulty 3
+prompt   What is the result?
+display  inline "60% of 10"
+answer   exact 6/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [60% → 0.60]
+step 2   Multiply by the quantity.   [0.60 × 10 = 6]
+miss     added-instead-of-multiplied = 70   Multiply 10 by 60%; do not add them.
+
+--- percent-of · seed 12345 · difficulty 3
+prompt   What is the result?
+display  inline "90% of 40"
+answer   exact 36/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [90% → 0.90]
+step 2   Multiply by the quantity.   [0.90 × 40 = 36]
+miss     added-instead-of-multiplied = 130   Multiply 40 by 90%; do not add them.
+
+--- percent-of · seed 67890 · difficulty 3
+prompt   What is the result?
+display  inline "30% of 70"
+answer   exact 21/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [30% → 0.30]
+step 2   Multiply by the quantity.   [0.30 × 70 = 21]
+miss     added-instead-of-multiplied = 100   Multiply 70 by 30%; do not add them.
+
+--- percent-of · seed 424242 · difficulty 3
+prompt   What is the result?
+display  inline "10% of 40"
+answer   exact 4/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [10% → 0.10]
+step 2   Multiply by the quantity.   [0.10 × 40 = 4]
+miss     added-instead-of-multiplied = 50   Multiply 40 by 10%; do not add them.
+
+--- percent-of · seed 987654321 · difficulty 3
+prompt   What is the result?
+display  inline "90% of 30"
+answer   exact 27/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [90% → 0.90]
+step 2   Multiply by the quantity.   [0.90 × 30 = 27]
+miss     added-instead-of-multiplied = 120   Multiply 30 by 90%; do not add them.
+
+--- percent-of · seed 1 · difficulty 4
+prompt   What is the result?
+display  inline "60% of 10"
+answer   exact 6/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [60% → 0.60]
+step 2   Multiply by the quantity.   [0.60 × 10 = 6]
+miss     added-instead-of-multiplied = 70   Multiply 10 by 60%; do not add them.
+
+--- percent-of · seed 12345 · difficulty 4
+prompt   What is the result?
+display  inline "90% of 60"
+answer   exact 54/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [90% → 0.90]
+step 2   Multiply by the quantity.   [0.90 × 60 = 54]
+miss     added-instead-of-multiplied = 150   Multiply 60 by 90%; do not add them.
+
+--- percent-of · seed 67890 · difficulty 4
+prompt   What is the result?
+display  inline "30% of 100"
+answer   exact 30/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [30% → 0.30]
+step 2   Multiply by the quantity.   [0.30 × 100 = 30]
+miss     added-instead-of-multiplied = 130   Multiply 100 by 30%; do not add them.
+
+--- percent-of · seed 424242 · difficulty 4
+prompt   What is the result?
+display  inline "10% of 50"
+answer   exact 5/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [10% → 0.10]
+step 2   Multiply by the quantity.   [0.10 × 50 = 5]
+miss     added-instead-of-multiplied = 60   Multiply 50 by 10%; do not add them.
+
+--- percent-of · seed 987654321 · difficulty 4
+prompt   What is the result?
+display  inline "90% of 40"
+answer   exact 36/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [90% → 0.90]
+step 2   Multiply by the quantity.   [0.90 × 40 = 36]
+miss     added-instead-of-multiplied = 130   Multiply 40 by 90%; do not add them.
+
+--- percent-of · seed 1 · difficulty 5
+prompt   What is the result?
+display  inline "60% of 15"
+answer   exact 9/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [60% → 0.60]
+step 2   Multiply by the quantity.   [0.60 × 15 = 9]
+miss     added-instead-of-multiplied = 75   Multiply 15 by 60%; do not add them.
+
+--- percent-of · seed 12345 · difficulty 5
+prompt   What is the result?
+display  inline "90% of 80"
+answer   exact 72/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [90% → 0.90]
+step 2   Multiply by the quantity.   [0.90 × 80 = 72]
+miss     added-instead-of-multiplied = 170   Multiply 80 by 90%; do not add them.
+
+--- percent-of · seed 67890 · difficulty 5
+prompt   What is the result?
+display  inline "30% of 130"
+answer   exact 39/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [30% → 0.30]
+step 2   Multiply by the quantity.   [0.30 × 130 = 39]
+miss     added-instead-of-multiplied = 160   Multiply 130 by 30%; do not add them.
+
+--- percent-of · seed 424242 · difficulty 5
+prompt   What is the result?
+display  inline "10% of 70"
+answer   exact 7/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [10% → 0.10]
+step 2   Multiply by the quantity.   [0.10 × 70 = 7]
+miss     added-instead-of-multiplied = 80   Multiply 70 by 10%; do not add them.
+
+--- percent-of · seed 987654321 · difficulty 5
+prompt   What is the result?
+display  inline "90% of 50"
+answer   exact 45/1
+input    keypad
+hint     Multiply the quantity by the percent, then divide by 100.
+step 1   Convert the percent to a decimal.   [90% → 0.90]
+step 2   Multiply by the quantity.   [0.90 × 50 = 45]
+miss     added-instead-of-multiplied = 140   Multiply 50 by 90%; do not add them."
+`;
+
+exports[`recorded output: percent-to-decimal > matches the wording recorded when the skill landed 1`] = `
+"--- percent-to-decimal · seed 1 · difficulty 1
+prompt   Write this percent as a decimal.
+display  inline "13%"
+answer   exact 13/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [13% → 0.13]
+miss     left-as-whole-number = 13   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 12345 · difficulty 1
+prompt   Write this percent as a decimal.
+display  inline "20%"
+answer   exact 1/5
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [20% → 0.20]
+miss     left-as-whole-number = 20   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 67890 · difficulty 1
+prompt   Write this percent as a decimal.
+display  inline "8%"
+answer   exact 2/25
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [8% → 0.08]
+miss     left-as-whole-number = 8   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 424242 · difficulty 1
+prompt   Write this percent as a decimal.
+display  inline "3%"
+answer   exact 3/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [3% → 0.03]
+miss     left-as-whole-number = 3   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 987654321 · difficulty 1
+prompt   Write this percent as a decimal.
+display  inline "20%"
+answer   exact 1/5
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [20% → 0.20]
+miss     left-as-whole-number = 20   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 1 · difficulty 2
+prompt   Write this percent as a decimal.
+display  inline "26%"
+answer   exact 13/50
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [26% → 0.26]
+miss     left-as-whole-number = 26   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 12345 · difficulty 2
+prompt   Write this percent as a decimal.
+display  inline "40%"
+answer   exact 2/5
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [40% → 0.40]
+miss     left-as-whole-number = 40   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 67890 · difficulty 2
+prompt   Write this percent as a decimal.
+display  inline "16%"
+answer   exact 4/25
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [16% → 0.16]
+miss     left-as-whole-number = 16   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 424242 · difficulty 2
+prompt   Write this percent as a decimal.
+display  inline "6%"
+answer   exact 3/50
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [6% → 0.06]
+miss     left-as-whole-number = 6   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 987654321 · difficulty 2
+prompt   Write this percent as a decimal.
+display  inline "39%"
+answer   exact 39/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [39% → 0.39]
+miss     left-as-whole-number = 39   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 1 · difficulty 3
+prompt   Write this percent as a decimal.
+display  inline "38%"
+answer   exact 19/50
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [38% → 0.38]
+miss     left-as-whole-number = 38   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 12345 · difficulty 3
+prompt   Write this percent as a decimal.
+display  inline "59%"
+answer   exact 59/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [59% → 0.59]
+miss     left-as-whole-number = 59   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 67890 · difficulty 3
+prompt   Write this percent as a decimal.
+display  inline "24%"
+answer   exact 6/25
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [24% → 0.24]
+miss     left-as-whole-number = 24   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 424242 · difficulty 3
+prompt   Write this percent as a decimal.
+display  inline "8%"
+answer   exact 2/25
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [8% → 0.08]
+miss     left-as-whole-number = 8   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 987654321 · difficulty 3
+prompt   Write this percent as a decimal.
+display  inline "58%"
+answer   exact 29/50
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [58% → 0.58]
+miss     left-as-whole-number = 58   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 1 · difficulty 4
+prompt   Write this percent as a decimal.
+display  inline "51%"
+answer   exact 51/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [51% → 0.51]
+miss     left-as-whole-number = 51   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 12345 · difficulty 4
+prompt   Write this percent as a decimal.
+display  inline "79%"
+answer   exact 79/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [79% → 0.79]
+miss     left-as-whole-number = 79   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 67890 · difficulty 4
+prompt   Write this percent as a decimal.
+display  inline "32%"
+answer   exact 8/25
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [32% → 0.32]
+miss     left-as-whole-number = 32   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 424242 · difficulty 4
+prompt   Write this percent as a decimal.
+display  inline "11%"
+answer   exact 11/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [11% → 0.11]
+miss     left-as-whole-number = 11   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 987654321 · difficulty 4
+prompt   Write this percent as a decimal.
+display  inline "77%"
+answer   exact 77/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [77% → 0.77]
+miss     left-as-whole-number = 77   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 1 · difficulty 5
+prompt   Write this percent as a decimal.
+display  inline "63%"
+answer   exact 63/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [63% → 0.63]
+miss     left-as-whole-number = 63   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 12345 · difficulty 5
+prompt   Write this percent as a decimal.
+display  inline "97%"
+answer   exact 97/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [97% → 0.97]
+miss     left-as-whole-number = 97   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 67890 · difficulty 5
+prompt   Write this percent as a decimal.
+display  inline "39%"
+answer   exact 39/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [39% → 0.39]
+miss     left-as-whole-number = 39   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 424242 · difficulty 5
+prompt   Write this percent as a decimal.
+display  inline "13%"
+answer   exact 13/100
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [13% → 0.13]
+miss     left-as-whole-number = 13   Divide by 100 by moving the decimal point two places left.
+
+--- percent-to-decimal · seed 987654321 · difficulty 5
+prompt   Write this percent as a decimal.
+display  inline "95%"
+answer   exact 19/20
+input    keypad
+keypad   allowDecimal=true
+hint     Divide by 100: move the decimal point two places left.
+step 1   Move the decimal point two places left.   [95% → 0.95]
+miss     left-as-whole-number = 95   Divide by 100 by moving the decimal point two places left."
+`;
+
+exports[`recorded output: percent-to-fraction > matches the wording recorded when the skill landed 1`] = `
+"--- percent-to-fraction · seed 1 · difficulty 1
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "13%"
+answer   exact 13/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [13/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 13   Use 100 as the denominator, then simplify 13/100.
+
+--- percent-to-fraction · seed 12345 · difficulty 1
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "20%"
+answer   exact 1/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [20/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 20   Use 100 as the denominator, then simplify 20/100.
+
+--- percent-to-fraction · seed 67890 · difficulty 1
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "8%"
+answer   exact 2/25 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [8/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 8   Use 100 as the denominator, then simplify 8/100.
+
+--- percent-to-fraction · seed 424242 · difficulty 1
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "3%"
+answer   exact 3/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [3/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 3   Use 100 as the denominator, then simplify 3/100.
+
+--- percent-to-fraction · seed 987654321 · difficulty 1
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "20%"
+answer   exact 1/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [20/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 20   Use 100 as the denominator, then simplify 20/100.
+
+--- percent-to-fraction · seed 1 · difficulty 2
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "26%"
+answer   exact 13/50 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [26/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 26   Use 100 as the denominator, then simplify 26/100.
+
+--- percent-to-fraction · seed 12345 · difficulty 2
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "40%"
+answer   exact 2/5 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [40/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 40   Use 100 as the denominator, then simplify 40/100.
+
+--- percent-to-fraction · seed 67890 · difficulty 2
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "16%"
+answer   exact 4/25 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [16/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 16   Use 100 as the denominator, then simplify 16/100.
+
+--- percent-to-fraction · seed 424242 · difficulty 2
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "6%"
+answer   exact 3/50 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [6/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 6   Use 100 as the denominator, then simplify 6/100.
+
+--- percent-to-fraction · seed 987654321 · difficulty 2
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "39%"
+answer   exact 39/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [39/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 39   Use 100 as the denominator, then simplify 39/100.
+
+--- percent-to-fraction · seed 1 · difficulty 3
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "38%"
+answer   exact 19/50 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [38/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 38   Use 100 as the denominator, then simplify 38/100.
+
+--- percent-to-fraction · seed 12345 · difficulty 3
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "59%"
+answer   exact 59/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [59/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 59   Use 100 as the denominator, then simplify 59/100.
+
+--- percent-to-fraction · seed 67890 · difficulty 3
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "24%"
+answer   exact 6/25 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [24/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 24   Use 100 as the denominator, then simplify 24/100.
+
+--- percent-to-fraction · seed 424242 · difficulty 3
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "8%"
+answer   exact 2/25 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [8/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 8   Use 100 as the denominator, then simplify 8/100.
+
+--- percent-to-fraction · seed 987654321 · difficulty 3
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "58%"
+answer   exact 29/50 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [58/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 58   Use 100 as the denominator, then simplify 58/100.
+
+--- percent-to-fraction · seed 1 · difficulty 4
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "51%"
+answer   exact 51/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [51/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 51   Use 100 as the denominator, then simplify 51/100.
+
+--- percent-to-fraction · seed 12345 · difficulty 4
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "79%"
+answer   exact 79/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [79/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 79   Use 100 as the denominator, then simplify 79/100.
+
+--- percent-to-fraction · seed 67890 · difficulty 4
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "32%"
+answer   exact 8/25 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [32/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 32   Use 100 as the denominator, then simplify 32/100.
+
+--- percent-to-fraction · seed 424242 · difficulty 4
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "11%"
+answer   exact 11/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [11/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 11   Use 100 as the denominator, then simplify 11/100.
+
+--- percent-to-fraction · seed 987654321 · difficulty 4
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "77%"
+answer   exact 77/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [77/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 77   Use 100 as the denominator, then simplify 77/100.
+
+--- percent-to-fraction · seed 1 · difficulty 5
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "63%"
+answer   exact 63/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [63/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 63   Use 100 as the denominator, then simplify 63/100.
+
+--- percent-to-fraction · seed 12345 · difficulty 5
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "97%"
+answer   exact 97/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [97/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 97   Use 100 as the denominator, then simplify 97/100.
+
+--- percent-to-fraction · seed 67890 · difficulty 5
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "39%"
+answer   exact 39/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [39/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 39   Use 100 as the denominator, then simplify 39/100.
+
+--- percent-to-fraction · seed 424242 · difficulty 5
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "13%"
+answer   exact 13/100 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [13/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 13   Use 100 as the denominator, then simplify 13/100.
+
+--- percent-to-fraction · seed 987654321 · difficulty 5
+prompt   Write this percent as a fraction in lowest terms.
+display  inline "95%"
+answer   exact 19/20 (simplified)
+input    keypad
+keypad   allowFraction=true
+hint     Write it over 100, then simplify.
+step 1   Write the percent over 100.   [95/100]
+step 2   Simplify to lowest terms.
+miss     numerator-only = 95   Use 100 as the denominator, then simplify 95/100."
+`;

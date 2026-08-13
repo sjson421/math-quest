@@ -71,6 +71,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "decimal-to-fraction": [
     "fraction-to-decimal",
   ],
+  "decimal-to-percent": [
+    "percent-to-decimal",
+  ],
   "div-by-10-100": [
     "div-remainder",
   ],
@@ -184,6 +187,18 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "pemdas": [
     "with-parentheses",
+  ],
+  "percent-meaning": [
+    "money-problems",
+  ],
+  "percent-of": [
+    "percent-to-fraction",
+  ],
+  "percent-to-decimal": [
+    "percent-meaning",
+  ],
+  "percent-to-fraction": [
+    "decimal-to-percent",
   ],
   "place-value-hundreds": [
     "place-value-tens",

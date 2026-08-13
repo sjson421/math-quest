@@ -200,6 +200,10 @@ function expectedDecimal(data: DecimalData): { text?: string; answer: number | s
       }
     case 'display':
       return { text: checkedDecimal(data.value), answer: decimalNumber(data.value) }
+    case 'to-percent':
+      // Exact integer scaling rather than `decimalNumber(...) * 100`, which
+      // reintroduces float error (`0.07 * 100 === 7.000000000000001`).
+      return { text: checkedDecimal(data.value), answer: data.value.coefficient * decimalPower(2 - data.value.scale) }
     default: {
       const unhandled: never = data
       throw new Error(`Unknown decimal operation: ${JSON.stringify(unhandled)}`)
@@ -239,6 +243,13 @@ function displayedText(data: WholeNumberData): string {
       return String(data.value)
     case 'multiples':
       return String(data.value)
+    case 'percent-of-hundred':
+    case 'percent-rational':
+      return `${data.value}%`
+    case 'parts-of-hundred':
+      return `${data.value} out of 100`
+    case 'percent-of':
+      return `${data.percent}% of ${data.quantity}`
     default: {
       const unhandled: never = data
       throw new Error(`Unknown whole-number operation: ${JSON.stringify(unhandled)}`)
@@ -626,6 +637,13 @@ function recompute(problem: Problem): number | string {
         return choiceIdFor(problem, multiplesOf(data.value, data.count).join(', '))
       case 'classify-prime':
         return choiceIdFor(problem, factorsOf(data.value).length === 2 ? 'prime' : 'composite')
+      case 'percent-of-hundred':
+      case 'parts-of-hundred':
+        return data.value
+      case 'percent-rational':
+        return data.value / 100
+      case 'percent-of':
+        return (data.percent * data.quantity) / 100
       default: {
         const unhandled: never = data
         throw new Error(`Unknown whole-number operation: ${JSON.stringify(unhandled)}`)
@@ -737,6 +755,8 @@ function sourceValues(data: WholeNumberData): number[] {
     case 'divide-remainder':
     case 'divide-quotient':
       return [data.dividend, data.divisor]
+    case 'percent-of':
+      return [data.percent, data.quantity]
     default:
       return [data.value]
   }

@@ -295,11 +295,11 @@ in lowest terms. Fraction operations wait for Unit 8.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 10.1 | `percent-meaning` | Out of 100 | `quick` |
-| 10.2 | `percent-to-decimal` | | |
-| 10.3 | `decimal-to-percent` | | ⚠️ shifting the wrong way |
-| 10.4 | `percent-to-fraction` | | |
-| 10.5 | `percent-of` | 15% of 80 | |
+| 10.1 | `percent-meaning` | Out of 100 | ✅ `quick` |
+| 10.2 | `percent-to-decimal` | | ✅ |
+| 10.3 | `decimal-to-percent` | | ✅ ⚠️ shifting the wrong way |
+| 10.4 | `percent-to-fraction` | | ✅ |
+| 10.5 | `percent-of` | 15% of 80 | ✅ |
 | 10.6 | `find-the-percent` | 12 is what % of 60 | ⚠️ which number divides |
 | 10.7 | `find-the-whole` | 20% is 15, find total | ⚠️ **major wall** |
 | 10.8 | `percent-change` | Increase / decrease | |
