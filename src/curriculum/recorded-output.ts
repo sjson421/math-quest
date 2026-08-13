@@ -47,6 +47,7 @@ export const RENDERED_KEYS = [
   'inputMode',
   'keypad',
   'numberLine',
+  'expression',
   'choices',
   'misconceptions',
   'hint',
@@ -290,6 +291,8 @@ const formatAnswer = (answer: Problem['answer']): string => {
       return `approx ${answer.value} ±${answer.tolerance}`
     case 'choice':
       return `choice ${answer.id}`
+    case 'expression':
+      return `expression ${answer.canonical} (${answer.variable}, ${answer.form})`
     default: {
       const unhandled: never = answer
       throw new Error(`Unhandled answer: ${JSON.stringify(unhandled)}`)
@@ -309,6 +312,7 @@ export const format = (problem: Problem, seed: number): string => {
   const keypad = formatKeypad(problem.keypad)
   if (keypad) lines.push(`keypad   ${keypad}`)
   if (problem.numberLine) lines.push(`line     ${formatNumberLine(problem.numberLine)}`)
+  if (problem.expression) lines.push(`variable ${problem.expression.variable}`)
 
   lines.push(`hint     ${problem.hint}`)
 

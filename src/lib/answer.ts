@@ -1,4 +1,5 @@
 import type { Answer } from './types'
+import { canonicalForm } from './expression'
 import { fromDecimalString, fromInt, gcd, rational, toNumber, type Rational } from './rational'
 
 export type ParsedInput =
@@ -83,6 +84,15 @@ export type CheckResult =
 export function checkAnswer(answer: Answer, raw: string): CheckResult {
   if (answer.kind === 'choice') {
     return raw === answer.id ? { status: 'correct' } : { status: 'incorrect' }
+  }
+
+  if (answer.kind === 'expression') {
+    const entry = canonicalForm(raw, answer.variable, answer.form)
+    if (entry === null) return { status: 'unparseable' }
+    // The stored answer is written naturally by the generator, not
+    // pre-normalized, so it is canonicalized the same way the entry is.
+    const expected = canonicalForm(answer.canonical, answer.variable, answer.form)
+    return entry === expected ? { status: 'correct' } : { status: 'incorrect' }
   }
 
   const parsed = parseInput(raw)

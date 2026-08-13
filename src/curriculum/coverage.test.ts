@@ -313,6 +313,21 @@ describe('the skills that are built', () => {
     expect(stage?.requires).toEqual(['choice-input'])
     expect(stageIds.every((id) => skillState(id) === 'implemented')).toBe(true)
   })
+
+  it('marks expression input available without unlocking any Stage E skill', () => {
+    // Roadmap item 20b: the capability ships before Unit 13's generators do,
+    // proving availability alone adds no playable skill — the same pattern
+    // `diagram` and `number-line` proved for their stages.
+    const stage = manifestIndex.get('variable-meaning')?.stage
+    const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
+    const unavailable = (stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))
+
+    expect(AVAILABLE_CAPABILITIES.has('expression-input')).toBe(true)
+    expect(stage?.requires).toEqual(['math-notation', 'expression-input'])
+    expect(unavailable).toEqual([])
+    expect(stageIds.every((id) => skillState(id) === 'planned')).toBe(true)
+    expect(implementedSkillIds).toHaveLength(111)
+  })
 })
 
 describe('what the learner is offered', () => {

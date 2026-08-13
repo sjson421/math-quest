@@ -40,6 +40,26 @@ export type Answer =
   | { kind: 'approx'; value: number; tolerance: number }
   /** Multiple choice. */
   | { kind: 'choice'; id: string }
+  /**
+   * A single-variable expression, compared under a canonical form rather than
+   * by value — expressions do not have a value until the variable does.
+   *
+   * `canonical` is written naturally by the generator (e.g. `"2x + 2"` or
+   * `"2(x + 1)"`) and is itself canonicalized before comparison, so it need
+   * not be pre-normalized by hand.
+   */
+  | {
+      kind: 'expression'
+      canonical: string
+      variable: string
+      /**
+       * `'expanded'` treats a distributed and undistributed form as the same
+       * answer — `2(x + 1)` and `2x + 2` are one answer. `'exact'` keeps them
+       * distinct, for skills like `factor-gcf` where un-distributing is the
+       * point. See `src/lib/expression.ts`.
+       */
+      form: 'expanded' | 'exact'
+    }
 
 export type Choice = {
   id: string
@@ -386,7 +406,7 @@ export type Problem = {
   prompt: string
   display: Display
   answer: Answer
-  inputMode: 'keypad' | 'choice' | 'number-line'
+  inputMode: 'keypad' | 'choice' | 'number-line' | 'expression'
   /**
    * What this answer may be typed with. Omitted means whole digits only, which
    * is what every skill built so far wants.
@@ -407,6 +427,13 @@ export type Problem = {
    * just built it.
    */
   numberLine?: NumberLineSpec
+  /**
+   * The variable letter offered on the pad, when `inputMode` is `expression`.
+   *
+   * Per problem for the same reason `keypad` and `numberLine` are: a generator
+   * knows which letter its own answer just used; nothing above it does.
+   */
+  expression?: { variable: string }
   misconceptions?: Misconception[]
   hint: string
   /** Worked steps, generated procedurally from the actual operands. */

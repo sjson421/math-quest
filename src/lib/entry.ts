@@ -32,6 +32,10 @@ const SHOW: Record<Problem['inputMode'], (problem: Problem, entry: string) => st
   // there is nothing for an entry to have come from and nothing to echo.
   'number-line': (problem, entry) =>
     problem.numberLine ? placedLabel(problem.numberLine, entry) : '',
+  // Same ASCII-in, typographic-minus-out rule as the numeric pad — the sign
+  // is a plain character in an expression entry, not a toggle, but the glyph
+  // it reads as is the same one the rest of the screen uses.
+  expression: (_problem, entry) => entryLabel(entry),
 }
 
 export const visibleEntry = (problem: Problem, entry: string): string =>

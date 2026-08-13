@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { applyKey, entryLabel } from './keypad'
+import { applyExpressionKey, applyKey, entryLabel } from './keypad'
 import { tickEntry, tickLabel } from './number-line'
 import { rational } from './rational'
 
@@ -128,5 +128,55 @@ describe('entryLabel', () => {
     expect(tickEntry(tick)).toBe('-3')
     expect(tickLabel(tick)).toBe(entryLabel('-3'))
     expect(tickLabel(tick)).toBe('−3')
+  })
+})
+
+describe('applyExpressionKey', () => {
+  const type = (keys: string[]) => keys.reduce((acc, k) => applyExpressionKey(acc, k, 'x'), '')
+
+  it('composes digits, the variable, and parens by juxtaposition', () => {
+    expect(type(['2', '(', 'x', '+', '1', ')'])).toBe('2(x+1)')
+  })
+
+  it('allows a leading unary minus and one right after an open paren', () => {
+    expect(type(['-', 'x'])).toBe('-x')
+    expect(type(['2', '(', '-', 'x', '+', '1', ')'])).toBe('2(-x+1)')
+  })
+
+  it('refuses a second dash in a row', () => {
+    expect(applyExpressionKey('2-', '-', 'x')).toBe('2-')
+  })
+
+  it('refuses a leading or doubled plus', () => {
+    expect(applyExpressionKey('', '+', 'x')).toBe('')
+    expect(applyExpressionKey('2+', '+', 'x')).toBe('2+')
+    expect(applyExpressionKey('(', '+', 'x')).toBe('(')
+  })
+
+  it('refuses an unmatched close paren', () => {
+    expect(applyExpressionKey('2', ')', 'x')).toBe('2')
+    expect(applyExpressionKey('2(x+1)', ')', 'x')).toBe('2(x+1)')
+    expect(applyExpressionKey('2(x+1', ')', 'x')).toBe('2(x+1)')
+  })
+
+  it('refuses a close paren with nothing since the open one', () => {
+    expect(applyExpressionKey('2(', ')', 'x')).toBe('2(')
+  })
+
+  it('ignores a key outside the expression grammar', () => {
+    expect(applyExpressionKey('2', 'y', 'x')).toBe('2')
+    expect(applyExpressionKey('2', '.', 'x')).toBe('2')
+    expect(applyExpressionKey('2', '/', 'x')).toBe('2')
+  })
+
+  it('backspaces and clears', () => {
+    expect(applyExpressionKey('2(x', 'back', 'x')).toBe('2(')
+    expect(applyExpressionKey('2(x', 'clear', 'x')).toBe('')
+  })
+
+  it('is pure, so rapid taps cannot drop a key', () => {
+    const first = applyExpressionKey('', '2', 'x')
+    const second = applyExpressionKey(first, 'x', 'x')
+    expect(second).toBe('2x')
   })
 })

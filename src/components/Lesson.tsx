@@ -19,6 +19,7 @@ import { feedbackText, responseTo } from '../lib/submit'
 import type { Difficulty, Misconception, SkillGenerator } from '../lib/types'
 import { difficultyFor, useProgress, type LessonOutcome } from '../store/progress'
 import { ChoiceInput } from './ChoiceInput'
+import { ExpressionKeypad } from './ExpressionKeypad'
 import { Keypad } from './Keypad'
 import { Mascot, type MascotState } from './Mascot'
 import { NumberLineInput } from './NumberLineInput'
@@ -206,6 +207,16 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
             />
           </>
         )
+
+      case 'expression':
+        return problem.expression ? (
+          <ExpressionKeypad
+            value={entry}
+            variable={problem.expression.variable}
+            onEntry={(apply) => setEntry(apply)}
+            onSubmit={submit}
+          />
+        ) : null
 
       default: {
         const unhandled: never = problem.inputMode

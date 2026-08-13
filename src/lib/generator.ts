@@ -21,12 +21,19 @@ export function generateProblem(
 
   if (!problem.misconceptions?.length) return problem
 
+  // An expression answer has no numeric "correct" value to compare a
+  // misconception against — its exclusion is textual, not implemented here
+  // because no expression-answer skill exists yet to need it. NaN never
+  // equals a predicted numeric value, so the numeric branch below is simply
+  // inert for this kind, same as it already is for `choice`.
   const correct =
     problem.answer.kind === 'exact'
       ? toNumber(rational(problem.answer.n, problem.answer.d))
       : problem.answer.kind === 'approx'
         ? problem.answer.value
-        : Number(problem.answer.id)
+        : problem.answer.kind === 'choice'
+          ? Number(problem.answer.id)
+          : NaN
 
   const seenNumbers = new Set<number>()
   const seenText = new Set<string>()

@@ -55,6 +55,7 @@ const SLOT: Record<Problem['inputMode'], 'prose' | 'number'> = {
   keypad: 'number',
   choice: 'prose',
   'number-line': 'number',
+  expression: 'number',
 }
 
 type Of<K extends Display['kind']> = Extract<Display, { kind: K }>

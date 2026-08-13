@@ -184,4 +184,31 @@ describe('checkAnswer', () => {
   it('reports unparseable input separately from a wrong answer', () => {
     expect(checkAnswer(exact(4), 'banana').status).toBe('unparseable')
   })
+
+  describe('an expression answer', () => {
+    const expanded: Answer = { kind: 'expression', canonical: '2x + 2', variable: 'x', form: 'expanded' }
+    const exactForm: Answer = { kind: 'expression', canonical: '2(x + 1)', variable: 'x', form: 'exact' }
+
+    it('accepts an undistributed equivalent under expanded form', () => {
+      expect(checkAnswer(expanded, '2(x + 1)').status).toBe('correct')
+      expect(checkAnswer(expanded, '2 + 2x').status).toBe('correct')
+    })
+
+    it('rejects a differently-structured equivalent under exact form', () => {
+      expect(checkAnswer(exactForm, '2x + 2').status).toBe('incorrect')
+      expect(checkAnswer(exactForm, '2(x + 1)').status).toBe('correct')
+      expect(checkAnswer(exactForm, '(x + 1)2').status).toBe('correct')
+    })
+
+    it('rejects a wrong value under either form', () => {
+      expect(checkAnswer(expanded, '2x + 3').status).toBe('incorrect')
+      expect(checkAnswer(exactForm, '3(x + 1)').status).toBe('incorrect')
+    })
+
+    it('reports an unparseable entry distinctly from a wrong answer', () => {
+      expect(checkAnswer(expanded, '2x +').status).toBe('unparseable')
+      expect(checkAnswer(expanded, 'x^2').status).toBe('unparseable')
+      expect(checkAnswer(expanded, '2y + 2').status).toBe('unparseable')
+    })
+  })
 })

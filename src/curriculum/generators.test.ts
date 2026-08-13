@@ -930,6 +930,7 @@ const answerValue = (problem: Problem): number | string => {
     return toNumber(rational(problem.answer.n, problem.answer.d))
   }
   if (problem.answer.kind === 'approx') return problem.answer.value
+  if (problem.answer.kind === 'expression') return problem.answer.canonical
   return problem.answer.id
 }
 

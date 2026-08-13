@@ -209,6 +209,11 @@ describe('stage capabilities', () => {
       expect((requires as readonly string[]).includes('katex'), stageId).toBe(false)
     }
   })
+
+  it('marks expression input built and records Stage E as its declaring stage', () => {
+    expect(AVAILABLE_CAPABILITIES.has('expression-input')).toBe(true)
+    expect(stageById.get('stage-e')?.requires).toEqual(['math-notation', 'expression-input'])
+  })
 })
 
 describe('skill ids are unique', () => {

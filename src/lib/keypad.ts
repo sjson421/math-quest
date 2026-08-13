@@ -90,3 +90,55 @@ export function applyKey(value: string, key: KeypadKey, rules: KeypadRules = {})
 
   return value + key
 }
+
+/**
+ * Apply one key press to an expression entry: digits, the problem's declared
+ * variable letter, infix `+`/`−`, and parentheses.
+ *
+ * A separate function rather than a branch inside `applyKey`: the expression
+ * grammar shares no character class with the numeric pad (no decimal point,
+ * fraction slash, or sign toggle), so folding it into one function would mean
+ * two unrelated rule sets reading each other's branches for no benefit.
+ */
+export function applyExpressionKey(value: string, key: KeypadKey, variable: string, maxLength = 20): string {
+  if (key === 'back') return value.slice(0, -1)
+  if (key === 'clear') return ''
+
+  const last = value.at(-1)
+
+  if (key === '(') {
+    if (value.length >= maxLength) return value
+    return value + key
+  }
+
+  if (key === ')') {
+    const open = (value.match(/\(/g) ?? []).length
+    const close = (value.match(/\)/g) ?? []).length
+    // No unmatched '(' to close, or nothing was written since the last one.
+    if (open <= close || last === '(' || last === '+' || last === '-' || value === '') return value
+    return value + key
+  }
+
+  if (key === '+') {
+    // A leading '+', or one directly after '(' or another operator, is not a
+    // valid factor — only a term or a unary '-' can start one.
+    if (value === '' || last === '(' || last === '+' || last === '-') return value
+    return value + key
+  }
+
+  if (key === '-') {
+    // Two dashes in a row is the one case worth refusing outright; every
+    // other position — start, after '(', after '+' — is a valid unary minus.
+    if (last === '-') return value
+    return value + key
+  }
+
+  if (key === variable || (key >= '0' && key <= '9')) {
+    if (value.length >= maxLength) return value
+    return value + key
+  }
+
+  // Any other key (a different letter, a decimal point, a fraction slash) is
+  // outside the expression grammar.
+  return value
+}

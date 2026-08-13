@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { tap } from '../lib/haptics'
 import { applyKey, type KeypadRules } from '../lib/keypad'
+import { KEY_STYLE, KeypadKey } from './keypad-key'
 
 /**
  * A purpose-built number pad.
@@ -29,9 +30,6 @@ type Props = {
   rules?: KeypadRules
 }
 
-const KEY_STYLE =
-  'flex items-center justify-center rounded-3xl bg-white text-ink font-bold shadow-[0_3px_0_0_var(--color-cream-deep)] active:shadow-none active:translate-y-[3px] transition-[transform,box-shadow] duration-75 h-16 text-3xl select-none'
-
 export function Keypad({ value, onEntry, onSubmit, disabled, rules }: Props) {
   const {
     allowFraction = false,
@@ -48,34 +46,11 @@ export function Keypad({ value, onEntry, onSubmit, disabled, rules }: Props) {
     onEntry((prev) => applyKey(prev, k, rules))
   }
 
-  const Key = ({
-    label,
-    k,
-    ariaLabel = label,
-    className = '',
-  }: {
-    label: string
-    k: string
-    ariaLabel?: string
-    className?: string
-  }) => (
-    <motion.button
-      type="button"
-      whileTap={{ scale: 0.94 }}
-      className={`${KEY_STYLE} ${className}`}
-      onClick={() => press(k)}
-      disabled={disabled}
-      aria-label={ariaLabel}
-    >
-      {label}
-    </motion.button>
-  )
-
   return (
     <div className="w-full max-w-sm mx-auto px-3 pb-3">
       <div className="grid grid-cols-4 gap-2.5">
         {['1', '2', '3'].map((d) => (
-          <Key key={d} label={d} k={d} />
+          <KeypadKey key={d} label={d} onPress={() => press(d)} />
         ))}
         <motion.button
           type="button"
@@ -89,7 +64,7 @@ export function Keypad({ value, onEntry, onSubmit, disabled, rules }: Props) {
         </motion.button>
 
         {['4', '5', '6', '7', '8', '9'].map((d) => (
-          <Key key={d} label={d} k={d} />
+          <KeypadKey key={d} label={d} onPress={() => press(d)} />
         ))}
 
         <motion.button
@@ -110,17 +85,17 @@ export function Keypad({ value, onEntry, onSubmit, disabled, rules }: Props) {
             The space key takes the cell the sign otherwise uses — a problem
             declares allowMixed or allowNegative, never both. */}
         {allowNegative ? (
-          <Key label="−" k="-" />
+          <KeypadKey label="−" onPress={() => press('-')} />
         ) : allowMixed ? (
-          <Key label="␣" ariaLabel="Space" k=" " />
+          <KeypadKey label="␣" ariaLabel="Space" onPress={() => press(' ')} />
         ) : (
           <span aria-hidden />
         )}
-        <Key label="0" k="0" />
+        <KeypadKey label="0" onPress={() => press('0')} />
         {fractionAllowed ? (
-          <Key label="/" k="/" />
+          <KeypadKey label="/" onPress={() => press('/')} />
         ) : allowDecimal ? (
-          <Key label="." k="." />
+          <KeypadKey label="." onPress={() => press('.')} />
         ) : (
           <span aria-hidden />
         )}

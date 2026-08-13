@@ -130,6 +130,34 @@ describe('ProblemView', () => {
     expect(html).toContain('=')
   })
 
+  it('renders an expression prompt through the existing text/row notation, with no new display kind', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'math',
+          notation: {
+            kind: 'row',
+            children: [
+              { kind: 'text', value: '2' },
+              { kind: 'text', value: '(' },
+              { kind: 'text', value: 'x + 1' },
+              { kind: 'text', value: ')' },
+            ],
+          },
+          label: '2 times the quantity x plus 1',
+        }}
+        entry="2x+2"
+        entryMode="expression"
+      />,
+    )
+
+    expect(html).toContain('role="math"')
+    expect(html).toContain('aria-label="2 times the quantity x plus 1"')
+    expect(html).toContain('mq-math-text">2<')
+    expect(html).toContain('mq-math-text">x + 1<')
+    expect(html).toContain('>2x+2<')
+  })
+
   it('shows a named fraction part without claiming the fraction equals a word', () => {
     const html = renderToStaticMarkup(
       <ProblemView

@@ -28,6 +28,7 @@ export const AVAILABLE_CAPABILITIES: ReadonlySet<Capability> = new Set([
   'fraction-input',
   'diagram',
   'number-line',
+  'expression-input',
 ])
 
 export type SkillLocation = {
