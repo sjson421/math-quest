@@ -332,10 +332,10 @@ in lowest terms. Fraction operations wait for Unit 8.
 | 12.4 | `estimate-roots` | Between which whole numbers | ✅ |
 | 12.5 | `exponent-multiply` | Add the powers | ✅ |
 | 12.6 | `exponent-divide` | Subtract the powers | ✅ |
-| 12.7 | `power-of-power` | Multiply the powers | ⚠️ confused with 12.5 |
-| 12.8 | `zero-neg-exponents` | | |
-| 12.9 | `scientific-notation` | | |
-| 12.10 | `pemdas-exponents` | Full order of operations | completes 5.3 |
+| 12.7 | `power-of-power` | Multiply the powers | ✅ · ⚠️ confused with 12.5 |
+| 12.8 | `zero-neg-exponents` | | ✅ |
+| 12.9 | `scientific-notation` | | ✅ |
+| 12.10 | `pemdas-exponents` | Full order of operations | ✅ · completes 5.3 |
 
 ### Unit 13 — Expressions (8)
 

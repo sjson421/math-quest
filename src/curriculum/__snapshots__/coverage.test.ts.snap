@@ -212,6 +212,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "pemdas": [
     "with-parentheses",
   ],
+  "pemdas-exponents": [
+    "scientific-notation",
+  ],
   "percent-change": [
     "find-the-whole",
   ],
@@ -236,6 +239,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "place-value-tens": [
     "read-numbers",
   ],
+  "power-of-power": [
+    "exponent-divide",
+  ],
   "primes": [
     "multiples",
   ],
@@ -257,6 +263,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "scale-drawings": [
     "solve-proportions",
+  ],
+  "scientific-notation": [
+    "zero-neg-exponents",
   ],
   "simple-interest": [
     "discount-tax-tip",
@@ -350,6 +359,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "write-ratios": [
     "simple-interest",
+  ],
+  "zero-neg-exponents": [
+    "power-of-power",
   ],
 }
 `;

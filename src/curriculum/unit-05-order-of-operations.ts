@@ -1,7 +1,20 @@
 import { intAnswer } from '../lib/answer'
 import type { Misconception, Operator, SkillGenerator } from '../lib/types'
-import { applyOperator, band, defineSkill } from './engine'
+import {
+  band,
+  defineSkill,
+  evaluateExpression as evaluate,
+  foldInOrder,
+  ignoringParentheses,
+  op,
+  renderExpression as render,
+  type NumericExpression as Expression,
+} from './engine'
 import type { ProblemSpec } from './engine'
+
+export { foldInOrder, ignoringParentheses, op } from './engine'
+export { evaluateExpression as evaluate, renderExpression as render } from './engine'
+export type { NumericExpression as Expression } from './engine'
 
 /**
  * Unit 5 · Order of Operations.
@@ -17,119 +30,10 @@ import type { ProblemSpec } from './engine'
  * verifies nothing, and a precedence bug now has to be made twice, by two
  * different methods, to survive.
  *
- * Nothing here is in `engine/`. Every consumer is a Unit 5 skill, which is the
- * rule Unit 4's number theory states — a helper moves to the engine when a
- * second *unit* needs it, so that Unit 12's exponents and Unit 13's variables
- * shape their own rather than inherit one guessed at from order of operations.
+ * Unit 12 became the second consumer of the numeric expression tree, so that
+ * model now lives in `engine/`. The Unit 5 skill wording and problem shapes stay
+ * local here; only the shared structure, rendering, and evaluation moved.
  */
-
-// ---------------------------------------------------------------------------
-// Expressions
-// ---------------------------------------------------------------------------
-
-export type Expression = number | { left: Expression; operator: Operator; right: Expression }
-
-export const op = (left: Expression, operator: Operator, right: Expression): Expression => ({
-  left,
-  operator,
-  right,
-})
-
-const PRECEDENCE: Record<Operator, number> = { '+': 1, '−': 1, '×': 2, '÷': 2 }
-
-const isValue = (node: Expression): node is number => typeof node === 'number'
-
-// `applyOperator` rather than a switch of our own: it is exhaustive over
-// `Operator`, so widening that union for Unit 12's exponents fails to compile
-// here rather than silently falling through to a wrong arm.
-const apply = (a: number, operator: Operator, b: number) => applyOperator(a, b, operator)
-
-/**
- * The expression as the learner reads it, bracketed only where the brackets
- * change what it means.
- *
- * Derived from the tree rather than stored as a flag on it. A stored flag would
- * let a generator claim brackets the renderer never printed — and `with-parentheses`
- * predicts the value of *ignoring* the brackets, which equals the answer when
- * they were decorative. The prediction would then be filtered on every problem
- * and the skill would ship diagnosing nothing.
- *
- * A child is parenthesised when it binds less tightly than its parent, or binds
- * equally and sits on the right: `a − (b + c)` is not `a − b + c`, while
- * `(a − b) + c` is.
- */
-export function render(node: Expression): string {
-  if (isValue(node)) return String(node)
-
-  const side = (child: Expression, onRight: boolean) => {
-    const text = render(child)
-    if (isValue(child)) return text
-    const needed =
-      PRECEDENCE[child.operator] < PRECEDENCE[node.operator] ||
-      (onRight && PRECEDENCE[child.operator] === PRECEDENCE[node.operator])
-    return needed ? `(${text})` : text
-  }
-
-  return `${side(node.left, false)} ${node.operator} ${side(node.right, true)}`
-}
-
-/** The value, under the rules the unit teaches. */
-export function evaluate(node: Expression): number {
-  return isValue(node) ? node : apply(evaluate(node.left), node.operator, evaluate(node.right))
-}
-
-/**
- * The expression as a flat run of values and operators — what is left of it once
- * its structure is thrown away.
- *
- * This is how a learner who ignores brackets and precedence sees the line, so
- * the two mistakes built on it read the tokens in the order they were rendered
- * rather than re-deriving them from a second source.
- */
-type Flat = { values: number[]; operators: Operator[] }
-
-function flatten(node: Expression): Flat {
-  if (isValue(node)) return { values: [node], operators: [] }
-
-  const left = flatten(node.left)
-  const right = flatten(node.right)
-  return {
-    values: [...left.values, ...right.values],
-    operators: [...left.operators, node.operator, ...right.operators],
-  }
-}
-
-/** Every operation applied in the order it is written. The unit's whole subject. */
-export const foldInOrder = (node: Expression): number => {
-  const { values, operators } = flatten(node)
-  return operators.reduce((total, operator, i) => apply(total, operator, values[i + 1]), values[0])
-}
-
-/**
- * Precedence honoured, brackets discarded.
- *
- * Multiplication and division collapse into the running term as they arrive; the
- * additive operators wait and fold across what is left. That is the same two-tier
- * rule `evaluate()` gets from the tree's shape, applied to a line that no longer
- * has one.
- */
-export const ignoringParentheses = (node: Expression): number => {
-  const { values, operators } = flatten(node)
-  const terms = [values[0]]
-  const additive: Operator[] = []
-
-  operators.forEach((operator, i) => {
-    const value = values[i + 1]
-    if (PRECEDENCE[operator] === 2) {
-      terms[terms.length - 1] = apply(terms[terms.length - 1], operator, value)
-    } else {
-      additive.push(operator)
-      terms.push(value)
-    }
-  })
-
-  return additive.reduce((total, operator, i) => apply(total, operator, terms[i + 1]), terms[0])
-}
 
 // ---------------------------------------------------------------------------
 // Shared wording

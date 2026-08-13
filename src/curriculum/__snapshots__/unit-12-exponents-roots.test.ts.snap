@@ -1235,6 +1235,308 @@ step 2   Write the result as a single power.   [8^6]
 miss     multiplied-exponents = 9   Same-base multiplication adds the exponents, not multiplies them."
 `;
 
+exports[`recorded output: pemdas-exponents > matches the wording recorded when the skill landed 1`] = `
+"--- pemdas-exponents · seed 1 · difficulty 1
+prompt   What is the value?
+display  math "4 plus 4 to the 2 power times 4" row("4", " + ", row(superscript("4", "2"), " × ", "4")) [pemdas-power-first 4 + 4^2 × 4]
+answer   exact 68/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [4^2 = 16]
+step 2   Then multiply.   [16 × 4 = 64]
+step 3   Then add.   [4 + 64 = 68]
+miss     multiplied-base-by-exponent = 36   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 256   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 12345 · difficulty 1
+prompt   What is the value?
+display  math "3 plus 3 to the 2 power times 4" row("3", " + ", row(superscript("3", "2"), " × ", "4")) [pemdas-power-first 3 + 3^2 × 4]
+answer   exact 39/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [3^2 = 9]
+step 2   Then multiply.   [9 × 4 = 36]
+step 3   Then add.   [3 + 36 = 39]
+miss     multiplied-base-by-exponent = 27   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 144   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 67890 · difficulty 1
+prompt   What is the value?
+display  math "3 plus 3 in parentheses, to the 2 power, divided by 3" row(superscript(row("(", row("3", " + ", "3"), ")"), "2"), " ÷ ", "3") [pemdas-group-power (3 + 3)^2 ÷ 3]
+answer   exact 12/1
+input    keypad
+hint     Take the parentheses, then the exponent, then divide.
+step 1   Work inside the parentheses.   [3 + 3 = 6]
+step 2   Evaluate the exponent.   [6^2 = 36]
+step 3   Then divide.   [36 ÷ 3 = 12]
+miss     multiplied-base-by-exponent = 4   After the parentheses, evaluate the power by repeated multiplication.
+miss     ignored-parentheses = 6   Keep the sum grouped; add before applying the exponent.
+
+--- pemdas-exponents · seed 424242 · difficulty 1
+prompt   What is the value?
+display  math "3 plus 3 to the 2 power times 3" row("3", " + ", row(superscript("3", "2"), " × ", "3")) [pemdas-power-first 3 + 3^2 × 3]
+answer   exact 30/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [3^2 = 9]
+step 2   Then multiply.   [9 × 3 = 27]
+step 3   Then add.   [3 + 27 = 30]
+miss     multiplied-base-by-exponent = 21   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 108   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 987654321 · difficulty 1
+prompt   What is the value?
+display  math "3 plus 3 to the 2 power times 4" row("3", " + ", row(superscript("3", "2"), " × ", "4")) [pemdas-power-first 3 + 3^2 × 4]
+answer   exact 39/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [3^2 = 9]
+step 2   Then multiply.   [9 × 4 = 36]
+step 3   Then add.   [3 + 36 = 39]
+miss     multiplied-base-by-exponent = 27   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 144   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 1 · difficulty 2
+prompt   What is the value?
+display  math "5 plus 4 to the 2 power times 5" row("5", " + ", row(superscript("4", "2"), " × ", "5")) [pemdas-power-first 5 + 4^2 × 5]
+answer   exact 85/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [4^2 = 16]
+step 2   Then multiply.   [16 × 5 = 80]
+step 3   Then add.   [5 + 80 = 85]
+miss     multiplied-base-by-exponent = 45   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 405   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 12345 · difficulty 2
+prompt   What is the value?
+display  math "4 plus 4 to the 2 power times 5" row("4", " + ", row(superscript("4", "2"), " × ", "5")) [pemdas-power-first 4 + 4^2 × 5]
+answer   exact 84/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [4^2 = 16]
+step 2   Then multiply.   [16 × 5 = 80]
+step 3   Then add.   [4 + 80 = 84]
+miss     multiplied-base-by-exponent = 44   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 320   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 67890 · difficulty 2
+prompt   What is the value?
+display  math "3 plus 3 in parentheses, to the 2 power, divided by 3" row(superscript(row("(", row("3", " + ", "3"), ")"), "2"), " ÷ ", "3") [pemdas-group-power (3 + 3)^2 ÷ 3]
+answer   exact 12/1
+input    keypad
+hint     Take the parentheses, then the exponent, then divide.
+step 1   Work inside the parentheses.   [3 + 3 = 6]
+step 2   Evaluate the exponent.   [6^2 = 36]
+step 3   Then divide.   [36 ÷ 3 = 12]
+miss     multiplied-base-by-exponent = 4   After the parentheses, evaluate the power by repeated multiplication.
+miss     ignored-parentheses = 6   Keep the sum grouped; add before applying the exponent.
+
+--- pemdas-exponents · seed 424242 · difficulty 2
+prompt   What is the value?
+display  math "3 plus 3 to the 2 power times 4" row("3", " + ", row(superscript("3", "2"), " × ", "4")) [pemdas-power-first 3 + 3^2 × 4]
+answer   exact 39/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [3^2 = 9]
+step 2   Then multiply.   [9 × 4 = 36]
+step 3   Then add.   [3 + 36 = 39]
+miss     multiplied-base-by-exponent = 27   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 144   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 987654321 · difficulty 2
+prompt   What is the value?
+display  math "4 plus 3 to the 2 power times 5" row("4", " + ", row(superscript("3", "2"), " × ", "5")) [pemdas-power-first 4 + 3^2 × 5]
+answer   exact 49/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [3^2 = 9]
+step 2   Then multiply.   [9 × 5 = 45]
+step 3   Then add.   [4 + 45 = 49]
+miss     multiplied-base-by-exponent = 34   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 245   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 1 · difficulty 3
+prompt   What is the value?
+display  math "6 plus 5 to the 2 power times 6" row("6", " + ", row(superscript("5", "2"), " × ", "6")) [pemdas-power-first 6 + 5^2 × 6]
+answer   exact 156/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [5^2 = 25]
+step 2   Then multiply.   [25 × 6 = 150]
+step 3   Then add.   [6 + 150 = 156]
+miss     multiplied-base-by-exponent = 66   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 726   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 12345 · difficulty 3
+prompt   What is the value?
+display  math "5 plus 4 to the 2 power times 6" row("5", " + ", row(superscript("4", "2"), " × ", "6")) [pemdas-power-first 5 + 4^2 × 6]
+answer   exact 101/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [4^2 = 16]
+step 2   Then multiply.   [16 × 6 = 96]
+step 3   Then add.   [5 + 96 = 101]
+miss     multiplied-base-by-exponent = 53   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 486   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 67890 · difficulty 3
+prompt   What is the value?
+display  math "4 plus 4 in parentheses, to the 2 power, divided by 4" row(superscript(row("(", row("4", " + ", "4"), ")"), "2"), " ÷ ", "4") [pemdas-group-power (4 + 4)^2 ÷ 4]
+answer   exact 16/1
+input    keypad
+hint     Take the parentheses, then the exponent, then divide.
+step 1   Work inside the parentheses.   [4 + 4 = 8]
+step 2   Evaluate the exponent.   [8^2 = 64]
+step 3   Then divide.   [64 ÷ 4 = 16]
+miss     multiplied-base-by-exponent = 4   After the parentheses, evaluate the power by repeated multiplication.
+miss     ignored-parentheses = 8   Keep the sum grouped; add before applying the exponent.
+
+--- pemdas-exponents · seed 424242 · difficulty 3
+prompt   What is the value?
+display  math "4 plus 3 to the 2 power times 5" row("4", " + ", row(superscript("3", "2"), " × ", "5")) [pemdas-power-first 4 + 3^2 × 5]
+answer   exact 49/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [3^2 = 9]
+step 2   Then multiply.   [9 × 5 = 45]
+step 3   Then add.   [4 + 45 = 49]
+miss     multiplied-base-by-exponent = 34   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 245   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 987654321 · difficulty 3
+prompt   What is the value?
+display  math "5 plus 3 to the 2 power times 6" row("5", " + ", row(superscript("3", "2"), " × ", "6")) [pemdas-power-first 5 + 3^2 × 6]
+answer   exact 59/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [3^2 = 9]
+step 2   Then multiply.   [9 × 6 = 54]
+step 3   Then add.   [5 + 54 = 59]
+miss     multiplied-base-by-exponent = 41   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 384   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 1 · difficulty 4
+prompt   What is the value?
+display  math "8 plus 6 to the 3 power times 6" row("8", " + ", row(superscript("6", "3"), " × ", "6")) [pemdas-power-first 8 + 6^3 × 6]
+answer   exact 1304/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [6^3 = 216]
+step 2   Then multiply.   [216 × 6 = 1296]
+step 3   Then add.   [8 + 1296 = 1304]
+miss     multiplied-base-by-exponent = 116   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 16464   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 12345 · difficulty 4
+prompt   What is the value?
+display  math "6 plus 6 to the 3 power times 6" row("6", " + ", row(superscript("6", "3"), " × ", "6")) [pemdas-power-first 6 + 6^3 × 6]
+answer   exact 1302/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [6^3 = 216]
+step 2   Then multiply.   [216 × 6 = 1296]
+step 3   Then add.   [6 + 1296 = 1302]
+miss     multiplied-base-by-exponent = 114   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 10368   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 67890 · difficulty 4
+prompt   What is the value?
+display  math "5 plus 5 in parentheses, to the 2 power, divided by 5" row(superscript(row("(", row("5", " + ", "5"), ")"), "2"), " ÷ ", "5") [pemdas-group-power (5 + 5)^2 ÷ 5]
+answer   exact 20/1
+input    keypad
+hint     Take the parentheses, then the exponent, then divide.
+step 1   Work inside the parentheses.   [5 + 5 = 10]
+step 2   Evaluate the exponent.   [10^2 = 100]
+step 3   Then divide.   [100 ÷ 5 = 20]
+miss     multiplied-base-by-exponent = 4   After the parentheses, evaluate the power by repeated multiplication.
+miss     ignored-parentheses = 10   Keep the sum grouped; add before applying the exponent.
+
+--- pemdas-exponents · seed 424242 · difficulty 4
+prompt   What is the value?
+display  math "5 plus 4 to the 2 power times 5" row("5", " + ", row(superscript("4", "2"), " × ", "5")) [pemdas-power-first 5 + 4^2 × 5]
+answer   exact 85/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [4^2 = 16]
+step 2   Then multiply.   [16 × 5 = 80]
+step 3   Then add.   [5 + 80 = 85]
+miss     multiplied-base-by-exponent = 45   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 405   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 987654321 · difficulty 4
+prompt   What is the value?
+display  math "7 plus 4 to the 3 power times 6" row("7", " + ", row(superscript("4", "3"), " × ", "6")) [pemdas-power-first 7 + 4^3 × 6]
+answer   exact 391/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [4^3 = 64]
+step 2   Then multiply.   [64 × 6 = 384]
+step 3   Then add.   [7 + 384 = 391]
+miss     multiplied-base-by-exponent = 79   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 7986   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 1 · difficulty 5
+prompt   What is the value?
+display  math "10 plus 8 to the 3 power times 6" row("10", " + ", row(superscript("8", "3"), " × ", "6")) [pemdas-power-first 10 + 8^3 × 6]
+answer   exact 3082/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [8^3 = 512]
+step 2   Then multiply.   [512 × 6 = 3072]
+step 3   Then add.   [10 + 3072 = 3082]
+miss     multiplied-base-by-exponent = 154   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 34992   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 12345 · difficulty 5
+prompt   What is the value?
+display  math "8 plus 7 to the 3 power times 6" row("8", " + ", row(superscript("7", "3"), " × ", "6")) [pemdas-power-first 8 + 7^3 × 6]
+answer   exact 2066/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [7^3 = 343]
+step 2   Then multiply.   [343 × 6 = 2058]
+step 3   Then add.   [8 + 2058 = 2066]
+miss     multiplied-base-by-exponent = 134   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 20250   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 67890 · difficulty 5
+prompt   What is the value?
+display  math "7 plus 7 in parentheses, to the 2 power, divided by 7" row(superscript(row("(", row("7", " + ", "7"), ")"), "2"), " ÷ ", "7") [pemdas-group-power (7 + 7)^2 ÷ 7]
+answer   exact 28/1
+input    keypad
+hint     Take the parentheses, then the exponent, then divide.
+step 1   Work inside the parentheses.   [7 + 7 = 14]
+step 2   Evaluate the exponent.   [14^2 = 196]
+step 3   Then divide.   [196 ÷ 7 = 28]
+miss     multiplied-base-by-exponent = 4   After the parentheses, evaluate the power by repeated multiplication.
+miss     ignored-parentheses = 14   Keep the sum grouped; add before applying the exponent.
+
+--- pemdas-exponents · seed 424242 · difficulty 5
+prompt   What is the value?
+display  math "7 plus 6 to the 2 power times 5" row("7", " + ", row(superscript("6", "2"), " × ", "5")) [pemdas-power-first 7 + 6^2 × 5]
+answer   exact 187/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [6^2 = 36]
+step 2   Then multiply.   [36 × 5 = 180]
+step 3   Then add.   [7 + 180 = 187]
+miss     multiplied-base-by-exponent = 67   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 845   The exponent belongs to its base before the addition.
+
+--- pemdas-exponents · seed 987654321 · difficulty 5
+prompt   What is the value?
+display  math "8 plus 5 to the 3 power times 6" row("8", " + ", row(superscript("5", "3"), " × ", "6")) [pemdas-power-first 8 + 5^3 × 6]
+answer   exact 758/1
+input    keypad
+hint     Evaluate the exponent, then multiply, then add.
+step 1   Evaluate the exponent first.   [5^3 = 125]
+step 2   Then multiply.   [125 × 6 = 750]
+step 3   Then add.   [8 + 750 = 758]
+miss     multiplied-base-by-exponent = 98   Evaluate the power as repeated multiplication before continuing.
+miss     added-before-exponent = 13182   The exponent belongs to its base before the addition."
+`;
+
 exports[`recorded output: perfect-squares > matches the wording recorded when the skill landed 1`] = `
 "--- perfect-squares · seed 1 · difficulty 1
 prompt   What is the square?
@@ -1435,4 +1737,825 @@ answer   exact 144/1
 input    keypad
 hint     Multiply the number by itself.
 step 1   Multiply the number by itself.   [12 × 12 = 144]"
+`;
+
+exports[`recorded output: power-of-power > matches the wording recorded when the skill landed 1`] = `
+"--- power-of-power · seed 1 · difficulty 1
+prompt   What is the missing exponent?
+display  math "3 to the 3 power, raised to the 2 power, equals 3 to the blank power" row(superscript(row("(", superscript("3", "3"), ")"), "2"), " = ", superscript("3", "?")) [power-of-power (3^3)^2]
+answer   exact 6/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [3 × 2 = 6]
+step 2   Write the result as one power.   [3^6]
+miss     added-exponents = 5   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 3   The outer 2 acts on the whole inner power.
+
+--- power-of-power · seed 12345 · difficulty 1
+prompt   What is the missing exponent?
+display  math "3 to the 3 power, raised to the 2 power, equals 3 to the blank power" row(superscript(row("(", superscript("3", "3"), ")"), "2"), " = ", superscript("3", "?")) [power-of-power (3^3)^2]
+answer   exact 6/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [3 × 2 = 6]
+step 2   Write the result as one power.   [3^6]
+miss     added-exponents = 5   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 3   The outer 2 acts on the whole inner power.
+
+--- power-of-power · seed 67890 · difficulty 1
+prompt   What is the missing exponent?
+display  math "3 to the 2 power, raised to the 3 power, equals 3 to the blank power" row(superscript(row("(", superscript("3", "2"), ")"), "3"), " = ", superscript("3", "?")) [power-of-power (3^2)^3]
+answer   exact 6/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [2 × 3 = 6]
+step 2   Write the result as one power.   [3^6]
+miss     added-exponents = 5   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 2   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 424242 · difficulty 1
+prompt   What is the missing exponent?
+display  math "3 to the 2 power, raised to the 3 power, equals 3 to the blank power" row(superscript(row("(", superscript("3", "2"), ")"), "3"), " = ", superscript("3", "?")) [power-of-power (3^2)^3]
+answer   exact 6/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [2 × 3 = 6]
+step 2   Write the result as one power.   [3^6]
+miss     added-exponents = 5   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 2   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 987654321 · difficulty 1
+prompt   What is the missing exponent?
+display  math "2 to the 3 power, raised to the 2 power, equals 2 to the blank power" row(superscript(row("(", superscript("2", "3"), ")"), "2"), " = ", superscript("2", "?")) [power-of-power (2^3)^2]
+answer   exact 6/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [3 × 2 = 6]
+step 2   Write the result as one power.   [2^6]
+miss     added-exponents = 5   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 3   The outer 2 acts on the whole inner power.
+
+--- power-of-power · seed 1 · difficulty 2
+prompt   What is the missing exponent?
+display  math "4 to the 3 power, raised to the 2 power, equals 4 to the blank power" row(superscript(row("(", superscript("4", "3"), ")"), "2"), " = ", superscript("4", "?")) [power-of-power (4^3)^2]
+answer   exact 6/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [3 × 2 = 6]
+step 2   Write the result as one power.   [4^6]
+miss     added-exponents = 5   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 3   The outer 2 acts on the whole inner power.
+
+--- power-of-power · seed 12345 · difficulty 2
+prompt   What is the missing exponent?
+display  math "3 to the 4 power, raised to the 2 power, equals 3 to the blank power" row(superscript(row("(", superscript("3", "4"), ")"), "2"), " = ", superscript("3", "?")) [power-of-power (3^4)^2]
+answer   exact 8/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [4 × 2 = 8]
+step 2   Write the result as one power.   [3^8]
+miss     added-exponents = 6   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 4   The outer 2 acts on the whole inner power.
+
+--- power-of-power · seed 67890 · difficulty 2
+prompt   What is the missing exponent?
+display  math "3 to the 3 power, raised to the 3 power, equals 3 to the blank power" row(superscript(row("(", superscript("3", "3"), ")"), "3"), " = ", superscript("3", "?")) [power-of-power (3^3)^3]
+answer   exact 9/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [3 × 3 = 9]
+step 2   Write the result as one power.   [3^9]
+miss     added-exponents = 6   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 3   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 424242 · difficulty 2
+prompt   What is the missing exponent?
+display  math "3 to the 2 power, raised to the 3 power, equals 3 to the blank power" row(superscript(row("(", superscript("3", "2"), ")"), "3"), " = ", superscript("3", "?")) [power-of-power (3^2)^3]
+answer   exact 6/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [2 × 3 = 6]
+step 2   Write the result as one power.   [3^6]
+miss     added-exponents = 5   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 2   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 987654321 · difficulty 2
+prompt   What is the missing exponent?
+display  math "2 to the 4 power, raised to the 2 power, equals 2 to the blank power" row(superscript(row("(", superscript("2", "4"), ")"), "2"), " = ", superscript("2", "?")) [power-of-power (2^4)^2]
+answer   exact 8/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [4 × 2 = 8]
+step 2   Write the result as one power.   [2^8]
+miss     added-exponents = 6   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 4   The outer 2 acts on the whole inner power.
+
+--- power-of-power · seed 1 · difficulty 3
+prompt   What is the missing exponent?
+display  math "5 to the 4 power, raised to the 2 power, equals 5 to the blank power" row(superscript(row("(", superscript("5", "4"), ")"), "2"), " = ", superscript("5", "?")) [power-of-power (5^4)^2]
+answer   exact 8/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [4 × 2 = 8]
+step 2   Write the result as one power.   [5^8]
+miss     added-exponents = 6   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 4   The outer 2 acts on the whole inner power.
+
+--- power-of-power · seed 12345 · difficulty 3
+prompt   What is the missing exponent?
+display  math "4 to the 5 power, raised to the 3 power, equals 4 to the blank power" row(superscript(row("(", superscript("4", "5"), ")"), "3"), " = ", superscript("4", "?")) [power-of-power (4^5)^3]
+answer   exact 15/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [5 × 3 = 15]
+step 2   Write the result as one power.   [4^15]
+miss     added-exponents = 8   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 5   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 67890 · difficulty 3
+prompt   What is the missing exponent?
+display  math "4 to the 3 power, raised to the 4 power, equals 4 to the blank power" row(superscript(row("(", superscript("4", "3"), ")"), "4"), " = ", superscript("4", "?")) [power-of-power (4^3)^4]
+answer   exact 12/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [3 × 4 = 12]
+step 2   Write the result as one power.   [4^12]
+miss     added-exponents = 7   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 3   The outer 4 acts on the whole inner power.
+
+--- power-of-power · seed 424242 · difficulty 3
+prompt   What is the missing exponent?
+display  math "4 to the 2 power, raised to the 4 power, equals 4 to the blank power" row(superscript(row("(", superscript("4", "2"), ")"), "4"), " = ", superscript("4", "?")) [power-of-power (4^2)^4]
+answer   exact 8/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [2 × 4 = 8]
+step 2   Write the result as one power.   [4^8]
+miss     added-exponents = 6   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 2   The outer 4 acts on the whole inner power.
+
+--- power-of-power · seed 987654321 · difficulty 3
+prompt   What is the missing exponent?
+display  math "3 to the 5 power, raised to the 2 power, equals 3 to the blank power" row(superscript(row("(", superscript("3", "5"), ")"), "2"), " = ", superscript("3", "?")) [power-of-power (3^5)^2]
+answer   exact 10/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [5 × 2 = 10]
+step 2   Write the result as one power.   [3^10]
+miss     added-exponents = 7   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 5   The outer 2 acts on the whole inner power.
+
+--- power-of-power · seed 1 · difficulty 4
+prompt   What is the missing exponent?
+display  math "5 to the 4 power, raised to the 3 power, equals 5 to the blank power" row(superscript(row("(", superscript("5", "4"), ")"), "3"), " = ", superscript("5", "?")) [power-of-power (5^4)^3]
+answer   exact 12/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [4 × 3 = 12]
+step 2   Write the result as one power.   [5^12]
+miss     added-exponents = 7   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 4   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 12345 · difficulty 4
+prompt   What is the missing exponent?
+display  math "5 to the 5 power, raised to the 3 power, equals 5 to the blank power" row(superscript(row("(", superscript("5", "5"), ")"), "3"), " = ", superscript("5", "?")) [power-of-power (5^5)^3]
+answer   exact 15/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [5 × 3 = 15]
+step 2   Write the result as one power.   [5^15]
+miss     added-exponents = 8   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 5   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 67890 · difficulty 4
+prompt   What is the missing exponent?
+display  math "4 to the 4 power, raised to the 4 power, equals 4 to the blank power" row(superscript(row("(", superscript("4", "4"), ")"), "4"), " = ", superscript("4", "?")) [power-of-power (4^4)^4]
+answer   exact 16/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [4 × 4 = 16]
+step 2   Write the result as one power.   [4^16]
+miss     added-exponents = 8   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 4   The outer 4 acts on the whole inner power.
+
+--- power-of-power · seed 424242 · difficulty 4
+prompt   What is the missing exponent?
+display  math "3 to the 3 power, raised to the 3 power, equals 3 to the blank power" row(superscript(row("(", superscript("3", "3"), ")"), "3"), " = ", superscript("3", "?")) [power-of-power (3^3)^3]
+answer   exact 9/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [3 × 3 = 9]
+step 2   Write the result as one power.   [3^9]
+miss     added-exponents = 6   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 3   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 987654321 · difficulty 4
+prompt   What is the missing exponent?
+display  math "3 to the 5 power, raised to the 3 power, equals 3 to the blank power" row(superscript(row("(", superscript("3", "5"), ")"), "3"), " = ", superscript("3", "?")) [power-of-power (3^5)^3]
+answer   exact 15/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [5 × 3 = 15]
+step 2   Write the result as one power.   [3^15]
+miss     added-exponents = 8   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 5   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 1 · difficulty 5
+prompt   What is the missing exponent?
+display  math "6 to the 5 power, raised to the 3 power, equals 6 to the blank power" row(superscript(row("(", superscript("6", "5"), ")"), "3"), " = ", superscript("6", "?")) [power-of-power (6^5)^3]
+answer   exact 15/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [5 × 3 = 15]
+step 2   Write the result as one power.   [6^15]
+miss     added-exponents = 8   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 5   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 12345 · difficulty 5
+prompt   What is the missing exponent?
+display  math "6 to the 6 power, raised to the 4 power, equals 6 to the blank power" row(superscript(row("(", superscript("6", "6"), ")"), "4"), " = ", superscript("6", "?")) [power-of-power (6^6)^4]
+answer   exact 24/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [6 × 4 = 24]
+step 2   Write the result as one power.   [6^24]
+miss     added-exponents = 10   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 6   The outer 4 acts on the whole inner power.
+
+--- power-of-power · seed 67890 · difficulty 5
+prompt   What is the missing exponent?
+display  math "5 to the 4 power, raised to the 5 power, equals 5 to the blank power" row(superscript(row("(", superscript("5", "4"), ")"), "5"), " = ", superscript("5", "?")) [power-of-power (5^4)^5]
+answer   exact 20/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [4 × 5 = 20]
+step 2   Write the result as one power.   [5^20]
+miss     added-exponents = 9   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 4   The outer 5 acts on the whole inner power.
+
+--- power-of-power · seed 424242 · difficulty 5
+prompt   What is the missing exponent?
+display  math "4 to the 3 power, raised to the 3 power, equals 4 to the blank power" row(superscript(row("(", superscript("4", "3"), ")"), "3"), " = ", superscript("4", "?")) [power-of-power (4^3)^3]
+answer   exact 9/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [3 × 3 = 9]
+step 2   Write the result as one power.   [4^9]
+miss     added-exponents = 6   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 3   The outer 3 acts on the whole inner power.
+
+--- power-of-power · seed 987654321 · difficulty 5
+prompt   What is the missing exponent?
+display  math "4 to the 6 power, raised to the 3 power, equals 4 to the blank power" row(superscript(row("(", superscript("4", "6"), ")"), "3"), " = ", superscript("4", "?")) [power-of-power (4^6)^3]
+answer   exact 18/1
+input    keypad
+hint     Multiply the inner exponent by the outer exponent.
+step 1   Keep the base and multiply the exponents.   [6 × 3 = 18]
+step 2   Write the result as one power.   [4^18]
+miss     added-exponents = 9   A power raised to a power multiplies the exponents.
+miss     ignored-outer-exponent = 6   The outer 3 acts on the whole inner power."
+`;
+
+exports[`recorded output: scientific-notation > matches the wording recorded when the skill landed 1`] = `
+"--- scientific-notation · seed 1 · difficulty 1
+prompt   Write this as an ordinary number.
+display  math "5 times 10 to the 2 power" row("5 × ", superscript("10", "2")) [scientific-notation 5e-0 × 10^2]
+answer   exact 500/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [500]
+miss     moved-one-place = 50   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 0.05   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 12345 · difficulty 1
+prompt   Write this as an ordinary number.
+display  math "5 times 10 to the 2 power" row("5 × ", superscript("10", "2")) [scientific-notation 5e-0 × 10^2]
+answer   exact 500/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [500]
+miss     moved-one-place = 50   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 0.05   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 67890 · difficulty 1
+prompt   Write this as an ordinary number.
+display  math "4 times 10 to the negative 2 power" row("4 × ", superscript("10", "−2")) [scientific-notation 4e-0 × 10^-2]
+answer   exact 1/25 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.04]
+miss     moved-one-place = 0.4   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 400   A negative exponent moves the decimal left.
+
+--- scientific-notation · seed 424242 · difficulty 1
+prompt   Write this as an ordinary number.
+display  math "2 times 10 to the 2 power" row("2 × ", superscript("10", "2")) [scientific-notation 2e-0 × 10^2]
+answer   exact 200/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [200]
+miss     moved-one-place = 20   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 0.02   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 987654321 · difficulty 1
+prompt   Write this as an ordinary number.
+display  math "1 times 10 to the 2 power" row("1 × ", superscript("10", "2")) [scientific-notation 1e-0 × 10^2]
+answer   exact 100/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [100]
+miss     moved-one-place = 10   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 0.01   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 1 · difficulty 2
+prompt   Write this as an ordinary number.
+display  math "9.8 times 10 to the 3 power" row("9.8 × ", superscript("10", "3")) [scientific-notation 98e-1 × 10^3]
+answer   exact 9800/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 3 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [9800]
+miss     moved-one-place = 98   The exponent moves the decimal 3 places, not one.
+miss     reversed-exponent-direction = 0.0098   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 12345 · difficulty 2
+prompt   Write this as an ordinary number.
+display  math "8 times 10 to the 3 power" row("8 × ", superscript("10", "3")) [scientific-notation 8e-0 × 10^3]
+answer   exact 8000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 3 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [8000]
+miss     moved-one-place = 80   The exponent moves the decimal 3 places, not one.
+miss     reversed-exponent-direction = 0.008   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 67890 · difficulty 2
+prompt   Write this as an ordinary number.
+display  math "4 times 10 to the negative 2 power" row("4 × ", superscript("10", "−2")) [scientific-notation 4e-0 × 10^-2]
+answer   exact 1/25 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.04]
+miss     moved-one-place = 0.4   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 400   A negative exponent moves the decimal left.
+
+--- scientific-notation · seed 424242 · difficulty 2
+prompt   Write this as an ordinary number.
+display  math "6 times 10 to the 2 power" row("6 × ", superscript("10", "2")) [scientific-notation 6e-0 × 10^2]
+answer   exact 600/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [600]
+miss     moved-one-place = 60   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 0.06   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 987654321 · difficulty 2
+prompt   Write this as an ordinary number.
+display  math "9 times 10 to the 3 power" row("9 × ", superscript("10", "3")) [scientific-notation 9e-0 × 10^3]
+answer   exact 9000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 3 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [9000]
+miss     moved-one-place = 90   The exponent moves the decimal 3 places, not one.
+miss     reversed-exponent-direction = 0.009   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 1 · difficulty 3
+prompt   Write this as an ordinary number.
+display  math "9.8 times 10 to the 3 power" row("9.8 × ", superscript("10", "3")) [scientific-notation 98e-1 × 10^3]
+answer   exact 9800/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 3 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [9800]
+miss     moved-one-place = 98   The exponent moves the decimal 3 places, not one.
+miss     reversed-exponent-direction = 0.0098   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 12345 · difficulty 3
+prompt   Write this as an ordinary number.
+display  math "8 times 10 to the 4 power" row("8 × ", superscript("10", "4")) [scientific-notation 8e-0 × 10^4]
+answer   exact 80000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 4 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [80000]
+miss     moved-one-place = 80   The exponent moves the decimal 4 places, not one.
+miss     reversed-exponent-direction = 0.0008   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 67890 · difficulty 3
+prompt   Write this as an ordinary number.
+display  math "4 times 10 to the negative 3 power" row("4 × ", superscript("10", "−3")) [scientific-notation 4e-0 × 10^-3]
+answer   exact 1/250 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 3 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.004]
+miss     moved-one-place = 0.4   The exponent moves the decimal 3 places, not one.
+miss     reversed-exponent-direction = 4000   A negative exponent moves the decimal left.
+
+--- scientific-notation · seed 424242 · difficulty 3
+prompt   Write this as an ordinary number.
+display  math "6 times 10 to the 2 power" row("6 × ", superscript("10", "2")) [scientific-notation 6e-0 × 10^2]
+answer   exact 600/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [600]
+miss     moved-one-place = 60   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 0.06   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 987654321 · difficulty 3
+prompt   Write this as an ordinary number.
+display  math "9 times 10 to the 4 power" row("9 × ", superscript("10", "4")) [scientific-notation 9e-0 × 10^4]
+answer   exact 90000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 4 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [90000]
+miss     moved-one-place = 90   The exponent moves the decimal 4 places, not one.
+miss     reversed-exponent-direction = 0.0009   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 1 · difficulty 4
+prompt   Write this as an ordinary number.
+display  math "9.8 times 10 to the 4 power" row("9.8 × ", superscript("10", "4")) [scientific-notation 98e-1 × 10^4]
+answer   exact 98000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 4 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [98000]
+miss     moved-one-place = 98   The exponent moves the decimal 4 places, not one.
+miss     reversed-exponent-direction = 0.00098   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 12345 · difficulty 4
+prompt   Write this as an ordinary number.
+display  math "8 times 10 to the 5 power" row("8 × ", superscript("10", "5")) [scientific-notation 8e-0 × 10^5]
+answer   exact 800000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 5 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [800000]
+miss     moved-one-place = 80   The exponent moves the decimal 5 places, not one.
+miss     reversed-exponent-direction = 0.00008   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 67890 · difficulty 4
+prompt   Write this as an ordinary number.
+display  math "4 times 10 to the negative 4 power" row("4 × ", superscript("10", "−4")) [scientific-notation 4e-0 × 10^-4]
+answer   exact 1/2500 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 4 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.0004]
+miss     moved-one-place = 0.4   The exponent moves the decimal 4 places, not one.
+miss     reversed-exponent-direction = 40000   A negative exponent moves the decimal left.
+
+--- scientific-notation · seed 424242 · difficulty 4
+prompt   Write this as an ordinary number.
+display  math "6 times 10 to the 3 power" row("6 × ", superscript("10", "3")) [scientific-notation 6e-0 × 10^3]
+answer   exact 6000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 3 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [6000]
+miss     moved-one-place = 60   The exponent moves the decimal 3 places, not one.
+miss     reversed-exponent-direction = 0.006   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 987654321 · difficulty 4
+prompt   Write this as an ordinary number.
+display  math "9 times 10 to the 5 power" row("9 × ", superscript("10", "5")) [scientific-notation 9e-0 × 10^5]
+answer   exact 900000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 5 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [900000]
+miss     moved-one-place = 90   The exponent moves the decimal 5 places, not one.
+miss     reversed-exponent-direction = 0.00009   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 1 · difficulty 5
+prompt   Write this as an ordinary number.
+display  math "9.8 times 10 to the 5 power" row("9.8 × ", superscript("10", "5")) [scientific-notation 98e-1 × 10^5]
+answer   exact 980000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 5 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [980000]
+miss     moved-one-place = 98   The exponent moves the decimal 5 places, not one.
+miss     reversed-exponent-direction = 0.000098   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 12345 · difficulty 5
+prompt   Write this as an ordinary number.
+display  math "8 times 10 to the 6 power" row("8 × ", superscript("10", "6")) [scientific-notation 8e-0 × 10^6]
+answer   exact 8000000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 6 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [8000000]
+miss     moved-one-place = 80   The exponent moves the decimal 6 places, not one.
+miss     reversed-exponent-direction = 0.000008   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 67890 · difficulty 5
+prompt   Write this as an ordinary number.
+display  math "4 times 10 to the negative 5 power" row("4 × ", superscript("10", "−5")) [scientific-notation 4e-0 × 10^-5]
+answer   exact 1/25000 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 5 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.00004]
+miss     moved-one-place = 0.4   The exponent moves the decimal 5 places, not one.
+miss     reversed-exponent-direction = 400000   A negative exponent moves the decimal left.
+
+--- scientific-notation · seed 424242 · difficulty 5
+prompt   Write this as an ordinary number.
+display  math "6 times 10 to the 4 power" row("6 × ", superscript("10", "4")) [scientific-notation 6e-0 × 10^4]
+answer   exact 60000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 4 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [60000]
+miss     moved-one-place = 60   The exponent moves the decimal 4 places, not one.
+miss     reversed-exponent-direction = 0.0006   A positive exponent moves the decimal right.
+
+--- scientific-notation · seed 987654321 · difficulty 5
+prompt   Write this as an ordinary number.
+display  math "9 times 10 to the 6 power" row("9 × ", superscript("10", "6")) [scientific-notation 9e-0 × 10^6]
+answer   exact 9000000/1
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 6 places right.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal right.   [9000000]
+miss     moved-one-place = 90   The exponent moves the decimal 6 places, not one.
+miss     reversed-exponent-direction = 0.000009   A positive exponent moves the decimal right."
+`;
+
+exports[`recorded output: zero-neg-exponents > matches the wording recorded when the skill landed 1`] = `
+"--- zero-neg-exponents · seed 1 · difficulty 1
+prompt   What is the value?
+display  math "3 to the zero power" superscript("3", "0") [zero-exponent 3^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [3^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 12345 · difficulty 1
+prompt   What is the value?
+display  math "4 to the zero power" superscript("4", "0") [zero-exponent 4^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [4^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 67890 · difficulty 1
+prompt   What is the value?
+display  math "3 to the negative 1 power" superscript("3", "−1") [negative-exponent 3^-1]
+answer   exact 1/3 (fraction)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Make the positive power the denominator of a fraction.
+step 1   Rewrite with a positive exponent.   [1/3^1]
+step 2   Evaluate the denominator.   [1/3]
+miss     kept-positive-exponent = 3   A negative exponent makes the positive power its denominator.
+miss     negated-positive-power = -3   The exponent makes a reciprocal, not a negative result.
+
+--- zero-neg-exponents · seed 424242 · difficulty 1
+prompt   What is the value?
+display  math "2 to the zero power" superscript("2", "0") [zero-exponent 2^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [2^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 987654321 · difficulty 1
+prompt   What is the value?
+display  math "4 to the zero power" superscript("4", "0") [zero-exponent 4^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [4^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 1 · difficulty 2
+prompt   What is the value?
+display  math "4 to the zero power" superscript("4", "0") [zero-exponent 4^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [4^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 12345 · difficulty 2
+prompt   What is the value?
+display  math "5 to the zero power" superscript("5", "0") [zero-exponent 5^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [5^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 67890 · difficulty 2
+prompt   What is the value?
+display  math "3 to the negative 1 power" superscript("3", "−1") [negative-exponent 3^-1]
+answer   exact 1/3 (fraction)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Make the positive power the denominator of a fraction.
+step 1   Rewrite with a positive exponent.   [1/3^1]
+step 2   Evaluate the denominator.   [1/3]
+miss     kept-positive-exponent = 3   A negative exponent makes the positive power its denominator.
+miss     negated-positive-power = -3   The exponent makes a reciprocal, not a negative result.
+
+--- zero-neg-exponents · seed 424242 · difficulty 2
+prompt   What is the value?
+display  math "2 to the zero power" superscript("2", "0") [zero-exponent 2^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [2^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 987654321 · difficulty 2
+prompt   What is the value?
+display  math "5 to the zero power" superscript("5", "0") [zero-exponent 5^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [5^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 1 · difficulty 3
+prompt   What is the value?
+display  math "5 to the zero power" superscript("5", "0") [zero-exponent 5^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [5^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 12345 · difficulty 3
+prompt   What is the value?
+display  math "6 to the zero power" superscript("6", "0") [zero-exponent 6^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [6^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 67890 · difficulty 3
+prompt   What is the value?
+display  math "4 to the negative 2 power" superscript("4", "−2") [negative-exponent 4^-2]
+answer   exact 1/16 (fraction)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Make the positive power the denominator of a fraction.
+step 1   Rewrite with a positive exponent.   [1/4^2]
+step 2   Evaluate the denominator.   [1/16]
+miss     kept-positive-exponent = 16   A negative exponent makes the positive power its denominator.
+miss     negated-positive-power = -16   The exponent makes a reciprocal, not a negative result.
+
+--- zero-neg-exponents · seed 424242 · difficulty 3
+prompt   What is the value?
+display  math "3 to the zero power" superscript("3", "0") [zero-exponent 3^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [3^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 987654321 · difficulty 3
+prompt   What is the value?
+display  math "6 to the zero power" superscript("6", "0") [zero-exponent 6^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [6^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 1 · difficulty 4
+prompt   What is the value?
+display  math "6 to the zero power" superscript("6", "0") [zero-exponent 6^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [6^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 12345 · difficulty 4
+prompt   What is the value?
+display  math "8 to the zero power" superscript("8", "0") [zero-exponent 8^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [8^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 67890 · difficulty 4
+prompt   What is the value?
+display  math "5 to the negative 2 power" superscript("5", "−2") [negative-exponent 5^-2]
+answer   exact 1/25 (fraction)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Make the positive power the denominator of a fraction.
+step 1   Rewrite with a positive exponent.   [1/5^2]
+step 2   Evaluate the denominator.   [1/25]
+miss     kept-positive-exponent = 25   A negative exponent makes the positive power its denominator.
+miss     negated-positive-power = -25   The exponent makes a reciprocal, not a negative result.
+
+--- zero-neg-exponents · seed 424242 · difficulty 4
+prompt   What is the value?
+display  math "3 to the zero power" superscript("3", "0") [zero-exponent 3^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [3^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 987654321 · difficulty 4
+prompt   What is the value?
+display  math "8 to the zero power" superscript("8", "0") [zero-exponent 8^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [8^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 1 · difficulty 5
+prompt   What is the value?
+display  math "8 to the zero power" superscript("8", "0") [zero-exponent 8^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [8^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 12345 · difficulty 5
+prompt   What is the value?
+display  math "10 to the zero power" superscript("10", "0") [zero-exponent 10^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [10^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 67890 · difficulty 5
+prompt   What is the value?
+display  math "6 to the negative 3 power" superscript("6", "−3") [negative-exponent 6^-3]
+answer   exact 1/216 (fraction)
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Make the positive power the denominator of a fraction.
+step 1   Rewrite with a positive exponent.   [1/6^3]
+step 2   Evaluate the denominator.   [1/216]
+miss     kept-positive-exponent = 216   A negative exponent makes the positive power its denominator.
+miss     negated-positive-power = -216   The exponent makes a reciprocal, not a negative result.
+
+--- zero-neg-exponents · seed 424242 · difficulty 5
+prompt   What is the value?
+display  math "4 to the zero power" superscript("4", "0") [zero-exponent 4^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [4^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- zero-neg-exponents · seed 987654321 · difficulty 5
+prompt   What is the value?
+display  math "10 to the zero power" superscript("10", "0") [zero-exponent 10^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [10^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one."
 `;

@@ -193,6 +193,25 @@ const formatPowerData = (data: PowerData): string => {
     case 'power-multiply':
     case 'power-divide':
       return `${data.operation} ${data.base}^${data.leftExponent} ${data.base}^${data.rightExponent}`
+    case 'power-of-power':
+      return `${data.operation} (${data.base}^${data.innerExponent})^${data.outerExponent}`
+    case 'zero-exponent':
+      return `${data.operation} ${data.base}^0`
+    case 'negative-exponent':
+      return `${data.operation} ${data.base}^-${data.magnitude}`
+    case 'scientific-notation':
+      return (
+        `${data.operation} ${data.coefficient}e-${data.coefficientScale} × ` +
+        `10^${data.exponent}`
+      )
+    case 'pemdas-power-first':
+      return (
+        `${data.operation} ${data.addend} + ${data.base}^${data.exponent} × ${data.factor}`
+      )
+    case 'pemdas-group-power':
+      return (
+        `${data.operation} (${data.left} + ${data.right})^${data.exponent} ÷ ${data.divisor}`
+      )
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled power data: ${JSON.stringify(unhandled)}`)

@@ -9,11 +9,8 @@
  * a reader should not have to walk back through earlier stages to assemble the
  * real set. Expression input is the new need (variables on the keypad, from Unit
  * 13); math notation is just as real, since `3⁴` and a fraction inside an
- * equation cannot render as plain text.
- *
- * `zero-neg-exponents` may also want fraction input, since 2⁻³ is 1/8. Left
- * undeclared until the generator settles whether the answer is entered as a
- * fraction or a decimal.
+ * equation cannot render as plain text. `zero-neg-exponents` settled on exact
+ * reciprocal answers, so the already-built fraction input belongs here too.
  */
 
 import type { StageEntry } from './types'
@@ -21,7 +18,7 @@ import type { StageEntry } from './types'
 export const stageE: StageEntry = {
   id: 'stage-e',
   name: 'Powers & Early Algebra',
-  requires: ['math-notation', 'expression-input'],
+  requires: ['math-notation', 'fraction-input', 'expression-input'],
   units: [
     {
       id: 'unit-12',

@@ -852,6 +852,128 @@ function expectedPowerDisplay(data: PowerData): {
         values: [data.leftExponent, data.rightExponent],
       }
     }
+    case 'power-of-power': {
+      const base = String(data.base)
+      const inner = notationSuperscript(base, String(data.innerExponent))
+      return {
+        notation: {
+          kind: 'row',
+          children: [
+            {
+              kind: 'superscript',
+              base: { kind: 'row', children: [notationText('('), inner, notationText(')')] },
+              exponent: notationText(String(data.outerExponent)),
+            },
+            notationText(' = '),
+            notationSuperscript(base, '?'),
+          ],
+        },
+        label: (
+          `${base} to the ${data.innerExponent} power, raised to the ${data.outerExponent} power, ` +
+          `equals ${base} to the blank power`
+        ),
+        answer: data.innerExponent * data.outerExponent,
+        values: [data.base, data.innerExponent, data.outerExponent],
+      }
+    }
+    case 'zero-exponent':
+      return {
+        notation: notationSuperscript(String(data.base), '0'),
+        label: `${data.base} to the zero power`,
+        answer: 1,
+        values: [data.base, 0],
+      }
+    case 'negative-exponent':
+      return {
+        notation: notationSuperscript(String(data.base), `−${data.magnitude}`),
+        label: `${data.base} to the negative ${data.magnitude} power`,
+        answer: 1 / data.base ** data.magnitude,
+        values: [data.base, data.magnitude],
+      }
+    case 'scientific-notation': {
+      const coefficientText = data.coefficientScale === 0
+        ? String(data.coefficient)
+        : (data.coefficient / 10).toFixed(1)
+      const exponentText = data.exponent < 0 ? `−${Math.abs(data.exponent)}` : String(data.exponent)
+      const exponentLabel = data.exponent < 0 ? `negative ${Math.abs(data.exponent)}` : String(data.exponent)
+      const answer = data.exponent >= 0
+        ? data.coefficient * 10 ** data.exponent / 10 ** data.coefficientScale
+        : data.coefficient / 10 ** (data.coefficientScale + Math.abs(data.exponent))
+      return {
+        notation: {
+          kind: 'row',
+          children: [
+            notationText(`${coefficientText} × `),
+            notationSuperscript('10', exponentText),
+          ],
+        },
+        label: `${coefficientText} times 10 to the ${exponentLabel} power`,
+        answer,
+        values: [data.coefficient / 10 ** data.coefficientScale, Math.abs(data.exponent)],
+      }
+    }
+    case 'pemdas-power-first': {
+      const powerValue = data.base ** data.exponent
+      return {
+        notation: {
+          kind: 'row',
+          children: [
+            notationText(String(data.addend)),
+            notationText(' + '),
+            {
+              kind: 'row',
+              children: [
+                notationSuperscript(String(data.base), String(data.exponent)),
+                notationText(' × '),
+                notationText(String(data.factor)),
+              ],
+            },
+          ],
+        },
+        label: (
+          `${data.addend} plus ${data.base} to the ${data.exponent} power times ${data.factor}`
+        ),
+        answer: data.addend + powerValue * data.factor,
+        values: [data.addend, data.base, data.exponent, data.factor],
+      }
+    }
+    case 'pemdas-group-power': {
+      const group = data.left + data.right
+      return {
+        notation: {
+          kind: 'row',
+          children: [
+            {
+              kind: 'superscript',
+              base: {
+                kind: 'row',
+                children: [
+                  notationText('('),
+                  {
+                    kind: 'row',
+                    children: [
+                      notationText(String(data.left)),
+                      notationText(' + '),
+                      notationText(String(data.right)),
+                    ],
+                  },
+                  notationText(')'),
+                ],
+              },
+              exponent: notationText(String(data.exponent)),
+            },
+            notationText(' ÷ '),
+            notationText(String(data.divisor)),
+          ],
+        },
+        label: (
+          `${data.left} plus ${data.right} in parentheses, to the ${data.exponent} power, ` +
+          `divided by ${data.divisor}`
+        ),
+        answer: group ** data.exponent / data.divisor,
+        values: [data.left, data.right, data.exponent, data.divisor],
+      }
+    }
     default: {
       const unhandled: never = data
       throw new Error(`Unknown power operation: ${JSON.stringify(unhandled)}`)

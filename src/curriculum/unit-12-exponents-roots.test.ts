@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import { checkAnswer } from '../lib/answer'
 import { diagnose, generateProblem } from '../lib/generator'
+import { rational, toNumber } from '../lib/rational'
 import type { Difficulty, PowerData, Problem } from '../lib/types'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit12 } from './unit-12-exponents-roots'
@@ -166,6 +168,170 @@ describe('exponent-divide', () => {
   it('grows both exponents with difficulty', () => {
     expect(meanAt('exponent-divide', 5, (data) => data.operation === 'power-divide' ? data.leftExponent + data.rightExponent : 0))
       .toBeGreaterThan(meanAt('exponent-divide', 1, (data) => data.operation === 'power-divide' ? data.leftExponent + data.rightExponent : 0))
+  })
+})
+
+describe('power-of-power', () => {
+  it('multiplies nested exponents and retains both wall diagnoses', () => {
+    for (const problem of problems('power-of-power')) {
+      const data = powerData(problem)
+      if (data.operation !== 'power-of-power') throw new Error('expected power-of-power data')
+      if (problem.answer.kind !== 'exact') throw new Error('expected exact answer')
+      const answer = data.innerExponent * data.outerExponent
+
+      expect(problem.answer).toMatchObject({ n: answer, d: 1 })
+      expect(diagnose(problem, String(data.innerExponent + data.outerExponent))?.tag)
+        .toBe('added-exponents')
+      expect(diagnose(problem, String(data.innerExponent))?.tag)
+        .toBe('ignored-outer-exponent')
+      expect(problem.misconceptions).toHaveLength(2)
+      expect(new Set(problem.misconceptions?.map((entry) => entry.value)).size).toBe(2)
+      expect(problem.display.kind === 'math' && problem.display.notation.kind).toBe('row')
+    }
+  })
+
+  it('varies and grows its operands with difficulty', () => {
+    expect(new Set(problems('power-of-power').map((problem) => JSON.stringify(problem.display))).size)
+      .toBeGreaterThan(20)
+    const magnitude = (data: PowerData) => data.operation === 'power-of-power'
+      ? data.base + data.innerExponent + data.outerExponent
+      : 0
+    expect(meanAt('power-of-power', 5, magnitude)).toBeGreaterThan(meanAt('power-of-power', 1, magnitude))
+  })
+})
+
+describe('zero-neg-exponents', () => {
+  it('covers zero and reciprocal rules with every prediction enterable', () => {
+    const families = new Set<string>()
+
+    for (const problem of problems('zero-neg-exponents')) {
+      const data = powerData(problem)
+      if (problem.answer.kind !== 'exact') throw new Error('expected exact answer')
+      families.add(data.operation)
+
+      if (data.operation === 'zero-exponent') {
+        expect(problem.answer).toMatchObject({ n: 1, d: 1 })
+        expect(diagnose(problem, '0')?.tag).toBe('answered-zero')
+        expect(problem.keypad).toBeUndefined()
+      } else if (data.operation === 'negative-exponent') {
+        const denominator = data.base ** data.magnitude
+        expect(problem.answer).toMatchObject({ n: 1, d: denominator, requireFraction: true })
+        expect(problem.keypad).toMatchObject({ allowFraction: true, allowNegative: true })
+        expect(diagnose(problem, String(denominator))?.tag).toBe('kept-positive-exponent')
+        expect(diagnose(problem, String(-denominator))?.tag).toBe('negated-positive-power')
+        expect(checkAnswer(problem.answer, `1/${denominator}`)).toEqual({ status: 'correct' })
+      } else {
+        throw new Error('expected zero or negative exponent data')
+      }
+    }
+
+    expect(families).toEqual(new Set(['zero-exponent', 'negative-exponent']))
+  })
+
+  it('varies and grows its source values with difficulty', () => {
+    expect(new Set(problems('zero-neg-exponents').map((problem) => JSON.stringify(problem.display))).size)
+      .toBeGreaterThan(20)
+    const magnitude = (data: PowerData) => data.operation === 'zero-exponent'
+      ? data.base
+      : data.operation === 'negative-exponent'
+        ? data.base + data.magnitude
+        : 0
+    expect(meanAt('zero-neg-exponents', 5, magnitude))
+      .toBeGreaterThan(meanAt('zero-neg-exponents', 1, magnitude))
+  })
+})
+
+describe('scientific-notation', () => {
+  const scaled = (coefficient: number, scale: 0 | 1, exponent: number) =>
+    exponent >= 0
+      ? rational(coefficient * 10 ** exponent, 10 ** scale)
+      : rational(coefficient, 10 ** (scale + Math.abs(exponent)))
+
+  it('places the decimal exactly and diagnoses both wrong directions', () => {
+    const signs = new Set<number>()
+
+    for (const problem of problems('scientific-notation')) {
+      const data = powerData(problem)
+      if (data.operation !== 'scientific-notation') throw new Error('expected scientific-notation data')
+      if (problem.answer.kind !== 'exact') throw new Error('expected exact answer')
+      const expected = scaled(data.coefficient, data.coefficientScale, data.exponent)
+      const onePlace = scaled(data.coefficient, data.coefficientScale, Math.sign(data.exponent))
+      const reversed = scaled(data.coefficient, data.coefficientScale, -data.exponent)
+
+      signs.add(Math.sign(data.exponent))
+      expect(data.coefficient / 10 ** data.coefficientScale).toBeGreaterThanOrEqual(1)
+      expect(data.coefficient / 10 ** data.coefficientScale).toBeLessThan(10)
+      expect(problem.answer).toMatchObject(expected)
+      expect(problem.answer.requireDecimal).toBe(data.exponent < 0 ? true : false)
+      expect(problem.keypad).toEqual({ allowDecimal: true })
+      expect(diagnose(problem, String(toNumber(onePlace)))?.tag).toBe('moved-one-place')
+      expect(diagnose(problem, String(toNumber(reversed)))?.tag).toBe('reversed-exponent-direction')
+    }
+
+    expect(signs).toEqual(new Set([-1, 1]))
+  })
+
+  it('varies and grows coefficient/exponent magnitude with difficulty', () => {
+    expect(new Set(problems('scientific-notation').map((problem) => JSON.stringify(problem.display))).size)
+      .toBeGreaterThan(40)
+    const magnitude = (data: PowerData) => data.operation === 'scientific-notation'
+      ? data.coefficient / 10 ** data.coefficientScale + Math.abs(data.exponent)
+      : 0
+    expect(meanAt('scientific-notation', 5, magnitude))
+      .toBeGreaterThan(meanAt('scientific-notation', 1, magnitude))
+  })
+})
+
+describe('pemdas-exponents', () => {
+  it('covers both structured families with exact whole-number work', () => {
+    const families = new Set<string>()
+
+    for (const problem of problems('pemdas-exponents')) {
+      const data = powerData(problem)
+      if (problem.answer.kind !== 'exact') throw new Error('expected exact answer')
+      families.add(data.operation)
+
+      if (data.operation === 'pemdas-power-first') {
+        const powerValue = data.base ** data.exponent
+        expect(problem.answer).toMatchObject({ n: data.addend + powerValue * data.factor, d: 1 })
+        expect(diagnose(problem, String(data.addend + data.base * data.exponent * data.factor))?.tag)
+          .toBe('multiplied-base-by-exponent')
+        expect(diagnose(problem, String((data.addend + data.base) ** data.exponent * data.factor))?.tag)
+          .toBe('added-before-exponent')
+      } else if (data.operation === 'pemdas-group-power') {
+        const group = data.left + data.right
+        expect(group ** data.exponent % data.divisor).toBe(0)
+        expect(data.right ** data.exponent % data.divisor).toBe(0)
+        expect(problem.answer).toMatchObject({ n: group ** data.exponent / data.divisor, d: 1 })
+        expect(diagnose(problem, String(group * data.exponent / data.divisor))?.tag)
+          .toBe('multiplied-base-by-exponent')
+        expect(diagnose(problem, String(data.left + data.right ** data.exponent / data.divisor))?.tag)
+          .toBe('ignored-parentheses')
+        expect(problem.solution.map((step) => step.detail)).toEqual([
+          `${data.left} + ${data.right} = ${group}`,
+          `${group}^${data.exponent} = ${group ** data.exponent}`,
+          `${group ** data.exponent} ÷ ${data.divisor} = ${group ** data.exponent / data.divisor}`,
+        ])
+      } else {
+        throw new Error('expected a PEMDAS exponent family')
+      }
+
+      expect(problem.solution.every((step) => !step.detail?.includes('/'))).toBe(true)
+    }
+
+    expect(families).toEqual(new Set(['pemdas-power-first', 'pemdas-group-power']))
+  })
+
+  it('varies and grows its operands with difficulty', () => {
+    expect(new Set(problems('pemdas-exponents').map((problem) => JSON.stringify(problem.display))).size)
+      .toBeGreaterThan(40)
+    const magnitude = (data: PowerData) => data.operation === 'pemdas-power-first'
+      ? data.addend + data.base + data.exponent + data.factor
+      : data.operation === 'pemdas-group-power'
+        ? data.left + data.right + data.exponent
+        : 0
+    expect(meanAt('pemdas-exponents', 5, magnitude))
+      .toBeGreaterThan(meanAt('pemdas-exponents', 1, magnitude))
   })
 })
 

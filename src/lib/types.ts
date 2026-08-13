@@ -271,6 +271,30 @@ export type PowerData =
       leftExponent: number
       rightExponent: number
     }
+  | { operation: 'power-of-power'; base: number; innerExponent: number; outerExponent: number }
+  | { operation: 'zero-exponent'; base: number }
+  | { operation: 'negative-exponent'; base: number; magnitude: number }
+  | {
+      operation: 'scientific-notation'
+      /** Integer digits of the coefficient; `coefficientScale` places its decimal point. */
+      coefficient: number
+      coefficientScale: 0 | 1
+      exponent: number
+    }
+  | {
+      operation: 'pemdas-power-first'
+      addend: number
+      base: number
+      exponent: number
+      factor: number
+    }
+  | {
+      operation: 'pemdas-group-power'
+      left: number
+      right: number
+      exponent: number
+      divisor: number
+    }
 
 /**
  * Structured notation for the closed expression surface used by Stages D–G.

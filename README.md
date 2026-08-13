@@ -27,10 +27,10 @@ decimal/fraction conversion, and a money word problem. Unit 10 is complete: perc
 and conversions, inverse percent relationships, percent change, discount/tax/tip, and simple
 interest. Unit 11 covers ratios, unit rates, proportions, scale drawings, stated unit
 conversions, and fixed-frame ratio word problems that distinguish part-to-part from
-part-to-whole. Unit 12 opens Stage E with what an exponent means, evaluating a power,
-perfect squares in both directions, estimating a non-perfect-square root, and the same-base
-power multiply/divide rules. Later units still need a tap-to-plot coordinate plane, charts,
-and timed mode.
+part-to-whole. Unit 12 opens Stage E and is complete: exponent meaning and evaluation,
+squares and roots, same-base and power-of-power rules, zero and negative exponents,
+scientific notation, and full order of operations with exponents. Later units still need a
+tap-to-plot coordinate plane, charts, and timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
 milestone, what blocks what, and the unbuilt product features (dress-up, skip-ahead,

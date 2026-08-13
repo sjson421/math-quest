@@ -70,7 +70,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(117)
+    expect(documentedAsBuilt).toHaveLength(121)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -294,7 +294,7 @@ describe('the skills that are built', () => {
       'ratio-words',
     ])
     expect(unit11Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(117)
+    expect(implementedSkillIds).toHaveLength(121)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -317,8 +317,8 @@ describe('the skills that are built', () => {
   it('marks expression input available without unlocking Unit 13, whose generators have not landed', () => {
     // Roadmap item 20b: the capability ships before Unit 13's generators do,
     // proving availability alone adds no playable skill — the same pattern
-    // `diagram` and `number-line` proved for their stages. Unit 12a has since
-    // landed generators of its own within Stage E, so this checks Unit 13
+    // `diagram` and `number-line` proved for their stages. Unit 12 has since
+    // completed within Stage E, so this checks Unit 13
     // specifically rather than the whole stage.
     const stage = manifestIndex.get('variable-meaning')?.stage
     const unit13 = stage?.units.find((unit) => unit.id === 'unit-13')
@@ -326,10 +326,24 @@ describe('the skills that are built', () => {
     const unavailable = (stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))
 
     expect(AVAILABLE_CAPABILITIES.has('expression-input')).toBe(true)
-    expect(stage?.requires).toEqual(['math-notation', 'expression-input'])
+    expect(stage?.requires).toEqual(['math-notation', 'fraction-input', 'expression-input'])
     expect(unavailable).toEqual([])
+    const unit12 = stage?.units.find((unit) => unit.id === 'unit-12')
+    expect(unit12?.skills.map((skill) => skill.id).filter((id) => skillState(id) === 'implemented'))
+      .toEqual([
+        'exponent-meaning',
+        'evaluate-powers',
+        'perfect-squares',
+        'estimate-roots',
+        'exponent-multiply',
+        'exponent-divide',
+        'power-of-power',
+        'zero-neg-exponents',
+        'scientific-notation',
+        'pemdas-exponents',
+      ])
     expect(unit13Ids.every((id) => skillState(id) === 'planned')).toBe(true)
-    expect(implementedSkillIds).toHaveLength(117)
+    expect(implementedSkillIds).toHaveLength(121)
   })
 })
 
@@ -364,9 +378,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 90 skills out of the skill tree entirely', () => {
+  it('leaves the other 80 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(117)
+    expect(offered).toHaveLength(121)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {

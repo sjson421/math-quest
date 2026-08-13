@@ -210,9 +210,14 @@ describe('stage capabilities', () => {
     }
   })
 
-  it('marks expression input built and records Stage E as its declaring stage', () => {
+  it('records every built input capability Stage E consumes', () => {
     expect(AVAILABLE_CAPABILITIES.has('expression-input')).toBe(true)
-    expect(stageById.get('stage-e')?.requires).toEqual(['math-notation', 'expression-input'])
+    expect(AVAILABLE_CAPABILITIES.has('fraction-input')).toBe(true)
+    expect(stageById.get('stage-e')?.requires).toEqual([
+      'math-notation',
+      'fraction-input',
+      'expression-input',
+    ])
   })
 })
 

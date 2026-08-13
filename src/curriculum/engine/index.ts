@@ -88,6 +88,17 @@ export { defineSkill } from './problem'
 export type { BuildContext, ProblemSpec, SkillConfig } from './problem'
 
 export {
+  evaluateExpression,
+  expressionNotation,
+  foldInOrder,
+  ignoringParentheses,
+  op,
+  power,
+  renderExpression,
+} from './expression'
+export type { NumericExpression } from './expression'
+
+export {
   CHECK_QUANTITIES,
   applyOperator,
   countOf,

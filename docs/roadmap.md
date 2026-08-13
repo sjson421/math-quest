@@ -2,16 +2,17 @@
 
 What is left, in the order it should be done.
 
-**Status: 117 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
-Stage E has opened with Unit 12a.
+**Status: 121 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
+Stage E has opened with the complete Unit 12.
 Choice input,
 number-line input, math notation, fraction input, diagrams and expression input are built,
 so `AVAILABLE_CAPABILITIES` holds
 `choice-input`, `number-line`, `math-notation`, `fraction-input`, `diagram` and
-`expression-input`. Unit 12a is the first content to use `math-notation`'s superscript and
+`expression-input`. Unit 12 is the first content to use `math-notation`'s superscript and
 root kinds, for exponent and root display; it does not use `expression-input`, since that
-capability's grammar excludes exponents, so `exponent-multiply` and `exponent-divide` ask
-for the resulting exponent as a number rather than an expression. `expression-input` itself
+capability's grammar excludes exponents, so power-rule skills ask for the resulting exponent
+as a number rather than an expression. `zero-neg-exponents` settles Stage E's previously
+deferred fraction-input declaration with exact reciprocal answers. `expression-input` itself
 still unlocks nothing on its own, since Unit 13 (item 21's 13a) has not shipped a generator
 yet. The three content-bearing answer-control modes all have
 content: `negatives-numberline` is the first skill anywhere to
@@ -31,9 +32,9 @@ conversions, inverse percent relationships, percent change, discount/tax/tip and
 interest with its supplied GED formula. Unit 11 covers writing and simplifying ratios,
 best-value unit rates, proportions, scale drawings, and a fixed stated set of within-system
 unit conversions, then closes with fixed-frame ratio stories distinguishing part-to-part from
-part-to-whole. Expression input is built. Unit 12a covers what an exponent means, evaluating
-a power, perfect squares in both directions, estimating a non-perfect-square root, and the
-same-base power multiply/divide rules; item 21's 12b increment is next.
+part-to-whole. Expression input is built. Unit 12 is complete: meaning and evaluation,
+squares and roots, same-base and nested-power rules, zero and negative exponents, scientific
+notation, and the full order of operations; item 21's 13a increment is next.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -777,7 +778,11 @@ document's ✅ markers updated to match, which the cross-check enforces.
       - **12b** `power-of-power`–`pemdas-exponents` — `scientific-notation` (12.9) is the first
         skill wanting ×10ⁿ, and `pemdas-exponents` (12.10) completes 5.3. Item 12 deliberately
         kept Unit 5's expression model local to Unit 5 and said this unit should shape its own;
-        whether to extend it or write a second one is the decision to record here.
+        whether to extend it or write a second one is the decision to record here. **Shipped
+        2026-08-13.** The second consumer moved Unit 5's numeric expression tree into the engine
+        and added a structural power node, with Unit 5's output unchanged. Scientific notation
+        reads exact ordinary numbers from ×10ⁿ, and negative exponents answer as exact fractions,
+        making `fraction-input` an explicit Stage E requirement.
       - **13a** `variable-meaning`–`distributive` — the first content on item 20, and it needs
         both increments of it: three of these six are walls answering with an expression.
       - **13b** `distribute-negative`–`factor-gcf` — 13.7 is the major wall (sign on the second

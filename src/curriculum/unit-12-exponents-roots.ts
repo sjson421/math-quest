@@ -1,7 +1,18 @@
 import { intAnswer } from '../lib/answer'
+import { gcd, rational, toNumber } from '../lib/rational'
 import { constrain } from '../lib/rng'
 import type { MathNotation, PowerData } from '../lib/types'
-import { band, defineSkill, type BuildContext, type Ladder } from './engine'
+import {
+  band,
+  defineSkill,
+  evaluateExpression,
+  expressionNotation,
+  op,
+  power,
+  type BuildContext,
+  type Ladder,
+  type NumericExpression,
+} from './engine'
 
 /**
  * Unit 12a · Exponents & Roots.
@@ -331,6 +342,372 @@ const exponentDivide = defineSkill({
   },
 })
 
+const POWER_OF_POWER_EXPONENT_BAND: Ladder = {
+  1: [2, 3],
+  2: [2, 4],
+  3: [2, 5],
+  4: [3, 5],
+  5: [3, 6],
+}
+
+const powerOfPower = defineSkill({
+  id: 'power-of-power',
+  name: 'Power of a Power',
+  blurb: 'Multiply the exponents',
+  build(context) {
+    const [baseMin, baseMax] = band(context.difficulty, MD_BASE_BAND)
+    const [exponentMin, exponentMax] = band(context.difficulty, POWER_OF_POWER_EXPONENT_BAND)
+    const { innerExponent, outerExponent } = constrain(
+      () => ({
+        innerExponent: context.rng.int(exponentMin, exponentMax),
+        outerExponent: context.rng.int(exponentMin, exponentMax),
+      }),
+      ({ innerExponent: inner, outerExponent: outer }) => inner * outer !== inner + outer,
+    )
+    const base = context.rng.int(baseMin, baseMax)
+    const answer = innerExponent * outerExponent
+    const inner = superscript(String(base), String(innerExponent))
+    const outer: MathNotation = {
+      kind: 'superscript',
+      base: { kind: 'row', children: [text('('), inner, text(')')] },
+      exponent: text(String(outerExponent)),
+    }
+    const data: PowerData = { operation: 'power-of-power', base, innerExponent, outerExponent }
+
+    return {
+      prompt: 'What is the missing exponent?',
+      display: {
+        kind: 'math',
+        notation: {
+          kind: 'row',
+          children: [outer, text(' = '), superscript(String(base), '?')],
+        },
+        label: (
+          `${base} to the ${innerExponent} power, raised to the ${outerExponent} power, ` +
+          `equals ${base} to the blank power`
+        ),
+        power: data,
+      },
+      answer: intAnswer(answer),
+      misconceptions: [
+        {
+          value: innerExponent + outerExponent,
+          tag: 'added-exponents',
+          nudge: 'A power raised to a power multiplies the exponents.',
+        },
+        {
+          value: innerExponent,
+          tag: 'ignored-outer-exponent',
+          nudge: `The outer ${outerExponent} acts on the whole inner power.`,
+        },
+      ],
+      hint: 'Multiply the inner exponent by the outer exponent.',
+      solution: [
+        { text: 'Keep the base and multiply the exponents.', detail: `${innerExponent} × ${outerExponent} = ${answer}` },
+        { text: 'Write the result as one power.', detail: `${base}^${answer}` },
+      ],
+    }
+  },
+})
+
+const ZERO_NEG_BASE_BAND: Ladder = {
+  1: [2, 4],
+  2: [2, 5],
+  3: [3, 6],
+  4: [3, 8],
+  5: [4, 10],
+}
+
+const NEGATIVE_EXPONENT_BAND: Ladder = {
+  1: [1, 2],
+  2: [1, 2],
+  3: [2, 3],
+  4: [2, 3],
+  5: [2, 4],
+}
+
+const zeroNegExponents = defineSkill({
+  id: 'zero-neg-exponents',
+  name: 'Zero & Negative Exponents',
+  blurb: 'What they stand for',
+  build(context) {
+    const [baseMin, baseMax] = band(context.difficulty, ZERO_NEG_BASE_BAND)
+    const base = context.rng.int(baseMin, baseMax)
+
+    if (context.rng.bool()) {
+      const data: PowerData = { operation: 'zero-exponent', base }
+      return {
+        prompt: 'What is the value?',
+        display: {
+          kind: 'math',
+          notation: superscript(String(base), '0'),
+          label: `${base} to the zero power`,
+          power: data,
+        },
+        answer: intAnswer(1),
+        misconceptions: [
+          { value: 0, tag: 'answered-zero', nudge: 'A nonzero base to the zero power equals one.' },
+        ],
+        hint: 'Any nonzero number to the zero power equals one.',
+        solution: [{ text: 'Use the zero-exponent rule.', detail: `${base}^0 = 1` }],
+      }
+    }
+
+    const [magnitudeMin, magnitudeMax] = band(context.difficulty, NEGATIVE_EXPONENT_BAND)
+    const magnitude = context.rng.int(magnitudeMin, magnitudeMax)
+    const denominator = base ** magnitude
+    const data: PowerData = { operation: 'negative-exponent', base, magnitude }
+
+    return {
+      prompt: 'What is the value?',
+      display: {
+        kind: 'math',
+        notation: superscript(String(base), `−${magnitude}`),
+        label: `${base} to the negative ${magnitude} power`,
+        power: data,
+      },
+      answer: { kind: 'exact', ...rational(1, denominator), requireFraction: true },
+      keypad: { allowFraction: true, allowNegative: true },
+      misconceptions: [
+        {
+          value: denominator,
+          tag: 'kept-positive-exponent',
+          nudge: 'A negative exponent makes the positive power its denominator.',
+        },
+        {
+          value: -denominator,
+          tag: 'negated-positive-power',
+          nudge: 'The exponent makes a reciprocal, not a negative result.',
+        },
+      ],
+      hint: 'Make the positive power the denominator of a fraction.',
+      solution: [
+        { text: 'Rewrite with a positive exponent.', detail: `1/${base}^${magnitude}` },
+        { text: 'Evaluate the denominator.', detail: `1/${denominator}` },
+      ],
+    }
+  },
+})
+
+const SCIENTIFIC_EXPONENT_BAND: Ladder = {
+  1: [2, 2],
+  2: [2, 3],
+  3: [2, 4],
+  4: [3, 5],
+  5: [4, 6],
+}
+
+const scientificRational = (coefficient: number, coefficientScale: 0 | 1, exponent: number) =>
+  exponent >= 0
+    ? rational(coefficient * 10 ** exponent, 10 ** coefficientScale)
+    : rational(coefficient, 10 ** (coefficientScale + Math.abs(exponent)))
+
+const coefficientText = (coefficient: number, scale: 0 | 1) =>
+  scale === 0 ? String(coefficient) : (coefficient / 10).toFixed(1)
+
+const ordinaryNumberText = (coefficient: number, scale: 0 | 1, exponent: number) => {
+  const digits = String(coefficient)
+  const point = digits.length - (scale - exponent)
+  if (point <= 0) return `0.${'0'.repeat(-point)}${digits}`
+  if (point >= digits.length) return `${digits}${'0'.repeat(point - digits.length)}`
+  return `${digits.slice(0, point)}.${digits.slice(point)}`
+}
+
+const exponentText = (exponent: number) => exponent < 0 ? `−${Math.abs(exponent)}` : String(exponent)
+const exponentLabel = (exponent: number) => exponent < 0 ? `negative ${Math.abs(exponent)}` : String(exponent)
+
+const scientificNotation = defineSkill({
+  id: 'scientific-notation',
+  name: 'Scientific Notation',
+  blurb: 'Powers of ten as shorthand',
+  build(context) {
+    const [magnitudeMin, magnitudeMax] = band(context.difficulty, SCIENTIFIC_EXPONENT_BAND)
+    const magnitude = context.rng.int(magnitudeMin, magnitudeMax)
+    const exponent = context.rng.bool() ? magnitude : -magnitude
+    const coefficientScale: 0 | 1 = context.difficulty === 1 || context.rng.bool() ? 0 : 1
+    const coefficient = coefficientScale === 0
+      ? context.rng.int(1, 9)
+      : context.rng.intExcept(11, 99, [20, 30, 40, 50, 60, 70, 80, 90])
+    const shownCoefficient = coefficientText(coefficient, coefficientScale)
+    const answer = scientificRational(coefficient, coefficientScale, exponent)
+    const onePlace = scientificRational(coefficient, coefficientScale, Math.sign(exponent))
+    const reversed = scientificRational(coefficient, coefficientScale, -exponent)
+    const data: PowerData = {
+      operation: 'scientific-notation',
+      coefficient,
+      coefficientScale,
+      exponent,
+    }
+
+    return {
+      prompt: 'Write this as an ordinary number.',
+      display: {
+        kind: 'math',
+        notation: {
+          kind: 'row',
+          children: [text(`${shownCoefficient} × `), superscript('10', exponentText(exponent))],
+        },
+        label: `${shownCoefficient} times 10 to the ${exponentLabel(exponent)} power`,
+        power: data,
+      },
+      answer: {
+        kind: 'exact',
+        ...answer,
+        requireDecimal: exponent < 0,
+      },
+      keypad: { allowDecimal: true },
+      misconceptions: [
+        {
+          value: toNumber(onePlace),
+          tag: 'moved-one-place',
+          nudge: `The exponent moves the decimal ${magnitude} places, not one.`,
+        },
+        {
+          value: toNumber(reversed),
+          tag: 'reversed-exponent-direction',
+          nudge: `A ${exponent < 0 ? 'negative' : 'positive'} exponent moves the decimal ${exponent < 0 ? 'left' : 'right'}.`,
+        },
+      ],
+      hint: `Move the decimal ${magnitude} places ${exponent < 0 ? 'left' : 'right'}.`,
+      solution: [
+        { text: 'Use the exponent as the number of places.' },
+        {
+          text: `Move the decimal ${exponent < 0 ? 'left' : 'right'}.`,
+          detail: ordinaryNumberText(coefficient, coefficientScale, exponent),
+        },
+      ],
+    }
+  },
+})
+
+const PEMDAS_TERM_BAND: Ladder = {
+  1: [2, 4],
+  2: [2, 5],
+  3: [3, 6],
+  4: [4, 8],
+  5: [5, 10],
+}
+
+const pemdasDisplay = (tree: NumericExpression, data: PowerData, label: string) => ({
+  kind: 'math' as const,
+  notation: expressionNotation(tree),
+  label,
+  power: data,
+})
+
+const pemdasExponents = defineSkill({
+  id: 'pemdas-exponents',
+  name: 'Order of Operations with Exponents',
+  blurb: 'The full rule',
+  build(context) {
+    const [termMin, termMax] = band(context.difficulty, PEMDAS_TERM_BAND)
+    const exponent = context.rng.int(2, context.difficulty >= 4 ? 3 : 2)
+
+    if (context.rng.bool()) {
+      const base = context.rng.intExcept(termMin, termMax, exponent === 2 ? [2] : [])
+      const factor = context.rng.int(2, Math.min(6, termMax))
+      const addend = context.rng.int(termMin, termMax)
+      const tree = op(addend, '+', op(power(base, exponent), '×', factor))
+      const answer = evaluateExpression(tree)
+      const multipliedPower = op(addend, '+', op(op(base, '×', exponent), '×', factor))
+      const addedFirst = op(power(op(addend, '+', base), exponent), '×', factor)
+      const data: PowerData = {
+        operation: 'pemdas-power-first',
+        addend,
+        base,
+        exponent,
+        factor,
+      }
+
+      return {
+        prompt: 'What is the value?',
+        display: pemdasDisplay(
+          tree,
+          data,
+          `${addend} plus ${base} to the ${exponent} power times ${factor}`,
+        ),
+        answer: intAnswer(answer),
+        misconceptions: [
+          {
+            value: evaluateExpression(multipliedPower),
+            tag: 'multiplied-base-by-exponent',
+            nudge: 'Evaluate the power as repeated multiplication before continuing.',
+          },
+          {
+            value: evaluateExpression(addedFirst),
+            tag: 'added-before-exponent',
+            nudge: 'The exponent belongs to its base before the addition.',
+          },
+        ],
+        hint: 'Evaluate the exponent, then multiply, then add.',
+        solution: [
+          { text: 'Evaluate the exponent first.', detail: `${base}^${exponent} = ${base ** exponent}` },
+          { text: 'Then multiply.', detail: `${base ** exponent} × ${factor} = ${base ** exponent * factor}` },
+          { text: 'Then add.', detail: `${addend} + ${base ** exponent * factor} = ${answer}` },
+        ],
+      }
+    }
+
+    const { left, right, divisor } = constrain(
+      () => {
+        const candidateLeft = context.rng.int(termMin, termMax)
+        const candidateRight = context.rng.int(termMin, termMax)
+        return {
+          left: candidateLeft,
+          right: candidateRight,
+          divisor: gcd(candidateLeft, candidateRight),
+        }
+      },
+      ({ left: candidateLeft, right: candidateRight, divisor: candidateDivisor }) => {
+        if (candidateDivisor === 1) return false
+        const multipliedPower = (candidateLeft + candidateRight) * exponent / candidateDivisor
+        const ignoredGrouping = candidateLeft + candidateRight ** exponent / candidateDivisor
+        return multipliedPower !== ignoredGrouping
+      },
+    )
+    const group = left + right
+    const tree = op(power(op(left, '+', right), exponent), '÷', divisor)
+    const answer = evaluateExpression(tree)
+    const multipliedPower = op(op(op(left, '+', right), '×', exponent), '÷', divisor)
+    const ignoredGrouping = op(left, '+', op(power(right, exponent), '÷', divisor))
+    const data: PowerData = {
+      operation: 'pemdas-group-power',
+      left,
+      right,
+      exponent,
+      divisor,
+    }
+
+    return {
+      prompt: 'What is the value?',
+      display: pemdasDisplay(
+        tree,
+        data,
+        `${left} plus ${right} in parentheses, to the ${exponent} power, divided by ${divisor}`,
+      ),
+      answer: intAnswer(answer),
+      misconceptions: [
+        {
+          value: evaluateExpression(multipliedPower),
+          tag: 'multiplied-base-by-exponent',
+          nudge: 'After the parentheses, evaluate the power by repeated multiplication.',
+        },
+        {
+          value: evaluateExpression(ignoredGrouping),
+          tag: 'ignored-parentheses',
+          nudge: 'Keep the sum grouped; add before applying the exponent.',
+        },
+      ],
+      hint: 'Take the parentheses, then the exponent, then divide.',
+      solution: [
+        { text: 'Work inside the parentheses.', detail: `${left} + ${right} = ${group}` },
+        { text: 'Evaluate the exponent.', detail: `${group}^${exponent} = ${group ** exponent}` },
+        { text: 'Then divide.', detail: `${group ** exponent} ÷ ${divisor} = ${answer}` },
+      ],
+    }
+  },
+})
+
 export const unit12 = [
   exponentMeaning,
   evaluatePowers,
@@ -338,4 +715,8 @@ export const unit12 = [
   estimateRoots,
   exponentMultiply,
   exponentDivide,
+  powerOfPower,
+  zeroNegExponents,
+  scientificNotation,
+  pemdasExponents,
 ]
