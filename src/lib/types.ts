@@ -296,6 +296,21 @@ export type PowerData =
       divisor: number
     }
 
+/** The source quantities behind Unit 13's single-variable expression displays. */
+export type AlgebraData =
+  /** `variable-meaning`: one term, `coefficient` times the variable. */
+  | { operation: 'substitute-term'; coefficient: number; value: number }
+  /** `evaluate-expression`: a term plus or minus a constant. */
+  | { operation: 'substitute-expression'; coefficient: number; constant: number; adds: boolean; value: number }
+  /** `words-to-expression`: which order-sensitive phrasing produced the shown text. */
+  | { operation: 'words-to-expression'; n: number; lessThan: boolean }
+  /** `identify-like-terms`: the target term and its one matching choice among the offered ids. */
+  | { operation: 'identify-like-terms'; targetCoefficient: number; targetLetter: string; matchCoefficient: number }
+  /** `combine-like-terms`: two terms in the declared variable, plus a constant. */
+  | { operation: 'combine-like-terms'; first: number; second: number; constant: number }
+  /** `distributive`: a coefficient distributed across the variable and a constant. */
+  | { operation: 'distributive'; coefficient: number; constant: number }
+
 /**
  * Structured notation for the closed expression surface used by Stages D–G.
  *
@@ -408,7 +423,7 @@ export type FractionData =
 
 /** How the problem is presented. Column layout matches how arithmetic is taught. */
 export type Display =
-  | { kind: 'inline'; text: string; wholeNumber?: WholeNumberData; decimal?: DecimalData }
+  | { kind: 'inline'; text: string; wholeNumber?: WholeNumberData; decimal?: DecimalData; algebra?: AlgebraData }
   | { kind: 'column'; operands: number[]; operator: Operator }
   /** Decimal columns render from exact source data so trailing zeroes survive. */
   | { kind: 'decimal-column'; decimal: DecimalArithmeticData }

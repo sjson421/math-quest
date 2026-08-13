@@ -8,6 +8,7 @@ import { equals, format as formatRational, gcd, toNumber, rational } from '../li
 import { shapeDiagramFraction } from '../lib/shape-diagram'
 import { ratioWordText } from './phrasing/ratios'
 import type {
+  AlgebraData,
   DecimalData,
   DecimalValue,
   Difficulty,
@@ -1046,6 +1047,28 @@ function recompute(problem: Problem): number | string {
     }
   }
 
+  if (display.kind === 'inline' && display.algebra) {
+    const data: AlgebraData = display.algebra
+    switch (data.operation) {
+      case 'substitute-term':
+        return data.coefficient * data.value
+      case 'substitute-expression':
+        return data.adds ? data.coefficient * data.value + data.constant : data.coefficient * data.value - data.constant
+      case 'words-to-expression':
+        return data.lessThan ? `x-${data.n}` : `${data.n}-x`
+      case 'identify-like-terms':
+        return choiceIdFor(problem, `${data.matchCoefficient}${data.targetLetter}`)
+      case 'combine-like-terms':
+        return `${data.first + data.second}x+${data.constant}`
+      case 'distributive':
+        return `${data.coefficient}x+${data.coefficient * data.constant}`
+      default: {
+        const unhandled: never = data
+        throw new Error(`Unknown algebra operation: ${JSON.stringify(unhandled)}`)
+      }
+    }
+  }
+
   if (display.kind === 'inline') {
     try {
       return evaluateExpression(display.text)
@@ -1268,6 +1291,31 @@ function sourceMagnitude(problem: Problem): number {
 
   if (problem.display.kind === 'math' && problem.display.power) {
     const values = expectedPowerDisplay(problem.display.power).values
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
+
+  if (problem.display.kind === 'inline' && problem.display.algebra) {
+    const data: AlgebraData = problem.display.algebra
+    const values: number[] = (() => {
+      switch (data.operation) {
+        case 'substitute-term':
+          return [data.coefficient, data.value]
+        case 'substitute-expression':
+          return [data.coefficient, data.constant, data.value]
+        case 'words-to-expression':
+          return [data.n]
+        case 'identify-like-terms':
+          return [data.targetCoefficient, data.matchCoefficient]
+        case 'combine-like-terms':
+          return [data.first, data.second, data.constant]
+        case 'distributive':
+          return [data.coefficient, data.constant]
+        default: {
+          const unhandled: never = data
+          throw new Error(`Unknown algebra operation: ${JSON.stringify(unhandled)}`)
+        }
+      }
+    })()
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 

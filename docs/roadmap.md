@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 121 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
-Stage E has opened with the complete Unit 12.
+**Status: 127 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
+Stage E has opened with the complete Unit 12 and Unit 13a.
 Choice input,
 number-line input, math notation, fraction input, diagrams and expression input are built,
 so `AVAILABLE_CAPABILITIES` holds
@@ -12,9 +12,10 @@ so `AVAILABLE_CAPABILITIES` holds
 root kinds, for exponent and root display; it does not use `expression-input`, since that
 capability's grammar excludes exponents, so power-rule skills ask for the resulting exponent
 as a number rather than an expression. `zero-neg-exponents` settles Stage E's previously
-deferred fraction-input declaration with exact reciprocal answers. `expression-input` itself
-still unlocks nothing on its own, since Unit 13 (item 21's 13a) has not shipped a generator
-yet. The three content-bearing answer-control modes all have
+deferred fraction-input declaration with exact reciprocal answers. `expression-input` now has
+its first content: `words-to-expression`, `combine-like-terms` and `distributive` (item 21's
+13a) answer through it, comparing under the `expanded` form so a re-ordered sum or an
+undistributed equivalent counts as the same answer. The three content-bearing answer-control modes all have
 content: `negatives-numberline` is the first skill anywhere to
 declare a line, comparison, ordering, factors, multiples, primes and negative comparison use
 choices, and everything else uses the keypad. The pad offers a sign, a decimal point or a
@@ -34,7 +35,9 @@ best-value unit rates, proportions, scale drawings, and a fixed stated set of wi
 unit conversions, then closes with fixed-frame ratio stories distinguishing part-to-part from
 part-to-whole. Expression input is built. Unit 12 is complete: meaning and evaluation,
 squares and roots, same-base and nested-power rules, zero and negative exponents, scientific
-notation, and the full order of operations; item 21's 13a increment is next.
+notation, and the full order of operations. Unit 13a is complete: what a variable is,
+evaluating and translating expressions, spotting like terms, and combining/distributing;
+item 21's 13b increment (`distribute-negative`, `factor-gcf`) is next.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -785,6 +788,12 @@ document's ✅ markers updated to match, which the cross-check enforces.
         making `fraction-input` an explicit Stage E requirement.
       - **13a** `variable-meaning`–`distributive` — the first content on item 20, and it needs
         both increments of it: three of these six are walls answering with an expression.
+        **Shipped 2026-08-13.** `variable-meaning` and `evaluate-expression` stay numeric via
+        the keypad; `identify-like-terms` uses choice input; `words-to-expression`,
+        `combine-like-terms` and `distributive` are `expression-input`'s first callers, all
+        under `form: 'expanded'`. A new `AlgebraData` payload on the `inline` display (beside
+        `wholeNumber`/`decimal`) carries the source operands for independent verification,
+        following the `PowerData` precedent from item 21's Unit 12 work.
       - **13b** `distribute-negative`–`factor-gcf` — 13.7 is the major wall (sign on the second
         term); `factor-gcf` (13.8) is where 20b's "same expression" decision is load-bearing,
         since the answer is a factored form and the expanded one is exactly wrong.

@@ -1,0 +1,1613 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: combine-like-terms > matches the wording recorded when the skill landed 1`] = `
+"--- combine-like-terms · seed 1 · difficulty 1
+prompt   Combine the like terms.
+display  inline "3x + 1x + 3"
+answer   expression 4x+3 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [3x + 1x = 4x]
+step 2   Keep the constant separate.   [4x + 3]
+miss     combined-unlike-terms = 7x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 7   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 12345 · difficulty 1
+prompt   Combine the like terms.
+display  inline "4x + 2x + 3"
+answer   expression 6x+3 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [4x + 2x = 6x]
+step 2   Keep the constant separate.   [6x + 3]
+miss     combined-unlike-terms = 9x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 9   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 67890 · difficulty 1
+prompt   Combine the like terms.
+display  inline "2x + 3x + 2"
+answer   expression 5x+2 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [2x + 3x = 5x]
+step 2   Keep the constant separate.   [5x + 2]
+miss     combined-unlike-terms = 7x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 7   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 424242 · difficulty 1
+prompt   Combine the like terms.
+display  inline "1x + 1x + 1"
+answer   expression 2x+1 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [1x + 1x = 2x]
+step 2   Keep the constant separate.   [2x + 1]
+miss     combined-unlike-terms = 3x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 3   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 987654321 · difficulty 1
+prompt   Combine the like terms.
+display  inline "4x + 1x + 1"
+answer   expression 5x+1 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [4x + 1x = 5x]
+step 2   Keep the constant separate.   [5x + 1]
+miss     combined-unlike-terms = 6x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 6   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 1 · difficulty 2
+prompt   Combine the like terms.
+display  inline "4x + 2x + 5"
+answer   expression 6x+5 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [4x + 2x = 6x]
+step 2   Keep the constant separate.   [6x + 5]
+miss     combined-unlike-terms = 11x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 11   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 12345 · difficulty 2
+prompt   Combine the like terms.
+display  inline "5x + 3x + 4"
+answer   expression 8x+4 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [5x + 3x = 8x]
+step 2   Keep the constant separate.   [8x + 4]
+miss     combined-unlike-terms = 12x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 12   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 67890 · difficulty 2
+prompt   Combine the like terms.
+display  inline "3x + 4x + 4"
+answer   expression 7x+4 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [3x + 4x = 7x]
+step 2   Keep the constant separate.   [7x + 4]
+miss     combined-unlike-terms = 11x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 11   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 424242 · difficulty 2
+prompt   Combine the like terms.
+display  inline "2x + 2x + 3"
+answer   expression 4x+3 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [2x + 2x = 4x]
+step 2   Keep the constant separate.   [4x + 3]
+miss     combined-unlike-terms = 7x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 7   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 987654321 · difficulty 2
+prompt   Combine the like terms.
+display  inline "5x + 2x + 2"
+answer   expression 7x+2 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [5x + 2x = 7x]
+step 2   Keep the constant separate.   [7x + 2]
+miss     combined-unlike-terms = 9x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 9   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 1 · difficulty 3
+prompt   Combine the like terms.
+display  inline "5x + 2x + 6"
+answer   expression 7x+6 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [5x + 2x = 7x]
+step 2   Keep the constant separate.   [7x + 6]
+miss     combined-unlike-terms = 13x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 13   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 12345 · difficulty 3
+prompt   Combine the like terms.
+display  inline "6x + 3x + 6"
+answer   expression 9x+6 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [6x + 3x = 9x]
+step 2   Keep the constant separate.   [9x + 6]
+miss     combined-unlike-terms = 15x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 15   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 67890 · difficulty 3
+prompt   Combine the like terms.
+display  inline "3x + 4x + 5"
+answer   expression 7x+5 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [3x + 4x = 7x]
+step 2   Keep the constant separate.   [7x + 5]
+miss     combined-unlike-terms = 12x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 12   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 424242 · difficulty 3
+prompt   Combine the like terms.
+display  inline "2x + 3x + 4"
+answer   expression 5x+4 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [2x + 3x = 5x]
+step 2   Keep the constant separate.   [5x + 4]
+miss     combined-unlike-terms = 9x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 9   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 987654321 · difficulty 3
+prompt   Combine the like terms.
+display  inline "6x + 2x + 3"
+answer   expression 8x+3 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [6x + 2x = 8x]
+step 2   Keep the constant separate.   [8x + 3]
+miss     combined-unlike-terms = 11x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 11   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 1 · difficulty 4
+prompt   Combine the like terms.
+display  inline "6x + 3x + 8"
+answer   expression 9x+8 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [6x + 3x = 9x]
+step 2   Keep the constant separate.   [9x + 8]
+miss     combined-unlike-terms = 17x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 17   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 12345 · difficulty 4
+prompt   Combine the like terms.
+display  inline "7x + 4x + 7"
+answer   expression 11x+7 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [7x + 4x = 11x]
+step 2   Keep the constant separate.   [11x + 7]
+miss     combined-unlike-terms = 18x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 18   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 67890 · difficulty 4
+prompt   Combine the like terms.
+display  inline "4x + 5x + 6"
+answer   expression 9x+6 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [4x + 5x = 9x]
+step 2   Keep the constant separate.   [9x + 6]
+miss     combined-unlike-terms = 15x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 15   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 424242 · difficulty 4
+prompt   Combine the like terms.
+display  inline "3x + 4x + 5"
+answer   expression 7x+5 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [3x + 4x = 7x]
+step 2   Keep the constant separate.   [7x + 5]
+miss     combined-unlike-terms = 12x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 12   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 987654321 · difficulty 4
+prompt   Combine the like terms.
+display  inline "7x + 3x + 4"
+answer   expression 10x+4 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [7x + 3x = 10x]
+step 2   Keep the constant separate.   [10x + 4]
+miss     combined-unlike-terms = 14x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 14   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 1 · difficulty 5
+prompt   Combine the like terms.
+display  inline "7x + 3x + 9"
+answer   expression 10x+9 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [7x + 3x = 10x]
+step 2   Keep the constant separate.   [10x + 9]
+miss     combined-unlike-terms = 19x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 19   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 12345 · difficulty 5
+prompt   Combine the like terms.
+display  inline "9x + 5x + 8"
+answer   expression 14x+8 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [9x + 5x = 14x]
+step 2   Keep the constant separate.   [14x + 8]
+miss     combined-unlike-terms = 22x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 22   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 67890 · difficulty 5
+prompt   Combine the like terms.
+display  inline "5x + 7x + 7"
+answer   expression 12x+7 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [5x + 7x = 12x]
+step 2   Keep the constant separate.   [12x + 7]
+miss     combined-unlike-terms = 19x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 19   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 424242 · difficulty 5
+prompt   Combine the like terms.
+display  inline "3x + 4x + 6"
+answer   expression 7x+6 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [3x + 4x = 7x]
+step 2   Keep the constant separate.   [7x + 6]
+miss     combined-unlike-terms = 13x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 13   The x terms stay attached to x; only add the matching terms.
+
+--- combine-like-terms · seed 987654321 · difficulty 5
+prompt   Combine the like terms.
+display  inline "9x + 3x + 5"
+answer   expression 12x+5 (x, expanded)
+input    expression
+variable x
+hint     Add the coefficients of the matching x terms and keep the constant separate.
+step 1   Add the two x terms.   [9x + 3x = 12x]
+step 2   Keep the constant separate.   [12x + 5]
+miss     combined-unlike-terms = 17x   The constant is not a like term for the x terms — keep it separate.
+miss     dropped-variable = 17   The x terms stay attached to x; only add the matching terms."
+`;
+
+exports[`recorded output: distributive > matches the wording recorded when the skill landed 1`] = `
+"--- distributive · seed 1 · difficulty 1
+prompt   Distribute to expand this expression.
+display  inline "3(x + 1)"
+answer   expression 3x+3 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [3 × x = 3x]
+step 2   Multiply by the second term.   [3 × 1 = 3]
+miss     distributed-first-term-only = 3x+1   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+3   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 12345 · difficulty 1
+prompt   Distribute to expand this expression.
+display  inline "4(x + 2)"
+answer   expression 4x+8 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [4 × x = 4x]
+step 2   Multiply by the second term.   [4 × 2 = 8]
+miss     distributed-first-term-only = 4x+2   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+8   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 67890 · difficulty 1
+prompt   Distribute to expand this expression.
+display  inline "3(x + 3)"
+answer   expression 3x+9 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [3 × x = 3x]
+step 2   Multiply by the second term.   [3 × 3 = 9]
+miss     distributed-first-term-only = 3x+3   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+9   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 424242 · difficulty 1
+prompt   Distribute to expand this expression.
+display  inline "2(x + 2)"
+answer   expression 2x+4 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [2 × x = 2x]
+step 2   Multiply by the second term.   [2 × 2 = 4]
+miss     distributed-first-term-only = 2x+2   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+4   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 987654321 · difficulty 1
+prompt   Distribute to expand this expression.
+display  inline "4(x + 1)"
+answer   expression 4x+4 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [4 × x = 4x]
+step 2   Multiply by the second term.   [4 × 1 = 4]
+miss     distributed-first-term-only = 4x+1   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+4   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 1 · difficulty 2
+prompt   Distribute to expand this expression.
+display  inline "4(x + 2)"
+answer   expression 4x+8 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [4 × x = 4x]
+step 2   Multiply by the second term.   [4 × 2 = 8]
+miss     distributed-first-term-only = 4x+2   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+8   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 12345 · difficulty 2
+prompt   Distribute to expand this expression.
+display  inline "5(x + 3)"
+answer   expression 5x+15 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [5 × x = 5x]
+step 2   Multiply by the second term.   [5 × 3 = 15]
+miss     distributed-first-term-only = 5x+3   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+15   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 67890 · difficulty 2
+prompt   Distribute to expand this expression.
+display  inline "3(x + 5)"
+answer   expression 3x+15 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [3 × x = 3x]
+step 2   Multiply by the second term.   [3 × 5 = 15]
+miss     distributed-first-term-only = 3x+5   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+15   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 424242 · difficulty 2
+prompt   Distribute to expand this expression.
+display  inline "2(x + 3)"
+answer   expression 2x+6 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [2 × x = 2x]
+step 2   Multiply by the second term.   [2 × 3 = 6]
+miss     distributed-first-term-only = 2x+3   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+6   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 987654321 · difficulty 2
+prompt   Distribute to expand this expression.
+display  inline "5(x + 2)"
+answer   expression 5x+10 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [5 × x = 5x]
+step 2   Multiply by the second term.   [5 × 2 = 10]
+miss     distributed-first-term-only = 5x+2   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+10   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 1 · difficulty 3
+prompt   Distribute to expand this expression.
+display  inline "5(x + 3)"
+answer   expression 5x+15 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [5 × x = 5x]
+step 2   Multiply by the second term.   [5 × 3 = 15]
+miss     distributed-first-term-only = 5x+3   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+15   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 12345 · difficulty 3
+prompt   Distribute to expand this expression.
+display  inline "6(x + 5)"
+answer   expression 6x+30 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [6 × x = 6x]
+step 2   Multiply by the second term.   [6 × 5 = 30]
+miss     distributed-first-term-only = 6x+5   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+30   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 67890 · difficulty 3
+prompt   Distribute to expand this expression.
+display  inline "4(x + 7)"
+answer   expression 4x+28 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [4 × x = 4x]
+step 2   Multiply by the second term.   [4 × 7 = 28]
+miss     distributed-first-term-only = 4x+7   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+28   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 424242 · difficulty 3
+prompt   Distribute to expand this expression.
+display  inline "3(x + 4)"
+answer   expression 3x+12 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [3 × x = 3x]
+step 2   Multiply by the second term.   [3 × 4 = 12]
+miss     distributed-first-term-only = 3x+4   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+12   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 987654321 · difficulty 3
+prompt   Distribute to expand this expression.
+display  inline "6(x + 3)"
+answer   expression 6x+18 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [6 × x = 6x]
+step 2   Multiply by the second term.   [6 × 3 = 18]
+miss     distributed-first-term-only = 6x+3   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+18   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 1 · difficulty 4
+prompt   Distribute to expand this expression.
+display  inline "6(x + 4)"
+answer   expression 6x+24 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [6 × x = 6x]
+step 2   Multiply by the second term.   [6 × 4 = 24]
+miss     distributed-first-term-only = 6x+4   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+24   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 12345 · difficulty 4
+prompt   Distribute to expand this expression.
+display  inline "7(x + 6)"
+answer   expression 7x+42 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [7 × x = 7x]
+step 2   Multiply by the second term.   [7 × 6 = 42]
+miss     distributed-first-term-only = 7x+6   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+42   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 67890 · difficulty 4
+prompt   Distribute to expand this expression.
+display  inline "4(x + 8)"
+answer   expression 4x+32 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [4 × x = 4x]
+step 2   Multiply by the second term.   [4 × 8 = 32]
+miss     distributed-first-term-only = 4x+8   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+32   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 424242 · difficulty 4
+prompt   Distribute to expand this expression.
+display  inline "3(x + 5)"
+answer   expression 3x+15 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [3 × x = 3x]
+step 2   Multiply by the second term.   [3 × 5 = 15]
+miss     distributed-first-term-only = 3x+5   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+15   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 987654321 · difficulty 4
+prompt   Distribute to expand this expression.
+display  inline "7(x + 5)"
+answer   expression 7x+35 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [7 × x = 7x]
+step 2   Multiply by the second term.   [7 × 5 = 35]
+miss     distributed-first-term-only = 7x+5   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+35   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 1 · difficulty 5
+prompt   Distribute to expand this expression.
+display  inline "7(x + 5)"
+answer   expression 7x+35 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [7 × x = 7x]
+step 2   Multiply by the second term.   [7 × 5 = 35]
+miss     distributed-first-term-only = 7x+5   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+35   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 12345 · difficulty 5
+prompt   Distribute to expand this expression.
+display  inline "8(x + 7)"
+answer   expression 8x+56 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [8 × x = 8x]
+step 2   Multiply by the second term.   [8 × 7 = 56]
+miss     distributed-first-term-only = 8x+7   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+56   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 67890 · difficulty 5
+prompt   Distribute to expand this expression.
+display  inline "5(x + 9)"
+answer   expression 5x+45 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [5 × x = 5x]
+step 2   Multiply by the second term.   [5 × 9 = 45]
+miss     distributed-first-term-only = 5x+9   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+45   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 424242 · difficulty 5
+prompt   Distribute to expand this expression.
+display  inline "4(x + 6)"
+answer   expression 4x+24 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [4 × x = 4x]
+step 2   Multiply by the second term.   [4 × 6 = 24]
+miss     distributed-first-term-only = 4x+6   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+24   The number outside multiplies both terms inside, not just the second.
+
+--- distributive · seed 987654321 · difficulty 5
+prompt   Distribute to expand this expression.
+display  inline "8(x + 6)"
+answer   expression 8x+48 (x, expanded)
+input    expression
+variable x
+hint     Multiply the number outside by both terms inside.
+step 1   Multiply by the first term.   [8 × x = 8x]
+step 2   Multiply by the second term.   [8 × 6 = 48]
+miss     distributed-first-term-only = 8x+6   The number outside multiplies both terms inside, not just the first.
+miss     distributed-second-term-only = x+48   The number outside multiplies both terms inside, not just the second."
+`;
+
+exports[`recorded output: evaluate-expression > matches the wording recorded when the skill landed 1`] = `
+"--- evaluate-expression · seed 1 · difficulty 1
+prompt   If x = 3, what is the value of this expression?
+display  inline "3x − 1"
+answer   exact 8/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [3 × 3 − 1]
+step 2   Finish the arithmetic.   [= 8]
+
+--- evaluate-expression · seed 12345 · difficulty 1
+prompt   If x = 2, what is the value of this expression?
+display  inline "4x − 2"
+answer   exact 6/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [4 × 2 − 2]
+step 2   Finish the arithmetic.   [= 6]
+
+--- evaluate-expression · seed 67890 · difficulty 1
+prompt   If x = 2, what is the value of this expression?
+display  inline "2x + 3"
+answer   exact 7/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [2 × 2 + 3]
+step 2   Finish the arithmetic.   [= 7]
+
+--- evaluate-expression · seed 424242 · difficulty 1
+prompt   If x = 1, what is the value of this expression?
+display  inline "1x − 2"
+answer   exact -1/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [1 × 1 − 2]
+step 2   Finish the arithmetic.   [= -1]
+
+--- evaluate-expression · seed 987654321 · difficulty 1
+prompt   If x = 1, what is the value of this expression?
+display  inline "4x − 1"
+answer   exact 3/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [4 × 1 − 1]
+step 2   Finish the arithmetic.   [= 3]
+
+--- evaluate-expression · seed 1 · difficulty 2
+prompt   If x = 4, what is the value of this expression?
+display  inline "4x − 2"
+answer   exact 14/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [4 × 4 − 2]
+step 2   Finish the arithmetic.   [= 14]
+
+--- evaluate-expression · seed 12345 · difficulty 2
+prompt   If x = 4, what is the value of this expression?
+display  inline "5x − 3"
+answer   exact 17/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [5 × 4 − 3]
+step 2   Finish the arithmetic.   [= 17]
+
+--- evaluate-expression · seed 67890 · difficulty 2
+prompt   If x = 3, what is the value of this expression?
+display  inline "3x + 5"
+answer   exact 14/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [3 × 3 + 5]
+step 2   Finish the arithmetic.   [= 14]
+
+--- evaluate-expression · seed 424242 · difficulty 2
+prompt   If x = 2, what is the value of this expression?
+display  inline "2x − 3"
+answer   exact 1/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [2 × 2 − 3]
+step 2   Finish the arithmetic.   [= 1]
+
+--- evaluate-expression · seed 987654321 · difficulty 2
+prompt   If x = 2, what is the value of this expression?
+display  inline "5x − 2"
+answer   exact 8/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [5 × 2 − 2]
+step 2   Finish the arithmetic.   [= 8]
+
+--- evaluate-expression · seed 1 · difficulty 3
+prompt   If x = 6, what is the value of this expression?
+display  inline "5x − 3"
+answer   exact 27/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [5 × 6 − 3]
+step 2   Finish the arithmetic.   [= 27]
+
+--- evaluate-expression · seed 12345 · difficulty 3
+prompt   If x = 5, what is the value of this expression?
+display  inline "6x − 5"
+answer   exact 25/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [6 × 5 − 5]
+step 2   Finish the arithmetic.   [= 25]
+
+--- evaluate-expression · seed 67890 · difficulty 3
+prompt   If x = 5, what is the value of this expression?
+display  inline "3x + 7"
+answer   exact 22/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [3 × 5 + 7]
+step 2   Finish the arithmetic.   [= 22]
+
+--- evaluate-expression · seed 424242 · difficulty 3
+prompt   If x = 4, what is the value of this expression?
+display  inline "2x − 4"
+answer   exact 4/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [2 × 4 − 4]
+step 2   Finish the arithmetic.   [= 4]
+
+--- evaluate-expression · seed 987654321 · difficulty 3
+prompt   If x = 3, what is the value of this expression?
+display  inline "6x − 3"
+answer   exact 15/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [6 × 3 − 3]
+step 2   Finish the arithmetic.   [= 15]
+
+--- evaluate-expression · seed 1 · difficulty 4
+prompt   If x = 7, what is the value of this expression?
+display  inline "6x − 4"
+answer   exact 38/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [6 × 7 − 4]
+step 2   Finish the arithmetic.   [= 38]
+
+--- evaluate-expression · seed 12345 · difficulty 4
+prompt   If x = 6, what is the value of this expression?
+display  inline "7x − 6"
+answer   exact 36/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [7 × 6 − 6]
+step 2   Finish the arithmetic.   [= 36]
+
+--- evaluate-expression · seed 67890 · difficulty 4
+prompt   If x = 6, what is the value of this expression?
+display  inline "4x + 8"
+answer   exact 32/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [4 × 6 + 8]
+step 2   Finish the arithmetic.   [= 32]
+
+--- evaluate-expression · seed 424242 · difficulty 4
+prompt   If x = 5, what is the value of this expression?
+display  inline "3x − 5"
+answer   exact 10/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [3 × 5 − 5]
+step 2   Finish the arithmetic.   [= 10]
+
+--- evaluate-expression · seed 987654321 · difficulty 4
+prompt   If x = 4, what is the value of this expression?
+display  inline "7x − 5"
+answer   exact 23/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [7 × 4 − 5]
+step 2   Finish the arithmetic.   [= 23]
+
+--- evaluate-expression · seed 1 · difficulty 5
+prompt   If x = 7, what is the value of this expression?
+display  inline "7x − 5"
+answer   exact 44/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [7 × 7 − 5]
+step 2   Finish the arithmetic.   [= 44]
+
+--- evaluate-expression · seed 12345 · difficulty 5
+prompt   If x = 7, what is the value of this expression?
+display  inline "9x − 7"
+answer   exact 56/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [9 × 7 − 7]
+step 2   Finish the arithmetic.   [= 56]
+
+--- evaluate-expression · seed 67890 · difficulty 5
+prompt   If x = 6, what is the value of this expression?
+display  inline "5x + 9"
+answer   exact 39/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [5 × 6 + 9]
+step 2   Finish the arithmetic.   [= 39]
+
+--- evaluate-expression · seed 424242 · difficulty 5
+prompt   If x = 5, what is the value of this expression?
+display  inline "3x − 6"
+answer   exact 9/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [3 × 5 − 6]
+step 2   Finish the arithmetic.   [= 9]
+
+--- evaluate-expression · seed 987654321 · difficulty 5
+prompt   If x = 5, what is the value of this expression?
+display  inline "9x − 6"
+answer   exact 39/1
+input    keypad
+hint     Substitute the value for x, then finish the arithmetic.
+step 1   Replace x with its value.   [9 × 5 − 6]
+step 2   Finish the arithmetic.   [= 39]"
+`;
+
+exports[`recorded output: identify-like-terms > matches the wording recorded when the skill landed 1`] = `
+"--- identify-like-terms · seed 1 · difficulty 1
+prompt   Which term is a like term to 4a?
+display  inline "4a"
+answer   choice 3a
+input    choice
+hint     Like terms share the same variable.
+choice   2y = 2y
+choice   3a = 3a
+choice   4 = 4
+step 1   Match the term with the same variable.   [4a and 3a]
+
+--- identify-like-terms · seed 12345 · difficulty 1
+prompt   Which term is a like term to 4y?
+display  inline "4y"
+answer   choice 2y
+input    choice
+hint     Like terms share the same variable.
+choice   2y = 2y
+choice   2n = 2n
+choice   1 = 1
+step 1   Match the term with the same variable.   [4y and 2y]
+
+--- identify-like-terms · seed 67890 · difficulty 1
+prompt   Which term is a like term to 2n?
+display  inline "2n"
+answer   choice 1n
+input    choice
+hint     Like terms share the same variable.
+choice   1n = 1n
+choice   1 = 1
+choice   4x = 4x
+step 1   Match the term with the same variable.   [2n and 1n]
+
+--- identify-like-terms · seed 424242 · difficulty 1
+prompt   Which term is a like term to 3y?
+display  inline "3y"
+answer   choice 2y
+input    choice
+hint     Like terms share the same variable.
+choice   2y = 2y
+choice   1 = 1
+choice   3n = 3n
+step 1   Match the term with the same variable.   [3y and 2y]
+
+--- identify-like-terms · seed 987654321 · difficulty 1
+prompt   Which term is a like term to 4y?
+display  inline "4y"
+answer   choice 2y
+input    choice
+hint     Like terms share the same variable.
+choice   3 = 3
+choice   2y = 2y
+choice   2n = 2n
+step 1   Match the term with the same variable.   [4y and 2y]
+
+--- identify-like-terms · seed 1 · difficulty 2
+prompt   Which term is a like term to 5a?
+display  inline "5a"
+answer   choice 4a
+input    choice
+hint     Like terms share the same variable.
+choice   3y = 3y
+choice   4a = 4a
+choice   5 = 5
+step 1   Match the term with the same variable.   [5a and 4a]
+
+--- identify-like-terms · seed 12345 · difficulty 2
+prompt   Which term is a like term to 5y?
+display  inline "5y"
+answer   choice 3y
+input    choice
+hint     Like terms share the same variable.
+choice   3y = 3y
+choice   3n = 3n
+choice   2 = 2
+step 1   Match the term with the same variable.   [5y and 3y]
+
+--- identify-like-terms · seed 67890 · difficulty 2
+prompt   Which term is a like term to 3n?
+display  inline "3n"
+answer   choice 2n
+input    choice
+hint     Like terms share the same variable.
+choice   2n = 2n
+choice   2 = 2
+choice   5x = 5x
+step 1   Match the term with the same variable.   [3n and 2n]
+
+--- identify-like-terms · seed 424242 · difficulty 2
+prompt   Which term is a like term to 4y?
+display  inline "4y"
+answer   choice 3y
+input    choice
+hint     Like terms share the same variable.
+choice   3y = 3y
+choice   2 = 2
+choice   4n = 4n
+step 1   Match the term with the same variable.   [4y and 3y]
+
+--- identify-like-terms · seed 987654321 · difficulty 2
+prompt   Which term is a like term to 5y?
+display  inline "5y"
+answer   choice 3y
+input    choice
+hint     Like terms share the same variable.
+choice   4 = 4
+choice   3y = 3y
+choice   3n = 3n
+step 1   Match the term with the same variable.   [5y and 3y]
+
+--- identify-like-terms · seed 1 · difficulty 3
+prompt   Which term is a like term to 6a?
+display  inline "6a"
+answer   choice 5a
+input    choice
+hint     Like terms share the same variable.
+choice   3y = 3y
+choice   5a = 5a
+choice   7 = 7
+step 1   Match the term with the same variable.   [6a and 5a]
+
+--- identify-like-terms · seed 12345 · difficulty 3
+prompt   Which term is a like term to 6y?
+display  inline "6y"
+answer   choice 4y
+input    choice
+hint     Like terms share the same variable.
+choice   4y = 4y
+choice   3n = 3n
+choice   3 = 3
+step 1   Match the term with the same variable.   [6y and 4y]
+
+--- identify-like-terms · seed 67890 · difficulty 3
+prompt   Which term is a like term to 3n?
+display  inline "3n"
+answer   choice 2n
+input    choice
+hint     Like terms share the same variable.
+choice   2n = 2n
+choice   4 = 4
+choice   5x = 5x
+step 1   Match the term with the same variable.   [3n and 2n]
+
+--- identify-like-terms · seed 424242 · difficulty 3
+prompt   Which term is a like term to 5y?
+display  inline "5y"
+answer   choice 3y
+input    choice
+hint     Like terms share the same variable.
+choice   3y = 3y
+choice   3 = 3
+choice   5n = 5n
+step 1   Match the term with the same variable.   [5y and 3y]
+
+--- identify-like-terms · seed 987654321 · difficulty 3
+prompt   Which term is a like term to 6y?
+display  inline "6y"
+answer   choice 4y
+input    choice
+hint     Like terms share the same variable.
+choice   6 = 6
+choice   4y = 4y
+choice   3n = 3n
+step 1   Match the term with the same variable.   [6y and 4y]
+
+--- identify-like-terms · seed 1 · difficulty 4
+prompt   Which term is a like term to 7a?
+display  inline "7a"
+answer   choice 6a
+input    choice
+hint     Like terms share the same variable.
+choice   4y = 4y
+choice   6a = 6a
+choice   8 = 8
+step 1   Match the term with the same variable.   [7a and 6a]
+
+--- identify-like-terms · seed 12345 · difficulty 4
+prompt   Which term is a like term to 7y?
+display  inline "7y"
+answer   choice 5y
+input    choice
+hint     Like terms share the same variable.
+choice   5y = 5y
+choice   4n = 4n
+choice   4 = 4
+step 1   Match the term with the same variable.   [7y and 5y]
+
+--- identify-like-terms · seed 67890 · difficulty 4
+prompt   Which term is a like term to 4n?
+display  inline "4n"
+answer   choice 3n
+input    choice
+hint     Like terms share the same variable.
+choice   3n = 3n
+choice   5 = 5
+choice   6x = 6x
+step 1   Match the term with the same variable.   [4n and 3n]
+
+--- identify-like-terms · seed 424242 · difficulty 4
+prompt   Which term is a like term to 6y?
+display  inline "6y"
+answer   choice 4y
+input    choice
+hint     Like terms share the same variable.
+choice   4y = 4y
+choice   4 = 4
+choice   6n = 6n
+step 1   Match the term with the same variable.   [6y and 4y]
+
+--- identify-like-terms · seed 987654321 · difficulty 4
+prompt   Which term is a like term to 7y?
+display  inline "7y"
+answer   choice 5y
+input    choice
+hint     Like terms share the same variable.
+choice   7 = 7
+choice   5y = 5y
+choice   4n = 4n
+step 1   Match the term with the same variable.   [7y and 5y]
+
+--- identify-like-terms · seed 1 · difficulty 5
+prompt   Which term is a like term to 9a?
+display  inline "9a"
+answer   choice 8a
+input    choice
+hint     Like terms share the same variable.
+choice   4y = 4y
+choice   8a = 8a
+choice   9 = 9
+step 1   Match the term with the same variable.   [9a and 8a]
+
+--- identify-like-terms · seed 12345 · difficulty 5
+prompt   Which term is a like term to 8y?
+display  inline "8y"
+answer   choice 6y
+input    choice
+hint     Like terms share the same variable.
+choice   6y = 6y
+choice   5n = 5n
+choice   5 = 5
+step 1   Match the term with the same variable.   [8y and 6y]
+
+--- identify-like-terms · seed 67890 · difficulty 5
+prompt   Which term is a like term to 5n?
+display  inline "5n"
+answer   choice 3n
+input    choice
+hint     Like terms share the same variable.
+choice   3n = 3n
+choice   6 = 6
+choice   8x = 8x
+step 1   Match the term with the same variable.   [5n and 3n]
+
+--- identify-like-terms · seed 424242 · difficulty 5
+prompt   Which term is a like term to 7y?
+display  inline "7y"
+answer   choice 5y
+input    choice
+hint     Like terms share the same variable.
+choice   5y = 5y
+choice   5 = 5
+choice   7n = 7n
+step 1   Match the term with the same variable.   [7y and 5y]
+
+--- identify-like-terms · seed 987654321 · difficulty 5
+prompt   Which term is a like term to 9y?
+display  inline "9y"
+answer   choice 6y
+input    choice
+hint     Like terms share the same variable.
+choice   8 = 8
+choice   6y = 6y
+choice   5n = 5n
+step 1   Match the term with the same variable.   [9y and 6y]"
+`;
+
+exports[`recorded output: variable-meaning > matches the wording recorded when the skill landed 1`] = `
+"--- variable-meaning · seed 1 · difficulty 1
+prompt   If x = 1, what does this expression equal?
+display  inline "3x"
+answer   exact 3/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [3 × 1]
+step 2   Multiply to find the value.   [= 3]
+
+--- variable-meaning · seed 12345 · difficulty 1
+prompt   If x = 2, what does this expression equal?
+display  inline "4x"
+answer   exact 8/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [4 × 2]
+step 2   Multiply to find the value.   [= 8]
+
+--- variable-meaning · seed 67890 · difficulty 1
+prompt   If x = 3, what does this expression equal?
+display  inline "2x"
+answer   exact 6/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [2 × 3]
+step 2   Multiply to find the value.   [= 6]
+
+--- variable-meaning · seed 424242 · difficulty 1
+prompt   If x = 1, what does this expression equal?
+display  inline "x"
+answer   exact 1/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [1 × 1]
+step 2   Multiply to find the value.   [= 1]
+
+--- variable-meaning · seed 987654321 · difficulty 1
+prompt   If x = 1, what does this expression equal?
+display  inline "4x"
+answer   exact 4/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [4 × 1]
+step 2   Multiply to find the value.   [= 4]
+
+--- variable-meaning · seed 1 · difficulty 2
+prompt   If x = 2, what does this expression equal?
+display  inline "4x"
+answer   exact 8/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [4 × 2]
+step 2   Multiply to find the value.   [= 8]
+
+--- variable-meaning · seed 12345 · difficulty 2
+prompt   If x = 3, what does this expression equal?
+display  inline "5x"
+answer   exact 15/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [5 × 3]
+step 2   Multiply to find the value.   [= 15]
+
+--- variable-meaning · seed 67890 · difficulty 2
+prompt   If x = 4, what does this expression equal?
+display  inline "3x"
+answer   exact 12/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [3 × 4]
+step 2   Multiply to find the value.   [= 12]
+
+--- variable-meaning · seed 424242 · difficulty 2
+prompt   If x = 3, what does this expression equal?
+display  inline "2x"
+answer   exact 6/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [2 × 3]
+step 2   Multiply to find the value.   [= 6]
+
+--- variable-meaning · seed 987654321 · difficulty 2
+prompt   If x = 2, what does this expression equal?
+display  inline "5x"
+answer   exact 10/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [5 × 2]
+step 2   Multiply to find the value.   [= 10]
+
+--- variable-meaning · seed 1 · difficulty 3
+prompt   If x = 3, what does this expression equal?
+display  inline "5x"
+answer   exact 15/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [5 × 3]
+step 2   Multiply to find the value.   [= 15]
+
+--- variable-meaning · seed 12345 · difficulty 3
+prompt   If x = 4, what does this expression equal?
+display  inline "6x"
+answer   exact 24/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [6 × 4]
+step 2   Multiply to find the value.   [= 24]
+
+--- variable-meaning · seed 67890 · difficulty 3
+prompt   If x = 6, what does this expression equal?
+display  inline "3x"
+answer   exact 18/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [3 × 6]
+step 2   Multiply to find the value.   [= 18]
+
+--- variable-meaning · seed 424242 · difficulty 3
+prompt   If x = 4, what does this expression equal?
+display  inline "2x"
+answer   exact 8/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [2 × 4]
+step 2   Multiply to find the value.   [= 8]
+
+--- variable-meaning · seed 987654321 · difficulty 3
+prompt   If x = 3, what does this expression equal?
+display  inline "6x"
+answer   exact 18/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [6 × 3]
+step 2   Multiply to find the value.   [= 18]
+
+--- variable-meaning · seed 1 · difficulty 4
+prompt   If x = 4, what does this expression equal?
+display  inline "6x"
+answer   exact 24/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [6 × 4]
+step 2   Multiply to find the value.   [= 24]
+
+--- variable-meaning · seed 12345 · difficulty 4
+prompt   If x = 5, what does this expression equal?
+display  inline "7x"
+answer   exact 35/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [7 × 5]
+step 2   Multiply to find the value.   [= 35]
+
+--- variable-meaning · seed 67890 · difficulty 4
+prompt   If x = 7, what does this expression equal?
+display  inline "4x"
+answer   exact 28/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [4 × 7]
+step 2   Multiply to find the value.   [= 28]
+
+--- variable-meaning · seed 424242 · difficulty 4
+prompt   If x = 5, what does this expression equal?
+display  inline "3x"
+answer   exact 15/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [3 × 5]
+step 2   Multiply to find the value.   [= 15]
+
+--- variable-meaning · seed 987654321 · difficulty 4
+prompt   If x = 4, what does this expression equal?
+display  inline "7x"
+answer   exact 28/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [7 × 4]
+step 2   Multiply to find the value.   [= 28]
+
+--- variable-meaning · seed 1 · difficulty 5
+prompt   If x = 5, what does this expression equal?
+display  inline "7x"
+answer   exact 35/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [7 × 5]
+step 2   Multiply to find the value.   [= 35]
+
+--- variable-meaning · seed 12345 · difficulty 5
+prompt   If x = 6, what does this expression equal?
+display  inline "9x"
+answer   exact 54/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [9 × 6]
+step 2   Multiply to find the value.   [= 54]
+
+--- variable-meaning · seed 67890 · difficulty 5
+prompt   If x = 7, what does this expression equal?
+display  inline "5x"
+answer   exact 35/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [5 × 7]
+step 2   Multiply to find the value.   [= 35]
+
+--- variable-meaning · seed 424242 · difficulty 5
+prompt   If x = 6, what does this expression equal?
+display  inline "3x"
+answer   exact 18/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [3 × 6]
+step 2   Multiply to find the value.   [= 18]
+
+--- variable-meaning · seed 987654321 · difficulty 5
+prompt   If x = 5, what does this expression equal?
+display  inline "9x"
+answer   exact 45/1
+input    keypad
+hint     Put the value in place of x, then multiply.
+step 1   Replace x with its value.   [9 × 5]
+step 2   Multiply to find the value.   [= 45]"
+`;
+
+exports[`recorded output: words-to-expression > matches the wording recorded when the skill landed 1`] = `
+"--- words-to-expression · seed 1 · difficulty 1
+prompt   Write the expression for "5 less than a number".
+display  inline "5"
+answer   expression x-5 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-5]
+miss     reversed-order = 5-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+5   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 12345 · difficulty 1
+prompt   Write the expression for "6 less than a number".
+display  inline "6"
+answer   expression x-6 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-6]
+miss     reversed-order = 6-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+6   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 67890 · difficulty 1
+prompt   Write the expression for "a number subtracted from 3".
+display  inline "3"
+answer   expression 3-x (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [3-x]
+miss     reversed-order = x-3   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = 3+x   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 424242 · difficulty 1
+prompt   Write the expression for "2 less than a number".
+display  inline "2"
+answer   expression x-2 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-2]
+miss     reversed-order = 2-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+2   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 987654321 · difficulty 1
+prompt   Write the expression for "6 less than a number".
+display  inline "6"
+answer   expression x-6 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-6]
+miss     reversed-order = 6-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+6   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 1 · difficulty 2
+prompt   Write the expression for "6 less than a number".
+display  inline "6"
+answer   expression x-6 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-6]
+miss     reversed-order = 6-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+6   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 12345 · difficulty 2
+prompt   Write the expression for "8 less than a number".
+display  inline "8"
+answer   expression x-8 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-8]
+miss     reversed-order = 8-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+8   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 67890 · difficulty 2
+prompt   Write the expression for "a number subtracted from 5".
+display  inline "5"
+answer   expression 5-x (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [5-x]
+miss     reversed-order = x-5   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = 5+x   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 424242 · difficulty 2
+prompt   Write the expression for "3 less than a number".
+display  inline "3"
+answer   expression x-3 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-3]
+miss     reversed-order = 3-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+3   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 987654321 · difficulty 2
+prompt   Write the expression for "8 less than a number".
+display  inline "8"
+answer   expression x-8 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-8]
+miss     reversed-order = 8-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+8   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 1 · difficulty 3
+prompt   Write the expression for "8 less than a number".
+display  inline "8"
+answer   expression x-8 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-8]
+miss     reversed-order = 8-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+8   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 12345 · difficulty 3
+prompt   Write the expression for "10 less than a number".
+display  inline "10"
+answer   expression x-10 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-10]
+miss     reversed-order = 10-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+10   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 67890 · difficulty 3
+prompt   Write the expression for "a number subtracted from 6".
+display  inline "6"
+answer   expression 6-x (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [6-x]
+miss     reversed-order = x-6   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = 6+x   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 424242 · difficulty 3
+prompt   Write the expression for "4 less than a number".
+display  inline "4"
+answer   expression x-4 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-4]
+miss     reversed-order = 4-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+4   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 987654321 · difficulty 3
+prompt   Write the expression for "10 less than a number".
+display  inline "10"
+answer   expression x-10 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-10]
+miss     reversed-order = 10-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+10   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 1 · difficulty 4
+prompt   Write the expression for "9 less than a number".
+display  inline "9"
+answer   expression x-9 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-9]
+miss     reversed-order = 9-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+9   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 12345 · difficulty 4
+prompt   Write the expression for "11 less than a number".
+display  inline "11"
+answer   expression x-11 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-11]
+miss     reversed-order = 11-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+11   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 67890 · difficulty 4
+prompt   Write the expression for "a number subtracted from 7".
+display  inline "7"
+answer   expression 7-x (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [7-x]
+miss     reversed-order = x-7   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = 7+x   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 424242 · difficulty 4
+prompt   Write the expression for "5 less than a number".
+display  inline "5"
+answer   expression x-5 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-5]
+miss     reversed-order = 5-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+5   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 987654321 · difficulty 4
+prompt   Write the expression for "11 less than a number".
+display  inline "11"
+answer   expression x-11 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-11]
+miss     reversed-order = 11-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+11   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 1 · difficulty 5
+prompt   Write the expression for "10 less than a number".
+display  inline "10"
+answer   expression x-10 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-10]
+miss     reversed-order = 10-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+10   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 12345 · difficulty 5
+prompt   Write the expression for "12 less than a number".
+display  inline "12"
+answer   expression x-12 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-12]
+miss     reversed-order = 12-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+12   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 67890 · difficulty 5
+prompt   Write the expression for "a number subtracted from 8".
+display  inline "8"
+answer   expression 8-x (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [8-x]
+miss     reversed-order = x-8   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = 8+x   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 424242 · difficulty 5
+prompt   Write the expression for "6 less than a number".
+display  inline "6"
+answer   expression x-6 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-6]
+miss     reversed-order = 6-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+6   This phrase means subtraction, not addition.
+
+--- words-to-expression · seed 987654321 · difficulty 5
+prompt   Write the expression for "12 less than a number".
+display  inline "12"
+answer   expression x-12 (x, expanded)
+input    expression
+variable x
+hint     Read the phrase in the order the subtraction happens.
+step 1   Write what is subtracted from what, in order.   [x-12]
+miss     reversed-order = 12-x   Subtraction order matters — write it in the order the phrase names it.
+miss     used-addition = x+12   This phrase means subtraction, not addition."
+`;

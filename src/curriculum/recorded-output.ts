@@ -366,7 +366,8 @@ export const format = (problem: Problem, seed: number): string => {
   })
 
   for (const m of problem.misconceptions ?? []) {
-    lines.push(`miss     ${m.tag} = ${m.value}   ${m.nudge}`)
+    const value = typeof m.value === 'number' ? m.value : m.value.value
+    lines.push(`miss     ${m.tag} = ${value}   ${m.nudge}`)
   }
 
   return lines.join('\n')

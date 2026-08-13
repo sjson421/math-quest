@@ -47,6 +47,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "add-words": [
     "add-three-numbers",
   ],
+  "combine-like-terms": [
+    "identify-like-terms",
+  ],
   "common-denominator": [
     "sub-frac-same-den",
   ],
@@ -76,6 +79,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "discount-tax-tip": [
     "percent-change",
+  ],
+  "distributive": [
+    "combine-like-terms",
   ],
   "div-by-10-100": [
     "div-remainder",
@@ -112,6 +118,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "estimate-roots": [
     "perfect-squares",
+  ],
+  "evaluate-expression": [
+    "variable-meaning",
   ],
   "evaluate-powers": [
     "exponent-meaning",
@@ -151,6 +160,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "fractions-numberline": [
     "name-parts",
+  ],
+  "identify-like-terms": [
+    "words-to-expression",
   ],
   "improper-to-mixed": [
     "sub-frac-diff-den",
@@ -354,8 +366,14 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "unit-rate": [
     "simplify-ratios",
   ],
+  "variable-meaning": [
+    "pemdas-exponents",
+  ],
   "with-parentheses": [
     "two-operations",
+  ],
+  "words-to-expression": [
+    "evaluate-expression",
   ],
   "write-ratios": [
     "simple-interest",

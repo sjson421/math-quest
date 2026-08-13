@@ -26,6 +26,7 @@ import { unit09 } from './unit-09-decimals'
 import { unit10 } from './unit-10-percents'
 import { unit11 } from './unit-11-ratios-proportions'
 import { unit12 } from './unit-12-exponents-roots'
+import { unit13 } from './unit-13-expressions'
 import {
   indexSkills,
   resolveCourseTree,
@@ -55,6 +56,7 @@ export const allSkills: SkillGenerator[] = [
   ...unit10,
   ...unit11,
   ...unit12,
+  ...unit13,
 ]
 
 /**
