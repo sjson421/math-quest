@@ -7,14 +7,14 @@ commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archi
 Task lists are the running record — mark each item done as it lands, and note decisions
 inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, twenty-nine
+- `openspec/specs/` is the **baseline**: what the system does today, thirty
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
   `unit-02-subtraction`, `unit-03-multiplication`, `unit-04-division`,
   `unit-05-order-of-operations`, `unit-06-negatives`, `unit-07-fractions-meaning`,
   `unit-08-fraction-operations`, `unit-09-decimals`, `unit-10-percents`,
-  `unit-11-ratios-proportions`,
+  `unit-11-ratios-proportions`, `unit-12-exponents-roots`,
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`,
   `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`,
