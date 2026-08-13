@@ -2,13 +2,18 @@
 
 What is left, in the order it should be done.
 
-**Status: 111 of 201 skills are playable.** Stages A, B and C and Stage D are playable.
+**Status: 117 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
+Stage E has opened with Unit 12a.
 Choice input,
 number-line input, math notation, fraction input, diagrams and expression input are built,
 so `AVAILABLE_CAPABILITIES` holds
 `choice-input`, `number-line`, `math-notation`, `fraction-input`, `diagram` and
-`expression-input` — the last of these unlocks nothing on its own, since Unit 13 (item 21)
-has not shipped a generator yet. The three content-bearing answer-control modes all have
+`expression-input`. Unit 12a is the first content to use `math-notation`'s superscript and
+root kinds, for exponent and root display; it does not use `expression-input`, since that
+capability's grammar excludes exponents, so `exponent-multiply` and `exponent-divide` ask
+for the resulting exponent as a number rather than an expression. `expression-input` itself
+still unlocks nothing on its own, since Unit 13 (item 21's 13a) has not shipped a generator
+yet. The three content-bearing answer-control modes all have
 content: `negatives-numberline` is the first skill anywhere to
 declare a line, comparison, ordering, factors, multiples, primes and negative comparison use
 choices, and everything else uses the keypad. The pad offers a sign, a decimal point or a
@@ -26,7 +31,9 @@ conversions, inverse percent relationships, percent change, discount/tax/tip and
 interest with its supplied GED formula. Unit 11 covers writing and simplifying ratios,
 best-value unit rates, proportions, scale drawings, and a fixed stated set of within-system
 unit conversions, then closes with fixed-frame ratio stories distinguishing part-to-part from
-part-to-whole. Expression input is built; Unit 13 is next.
+part-to-whole. Expression input is built. Unit 12a covers what an exponent means, evaluating
+a power, perfect squares in both directions, estimating a non-perfect-square root, and the
+same-base power multiply/divide rules; item 21's 12b increment is next.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -762,7 +769,11 @@ document's ✅ markers updated to match, which the cross-check enforces.
 
       - **12a** `exponent-meaning`–`exponent-divide` — needs item 17's notation for superscripts
         and the radical; `evaluate-powers` (12.2) is a wall on reading 3⁴ as 3 × 4, which is the
-        misconception the notation itself invites.
+        misconception the notation itself invites. **Shipped 2026-08-13.** `exponent-multiply`
+        and `exponent-divide` ask for the resulting exponent as a number rather than an
+        expression, since `expression-input`'s grammar excludes exponents; a `PowerData` payload
+        on the `math` display (alongside the existing `FractionData`/`RatioData`) carries the
+        base, exponent(s), or radicand for independent verification.
       - **12b** `power-of-power`–`pemdas-exponents` — `scientific-notation` (12.9) is the first
         skill wanting ×10ⁿ, and `pemdas-exponents` (12.10) completes 5.3. Item 12 deliberately
         kept Unit 5's expression model local to Unit 5 and said this unit should shape its own;

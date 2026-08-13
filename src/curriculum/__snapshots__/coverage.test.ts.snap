@@ -110,8 +110,23 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "equivalent-visual": [
     "fractions-numberline",
   ],
+  "estimate-roots": [
+    "perfect-squares",
+  ],
+  "evaluate-powers": [
+    "exponent-meaning",
+  ],
   "expanded-form": [
     "place-value-hundreds",
+  ],
+  "exponent-divide": [
+    "exponent-multiply",
+  ],
+  "exponent-meaning": [
+    "ratio-words",
+  ],
+  "exponent-multiply": [
+    "estimate-roots",
   ],
   "factors": [
     "long-div-2digit",
@@ -211,6 +226,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "percent-to-fraction": [
     "decimal-to-percent",
+  ],
+  "perfect-squares": [
+    "evaluate-powers",
   ],
   "place-value-hundreds": [
     "place-value-tens",

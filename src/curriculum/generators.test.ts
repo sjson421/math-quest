@@ -15,6 +15,7 @@ import type {
   MathNotation,
   PercentData,
   Problem,
+  PowerData,
   RatioData,
   SkillGenerator,
   WholeNumberData,
@@ -433,6 +434,17 @@ const notationMixed = (whole: number, numerator: number, denominator: number): M
   children: [notationText(String(whole)), notationFraction(String(numerator), String(denominator))],
 })
 
+const notationSuperscript = (base: string, exponent: string): MathNotation => ({
+  kind: 'superscript',
+  base: notationText(base),
+  exponent: notationText(exponent),
+})
+
+const notationRoot = (radicand: string): MathNotation => ({
+  kind: 'root',
+  radicand: notationText(radicand),
+})
+
 /**
  * The exact notation and spoken label a fraction operation claims to show.
  *
@@ -764,6 +776,89 @@ function expectedRatioDisplay(data: RatioData): {
   }
 }
 
+function expectedPowerDisplay(data: PowerData): {
+  notation: MathNotation
+  label: string
+  answer: number
+  values: number[]
+} {
+  switch (data.operation) {
+    case 'expand-power': {
+      const factors = Array.from({ length: data.exponent }, () => String(data.base)).join(' × ')
+      return {
+        notation: {
+          kind: 'row',
+          children: [notationText(`${factors} = `), notationSuperscript(String(data.base), '?')],
+        },
+        label: `${factors} equals ${data.base} to the blank power`,
+        answer: data.exponent,
+        values: [data.base, data.exponent],
+      }
+    }
+    case 'evaluate-power':
+      return {
+        notation: notationSuperscript(String(data.base), String(data.exponent)),
+        label: `${data.base} to the ${data.exponent} power`,
+        answer: data.base ** data.exponent,
+        values: [data.base, data.exponent],
+      }
+    case 'square':
+      return {
+        notation: notationSuperscript(String(data.value), '2'),
+        label: `${data.value} squared`,
+        answer: data.value * data.value,
+        values: [data.value],
+      }
+    case 'square-root': {
+      const answer = Math.sqrt(data.value)
+      if (!Number.isInteger(answer)) throw new Error(`square-root value ${data.value} is not a perfect square`)
+      return {
+        notation: notationRoot(String(data.value)),
+        label: `the square root of ${data.value}`,
+        answer,
+        values: [data.value],
+      }
+    }
+    case 'estimate-root':
+      return {
+        notation: notationRoot(String(data.value)),
+        label: `the square root of ${data.value}`,
+        answer: Math.floor(Math.sqrt(data.value)),
+        values: [data.value],
+      }
+    case 'power-multiply':
+    case 'power-divide': {
+      const base = String(data.base)
+      const operatorText = data.operation === 'power-multiply' ? ' × ' : ' ÷ '
+      const answer = data.operation === 'power-multiply'
+        ? data.leftExponent + data.rightExponent
+        : data.leftExponent - data.rightExponent
+      return {
+        notation: {
+          kind: 'row',
+          children: [
+            notationSuperscript(base, String(data.leftExponent)),
+            notationText(operatorText),
+            notationSuperscript(base, String(data.rightExponent)),
+            notationText(' = '),
+            notationSuperscript(base, '?'),
+          ],
+        },
+        label: (
+          `${base} to the ${data.leftExponent} ${data.operation === 'power-multiply' ? 'times' : 'divided by'} ` +
+          `${base} to the ${data.rightExponent} equals ${base} to the blank power`
+        ),
+        answer,
+        values: [data.leftExponent, data.rightExponent],
+      }
+    }
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unknown power operation: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 function recompute(problem: Problem): number | string {
   const { display } = problem
 
@@ -844,6 +939,14 @@ function recompute(problem: Problem): number | string {
         throw new Error(`${problem.skillId}: visible ratio notation disagrees with its data`)
       }
       return typeof expected.answer === 'string' ? choiceIdFor(problem, expected.answer) : expected.answer
+    }
+
+    if (display.power) {
+      const expected = expectedPowerDisplay(display.power)
+      if (JSON.stringify(display.notation) !== JSON.stringify(expected.notation) || display.label !== expected.label) {
+        throw new Error(`${problem.skillId}: visible power notation disagrees with its data`)
+      }
+      return expected.answer
     }
 
     if (!display.fraction) {
@@ -1038,6 +1141,11 @@ function sourceMagnitude(problem: Problem): number {
 
   if (problem.display.kind === 'math' && problem.display.ratio) {
     const values = expectedRatioDisplay(problem.display.ratio).values
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
+
+  if (problem.display.kind === 'math' && problem.display.power) {
+    const values = expectedPowerDisplay(problem.display.power).values
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 

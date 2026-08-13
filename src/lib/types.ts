@@ -256,6 +256,22 @@ export type RatioData =
       comparison: 'part-to-part' | 'part-to-whole'
     }
 
+/** The source quantities behind Unit 12's exponent and root displays. */
+export type PowerData =
+  /** `exponent-meaning`: repeated multiplication expands to `exponent` factors of `base`. */
+  | { operation: 'expand-power'; base: number; exponent: number }
+  | { operation: 'evaluate-power'; base: number; exponent: number }
+  | { operation: 'square'; value: number }
+  | { operation: 'square-root'; value: number }
+  /** The answer is `floor(sqrt(value))`, the lesser of the two bounding whole numbers. */
+  | { operation: 'estimate-root'; value: number }
+  | {
+      operation: 'power-multiply' | 'power-divide'
+      base: number
+      leftExponent: number
+      rightExponent: number
+    }
+
 /**
  * Structured notation for the closed expression surface used by Stages D–G.
  *
@@ -393,9 +409,10 @@ export type Display =
       notation: MathNotation
       label: string
     } & (
-      | { fraction: FractionData; ratio?: never }
-      | { ratio: RatioData; fraction?: never }
-      | { fraction?: never; ratio?: never }
+      | { fraction: FractionData; ratio?: never; power?: never }
+      | { ratio: RatioData; fraction?: never; power?: never }
+      | { power: PowerData; fraction?: never; ratio?: never }
+      | { fraction?: never; ratio?: never; power?: never }
     ))
   /** A shaded equal-part shape whose visible fraction is carried as data. */
   | { kind: 'diagram'; diagram: ShapeDiagram }

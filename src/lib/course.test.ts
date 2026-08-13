@@ -107,7 +107,7 @@ describe('currentUnitId', () => {
     const progress = progressAt(every(unitIds, MAX_MASTERY))
 
     expect(currentUnitId(course, progress)).toBe(unitIds.at(-1))
-    expect(unitIds.at(-1)).toBe('unit-11')
+    expect(unitIds.at(-1)).toBe('unit-12')
   })
 
   it('has no answer for an empty course', () => {

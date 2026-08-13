@@ -10,6 +10,7 @@ import type {
   FractionData,
   MathNotation,
   PercentData,
+  PowerData,
   Problem,
   RatioData,
   SkillGenerator,
@@ -180,6 +181,25 @@ const formatPercentData = (data: PercentData): string => {
   }
 }
 
+const formatPowerData = (data: PowerData): string => {
+  switch (data.operation) {
+    case 'expand-power':
+    case 'evaluate-power':
+      return `${data.operation} ${data.base}^${data.exponent}`
+    case 'square':
+    case 'square-root':
+    case 'estimate-root':
+      return `${data.operation} ${data.value}`
+    case 'power-multiply':
+    case 'power-divide':
+      return `${data.operation} ${data.base}^${data.leftExponent} ${data.base}^${data.rightExponent}`
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled power data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 const formatRatioData = (data: RatioData): string => {
   switch (data.operation) {
     case 'write-ratio':
@@ -228,7 +248,8 @@ const formatDisplay = (display: Problem['display']): string => {
       return (
         `math "${display.label}" ${formatNotation(display.notation)}` +
         (display.fraction ? ` [${formatFractionData(display.fraction)}]` : '') +
-        (display.ratio ? ` [${formatRatioData(display.ratio)}]` : '')
+        (display.ratio ? ` [${formatRatioData(display.ratio)}]` : '') +
+        (display.power ? ` [${formatPowerData(display.power)}]` : '')
       )
     case 'diagram':
       return (

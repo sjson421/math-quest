@@ -326,12 +326,12 @@ in lowest terms. Fraction operations wait for Unit 8.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 12.1 | `exponent-meaning` | Repeated multiplication | `quick` |
-| 12.2 | `evaluate-powers` | | ⚠️ 3⁴ read as 3 × 4 |
-| 12.3 | `perfect-squares` | Roots to 144 | |
-| 12.4 | `estimate-roots` | Between which whole numbers | |
-| 12.5 | `exponent-multiply` | Add the powers | |
-| 12.6 | `exponent-divide` | Subtract the powers | |
+| 12.1 | `exponent-meaning` | Repeated multiplication | `quick` · ✅ |
+| 12.2 | `evaluate-powers` | | ✅ · ⚠️ 3⁴ read as 3 × 4 |
+| 12.3 | `perfect-squares` | Roots to 144 | ✅ |
+| 12.4 | `estimate-roots` | Between which whole numbers | ✅ |
+| 12.5 | `exponent-multiply` | Add the powers | ✅ |
+| 12.6 | `exponent-divide` | Subtract the powers | ✅ |
 | 12.7 | `power-of-power` | Multiply the powers | ⚠️ confused with 12.5 |
 | 12.8 | `zero-neg-exponents` | | |
 | 12.9 | `scientific-notation` | | |

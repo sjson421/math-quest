@@ -1,9 +1,9 @@
 /**
  * What the top of the course offers at first paint.
  *
- * Four of the eight stages have no generator anywhere in them. None of the four
- * may appear here, in any form — that is the difference between a course that
- * is being written and one that looks two-thirds empty.
+ * Three of the eight stages have no generator anywhere in them. None of the
+ * three may appear here, in any form — that is the difference between a course
+ * that is being written and one that looks two-thirds empty.
  */
 
 import { renderToStaticMarkup } from 'react-dom/server'
@@ -22,10 +22,11 @@ describe('StageList', () => {
   it('lists the stages that have something to play, in curriculum order', () => {
     const html = render()
 
-    expect(html.match(/<button/g)).toHaveLength(4)
+    expect(html.match(/<button/g)).toHaveLength(5)
     expect(html.indexOf('Numbers')).toBeLessThan(html.indexOf('The Four Operations'))
     expect(html.indexOf('The Four Operations')).toBeLessThan(html.indexOf('Negatives'))
     expect(html.indexOf('Negatives')).toBeLessThan(html.indexOf('Parts of a Whole'))
+    expect(html.indexOf('Parts of a Whole')).toBeLessThan(html.indexOf('Powers &amp; Early Algebra'))
   })
 
   it('shows no trace of a stage with no generator in it', () => {
@@ -35,7 +36,6 @@ describe('StageList', () => {
     )
 
     expect(unbuilt.map((stage) => stage.name)).toEqual([
-      'Powers & Early Algebra',
       'Graphs & Algebra II',
       'Geometry & Data',
       'GED Prep',

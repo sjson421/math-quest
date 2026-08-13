@@ -1,0 +1,1438 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: estimate-roots > matches the wording recorded when the skill landed 1`] = `
+"--- estimate-roots · seed 1 · difficulty 1
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 10" root("10") [estimate-root 10]
+answer   exact 3/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [3² = 9 and 4² = 16]
+step 2   The root falls between them.   [3 and 4]
+
+--- estimate-roots · seed 12345 · difficulty 1
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 19" root("19") [estimate-root 19]
+answer   exact 4/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [4² = 16 and 5² = 25]
+step 2   The root falls between them.   [4 and 5]
+
+--- estimate-roots · seed 67890 · difficulty 1
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 13" root("13") [estimate-root 13]
+answer   exact 3/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [3² = 9 and 4² = 16]
+step 2   The root falls between them.   [3 and 4]
+
+--- estimate-roots · seed 424242 · difficulty 1
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 5" root("5") [estimate-root 5]
+answer   exact 2/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [2² = 4 and 3² = 9]
+step 2   The root falls between them.   [2 and 3]
+
+--- estimate-roots · seed 987654321 · difficulty 1
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 18" root("18") [estimate-root 18]
+answer   exact 4/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [4² = 16 and 5² = 25]
+step 2   The root falls between them.   [4 and 5]
+
+--- estimate-roots · seed 1 · difficulty 2
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 26" root("26") [estimate-root 26]
+answer   exact 5/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [5² = 25 and 6² = 36]
+step 2   The root falls between them.   [5 and 6]
+
+--- estimate-roots · seed 12345 · difficulty 2
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 40" root("40") [estimate-root 40]
+answer   exact 6/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [6² = 36 and 7² = 49]
+step 2   The root falls between them.   [6 and 7]
+
+--- estimate-roots · seed 67890 · difficulty 2
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 21" root("21") [estimate-root 21]
+answer   exact 4/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [4² = 16 and 5² = 25]
+step 2   The root falls between them.   [4 and 5]
+
+--- estimate-roots · seed 424242 · difficulty 2
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 11" root("11") [estimate-root 11]
+answer   exact 3/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [3² = 9 and 4² = 16]
+step 2   The root falls between them.   [3 and 4]
+
+--- estimate-roots · seed 987654321 · difficulty 2
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 38" root("38") [estimate-root 38]
+answer   exact 6/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [6² = 36 and 7² = 49]
+step 2   The root falls between them.   [6 and 7]
+
+--- estimate-roots · seed 1 · difficulty 3
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 50" root("50") [estimate-root 50]
+answer   exact 7/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [7² = 49 and 8² = 64]
+step 2   The root falls between them.   [7 and 8]
+
+--- estimate-roots · seed 12345 · difficulty 3
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 69" root("69") [estimate-root 69]
+answer   exact 8/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [8² = 64 and 9² = 81]
+step 2   The root falls between them.   [8 and 9]
+
+--- estimate-roots · seed 67890 · difficulty 3
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 44" root("44") [estimate-root 44]
+answer   exact 6/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [6² = 36 and 7² = 49]
+step 2   The root falls between them.   [6 and 7]
+
+--- estimate-roots · seed 424242 · difficulty 3
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 28" root("28") [estimate-root 28]
+answer   exact 5/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [5² = 25 and 6² = 36]
+step 2   The root falls between them.   [5 and 6]
+
+--- estimate-roots · seed 987654321 · difficulty 3
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 67" root("67") [estimate-root 67]
+answer   exact 8/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [8² = 64 and 9² = 81]
+step 2   The root falls between them.   [8 and 9]
+
+--- estimate-roots · seed 1 · difficulty 4
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 82" root("82") [estimate-root 82]
+answer   exact 9/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [9² = 81 and 10² = 100]
+step 2   The root falls between them.   [9 and 10]
+
+--- estimate-roots · seed 12345 · difficulty 4
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 107" root("107") [estimate-root 107]
+answer   exact 10/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [10² = 100 and 11² = 121]
+step 2   The root falls between them.   [10 and 11]
+
+--- estimate-roots · seed 67890 · difficulty 4
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 74" root("74") [estimate-root 74]
+answer   exact 8/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [8² = 64 and 9² = 81]
+step 2   The root falls between them.   [8 and 9]
+
+--- estimate-roots · seed 424242 · difficulty 4
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 53" root("53") [estimate-root 53]
+answer   exact 7/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [7² = 49 and 8² = 64]
+step 2   The root falls between them.   [7 and 8]
+
+--- estimate-roots · seed 987654321 · difficulty 4
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 103" root("103") [estimate-root 103]
+answer   exact 10/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [10² = 100 and 11² = 121]
+step 2   The root falls between them.   [10 and 11]
+
+--- estimate-roots · seed 1 · difficulty 5
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 145" root("145") [estimate-root 145]
+answer   exact 12/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [12² = 144 and 13² = 169]
+step 2   The root falls between them.   [12 and 13]
+
+--- estimate-roots · seed 12345 · difficulty 5
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 177" root("177") [estimate-root 177]
+answer   exact 13/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [13² = 169 and 14² = 196]
+step 2   The root falls between them.   [13 and 14]
+
+--- estimate-roots · seed 67890 · difficulty 5
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 112" root("112") [estimate-root 112]
+answer   exact 10/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [10² = 100 and 11² = 121]
+step 2   The root falls between them.   [10 and 11]
+
+--- estimate-roots · seed 424242 · difficulty 5
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 86" root("86") [estimate-root 86]
+answer   exact 9/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [9² = 81 and 10² = 100]
+step 2   The root falls between them.   [9 and 10]
+
+--- estimate-roots · seed 987654321 · difficulty 5
+prompt   Between which two whole numbers does this root fall? Enter the smaller one.
+display  math "the square root of 173" root("173") [estimate-root 173]
+answer   exact 13/1
+input    keypad
+hint     Find the perfect squares just below and above this value.
+step 1   Find the nearest perfect squares.   [13² = 169 and 14² = 196]
+step 2   The root falls between them.   [13 and 14]"
+`;
+
+exports[`recorded output: evaluate-powers > matches the wording recorded when the skill landed 1`] = `
+"--- evaluate-powers · seed 1 · difficulty 1
+prompt   What is the value of this power?
+display  math "5 to the 2 power" superscript("5", "2") [evaluate-power 5^2]
+answer   exact 25/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [5 × 5]
+step 2   Multiply to find the value.   [= 25]
+miss     multiplied-base-by-exponent = 10   5 means 5 multiplied by itself 2 times, not 5 times 2.
+miss     swapped-base-and-exponent = 32   The base is 5 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 12345 · difficulty 1
+prompt   What is the value of this power?
+display  math "6 to the 2 power" superscript("6", "2") [evaluate-power 6^2]
+answer   exact 36/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [6 × 6]
+step 2   Multiply to find the value.   [= 36]
+miss     multiplied-base-by-exponent = 12   6 means 6 multiplied by itself 2 times, not 6 times 2.
+miss     swapped-base-and-exponent = 64   The base is 6 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 67890 · difficulty 1
+prompt   What is the value of this power?
+display  math "3 to the 2 power" superscript("3", "2") [evaluate-power 3^2]
+answer   exact 9/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [3 × 3]
+step 2   Multiply to find the value.   [= 9]
+miss     multiplied-base-by-exponent = 6   3 means 3 multiplied by itself 2 times, not 3 times 2.
+miss     swapped-base-and-exponent = 8   The base is 3 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 424242 · difficulty 1
+prompt   What is the value of this power?
+display  math "2 to the 3 power" superscript("2", "3") [evaluate-power 2^3]
+answer   exact 8/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [2 × 2 × 2]
+step 2   Multiply to find the value.   [= 8]
+miss     multiplied-base-by-exponent = 6   2^3 means 2 multiplied by itself 3 times, not 2 times 3.
+miss     swapped-base-and-exponent = 9   The base is 2 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 987654321 · difficulty 1
+prompt   What is the value of this power?
+display  math "6 to the 2 power" superscript("6", "2") [evaluate-power 6^2]
+answer   exact 36/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [6 × 6]
+step 2   Multiply to find the value.   [= 36]
+miss     multiplied-base-by-exponent = 12   6 means 6 multiplied by itself 2 times, not 6 times 2.
+miss     swapped-base-and-exponent = 64   The base is 6 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 1 · difficulty 2
+prompt   What is the value of this power?
+display  math "6 to the 2 power" superscript("6", "2") [evaluate-power 6^2]
+answer   exact 36/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [6 × 6]
+step 2   Multiply to find the value.   [= 36]
+miss     multiplied-base-by-exponent = 12   6 means 6 multiplied by itself 2 times, not 6 times 2.
+miss     swapped-base-and-exponent = 64   The base is 6 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 12345 · difficulty 2
+prompt   What is the value of this power?
+display  math "7 to the 2 power" superscript("7", "2") [evaluate-power 7^2]
+answer   exact 49/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [7 × 7]
+step 2   Multiply to find the value.   [= 49]
+miss     multiplied-base-by-exponent = 14   7 means 7 multiplied by itself 2 times, not 7 times 2.
+miss     swapped-base-and-exponent = 128   The base is 7 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 67890 · difficulty 2
+prompt   What is the value of this power?
+display  math "4 to the 3 power" superscript("4", "3") [evaluate-power 4^3]
+answer   exact 64/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [4 × 4 × 4]
+step 2   Multiply to find the value.   [= 64]
+miss     multiplied-base-by-exponent = 12   4^3 means 4 multiplied by itself 3 times, not 4 times 3.
+miss     swapped-base-and-exponent = 81   The base is 4 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 424242 · difficulty 2
+prompt   What is the value of this power?
+display  math "3 to the 2 power" superscript("3", "2") [evaluate-power 3^2]
+answer   exact 9/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [3 × 3]
+step 2   Multiply to find the value.   [= 9]
+miss     multiplied-base-by-exponent = 6   3 means 3 multiplied by itself 2 times, not 3 times 2.
+miss     swapped-base-and-exponent = 8   The base is 3 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 987654321 · difficulty 2
+prompt   What is the value of this power?
+display  math "7 to the 2 power" superscript("7", "2") [evaluate-power 7^2]
+answer   exact 49/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [7 × 7]
+step 2   Multiply to find the value.   [= 49]
+miss     multiplied-base-by-exponent = 14   7 means 7 multiplied by itself 2 times, not 7 times 2.
+miss     swapped-base-and-exponent = 128   The base is 7 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 1 · difficulty 3
+prompt   What is the value of this power?
+display  math "7 to the 2 power" superscript("7", "2") [evaluate-power 7^2]
+answer   exact 49/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [7 × 7]
+step 2   Multiply to find the value.   [= 49]
+miss     multiplied-base-by-exponent = 14   7 means 7 multiplied by itself 2 times, not 7 times 2.
+miss     swapped-base-and-exponent = 128   The base is 7 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 12345 · difficulty 3
+prompt   What is the value of this power?
+display  math "8 to the 2 power" superscript("8", "2") [evaluate-power 8^2]
+answer   exact 64/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [8 × 8]
+step 2   Multiply to find the value.   [= 64]
+miss     multiplied-base-by-exponent = 16   8 means 8 multiplied by itself 2 times, not 8 times 2.
+miss     swapped-base-and-exponent = 256   The base is 8 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 67890 · difficulty 3
+prompt   What is the value of this power?
+display  math "5 to the 3 power" superscript("5", "3") [evaluate-power 5^3]
+answer   exact 125/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [5 × 5 × 5]
+step 2   Multiply to find the value.   [= 125]
+miss     multiplied-base-by-exponent = 15   5^3 means 5 multiplied by itself 3 times, not 5 times 3.
+miss     swapped-base-and-exponent = 243   The base is 5 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 424242 · difficulty 3
+prompt   What is the value of this power?
+display  math "4 to the 3 power" superscript("4", "3") [evaluate-power 4^3]
+answer   exact 64/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [4 × 4 × 4]
+step 2   Multiply to find the value.   [= 64]
+miss     multiplied-base-by-exponent = 12   4^3 means 4 multiplied by itself 3 times, not 4 times 3.
+miss     swapped-base-and-exponent = 81   The base is 4 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 987654321 · difficulty 3
+prompt   What is the value of this power?
+display  math "8 to the 2 power" superscript("8", "2") [evaluate-power 8^2]
+answer   exact 64/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [8 × 8]
+step 2   Multiply to find the value.   [= 64]
+miss     multiplied-base-by-exponent = 16   8 means 8 multiplied by itself 2 times, not 8 times 2.
+miss     swapped-base-and-exponent = 256   The base is 8 and the exponent is 2 — keep them in that order.
+
+--- evaluate-powers · seed 1 · difficulty 4
+prompt   What is the value of this power?
+display  math "8 to the 3 power" superscript("8", "3") [evaluate-power 8^3]
+answer   exact 512/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [8 × 8 × 8]
+step 2   Multiply to find the value.   [= 512]
+miss     multiplied-base-by-exponent = 24   8^3 means 8 multiplied by itself 3 times, not 8 times 3.
+miss     swapped-base-and-exponent = 6561   The base is 8 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 12345 · difficulty 4
+prompt   What is the value of this power?
+display  math "9 to the 3 power" superscript("9", "3") [evaluate-power 9^3]
+answer   exact 729/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [9 × 9 × 9]
+step 2   Multiply to find the value.   [= 729]
+miss     multiplied-base-by-exponent = 27   9^3 means 9 multiplied by itself 3 times, not 9 times 3.
+miss     swapped-base-and-exponent = 19683   The base is 9 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 67890 · difficulty 4
+prompt   What is the value of this power?
+display  math "6 to the 4 power" superscript("6", "4") [evaluate-power 6^4]
+answer   exact 1296/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [6 × 6 × 6 × 6]
+step 2   Multiply to find the value.   [= 1296]
+miss     multiplied-base-by-exponent = 24   6^4 means 6 multiplied by itself 4 times, not 6 times 4.
+miss     swapped-base-and-exponent = 4096   The base is 6 and the exponent is 4 — keep them in that order.
+
+--- evaluate-powers · seed 424242 · difficulty 4
+prompt   What is the value of this power?
+display  math "5 to the 3 power" superscript("5", "3") [evaluate-power 5^3]
+answer   exact 125/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [5 × 5 × 5]
+step 2   Multiply to find the value.   [= 125]
+miss     multiplied-base-by-exponent = 15   5^3 means 5 multiplied by itself 3 times, not 5 times 3.
+miss     swapped-base-and-exponent = 243   The base is 5 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 987654321 · difficulty 4
+prompt   What is the value of this power?
+display  math "9 to the 3 power" superscript("9", "3") [evaluate-power 9^3]
+answer   exact 729/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [9 × 9 × 9]
+step 2   Multiply to find the value.   [= 729]
+miss     multiplied-base-by-exponent = 27   9^3 means 9 multiplied by itself 3 times, not 9 times 3.
+miss     swapped-base-and-exponent = 19683   The base is 9 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 1 · difficulty 5
+prompt   What is the value of this power?
+display  math "9 to the 3 power" superscript("9", "3") [evaluate-power 9^3]
+answer   exact 729/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [9 × 9 × 9]
+step 2   Multiply to find the value.   [= 729]
+miss     multiplied-base-by-exponent = 27   9^3 means 9 multiplied by itself 3 times, not 9 times 3.
+miss     swapped-base-and-exponent = 19683   The base is 9 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 12345 · difficulty 5
+prompt   What is the value of this power?
+display  math "10 to the 3 power" superscript("10", "3") [evaluate-power 10^3]
+answer   exact 1000/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [10 × 10 × 10]
+step 2   Multiply to find the value.   [= 1000]
+miss     multiplied-base-by-exponent = 30   10^3 means 10 multiplied by itself 3 times, not 10 times 3.
+miss     swapped-base-and-exponent = 59049   The base is 10 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 67890 · difficulty 5
+prompt   What is the value of this power?
+display  math "7 to the 4 power" superscript("7", "4") [evaluate-power 7^4]
+answer   exact 2401/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [7 × 7 × 7 × 7]
+step 2   Multiply to find the value.   [= 2401]
+miss     multiplied-base-by-exponent = 28   7^4 means 7 multiplied by itself 4 times, not 7 times 4.
+miss     swapped-base-and-exponent = 16384   The base is 7 and the exponent is 4 — keep them in that order.
+
+--- evaluate-powers · seed 424242 · difficulty 5
+prompt   What is the value of this power?
+display  math "6 to the 3 power" superscript("6", "3") [evaluate-power 6^3]
+answer   exact 216/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [6 × 6 × 6]
+step 2   Multiply to find the value.   [= 216]
+miss     multiplied-base-by-exponent = 18   6^3 means 6 multiplied by itself 3 times, not 6 times 3.
+miss     swapped-base-and-exponent = 729   The base is 6 and the exponent is 3 — keep them in that order.
+
+--- evaluate-powers · seed 987654321 · difficulty 5
+prompt   What is the value of this power?
+display  math "10 to the 3 power" superscript("10", "3") [evaluate-power 10^3]
+answer   exact 1000/1
+input    keypad
+hint     Multiply the base by itself as many times as the exponent says.
+step 1   Write out the repeated multiplication.   [10 × 10 × 10]
+step 2   Multiply to find the value.   [= 1000]
+miss     multiplied-base-by-exponent = 30   10^3 means 10 multiplied by itself 3 times, not 10 times 3.
+miss     swapped-base-and-exponent = 59049   The base is 10 and the exponent is 3 — keep them in that order."
+`;
+
+exports[`recorded output: exponent-divide > matches the wording recorded when the skill landed 1`] = `
+"--- exponent-divide · seed 1 · difficulty 1
+prompt   What is the missing exponent?
+display  math "3 to the 3 divided by 3 to the 1 equals 3 to the blank power" row(superscript("3", "3"), " ÷ ", superscript("3", "1"), " = ", superscript("3", "?")) [power-divide 3^3 3^1]
+answer   exact 2/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [3 − 1 = 2]
+step 2   Write the result as a single power.   [3^2]
+miss     added-exponents = 4   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 12345 · difficulty 1
+prompt   What is the missing exponent?
+display  math "4 to the 2 divided by 4 to the 1 equals 4 to the blank power" row(superscript("4", "2"), " ÷ ", superscript("4", "1"), " = ", superscript("4", "?")) [power-divide 4^2 4^1]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [2 − 1 = 1]
+step 2   Write the result as a single power.   [4^1]
+miss     added-exponents = 3   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 67890 · difficulty 1
+prompt   What is the missing exponent?
+display  math "3 to the 3 divided by 3 to the 2 equals 3 to the blank power" row(superscript("3", "3"), " ÷ ", superscript("3", "2"), " = ", superscript("3", "?")) [power-divide 3^3 3^2]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [3 − 2 = 1]
+step 2   Write the result as a single power.   [3^1]
+miss     added-exponents = 5   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 424242 · difficulty 1
+prompt   What is the missing exponent?
+display  math "2 to the 2 divided by 2 to the 1 equals 2 to the blank power" row(superscript("2", "2"), " ÷ ", superscript("2", "1"), " = ", superscript("2", "?")) [power-divide 2^2 2^1]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [2 − 1 = 1]
+step 2   Write the result as a single power.   [2^1]
+miss     added-exponents = 3   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 987654321 · difficulty 1
+prompt   What is the missing exponent?
+display  math "4 to the 2 divided by 4 to the 1 equals 4 to the blank power" row(superscript("4", "2"), " ÷ ", superscript("4", "1"), " = ", superscript("4", "?")) [power-divide 4^2 4^1]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [2 − 1 = 1]
+step 2   Write the result as a single power.   [4^1]
+miss     added-exponents = 3   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 1 · difficulty 2
+prompt   What is the missing exponent?
+display  math "4 to the 3 divided by 4 to the 1 equals 4 to the blank power" row(superscript("4", "3"), " ÷ ", superscript("4", "1"), " = ", superscript("4", "?")) [power-divide 4^3 4^1]
+answer   exact 2/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [3 − 1 = 2]
+step 2   Write the result as a single power.   [4^2]
+miss     added-exponents = 4   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 12345 · difficulty 2
+prompt   What is the missing exponent?
+display  math "5 to the 3 divided by 5 to the 1 equals 5 to the blank power" row(superscript("5", "3"), " ÷ ", superscript("5", "1"), " = ", superscript("5", "?")) [power-divide 5^3 5^1]
+answer   exact 2/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [3 − 1 = 2]
+step 2   Write the result as a single power.   [5^2]
+miss     added-exponents = 4   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 67890 · difficulty 2
+prompt   What is the missing exponent?
+display  math "3 to the 4 divided by 3 to the 2 equals 3 to the blank power" row(superscript("3", "4"), " ÷ ", superscript("3", "2"), " = ", superscript("3", "?")) [power-divide 3^4 3^2]
+answer   exact 2/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [4 − 2 = 2]
+step 2   Write the result as a single power.   [3^2]
+miss     added-exponents = 6   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 424242 · difficulty 2
+prompt   What is the missing exponent?
+display  math "2 to the 2 divided by 2 to the 1 equals 2 to the blank power" row(superscript("2", "2"), " ÷ ", superscript("2", "1"), " = ", superscript("2", "?")) [power-divide 2^2 2^1]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [2 − 1 = 1]
+step 2   Write the result as a single power.   [2^1]
+miss     added-exponents = 3   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 987654321 · difficulty 2
+prompt   What is the missing exponent?
+display  math "5 to the 2 divided by 5 to the 1 equals 5 to the blank power" row(superscript("5", "2"), " ÷ ", superscript("5", "1"), " = ", superscript("5", "?")) [power-divide 5^2 5^1]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [2 − 1 = 1]
+step 2   Write the result as a single power.   [5^1]
+miss     added-exponents = 3   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 1 · difficulty 3
+prompt   What is the missing exponent?
+display  math "5 to the 5 divided by 5 to the 2 equals 5 to the blank power" row(superscript("5", "5"), " ÷ ", superscript("5", "2"), " = ", superscript("5", "?")) [power-divide 5^5 5^2]
+answer   exact 3/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [5 − 2 = 3]
+step 2   Write the result as a single power.   [5^3]
+miss     added-exponents = 7   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 12345 · difficulty 3
+prompt   What is the missing exponent?
+display  math "6 to the 4 divided by 6 to the 2 equals 6 to the blank power" row(superscript("6", "4"), " ÷ ", superscript("6", "2"), " = ", superscript("6", "?")) [power-divide 6^4 6^2]
+answer   exact 2/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [4 − 2 = 2]
+step 2   Write the result as a single power.   [6^2]
+miss     added-exponents = 6   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 67890 · difficulty 3
+prompt   What is the missing exponent?
+display  math "4 to the 5 divided by 4 to the 3 equals 4 to the blank power" row(superscript("4", "5"), " ÷ ", superscript("4", "3"), " = ", superscript("4", "?")) [power-divide 4^5 4^3]
+answer   exact 2/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [5 − 3 = 2]
+step 2   Write the result as a single power.   [4^2]
+miss     added-exponents = 8   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 424242 · difficulty 3
+prompt   What is the missing exponent?
+display  math "3 to the 3 divided by 3 to the 2 equals 3 to the blank power" row(superscript("3", "3"), " ÷ ", superscript("3", "2"), " = ", superscript("3", "?")) [power-divide 3^3 3^2]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [3 − 2 = 1]
+step 2   Write the result as a single power.   [3^1]
+miss     added-exponents = 5   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 987654321 · difficulty 3
+prompt   What is the missing exponent?
+display  math "6 to the 3 divided by 6 to the 2 equals 6 to the blank power" row(superscript("6", "3"), " ÷ ", superscript("6", "2"), " = ", superscript("6", "?")) [power-divide 6^3 6^2]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [3 − 2 = 1]
+step 2   Write the result as a single power.   [6^1]
+miss     added-exponents = 5   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 1 · difficulty 4
+prompt   What is the missing exponent?
+display  math "6 to the 5 divided by 6 to the 2 equals 6 to the blank power" row(superscript("6", "5"), " ÷ ", superscript("6", "2"), " = ", superscript("6", "?")) [power-divide 6^5 6^2]
+answer   exact 3/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [5 − 2 = 3]
+step 2   Write the result as a single power.   [6^3]
+miss     added-exponents = 7   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 12345 · difficulty 4
+prompt   What is the missing exponent?
+display  math "7 to the 5 divided by 7 to the 2 equals 7 to the blank power" row(superscript("7", "5"), " ÷ ", superscript("7", "2"), " = ", superscript("7", "?")) [power-divide 7^5 7^2]
+answer   exact 3/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [5 − 2 = 3]
+step 2   Write the result as a single power.   [7^3]
+miss     added-exponents = 7   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 67890 · difficulty 4
+prompt   What is the missing exponent?
+display  math "4 to the 5 divided by 4 to the 3 equals 4 to the blank power" row(superscript("4", "5"), " ÷ ", superscript("4", "3"), " = ", superscript("4", "?")) [power-divide 4^5 4^3]
+answer   exact 2/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [5 − 3 = 2]
+step 2   Write the result as a single power.   [4^2]
+miss     added-exponents = 8   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 424242 · difficulty 4
+prompt   What is the missing exponent?
+display  math "3 to the 3 divided by 3 to the 2 equals 3 to the blank power" row(superscript("3", "3"), " ÷ ", superscript("3", "2"), " = ", superscript("3", "?")) [power-divide 3^3 3^2]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [3 − 2 = 1]
+step 2   Write the result as a single power.   [3^1]
+miss     added-exponents = 5   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 987654321 · difficulty 4
+prompt   What is the missing exponent?
+display  math "7 to the 3 divided by 7 to the 2 equals 7 to the blank power" row(superscript("7", "3"), " ÷ ", superscript("7", "2"), " = ", superscript("7", "?")) [power-divide 7^3 7^2]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [3 − 2 = 1]
+step 2   Write the result as a single power.   [7^1]
+miss     added-exponents = 5   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 1 · difficulty 5
+prompt   What is the missing exponent?
+display  math "7 to the 7 divided by 7 to the 3 equals 7 to the blank power" row(superscript("7", "7"), " ÷ ", superscript("7", "3"), " = ", superscript("7", "?")) [power-divide 7^7 7^3]
+answer   exact 4/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [7 − 3 = 4]
+step 2   Write the result as a single power.   [7^4]
+miss     added-exponents = 10   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 12345 · difficulty 5
+prompt   What is the missing exponent?
+display  math "8 to the 6 divided by 8 to the 3 equals 8 to the blank power" row(superscript("8", "6"), " ÷ ", superscript("8", "3"), " = ", superscript("8", "?")) [power-divide 8^6 8^3]
+answer   exact 3/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [6 − 3 = 3]
+step 2   Write the result as a single power.   [8^3]
+miss     added-exponents = 9   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 67890 · difficulty 5
+prompt   What is the missing exponent?
+display  math "5 to the 7 divided by 5 to the 4 equals 5 to the blank power" row(superscript("5", "7"), " ÷ ", superscript("5", "4"), " = ", superscript("5", "?")) [power-divide 5^7 5^4]
+answer   exact 3/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [7 − 4 = 3]
+step 2   Write the result as a single power.   [5^3]
+miss     added-exponents = 11   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 424242 · difficulty 5
+prompt   What is the missing exponent?
+display  math "4 to the 5 divided by 4 to the 3 equals 4 to the blank power" row(superscript("4", "5"), " ÷ ", superscript("4", "3"), " = ", superscript("4", "?")) [power-divide 4^5 4^3]
+answer   exact 2/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [5 − 3 = 2]
+step 2   Write the result as a single power.   [4^2]
+miss     added-exponents = 8   Same-base division subtracts the exponents, not adds them.
+
+--- exponent-divide · seed 987654321 · difficulty 5
+prompt   What is the missing exponent?
+display  math "8 to the 4 divided by 8 to the 3 equals 8 to the blank power" row(superscript("8", "4"), " ÷ ", superscript("8", "3"), " = ", superscript("8", "?")) [power-divide 8^4 8^3]
+answer   exact 1/1
+input    keypad
+hint     When dividing same-base powers, subtract the exponents.
+step 1   Keep the base and subtract the exponents.   [4 − 3 = 1]
+step 2   Write the result as a single power.   [8^1]
+miss     added-exponents = 7   Same-base division subtracts the exponents, not adds them."
+`;
+
+exports[`recorded output: exponent-meaning > matches the wording recorded when the skill landed 1`] = `
+"--- exponent-meaning · seed 1 · difficulty 1
+prompt   How many times is the base multiplied by itself?
+display  math "5 × 5 equals 5 to the blank power" row("5 × 5 = ", superscript("5", "?")) [expand-power 5^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [5 × 5]
+step 2   That count is the exponent.   [5^2]
+
+--- exponent-meaning · seed 12345 · difficulty 1
+prompt   How many times is the base multiplied by itself?
+display  math "6 × 6 equals 6 to the blank power" row("6 × 6 = ", superscript("6", "?")) [expand-power 6^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [6 × 6]
+step 2   That count is the exponent.   [6^2]
+
+--- exponent-meaning · seed 67890 · difficulty 1
+prompt   How many times is the base multiplied by itself?
+display  math "3 × 3 × 3 equals 3 to the blank power" row("3 × 3 × 3 = ", superscript("3", "?")) [expand-power 3^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [3 × 3 × 3]
+step 2   That count is the exponent.   [3^3]
+
+--- exponent-meaning · seed 424242 · difficulty 1
+prompt   How many times is the base multiplied by itself?
+display  math "2 × 2 equals 2 to the blank power" row("2 × 2 = ", superscript("2", "?")) [expand-power 2^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [2 × 2]
+step 2   That count is the exponent.   [2^2]
+
+--- exponent-meaning · seed 987654321 · difficulty 1
+prompt   How many times is the base multiplied by itself?
+display  math "6 × 6 equals 6 to the blank power" row("6 × 6 = ", superscript("6", "?")) [expand-power 6^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [6 × 6]
+step 2   That count is the exponent.   [6^2]
+
+--- exponent-meaning · seed 1 · difficulty 2
+prompt   How many times is the base multiplied by itself?
+display  math "6 × 6 equals 6 to the blank power" row("6 × 6 = ", superscript("6", "?")) [expand-power 6^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [6 × 6]
+step 2   That count is the exponent.   [6^2]
+
+--- exponent-meaning · seed 12345 · difficulty 2
+prompt   How many times is the base multiplied by itself?
+display  math "7 × 7 equals 7 to the blank power" row("7 × 7 = ", superscript("7", "?")) [expand-power 7^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [7 × 7]
+step 2   That count is the exponent.   [7^2]
+
+--- exponent-meaning · seed 67890 · difficulty 2
+prompt   How many times is the base multiplied by itself?
+display  math "4 × 4 × 4 equals 4 to the blank power" row("4 × 4 × 4 = ", superscript("4", "?")) [expand-power 4^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [4 × 4 × 4]
+step 2   That count is the exponent.   [4^3]
+
+--- exponent-meaning · seed 424242 · difficulty 2
+prompt   How many times is the base multiplied by itself?
+display  math "3 × 3 equals 3 to the blank power" row("3 × 3 = ", superscript("3", "?")) [expand-power 3^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [3 × 3]
+step 2   That count is the exponent.   [3^2]
+
+--- exponent-meaning · seed 987654321 · difficulty 2
+prompt   How many times is the base multiplied by itself?
+display  math "7 × 7 equals 7 to the blank power" row("7 × 7 = ", superscript("7", "?")) [expand-power 7^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [7 × 7]
+step 2   That count is the exponent.   [7^2]
+
+--- exponent-meaning · seed 1 · difficulty 3
+prompt   How many times is the base multiplied by itself?
+display  math "7 × 7 equals 7 to the blank power" row("7 × 7 = ", superscript("7", "?")) [expand-power 7^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [7 × 7]
+step 2   That count is the exponent.   [7^2]
+
+--- exponent-meaning · seed 12345 · difficulty 3
+prompt   How many times is the base multiplied by itself?
+display  math "8 × 8 equals 8 to the blank power" row("8 × 8 = ", superscript("8", "?")) [expand-power 8^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [8 × 8]
+step 2   That count is the exponent.   [8^2]
+
+--- exponent-meaning · seed 67890 · difficulty 3
+prompt   How many times is the base multiplied by itself?
+display  math "5 × 5 × 5 equals 5 to the blank power" row("5 × 5 × 5 = ", superscript("5", "?")) [expand-power 5^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [5 × 5 × 5]
+step 2   That count is the exponent.   [5^3]
+
+--- exponent-meaning · seed 424242 · difficulty 3
+prompt   How many times is the base multiplied by itself?
+display  math "4 × 4 equals 4 to the blank power" row("4 × 4 = ", superscript("4", "?")) [expand-power 4^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [4 × 4]
+step 2   That count is the exponent.   [4^2]
+
+--- exponent-meaning · seed 987654321 · difficulty 3
+prompt   How many times is the base multiplied by itself?
+display  math "8 × 8 equals 8 to the blank power" row("8 × 8 = ", superscript("8", "?")) [expand-power 8^2]
+answer   exact 2/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [8 × 8]
+step 2   That count is the exponent.   [8^2]
+
+--- exponent-meaning · seed 1 · difficulty 4
+prompt   How many times is the base multiplied by itself?
+display  math "8 × 8 × 8 equals 8 to the blank power" row("8 × 8 × 8 = ", superscript("8", "?")) [expand-power 8^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [8 × 8 × 8]
+step 2   That count is the exponent.   [8^3]
+
+--- exponent-meaning · seed 12345 · difficulty 4
+prompt   How many times is the base multiplied by itself?
+display  math "9 × 9 × 9 equals 9 to the blank power" row("9 × 9 × 9 = ", superscript("9", "?")) [expand-power 9^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [9 × 9 × 9]
+step 2   That count is the exponent.   [9^3]
+
+--- exponent-meaning · seed 67890 · difficulty 4
+prompt   How many times is the base multiplied by itself?
+display  math "6 × 6 × 6 × 6 equals 6 to the blank power" row("6 × 6 × 6 × 6 = ", superscript("6", "?")) [expand-power 6^4]
+answer   exact 4/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [6 × 6 × 6 × 6]
+step 2   That count is the exponent.   [6^4]
+
+--- exponent-meaning · seed 424242 · difficulty 4
+prompt   How many times is the base multiplied by itself?
+display  math "5 × 5 × 5 equals 5 to the blank power" row("5 × 5 × 5 = ", superscript("5", "?")) [expand-power 5^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [5 × 5 × 5]
+step 2   That count is the exponent.   [5^3]
+
+--- exponent-meaning · seed 987654321 · difficulty 4
+prompt   How many times is the base multiplied by itself?
+display  math "9 × 9 × 9 equals 9 to the blank power" row("9 × 9 × 9 = ", superscript("9", "?")) [expand-power 9^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [9 × 9 × 9]
+step 2   That count is the exponent.   [9^3]
+
+--- exponent-meaning · seed 1 · difficulty 5
+prompt   How many times is the base multiplied by itself?
+display  math "9 × 9 × 9 equals 9 to the blank power" row("9 × 9 × 9 = ", superscript("9", "?")) [expand-power 9^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [9 × 9 × 9]
+step 2   That count is the exponent.   [9^3]
+
+--- exponent-meaning · seed 12345 · difficulty 5
+prompt   How many times is the base multiplied by itself?
+display  math "10 × 10 × 10 equals 10 to the blank power" row("10 × 10 × 10 = ", superscript("10", "?")) [expand-power 10^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [10 × 10 × 10]
+step 2   That count is the exponent.   [10^3]
+
+--- exponent-meaning · seed 67890 · difficulty 5
+prompt   How many times is the base multiplied by itself?
+display  math "7 × 7 × 7 × 7 equals 7 to the blank power" row("7 × 7 × 7 × 7 = ", superscript("7", "?")) [expand-power 7^4]
+answer   exact 4/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [7 × 7 × 7 × 7]
+step 2   That count is the exponent.   [7^4]
+
+--- exponent-meaning · seed 424242 · difficulty 5
+prompt   How many times is the base multiplied by itself?
+display  math "6 × 6 × 6 equals 6 to the blank power" row("6 × 6 × 6 = ", superscript("6", "?")) [expand-power 6^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [6 × 6 × 6]
+step 2   That count is the exponent.   [6^3]
+
+--- exponent-meaning · seed 987654321 · difficulty 5
+prompt   How many times is the base multiplied by itself?
+display  math "10 × 10 × 10 equals 10 to the blank power" row("10 × 10 × 10 = ", superscript("10", "?")) [expand-power 10^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [10 × 10 × 10]
+step 2   That count is the exponent.   [10^3]"
+`;
+
+exports[`recorded output: exponent-multiply > matches the wording recorded when the skill landed 1`] = `
+"--- exponent-multiply · seed 1 · difficulty 1
+prompt   What is the missing exponent?
+display  math "3 to the 2 times 3 to the 1 equals 3 to the blank power" row(superscript("3", "2"), " × ", superscript("3", "1"), " = ", superscript("3", "?")) [power-multiply 3^2 3^1]
+answer   exact 3/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [2 + 1 = 3]
+step 2   Write the result as a single power.   [3^3]
+miss     multiplied-exponents = 2   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 12345 · difficulty 1
+prompt   What is the missing exponent?
+display  math "4 to the 1 times 4 to the 1 equals 4 to the blank power" row(superscript("4", "1"), " × ", superscript("4", "1"), " = ", superscript("4", "?")) [power-multiply 4^1 4^1]
+answer   exact 2/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [1 + 1 = 2]
+step 2   Write the result as a single power.   [4^2]
+miss     multiplied-exponents = 1   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 67890 · difficulty 1
+prompt   What is the missing exponent?
+display  math "3 to the 1 times 3 to the 2 equals 3 to the blank power" row(superscript("3", "1"), " × ", superscript("3", "2"), " = ", superscript("3", "?")) [power-multiply 3^1 3^2]
+answer   exact 3/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [1 + 2 = 3]
+step 2   Write the result as a single power.   [3^3]
+miss     multiplied-exponents = 2   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 424242 · difficulty 1
+prompt   What is the missing exponent?
+display  math "2 to the 1 times 2 to the 1 equals 2 to the blank power" row(superscript("2", "1"), " × ", superscript("2", "1"), " = ", superscript("2", "?")) [power-multiply 2^1 2^1]
+answer   exact 2/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [1 + 1 = 2]
+step 2   Write the result as a single power.   [2^2]
+miss     multiplied-exponents = 1   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 987654321 · difficulty 1
+prompt   What is the missing exponent?
+display  math "4 to the 1 times 4 to the 1 equals 4 to the blank power" row(superscript("4", "1"), " × ", superscript("4", "1"), " = ", superscript("4", "?")) [power-multiply 4^1 4^1]
+answer   exact 2/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [1 + 1 = 2]
+step 2   Write the result as a single power.   [4^2]
+miss     multiplied-exponents = 1   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 1 · difficulty 2
+prompt   What is the missing exponent?
+display  math "4 to the 2 times 4 to the 1 equals 4 to the blank power" row(superscript("4", "2"), " × ", superscript("4", "1"), " = ", superscript("4", "?")) [power-multiply 4^2 4^1]
+answer   exact 3/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [2 + 1 = 3]
+step 2   Write the result as a single power.   [4^3]
+miss     multiplied-exponents = 2   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 12345 · difficulty 2
+prompt   What is the missing exponent?
+display  math "5 to the 2 times 5 to the 1 equals 5 to the blank power" row(superscript("5", "2"), " × ", superscript("5", "1"), " = ", superscript("5", "?")) [power-multiply 5^2 5^1]
+answer   exact 3/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [2 + 1 = 3]
+step 2   Write the result as a single power.   [5^3]
+miss     multiplied-exponents = 2   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 67890 · difficulty 2
+prompt   What is the missing exponent?
+display  math "3 to the 1 times 3 to the 2 equals 3 to the blank power" row(superscript("3", "1"), " × ", superscript("3", "2"), " = ", superscript("3", "?")) [power-multiply 3^1 3^2]
+answer   exact 3/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [1 + 2 = 3]
+step 2   Write the result as a single power.   [3^3]
+miss     multiplied-exponents = 2   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 424242 · difficulty 2
+prompt   What is the missing exponent?
+display  math "2 to the 1 times 2 to the 1 equals 2 to the blank power" row(superscript("2", "1"), " × ", superscript("2", "1"), " = ", superscript("2", "?")) [power-multiply 2^1 2^1]
+answer   exact 2/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [1 + 1 = 2]
+step 2   Write the result as a single power.   [2^2]
+miss     multiplied-exponents = 1   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 987654321 · difficulty 2
+prompt   What is the missing exponent?
+display  math "5 to the 1 times 5 to the 1 equals 5 to the blank power" row(superscript("5", "1"), " × ", superscript("5", "1"), " = ", superscript("5", "?")) [power-multiply 5^1 5^1]
+answer   exact 2/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [1 + 1 = 2]
+step 2   Write the result as a single power.   [5^2]
+miss     multiplied-exponents = 1   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 1 · difficulty 3
+prompt   What is the missing exponent?
+display  math "5 to the 3 times 5 to the 2 equals 5 to the blank power" row(superscript("5", "3"), " × ", superscript("5", "2"), " = ", superscript("5", "?")) [power-multiply 5^3 5^2]
+answer   exact 5/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 2 = 5]
+step 2   Write the result as a single power.   [5^5]
+miss     multiplied-exponents = 6   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 12345 · difficulty 3
+prompt   What is the missing exponent?
+display  math "6 to the 3 times 6 to the 2 equals 6 to the blank power" row(superscript("6", "3"), " × ", superscript("6", "2"), " = ", superscript("6", "?")) [power-multiply 6^3 6^2]
+answer   exact 5/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 2 = 5]
+step 2   Write the result as a single power.   [6^5]
+miss     multiplied-exponents = 6   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 67890 · difficulty 3
+prompt   What is the missing exponent?
+display  math "4 to the 2 times 4 to the 3 equals 4 to the blank power" row(superscript("4", "2"), " × ", superscript("4", "3"), " = ", superscript("4", "?")) [power-multiply 4^2 4^3]
+answer   exact 5/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [2 + 3 = 5]
+step 2   Write the result as a single power.   [4^5]
+miss     multiplied-exponents = 6   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 424242 · difficulty 3
+prompt   What is the missing exponent?
+display  math "3 to the 3 times 3 to the 2 equals 3 to the blank power" row(superscript("3", "3"), " × ", superscript("3", "2"), " = ", superscript("3", "?")) [power-multiply 3^3 3^2]
+answer   exact 5/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 2 = 5]
+step 2   Write the result as a single power.   [3^5]
+miss     multiplied-exponents = 6   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 987654321 · difficulty 3
+prompt   What is the missing exponent?
+display  math "6 to the 3 times 6 to the 2 equals 6 to the blank power" row(superscript("6", "3"), " × ", superscript("6", "2"), " = ", superscript("6", "?")) [power-multiply 6^3 6^2]
+answer   exact 5/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 2 = 5]
+step 2   Write the result as a single power.   [6^5]
+miss     multiplied-exponents = 6   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 1 · difficulty 4
+prompt   What is the missing exponent?
+display  math "6 to the 3 times 6 to the 2 equals 6 to the blank power" row(superscript("6", "3"), " × ", superscript("6", "2"), " = ", superscript("6", "?")) [power-multiply 6^3 6^2]
+answer   exact 5/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 2 = 5]
+step 2   Write the result as a single power.   [6^5]
+miss     multiplied-exponents = 6   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 12345 · difficulty 4
+prompt   What is the missing exponent?
+display  math "7 to the 3 times 7 to the 2 equals 7 to the blank power" row(superscript("7", "3"), " × ", superscript("7", "2"), " = ", superscript("7", "?")) [power-multiply 7^3 7^2]
+answer   exact 5/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 2 = 5]
+step 2   Write the result as a single power.   [7^5]
+miss     multiplied-exponents = 6   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 67890 · difficulty 4
+prompt   What is the missing exponent?
+display  math "4 to the 3 times 4 to the 3 equals 4 to the blank power" row(superscript("4", "3"), " × ", superscript("4", "3"), " = ", superscript("4", "?")) [power-multiply 4^3 4^3]
+answer   exact 6/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 3 = 6]
+step 2   Write the result as a single power.   [4^6]
+miss     multiplied-exponents = 9   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 424242 · difficulty 4
+prompt   What is the missing exponent?
+display  math "3 to the 3 times 3 to the 2 equals 3 to the blank power" row(superscript("3", "3"), " × ", superscript("3", "2"), " = ", superscript("3", "?")) [power-multiply 3^3 3^2]
+answer   exact 5/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 2 = 5]
+step 2   Write the result as a single power.   [3^5]
+miss     multiplied-exponents = 6   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 987654321 · difficulty 4
+prompt   What is the missing exponent?
+display  math "7 to the 4 times 7 to the 2 equals 7 to the blank power" row(superscript("7", "4"), " × ", superscript("7", "2"), " = ", superscript("7", "?")) [power-multiply 7^4 7^2]
+answer   exact 6/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [4 + 2 = 6]
+step 2   Write the result as a single power.   [7^6]
+miss     multiplied-exponents = 8   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 1 · difficulty 5
+prompt   What is the missing exponent?
+display  math "7 to the 4 times 7 to the 3 equals 7 to the blank power" row(superscript("7", "4"), " × ", superscript("7", "3"), " = ", superscript("7", "?")) [power-multiply 7^4 7^3]
+answer   exact 7/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [4 + 3 = 7]
+step 2   Write the result as a single power.   [7^7]
+miss     multiplied-exponents = 12   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 12345 · difficulty 5
+prompt   What is the missing exponent?
+display  math "8 to the 3 times 8 to the 3 equals 8 to the blank power" row(superscript("8", "3"), " × ", superscript("8", "3"), " = ", superscript("8", "?")) [power-multiply 8^3 8^3]
+answer   exact 6/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 3 = 6]
+step 2   Write the result as a single power.   [8^6]
+miss     multiplied-exponents = 9   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 67890 · difficulty 5
+prompt   What is the missing exponent?
+display  math "5 to the 3 times 5 to the 4 equals 5 to the blank power" row(superscript("5", "3"), " × ", superscript("5", "4"), " = ", superscript("5", "?")) [power-multiply 5^3 5^4]
+answer   exact 7/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 4 = 7]
+step 2   Write the result as a single power.   [5^7]
+miss     multiplied-exponents = 12   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 424242 · difficulty 5
+prompt   What is the missing exponent?
+display  math "4 to the 3 times 4 to the 3 equals 4 to the blank power" row(superscript("4", "3"), " × ", superscript("4", "3"), " = ", superscript("4", "?")) [power-multiply 4^3 4^3]
+answer   exact 6/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 3 = 6]
+step 2   Write the result as a single power.   [4^6]
+miss     multiplied-exponents = 9   Same-base multiplication adds the exponents, not multiplies them.
+
+--- exponent-multiply · seed 987654321 · difficulty 5
+prompt   What is the missing exponent?
+display  math "8 to the 3 times 8 to the 3 equals 8 to the blank power" row(superscript("8", "3"), " × ", superscript("8", "3"), " = ", superscript("8", "?")) [power-multiply 8^3 8^3]
+answer   exact 6/1
+input    keypad
+hint     When multiplying same-base powers, add the exponents.
+step 1   Keep the base and add the exponents.   [3 + 3 = 6]
+step 2   Write the result as a single power.   [8^6]
+miss     multiplied-exponents = 9   Same-base multiplication adds the exponents, not multiplies them."
+`;
+
+exports[`recorded output: perfect-squares > matches the wording recorded when the skill landed 1`] = `
+"--- perfect-squares · seed 1 · difficulty 1
+prompt   What is the square?
+display  math "3 squared" superscript("3", "2") [square 3]
+answer   exact 9/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [3 × 3 = 9]
+
+--- perfect-squares · seed 12345 · difficulty 1
+prompt   What is the square?
+display  math "4 squared" superscript("4", "2") [square 4]
+answer   exact 16/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [4 × 4 = 16]
+
+--- perfect-squares · seed 67890 · difficulty 1
+prompt   What is the square root?
+display  math "the square root of 4" root("4") [square-root 4]
+answer   exact 2/1
+input    keypad
+hint     Find the number that multiplies by itself to make this value.
+step 1   Find the number that squares to this value.   [2 × 2 = 4]
+
+--- perfect-squares · seed 424242 · difficulty 1
+prompt   What is the square?
+display  math "1 squared" superscript("1", "2") [square 1]
+answer   exact 1/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [1 × 1 = 1]
+
+--- perfect-squares · seed 987654321 · difficulty 1
+prompt   What is the square?
+display  math "4 squared" superscript("4", "2") [square 4]
+answer   exact 16/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [4 × 4 = 16]
+
+--- perfect-squares · seed 1 · difficulty 2
+prompt   What is the square?
+display  math "5 squared" superscript("5", "2") [square 5]
+answer   exact 25/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [5 × 5 = 25]
+
+--- perfect-squares · seed 12345 · difficulty 2
+prompt   What is the square?
+display  math "6 squared" superscript("6", "2") [square 6]
+answer   exact 36/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [6 × 6 = 36]
+
+--- perfect-squares · seed 67890 · difficulty 2
+prompt   What is the square root?
+display  math "the square root of 9" root("9") [square-root 9]
+answer   exact 3/1
+input    keypad
+hint     Find the number that multiplies by itself to make this value.
+step 1   Find the number that squares to this value.   [3 × 3 = 9]
+
+--- perfect-squares · seed 424242 · difficulty 2
+prompt   What is the square?
+display  math "2 squared" superscript("2", "2") [square 2]
+answer   exact 4/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [2 × 2 = 4]
+
+--- perfect-squares · seed 987654321 · difficulty 2
+prompt   What is the square?
+display  math "6 squared" superscript("6", "2") [square 6]
+answer   exact 36/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [6 × 6 = 36]
+
+--- perfect-squares · seed 1 · difficulty 3
+prompt   What is the square?
+display  math "7 squared" superscript("7", "2") [square 7]
+answer   exact 49/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [7 × 7 = 49]
+
+--- perfect-squares · seed 12345 · difficulty 3
+prompt   What is the square?
+display  math "8 squared" superscript("8", "2") [square 8]
+answer   exact 64/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [8 × 8 = 64]
+
+--- perfect-squares · seed 67890 · difficulty 3
+prompt   What is the square root?
+display  math "the square root of 25" root("25") [square-root 25]
+answer   exact 5/1
+input    keypad
+hint     Find the number that multiplies by itself to make this value.
+step 1   Find the number that squares to this value.   [5 × 5 = 25]
+
+--- perfect-squares · seed 424242 · difficulty 3
+prompt   What is the square?
+display  math "4 squared" superscript("4", "2") [square 4]
+answer   exact 16/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [4 × 4 = 16]
+
+--- perfect-squares · seed 987654321 · difficulty 3
+prompt   What is the square?
+display  math "8 squared" superscript("8", "2") [square 8]
+answer   exact 64/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [8 × 8 = 64]
+
+--- perfect-squares · seed 1 · difficulty 4
+prompt   What is the square?
+display  math "9 squared" superscript("9", "2") [square 9]
+answer   exact 81/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [9 × 9 = 81]
+
+--- perfect-squares · seed 12345 · difficulty 4
+prompt   What is the square?
+display  math "10 squared" superscript("10", "2") [square 10]
+answer   exact 100/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [10 × 10 = 100]
+
+--- perfect-squares · seed 67890 · difficulty 4
+prompt   What is the square root?
+display  math "the square root of 49" root("49") [square-root 49]
+answer   exact 7/1
+input    keypad
+hint     Find the number that multiplies by itself to make this value.
+step 1   Find the number that squares to this value.   [7 × 7 = 49]
+
+--- perfect-squares · seed 424242 · difficulty 4
+prompt   What is the square?
+display  math "6 squared" superscript("6", "2") [square 6]
+answer   exact 36/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [6 × 6 = 36]
+
+--- perfect-squares · seed 987654321 · difficulty 4
+prompt   What is the square?
+display  math "10 squared" superscript("10", "2") [square 10]
+answer   exact 100/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [10 × 10 = 100]
+
+--- perfect-squares · seed 1 · difficulty 5
+prompt   What is the square?
+display  math "11 squared" superscript("11", "2") [square 11]
+answer   exact 121/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [11 × 11 = 121]
+
+--- perfect-squares · seed 12345 · difficulty 5
+prompt   What is the square?
+display  math "12 squared" superscript("12", "2") [square 12]
+answer   exact 144/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [12 × 12 = 144]
+
+--- perfect-squares · seed 67890 · difficulty 5
+prompt   What is the square root?
+display  math "the square root of 81" root("81") [square-root 81]
+answer   exact 9/1
+input    keypad
+hint     Find the number that multiplies by itself to make this value.
+step 1   Find the number that squares to this value.   [9 × 9 = 81]
+
+--- perfect-squares · seed 424242 · difficulty 5
+prompt   What is the square?
+display  math "8 squared" superscript("8", "2") [square 8]
+answer   exact 64/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [8 × 8 = 64]
+
+--- perfect-squares · seed 987654321 · difficulty 5
+prompt   What is the square?
+display  math "12 squared" superscript("12", "2") [square 12]
+answer   exact 144/1
+input    keypad
+hint     Multiply the number by itself.
+step 1   Multiply the number by itself.   [12 × 12 = 144]"
+`;
