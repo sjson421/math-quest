@@ -123,9 +123,12 @@ When a submitted answer matches the expected value but not the form the skill is
 lesson SHALL respond to that specifically: it SHALL tell the learner the value is right and ask
 for the form, and it SHALL NOT show the worked solution.
 
-A skill SHALL be able to require lowest terms and SHALL be able to require mixed form; each
-requirement has its own response naming the form the entry is missing. When both apply, an
-entry missing the mixed form is answered about the mixed form before any reduction question.
+A skill SHALL be able to require lowest terms, SHALL be able to require mixed form, SHALL be
+able to require decimal notation, and SHALL be able to require fraction notation; each
+requirement has its own response naming the form the entry is missing. When more than one
+applies, an entry missing the mixed form is answered about the mixed form before any reduction
+question; decimal notation and fraction notation are mutually exclusive on one answer, since a
+skill teaches conversion in exactly one direction.
 
 The lesson SHALL treat a right value in the wrong form as not yet complete — the correct-answer
 count does not advance and the problem returns later in the session, exactly as any other
@@ -135,8 +138,8 @@ since the mistake is one the generator did not predict a value for.
 Withholding the worked solution is the point. Partial simplification is the named wall at
 `simplify-fractions`, and a learner who reached the right value has done the arithmetic; handing
 them the full working answers a question they did not get wrong and removes the only step left
-to take. The same holds for a learner who computed the amount but not the mixed form it is
-taught in.
+to take. The same holds for a learner who computed the amount but not the mixed form, decimal
+form, or fraction form it is taught in.
 
 #### Scenario: An unreduced answer is acknowledged, not corrected
 
@@ -163,6 +166,20 @@ taught in.
 - **WHEN** a learner submits a numerically correct answer in mixed form that is not reduced
 - **THEN** the learner is told the value is right and asked for lowest terms
 - **AND** the mixed-form question is not asked again
+
+#### Scenario: A fraction entry is asked for in decimal form
+
+- **WHEN** a learner submits a numerically correct answer written as a fraction where decimal
+  form is required
+- **THEN** the learner is told the value is right and asked to write it as a decimal
+- **AND** the worked solution is not shown and the problem does not complete
+
+#### Scenario: A decimal entry is asked for in fraction form
+
+- **WHEN** a learner submits a numerically correct answer written as a decimal where fraction
+  form is required
+- **THEN** the learner is told the value is right and asked to write it as a fraction
+- **AND** the worked solution is not shown and the problem does not complete
 
 ### Requirement: An unfinished entry is not a wrong answer
 
