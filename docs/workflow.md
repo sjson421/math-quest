@@ -21,11 +21,11 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-three changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Thirty-four changes
   have shipped; the latest archive is
-  `2026-08-13-add-stage-d-unit-10a`. It starts Unit 10 with what a percent means, both
-  conversions to and from decimal and fraction form, and finding a percent of a quantity.
-  Increment 10b remains the next curriculum change.
+  `2026-08-13-add-stage-d-unit-10b`. It completes Unit 10 with inverse percent questions,
+  percent change, discounts, tax, tips, and simple interest. Unit 11 is the next curriculum
+  change.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
