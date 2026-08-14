@@ -7,7 +7,7 @@ commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archi
 Task lists are the running record — mark each item done as it lands, and note decisions
 inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, thirty-two
+- `openspec/specs/` is the **baseline**: what the system does today, thirty-three
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
@@ -15,7 +15,8 @@ inline rather than only in chat.
   `unit-05-order-of-operations`, `unit-06-negatives`, `unit-07-fractions-meaning`,
   `unit-08-fraction-operations`, `unit-09-decimals`, `unit-10-percents`,
   `unit-11-ratios-proportions`, `unit-12-exponents-roots`, `unit-13-expressions`,
-  `unit-14-linear-equations`, `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
+  `unit-14-linear-equations`, `unit-15-inequalities`,
+  `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`,
   `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`,
   `expression-input`. A change
@@ -23,14 +24,14 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-three changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-five changes
   have shipped — `ls openspec/changes/archive/` is the authority, and this line has run one
   behind before; the latest archive is
-  `2026-08-14-add-unit-14a-linear-equations`. It ships roadmap item 21's 14a increment:
-  `equation-balance` through `equation-parentheses`, which opens Unit 14 and gives `Display`
-  its `equation` arm — the first display whose answer is neither the value of what is shown
-  nor a rewriting of it, but the value that makes it true. Item 21 remains open for 14b and
-  15.
+  `2026-08-14-add-unit-15-inequalities`. It ships roadmap item 21's last increment, Unit 15,
+  which **closes the item and Stage E**. It is the course's first content whose answers are
+  relations rather than values: five of its six skills answer through choice input over whole
+  statements, because a pad that submits `−4` cannot say whether the answer was `x < −4` or
+  `x > −4`, and that direction is the entire content of `flip-the-sign`.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
