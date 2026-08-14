@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 139 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
-Stage E has opened with the complete Unit 12, Unit 13 and Unit 14.
+**Status: 145 of 201 skills are playable.** Stages A, B, C, D and E are all playable, and
+Stage E is complete: Units 12, 13, 14 and 15.
 Choice input,
 number-line input, math notation, fraction input, diagrams and expression input are built,
 so `AVAILABLE_CAPABILITIES` holds
@@ -47,8 +47,16 @@ a stacked fraction inside an equation on the keypad, `special-solutions` answers
 *count* through choices and drops the framed row entirely, `equation-words` states the same
 two-step equation in prose, and `rearrange-formula` answers with an expression in the one
 letter the pad offers while `y` stays in the frame. Stage E now declares `choice-input`, owed
-since 13a. Item 21's increment 15 (Unit 15, inequalities) is next, and `graph-inequality`
-(15.2) still has no input mode — that decision comes before the increment is proposed.
+since 13a. Unit 15 closes the stage and is the first content whose **answers are relations
+rather than values** — `−3x > 12` solves to `x < −4`, and a keypad submits the `−4` and nothing
+else, dropping the direction that is the whole content of `flip-the-sign`. So five of its six
+skills answer through choice input over whole statements, and `compound-inequalities` takes the
+pad because a count of what satisfies a range genuinely is a value. `graph-inequality`'s open
+question is settled by naming the graph rather than drawing one: a choice renders text, so
+picking among rendered lines was never the built option the roadmap took it for, and a drawn
+inequality graph is declined rather than deferred. The unit needed no new capability, and its
+six new `EquationData` arms sit on the existing `equation` display arm, which was always
+"a statement that already contains its relation" and now says so.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -776,7 +784,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
       which form is the content decision, and it belongs to the answer type, not to a checker
       each generator writes for itself.
 
-- [ ] **21 · Stage E · Units 12–15** — L — 34 skills, seven changes
+- [x] **21 · Stage E · Units 12–15** — L — 34 skills, seven changes — **shipped 2026-08-14**
 
       `distribute-negative` (13.7) is a major wall.
 
@@ -887,7 +895,70 @@ document's ✅ markers updated to match, which the cross-check enforces.
         today:** item 13's line submits one tick's value and cannot express an open circle or a
         shaded ray. Either the skill picks among rendered lines (choice input, built) or the line
         component grows — and growing it is capability work with its own item, decided before this
-        increment is proposed rather than inside it.
+        increment is proposed rather than inside it. **Shipped 2026-08-14**, completing Unit 15,
+        Stage E and this item.
+
+        **The fork above was wrong, and that is the finding.** "Picks among rendered lines
+        (choice input, built)" assumes a choice can draw a figure. `Choice` is
+        `{ id, label: string }` and `ChoiceInput` renders the label as text, so a choice that
+        draws a line is the same capability work as growing `NumberLineInput` — not the built
+        alternative to it. With that gone the real fork was a described graph or a new rendering
+        capability whose only consumer in the whole course is this one skill; item 22 delivers a
+        plane, not a line with rays, so nothing downstream inherits it. **A drawn inequality graph
+        is therefore declined rather than deferred.** If it is ever wanted it is its own item, and
+        the reason to want it is pedagogy — reading a graph is a stronger skill than naming one —
+        not a second consumer.
+
+        That decision generalised to the unit and is the reason it needed no capability at all.
+        **A solution to an inequality is a relation, not a value:** `−3x > 12` solves to `x < −4`,
+        and the pad submits the `−4` and nothing else, which drops the direction that is the whole
+        content of 15.5. Choice labels are plain strings and `x < −4` is a plain string, so five
+        skills answer through choice input and only `compound-inequalities` takes the pad, where a
+        count genuinely is a value — which also stops the unit being five multiple-choice screens
+        in a row. Stage E already declared `choice-input` since 14b, so `requires` and
+        `AVAILABLE_CAPABILITIES` are both untouched.
+
+        Left behind: **six `EquationData` arms and a `Relation` type**, on the existing `equation`
+        display arm rather than a new one. An inequality is a statement already carrying its
+        relation, which is what that arm was built for; the row measures, renders and announces
+        identically, so a fourth arm would have duplicated `EquationView` and its size ladder for
+        no measured difference — 14a's own test, applied the other way. The arm's doc no longer claims
+        such a statement is "answered by the value of `variable` that makes it true", which is what
+        the frame row asserts and what the five choice-answered skills therefore drop. One arm covers
+        15.3 and 15.5 with a **signed** coefficient, so the reversal is one rule keyed on a number
+        the display shows, rather than two arms that could drift.
+
+        Three findings the tests would not have given for free. **Sorting the options leaks the
+        answer** — the three distractors are derived *from* it, so under `< ≤ > ≥` the correct
+        option lands at position 1, 2, 2 and 3 as the relation runs through the four symbols and
+        position 4 is never right. `special-solutions` sorts safely only because it draws its
+        *answer* from a fixed list, which is the opposite direction; here the order is drawn from
+        the problem's own rng. The same skill leaked twice over: with the right-hand side always
+        positive, `c ÷ −a` is negative every time and "pick the option with the minus sign" is
+        right without reversing anything, so 15.5 draws that side signed. And **the central filter
+        does not protect a text prediction**: `generateProblem` compares against
+        `Number(answer.id)`, which is `NaN` for `x<-4`, so a prediction equal to the answer would
+        survive where on a keypad skill it could not. Five of the six skills predict text, and the
+        unit asserts it itself.
+
+        **The browser check paid for itself a fourth time, after items 12, 16 and 14b.** All six
+        displays began with the frame row dropped, on the reasoning that no answer in the unit is
+        a value of x. True of the five answered by choices; false of `compound-inequalities`,
+        which has a keypad, so what shipped was entry with no feedback — the learner pressed a
+        digit and nothing on screen moved. Every assertion passed, because a missing row is not
+        something an element query thinks to ask about. It is 14b's finding read backwards: that
+        increment dropped a slot that had no keypad, this one restored a slot that had one. The
+        rule under both is that the frame is a **claim** — the answer is a value of the thing
+        named — false of a graph or a solved relation, true of a count, so it frames `how many`,
+        a label rather than a variable name in the way `equation-balance` frames `each side`.
+
+        Two composition traps, both of the shape 14a named. `3x + 4 ≤ 19` mis-orders to `19/3 − 4`,
+        a fraction no option can state and no learner reaches, so 15.4 draws its constant and
+        right-hand value as multiples of the coefficient — the mistake has to be *offerable*, not
+        merely distinct. And 15.6's two diagnoses can collide with each other rather than with the
+        answer: the complement landed on the loosened count, `generateProblem` deduped it away, and
+        the skill quietly predicted one mistake where its contract promises two. Its upper bound is
+        drawn from the values that leave both standing.
 
 - [ ] **22 · Coordinate-plane input** — L — **two increments**
 

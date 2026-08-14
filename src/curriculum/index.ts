@@ -28,6 +28,7 @@ import { unit11 } from './unit-11-ratios-proportions'
 import { unit12 } from './unit-12-exponents-roots'
 import { unit13 } from './unit-13-expressions'
 import { unit14 } from './unit-14-linear-equations'
+import { unit15 } from './unit-15-inequalities'
 import {
   indexSkills,
   resolveCourseTree,
@@ -59,6 +60,7 @@ export const allSkills: SkillGenerator[] = [
   ...unit12,
   ...unit13,
   ...unit14,
+  ...unit15,
 ]
 
 /**

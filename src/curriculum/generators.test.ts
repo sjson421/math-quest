@@ -19,6 +19,7 @@ import type {
   Problem,
   PowerData,
   RatioData,
+  Relation,
   SkillGenerator,
   WholeNumberData,
 } from '../lib/types'
@@ -133,6 +134,49 @@ function choiceIdFor(problem: Problem, label: string): string {
  * untouched, so every display that shipped before Unit 6 is unaffected.
  */
 const drawn = (value: number): string => String(value).replace('-', '−')
+
+/**
+ * Unit 15's relation vocabulary, spelled out again here.
+ *
+ * Same rule as `drawn` above and the number theory further up: a helper shared
+ * with the generator agrees with it by construction, and these four tables are
+ * exactly what the unit could get wrong.
+ */
+const REVERSED_RELATION: Record<Relation, Relation> = { '<': '>', '>': '<', '≤': '≥', '≥': '≤' }
+
+const RELATION_ID: Record<Relation, string> = { '<': '<', '≤': '<=', '>': '>', '≥': '>=' }
+
+/**
+ * The letter Unit 15 writes, asserted rather than carried.
+ *
+ * `special-solutions` carries its own letter because its display omits the frame
+ * label, and every Unit 15 display omits it too — but the conclusion is the
+ * opposite one here, and deliberately. A carried letter lets the generator pick
+ * any letter and this rebuild follows it; a fixed one makes the whole unit
+ * answer in the letter the pad and the course already use, and a generator that
+ * drew `n ≥ 3` fails the text comparison rather than being quietly agreed with.
+ * That is the stronger check, and it costs six payload fields less.
+ */
+const RELATION_VARIABLE = 'x'
+
+const statement = (relation: Relation, bound: number): string =>
+  `${RELATION_VARIABLE} ${relation} ${drawn(bound)}`
+
+/** A solved statement's choice id: plain characters, matching what the pad-free options submit. */
+const solved = (relation: Relation, bound: number): string =>
+  `${RELATION_VARIABLE}${RELATION_ID[relation]}${bound}`
+
+const reversedWhen = (reverse: boolean, relation: Relation): Relation =>
+  reverse ? REVERSED_RELATION[relation] : relation
+
+const satisfies = (relation: Relation, value: number, bound: number): boolean =>
+  relation === '<'
+    ? value < bound
+    : relation === '≤'
+      ? value <= bound
+      : relation === '>'
+        ? value > bound
+        : value >= bound
 
 const decimalPower = (scale: number) => 10 ** scale
 
@@ -1109,6 +1153,97 @@ function expectedEquation(
           `${data.termCoefficient}${data.term} = ${drawn(data.constant)}`,
         answer: `${term(coefficient)}${constant < 0 ? '' : '+'}${constant}`,
         values: [data.subjectCoefficient, data.termCoefficient, data.constant],
+      }
+    }
+    // Unit 15's six. Each rebuilds the *displayed* statement and then solves it,
+    // so a generator that shows one inequality and carries another is caught
+    // before its answer is ever looked at.
+    case 'inequality-meaning':
+      return {
+        text: statement(data.relation, data.bound),
+        // The reading is identified by the relation it reads, in the plain
+        // characters a choice id uses. Not by its wording: a check pinned to
+        // "x is at most 9" would fail the day the copy is reworded, which is
+        // the lesson `special-solutions` already recorded.
+        answer: RELATION_ID[data.relation],
+        values: [data.bound],
+      }
+    case 'inequality-graph':
+      return {
+        text: statement(data.relation, data.bound),
+        // Both halves derived separately, because the skill's whole claim is
+        // that neither can be read off the other: strictness opens or closes the
+        // circle, direction decides the shading.
+        answer:
+          `${data.relation === '<' || data.relation === '>' ? 'open' : 'closed'}-` +
+          `${data.relation === '>' || data.relation === '≥' ? 'right' : 'left'}`,
+        values: [data.bound],
+      }
+    case 'inequality-addsub':
+      return {
+        text:
+          `${RELATION_VARIABLE} ${sign(data.adds)} ${data.constant} ` +
+          `${data.relation} ${drawn(data.rightHand)}`,
+        // Nothing multiplies the variable, so the relation cannot reverse here.
+        answer: solved(data.relation, data.adds ? data.rightHand - data.constant : data.rightHand + data.constant),
+        values: [data.constant, data.rightHand],
+      }
+    case 'inequality-multdiv': {
+      const boundary = data.multiplies ? data.rightHand / data.coefficient : data.rightHand * data.coefficient
+      if (!Number.isInteger(boundary)) {
+        throw new Error(`inequality-multdiv: ${data.coefficient} does not divide ${data.rightHand}`)
+      }
+      return {
+        text: data.multiplies
+          ? `${drawn(data.coefficient)}${RELATION_VARIABLE} ${data.relation} ${drawn(data.rightHand)}`
+          : `${RELATION_VARIABLE} ÷ ${drawn(data.coefficient)} ${data.relation} ${drawn(data.rightHand)}`,
+        // The one rule that serves both `solve-one-step-ineq` and
+        // `flip-the-sign`, and the reason they share an arm: the relation
+        // reverses exactly when the carried coefficient is negative, which is a
+        // property of a number the display puts on screen.
+        answer: solved(reversedWhen(data.coefficient < 0, data.relation), boundary),
+        values: [data.coefficient, data.rightHand],
+      }
+    }
+    case 'inequality-two-step': {
+      const cleared = data.adds ? data.rightHand - data.constant : data.rightHand + data.constant
+      const boundary = cleared / data.coefficient
+      if (!Number.isInteger(boundary)) {
+        throw new Error(`inequality-two-step: ${data.coefficient} does not divide ${cleared}`)
+      }
+      return {
+        text:
+          `${data.coefficient}${RELATION_VARIABLE} ${sign(data.adds)} ${data.constant} ` +
+          `${data.relation} ${drawn(data.rightHand)}`,
+        answer: solved(reversedWhen(data.coefficient < 0, data.relation), boundary),
+        values: [data.coefficient, data.constant, data.rightHand],
+      }
+    }
+    case 'inequality-compound': {
+      const first = `${RELATION_VARIABLE} ${data.firstRelation} ${drawn(data.firstBound)}`
+      const second = `${RELATION_VARIABLE} ${data.secondRelation} ${drawn(data.secondBound)}`
+      // Counted by testing every candidate, never by arithmetic on the bounds.
+      // The arithmetic is where the off-by-one lives, and it is the mistake this
+      // skill exists to diagnose — a count that made it would agree with a
+      // generator that made it too.
+      let count = 0
+      for (let value = 0; value <= data.rangeMax; value += 1) {
+        const inFirst = satisfies(data.firstRelation, value, data.firstBound)
+        const inSecond = satisfies(data.secondRelation, value, data.secondBound)
+        if (data.form === 'or' ? inFirst || inSecond : inFirst && inSecond) count += 1
+      }
+      return {
+        text:
+          data.form === 'between'
+            ? // Chained, so the first bound moves to the left of the variable and
+              // its relation turns round with it. Both are carried as they apply
+              // to the variable, which is what stops a generator drawing
+              // `6 < x ≤ 2` from a payload that means the opposite.
+              `${drawn(data.firstBound)} ${REVERSED_RELATION[data.firstRelation]} ` +
+              `${RELATION_VARIABLE} ${data.secondRelation} ${drawn(data.secondBound)}`
+            : `${first} ${data.form} ${second}`,
+        answer: count,
+        values: [Math.abs(data.firstBound), Math.abs(data.secondBound), data.rangeMax],
       }
     }
     default: {

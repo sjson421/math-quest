@@ -100,6 +100,23 @@ export type SolutionStep = {
 export type Operator = '+' | '−' | '×' | '÷'
 
 /**
+ * How two sides of a statement compare, where they are not equal.
+ *
+ * Beside `Operator` because it is the same kind of thing one level up: an
+ * operator says what to do to two values, a relation says how they stand. Unit
+ * 15 is the first content to need one, and it needs it in four places at once —
+ * the display's text, the option labels, the option ids, and the reversal that
+ * multiplying by a negative forces — so a string literal per generator would be
+ * four spellings of one idea.
+ *
+ * The symbols are the ones the learner reads. `≤` is a single character rather
+ * than `<=`, for the same reason `Operator` carries `−` and `×`: nothing
+ * interpolates a keyboard approximation into learner-facing text. The ASCII
+ * forms exist only as option ids, which the checker reads and nobody sees.
+ */
+export type Relation = '<' | '>' | '≤' | '≥'
+
+/**
  * What a problem's answer is derived from, and which derivation.
  *
  * Named for the representation skills of Unit 0, which asked the first questions
@@ -414,6 +431,91 @@ export type EquationData =
       termCoefficient: number
       constant: number
     }
+  /*
+   * Unit 15's six. Every arm below states an *inequality*, so its `relation` is
+   * the one the display shows — never the one the answer carries, which for two
+   * of these is its reverse and would be the generator's answer smuggled into
+   * the payload that exists to check it.
+   */
+  /**
+   * `inequality-symbols`: `x relation bound`, answered by what that reads as in
+   * words.
+   *
+   * Carries exactly what `inequality-graph` carries, and is deliberately not
+   * that arm. The two derive different things from the same two values — a
+   * reading and a drawing — and one arm serving both would let either generator
+   * claim either answer. `vars-both-sides` and `special-solutions` are separate
+   * for this reason on the same evidence: identical fields, different question.
+   */
+  | { operation: 'inequality-meaning'; relation: Relation; bound: number }
+  /** `graph-inequality`: `x relation bound`, answered by the graph it draws. */
+  | { operation: 'inequality-graph'; relation: Relation; bound: number }
+  /** `solve-one-step-ineq`: `x + constant relation rightHand`, or `−` when `adds` is false. */
+  | {
+      operation: 'inequality-addsub'
+      relation: Relation
+      constant: number
+      adds: boolean
+      rightHand: number
+    }
+  /**
+   * `coefficient·x relation rightHand` when `multiplies`, else
+   * `x / coefficient relation rightHand`.
+   *
+   * **One arm across two skills, and the coefficient is signed.** The solved
+   * relation reverses exactly when that coefficient is negative, which is one
+   * derivation rather than two — and the sign is a number the display puts on
+   * screen, so there is nothing here a generator could swap. What separates
+   * `solve-one-step-ineq` from `flip-the-sign` is which sign each *draws*, and a
+   * draw constraint belongs in the unit's tests rather than in this union.
+   *
+   * Deliberately unlike 14a's `one-step-multdiv`/`two-step` split, which
+   * separates genuinely different *shapes*. These two differ in the sign of one
+   * carried number, and two arms would mean two copies of the same reversal rule.
+   */
+  | {
+      operation: 'inequality-multdiv'
+      relation: Relation
+      coefficient: number
+      multiplies: boolean
+      rightHand: number
+    }
+  /** `solve-multi-step-ineq`: `coefficient·x ± constant relation rightHand`. */
+  | {
+      operation: 'inequality-two-step'
+      relation: Relation
+      coefficient: number
+      constant: number
+      adds: boolean
+      rightHand: number
+    }
+  /**
+   * `compound-inequalities`: two conditions on the variable and how they
+   * combine, answered by how many whole numbers from 0 to `rangeMax` satisfy
+   * them.
+   *
+   * **Both relations read as they apply to the variable** — `x relation bound`,
+   * always in that order — even for `between`, which draws the first one flipped
+   * so the range reads left to right (`2 < x ≤ 6` for `x > 2 and x ≤ 6`). The
+   * alternative, letting each form carry relations in the order it happens to
+   * draw them, means the same two fields mean different things per form, and
+   * verification would then agree with a generator that displayed the wrong way
+   * round.
+   *
+   * `between` is `and` with a rendering, so it is a third value here rather than
+   * a flag beside the connective: a chained `or` reads as a range that is not
+   * one, and this way it cannot be written down at all.
+   */
+  | {
+      operation: 'inequality-compound'
+      form: 'and' | 'or' | 'between'
+      firstRelation: Relation
+      firstBound: number
+      secondRelation: Relation
+      secondBound: number
+      /** The count runs over 0 through this value, both ends included. */
+      rangeMax: number
+    }
 
 /**
  * Structured notation for the closed expression surface used by Stages D–G.
@@ -573,8 +675,8 @@ export type Display =
   /** A shaded equal-part shape whose visible fraction is carried as data. */
   | { kind: 'diagram'; diagram: ShapeDiagram }
   /**
-   * An equation: a statement that already contains its relation, answered by the
-   * value of `variable` that makes it true.
+   * A statement that already contains its relation — an equation, or since Unit
+   * 15 an inequality.
    *
    * The third thing a display's answer can be, and the reason it cannot be an
    * `inline`. Where an inline expression's answer is *the value of what is
@@ -583,7 +685,23 @@ export type Display =
    * answer is neither: `3x + 5 = 20` evaluates to no number, and appending a
    * second equality would put `3x + 5 = 20 = 5` on screen — a false statement,
    * in the unit whose whole subject is that both sides of an equals sign hold
-   * the same value. `ProblemView` frames the slot as `x = ⟦slot⟧` beneath.
+   * the same value. The same argument covers `x ≥ −2`, where the appended frame
+   * would read `x ≥ −2 = closed`.
+   *
+   * The arm was written for equations and its first sentence used to end
+   * "answered by the value of `variable` that makes it true". That was already
+   * only usually so — `special-solutions` answers a solution *count*, which is
+   * why 14b made the frame optional — and Unit 15 makes it the exception rather
+   * than the rule: a relation's answer is a reading, a graph, a solved relation
+   * or a count, and not one of the six is a value of anything. `variable` is set
+   * where the answer *is* such a value, and `ProblemView` then frames the slot
+   * as `x = ⟦slot⟧` beneath; where it is absent the frame row is dropped whole.
+   *
+   * `EquationData` keeps its name while carrying arms that are not equations.
+   * The alternative was renaming the arm and the payload type across this file,
+   * `ProblemView`, the recorded-output gate, the generator checks and Unit 14 —
+   * a rename with no behaviour in it, and the arm renders, measures and
+   * announces an inequality exactly as it does an equation.
    */
   | {
       kind: 'equation'

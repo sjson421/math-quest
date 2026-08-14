@@ -68,6 +68,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "compare-same-den": [
     "simplify-fractions",
   ],
+  "compound-inequalities": [
+    "flip-the-sign",
+  ],
   "decimal-place-value": [
     "fraction-words",
   ],
@@ -161,6 +164,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "find-the-whole": [
     "find-the-percent",
   ],
+  "flip-the-sign": [
+    "solve-multi-step-ineq",
+  ],
   "fraction-meaning": [
     "negatives-mixed",
   ],
@@ -176,11 +182,17 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "fractions-numberline": [
     "name-parts",
   ],
+  "graph-inequality": [
+    "inequality-symbols",
+  ],
   "identify-like-terms": [
     "words-to-expression",
   ],
   "improper-to-mixed": [
     "sub-frac-diff-den",
+  ],
+  "inequality-symbols": [
+    "rearrange-formula",
   ],
   "long-div-1digit": [
     "div-by-10-100",
@@ -311,6 +323,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "simplify-ratios": [
     "write-ratios",
+  ],
+  "solve-multi-step-ineq": [
+    "solve-one-step-ineq",
+  ],
+  "solve-one-step-ineq": [
+    "graph-inequality",
   ],
   "solve-proportions": [
     "unit-rate",

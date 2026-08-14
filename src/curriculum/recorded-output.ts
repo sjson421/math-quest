@@ -312,6 +312,31 @@ const formatEquationData = (data: EquationData): string => {
         `${data.operation} ${data.subjectCoefficient}${data.subject} + ` +
         `${data.termCoefficient}${data.term} = ${data.constant} for ${data.subject}`
       )
+    case 'inequality-meaning':
+    case 'inequality-graph':
+      // The two arms carry the same fields and ask different questions, so the
+      // operation name is what tells the snapshots apart. Recording only the
+      // statement would make a swapped arm invisible here.
+      return `${data.operation} x ${data.relation} ${data.bound}`
+    case 'inequality-addsub':
+      return `${data.operation} x ${data.adds ? '+' : '-'} ${data.constant} ${data.relation} ${data.rightHand}`
+    case 'inequality-multdiv':
+      return data.multiplies
+        ? `${data.operation} ${data.coefficient}x ${data.relation} ${data.rightHand}`
+        : `${data.operation} x / ${data.coefficient} ${data.relation} ${data.rightHand}`
+    case 'inequality-two-step':
+      return (
+        `${data.operation} ${data.coefficient}x ${data.adds ? '+' : '-'} ${data.constant} ` +
+        `${data.relation} ${data.rightHand}`
+      )
+    case 'inequality-compound':
+      // Both conditions written variable-first, which is how they are carried —
+      // a `between` draw renders flipped on screen, and recording it flipped
+      // here would hide a payload that means the opposite of what it draws.
+      return (
+        `${data.operation} ${data.form} x ${data.firstRelation} ${data.firstBound} / ` +
+        `x ${data.secondRelation} ${data.secondBound} over 0..${data.rangeMax}`
+      )
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled equation data: ${JSON.stringify(unhandled)}`)

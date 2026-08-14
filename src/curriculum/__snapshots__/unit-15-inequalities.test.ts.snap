@@ -1,0 +1,2238 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: compound-inequalities > matches the wording recorded when the skill landed 1`] = `
+"--- compound-inequalities · seed 1 · difficulty 1
+prompt   How many whole numbers from 0 to 9 make this true?
+display  equation "x ≤ 1 or x > 8" solve how many [inequality-compound or x ≤ 1 / x > 8 over 0..9]
+answer   exact 3/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 9.
+step 2   Keep every number satisfying either part.   [x ≤ 1 or x > 8]
+step 3   That leaves 3 of them.
+miss     counted-a-strict-boundary = 4   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 7   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 12345 · difficulty 1
+prompt   How many whole numbers from 0 to 10 make this true?
+display  equation "x ≤ 3 or x > 7" solve how many [inequality-compound or x ≤ 3 / x > 7 over 0..10]
+answer   exact 7/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 10.
+step 2   Keep every number satisfying either part.   [x ≤ 3 or x > 7]
+step 3   That leaves 7 of them.
+miss     counted-a-strict-boundary = 8   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 4   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 67890 · difficulty 1
+prompt   How many whole numbers from 0 to 9 make this true?
+display  equation "x < 4 or x > 7" solve how many [inequality-compound or x < 4 / x > 7 over 0..9]
+answer   exact 6/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 9.
+step 2   Keep every number satisfying either part.   [x < 4 or x > 7]
+step 3   That leaves 6 of them.
+miss     counted-a-strict-boundary = 8   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 4   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 424242 · difficulty 1
+prompt   How many whole numbers from 0 to 8 make this true?
+display  equation "x ≥ 2 and x < 5" solve how many [inequality-compound and x ≥ 2 / x < 5 over 0..8]
+answer   exact 3/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 8.
+step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 5]
+step 3   That leaves 3 of them.
+miss     counted-a-strict-boundary = 4   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 6   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 987654321 · difficulty 1
+prompt   How many whole numbers from 0 to 10 make this true?
+display  equation "x ≥ 1 and x < 7" solve how many [inequality-compound and x ≥ 1 / x < 7 over 0..10]
+answer   exact 6/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 10.
+step 2   Keep only the numbers satisfying both parts.   [x ≥ 1 and x < 7]
+step 3   That leaves 6 of them.
+miss     counted-a-strict-boundary = 7   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 5   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 1 · difficulty 2
+prompt   How many whole numbers from 0 to 11 make this true?
+display  equation "x ≤ 1 or x > 10" solve how many [inequality-compound or x ≤ 1 / x > 10 over 0..11]
+answer   exact 3/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 11.
+step 2   Keep every number satisfying either part.   [x ≤ 1 or x > 10]
+step 3   That leaves 3 of them.
+miss     counted-a-strict-boundary = 4   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 9   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 12345 · difficulty 2
+prompt   How many whole numbers from 0 to 12 make this true?
+display  equation "x ≤ 3 or x > 8" solve how many [inequality-compound or x ≤ 3 / x > 8 over 0..12]
+answer   exact 8/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 12.
+step 2   Keep every number satisfying either part.   [x ≤ 3 or x > 8]
+step 3   That leaves 8 of them.
+miss     counted-a-strict-boundary = 9   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 5   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 67890 · difficulty 2
+prompt   How many whole numbers from 0 to 11 make this true?
+display  equation "x < 5 or x > 9" solve how many [inequality-compound or x < 5 / x > 9 over 0..11]
+answer   exact 7/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 11.
+step 2   Keep every number satisfying either part.   [x < 5 or x > 9]
+step 3   That leaves 7 of them.
+miss     counted-a-strict-boundary = 9   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 5   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 424242 · difficulty 2
+prompt   How many whole numbers from 0 to 10 make this true?
+display  equation "x ≥ 2 and x < 5" solve how many [inequality-compound and x ≥ 2 / x < 5 over 0..10]
+answer   exact 3/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 10.
+step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 5]
+step 3   That leaves 3 of them.
+miss     counted-a-strict-boundary = 4   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 8   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 987654321 · difficulty 2
+prompt   How many whole numbers from 0 to 12 make this true?
+display  equation "x ≥ 2 and x < 9" solve how many [inequality-compound and x ≥ 2 / x < 9 over 0..12]
+answer   exact 7/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 12.
+step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 9]
+step 3   That leaves 7 of them.
+miss     counted-a-strict-boundary = 8   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 6   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 1 · difficulty 3
+prompt   How many whole numbers from 0 to 13 make this true?
+display  equation "x ≤ 1 or x > 12" solve how many [inequality-compound or x ≤ 1 / x > 12 over 0..13]
+answer   exact 3/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 13.
+step 2   Keep every number satisfying either part.   [x ≤ 1 or x > 12]
+step 3   That leaves 3 of them.
+miss     counted-a-strict-boundary = 4   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 11   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 12345 · difficulty 3
+prompt   How many whole numbers from 0 to 14 make this true?
+display  equation "x ≤ 4 or x > 9" solve how many [inequality-compound or x ≤ 4 / x > 9 over 0..14]
+answer   exact 10/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 14.
+step 2   Keep every number satisfying either part.   [x ≤ 4 or x > 9]
+step 3   That leaves 10 of them.
+miss     counted-a-strict-boundary = 11   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 5   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 67890 · difficulty 3
+prompt   How many whole numbers from 0 to 11 make this true?
+display  equation "x < 5 or x > 9" solve how many [inequality-compound or x < 5 / x > 9 over 0..11]
+answer   exact 7/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 11.
+step 2   Keep every number satisfying either part.   [x < 5 or x > 9]
+step 3   That leaves 7 of them.
+miss     counted-a-strict-boundary = 9   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 5   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 424242 · difficulty 3
+prompt   How many whole numbers from 0 to 10 make this true?
+display  equation "x ≥ 2 and x < 5" solve how many [inequality-compound and x ≥ 2 / x < 5 over 0..10]
+answer   exact 3/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 10.
+step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 5]
+step 3   That leaves 3 of them.
+miss     counted-a-strict-boundary = 4   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 8   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 987654321 · difficulty 3
+prompt   How many whole numbers from 0 to 14 make this true?
+display  equation "x ≥ 2 and x < 10" solve how many [inequality-compound and x ≥ 2 / x < 10 over 0..14]
+answer   exact 8/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 14.
+step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 10]
+step 3   That leaves 8 of them.
+miss     counted-a-strict-boundary = 9   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 7   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 1 · difficulty 4
+prompt   How many whole numbers from 0 to 15 make this true?
+display  equation "x ≤ 1 or x > 14" solve how many [inequality-compound or x ≤ 1 / x > 14 over 0..15]
+answer   exact 3/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 15.
+step 2   Keep every number satisfying either part.   [x ≤ 1 or x > 14]
+step 3   That leaves 3 of them.
+miss     counted-a-strict-boundary = 4   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 13   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 12345 · difficulty 4
+prompt   How many whole numbers from 0 to 16 make this true?
+display  equation "x ≤ 4 or x > 10" solve how many [inequality-compound or x ≤ 4 / x > 10 over 0..16]
+answer   exact 11/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 16.
+step 2   Keep every number satisfying either part.   [x ≤ 4 or x > 10]
+step 3   That leaves 11 of them.
+miss     counted-a-strict-boundary = 12   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 6   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 67890 · difficulty 4
+prompt   How many whole numbers from 0 to 13 make this true?
+display  equation "x < 6 or x > 11" solve how many [inequality-compound or x < 6 / x > 11 over 0..13]
+answer   exact 8/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 13.
+step 2   Keep every number satisfying either part.   [x < 6 or x > 11]
+step 3   That leaves 8 of them.
+miss     counted-a-strict-boundary = 10   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 6   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 424242 · difficulty 4
+prompt   How many whole numbers from 0 to 12 make this true?
+display  equation "x ≥ 3 and x < 7" solve how many [inequality-compound and x ≥ 3 / x < 7 over 0..12]
+answer   exact 4/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 12.
+step 2   Keep only the numbers satisfying both parts.   [x ≥ 3 and x < 7]
+step 3   That leaves 4 of them.
+miss     counted-a-strict-boundary = 5   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 9   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 987654321 · difficulty 4
+prompt   How many whole numbers from 0 to 16 make this true?
+display  equation "x ≥ 2 and x < 11" solve how many [inequality-compound and x ≥ 2 / x < 11 over 0..16]
+answer   exact 9/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 16.
+step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 11]
+step 3   That leaves 9 of them.
+miss     counted-a-strict-boundary = 10   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 8   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 1 · difficulty 5
+prompt   How many whole numbers from 0 to 18 make this true?
+display  equation "x ≤ 1 or x > 17" solve how many [inequality-compound or x ≤ 1 / x > 17 over 0..18]
+answer   exact 3/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 18.
+step 2   Keep every number satisfying either part.   [x ≤ 1 or x > 17]
+step 3   That leaves 3 of them.
+miss     counted-a-strict-boundary = 4   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 16   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 12345 · difficulty 5
+prompt   How many whole numbers from 0 to 20 make this true?
+display  equation "x ≤ 6 or x > 13" solve how many [inequality-compound or x ≤ 6 / x > 13 over 0..20]
+answer   exact 14/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 20.
+step 2   Keep every number satisfying either part.   [x ≤ 6 or x > 13]
+step 3   That leaves 14 of them.
+miss     counted-a-strict-boundary = 15   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 7   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 67890 · difficulty 5
+prompt   How many whole numbers from 0 to 16 make this true?
+display  equation "x < 8 or x > 14" solve how many [inequality-compound or x < 8 / x > 14 over 0..16]
+answer   exact 10/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 16.
+step 2   Keep every number satisfying either part.   [x < 8 or x > 14]
+step 3   That leaves 10 of them.
+miss     counted-a-strict-boundary = 12   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 7   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 424242 · difficulty 5
+prompt   How many whole numbers from 0 to 14 make this true?
+display  equation "x ≥ 3 and x < 7" solve how many [inequality-compound and x ≥ 3 / x < 7 over 0..14]
+answer   exact 4/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 14.
+step 2   Keep only the numbers satisfying both parts.   [x ≥ 3 and x < 7]
+step 3   That leaves 4 of them.
+miss     counted-a-strict-boundary = 5   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 11   Count the numbers that make it true, not the ones that do not.
+
+--- compound-inequalities · seed 987654321 · difficulty 5
+prompt   How many whole numbers from 0 to 20 make this true?
+display  equation "x ≥ 3 and x < 14" solve how many [inequality-compound and x ≥ 3 / x < 14 over 0..20]
+answer   exact 11/1
+input    keypad
+hint     Walk the range and keep the numbers the statement admits.
+step 1   Take the whole numbers from 0 to 20.
+step 2   Keep only the numbers satisfying both parts.   [x ≥ 3 and x < 14]
+step 3   That leaves 11 of them.
+miss     counted-a-strict-boundary = 12   A symbol with no line underneath leaves its own number out.
+miss     counted-the-other-side = 10   Count the numbers that make it true, not the ones that do not."
+`;
+
+exports[`recorded output: flip-the-sign > matches the wording recorded when the skill landed 1`] = `
+"--- flip-the-sign · seed 1 · difficulty 1
+prompt   Solve for x.
+display  equation "x ÷ −2 > 3" unframed [inequality-multdiv x / -2 > 3]
+answer   choice x<-6
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<-6 = x < −6
+choice   x<6 = x < 6
+choice   x>6 = x > 6
+choice   x>-6 = x > −6
+step 1   Multiply both sides by −2.   [3 × −2 = −6]
+step 2   It was a negative, so the symbol turns round.   [x < −6]
+miss     did-not-flip = x>-6   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<6   The symbol turned, but 3 × −2 is −6.
+miss     kept-both = x>6   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "x ÷ −2 ≥ 3" unframed [inequality-multdiv x / -2 ≥ 3]
+answer   choice x<=-6
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<=6 = x ≤ 6
+choice   x>=6 = x ≥ 6
+choice   x<=-6 = x ≤ −6
+choice   x>=-6 = x ≥ −6
+step 1   Multiply both sides by −2.   [3 × −2 = −6]
+step 2   It was a negative, so the symbol turns round.   [x ≤ −6]
+miss     did-not-flip = x>=-6   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<=6   The symbol turned, but 3 × −2 is −6.
+miss     kept-both = x>=6   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 67890 · difficulty 1
+prompt   Solve for x.
+display  equation "−3x ≤ 9" unframed [inequality-multdiv -3x ≤ 9]
+answer   choice x>=-3
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x>=3 = x ≥ 3
+choice   x<=-3 = x ≤ −3
+choice   x>=-3 = x ≥ −3
+choice   x<=3 = x ≤ 3
+step 1   Divide both sides by −3.   [9 ÷ −3 = −3]
+step 2   It was a negative, so the symbol turns round.   [x ≥ −3]
+miss     did-not-flip = x<=-3   Dividing by a negative turns the symbol round.
+miss     lost-the-sign = x>=3   The symbol turned, but 9 ÷ −3 is −3.
+miss     kept-both = x<=3   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 424242 · difficulty 1
+prompt   Solve for x.
+display  equation "−2x < −4" unframed [inequality-multdiv -2x < -4]
+answer   choice x>2
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<-2 = x < −2
+choice   x<2 = x < 2
+choice   x>2 = x > 2
+choice   x>-2 = x > −2
+step 1   Divide both sides by −2.   [−4 ÷ −2 = 2]
+step 2   It was a negative, so the symbol turns round.   [x > 2]
+miss     did-not-flip = x<2   Dividing by a negative turns the symbol round.
+miss     lost-the-sign = x>-2   The symbol turned, but −4 ÷ −2 is 2.
+miss     kept-both = x<-2   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 987654321 · difficulty 1
+prompt   Solve for x.
+display  equation "x ÷ −2 ≥ 2" unframed [inequality-multdiv x / -2 ≥ 2]
+answer   choice x<=-4
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<=4 = x ≤ 4
+choice   x<=-4 = x ≤ −4
+choice   x>=4 = x ≥ 4
+choice   x>=-4 = x ≥ −4
+step 1   Multiply both sides by −2.   [2 × −2 = −4]
+step 2   It was a negative, so the symbol turns round.   [x ≤ −4]
+miss     did-not-flip = x>=-4   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<=4   The symbol turned, but 2 × −2 is −4.
+miss     kept-both = x>=4   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 1 · difficulty 2
+prompt   Solve for x.
+display  equation "x ÷ −2 > 4" unframed [inequality-multdiv x / -2 > 4]
+answer   choice x<-8
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<-8 = x < −8
+choice   x<8 = x < 8
+choice   x>8 = x > 8
+choice   x>-8 = x > −8
+step 1   Multiply both sides by −2.   [4 × −2 = −8]
+step 2   It was a negative, so the symbol turns round.   [x < −8]
+miss     did-not-flip = x>-8   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<8   The symbol turned, but 4 × −2 is −8.
+miss     kept-both = x>8   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "x ÷ −2 ≥ 4" unframed [inequality-multdiv x / -2 ≥ 4]
+answer   choice x<=-8
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<=8 = x ≤ 8
+choice   x>=8 = x ≥ 8
+choice   x<=-8 = x ≤ −8
+choice   x>=-8 = x ≥ −8
+step 1   Multiply both sides by −2.   [4 × −2 = −8]
+step 2   It was a negative, so the symbol turns round.   [x ≤ −8]
+miss     did-not-flip = x>=-8   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<=8   The symbol turned, but 4 × −2 is −8.
+miss     kept-both = x>=8   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 67890 · difficulty 2
+prompt   Solve for x.
+display  equation "−3x ≤ 9" unframed [inequality-multdiv -3x ≤ 9]
+answer   choice x>=-3
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x>=3 = x ≥ 3
+choice   x<=-3 = x ≤ −3
+choice   x>=-3 = x ≥ −3
+choice   x<=3 = x ≤ 3
+step 1   Divide both sides by −3.   [9 ÷ −3 = −3]
+step 2   It was a negative, so the symbol turns round.   [x ≥ −3]
+miss     did-not-flip = x<=-3   Dividing by a negative turns the symbol round.
+miss     lost-the-sign = x>=3   The symbol turned, but 9 ÷ −3 is −3.
+miss     kept-both = x<=3   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 424242 · difficulty 2
+prompt   Solve for x.
+display  equation "−2x < −4" unframed [inequality-multdiv -2x < -4]
+answer   choice x>2
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<-2 = x < −2
+choice   x<2 = x < 2
+choice   x>2 = x > 2
+choice   x>-2 = x > −2
+step 1   Divide both sides by −2.   [−4 ÷ −2 = 2]
+step 2   It was a negative, so the symbol turns round.   [x > 2]
+miss     did-not-flip = x<2   Dividing by a negative turns the symbol round.
+miss     lost-the-sign = x>-2   The symbol turned, but −4 ÷ −2 is 2.
+miss     kept-both = x<-2   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 987654321 · difficulty 2
+prompt   Solve for x.
+display  equation "x ÷ −2 ≥ 2" unframed [inequality-multdiv x / -2 ≥ 2]
+answer   choice x<=-4
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<=4 = x ≤ 4
+choice   x<=-4 = x ≤ −4
+choice   x>=4 = x ≥ 4
+choice   x>=-4 = x ≥ −4
+step 1   Multiply both sides by −2.   [2 × −2 = −4]
+step 2   It was a negative, so the symbol turns round.   [x ≤ −4]
+miss     did-not-flip = x>=-4   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<=4   The symbol turned, but 2 × −2 is −4.
+miss     kept-both = x>=4   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 1 · difficulty 3
+prompt   Solve for x.
+display  equation "x ÷ −2 > 6" unframed [inequality-multdiv x / -2 > 6]
+answer   choice x<-12
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<-12 = x < −12
+choice   x<12 = x < 12
+choice   x>12 = x > 12
+choice   x>-12 = x > −12
+step 1   Multiply both sides by −2.   [6 × −2 = −12]
+step 2   It was a negative, so the symbol turns round.   [x < −12]
+miss     did-not-flip = x>-12   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<12   The symbol turned, but 6 × −2 is −12.
+miss     kept-both = x>12   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "x ÷ −2 ≥ 5" unframed [inequality-multdiv x / -2 ≥ 5]
+answer   choice x<=-10
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<=10 = x ≤ 10
+choice   x>=10 = x ≥ 10
+choice   x<=-10 = x ≤ −10
+choice   x>=-10 = x ≥ −10
+step 1   Multiply both sides by −2.   [5 × −2 = −10]
+step 2   It was a negative, so the symbol turns round.   [x ≤ −10]
+miss     did-not-flip = x>=-10   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<=10   The symbol turned, but 5 × −2 is −10.
+miss     kept-both = x>=10   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 67890 · difficulty 3
+prompt   Solve for x.
+display  equation "−3x ≤ 15" unframed [inequality-multdiv -3x ≤ 15]
+answer   choice x>=-5
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x>=5 = x ≥ 5
+choice   x<=-5 = x ≤ −5
+choice   x>=-5 = x ≥ −5
+choice   x<=5 = x ≤ 5
+step 1   Divide both sides by −3.   [15 ÷ −3 = −5]
+step 2   It was a negative, so the symbol turns round.   [x ≥ −5]
+miss     did-not-flip = x<=-5   Dividing by a negative turns the symbol round.
+miss     lost-the-sign = x>=5   The symbol turned, but 15 ÷ −3 is −5.
+miss     kept-both = x<=5   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 424242 · difficulty 3
+prompt   Solve for x.
+display  equation "−2x < −8" unframed [inequality-multdiv -2x < -8]
+answer   choice x>4
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<-4 = x < −4
+choice   x<4 = x < 4
+choice   x>4 = x > 4
+choice   x>-4 = x > −4
+step 1   Divide both sides by −2.   [−8 ÷ −2 = 4]
+step 2   It was a negative, so the symbol turns round.   [x > 4]
+miss     did-not-flip = x<4   Dividing by a negative turns the symbol round.
+miss     lost-the-sign = x>-4   The symbol turned, but −8 ÷ −2 is 4.
+miss     kept-both = x<-4   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 987654321 · difficulty 3
+prompt   Solve for x.
+display  equation "x ÷ −2 ≥ 3" unframed [inequality-multdiv x / -2 ≥ 3]
+answer   choice x<=-6
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<=6 = x ≤ 6
+choice   x<=-6 = x ≤ −6
+choice   x>=6 = x ≥ 6
+choice   x>=-6 = x ≥ −6
+step 1   Multiply both sides by −2.   [3 × −2 = −6]
+step 2   It was a negative, so the symbol turns round.   [x ≤ −6]
+miss     did-not-flip = x>=-6   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<=6   The symbol turned, but 3 × −2 is −6.
+miss     kept-both = x>=6   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 1 · difficulty 4
+prompt   Solve for x.
+display  equation "x ÷ −2 > 7" unframed [inequality-multdiv x / -2 > 7]
+answer   choice x<-14
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<-14 = x < −14
+choice   x<14 = x < 14
+choice   x>14 = x > 14
+choice   x>-14 = x > −14
+step 1   Multiply both sides by −2.   [7 × −2 = −14]
+step 2   It was a negative, so the symbol turns round.   [x < −14]
+miss     did-not-flip = x>-14   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<14   The symbol turned, but 7 × −2 is −14.
+miss     kept-both = x>14   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "x ÷ −2 ≥ 6" unframed [inequality-multdiv x / -2 ≥ 6]
+answer   choice x<=-12
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<=12 = x ≤ 12
+choice   x>=12 = x ≥ 12
+choice   x<=-12 = x ≤ −12
+choice   x>=-12 = x ≥ −12
+step 1   Multiply both sides by −2.   [6 × −2 = −12]
+step 2   It was a negative, so the symbol turns round.   [x ≤ −12]
+miss     did-not-flip = x>=-12   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<=12   The symbol turned, but 6 × −2 is −12.
+miss     kept-both = x>=12   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 67890 · difficulty 4
+prompt   Solve for x.
+display  equation "−3x ≤ 15" unframed [inequality-multdiv -3x ≤ 15]
+answer   choice x>=-5
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x>=5 = x ≥ 5
+choice   x<=-5 = x ≤ −5
+choice   x>=-5 = x ≥ −5
+choice   x<=5 = x ≤ 5
+step 1   Divide both sides by −3.   [15 ÷ −3 = −5]
+step 2   It was a negative, so the symbol turns round.   [x ≥ −5]
+miss     did-not-flip = x<=-5   Dividing by a negative turns the symbol round.
+miss     lost-the-sign = x>=5   The symbol turned, but 15 ÷ −3 is −5.
+miss     kept-both = x<=5   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 424242 · difficulty 4
+prompt   Solve for x.
+display  equation "−2x < −8" unframed [inequality-multdiv -2x < -8]
+answer   choice x>4
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<-4 = x < −4
+choice   x<4 = x < 4
+choice   x>4 = x > 4
+choice   x>-4 = x > −4
+step 1   Divide both sides by −2.   [−8 ÷ −2 = 4]
+step 2   It was a negative, so the symbol turns round.   [x > 4]
+miss     did-not-flip = x<4   Dividing by a negative turns the symbol round.
+miss     lost-the-sign = x>-4   The symbol turned, but −8 ÷ −2 is 4.
+miss     kept-both = x<-4   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 987654321 · difficulty 4
+prompt   Solve for x.
+display  equation "x ÷ −2 ≥ 3" unframed [inequality-multdiv x / -2 ≥ 3]
+answer   choice x<=-6
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<=6 = x ≤ 6
+choice   x<=-6 = x ≤ −6
+choice   x>=6 = x ≥ 6
+choice   x>=-6 = x ≥ −6
+step 1   Multiply both sides by −2.   [3 × −2 = −6]
+step 2   It was a negative, so the symbol turns round.   [x ≤ −6]
+miss     did-not-flip = x>=-6   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<=6   The symbol turned, but 3 × −2 is −6.
+miss     kept-both = x>=6   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 1 · difficulty 5
+prompt   Solve for x.
+display  equation "x ÷ −3 > 8" unframed [inequality-multdiv x / -3 > 8]
+answer   choice x<-24
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<-24 = x < −24
+choice   x<24 = x < 24
+choice   x>24 = x > 24
+choice   x>-24 = x > −24
+step 1   Multiply both sides by −3.   [8 × −3 = −24]
+step 2   It was a negative, so the symbol turns round.   [x < −24]
+miss     did-not-flip = x>-24   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<24   The symbol turned, but 8 × −3 is −24.
+miss     kept-both = x>24   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "x ÷ −3 ≥ 8" unframed [inequality-multdiv x / -3 ≥ 8]
+answer   choice x<=-24
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<=24 = x ≤ 24
+choice   x>=24 = x ≥ 24
+choice   x<=-24 = x ≤ −24
+choice   x>=-24 = x ≥ −24
+step 1   Multiply both sides by −3.   [8 × −3 = −24]
+step 2   It was a negative, so the symbol turns round.   [x ≤ −24]
+miss     did-not-flip = x>=-24   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<=24   The symbol turned, but 8 × −3 is −24.
+miss     kept-both = x>=24   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 67890 · difficulty 5
+prompt   Solve for x.
+display  equation "−4x ≤ 28" unframed [inequality-multdiv -4x ≤ 28]
+answer   choice x>=-7
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x>=7 = x ≥ 7
+choice   x<=-7 = x ≤ −7
+choice   x>=-7 = x ≥ −7
+choice   x<=7 = x ≤ 7
+step 1   Divide both sides by −4.   [28 ÷ −4 = −7]
+step 2   It was a negative, so the symbol turns round.   [x ≥ −7]
+miss     did-not-flip = x<=-7   Dividing by a negative turns the symbol round.
+miss     lost-the-sign = x>=7   The symbol turned, but 28 ÷ −4 is −7.
+miss     kept-both = x<=7   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 424242 · difficulty 5
+prompt   Solve for x.
+display  equation "−3x < −15" unframed [inequality-multdiv -3x < -15]
+answer   choice x>5
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<-5 = x < −5
+choice   x<5 = x < 5
+choice   x>5 = x > 5
+choice   x>-5 = x > −5
+step 1   Divide both sides by −3.   [−15 ÷ −3 = 5]
+step 2   It was a negative, so the symbol turns round.   [x > 5]
+miss     did-not-flip = x<5   Dividing by a negative turns the symbol round.
+miss     lost-the-sign = x>-5   The symbol turned, but −15 ÷ −3 is 5.
+miss     kept-both = x<-5   A negative changes two things here: the symbol and the sign.
+
+--- flip-the-sign · seed 987654321 · difficulty 5
+prompt   Solve for x.
+display  equation "x ÷ −3 ≥ 4" unframed [inequality-multdiv x / -3 ≥ 4]
+answer   choice x<=-12
+input    choice
+hint     A negative multiplier turns the symbol round as well.
+choice   x<=12 = x ≤ 12
+choice   x<=-12 = x ≤ −12
+choice   x>=12 = x ≥ 12
+choice   x>=-12 = x ≥ −12
+step 1   Multiply both sides by −3.   [4 × −3 = −12]
+step 2   It was a negative, so the symbol turns round.   [x ≤ −12]
+miss     did-not-flip = x>=-12   Multiplying by a negative turns the symbol round.
+miss     lost-the-sign = x<=12   The symbol turned, but 4 × −3 is −12.
+miss     kept-both = x>=12   A negative changes two things here: the symbol and the sign."
+`;
+
+exports[`recorded output: graph-inequality > matches the wording recorded when the skill landed 1`] = `
+"--- graph-inequality · seed 1 · difficulty 1
+prompt   What does the graph of this look like?
+display  equation "x > −5" unframed [inequality-graph x > -5]
+answer   choice open-right
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   closed-left = Closed circle at −5, shaded left
+choice   open-left = Open circle at −5, shaded left
+choice   open-right = Open circle at −5, shaded right
+choice   closed-right = Closed circle at −5, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −5]
+step 2   Shade right, toward the larger numbers.   [x > −5]
+miss     circle-strictness = closed-right   −5 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-left   Shading runs toward the numbers that satisfy it, right of −5.
+
+--- graph-inequality · seed 12345 · difficulty 1
+prompt   What does the graph of this look like?
+display  equation "x ≤ −6" unframed [inequality-graph x ≤ -6]
+answer   choice closed-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at −6, shaded right
+choice   open-left = Open circle at −6, shaded left
+choice   closed-left = Closed circle at −6, shaded left
+choice   closed-right = Closed circle at −6, shaded right
+step 1   The line under the symbol fills the circle in.   [circle at −6]
+step 2   Shade left, toward the smaller numbers.   [x ≤ −6]
+miss     circle-strictness = open-left   −6 is a solution here, so its circle is filled in.
+miss     shaded-wrong-way = closed-right   Shading runs toward the numbers that satisfy it, left of −6.
+
+--- graph-inequality · seed 67890 · difficulty 1
+prompt   What does the graph of this look like?
+display  equation "x ≤ 3" unframed [inequality-graph x ≤ 3]
+answer   choice closed-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at 3, shaded right
+choice   closed-right = Closed circle at 3, shaded right
+choice   open-left = Open circle at 3, shaded left
+choice   closed-left = Closed circle at 3, shaded left
+step 1   The line under the symbol fills the circle in.   [circle at 3]
+step 2   Shade left, toward the smaller numbers.   [x ≤ 3]
+miss     circle-strictness = open-left   3 is a solution here, so its circle is filled in.
+miss     shaded-wrong-way = closed-right   Shading runs toward the numbers that satisfy it, left of 3.
+
+--- graph-inequality · seed 424242 · difficulty 1
+prompt   What does the graph of this look like?
+display  equation "x < −2" unframed [inequality-graph x < -2]
+answer   choice open-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-left = Open circle at −2, shaded left
+choice   closed-right = Closed circle at −2, shaded right
+choice   closed-left = Closed circle at −2, shaded left
+choice   open-right = Open circle at −2, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −2]
+step 2   Shade left, toward the smaller numbers.   [x < −2]
+miss     circle-strictness = closed-left   −2 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-right   Shading runs toward the numbers that satisfy it, left of −2.
+
+--- graph-inequality · seed 987654321 · difficulty 1
+prompt   What does the graph of this look like?
+display  equation "x < −6" unframed [inequality-graph x < -6]
+answer   choice open-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at −6, shaded right
+choice   open-left = Open circle at −6, shaded left
+choice   closed-left = Closed circle at −6, shaded left
+choice   closed-right = Closed circle at −6, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −6]
+step 2   Shade left, toward the smaller numbers.   [x < −6]
+miss     circle-strictness = closed-left   −6 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-right   Shading runs toward the numbers that satisfy it, left of −6.
+
+--- graph-inequality · seed 1 · difficulty 2
+prompt   What does the graph of this look like?
+display  equation "x > −7" unframed [inequality-graph x > -7]
+answer   choice open-right
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   closed-left = Closed circle at −7, shaded left
+choice   open-left = Open circle at −7, shaded left
+choice   open-right = Open circle at −7, shaded right
+choice   closed-right = Closed circle at −7, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −7]
+step 2   Shade right, toward the larger numbers.   [x > −7]
+miss     circle-strictness = closed-right   −7 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-left   Shading runs toward the numbers that satisfy it, right of −7.
+
+--- graph-inequality · seed 12345 · difficulty 2
+prompt   What does the graph of this look like?
+display  equation "x ≤ −9" unframed [inequality-graph x ≤ -9]
+answer   choice closed-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at −9, shaded right
+choice   open-left = Open circle at −9, shaded left
+choice   closed-left = Closed circle at −9, shaded left
+choice   closed-right = Closed circle at −9, shaded right
+step 1   The line under the symbol fills the circle in.   [circle at −9]
+step 2   Shade left, toward the smaller numbers.   [x ≤ −9]
+miss     circle-strictness = open-left   −9 is a solution here, so its circle is filled in.
+miss     shaded-wrong-way = closed-right   Shading runs toward the numbers that satisfy it, left of −9.
+
+--- graph-inequality · seed 67890 · difficulty 2
+prompt   What does the graph of this look like?
+display  equation "x ≤ 5" unframed [inequality-graph x ≤ 5]
+answer   choice closed-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at 5, shaded right
+choice   closed-right = Closed circle at 5, shaded right
+choice   open-left = Open circle at 5, shaded left
+choice   closed-left = Closed circle at 5, shaded left
+step 1   The line under the symbol fills the circle in.   [circle at 5]
+step 2   Shade left, toward the smaller numbers.   [x ≤ 5]
+miss     circle-strictness = open-left   5 is a solution here, so its circle is filled in.
+miss     shaded-wrong-way = closed-right   Shading runs toward the numbers that satisfy it, left of 5.
+
+--- graph-inequality · seed 424242 · difficulty 2
+prompt   What does the graph of this look like?
+display  equation "x < −3" unframed [inequality-graph x < -3]
+answer   choice open-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-left = Open circle at −3, shaded left
+choice   closed-right = Closed circle at −3, shaded right
+choice   closed-left = Closed circle at −3, shaded left
+choice   open-right = Open circle at −3, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −3]
+step 2   Shade left, toward the smaller numbers.   [x < −3]
+miss     circle-strictness = closed-left   −3 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-right   Shading runs toward the numbers that satisfy it, left of −3.
+
+--- graph-inequality · seed 987654321 · difficulty 2
+prompt   What does the graph of this look like?
+display  equation "x < −9" unframed [inequality-graph x < -9]
+answer   choice open-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at −9, shaded right
+choice   open-left = Open circle at −9, shaded left
+choice   closed-left = Closed circle at −9, shaded left
+choice   closed-right = Closed circle at −9, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −9]
+step 2   Shade left, toward the smaller numbers.   [x < −9]
+miss     circle-strictness = closed-left   −9 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-right   Shading runs toward the numbers that satisfy it, left of −9.
+
+--- graph-inequality · seed 1 · difficulty 3
+prompt   What does the graph of this look like?
+display  equation "x > −10" unframed [inequality-graph x > -10]
+answer   choice open-right
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   closed-left = Closed circle at −10, shaded left
+choice   open-left = Open circle at −10, shaded left
+choice   open-right = Open circle at −10, shaded right
+choice   closed-right = Closed circle at −10, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −10]
+step 2   Shade right, toward the larger numbers.   [x > −10]
+miss     circle-strictness = closed-right   −10 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-left   Shading runs toward the numbers that satisfy it, right of −10.
+
+--- graph-inequality · seed 12345 · difficulty 3
+prompt   What does the graph of this look like?
+display  equation "x ≤ −14" unframed [inequality-graph x ≤ -14]
+answer   choice closed-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at −14, shaded right
+choice   open-left = Open circle at −14, shaded left
+choice   closed-left = Closed circle at −14, shaded left
+choice   closed-right = Closed circle at −14, shaded right
+step 1   The line under the symbol fills the circle in.   [circle at −14]
+step 2   Shade left, toward the smaller numbers.   [x ≤ −14]
+miss     circle-strictness = open-left   −14 is a solution here, so its circle is filled in.
+miss     shaded-wrong-way = closed-right   Shading runs toward the numbers that satisfy it, left of −14.
+
+--- graph-inequality · seed 67890 · difficulty 3
+prompt   What does the graph of this look like?
+display  equation "x ≤ 7" unframed [inequality-graph x ≤ 7]
+answer   choice closed-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at 7, shaded right
+choice   closed-right = Closed circle at 7, shaded right
+choice   open-left = Open circle at 7, shaded left
+choice   closed-left = Closed circle at 7, shaded left
+step 1   The line under the symbol fills the circle in.   [circle at 7]
+step 2   Shade left, toward the smaller numbers.   [x ≤ 7]
+miss     circle-strictness = open-left   7 is a solution here, so its circle is filled in.
+miss     shaded-wrong-way = closed-right   Shading runs toward the numbers that satisfy it, left of 7.
+
+--- graph-inequality · seed 424242 · difficulty 3
+prompt   What does the graph of this look like?
+display  equation "x < −4" unframed [inequality-graph x < -4]
+answer   choice open-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-left = Open circle at −4, shaded left
+choice   closed-right = Closed circle at −4, shaded right
+choice   closed-left = Closed circle at −4, shaded left
+choice   open-right = Open circle at −4, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −4]
+step 2   Shade left, toward the smaller numbers.   [x < −4]
+miss     circle-strictness = closed-left   −4 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-right   Shading runs toward the numbers that satisfy it, left of −4.
+
+--- graph-inequality · seed 987654321 · difficulty 3
+prompt   What does the graph of this look like?
+display  equation "x < −14" unframed [inequality-graph x < -14]
+answer   choice open-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at −14, shaded right
+choice   open-left = Open circle at −14, shaded left
+choice   closed-left = Closed circle at −14, shaded left
+choice   closed-right = Closed circle at −14, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −14]
+step 2   Shade left, toward the smaller numbers.   [x < −14]
+miss     circle-strictness = closed-left   −14 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-right   Shading runs toward the numbers that satisfy it, left of −14.
+
+--- graph-inequality · seed 1 · difficulty 4
+prompt   What does the graph of this look like?
+display  equation "x > −15" unframed [inequality-graph x > -15]
+answer   choice open-right
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   closed-left = Closed circle at −15, shaded left
+choice   open-left = Open circle at −15, shaded left
+choice   open-right = Open circle at −15, shaded right
+choice   closed-right = Closed circle at −15, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −15]
+step 2   Shade right, toward the larger numbers.   [x > −15]
+miss     circle-strictness = closed-right   −15 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-left   Shading runs toward the numbers that satisfy it, right of −15.
+
+--- graph-inequality · seed 12345 · difficulty 4
+prompt   What does the graph of this look like?
+display  equation "x ≤ −22" unframed [inequality-graph x ≤ -22]
+answer   choice closed-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at −22, shaded right
+choice   open-left = Open circle at −22, shaded left
+choice   closed-left = Closed circle at −22, shaded left
+choice   closed-right = Closed circle at −22, shaded right
+step 1   The line under the symbol fills the circle in.   [circle at −22]
+step 2   Shade left, toward the smaller numbers.   [x ≤ −22]
+miss     circle-strictness = open-left   −22 is a solution here, so its circle is filled in.
+miss     shaded-wrong-way = closed-right   Shading runs toward the numbers that satisfy it, left of −22.
+
+--- graph-inequality · seed 67890 · difficulty 4
+prompt   What does the graph of this look like?
+display  equation "x ≤ 11" unframed [inequality-graph x ≤ 11]
+answer   choice closed-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at 11, shaded right
+choice   closed-right = Closed circle at 11, shaded right
+choice   open-left = Open circle at 11, shaded left
+choice   closed-left = Closed circle at 11, shaded left
+step 1   The line under the symbol fills the circle in.   [circle at 11]
+step 2   Shade left, toward the smaller numbers.   [x ≤ 11]
+miss     circle-strictness = open-left   11 is a solution here, so its circle is filled in.
+miss     shaded-wrong-way = closed-right   Shading runs toward the numbers that satisfy it, left of 11.
+
+--- graph-inequality · seed 424242 · difficulty 4
+prompt   What does the graph of this look like?
+display  equation "x < −6" unframed [inequality-graph x < -6]
+answer   choice open-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-left = Open circle at −6, shaded left
+choice   closed-right = Closed circle at −6, shaded right
+choice   closed-left = Closed circle at −6, shaded left
+choice   open-right = Open circle at −6, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −6]
+step 2   Shade left, toward the smaller numbers.   [x < −6]
+miss     circle-strictness = closed-left   −6 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-right   Shading runs toward the numbers that satisfy it, left of −6.
+
+--- graph-inequality · seed 987654321 · difficulty 4
+prompt   What does the graph of this look like?
+display  equation "x < −22" unframed [inequality-graph x < -22]
+answer   choice open-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at −22, shaded right
+choice   open-left = Open circle at −22, shaded left
+choice   closed-left = Closed circle at −22, shaded left
+choice   closed-right = Closed circle at −22, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −22]
+step 2   Shade left, toward the smaller numbers.   [x < −22]
+miss     circle-strictness = closed-left   −22 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-right   Shading runs toward the numbers that satisfy it, left of −22.
+
+--- graph-inequality · seed 1 · difficulty 5
+prompt   What does the graph of this look like?
+display  equation "x > −24" unframed [inequality-graph x > -24]
+answer   choice open-right
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   closed-left = Closed circle at −24, shaded left
+choice   open-left = Open circle at −24, shaded left
+choice   open-right = Open circle at −24, shaded right
+choice   closed-right = Closed circle at −24, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −24]
+step 2   Shade right, toward the larger numbers.   [x > −24]
+miss     circle-strictness = closed-right   −24 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-left   Shading runs toward the numbers that satisfy it, right of −24.
+
+--- graph-inequality · seed 12345 · difficulty 5
+prompt   What does the graph of this look like?
+display  equation "x ≤ −35" unframed [inequality-graph x ≤ -35]
+answer   choice closed-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at −35, shaded right
+choice   open-left = Open circle at −35, shaded left
+choice   closed-left = Closed circle at −35, shaded left
+choice   closed-right = Closed circle at −35, shaded right
+step 1   The line under the symbol fills the circle in.   [circle at −35]
+step 2   Shade left, toward the smaller numbers.   [x ≤ −35]
+miss     circle-strictness = open-left   −35 is a solution here, so its circle is filled in.
+miss     shaded-wrong-way = closed-right   Shading runs toward the numbers that satisfy it, left of −35.
+
+--- graph-inequality · seed 67890 · difficulty 5
+prompt   What does the graph of this look like?
+display  equation "x ≤ 17" unframed [inequality-graph x ≤ 17]
+answer   choice closed-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at 17, shaded right
+choice   closed-right = Closed circle at 17, shaded right
+choice   open-left = Open circle at 17, shaded left
+choice   closed-left = Closed circle at 17, shaded left
+step 1   The line under the symbol fills the circle in.   [circle at 17]
+step 2   Shade left, toward the smaller numbers.   [x ≤ 17]
+miss     circle-strictness = open-left   17 is a solution here, so its circle is filled in.
+miss     shaded-wrong-way = closed-right   Shading runs toward the numbers that satisfy it, left of 17.
+
+--- graph-inequality · seed 424242 · difficulty 5
+prompt   What does the graph of this look like?
+display  equation "x < −8" unframed [inequality-graph x < -8]
+answer   choice open-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-left = Open circle at −8, shaded left
+choice   closed-right = Closed circle at −8, shaded right
+choice   closed-left = Closed circle at −8, shaded left
+choice   open-right = Open circle at −8, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −8]
+step 2   Shade left, toward the smaller numbers.   [x < −8]
+miss     circle-strictness = closed-left   −8 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-right   Shading runs toward the numbers that satisfy it, left of −8.
+
+--- graph-inequality · seed 987654321 · difficulty 5
+prompt   What does the graph of this look like?
+display  equation "x < −34" unframed [inequality-graph x < -34]
+answer   choice open-left
+input    choice
+hint     The line under the symbol fills the circle in.
+choice   open-right = Open circle at −34, shaded right
+choice   open-left = Open circle at −34, shaded left
+choice   closed-left = Closed circle at −34, shaded left
+choice   closed-right = Closed circle at −34, shaded right
+step 1   No line under the symbol, so the circle stays open.   [circle at −34]
+step 2   Shade left, toward the smaller numbers.   [x < −34]
+miss     circle-strictness = closed-left   −34 is not a solution here, so its circle stays open.
+miss     shaded-wrong-way = open-right   Shading runs toward the numbers that satisfy it, left of −34."
+`;
+
+exports[`recorded output: inequality-symbols > matches the wording recorded when the skill landed 1`] = `
+"--- inequality-symbols · seed 1 · difficulty 1
+prompt   What does this say?
+display  equation "x < 7" unframed [inequality-meaning x < 7]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   < = x is less than 7
+choice   <= = x is at most 7
+choice   >= = x is at least 7
+choice   > = x is more than 7
+step 1   Read the direction first.   [< keeps x below 7]
+step 2   No line underneath, so the boundary is left out.   [x is less than 7]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 7 itself is left out.
+
+--- inequality-symbols · seed 12345 · difficulty 1
+prompt   What does this say?
+display  equation "x ≤ 9" unframed [inequality-meaning x ≤ 9]
+answer   choice <=
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   < = x is less than 9
+choice   >= = x is at least 9
+choice   > = x is more than 9
+choice   <= = x is at most 9
+step 1   Read the direction first.   [≤ keeps x below 9]
+step 2   The line underneath lets the boundary count.   [x is at most 9]
+miss     direction-reversed = >=   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <   The line underneath lets 9 itself count.
+
+--- inequality-symbols · seed 67890 · difficulty 1
+prompt   What does this say?
+display  equation "x > 5" unframed [inequality-meaning x > 5]
+answer   choice >
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   > = x is more than 5
+choice   < = x is less than 5
+choice   >= = x is at least 5
+choice   <= = x is at most 5
+step 1   Read the direction first.   [> keeps x above 5]
+step 2   No line underneath, so the boundary is left out.   [x is more than 5]
+miss     direction-reversed = <   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = >=   With no line underneath, 5 itself is left out.
+
+--- inequality-symbols · seed 424242 · difficulty 1
+prompt   What does this say?
+display  equation "x < 3" unframed [inequality-meaning x < 3]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   > = x is more than 3
+choice   >= = x is at least 3
+choice   <= = x is at most 3
+choice   < = x is less than 3
+step 1   Read the direction first.   [< keeps x below 3]
+step 2   No line underneath, so the boundary is left out.   [x is less than 3]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 3 itself is left out.
+
+--- inequality-symbols · seed 987654321 · difficulty 1
+prompt   What does this say?
+display  equation "x < 9" unframed [inequality-meaning x < 9]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   >= = x is at least 9
+choice   <= = x is at most 9
+choice   > = x is more than 9
+choice   < = x is less than 9
+step 1   Read the direction first.   [< keeps x below 9]
+step 2   No line underneath, so the boundary is left out.   [x is less than 9]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 9 itself is left out.
+
+--- inequality-symbols · seed 1 · difficulty 2
+prompt   What does this say?
+display  equation "x < 11" unframed [inequality-meaning x < 11]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   < = x is less than 11
+choice   <= = x is at most 11
+choice   >= = x is at least 11
+choice   > = x is more than 11
+step 1   Read the direction first.   [< keeps x below 11]
+step 2   No line underneath, so the boundary is left out.   [x is less than 11]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 11 itself is left out.
+
+--- inequality-symbols · seed 12345 · difficulty 2
+prompt   What does this say?
+display  equation "x ≤ 15" unframed [inequality-meaning x ≤ 15]
+answer   choice <=
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   < = x is less than 15
+choice   >= = x is at least 15
+choice   > = x is more than 15
+choice   <= = x is at most 15
+step 1   Read the direction first.   [≤ keeps x below 15]
+step 2   The line underneath lets the boundary count.   [x is at most 15]
+miss     direction-reversed = >=   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <   The line underneath lets 15 itself count.
+
+--- inequality-symbols · seed 67890 · difficulty 2
+prompt   What does this say?
+display  equation "x > 8" unframed [inequality-meaning x > 8]
+answer   choice >
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   > = x is more than 8
+choice   < = x is less than 8
+choice   >= = x is at least 8
+choice   <= = x is at most 8
+step 1   Read the direction first.   [> keeps x above 8]
+step 2   No line underneath, so the boundary is left out.   [x is more than 8]
+miss     direction-reversed = <   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = >=   With no line underneath, 8 itself is left out.
+
+--- inequality-symbols · seed 424242 · difficulty 2
+prompt   What does this say?
+display  equation "x < 4" unframed [inequality-meaning x < 4]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   > = x is more than 4
+choice   >= = x is at least 4
+choice   <= = x is at most 4
+choice   < = x is less than 4
+step 1   Read the direction first.   [< keeps x below 4]
+step 2   No line underneath, so the boundary is left out.   [x is less than 4]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 4 itself is left out.
+
+--- inequality-symbols · seed 987654321 · difficulty 2
+prompt   What does this say?
+display  equation "x < 15" unframed [inequality-meaning x < 15]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   >= = x is at least 15
+choice   <= = x is at most 15
+choice   > = x is more than 15
+choice   < = x is less than 15
+step 1   Read the direction first.   [< keeps x below 15]
+step 2   No line underneath, so the boundary is left out.   [x is less than 15]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 15 itself is left out.
+
+--- inequality-symbols · seed 1 · difficulty 3
+prompt   What does this say?
+display  equation "x < 17" unframed [inequality-meaning x < 17]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   < = x is less than 17
+choice   <= = x is at most 17
+choice   >= = x is at least 17
+choice   > = x is more than 17
+step 1   Read the direction first.   [< keeps x below 17]
+step 2   No line underneath, so the boundary is left out.   [x is less than 17]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 17 itself is left out.
+
+--- inequality-symbols · seed 12345 · difficulty 3
+prompt   What does this say?
+display  equation "x ≤ 25" unframed [inequality-meaning x ≤ 25]
+answer   choice <=
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   < = x is less than 25
+choice   >= = x is at least 25
+choice   > = x is more than 25
+choice   <= = x is at most 25
+step 1   Read the direction first.   [≤ keeps x below 25]
+step 2   The line underneath lets the boundary count.   [x is at most 25]
+miss     direction-reversed = >=   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <   The line underneath lets 25 itself count.
+
+--- inequality-symbols · seed 67890 · difficulty 3
+prompt   What does this say?
+display  equation "x > 12" unframed [inequality-meaning x > 12]
+answer   choice >
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   > = x is more than 12
+choice   < = x is less than 12
+choice   >= = x is at least 12
+choice   <= = x is at most 12
+step 1   Read the direction first.   [> keeps x above 12]
+step 2   No line underneath, so the boundary is left out.   [x is more than 12]
+miss     direction-reversed = <   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = >=   With no line underneath, 12 itself is left out.
+
+--- inequality-symbols · seed 424242 · difficulty 3
+prompt   What does this say?
+display  equation "x < 6" unframed [inequality-meaning x < 6]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   > = x is more than 6
+choice   >= = x is at least 6
+choice   <= = x is at most 6
+choice   < = x is less than 6
+step 1   Read the direction first.   [< keeps x below 6]
+step 2   No line underneath, so the boundary is left out.   [x is less than 6]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 6 itself is left out.
+
+--- inequality-symbols · seed 987654321 · difficulty 3
+prompt   What does this say?
+display  equation "x < 24" unframed [inequality-meaning x < 24]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   >= = x is at least 24
+choice   <= = x is at most 24
+choice   > = x is more than 24
+choice   < = x is less than 24
+step 1   Read the direction first.   [< keeps x below 24]
+step 2   No line underneath, so the boundary is left out.   [x is less than 24]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 24 itself is left out.
+
+--- inequality-symbols · seed 1 · difficulty 4
+prompt   What does this say?
+display  equation "x < 34" unframed [inequality-meaning x < 34]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   < = x is less than 34
+choice   <= = x is at most 34
+choice   >= = x is at least 34
+choice   > = x is more than 34
+step 1   Read the direction first.   [< keeps x below 34]
+step 2   No line underneath, so the boundary is left out.   [x is less than 34]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 34 itself is left out.
+
+--- inequality-symbols · seed 12345 · difficulty 4
+prompt   What does this say?
+display  equation "x ≤ 50" unframed [inequality-meaning x ≤ 50]
+answer   choice <=
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   < = x is less than 50
+choice   >= = x is at least 50
+choice   > = x is more than 50
+choice   <= = x is at most 50
+step 1   Read the direction first.   [≤ keeps x below 50]
+step 2   The line underneath lets the boundary count.   [x is at most 50]
+miss     direction-reversed = >=   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <   The line underneath lets 50 itself count.
+
+--- inequality-symbols · seed 67890 · difficulty 4
+prompt   What does this say?
+display  equation "x > 23" unframed [inequality-meaning x > 23]
+answer   choice >
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   > = x is more than 23
+choice   < = x is less than 23
+choice   >= = x is at least 23
+choice   <= = x is at most 23
+step 1   Read the direction first.   [> keeps x above 23]
+step 2   No line underneath, so the boundary is left out.   [x is more than 23]
+miss     direction-reversed = <   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = >=   With no line underneath, 23 itself is left out.
+
+--- inequality-symbols · seed 424242 · difficulty 4
+prompt   What does this say?
+display  equation "x < 11" unframed [inequality-meaning x < 11]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   > = x is more than 11
+choice   >= = x is at least 11
+choice   <= = x is at most 11
+choice   < = x is less than 11
+step 1   Read the direction first.   [< keeps x below 11]
+step 2   No line underneath, so the boundary is left out.   [x is less than 11]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 11 itself is left out.
+
+--- inequality-symbols · seed 987654321 · difficulty 4
+prompt   What does this say?
+display  equation "x < 48" unframed [inequality-meaning x < 48]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   >= = x is at least 48
+choice   <= = x is at most 48
+choice   > = x is more than 48
+choice   < = x is less than 48
+step 1   Read the direction first.   [< keeps x below 48]
+step 2   No line underneath, so the boundary is left out.   [x is less than 48]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 48 itself is left out.
+
+--- inequality-symbols · seed 1 · difficulty 5
+prompt   What does this say?
+display  equation "x < 66" unframed [inequality-meaning x < 66]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   < = x is less than 66
+choice   <= = x is at most 66
+choice   >= = x is at least 66
+choice   > = x is more than 66
+step 1   Read the direction first.   [< keeps x below 66]
+step 2   No line underneath, so the boundary is left out.   [x is less than 66]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 66 itself is left out.
+
+--- inequality-symbols · seed 12345 · difficulty 5
+prompt   What does this say?
+display  equation "x ≤ 98" unframed [inequality-meaning x ≤ 98]
+answer   choice <=
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   < = x is less than 98
+choice   >= = x is at least 98
+choice   > = x is more than 98
+choice   <= = x is at most 98
+step 1   Read the direction first.   [≤ keeps x below 98]
+step 2   The line underneath lets the boundary count.   [x is at most 98]
+miss     direction-reversed = >=   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <   The line underneath lets 98 itself count.
+
+--- inequality-symbols · seed 67890 · difficulty 5
+prompt   What does this say?
+display  equation "x > 45" unframed [inequality-meaning x > 45]
+answer   choice >
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   > = x is more than 45
+choice   < = x is less than 45
+choice   >= = x is at least 45
+choice   <= = x is at most 45
+step 1   Read the direction first.   [> keeps x above 45]
+step 2   No line underneath, so the boundary is left out.   [x is more than 45]
+miss     direction-reversed = <   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = >=   With no line underneath, 45 itself is left out.
+
+--- inequality-symbols · seed 424242 · difficulty 5
+prompt   What does this say?
+display  equation "x < 21" unframed [inequality-meaning x < 21]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   > = x is more than 21
+choice   >= = x is at least 21
+choice   <= = x is at most 21
+choice   < = x is less than 21
+step 1   Read the direction first.   [< keeps x below 21]
+step 2   No line underneath, so the boundary is left out.   [x is less than 21]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 21 itself is left out.
+
+--- inequality-symbols · seed 987654321 · difficulty 5
+prompt   What does this say?
+display  equation "x < 95" unframed [inequality-meaning x < 95]
+answer   choice <
+input    choice
+hint     Check which way the symbol opens, then look for a line underneath.
+choice   >= = x is at least 95
+choice   <= = x is at most 95
+choice   > = x is more than 95
+choice   < = x is less than 95
+step 1   Read the direction first.   [< keeps x below 95]
+step 2   No line underneath, so the boundary is left out.   [x is less than 95]
+miss     direction-reversed = >   The symbol opens toward the larger side — check which way it faces.
+miss     boundary-swapped = <=   With no line underneath, 95 itself is left out."
+`;
+
+exports[`recorded output: solve-multi-step-ineq > matches the wording recorded when the skill landed 1`] = `
+"--- solve-multi-step-ineq · seed 1 · difficulty 1
+prompt   Solve for x.
+display  equation "2x − 4 > 8" unframed [inequality-two-step 2x - 4 > 8]
+answer   choice x>6
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x>6 = x > 6
+choice   x<6 = x < 6
+choice   x>=6 = x ≥ 6
+choice   x>8 = x > 8
+step 1   Add 4 on both sides first.   [2x > 12]
+step 2   Then divide both sides by 2.   [x > 6]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>8   Clear the 4 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<6   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "2x − 4 ≥ 6" unframed [inequality-two-step 2x - 4 ≥ 6]
+answer   choice x>=5
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=5 = x ≤ 5
+choice   x>5 = x > 5
+choice   x>=5 = x ≥ 5
+choice   x>=7 = x ≥ 7
+step 1   Add 4 on both sides first.   [2x ≥ 10]
+step 2   Then divide both sides by 2.   [x ≥ 5]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>=7   Clear the 4 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<=5   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 67890 · difficulty 1
+prompt   Solve for x.
+display  equation "3x + 3 ≤ 15" unframed [inequality-two-step 3x + 3 ≤ 15]
+answer   choice x<=4
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x>=4 = x ≥ 4
+choice   x<=2 = x ≤ 2
+choice   x<=4 = x ≤ 4
+choice   x<4 = x < 4
+step 1   Subtract 3 on both sides first.   [3x ≤ 12]
+step 2   Then divide both sides by 3.   [x ≤ 4]
+step 3   3 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x<=2   Clear the 3 first, then divide what is left by 3.
+miss     flipped-without-a-negative = x>=4   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 424242 · difficulty 1
+prompt   Solve for x.
+display  equation "2x + 4 < 10" unframed [inequality-two-step 2x + 4 < 10]
+answer   choice x<3
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=3 = x ≤ 3
+choice   x<1 = x < 1
+choice   x<3 = x < 3
+choice   x>3 = x > 3
+step 1   Subtract 4 on both sides first.   [2x < 6]
+step 2   Then divide both sides by 2.   [x < 3]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x<1   Clear the 4 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x>3   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 987654321 · difficulty 1
+prompt   Solve for x.
+display  equation "2x − 4 ≥ 0" unframed [inequality-two-step 2x - 4 ≥ 0]
+answer   choice x>=2
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=2 = x ≤ 2
+choice   x>=2 = x ≥ 2
+choice   x>2 = x > 2
+choice   x>=4 = x ≥ 4
+step 1   Add 4 on both sides first.   [2x ≥ 4]
+step 2   Then divide both sides by 2.   [x ≥ 2]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>=4   Clear the 4 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<=2   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 1 · difficulty 2
+prompt   Solve for x.
+display  equation "2x − 6 > 12" unframed [inequality-two-step 2x - 6 > 12]
+answer   choice x>9
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x>9 = x > 9
+choice   x<9 = x < 9
+choice   x>=9 = x ≥ 9
+choice   x>12 = x > 12
+step 1   Add 6 on both sides first.   [2x > 18]
+step 2   Then divide both sides by 2.   [x > 9]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>12   Clear the 6 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<9   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "2x − 6 ≥ 10" unframed [inequality-two-step 2x - 6 ≥ 10]
+answer   choice x>=8
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=8 = x ≤ 8
+choice   x>8 = x > 8
+choice   x>=8 = x ≥ 8
+choice   x>=11 = x ≥ 11
+step 1   Add 6 on both sides first.   [2x ≥ 16]
+step 2   Then divide both sides by 2.   [x ≥ 8]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>=11   Clear the 6 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<=8   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 67890 · difficulty 2
+prompt   Solve for x.
+display  equation "3x + 6 ≤ 27" unframed [inequality-two-step 3x + 6 ≤ 27]
+answer   choice x<=7
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x>=7 = x ≥ 7
+choice   x<=3 = x ≤ 3
+choice   x<=7 = x ≤ 7
+choice   x<7 = x < 7
+step 1   Subtract 6 on both sides first.   [3x ≤ 21]
+step 2   Then divide both sides by 3.   [x ≤ 7]
+step 3   3 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x<=3   Clear the 6 first, then divide what is left by 3.
+miss     flipped-without-a-negative = x>=7   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 424242 · difficulty 2
+prompt   Solve for x.
+display  equation "2x + 4 < 14" unframed [inequality-two-step 2x + 4 < 14]
+answer   choice x<5
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=5 = x ≤ 5
+choice   x<3 = x < 3
+choice   x<5 = x < 5
+choice   x>5 = x > 5
+step 1   Subtract 4 on both sides first.   [2x < 10]
+step 2   Then divide both sides by 2.   [x < 5]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x<3   Clear the 4 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x>5   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 987654321 · difficulty 2
+prompt   Solve for x.
+display  equation "2x − 6 ≥ 0" unframed [inequality-two-step 2x - 6 ≥ 0]
+answer   choice x>=3
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=3 = x ≤ 3
+choice   x>=3 = x ≥ 3
+choice   x>3 = x > 3
+choice   x>=6 = x ≥ 6
+step 1   Add 6 on both sides first.   [2x ≥ 6]
+step 2   Then divide both sides by 2.   [x ≥ 3]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>=6   Clear the 6 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<=3   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 1 · difficulty 3
+prompt   Solve for x.
+display  equation "2x − 8 > 16" unframed [inequality-two-step 2x - 8 > 16]
+answer   choice x>12
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x>12 = x > 12
+choice   x<12 = x < 12
+choice   x>=12 = x ≥ 12
+choice   x>16 = x > 16
+step 1   Add 8 on both sides first.   [2x > 24]
+step 2   Then divide both sides by 2.   [x > 12]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>16   Clear the 8 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<12   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "2x − 8 ≥ 16" unframed [inequality-two-step 2x - 8 ≥ 16]
+answer   choice x>=12
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=12 = x ≤ 12
+choice   x>12 = x > 12
+choice   x>=12 = x ≥ 12
+choice   x>=16 = x ≥ 16
+step 1   Add 8 on both sides first.   [2x ≥ 24]
+step 2   Then divide both sides by 2.   [x ≥ 12]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>=16   Clear the 8 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<=12   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 67890 · difficulty 3
+prompt   Solve for x.
+display  equation "3x + 9 ≤ 39" unframed [inequality-two-step 3x + 9 ≤ 39]
+answer   choice x<=10
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x>=10 = x ≥ 10
+choice   x<=4 = x ≤ 4
+choice   x<=10 = x ≤ 10
+choice   x<10 = x < 10
+step 1   Subtract 9 on both sides first.   [3x ≤ 30]
+step 2   Then divide both sides by 3.   [x ≤ 10]
+step 3   3 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x<=4   Clear the 9 first, then divide what is left by 3.
+miss     flipped-without-a-negative = x>=10   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 424242 · difficulty 3
+prompt   Solve for x.
+display  equation "2x + 6 < 20" unframed [inequality-two-step 2x + 6 < 20]
+answer   choice x<7
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=7 = x ≤ 7
+choice   x<4 = x < 4
+choice   x<7 = x < 7
+choice   x>7 = x > 7
+step 1   Subtract 6 on both sides first.   [2x < 14]
+step 2   Then divide both sides by 2.   [x < 7]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x<4   Clear the 6 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x>7   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 987654321 · difficulty 3
+prompt   Solve for x.
+display  equation "2x − 8 ≥ 0" unframed [inequality-two-step 2x - 8 ≥ 0]
+answer   choice x>=4
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=4 = x ≤ 4
+choice   x>=4 = x ≥ 4
+choice   x>4 = x > 4
+choice   x>=8 = x ≥ 8
+step 1   Add 8 on both sides first.   [2x ≥ 8]
+step 2   Then divide both sides by 2.   [x ≥ 4]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>=8   Clear the 8 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<=4   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 1 · difficulty 4
+prompt   Solve for x.
+display  equation "2x − 10 > 26" unframed [inequality-two-step 2x - 10 > 26]
+answer   choice x>18
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x>18 = x > 18
+choice   x<18 = x < 18
+choice   x>=18 = x ≥ 18
+choice   x>23 = x > 23
+step 1   Add 10 on both sides first.   [2x > 36]
+step 2   Then divide both sides by 2.   [x > 18]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>23   Clear the 10 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<18   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "2x − 10 ≥ 24" unframed [inequality-two-step 2x - 10 ≥ 24]
+answer   choice x>=17
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=17 = x ≤ 17
+choice   x>17 = x > 17
+choice   x>=17 = x ≥ 17
+choice   x>=22 = x ≥ 22
+step 1   Add 10 on both sides first.   [2x ≥ 34]
+step 2   Then divide both sides by 2.   [x ≥ 17]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>=22   Clear the 10 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<=17   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 67890 · difficulty 4
+prompt   Solve for x.
+display  equation "3x + 9 ≤ 51" unframed [inequality-two-step 3x + 9 ≤ 51]
+answer   choice x<=14
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x>=14 = x ≥ 14
+choice   x<=8 = x ≤ 8
+choice   x<=14 = x ≤ 14
+choice   x<14 = x < 14
+step 1   Subtract 9 on both sides first.   [3x ≤ 42]
+step 2   Then divide both sides by 3.   [x ≤ 14]
+step 3   3 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x<=8   Clear the 9 first, then divide what is left by 3.
+miss     flipped-without-a-negative = x>=14   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 424242 · difficulty 4
+prompt   Solve for x.
+display  equation "2x + 8 < 26" unframed [inequality-two-step 2x + 8 < 26]
+answer   choice x<9
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=9 = x ≤ 9
+choice   x<5 = x < 5
+choice   x<9 = x < 9
+choice   x>9 = x > 9
+step 1   Subtract 8 on both sides first.   [2x < 18]
+step 2   Then divide both sides by 2.   [x < 9]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x<5   Clear the 8 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x>9   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 987654321 · difficulty 4
+prompt   Solve for x.
+display  equation "2x − 10 ≥ 0" unframed [inequality-two-step 2x - 10 ≥ 0]
+answer   choice x>=5
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=5 = x ≤ 5
+choice   x>=5 = x ≥ 5
+choice   x>5 = x > 5
+choice   x>=10 = x ≥ 10
+step 1   Add 10 on both sides first.   [2x ≥ 10]
+step 2   Then divide both sides by 2.   [x ≥ 5]
+step 3   2 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>=10   Clear the 10 first, then divide what is left by 2.
+miss     flipped-without-a-negative = x<=5   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 1 · difficulty 5
+prompt   Solve for x.
+display  equation "3x − 21 > 60" unframed [inequality-two-step 3x - 21 > 60]
+answer   choice x>27
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x>27 = x > 27
+choice   x<27 = x < 27
+choice   x>=27 = x ≥ 27
+choice   x>41 = x > 41
+step 1   Add 21 on both sides first.   [3x > 81]
+step 2   Then divide both sides by 3.   [x > 27]
+step 3   3 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>41   Clear the 21 first, then divide what is left by 3.
+miss     flipped-without-a-negative = x<27   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "3x − 21 ≥ 54" unframed [inequality-two-step 3x - 21 ≥ 54]
+answer   choice x>=25
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=25 = x ≤ 25
+choice   x>25 = x > 25
+choice   x>=25 = x ≥ 25
+choice   x>=39 = x ≥ 39
+step 1   Add 21 on both sides first.   [3x ≥ 75]
+step 2   Then divide both sides by 3.   [x ≥ 25]
+step 3   3 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>=39   Clear the 21 first, then divide what is left by 3.
+miss     flipped-without-a-negative = x<=25   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 67890 · difficulty 5
+prompt   Solve for x.
+display  equation "4x + 16 ≤ 96" unframed [inequality-two-step 4x + 16 ≤ 96]
+answer   choice x<=20
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x>=20 = x ≥ 20
+choice   x<=8 = x ≤ 8
+choice   x<=20 = x ≤ 20
+choice   x<20 = x < 20
+step 1   Subtract 16 on both sides first.   [4x ≤ 80]
+step 2   Then divide both sides by 4.   [x ≤ 20]
+step 3   4 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x<=8   Clear the 16 first, then divide what is left by 4.
+miss     flipped-without-a-negative = x>=20   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 424242 · difficulty 5
+prompt   Solve for x.
+display  equation "3x + 18 < 57" unframed [inequality-two-step 3x + 18 < 57]
+answer   choice x<13
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=13 = x ≤ 13
+choice   x<1 = x < 1
+choice   x<13 = x < 13
+choice   x>13 = x > 13
+step 1   Subtract 18 on both sides first.   [3x < 39]
+step 2   Then divide both sides by 3.   [x < 13]
+step 3   3 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x<1   Clear the 18 first, then divide what is left by 3.
+miss     flipped-without-a-negative = x>13   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-multi-step-ineq · seed 987654321 · difficulty 5
+prompt   Solve for x.
+display  equation "3x − 21 ≥ −3" unframed [inequality-two-step 3x - 21 ≥ -3]
+answer   choice x>=6
+input    choice
+hint     Clear the number added or subtracted before you divide.
+choice   x<=6 = x ≤ 6
+choice   x>=6 = x ≥ 6
+choice   x>6 = x > 6
+choice   x>=20 = x ≥ 20
+step 1   Add 21 on both sides first.   [3x ≥ 18]
+step 2   Then divide both sides by 3.   [x ≥ 6]
+step 3   3 is positive, so the symbol stays as it is.
+miss     undid-in-the-wrong-order = x>=20   Clear the 21 first, then divide what is left by 3.
+miss     flipped-without-a-negative = x<=6   Only multiplying or dividing by a negative turns the symbol round."
+`;
+
+exports[`recorded output: solve-one-step-ineq > matches the wording recorded when the skill landed 1`] = `
+"--- solve-one-step-ineq · seed 1 · difficulty 1
+prompt   Solve for x.
+display  equation "x ÷ 3 > 12" unframed [inequality-multdiv x / 3 > 12]
+answer   choice x>36
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x>36 = x > 36
+choice   x<36 = x < 36
+choice   x>=36 = x ≥ 36
+choice   x>4 = x > 4
+step 1   Multiply both sides by 3.   [x > 36]
+step 2   3 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>4   Undo it: multiply both sides by 3 instead.
+miss     flipped-without-a-negative = x<36   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "x ÷ 2 ≥ 8" unframed [inequality-multdiv x / 2 ≥ 8]
+answer   choice x>=16
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=16 = x ≤ 16
+choice   x>16 = x > 16
+choice   x>=16 = x ≥ 16
+choice   x>=4 = x ≥ 4
+step 1   Multiply both sides by 2.   [x ≥ 16]
+step 2   2 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>=4   Undo it: multiply both sides by 2 instead.
+miss     flipped-without-a-negative = x<=16   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 67890 · difficulty 1
+prompt   Solve for x.
+display  equation "x + 3 ≤ 7" unframed [inequality-addsub x + 3 ≤ 7]
+answer   choice x<=4
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x>=4 = x ≥ 4
+choice   x<=10 = x ≤ 10
+choice   x<=4 = x ≤ 4
+choice   x<4 = x < 4
+step 1   Subtract 3 on both sides.   [x ≤ 4]
+step 2   Nothing multiplies x, so the symbol stays as it is.
+miss     repeated-the-operation = x<=10   Undo it: subtract 3 on both sides instead.
+miss     flipped-without-a-negative = x>=4   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 424242 · difficulty 1
+prompt   Solve for x.
+display  equation "2x < 6" unframed [inequality-multdiv 2x < 6]
+answer   choice x<3
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=3 = x ≤ 3
+choice   x<12 = x < 12
+choice   x<3 = x < 3
+choice   x>3 = x > 3
+step 1   Divide both sides by 2.   [x < 3]
+step 2   2 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x<12   Undo it: divide both sides by 2 instead.
+miss     flipped-without-a-negative = x>3   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 987654321 · difficulty 1
+prompt   Solve for x.
+display  equation "x ÷ 2 ≥ 8" unframed [inequality-multdiv x / 2 ≥ 8]
+answer   choice x>=16
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=16 = x ≤ 16
+choice   x>=16 = x ≥ 16
+choice   x>16 = x > 16
+choice   x>=4 = x ≥ 4
+step 1   Multiply both sides by 2.   [x ≥ 16]
+step 2   2 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>=4   Undo it: multiply both sides by 2 instead.
+miss     flipped-without-a-negative = x<=16   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 1 · difficulty 2
+prompt   Solve for x.
+display  equation "x ÷ 3 > 18" unframed [inequality-multdiv x / 3 > 18]
+answer   choice x>54
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x>54 = x > 54
+choice   x<54 = x < 54
+choice   x>=54 = x ≥ 54
+choice   x>6 = x > 6
+step 1   Multiply both sides by 3.   [x > 54]
+step 2   3 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>6   Undo it: multiply both sides by 3 instead.
+miss     flipped-without-a-negative = x<54   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "x ÷ 2 ≥ 12" unframed [inequality-multdiv x / 2 ≥ 12]
+answer   choice x>=24
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=24 = x ≤ 24
+choice   x>24 = x > 24
+choice   x>=24 = x ≥ 24
+choice   x>=6 = x ≥ 6
+step 1   Multiply both sides by 2.   [x ≥ 24]
+step 2   2 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>=6   Undo it: multiply both sides by 2 instead.
+miss     flipped-without-a-negative = x<=24   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 67890 · difficulty 2
+prompt   Solve for x.
+display  equation "x + 4 ≤ 11" unframed [inequality-addsub x + 4 ≤ 11]
+answer   choice x<=7
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x>=7 = x ≥ 7
+choice   x<=15 = x ≤ 15
+choice   x<=7 = x ≤ 7
+choice   x<7 = x < 7
+step 1   Subtract 4 on both sides.   [x ≤ 7]
+step 2   Nothing multiplies x, so the symbol stays as it is.
+miss     repeated-the-operation = x<=15   Undo it: subtract 4 on both sides instead.
+miss     flipped-without-a-negative = x>=7   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 424242 · difficulty 2
+prompt   Solve for x.
+display  equation "2x < 10" unframed [inequality-multdiv 2x < 10]
+answer   choice x<5
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=5 = x ≤ 5
+choice   x<20 = x < 20
+choice   x<5 = x < 5
+choice   x>5 = x > 5
+step 1   Divide both sides by 2.   [x < 5]
+step 2   2 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x<20   Undo it: divide both sides by 2 instead.
+miss     flipped-without-a-negative = x>5   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 987654321 · difficulty 2
+prompt   Solve for x.
+display  equation "x ÷ 2 ≥ 12" unframed [inequality-multdiv x / 2 ≥ 12]
+answer   choice x>=24
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=24 = x ≤ 24
+choice   x>=24 = x ≥ 24
+choice   x>24 = x > 24
+choice   x>=6 = x ≥ 6
+step 1   Multiply both sides by 2.   [x ≥ 24]
+step 2   2 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>=6   Undo it: multiply both sides by 2 instead.
+miss     flipped-without-a-negative = x<=24   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 1 · difficulty 3
+prompt   Solve for x.
+display  equation "x ÷ 3 > 24" unframed [inequality-multdiv x / 3 > 24]
+answer   choice x>72
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x>72 = x > 72
+choice   x<72 = x < 72
+choice   x>=72 = x ≥ 72
+choice   x>8 = x > 8
+step 1   Multiply both sides by 3.   [x > 72]
+step 2   3 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>8   Undo it: multiply both sides by 3 instead.
+miss     flipped-without-a-negative = x<72   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "x ÷ 3 ≥ 21" unframed [inequality-multdiv x / 3 ≥ 21]
+answer   choice x>=63
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=63 = x ≤ 63
+choice   x>63 = x > 63
+choice   x>=63 = x ≥ 63
+choice   x>=7 = x ≥ 7
+step 1   Multiply both sides by 3.   [x ≥ 63]
+step 2   3 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>=7   Undo it: multiply both sides by 3 instead.
+miss     flipped-without-a-negative = x<=63   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 67890 · difficulty 3
+prompt   Solve for x.
+display  equation "x + 6 ≤ 16" unframed [inequality-addsub x + 6 ≤ 16]
+answer   choice x<=10
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x>=10 = x ≥ 10
+choice   x<=22 = x ≤ 22
+choice   x<=10 = x ≤ 10
+choice   x<10 = x < 10
+step 1   Subtract 6 on both sides.   [x ≤ 10]
+step 2   Nothing multiplies x, so the symbol stays as it is.
+miss     repeated-the-operation = x<=22   Undo it: subtract 6 on both sides instead.
+miss     flipped-without-a-negative = x>=10   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 424242 · difficulty 3
+prompt   Solve for x.
+display  equation "2x < 12" unframed [inequality-multdiv 2x < 12]
+answer   choice x<6
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=6 = x ≤ 6
+choice   x<24 = x < 24
+choice   x<6 = x < 6
+choice   x>6 = x > 6
+step 1   Divide both sides by 2.   [x < 6]
+step 2   2 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x<24   Undo it: divide both sides by 2 instead.
+miss     flipped-without-a-negative = x>6   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 987654321 · difficulty 3
+prompt   Solve for x.
+display  equation "x ÷ 2 ≥ 16" unframed [inequality-multdiv x / 2 ≥ 16]
+answer   choice x>=32
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=32 = x ≤ 32
+choice   x>=32 = x ≥ 32
+choice   x>32 = x > 32
+choice   x>=8 = x ≥ 8
+step 1   Multiply both sides by 2.   [x ≥ 32]
+step 2   2 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>=8   Undo it: multiply both sides by 2 instead.
+miss     flipped-without-a-negative = x<=32   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 1 · difficulty 4
+prompt   Solve for x.
+display  equation "x ÷ 3 > 30" unframed [inequality-multdiv x / 3 > 30]
+answer   choice x>90
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x>90 = x > 90
+choice   x<90 = x < 90
+choice   x>=90 = x ≥ 90
+choice   x>10 = x > 10
+step 1   Multiply both sides by 3.   [x > 90]
+step 2   3 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>10   Undo it: multiply both sides by 3 instead.
+miss     flipped-without-a-negative = x<90   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "x ÷ 3 ≥ 27" unframed [inequality-multdiv x / 3 ≥ 27]
+answer   choice x>=81
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=81 = x ≤ 81
+choice   x>81 = x > 81
+choice   x>=81 = x ≥ 81
+choice   x>=9 = x ≥ 9
+step 1   Multiply both sides by 3.   [x ≥ 81]
+step 2   3 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>=9   Undo it: multiply both sides by 3 instead.
+miss     flipped-without-a-negative = x<=81   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 67890 · difficulty 4
+prompt   Solve for x.
+display  equation "x + 9 ≤ 23" unframed [inequality-addsub x + 9 ≤ 23]
+answer   choice x<=14
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x>=14 = x ≥ 14
+choice   x<=32 = x ≤ 32
+choice   x<=14 = x ≤ 14
+choice   x<14 = x < 14
+step 1   Subtract 9 on both sides.   [x ≤ 14]
+step 2   Nothing multiplies x, so the symbol stays as it is.
+miss     repeated-the-operation = x<=32   Undo it: subtract 9 on both sides instead.
+miss     flipped-without-a-negative = x>=14   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 424242 · difficulty 4
+prompt   Solve for x.
+display  equation "2x < 16" unframed [inequality-multdiv 2x < 16]
+answer   choice x<8
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=8 = x ≤ 8
+choice   x<32 = x < 32
+choice   x<8 = x < 8
+choice   x>8 = x > 8
+step 1   Divide both sides by 2.   [x < 8]
+step 2   2 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x<32   Undo it: divide both sides by 2 instead.
+miss     flipped-without-a-negative = x>8   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 987654321 · difficulty 4
+prompt   Solve for x.
+display  equation "x ÷ 2 ≥ 20" unframed [inequality-multdiv x / 2 ≥ 20]
+answer   choice x>=40
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=40 = x ≤ 40
+choice   x>=40 = x ≥ 40
+choice   x>40 = x > 40
+choice   x>=10 = x ≥ 10
+step 1   Multiply both sides by 2.   [x ≥ 40]
+step 2   2 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>=10   Undo it: multiply both sides by 2 instead.
+miss     flipped-without-a-negative = x<=40   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 1 · difficulty 5
+prompt   Solve for x.
+display  equation "x ÷ 4 > 48" unframed [inequality-multdiv x / 4 > 48]
+answer   choice x>192
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x>192 = x > 192
+choice   x<192 = x < 192
+choice   x>=192 = x ≥ 192
+choice   x>12 = x > 12
+step 1   Multiply both sides by 4.   [x > 192]
+step 2   4 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>12   Undo it: multiply both sides by 4 instead.
+miss     flipped-without-a-negative = x<192   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "x ÷ 4 ≥ 44" unframed [inequality-multdiv x / 4 ≥ 44]
+answer   choice x>=176
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=176 = x ≤ 176
+choice   x>176 = x > 176
+choice   x>=176 = x ≥ 176
+choice   x>=11 = x ≥ 11
+step 1   Multiply both sides by 4.   [x ≥ 176]
+step 2   4 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>=11   Undo it: multiply both sides by 4 instead.
+miss     flipped-without-a-negative = x<=176   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 67890 · difficulty 5
+prompt   Solve for x.
+display  equation "x + 12 ≤ 32" unframed [inequality-addsub x + 12 ≤ 32]
+answer   choice x<=20
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x>=20 = x ≥ 20
+choice   x<=44 = x ≤ 44
+choice   x<=20 = x ≤ 20
+choice   x<20 = x < 20
+step 1   Subtract 12 on both sides.   [x ≤ 20]
+step 2   Nothing multiplies x, so the symbol stays as it is.
+miss     repeated-the-operation = x<=44   Undo it: subtract 12 on both sides instead.
+miss     flipped-without-a-negative = x>=20   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 424242 · difficulty 5
+prompt   Solve for x.
+display  equation "3x < 27" unframed [inequality-multdiv 3x < 27]
+answer   choice x<9
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=9 = x ≤ 9
+choice   x<81 = x < 81
+choice   x<9 = x < 9
+choice   x>9 = x > 9
+step 1   Divide both sides by 3.   [x < 9]
+step 2   3 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x<81   Undo it: divide both sides by 3 instead.
+miss     flipped-without-a-negative = x>9   Only multiplying or dividing by a negative turns the symbol round.
+
+--- solve-one-step-ineq · seed 987654321 · difficulty 5
+prompt   Solve for x.
+display  equation "x ÷ 3 ≥ 36" unframed [inequality-multdiv x / 3 ≥ 36]
+answer   choice x>=108
+input    choice
+hint     Undo the operation on both sides and leave the symbol alone.
+choice   x<=108 = x ≤ 108
+choice   x>=108 = x ≥ 108
+choice   x>108 = x > 108
+choice   x>=12 = x ≥ 12
+step 1   Multiply both sides by 3.   [x ≥ 108]
+step 2   3 is positive, so the symbol stays as it is.
+miss     repeated-the-operation = x>=12   Undo it: multiply both sides by 3 instead.
+miss     flipped-without-a-negative = x<=108   Only multiplying or dividing by a negative turns the symbol round."
+`;

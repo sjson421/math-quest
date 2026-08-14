@@ -369,12 +369,12 @@ in lowest terms. Fraction operations wait for Unit 8.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 15.1 | `inequality-symbols` | | `quick` |
-| 15.2 | `graph-inequality` | Open vs closed circle | |
-| 15.3 | `solve-one-step-ineq` | | |
-| 15.4 | `solve-multi-step-ineq` | | |
-| 15.5 | `flip-the-sign` | × or ÷ by a negative | ⚠️ **major wall** — own skill deliberately |
-| 15.6 | `compound-inequalities` | | |
+| 15.1 | `inequality-symbols` | | `quick` · ✅ |
+| 15.2 | `graph-inequality` | Open vs closed circle | ✅ · the graph named, not drawn |
+| 15.3 | `solve-one-step-ineq` | | ✅ · answers the whole relation |
+| 15.4 | `solve-multi-step-ineq` | | ✅ |
+| 15.5 | `flip-the-sign` | × or ÷ by a negative | ✅ · ⚠️ **major wall** — own skill deliberately |
+| 15.6 | `compound-inequalities` | | ✅ · counts on the keypad |
 
 ---
 
@@ -518,7 +518,7 @@ Ship by stage; each stage is independently useful.
    onward. The **fraction input mode** is also built: a problem declares `allowFraction`
    and the pad offers the slash. **Diagram rendering** is built for shaded bars, circles and
    grids, so Stage D's capability infrastructure is complete.
-4. **Stage E** (34) — needs a variable/expression input mode.
+4. **Stage E** (34) — complete; the **expression input mode** it needed is built.
 5. **Stage F** (28) — needs a **coordinate-plane input** component (tap to plot).
 6. **Stage G** (22) — reuses built **diagram rendering** for shapes and still needs charts.
 7. **Stage H** (6) — needs timed mode and a score estimator.
@@ -531,7 +531,7 @@ Ship by stage; each stage is independently useful.
 | Math notation rendering | D (Unit 7) | Built — structured React/CSS via `Display` |
 | Fraction keypad mode | D (Unit 8) | Built and available — declared per problem via `allowFraction`; mixed-number entry via `allowMixed` (a space key in the pad's adaptive cell, with `requireMixed` form checking) |
 | Diagram rendering | D (Unit 7.2) | Built — typed shaded bars, circles and grids via `Display` |
-| Expression input | E (Unit 13) | Variables on the keypad |
+| Expression input | E (Unit 13) | Built — a variable key per problem via `expression`, compared under a canonical form |
 | Number-line input | C (Unit 6.1) | Built — declared per problem via `numberLine` |
 | Coordinate-plane input | F (Unit 16.1) | Tap to plot a point |
 | Chart rendering | G (Unit 21.5) | Bar, line, scatter |

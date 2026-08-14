@@ -72,7 +72,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(139)
+    expect(documentedAsBuilt).toHaveLength(145)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -351,7 +351,7 @@ describe('the skills that are built', () => {
       'ratio-words',
     ])
     expect(unit11Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(139)
+    expect(implementedSkillIds).toHaveLength(145)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -417,7 +417,7 @@ describe('the skills that are built', () => {
       'factor-gcf',
     ])
     expect(unit13Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(139)
+    expect(implementedSkillIds).toHaveLength(145)
   })
 
   it('completes Unit 14 on the capabilities Stage E already had, adding none', () => {
@@ -451,6 +451,30 @@ describe('the skills that are built', () => {
     expect((stage?.requires ?? []).filter((c) => !AVAILABLE_CAPABILITIES.has(c))).toEqual([])
   })
 
+  it('completes Unit 15 and Stage E without declaring a capability for the graph', () => {
+    // Roadmap item 21's last increment, and the one whose input mode the item
+    // held open. `graph-inequality` names its graph through the choice input
+    // built in item 5 rather than drawing one, so `number-line` is *not* here —
+    // the manifest's note on that skill anticipated leaning on a line, and the
+    // resolution was that nothing in the stage does. Stated as the full set
+    // because that absence is the claim.
+    const stage = manifestIndex.get('inequality-symbols')?.stage
+    const unit15Ids = stage?.units.find((unit) => unit.id === 'unit-15')?.skills.map((skill) => skill.id) ?? []
+
+    expect(stage?.requires).toEqual(['choice-input', 'math-notation', 'fraction-input', 'expression-input'])
+    expect(unit15Ids.filter((id) => skillState(id) === 'implemented')).toEqual([
+      'inequality-symbols',
+      'graph-inequality',
+      'solve-one-step-ineq',
+      'solve-multi-step-ineq',
+      'flip-the-sign',
+      'compound-inequalities',
+    ])
+    // Nothing left anywhere in Stage E, which closes roadmap item 21.
+    const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
+    expect(stageIds.filter((id) => skillState(id) === 'planned')).toEqual([])
+  })
+
   it('declares a capability for every input mode a stage actually uses', () => {
     // The rule `requires` states, executed rather than restated. Stage E carried
     // a choice-input consumer from 13a without declaring one, and nothing
@@ -469,7 +493,7 @@ describe('the skills that are built', () => {
       if (!stage) continue
       for (const difficulty of [1, 2, 3, 4, 5] as const) {
         // Five a difficulty rather than twenty: `inputMode` varies by draw at
-        // most, never by seed depth, and this walks all 139 generators.
+        // most, never by seed depth, and this walks all 145 generators.
         for (let i = 0; i < 5; i += 1) {
           const { inputMode } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
           const capability = modes[inputMode]
@@ -515,9 +539,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 62 skills out of the skill tree entirely', () => {
+  it('leaves the other 56 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(139)
+    expect(offered).toHaveLength(145)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -540,7 +564,7 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['compare-diff-den', 'unit-7', 'stage-d'])
   })
 
-  it('shows the fifteen built units, and no stage or unit that has nothing to play', () => {
+  it('shows the sixteen built units, and no stage or unit that has nothing to play', () => {
     expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b', 'stage-c', 'stage-d', 'stage-e'])
     expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
       'unit-0',
@@ -558,6 +582,7 @@ describe('what the learner is offered', () => {
       'unit-12',
       'unit-13',
       'unit-14',
+      'unit-15',
     ])
   })
 })
