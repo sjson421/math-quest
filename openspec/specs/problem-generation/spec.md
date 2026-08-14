@@ -9,7 +9,9 @@ is rewritten.
 These rules already hold in practice but have never been written down. Stating them matters
 now because 195 generators are still to be authored, and a rule enforced only by a test that
 someone remembers to copy is a rule that will eventually be skipped.
+
 ## Requirements
+
 ### Requirement: A problem is fully determined by its skill, seed, and difficulty
 
 Generating a problem from the same skill, seed, and difficulty SHALL produce an identical
@@ -382,6 +384,12 @@ performed — a generator MAY declare only the exact text form it means to predi
 system SHALL NOT attempt to determine that two different non-numeric predictions describe
 the same underlying mistake.
 
+The correct-answer exclusion that drops a numeric prediction equal to the answer SHALL NOT
+be applied to a non-numeric prediction: an expression answer has no numeric value to compare
+against, and no algebraic comparison is performed. A generator predicting a non-numeric
+mistake is therefore responsible for constructing it so it cannot coincide with its own
+answer for any draw it allows.
+
 #### Scenario: A non-numeric prediction reaches the learner
 
 - **WHEN** a generator predicts a mistake whose value is not a number
@@ -401,8 +409,15 @@ the same underlying mistake.
 #### Scenario: Non-numeric and numeric predictions do not collide
 
 - **WHEN** a problem carries both numeric and non-numeric predicted misconceptions
-- **THEN** deduplication and the correct-answer exclusion apply within each kind
-  independently, and a non-numeric prediction is never compared against a numeric one
+- **THEN** deduplication applies within each kind independently, and a non-numeric
+  prediction is never compared against a numeric one
+
+#### Scenario: A non-numeric prediction equal to the answer is not dropped for the generator
+
+- **WHEN** a generator predicts a non-numeric mistake whose text equals its own canonical
+  answer
+- **THEN** the prediction is still carried, because no correct-answer exclusion runs for
+  this kind
 
 ### Requirement: Single-variable expression displays carry independently verifiable source data
 
@@ -444,3 +459,18 @@ the displayed text or trusting the generator's stated answer.
   coefficient across a parenthesized sum
 - **THEN** verification derives the expected canonical expression from the carried source
   coefficients and constant independently
+
+#### Scenario: A negative distribution is rebuilt from its coefficient, constant, and inner sign
+
+- **WHEN** a problem asks for the distributed form of a negative coefficient across a
+  parenthesized sum or difference
+- **THEN** verification derives the expected canonical expression from the carried
+  coefficient, constant, and inner sign independently, including the sign of both resulting
+  terms
+
+#### Scenario: A factored form is rebuilt from its common factor and inner terms
+
+- **WHEN** a problem asks for the factored form of a sum whose terms share a common factor
+- **THEN** verification derives the expected canonical expression from the carried common
+  factor and the inner coefficient and constant independently, and derives the displayed
+  expanded sum from the same data

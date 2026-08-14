@@ -1,6 +1,19 @@
-## MODIFIED Requirements
+## REMOVED Requirements
 
 ### Requirement: The first six Unit 13 skills are playable as expression content
+
+**Reason**: Superseded by the all-eight requirement below. Its only scenario asserts that
+`distribute-negative` and `factor-gcf` remain planned, which is exactly what increment 13b
+makes false, so the requirement cannot be carried forward with that scenario intact.
+
+**Migration**: None for callers. Every guarantee it made about the six increment 13a skills
+is restated verbatim by "All eight Unit 13 skills are playable as expression content", which
+extends the same determinism, computed-answer, difficulty, variety, agreement, and content
+obligations over the two skills 13b adds.
+
+## ADDED Requirements
+
+### Requirement: All eight Unit 13 skills are playable as expression content
 
 The system SHALL generate all eight Unit 13 skills, from `variable-meaning` through
 `factor-gcf`, under their manifest ids. Each SHALL satisfy the existing determinism,
@@ -19,8 +32,6 @@ so an answer authored with an explicit one would grade a learner's natural entry
 - **THEN** all eight Unit 13 skills resolve as implemented in manifest order
 - **AND** no Unit 13 skill remains planned
 - **AND** roadmap item 21 remains open for its Units 14–15 increments
-
-## ADDED Requirements
 
 ### Requirement: Distributing a negative answers as an expanded expression and predicts sign errors
 

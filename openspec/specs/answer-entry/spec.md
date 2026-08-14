@@ -214,10 +214,20 @@ Echoing the submitted form verbatim puts both on screen at once — one sign in 
 another in the slot beside it — which is the control disagreeing with itself about what it
 just did, and is indistinguishable from a broken control.
 
+This SHALL hold for every sign in the entry, not only the first. A numeric entry carries at
+most one, but an expression entry may carry several, and converting the leading sign alone
+puts both notations inside a single answer slot — the same disagreement, one line lower.
+
 #### Scenario: A typed negative reads as the problem reads
 
 - **WHEN** a learner enters a negative value on the pad
 - **THEN** the answer slot shows it with the same sign notation the problem uses
+- **AND** the value submitted for checking is unchanged
+
+#### Scenario: An expression entry with two signs reads consistently
+
+- **WHEN** a learner enters an expression whose terms are both negative
+- **THEN** every sign in the answer slot is drawn in the problem's notation
 - **AND** the value submitted for checking is unchanged
 
 #### Scenario: A positive entry is unaffected

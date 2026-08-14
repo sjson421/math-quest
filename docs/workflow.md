@@ -23,20 +23,23 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-one changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-two changes
   have shipped — `ls openspec/changes/archive/` is the authority, and this line has run one
   behind before; the latest archive is
-  `2026-08-13-add-unit-13a-expressions-intro`. It ships roadmap item 21's 13a increment:
-  variable-meaning, expression evaluation, words-to-expression, identify-like-terms,
-  combine-like-terms, and distributive — the first content to consume `expression-input`.
-  Unit 13a is complete; item 21 remains open for 13b, 14a, 14b, and 15.
+  `2026-08-13-add-unit-13b-distribute-factor`. It ships roadmap item 21's 13b increment:
+  `distribute-negative` and `factor-gcf`, which completes Unit 13 and makes `factor-gcf` the
+  first content anywhere to answer under the `exact` comparison form. Item 21 remains open
+  for 14a, 14b, and 15.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
   archive aborted without changing a file. The fix is to keep the original scenario verbatim
   and add a second one beside it rather than absorbing it — which is the better spec anyway,
   since the two kinds are checked separately. Rename a scenario only by leaving the old one
-  in place.
+  in place. When the existing scenario has become *false* rather than merely reworded — Unit
+  13's "Increment 13a leaves Unit 13 incomplete" asserted that 13b's two skills stay planned
+  — keeping it verbatim would archive a lie, so retire the whole requirement under
+  `## REMOVED Requirements` with its Reason and Migration and add its successor beside it.
 - **`openspec archive` reflows what it writes.** It strips the blank lines around `##` and
   `###` headings, appends a trailing newline, and titles a new capability
   `# <kebab-name> Specification` rather than the title case every other spec uses. Read the

@@ -34,6 +34,11 @@ Under `exact`, an entry is correct only when it matches the canonical answer's s
 (the same grouping into a sum of a coefficient-times-parenthesized-factor versus a fully
 distributed sum), so a factored and an expanded form of the same value are different answers.
 
+Under `exact`, two entries SHALL compare equal only when they differ by the order of a sum's
+terms or a product's factors. Differing in how the expression is grouped SHALL compare
+unequal, whatever the nesting depth: a product of a number and a sum is never the same
+answer as a sum containing that product.
+
 The comparison form SHALL be a property of the answer the generator produces, not of a
 per-skill checker, so the same comparison mechanism serves every skill.
 
@@ -56,6 +61,12 @@ per-skill checker, so the same comparison mechanism serves every skill.
 
 - **WHEN** the canonical answer is `2x + 2` and the form is `exact`
 - **THEN** an entry of `2 + 2x` is correct
+
+#### Scenario: Exact form rejects a regrouping that reuses the same numbers
+
+- **WHEN** the canonical answer is `3(x + 4)` and the form is `exact`
+- **THEN** an entry of `3(4) + x` is incorrect, because the grouping differs even though
+  both entries name the same numbers in the same order
 
 ### Requirement: An unparseable expression entry is not a wrong answer
 
