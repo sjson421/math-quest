@@ -113,6 +113,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "div-words": [
     "primes",
   ],
+  "equation-balance": [
+    "factor-gcf",
+  ],
+  "equation-parentheses": [
+    "vars-both-sides",
+  ],
   "equivalent-multiply": [
     "equivalent-visual",
   ],
@@ -223,6 +229,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "negatives-numberline": [
     "pemdas",
+  ],
+  "one-step-addsub": [
+    "equation-balance",
+  ],
+  "one-step-multdiv": [
+    "one-step-addsub",
   ],
   "order-numbers": [
     "compare-numbers",
@@ -366,6 +378,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "two-operations": [
     "div-words",
   ],
+  "two-step": [
+    "one-step-multdiv",
+  ],
   "unit-conversion": [
     "scale-drawings",
   ],
@@ -374,6 +389,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "variable-meaning": [
     "pemdas-exponents",
+  ],
+  "vars-both-sides": [
+    "two-step",
   ],
   "with-parentheses": [
     "two-operations",

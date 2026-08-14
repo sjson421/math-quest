@@ -8,6 +8,7 @@ import type {
   AlgebraData,
   DecimalData,
   Difficulty,
+  EquationData,
   FractionData,
   MathNotation,
   PercentData,
@@ -280,6 +281,32 @@ const formatAlgebraData = (data: AlgebraData): string => {
   }
 }
 
+const formatEquationData = (data: EquationData): string => {
+  switch (data.operation) {
+    case 'balance':
+      return `${data.operation} ${data.first} + ${data.second} ${data.adds ? '+' : '-'}${data.change} both sides`
+    case 'one-step-addsub':
+      return `${data.operation} x ${data.adds ? '+' : '-'} ${data.constant} = ${data.rightHand}`
+    case 'one-step-multdiv':
+      return data.multiplies
+        ? `${data.operation} ${data.coefficient}x = ${data.rightHand}`
+        : `${data.operation} x / ${data.coefficient} = ${data.rightHand}`
+    case 'two-step':
+      return `${data.operation} ${data.coefficient}x ${data.adds ? '+' : '-'} ${data.constant} = ${data.rightHand}`
+    case 'vars-both-sides':
+      return (
+        `${data.operation} ${data.leftCoefficient}x + ${data.leftConstant} = ` +
+        `${data.rightCoefficient}x + ${data.rightConstant}`
+      )
+    case 'parentheses':
+      return `${data.operation} ${data.coefficient}(x ${data.adds ? '+' : '-'} ${data.constant}) = ${data.rightHand}`
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled equation data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 const formatDisplay = (display: Problem['display']): string => {
   switch (display.kind) {
     case 'inline':
@@ -309,6 +336,8 @@ const formatDisplay = (display: Problem['display']): string => {
         `diagram ${display.diagram.kind} ${display.diagram.shadedParts}/${display.diagram.parts} ` +
         `"${shapeDiagramLabel(display.diagram)}"`
       )
+    case 'equation':
+      return `equation "${display.text}" solve ${display.variable} [${formatEquationData(display.equation)}]`
     default: {
       // A new Display variant must be rendered here or it slips past the gate.
       const unhandled: never = display

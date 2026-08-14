@@ -70,7 +70,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(129)
+    expect(documentedAsBuilt).toHaveLength(135)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -104,6 +104,41 @@ describe('the skills that are built', () => {
       .map(([id, text]) => `${id}: "${text}" is ${text.length} characters`)
 
     expect(tooWide, 'widen the ProblemView size bands, or narrow the draw').toEqual([])
+  })
+
+  it('keeps every equation inside the width its own size band was chosen for', () => {
+    // Measured separately from the inline ladder above, and that separation is
+    // the point rather than tidiness. An inline row spends part of its width on
+    // a trailing `=` and the answer slot, both sized in `em` and both growing as
+    // the learner types — which is what the 18-character cap was measured
+    // against. An equation row carries neither: the slot sits on a second row,
+    // framed by the variable. One number cannot be right for two differently
+    // shaped rows, and sharing it is how a display passes the gate and still
+    // wraps on a phone.
+    //
+    // 21 is the measurement, not a judgement. The widest any Unit 14a draw
+    // produces is `vars-both-sides` at 20 characters (`17x + 14 = 10x + 119`),
+    // and `EquationView`'s smallest band starts at 19.
+    const widest = new Map<string, string>()
+
+    for (const generator of allSkills) {
+      for (const difficulty of [1, 2, 3, 4, 5] as const) {
+        for (let i = 0; i < 50; i += 1) {
+          const { display } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
+          if (display.kind !== 'equation') continue
+          const seen = widest.get(generator.id) ?? ''
+          if (display.text.length > seen.length) widest.set(generator.id, display.text)
+        }
+      }
+    }
+
+    expect(widest.size, 'no equation displays were sampled').toBeGreaterThan(0)
+
+    const tooWide = [...widest]
+      .filter(([, text]) => text.length > 21)
+      .map(([id, text]) => `${id}: "${text}" is ${text.length} characters`)
+
+    expect(tooWide, 'widen the EquationView size bands, or narrow the draw').toEqual([])
   })
 
   it('matches every generator name and blurb to its manifest entry', () => {
@@ -294,7 +329,7 @@ describe('the skills that are built', () => {
       'ratio-words',
     ])
     expect(unit11Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(129)
+    expect(implementedSkillIds).toHaveLength(135)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -353,7 +388,38 @@ describe('the skills that are built', () => {
       'factor-gcf',
     ])
     expect(unit13Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(129)
+    expect(implementedSkillIds).toHaveLength(135)
+  })
+
+  it('opens Unit 14 on the capabilities Stage E already had, adding none', () => {
+    // Unit 14a's claim is that an equation needed no new capability — it draws
+    // as text and answers on the keypad built in item 3. Asserted rather than
+    // assumed: a generator that quietly wanted a new flag would otherwise show
+    // up only as six skills silently staying `planned`, which reads exactly
+    // like work that has not been done yet.
+    const stage = manifestIndex.get('equation-balance')?.stage
+    const unit14 = stage?.units.find((unit) => unit.id === 'unit-14')
+    const unit14Ids = unit14?.skills.map((skill) => skill.id) ?? []
+
+    expect(unit14Ids.filter((id) => skillState(id) === 'implemented')).toEqual([
+      'equation-balance',
+      'one-step-addsub',
+      'one-step-multdiv',
+      'two-step',
+      'vars-both-sides',
+      'equation-parentheses',
+    ])
+    // 14b's four remain, which is what keeps roadmap item 21 open.
+    expect(unit14Ids.filter((id) => skillState(id) === 'planned')).toEqual([
+      'with-fractions',
+      'special-solutions',
+      'equation-words',
+      'rearrange-formula',
+    ])
+    // What the claim needs, and no more: Stage E asks for nothing this change
+    // had to build. Pinning the whole capability set here would fail this Unit
+    // 14 test the day an unrelated capability lands.
+    expect((stage?.requires ?? []).filter((c) => !AVAILABLE_CAPABILITIES.has(c))).toEqual([])
   })
 })
 
@@ -388,9 +454,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 72 skills out of the skill tree entirely', () => {
+  it('leaves the other 66 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(129)
+    expect(offered).toHaveLength(135)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -413,7 +479,7 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['compare-diff-den', 'unit-7', 'stage-d'])
   })
 
-  it('shows the fourteen built units, and no stage or unit that has nothing to play', () => {
+  it('shows the fifteen built units, and no stage or unit that has nothing to play', () => {
     expect(course.map(({ stage }) => stage.id)).toEqual(['stage-a', 'stage-b', 'stage-c', 'stage-d', 'stage-e'])
     expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
       'unit-0',
@@ -430,6 +496,7 @@ describe('what the learner is offered', () => {
       'unit-11',
       'unit-12',
       'unit-13',
+      'unit-14',
     ])
   })
 })

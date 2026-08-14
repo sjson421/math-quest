@@ -318,4 +318,68 @@ describe('ProblemView', () => {
     expect(html).toMatch(/aria-hidden="true">[\s\S]*aria-label="3 over 4"/)
     expect(html).toContain('mq-math-fraction')
   })
+
+  const equation = {
+    kind: 'equation',
+    text: '3x + 5 = 20',
+    variable: 'x',
+    equation: { operation: 'two-step', coefficient: 3, constant: 5, adds: true, rightHand: 20 },
+  } as const
+
+  it('frames an equation answer with its variable and never a second equals sign', () => {
+    const html = renderToStaticMarkup(<ProblemView display={equation} entry="5" />)
+
+    // The whole reason this is not an `InlineView`. Appending the usual frame
+    // would draw `3x + 5 = 20 = 5`, which is false — in the unit whose subject
+    // is that both sides of an equals sign hold the same value.
+    expect(html).toContain('3x + 5 = 20')
+    expect(html).not.toContain('3x + 5 = 20 =')
+    expect(html).toContain('>x<')
+    expect(html).toContain('>5<')
+    // Counted over what the learner sees, not over the markup — every attribute
+    // carries an equals sign of its own. One for the equation, one for the
+    // frame; a third would mean the inline frame had crept back in.
+    const visible = html.replace(/<[^>]*>/g, '')
+    expect([...visible.matchAll(/=/g)]).toHaveLength(2)
+  })
+
+  it('gives the equation one accessible name rather than loose digits', () => {
+    const html = renderToStaticMarkup(<ProblemView display={equation} entry="" />)
+
+    expect(html).toContain('role="math"')
+    expect(html).toContain('aria-label="3x + 5 = 20"')
+  })
+
+  it('still shows the cursor when nothing has been entered', () => {
+    const html = renderToStaticMarkup(<ProblemView display={equation} entry="" />)
+
+    expect(html).toContain('animate-pulse')
+  })
+
+  it('drops the widest equation a draw can produce into the smallest band', () => {
+    // `vars-both-sides` at its widest: 20 characters observed, against the
+    // 21-character cap `coverage.test.ts` enforces. It has to land below the
+    // band the shorter equations use, or the row wraps at 375px.
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'equation',
+          text: '17x + 14 = 10x + 119',
+          variable: 'x',
+          equation: {
+            operation: 'vars-both-sides',
+            leftCoefficient: 17,
+            leftConstant: 14,
+            rightCoefficient: 10,
+            rightConstant: 119,
+          },
+        }}
+        entry="15"
+      />,
+    )
+
+    expect(html).toContain('17x + 14 = 10x + 119')
+    // On the equation's own element, not merely somewhere in the markup.
+    expect(html).toMatch(/<span class="[^"]*text-3xl[^"]*" role="math"/)
+  })
 })

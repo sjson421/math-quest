@@ -12,6 +12,7 @@ import type {
   DecimalData,
   DecimalValue,
   Difficulty,
+  EquationData,
   FractionData,
   MathNotation,
   PercentData,
@@ -982,6 +983,81 @@ function expectedPowerDisplay(data: PowerData): {
   }
 }
 
+/**
+ * Unit 14's equation rebuilt from its operands: the text, the solution, and the
+ * values the difficulty ladder is measured over.
+ *
+ * One owner for all three so `recompute` and `sourceMagnitude` cannot drift.
+ * `sourceMagnitude` matters here more than usual: it is the one consumer of a
+ * new `Display` arm that the compiler does *not* force, because it ends in a
+ * fallback to the problem's own answer. An equation left out of it would take
+ * its magnitude from the answer and the ladder check would pass by tautology.
+ *
+ * Nothing carried is the solution. Every arm below does the arithmetic the
+ * learner does, which is what makes this an independent check rather than a
+ * restatement of the generator.
+ */
+function expectedEquation(
+  data: EquationData,
+  variable: string,
+): { text: string; answer: number; values: number[] } {
+  const sign = (adds: boolean): string => (adds ? '+' : '−')
+
+  switch (data.operation) {
+    case 'balance': {
+      const total = data.first + data.second
+      return {
+        text: `${data.first} + ${data.second} = ${total}`,
+        answer: data.adds ? total + data.change : total - data.change,
+        values: [data.first, data.second, data.change],
+      }
+    }
+    case 'one-step-addsub':
+      return {
+        text: `${variable} ${sign(data.adds)} ${data.constant} = ${drawn(data.rightHand)}`,
+        answer: data.adds ? data.rightHand - data.constant : data.rightHand + data.constant,
+        values: [data.constant, data.rightHand],
+      }
+    case 'one-step-multdiv':
+      return {
+        text: data.multiplies
+          ? `${data.coefficient}${variable} = ${drawn(data.rightHand)}`
+          : `${variable} ÷ ${data.coefficient} = ${drawn(data.rightHand)}`,
+        answer: data.multiplies ? data.rightHand / data.coefficient : data.rightHand * data.coefficient,
+        values: [data.coefficient, data.rightHand],
+      }
+    case 'two-step':
+      return {
+        text: `${data.coefficient}${variable} ${sign(data.adds)} ${data.constant} = ${drawn(data.rightHand)}`,
+        answer: data.adds
+          ? (data.rightHand - data.constant) / data.coefficient
+          : (data.rightHand + data.constant) / data.coefficient,
+        values: [data.coefficient, data.constant, data.rightHand],
+      }
+    case 'vars-both-sides':
+      return {
+        text:
+          `${data.leftCoefficient}${variable} + ${data.leftConstant} = ` +
+          `${data.rightCoefficient}${variable} + ${data.rightConstant}`,
+        answer:
+          (data.rightConstant - data.leftConstant) / (data.leftCoefficient - data.rightCoefficient),
+        values: [data.leftCoefficient, data.leftConstant, data.rightCoefficient, data.rightConstant],
+      }
+    case 'parentheses':
+      return {
+        text: `${data.coefficient}(${variable} ${sign(data.adds)} ${data.constant}) = ${drawn(data.rightHand)}`,
+        answer: data.adds
+          ? data.rightHand / data.coefficient - data.constant
+          : data.rightHand / data.coefficient + data.constant,
+        values: [data.coefficient, data.constant, data.rightHand],
+      }
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unknown equation operation: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 function recompute(problem: Problem): number | string {
   const { display } = problem
 
@@ -1157,6 +1233,21 @@ function recompute(problem: Problem): number | string {
       throw new Error(`${problem.skillId}: visible ratio text disagrees with its data`)
     }
     return typeof expected.answer === 'string' ? choiceIdFor(problem, expected.answer) : expected.answer
+  }
+
+  if (display.kind === 'equation') {
+    const expected = expectedEquation(display.equation, display.variable)
+    // The equation is rebuilt from the operands and compared, never parsed.
+    // This is the direction that catches a generator showing one equation while
+    // carrying another — the answer below is derived from the same values, so
+    // without this check the two would agree with each other and be wrong
+    // together.
+    if (display.text !== expected.text) {
+      throw new Error(
+        `${problem.skillId}: visible equation "${display.text}" disagrees with its data ("${expected.text}")`,
+      )
+    }
+    return expected.answer
   }
 
   // A story carries its quantities precisely so this stays possible. Reading
@@ -1352,6 +1443,16 @@ function sourceMagnitude(problem: Problem): number {
       : problem.display.ratio
         ? expectedRatioDisplay(problem.display.ratio).values
         : problem.display.operands
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
+
+  // Deliberate, not incidental. The fallback below reads the problem's own
+  // answer, so a display arm missing from this function does not fail to
+  // compile — it makes the ladder check measure the answer against itself and
+  // pass on a ladder that has stopped climbing. Every new `Display` kind needs
+  // a branch here even though nothing will ask for one.
+  if (problem.display.kind === 'equation') {
+    const { values } = expectedEquation(problem.display.equation, problem.display.variable)
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 

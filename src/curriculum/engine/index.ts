@@ -84,6 +84,8 @@ export {
   wrongOperation,
 } from './misconceptions'
 
+export { drawn, padFor } from './signs'
+
 export { defineSkill } from './problem'
 export type { BuildContext, ProblemSpec, SkillConfig } from './problem'
 

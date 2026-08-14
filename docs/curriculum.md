@@ -354,12 +354,12 @@ in lowest terms. Fraction operations wait for Unit 8.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 14.1 | `equation-balance` | Both sides stay equal | `quick` |
-| 14.2 | `one-step-addsub` | | |
-| 14.3 | `one-step-multdiv` | | |
-| 14.4 | `two-step` | | ⚠️ undoing in the wrong order |
-| 14.5 | `vars-both-sides` | | |
-| 14.6 | `equation-parentheses` | | |
+| 14.1 | `equation-balance` | Both sides stay equal | `quick` · ✅ |
+| 14.2 | `one-step-addsub` | | ✅ |
+| 14.3 | `one-step-multdiv` | | ✅ |
+| 14.4 | `two-step` | | ✅ · ⚠️ undoing in the wrong order |
+| 14.5 | `vars-both-sides` | | ✅ |
+| 14.6 | `equation-parentheses` | | ✅ |
 | 14.7 | `with-fractions` | Clear denominators | |
 | 14.8 | `special-solutions` | None / infinite | |
 | 14.9 | `equation-words` | | |

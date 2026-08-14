@@ -1,8 +1,7 @@
 import { intAnswer } from '../lib/answer'
-import { entryLabel, type KeypadRules } from '../lib/keypad'
 import { rational } from '../lib/rational'
 import type { Misconception, SkillGenerator } from '../lib/types'
-import { band, countOf, defineSkill } from './engine'
+import { band, countOf, defineSkill, drawn, padFor } from './engine'
 import type { BuildContext, Ladder, ProblemSpec } from './engine'
 
 /**
@@ -26,41 +25,8 @@ import type { BuildContext, Ladder, ProblemSpec } from './engine'
  */
 
 // ---------------------------------------------------------------------------
-// Drawing and answering
+// Building a problem
 // ---------------------------------------------------------------------------
-
-/**
- * A value as the learner reads it: typographic minus, matching every other
- * display in the course and the label on the pad's own sign key.
- *
- * The answer checker parses the ASCII hyphen, and that difference is deliberate
- * and lives in `lib/keypad.ts`. What matters here is that nothing in this file
- * interpolates a raw negative number into learner-facing text — `${-3}` is
- * `-3`, one glyph away from everything around it, and the difference is small
- * enough on screen to survive review and obvious enough to look broken.
- */
-const drawn = (value: number): string => entryLabel(String(value))
-
-/**
- * What the pad must offer for this problem.
- *
- * Derived from the answer *and* the predictions, not from the answer alone. A
- * pad that withholds the sign key does not merely fail to record a negative
- * answer: it tells the learner the answer is not negative, at exactly the three
- * skills whose question is what sign it has. `add-neg-pos`'s documented
- * misconception is `−8` where the answer is `2`, and a learner who makes it
- * would find they could not type it.
- *
- * Taking both means the declaration cannot drift from what the problem holds —
- * a prediction added later brings the key with it.
- */
-const padFor = (
-  answer: number,
-  misconceptions: readonly Misconception[],
-): KeypadRules | undefined =>
-  answer < 0 || misconceptions.some((m) => typeof m.value === 'number' && m.value < 0)
-    ? { allowNegative: true }
-    : undefined
 
 /**
  * The parts of a problem a builder here still decides for itself, which is the

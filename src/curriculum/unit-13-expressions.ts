@@ -1,7 +1,6 @@
 import { intAnswer } from '../lib/answer'
-import { entryLabel } from '../lib/keypad'
 import { gcd } from '../lib/rational'
-import { band, defineSkill, type BuildContext, type Ladder } from './engine'
+import { band, defineSkill, drawn, type BuildContext, type Ladder } from './engine'
 import { factorsOf } from './unit-04-division'
 
 /**
@@ -24,15 +23,6 @@ import { factorsOf } from './unit-04-division'
  */
 
 const VARIABLE = 'x'
-
-/**
- * A signed number as the learner reads it, not as it is stored.
- *
- * Unit 6's helper, repeated here for the same reason it exists there: worked
- * steps are display text and use the typographic minus, while an answer and a
- * predicted mistake are matched against pad entry and stay ASCII.
- */
-const drawn = (value: number): string => entryLabel(String(value))
 
 /**
  * A term as it is written, not as it is stored.

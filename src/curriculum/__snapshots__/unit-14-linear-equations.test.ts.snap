@@ -1,0 +1,1647 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: equation-balance > matches the wording recorded when the skill landed 1`] = `
+"--- equation-balance · seed 1 · difficulty 1
+prompt   Subtract 5 from both sides. What does each side equal?
+display  equation "1 + 5 = 6" solve each side [balance 1 + 5 -5 both sides]
+answer   exact 1/1
+input    keypad
+keypad   allowNegative=true
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [1 + 5 = 6]
+step 2   Subtract the same amount from each.   [6 − 5 = 1]
+miss     changed-one-side-only = 6   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = -4   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 12345 · difficulty 1
+prompt   Add 5 to both sides. What does each side equal?
+display  equation "3 + 5 = 8" solve each side [balance 3 + 5 +5 both sides]
+answer   exact 13/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [3 + 5 = 8]
+step 2   Add the same amount to each.   [8 + 5 = 13]
+miss     changed-one-side-only = 8   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 18   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 67890 · difficulty 1
+prompt   Add 3 to both sides. What does each side equal?
+display  equation "3 + 2 = 5" solve each side [balance 3 + 2 +3 both sides]
+answer   exact 8/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [3 + 2 = 5]
+step 2   Add the same amount to each.   [5 + 3 = 8]
+miss     changed-one-side-only = 5   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 11   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 424242 · difficulty 1
+prompt   Add 4 to both sides. What does each side equal?
+display  equation "1 + 2 = 3" solve each side [balance 1 + 2 +4 both sides]
+answer   exact 7/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [1 + 2 = 3]
+step 2   Add the same amount to each.   [3 + 4 = 7]
+miss     changed-one-side-only = 3   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 11   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 987654321 · difficulty 1
+prompt   Add 5 to both sides. What does each side equal?
+display  equation "1 + 7 = 8" solve each side [balance 1 + 7 +5 both sides]
+answer   exact 13/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [1 + 7 = 8]
+step 2   Add the same amount to each.   [8 + 5 = 13]
+miss     changed-one-side-only = 8   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 18   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 1 · difficulty 2
+prompt   Subtract 8 from both sides. What does each side equal?
+display  equation "1 + 8 = 9" solve each side [balance 1 + 8 -8 both sides]
+answer   exact 1/1
+input    keypad
+keypad   allowNegative=true
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [1 + 8 = 9]
+step 2   Subtract the same amount from each.   [9 − 8 = 1]
+miss     changed-one-side-only = 9   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = -7   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 12345 · difficulty 2
+prompt   Add 7 to both sides. What does each side equal?
+display  equation "4 + 8 = 12" solve each side [balance 4 + 8 +7 both sides]
+answer   exact 19/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [4 + 8 = 12]
+step 2   Add the same amount to each.   [12 + 7 = 19]
+miss     changed-one-side-only = 12   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 26   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 67890 · difficulty 2
+prompt   Add 4 to both sides. What does each side equal?
+display  equation "4 + 3 = 7" solve each side [balance 4 + 3 +4 both sides]
+answer   exact 11/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [4 + 3 = 7]
+step 2   Add the same amount to each.   [7 + 4 = 11]
+miss     changed-one-side-only = 7   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 15   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 424242 · difficulty 2
+prompt   Add 6 to both sides. What does each side equal?
+display  equation "1 + 4 = 5" solve each side [balance 1 + 4 +6 both sides]
+answer   exact 11/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [1 + 4 = 5]
+step 2   Add the same amount to each.   [5 + 6 = 11]
+miss     changed-one-side-only = 5   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 17   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 987654321 · difficulty 2
+prompt   Add 8 to both sides. What does each side equal?
+display  equation "2 + 10 = 12" solve each side [balance 2 + 10 +8 both sides]
+answer   exact 20/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [2 + 10 = 12]
+step 2   Add the same amount to each.   [12 + 8 = 20]
+miss     changed-one-side-only = 12   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 28   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 1 · difficulty 3
+prompt   Subtract 12 from both sides. What does each side equal?
+display  equation "1 + 12 = 13" solve each side [balance 1 + 12 -12 both sides]
+answer   exact 1/1
+input    keypad
+keypad   allowNegative=true
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [1 + 12 = 13]
+step 2   Subtract the same amount from each.   [13 − 12 = 1]
+miss     changed-one-side-only = 13   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = -11   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 12345 · difficulty 3
+prompt   Add 11 to both sides. What does each side equal?
+display  equation "6 + 12 = 18" solve each side [balance 6 + 12 +11 both sides]
+answer   exact 29/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [6 + 12 = 18]
+step 2   Add the same amount to each.   [18 + 11 = 29]
+miss     changed-one-side-only = 18   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 40   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 67890 · difficulty 3
+prompt   Add 6 to both sides. What does each side equal?
+display  equation "6 + 4 = 10" solve each side [balance 6 + 4 +6 both sides]
+answer   exact 16/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [6 + 4 = 10]
+step 2   Add the same amount to each.   [10 + 6 = 16]
+miss     changed-one-side-only = 10   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 22   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 424242 · difficulty 3
+prompt   Add 9 to both sides. What does each side equal?
+display  equation "2 + 4 = 6" solve each side [balance 2 + 4 +9 both sides]
+answer   exact 15/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [2 + 4 = 6]
+step 2   Add the same amount to each.   [6 + 9 = 15]
+miss     changed-one-side-only = 6   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 24   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 987654321 · difficulty 3
+prompt   Add 12 to both sides. What does each side equal?
+display  equation "3 + 15 = 18" solve each side [balance 3 + 15 +12 both sides]
+answer   exact 30/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [3 + 15 = 18]
+step 2   Add the same amount to each.   [18 + 12 = 30]
+miss     changed-one-side-only = 18   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 42   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 1 · difficulty 4
+prompt   Subtract 16 from both sides. What does each side equal?
+display  equation "1 + 17 = 18" solve each side [balance 1 + 17 -16 both sides]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [1 + 17 = 18]
+step 2   Subtract the same amount from each.   [18 − 16 = 2]
+miss     changed-one-side-only = 18   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = -14   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 12345 · difficulty 4
+prompt   Add 14 to both sides. What does each side equal?
+display  equation "8 + 17 = 25" solve each side [balance 8 + 17 +14 both sides]
+answer   exact 39/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [8 + 17 = 25]
+step 2   Add the same amount to each.   [25 + 14 = 39]
+miss     changed-one-side-only = 25   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 53   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 67890 · difficulty 4
+prompt   Add 8 to both sides. What does each side equal?
+display  equation "8 + 5 = 13" solve each side [balance 8 + 5 +8 both sides]
+answer   exact 21/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [8 + 5 = 13]
+step 2   Add the same amount to each.   [13 + 8 = 21]
+miss     changed-one-side-only = 13   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 29   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 424242 · difficulty 4
+prompt   Add 12 to both sides. What does each side equal?
+display  equation "2 + 6 = 8" solve each side [balance 2 + 6 +12 both sides]
+answer   exact 20/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [2 + 6 = 8]
+step 2   Add the same amount to each.   [8 + 12 = 20]
+miss     changed-one-side-only = 8   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 32   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 987654321 · difficulty 4
+prompt   Add 15 to both sides. What does each side equal?
+display  equation "4 + 21 = 25" solve each side [balance 4 + 21 +15 both sides]
+answer   exact 40/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [4 + 21 = 25]
+step 2   Add the same amount to each.   [25 + 15 = 40]
+miss     changed-one-side-only = 25   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 55   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 1 · difficulty 5
+prompt   Subtract 20 from both sides. What does each side equal?
+display  equation "1 + 27 = 28" solve each side [balance 1 + 27 -20 both sides]
+answer   exact 8/1
+input    keypad
+keypad   allowNegative=true
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [1 + 27 = 28]
+step 2   Subtract the same amount from each.   [28 − 20 = 8]
+miss     changed-one-side-only = 28   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = -12   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 12345 · difficulty 5
+prompt   Add 18 to both sides. What does each side equal?
+display  equation "12 + 28 = 40" solve each side [balance 12 + 28 +18 both sides]
+answer   exact 58/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [12 + 28 = 40]
+step 2   Add the same amount to each.   [40 + 18 = 58]
+miss     changed-one-side-only = 40   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 76   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 67890 · difficulty 5
+prompt   Add 10 to both sides. What does each side equal?
+display  equation "12 + 8 = 20" solve each side [balance 12 + 8 +10 both sides]
+answer   exact 30/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [12 + 8 = 20]
+step 2   Add the same amount to each.   [20 + 10 = 30]
+miss     changed-one-side-only = 20   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 40   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 424242 · difficulty 5
+prompt   Add 15 to both sides. What does each side equal?
+display  equation "3 + 9 = 12" solve each side [balance 3 + 9 +15 both sides]
+answer   exact 27/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [3 + 9 = 12]
+step 2   Add the same amount to each.   [12 + 15 = 27]
+miss     changed-one-side-only = 12   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 42   Each side changes by that amount once, not twice.
+
+--- equation-balance · seed 987654321 · difficulty 5
+prompt   Add 19 to both sides. What does each side equal?
+display  equation "6 + 33 = 39" solve each side [balance 6 + 33 +19 both sides]
+answer   exact 58/1
+input    keypad
+hint     Whatever happens to one side happens to the other, so both land on the same value.
+step 1   Both sides start equal.   [6 + 33 = 39]
+step 2   Add the same amount to each.   [39 + 19 = 58]
+miss     changed-one-side-only = 39   That is the total before the change — it happens to both sides, not one.
+miss     applied-change-twice = 77   Each side changes by that amount once, not twice."
+`;
+
+exports[`recorded output: equation-parentheses > matches the wording recorded when the skill landed 1`] = `
+"--- equation-parentheses · seed 1 · difficulty 1
+prompt   Solve for x.
+display  equation "3(x − 3) = 18" solve x [parentheses 3(x - 3) = 18]
+answer   exact 9/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 3.   [x − 3 = 6]
+step 2   Add 3 on both sides.   [x = 9]
+miss     distributed-first-term-only = 7   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "3(x + 3) = 27" solve x [parentheses 3(x + 3) = 27]
+answer   exact 6/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 3.   [x + 3 = 9]
+step 2   Subtract 3 on both sides.   [x = 6]
+miss     distributed-first-term-only = 8   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 67890 · difficulty 1
+prompt   Solve for x.
+display  equation "2(x + 4) = 14" solve x [parentheses 2(x + 4) = 14]
+answer   exact 3/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 2.   [x + 4 = 7]
+step 2   Subtract 4 on both sides.   [x = 3]
+miss     distributed-first-term-only = 5   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 424242 · difficulty 1
+prompt   Solve for x.
+display  equation "2(x + 2) = 14" solve x [parentheses 2(x + 2) = 14]
+answer   exact 5/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 2.   [x + 2 = 7]
+step 2   Subtract 2 on both sides.   [x = 5]
+miss     distributed-first-term-only = 6   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 987654321 · difficulty 1
+prompt   Solve for x.
+display  equation "3(x + 3) = 27" solve x [parentheses 3(x + 3) = 27]
+answer   exact 6/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 3.   [x + 3 = 9]
+step 2   Subtract 3 on both sides.   [x = 6]
+miss     distributed-first-term-only = 8   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 1 · difficulty 2
+prompt   Solve for x.
+display  equation "3(x − 3) = 27" solve x [parentheses 3(x - 3) = 27]
+answer   exact 12/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 3.   [x − 3 = 9]
+step 2   Add 3 on both sides.   [x = 12]
+miss     distributed-first-term-only = 10   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "4(x + 4) = 48" solve x [parentheses 4(x + 4) = 48]
+answer   exact 8/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 4.   [x + 4 = 12]
+step 2   Subtract 4 on both sides.   [x = 8]
+miss     distributed-first-term-only = 11   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 67890 · difficulty 2
+prompt   Solve for x.
+display  equation "3(x + 6) = 33" solve x [parentheses 3(x + 6) = 33]
+answer   exact 5/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 3.   [x + 6 = 11]
+step 2   Subtract 6 on both sides.   [x = 5]
+miss     distributed-first-term-only = 9   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 424242 · difficulty 2
+prompt   Solve for x.
+display  equation "2(x + 2) = 18" solve x [parentheses 2(x + 2) = 18]
+answer   exact 7/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 2.   [x + 2 = 9]
+step 2   Subtract 2 on both sides.   [x = 7]
+miss     distributed-first-term-only = 8   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 987654321 · difficulty 2
+prompt   Solve for x.
+display  equation "4(x + 4) = 52" solve x [parentheses 4(x + 4) = 52]
+answer   exact 9/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 4.   [x + 4 = 13]
+step 2   Subtract 4 on both sides.   [x = 9]
+miss     distributed-first-term-only = 12   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 1 · difficulty 3
+prompt   Solve for x.
+display  equation "5(x − 5) = 60" solve x [parentheses 5(x - 5) = 60]
+answer   exact 17/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 5.   [x − 5 = 12]
+step 2   Add 5 on both sides.   [x = 17]
+miss     distributed-first-term-only = 13   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "6(x + 12) = 138" solve x [parentheses 6(x + 12) = 138]
+answer   exact 11/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 6.   [x + 12 = 23]
+step 2   Subtract 12 on both sides.   [x = 11]
+miss     distributed-first-term-only = 21   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 67890 · difficulty 3
+prompt   Solve for x.
+display  equation "3(x + 9) = 48" solve x [parentheses 3(x + 9) = 48]
+answer   exact 7/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 3.   [x + 9 = 16]
+step 2   Subtract 9 on both sides.   [x = 7]
+miss     distributed-first-term-only = 13   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 424242 · difficulty 3
+prompt   Solve for x.
+display  equation "2(x + 2) = 22" solve x [parentheses 2(x + 2) = 22]
+answer   exact 9/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 2.   [x + 2 = 11]
+step 2   Subtract 2 on both sides.   [x = 9]
+miss     distributed-first-term-only = 10   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 987654321 · difficulty 3
+prompt   Solve for x.
+display  equation "6(x + 6) = 108" solve x [parentheses 6(x + 6) = 108]
+answer   exact 12/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 6.   [x + 6 = 18]
+step 2   Subtract 6 on both sides.   [x = 12]
+miss     distributed-first-term-only = 17   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 1 · difficulty 4
+prompt   Solve for x.
+display  equation "6(x − 12) = 96" solve x [parentheses 6(x - 12) = 96]
+answer   exact 28/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 6.   [x − 12 = 16]
+step 2   Add 12 on both sides.   [x = 28]
+miss     distributed-first-term-only = 18   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "8(x + 24) = 304" solve x [parentheses 8(x + 24) = 304]
+answer   exact 14/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 8.   [x + 24 = 38]
+step 2   Subtract 24 on both sides.   [x = 14]
+miss     distributed-first-term-only = 35   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 67890 · difficulty 4
+prompt   Solve for x.
+display  equation "5(x + 20) = 145" solve x [parentheses 5(x + 20) = 145]
+answer   exact 9/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 5.   [x + 20 = 29]
+step 2   Subtract 20 on both sides.   [x = 9]
+miss     distributed-first-term-only = 25   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 424242 · difficulty 4
+prompt   Solve for x.
+display  equation "3(x + 6) = 54" solve x [parentheses 3(x + 6) = 54]
+answer   exact 12/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 3.   [x + 6 = 18]
+step 2   Subtract 6 on both sides.   [x = 12]
+miss     distributed-first-term-only = 16   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 987654321 · difficulty 4
+prompt   Solve for x.
+display  equation "8(x + 16) = 248" solve x [parentheses 8(x + 16) = 248]
+answer   exact 15/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 8.   [x + 16 = 31]
+step 2   Subtract 16 on both sides.   [x = 15]
+miss     distributed-first-term-only = 29   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 1 · difficulty 5
+prompt   Solve for x.
+display  equation "7(x − 14) = 140" solve x [parentheses 7(x - 14) = 140]
+answer   exact 34/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 7.   [x − 14 = 20]
+step 2   Add 14 on both sides.   [x = 34]
+miss     distributed-first-term-only = 22   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "9(x + 27) = 405" solve x [parentheses 9(x + 27) = 405]
+answer   exact 18/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 9.   [x + 27 = 45]
+step 2   Subtract 27 on both sides.   [x = 18]
+miss     distributed-first-term-only = 42   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 67890 · difficulty 5
+prompt   Solve for x.
+display  equation "5(x + 20) = 155" solve x [parentheses 5(x + 20) = 155]
+answer   exact 11/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 5.   [x + 20 = 31]
+step 2   Subtract 20 on both sides.   [x = 11]
+miss     distributed-first-term-only = 27   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 424242 · difficulty 5
+prompt   Solve for x.
+display  equation "3(x + 9) = 72" solve x [parentheses 3(x + 9) = 72]
+answer   exact 15/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 3.   [x + 9 = 24]
+step 2   Subtract 9 on both sides.   [x = 15]
+miss     distributed-first-term-only = 21   The number outside multiplies both terms in the bracket, not just the x.
+
+--- equation-parentheses · seed 987654321 · difficulty 5
+prompt   Solve for x.
+display  equation "9(x + 18) = 333" solve x [parentheses 9(x + 18) = 333]
+answer   exact 19/1
+input    keypad
+hint     Multiply the bracket out first, or divide both sides by the number outside.
+step 1   Divide both sides by 9.   [x + 18 = 37]
+step 2   Subtract 18 on both sides.   [x = 19]
+miss     distributed-first-term-only = 35   The number outside multiplies both terms in the bracket, not just the x."
+`;
+
+exports[`recorded output: one-step-addsub > matches the wording recorded when the skill landed 1`] = `
+"--- one-step-addsub · seed 1 · difficulty 1
+prompt   Solve for x.
+display  equation "x − 2 = 3" solve x [one-step-addsub x - 2 = 3]
+answer   exact 5/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Add 2 on both sides.   [x = 3 + 2]
+step 2   That leaves x alone.   [x = 5]
+miss     repeated-operation = 1   The equation subtracts, so undo it by adding.
+
+--- one-step-addsub · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "x + 3 = 9" solve x [one-step-addsub x + 3 = 9]
+answer   exact 6/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 3 on both sides.   [x = 9 − 3]
+step 2   That leaves x alone.   [x = 6]
+miss     repeated-operation = 12   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 67890 · difficulty 1
+prompt   Solve for x.
+display  equation "x + 4 = 7" solve x [one-step-addsub x + 4 = 7]
+answer   exact 3/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 4 on both sides.   [x = 7 − 4]
+step 2   That leaves x alone.   [x = 3]
+miss     repeated-operation = 11   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 424242 · difficulty 1
+prompt   Solve for x.
+display  equation "x + 3 = 5" solve x [one-step-addsub x + 3 = 5]
+answer   exact 2/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 3 on both sides.   [x = 5 − 3]
+step 2   That leaves x alone.   [x = 2]
+miss     repeated-operation = 8   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 987654321 · difficulty 1
+prompt   Solve for x.
+display  equation "x + 2 = 8" solve x [one-step-addsub x + 2 = 8]
+answer   exact 6/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 2 on both sides.   [x = 8 − 2]
+step 2   That leaves x alone.   [x = 6]
+miss     repeated-operation = 10   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 1 · difficulty 2
+prompt   Solve for x.
+display  equation "x − 3 = 4" solve x [one-step-addsub x - 3 = 4]
+answer   exact 7/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Add 3 on both sides.   [x = 4 + 3]
+step 2   That leaves x alone.   [x = 7]
+miss     repeated-operation = 1   The equation subtracts, so undo it by adding.
+
+--- one-step-addsub · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "x + 5 = 14" solve x [one-step-addsub x + 5 = 14]
+answer   exact 9/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 5 on both sides.   [x = 14 − 5]
+step 2   That leaves x alone.   [x = 9]
+miss     repeated-operation = 19   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 67890 · difficulty 2
+prompt   Solve for x.
+display  equation "x + 7 = 12" solve x [one-step-addsub x + 7 = 12]
+answer   exact 5/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 7 on both sides.   [x = 12 − 7]
+step 2   That leaves x alone.   [x = 5]
+miss     repeated-operation = 19   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 424242 · difficulty 2
+prompt   Solve for x.
+display  equation "x + 4 = 7" solve x [one-step-addsub x + 4 = 7]
+answer   exact 3/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 4 on both sides.   [x = 7 − 4]
+step 2   That leaves x alone.   [x = 3]
+miss     repeated-operation = 11   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 987654321 · difficulty 2
+prompt   Solve for x.
+display  equation "x + 3 = 12" solve x [one-step-addsub x + 3 = 12]
+answer   exact 9/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 3 on both sides.   [x = 12 − 3]
+step 2   That leaves x alone.   [x = 9]
+miss     repeated-operation = 15   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 1 · difficulty 3
+prompt   Solve for x.
+display  equation "x − 4 = 5" solve x [one-step-addsub x - 4 = 5]
+answer   exact 9/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Add 4 on both sides.   [x = 5 + 4]
+step 2   That leaves x alone.   [x = 9]
+miss     repeated-operation = 1   The equation subtracts, so undo it by adding.
+
+--- one-step-addsub · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "x + 6 = 18" solve x [one-step-addsub x + 6 = 18]
+answer   exact 12/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 6 on both sides.   [x = 18 − 6]
+step 2   That leaves x alone.   [x = 12]
+miss     repeated-operation = 24   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 67890 · difficulty 3
+prompt   Solve for x.
+display  equation "x + 9 = 16" solve x [one-step-addsub x + 9 = 16]
+answer   exact 7/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 9 on both sides.   [x = 16 − 9]
+step 2   That leaves x alone.   [x = 7]
+miss     repeated-operation = 25   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 424242 · difficulty 3
+prompt   Solve for x.
+display  equation "x + 6 = 11" solve x [one-step-addsub x + 6 = 11]
+answer   exact 5/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 6 on both sides.   [x = 11 − 6]
+step 2   That leaves x alone.   [x = 5]
+miss     repeated-operation = 17   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 987654321 · difficulty 3
+prompt   Solve for x.
+display  equation "x + 5 = 17" solve x [one-step-addsub x + 5 = 17]
+answer   exact 12/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 5 on both sides.   [x = 17 − 5]
+step 2   That leaves x alone.   [x = 12]
+miss     repeated-operation = 22   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 1 · difficulty 4
+prompt   Solve for x.
+display  equation "x − 5 = 7" solve x [one-step-addsub x - 5 = 7]
+answer   exact 12/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Add 5 on both sides.   [x = 7 + 5]
+step 2   That leaves x alone.   [x = 12]
+miss     repeated-operation = 2   The equation subtracts, so undo it by adding.
+
+--- one-step-addsub · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "x + 8 = 24" solve x [one-step-addsub x + 8 = 24]
+answer   exact 16/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 8 on both sides.   [x = 24 − 8]
+step 2   That leaves x alone.   [x = 16]
+miss     repeated-operation = 32   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 67890 · difficulty 4
+prompt   Solve for x.
+display  equation "x + 11 = 20" solve x [one-step-addsub x + 11 = 20]
+answer   exact 9/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 11 on both sides.   [x = 20 − 11]
+step 2   That leaves x alone.   [x = 9]
+miss     repeated-operation = 31   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 424242 · difficulty 4
+prompt   Solve for x.
+display  equation "x + 7 = 13" solve x [one-step-addsub x + 7 = 13]
+answer   exact 6/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 7 on both sides.   [x = 13 − 7]
+step 2   That leaves x alone.   [x = 6]
+miss     repeated-operation = 20   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 987654321 · difficulty 4
+prompt   Solve for x.
+display  equation "x + 6 = 22" solve x [one-step-addsub x + 6 = 22]
+answer   exact 16/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 6 on both sides.   [x = 22 − 6]
+step 2   That leaves x alone.   [x = 16]
+miss     repeated-operation = 28   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 1 · difficulty 5
+prompt   Solve for x.
+display  equation "x − 6 = 9" solve x [one-step-addsub x - 6 = 9]
+answer   exact 15/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Add 6 on both sides.   [x = 9 + 6]
+step 2   That leaves x alone.   [x = 15]
+miss     repeated-operation = 3   The equation subtracts, so undo it by adding.
+
+--- one-step-addsub · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "x + 10 = 30" solve x [one-step-addsub x + 10 = 30]
+answer   exact 20/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 10 on both sides.   [x = 30 − 10]
+step 2   That leaves x alone.   [x = 20]
+miss     repeated-operation = 40   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 67890 · difficulty 5
+prompt   Solve for x.
+display  equation "x + 14 = 25" solve x [one-step-addsub x + 14 = 25]
+answer   exact 11/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 14 on both sides.   [x = 25 − 14]
+step 2   That leaves x alone.   [x = 11]
+miss     repeated-operation = 39   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 424242 · difficulty 5
+prompt   Solve for x.
+display  equation "x + 9 = 16" solve x [one-step-addsub x + 9 = 16]
+answer   exact 7/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 9 on both sides.   [x = 16 − 9]
+step 2   That leaves x alone.   [x = 7]
+miss     repeated-operation = 25   The equation adds, so undo it by subtracting.
+
+--- one-step-addsub · seed 987654321 · difficulty 5
+prompt   Solve for x.
+display  equation "x + 7 = 27" solve x [one-step-addsub x + 7 = 27]
+answer   exact 20/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Subtract 7 on both sides.   [x = 27 − 7]
+step 2   That leaves x alone.   [x = 20]
+miss     repeated-operation = 34   The equation adds, so undo it by subtracting."
+`;
+
+exports[`recorded output: one-step-multdiv > matches the wording recorded when the skill landed 1`] = `
+"--- one-step-multdiv · seed 1 · difficulty 1
+prompt   Solve for x.
+display  equation "x ÷ 2 = 8" solve x [one-step-multdiv x / 2 = 8]
+answer   exact 16/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 2.   [x = 8 × 2]
+step 2   That leaves x alone.   [x = 16]
+miss     repeated-operation = 4   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "x ÷ 2 = 6" solve x [one-step-multdiv x / 2 = 6]
+answer   exact 12/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 2.   [x = 6 × 2]
+step 2   That leaves x alone.   [x = 12]
+miss     repeated-operation = 3   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 67890 · difficulty 1
+prompt   Solve for x.
+display  equation "3x = 9" solve x [one-step-multdiv 3x = 9]
+answer   exact 3/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Divide both sides by 3.   [x = 9 ÷ 3]
+step 2   That leaves x alone.   [x = 3]
+miss     repeated-operation = 27   The equation multiplies, so undo it by dividing.
+
+--- one-step-multdiv · seed 424242 · difficulty 1
+prompt   Solve for x.
+display  equation "2x = 4" solve x [one-step-multdiv 2x = 4]
+answer   exact 2/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Divide both sides by 2.   [x = 4 ÷ 2]
+step 2   That leaves x alone.   [x = 2]
+miss     repeated-operation = 8   The equation multiplies, so undo it by dividing.
+
+--- one-step-multdiv · seed 987654321 · difficulty 1
+prompt   Solve for x.
+display  equation "x ÷ 2 = 4" solve x [one-step-multdiv x / 2 = 4]
+answer   exact 8/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 2.   [x = 4 × 2]
+step 2   That leaves x alone.   [x = 8]
+miss     repeated-operation = 2   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 1 · difficulty 2
+prompt   Solve for x.
+display  equation "x ÷ 2 = 8" solve x [one-step-multdiv x / 2 = 8]
+answer   exact 16/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 2.   [x = 8 × 2]
+step 2   That leaves x alone.   [x = 16]
+miss     repeated-operation = 4   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "x ÷ 2 = 8" solve x [one-step-multdiv x / 2 = 8]
+answer   exact 16/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 2.   [x = 8 × 2]
+step 2   That leaves x alone.   [x = 16]
+miss     repeated-operation = 4   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 67890 · difficulty 2
+prompt   Solve for x.
+display  equation "4x = 20" solve x [one-step-multdiv 4x = 20]
+answer   exact 5/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Divide both sides by 4.   [x = 20 ÷ 4]
+step 2   That leaves x alone.   [x = 5]
+miss     repeated-operation = 80   The equation multiplies, so undo it by dividing.
+
+--- one-step-multdiv · seed 424242 · difficulty 2
+prompt   Solve for x.
+display  equation "3x = 12" solve x [one-step-multdiv 3x = 12]
+answer   exact 4/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Divide both sides by 3.   [x = 12 ÷ 3]
+step 2   That leaves x alone.   [x = 4]
+miss     repeated-operation = 36   The equation multiplies, so undo it by dividing.
+
+--- one-step-multdiv · seed 987654321 · difficulty 2
+prompt   Solve for x.
+display  equation "x ÷ 2 = 4" solve x [one-step-multdiv x / 2 = 4]
+answer   exact 8/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 2.   [x = 4 × 2]
+step 2   That leaves x alone.   [x = 8]
+miss     repeated-operation = 2   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 1 · difficulty 3
+prompt   Solve for x.
+display  equation "x ÷ 2 = 12" solve x [one-step-multdiv x / 2 = 12]
+answer   exact 24/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 2.   [x = 12 × 2]
+step 2   That leaves x alone.   [x = 24]
+miss     repeated-operation = 6   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "x ÷ 3 = 15" solve x [one-step-multdiv x / 3 = 15]
+answer   exact 45/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 3.   [x = 15 × 3]
+step 2   That leaves x alone.   [x = 45]
+miss     repeated-operation = 5   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 67890 · difficulty 3
+prompt   Solve for x.
+display  equation "6x = 42" solve x [one-step-multdiv 6x = 42]
+answer   exact 7/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Divide both sides by 6.   [x = 42 ÷ 6]
+step 2   That leaves x alone.   [x = 7]
+miss     repeated-operation = 252   The equation multiplies, so undo it by dividing.
+
+--- one-step-multdiv · seed 424242 · difficulty 3
+prompt   Solve for x.
+display  equation "4x = 20" solve x [one-step-multdiv 4x = 20]
+answer   exact 5/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Divide both sides by 4.   [x = 20 ÷ 4]
+step 2   That leaves x alone.   [x = 5]
+miss     repeated-operation = 80   The equation multiplies, so undo it by dividing.
+
+--- one-step-multdiv · seed 987654321 · difficulty 3
+prompt   Solve for x.
+display  equation "x ÷ 2 = 6" solve x [one-step-multdiv x / 2 = 6]
+answer   exact 12/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 2.   [x = 6 × 2]
+step 2   That leaves x alone.   [x = 12]
+miss     repeated-operation = 3   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 1 · difficulty 4
+prompt   Solve for x.
+display  equation "x ÷ 3 = 18" solve x [one-step-multdiv x / 3 = 18]
+answer   exact 54/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 3.   [x = 18 × 3]
+step 2   That leaves x alone.   [x = 54]
+miss     repeated-operation = 6   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "x ÷ 4 = 24" solve x [one-step-multdiv x / 4 = 24]
+answer   exact 96/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 4.   [x = 24 × 4]
+step 2   That leaves x alone.   [x = 96]
+miss     repeated-operation = 6   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 67890 · difficulty 4
+prompt   Solve for x.
+display  equation "7x = 63" solve x [one-step-multdiv 7x = 63]
+answer   exact 9/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Divide both sides by 7.   [x = 63 ÷ 7]
+step 2   That leaves x alone.   [x = 9]
+miss     repeated-operation = 441   The equation multiplies, so undo it by dividing.
+
+--- one-step-multdiv · seed 424242 · difficulty 4
+prompt   Solve for x.
+display  equation "4x = 28" solve x [one-step-multdiv 4x = 28]
+answer   exact 7/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Divide both sides by 4.   [x = 28 ÷ 4]
+step 2   That leaves x alone.   [x = 7]
+miss     repeated-operation = 112   The equation multiplies, so undo it by dividing.
+
+--- one-step-multdiv · seed 987654321 · difficulty 4
+prompt   Solve for x.
+display  equation "x ÷ 3 = 9" solve x [one-step-multdiv x / 3 = 9]
+answer   exact 27/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 3.   [x = 9 × 3]
+step 2   That leaves x alone.   [x = 27]
+miss     repeated-operation = 3   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 1 · difficulty 5
+prompt   Solve for x.
+display  equation "x ÷ 3 = 21" solve x [one-step-multdiv x / 3 = 21]
+answer   exact 63/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 3.   [x = 21 × 3]
+step 2   That leaves x alone.   [x = 63]
+miss     repeated-operation = 7   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "x ÷ 4 = 28" solve x [one-step-multdiv x / 4 = 28]
+answer   exact 112/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 4.   [x = 28 × 4]
+step 2   That leaves x alone.   [x = 112]
+miss     repeated-operation = 7   The equation divides, so undo it by multiplying.
+
+--- one-step-multdiv · seed 67890 · difficulty 5
+prompt   Solve for x.
+display  equation "9x = 99" solve x [one-step-multdiv 9x = 99]
+answer   exact 11/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Divide both sides by 9.   [x = 99 ÷ 9]
+step 2   That leaves x alone.   [x = 11]
+miss     repeated-operation = 891   The equation multiplies, so undo it by dividing.
+
+--- one-step-multdiv · seed 424242 · difficulty 5
+prompt   Solve for x.
+display  equation "6x = 48" solve x [one-step-multdiv 6x = 48]
+answer   exact 8/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Divide both sides by 6.   [x = 48 ÷ 6]
+step 2   That leaves x alone.   [x = 8]
+miss     repeated-operation = 288   The equation multiplies, so undo it by dividing.
+
+--- one-step-multdiv · seed 987654321 · difficulty 5
+prompt   Solve for x.
+display  equation "x ÷ 3 = 12" solve x [one-step-multdiv x / 3 = 12]
+answer   exact 36/1
+input    keypad
+hint     Do the opposite operation to both sides.
+step 1   Multiply both sides by 3.   [x = 12 × 3]
+step 2   That leaves x alone.   [x = 36]
+miss     repeated-operation = 4   The equation divides, so undo it by multiplying."
+`;
+
+exports[`recorded output: two-step > matches the wording recorded when the skill landed 1`] = `
+"--- two-step · seed 1 · difficulty 1
+prompt   Solve for x.
+display  equation "3x − 3 = 18" solve x [two-step 3x - 3 = 18]
+answer   exact 7/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Add 3 on both sides.   [3x = 21]
+step 2   Divide both sides by 3.   [x = 7]
+miss     undid-in-wrong-order = 9   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 5   The equation subtracts that number, so undo it by adding.
+
+--- two-step · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "3x + 3 = 21" solve x [two-step 3x + 3 = 21]
+answer   exact 6/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 3 on both sides.   [3x = 18]
+step 2   Divide both sides by 3.   [x = 6]
+miss     undid-in-wrong-order = 4   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 8   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 67890 · difficulty 1
+prompt   Solve for x.
+display  equation "2x + 4 = 10" solve x [two-step 2x + 4 = 10]
+answer   exact 3/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 4 on both sides.   [2x = 6]
+step 2   Divide both sides by 2.   [x = 3]
+miss     undid-in-wrong-order = 1   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 7   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 424242 · difficulty 1
+prompt   Solve for x.
+display  equation "2x + 2 = 12" solve x [two-step 2x + 2 = 12]
+answer   exact 5/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 2 on both sides.   [2x = 10]
+step 2   Divide both sides by 2.   [x = 5]
+miss     undid-in-wrong-order = 4   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 7   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 987654321 · difficulty 1
+prompt   Solve for x.
+display  equation "3x + 3 = 21" solve x [two-step 3x + 3 = 21]
+answer   exact 6/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 3 on both sides.   [3x = 18]
+step 2   Divide both sides by 3.   [x = 6]
+miss     undid-in-wrong-order = 4   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 8   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 1 · difficulty 2
+prompt   Solve for x.
+display  equation "3x − 3 = 27" solve x [two-step 3x - 3 = 27]
+answer   exact 10/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Add 3 on both sides.   [3x = 30]
+step 2   Divide both sides by 3.   [x = 10]
+miss     undid-in-wrong-order = 12   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 8   The equation subtracts that number, so undo it by adding.
+
+--- two-step · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "4x + 4 = 36" solve x [two-step 4x + 4 = 36]
+answer   exact 8/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 4 on both sides.   [4x = 32]
+step 2   Divide both sides by 4.   [x = 8]
+miss     undid-in-wrong-order = 5   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 10   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 67890 · difficulty 2
+prompt   Solve for x.
+display  equation "3x + 6 = 21" solve x [two-step 3x + 6 = 21]
+answer   exact 5/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 6 on both sides.   [3x = 15]
+step 2   Divide both sides by 3.   [x = 5]
+miss     undid-in-wrong-order = 1   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 9   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 424242 · difficulty 2
+prompt   Solve for x.
+display  equation "2x + 2 = 16" solve x [two-step 2x + 2 = 16]
+answer   exact 7/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 2 on both sides.   [2x = 14]
+step 2   Divide both sides by 2.   [x = 7]
+miss     undid-in-wrong-order = 6   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 9   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 987654321 · difficulty 2
+prompt   Solve for x.
+display  equation "4x + 4 = 40" solve x [two-step 4x + 4 = 40]
+answer   exact 9/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 4 on both sides.   [4x = 36]
+step 2   Divide both sides by 4.   [x = 9]
+miss     undid-in-wrong-order = 6   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 11   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 1 · difficulty 3
+prompt   Solve for x.
+display  equation "5x − 5 = 60" solve x [two-step 5x - 5 = 60]
+answer   exact 13/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Add 5 on both sides.   [5x = 65]
+step 2   Divide both sides by 5.   [x = 13]
+miss     undid-in-wrong-order = 17   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 11   The equation subtracts that number, so undo it by adding.
+
+--- two-step · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "6x + 12 = 78" solve x [two-step 6x + 12 = 78]
+answer   exact 11/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 12 on both sides.   [6x = 66]
+step 2   Divide both sides by 6.   [x = 11]
+miss     undid-in-wrong-order = 1   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 15   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 67890 · difficulty 3
+prompt   Solve for x.
+display  equation "3x + 9 = 30" solve x [two-step 3x + 9 = 30]
+answer   exact 7/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 9 on both sides.   [3x = 21]
+step 2   Divide both sides by 3.   [x = 7]
+miss     undid-in-wrong-order = 1   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 13   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 424242 · difficulty 3
+prompt   Solve for x.
+display  equation "2x + 2 = 20" solve x [two-step 2x + 2 = 20]
+answer   exact 9/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 2 on both sides.   [2x = 18]
+step 2   Divide both sides by 2.   [x = 9]
+miss     undid-in-wrong-order = 8   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 11   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 987654321 · difficulty 3
+prompt   Solve for x.
+display  equation "6x + 6 = 78" solve x [two-step 6x + 6 = 78]
+answer   exact 12/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 6 on both sides.   [6x = 72]
+step 2   Divide both sides by 6.   [x = 12]
+miss     undid-in-wrong-order = 7   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 14   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 1 · difficulty 4
+prompt   Solve for x.
+display  equation "6x − 12 = 96" solve x [two-step 6x - 12 = 96]
+answer   exact 18/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Add 12 on both sides.   [6x = 108]
+step 2   Divide both sides by 6.   [x = 18]
+miss     undid-in-wrong-order = 28   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 14   The equation subtracts that number, so undo it by adding.
+
+--- two-step · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "8x + 24 = 136" solve x [two-step 8x + 24 = 136]
+answer   exact 14/1
+input    keypad
+keypad   allowNegative=true
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 24 on both sides.   [8x = 112]
+step 2   Divide both sides by 8.   [x = 14]
+miss     undid-in-wrong-order = -7   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 20   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 67890 · difficulty 4
+prompt   Solve for x.
+display  equation "5x + 20 = 65" solve x [two-step 5x + 20 = 65]
+answer   exact 9/1
+input    keypad
+keypad   allowNegative=true
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 20 on both sides.   [5x = 45]
+step 2   Divide both sides by 5.   [x = 9]
+miss     undid-in-wrong-order = -7   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 17   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 424242 · difficulty 4
+prompt   Solve for x.
+display  equation "3x + 6 = 42" solve x [two-step 3x + 6 = 42]
+answer   exact 12/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 6 on both sides.   [3x = 36]
+step 2   Divide both sides by 3.   [x = 12]
+miss     undid-in-wrong-order = 8   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 16   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 987654321 · difficulty 4
+prompt   Solve for x.
+display  equation "8x + 16 = 136" solve x [two-step 8x + 16 = 136]
+answer   exact 15/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 16 on both sides.   [8x = 120]
+step 2   Divide both sides by 8.   [x = 15]
+miss     undid-in-wrong-order = 1   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 19   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 1 · difficulty 5
+prompt   Solve for x.
+display  equation "7x − 14 = 140" solve x [two-step 7x - 14 = 140]
+answer   exact 22/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Add 14 on both sides.   [7x = 154]
+step 2   Divide both sides by 7.   [x = 22]
+miss     undid-in-wrong-order = 34   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 18   The equation subtracts that number, so undo it by adding.
+
+--- two-step · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "9x + 27 = 189" solve x [two-step 9x + 27 = 189]
+answer   exact 18/1
+input    keypad
+keypad   allowNegative=true
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 27 on both sides.   [9x = 162]
+step 2   Divide both sides by 9.   [x = 18]
+miss     undid-in-wrong-order = -6   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 24   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 67890 · difficulty 5
+prompt   Solve for x.
+display  equation "5x + 20 = 75" solve x [two-step 5x + 20 = 75]
+answer   exact 11/1
+input    keypad
+keypad   allowNegative=true
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 20 on both sides.   [5x = 55]
+step 2   Divide both sides by 5.   [x = 11]
+miss     undid-in-wrong-order = -5   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 19   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 424242 · difficulty 5
+prompt   Solve for x.
+display  equation "3x + 9 = 54" solve x [two-step 3x + 9 = 54]
+answer   exact 15/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 9 on both sides.   [3x = 45]
+step 2   Divide both sides by 3.   [x = 15]
+miss     undid-in-wrong-order = 9   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 21   The equation adds that number, so undo it by subtracting.
+
+--- two-step · seed 987654321 · difficulty 5
+prompt   Solve for x.
+display  equation "9x + 18 = 189" solve x [two-step 9x + 18 = 189]
+answer   exact 19/1
+input    keypad
+hint     Undo the addition or subtraction first, then the multiplication.
+step 1   Subtract 18 on both sides.   [9x = 171]
+step 2   Divide both sides by 9.   [x = 19]
+miss     undid-in-wrong-order = 3   Undo the + or − first, and divide by the coefficient last.
+miss     undid-with-wrong-sign = 23   The equation adds that number, so undo it by subtracting."
+`;
+
+exports[`recorded output: vars-both-sides > matches the wording recorded when the skill landed 1`] = `
+"--- vars-both-sides · seed 1 · difficulty 1
+prompt   Solve for x.
+display  equation "4x + 4 = 3x + 8" solve x [vars-both-sides 4x + 4 = 3x + 8]
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 3x from both sides.   [1x + 4 = 8]
+step 2   Subtract 4 from both sides.   [1x = 4]
+step 3   Divide both sides by 1.   [x = 4]
+miss     gathered-wrong-direction = -4   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 8   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "5x + 4 = 4x + 8" solve x [vars-both-sides 5x + 4 = 4x + 8]
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 4x from both sides.   [1x + 4 = 8]
+step 2   Subtract 4 from both sides.   [1x = 4]
+step 3   Divide both sides by 1.   [x = 4]
+miss     gathered-wrong-direction = -4   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 8   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 67890 · difficulty 1
+prompt   Solve for x.
+display  equation "5x + 4 = 3x + 10" solve x [vars-both-sides 5x + 4 = 3x + 10]
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 3x from both sides.   [2x + 4 = 10]
+step 2   Subtract 4 from both sides.   [2x = 6]
+step 3   Divide both sides by 2.   [x = 3]
+miss     gathered-wrong-direction = -3   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 5   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 424242 · difficulty 1
+prompt   Solve for x.
+display  equation "3x + 3 = 2x + 5" solve x [vars-both-sides 3x + 3 = 2x + 5]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 2x from both sides.   [1x + 3 = 5]
+step 2   Subtract 3 from both sides.   [1x = 2]
+step 3   Divide both sides by 1.   [x = 2]
+miss     gathered-wrong-direction = -2   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 5   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 987654321 · difficulty 1
+prompt   Solve for x.
+display  equation "5x + 4 = 4x + 6" solve x [vars-both-sides 5x + 4 = 4x + 6]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 4x from both sides.   [1x + 4 = 6]
+step 2   Subtract 4 from both sides.   [1x = 2]
+step 3   Divide both sides by 1.   [x = 2]
+miss     gathered-wrong-direction = -2   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 6   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 1 · difficulty 2
+prompt   Solve for x.
+display  equation "7x + 8 = 5x + 20" solve x [vars-both-sides 7x + 8 = 5x + 20]
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 5x from both sides.   [2x + 8 = 20]
+step 2   Subtract 8 from both sides.   [2x = 12]
+step 3   Divide both sides by 2.   [x = 6]
+miss     gathered-wrong-direction = -6   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 10   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "8x + 8 = 6x + 20" solve x [vars-both-sides 8x + 8 = 6x + 20]
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 6x from both sides.   [2x + 8 = 20]
+step 2   Subtract 8 from both sides.   [2x = 12]
+step 3   Divide both sides by 2.   [x = 6]
+miss     gathered-wrong-direction = -6   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 10   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 67890 · difficulty 2
+prompt   Solve for x.
+display  equation "6x + 6 = 3x + 21" solve x [vars-both-sides 6x + 6 = 3x + 21]
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 3x from both sides.   [3x + 6 = 21]
+step 2   Subtract 6 from both sides.   [3x = 15]
+step 3   Divide both sides by 3.   [x = 5]
+miss     gathered-wrong-direction = -5   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 7   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 424242 · difficulty 2
+prompt   Solve for x.
+display  equation "4x + 6 = 2x + 14" solve x [vars-both-sides 4x + 6 = 2x + 14]
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 2x from both sides.   [2x + 6 = 14]
+step 2   Subtract 6 from both sides.   [2x = 8]
+step 3   Divide both sides by 2.   [x = 4]
+miss     gathered-wrong-direction = -4   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 7   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 987654321 · difficulty 2
+prompt   Solve for x.
+display  equation "8x + 8 = 6x + 14" solve x [vars-both-sides 8x + 8 = 6x + 14]
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 6x from both sides.   [2x + 8 = 14]
+step 2   Subtract 8 from both sides.   [2x = 6]
+step 3   Divide both sides by 2.   [x = 3]
+miss     gathered-wrong-direction = -3   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 7   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 1 · difficulty 3
+prompt   Solve for x.
+display  equation "8x + 8 = 6x + 24" solve x [vars-both-sides 8x + 8 = 6x + 24]
+answer   exact 8/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 6x from both sides.   [2x + 8 = 24]
+step 2   Subtract 8 from both sides.   [2x = 16]
+step 3   Divide both sides by 2.   [x = 8]
+miss     gathered-wrong-direction = -8   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 12   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "11x + 12 = 8x + 36" solve x [vars-both-sides 11x + 12 = 8x + 36]
+answer   exact 8/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 8x from both sides.   [3x + 12 = 36]
+step 2   Subtract 12 from both sides.   [3x = 24]
+step 3   Divide both sides by 3.   [x = 8]
+miss     gathered-wrong-direction = -8   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 12   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 67890 · difficulty 3
+prompt   Solve for x.
+display  equation "9x + 8 = 5x + 36" solve x [vars-both-sides 9x + 8 = 5x + 36]
+answer   exact 7/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 5x from both sides.   [4x + 8 = 36]
+step 2   Subtract 8 from both sides.   [4x = 28]
+step 3   Divide both sides by 4.   [x = 7]
+miss     gathered-wrong-direction = -7   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 9   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 424242 · difficulty 3
+prompt   Solve for x.
+display  equation "6x + 9 = 3x + 24" solve x [vars-both-sides 6x + 9 = 3x + 24]
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 3x from both sides.   [3x + 9 = 24]
+step 2   Subtract 9 from both sides.   [3x = 15]
+step 3   Divide both sides by 3.   [x = 5]
+miss     gathered-wrong-direction = -5   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 8   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 987654321 · difficulty 3
+prompt   Solve for x.
+display  equation "10x + 8 = 8x + 16" solve x [vars-both-sides 10x + 8 = 8x + 16]
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 8x from both sides.   [2x + 8 = 16]
+step 2   Subtract 8 from both sides.   [2x = 8]
+step 3   Divide both sides by 2.   [x = 4]
+miss     gathered-wrong-direction = -4   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 8   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 1 · difficulty 4
+prompt   Solve for x.
+display  equation "11x + 12 = 8x + 45" solve x [vars-both-sides 11x + 12 = 8x + 45]
+answer   exact 11/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 8x from both sides.   [3x + 12 = 45]
+step 2   Subtract 12 from both sides.   [3x = 33]
+step 3   Divide both sides by 3.   [x = 11]
+miss     gathered-wrong-direction = -11   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 15   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "14x + 16 = 10x + 56" solve x [vars-both-sides 14x + 16 = 10x + 56]
+answer   exact 10/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 10x from both sides.   [4x + 16 = 56]
+step 2   Subtract 16 from both sides.   [4x = 40]
+step 3   Divide both sides by 4.   [x = 10]
+miss     gathered-wrong-direction = -10   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 14   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 67890 · difficulty 4
+prompt   Solve for x.
+display  equation "11x + 10 = 6x + 55" solve x [vars-both-sides 11x + 10 = 6x + 55]
+answer   exact 9/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 6x from both sides.   [5x + 10 = 55]
+step 2   Subtract 10 from both sides.   [5x = 45]
+step 3   Divide both sides by 5.   [x = 9]
+miss     gathered-wrong-direction = -9   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 11   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 424242 · difficulty 4
+prompt   Solve for x.
+display  equation "8x + 12 = 4x + 40" solve x [vars-both-sides 8x + 12 = 4x + 40]
+answer   exact 7/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 4x from both sides.   [4x + 12 = 40]
+step 2   Subtract 12 from both sides.   [4x = 28]
+step 3   Divide both sides by 4.   [x = 7]
+miss     gathered-wrong-direction = -7   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 10   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 987654321 · difficulty 4
+prompt   Solve for x.
+display  equation "13x + 12 = 10x + 27" solve x [vars-both-sides 13x + 12 = 10x + 27]
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 10x from both sides.   [3x + 12 = 27]
+step 2   Subtract 12 from both sides.   [3x = 15]
+step 3   Divide both sides by 3.   [x = 5]
+miss     gathered-wrong-direction = -5   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 9   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 1 · difficulty 5
+prompt   Solve for x.
+display  equation "12x + 12 = 9x + 51" solve x [vars-both-sides 12x + 12 = 9x + 51]
+answer   exact 13/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 9x from both sides.   [3x + 12 = 51]
+step 2   Subtract 12 from both sides.   [3x = 39]
+step 3   Divide both sides by 3.   [x = 13]
+miss     gathered-wrong-direction = -13   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 17   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "17x + 20 = 12x + 85" solve x [vars-both-sides 17x + 20 = 12x + 85]
+answer   exact 13/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 12x from both sides.   [5x + 20 = 85]
+step 2   Subtract 20 from both sides.   [5x = 65]
+step 3   Divide both sides by 5.   [x = 13]
+miss     gathered-wrong-direction = -13   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 17   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 67890 · difficulty 5
+prompt   Solve for x.
+display  equation "14x + 14 = 7x + 91" solve x [vars-both-sides 14x + 14 = 7x + 91]
+answer   exact 11/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 7x from both sides.   [7x + 14 = 91]
+step 2   Subtract 14 from both sides.   [7x = 77]
+step 3   Divide both sides by 7.   [x = 11]
+miss     gathered-wrong-direction = -11   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 13   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 424242 · difficulty 5
+prompt   Solve for x.
+display  equation "9x + 12 = 5x + 44" solve x [vars-both-sides 9x + 12 = 5x + 44]
+answer   exact 8/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 5x from both sides.   [4x + 12 = 44]
+step 2   Subtract 12 from both sides.   [4x = 32]
+step 3   Divide both sides by 4.   [x = 8]
+miss     gathered-wrong-direction = -8   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 11   The constants move to the other side too, not just the x terms.
+
+--- vars-both-sides · seed 987654321 · difficulty 5
+prompt   Solve for x.
+display  equation "15x + 12 = 12x + 30" solve x [vars-both-sides 15x + 12 = 12x + 30]
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Move the x terms to one side and the plain numbers to the other.
+step 1   Subtract 12x from both sides.   [3x + 12 = 30]
+step 2   Subtract 12 from both sides.   [3x = 18]
+step 3   Divide both sides by 3.   [x = 6]
+miss     gathered-wrong-direction = -6   Take the smaller x term from the larger so the coefficient stays positive.
+miss     left-constants-unmoved = 10   The constants move to the other side too, not just the x terms."
+`;

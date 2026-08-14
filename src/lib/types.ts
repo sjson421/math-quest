@@ -323,6 +323,48 @@ export type AlgebraData =
   | { operation: 'factor-gcf'; factor: number; coefficient: number; constant: number }
 
 /**
+ * The source quantities behind Unit 14's equation displays.
+ *
+ * Separate from `AlgebraData` because that one is reachable only from `inline`
+ * and `story`, where an equation operation would mean nothing — the same reason
+ * `WholeNumberData` above is a union rather than a shared `number[]`.
+ *
+ * **No arm carries the solution.** Every value here is one the equation puts on
+ * screen, and verification does the arithmetic to reach the answer. A payload
+ * carrying the answer and a check that reads it back is the generator's stated
+ * answer under another name, which is the one thing the recompute rule exists
+ * to prevent.
+ */
+export type EquationData =
+  /**
+   * `equation-balance`: the displayed sum `first + second`, whose stated total
+   * is their sum, and the amount applied to both sides.
+   */
+  | { operation: 'balance'; first: number; second: number; change: number; adds: boolean }
+  /** `one-step-addsub`: `x + constant = rightHand`, or `−` when `adds` is false. */
+  | { operation: 'one-step-addsub'; constant: number; adds: boolean; rightHand: number }
+  /**
+   * `one-step-multdiv`: `coefficient · x = rightHand` when `multiplies`, else
+   * `x / coefficient = rightHand`.
+   */
+  | { operation: 'one-step-multdiv'; coefficient: number; multiplies: boolean; rightHand: number }
+  /** `two-step`: `coefficient · x ± constant = rightHand`. */
+  | { operation: 'two-step'; coefficient: number; constant: number; adds: boolean; rightHand: number }
+  /**
+   * `vars-both-sides`: all four displayed terms. The only arm needing nothing
+   * else, because both sides are on screen in full.
+   */
+  | {
+      operation: 'vars-both-sides'
+      leftCoefficient: number
+      leftConstant: number
+      rightCoefficient: number
+      rightConstant: number
+    }
+  /** `equation-parentheses`: `coefficient(x ± constant) = rightHand`. */
+  | { operation: 'parentheses'; coefficient: number; constant: number; adds: boolean; rightHand: number }
+
+/**
  * Structured notation for the closed expression surface used by Stages D–G.
  *
  * Generators build this tree directly rather than passing TeX or a string to a
@@ -473,6 +515,20 @@ export type Display =
     ))
   /** A shaded equal-part shape whose visible fraction is carried as data. */
   | { kind: 'diagram'; diagram: ShapeDiagram }
+  /**
+   * An equation: a statement that already contains its relation, answered by the
+   * value of `variable` that makes it true.
+   *
+   * The third thing a display's answer can be, and the reason it cannot be an
+   * `inline`. Where an inline expression's answer is *the value of what is
+   * shown*, appending `= answer` states something true. Where a story's answer
+   * is *a rewriting of* what is shown, no frame is appended at all. Here the
+   * answer is neither: `3x + 5 = 20` evaluates to no number, and appending a
+   * second equality would put `3x + 5 = 20 = 5` on screen — a false statement,
+   * in the unit whose whole subject is that both sides of an equals sign hold
+   * the same value. `ProblemView` frames the slot as `x = ⟦slot⟧` beneath.
+   */
+  | { kind: 'equation'; text: string; variable: string; equation: EquationData }
 
 export type Problem = {
   skillId: string

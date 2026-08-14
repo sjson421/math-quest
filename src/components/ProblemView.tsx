@@ -35,6 +35,8 @@ export function ProblemView({
       return <MathView display={display} entry={entry} entryMode={entryMode} />
     case 'diagram':
       return <DiagramView display={display} entry={entry} entryMode={entryMode} />
+    case 'equation':
+      return <EquationView display={display} entry={entry} entryMode={entryMode} />
     default: {
       const unhandled: never = display
       throw new Error(`Unhandled display: ${JSON.stringify(unhandled)}`)
@@ -175,6 +177,37 @@ function MathView({ display, entry, entryMode }: { display: Of<'math'> } & Entry
       <span className="text-4xl">
         <EntrySlot value={entry} mode={entryMode} fractionSize="fluid" />
       </span>
+    </div>
+  )
+}
+
+/**
+ * The equation on its own row, the answer framed by the variable beneath it.
+ *
+ * No `= slot` is appended, and that is the whole reason this is not an
+ * `InlineView` with a flag. An equation already carries its relation; a second
+ * one would draw `3x + 5 = 20 = 5`.
+ *
+ * The two rows are sized independently. An inline row spends part of its width
+ * on the trailing equals sign and the answer slot, both in `em`, which is what
+ * `coverage.test.ts` measured its 18-character cap against. This row spends
+ * none of it, so it takes its own band — sharing one number across two
+ * differently-shaped rows is how a display passes the gate and still wraps on a
+ * phone, which is item 12's finding.
+ */
+function EquationView({ display, entry, entryMode }: { display: Of<'equation'> } & EntryProps) {
+  const size = display.text.length > 18 ? 'text-3xl' : display.text.length > 13 ? 'text-4xl' : 'text-5xl'
+
+  return (
+    <div className="flex flex-col items-center gap-6">
+      <span className={`font-bold tabular-nums tracking-tight ${size}`} role="math" aria-label={display.text}>
+        {display.text}
+      </span>
+      <div className="flex items-baseline justify-center gap-3 text-4xl">
+        <span className="font-bold tabular-nums tracking-tight">{display.variable}</span>
+        <span className="font-bold text-ink-faint">=</span>
+        <EntrySlot value={entry} mode={entryMode} />
+      </div>
     </div>
   )
 }

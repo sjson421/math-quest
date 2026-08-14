@@ -133,6 +133,7 @@ function displayText(display: Display): string {
   switch (display.kind) {
     case 'inline':
     case 'story':
+    case 'equation':
       return display.text
     case 'math':
       return display.label

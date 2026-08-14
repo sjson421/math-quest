@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 129 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
-Stage E has opened with the complete Unit 12 and Unit 13.
+**Status: 135 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
+Stage E has opened with the complete Unit 12 and Unit 13, and the first six of Unit 14.
 Choice input,
 number-line input, math notation, fraction input, diagrams and expression input are built,
 so `AVAILABLE_CAPABILITIES` holds
@@ -39,7 +39,10 @@ notation, and the full order of operations. Unit 13 is complete: what a variable
 evaluating and translating expressions, spotting like terms, combining, distributing across
 a sign, and factoring a common factor back out. `factor-gcf` is the first skill anywhere to
 answer under the `exact` comparison form, where the expanded expression on screen is a wrong
-answer; item 21's 14a increment (`equation-balance`–`equation-parentheses`) is next.
+answer. Unit 14's first six skills are the course's first content to display an **equation**,
+which needed a new `equation` arm on `Display`: an inline row appends `= answer` to what it
+shows, which is true of an open expression and false of a statement that already carries its
+relation. Item 21's 14b increment (`with-fractions`–`rearrange-formula`) is next.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -807,7 +810,28 @@ document's ✅ markers updated to match, which the cross-check enforces.
         two remaining coefficients coprime, which is what makes the greatest common factor the
         only correct answer.
       - **14a** `equation-balance`–`equation-parentheses` — answers are numbers, so the keypad
-        carries it, with the sign key declared per problem as Unit 6 established.
+        carries it, with the sign key declared per problem as Unit 6 established. **Shipped
+        2026-08-14.** Left behind: **an `equation` arm on `Display`**, carrying the text, the
+        variable and an `EquationData` payload, rendered as the equation on one row and
+        `x = ⟦slot⟧` beneath. It is not an `inline` with a flag, and the reason is the
+        measurement rather than taste — an inline row spends part of its width on the
+        trailing `=` and the answer slot, which is what item 12's 18-character cap was
+        measured against, and an equation row spends none of it. One cap cannot be right for
+        both, so `coverage.test.ts` now measures the two separately.
+        `equation-balance` teaches the axiom rather than naming an inverse: an earlier draft
+        asked what to apply to both sides of `x + 7 = 12`, whose answer is a number already
+        printed on screen and is anyway 14.2's question one step early.
+
+        Two findings worth carrying into 14b. **A fractional predicted misconception is dead,
+        not dropped** — filtering removes predictions equal to the answer, duplicates, and
+        non-finite values, and `8 ÷ 6` is finite, so it survives every existing gate as a
+        diagnosis the whole-number pad can never submit. `one-step-multdiv` shipped one until
+        the unit's own test checked predicted values for integrality. That is also why every
+        draw here composes from the value its predictions divide by rather than drawing and
+        filtering. And **`sourceMagnitude()` in `generators.test.ts` is the one consumer of a
+        new `Display` arm the compiler does not force**: it ends in a fallback to the
+        problem's own answer, so an unhandled arm measures the difficulty ladder against the
+        answer and stays green.
       - **14b** `with-fractions`–`rearrange-formula` — two skills break the pad: `rearrange-formula`
         (14.10) answers with an expression, and `special-solutions` (14.8) answers "no solution"
         or "infinitely many", which is not a value at all and wants choice input. Name both in the

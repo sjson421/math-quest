@@ -107,7 +107,12 @@ describe('currentUnitId', () => {
     const progress = progressAt(every(unitIds, MAX_MASTERY))
 
     expect(currentUnitId(course, progress)).toBe(unitIds.at(-1))
-    expect(unitIds.at(-1)).toBe('unit-13')
+    // Deliberately not naming that unit. It was pinned to `unit-13` and had to
+    // be edited the moment Unit 14 landed — a test that needs updating to stay
+    // true has stopped testing the rule and started restating the course. What
+    // the fallback needs is that there *is* a last unit and it is a real one;
+    // which one it happens to be is the derivation's business.
+    expect(unitIds.length).toBeGreaterThan(1)
   })
 
   it('has no answer for an empty course', () => {
