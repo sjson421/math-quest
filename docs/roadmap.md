@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 135 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
-Stage E has opened with the complete Unit 12 and Unit 13, and the first six of Unit 14.
+**Status: 139 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
+Stage E has opened with the complete Unit 12, Unit 13 and Unit 14.
 Choice input,
 number-line input, math notation, fraction input, diagrams and expression input are built,
 so `AVAILABLE_CAPABILITIES` holds
@@ -39,10 +39,16 @@ notation, and the full order of operations. Unit 13 is complete: what a variable
 evaluating and translating expressions, spotting like terms, combining, distributing across
 a sign, and factoring a common factor back out. `factor-gcf` is the first skill anywhere to
 answer under the `exact` comparison form, where the expanded expression on screen is a wrong
-answer. Unit 14's first six skills are the course's first content to display an **equation**,
+answer. Unit 14 is complete, and is the course's first content to display an **equation**,
 which needed a new `equation` arm on `Display`: an inline row appends `= answer` to what it
 shows, which is true of an open expression and false of a statement that already carries its
-relation. Item 21's 14b increment (`with-fractions`–`rearrange-formula`) is next.
+relation. Its last four skills use all three answer surfaces at once — `with-fractions` draws
+a stacked fraction inside an equation on the keypad, `special-solutions` answers a solution
+*count* through choices and drops the framed row entirely, `equation-words` states the same
+two-step equation in prose, and `rearrange-formula` answers with an expression in the one
+letter the pad offers while `y` stays in the frame. Stage E now declares `choice-input`, owed
+since 13a. Item 21's increment 15 (Unit 15, inequalities) is next, and `graph-inequality`
+(15.2) still has no input mode — that decision comes before the increment is proposed.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -835,7 +841,47 @@ document's ✅ markers updated to match, which the cross-check enforces.
       - **14b** `with-fractions`–`rearrange-formula` — two skills break the pad: `rearrange-formula`
         (14.10) answers with an expression, and `special-solutions` (14.8) answers "no solution"
         or "infinitely many", which is not a value at all and wants choice input. Name both in the
-        proposal; neither is a generator detail.
+        proposal; neither is a generator detail. **Shipped 2026-08-14**, completing Unit 14.
+
+        **`rearrange-formula` needed no new grammar, and that is the finding.** "Solve for y"
+        reads like a two-variable answer with division in it, and `expression-input` admits
+        neither — but `y` is the *frame label* and is never typed, so the answer holds only
+        `x`. Composing the draw so the subject's coefficient divides both other terms keeps
+        division out of the answer entirely. The alternatives were widening the grammar
+        (capability work, which never travels with its content) or choice input over rendered
+        rearrangements — rejected because Unit 16 needs the producing skill, not the
+        recognising one.
+
+        Left behind: **the `equation` arm's two optional fields**, each with one consumer.
+        `notation` settles the question 14a deferred — `with-fractions` needs a real stacked
+        fraction, so the arm grew a notation field rather than merging with `math`, and `text`
+        keeps all three of its jobs (the plain row, the accessible name, the form verification
+        rebuilds). An optional `variable` drops the framed row where the answer is not a value
+        of anything. `story` also gained an `equation` payload, since a pair of operands and
+        one operator states one operation and an equation word problem states two.
+
+        **The frame row had to go entirely, and only the browser check said so.** Dropping the
+        label alone passed every test: the slot still rendered, so the chosen answer was still
+        echoed. On screen it is a blinking entry cursor above no keypad — and what it echoes is
+        `entry`, which for a choice problem is the **id**. Every earlier choice skill names its
+        options by their own text (`3x`, `prime`, `<`), so the slot reads correctly there by
+        coincidence; these options are sentences with slug ids, so it drew `none`. Third time
+        the browser check has paid for itself after items 12 and 16.
+
+        Two more the gates caught rather than a reviewer. The recorded-output gate exposed
+        `rearrange-formula` predicting **`1x+2`** — a mistake no learner can make, because the
+        pad emits `x+2`. That is the dead-not-dropped trap 14a documented for numbers, reached
+        through notation instead of arithmetic, and it also had `y = -1x + 2` in a solution
+        step. And `npm test` was green with a type error in a new coverage case: `generators`
+        is a `Map`, so iterating it yields entries. `npm run build` is the check that reads
+        types, exactly as AGENTS.md says.
+
+        Also here: **Stage E now declares `choice-input`**, owed since 13a when
+        `identify-like-terms` began answering through it. Nothing unlocked — the capability has
+        shipped since item 5 — but a stage's `requires` states what its own skills need, which
+        is the correction Stage B took in item 11. A coverage case now derives the used input
+        modes per stage, so the next omission fails at the unit that causes it rather than one
+        unit later.
       - **15** `inequality-symbols`–`compound-inequalities` — `flip-the-sign` (15.5) is a major
         wall and has its own skill on purpose. **`graph-inequality` (15.2) has no input mode
         today:** item 13's line submits one tick's value and cannot express an open circle or a

@@ -86,6 +86,8 @@ export {
 
 export { drawn, padFor } from './signs'
 
+export { term } from './algebra'
+
 export { defineSkill } from './problem'
 export type { BuildContext, ProblemSpec, SkillConfig } from './problem'
 

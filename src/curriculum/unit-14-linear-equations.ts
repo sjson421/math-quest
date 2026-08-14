@@ -1,6 +1,8 @@
 import { intAnswer } from '../lib/answer'
-import { band, defineSkill, drawn, padFor, type BuildContext, type Ladder } from './engine'
-import type { Misconception } from '../lib/types'
+import { entryLabel } from '../lib/keypad'
+import { band, defineSkill, drawn, padFor, term, type BuildContext, type Ladder } from './engine'
+import { EQUATION_FRAMES, equationStoryProblem } from './phrasing/equations'
+import type { MathNotation, Misconception } from '../lib/types'
 
 /**
  * Unit 14a · Linear Equations, the first six.
@@ -506,6 +508,375 @@ const equationParentheses = defineSkill({
   },
 })
 
+/**
+ * Unit 14b · the four that close the unit.
+ *
+ * Three of them ask the equation display something 14a's plain-text row could
+ * not say, and each extension has exactly one consumer here: `with-fractions`
+ * needs a stacked fraction, `special-solutions` needs the frame to go away, and
+ * `equation-words` needs the prose display to carry equation terms.
+ *
+ * `rearrange-formula` is the one that looks like it needs new machinery and does
+ * not. "Solve for y" reads like a two-variable answer with division in it, which
+ * the shipped expression grammar admits neither of — but `y` is the frame label
+ * and never typed, so the answer holds one letter, and composing the draw so the
+ * subject's coefficient divides everything keeps division out of it entirely.
+ */
+
+const text = (value: string): MathNotation => ({ kind: 'text', value })
+
+const fraction = (numerator: string, denominator: string): MathNotation => ({
+  kind: 'fraction',
+  numerator: text(numerator),
+  denominator: text(denominator),
+})
+
+const DENOMINATOR_BAND: Ladder = {
+  1: [2, 3],
+  2: [2, 4],
+  3: [2, 5],
+  4: [3, 6],
+  5: [3, 8],
+}
+
+/** The value `x / denominator` comes to — the solution is this times the denominator. */
+const QUOTIENT_BAND: Ladder = {
+  1: [2, 5],
+  2: [2, 7],
+  3: [3, 9],
+  4: [3, 12],
+  5: [4, 15],
+}
+
+const FRACTION_CONSTANT_BAND: Ladder = {
+  1: [1, 3],
+  2: [1, 4],
+  3: [2, 6],
+  4: [2, 8],
+  5: [3, 10],
+}
+
+/**
+ * 14.7 · The first equation the course draws rather than spells.
+ *
+ * Composed from the quotient rather than from the solution, which is the same
+ * move the rest of the unit makes for a different divisibility: `x / d` has to
+ * land on a whole number for the working to be followable, so the quotient is
+ * drawn and the solution is `d × q`.
+ *
+ * A subtraction keeps the right-hand side at or above zero, so the quotient
+ * clears the constant. Strictly, not loosely — at `q = c` the predicted mistake
+ * equals the answer and the skill's only diagnosis disappears.
+ */
+const withFractions = defineSkill({
+  id: 'with-fractions',
+  name: 'Equations with Fractions',
+  blurb: 'Clear the denominators',
+  build(context: BuildContext) {
+    const [denMin, denMax] = band(context.difficulty, DENOMINATOR_BAND)
+    const [quotMin, quotMax] = band(context.difficulty, QUOTIENT_BAND)
+    const [constMin, constMax] = band(context.difficulty, FRACTION_CONSTANT_BAND)
+    const denominator = context.rng.int(denMin, denMax)
+    const constant = context.rng.int(constMin, constMax)
+    const adds = context.rng.bool()
+    const quotient = adds
+      ? context.rng.int(quotMin, quotMax)
+      : context.rng.int(Math.max(quotMin, constant + 1), Math.max(quotMax, constant + 1))
+    const rightHand = adds ? quotient + constant : quotient - constant
+    const solution = denominator * quotient
+
+    const misconceptions: Misconception[] = [
+      {
+        // Multiplying through on the left and forgetting the right. Goes below
+        // zero when the constant outweighs the quotient, which is why this skill
+        // reaches `padFor`'s sign key despite answering positively.
+        value: adds ? rightHand - constant * denominator : rightHand + constant * denominator,
+        tag: 'multiplied-one-side-only',
+        nudge: 'The whole of the other side is multiplied too, not just the fraction.',
+      },
+    ]
+
+    return {
+      prompt: 'Solve for x.',
+      display: {
+        kind: 'equation',
+        text: `${VARIABLE}/${denominator} ${adds ? '+' : '−'} ${constant} = ${drawn(rightHand)}`,
+        variable: VARIABLE,
+        equation: { operation: 'clear-fraction', denominator, constant, adds, rightHand },
+        // The row is drawn, not spelled. `text` stays its name and the form the
+        // carried values are checked against; a slash between characters is the
+        // presentation item 17 exists to replace.
+        notation: {
+          kind: 'row',
+          children: [
+            fraction(VARIABLE, String(denominator)),
+            text(` ${adds ? '+' : '−'} ${constant} = ${drawn(rightHand)}`),
+          ],
+        },
+      },
+      answer: intAnswer(solution),
+      keypad: padFor(solution, misconceptions),
+      misconceptions,
+      hint: 'Multiply both sides by the denominator to clear the fraction.',
+      solution: [
+        {
+          text: `${adds ? 'Subtract' : 'Add'} ${constant} on both sides.`,
+          detail: `${VARIABLE}/${denominator} = ${quotient}`,
+        },
+        {
+          text: `Multiply both sides by ${denominator}.`,
+          detail: `${VARIABLE} = ${solution}`,
+        },
+      ],
+    }
+  },
+})
+
+const SPECIAL_COEFF_BAND: Ladder = {
+  1: [2, 4],
+  2: [2, 6],
+  3: [3, 8],
+  4: [3, 10],
+  5: [4, 12],
+}
+
+const SPECIAL_CONSTANT_BAND: Ladder = {
+  1: [1, 5],
+  2: [2, 8],
+  3: [2, 12],
+  4: [3, 16],
+  5: [4, 20],
+}
+
+/** The three outcomes, as stable ids. The labels are copy; these are the vocabulary. */
+const OUTCOMES = [
+  { id: 'none', label: 'No solution' },
+  { id: 'infinite', label: 'Infinitely many solutions' },
+  { id: 'one', label: 'Exactly one solution' },
+] as const
+
+/**
+ * 14.8 · The answer is a property of the equation, not a value.
+ *
+ * All three cases are drawn, and the third is the one that makes the skill
+ * honest: with only "none" and "infinitely many" on offer, noticing that the
+ * variable appears twice is enough to be right half the time, and every earlier
+ * skill in the unit has been a one-solution equation anyway.
+ *
+ * The frame is omitted. `x = ⟦No solution⟧` would assert that a solution exists
+ * and then name it, in the skill whose question is whether one does.
+ */
+const specialSolutions = defineSkill({
+  id: 'special-solutions',
+  name: 'No Solution or Every Solution',
+  blurb: 'When the variable disappears',
+  build(context: BuildContext) {
+    const [coeffMin, coeffMax] = band(context.difficulty, SPECIAL_COEFF_BAND)
+    const [constMin, constMax] = band(context.difficulty, SPECIAL_CONSTANT_BAND)
+    const outcome = context.rng.pick(OUTCOMES).id
+    const leftCoefficient = context.rng.int(coeffMin, coeffMax)
+    const leftConstant = context.rng.int(constMin, constMax)
+    // Composed per outcome rather than drawn and classified. Classifying a draw
+    // would leave the mix to chance, and "infinitely many" needs two exact
+    // coincidences that a random draw almost never produces.
+    const rightCoefficient =
+      outcome === 'one' ? context.rng.intExcept(coeffMin, coeffMax, [leftCoefficient]) : leftCoefficient
+    const rightConstant =
+      outcome === 'none'
+        ? context.rng.intExcept(constMin, constMax, [leftConstant])
+        : outcome === 'infinite'
+          ? leftConstant
+          : context.rng.int(constMin, constMax)
+
+    // The mistake in every case is reading a cancelled variable as a verdict.
+    // On a one-solution draw nothing cancels, and the mistake is expecting it to.
+    const predicted = outcome === 'none' ? 'infinite' : 'none'
+    const nudge =
+      outcome === 'infinite'
+        ? 'Both sides are the same statement, so every value of x works.'
+        : outcome === 'none'
+          ? 'The x terms cancel and the numbers left over disagree — nothing works.'
+          : 'The x terms are different sizes, so they do not cancel.'
+
+    return {
+      prompt: 'How many solutions does this equation have?',
+      display: {
+        kind: 'equation',
+        text:
+          `${leftCoefficient}${VARIABLE} + ${leftConstant} = ` +
+          `${rightCoefficient}${VARIABLE} + ${rightConstant}`,
+        equation: {
+          operation: 'special-solutions',
+          letter: VARIABLE,
+          leftCoefficient,
+          leftConstant,
+          rightCoefficient,
+          rightConstant,
+        },
+      },
+      answer: { kind: 'choice', id: outcome },
+      inputMode: 'choice',
+      choices: [...OUTCOMES],
+      // Text-valued at the choice's id: a choice submits its id, and `diagnose`
+      // matches a text prediction against the raw entry by exact string.
+      misconceptions: [{ value: { kind: 'text', value: predicted }, tag: `expected-${predicted}`, nudge }],
+      hint: 'Gather the x terms and see whether anything is left of them.',
+      solution: [
+        {
+          // Where the coefficients match, the x terms are gone and writing `0x`
+          // would show the learner a term that is not there — on the skill whose
+          // whole subject is what it means for the variable to disappear.
+          text: 'Take the smaller x term from both sides.',
+          detail:
+            rightCoefficient === leftCoefficient
+              ? `${leftConstant} = ${rightConstant}`
+              : `${leftConstant} = ${rightCoefficient - leftCoefficient}${VARIABLE} + ${rightConstant}`,
+        },
+        {
+          text:
+            outcome === 'one'
+              ? 'An x term survives, so one value works.'
+              : outcome === 'infinite'
+                ? 'Both sides are identical, so every value works.'
+                : 'No x is left and the numbers disagree.',
+        },
+      ],
+    }
+  },
+})
+
+/**
+ * 14.9 · The same two-step equation, stated in prose.
+ *
+ * The prose is drawn from a fixed bank and the numbers are composed here, so a
+ * sentence cannot disagree with the arithmetic it describes. The constant is a
+ * multiple of the coefficient for the wrong-order prediction's sake — see the
+ * bank, which states why in full.
+ */
+const equationWords = defineSkill({
+  id: 'equation-words',
+  name: 'Equation Word Problems',
+  blurb: 'Build the equation',
+  build(context: BuildContext) {
+    const [solMin, solMax] = band(context.difficulty, SOLUTION_BAND)
+    const [coeffMin, coeffMax] = band(context.difficulty, TWO_STEP_COEFF_BAND)
+    const [multMin, multMax] = band(context.difficulty, MULTIPLIER_BAND)
+    const coefficient = context.rng.int(coeffMin, coeffMax)
+    const constant = coefficient * context.rng.int(multMin, multMax)
+    const solution = context.rng.int(solMin, solMax)
+    const frame = context.rng.pick(EQUATION_FRAMES)
+
+    return equationStoryProblem(frame, {
+      coefficient,
+      constant,
+      rightHand: coefficient * solution + constant,
+    })
+  },
+})
+
+const SUBJECT = 'y'
+
+
+/**
+ * The subject's coefficient, never one.
+ *
+ * At one, dividing both sides by it does nothing, so "divided only one term" —
+ * the second of the two predicted mistakes — *is* the correct answer and is
+ * filtered away. The same bound `two-step` and `equation-parentheses` carry, for
+ * the same shape of reason.
+ */
+const SUBJECT_COEFF_BAND: Ladder = {
+  1: [2, 3],
+  2: [2, 4],
+  3: [2, 5],
+  4: [2, 6],
+  5: [3, 8],
+}
+
+/** How many subject coefficients the other term is worth, and separately the constant. */
+const REARRANGE_MULTIPLIER_BAND: Ladder = {
+  1: [1, 3],
+  2: [1, 4],
+  3: [2, 6],
+  4: [2, 8],
+  5: [3, 10],
+}
+
+/**
+ * 14.10 · Solve for y, and the reason Unit 16 waits on it.
+ *
+ * Two letters are on screen and exactly one is on the pad. `y` is the frame
+ * label — the row reads `y = ⟦slot⟧` — and the answer is written in `x` alone,
+ * which is what lets this ship against the single-variable grammar item 20b
+ * built without widening it.
+ *
+ * Both the other coefficient and the constant are composed as multiples of the
+ * subject's, so dividing through comes out whole and no division reaches the
+ * answer. Filtering for that instead would want two divisibility properties at
+ * once from one draw, which is the shape this unit rules out everywhere else.
+ */
+const rearrangeFormula = defineSkill({
+  id: 'rearrange-formula',
+  name: 'Rearranging a Formula',
+  blurb: 'Solve for y',
+  build(context: BuildContext) {
+    const [coeffMin, coeffMax] = band(context.difficulty, SUBJECT_COEFF_BAND)
+    const [multMin, multMax] = band(context.difficulty, REARRANGE_MULTIPLIER_BAND)
+    const subjectCoefficient = context.rng.int(coeffMin, coeffMax)
+    const termCoefficient = subjectCoefficient * context.rng.int(multMin, multMax)
+    const constant = subjectCoefficient * context.rng.int(multMin, multMax)
+
+    const coefficient = -termCoefficient / subjectCoefficient
+    const intercept = constant / subjectCoefficient
+    const canonical = `${term(coefficient, VARIABLE)}+${intercept}`
+
+    return {
+      prompt: 'Solve for y.',
+      display: {
+        kind: 'equation',
+        text: `${subjectCoefficient}${SUBJECT} + ${termCoefficient}${VARIABLE} = ${drawn(constant)}`,
+        variable: SUBJECT,
+        equation: {
+          operation: 'rearrange',
+          subject: SUBJECT,
+          term: VARIABLE,
+          subjectCoefficient,
+          termCoefficient,
+          constant,
+        },
+      },
+      answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'expanded' },
+      inputMode: 'expression',
+      expression: { variable: VARIABLE },
+      // Written exactly as the pad produces them — no spaces, ASCII `-` — since
+      // a text prediction is matched against the raw entry by exact string.
+      misconceptions: [
+        {
+          value: { kind: 'text', value: `${term(-coefficient, VARIABLE)}+${intercept}` },
+          tag: 'moved-term-unchanged',
+          nudge: 'The x term changes sign as it crosses the equals sign.',
+        },
+        {
+          value: { kind: 'text', value: `${term(-termCoefficient, VARIABLE)}+${intercept}` },
+          tag: 'divided-one-term-only',
+          nudge: 'Dividing by the coefficient divides every term, not just the number.',
+        },
+      ],
+      hint: 'Move the x term across, then divide the whole side by the y coefficient.',
+      solution: [
+        {
+          text: `Subtract ${term(termCoefficient, VARIABLE)} from both sides.`,
+          detail: `${term(subjectCoefficient, SUBJECT)} = ${drawn(constant)} − ${term(termCoefficient, VARIABLE)}`,
+        },
+        {
+          text: `Divide every term by ${subjectCoefficient}.`,
+          detail: `${SUBJECT} = ${entryLabel(term(coefficient, VARIABLE))} + ${intercept}`,
+        },
+      ],
+    }
+  },
+})
+
 export const unit14 = [
   equationBalance,
   oneStepAddSub,
@@ -513,4 +884,8 @@ export const unit14 = [
   twoStep,
   varsBothSides,
   equationParentheses,
+  withFractions,
+  specialSolutions,
+  equationWords,
+  rearrangeFormula,
 ]

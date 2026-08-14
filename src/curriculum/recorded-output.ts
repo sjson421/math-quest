@@ -300,6 +300,18 @@ const formatEquationData = (data: EquationData): string => {
       )
     case 'parentheses':
       return `${data.operation} ${data.coefficient}(x ${data.adds ? '+' : '-'} ${data.constant}) = ${data.rightHand}`
+    case 'clear-fraction':
+      return `${data.operation} x/${data.denominator} ${data.adds ? '+' : '-'} ${data.constant} = ${data.rightHand}`
+    case 'special-solutions':
+      return (
+        `${data.operation} ${data.leftCoefficient}x + ${data.leftConstant} = ` +
+        `${data.rightCoefficient}x + ${data.rightConstant}`
+      )
+    case 'rearrange':
+      return (
+        `${data.operation} ${data.subjectCoefficient}${data.subject} + ` +
+        `${data.termCoefficient}${data.term} = ${data.constant} for ${data.subject}`
+      )
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled equation data: ${JSON.stringify(unhandled)}`)
@@ -323,6 +335,7 @@ const formatDisplay = (display: Problem['display']): string => {
       if (display.percent) return `story [${formatPercentData(display.percent)}] "${display.text}"`
       if (display.ratio) return `story [${formatRatioData(display.ratio)}] "${display.text}"`
       if (display.algebra) return `story [${formatAlgebraData(display.algebra)}] "${display.text}"`
+      if (display.equation) return `story [${formatEquationData(display.equation)}] "${display.text}"`
       return `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
     case 'math':
       return (
@@ -337,7 +350,17 @@ const formatDisplay = (display: Problem['display']): string => {
         `"${shapeDiagramLabel(display.diagram)}"`
       )
     case 'equation':
-      return `equation "${display.text}" solve ${display.variable} [${formatEquationData(display.equation)}]`
+      // Both optional fields are stated rather than interpolated raw. An absent
+      // frame label would otherwise print `solve undefined`, and unrendered
+      // notation would leave a change to a fraction's structure invisible here —
+      // the gate's own key check guards a problem's fields, not the interior of
+      // its display, so nothing else would have caught either.
+      return (
+        `equation "${display.text}" ` +
+        `${display.variable === undefined ? 'unframed' : `solve ${display.variable}`}` +
+        (display.notation ? ` ${formatNotation(display.notation)}` : '') +
+        ` [${formatEquationData(display.equation)}]`
+      )
     default: {
       // A new Display variant must be rendered here or it slips past the gate.
       const unhandled: never = display

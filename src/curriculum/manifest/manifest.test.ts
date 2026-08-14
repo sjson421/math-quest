@@ -213,7 +213,13 @@ describe('stage capabilities', () => {
   it('records every built input capability Stage E consumes', () => {
     expect(AVAILABLE_CAPABILITIES.has('expression-input')).toBe(true)
     expect(AVAILABLE_CAPABILITIES.has('fraction-input')).toBe(true)
+    // `choice-input` joined in Unit 14b and had been owed since 13a, when
+    // `identify-like-terms` began answering through it. `requires` states what a
+    // stage's own skills need rather than what it introduced, so a consumer
+    // without a declaration is this file disagreeing with the course — the same
+    // correction Stage B took in item 11.
     expect(stageById.get('stage-e')?.requires).toEqual([
+      'choice-input',
       'math-notation',
       'fraction-input',
       'expression-input',

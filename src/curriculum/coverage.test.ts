@@ -22,6 +22,8 @@ import {
 } from './index'
 import { parseCurriculumDoc } from './manifest/curriculum-doc'
 import { AVAILABLE_CAPABILITIES, allSkills as manifestSkills } from './manifest'
+import type { Capability } from './manifest/types'
+import type { Problem } from '../lib/types'
 
 const doc = parseCurriculumDoc()
 
@@ -70,7 +72,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(135)
+    expect(documentedAsBuilt).toHaveLength(139)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -116,27 +118,47 @@ describe('the skills that are built', () => {
     // shaped rows, and sharing it is how a display passes the gate and still
     // wraps on a phone.
     //
-    // 21 is the measurement, not a judgement. The widest any Unit 14a draw
-    // produces is `vars-both-sides` at 20 characters (`17x + 14 = 10x + 119`),
-    // and `EquationView`'s smallest band starts at 19.
-    const widest = new Map<string, string>()
+    // 21 is the measurement, not a judgement. The widest plain row any Unit 14
+    // draw produces is `vars-both-sides` at 20 characters
+    // (`17x + 14 = 10x + 119`), and `EquationView`'s smallest band starts at 19.
+    //
+    // A row drawn as *notation* is measured against its own number, because the
+    // character count stops describing it: `x/6` is three characters and one
+    // stacked column. The count over-estimates a notated row's width, so a cap
+    // on it is conservative — it fires early rather than late, which is the
+    // safe direction for a gate. The number comes from the browser: Unit 14b's
+    // widest notated draw is `x/6 + 10 = 15`, 13 characters, rendering 101.6px
+    // wide in a 375px viewport. 16 leaves room for a wider denominator without
+    // leaving the row ungated, which was the alternative considered and
+    // rejected — `with-fractions` would then be the only equation in the course
+    // whose widening ships green.
+    const CAPS = { text: 21, notation: 16 }
+    const widest = new Map<string, { text: string; notated: boolean }>()
 
     for (const generator of allSkills) {
       for (const difficulty of [1, 2, 3, 4, 5] as const) {
         for (let i = 0; i < 50; i += 1) {
           const { display } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
           if (display.kind !== 'equation') continue
-          const seen = widest.get(generator.id) ?? ''
-          if (display.text.length > seen.length) widest.set(generator.id, display.text)
+          const seen = widest.get(generator.id)
+          if (display.text.length > (seen?.text.length ?? 0)) {
+            widest.set(generator.id, { text: display.text, notated: display.notation !== undefined })
+          }
         }
       }
     }
 
     expect(widest.size, 'no equation displays were sampled').toBeGreaterThan(0)
+    expect(
+      [...widest.values()].filter(({ notated }) => notated).length,
+      'no notated equation was sampled, so its cap is testing nothing',
+    ).toBeGreaterThan(0)
 
     const tooWide = [...widest]
-      .filter(([, text]) => text.length > 21)
-      .map(([id, text]) => `${id}: "${text}" is ${text.length} characters`)
+      .filter(([, { text, notated }]) => text.length > (notated ? CAPS.notation : CAPS.text))
+      .map(([id, { text, notated }]) =>
+        `${id}: "${text}" is ${text.length} characters, over the ${notated ? 'notation' : 'text'} cap`,
+      )
 
     expect(tooWide, 'widen the EquationView size bands, or narrow the draw').toEqual([])
   })
@@ -329,7 +351,7 @@ describe('the skills that are built', () => {
       'ratio-words',
     ])
     expect(unit11Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(135)
+    expect(implementedSkillIds).toHaveLength(139)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -361,7 +383,14 @@ describe('the skills that are built', () => {
     const unavailable = (stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))
 
     expect(AVAILABLE_CAPABILITIES.has('expression-input')).toBe(true)
-    expect(stage?.requires).toEqual(['math-notation', 'fraction-input', 'expression-input'])
+    // `choice-input` joined in Unit 14b, owed since 13a — see the input-mode
+    // check below, which is what makes the next omission fail on its own unit.
+    expect(stage?.requires).toEqual([
+      'choice-input',
+      'math-notation',
+      'fraction-input',
+      'expression-input',
+    ])
     expect(unavailable).toEqual([])
     const unit12 = stage?.units.find((unit) => unit.id === 'unit-12')
     expect(unit12?.skills.map((skill) => skill.id).filter((id) => skillState(id) === 'implemented'))
@@ -388,15 +417,16 @@ describe('the skills that are built', () => {
       'factor-gcf',
     ])
     expect(unit13Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(135)
+    expect(implementedSkillIds).toHaveLength(139)
   })
 
-  it('opens Unit 14 on the capabilities Stage E already had, adding none', () => {
-    // Unit 14a's claim is that an equation needed no new capability — it draws
-    // as text and answers on the keypad built in item 3. Asserted rather than
-    // assumed: a generator that quietly wanted a new flag would otherwise show
-    // up only as six skills silently staying `planned`, which reads exactly
-    // like work that has not been done yet.
+  it('completes Unit 14 on the capabilities Stage E already had, adding none', () => {
+    // Unit 14's claim across both increments is that equations needed no new
+    // capability — 14a drew as text on the keypad built in item 3, and 14b's
+    // three answer surfaces were all built before Stage E opened. Asserted
+    // rather than assumed: a generator that quietly wanted a new flag would
+    // otherwise show up only as skills silently staying `planned`, which reads
+    // exactly like work that has not been done yet.
     const stage = manifestIndex.get('equation-balance')?.stage
     const unit14 = stage?.units.find((unit) => unit.id === 'unit-14')
     const unit14Ids = unit14?.skills.map((skill) => skill.id) ?? []
@@ -408,18 +438,49 @@ describe('the skills that are built', () => {
       'two-step',
       'vars-both-sides',
       'equation-parentheses',
-    ])
-    // 14b's four remain, which is what keeps roadmap item 21 open.
-    expect(unit14Ids.filter((id) => skillState(id) === 'planned')).toEqual([
       'with-fractions',
       'special-solutions',
       'equation-words',
       'rearrange-formula',
     ])
+    // Nothing left in the unit. Roadmap item 21 stays open on increment 15.
+    expect(unit14Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
     // What the claim needs, and no more: Stage E asks for nothing this change
     // had to build. Pinning the whole capability set here would fail this Unit
     // 14 test the day an unrelated capability lands.
     expect((stage?.requires ?? []).filter((c) => !AVAILABLE_CAPABILITIES.has(c))).toEqual([])
+  })
+
+  it('declares a capability for every input mode a stage actually uses', () => {
+    // The rule `requires` states, executed rather than restated. Stage E carried
+    // a choice-input consumer from 13a without declaring one, and nothing
+    // failed — because a capability that is *available* changes no skill's
+    // state, so the only symptom was the manifest quietly disagreeing with the
+    // course. This is what makes the next one fail at the unit that causes it.
+    const modes: Partial<Record<Problem['inputMode'], Capability>> = {
+      choice: 'choice-input',
+      expression: 'expression-input',
+      'number-line': 'number-line',
+    }
+
+    const undeclared = new Set<string>()
+    for (const generator of allSkills) {
+      const stage = manifestIndex.get(generator.id)?.stage
+      if (!stage) continue
+      for (const difficulty of [1, 2, 3, 4, 5] as const) {
+        // Five a difficulty rather than twenty: `inputMode` varies by draw at
+        // most, never by seed depth, and this walks all 139 generators.
+        for (let i = 0; i < 5; i += 1) {
+          const { inputMode } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
+          const capability = modes[inputMode]
+          if (capability && !(stage.requires ?? []).includes(capability)) {
+            undeclared.add(`${stage.id} uses ${capability} for ${generator.id}`)
+          }
+        }
+      }
+    }
+
+    expect([...undeclared], 'add these to the stage’s `requires`').toEqual([])
   })
 })
 
@@ -454,9 +515,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 66 skills out of the skill tree entirely', () => {
+  it('leaves the other 62 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(135)
+    expect(offered).toHaveLength(139)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {

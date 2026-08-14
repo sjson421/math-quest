@@ -9,6 +9,12 @@ import {
   type Quantities,
 } from '../engine'
 import {
+  EQUATION_FRAMES,
+  equationStoryProblem,
+  type EquationFrame,
+  type EquationQuantities,
+} from './equations'
+import {
   RATIO_FRAMES,
   ratioStoryProblem,
   ratioText,
@@ -77,12 +83,17 @@ const ratioBanks: RatioBank[] = [
   { name: 'ratio', frames: RATIO_FRAMES },
 ]
 
-const registeredFrameArrays: ReadonlyArray<readonly (Frame | RatioFrame)[]> = [
-  ...banks.map(({ frames }) => frames),
-  ...ratioBanks.map(({ frames }) => frames),
+const equationBanks: { name: string; frames: EquationFrame[] }[] = [
+  { name: 'equation', frames: EQUATION_FRAMES },
 ]
 
-type FrameArray = Frame[] | RatioFrame[]
+const registeredFrameArrays: ReadonlyArray<readonly (Frame | RatioFrame | EquationFrame)[]> = [
+  ...banks.map(({ frames }) => frames),
+  ...ratioBanks.map(({ frames }) => frames),
+  ...equationBanks.map(({ frames }) => frames),
+]
+
+type FrameArray = Frame[] | RatioFrame[] | EquationFrame[]
 
 type ExportedFrameArray = {
   path: string
@@ -90,10 +101,19 @@ type ExportedFrameArray = {
   frames: FrameArray
 }
 
+/**
+ * Every bank shape, named by a field only that shape has.
+ *
+ * The list is the load-bearing part. A bank whose shape is missing here is not
+ * reported as unregistered — it is not seen at all, so this file stays green
+ * while claiming to check every authored bank, which is the exact hole checking
+ * frames at their source was meant to close. Unit 14's equation frames opened it
+ * the first time: they carry neither `nudges` nor `partToPartText`.
+ */
 const isFrameArray = (value: unknown): value is FrameArray =>
   Array.isArray(value) &&
   value.length > 0 &&
-  ('nudges' in value[0] || 'partToPartText' in value[0])
+  ('nudges' in value[0] || 'partToPartText' in value[0] || 'hint' in value[0])
 
 const exportedFrameArrays = (
   path: string,
@@ -191,6 +211,32 @@ function checkRatioBank(frames: RatioFrame[]): string[] {
         formatViolations(checkContent(ratioProblemFor(frame, q, comparison), at)).map(
           (violation) => `${frame.id}: ${violation}`,
         ),
+      ),
+    ),
+  )
+}
+
+const EQUATION_CHECK_QUANTITIES: EquationQuantities[] = [
+  { coefficient: 2, constant: 4, rightHand: 18 },
+  { coefficient: 3, constant: 9, rightHand: 30 },
+  { coefficient: 5, constant: 10, rightHand: 45 },
+  { coefficient: 8, constant: 24, rightHand: 80 },
+]
+
+const equationProblemFor = (frame: EquationFrame, q: EquationQuantities): Problem => ({
+  ...equationStoryProblem(frame, q),
+  skillId: 'equation-words',
+  inputMode: 'keypad',
+  difficulty: 1,
+})
+
+function checkEquationBank(frames: EquationFrame[]): string[] {
+  const at = locationFor('equation-words', 'unit-14')
+
+  return frames.flatMap((frame) =>
+    EQUATION_CHECK_QUANTITIES.flatMap((q) =>
+      formatViolations(checkContent(equationProblemFor(frame, q), at)).map(
+        (violation) => `${frame.id}: ${violation}`,
       ),
     ),
   )
@@ -546,5 +592,57 @@ describe('the frame check itself', () => {
       frames: [ADDITION_FRAMES[0], SUBTRACTION_FRAMES[0]],
     }
     expect(() => checkBank(mixed)).toThrow('a bank must share one operator')
+  })
+})
+
+describe.each(equationBanks)('the $name frame bank', ({ frames }) => {
+  it('has enough distinct frames for a standard lesson', () => {
+    expect(frames.length).toBeGreaterThanOrEqual(8)
+    expect(new Set(frames.map(({ id }) => id)).size).toBe(frames.length)
+  })
+
+  it('satisfies the content contract on every frame, drawn or not', () => {
+    expect(checkEquationBank(frames)).toEqual([])
+  })
+
+  it('states all three quantities in every frame', () => {
+    // A sentence missing one of them is describing a different equation from
+    // the one its carried terms solve, and nothing else would notice: the terms
+    // are what verification reads, and the prose is what the learner reads.
+    for (const frame of frames) {
+      for (const q of EQUATION_CHECK_QUANTITIES) {
+        const text = frame.text(q)
+        for (const [label, value] of Object.entries(q)) {
+          expect(text, `${frame.id} omits its ${label}`).toContain(String(value))
+        }
+      }
+    }
+  })
+
+  it('is checked with quantities the generator can actually compose', () => {
+    // The bank's own version of the division bank's exactness rule. The wrong-
+    // order prediction is `rightHand / coefficient - constant`, so a check set
+    // whose coefficient does not divide both would check the sentences against
+    // an arithmetic the draw never produces — and the fractional prediction it
+    // implies is finite, so nothing downstream would drop it either.
+    for (const q of EQUATION_CHECK_QUANTITIES) {
+      expect(q.constant % q.coefficient, `${q.constant} must be a multiple of ${q.coefficient}`).toBe(0)
+      expect(q.rightHand % q.coefficient, `${q.rightHand} must be a multiple of ${q.coefficient}`).toBe(0)
+      expect(q.coefficient, 'a coefficient of one makes the two steps one').toBeGreaterThan(1)
+    }
+  })
+
+  it('predicts one whole mistake per frame, never the answer', () => {
+    for (const frame of frames) {
+      for (const q of EQUATION_CHECK_QUANTITIES) {
+        const problem = equationProblemFor(frame, q)
+        const values = (problem.misconceptions ?? []).map(({ value }) => value)
+        const answer = (q.rightHand - q.constant) / q.coefficient
+
+        expect(values, frame.id).toHaveLength(1)
+        expect(values, frame.id).not.toContain(answer)
+        expect(Number.isInteger(values[0]), `${frame.id}: ${String(values[0])}`).toBe(true)
+      }
+    }
   })
 })

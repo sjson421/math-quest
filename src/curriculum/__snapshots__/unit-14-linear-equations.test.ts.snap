@@ -534,6 +534,258 @@ step 2   Subtract 18 on both sides.   [x = 19]
 miss     distributed-first-term-only = 35   The number outside multiplies both terms in the bracket, not just the x."
 `;
 
+exports[`recorded output: equation-words > matches the wording recorded when the skill landed 1`] = `
+"--- equation-words · seed 1 · difficulty 1
+prompt   How many rooms were painted?
+display  story [two-step 3x + 3 = 15] "A decorator uses 3 litres of paint per room and 3 litres for the trim. The job used 15 litres."
+answer   exact 4/1
+input    keypad
+hint     Trim is a one-off, so take its 3 litres off the total first.
+step 1   Take off the 3 that was added.   [3x = 12]
+step 2   Divide by 3.   [x = 4]
+miss     undid-in-wrong-order = 2   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 12345 · difficulty 1
+prompt   How many panels were installed?
+display  story [two-step 3x + 3 = 15] "An installer bills 3 minutes a panel, plus 3 minutes to set up. The job took 15 minutes."
+answer   exact 4/1
+input    keypad
+hint     Setup happens once, so remove 3 minutes before dividing.
+step 1   Take off the 3 that was added.   [3x = 12]
+step 2   Divide by 3.   [x = 4]
+miss     undid-in-wrong-order = 2   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 67890 · difficulty 1
+prompt   How many invoices were paid?
+display  story [two-step 2x + 4 = 10] "Each invoice costs $2, and a $4 handling fee is added once. The total charge is $10."
+answer   exact 3/1
+input    keypad
+hint     Remove the $4 fee first, then divide by the price of one invoice.
+step 1   Take off the 4 that was added.   [2x = 6]
+step 2   Divide by 2.   [x = 3]
+miss     undid-in-wrong-order = 1   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 424242 · difficulty 1
+prompt   How many batches were made?
+display  story [two-step 2x + 2 = 6] "A kitchen bakes 2 loaves per batch and starts with 2 from yesterday. There are 6 loaves on the rack."
+answer   exact 2/1
+input    keypad
+hint     The 2 from yesterday came from no batch — set them aside.
+step 1   Take off the 2 that was added.   [2x = 4]
+step 2   Divide by 2.   [x = 2]
+miss     undid-in-wrong-order = 1   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 987654321 · difficulty 1
+prompt   How many rooms were painted?
+display  story [two-step 3x + 3 = 9] "A decorator uses 3 litres of paint per room and 3 litres for the trim. The job used 9 litres."
+answer   exact 2/1
+input    keypad
+hint     Trim is a one-off, so take its 3 litres off the total first.
+step 1   Take off the 3 that was added.   [3x = 6]
+step 2   Divide by 3.   [x = 2]
+miss     undid-in-wrong-order = 0   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 1 · difficulty 2
+prompt   How many rooms were painted?
+display  story [two-step 3x + 3 = 21] "A decorator uses 3 litres of paint per room and 3 litres for the trim. The job used 21 litres."
+answer   exact 6/1
+input    keypad
+hint     Trim is a one-off, so take its 3 litres off the total first.
+step 1   Take off the 3 that was added.   [3x = 18]
+step 2   Divide by 3.   [x = 6]
+miss     undid-in-wrong-order = 4   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 12345 · difficulty 2
+prompt   How many panels were installed?
+display  story [two-step 4x + 4 = 28] "An installer bills 4 minutes a panel, plus 4 minutes to set up. The job took 28 minutes."
+answer   exact 6/1
+input    keypad
+hint     Setup happens once, so remove 4 minutes before dividing.
+step 1   Take off the 4 that was added.   [4x = 24]
+step 2   Divide by 4.   [x = 6]
+miss     undid-in-wrong-order = 3   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 67890 · difficulty 2
+prompt   How many invoices were paid?
+display  story [two-step 3x + 6 = 21] "Each invoice costs $3, and a $6 handling fee is added once. The total charge is $21."
+answer   exact 5/1
+input    keypad
+hint     Remove the $6 fee first, then divide by the price of one invoice.
+step 1   Take off the 6 that was added.   [3x = 15]
+step 2   Divide by 3.   [x = 5]
+miss     undid-in-wrong-order = 1   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 424242 · difficulty 2
+prompt   How many batches were made?
+display  story [two-step 2x + 2 = 10] "A kitchen bakes 2 loaves per batch and starts with 2 from yesterday. There are 10 loaves on the rack."
+answer   exact 4/1
+input    keypad
+hint     The 2 from yesterday came from no batch — set them aside.
+step 1   Take off the 2 that was added.   [2x = 8]
+step 2   Divide by 2.   [x = 4]
+miss     undid-in-wrong-order = 3   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 987654321 · difficulty 2
+prompt   How many rooms were painted?
+display  story [two-step 4x + 4 = 16] "A decorator uses 4 litres of paint per room and 4 litres for the trim. The job used 16 litres."
+answer   exact 3/1
+input    keypad
+hint     Trim is a one-off, so take its 4 litres off the total first.
+step 1   Take off the 4 that was added.   [4x = 12]
+step 2   Divide by 4.   [x = 3]
+miss     undid-in-wrong-order = 0   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 1 · difficulty 3
+prompt   How many rooms were painted?
+display  story [two-step 5x + 5 = 45] "A decorator uses 5 litres of paint per room and 5 litres for the trim. The job used 45 litres."
+answer   exact 8/1
+input    keypad
+hint     Trim is a one-off, so take its 5 litres off the total first.
+step 1   Take off the 5 that was added.   [5x = 40]
+step 2   Divide by 5.   [x = 8]
+miss     undid-in-wrong-order = 4   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 12345 · difficulty 3
+prompt   How many panels were installed?
+display  story [two-step 6x + 12 = 60] "An installer bills 6 minutes a panel, plus 12 minutes to set up. The job took 60 minutes."
+answer   exact 8/1
+input    keypad
+hint     Setup happens once, so remove 12 minutes before dividing.
+step 1   Take off the 12 that was added.   [6x = 48]
+step 2   Divide by 6.   [x = 8]
+miss     undid-in-wrong-order = -2   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 67890 · difficulty 3
+prompt   How many invoices were paid?
+display  story [two-step 3x + 9 = 30] "Each invoice costs $3, and a $9 handling fee is added once. The total charge is $30."
+answer   exact 7/1
+input    keypad
+hint     Remove the $9 fee first, then divide by the price of one invoice.
+step 1   Take off the 9 that was added.   [3x = 21]
+step 2   Divide by 3.   [x = 7]
+miss     undid-in-wrong-order = 1   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 424242 · difficulty 3
+prompt   How many batches were made?
+display  story [two-step 2x + 2 = 12] "A kitchen bakes 2 loaves per batch and starts with 2 from yesterday. There are 12 loaves on the rack."
+answer   exact 5/1
+input    keypad
+hint     The 2 from yesterday came from no batch — set them aside.
+step 1   Take off the 2 that was added.   [2x = 10]
+step 2   Divide by 2.   [x = 5]
+miss     undid-in-wrong-order = 4   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 987654321 · difficulty 3
+prompt   How many rooms were painted?
+display  story [two-step 6x + 6 = 30] "A decorator uses 6 litres of paint per room and 6 litres for the trim. The job used 30 litres."
+answer   exact 4/1
+input    keypad
+hint     Trim is a one-off, so take its 6 litres off the total first.
+step 1   Take off the 6 that was added.   [6x = 24]
+step 2   Divide by 6.   [x = 4]
+miss     undid-in-wrong-order = -1   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 1 · difficulty 4
+prompt   How many rooms were painted?
+display  story [two-step 6x + 12 = 78] "A decorator uses 6 litres of paint per room and 12 litres for the trim. The job used 78 litres."
+answer   exact 11/1
+input    keypad
+hint     Trim is a one-off, so take its 12 litres off the total first.
+step 1   Take off the 12 that was added.   [6x = 66]
+step 2   Divide by 6.   [x = 11]
+miss     undid-in-wrong-order = 1   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 12345 · difficulty 4
+prompt   How many panels were installed?
+display  story [two-step 8x + 24 = 104] "An installer bills 8 minutes a panel, plus 24 minutes to set up. The job took 104 minutes."
+answer   exact 10/1
+input    keypad
+hint     Setup happens once, so remove 24 minutes before dividing.
+step 1   Take off the 24 that was added.   [8x = 80]
+step 2   Divide by 8.   [x = 10]
+miss     undid-in-wrong-order = -11   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 67890 · difficulty 4
+prompt   How many invoices were paid?
+display  story [two-step 5x + 20 = 65] "Each invoice costs $5, and a $20 handling fee is added once. The total charge is $65."
+answer   exact 9/1
+input    keypad
+hint     Remove the $20 fee first, then divide by the price of one invoice.
+step 1   Take off the 20 that was added.   [5x = 45]
+step 2   Divide by 5.   [x = 9]
+miss     undid-in-wrong-order = -7   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 424242 · difficulty 4
+prompt   How many batches were made?
+display  story [two-step 3x + 6 = 27] "A kitchen bakes 3 loaves per batch and starts with 6 from yesterday. There are 27 loaves on the rack."
+answer   exact 7/1
+input    keypad
+hint     The 6 from yesterday came from no batch — set them aside.
+step 1   Take off the 6 that was added.   [3x = 21]
+step 2   Divide by 3.   [x = 7]
+miss     undid-in-wrong-order = 3   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 987654321 · difficulty 4
+prompt   How many rooms were painted?
+display  story [two-step 8x + 16 = 56] "A decorator uses 8 litres of paint per room and 16 litres for the trim. The job used 56 litres."
+answer   exact 5/1
+input    keypad
+hint     Trim is a one-off, so take its 16 litres off the total first.
+step 1   Take off the 16 that was added.   [8x = 40]
+step 2   Divide by 8.   [x = 5]
+miss     undid-in-wrong-order = -9   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 1 · difficulty 5
+prompt   How many rooms were painted?
+display  story [two-step 7x + 14 = 105] "A decorator uses 7 litres of paint per room and 14 litres for the trim. The job used 105 litres."
+answer   exact 13/1
+input    keypad
+hint     Trim is a one-off, so take its 14 litres off the total first.
+step 1   Take off the 14 that was added.   [7x = 91]
+step 2   Divide by 7.   [x = 13]
+miss     undid-in-wrong-order = 1   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 12345 · difficulty 5
+prompt   How many panels were installed?
+display  story [two-step 9x + 27 = 144] "An installer bills 9 minutes a panel, plus 27 minutes to set up. The job took 144 minutes."
+answer   exact 13/1
+input    keypad
+hint     Setup happens once, so remove 27 minutes before dividing.
+step 1   Take off the 27 that was added.   [9x = 117]
+step 2   Divide by 9.   [x = 13]
+miss     undid-in-wrong-order = -11   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 67890 · difficulty 5
+prompt   How many invoices were paid?
+display  story [two-step 5x + 20 = 75] "Each invoice costs $5, and a $20 handling fee is added once. The total charge is $75."
+answer   exact 11/1
+input    keypad
+hint     Remove the $20 fee first, then divide by the price of one invoice.
+step 1   Take off the 20 that was added.   [5x = 55]
+step 2   Divide by 5.   [x = 11]
+miss     undid-in-wrong-order = -5   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 424242 · difficulty 5
+prompt   How many batches were made?
+display  story [two-step 3x + 9 = 33] "A kitchen bakes 3 loaves per batch and starts with 9 from yesterday. There are 33 loaves on the rack."
+answer   exact 8/1
+input    keypad
+hint     The 9 from yesterday came from no batch — set them aside.
+step 1   Take off the 9 that was added.   [3x = 24]
+step 2   Divide by 3.   [x = 8]
+miss     undid-in-wrong-order = 2   Take the added amount off first, then divide by the group size.
+
+--- equation-words · seed 987654321 · difficulty 5
+prompt   How many rooms were painted?
+display  story [two-step 9x + 18 = 72] "A decorator uses 9 litres of paint per room and 18 litres for the trim. The job used 72 litres."
+answer   exact 6/1
+input    keypad
+hint     Trim is a one-off, so take its 18 litres off the total first.
+step 1   Take off the 18 that was added.   [9x = 54]
+step 2   Divide by 9.   [x = 6]
+miss     undid-in-wrong-order = -10   Take the added amount off first, then divide by the group size."
+`;
+
 exports[`recorded output: one-step-addsub > matches the wording recorded when the skill landed 1`] = `
 "--- one-step-addsub · seed 1 · difficulty 1
 prompt   Solve for x.
@@ -1036,6 +1288,635 @@ hint     Do the opposite operation to both sides.
 step 1   Multiply both sides by 3.   [x = 12 × 3]
 step 2   That leaves x alone.   [x = 36]
 miss     repeated-operation = 4   The equation divides, so undo it by multiplying."
+`;
+
+exports[`recorded output: rearrange-formula > matches the wording recorded when the skill landed 1`] = `
+"--- rearrange-formula · seed 1 · difficulty 1
+prompt   Solve for y.
+display  equation "3y + 3x = 6" solve y [rearrange 3y + 3x = 6 for y]
+answer   expression -x+2 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 3x from both sides.   [3y = 6 − 3x]
+step 2   Divide every term by 3.   [y = −x + 2]
+miss     moved-term-unchanged = x+2   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -3x+2   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 12345 · difficulty 1
+prompt   Solve for y.
+display  equation "3y + 3x = 6" solve y [rearrange 3y + 3x = 6 for y]
+answer   expression -x+2 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 3x from both sides.   [3y = 6 − 3x]
+step 2   Divide every term by 3.   [y = −x + 2]
+miss     moved-term-unchanged = x+2   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -3x+2   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 67890 · difficulty 1
+prompt   Solve for y.
+display  equation "2y + 4x = 4" solve y [rearrange 2y + 4x = 4 for y]
+answer   expression -2x+2 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 4x from both sides.   [2y = 4 − 4x]
+step 2   Divide every term by 2.   [y = −2x + 2]
+miss     moved-term-unchanged = 2x+2   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -4x+2   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 424242 · difficulty 1
+prompt   Solve for y.
+display  equation "2y + 2x = 2" solve y [rearrange 2y + 2x = 2 for y]
+answer   expression -x+1 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 2x from both sides.   [2y = 2 − 2x]
+step 2   Divide every term by 2.   [y = −x + 1]
+miss     moved-term-unchanged = x+1   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -2x+1   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 987654321 · difficulty 1
+prompt   Solve for y.
+display  equation "3y + 3x = 3" solve y [rearrange 3y + 3x = 3 for y]
+answer   expression -x+1 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 3x from both sides.   [3y = 3 − 3x]
+step 2   Divide every term by 3.   [y = −x + 1]
+miss     moved-term-unchanged = x+1   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -3x+1   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 1 · difficulty 2
+prompt   Solve for y.
+display  equation "3y + 3x = 9" solve y [rearrange 3y + 3x = 9 for y]
+answer   expression -x+3 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 3x from both sides.   [3y = 9 − 3x]
+step 2   Divide every term by 3.   [y = −x + 3]
+miss     moved-term-unchanged = x+3   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -3x+3   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 12345 · difficulty 2
+prompt   Solve for y.
+display  equation "4y + 8x = 8" solve y [rearrange 4y + 8x = 8 for y]
+answer   expression -2x+2 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 8x from both sides.   [4y = 8 − 8x]
+step 2   Divide every term by 4.   [y = −2x + 2]
+miss     moved-term-unchanged = 2x+2   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -8x+2   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 67890 · difficulty 2
+prompt   Solve for y.
+display  equation "3y + 9x = 6" solve y [rearrange 3y + 9x = 6 for y]
+answer   expression -3x+2 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 9x from both sides.   [3y = 6 − 9x]
+step 2   Divide every term by 3.   [y = −3x + 2]
+miss     moved-term-unchanged = 3x+2   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -9x+2   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 424242 · difficulty 2
+prompt   Solve for y.
+display  equation "2y + 2x = 2" solve y [rearrange 2y + 2x = 2 for y]
+answer   expression -x+1 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 2x from both sides.   [2y = 2 − 2x]
+step 2   Divide every term by 2.   [y = −x + 1]
+miss     moved-term-unchanged = x+1   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -2x+1   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 987654321 · difficulty 2
+prompt   Solve for y.
+display  equation "4y + 4x = 4" solve y [rearrange 4y + 4x = 4 for y]
+answer   expression -x+1 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 4x from both sides.   [4y = 4 − 4x]
+step 2   Divide every term by 4.   [y = −x + 1]
+miss     moved-term-unchanged = x+1   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -4x+1   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 1 · difficulty 3
+prompt   Solve for y.
+display  equation "4y + 8x = 16" solve y [rearrange 4y + 8x = 16 for y]
+answer   expression -2x+4 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 8x from both sides.   [4y = 16 − 8x]
+step 2   Divide every term by 4.   [y = −2x + 4]
+miss     moved-term-unchanged = 2x+4   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -8x+4   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 12345 · difficulty 3
+prompt   Solve for y.
+display  equation "5y + 15x = 20" solve y [rearrange 5y + 15x = 20 for y]
+answer   expression -3x+4 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 15x from both sides.   [5y = 20 − 15x]
+step 2   Divide every term by 5.   [y = −3x + 4]
+miss     moved-term-unchanged = 3x+4   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -15x+4   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 67890 · difficulty 3
+prompt   Solve for y.
+display  equation "3y + 12x = 9" solve y [rearrange 3y + 12x = 9 for y]
+answer   expression -4x+3 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 12x from both sides.   [3y = 9 − 12x]
+step 2   Divide every term by 3.   [y = −4x + 3]
+miss     moved-term-unchanged = 4x+3   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -12x+3   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 424242 · difficulty 3
+prompt   Solve for y.
+display  equation "2y + 6x = 4" solve y [rearrange 2y + 6x = 4 for y]
+answer   expression -3x+2 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 6x from both sides.   [2y = 4 − 6x]
+step 2   Divide every term by 2.   [y = −3x + 2]
+miss     moved-term-unchanged = 3x+2   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -6x+2   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 987654321 · difficulty 3
+prompt   Solve for y.
+display  equation "5y + 10x = 10" solve y [rearrange 5y + 10x = 10 for y]
+answer   expression -2x+2 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 10x from both sides.   [5y = 10 − 10x]
+step 2   Divide every term by 5.   [y = −2x + 2]
+miss     moved-term-unchanged = 2x+2   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -10x+2   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 1 · difficulty 4
+prompt   Solve for y.
+display  equation "5y + 10x = 25" solve y [rearrange 5y + 10x = 25 for y]
+answer   expression -2x+5 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 10x from both sides.   [5y = 25 − 10x]
+step 2   Divide every term by 5.   [y = −2x + 5]
+miss     moved-term-unchanged = 2x+5   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -10x+5   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 12345 · difficulty 4
+prompt   Solve for y.
+display  equation "6y + 24x = 30" solve y [rearrange 6y + 24x = 30 for y]
+answer   expression -4x+5 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 24x from both sides.   [6y = 30 − 24x]
+step 2   Divide every term by 6.   [y = −4x + 5]
+miss     moved-term-unchanged = 4x+5   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -24x+5   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 67890 · difficulty 4
+prompt   Solve for y.
+display  equation "3y + 18x = 12" solve y [rearrange 3y + 18x = 12 for y]
+answer   expression -6x+4 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 18x from both sides.   [3y = 12 − 18x]
+step 2   Divide every term by 3.   [y = −6x + 4]
+miss     moved-term-unchanged = 6x+4   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -18x+4   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 424242 · difficulty 4
+prompt   Solve for y.
+display  equation "2y + 6x = 6" solve y [rearrange 2y + 6x = 6 for y]
+answer   expression -3x+3 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 6x from both sides.   [2y = 6 − 6x]
+step 2   Divide every term by 2.   [y = −3x + 3]
+miss     moved-term-unchanged = 3x+3   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -6x+3   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 987654321 · difficulty 4
+prompt   Solve for y.
+display  equation "6y + 12x = 12" solve y [rearrange 6y + 12x = 12 for y]
+answer   expression -2x+2 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 12x from both sides.   [6y = 12 − 12x]
+step 2   Divide every term by 6.   [y = −2x + 2]
+miss     moved-term-unchanged = 2x+2   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -12x+2   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 1 · difficulty 5
+prompt   Solve for y.
+display  equation "6y + 18x = 42" solve y [rearrange 6y + 18x = 42 for y]
+answer   expression -3x+7 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 18x from both sides.   [6y = 42 − 18x]
+step 2   Divide every term by 6.   [y = −3x + 7]
+miss     moved-term-unchanged = 3x+7   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -18x+7   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 12345 · difficulty 5
+prompt   Solve for y.
+display  equation "8y + 40x = 48" solve y [rearrange 8y + 40x = 48 for y]
+answer   expression -5x+6 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 40x from both sides.   [8y = 48 − 40x]
+step 2   Divide every term by 8.   [y = −5x + 6]
+miss     moved-term-unchanged = 5x+6   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -40x+6   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 67890 · difficulty 5
+prompt   Solve for y.
+display  equation "5y + 35x = 25" solve y [rearrange 5y + 35x = 25 for y]
+answer   expression -7x+5 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 35x from both sides.   [5y = 25 − 35x]
+step 2   Divide every term by 5.   [y = −7x + 5]
+miss     moved-term-unchanged = 7x+5   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -35x+5   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 424242 · difficulty 5
+prompt   Solve for y.
+display  equation "3y + 12x = 12" solve y [rearrange 3y + 12x = 12 for y]
+answer   expression -4x+4 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 12x from both sides.   [3y = 12 − 12x]
+step 2   Divide every term by 3.   [y = −4x + 4]
+miss     moved-term-unchanged = 4x+4   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -12x+4   Dividing by the coefficient divides every term, not just the number.
+
+--- rearrange-formula · seed 987654321 · difficulty 5
+prompt   Solve for y.
+display  equation "8y + 32x = 24" solve y [rearrange 8y + 32x = 24 for y]
+answer   expression -4x+3 (x, expanded)
+input    expression
+variable x
+hint     Move the x term across, then divide the whole side by the y coefficient.
+step 1   Subtract 32x from both sides.   [8y = 24 − 32x]
+step 2   Divide every term by 8.   [y = −4x + 3]
+miss     moved-term-unchanged = 4x+3   The x term changes sign as it crosses the equals sign.
+miss     divided-one-term-only = -32x+3   Dividing by the coefficient divides every term, not just the number."
+`;
+
+exports[`recorded output: special-solutions > matches the wording recorded when the skill landed 1`] = `
+"--- special-solutions · seed 1 · difficulty 1
+prompt   How many solutions does this equation have?
+display  equation "2x + 3 = 2x + 3" unframed [special-solutions 2x + 3 = 2x + 3]
+answer   choice infinite
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [3 = 3]
+step 2   Both sides are identical, so every value works.
+miss     expected-none = none   Both sides are the same statement, so every value of x works.
+
+--- special-solutions · seed 12345 · difficulty 1
+prompt   How many solutions does this equation have?
+display  equation "2x + 3 = 4x + 3" unframed [special-solutions 2x + 3 = 4x + 3]
+answer   choice one
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [3 = 2x + 3]
+step 2   An x term survives, so one value works.
+miss     expected-none = none   The x terms are different sizes, so they do not cancel.
+
+--- special-solutions · seed 67890 · difficulty 1
+prompt   How many solutions does this equation have?
+display  equation "3x + 2 = 3x + 2" unframed [special-solutions 3x + 2 = 3x + 2]
+answer   choice infinite
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [2 = 2]
+step 2   Both sides are identical, so every value works.
+miss     expected-none = none   Both sides are the same statement, so every value of x works.
+
+--- special-solutions · seed 424242 · difficulty 1
+prompt   How many solutions does this equation have?
+display  equation "2x + 1 = 2x + 4" unframed [special-solutions 2x + 1 = 2x + 4]
+answer   choice none
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [1 = 4]
+step 2   No x is left and the numbers disagree.
+miss     expected-infinite = infinite   The x terms cancel and the numbers left over disagree — nothing works.
+
+--- special-solutions · seed 987654321 · difficulty 1
+prompt   How many solutions does this equation have?
+display  equation "2x + 1 = 4x + 4" unframed [special-solutions 2x + 1 = 4x + 4]
+answer   choice one
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [1 = 2x + 4]
+step 2   An x term survives, so one value works.
+miss     expected-none = none   The x terms are different sizes, so they do not cancel.
+
+--- special-solutions · seed 1 · difficulty 2
+prompt   How many solutions does this equation have?
+display  equation "2x + 5 = 2x + 5" unframed [special-solutions 2x + 5 = 2x + 5]
+answer   choice infinite
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [5 = 5]
+step 2   Both sides are identical, so every value works.
+miss     expected-none = none   Both sides are the same statement, so every value of x works.
+
+--- special-solutions · seed 12345 · difficulty 2
+prompt   How many solutions does this equation have?
+display  equation "3x + 5 = 6x + 5" unframed [special-solutions 3x + 5 = 6x + 5]
+answer   choice one
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [5 = 3x + 5]
+step 2   An x term survives, so one value works.
+miss     expected-none = none   The x terms are different sizes, so they do not cancel.
+
+--- special-solutions · seed 67890 · difficulty 2
+prompt   How many solutions does this equation have?
+display  equation "4x + 4 = 4x + 4" unframed [special-solutions 4x + 4 = 4x + 4]
+answer   choice infinite
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [4 = 4]
+step 2   Both sides are identical, so every value works.
+miss     expected-none = none   Both sides are the same statement, so every value of x works.
+
+--- special-solutions · seed 424242 · difficulty 2
+prompt   How many solutions does this equation have?
+display  equation "3x + 3 = 3x + 6" unframed [special-solutions 3x + 3 = 3x + 6]
+answer   choice none
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [3 = 6]
+step 2   No x is left and the numbers disagree.
+miss     expected-infinite = infinite   The x terms cancel and the numbers left over disagree — nothing works.
+
+--- special-solutions · seed 987654321 · difficulty 2
+prompt   How many solutions does this equation have?
+display  equation "2x + 2 = 6x + 6" unframed [special-solutions 2x + 2 = 6x + 6]
+answer   choice one
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [2 = 4x + 6]
+step 2   An x term survives, so one value works.
+miss     expected-none = none   The x terms are different sizes, so they do not cancel.
+
+--- special-solutions · seed 1 · difficulty 3
+prompt   How many solutions does this equation have?
+display  equation "3x + 7 = 3x + 7" unframed [special-solutions 3x + 7 = 3x + 7]
+answer   choice infinite
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [7 = 7]
+step 2   Both sides are identical, so every value works.
+miss     expected-none = none   Both sides are the same statement, so every value of x works.
+
+--- special-solutions · seed 12345 · difficulty 3
+prompt   How many solutions does this equation have?
+display  equation "4x + 7 = 8x + 7" unframed [special-solutions 4x + 7 = 8x + 7]
+answer   choice one
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [7 = 4x + 7]
+step 2   An x term survives, so one value works.
+miss     expected-none = none   The x terms are different sizes, so they do not cancel.
+
+--- special-solutions · seed 67890 · difficulty 3
+prompt   How many solutions does this equation have?
+display  equation "6x + 5 = 6x + 5" unframed [special-solutions 6x + 5 = 6x + 5]
+answer   choice infinite
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [5 = 5]
+step 2   Both sides are identical, so every value works.
+miss     expected-none = none   Both sides are the same statement, so every value of x works.
+
+--- special-solutions · seed 424242 · difficulty 3
+prompt   How many solutions does this equation have?
+display  equation "4x + 4 = 4x + 9" unframed [special-solutions 4x + 4 = 4x + 9]
+answer   choice none
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [4 = 9]
+step 2   No x is left and the numbers disagree.
+miss     expected-infinite = infinite   The x terms cancel and the numbers left over disagree — nothing works.
+
+--- special-solutions · seed 987654321 · difficulty 3
+prompt   How many solutions does this equation have?
+display  equation "3x + 2 = 8x + 8" unframed [special-solutions 3x + 2 = 8x + 8]
+answer   choice one
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [2 = 5x + 8]
+step 2   An x term survives, so one value works.
+miss     expected-none = none   The x terms are different sizes, so they do not cancel.
+
+--- special-solutions · seed 1 · difficulty 4
+prompt   How many solutions does this equation have?
+display  equation "3x + 10 = 3x + 10" unframed [special-solutions 3x + 10 = 3x + 10]
+answer   choice infinite
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [10 = 10]
+step 2   Both sides are identical, so every value works.
+miss     expected-none = none   Both sides are the same statement, so every value of x works.
+
+--- special-solutions · seed 12345 · difficulty 4
+prompt   How many solutions does this equation have?
+display  equation "5x + 9 = 9x + 10" unframed [special-solutions 5x + 9 = 9x + 10]
+answer   choice one
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [9 = 4x + 10]
+step 2   An x term survives, so one value works.
+miss     expected-none = none   The x terms are different sizes, so they do not cancel.
+
+--- special-solutions · seed 67890 · difficulty 4
+prompt   How many solutions does this equation have?
+display  equation "7x + 8 = 7x + 8" unframed [special-solutions 7x + 8 = 7x + 8]
+answer   choice infinite
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [8 = 8]
+step 2   Both sides are identical, so every value works.
+miss     expected-none = none   Both sides are the same statement, so every value of x works.
+
+--- special-solutions · seed 424242 · difficulty 4
+prompt   How many solutions does this equation have?
+display  equation "4x + 5 = 4x + 12" unframed [special-solutions 4x + 5 = 4x + 12]
+answer   choice none
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [5 = 12]
+step 2   No x is left and the numbers disagree.
+miss     expected-infinite = infinite   The x terms cancel and the numbers left over disagree — nothing works.
+
+--- special-solutions · seed 987654321 · difficulty 4
+prompt   How many solutions does this equation have?
+display  equation "4x + 3 = 10x + 11" unframed [special-solutions 4x + 3 = 10x + 11]
+answer   choice one
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [3 = 6x + 11]
+step 2   An x term survives, so one value works.
+miss     expected-none = none   The x terms are different sizes, so they do not cancel.
+
+--- special-solutions · seed 1 · difficulty 5
+prompt   How many solutions does this equation have?
+display  equation "4x + 12 = 4x + 12" unframed [special-solutions 4x + 12 = 4x + 12]
+answer   choice infinite
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [12 = 12]
+step 2   Both sides are identical, so every value works.
+miss     expected-none = none   Both sides are the same statement, so every value of x works.
+
+--- special-solutions · seed 12345 · difficulty 5
+prompt   How many solutions does this equation have?
+display  equation "6x + 12 = 11x + 12" unframed [special-solutions 6x + 12 = 11x + 12]
+answer   choice one
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [12 = 5x + 12]
+step 2   An x term survives, so one value works.
+miss     expected-none = none   The x terms are different sizes, so they do not cancel.
+
+--- special-solutions · seed 67890 · difficulty 5
+prompt   How many solutions does this equation have?
+display  equation "9x + 10 = 9x + 10" unframed [special-solutions 9x + 10 = 9x + 10]
+answer   choice infinite
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [10 = 10]
+step 2   Both sides are identical, so every value works.
+miss     expected-none = none   Both sides are the same statement, so every value of x works.
+
+--- special-solutions · seed 424242 · difficulty 5
+prompt   How many solutions does this equation have?
+display  equation "6x + 7 = 6x + 15" unframed [special-solutions 6x + 7 = 6x + 15]
+answer   choice none
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [7 = 15]
+step 2   No x is left and the numbers disagree.
+miss     expected-infinite = infinite   The x terms cancel and the numbers left over disagree — nothing works.
+
+--- special-solutions · seed 987654321 · difficulty 5
+prompt   How many solutions does this equation have?
+display  equation "5x + 4 = 12x + 14" unframed [special-solutions 5x + 4 = 12x + 14]
+answer   choice one
+input    choice
+hint     Gather the x terms and see whether anything is left of them.
+choice   none = No solution
+choice   infinite = Infinitely many solutions
+choice   one = Exactly one solution
+step 1   Take the smaller x term from both sides.   [4 = 7x + 14]
+step 2   An x term survives, so one value works.
+miss     expected-none = none   The x terms are different sizes, so they do not cancel."
 `;
 
 exports[`recorded output: two-step > matches the wording recorded when the skill landed 1`] = `
@@ -1644,4 +2525,264 @@ step 2   Subtract 12 from both sides.   [3x = 18]
 step 3   Divide both sides by 3.   [x = 6]
 miss     gathered-wrong-direction = -6   Take the smaller x term from the larger so the coefficient stays positive.
 miss     left-constants-unmoved = 10   The constants move to the other side too, not just the x terms."
+`;
+
+exports[`recorded output: with-fractions > matches the wording recorded when the skill landed 1`] = `
+"--- with-fractions · seed 1 · difficulty 1
+prompt   Solve for x.
+display  equation "x/3 − 1 = 4" solve x row(fraction("x", "3"), " − 1 = 4") [clear-fraction x/3 - 1 = 4]
+answer   exact 15/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Add 1 on both sides.   [x/3 = 5]
+step 2   Multiply both sides by 3.   [x = 15]
+miss     multiplied-one-side-only = 7   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "x/3 + 1 = 6" solve x row(fraction("x", "3"), " + 1 = 6") [clear-fraction x/3 + 1 = 6]
+answer   exact 15/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 1 on both sides.   [x/3 = 5]
+step 2   Multiply both sides by 3.   [x = 15]
+miss     multiplied-one-side-only = 3   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 67890 · difficulty 1
+prompt   Solve for x.
+display  equation "x/2 + 2 = 5" solve x row(fraction("x", "2"), " + 2 = 5") [clear-fraction x/2 + 2 = 5]
+answer   exact 6/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 2 on both sides.   [x/2 = 3]
+step 2   Multiply both sides by 2.   [x = 6]
+miss     multiplied-one-side-only = 1   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 424242 · difficulty 1
+prompt   Solve for x.
+display  equation "x/2 + 1 = 5" solve x row(fraction("x", "2"), " + 1 = 5") [clear-fraction x/2 + 1 = 5]
+answer   exact 8/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 1 on both sides.   [x/2 = 4]
+step 2   Multiply both sides by 2.   [x = 8]
+miss     multiplied-one-side-only = 3   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 987654321 · difficulty 1
+prompt   Solve for x.
+display  equation "x/3 + 1 = 6" solve x row(fraction("x", "3"), " + 1 = 6") [clear-fraction x/3 + 1 = 6]
+answer   exact 15/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 1 on both sides.   [x/3 = 5]
+step 2   Multiply both sides by 3.   [x = 15]
+miss     multiplied-one-side-only = 3   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 1 · difficulty 2
+prompt   Solve for x.
+display  equation "x/3 − 1 = 6" solve x row(fraction("x", "3"), " − 1 = 6") [clear-fraction x/3 - 1 = 6]
+answer   exact 21/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Add 1 on both sides.   [x/3 = 7]
+step 2   Multiply both sides by 3.   [x = 21]
+miss     multiplied-one-side-only = 9   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "x/4 + 2 = 8" solve x row(fraction("x", "4"), " + 2 = 8") [clear-fraction x/4 + 2 = 8]
+answer   exact 24/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 2 on both sides.   [x/4 = 6]
+step 2   Multiply both sides by 4.   [x = 24]
+miss     multiplied-one-side-only = 0   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 67890 · difficulty 2
+prompt   Solve for x.
+display  equation "x/3 + 3 = 7" solve x row(fraction("x", "3"), " + 3 = 7") [clear-fraction x/3 + 3 = 7]
+answer   exact 12/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 3 on both sides.   [x/3 = 4]
+step 2   Multiply both sides by 3.   [x = 12]
+miss     multiplied-one-side-only = -2   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 424242 · difficulty 2
+prompt   Solve for x.
+display  equation "x/2 + 1 = 6" solve x row(fraction("x", "2"), " + 1 = 6") [clear-fraction x/2 + 1 = 6]
+answer   exact 10/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 1 on both sides.   [x/2 = 5]
+step 2   Multiply both sides by 2.   [x = 10]
+miss     multiplied-one-side-only = 4   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 987654321 · difficulty 2
+prompt   Solve for x.
+display  equation "x/4 + 1 = 8" solve x row(fraction("x", "4"), " + 1 = 8") [clear-fraction x/4 + 1 = 8]
+answer   exact 28/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 1 on both sides.   [x/4 = 7]
+step 2   Multiply both sides by 4.   [x = 28]
+miss     multiplied-one-side-only = 4   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 1 · difficulty 3
+prompt   Solve for x.
+display  equation "x/4 − 2 = 7" solve x row(fraction("x", "4"), " − 2 = 7") [clear-fraction x/4 - 2 = 7]
+answer   exact 36/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Add 2 on both sides.   [x/4 = 9]
+step 2   Multiply both sides by 4.   [x = 36]
+miss     multiplied-one-side-only = 15   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "x/5 + 3 = 11" solve x row(fraction("x", "5"), " + 3 = 11") [clear-fraction x/5 + 3 = 11]
+answer   exact 40/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 3 on both sides.   [x/5 = 8]
+step 2   Multiply both sides by 5.   [x = 40]
+miss     multiplied-one-side-only = -4   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 67890 · difficulty 3
+prompt   Solve for x.
+display  equation "x/3 + 4 = 9" solve x row(fraction("x", "3"), " + 4 = 9") [clear-fraction x/3 + 4 = 9]
+answer   exact 15/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 4 on both sides.   [x/3 = 5]
+step 2   Multiply both sides by 3.   [x = 15]
+miss     multiplied-one-side-only = -3   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 424242 · difficulty 3
+prompt   Solve for x.
+display  equation "x/2 + 3 = 10" solve x row(fraction("x", "2"), " + 3 = 10") [clear-fraction x/2 + 3 = 10]
+answer   exact 14/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 3 on both sides.   [x/2 = 7]
+step 2   Multiply both sides by 2.   [x = 14]
+miss     multiplied-one-side-only = 4   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 987654321 · difficulty 3
+prompt   Solve for x.
+display  equation "x/5 + 2 = 11" solve x row(fraction("x", "5"), " + 2 = 11") [clear-fraction x/5 + 2 = 11]
+answer   exact 45/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 2 on both sides.   [x/5 = 9]
+step 2   Multiply both sides by 5.   [x = 45]
+miss     multiplied-one-side-only = 1   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 1 · difficulty 4
+prompt   Solve for x.
+display  equation "x/5 − 2 = 10" solve x row(fraction("x", "5"), " − 2 = 10") [clear-fraction x/5 - 2 = 10]
+answer   exact 60/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Add 2 on both sides.   [x/5 = 12]
+step 2   Multiply both sides by 5.   [x = 60]
+miss     multiplied-one-side-only = 20   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "x/6 + 4 = 15" solve x row(fraction("x", "6"), " + 4 = 15") [clear-fraction x/6 + 4 = 15]
+answer   exact 66/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 4 on both sides.   [x/6 = 11]
+step 2   Multiply both sides by 6.   [x = 66]
+miss     multiplied-one-side-only = -9   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 67890 · difficulty 4
+prompt   Solve for x.
+display  equation "x/4 + 6 = 12" solve x row(fraction("x", "4"), " + 6 = 12") [clear-fraction x/4 + 6 = 12]
+answer   exact 24/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 6 on both sides.   [x/4 = 6]
+step 2   Multiply both sides by 4.   [x = 24]
+miss     multiplied-one-side-only = -12   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 424242 · difficulty 4
+prompt   Solve for x.
+display  equation "x/3 + 3 = 12" solve x row(fraction("x", "3"), " + 3 = 12") [clear-fraction x/3 + 3 = 12]
+answer   exact 27/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 3 on both sides.   [x/3 = 9]
+step 2   Multiply both sides by 3.   [x = 27]
+miss     multiplied-one-side-only = 3   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 987654321 · difficulty 4
+prompt   Solve for x.
+display  equation "x/6 + 2 = 14" solve x row(fraction("x", "6"), " + 2 = 14") [clear-fraction x/6 + 2 = 14]
+answer   exact 72/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 2 on both sides.   [x/6 = 12]
+step 2   Multiply both sides by 6.   [x = 72]
+miss     multiplied-one-side-only = 2   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 1 · difficulty 5
+prompt   Solve for x.
+display  equation "x/6 − 3 = 12" solve x row(fraction("x", "6"), " − 3 = 12") [clear-fraction x/6 - 3 = 12]
+answer   exact 90/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Add 3 on both sides.   [x/6 = 15]
+step 2   Multiply both sides by 6.   [x = 90]
+miss     multiplied-one-side-only = 30   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "x/8 + 5 = 18" solve x row(fraction("x", "8"), " + 5 = 18") [clear-fraction x/8 + 5 = 18]
+answer   exact 104/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 5 on both sides.   [x/8 = 13]
+step 2   Multiply both sides by 8.   [x = 104]
+miss     multiplied-one-side-only = -22   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 67890 · difficulty 5
+prompt   Solve for x.
+display  equation "x/5 + 7 = 15" solve x row(fraction("x", "5"), " + 7 = 15") [clear-fraction x/5 + 7 = 15]
+answer   exact 40/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 7 on both sides.   [x/5 = 8]
+step 2   Multiply both sides by 5.   [x = 40]
+miss     multiplied-one-side-only = -20   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 424242 · difficulty 5
+prompt   Solve for x.
+display  equation "x/3 + 4 = 15" solve x row(fraction("x", "3"), " + 4 = 15") [clear-fraction x/3 + 4 = 15]
+answer   exact 33/1
+input    keypad
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 4 on both sides.   [x/3 = 11]
+step 2   Multiply both sides by 3.   [x = 33]
+miss     multiplied-one-side-only = 3   The whole of the other side is multiplied too, not just the fraction.
+
+--- with-fractions · seed 987654321 · difficulty 5
+prompt   Solve for x.
+display  equation "x/8 + 4 = 18" solve x row(fraction("x", "8"), " + 4 = 18") [clear-fraction x/8 + 4 = 18]
+answer   exact 112/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 4 on both sides.   [x/8 = 14]
+step 2   Multiply both sides by 8.   [x = 112]
+miss     multiplied-one-side-only = -14   The whole of the other side is multiplied too, not just the fraction."
 `;

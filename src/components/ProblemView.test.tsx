@@ -382,4 +382,71 @@ describe('ProblemView', () => {
     // On the equation's own element, not merely somewhere in the markup.
     expect(html).toMatch(/<span class="[^"]*text-3xl[^"]*" role="math"/)
   })
+
+  it('drops the frame where the answer is not a value of the variable', () => {
+    // `special-solutions` omits the label. The frame is a claim — this equation
+    // has a solution and the answer is it — and framing this one would draw
+    // `x = No solution`, asserting exactly what the learner is asked to rule out.
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'equation',
+          text: '4x + 3 = 4x + 9',
+          equation: {
+            operation: 'special-solutions',
+            letter: 'x',
+            leftCoefficient: 4,
+            leftConstant: 3,
+            rightCoefficient: 4,
+            rightConstant: 9,
+          },
+        }}
+        entry="No solution"
+        entryMode="choice"
+      />,
+    )
+
+    // The whole row goes, slot included. An unlabelled slot is a cursor
+    // inviting entry on a screen with no keypad, and the value it would echo is
+    // the choice's id — a slug here, not the sentence the learner tapped.
+    expect(html).not.toContain('No solution')
+    expect(html).not.toContain('animate-pulse')
+    // One equals sign reaches the learner — the equation's own. A second would
+    // be the frame, and there is nothing true for it to say here.
+    const visible = html.replace(/<[^>]*>/g, '')
+    expect([...visible.matchAll(/=/g)]).toHaveLength(1)
+  })
+
+  it('renders a notated equation through the notation surface, under one name', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'equation',
+          text: 'x/3 + 2 = 7',
+          variable: 'x',
+          equation: { operation: 'clear-fraction', denominator: 3, constant: 2, adds: true, rightHand: 7 },
+          notation: {
+            kind: 'row',
+            children: [
+              { kind: 'fraction', numerator: { kind: 'text', value: 'x' }, denominator: { kind: 'text', value: '3' } },
+              { kind: 'text', value: ' + 2 = 7' },
+            ],
+          },
+        }}
+        entry="15"
+      />,
+    )
+
+    // Stacked, not a slash between characters — the presentation `math-notation`
+    // exists to replace, and the equation arm was the last display without it.
+    expect(html).toContain('mq-math')
+    expect(html).not.toContain('x/3 + 2 = 7<')
+    // Exactly one accessible name for the equation. `MathNotation` carries its
+    // own role, so a wrapper carrying a second one would announce it twice.
+    expect([...html.matchAll(/role="math"/g)]).toHaveLength(1)
+    expect(html).toContain('aria-label="x/3 + 2 = 7"')
+    // The frame still applies: this answer *is* a value of x.
+    expect(html).toContain('>x<')
+    expect(html).toContain('>15<')
+  })
 })

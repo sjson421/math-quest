@@ -1,6 +1,6 @@
 import { intAnswer } from '../lib/answer'
 import { gcd } from '../lib/rational'
-import { band, defineSkill, drawn, type BuildContext, type Ladder } from './engine'
+import { band, defineSkill, drawn, term as engineTerm, type BuildContext, type Ladder } from './engine'
 import { factorsOf } from './unit-04-division'
 
 /**
@@ -25,15 +25,16 @@ import { factorsOf } from './unit-04-division'
 const VARIABLE = 'x'
 
 /**
- * A term as it is written, not as it is stored.
+ * This unit's letter, filled in.
  *
- * A coefficient of one is not shown — `x`, never `1x`. Shared rather than
- * inlined per generator because this is the unit that teaches the notation:
- * one skill writing `1x` while the next writes `x` teaches that they are
- * different terms, which is exactly the confusion 13.4 and 13.5 are for.
+ * The rule itself — a coefficient of one is not written — moved to the engine
+ * once Unit 14 needed it too. It matters most here, because this is the unit
+ * that teaches the notation: one skill writing `1x` while the next writes `x`
+ * would teach that they are different terms, which is exactly the confusion
+ * 13.4 and 13.5 exist to clear up.
  */
 const term = (coefficient: number, letter: string = VARIABLE): string =>
-  coefficient === 1 ? letter : `${coefficient}${letter}`
+  engineTerm(coefficient, letter)
 
 const VALUE_BAND: Ladder = {
   1: [1, 4],

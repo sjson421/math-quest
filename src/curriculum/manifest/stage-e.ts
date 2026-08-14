@@ -11,6 +11,13 @@
  * 13); math notation is just as real, since `3⁴` and a fraction inside an
  * equation cannot render as plain text. `zero-neg-exponents` settled on exact
  * reciprocal answers, so the already-built fraction input belongs here too.
+ *
+ * `choice-input` was missing until Unit 14b and should not have been:
+ * `identify-like-terms` has answered through it since 13a, and
+ * `special-solutions` is the second consumer. Nothing waited on it — the
+ * capability has shipped since item 5 — but an undeclared need is this file
+ * disagreeing with the course it transcribes. Stage B took the same correction
+ * when Unit 4 chose choice input for its number-theory skills.
  */
 
 import type { StageEntry } from './types'
@@ -18,7 +25,7 @@ import type { StageEntry } from './types'
 export const stageE: StageEntry = {
   id: 'stage-e',
   name: 'Powers & Early Algebra',
-  requires: ['math-notation', 'fraction-input', 'expression-input'],
+  requires: ['choice-input', 'math-notation', 'fraction-input', 'expression-input'],
   units: [
     {
       id: 'unit-12',

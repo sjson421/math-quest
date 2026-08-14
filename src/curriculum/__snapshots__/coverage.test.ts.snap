@@ -119,6 +119,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "equation-parentheses": [
     "vars-both-sides",
   ],
+  "equation-words": [
+    "special-solutions",
+  ],
   "equivalent-multiply": [
     "equivalent-visual",
   ],
@@ -282,6 +285,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
     "decimal-place-value",
   ],
   "read-numbers": [],
+  "rearrange-formula": [
+    "equation-words",
+  ],
   "round-decimals": [
     "compare-decimals",
   ],
@@ -308,6 +314,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "solve-proportions": [
     "unit-rate",
+  ],
+  "special-solutions": [
+    "with-fractions",
   ],
   "sub-2digit-borrow": [
     "sub-2digit-noborrow",
@@ -392,6 +401,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "vars-both-sides": [
     "two-step",
+  ],
+  "with-fractions": [
+    "equation-parentheses",
   ],
   "with-parentheses": [
     "two-operations",

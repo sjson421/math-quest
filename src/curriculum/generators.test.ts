@@ -999,9 +999,18 @@ function expectedPowerDisplay(data: PowerData): {
  */
 function expectedEquation(
   data: EquationData,
-  variable: string,
-): { text: string; answer: number; values: number[] } {
+  variable: string | undefined,
+): { text: string; answer: number | string; values: number[] } {
   const sign = (adds: boolean): string => (adds ? '+' : '−')
+  // The five arms below that write the variable into their text all belong to
+  // skills that frame their slot with a letter, so it is always there for them.
+  // The three arms added in 14b do not depend on it: `special-solutions` is
+  // unframed and carries its own letters implicitly, and `rearrange` carries
+  // both of its letters in the payload.
+  const framed = (): string => {
+    if (variable === undefined) throw new Error(`${data.operation}: needs a frame label to rebuild its text`)
+    return variable
+  }
 
   switch (data.operation) {
     case 'balance': {
@@ -1014,21 +1023,21 @@ function expectedEquation(
     }
     case 'one-step-addsub':
       return {
-        text: `${variable} ${sign(data.adds)} ${data.constant} = ${drawn(data.rightHand)}`,
+        text: `${framed()} ${sign(data.adds)} ${data.constant} = ${drawn(data.rightHand)}`,
         answer: data.adds ? data.rightHand - data.constant : data.rightHand + data.constant,
         values: [data.constant, data.rightHand],
       }
     case 'one-step-multdiv':
       return {
         text: data.multiplies
-          ? `${data.coefficient}${variable} = ${drawn(data.rightHand)}`
-          : `${variable} ÷ ${data.coefficient} = ${drawn(data.rightHand)}`,
+          ? `${data.coefficient}${framed()} = ${drawn(data.rightHand)}`
+          : `${framed()} ÷ ${data.coefficient} = ${drawn(data.rightHand)}`,
         answer: data.multiplies ? data.rightHand / data.coefficient : data.rightHand * data.coefficient,
         values: [data.coefficient, data.rightHand],
       }
     case 'two-step':
       return {
-        text: `${data.coefficient}${variable} ${sign(data.adds)} ${data.constant} = ${drawn(data.rightHand)}`,
+        text: `${data.coefficient}${framed()} ${sign(data.adds)} ${data.constant} = ${drawn(data.rightHand)}`,
         answer: data.adds
           ? (data.rightHand - data.constant) / data.coefficient
           : (data.rightHand + data.constant) / data.coefficient,
@@ -1037,26 +1046,86 @@ function expectedEquation(
     case 'vars-both-sides':
       return {
         text:
-          `${data.leftCoefficient}${variable} + ${data.leftConstant} = ` +
-          `${data.rightCoefficient}${variable} + ${data.rightConstant}`,
+          `${data.leftCoefficient}${framed()} + ${data.leftConstant} = ` +
+          `${data.rightCoefficient}${framed()} + ${data.rightConstant}`,
         answer:
           (data.rightConstant - data.leftConstant) / (data.leftCoefficient - data.rightCoefficient),
         values: [data.leftCoefficient, data.leftConstant, data.rightCoefficient, data.rightConstant],
       }
     case 'parentheses':
       return {
-        text: `${data.coefficient}(${variable} ${sign(data.adds)} ${data.constant}) = ${drawn(data.rightHand)}`,
+        text: `${data.coefficient}(${framed()} ${sign(data.adds)} ${data.constant}) = ${drawn(data.rightHand)}`,
         answer: data.adds
           ? data.rightHand / data.coefficient - data.constant
           : data.rightHand / data.coefficient + data.constant,
         values: [data.coefficient, data.constant, data.rightHand],
       }
+    case 'clear-fraction':
+      return {
+        // The row is notated, so the text is the equation's name rather than
+        // its drawing. It is still what the display must carry and announce.
+        text: `${framed()}/${data.denominator} ${sign(data.adds)} ${data.constant} = ${drawn(data.rightHand)}`,
+        answer: data.adds
+          ? (data.rightHand - data.constant) * data.denominator
+          : (data.rightHand + data.constant) * data.denominator,
+        values: [data.denominator, data.constant, data.rightHand],
+      }
+    case 'special-solutions': {
+      // Derived by comparing the two sides, not by solving. Solving is what
+      // `vars-both-sides` does, and on the equal-coefficient draws that is a
+      // division by zero — which is exactly why this is its own arm.
+      const sameCoefficient = data.leftCoefficient === data.rightCoefficient
+      const sameConstant = data.leftConstant === data.rightConstant
+      return {
+        text:
+          `${data.leftCoefficient}${data.letter} + ${data.leftConstant} = ` +
+          `${data.rightCoefficient}${data.letter} + ${data.rightConstant}`,
+        answer: sameCoefficient ? (sameConstant ? 'infinite' : 'none') : 'one',
+        values: [data.leftCoefficient, data.leftConstant, data.rightCoefficient, data.rightConstant],
+      }
+    }
+    case 'rearrange': {
+      // `a·subject + b·term = c` → `subject = −(b/a)·term + c/a`. Both divisions
+      // are exact by the generator's composition, and this check asserts that
+      // rather than assuming it: a non-integer here means the draw stopped
+      // composing and the answer left the expression grammar.
+      const coefficient = -data.termCoefficient / data.subjectCoefficient
+      const constant = data.constant / data.subjectCoefficient
+      if (!Number.isInteger(coefficient) || !Number.isInteger(constant)) {
+        throw new Error(
+          `rearrange: ${data.subjectCoefficient} does not divide both ` +
+            `${data.termCoefficient} and ${data.constant}`,
+        )
+      }
+      // A coefficient of one is written as the bare letter, because that is what
+      // the pad produces — `x`, never `1x`. Re-derived here rather than shared
+      // with the generator: a helper both sides imported would agree with itself
+      // whichever way it was wrong.
+      const term = (value: number): string =>
+        value === 1 ? data.term : value === -1 ? `-${data.term}` : `${value}${data.term}`
+      return {
+        text:
+          `${data.subjectCoefficient}${data.subject} + ` +
+          `${data.termCoefficient}${data.term} = ${drawn(data.constant)}`,
+        answer: `${term(coefficient)}${constant < 0 ? '' : '+'}${constant}`,
+        values: [data.subjectCoefficient, data.termCoefficient, data.constant],
+      }
+    }
     default: {
       const unhandled: never = data
       throw new Error(`Unknown equation operation: ${JSON.stringify(unhandled)}`)
     }
   }
 }
+
+/**
+ * The letter passed when rebuilding an equation that is never displayed.
+ *
+ * A story shows prose, so its rebuilt equation text is discarded and only the
+ * answer is taken. Named rather than written twice so the two sites that do this
+ * cannot drift into disagreeing about a value neither of them reads.
+ */
+const STORY_REBUILD_LETTER = 'x'
 
 function recompute(problem: Problem): number | string {
   const { display } = problem
@@ -1247,7 +1316,36 @@ function recompute(problem: Problem): number | string {
         `${problem.skillId}: visible equation "${display.text}" disagrees with its data ("${expected.text}")`,
       )
     }
+    // A choice-answered equation derives the outcome's stable id, not its
+    // label, and that is the one place this differs from every earlier
+    // choice-answered display. Those name a label because their choices *are*
+    // their values — `<`, `prime`, a sorted list. These are sentences, and a
+    // check that hardcoded "Infinitely many solutions" would fail the day the
+    // copy is reworded, which is not a defect in the arithmetic.
+    //
+    // The guarantee `choiceIdFor` gives is kept explicitly: the derived outcome
+    // has to be one the problem actually offers, or a generator could ask for an
+    // answer that is not on screen.
+    if (typeof expected.answer === 'string' && problem.answer.kind === 'choice') {
+      const ids = (problem.choices ?? []).map((choice) => choice.id)
+      if (new Set(ids).size !== ids.length) throw new Error(`${problem.skillId}: choice ids are not unique`)
+      if (!ids.includes(expected.answer)) {
+        throw new Error(`${problem.skillId}: derived outcome "${expected.answer}" is not among the offered choices`)
+      }
+    }
     return expected.answer
+  }
+
+  // A story whose structure is an equation. The prose states two operations in
+  // sequence and mentions quantities the answer does not use, so the terms are
+  // carried and the sentence is never read.
+  //
+  // Only the answer is taken. No equation is on screen to compare a rebuild
+  // against — the sentence is what is displayed, and the unit's own test checks
+  // that against its frame and these same terms. The letter passed here names a
+  // rebuild that is discarded.
+  if (display.kind === 'story' && display.equation) {
+    return expectedEquation(display.equation, STORY_REBUILD_LETTER).answer
   }
 
   // A story carries its quantities precisely so this stays possible. Reading
@@ -1438,11 +1536,17 @@ function sourceMagnitude(problem: Problem): number {
   if (problem.display.kind === 'diagram') return problem.display.diagram.parts
 
   if (problem.display.kind === 'story') {
+    // The equation case is named for the same reason the equation branch below
+    // is: this chain ends at `operands`, which an equation-carrying story does
+    // not have, so leaving it out measures the ladder against `undefined`
+    // rather than failing.
     const values = problem.display.percent
       ? expectedPercent(problem.display.percent).values
       : problem.display.ratio
         ? expectedRatioDisplay(problem.display.ratio).values
-        : problem.display.operands
+        : problem.display.equation
+          ? expectedEquation(problem.display.equation, STORY_REBUILD_LETTER).values
+          : problem.display.operands
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
@@ -1692,6 +1796,149 @@ describe('ratio and proportion answer verification', () => {
     problem.display.ratio.rightNumerator = 12
 
     expect(answerMismatch(problem)).toContain('synthetic-proportion: stated 12, derived 15')
+  })
+})
+
+describe('equation answer verification', () => {
+  const notated = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-clear-fraction',
+    prompt: 'Solve for x.',
+    display: {
+      kind: 'equation',
+      text: 'x/3 + 2 = 7',
+      variable: 'x',
+      equation: { operation: 'clear-fraction', denominator: 3, constant: 2, adds: true, rightHand: 7 },
+      notation: {
+        kind: 'row',
+        children: [notationFraction('x', '3'), notationText(' + 2 = 7')],
+      },
+    },
+    answer: intAnswer(15),
+    inputMode: 'keypad',
+    hint: 'Multiply both sides by the denominator.',
+    solution: [{ text: 'Clear the denominator.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  const counted = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-special-solutions',
+    prompt: 'How many solutions does this equation have?',
+    display: {
+      kind: 'equation',
+      text: '4x + 3 = 4x + 9',
+      equation: {
+        operation: 'special-solutions',
+        letter: 'x',
+        leftCoefficient: 4,
+        leftConstant: 3,
+        rightCoefficient: 4,
+        rightConstant: 9,
+      },
+    },
+    answer: { kind: 'choice', id: 'none' },
+    inputMode: 'choice',
+    choices: [
+      { id: 'none', label: 'No solution' },
+      { id: 'infinite', label: 'Infinitely many solutions' },
+      { id: 'one', label: 'Exactly one solution' },
+    ],
+    hint: 'Gather the x terms and see what is left.',
+    solution: [{ text: 'The x terms cancel.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  const rearranged = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-rearrange',
+    prompt: 'Solve for y.',
+    display: {
+      kind: 'equation',
+      text: '2y + 4x = 10',
+      variable: 'y',
+      equation: {
+        operation: 'rearrange',
+        subject: 'y',
+        term: 'x',
+        subjectCoefficient: 2,
+        termCoefficient: 4,
+        constant: 10,
+      },
+    },
+    answer: { kind: 'expression', canonical: '-2x+5', variable: 'x', form: 'expanded' },
+    inputMode: 'expression',
+    expression: { variable: 'x' },
+    hint: 'Get the y term alone, then divide both sides.',
+    solution: [{ text: 'Subtract the x term.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
+  it('derives each new equation answer from its carried terms alone', () => {
+    expect(answerMismatch(notated())).toBeUndefined()
+    expect(answerMismatch(counted())).toBeUndefined()
+    expect(answerMismatch(rearranged())).toBeUndefined()
+  })
+
+  it('names a stated equation answer that disagrees with the carried terms', () => {
+    expect(answerMismatch(notated({ answer: intAnswer(9) }))).toContain(
+      'synthetic-clear-fraction: stated 9, derived 15',
+    )
+    expect(answerMismatch(counted({ answer: { kind: 'choice', id: 'infinite' } }))).toContain(
+      'synthetic-special-solutions: stated infinite, derived none',
+    )
+    expect(
+      answerMismatch(rearranged({ answer: { kind: 'expression', canonical: '2x+5', variable: 'x', form: 'expanded' } })),
+    ).toContain('synthetic-rearrange: stated 2x+5, derived -2x+5')
+  })
+
+  it('rejects a notated equation whose text disagrees with its data', () => {
+    // The notation is what the learner sees, but `text` is what names it to
+    // assistive technology and what the carried values are checked against. A
+    // text that has drifted from the data is the same defect as a plain row
+    // that has, and the check has to reach it through the notated arm too.
+    const problem = notated()
+    if (problem.display.kind !== 'equation') throw new Error('expected equation display')
+    problem.display.text = 'x/4 + 2 = 7'
+
+    expect(() => answerMismatch(problem)).toThrow('visible equation "x/4 + 2 = 7" disagrees with its data')
+  })
+
+  it('reads the solution count from the constants, not only the coefficients', () => {
+    // The whole diagnostic content of the skill. `4x + 3 = 4x + 9` and
+    // `4x + 3 = 4x + 3` share every coefficient and differ only in a constant,
+    // so a check that stopped at the coefficients would call them the same.
+    const infinite = counted({
+      display: {
+        kind: 'equation',
+        text: '4x + 3 = 4x + 3',
+        equation: {
+          operation: 'special-solutions',
+          letter: 'x',
+          leftCoefficient: 4,
+          leftConstant: 3,
+          rightCoefficient: 4,
+          rightConstant: 3,
+        },
+      },
+      answer: { kind: 'choice', id: 'infinite' },
+    })
+
+    expect(answerMismatch(infinite)).toBeUndefined()
+  })
+
+  it('fails a rearrangement whose coefficients do not divide exactly', () => {
+    // The composition rule made executable. A draw that stopped composing
+    // produces an answer with a fractional coefficient, which is outside the
+    // expression grammar and unenterable on the pad — so the check refuses to
+    // derive one rather than deriving something the learner cannot type.
+    const problem = rearranged()
+    if (problem.display.kind !== 'equation' || problem.display.equation.operation !== 'rearrange') {
+      throw new Error('expected rearrange display')
+    }
+    problem.display.equation.termCoefficient = 5
+
+    expect(() => answerMismatch(problem)).toThrow('rearrange: 2 does not divide both 5 and 10')
   })
 })
 

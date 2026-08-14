@@ -363,6 +363,57 @@ export type EquationData =
     }
   /** `equation-parentheses`: `coefficient(x ± constant) = rightHand`. */
   | { operation: 'parentheses'; coefficient: number; constant: number; adds: boolean; rightHand: number }
+  /**
+   * `with-fractions`: `x / denominator ± constant = rightHand`, drawn as a
+   * stacked fraction rather than a slash.
+   */
+  | {
+      operation: 'clear-fraction'
+      denominator: number
+      constant: number
+      adds: boolean
+      rightHand: number
+    }
+  /**
+   * `special-solutions`: all four displayed terms, like `vars-both-sides` — and
+   * deliberately not that arm.
+   *
+   * The two derive different things from the same four numbers: one a solution,
+   * one a solution *count*. `4x + 3 = 4x + 9` has no solution at all, so
+   * `vars-both-sides`'s derivation divides by zero on it. One arm serving both
+   * would let a generator claim either answer from either shape, which is the
+   * swap this union exists to make a compile error.
+   */
+  | {
+      operation: 'special-solutions'
+      /**
+       * The letter, carried rather than taken from the display's frame label —
+       * this arm is the one that omits that label, and a check that assumed the
+       * letter instead would stop being independent of the generator.
+       */
+      letter: string
+      leftCoefficient: number
+      leftConstant: number
+      rightCoefficient: number
+      rightConstant: number
+    }
+  /**
+   * `rearrange-formula`: `subjectCoefficient·subject + termCoefficient·term =
+   * constant`, solved for `subject`.
+   *
+   * The only arm carrying letters. Every other equation is written in the one
+   * variable the display already names; this one puts two on screen and the
+   * answer contains only `term`, so the text cannot be rebuilt from
+   * `display.variable` alone.
+   */
+  | {
+      operation: 'rearrange'
+      subject: string
+      term: string
+      subjectCoefficient: number
+      termCoefficient: number
+      constant: number
+    }
 
 /**
  * Structured notation for the closed expression surface used by Stages D–G.
@@ -497,10 +548,16 @@ export type Display =
    * no such frame.
    */
   | ({ kind: 'story'; text: string } & (
-      | { operands: number[]; operator: Operator; percent?: never; ratio?: never; algebra?: never }
-      | { percent: PercentData; operands?: never; operator?: never; ratio?: never; algebra?: never }
-      | { ratio: RatioData; operands?: never; operator?: never; percent?: never; algebra?: never }
-      | { algebra: AlgebraData; operands?: never; operator?: never; percent?: never; ratio?: never }
+      | { operands: number[]; operator: Operator; percent?: never; ratio?: never; algebra?: never; equation?: never }
+      | { percent: PercentData; operands?: never; operator?: never; ratio?: never; algebra?: never; equation?: never }
+      | { ratio: RatioData; operands?: never; operator?: never; percent?: never; algebra?: never; equation?: never }
+      | { algebra: AlgebraData; operands?: never; operator?: never; percent?: never; ratio?: never; equation?: never }
+      /**
+       * A situation whose structure is an equation. `equation-words` is the
+       * consumer: its sentence states two operations applied in sequence, and
+       * `operands` with one `operator` states exactly one by construction.
+       */
+      | { equation: EquationData; operands?: never; operator?: never; percent?: never; ratio?: never; algebra?: never }
     ))
   /** Structured notation with the one complete name assistive technology reads. */
   | ({
@@ -528,7 +585,36 @@ export type Display =
    * in the unit whose whole subject is that both sides of an equals sign hold
    * the same value. `ProblemView` frames the slot as `x = ⟦slot⟧` beneath.
    */
-  | { kind: 'equation'; text: string; variable: string; equation: EquationData }
+  | {
+      kind: 'equation'
+      /**
+       * The equation in plain characters. Three jobs at once, and they have to
+       * stay one string: it is the row when there is no `notation`, it is the
+       * accessible name when there is, and it is what independent verification
+       * rebuilds from the carried values and compares against.
+       */
+      text: string
+      /**
+       * The label on the answer row — a letter for most skills, but `'each side'`
+       * for `equation-balance`, so this is a label rather than a variable name.
+       *
+       * Omitted where the answer is *not* a value of anything the equation
+       * solves for. `special-solutions` is the consumer: framing its slot would
+       * draw `x = No solution`, asserting a solution exists in the one skill
+       * whose question is whether it does.
+       */
+      variable?: string
+      equation: EquationData
+      /**
+       * The equation as structured notation, drawn instead of `text` when set.
+       *
+       * `with-fractions` is the consumer and the reason this exists: a fraction
+       * written as a slash between plain characters is exactly the presentation
+       * `math-notation` was built to replace, and the equation arm was the one
+       * display with no way to avoid it.
+       */
+      notation?: MathNotation
+    }
 
 export type Problem = {
   skillId: string

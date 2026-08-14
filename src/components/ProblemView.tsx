@@ -196,18 +196,56 @@ function MathView({ display, entry, entryMode }: { display: Of<'math'> } & Entry
  * phone, which is item 12's finding.
  */
 function EquationView({ display, entry, entryMode }: { display: Of<'equation'> } & EntryProps) {
-  const size = display.text.length > 18 ? 'text-3xl' : display.text.length > 13 ? 'text-4xl' : 'text-5xl'
+  // A notated row is a stack, not a line of characters, so it takes one size
+  // rather than a ladder over `text.length` — the text names the equation but no
+  // longer describes how wide it draws. `coverage.test.ts` bounds the two rows
+  // separately for the same reason.
+  const size = display.notation
+    ? 'text-3xl'
+    : display.text.length > 18
+      ? 'text-3xl'
+      : display.text.length > 13
+        ? 'text-4xl'
+        : 'text-5xl'
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <span className={`font-bold tabular-nums tracking-tight ${size}`} role="math" aria-label={display.text}>
-        {display.text}
-      </span>
-      <div className="flex items-baseline justify-center gap-3 text-4xl">
-        <span className="font-bold tabular-nums tracking-tight">{display.variable}</span>
-        <span className="font-bold text-ink-faint">=</span>
-        <EntrySlot value={entry} mode={entryMode} />
-      </div>
+      {/*
+        `MathNotation` owns its own `role="math"` and label, so it *replaces* the
+        text row rather than sitting inside it. Nesting them would expose two
+        accessible names for one equation, which is the single-name rule the
+        notation surface exists to keep — and the plain row is left exactly as it
+        was, since every equation in the course but one still takes it.
+      */}
+      {display.notation ? (
+        <span className={size}>
+          <MathNotation notation={display.notation} label={display.text} />
+        </span>
+      ) : (
+        <span className={`font-bold tabular-nums tracking-tight ${size}`} role="math" aria-label={display.text}>
+          {display.text}
+        </span>
+      )}
+      {/*
+        The frame is a claim: this equation has a solution, and the answer is it.
+        Where the answer is a property of the equation instead, the whole row
+        goes — label, equals sign and slot together.
+
+        Dropping only the label was the first attempt and the browser check
+        showed why it does not work. An unlabelled slot is a blinking cursor
+        inviting entry on a screen with no keypad, and the value it would echo is
+        the choice's *id*: every earlier choice skill names its options by their
+        own text (`3x`, `prime`, `<`), so the slot reads correctly by accident.
+        These options are sentences with slug ids, so it would read `none`. The
+        choices are the answer surface here, and the feedback names the mistake.
+      */}
+      {display.variable !== undefined && (
+        <div className="flex items-baseline justify-center gap-3 text-4xl">
+          <span className="font-bold tabular-nums tracking-tight">{display.variable}</span>
+          <span className="font-bold text-ink-faint">=</span>
+          <EntrySlot value={entry} mode={entryMode} />
+        </div>
+      )}
     </div>
   )
 }
