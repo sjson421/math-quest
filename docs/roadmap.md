@@ -78,7 +78,7 @@ behind our build order.
 
 **Capabilities gate whole stages.** `AVAILABLE_CAPABILITIES` in
 `src/curriculum/manifest/resolve.ts` contains `choice-input`, `number-line`, `math-notation`,
-`fraction-input` and `diagram` today. Adding a capability there is a one-line edit that flips its stage
+`fraction-input`, `diagram` and `expression-input` today. Adding a capability there is a one-line edit that flips its stage
 on — which is why capability work is its own item, never bundled with the content it unblocks.
 It flips nothing on its own, though: a skill still needs a generator and every other
 capability its stage declares.
