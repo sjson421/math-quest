@@ -1,19 +1,38 @@
 import { intAnswer } from '../lib/answer'
+import { entryLabel } from '../lib/keypad'
+import { gcd } from '../lib/rational'
 import { band, defineSkill, type BuildContext, type Ladder } from './engine'
+import { factorsOf } from './unit-04-division'
 
 /**
- * Unit 13a · Expressions.
+ * Unit 13 · Expressions.
  *
- * The six generators move from what a variable is through substitution,
- * translating a phrase, spotting like terms, and combining/distributing —
- * the first content to answer through `inputMode: 'expression'`. Every
- * expression answer declares a single variable, `x`, and compares under the
- * `expanded` form, so a re-ordered sum or an undistributed equivalent counts
- * as the same answer; only `factor-gcf` (13.8, a later increment) needs the
- * `exact` form that keeps a factored and expanded form apart.
+ * The eight generators move from what a variable is through substitution,
+ * translating a phrase, spotting like terms, distributing (twice, the second
+ * time across a sign), and factoring back out — the first content to answer
+ * through `inputMode: 'expression'`. Every expression answer declares a single
+ * variable, `x`.
+ *
+ * Seven of them compare under the `expanded` form, so a re-ordered sum or an
+ * undistributed equivalent counts as the same answer. `factor-gcf` (13.8) is
+ * the exception and the reason the `exact` form exists: its answer is a
+ * factored form, and the expanded expression on screen is exactly the wrong
+ * answer. `exact` compares structure rather than value, which is why every
+ * coefficient that can come out as one goes through `term()` — under it, `1x`
+ * and `x` are two different answers, and authoring the first would mark the
+ * natural entry wrong.
  */
 
 const VARIABLE = 'x'
+
+/**
+ * A signed number as the learner reads it, not as it is stored.
+ *
+ * Unit 6's helper, repeated here for the same reason it exists there: worked
+ * steps are display text and use the typographic minus, while an answer and a
+ * predicted mistake are matched against pad entry and stay ASCII.
+ */
+const drawn = (value: number): string => entryLabel(String(value))
 
 /**
  * A term as it is written, not as it is stored.
@@ -312,6 +331,166 @@ const distributive = defineSkill({
   },
 })
 
+/**
+ * The coefficient outside the bracket, never one.
+ *
+ * At one, "multiplied the variable term only" and "took the second term's sign
+ * from inside the bracket" produce the same string, and the wall would predict
+ * two mistakes while diagnosing one.
+ */
+const NEGATIVE_COEFF_BAND: Ladder = {
+  1: [2, 4],
+  2: [2, 5],
+  3: [3, 6],
+  4: [3, 7],
+  5: [4, 8],
+}
+
+const distributeNegative = defineSkill({
+  id: 'distribute-negative',
+  name: 'Distributing a Negative',
+  blurb: '−3(x − 4)',
+  build(context: BuildContext) {
+    const [coeffMin, coeffMax] = band(context.difficulty, NEGATIVE_COEFF_BAND)
+    const [constMin, constMax] = band(context.difficulty, CONSTANT_BAND)
+    const coeff = context.rng.int(coeffMin, coeffMax)
+    const constant = context.rng.int(constMin, constMax)
+    // Both bracket signs are drawn. If the bracket always subtracted, the
+    // answer's second term would always be positive and the sign decision this
+    // skill exists for could be skipped by pattern.
+    const adds = context.rng.bool()
+    const product = coeff * constant
+    const second = adds ? -product : product
+
+    const canonical = `-${coeff}${VARIABLE}${second < 0 ? '' : '+'}${second}`
+
+    return {
+      prompt: 'Distribute to expand this expression.',
+      display: {
+        kind: 'inline',
+        text: `−${coeff}(${VARIABLE} ${adds ? '+' : '−'} ${constant})`,
+        algebra: { operation: 'distribute-negative', coefficient: coeff, constant, adds },
+      },
+      answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'expanded' },
+      inputMode: 'expression',
+      expression: { variable: VARIABLE },
+      misconceptions: [
+        {
+          // The wall: the second term's sign copied from inside the bracket
+          // rather than worked out from the multiplication.
+          value: { kind: 'text', value: `-${coeff}${VARIABLE}${adds ? '+' : '-'}${product}` },
+          tag: 'sign-not-flipped',
+          nudge: 'The negative outside multiplies the second term too, so its sign changes.',
+        },
+        {
+          value: { kind: 'text', value: `-${coeff}${VARIABLE}${adds ? '+' : '-'}${constant}` },
+          tag: 'distributed-first-term-only',
+          nudge: 'The number outside multiplies both terms inside, not just the first.',
+        },
+        {
+          value: { kind: 'text', value: `${coeff}${VARIABLE}${adds ? '+' : '-'}${product}` },
+          tag: 'dropped-outer-sign',
+          nudge: 'The coefficient outside is negative — both terms carry that with them.',
+        },
+      ],
+      hint: 'Multiply both terms inside by the negative number outside.',
+      solution: [
+        { text: 'Multiply by the first term.', detail: `−${coeff} × x = −${coeff}${VARIABLE}` },
+        {
+          text: 'Multiply by the second term.',
+          // `drawn`, not the raw number: a step reading `−4 × 2 = -8` writes the
+          // same sign two ways in one line, in the unit whose subject is signs.
+          detail: `−${coeff} × ${adds ? '' : '−'}${constant} = ${drawn(second)}`,
+        },
+      ],
+    }
+  },
+})
+
+const FACTOR_BAND: Ladder = {
+  1: [2, 3],
+  2: [2, 4],
+  3: [2, 6],
+  4: [3, 8],
+  5: [3, 9],
+}
+
+const INNER_CONSTANT_BAND: Ladder = {
+  1: [2, 5],
+  2: [2, 7],
+  3: [3, 9],
+  4: [3, 11],
+  5: [4, 12],
+}
+
+const factorGcf = defineSkill({
+  id: 'factor-gcf',
+  name: 'Factoring Out',
+  blurb: 'The reverse of distributing',
+  build(context: BuildContext) {
+    const [factorMin, factorMax] = band(context.difficulty, FACTOR_BAND)
+    const [innerMin, innerMax] = band(context.difficulty, INNER_CONSTANT_BAND)
+    const factor = context.rng.int(factorMin, factorMax)
+    const inner = context.rng.int(innerMin, innerMax)
+    // The two coefficients left inside must share nothing, or the factor drawn
+    // is merely *a* common factor and a smaller factoring would be just as
+    // correct. Drawn against the constant rather than filtered afterwards, so
+    // every difficulty keeps its full constant range.
+    const coefficients = [1, 2, 3, 4, 5].filter((c) => gcd(c, inner) === 1)
+    const coeff = context.rng.pick(coefficients)
+
+    const shownCoeff = factor * coeff
+    const shownConstant = factor * inner
+    const canonical = `${factor}(${term(coeff)}+${inner})`
+
+    return {
+      prompt: 'Factor out the greatest common factor.',
+      display: {
+        kind: 'inline',
+        text: `${shownCoeff}${VARIABLE} + ${shownConstant}`,
+        algebra: { operation: 'factor-gcf', factor, coefficient: coeff, constant: inner },
+      },
+      // `exact`, not `expanded`: the expression on screen is algebraically the
+      // answer, and accepting it back would accept doing nothing at all.
+      answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'exact' },
+      inputMode: 'expression',
+      expression: { variable: VARIABLE },
+      misconceptions: [
+        {
+          value: { kind: 'text', value: `${shownCoeff}${VARIABLE}+${shownConstant}` },
+          tag: 'left-expanded',
+          nudge: 'That is the expression you were given — take the shared factor outside it.',
+        },
+        // Every divisor strictly between one and the factor: each is a common
+        // factor, and none of them is the greatest.
+        ...factorsOf(factor)
+          .slice(1, -1)
+          .map((d) => ({
+            value: { kind: 'text' as const, value: `${d}(${term(shownCoeff / d)}+${shownConstant / d})` },
+            tag: 'not-greatest-factor',
+            nudge: 'That is a common factor, but a larger one divides both terms.',
+          })),
+        {
+          value: { kind: 'text', value: `${factor}(${term(coeff)}+${shownConstant})` },
+          tag: 'divided-first-term-only',
+          nudge: 'Both terms inside the brackets are divided by the factor, not just the first.',
+        },
+        {
+          value: { kind: 'text', value: `${factor}(${term(shownCoeff)}+${inner})` },
+          tag: 'divided-second-term-only',
+          nudge: 'Both terms inside the brackets are divided by the factor, not just the second.',
+        },
+      ],
+      hint: 'Find the largest number that divides both terms, then write what is left inside.',
+      solution: [
+        { text: 'Find the greatest common factor.', detail: `${shownCoeff} and ${shownConstant} share ${factor}` },
+        { text: 'Divide both terms by it.', detail: `${shownCoeff} ÷ ${factor} = ${coeff}, ${shownConstant} ÷ ${factor} = ${inner}` },
+        { text: 'Write the factor outside the brackets.', detail: canonical },
+      ],
+    }
+  },
+})
+
 export const unit13 = [
   variableMeaning,
   evaluateExpression,
@@ -319,4 +498,6 @@ export const unit13 = [
   identifyLikeTerms,
   combineLikeTerms,
   distributive,
+  distributeNegative,
+  factorGcf,
 ]

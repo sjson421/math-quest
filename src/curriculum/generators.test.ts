@@ -1069,6 +1069,18 @@ function recompute(problem: Problem): number | string {
         return `${data.first + data.second}x+${data.constant}`
       case 'distributive':
         return `${data.coefficient}x+${data.coefficient * data.constant}`
+      case 'distribute-negative': {
+        // The displayed coefficient is the negation of the carried one, so both
+        // terms of the result are negative products — and the second one is
+        // positive exactly when the bracket subtracts.
+        const second = data.adds ? -(data.coefficient * data.constant) : data.coefficient * data.constant
+        return `-${data.coefficient}x${second < 0 ? '' : '+'}${second}`
+      }
+      case 'factor-gcf':
+        // A coefficient of one is not written; under `exact` comparison `1x` and
+        // `x` are different answers, so this rebuild has to make the same choice
+        // the generator made.
+        return `${data.factor}(${data.coefficient === 1 ? 'x' : `${data.coefficient}x`}+${data.constant})`
       default: {
         const unhandled: never = data
         throw new Error(`Unknown algebra operation: ${JSON.stringify(unhandled)}`)
@@ -1316,7 +1328,13 @@ function sourceMagnitude(problem: Problem): number {
         case 'combine-like-terms':
           return [data.first, data.second, data.constant]
         case 'distributive':
+        case 'distribute-negative':
           return [data.coefficient, data.constant]
+        case 'factor-gcf':
+          // The inner coefficient is drawn from a fixed small set rather than a
+          // ladder — it exists to keep the two terms coprime — so averaging it
+          // in would flatten a ladder that the factor and constant do grow.
+          return [data.factor, data.constant]
         default: {
           const unhandled: never = data
           throw new Error(`Unknown algebra operation: ${JSON.stringify(unhandled)}`)

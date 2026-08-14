@@ -310,6 +310,17 @@ export type AlgebraData =
   | { operation: 'combine-like-terms'; first: number; second: number; constant: number }
   /** `distributive`: a coefficient distributed across the variable and a constant. */
   | { operation: 'distributive'; coefficient: number; constant: number }
+  /**
+   * `distribute-negative`: the coefficient's magnitude — the displayed one is
+   * its negation — the constant, and whether the bracket adds or subtracts it.
+   */
+  | { operation: 'distribute-negative'; coefficient: number; constant: number; adds: boolean }
+  /**
+   * `factor-gcf`: the greatest common factor taken outside, and the coefficient
+   * and constant left inside. The displayed sum is their products, so it is
+   * derived from this rather than carried alongside it.
+   */
+  | { operation: 'factor-gcf'; factor: number; coefficient: number; constant: number }
 
 /**
  * Structured notation for the closed expression surface used by Stages D–G.

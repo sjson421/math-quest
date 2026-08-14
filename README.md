@@ -29,11 +29,12 @@ interest. Unit 11 covers ratios, unit rates, proportions, scale drawings, stated
 conversions, and fixed-frame ratio word problems that distinguish part-to-part from
 part-to-whole. Unit 12 opens Stage E and is complete: exponent meaning and evaluation,
 squares and roots, same-base and power-of-power rules, zero and negative exponents,
-scientific notation, and full order of operations with exponents. Unit 13 has opened with
-its first six skills: what a variable is, evaluating and translating expressions, spotting
-like terms, and combining/distributing — the first content to use expression input, with
-`distribute-negative` and `factor-gcf` still to come. Later units still need a tap-to-plot
-coordinate plane, charts, and timed mode.
+scientific notation, and full order of operations with exponents. Unit 13 is complete: what
+a variable is, evaluating and translating expressions, spotting like terms, combining,
+distributing across a sign, and factoring a common factor back out — the first content to
+use expression input, and the first to ask for an answer whose written form matters as much
+as its value, since the expanded expression a factoring question displays is a wrong answer
+to it. Later units still need a tap-to-plot coordinate plane, charts, and timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
 milestone, what blocks what, and the unbuilt product features (dress-up, skip-ahead,

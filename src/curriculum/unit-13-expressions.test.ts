@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
 import { diagnose, generateProblem } from '../lib/generator'
+import { applyExpressionKey, type KeypadKey } from '../lib/keypad'
+import { gcd } from '../lib/rational'
 import type { Difficulty, Problem } from '../lib/types'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit13 } from './unit-13-expressions'
@@ -268,6 +270,166 @@ describe('distributive', () => {
   })
 })
 
+/** Every character replayed through the pad, so a prediction cannot be one nobody can type. */
+const typable = (value: string): boolean =>
+  [...value].reduce((entry, key) => applyExpressionKey(entry, key as KeypadKey, 'x'), '') === value
+
+const predictions = (problem: Problem): string[] =>
+  (problem.misconceptions ?? []).map((m) => (typeof m.value === 'number' ? String(m.value) : m.value.value))
+
+/**
+ * Nothing centrally excludes a text prediction that equals the answer, and the
+ * checker runs before diagnosis — so a prediction that graded correct would be
+ * congratulated rather than diagnosed, and one nobody can type never appears.
+ */
+const expectPredictionsWrongAndTypable = (problem: Problem) => {
+  for (const value of predictions(problem)) {
+    expect(checkAnswer(problem.answer, value).status).toBe('incorrect')
+    expect(typable(value)).toBe(true)
+  }
+}
+
+describe('distribute-negative', () => {
+  const shown = (problem: Problem) => {
+    const text = inlineText(problem)
+    const match = /^−(\d+)\(x ([+−]) (\d+)\)$/.exec(text)
+    if (!match) throw new Error(`unexpected term display: "${text}"`)
+    return { coeff: Number(match[1]), adds: match[2] === '+', constant: Number(match[3]) }
+  }
+
+  it('distributes the negative to both terms, recomputed from what is shown', () => {
+    for (const problem of problems('distribute-negative')) {
+      const { coeff, adds, constant } = shown(problem)
+      const product = coeff * constant
+      const second = adds ? -product : product
+
+      if (problem.answer.kind !== 'expression') throw new Error('expected expression answer')
+      expect(problem.answer.form).toBe('expanded')
+      expect(checkAnswer(problem.answer, `-${coeff}x${second < 0 ? '' : '+'}${second}`)).toEqual({ status: 'correct' })
+      // 13.7 is about the signs, not about factoring, so the undistributed form
+      // is accepted here exactly as it is at 13.6.
+      expect(checkAnswer(problem.answer, `-${coeff}(x${adds ? '+' : '-'}${constant})`)).toEqual({ status: 'correct' })
+    }
+  })
+
+  it('predicts three sign mistakes, each diagnosable and none of them right', () => {
+    for (const problem of problems('distribute-negative')) {
+      const { coeff, adds, constant } = shown(problem)
+      const product = coeff * constant
+      const sign = adds ? '+' : '-'
+
+      expect(problem.misconceptions).toHaveLength(3)
+      expect(diagnose(problem, `-${coeff}x${sign}${product}`)?.tag).toBe('sign-not-flipped')
+      expect(diagnose(problem, `-${coeff}x${sign}${constant}`)?.tag).toBe('distributed-first-term-only')
+      expect(diagnose(problem, `${coeff}x${sign}${product}`)?.tag).toBe('dropped-outer-sign')
+      expectPredictionsWrongAndTypable(problem)
+    }
+  })
+
+  it('grows the coefficient and constant with difficulty', () => {
+    const magnitude = (problem: Problem) => {
+      const { coeff, constant } = shown(problem)
+      return coeff + constant
+    }
+    expect(meanAt('distribute-negative', 5, magnitude)).toBeGreaterThan(meanAt('distribute-negative', 1, magnitude))
+  })
+})
+
+describe('factor-gcf', () => {
+  const shown = (problem: Problem) => {
+    const text = inlineText(problem)
+    const match = /^(\d+)x \+ (\d+)$/.exec(text)
+    if (!match) throw new Error(`unexpected term display: "${text}"`)
+    return { coeff: Number(match[1]), constant: Number(match[2]) }
+  }
+
+  /** The factored form, written the way the unit writes a term. */
+  const factored = (factor: number, coeff: number, constant: number) =>
+    `${factor}(${coeff === 1 ? 'x' : `${coeff}x`}+${constant})`
+
+  it('takes out the greatest common factor, recomputed from what is shown', () => {
+    for (const problem of problems('factor-gcf')) {
+      const { coeff, constant } = shown(problem)
+      const factor = gcd(coeff, constant)
+      expect(factor).toBeGreaterThan(1)
+
+      if (problem.answer.kind !== 'expression') throw new Error('expected expression answer')
+      expect(problem.answer.form).toBe('exact')
+      expect(checkAnswer(problem.answer, factored(factor, coeff / factor, constant / factor))).toEqual({
+        status: 'correct',
+      })
+    }
+  })
+
+  it('accepts a re-ordered bracket and rejects the expression it displayed', () => {
+    for (const problem of problems('factor-gcf')) {
+      const { coeff, constant } = shown(problem)
+      const factor = gcd(coeff, constant)
+      const inner = coeff / factor
+
+      expect(checkAnswer(problem.answer, `${factor}(${constant / factor}+${inner === 1 ? 'x' : `${inner}x`})`)).toEqual({
+        status: 'correct',
+      })
+      // Undoing the distribution is the whole skill, so what is on screen is a
+      // wrong answer — the one thing `exact` exists to be able to say.
+      expect(checkAnswer(problem.answer, `${coeff}x+${constant}`)).toEqual({ status: 'incorrect' })
+    }
+  })
+
+  it('draws the ordinary case where nothing is left in front of x', () => {
+    // `3x + 12` is the shape this skill is usually taught with, and the one that
+    // would break it: under `exact`, an answer of `3(1x + 4)` marks the natural
+    // `3(x + 4)` wrong. The unit-wide notation sweep covers the writing; this
+    // covers the draw actually reaching it.
+    const ordinary = problems('factor-gcf').filter((problem) => {
+      const { coeff, constant } = shown(problem)
+      return coeff / gcd(coeff, constant) === 1
+    })
+
+    expect(ordinary.length).toBeGreaterThan(0)
+  })
+
+  it('predicts a mistake for each way the factoring goes wrong, none of them right', () => {
+    for (const problem of problems('factor-gcf')) {
+      const { coeff, constant } = shown(problem)
+      const factor = gcd(coeff, constant)
+      const inner = coeff / factor
+
+      expect(diagnose(problem, `${coeff}x+${constant}`)?.tag).toBe('left-expanded')
+      expect(diagnose(problem, factored(factor, inner, constant))?.tag).toBe('divided-first-term-only')
+      expect(diagnose(problem, factored(factor, coeff, constant / factor))?.tag).toBe('divided-second-term-only')
+      expectPredictionsWrongAndTypable(problem)
+    }
+  })
+
+  it('predicts factoring by a smaller shared factor whenever one exists', () => {
+    /** Divisors strictly between one and the greatest common factor. */
+    const smallerFactors = (problem: Problem) => {
+      const { coeff, constant } = shown(problem)
+      const factor = gcd(coeff, constant)
+      return Array.from({ length: factor }, (_, i) => i + 1).filter((d) => d > 1 && d < factor && factor % d === 0)
+    }
+
+    const composite = problems('factor-gcf').filter((problem) => smallerFactors(problem).length > 0)
+    expect(composite.length).toBeGreaterThan(0)
+
+    for (const problem of composite) {
+      const { coeff, constant } = shown(problem)
+      for (const d of smallerFactors(problem)) {
+        expect(diagnose(problem, factored(d, coeff / d, constant / d))?.tag).toBe('not-greatest-factor')
+      }
+    }
+  })
+
+  it('grows the factor and constant with difficulty', () => {
+    const magnitude = (problem: Problem) => {
+      const { coeff, constant } = shown(problem)
+      return gcd(coeff, constant) + constant
+    }
+    expect(meanAt('factor-gcf', 5, magnitude)).toBeGreaterThan(meanAt('factor-gcf', 1, magnitude))
+  })
+})
+
 // The unit that teaches term notation cannot write a term two ways. `1x` in a
 // display, a choice label, or a worked step teaches that `1x` and `x` are
 // different terms — the exact confusion 13.4 and 13.5 exist to clear up.
@@ -281,6 +443,10 @@ it('never writes a coefficient of one', () => {
         ...(problem.choices ?? []).map((choice) => `${choice.id} ${choice.label}`),
         ...problem.solution.map((step) => `${step.text} ${step.detail ?? ''}`),
         ...(problem.misconceptions ?? []).map((m) => (typeof m.value === 'number' ? '' : m.value.value)),
+        // The stated answer too: under `exact` comparison a canonical `1x` is a
+        // different answer from `x`, so writing one there marks a correct entry
+        // wrong rather than merely reading oddly.
+        problem.answer.kind === 'expression' ? problem.answer.canonical : '',
       ].join(' | ')
       // A digit before the letter is a coefficient; `1 × 3` and `= 1` are not.
       expect(written).not.toMatch(/(?<!\d)1[a-z]/)

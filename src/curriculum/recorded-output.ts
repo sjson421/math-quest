@@ -266,6 +266,13 @@ const formatAlgebraData = (data: AlgebraData): string => {
       return `${data.operation} ${data.first}x + ${data.second}x + ${data.constant}`
     case 'distributive':
       return `${data.operation} ${data.coefficient}(x + ${data.constant})`
+    case 'distribute-negative':
+      return `${data.operation} -${data.coefficient}(x ${data.adds ? '+' : '-'} ${data.constant})`
+    case 'factor-gcf':
+      // Written the way the unit writes a term: recording `2(1x + 2)` beside an
+      // answer of `2(x + 2)` reads as a disagreement rather than as the same
+      // coefficient.
+      return `${data.operation} ${data.factor}(${data.coefficient === 1 ? 'x' : `${data.coefficient}x`} + ${data.constant})`
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled algebra data: ${JSON.stringify(unhandled)}`)

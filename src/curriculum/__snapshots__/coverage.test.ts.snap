@@ -80,6 +80,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "discount-tax-tip": [
     "percent-change",
   ],
+  "distribute-negative": [
+    "distributive",
+  ],
   "distributive": [
     "combine-like-terms",
   ],
@@ -136,6 +139,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "exponent-multiply": [
     "estimate-roots",
+  ],
+  "factor-gcf": [
+    "distribute-negative",
   ],
   "factors": [
     "long-div-2digit",

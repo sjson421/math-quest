@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 127 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
-Stage E has opened with the complete Unit 12 and Unit 13a.
+**Status: 129 of 201 skills are playable.** Stages A, B and C and Stage D are playable, and
+Stage E has opened with the complete Unit 12 and Unit 13.
 Choice input,
 number-line input, math notation, fraction input, diagrams and expression input are built,
 so `AVAILABLE_CAPABILITIES` holds
@@ -35,9 +35,11 @@ best-value unit rates, proportions, scale drawings, and a fixed stated set of wi
 unit conversions, then closes with fixed-frame ratio stories distinguishing part-to-part from
 part-to-whole. Expression input is built. Unit 12 is complete: meaning and evaluation,
 squares and roots, same-base and nested-power rules, zero and negative exponents, scientific
-notation, and the full order of operations. Unit 13a is complete: what a variable is,
-evaluating and translating expressions, spotting like terms, and combining/distributing;
-item 21's 13b increment (`distribute-negative`, `factor-gcf`) is next.
+notation, and the full order of operations. Unit 13 is complete: what a variable is,
+evaluating and translating expressions, spotting like terms, combining, distributing across
+a sign, and factoring a common factor back out. `factor-gcf` is the first skill anywhere to
+answer under the `exact` comparison form, where the expanded expression on screen is a wrong
+answer; item 21's 14a increment (`equation-balance`–`equation-parentheses`) is next.
 This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
@@ -796,7 +798,14 @@ document's ✅ markers updated to match, which the cross-check enforces.
         following the `PowerData` precedent from item 21's Unit 12 work.
       - **13b** `distribute-negative`–`factor-gcf` — 13.7 is the major wall (sign on the second
         term); `factor-gcf` (13.8) is where 20b's "same expression" decision is load-bearing,
-        since the answer is a factored form and the expanded one is exactly wrong.
+        since the answer is a factored form and the expanded one is exactly wrong. **Shipped
+        2026-08-13.** `distribute-negative` stays on `expanded` like 13.6 and draws both
+        bracket signs, so the second term's sign cannot be guessed from the shape. `factor-gcf`
+        is `exact`'s first caller, and making it load-bearing exposed that the structural
+        serializer did not parenthesize its children — `3(x + 4)` and `3(4) + x` shared a
+        canonical form — so `exact` now separates grouping at every depth. Its draw keeps the
+        two remaining coefficients coprime, which is what makes the greatest common factor the
+        only correct answer.
       - **14a** `equation-balance`–`equation-parentheses` — answers are numbers, so the keypad
         carries it, with the sign key declared per problem as Unit 6 established.
       - **14b** `with-fractions`–`rearrange-formula` — two skills break the pad: `rearrange-formula`

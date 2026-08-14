@@ -224,15 +224,30 @@ function serializeExact(node: ExpressionNode, variable: string): string {
       return `-(${serializeExact(node.expr, variable)})`
     case 'add':
       return node.terms
-        .map((t) => serializeExact(t, variable))
+        .map((t) => serializeChild(t, variable))
         .sort()
         .join('+')
     case 'mul':
       return node.factors
-        .map((f) => serializeExact(f, variable))
+        .map((f) => serializeChild(f, variable))
         .sort()
         .join('*')
   }
+}
+
+/**
+ * A compound child is parenthesized, so grouping survives into the string.
+ *
+ * Without this, `3(x + 4)` and `3(4) + x` both flatten to `3*4+x` — the same
+ * three symbols joined the same way — and `exact` cannot tell a factored form
+ * from a sum that happens to contain a product. Sorting then runs over the
+ * wrapped strings, which is why a wrapped factor leads: `(` sorts before a
+ * digit. Only the order of a sum's terms or a product's factors is normalized;
+ * nesting is not.
+ */
+function serializeChild(node: ExpressionNode, variable: string): string {
+  const text = serializeExact(node, variable)
+  return node.kind === 'add' || node.kind === 'mul' ? `(${text})` : text
 }
 
 export type ExpressionForm = 'expanded' | 'exact'

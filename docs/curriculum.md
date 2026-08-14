@@ -347,8 +347,8 @@ in lowest terms. Fraction operations wait for Unit 8.
 | 13.4 | `identify-like-terms` | | ✅ |
 | 13.5 | `combine-like-terms` | | ✅ · ⚠️ combining unlike terms |
 | 13.6 | `distributive` | | ✅ · ⚠️ distributing to first term only |
-| 13.7 | `distribute-negative` | −3(x − 4) | ⚠️ **major wall** — sign on second term |
-| 13.8 | `factor-gcf` | Reverse of distributing | |
+| 13.7 | `distribute-negative` | −3(x − 4) | ✅ · ⚠️ **major wall** — sign on second term |
+| 13.8 | `factor-gcf` | Reverse of distributing | ✅ · answers in factored form |
 
 ### Unit 14 — Linear Equations (10)
 

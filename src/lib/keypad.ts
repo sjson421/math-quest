@@ -29,8 +29,13 @@ export type KeypadRules = {
  * Here rather than in the component, beside `applyKey` which produced the
  * string: one owner for the notation, so the line's tick labels and the pad's
  * entry cannot drift into two answers about the same glyph.
+ *
+ * Every occurrence, not the first. A numeric entry carries at most one sign, so
+ * this was invisible until the expression pad — where `-4x-20` is an ordinary
+ * answer, and converting only the leading sign shows the same minus two ways in
+ * one entry, which is the exact disagreement above.
  */
-export const entryLabel = (value: string): string => value.replace('-', '−')
+export const entryLabel = (value: string): string => value.replaceAll('-', '−')
 
 /**
  * Apply one key press to the current entry.

@@ -113,6 +113,17 @@ describe('entryLabel', () => {
     expect(entryLabel('1.5')).toBe('1.5')
   })
 
+  it('reads every sign in an expression entry, not just the leading one', () => {
+    // A numeric entry carries one sign at most, so the first-occurrence version
+    // of this rule looked right until `distribute-negative`, whose answers are
+    // routinely `-4x-20`: converting the lead alone drew the same minus two
+    // ways in one entry.
+    const typed = [...'-4x-20'].reduce((entry, key) => applyExpressionKey(entry, key, 'x'), '')
+
+    expect(typed).toBe('-4x-20')
+    expect(entryLabel(typed)).toBe('−4x−20')
+  })
+
   it('shows a sign with nothing after it, which is unfinished rather than wrong', () => {
     // `applyKey` reaches this state on the first tap of the sign key, and
     // `answer.ts` reads it as unparseable — so it must still be visible while

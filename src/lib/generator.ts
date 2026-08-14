@@ -22,10 +22,12 @@ export function generateProblem(
   if (!problem.misconceptions?.length) return problem
 
   // An expression answer has no numeric "correct" value to compare a
-  // misconception against — its exclusion is textual, not implemented here
-  // because no expression-answer skill exists yet to need it. NaN never
-  // equals a predicted numeric value, so the numeric branch below is simply
-  // inert for this kind, same as it already is for `choice`.
+  // misconception against, and no algebraic comparison happens here, so a
+  // text-valued prediction is deduplicated but never excluded for equalling the
+  // answer. A generator predicting one is responsible for constructing it so it
+  // cannot coincide, for every draw it allows. NaN never equals a predicted
+  // numeric value, so the numeric branch below is simply inert for this kind,
+  // same as it already is for `choice`.
   const correct =
     problem.answer.kind === 'exact'
       ? toNumber(rational(problem.answer.n, problem.answer.d))
