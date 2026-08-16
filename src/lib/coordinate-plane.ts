@@ -18,6 +18,13 @@ export type CoordinatePlane = {
   lines: CoordinateLine[]
 }
 
+export type CoordinatePlacement = {
+  point?: Coordinate
+  canConfirm: boolean
+}
+
+export type CoordinateDirection = 'up' | 'down' | 'left' | 'right'
+
 function assertInteger(value: number, field: string): void {
   if (!Number.isFinite(value) || !Number.isInteger(value)) {
     throw new Error(`coordinate plane: ${field} must be a finite whole number`)
@@ -55,6 +62,11 @@ function assertAxis(axis: AxisScale, name?: 'x' | 'y'): void {
 function assertCoordinate(point: Coordinate, field: string): void {
   assertInteger(point.x, `${field}.x`)
   assertInteger(point.y, `${field}.y`)
+}
+
+export function isCoordinate(point: Coordinate): boolean {
+  return Number.isFinite(point.x) && Number.isInteger(point.x) &&
+    Number.isFinite(point.y) && Number.isInteger(point.y)
 }
 
 function inside(value: number, min: number, max: number): boolean {
@@ -253,6 +265,72 @@ export function axisValues(axis: AxisScale): number[] {
   assertAxis(axis)
   const count = (axis.max - axis.min) / axis.step
   return Array.from({ length: count + 1 }, (_, index) => axis.min + index * axis.step)
+}
+
+/** Every placeable lattice point, top-left to bottom-right as the graph reads. */
+export function coordinateTargets(plane: CoordinatePlane): Coordinate[] {
+  assertCoordinatePlane(plane)
+  const xValues = axisValues(plane.x)
+  const yValues = axisValues(plane.y).reverse()
+  return yValues.flatMap((y) => xValues.map((x) => ({ x, y })))
+}
+
+/** Canonical internal lesson entry for one placed point. */
+export function coordinateEntry(point: Coordinate): string {
+  assertCoordinate(point, 'entry')
+  return `${point.x},${point.y}`
+}
+
+/** Parse only the canonical entry emitted by `coordinateEntry`. */
+export function parseCoordinateEntry(entry: string): Coordinate | undefined {
+  const match = /^([^,]+),([^,]+)$/.exec(entry)
+  if (!match) return undefined
+  const point = { x: Number(match[1]), y: Number(match[2]) }
+  return isCoordinate(point) && coordinateEntry(point) === entry ? point : undefined
+}
+
+export function isCoordinateTarget(plane: CoordinatePlane, point: Coordinate): boolean {
+  if (!isCoordinate(point)) return false
+  return axisValues(plane.x).includes(point.x) && axisValues(plane.y).includes(point.y)
+}
+
+/** Resolve the lesson's ordinary string entry against the declared lattice. */
+export function coordinatePlacement(
+  plane: CoordinatePlane,
+  entry: string,
+): CoordinatePlacement {
+  const point = parseCoordinateEntry(entry)
+  return point && isCoordinateTarget(plane, point)
+    ? { point, canConfirm: true }
+    : { canConfirm: false }
+}
+
+/** Move one declared tick for roving keyboard placement, clamped at an edge. */
+export function moveCoordinate(
+  plane: CoordinatePlane,
+  point: Coordinate,
+  direction: CoordinateDirection,
+): Coordinate {
+  if (!isCoordinateTarget(plane, point)) {
+    throw new Error('coordinate plane: keyboard position must be a lattice target')
+  }
+
+  const xValues = axisValues(plane.x)
+  const yValues = axisValues(plane.y)
+  const xIndex = xValues.indexOf(point.x)
+  const yIndex = yValues.indexOf(point.y)
+  const x = direction === 'left'
+    ? xValues[Math.max(0, xIndex - 1)]
+    : direction === 'right'
+      ? xValues[Math.min(xValues.length - 1, xIndex + 1)]
+      : point.x
+  const y = direction === 'down'
+    ? yValues[Math.max(0, yIndex - 1)]
+    : direction === 'up'
+      ? yValues[Math.min(yValues.length - 1, yIndex + 1)]
+      : point.y
+
+  return { x, y }
 }
 
 /** The visible segment of one declared infinite line. */

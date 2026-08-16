@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
+import { coordinateEntry } from '../lib/coordinate-plane'
 import { diagnose, generateProblem } from '../lib/generator'
 import { applyExpressionKey, type KeypadKey } from '../lib/keypad'
 import { gcd } from '../lib/rational'
-import type { Difficulty, Problem } from '../lib/types'
+import type { Difficulty, Misconception, Problem } from '../lib/types'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit13 } from './unit-13-expressions'
 
@@ -274,8 +275,14 @@ describe('distributive', () => {
 const typable = (value: string): boolean =>
   [...value].reduce((entry, key) => applyExpressionKey(entry, key as KeypadKey, 'x'), '') === value
 
+const predictionEntry = ({ value }: Misconception): string => {
+  if (typeof value === 'number') return String(value)
+  if (value.kind === 'text') return value.value
+  return coordinateEntry(value)
+}
+
 const predictions = (problem: Problem): string[] =>
-  (problem.misconceptions ?? []).map((m) => (typeof m.value === 'number' ? String(m.value) : m.value.value))
+  (problem.misconceptions ?? []).map(predictionEntry)
 
 /**
  * Nothing centrally excludes a text prediction that equals the answer, and the
@@ -442,7 +449,7 @@ it('never writes a coefficient of one', () => {
         problem.display.kind === 'inline' || problem.display.kind === 'story' ? problem.display.text : '',
         ...(problem.choices ?? []).map((choice) => `${choice.id} ${choice.label}`),
         ...problem.solution.map((step) => `${step.text} ${step.detail ?? ''}`),
-        ...(problem.misconceptions ?? []).map((m) => (typeof m.value === 'number' ? '' : m.value.value)),
+        ...(problem.misconceptions ?? []).map(predictionEntry),
         // The stated answer too: under `exact` comparison a canonical `1x` is a
         // different answer from `x`, so writing one there marks a correct entry
         // wrong rather than merely reading oddly.

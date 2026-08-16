@@ -73,6 +73,22 @@ describe('checkAnswer', () => {
     expect(checkAnswer(answer, 'greater-than').status).toBe('incorrect')
   })
 
+  it('checks exact ordered points without swapping or scalar coercion', () => {
+    const answer: Answer = { kind: 'point', x: 3, y: 2 }
+
+    expect(checkAnswer(answer, '3,2')).toEqual({ status: 'correct' })
+    expect(checkAnswer(answer, '2,3')).toEqual({ status: 'incorrect' })
+    expect(checkAnswer(answer, '3,3')).toEqual({ status: 'incorrect' })
+  })
+
+  it('rejects anything outside the canonical finite integer point entry', () => {
+    const answer: Answer = { kind: 'point', x: -3, y: 2 }
+
+    for (const entry of ['(-3, 2)', '-3, 2', ' -3,2', '-3.5,2', '-3,']) {
+      expect(checkAnswer(answer, entry), entry).toEqual({ status: 'unparseable' })
+    }
+  })
+
   it('treats equivalent forms of the same number as equal', () => {
     for (const form of ['1/2', '2/4', '0.5', '.5', '4/8', '50/100']) {
       expect(checkAnswer(exact(1, 2), form).status, form).toBe('correct')

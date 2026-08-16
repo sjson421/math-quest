@@ -3,8 +3,14 @@ import {
   assertCoordinatePlane,
   axisValues,
   clipCoordinateLine,
+  coordinateEntry,
   coordinateLabel,
+  coordinatePlacement,
   coordinatePlaneLabel,
+  coordinateTargets,
+  isCoordinateTarget,
+  moveCoordinate,
+  parseCoordinateEntry,
   type CoordinateLine,
   type CoordinatePlane,
 } from './coordinate-plane'
@@ -126,6 +132,73 @@ describe('coordinate-plane data', () => {
     const second = line(1, 0, 2_000_000_001, 1)
 
     expect(() => assertCoordinatePlane(plane({ lines: [first, second] }))).not.toThrow()
+  })
+})
+
+describe('coordinate-plane input policy', () => {
+  it('orders the declared lattice from top-left to bottom-right', () => {
+    const graph = plane({
+      x: { min: -2, max: 2, step: 2 },
+      y: { min: -2, max: 2, step: 2 },
+    })
+
+    expect(coordinateTargets(graph)).toEqual([
+      { x: -2, y: 2 }, { x: 0, y: 2 }, { x: 2, y: 2 },
+      { x: -2, y: 0 }, { x: 0, y: 0 }, { x: 2, y: 0 },
+      { x: -2, y: -2 }, { x: 0, y: -2 }, { x: 2, y: -2 },
+    ])
+  })
+
+  it('round-trips only canonical finite integer point entries', () => {
+    expect(coordinateEntry({ x: -3, y: 2 })).toBe('-3,2')
+    expect(parseCoordinateEntry('-3,2')).toEqual({ x: -3, y: 2 })
+    expect(parseCoordinateEntry(coordinateEntry({ x: 1e21, y: 2 }))).toEqual({
+      x: 1e21,
+      y: 2,
+    })
+    for (const entry of ['(-3, 2)', '-3, 2', ' -3,2', '-0,2', '03,2', '3.5,2', '3,']) {
+      expect(parseCoordinateEntry(entry), entry).toBeUndefined()
+    }
+    expect(() => coordinateEntry({ x: Number.NaN, y: 2 })).toThrow(
+      'entry.x must be a finite whole number',
+    )
+  })
+
+  it('confirms only a point on both declared tick sets', () => {
+    const graph = plane({
+      x: { min: -4, max: 4, step: 2 },
+      y: { min: -4, max: 4, step: 2 },
+    })
+
+    expect(coordinatePlacement(graph, '2,-4')).toEqual({
+      point: { x: 2, y: -4 },
+      canConfirm: true,
+    })
+    expect(coordinatePlacement(graph, '1,-4')).toEqual({ canConfirm: false })
+    expect(coordinatePlacement(graph, '2,5')).toEqual({ canConfirm: false })
+    expect(coordinatePlacement(graph, '')).toEqual({ canConfirm: false })
+    expect(isCoordinateTarget(graph, { x: 2, y: -4 })).toBe(true)
+    expect(isCoordinateTarget(graph, { x: 1, y: -4 })).toBe(false)
+  })
+
+  it('moves one declared tick and clamps at each edge', () => {
+    const graph = plane({
+      x: { min: -4, max: 4, step: 2 },
+      y: { min: -6, max: 6, step: 3 },
+    })
+
+    expect(moveCoordinate(graph, { x: 0, y: 0 }, 'left')).toEqual({ x: -2, y: 0 })
+    expect(moveCoordinate(graph, { x: 0, y: 0 }, 'right')).toEqual({ x: 2, y: 0 })
+    expect(moveCoordinate(graph, { x: 0, y: 0 }, 'up')).toEqual({ x: 0, y: 3 })
+    expect(moveCoordinate(graph, { x: 0, y: 0 }, 'down')).toEqual({ x: 0, y: -3 })
+    expect(moveCoordinate(graph, { x: -4, y: 6 }, 'left')).toEqual({ x: -4, y: 6 })
+    expect(moveCoordinate(graph, { x: -4, y: 6 }, 'up')).toEqual({ x: -4, y: 6 })
+  })
+
+  it('rejects keyboard movement from outside the lattice', () => {
+    expect(() => moveCoordinate(plane(), { x: 0, y: 0.5 }, 'up')).toThrow(
+      'keyboard position must be a lattice target',
+    )
   })
 })
 

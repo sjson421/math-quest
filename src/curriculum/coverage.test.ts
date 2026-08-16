@@ -475,12 +475,12 @@ describe('the skills that are built', () => {
     expect(stageIds.filter((id) => skillState(id) === 'planned')).toEqual([])
   })
 
-  it('leaves Stage F planned while only the coordinate-plane display half exists', () => {
+  it('leaves Stage F planned after its input capability exists but before generators do', () => {
     const stage = manifestIndex.get('plot-points')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
 
     expect(stage?.requires).toEqual(['math-notation', 'expression-input', 'coordinate-plane'])
-    expect(AVAILABLE_CAPABILITIES.has('coordinate-plane')).toBe(false)
+    expect((stage?.requires ?? []).filter((c) => !AVAILABLE_CAPABILITIES.has(c))).toEqual([])
     expect(stageIds).toHaveLength(28)
     expect(stageIds.filter((id) => generators.has(id))).toEqual([])
     expect(stageIds.every((id) => skillState(id) === 'planned')).toBe(true)
@@ -493,10 +493,12 @@ describe('the skills that are built', () => {
     // failed — because a capability that is *available* changes no skill's
     // state, so the only symptom was the manifest quietly disagreeing with the
     // course. This is what makes the next one fail at the unit that causes it.
-    const modes: Partial<Record<Problem['inputMode'], Capability>> = {
+    const modes: Record<Problem['inputMode'], Capability | undefined> = {
+      keypad: undefined,
       choice: 'choice-input',
       expression: 'expression-input',
       'number-line': 'number-line',
+      'coordinate-plane': 'coordinate-plane',
     }
 
     const undeclared = new Set<string>()

@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest'
+import { coordinateEntry } from '../lib/coordinate-plane'
 import { generateProblem } from '../lib/generator'
 import { canonicalForm } from '../lib/expression'
-import type { Difficulty, Problem } from '../lib/types'
+import type { Difficulty, Misconception, Problem } from '../lib/types'
 import { sample } from './recorded-output'
 import { unit14 } from './unit-14-linear-equations'
 
@@ -23,6 +24,12 @@ const problems = (id: string) => {
   )
   problemCache.set(id, generated)
   return generated
+}
+
+const predictionEntry = ({ value }: Misconception): string => {
+  if (typeof value === 'number') return String(value)
+  if (value.kind === 'text') return value.value
+  return coordinateEntry(value)
 }
 
 const equationOf = (problem: Problem) => {
@@ -364,9 +371,7 @@ describe('special-solutions', () => {
     // prediction naming an outcome that is not on screen could never fire.
     for (const problem of problems('special-solutions')) {
       const offered = (problem.choices ?? []).map((choice) => choice.id)
-      const predictions = (problem.misconceptions ?? []).map((m) =>
-        typeof m.value === 'number' ? String(m.value) : m.value.value,
-      )
+      const predictions = (problem.misconceptions ?? []).map(predictionEntry)
 
       expect(predictions.length, equationOf(problem).text).toBeGreaterThan(0)
       for (const prediction of predictions) {
@@ -474,9 +479,7 @@ describe('rearrange-formula', () => {
     // rather than through arithmetic.
     for (const problem of problems('rearrange-formula')) {
       const { text, term } = dataOf(problem)
-      const predictions = (problem.misconceptions ?? []).map((m) =>
-        typeof m.value === 'number' ? String(m.value) : m.value.value,
-      )
+      const predictions = (problem.misconceptions ?? []).map(predictionEntry)
 
       expect(predictions, text).toHaveLength(2)
       expect(new Set(predictions).size, text).toBe(2)

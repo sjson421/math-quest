@@ -519,7 +519,7 @@ Ship by stage; each stage is independently useful.
    and the pad offers the slash. **Diagram rendering** is built for shaded bars, circles and
    grids, so Stage D's capability infrastructure is complete.
 4. **Stage E** (34) — complete; the **expression input mode** it needed is built.
-5. **Stage F** (28) — needs a **coordinate-plane input** component (tap to plot).
+5. **Stage F** (28) — the **coordinate-plane input** it needs is built; content remains.
 6. **Stage G** (22) — reuses built **diagram rendering** for shapes and still needs charts.
 7. **Stage H** (6) — needs timed mode and a score estimator.
 
@@ -533,7 +533,7 @@ Ship by stage; each stage is independently useful.
 | Diagram rendering | D (Unit 7.2) | Built — typed shaded bars, circles and grids via `Display` |
 | Expression input | E (Unit 13) | Built — a variable key per problem via `expression`, compared under a canonical form |
 | Number-line input | C (Unit 6.1) | Built — declared per problem via `numberLine` |
-| Coordinate-plane input | F (Unit 16.1) | Tap to plot a point |
+| Coordinate-plane input | F (Unit 16.1) | Built — tap or use large axis controls or arrow keys to place an integer-lattice point, then confirm |
 | Chart rendering | G (Unit 21.5) | Bar, line, scatter |
 | Timed mode | H | Only place time pressure appears |
 

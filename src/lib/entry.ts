@@ -36,6 +36,9 @@ const SHOW: Record<Problem['inputMode'], (problem: Problem, entry: string) => st
   // is a plain character in an expression entry, not a toggle, but the glyph
   // it reads as is the same one the rest of the screen uses.
   expression: (_problem, entry) => entryLabel(entry),
+  // The interactive plane owns its selection marker and reads the raw entry
+  // through the point codec. No passive answer slot should echo that encoding.
+  'coordinate-plane': () => '',
 }
 
 export const visibleEntry = (problem: Problem, entry: string): string =>

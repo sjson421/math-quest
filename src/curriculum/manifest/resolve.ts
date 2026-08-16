@@ -29,6 +29,7 @@ export const AVAILABLE_CAPABILITIES: ReadonlySet<Capability> = new Set([
   'diagram',
   'number-line',
   'expression-input',
+  'coordinate-plane',
 ])
 
 export type SkillLocation = {

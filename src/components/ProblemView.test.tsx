@@ -296,7 +296,7 @@ describe('ProblemView', () => {
     },
   }
 
-  it.each(['choice', 'number-line'] as const)(
+  it.each(['choice', 'number-line', 'coordinate-plane'] as const)(
     'lets %s own a coordinate-plane answer surface without a display echo',
     (entryMode) => {
       const html = renderToStaticMarkup(

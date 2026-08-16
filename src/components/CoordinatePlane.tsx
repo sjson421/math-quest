@@ -1,10 +1,15 @@
-import { useId } from 'react'
+import { useId, useRef, type KeyboardEvent } from 'react'
 import {
   axisValues,
   clipCoordinateLine,
+  coordinateEntry,
+  coordinateLabel,
   coordinatePlaneLabel,
+  coordinateTargets,
   coordinateValueLabel,
+  moveCoordinate,
   type Coordinate,
+  type CoordinateDirection,
   type CoordinatePlane as CoordinatePlaneSpec,
 } from '../lib/coordinate-plane'
 
@@ -17,6 +22,12 @@ const AXIS = 'var(--color-ink-soft)'
 const POINT = 'var(--color-blossom-deep)'
 const LINES = ['var(--color-blossom-deep)', 'var(--color-lilac-deep)'] as const
 
+type Placement = {
+  point?: Coordinate
+  onPlace: (point: Coordinate) => void
+  disabled?: boolean
+}
+
 const toX = (plane: CoordinatePlaneSpec, value: number) =>
   PLOT_START + ((value - plane.x.min) / (plane.x.max - plane.x.min)) * PLOT_SIZE
 
@@ -28,9 +39,23 @@ function labelsAt(values: number[]): Set<number> {
   return new Set(values.filter((value, index) => value === 0 || index === 0 || index === values.length - 1 || index % every === 0))
 }
 
+const KEY_DIRECTION: Partial<Record<string, CoordinateDirection>> = {
+  ArrowUp: 'up',
+  ArrowDown: 'down',
+  ArrowLeft: 'left',
+  ArrowRight: 'right',
+}
+
 /** One local SVG and one accessible name for a bounded linear graph. */
-export function CoordinatePlane({ plane }: { plane: CoordinatePlaneSpec }) {
+export function CoordinatePlane({
+  plane,
+  placement,
+}: {
+  plane: CoordinatePlaneSpec
+  placement?: Placement
+}) {
   const plotClipId = useId()
+  const targetRefs = useRef(new Map<string, HTMLButtonElement>())
   const label = coordinatePlaneLabel(plane)
   const xValues = axisValues(plane.x)
   const yValues = axisValues(plane.y)
@@ -50,7 +75,7 @@ export function CoordinatePlane({ plane }: { plane: CoordinatePlaneSpec }) {
     return segment
   })
 
-  return (
+  const svg = (
     <svg
       viewBox={`0 0 ${VIEW_SIZE} ${VIEW_SIZE}`}
       className="block w-80 max-w-full h-auto"
@@ -187,6 +212,84 @@ export function CoordinatePlane({ plane }: { plane: CoordinatePlaneSpec }) {
         ))}
       </g>
     </svg>
+  )
+
+  if (!placement) return svg
+
+  const targets = coordinateTargets(plane)
+  const focusPoint = placement.point ?? { x: 0, y: 0 }
+  const xTargetSize = Math.min(
+    PLOT_SIZE / (xValues.length - 1),
+    PLOT_START * 2,
+  )
+  const yTargetSize = Math.min(
+    PLOT_SIZE / (yValues.length - 1),
+    PLOT_START * 2,
+  )
+
+  const handleKey = (
+    event: KeyboardEvent<HTMLButtonElement>,
+    point: Coordinate,
+  ) => {
+    const direction = KEY_DIRECTION[event.key]
+    if (!direction || placement.disabled) return
+    event.preventDefault()
+    const next = moveCoordinate(plane, point, direction)
+    placement.onPlace(next)
+    targetRefs.current.get(coordinateEntry(next))?.focus()
+  }
+
+  return (
+    <div className="relative w-80 max-w-full" data-coordinate-placement-surface>
+      {svg}
+      <div
+        className="absolute inset-0"
+        role="group"
+        aria-label="Coordinate plane point placement"
+      >
+        {targets.map((point) => {
+          const key = coordinateEntry(point)
+          const selected = placement.point?.x === point.x && placement.point.y === point.y
+          const inTabOrder = focusPoint.x === point.x && focusPoint.y === point.y
+
+          return (
+            <button
+              key={key}
+              ref={(node) => {
+                if (node) targetRefs.current.set(key, node)
+                else targetRefs.current.delete(key)
+              }}
+              type="button"
+              aria-label={coordinateLabel(point)}
+              aria-pressed={selected}
+              tabIndex={inTabOrder ? 0 : -1}
+              disabled={placement.disabled}
+              data-coordinate-target
+              data-x={point.x}
+              data-y={point.y}
+              className="absolute flex items-center justify-center rounded-full focus-visible:outline-3 focus-visible:outline-lilac-deep focus-visible:outline-offset-1"
+              style={{
+                left: `${(toX(plane, point.x) / VIEW_SIZE) * 100}%`,
+                top: `${(toY(plane, point.y) / VIEW_SIZE) * 100}%`,
+                width: `${(xTargetSize / VIEW_SIZE) * 100}%`,
+                height: `${(yTargetSize / VIEW_SIZE) * 100}%`,
+                transform: 'translate(-50%, -50%)',
+              }}
+              onClick={() => placement.onPlace(point)}
+              onKeyDown={(event) => handleKey(event, point)}
+            >
+              {selected && (
+                <span
+                  className="w-3.5 h-3.5 rounded-full bg-blossom-deep border-2 border-white shadow-sm"
+                  aria-hidden
+                  data-coordinate-selection
+                />
+              )}
+            </button>
+          )
+        })}
+      </div>
+    </div>
   )
 }
 

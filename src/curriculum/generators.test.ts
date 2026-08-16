@@ -3,7 +3,7 @@ import { allSkills, manifestIndex } from './index'
 import { checkContent, formatViolations } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { checkAnswer, intAnswer } from '../lib/answer'
-import { assertCoordinatePlane } from '../lib/coordinate-plane'
+import { assertCoordinatePlane, coordinateEntry } from '../lib/coordinate-plane'
 import { makeRng } from '../lib/rng'
 import { equals, format as formatRational, gcd, toNumber, rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
@@ -1528,6 +1528,7 @@ const answerValue = (problem: Problem): number | string => {
   }
   if (problem.answer.kind === 'approx') return problem.answer.value
   if (problem.answer.kind === 'expression') return problem.answer.canonical
+  if (problem.answer.kind === 'point') return coordinateEntry(problem.answer)
   return problem.answer.id
 }
 
@@ -2150,6 +2151,19 @@ describe('coordinate-plane answer verification', () => {
 
   it('validates the graph before reaching the operation-specific tripwire', () => {
     expect(() => answerMismatch(problem(6, 2))).toThrow('x.step must divide the axis span')
+  })
+
+  it('fails closed for a point answer until content carries its operation', () => {
+    const pointProblem: Problem = {
+      ...problem(),
+      prompt: 'Plot the point.',
+      answer: { kind: 'point', x: -2, y: 1 },
+      inputMode: 'coordinate-plane',
+    }
+
+    expect(() => answerMismatch(pointProblem)).toThrow(
+      'synthetic-coordinate-plane: coordinate plane needs operation-specific data',
+    )
   })
 
   it('derives difficulty magnitude from graph source values rather than its stated answer', () => {

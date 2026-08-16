@@ -132,6 +132,30 @@ const coordinatePlaneChoiceSkill: SkillGenerator = {
   }),
 }
 
+const coordinatePlaneInputSkill: SkillGenerator = {
+  id: 'synthetic-coordinate-plane-input',
+  name: 'Synthetic Coordinate Plane Input',
+  blurb: 'For testing point wiring',
+  generate: (_rng, difficulty) => ({
+    skillId: 'synthetic-coordinate-plane-input',
+    prompt: 'Plot (3, 2).',
+    display: {
+      kind: 'coordinate-plane',
+      plane: {
+        x: { min: -5, max: 5, step: 1 },
+        y: { min: -5, max: 5, step: 1 },
+        points: [],
+        lines: [],
+      },
+    },
+    answer: { kind: 'point', x: 3, y: 2 },
+    inputMode: 'coordinate-plane',
+    hint: 'Read x first, then y.',
+    solution: [{ text: 'Move across, then up.' }],
+    difficulty,
+  }),
+}
+
 const has = (html: string, label: string) => html.includes(`aria-label="${label}"`)
 
 describe('Lesson', () => {
@@ -164,6 +188,22 @@ describe('Lesson', () => {
     expect(html).not.toContain('greater-than-id')
     expect(html).not.toContain('data-coordinate-plane-answer')
     expect(html).not.toContain('text-ink-faint">=')
+  })
+
+  it('replaces the passive graph with the declared point-placement surface', () => {
+    const html = renderToStaticMarkup(
+      <Lesson skill={coordinatePlaneInputSkill} onExit={() => {}} />,
+    )
+
+    expect(html.match(/data-coordinate-plane="true"/g)).toHaveLength(1)
+    expect(html.match(/data-coordinate-target=/g)).toHaveLength(121)
+    expect(html).toContain('aria-label="Coordinate plane point placement"')
+    expect(html).toContain('>Check</button>')
+    expect(html).toContain('disabled=""')
+    expect(has(html, 'Backspace')).toBe(false)
+    expect(html).not.toContain('aria-label="Number line"')
+    for (const { label } of answerChoices) expect(html).not.toContain(label)
+    expect(html).not.toContain('data-coordinate-plane-answer')
   })
 
   it('gives the pad the sign key when the problem asks for one', () => {

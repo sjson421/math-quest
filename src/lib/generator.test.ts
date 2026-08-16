@@ -29,6 +29,12 @@ const missText = (value: string, tag: string): Misconception => ({
   nudge: `nudge for ${tag}`,
 })
 
+const missPoint = (x: number, y: number, tag: string): Misconception => ({
+  value: { kind: 'point', x, y },
+  tag,
+  nudge: `nudge for ${tag}`,
+})
+
 /** A skill that predicts exactly what the test tells it to, ignoring the rng. */
 function skillPredicting(misconceptions: Misconception[], answer = 12): SkillGenerator {
   return {
@@ -64,6 +70,39 @@ function choiceSkill(id: string, misconceptions: Misconception[]): SkillGenerato
           { id, label: 'Expected' },
           { id: 'other', label: 'Other' },
         ],
+      }
+    },
+  }
+}
+
+function pointSkill(
+  answer: { x: number; y: number },
+  misconceptions: Misconception[],
+  step = 1,
+): SkillGenerator {
+  return {
+    id: 'synthetic-point',
+    name: 'Synthetic Point',
+    blurb: 'For testing point input',
+    generate(_rng, difficulty) {
+      return {
+        skillId: 'synthetic-point',
+        prompt: 'Plot the point.',
+        display: {
+          kind: 'coordinate-plane',
+          plane: {
+            x: { min: -4, max: 4, step },
+            y: { min: -4, max: 4, step },
+            points: [],
+            lines: [],
+          },
+        },
+        answer: { kind: 'point', ...answer },
+        inputMode: 'coordinate-plane',
+        misconceptions,
+        hint: 'Read x first, then y.',
+        solution: [{ text: 'Move across, then up or down.' }],
+        difficulty,
       }
     },
   }
@@ -216,6 +255,89 @@ describe('generateProblem drops predictions that cannot help', () => {
 
     expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['numeric-five', 'text-five'])
   })
+
+  it('drops a point prediction equal to the point answer', () => {
+    const skill = pointSkill(
+      { x: 3, y: 2 },
+      [missPoint(3, 2, 'equals-answer'), missPoint(2, 3, 'swapped')],
+    )
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['swapped'])
+  })
+
+  it('deduplicates ordered points without colliding with a swapped point', () => {
+    const skill = pointSkill(
+      { x: 0, y: 0 },
+      [
+        missPoint(3, 2, 'first'),
+        missPoint(3, 2, 'duplicate'),
+        missPoint(2, 3, 'swapped'),
+      ],
+    )
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['first', 'swapped'])
+  })
+
+  it('drops invalid and unreachable point predictions', () => {
+    const skill = pointSkill(
+      { x: 2, y: 2 },
+      [
+        missPoint(Number.NaN, 2, 'not-finite'),
+        missPoint(1.5, 2, 'not-integer'),
+        missPoint(1, 2, 'between-ticks'),
+        missPoint(6, 2, 'out-of-bounds'),
+        missPoint(-2, 2, 'reachable'),
+      ],
+      2,
+    )
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['reachable'])
+  })
+
+  it('drops a point prediction when no coordinate input surface can reach it', () => {
+    const skill = skillPredicting([missPoint(3, 2, 'no-point-surface')])
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual([])
+  })
+
+  it('keeps numeric, text, and point prediction kinds independent', () => {
+    const skill = pointSkill(
+      { x: 0, y: 0 },
+      [miss(3, 'numeric'), missText('3,0', 'text'), missPoint(3, 0, 'point')],
+    )
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['numeric', 'text', 'point'])
+  })
+
+  it('rejects a point answer the declared lattice cannot place', () => {
+    expect(() => generateProblem(pointSkill({ x: 1, y: 2 }, [], 2), 1, 1)).toThrow(
+      'synthetic-point: point answer must be a declared lattice target',
+    )
+  })
+
+  it('rejects mismatched point answer and input declarations', () => {
+    const wrongDisplay: SkillGenerator = {
+      ...pointSkill({ x: 2, y: 2 }, []),
+      generate(rng, difficulty) {
+        const problem = pointSkill({ x: 2, y: 2 }, []).generate(rng, difficulty)
+        return { ...problem, display: { kind: 'inline', text: '(2, 2)' } }
+      },
+    }
+    const wrongMode: SkillGenerator = {
+      ...pointSkill({ x: 2, y: 2 }, []),
+      generate(rng, difficulty) {
+        const problem = pointSkill({ x: 2, y: 2 }, []).generate(rng, difficulty)
+        return { ...problem, inputMode: 'keypad' }
+      },
+    }
+
+    expect(() => generateProblem(wrongDisplay, 1, 1)).toThrow(
+      'coordinate-plane input needs a coordinate-plane display',
+    )
+    expect(() => generateProblem(wrongMode, 1, 1)).toThrow(
+      'point answer needs coordinate-plane input',
+    )
+  })
 })
 
 describe('diagnose', () => {
@@ -277,5 +399,19 @@ describe('diagnose', () => {
     expect(diagnose(withText, '2x + 3')?.tag).toBe('did-not-distribute')
     expect(diagnose(withText, '  2x + 3  ')?.tag).toBe('did-not-distribute')
     expect(diagnose(withText, '2x+3')).toBeUndefined()
+  })
+
+  it('matches a structured point by exact coordinate order', () => {
+    const problem = generateProblem(
+      pointSkill({ x: 3, y: 2 }, [missPoint(2, 3, 'swapped'), missPoint(-1, 4, 'other')]),
+      1,
+      1,
+    )
+
+    expect(diagnose(problem, '2,3')?.tag).toBe('swapped')
+    expect(diagnose(problem, '-1,4')?.tag).toBe('other')
+    expect(diagnose(problem, '3,2')).toBeUndefined()
+    expect(diagnose(problem, '(2, 3)')).toBeUndefined()
+    expect(diagnose(problem, '4,4')).toBeUndefined()
   })
 })

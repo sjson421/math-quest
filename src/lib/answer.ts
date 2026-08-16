@@ -1,4 +1,5 @@
 import type { Answer } from './types'
+import { parseCoordinateEntry } from './coordinate-plane'
 import { canonicalForm } from './expression'
 import { fromDecimalString, fromInt, gcd, rational, toNumber, type Rational } from './rational'
 
@@ -82,6 +83,14 @@ export type CheckResult =
   | { status: 'unparseable' }
 
 export function checkAnswer(answer: Answer, raw: string): CheckResult {
+  if (answer.kind === 'point') {
+    const point = parseCoordinateEntry(raw)
+    if (!point) return { status: 'unparseable' }
+    return point.x === answer.x && point.y === answer.y
+      ? { status: 'correct' }
+      : { status: 'incorrect' }
+  }
+
   if (answer.kind === 'choice') {
     return raw === answer.id ? { status: 'correct' } : { status: 'incorrect' }
   }

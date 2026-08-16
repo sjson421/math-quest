@@ -19,6 +19,7 @@ import { feedbackText, responseTo } from '../lib/submit'
 import type { Difficulty, Misconception, SkillGenerator } from '../lib/types'
 import { difficultyFor, useProgress, type LessonOutcome } from '../store/progress'
 import { ChoiceInput } from './ChoiceInput'
+import { CoordinatePlaneInput } from './CoordinatePlaneInput'
 import { ExpressionKeypad } from './ExpressionKeypad'
 import { Keypad } from './Keypad'
 import { Mascot, type MascotState } from './Mascot'
@@ -218,6 +219,11 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
           />
         ) : null
 
+      case 'coordinate-plane':
+        // The interactive graph occupies the problem surface itself so the
+        // learner sees one plane, not a passive display plus a second control.
+        return null
+
       default: {
         const unhandled: never = problem.inputMode
         throw new Error(`Unhandled input mode: ${String(unhandled)}`)
@@ -265,11 +271,22 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
             exit={{ opacity: 0, x: -40 }}
             transition={{ duration: feedback?.status === 'incorrect' ? 0.36 : 0.22 }}
           >
-            <ProblemView
-              display={problem.display}
-              entry={visibleEntry(problem, entry)}
-              entryMode={problem.inputMode}
-            />
+            {problem.inputMode === 'coordinate-plane' &&
+            problem.display.kind === 'coordinate-plane' ? (
+              <CoordinatePlaneInput
+                plane={problem.display.plane}
+                entry={entry}
+                onPlace={setEntry}
+                onConfirm={() => submit()}
+                disabled={feedback !== null}
+              />
+            ) : (
+              <ProblemView
+                display={problem.display}
+                entry={visibleEntry(problem, entry)}
+                entryMode={problem.inputMode}
+              />
+            )}
           </motion.div>
         </AnimatePresence>
 

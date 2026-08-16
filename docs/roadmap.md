@@ -5,10 +5,11 @@ What is left, in the order it should be done.
 **Status: 145 of 201 skills are playable.** Stages A, B, C, D and E are all playable, and
 Stage E is complete: Units 12, 13, 14 and 15.
 Choice input,
-number-line input, math notation, fraction input, diagrams and expression input are built,
+number-line input, math notation, fraction input, diagrams, expression input and
+coordinate-plane input are built,
 so `AVAILABLE_CAPABILITIES` holds
 `choice-input`, `number-line`, `math-notation`, `fraction-input`, `diagram` and
-`expression-input`. Unit 12 is the first content to use `math-notation`'s superscript and
+`expression-input`, plus `coordinate-plane` ahead of Stage F's content. Unit 12 is the first content to use `math-notation`'s superscript and
 root kinds, for exponent and root display; it does not use `expression-input`, since that
 capability's grammar excludes exponents, so power-rule skills ask for the resulting exponent
 as a number rather than an expression. `zero-neg-exponents` settles Stage E's previously
@@ -86,7 +87,7 @@ behind our build order.
 
 **Capabilities gate whole stages.** `AVAILABLE_CAPABILITIES` in
 `src/curriculum/manifest/resolve.ts` contains `choice-input`, `number-line`, `math-notation`,
-`fraction-input`, `diagram` and `expression-input` today. Adding a capability there is a one-line edit that flips its stage
+`fraction-input`, `diagram`, `expression-input` and `coordinate-plane` today. Adding a capability there is a one-line edit that flips its stage
 on — which is why capability work is its own item, never bundled with the content it unblocks.
 It flips nothing on its own, though: a skill still needs a generator and every other
 capability its stage declares.
@@ -960,7 +961,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
         the skill quietly predicted one mistake where its contract promises two. Its upper bound is
         drawn from the values that leave both standing.
 
-- [ ] **22 · Coordinate-plane input** — L — **two increments**
+- [x] **22 · Coordinate-plane input** — L — **two increments** — **shipped 2026-08-16**
 
       First needed at `plot-points` (16.1) — the only skill in the course marked both `quick` and
       a wall.
@@ -984,12 +985,23 @@ document's ✅ markers updated to match, which the cross-check enforces.
       or intersection. `coordinate-plane` remains unavailable: drawing is only the first half
       of the stage's input capability, so item 22 stays open for 22b.
 
-      **22b · The plane accepts.** Tap to place, then confirm — item 13's rule, and for the same
+      **22b · The plane accepts — shipped 2026-08-16.** Tap to place, then confirm — item 13's rule, and for the same
       reason: a plane packs far more targets into 375px than a line does, so a tap one square out
       is a slip rather than a wrong answer. Needs an `Answer` arm for a point (the union is exact,
       approx, choice and expression today) and item 20a's non-scalar misconceptions, since
       (3, 2) plotted as (2, 3) is *the* predicted mistake of 16.1 and unrepresentable as a number.
       `coordinate-plane` joins `AVAILABLE_CAPABILITIES` here.
+
+      The shipped surface reuses the graph's declared integer ticks as the only reachable
+      targets. Each target is real button markup, with one roving tab stop and one-tick arrow
+      movement. Large x−, y−, origin, y+, and x+ controls provide a precise touch route across
+      even the densest plane, while Check stays disabled until a point is placed. A second
+      placement corrects the first before submission. Points are structured ordered-pair answers and misconceptions;
+      central validation rejects off-plane answers and drops off-plane, duplicate, or
+      answer-colliding predictions. Recorded output names points, while independent answer
+      verification remains fail-closed until a content generator supplies operation-specific
+      source data. No Stage F generator ships here, so all 28 skills remain planned and the
+      playable total remains 145.
 
 - [ ] **23 · Stage F · Units 16–19** — L — 28 skills, six changes
 

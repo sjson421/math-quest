@@ -66,4 +66,8 @@ describe('visibleEntry', () => {
     // branch chain this replaced fell through to the keypad's translation here.
     expect(visibleEntry(problem({ inputMode: 'number-line' }), '-3')).toBe('')
   })
+
+  it('leaves the internal point entry to the coordinate placement surface', () => {
+    expect(visibleEntry(problem({ inputMode: 'coordinate-plane' }), '-3,2')).toBe('')
+  })
 })

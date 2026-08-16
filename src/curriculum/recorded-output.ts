@@ -457,6 +457,8 @@ const formatAnswer = (answer: Problem['answer']): string => {
       return `choice ${answer.id}`
     case 'expression':
       return `expression ${answer.canonical} (${answer.variable}, ${answer.form})`
+    case 'point':
+      return `point ${coordinateLabel(answer)}`
     default: {
       const unhandled: never = answer
       throw new Error(`Unhandled answer: ${JSON.stringify(unhandled)}`)
@@ -490,7 +492,11 @@ export const format = (problem: Problem, seed: number): string => {
   })
 
   for (const m of problem.misconceptions ?? []) {
-    const value = typeof m.value === 'number' ? m.value : m.value.value
+    const value = typeof m.value === 'number'
+      ? m.value
+      : m.value.kind === 'text'
+        ? m.value.value
+        : coordinateLabel(m.value)
     lines.push(`miss     ${m.tag} = ${value}   ${m.nudge}`)
   }
 

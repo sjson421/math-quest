@@ -61,6 +61,7 @@ const SLOT: Record<Problem['inputMode'], 'prose' | 'number'> = {
   choice: 'prose',
   'number-line': 'number',
   expression: 'number',
+  'coordinate-plane': 'prose',
 }
 
 // Choice and number-line controls already own their answer surface outside the
@@ -71,6 +72,7 @@ const COORDINATE_PLANE_ENTRY_FRAME: Record<Problem['inputMode'], boolean> = {
   choice: false,
   'number-line': false,
   expression: true,
+  'coordinate-plane': false,
 }
 
 type Of<K extends Display['kind']> = Extract<Display, { kind: K }>

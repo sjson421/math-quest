@@ -2,9 +2,12 @@ import type { KeypadRules } from './keypad'
 import type { NumberLineSpec } from './number-line'
 import type { Rational } from './rational'
 import type { ShapeDiagram } from './shape-diagram'
-import type { CoordinatePlane } from './coordinate-plane'
+import type { Coordinate, CoordinatePlane } from './coordinate-plane'
 
 export type Difficulty = 1 | 2 | 3 | 4 | 5
+
+/** One exact ordered pair, shared by point answers and point misconceptions. */
+export type PointValue = Coordinate & { kind: 'point' }
 
 export type Answer =
   /** Exact rational match — covers integers and fractions alike. */
@@ -61,6 +64,8 @@ export type Answer =
        */
       form: 'expanded' | 'exact'
     }
+  /** Exact ordered-pair match for coordinate-plane placement. */
+  | PointValue
 
 export type Choice = {
   id: string
@@ -83,9 +88,10 @@ export type Misconception = {
    * The wrong value this mistake produces. A plain number for arithmetic
    * mistakes; `{ kind: 'text' }` for a mistake whose result isn't a scalar
    * (e.g. an unsimplified expression) — matched by exact string, not by
-   * numeric or algebraic equivalence.
+   * numeric or algebraic equivalence. A point keeps its coordinates structured
+   * so order reversal can be filtered and diagnosed exactly.
    */
-  value: number | { kind: 'text'; value: string }
+  value: number | { kind: 'text'; value: string } | PointValue
   /** Stable tag for tracking recurring errors across sessions. */
   tag: string
   /** Shown to the learner. Warm, specific, never scolding. */
@@ -743,7 +749,7 @@ export type Problem = {
   prompt: string
   display: Display
   answer: Answer
-  inputMode: 'keypad' | 'choice' | 'number-line' | 'expression'
+  inputMode: 'keypad' | 'choice' | 'number-line' | 'expression' | 'coordinate-plane'
   /**
    * What this answer may be typed with. Omitted means whole digits only, which
    * is what every skill built so far wants.

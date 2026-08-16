@@ -1,4 +1,12 @@
 import { parseInput } from './answer'
+import {
+  assertCoordinatePlane,
+  coordinateEntry,
+  isCoordinate,
+  isCoordinateTarget,
+  parseCoordinateEntry,
+  type CoordinatePlane,
+} from './coordinate-plane'
 import { makeRng } from './rng'
 import { toNumber, rational } from './rational'
 import type { Difficulty, Problem, SkillGenerator } from './types'
@@ -18,6 +26,23 @@ export function generateProblem(
   difficulty: Difficulty,
 ): Problem {
   const problem = skill.generate(makeRng(seed), difficulty)
+
+  let inputPlane: CoordinatePlane | undefined
+  if (problem.inputMode === 'coordinate-plane') {
+    if (problem.display.kind !== 'coordinate-plane') {
+      throw new Error(`${problem.skillId}: coordinate-plane input needs a coordinate-plane display`)
+    }
+    if (problem.answer.kind !== 'point') {
+      throw new Error(`${problem.skillId}: coordinate-plane input needs a point answer`)
+    }
+    assertCoordinatePlane(problem.display.plane)
+    if (!isCoordinateTarget(problem.display.plane, problem.answer)) {
+      throw new Error(`${problem.skillId}: point answer must be a declared lattice target`)
+    }
+    inputPlane = problem.display.plane
+  } else if (problem.answer.kind === 'point') {
+    throw new Error(`${problem.skillId}: point answer needs coordinate-plane input`)
+  }
 
   if (!problem.misconceptions?.length) return problem
 
@@ -39,6 +64,7 @@ export function generateProblem(
 
   const seenNumbers = new Set<number>()
   const seenText = new Set<string>()
+  const seenPoints = new Set<string>()
   const misconceptions = problem.misconceptions.filter((m) => {
     if (typeof m.value === 'number') {
       if (!Number.isFinite(m.value)) return false
@@ -47,10 +73,24 @@ export function generateProblem(
       seenNumbers.add(m.value)
       return true
     }
-    const text = m.value.value.trim()
-    if (!text) return false
-    if (seenText.has(text)) return false
-    seenText.add(text)
+    if (m.value.kind === 'text') {
+      const text = m.value.value.trim()
+      if (!text) return false
+      if (seenText.has(text)) return false
+      seenText.add(text)
+      return true
+    }
+
+    if (!isCoordinate(m.value)) return false
+    if (
+      problem.answer.kind === 'point' &&
+      m.value.x === problem.answer.x &&
+      m.value.y === problem.answer.y
+    ) return false
+    if (!inputPlane || !isCoordinateTarget(inputPlane, m.value)) return false
+    const key = coordinateEntry(m.value)
+    if (seenPoints.has(key)) return false
+    seenPoints.add(key)
     return true
   })
 
@@ -62,7 +102,10 @@ export function diagnose(problem: Problem, raw: string) {
   const trimmed = raw.trim()
   const parsed = parseInput(raw)
   const value = parsed.kind === 'invalid' ? undefined : toNumber(parsed.value)
-  return problem.misconceptions?.find((m) =>
-    typeof m.value === 'number' ? m.value === value : m.value.value === trimmed,
-  )
+  const point = parseCoordinateEntry(raw)
+  return problem.misconceptions?.find((m) => {
+    if (typeof m.value === 'number') return m.value === value
+    if (m.value.kind === 'text') return m.value.value === trimmed
+    return point?.x === m.value.x && point.y === m.value.y
+  })
 }
