@@ -396,30 +396,36 @@ exact answer from that structured data without trusting the generator's stated a
 
 ### Requirement: A predicted misconception may carry a non-numeric value
 
-A generator MAY predict a mistake whose result is not a plain number (for example, an
-unsimplified or mis-transformed algebraic expression). Such a prediction SHALL reach the
-learner and be diagnosable on exactly the same terms as a numeric prediction: it is carried
-unless blank, deduplicated against other predictions of the same kind, and matched against
-the learner's raw entry by direct comparison. No equivalence beyond exact match is
-performed — a generator MAY declare only the exact text form it means to predict, and the
-system SHALL NOT attempt to determine that two different non-numeric predictions describe
-the same underlying mistake.
+A generator MAY predict a mistake whose result is not a plain number. Text-valued predictions
+represent exact authored forms such as an unsimplified or mis-transformed algebraic expression;
+point-valued predictions represent an exact structured integer ordered pair. Either kind SHALL
+reach the learner and be diagnosable on the same terms as a numeric prediction, subject to the
+kind-specific validation and comparison below.
 
-The correct-answer exclusion that drops a numeric prediction equal to the answer SHALL NOT
-be applied to a non-numeric prediction: an expression answer has no numeric value to compare
-against, and no algebraic comparison is performed. A generator predicting a non-numeric
-mistake is therefore responsible for constructing it so it cannot coincide with its own
-answer for any draw it allows.
+A text prediction SHALL be carried unless blank, deduplicated against identical text
+predictions, and matched against the learner's trimmed raw entry by direct comparison. No
+algebraic equivalence is performed. The correct-answer exclusion SHALL NOT be applied to text:
+an expression answer has no numeric value to compare against, so a generator remains
+responsible for constructing text predictions that cannot coincide with its answer.
+
+A point prediction SHALL contain two finite integers. It SHALL be carried unless it equals the
+structured point answer, duplicates an earlier ordered point, or cannot be placed on the
+declared lattice of its coordinate-plane input problem. It SHALL be diagnosed only when the
+learner's parsed point has the same x and y in the same order. `(3, 2)` and `(2, 3)` are
+distinct predictions.
+
+Numeric, text, and point predictions SHALL be validated and deduplicated within their own
+kinds. Similar written forms across kinds SHALL NOT collide.
 
 #### Scenario: A non-numeric prediction reaches the learner
 
-- **WHEN** a generator predicts a mistake whose value is not a number
-- **THEN** the prediction is carried in the problem's misconceptions unless it is blank or
-  duplicates another prediction of the same kind
+- **WHEN** a generator predicts a non-blank text mistake
+- **THEN** the prediction is carried in the problem's misconceptions unless it duplicates
+  another text prediction
 
 #### Scenario: A non-numeric prediction is diagnosed on submission
 
-- **WHEN** a learner's raw entry, trimmed, exactly matches a carried non-numeric prediction
+- **WHEN** a learner's raw entry, trimmed, exactly matches a carried text prediction
 - **THEN** that prediction is returned as the diagnosis
 
 #### Scenario: A blank non-numeric prediction is dropped
@@ -429,16 +435,49 @@ answer for any draw it allows.
 
 #### Scenario: Non-numeric and numeric predictions do not collide
 
-- **WHEN** a problem carries both numeric and non-numeric predicted misconceptions
-- **THEN** deduplication applies within each kind independently, and a non-numeric
-  prediction is never compared against a numeric one
+- **WHEN** a problem carries numeric, text, and point predicted misconceptions with similar
+  written forms
+- **THEN** deduplication applies within each kind independently
+- **AND** otherwise-valid predictions are never compared across kinds
 
 #### Scenario: A non-numeric prediction equal to the answer is not dropped for the generator
 
-- **WHEN** a generator predicts a non-numeric mistake whose text equals its own canonical
+- **WHEN** a generator predicts a text mistake whose text equals its own canonical expression
   answer
-- **THEN** the prediction is still carried, because no correct-answer exclusion runs for
-  this kind
+- **THEN** the prediction is still carried, because no correct-answer exclusion runs for text
+
+#### Scenario: A point prediction equal to the answer is dropped
+
+- **WHEN** a point-answer problem predicts the same ordered point as its answer
+- **THEN** that prediction does not reach the learner
+
+#### Scenario: Duplicate point predictions keep the first diagnosis
+
+- **WHEN** two predictions carry the same ordered point under different tags
+- **THEN** only the first prediction reaches the learner
+- **AND** a prediction carrying the swapped point remains distinct
+
+#### Scenario: Invalid or unreachable point predictions are dropped
+
+- **WHEN** a point prediction contains a non-finite or non-integer coordinate, or is not a
+  target on its coordinate-plane input surface
+- **THEN** that prediction does not reach the learner
+
+#### Scenario: Swapped coordinates receive their diagnosis
+
+- **WHEN** `(2, 3)` is carried as the coordinate-order misconception for answer `(3, 2)`
+- **AND** the learner confirms `(2, 3)`
+- **THEN** diagnosis returns the coordinate-order misconception and its stable tag
+
+#### Scenario: An unpredicted point has no diagnosis
+
+- **WHEN** the learner confirms a valid wrong point not carried by any misconception
+- **THEN** diagnosis returns no misconception
+
+#### Scenario: Invalid point input has no diagnosis
+
+- **WHEN** an entry cannot be parsed as a finite integer point
+- **THEN** it matches no structured point misconception
 
 ### Requirement: Single-variable expression displays carry independently verifiable source data
 

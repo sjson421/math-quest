@@ -7,7 +7,7 @@ commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archi
 Task lists are the running record — mark each item done as it lands, and note decisions
 inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, thirty-four
+- `openspec/specs/` is the **baseline**: what the system does today, thirty-five
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
@@ -19,18 +19,17 @@ inline rather than only in chat.
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`,
   `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`,
-  `expression-input`, `coordinate-plane-display`. A change
+  `expression-input`, `coordinate-plane-display`, `coordinate-plane-input`. A change
   amending built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED`
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-six changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-seven changes
   have shipped — `ls openspec/changes/archive/` is the authority, and this line has run one
   behind before; the latest archive is
-  `2026-08-16-add-coordinate-plane-display`. It ships roadmap item 22's first increment,
-  22a, which adds structured, accessible coordinate-plane display while leaving the item open
-  for 22b's point-placement input. Stage F remains planned until that input and its content
-  generators ship.
+  `2026-08-16-add-coordinate-plane-input`. It completes roadmap item 22 with structured point
+  answers, direct lattice placement, and large-target touch adjustment over the existing
+  coordinate-plane display. Stage F remains planned until its content generators ship.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the

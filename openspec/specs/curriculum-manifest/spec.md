@@ -109,7 +109,7 @@ introduces, so the set can be read off the stage rather than assembled from earl
 #### Scenario: Skill needing an unavailable capability stays planned
 
 - **WHEN** a skill requires a capability that is not yet built
-- **THEN** the skill resolves as `planned` regardless of whether a generator exists
+- **THEN** it resolves as `planned` regardless of whether a generator exists
 
 #### Scenario: Consumer stages record the built choice capability
 
@@ -162,6 +162,13 @@ introduces, so the set can be read off the stage rather than assembled from earl
 - **WHEN** `zero-neg-exponents` requires an exact reciprocal through fraction entry
 - **THEN** Stage E lists `fraction-input` as a required available capability
 - **AND** no new capability implementation or availability flag is needed
+
+#### Scenario: Stage F records complete coordinate-plane infrastructure without content
+
+- **WHEN** coordinate-plane display and confirmed point placement are both built
+- **THEN** Stage F lists `coordinate-plane` as an available required capability
+- **AND** all 28 Stage F skills remain planned while none has a generator
+- **AND** the playable skill total remains 145 and the offered course is unchanged
 
 ### Requirement: Skills carry pacing metadata
 
