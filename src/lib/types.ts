@@ -2,6 +2,7 @@ import type { KeypadRules } from './keypad'
 import type { NumberLineSpec } from './number-line'
 import type { Rational } from './rational'
 import type { ShapeDiagram } from './shape-diagram'
+import type { CoordinatePlane } from './coordinate-plane'
 
 export type Difficulty = 1 | 2 | 3 | 4 | 5
 
@@ -674,6 +675,8 @@ export type Display =
     ))
   /** A shaded equal-part shape whose visible fraction is carried as data. */
   | { kind: 'diagram'; diagram: ShapeDiagram }
+  /** A bounded graph whose axes, points, and lines are carried as data. */
+  | { kind: 'coordinate-plane'; plane: CoordinatePlane }
   /**
    * A statement that already contains its relation — an equation, or since Unit
    * 15 an inequality.

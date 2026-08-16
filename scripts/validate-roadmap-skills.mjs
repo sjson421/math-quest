@@ -80,8 +80,12 @@ const phaseRows = [
 ]
 for (const phaseRow of phaseRows) requireText(core, phaseRow, 'shared core')
 requireText(core, 'exactly one phase in', 'shared core')
-requireText(core, 'Start each reviewer with fresh context, medium reasoning', 'shared core')
-requireText(core, 'Never pin a concrete model', 'shared core')
+requireText(
+  core,
+  'Start each reviewer with fresh context, `gpt-5.6-terra`, and medium reasoning',
+  'shared core',
+)
+requireText(core, 'do not vary the reviewer model by task', 'shared core')
 
 for (const referenceName of referenceNames) {
   if (!existsSync(resolve(sharedRoot, referenceName))) failures.push(`Missing shared ${referenceName}`)
@@ -93,8 +97,8 @@ for (const token of [
   '$simplify',
   'spawn_agent',
   'fork_turns: "none"',
+  'model: "gpt-5.6-terra"',
   'reasoning_effort: "medium"',
-  'omit `model`',
 ]) {
   requireText(codex, token, 'Codex adapter')
 }
@@ -147,8 +151,15 @@ const modelCheckedFiles = [
   { path: 'docs/workflow.md', content: read('docs/workflow.md') },
 ]
 const concreteModel = /\b(?:gpt(?:-\d|[._])|o[1-9](?:[-._]|\b)|claude-(?:opus|sonnet|haiku|\d)|deepseek|gemini|qwen|llama|mistral|codestral|command-r|terra|opus|sonnet|haiku)\b/i
+const allowedConcreteModel = new Map([
+  ['docs/agent-workflows/ship-roadmap-item/core.md', 'gpt-5.6-terra'],
+  ['.agents/skills/ship-roadmap-item/SKILL.md', 'gpt-5.6-terra'],
+])
 for (const { path, content } of modelCheckedFiles) {
-  if (concreteModel.test(content)) failures.push(`Concrete model identifier in ${path}`)
+  const checkedContent = allowedConcreteModel.has(path)
+    ? content.replaceAll(allowedConcreteModel.get(path), '')
+    : content
+  if (concreteModel.test(checkedContent)) failures.push(`Concrete model identifier in ${path}`)
   for (const match of content.matchAll(/^model:\s*(\S+)/gm)) {
     if (path !== '.claude/agents/roadmap-reviewer.md' || match[1] !== 'inherit') {
       failures.push(`Pinned model configuration in ${path}`)

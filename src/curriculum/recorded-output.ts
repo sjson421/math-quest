@@ -1,4 +1,5 @@
 import { generateProblem } from '../lib/generator'
+import { coordinateLabel, coordinatePlaneLabel } from '../lib/coordinate-plane'
 import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
@@ -374,6 +375,18 @@ const formatDisplay = (display: Problem['display']): string => {
         `diagram ${display.diagram.kind} ${display.diagram.shadedParts}/${display.diagram.parts} ` +
         `"${shapeDiagramLabel(display.diagram)}"`
       )
+    case 'coordinate-plane': {
+      const { plane } = display
+      const points = plane.points.map(coordinateLabel).join(', ')
+      const lines = plane.lines
+        .map((line) => `${coordinateLabel(line.through[0])}→${coordinateLabel(line.through[1])}`)
+        .join(', ')
+      return (
+        `coordinate-plane x ${plane.x.min}..${plane.x.max}/${plane.x.step} ` +
+        `y ${plane.y.min}..${plane.y.max}/${plane.y.step} ` +
+        `points [${points}] lines [${lines}] "${coordinatePlaneLabel(plane)}"`
+      )
+    }
     case 'equation':
       // Both optional fields are stated rather than interpolated raw. An absent
       // frame label would otherwise print `solve undefined`, and unrendered

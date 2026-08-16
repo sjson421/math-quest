@@ -3,6 +3,7 @@ import { allSkills, manifestIndex } from './index'
 import { checkContent, formatViolations } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { checkAnswer, intAnswer } from '../lib/answer'
+import { assertCoordinatePlane } from '../lib/coordinate-plane'
 import { makeRng } from '../lib/rng'
 import { equals, format as formatRational, gcd, toNumber, rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
@@ -1419,6 +1420,11 @@ function recompute(problem: Problem): number | string {
     return matches[0].id
   }
 
+  if (display.kind === 'coordinate-plane') {
+    assertCoordinatePlane(display.plane)
+    throw new Error(`${problem.skillId}: coordinate plane needs operation-specific data for independent verification`)
+  }
+
   if (display.kind === 'decimal-column') {
     return expectedDecimal(display.decimal).answer
   }
@@ -1669,6 +1675,20 @@ function sourceMagnitude(problem: Problem): number {
   }
 
   if (problem.display.kind === 'diagram') return problem.display.diagram.parts
+
+  if (problem.display.kind === 'coordinate-plane') {
+    const { plane } = problem.display
+    assertCoordinatePlane(plane)
+    const values = [
+      plane.x.min,
+      plane.x.max,
+      plane.y.min,
+      plane.y.max,
+      ...plane.points.flatMap((point) => [point.x, point.y]),
+      ...plane.lines.flatMap((line) => line.through.flatMap((point) => [point.x, point.y])),
+    ]
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
 
   if (problem.display.kind === 'story') {
     // The equation case is named for the same reason the equation branch below
@@ -2099,6 +2119,41 @@ describe('diagram answer verification', () => {
 
   it('rejects invalid visible counts instead of trusting the stated answer', () => {
     expect(() => answerMismatch(problem(0, 0, { n: 0, d: 1 }))).toThrow(/parts must be a positive whole number/)
+  })
+})
+
+describe('coordinate-plane answer verification', () => {
+  const problem = (xMax = 5, xStep = 1): Problem => ({
+    skillId: 'synthetic-coordinate-plane',
+    prompt: 'What is the slope?',
+    display: {
+      kind: 'coordinate-plane',
+      plane: {
+        x: { min: -5, max: xMax, step: xStep },
+        y: { min: -5, max: 5, step: 1 },
+        points: [{ x: -2, y: 1 }],
+        lines: [{ through: [{ x: 0, y: 1 }, { x: 2, y: 3 }] }],
+      },
+    },
+    answer: { kind: 'exact', n: 1, d: 1 },
+    inputMode: 'keypad',
+    hint: 'Compare rise with run.',
+    solution: [{ text: 'Read two points on the line.' }],
+    difficulty: 1,
+  })
+
+  it('fails closed until content declares what answer the graph asks for', () => {
+    expect(() => answerMismatch(problem())).toThrow(
+      'synthetic-coordinate-plane: coordinate plane needs operation-specific data',
+    )
+  })
+
+  it('validates the graph before reaching the operation-specific tripwire', () => {
+    expect(() => answerMismatch(problem(6, 2))).toThrow('x.step must divide the axis span')
+  })
+
+  it('derives difficulty magnitude from graph source values rather than its stated answer', () => {
+    expect(sourceMagnitude(problem())).toBeGreaterThan(1)
   })
 })
 

@@ -65,3 +65,32 @@ describe('recorded output for diagrams', () => {
     )
   })
 })
+
+describe('recorded output for coordinate planes', () => {
+  it('records both axes, every mark, and the derived accessible name', () => {
+    const problem: Problem = {
+      skillId: 'synthetic-coordinate-plane',
+      prompt: 'What is the slope?',
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -4, max: 4, step: 2 },
+          points: [{ x: -2, y: 2 }],
+          lines: [{ through: [{ x: 0, y: 0 }, { x: 2, y: 2 }] }],
+        },
+      },
+      answer: { kind: 'exact', n: 1, d: 1 },
+      inputMode: 'keypad',
+      hint: 'Compare rise with run.',
+      solution: [{ text: 'Read two points.' }],
+      difficulty: 1,
+    }
+
+    expect(format(problem, 11)).toContain(
+      'display  coordinate-plane x -5..5/1 y -4..4/2 points [(−2, 2)] ' +
+        'lines [(0, 0)→(2, 2)] "Coordinate plane, x-axis −5 to 5 by 1; ' +
+        'y-axis −4 to 4 by 2; points (−2, 2); line 1 through (0, 0) and (2, 2)"',
+    )
+  })
+})

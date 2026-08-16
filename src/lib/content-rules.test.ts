@@ -237,6 +237,23 @@ describe('forward references', () => {
     ).toEqual([])
   })
 
+  it('reads a coordinate-plane name from its mathematical data', () => {
+    const graph: Problem['display'] = {
+      kind: 'coordinate-plane',
+      plane: {
+        x: { min: -5, max: 5, step: 1 },
+        y: { min: -5, max: 5, step: 1 },
+        points: [{ x: -2, y: 1 }],
+        lines: [{ through: [{ x: 0, y: 1 }, { x: 2, y: 3 }] }],
+      },
+    }
+    const tooEarly = checkContent(problem({ display: graph }), at({}, 'unit-15'))
+
+    expect(tooEarly.map((violation) => violation.rule)).toEqual(['forward-reference'])
+    expect(tooEarly[0].message).toContain('Coordinate plane')
+    expect(checkContent(problem({ display: graph }), at({}, 'unit-16'))).toEqual([])
+  })
+
   it('matches plurals but not words that merely contain a term', () => {
     const plural = checkContent(problem({ hint: 'Add the exponents together.' }), at())
     // "primer" contains "prime"; a substring match would flag it.

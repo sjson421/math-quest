@@ -3,6 +3,7 @@ import { decimalColumnText } from '../lib/decimal'
 import { entrySpokenLabel, fractionEntryNotation } from '../lib/math-notation'
 import { MathNotation } from './MathNotation'
 import { ShapeDiagram } from './ShapeDiagram'
+import { CoordinatePlane } from './CoordinatePlane'
 
 /**
  * Column layout matters pedagogically — it is how the carrying and borrowing
@@ -35,6 +36,8 @@ export function ProblemView({
       return <MathView display={display} entry={entry} entryMode={entryMode} />
     case 'diagram':
       return <DiagramView display={display} entry={entry} entryMode={entryMode} />
+    case 'coordinate-plane':
+      return <CoordinatePlaneView display={display} entry={entry} entryMode={entryMode} />
     case 'equation':
       return <EquationView display={display} entry={entry} entryMode={entryMode} />
     default: {
@@ -58,6 +61,16 @@ const SLOT: Record<Problem['inputMode'], 'prose' | 'number'> = {
   choice: 'prose',
   'number-line': 'number',
   expression: 'number',
+}
+
+// Choice and number-line controls already own their answer surface outside the
+// display. Key this on the full union so a new input mode cannot silently gain
+// a graph-owned entry frame.
+const COORDINATE_PLANE_ENTRY_FRAME: Record<Problem['inputMode'], boolean> = {
+  keypad: true,
+  choice: false,
+  'number-line': false,
+  expression: true,
 }
 
 type Of<K extends Display['kind']> = Extract<Display, { kind: K }>
@@ -258,6 +271,29 @@ function DiagramView({ display, entry, entryMode }: { display: Of<'diagram'> } &
         <span className="font-bold text-ink-faint">=</span>
         <EntrySlot value={entry} mode={entryMode} fractionSize="fluid" />
       </div>
+    </div>
+  )
+}
+
+function CoordinatePlaneView({
+  display,
+  entry,
+  entryMode,
+}: { display: Of<'coordinate-plane'> } & EntryProps) {
+  return (
+    <div className="flex flex-col items-center gap-3 max-w-full">
+      <CoordinatePlane plane={display.plane} />
+      {COORDINATE_PLANE_ENTRY_FRAME[entryMode] && (
+        <div
+          data-coordinate-plane-answer
+          className="flex items-center justify-center gap-3"
+        >
+          <span className="text-lg font-bold text-ink-soft">Answer</span>
+          <span className="text-4xl">
+            <EntrySlot value={entry} mode={entryMode} />
+          </span>
+        </div>
+      )}
     </div>
   )
 }

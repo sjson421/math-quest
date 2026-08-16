@@ -12,6 +12,7 @@
  */
 
 import type { SkillEntry, UnitEntry } from '../curriculum/manifest/types'
+import { coordinatePlaneLabel } from './coordinate-plane'
 import { shapeDiagramLabel } from './shape-diagram'
 import type { Display, Problem } from './types'
 
@@ -139,6 +140,8 @@ function displayText(display: Display): string {
       return display.label
     case 'diagram':
       return shapeDiagramLabel(display.diagram)
+    case 'coordinate-plane':
+      return coordinatePlaneLabel(display.plane)
     case 'column':
     case 'decimal-column':
       return ''

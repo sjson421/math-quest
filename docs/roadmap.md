@@ -965,17 +965,30 @@ document's ✅ markers updated to match, which the cross-check enforces.
       First needed at `plot-points` (16.1) — the only skill in the course marked both `quick` and
       a wall.
 
-      **22a · The plane draws.** Much of Unit 16 *reads* a graph rather than making one:
+      **22a · The plane draws — shipped 2026-08-16.** Much of Unit 16 *reads* a graph rather than making one:
       `table-to-graph` (16.3), `slope-from-graph` (16.4), `graph-from-equation` (16.8) and
       `equation-from-graph` (16.9) all need axes, gridlines and a plotted line on screen before
       any tap is involved, and `system-by-graphing` (17.1) needs two. That is a display arm,
-      subject to item 12's size-ladder measurement, with an accessible description per graph.
+      subject to item 12's size-ladder measurement, with an accessible name per graph.
+
+      The shipped arm carries zero-aligned integer axis scales, plotted lattice points, and up
+      to two mathematically distinct infinite lines defined by two points. One pure owner
+      validates the graph, clips lines with exact rational boundary math, rejects coincident or
+      unrenderably collapsed segments, and derives the complete accessible name. A responsive
+      local SVG draws thinned tick labels, emphasized axes, points, and solid/dashed line styles
+      clipped to the plot frame so a system does not rely on color alone or paint past its
+      bounds. The densest 20-interval plane and representative choice and typed answer
+      compositions were measured at 375px. Every exhaustive `Display` consumer records or
+      names the graph explicitly, while independent answer verification fails closed until a
+      content change declares whether the graph is being read for slope, equation, quadrant,
+      or intersection. `coordinate-plane` remains unavailable: drawing is only the first half
+      of the stage's input capability, so item 22 stays open for 22b.
 
       **22b · The plane accepts.** Tap to place, then confirm — item 13's rule, and for the same
       reason: a plane packs far more targets into 375px than a line does, so a tap one square out
       is a slip rather than a wrong answer. Needs an `Answer` arm for a point (the union is exact,
-      approx and choice today) and item 20a's non-scalar misconceptions, since (3, 2) plotted as
-      (2, 3) is *the* predicted mistake of 16.1 and unrepresentable as a number.
+      approx, choice and expression today) and item 20a's non-scalar misconceptions, since
+      (3, 2) plotted as (2, 3) is *the* predicted mistake of 16.1 and unrepresentable as a number.
       `coordinate-plane` joins `AVAILABLE_CAPABILITIES` here.
 
 - [ ] **23 · Stage F · Units 16–19** — L — 28 skills, six changes

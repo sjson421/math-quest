@@ -1,6 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import type { WholeNumberData } from '../lib/types'
+import type { Display, WholeNumberData } from '../lib/types'
 import { ProblemView } from './ProblemView'
 
 describe('ProblemView', () => {
@@ -285,6 +285,55 @@ describe('ProblemView', () => {
     expect(html).toContain('aria-label="3 over 4"')
     expect(html).toContain('=')
   })
+
+  const coordinatePlaneDisplay: Display = {
+    kind: 'coordinate-plane',
+    plane: {
+      x: { min: -5, max: 5, step: 1 },
+      y: { min: -5, max: 5, step: 1 },
+      points: [{ x: -2, y: 1 }],
+      lines: [{ through: [{ x: 0, y: 1 }, { x: 2, y: 3 }] }],
+    },
+  }
+
+  it.each(['choice', 'number-line'] as const)(
+    'lets %s own a coordinate-plane answer surface without a display echo',
+    (entryMode) => {
+      const html = renderToStaticMarkup(
+        <ProblemView
+          display={coordinatePlaneDisplay}
+          entry="greater-than-id"
+          entryMode={entryMode}
+        />,
+      )
+
+      expect(html).toContain('role="img"')
+      expect(html).toContain('aria-label="Coordinate plane, x-axis −5 to 5 by 1')
+      expect(html).toContain('data-coordinate-point')
+      expect(html).toContain('data-coordinate-line="1"')
+      expect(html).not.toContain('greater-than-id')
+      expect(html).not.toContain('data-coordinate-plane-answer')
+      expect(html).not.toContain('text-ink-faint">=')
+    },
+  )
+
+  it.each(['keypad', 'expression'] as const)(
+    'frames a %s coordinate-plane entry as an answer without graph equality',
+    (entryMode) => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={coordinatePlaneDisplay}
+        entry="1"
+        entryMode={entryMode}
+      />,
+    )
+
+      expect(html).toContain('data-coordinate-plane-answer')
+      expect(html).toContain('>Answer<')
+      expect(html).toContain('>1<')
+      expect(html).not.toContain('text-ink-faint">=')
+    },
+  )
 
   it.each([
     ['3/4', '3 over 4'],

@@ -475,6 +475,18 @@ describe('the skills that are built', () => {
     expect(stageIds.filter((id) => skillState(id) === 'planned')).toEqual([])
   })
 
+  it('leaves Stage F planned while only the coordinate-plane display half exists', () => {
+    const stage = manifestIndex.get('plot-points')?.stage
+    const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
+
+    expect(stage?.requires).toEqual(['math-notation', 'expression-input', 'coordinate-plane'])
+    expect(AVAILABLE_CAPABILITIES.has('coordinate-plane')).toBe(false)
+    expect(stageIds).toHaveLength(28)
+    expect(stageIds.filter((id) => generators.has(id))).toEqual([])
+    expect(stageIds.every((id) => skillState(id) === 'planned')).toBe(true)
+    expect(implementedSkillIds).toHaveLength(145)
+  })
+
   it('declares a capability for every input mode a stage actually uses', () => {
     // The rule `requires` states, executed rather than restated. Stage E carried
     // a choice-input consumer from 13a without declaring one, and nothing

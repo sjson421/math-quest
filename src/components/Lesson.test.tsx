@@ -107,6 +107,31 @@ const diagramSkill: SkillGenerator = {
   }),
 }
 
+const coordinatePlaneChoiceSkill: SkillGenerator = {
+  id: 'synthetic-coordinate-plane-choice',
+  name: 'Synthetic Coordinate Plane Choice',
+  blurb: 'For testing graph wiring',
+  generate: (_rng, difficulty) => ({
+    skillId: 'synthetic-coordinate-plane-choice',
+    prompt: 'How does this line move?',
+    display: {
+      kind: 'coordinate-plane',
+      plane: {
+        x: { min: -5, max: 5, step: 1 },
+        y: { min: -5, max: 5, step: 1 },
+        points: [],
+        lines: [{ through: [{ x: 0, y: 1 }, { x: 2, y: 3 }] }],
+      },
+    },
+    answer: { kind: 'choice', id: 'greater-than-id' },
+    inputMode: 'choice',
+    choices: answerChoices,
+    hint: 'Read the line from left to right.',
+    solution: [{ text: 'The line rises.' }],
+    difficulty,
+  }),
+}
+
 const has = (html: string, label: string) => html.includes(`aria-label="${label}"`)
 
 describe('Lesson', () => {
@@ -124,6 +149,21 @@ describe('Lesson', () => {
     expect(html).toContain('What fraction is shaded?')
     expect(has(html, '/')).toBe(true)
     expect(html).toContain('Check')
+  })
+
+  it('keeps a coordinate-plane display on the declared choice path', () => {
+    const html = renderToStaticMarkup(
+      <Lesson skill={coordinatePlaneChoiceSkill} onExit={() => {}} />,
+    )
+
+    expect(html).toContain('aria-label="Coordinate plane, x-axis −5 to 5 by 1')
+    expect(html).toContain('data-coordinate-line="1"')
+    for (const { label } of answerChoices) expect(html).toContain(label)
+    expect(has(html, 'Backspace')).toBe(false)
+    expect(html).not.toContain('>Check<')
+    expect(html).not.toContain('greater-than-id')
+    expect(html).not.toContain('data-coordinate-plane-answer')
+    expect(html).not.toContain('text-ink-faint">=')
   })
 
   it('gives the pad the sign key when the problem asks for one', () => {
