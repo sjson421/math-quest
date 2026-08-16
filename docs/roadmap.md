@@ -2,8 +2,9 @@
 
 What is left, in the order it should be done.
 
-**Status: 145 of 201 skills are playable.** Stages A, B, C, D and E are all playable, and
-Stage E is complete: Units 12, 13, 14 and 15.
+**Status: 151 of 201 skills are playable.** Stages A through F have playable content. Stage E
+is complete with Units 12, 13, 14 and 15; Stage F has started with Unit 16's first six
+coordinate-plane and line-reading skills.
 Choice input,
 number-line input, math notation, fraction input, diagrams, expression input and
 coordinate-plane input are built,
@@ -1007,9 +1008,12 @@ document's ✅ markers updated to match, which the cross-check enforces.
 
       Ordered increments:
 
-      - **16a** `plot-points`–`y-intercept` — needs both halves of item 22; `slope-from-points`
-        (16.5) is a wall on inconsistent subtraction order, which a generator holding both points
-        can predict exactly.
+      - **16a — shipped 2026-08-16.** `plot-points`–`y-intercept` use item 22's shared plane
+        for point placement, quadrant reading, a semantic x/y table, slope, and intercept work.
+        Structured operation data keeps every answer independently derivable from what is visible.
+        `plot-points` predicts swapped coordinates and reversed vertical direction as reachable
+        points; the `slope-from-points` wall preserves distinct inconsistent-order and reciprocal
+        diagnoses. Exact rational slope answers expose fraction and sign keys only when needed.
       - **16b** `slope-intercept`–`parallel-perpendicular` — `graph-from-equation` (16.8) asks the
         learner to *produce* a line: two placed points, or a choice among rendered graphs. Decide
         it here; it is the one skill in the unit whose answer shape is genuinely open.

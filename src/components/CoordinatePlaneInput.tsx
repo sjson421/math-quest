@@ -7,11 +7,14 @@ import {
   type CoordinateDirection,
   type CoordinatePlane as CoordinatePlaneSpec,
 } from '../lib/coordinate-plane'
+import type { CoordinateData } from '../lib/types'
 import { tap } from '../lib/haptics'
+import { CoordinateContext } from './CoordinateContext'
 import { CoordinatePlane } from './CoordinatePlane'
 
 type Props = {
   plane: CoordinatePlaneSpec
+  coordinate?: CoordinateData
   /** The placed point as the lesson's ordinary canonical entry. */
   entry: string
   onPlace: (entry: string) => void
@@ -22,6 +25,7 @@ type Props = {
 /** One exact lattice placement, deliberately confirmed before submission. */
 export function CoordinatePlaneInput({
   plane,
+  coordinate,
   entry,
   onPlace,
   onConfirm,
@@ -50,6 +54,7 @@ export function CoordinatePlaneInput({
 
   return (
     <div className="flex w-80 max-w-full flex-col items-center gap-3">
+      <CoordinateContext data={coordinate} />
       <CoordinatePlane
         plane={plane}
         placement={{

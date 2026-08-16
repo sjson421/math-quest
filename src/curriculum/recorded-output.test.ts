@@ -124,4 +124,34 @@ describe('recorded output for coordinate planes', () => {
     expect(output).toContain('input    coordinate-plane')
     expect(output).toContain('miss     swapped-coordinates = (2, 3)')
   })
+
+  it('records every coordinate table row, target, and operation', () => {
+    const problem: Problem = {
+      skillId: 'synthetic-table',
+      prompt: 'Plot the highlighted row.',
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [{ x: -2, y: -1 }, { x: 0, y: 1 }],
+          lines: [],
+        },
+        coordinate: {
+          operation: 'table-to-graph',
+          rows: [{ x: -2, y: -1 }, { x: 0, y: 1 }, { x: 2, y: 3 }],
+          targetX: 2,
+        },
+      },
+      answer: { kind: 'point', x: 2, y: 3 },
+      inputMode: 'coordinate-plane',
+      hint: 'Read x first, then y.',
+      solution: [{ text: 'Move across, then up.' }],
+      difficulty: 1,
+    }
+
+    expect(format(problem, 17)).toContain(
+      'table-to-graph rows [(−2, −1), (0, 1), (2, 3)] target-x 2',
+    )
+  })
 })

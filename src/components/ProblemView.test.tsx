@@ -313,6 +313,7 @@ describe('ProblemView', () => {
       expect(html).toContain('data-coordinate-line="1"')
       expect(html).not.toContain('greater-than-id')
       expect(html).not.toContain('data-coordinate-plane-answer')
+      expect(html).toContain('data-coordinate-plane-size="full"')
       expect(html).not.toContain('text-ink-faint">=')
     },
   )
@@ -329,11 +330,29 @@ describe('ProblemView', () => {
     )
 
       expect(html).toContain('data-coordinate-plane-answer')
+      expect(html).toContain('data-coordinate-plane-size="compact"')
       expect(html).toContain('>Answer<')
       expect(html).toContain('>1<')
       expect(html).not.toContain('text-ink-faint">=')
     },
   )
+
+  it('keeps coordinate operation context beside the passive graph', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          ...coordinatePlaneDisplay,
+          coordinate: { operation: 'plot-point', point: { x: -2, y: 3 } },
+        }}
+        entry=""
+        entryMode="choice"
+      />,
+    )
+
+    expect(html).toContain('Point (−2, 3)')
+    expect(html.match(/role="img"/g)).toHaveLength(1)
+    expect(html).not.toContain('data-coordinate-plane-answer')
+  })
 
   it.each([
     ['3/4', '3 over 4'],

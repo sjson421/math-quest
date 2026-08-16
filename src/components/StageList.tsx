@@ -15,9 +15,9 @@ type Props = {
 /**
  * The top of the course — the stages that have something to play in them.
  *
- * Stages C through H are absent rather than greyed out, and will stay absent
- * until a generator lands in one. The learner cannot read the size of the
- * unwritten remainder off this screen, which is the point.
+ * A stage with no generated content is absent rather than greyed out. The
+ * learner cannot read the size of the unwritten remainder off this screen,
+ * which is the point.
  */
 export function StageList({ course, progress, onOpen }: Props) {
   return (

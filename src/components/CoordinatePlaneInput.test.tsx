@@ -1,6 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import type { CoordinatePlane as CoordinatePlaneSpec } from '../lib/coordinate-plane'
+import type { CoordinateData } from '../lib/types'
 import { CoordinatePlaneInput } from './CoordinatePlaneInput'
 
 const plane = (reach: number, step = 1): CoordinatePlaneSpec => ({
@@ -10,10 +11,16 @@ const plane = (reach: number, step = 1): CoordinatePlaneSpec => ({
   lines: [],
 })
 
-const render = (graph: CoordinatePlaneSpec, entry = '', disabled = false) =>
+const render = (
+  graph: CoordinatePlaneSpec,
+  entry = '',
+  disabled = false,
+  coordinate?: CoordinateData,
+) =>
   renderToStaticMarkup(
     <CoordinatePlaneInput
       plane={graph}
+      coordinate={coordinate}
       entry={entry}
       onPlace={() => {}}
       onConfirm={() => {}}
@@ -82,6 +89,23 @@ describe('CoordinatePlaneInput', () => {
     expect(html).not.toContain('<textarea')
     expect(html).not.toContain('contenteditable')
     expect(html).not.toContain('<canvas')
+  })
+
+  it('keeps a semantic table beside the single interactive graph', () => {
+    const html = render(
+      { ...plane(2), points: [{ x: -1, y: 0 }, { x: 0, y: 1 }] },
+      '',
+      false,
+      {
+        operation: 'table-to-graph',
+        rows: [{ x: -1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 2 }],
+        targetX: 1,
+      },
+    )
+
+    expect(html.match(/<table/g)).toHaveLength(1)
+    expect(html.match(/role="img"/g)).toHaveLength(1)
+    expect(html.match(/data-coordinate-placement-surface/g)).toHaveLength(1)
   })
 
   it('disables every target, nudge, and confirmation while feedback owns the lesson', () => {

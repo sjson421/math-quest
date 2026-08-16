@@ -284,11 +284,17 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "place-value-tens": [
     "read-numbers",
   ],
+  "plot-points": [
+    "compound-inequalities",
+  ],
   "power-of-power": [
     "exponent-divide",
   ],
   "primes": [
     "multiples",
+  ],
+  "quadrants": [
+    "plot-points",
   ],
   "ratio-words": [
     "unit-conversion",
@@ -323,6 +329,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "simplify-ratios": [
     "write-ratios",
+  ],
+  "slope-from-graph": [
+    "table-to-graph",
+  ],
+  "slope-from-points": [
+    "slope-from-graph",
   ],
   "solve-multi-step-ineq": [
     "solve-one-step-ineq",
@@ -374,6 +386,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "sub-words": [
     "sub-across-zero",
+  ],
+  "table-to-graph": [
+    "quadrants",
   ],
   "times-10": [
     "times-2",
@@ -431,6 +446,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "write-ratios": [
     "simple-interest",
+  ],
+  "y-intercept": [
+    "slope-from-points",
   ],
   "zero-neg-exponents": [
     "power-of-power",

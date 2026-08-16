@@ -3,6 +3,7 @@ import { decimalColumnText } from '../lib/decimal'
 import { entrySpokenLabel, fractionEntryNotation } from '../lib/math-notation'
 import { MathNotation } from './MathNotation'
 import { ShapeDiagram } from './ShapeDiagram'
+import { CoordinateContext } from './CoordinateContext'
 import { CoordinatePlane } from './CoordinatePlane'
 
 /**
@@ -282,10 +283,20 @@ function CoordinatePlaneView({
   entry,
   entryMode,
 }: { display: Of<'coordinate-plane'> } & EntryProps) {
+  const ownsEntry = COORDINATE_PLANE_ENTRY_FRAME[entryMode]
+
   return (
     <div className="flex flex-col items-center gap-3 max-w-full">
-      <CoordinatePlane plane={display.plane} />
-      {COORDINATE_PLANE_ENTRY_FRAME[entryMode] && (
+      <CoordinateContext data={display.coordinate} />
+      {/* A passive plane sharing 375px with the keypad needs 96px less height;
+          otherwise its prompt and hint slide behind the fixed answer controls. */}
+      <div
+        className={ownsEntry ? 'w-56 max-w-full' : 'max-w-full'}
+        data-coordinate-plane-size={ownsEntry ? 'compact' : 'full'}
+      >
+        <CoordinatePlane plane={display.plane} />
+      </div>
+      {ownsEntry && (
         <div
           data-coordinate-plane-answer
           className="flex items-center justify-center gap-3"

@@ -12,9 +12,9 @@
  */
 
 import type { SkillEntry, UnitEntry } from '../curriculum/manifest/types'
-import { coordinatePlaneLabel } from './coordinate-plane'
+import { coordinateLabel, coordinatePlaneLabel } from './coordinate-plane'
 import { shapeDiagramLabel } from './shape-diagram'
-import type { Display, Problem } from './types'
+import type { CoordinateData, Display, Problem } from './types'
 
 export const MAX_SOLUTION_STEPS = 4
 export const MAX_WORDS_PER_STEP = 12
@@ -141,13 +141,34 @@ function displayText(display: Display): string {
     case 'diagram':
       return shapeDiagramLabel(display.diagram)
     case 'coordinate-plane':
-      return coordinatePlaneLabel(display.plane)
+      return [coordinatePlaneLabel(display.plane), coordinateDataText(display.coordinate)]
+        .filter(Boolean)
+        .join('; ')
     case 'column':
     case 'decimal-column':
       return ''
     default: {
       const unhandled: never = display
       throw new Error(`Unhandled display: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
+function coordinateDataText(data?: CoordinateData): string {
+  if (!data) return ''
+  switch (data.operation) {
+    case 'plot-point':
+      return `Point ${coordinateLabel(data.point)}`
+    case 'table-to-graph':
+      return `Table ${data.rows.map(coordinateLabel).join(', ')}; target x ${data.targetX}`
+    case 'quadrant':
+    case 'slope-from-graph':
+    case 'slope-from-points':
+    case 'y-intercept':
+      return ''
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled coordinate data: ${JSON.stringify(unhandled)}`)
     }
   }
 }

@@ -104,6 +104,21 @@ export type SolutionStep = {
   detail?: string
 }
 
+/**
+ * What one coordinate-plane problem asks the learner to read or place.
+ *
+ * The plane remains geometry: axes, points, and lines. This record gives that
+ * geometry one content meaning so independent verification never has to guess
+ * whether the same line is being read for slope, intercept, or something else.
+ */
+export type CoordinateData =
+  | { operation: 'plot-point'; point: Coordinate }
+  | { operation: 'quadrant' }
+  | { operation: 'table-to-graph'; rows: Coordinate[]; targetX: number }
+  | { operation: 'slope-from-graph' }
+  | { operation: 'slope-from-points' }
+  | { operation: 'y-intercept' }
+
 export type Operator = '+' | '−' | '×' | '÷'
 
 /**
@@ -681,8 +696,8 @@ export type Display =
     ))
   /** A shaded equal-part shape whose visible fraction is carried as data. */
   | { kind: 'diagram'; diagram: ShapeDiagram }
-  /** A bounded graph whose axes, points, and lines are carried as data. */
-  | { kind: 'coordinate-plane'; plane: CoordinatePlane }
+  /** A bounded graph whose axes, points, lines, and optional content meaning are data. */
+  | { kind: 'coordinate-plane'; plane: CoordinatePlane; coordinate?: CoordinateData }
   /**
    * A statement that already contains its relation — an equation, or since Unit
    * 15 an inequality.

@@ -7,6 +7,7 @@ import { shapeDiagramLabel } from '../lib/shape-diagram'
 import { decimalColumnText, decimalText } from '../lib/decimal'
 import type {
   AlgebraData,
+  CoordinateData,
   DecimalData,
   Difficulty,
   EquationData,
@@ -159,6 +160,27 @@ const formatDecimalData = (data: DecimalData): string => {
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled decimal data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
+const formatCoordinateData = (data: CoordinateData): string => {
+  switch (data.operation) {
+    case 'plot-point':
+      return `${data.operation} ${coordinateLabel(data.point)}`
+    case 'table-to-graph':
+      return (
+        `${data.operation} rows [${data.rows.map(coordinateLabel).join(', ')}] ` +
+        `target-x ${data.targetX}`
+      )
+    case 'quadrant':
+    case 'slope-from-graph':
+    case 'slope-from-points':
+    case 'y-intercept':
+      return data.operation
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled coordinate data: ${JSON.stringify(unhandled)}`)
     }
   }
 }
@@ -384,7 +406,8 @@ const formatDisplay = (display: Problem['display']): string => {
       return (
         `coordinate-plane x ${plane.x.min}..${plane.x.max}/${plane.x.step} ` +
         `y ${plane.y.min}..${plane.y.max}/${plane.y.step} ` +
-        `points [${points}] lines [${lines}] "${coordinatePlaneLabel(plane)}"`
+        `points [${points}] lines [${lines}] "${coordinatePlaneLabel(plane)}"` +
+        (display.coordinate ? ` [${formatCoordinateData(display.coordinate)}]` : '')
       )
     }
     case 'equation':

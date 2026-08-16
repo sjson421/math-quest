@@ -3,7 +3,12 @@ import { allSkills, manifestIndex } from './index'
 import { checkContent, formatViolations } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { checkAnswer, intAnswer } from '../lib/answer'
-import { assertCoordinatePlane, coordinateEntry } from '../lib/coordinate-plane'
+import {
+  assertCoordinatePlane,
+  coordinateEntry,
+  isCoordinateTarget,
+  type Coordinate,
+} from '../lib/coordinate-plane'
 import { makeRng } from '../lib/rng'
 import { equals, format as formatRational, gcd, toNumber, rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
@@ -1422,7 +1427,105 @@ function recompute(problem: Problem): number | string {
 
   if (display.kind === 'coordinate-plane') {
     assertCoordinatePlane(display.plane)
-    throw new Error(`${problem.skillId}: coordinate plane needs operation-specific data for independent verification`)
+    const data = display.coordinate
+    if (!data) {
+      throw new Error(`${problem.skillId}: coordinate plane needs operation-specific data for independent verification`)
+    }
+
+    const fail = (message: string): never => {
+      throw new Error(`${problem.skillId}: ${message}`)
+    }
+    const noLines = () => {
+      if (display.plane.lines.length !== 0) fail(`${data.operation} must not draw a line`)
+    }
+    const samePoints = (left: readonly Coordinate[], right: readonly Coordinate[]) => {
+      const keys = (points: readonly Coordinate[]) => points.map(coordinateEntry).sort()
+      return JSON.stringify(keys(left)) === JSON.stringify(keys(right))
+    }
+    const slopeFrom = (points: readonly [Coordinate, Coordinate]): number => {
+      const [first, second] = points
+      const run = second.x - first.x
+      const rise = second.y - first.y
+      if (run === 0 || rise === 0) fail(`${data.operation} needs non-zero rise and run`)
+      if (Math.abs(run) === Math.abs(rise)) fail(`${data.operation} must not draw slope 1 or -1`)
+      return toNumber(rational(rise, run))
+    }
+
+    switch (data.operation) {
+      case 'plot-point':
+        noLines()
+        if (display.plane.points.length !== 0) fail('plot-point must start with no plotted points')
+        if (!isCoordinateTarget(display.plane, data.point)) fail('plot-point target is not on the lattice')
+        return coordinateEntry(data.point)
+      case 'quadrant': {
+        noLines()
+        if (display.plane.points.length !== 1) fail('quadrant needs exactly one plotted point')
+        const [{ x, y }] = display.plane.points
+        if (x === 0 || y === 0) fail('quadrant point must not lie on an axis')
+        const id = x > 0
+          ? y > 0 ? 'quadrant-i' : 'quadrant-iv'
+          : y > 0 ? 'quadrant-ii' : 'quadrant-iii'
+        const ids = (problem.choices ?? []).map((choice) => choice.id)
+        if (new Set(ids).size !== ids.length) fail('quadrant choice ids are not unique')
+        if (!ids.includes(id)) fail(`derived quadrant ${id} is not among the offered choices`)
+        return id
+      }
+      case 'table-to-graph': {
+        noLines()
+        if (data.rows.length < 3) fail('table-to-graph needs at least three rows')
+        if (new Set(data.rows.map((point) => point.x)).size !== data.rows.length) {
+          fail('table-to-graph x values must be unique')
+        }
+        if (!data.rows.every((point) => isCoordinateTarget(display.plane, point))) {
+          fail('table-to-graph row is not on the lattice')
+        }
+        const [first, second, ...rest] = data.rows
+        const run = BigInt(second.x - first.x)
+        const rise = BigInt(second.y - first.y)
+        if (rest.some((point) =>
+          BigInt(point.y - first.y) * run !== rise * BigInt(point.x - first.x)
+        )) fail('table-to-graph rows are not collinear')
+        const targets = data.rows.filter((point) => point.x === data.targetX)
+        if (targets.length !== 1) fail('table-to-graph target x must select exactly one row')
+        const target = targets[0]
+        const plotted = data.rows.filter((point) => point.x !== data.targetX)
+        if (!samePoints(display.plane.points, plotted)) {
+          fail('table-to-graph plotted points must equal the non-target rows')
+        }
+        return coordinateEntry(target)
+      }
+      case 'slope-from-graph': {
+        if (display.plane.lines.length !== 1 || display.plane.points.length !== 2) {
+          fail('slope-from-graph needs one line and two marked points')
+        }
+        const points = display.plane.lines[0].through
+        if (!samePoints(display.plane.points, points)) {
+          fail('slope-from-graph marked points must define its line')
+        }
+        return slopeFrom(points)
+      }
+      case 'slope-from-points':
+        noLines()
+        if (display.plane.points.length !== 2) fail('slope-from-points needs exactly two points')
+        return slopeFrom(display.plane.points as [Coordinate, Coordinate])
+      case 'y-intercept': {
+        if (display.plane.lines.length !== 1) fail('y-intercept needs exactly one line')
+        const [first, second] = display.plane.lines[0].through
+        const run = second.x - first.x
+        if (run === 0) fail('y-intercept needs a non-vertical line')
+        const numerator = first.y * run - (second.y - first.y) * first.x
+        if (numerator % run !== 0) fail('y-intercept must be an integer')
+        const intercept = numerator / run
+        if (!isCoordinateTarget(display.plane, { x: 0, y: intercept })) {
+          fail('y-intercept must lie on the displayed lattice')
+        }
+        return intercept
+      }
+      default: {
+        const unhandled: never = data
+        throw new Error(`Unknown coordinate operation: ${JSON.stringify(unhandled)}`)
+      }
+    }
   }
 
   if (display.kind === 'decimal-column') {
@@ -2168,6 +2271,81 @@ describe('coordinate-plane answer verification', () => {
 
   it('derives difficulty magnitude from graph source values rather than its stated answer', () => {
     expect(sourceMagnitude(problem())).toBeGreaterThan(1)
+  })
+
+  it('derives a plotted point from operation data rather than the stated answer', () => {
+    const base = problem()
+    if (base.display.kind !== 'coordinate-plane') throw new Error('expected coordinate plane')
+    const pointProblem: Problem = {
+      ...base,
+      answer: { kind: 'point', x: -2, y: 1 },
+      inputMode: 'coordinate-plane',
+      display: {
+        kind: 'coordinate-plane',
+        plane: { ...base.display.plane, points: [], lines: [] },
+        coordinate: { operation: 'plot-point', point: { x: -2, y: 1 } },
+      },
+    }
+
+    expect(answerMismatch(pointProblem)).toBeUndefined()
+    expect(answerMismatch({ ...pointProblem, answer: { kind: 'point', x: 1, y: -2 } }))
+      .toContain('stated 1,-2, derived -2,1')
+  })
+
+  it('rejects table rows that leave their exact linear relationship', () => {
+    const tableProblem: Problem = {
+      ...problem(),
+      answer: { kind: 'point', x: 2, y: 4 },
+      inputMode: 'coordinate-plane',
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [{ x: -2, y: -1 }, { x: 0, y: 1 }],
+          lines: [],
+        },
+        coordinate: {
+          operation: 'table-to-graph',
+          rows: [{ x: -2, y: -1 }, { x: 0, y: 1 }, { x: 2, y: 4 }],
+          targetX: 2,
+        },
+      },
+    }
+
+    expect(() => answerMismatch(tableProblem)).toThrow('table-to-graph rows are not collinear')
+  })
+
+  it('derives slope and rejects horizontal source points', () => {
+    const slopeProblem: Problem = {
+      ...problem(),
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [{ x: -1, y: 1 }, { x: 3, y: 3 }],
+          lines: [],
+        },
+        coordinate: { operation: 'slope-from-points' },
+      },
+      answer: { kind: 'exact', n: 1, d: 2 },
+    }
+
+    expect(answerMismatch(slopeProblem)).toBeUndefined()
+    expect(() => answerMismatch({
+      ...slopeProblem,
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [{ x: -1, y: 1 }, { x: 3, y: 1 }],
+          lines: [],
+        },
+        coordinate: { operation: 'slope-from-points' },
+      },
+    })).toThrow('slope-from-points needs non-zero rise and run')
   })
 })
 

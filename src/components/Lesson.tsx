@@ -275,6 +275,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
             problem.display.kind === 'coordinate-plane' ? (
               <CoordinatePlaneInput
                 plane={problem.display.plane}
+                coordinate={problem.display.coordinate}
                 entry={entry}
                 onPlace={setEntry}
                 onConfirm={() => submit()}

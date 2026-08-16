@@ -1,0 +1,1829 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`recorded output: plot-points > matches the wording recorded when the skill landed 1`] = `
+"--- plot-points · seed 1 · difficulty 1
+prompt   Place this point on the plane.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1" [plot-point (2, −4)]
+answer   point (2, −4)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 2]
+step 2   Use the second coordinate for vertical position.   [y = −4]
+miss     coordinate-order-reversed = (−4, 2)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (2, 4)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 12345 · difficulty 1
+prompt   Place this point on the plane.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1" [plot-point (4, 2)]
+answer   point (4, 2)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 4]
+step 2   Use the second coordinate for vertical position.   [y = 2]
+miss     coordinate-order-reversed = (2, 4)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (4, −2)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 67890 · difficulty 1
+prompt   Place this point on the plane.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1" [plot-point (−1, −3)]
+answer   point (−1, −3)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = −1]
+step 2   Use the second coordinate for vertical position.   [y = −3]
+miss     coordinate-order-reversed = (−3, −1)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (−1, 3)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 424242 · difficulty 1
+prompt   Place this point on the plane.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1" [plot-point (−3, −4)]
+answer   point (−3, −4)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = −3]
+step 2   Use the second coordinate for vertical position.   [y = −4]
+miss     coordinate-order-reversed = (−4, −3)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (−3, 4)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 987654321 · difficulty 1
+prompt   Place this point on the plane.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1" [plot-point (4, 1)]
+answer   point (4, 1)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 4]
+step 2   Use the second coordinate for vertical position.   [y = 1]
+miss     coordinate-order-reversed = (1, 4)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (4, −1)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 1 · difficulty 2
+prompt   Place this point on the plane.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1" [plot-point (2, −3)]
+answer   point (2, −3)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 2]
+step 2   Use the second coordinate for vertical position.   [y = −3]
+miss     coordinate-order-reversed = (−3, 2)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (2, 3)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 12345 · difficulty 2
+prompt   Place this point on the plane.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1" [plot-point (5, 3)]
+answer   point (5, 3)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 5]
+step 2   Use the second coordinate for vertical position.   [y = 3]
+miss     coordinate-order-reversed = (3, 5)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (5, −3)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 67890 · difficulty 2
+prompt   Place this point on the plane.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1" [plot-point (−2, 5)]
+answer   point (−2, 5)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = −2]
+step 2   Use the second coordinate for vertical position.   [y = 5]
+miss     coordinate-order-reversed = (5, −2)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (−2, −5)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 424242 · difficulty 2
+prompt   Place this point on the plane.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1" [plot-point (−4, −2)]
+answer   point (−4, −2)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = −4]
+step 2   Use the second coordinate for vertical position.   [y = −2]
+miss     coordinate-order-reversed = (−2, −4)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (−4, 2)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 987654321 · difficulty 2
+prompt   Place this point on the plane.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1" [plot-point (5, −1)]
+answer   point (5, −1)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 5]
+step 2   Use the second coordinate for vertical position.   [y = −1]
+miss     coordinate-order-reversed = (−1, 5)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (5, 1)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 1 · difficulty 3
+prompt   Place this point on the plane.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1" [plot-point (2, −1)]
+answer   point (2, −1)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 2]
+step 2   Use the second coordinate for vertical position.   [y = −1]
+miss     coordinate-order-reversed = (−1, 2)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (2, 1)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 12345 · difficulty 3
+prompt   Place this point on the plane.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1" [plot-point (6, 3)]
+answer   point (6, 3)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 6]
+step 2   Use the second coordinate for vertical position.   [y = 3]
+miss     coordinate-order-reversed = (3, 6)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (6, −3)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 67890 · difficulty 3
+prompt   Place this point on the plane.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1" [plot-point (−2, 3)]
+answer   point (−2, 3)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = −2]
+step 2   Use the second coordinate for vertical position.   [y = 3]
+miss     coordinate-order-reversed = (3, −2)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (−2, −3)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 424242 · difficulty 3
+prompt   Place this point on the plane.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1" [plot-point (−5, 1)]
+answer   point (−5, 1)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = −5]
+step 2   Use the second coordinate for vertical position.   [y = 1]
+miss     coordinate-order-reversed = (1, −5)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (−5, −1)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 987654321 · difficulty 3
+prompt   Place this point on the plane.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1" [plot-point (6, −2)]
+answer   point (6, −2)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 6]
+step 2   Use the second coordinate for vertical position.   [y = −2]
+miss     coordinate-order-reversed = (−2, 6)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (6, 2)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 1 · difficulty 4
+prompt   Place this point on the plane.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1" [plot-point (3, −8)]
+answer   point (3, −8)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 3]
+step 2   Use the second coordinate for vertical position.   [y = −8]
+miss     coordinate-order-reversed = (−8, 3)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (3, 8)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 12345 · difficulty 4
+prompt   Place this point on the plane.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1" [plot-point (8, 3)]
+answer   point (8, 3)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 8]
+step 2   Use the second coordinate for vertical position.   [y = 3]
+miss     coordinate-order-reversed = (3, 8)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (8, −3)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 67890 · difficulty 4
+prompt   Place this point on the plane.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1" [plot-point (−2, −4)]
+answer   point (−2, −4)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = −2]
+step 2   Use the second coordinate for vertical position.   [y = −4]
+miss     coordinate-order-reversed = (−4, −2)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (−2, 4)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 424242 · difficulty 4
+prompt   Place this point on the plane.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1" [plot-point (−6, −8)]
+answer   point (−6, −8)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = −6]
+step 2   Use the second coordinate for vertical position.   [y = −8]
+miss     coordinate-order-reversed = (−8, −6)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (−6, 8)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 987654321 · difficulty 4
+prompt   Place this point on the plane.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1" [plot-point (8, −5)]
+answer   point (8, −5)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 8]
+step 2   Use the second coordinate for vertical position.   [y = −5]
+miss     coordinate-order-reversed = (−5, 8)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (8, 5)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 1 · difficulty 5
+prompt   Place this point on the plane.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1" [plot-point (3, 1)]
+answer   point (3, 1)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 3]
+step 2   Use the second coordinate for vertical position.   [y = 1]
+miss     coordinate-order-reversed = (1, 3)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (3, −1)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 12345 · difficulty 5
+prompt   Place this point on the plane.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1" [plot-point (10, 2)]
+answer   point (10, 2)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 10]
+step 2   Use the second coordinate for vertical position.   [y = 2]
+miss     coordinate-order-reversed = (2, 10)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (10, −2)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 67890 · difficulty 5
+prompt   Place this point on the plane.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1" [plot-point (−3, 8)]
+answer   point (−3, 8)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = −3]
+step 2   Use the second coordinate for vertical position.   [y = 8]
+miss     coordinate-order-reversed = (8, −3)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (−3, −8)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 424242 · difficulty 5
+prompt   Place this point on the plane.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1" [plot-point (−8, 2)]
+answer   point (−8, 2)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = −8]
+step 2   Use the second coordinate for vertical position.   [y = 2]
+miss     coordinate-order-reversed = (2, −8)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (−8, −2)   Positive y moves up and negative y moves down.
+
+--- plot-points · seed 987654321 · difficulty 5
+prompt   Place this point on the plane.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1" [plot-point (10, −10)]
+answer   point (10, −10)
+input    coordinate-plane
+hint     Read x first for horizontal movement, then y for vertical movement.
+step 1   Use the first coordinate for horizontal position.   [x = 10]
+step 2   Use the second coordinate for vertical position.   [y = −10]
+miss     coordinate-order-reversed = (−10, 10)   The first coordinate moves horizontally; the second moves vertically.
+miss     vertical-direction-reversed = (10, 10)   Positive y moves up and negative y moves down."
+`;
+
+exports[`recorded output: quadrants > matches the wording recorded when the skill landed 1`] = `
+"--- quadrants · seed 1 · difficulty 1
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(2, −4)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (2, −4)" [quadrant]
+answer   choice quadrant-iv
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is positive; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant IV]
+miss     vertical-sign-misread = quadrant-i   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 12345 · difficulty 1
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(4, 3)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (4, 3)" [quadrant]
+answer   choice quadrant-i
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-i = Quadrant I
+choice   quadrant-iii = Quadrant III
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-ii = Quadrant II
+step 1   Read the signs of x and y.   [x is positive; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant I]
+miss     vertical-sign-misread = quadrant-iv   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 67890 · difficulty 1
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−1, −3)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−1, −3)" [quadrant]
+answer   choice quadrant-iii
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iii = Quadrant III
+step 1   Read the signs of x and y.   [x is negative; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant III]
+miss     vertical-sign-misread = quadrant-ii   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 424242 · difficulty 1
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−3, −4)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−3, −4)" [quadrant]
+answer   choice quadrant-iii
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is negative; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant III]
+miss     vertical-sign-misread = quadrant-ii   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 987654321 · difficulty 1
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(4, 1)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (4, 1)" [quadrant]
+answer   choice quadrant-i
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is positive; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant I]
+miss     vertical-sign-misread = quadrant-iv   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 1 · difficulty 2
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(2, −3)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (2, −3)" [quadrant]
+answer   choice quadrant-iv
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is positive; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant IV]
+miss     vertical-sign-misread = quadrant-i   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 12345 · difficulty 2
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(5, 3)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (5, 3)" [quadrant]
+answer   choice quadrant-i
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-i = Quadrant I
+choice   quadrant-iii = Quadrant III
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-ii = Quadrant II
+step 1   Read the signs of x and y.   [x is positive; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant I]
+miss     vertical-sign-misread = quadrant-iv   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 67890 · difficulty 2
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−2, 5)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−2, 5)" [quadrant]
+answer   choice quadrant-ii
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iii = Quadrant III
+step 1   Read the signs of x and y.   [x is negative; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant II]
+miss     vertical-sign-misread = quadrant-iii   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 424242 · difficulty 2
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−4, −3)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−4, −3)" [quadrant]
+answer   choice quadrant-iii
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is negative; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant III]
+miss     vertical-sign-misread = quadrant-ii   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 987654321 · difficulty 2
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(5, 1)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (5, 1)" [quadrant]
+answer   choice quadrant-i
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is positive; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant I]
+miss     vertical-sign-misread = quadrant-iv   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 1 · difficulty 3
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(2, 1)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (2, 1)" [quadrant]
+answer   choice quadrant-i
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is positive; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant I]
+miss     vertical-sign-misread = quadrant-iv   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 12345 · difficulty 3
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(6, 4)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (6, 4)" [quadrant]
+answer   choice quadrant-i
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-i = Quadrant I
+choice   quadrant-iii = Quadrant III
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-ii = Quadrant II
+step 1   Read the signs of x and y.   [x is positive; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant I]
+miss     vertical-sign-misread = quadrant-iv   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 67890 · difficulty 3
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−2, 3)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−2, 3)" [quadrant]
+answer   choice quadrant-ii
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iii = Quadrant III
+step 1   Read the signs of x and y.   [x is negative; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant II]
+miss     vertical-sign-misread = quadrant-iii   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 424242 · difficulty 3
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−5, 1)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−5, 1)" [quadrant]
+answer   choice quadrant-ii
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is negative; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant II]
+miss     vertical-sign-misread = quadrant-iii   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 987654321 · difficulty 3
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(6, −1)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (6, −1)" [quadrant]
+answer   choice quadrant-iv
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is positive; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant IV]
+miss     vertical-sign-misread = quadrant-i   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 1 · difficulty 4
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(3, −8)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (3, −8)" [quadrant]
+answer   choice quadrant-iv
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is positive; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant IV]
+miss     vertical-sign-misread = quadrant-i   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 12345 · difficulty 4
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(8, 3)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (8, 3)" [quadrant]
+answer   choice quadrant-i
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-i = Quadrant I
+choice   quadrant-iii = Quadrant III
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-ii = Quadrant II
+step 1   Read the signs of x and y.   [x is positive; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant I]
+miss     vertical-sign-misread = quadrant-iv   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 67890 · difficulty 4
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−2, −4)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−2, −4)" [quadrant]
+answer   choice quadrant-iii
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iii = Quadrant III
+step 1   Read the signs of x and y.   [x is negative; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant III]
+miss     vertical-sign-misread = quadrant-ii   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 424242 · difficulty 4
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−6, −8)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−6, −8)" [quadrant]
+answer   choice quadrant-iii
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is negative; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant III]
+miss     vertical-sign-misread = quadrant-ii   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 987654321 · difficulty 4
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(8, −5)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (8, −5)" [quadrant]
+answer   choice quadrant-iv
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is positive; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant IV]
+miss     vertical-sign-misread = quadrant-i   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 1 · difficulty 5
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(3, 1)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (3, 1)" [quadrant]
+answer   choice quadrant-i
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is positive; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant I]
+miss     vertical-sign-misread = quadrant-iv   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 12345 · difficulty 5
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(10, 2)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (10, 2)" [quadrant]
+answer   choice quadrant-i
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-i = Quadrant I
+choice   quadrant-iii = Quadrant III
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-ii = Quadrant II
+step 1   Read the signs of x and y.   [x is positive; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant I]
+miss     vertical-sign-misread = quadrant-iv   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 67890 · difficulty 5
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−3, 8)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−3, 8)" [quadrant]
+answer   choice quadrant-ii
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iii = Quadrant III
+step 1   Read the signs of x and y.   [x is negative; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant II]
+miss     vertical-sign-misread = quadrant-iii   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 424242 · difficulty 5
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−8, 2)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−8, 2)" [quadrant]
+answer   choice quadrant-ii
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is negative; y is positive]
+step 2   Match that sign pair to its quadrant.   [Quadrant II]
+miss     vertical-sign-misread = quadrant-iii   Check whether the y-coordinate places the point above or below zero.
+
+--- quadrants · seed 987654321 · difficulty 5
+prompt   Which quadrant contains this point?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(10, −10)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (10, −10)" [quadrant]
+answer   choice quadrant-iv
+input    choice
+hint     Use the signs of x and y to identify the region.
+choice   quadrant-iii = Quadrant III
+choice   quadrant-ii = Quadrant II
+choice   quadrant-iv = Quadrant IV
+choice   quadrant-i = Quadrant I
+step 1   Read the signs of x and y.   [x is positive; y is negative]
+step 2   Match that sign pair to its quadrant.   [Quadrant IV]
+miss     vertical-sign-misread = quadrant-i   Check whether the y-coordinate places the point above or below zero."
+`;
+
+exports[`recorded output: slope-from-graph > matches the wording recorded when the skill landed 1`] = `
+"--- slope-from-graph · seed 1 · difficulty 1
+prompt   What is the slope of this line?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(0, 1), (4, 2)] lines [(0, 1)→(4, 2)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (0, 1) and (4, 2); line 1 through (0, 1) and (4, 2)" [slope-from-graph]
+answer   exact 1/4
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [2 − 1 = 1]
+step 2   Subtract x-values in that order too.   [4 − 0 = 4]
+step 3   Divide rise by run and reduce.   [1/4 = 1/4]
+miss     run-over-rise = 4   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 12345 · difficulty 1
+prompt   What is the slope of this line?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−2, 1), (4, 4)] lines [(−2, 1)→(4, 4)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−2, 1) and (4, 4); line 1 through (−2, 1) and (4, 4)" [slope-from-graph]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [4 − 1 = 3]
+step 2   Subtract x-values in that order too.   [4 − −2 = 6]
+step 3   Divide rise by run and reduce.   [3/6 = 1/2]
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 67890 · difficulty 1
+prompt   What is the slope of this line?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−2, −3), (1, −2)] lines [(−2, −3)→(1, −2)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−2, −3) and (1, −2); line 1 through (−2, −3) and (1, −2)" [slope-from-graph]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−2 − −3 = 1]
+step 2   Subtract x-values in that order too.   [1 − −2 = 3]
+step 3   Divide rise by run and reduce.   [1/3 = 1/3]
+miss     run-over-rise = 3   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 424242 · difficulty 1
+prompt   What is the slope of this line?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(2, 0), (4, −1)] lines [(2, 0)→(4, −1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (2, 0) and (4, −1); line 1 through (2, 0) and (4, −1)" [slope-from-graph]
+answer   exact -1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−1 − 0 = −1]
+step 2   Subtract x-values in that order too.   [4 − 2 = 2]
+step 3   Divide rise by run and reduce.   [−1/2 = −1/2]
+miss     run-over-rise = -2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 987654321 · difficulty 1
+prompt   What is the slope of this line?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−2, 2), (4, 3)] lines [(−2, 2)→(4, 3)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−2, 2) and (4, 3); line 1 through (−2, 2) and (4, 3)" [slope-from-graph]
+answer   exact 1/6
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [3 − 2 = 1]
+step 2   Subtract x-values in that order too.   [4 − −2 = 6]
+step 3   Divide rise by run and reduce.   [1/6 = 1/6]
+miss     run-over-rise = 6   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 1 · difficulty 2
+prompt   What is the slope of this line?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−3, −5), (1, −2)] lines [(−3, −5)→(1, −2)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−3, −5) and (1, −2); line 1 through (−3, −5) and (1, −2)" [slope-from-graph]
+answer   exact 3/4
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−2 − −5 = 3]
+step 2   Subtract x-values in that order too.   [1 − −3 = 4]
+step 3   Divide rise by run and reduce.   [3/4 = 3/4]
+miss     run-over-rise = 1.3333333333333333   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 12345 · difficulty 2
+prompt   What is the slope of this line?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−4, −1), (2, 3)] lines [(−4, −1)→(2, 3)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−4, −1) and (2, 3); line 1 through (−4, −1) and (2, 3)" [slope-from-graph]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [3 − −1 = 4]
+step 2   Subtract x-values in that order too.   [2 − −4 = 6]
+step 3   Divide rise by run and reduce.   [4/6 = 2/3]
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 67890 · difficulty 2
+prompt   What is the slope of this line?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−4, 0), (−1, 2)] lines [(−4, 0)→(−1, 2)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−4, 0) and (−1, 2); line 1 through (−4, 0) and (−1, 2)" [slope-from-graph]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [2 − 0 = 2]
+step 2   Subtract x-values in that order too.   [−1 − −4 = 3]
+step 3   Divide rise by run and reduce.   [2/3 = 2/3]
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 424242 · difficulty 2
+prompt   What is the slope of this line?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−4, 0), (−2, 1)] lines [(−4, 0)→(−2, 1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−4, 0) and (−2, 1); line 1 through (−4, 0) and (−2, 1)" [slope-from-graph]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [1 − 0 = 1]
+step 2   Subtract x-values in that order too.   [−2 − −4 = 2]
+step 3   Divide rise by run and reduce.   [1/2 = 1/2]
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 987654321 · difficulty 2
+prompt   What is the slope of this line?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−3, −2), (3, 0)] lines [(−3, −2)→(3, 0)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−3, −2) and (3, 0); line 1 through (−3, −2) and (3, 0)" [slope-from-graph]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [0 − −2 = 2]
+step 2   Subtract x-values in that order too.   [3 − −3 = 6]
+step 3   Divide rise by run and reduce.   [2/6 = 1/3]
+miss     run-over-rise = 3   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 1 · difficulty 3
+prompt   What is the slope of this line?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−5, 1), (−1, 6)] lines [(−5, 1)→(−1, 6)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−5, 1) and (−1, 6); line 1 through (−5, 1) and (−1, 6)" [slope-from-graph]
+answer   exact 5/4
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [6 − 1 = 5]
+step 2   Subtract x-values in that order too.   [−1 − −5 = 4]
+step 3   Divide rise by run and reduce.   [5/4 = 5/4]
+miss     run-over-rise = 0.8   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 12345 · difficulty 3
+prompt   What is the slope of this line?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−3, −2), (3, 2)] lines [(−3, −2)→(3, 2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−3, −2) and (3, 2); line 1 through (−3, −2) and (3, 2)" [slope-from-graph]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [2 − −2 = 4]
+step 2   Subtract x-values in that order too.   [3 − −3 = 6]
+step 3   Divide rise by run and reduce.   [4/6 = 2/3]
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 67890 · difficulty 3
+prompt   What is the slope of this line?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(2, −4), (5, −2)] lines [(2, −4)→(5, −2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (2, −4) and (5, −2); line 1 through (2, −4) and (5, −2)" [slope-from-graph]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−2 − −4 = 2]
+step 2   Subtract x-values in that order too.   [5 − 2 = 3]
+step 3   Divide rise by run and reduce.   [2/3 = 2/3]
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 424242 · difficulty 3
+prompt   What is the slope of this line?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−3, 5), (−1, 6)] lines [(−3, 5)→(−1, 6)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−3, 5) and (−1, 6); line 1 through (−3, 5) and (−1, 6)" [slope-from-graph]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [6 − 5 = 1]
+step 2   Subtract x-values in that order too.   [−1 − −3 = 2]
+step 3   Divide rise by run and reduce.   [1/2 = 1/2]
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 987654321 · difficulty 3
+prompt   What is the slope of this line?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−1, −4), (5, −2)] lines [(−1, −4)→(5, −2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−1, −4) and (5, −2); line 1 through (−1, −4) and (5, −2)" [slope-from-graph]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−2 − −4 = 2]
+step 2   Subtract x-values in that order too.   [5 − −1 = 6]
+step 3   Divide rise by run and reduce.   [2/6 = 1/3]
+miss     run-over-rise = 3   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 1 · difficulty 4
+prompt   What is the slope of this line?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−4, −3), (0, 3)] lines [(−4, −3)→(0, 3)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−4, −3) and (0, 3); line 1 through (−4, −3) and (0, 3)" [slope-from-graph]
+answer   exact 3/2
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [3 − −3 = 6]
+step 2   Subtract x-values in that order too.   [0 − −4 = 4]
+step 3   Divide rise by run and reduce.   [6/4 = 3/2]
+miss     run-over-rise = 0.6666666666666666   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 12345 · difficulty 4
+prompt   What is the slope of this line?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−1, −3), (5, 1)] lines [(−1, −3)→(5, 1)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−1, −3) and (5, 1); line 1 through (−1, −3) and (5, 1)" [slope-from-graph]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [1 − −3 = 4]
+step 2   Subtract x-values in that order too.   [5 − −1 = 6]
+step 3   Divide rise by run and reduce.   [4/6 = 2/3]
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 67890 · difficulty 4
+prompt   What is the slope of this line?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(1, −7), (4, −3)] lines [(1, −7)→(4, −3)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (1, −7) and (4, −3); line 1 through (1, −7) and (4, −3)" [slope-from-graph]
+answer   exact 4/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−3 − −7 = 4]
+step 2   Subtract x-values in that order too.   [4 − 1 = 3]
+step 3   Divide rise by run and reduce.   [4/3 = 4/3]
+miss     run-over-rise = 0.75   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 424242 · difficulty 4
+prompt   What is the slope of this line?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(1, −7), (3, −6)] lines [(1, −7)→(3, −6)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (1, −7) and (3, −6); line 1 through (1, −7) and (3, −6)" [slope-from-graph]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−6 − −7 = 1]
+step 2   Subtract x-values in that order too.   [3 − 1 = 2]
+step 3   Divide rise by run and reduce.   [1/2 = 1/2]
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 987654321 · difficulty 4
+prompt   What is the slope of this line?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−8, −8), (−2, −5)] lines [(−8, −8)→(−2, −5)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−8, −8) and (−2, −5); line 1 through (−8, −8) and (−2, −5)" [slope-from-graph]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−5 − −8 = 3]
+step 2   Subtract x-values in that order too.   [−2 − −8 = 6]
+step 3   Divide rise by run and reduce.   [3/6 = 1/2]
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 1 · difficulty 5
+prompt   What is the slope of this line?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(5, −4), (9, 2)] lines [(5, −4)→(9, 2)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (5, −4) and (9, 2); line 1 through (5, −4) and (9, 2)" [slope-from-graph]
+answer   exact 3/2
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [2 − −4 = 6]
+step 2   Subtract x-values in that order too.   [9 − 5 = 4]
+step 3   Divide rise by run and reduce.   [6/4 = 3/2]
+miss     run-over-rise = 0.6666666666666666   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 12345 · difficulty 5
+prompt   What is the slope of this line?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(1, −5), (7, −1)] lines [(1, −5)→(7, −1)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (1, −5) and (7, −1); line 1 through (1, −5) and (7, −1)" [slope-from-graph]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−1 − −5 = 4]
+step 2   Subtract x-values in that order too.   [7 − 1 = 6]
+step 3   Divide rise by run and reduce.   [4/6 = 2/3]
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 67890 · difficulty 5
+prompt   What is the slope of this line?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−8, −5), (−5, 0)] lines [(−8, −5)→(−5, 0)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−8, −5) and (−5, 0); line 1 through (−8, −5) and (−5, 0)" [slope-from-graph]
+answer   exact 5/3
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [0 − −5 = 5]
+step 2   Subtract x-values in that order too.   [−5 − −8 = 3]
+step 3   Divide rise by run and reduce.   [5/3 = 5/3]
+miss     run-over-rise = 0.6   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 424242 · difficulty 5
+prompt   What is the slope of this line?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(4, −2), (6, −1)] lines [(4, −2)→(6, −1)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (4, −2) and (6, −1); line 1 through (4, −2) and (6, −1)" [slope-from-graph]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−1 − −2 = 1]
+step 2   Subtract x-values in that order too.   [6 − 4 = 2]
+step 3   Divide rise by run and reduce.   [1/2 = 1/2]
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-graph · seed 987654321 · difficulty 5
+prompt   What is the slope of this line?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−8, −7), (−2, −4)] lines [(−8, −7)→(−2, −4)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−8, −7) and (−2, −4); line 1 through (−8, −7) and (−2, −4)" [slope-from-graph]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=false
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−4 − −7 = 3]
+step 2   Subtract x-values in that order too.   [−2 − −8 = 6]
+step 3   Divide rise by run and reduce.   [3/6 = 1/2]
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run."
+`;
+
+exports[`recorded output: slope-from-points > matches the wording recorded when the skill landed 1`] = `
+"--- slope-from-points · seed 1 · difficulty 1
+prompt   Find the slope between these points.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(0, 1), (4, 2)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (0, 1) and (4, 2)" [slope-from-points]
+answer   exact 1/4
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [2 − 1 = 1]
+step 2   Subtract x-values in that order too.   [4 − 0 = 4]
+step 3   Divide rise by run and reduce.   [1/4 = 1/4]
+miss     inconsistent-subtraction-order = -0.25   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 4   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 12345 · difficulty 1
+prompt   Find the slope between these points.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−2, 1), (4, 4)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−2, 1) and (4, 4)" [slope-from-points]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [4 − 1 = 3]
+step 2   Subtract x-values in that order too.   [4 − −2 = 6]
+step 3   Divide rise by run and reduce.   [3/6 = 1/2]
+miss     inconsistent-subtraction-order = -0.5   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 67890 · difficulty 1
+prompt   Find the slope between these points.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−2, −3), (1, −2)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−2, −3) and (1, −2)" [slope-from-points]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−2 − −3 = 1]
+step 2   Subtract x-values in that order too.   [1 − −2 = 3]
+step 3   Divide rise by run and reduce.   [1/3 = 1/3]
+miss     inconsistent-subtraction-order = -0.3333333333333333   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 3   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 424242 · difficulty 1
+prompt   Find the slope between these points.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(2, 0), (4, −1)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (2, 0) and (4, −1)" [slope-from-points]
+answer   exact -1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−1 − 0 = −1]
+step 2   Subtract x-values in that order too.   [4 − 2 = 2]
+step 3   Divide rise by run and reduce.   [−1/2 = −1/2]
+miss     inconsistent-subtraction-order = 0.5   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = -2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 987654321 · difficulty 1
+prompt   Find the slope between these points.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−2, 2), (4, 3)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−2, 2) and (4, 3)" [slope-from-points]
+answer   exact 1/6
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [3 − 2 = 1]
+step 2   Subtract x-values in that order too.   [4 − −2 = 6]
+step 3   Divide rise by run and reduce.   [1/6 = 1/6]
+miss     inconsistent-subtraction-order = -0.16666666666666666   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 6   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 1 · difficulty 2
+prompt   Find the slope between these points.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−3, −5), (1, −2)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−3, −5) and (1, −2)" [slope-from-points]
+answer   exact 3/4
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−2 − −5 = 3]
+step 2   Subtract x-values in that order too.   [1 − −3 = 4]
+step 3   Divide rise by run and reduce.   [3/4 = 3/4]
+miss     inconsistent-subtraction-order = -0.75   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 1.3333333333333333   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 12345 · difficulty 2
+prompt   Find the slope between these points.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−4, −1), (2, 3)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−4, −1) and (2, 3)" [slope-from-points]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [3 − −1 = 4]
+step 2   Subtract x-values in that order too.   [2 − −4 = 6]
+step 3   Divide rise by run and reduce.   [4/6 = 2/3]
+miss     inconsistent-subtraction-order = -0.6666666666666666   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 67890 · difficulty 2
+prompt   Find the slope between these points.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−4, 0), (−1, 2)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−4, 0) and (−1, 2)" [slope-from-points]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [2 − 0 = 2]
+step 2   Subtract x-values in that order too.   [−1 − −4 = 3]
+step 3   Divide rise by run and reduce.   [2/3 = 2/3]
+miss     inconsistent-subtraction-order = -0.6666666666666666   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 424242 · difficulty 2
+prompt   Find the slope between these points.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−4, 0), (−2, 1)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−4, 0) and (−2, 1)" [slope-from-points]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [1 − 0 = 1]
+step 2   Subtract x-values in that order too.   [−2 − −4 = 2]
+step 3   Divide rise by run and reduce.   [1/2 = 1/2]
+miss     inconsistent-subtraction-order = -0.5   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 987654321 · difficulty 2
+prompt   Find the slope between these points.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−3, −2), (3, 0)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−3, −2) and (3, 0)" [slope-from-points]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [0 − −2 = 2]
+step 2   Subtract x-values in that order too.   [3 − −3 = 6]
+step 3   Divide rise by run and reduce.   [2/6 = 1/3]
+miss     inconsistent-subtraction-order = -0.3333333333333333   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 3   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 1 · difficulty 3
+prompt   Find the slope between these points.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−5, 1), (−1, 6)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−5, 1) and (−1, 6)" [slope-from-points]
+answer   exact 5/4
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [6 − 1 = 5]
+step 2   Subtract x-values in that order too.   [−1 − −5 = 4]
+step 3   Divide rise by run and reduce.   [5/4 = 5/4]
+miss     inconsistent-subtraction-order = -1.25   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 0.8   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 12345 · difficulty 3
+prompt   Find the slope between these points.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−3, −2), (3, 2)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−3, −2) and (3, 2)" [slope-from-points]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [2 − −2 = 4]
+step 2   Subtract x-values in that order too.   [3 − −3 = 6]
+step 3   Divide rise by run and reduce.   [4/6 = 2/3]
+miss     inconsistent-subtraction-order = -0.6666666666666666   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 67890 · difficulty 3
+prompt   Find the slope between these points.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(2, −4), (5, −2)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (2, −4) and (5, −2)" [slope-from-points]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−2 − −4 = 2]
+step 2   Subtract x-values in that order too.   [5 − 2 = 3]
+step 3   Divide rise by run and reduce.   [2/3 = 2/3]
+miss     inconsistent-subtraction-order = -0.6666666666666666   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 424242 · difficulty 3
+prompt   Find the slope between these points.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−3, 5), (−1, 6)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−3, 5) and (−1, 6)" [slope-from-points]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [6 − 5 = 1]
+step 2   Subtract x-values in that order too.   [−1 − −3 = 2]
+step 3   Divide rise by run and reduce.   [1/2 = 1/2]
+miss     inconsistent-subtraction-order = -0.5   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 987654321 · difficulty 3
+prompt   Find the slope between these points.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−1, −4), (5, −2)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−1, −4) and (5, −2)" [slope-from-points]
+answer   exact 1/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−2 − −4 = 2]
+step 2   Subtract x-values in that order too.   [5 − −1 = 6]
+step 3   Divide rise by run and reduce.   [2/6 = 1/3]
+miss     inconsistent-subtraction-order = -0.3333333333333333   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 3   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 1 · difficulty 4
+prompt   Find the slope between these points.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−4, −3), (0, 3)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−4, −3) and (0, 3)" [slope-from-points]
+answer   exact 3/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [3 − −3 = 6]
+step 2   Subtract x-values in that order too.   [0 − −4 = 4]
+step 3   Divide rise by run and reduce.   [6/4 = 3/2]
+miss     inconsistent-subtraction-order = -1.5   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 0.6666666666666666   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 12345 · difficulty 4
+prompt   Find the slope between these points.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−1, −3), (5, 1)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−1, −3) and (5, 1)" [slope-from-points]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [1 − −3 = 4]
+step 2   Subtract x-values in that order too.   [5 − −1 = 6]
+step 3   Divide rise by run and reduce.   [4/6 = 2/3]
+miss     inconsistent-subtraction-order = -0.6666666666666666   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 67890 · difficulty 4
+prompt   Find the slope between these points.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(1, −7), (4, −3)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (1, −7) and (4, −3)" [slope-from-points]
+answer   exact 4/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−3 − −7 = 4]
+step 2   Subtract x-values in that order too.   [4 − 1 = 3]
+step 3   Divide rise by run and reduce.   [4/3 = 4/3]
+miss     inconsistent-subtraction-order = -1.3333333333333333   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 0.75   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 424242 · difficulty 4
+prompt   Find the slope between these points.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(1, −7), (3, −6)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (1, −7) and (3, −6)" [slope-from-points]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−6 − −7 = 1]
+step 2   Subtract x-values in that order too.   [3 − 1 = 2]
+step 3   Divide rise by run and reduce.   [1/2 = 1/2]
+miss     inconsistent-subtraction-order = -0.5   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 987654321 · difficulty 4
+prompt   Find the slope between these points.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−8, −8), (−2, −5)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−8, −8) and (−2, −5)" [slope-from-points]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−5 − −8 = 3]
+step 2   Subtract x-values in that order too.   [−2 − −8 = 6]
+step 3   Divide rise by run and reduce.   [3/6 = 1/2]
+miss     inconsistent-subtraction-order = -0.5   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 1 · difficulty 5
+prompt   Find the slope between these points.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(5, −4), (9, 2)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (5, −4) and (9, 2)" [slope-from-points]
+answer   exact 3/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [2 − −4 = 6]
+step 2   Subtract x-values in that order too.   [9 − 5 = 4]
+step 3   Divide rise by run and reduce.   [6/4 = 3/2]
+miss     inconsistent-subtraction-order = -1.5   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 0.6666666666666666   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 12345 · difficulty 5
+prompt   Find the slope between these points.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(1, −5), (7, −1)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (1, −5) and (7, −1)" [slope-from-points]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−1 − −5 = 4]
+step 2   Subtract x-values in that order too.   [7 − 1 = 6]
+step 3   Divide rise by run and reduce.   [4/6 = 2/3]
+miss     inconsistent-subtraction-order = -0.6666666666666666   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 1.5   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 67890 · difficulty 5
+prompt   Find the slope between these points.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−8, −5), (−5, 0)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−8, −5) and (−5, 0)" [slope-from-points]
+answer   exact 5/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [0 − −5 = 5]
+step 2   Subtract x-values in that order too.   [−5 − −8 = 3]
+step 3   Divide rise by run and reduce.   [5/3 = 5/3]
+miss     inconsistent-subtraction-order = -1.6666666666666667   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 0.6   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 424242 · difficulty 5
+prompt   Find the slope between these points.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(4, −2), (6, −1)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (4, −2) and (6, −1)" [slope-from-points]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−1 − −2 = 1]
+step 2   Subtract x-values in that order too.   [6 − 4 = 2]
+step 3   Divide rise by run and reduce.   [1/2 = 1/2]
+miss     inconsistent-subtraction-order = -0.5   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run.
+
+--- slope-from-points · seed 987654321 · difficulty 5
+prompt   Find the slope between these points.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−8, −7), (−2, −4)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−8, −7) and (−2, −4)" [slope-from-points]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−4 − −7 = 3]
+step 2   Subtract x-values in that order too.   [−2 − −8 = 6]
+step 3   Divide rise by run and reduce.   [3/6 = 1/2]
+miss     inconsistent-subtraction-order = -0.5   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run."
+`;
+
+exports[`recorded output: table-to-graph > matches the wording recorded when the skill landed 1`] = `
+"--- table-to-graph · seed 1 · difficulty 1
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(2, 0), (3, 1)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (2, 0) and (3, 1)" [table-to-graph rows [(2, 0), (3, 1), (4, 2)] target-x 4]
+answer   point (4, 2)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 4]
+step 2   Pair it with y from the same row.   [y = 2]
+step 3   Plot x across, then y vertically.   [(4, 2)]
+miss     table-coordinate-order-reversed = (2, 4)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 12345 · difficulty 1
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−4, −4), (−3, −2)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−4, −4) and (−3, −2)" [table-to-graph rows [(−4, −4), (−3, −2), (−2, 0)] target-x -2]
+answer   point (−2, 0)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −2]
+step 2   Pair it with y from the same row.   [y = 0]
+step 3   Plot x across, then y vertically.   [(−2, 0)]
+miss     table-coordinate-order-reversed = (0, −2)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 67890 · difficulty 1
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−2, 3), (−1, 2)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−2, 3) and (−1, 2)" [table-to-graph rows [(−2, 3), (−1, 2), (0, 1)] target-x 0]
+answer   point (0, 1)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 0]
+step 2   Pair it with y from the same row.   [y = 1]
+step 3   Plot x across, then y vertically.   [(0, 1)]
+miss     table-coordinate-order-reversed = (1, 0)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 424242 · difficulty 1
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(1, 0), (2, −2)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (1, 0) and (2, −2)" [table-to-graph rows [(0, 2), (1, 0), (2, −2)] target-x 0]
+answer   point (0, 2)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 0]
+step 2   Pair it with y from the same row.   [y = 2]
+step 3   Plot x across, then y vertically.   [(0, 2)]
+miss     table-coordinate-order-reversed = (2, 0)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 987654321 · difficulty 1
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−2, −2), (−1, 0)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−2, −2) and (−1, 0)" [table-to-graph rows [(−2, −2), (−1, 0), (0, 2)] target-x 0]
+answer   point (0, 2)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 0]
+step 2   Pair it with y from the same row.   [y = 2]
+step 3   Plot x across, then y vertically.   [(0, 2)]
+miss     table-coordinate-order-reversed = (2, 0)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 1 · difficulty 2
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(2, 0), (4, 2)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (2, 0) and (4, 2)" [table-to-graph rows [(2, 0), (3, 1), (4, 2)] target-x 3]
+answer   point (3, 1)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 3]
+step 2   Pair it with y from the same row.   [y = 1]
+step 3   Plot x across, then y vertically.   [(3, 1)]
+miss     table-coordinate-order-reversed = (1, 3)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 12345 · difficulty 2
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−2, 0), (−1, 2)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−2, 0) and (−1, 2)" [table-to-graph rows [(−2, 0), (−1, 2), (0, 4)] target-x 0]
+answer   point (0, 4)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 0]
+step 2   Pair it with y from the same row.   [y = 4]
+step 3   Plot x across, then y vertically.   [(0, 4)]
+miss     table-coordinate-order-reversed = (4, 0)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 67890 · difficulty 2
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−1, 2), (1, 0)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−1, 2) and (1, 0)" [table-to-graph rows [(−1, 2), (0, 1), (1, 0)] target-x 0]
+answer   point (0, 1)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 0]
+step 2   Pair it with y from the same row.   [y = 1]
+step 3   Plot x across, then y vertically.   [(0, 1)]
+miss     table-coordinate-order-reversed = (1, 0)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 424242 · difficulty 2
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(0, 2), (1, 0)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (0, 2) and (1, 0)" [table-to-graph rows [(0, 2), (1, 0), (2, −2)] target-x 2]
+answer   point (2, −2)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 2]
+step 2   Pair it with y from the same row.   [y = −2]
+step 3   Plot x across, then y vertically.   [(2, −2)]
+miss     table-coordinate-order-reversed = (−2, 2)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 987654321 · difficulty 2
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−4, −5), (−3, −3)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−4, −5) and (−3, −3)" [table-to-graph rows [(−4, −5), (−3, −3), (−2, −1)] target-x -2]
+answer   point (−2, −1)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −2]
+step 2   Pair it with y from the same row.   [y = −1]
+step 3   Plot x across, then y vertically.   [(−2, −1)]
+miss     table-coordinate-order-reversed = (−1, −2)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 1 · difficulty 3
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−1, −3), (1, −1)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−1, −3) and (1, −1)" [table-to-graph rows [(−3, −5), (−1, −3), (1, −1)] target-x -3]
+answer   point (−3, −5)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −3]
+step 2   Pair it with y from the same row.   [y = −5]
+step 3   Plot x across, then y vertically.   [(−3, −5)]
+miss     table-coordinate-order-reversed = (−5, −3)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 12345 · difficulty 3
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−1, 3), (0, 5)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−1, 3) and (0, 5)" [table-to-graph rows [(−2, 1), (−1, 3), (0, 5)] target-x -2]
+answer   point (−2, 1)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −2]
+step 2   Pair it with y from the same row.   [y = 1]
+step 3   Plot x across, then y vertically.   [(−2, 1)]
+miss     table-coordinate-order-reversed = (1, −2)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 67890 · difficulty 3
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−1, 2), (3, −2)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−1, 2) and (3, −2)" [table-to-graph rows [(−1, 2), (1, 0), (3, −2)] target-x 1]
+answer   point (1, 0)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 1]
+step 2   Pair it with y from the same row.   [y = 0]
+step 3   Plot x across, then y vertically.   [(1, 0)]
+miss     table-coordinate-order-reversed = (0, 1)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 424242 · difficulty 3
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(2, −1), (4, −5)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (2, −1) and (4, −5)" [table-to-graph rows [(2, −1), (3, −3), (4, −5)] target-x 3]
+answer   point (3, −3)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 3]
+step 2   Pair it with y from the same row.   [y = −3]
+step 3   Plot x across, then y vertically.   [(3, −3)]
+miss     table-coordinate-order-reversed = (−3, 3)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 987654321 · difficulty 3
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−3, −3), (−2, −1)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−3, −3) and (−2, −1)" [table-to-graph rows [(−3, −3), (−2, −1), (−1, 1)] target-x -1]
+answer   point (−1, 1)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −1]
+step 2   Pair it with y from the same row.   [y = 1]
+step 3   Plot x across, then y vertically.   [(−1, 1)]
+miss     table-coordinate-order-reversed = (1, −1)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 1 · difficulty 4
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(2, 0), (3, 1)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (2, 0) and (3, 1)" [table-to-graph rows [(2, 0), (3, 1), (4, 2)] target-x 4]
+answer   point (4, 2)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 4]
+step 2   Pair it with y from the same row.   [y = 2]
+step 3   Plot x across, then y vertically.   [(4, 2)]
+miss     table-coordinate-order-reversed = (2, 4)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 12345 · difficulty 4
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−6, −5), (−4, −1)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−6, −5) and (−4, −1)" [table-to-graph rows [(−6, −5), (−5, −3), (−4, −1)] target-x -5]
+answer   point (−5, −3)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −5]
+step 2   Pair it with y from the same row.   [y = −3]
+step 3   Plot x across, then y vertically.   [(−5, −3)]
+miss     table-coordinate-order-reversed = (−3, −5)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 67890 · difficulty 4
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−3, 5), (−2, 4)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−3, 5) and (−2, 4)" [table-to-graph rows [(−3, 5), (−2, 4), (−1, 3)] target-x -1]
+answer   point (−1, 3)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −1]
+step 2   Pair it with y from the same row.   [y = 3]
+step 3   Plot x across, then y vertically.   [(−1, 3)]
+miss     table-coordinate-order-reversed = (3, −1)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 424242 · difficulty 4
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(0, 3), (4, −5)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (0, 3) and (4, −5)" [table-to-graph rows [(0, 3), (2, −1), (4, −5)] target-x 2]
+answer   point (2, −1)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 2]
+step 2   Pair it with y from the same row.   [y = −1]
+step 3   Plot x across, then y vertically.   [(2, −1)]
+miss     table-coordinate-order-reversed = (−1, 2)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 987654321 · difficulty 4
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(0, 4), (1, 6)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (0, 4) and (1, 6)" [table-to-graph rows [(−1, 2), (0, 4), (1, 6)] target-x -1]
+answer   point (−1, 2)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −1]
+step 2   Pair it with y from the same row.   [y = 2]
+step 3   Plot x across, then y vertically.   [(−1, 2)]
+miss     table-coordinate-order-reversed = (2, −1)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 1 · difficulty 5
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−6, −8), (−4, −6)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−6, −8) and (−4, −6)" [table-to-graph rows [(−6, −8), (−5, −7), (−4, −6)] target-x -5]
+answer   point (−5, −7)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −5]
+step 2   Pair it with y from the same row.   [y = −7]
+step 3   Plot x across, then y vertically.   [(−5, −7)]
+miss     table-coordinate-order-reversed = (−7, −5)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 12345 · difficulty 5
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−5, −2), (−3, 2)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−5, −2) and (−3, 2)" [table-to-graph rows [(−5, −2), (−3, 2), (−1, 6)] target-x -1]
+answer   point (−1, 6)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −1]
+step 2   Pair it with y from the same row.   [y = 6]
+step 3   Plot x across, then y vertically.   [(−1, 6)]
+miss     table-coordinate-order-reversed = (6, −1)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 67890 · difficulty 5
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−7, 9), (−1, 3)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−7, 9) and (−1, 3)" [table-to-graph rows [(−7, 9), (−4, 6), (−1, 3)] target-x -4]
+answer   point (−4, 6)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −4]
+step 2   Pair it with y from the same row.   [y = 6]
+step 3   Plot x across, then y vertically.   [(−4, 6)]
+miss     table-coordinate-order-reversed = (6, −4)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 424242 · difficulty 5
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−2, 8), (1, 2)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−2, 8) and (1, 2)" [table-to-graph rows [(−2, 8), (1, 2), (4, −4)] target-x 4]
+answer   point (4, −4)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = 4]
+step 2   Pair it with y from the same row.   [y = −4]
+step 3   Plot x across, then y vertically.   [(4, −4)]
+miss     table-coordinate-order-reversed = (−4, 4)   The x column gives horizontal position and the y column gives vertical position.
+
+--- table-to-graph · seed 987654321 · difficulty 5
+prompt   Plot the highlighted table row.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−2, 1), (−1, 3)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−2, 1) and (−1, 3)" [table-to-graph rows [(−3, −1), (−2, 1), (−1, 3)] target-x -3]
+answer   point (−3, −1)
+input    coordinate-plane
+hint     Read both values across the highlighted row before plotting.
+step 1   Find the highlighted x-value.   [x = −3]
+step 2   Pair it with y from the same row.   [y = −1]
+step 3   Plot x across, then y vertically.   [(−3, −1)]
+miss     table-coordinate-order-reversed = (−1, −3)   The x column gives horizontal position and the y column gives vertical position."
+`;
+
+exports[`recorded output: y-intercept > matches the wording recorded when the skill landed 1`] = `
+"--- y-intercept · seed 1 · difficulty 1
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −2) and (1, −1)" [y-intercept]
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = −2]
+miss     slope-as-intercept = 1   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 12345 · difficulty 1
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 1)→(1, 3)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 1) and (1, 3)" [y-intercept]
+answer   exact 1/1
+input    keypad
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 1]
+miss     slope-as-intercept = 2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 67890 · difficulty 1
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 2)→(1, 1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 2) and (1, 1)" [y-intercept]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 2]
+miss     slope-as-intercept = -1   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 424242 · difficulty 1
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 2)→(1, 0)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 2) and (1, 0)" [y-intercept]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 2]
+miss     slope-as-intercept = -2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 987654321 · difficulty 1
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −1)→(1, 1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −1) and (1, 1)" [y-intercept]
+answer   exact -1/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = −1]
+miss     slope-as-intercept = 2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 1 · difficulty 2
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, −2) and (1, −1)" [y-intercept]
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = −2]
+miss     slope-as-intercept = 1   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 12345 · difficulty 2
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 3)→(1, 5)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 3) and (1, 5)" [y-intercept]
+answer   exact 3/1
+input    keypad
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 3]
+miss     slope-as-intercept = 2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 67890 · difficulty 2
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 2)→(1, 1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 2) and (1, 1)" [y-intercept]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 2]
+miss     slope-as-intercept = -1   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 424242 · difficulty 2
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 2)→(1, 0)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 2) and (1, 0)" [y-intercept]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 2]
+miss     slope-as-intercept = -2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 987654321 · difficulty 2
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 1)→(1, 3)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 1) and (1, 3)" [y-intercept]
+answer   exact 1/1
+input    keypad
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 1]
+miss     slope-as-intercept = 2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 1 · difficulty 3
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, −2) and (1, −1)" [y-intercept]
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = −2]
+miss     slope-as-intercept = 1   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 12345 · difficulty 3
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 4)→(1, 6)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 4) and (1, 6)" [y-intercept]
+answer   exact 4/1
+input    keypad
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 4]
+miss     slope-as-intercept = 2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 67890 · difficulty 3
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 2)→(1, 1)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 2) and (1, 1)" [y-intercept]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 2]
+miss     slope-as-intercept = -1   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 424242 · difficulty 3
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 2)→(1, 0)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 2) and (1, 0)" [y-intercept]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 2]
+miss     slope-as-intercept = -2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 987654321 · difficulty 3
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 3)→(1, 5)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 3) and (1, 5)" [y-intercept]
+answer   exact 3/1
+input    keypad
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 3]
+miss     slope-as-intercept = 2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 1 · difficulty 4
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −2) and (1, −1)" [y-intercept]
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = −2]
+miss     slope-as-intercept = 1   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 12345 · difficulty 4
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 5)→(1, 7)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 5) and (1, 7)" [y-intercept]
+answer   exact 5/1
+input    keypad
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 5]
+miss     slope-as-intercept = 2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 67890 · difficulty 4
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 3)→(1, 2)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 3) and (1, 2)" [y-intercept]
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 3]
+miss     slope-as-intercept = -1   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 424242 · difficulty 4
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 2)→(1, 0)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 2) and (1, 0)" [y-intercept]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 2]
+miss     slope-as-intercept = -2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 987654321 · difficulty 4
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 4)→(1, 6)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 4) and (1, 6)" [y-intercept]
+answer   exact 4/1
+input    keypad
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 4]
+miss     slope-as-intercept = 2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 1 · difficulty 5
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −2) and (1, −1)" [y-intercept]
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = −2]
+miss     slope-as-intercept = 1   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 12345 · difficulty 5
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 7)→(1, 9)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 7) and (1, 9)" [y-intercept]
+answer   exact 7/1
+input    keypad
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 7]
+miss     slope-as-intercept = 2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 67890 · difficulty 5
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 3)→(1, 2)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 3) and (1, 2)" [y-intercept]
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 3]
+miss     slope-as-intercept = -1   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 424242 · difficulty 5
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 3)→(1, 1)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 3) and (1, 1)" [y-intercept]
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 3]
+miss     slope-as-intercept = -2   The y-intercept is where the line crosses the vertical axis.
+
+--- y-intercept · seed 987654321 · difficulty 5
+prompt   What is this line's y-intercept?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 5)→(1, 7)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 5) and (1, 7)" [y-intercept]
+answer   exact 5/1
+input    keypad
+hint     Look where the line crosses the vertical axis at x equals zero.
+step 1   Find where the line meets the y-axis.
+step 2   At that point, x is zero.
+step 3   Read the y-value there.   [y = 5]
+miss     slope-as-intercept = 2   The y-intercept is where the line crosses the vertical axis."
+`;
