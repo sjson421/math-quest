@@ -7,7 +7,7 @@ commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archi
 Task lists are the running record — mark each item done as it lands, and note decisions
 inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, thirty-five
+- `openspec/specs/` is the **baseline**: what the system does today, thirty-six
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
@@ -15,7 +15,7 @@ inline rather than only in chat.
   `unit-05-order-of-operations`, `unit-06-negatives`, `unit-07-fractions-meaning`,
   `unit-08-fraction-operations`, `unit-09-decimals`, `unit-10-percents`,
   `unit-11-ratios-proportions`, `unit-12-exponents-roots`, `unit-13-expressions`,
-  `unit-14-linear-equations`, `unit-15-inequalities`,
+  `unit-14-linear-equations`, `unit-15-inequalities`, `unit-16-coordinate-plane-lines`,
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`,
   `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`,
@@ -24,12 +24,12 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-seven changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-eight changes
   have shipped — `ls openspec/changes/archive/` is the authority, and this line has run one
   behind before; the latest archive is
-  `2026-08-16-add-coordinate-plane-input`. It completes roadmap item 22 with structured point
-  answers, direct lattice placement, and large-target touch adjustment over the existing
-  coordinate-plane display. Stage F remains planned until its content generators ship.
+  `2026-08-16-add-stage-f-unit-16a`. It starts Stage F with six generated coordinate and line
+  skills, structured point and table context, exact slope answers, and independently derived
+  graph verification. Roadmap item 23 remains open for Unit 16b and Units 17–19.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
