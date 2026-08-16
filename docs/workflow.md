@@ -7,7 +7,7 @@ commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archi
 Task lists are the running record — mark each item done as it lands, and note decisions
 inline rather than only in chat.
 
-- `openspec/specs/` is the **baseline**: what the system does today, thirty-three
+- `openspec/specs/` is the **baseline**: what the system does today, thirty-four
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
@@ -19,19 +19,18 @@ inline rather than only in chat.
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`,
   `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`,
-  `expression-input`. A change
+  `expression-input`, `coordinate-plane-display`. A change
   amending built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED`
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-five changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-six changes
   have shipped — `ls openspec/changes/archive/` is the authority, and this line has run one
   behind before; the latest archive is
-  `2026-08-14-add-unit-15-inequalities`. It ships roadmap item 21's last increment, Unit 15,
-  which **closes the item and Stage E**. It is the course's first content whose answers are
-  relations rather than values: five of its six skills answer through choice input over whole
-  statements, because a pad that submits `−4` cannot say whether the answer was `x < −4` or
-  `x > −4`, and that direction is the entire content of `flip-the-sign`.
+  `2026-08-16-add-coordinate-plane-display`. It ships roadmap item 22's first increment,
+  22a, which adds structured, accessible coordinate-plane display while leaving the item open
+  for 22b's point-placement input. Stage F remains planned until that input and its content
+  generators ship.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
