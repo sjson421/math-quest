@@ -55,12 +55,12 @@ read-only reviewer. Use two or three only when changed paths form disjoint domai
 overlapping file; every reviewer applies reuse, quality, and efficiency checks to its own
 domain. Never split by perspective over the same paths.
 
-Start each reviewer with fresh context, medium reasoning, and inherited environment model
-selection. Never pin a concrete model. Pass only the repository root, baseline SHA,
-explicit assigned paths, focused questions, and concise output format. Never paste the
-full diff, artifacts, parent conclusions, user history, or unrelated paths. Require concise
-`file:line` findings and no edits. Treat results as claims: the parent verifies every
-finding before accepting or fixing it.
+Start each reviewer with fresh context, `gpt-5.6-terra`, and medium reasoning. Keep the parent
+on the environment-selected model, and do not vary the reviewer model by task. Pass only the
+repository root, baseline SHA, explicit assigned paths, focused questions, and concise output
+format. Never paste the full diff, artifacts, parent conclusions, user history, or unrelated
+paths. Require concise `file:line` findings and no edits. Treat results as claims: the parent
+verifies every finding before accepting or fixing it.
 
 ## Stop conditions
 

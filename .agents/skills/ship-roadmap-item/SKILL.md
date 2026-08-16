@@ -26,9 +26,10 @@ Create an `update_plan` plan with the shared contract's exact ten phases. Keep e
 entry `in_progress`, and never mark a phase complete before its gate passes.
 
 Invoke the named OpenSpec skills through Codex's skill mechanism. In phase 6, invoke
-`$simplify` on this run's changed paths, but this adapter controls reviewer launch: omit any
-`model` field even if another cleanup instruction suggests one.
+`$simplify` on this run's changed paths, but this adapter controls reviewer launch: use the
+reviewer model below even if another cleanup instruction suggests a different one.
 
 For every independent reviewer, call `spawn_agent` with `fork_turns: "none"` and
-`reasoning_effort: "medium"`; omit `model`. Pass only the fields permitted by the shared
-contract, require no edits, and verify every returned claim locally.
+`model: "gpt-5.6-terra"` and `reasoning_effort: "medium"`. Keep the parent on the model
+selected for its environment. Pass only the fields permitted by the shared contract, require
+no edits, and verify every returned claim locally.
