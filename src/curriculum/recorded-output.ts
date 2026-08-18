@@ -1,5 +1,5 @@
 import { generateProblem } from '../lib/generator'
-import { coordinateLabel, coordinatePlaneLabel } from '../lib/coordinate-plane'
+import { coordinateEquationLabel, coordinateLabel, coordinatePlaneLabel } from '../lib/coordinate-plane'
 import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
@@ -173,11 +173,24 @@ const formatCoordinateData = (data: CoordinateData): string => {
         `${data.operation} rows [${data.rows.map(coordinateLabel).join(', ')}] ` +
         `target-x ${data.targetX}`
       )
+    case 'slope-intercept':
+      return (
+        `${data.operation} slope ${data.slope} intercept ${data.intercept} ` +
+        `${coordinateEquationLabel(data.slope, data.intercept)} ask ${data.asks}`
+      )
+    case 'graph-from-equation':
+      return (
+        `${data.operation} slope ${data.slope} intercept ${data.intercept} ` +
+        coordinateEquationLabel(data.slope, data.intercept)
+      )
     case 'quadrant':
     case 'slope-from-graph':
     case 'slope-from-points':
     case 'y-intercept':
+    case 'equation-from-graph':
       return data.operation
+    case 'parallel-perpendicular':
+      return `${data.operation} ${data.relationship}`
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled coordinate data: ${JSON.stringify(unhandled)}`)

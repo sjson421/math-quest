@@ -154,4 +154,37 @@ describe('recorded output for coordinate planes', () => {
       'table-to-graph rows [(−2, −1), (0, 1), (2, 3)] target-x 2',
     )
   })
+
+  it('records equation sources and both graph candidates', () => {
+    const problem: Problem = {
+      skillId: 'synthetic-graph-equation',
+      prompt: 'Which line matches?',
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [],
+          lines: [
+            { through: [{ x: 0, y: -3 }, { x: 1, y: -1 }] },
+            { through: [{ x: 0, y: 3 }, { x: 1, y: 5 }] },
+          ],
+        },
+        coordinate: { operation: 'graph-from-equation', slope: 2, intercept: -3 },
+      },
+      answer: { kind: 'choice', id: 'line-1' },
+      inputMode: 'choice',
+      choices: [
+        { id: 'line-1', label: 'Line 1 (solid)' },
+        { id: 'line-2', label: 'Line 2 (dashed)' },
+      ],
+      hint: 'Match the slope and intercept.',
+      solution: [{ text: 'Find the matching line.' }],
+      difficulty: 1,
+    }
+
+    const output = format(problem, 19)
+    expect(output).toContain('graph-from-equation slope 2 intercept -3 y = 2x − 3')
+    expect(output).toContain('lines [(0, −3)→(1, −1), (0, 3)→(1, 5)]')
+  })
 })

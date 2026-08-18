@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 151 of 201 skills are playable.** Stages A through F have playable content. Stage E
-is complete with Units 12, 13, 14 and 15; Stage F has started with Unit 16's first six
+**Status: 155 of 201 skills are playable.** Stages A through F have playable content. Stage E
+is complete with Units 12, 13, 14 and 15; Stage F's Unit 16 is complete with all ten
 coordinate-plane and line-reading skills.
 Choice input,
 number-line input, math notation, fraction input, diagrams, expression input and
@@ -1014,9 +1014,11 @@ document's ✅ markers updated to match, which the cross-check enforces.
         `plot-points` predicts swapped coordinates and reversed vertical direction as reachable
         points; the `slope-from-points` wall preserves distinct inconsistent-order and reciprocal
         diagnoses. Exact rational slope answers expose fraction and sign keys only when needed.
-      - **16b** `slope-intercept`–`parallel-perpendicular` — `graph-from-equation` (16.8) asks the
-        learner to *produce* a line: two placed points, or a choice among rendered graphs. Decide
-        it here; it is the one skill in the unit whose answer shape is genuinely open.
+      - **16b — shipped 2026-08-17.** `slope-intercept`–`parallel-perpendicular` read and
+        write linear equations, choose between two solid/dashed candidate lines, and derive
+        exact parallel or perpendicular slopes through the existing answer surfaces. The
+        graph-choice design uses one full plane and ordinary text choices, with the matching
+        line randomized across declaration order and button position.
       - **17** `system-by-graphing`–`system-words` — answers are ordered pairs throughout, so this
         is the second consumer of 22b's point answer. `elimination` (17.3) is a wall on forgetting
         to scale both sides.

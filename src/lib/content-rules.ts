@@ -12,7 +12,7 @@
  */
 
 import type { SkillEntry, UnitEntry } from '../curriculum/manifest/types'
-import { coordinateLabel, coordinatePlaneLabel } from './coordinate-plane'
+import { coordinateEquationLabel, coordinateLabel, coordinatePlaneLabel } from './coordinate-plane'
 import { shapeDiagramLabel } from './shape-diagram'
 import type { CoordinateData, Display, Problem } from './types'
 
@@ -161,11 +161,18 @@ function coordinateDataText(data?: CoordinateData): string {
       return `Point ${coordinateLabel(data.point)}`
     case 'table-to-graph':
       return `Table ${data.rows.map(coordinateLabel).join(', ')}; target x ${data.targetX}`
+    case 'slope-intercept':
+      return `${data.operation} ${coordinateEquationLabel(data.slope, data.intercept)}; ask ${data.asks}`
+    case 'graph-from-equation':
+      return `${data.operation} ${coordinateEquationLabel(data.slope, data.intercept)}`
     case 'quadrant':
     case 'slope-from-graph':
     case 'slope-from-points':
     case 'y-intercept':
-      return ''
+    case 'equation-from-graph':
+      return data.operation
+    case 'parallel-perpendicular':
+      return `${data.operation} ${data.relationship}`
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled coordinate data: ${JSON.stringify(unhandled)}`)

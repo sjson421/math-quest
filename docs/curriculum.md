@@ -390,10 +390,10 @@ in lowest terms. Fraction operations wait for Unit 8.
 | 16.4 | `slope-from-graph` | Rise over run | ✅ |
 | 16.5 | `slope-from-points` | Formula | ✅ · ⚠️ inconsistent subtraction order |
 | 16.6 | `y-intercept` | | ✅ |
-| 16.7 | `slope-intercept` | y = mx + b | |
-| 16.8 | `graph-from-equation` | | |
-| 16.9 | `equation-from-graph` | | |
-| 16.10 | `parallel-perpendicular` | Negative reciprocal | |
+| 16.7 | `slope-intercept` | y = mx + b | ✅ |
+| 16.8 | `graph-from-equation` | Choose the matching line | ✅ |
+| 16.9 | `equation-from-graph` | | ✅ |
+| 16.10 | `parallel-perpendicular` | Negative reciprocal | ✅ |
 
 ### Unit 17 — Systems of Equations (4)
 
@@ -519,7 +519,7 @@ Ship by stage; each stage is independently useful.
    and the pad offers the slash. **Diagram rendering** is built for shaded bars, circles and
    grids, so Stage D's capability infrastructure is complete.
 4. **Stage E** (34) — complete; the **expression input mode** it needed is built.
-5. **Stage F** (28) — the **coordinate-plane input** it needs is built; Unit 16a's first six skills are playable.
+5. **Stage F** (28) — the **coordinate-plane input** it needs is built; all ten Unit 16 skills are playable.
 6. **Stage G** (22) — reuses built **diagram rendering** for shapes and still needs charts.
 7. **Stage H** (6) — needs timed mode and a score estimator.
 

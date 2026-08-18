@@ -119,6 +119,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "equation-balance": [
     "factor-gcf",
   ],
+  "equation-from-graph": [
+    "graph-from-equation",
+  ],
   "equation-parentheses": [
     "vars-both-sides",
   ],
@@ -181,6 +184,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "fractions-numberline": [
     "name-parts",
+  ],
+  "graph-from-equation": [
+    "slope-intercept",
   ],
   "graph-inequality": [
     "inequality-symbols",
@@ -253,6 +259,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "order-numbers": [
     "compare-numbers",
+  ],
+  "parallel-perpendicular": [
+    "equation-from-graph",
   ],
   "pemdas": [
     "with-parentheses",
@@ -335,6 +344,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "slope-from-points": [
     "slope-from-graph",
+  ],
+  "slope-intercept": [
+    "y-intercept",
   ],
   "solve-multi-step-ineq": [
     "solve-one-step-ineq",

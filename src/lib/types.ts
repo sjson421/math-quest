@@ -118,6 +118,18 @@ export type CoordinateData =
   | { operation: 'slope-from-graph' }
   | { operation: 'slope-from-points' }
   | { operation: 'y-intercept' }
+  | {
+      operation: 'slope-intercept'
+      slope: number
+      intercept: number
+      asks: 'slope' | 'intercept'
+    }
+  | { operation: 'graph-from-equation'; slope: number; intercept: number }
+  | { operation: 'equation-from-graph' }
+  | {
+      operation: 'parallel-perpendicular'
+      relationship: 'parallel' | 'perpendicular'
+    }
 
 export type Operator = '+' | '−' | '×' | '÷'
 

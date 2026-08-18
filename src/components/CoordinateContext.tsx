@@ -1,4 +1,4 @@
-import { coordinateLabel } from '../lib/coordinate-plane'
+import { coordinateEquationLabel, coordinateLabel } from '../lib/coordinate-plane'
 import type { CoordinateData } from '../lib/types'
 
 /** The source values a coordinate problem presents beside its one graph. */
@@ -48,10 +48,26 @@ export function CoordinateContext({ data }: { data?: CoordinateData }) {
           </tbody>
         </table>
       )
+    case 'slope-intercept':
+    case 'graph-from-equation': {
+      const label = coordinateEquationLabel(data.slope, data.intercept)
+      return (
+        <p
+          className="rounded-xl bg-butter-soft px-4 py-2 text-xl font-bold text-ink"
+          data-coordinate-equation
+          role="math"
+          aria-label={spokenEquation(label)}
+        >
+          <span aria-hidden>{label}</span>
+        </p>
+      )
+    }
     case 'quadrant':
     case 'slope-from-graph':
     case 'slope-from-points':
     case 'y-intercept':
+    case 'equation-from-graph':
+    case 'parallel-perpendicular':
       return null
     default: {
       const unhandled: never = data
@@ -61,3 +77,6 @@ export function CoordinateContext({ data }: { data?: CoordinateData }) {
 }
 
 const drawn = (value: number): string => String(value).replace('-', '−')
+
+const spokenEquation = (label: string): string =>
+  label.replace('y =', 'y equals').replace(' − ', ' minus ').replace(' + ', ' plus ')

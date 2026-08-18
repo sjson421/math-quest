@@ -345,6 +345,18 @@ export function coordinateValueLabel(value: number): string {
   return String(value).replace('-', '−')
 }
 
+/** Conventional slope-intercept notation shared by graph context and records. */
+export function coordinateEquationLabel(slope: number, intercept: number): string {
+  if (!Number.isInteger(slope) || !Number.isInteger(intercept) || slope === 0) {
+    throw new Error('coordinate equation: slope and intercept must be integer values with a non-zero slope')
+  }
+
+  const xTerm = slope === 1 ? 'x' : slope === -1 ? '−x' : `${coordinateValueLabel(slope)}x`
+  if (intercept === 0) return `y = ${xTerm}`
+  const sign = intercept > 0 ? '+' : '−'
+  return `y = ${xTerm} ${sign} ${coordinateValueLabel(Math.abs(intercept))}`
+}
+
 export function coordinateLabel(point: Coordinate): string {
   assertCoordinate(point, 'coordinate')
   return `(${coordinateValueLabel(point.x)}, ${coordinateValueLabel(point.y)})`

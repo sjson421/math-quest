@@ -273,6 +273,24 @@ describe('forward references', () => {
     expect(checkContent(problem({ display: graph }), at({}, 'unit-16'))).toEqual([])
   })
 
+  it('includes every linear-equation source value in learner text', () => {
+    const graph: Problem['display'] = {
+      kind: 'coordinate-plane',
+      plane: {
+        x: { min: -5, max: 5, step: 1 },
+        y: { min: -5, max: 5, step: 1 },
+        points: [],
+        lines: [{ through: [{ x: 0, y: -3 }, { x: 1, y: -1 }] }],
+      },
+      coordinate: { operation: 'slope-intercept', slope: 2, intercept: -3, asks: 'slope' },
+    }
+
+    expect(checkContent(problem({ display: graph }), at({}, 'unit-16'))).toEqual([])
+    const tooEarly = checkContent(problem({ display: graph }), at({}, 'unit-15'))
+    expect(tooEarly.map((violation) => violation.rule)).toContain('forward-reference')
+    expect(tooEarly.map((violation) => violation.message).join(' ')).toContain('y = 2x − 3')
+  })
+
   it('matches plurals but not words that merely contain a term', () => {
     const plural = checkContent(problem({ hint: 'Add the exponents together.' }), at())
     // "primer" contains "prime"; a substring match would flag it.

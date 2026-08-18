@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { isCoordinateTarget, type Coordinate } from '../lib/coordinate-plane'
+import { checkAnswer } from '../lib/answer'
 import { generateProblem } from '../lib/generator'
 import { gcd, rational } from '../lib/rational'
 import type { CoordinateData, Difficulty, Problem } from '../lib/types'
@@ -284,5 +285,138 @@ describe('y-intercept', () => {
     }
     expect([...signs].sort()).toEqual([-1, 1])
     usesDifficultyReach('y-intercept')
+  })
+})
+
+const integerLineValues = (problem: Problem) => {
+  const display = displayOf(problem)
+  expect(display.plane.lines).toHaveLength(1)
+  expect(display.plane.points).toEqual([])
+  const [first, second] = display.plane.lines[0].through
+  const run = second.x - first.x
+  const rise = second.y - first.y
+  expect(run).not.toBe(0)
+  expect(rise).not.toBe(0)
+  const slope = rational(rise, run)
+  const intercept = rational(first.y * run - rise * first.x, run)
+  expect(slope.d).toBe(1)
+  expect(intercept.d).toBe(1)
+  return { slope: slope.n, intercept: intercept.n }
+}
+
+describe('slope-intercept', () => {
+  it('matches either requested coefficient to the plotted equation', () => {
+    const asks = new Set<string>()
+    for (const problem of problems('slope-intercept')) {
+      const data = dataOf(problem, 'slope-intercept')
+      const { slope, intercept } = integerLineValues(problem)
+      expect(data.slope).toBe(slope)
+      expect(data.intercept).toBe(intercept)
+      expect(data.intercept).not.toBe(data.slope)
+      expect(exactAnswerOf(problem).n).toBe(
+        data.asks === 'slope' ? slope : intercept,
+      )
+      expect(predictionTags(problem)).toEqual([
+        data.asks === 'slope' ? 'intercept-as-slope' : 'slope-as-intercept',
+      ])
+      expect(numericPredictions(problem)).toEqual([data.asks === 'slope' ? intercept : slope])
+      expect(problem.keypad?.allowNegative ?? false).toBe(
+        [data.asks === 'slope' ? slope : intercept, data.asks === 'slope' ? intercept : slope].some((value) => value < 0),
+      )
+      asks.add(data.asks)
+    }
+    expect([...asks].sort()).toEqual(['intercept', 'slope'])
+    usesDifficultyReach('slope-intercept')
+  })
+})
+
+describe('graph-from-equation', () => {
+  it('maps exactly one matching line to its styled text choice', () => {
+    const linePositions = new Set<number>()
+    const buttonPositions = new Set<number>()
+    for (const problem of problems('graph-from-equation')) {
+      const display = displayOf(problem)
+      const data = dataOf(problem, 'graph-from-equation')
+      expect(display.plane.points).toEqual([])
+      expect(display.plane.lines).toHaveLength(2)
+      const matches = display.plane.lines.filter((line) => {
+        const [first, second] = line.through
+        return second.y - first.y === data.slope * (second.x - first.x) && first.y === data.intercept + data.slope * first.x
+      })
+      expect(matches).toHaveLength(1)
+      const lineIndex = display.plane.lines.indexOf(matches[0])
+      linePositions.add(lineIndex)
+      const answer = problem.answer
+      if (answer.kind !== 'choice') throw new Error('graph-from-equation: expected choice answer')
+      expect(answer.id).toBe(`line-${lineIndex + 1}`)
+      const choices = problem.choices ?? []
+      expect(choices.find((choice) => choice.id === 'line-1')?.label).toBe('Line 1 (solid)')
+      expect(choices.find((choice) => choice.id === 'line-2')?.label).toBe('Line 2 (dashed)')
+      buttonPositions.add(choices.findIndex((choice) => choice.id === answer.id))
+      expect(predictionTags(problem)).toEqual(['intercept-sign-reversed'])
+      const prediction = problem.misconceptions?.[0]?.value
+      expect(prediction).toEqual({ kind: 'text', value: answer.id === 'line-1' ? 'line-2' : 'line-1' })
+    }
+    expect([...linePositions].sort()).toEqual([0, 1])
+    expect(buttonPositions.size).toBe(2)
+    usesDifficultyReach('graph-from-equation')
+  })
+})
+
+describe('equation-from-graph', () => {
+  it('derives an expanded expression and accepts an equivalent term order', () => {
+    const shapes = new Set<string>()
+    for (const problem of problems('equation-from-graph')) {
+      const { slope, intercept } = integerLineValues(problem)
+      const answer = problem.answer
+      if (answer.kind !== 'expression') throw new Error('equation-from-graph: expected expression answer')
+      expect(answer.variable).toBe('x')
+      expect(answer.form).toBe('expanded')
+      const coefficient = slope === 1 ? 'x' : slope === -1 ? '-x' : `${slope}x`
+      const canonical = intercept === 0 ? coefficient : `${coefficient}${intercept > 0 ? '+' : ''}${intercept}`
+      expect(answer.canonical).toBe(canonical)
+      expect(checkAnswer(answer, `${intercept}+${coefficient}`)).toEqual({ status: 'correct' })
+      expect(problem.expression).toEqual({ variable: 'x' })
+      expect(predictionTags(problem)).toEqual(['slope-intercept-swapped', 'intercept-sign-reversed'])
+      shapes.add(canonical)
+    }
+    expect(shapes.size).toBeGreaterThan(20)
+    usesDifficultyReach('equation-from-graph')
+  })
+})
+
+describe('parallel-perpendicular', () => {
+  it('uses exact rational slopes and reachable relationship predictions', () => {
+    const relationships = new Set<string>()
+    const sourceSlopes = new Set<string>()
+    for (const problem of problems('parallel-perpendicular')) {
+      const display = displayOf(problem)
+      const data = dataOf(problem, 'parallel-perpendicular')
+      expect(display.plane.lines).toHaveLength(1)
+      expect(display.plane.points).toEqual([])
+      const [first, second] = display.plane.lines[0].through
+      const reference = rational(second.y - first.y, second.x - first.x)
+      expect(reference.n).not.toBe(0)
+      expect(reference.d).not.toBe(1)
+      const expected = data.relationship === 'parallel' ? reference : rational(-reference.d, reference.n)
+      expect(exactAnswerOf(problem)).toEqual({ kind: 'exact', ...expected })
+      expect(problem.keypad?.allowFraction).toBe(true)
+      expect(problem.keypad?.allowNegative).toBe(
+        [expected.n / expected.d, ...numericPredictions(problem)].some((value) => value < 0),
+      )
+      if (data.relationship === 'parallel') {
+        expect(predictionTags(problem)).toEqual(['negative-reciprocal-for-parallel'])
+      } else {
+        expect(predictionTags(problem)).toEqual(['unsigned-reciprocal', 'original-slope-kept'])
+      }
+      expect(numericPredictions(problem)).not.toContain(expected.n / expected.d)
+      relationships.add(data.relationship)
+      sourceSlopes.add(`${reference.n}/${reference.d}`)
+    }
+    expect([...relationships].sort()).toEqual(['parallel', 'perpendicular'])
+    expect(sourceSlopes.size).toBeGreaterThan(8)
+    expect([...sourceSlopes].some((slope) => slope.startsWith('-'))).toBe(true)
+    expect([...sourceSlopes].some((slope) => !slope.startsWith('-'))).toBe(true)
+    usesDifficultyReach('parallel-perpendicular')
   })
 })

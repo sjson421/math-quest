@@ -71,7 +71,7 @@ export const stageF: StageEntry = {
         {
           id: 'graph-from-equation',
           name: 'Graphing an Equation',
-          blurb: 'Draw the line from its equation',
+          blurb: 'Choose the matching line',
         },
         {
           id: 'equation-from-graph',

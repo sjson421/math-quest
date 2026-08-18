@@ -9,10 +9,10 @@ import type {
   PointValue,
   SkillGenerator,
 } from '../lib/types'
-import { defineSkill, drawn, padFor, type BuildContext } from './engine'
+import { defineSkill, drawn, padFor, term, type BuildContext } from './engine'
 
 /**
- * Unit 16a · Coordinate Plane & Lines.
+ * Unit 16 · Coordinate Plane & Lines.
  *
  * The generic plane deliberately knows no content operation. Each problem adds
  * that meaning beside the plane, and the global verifier derives the answer
@@ -396,6 +396,309 @@ const drawnPoint = (point: Coordinate): string => `(${drawn(point.x)}, ${drawn(p
 const fractionText = (value: Rational): string =>
   value.d === 1 ? drawn(value.n) : `${drawn(value.n)}/${value.d}`
 
+type IntegerLineDraw = {
+  slope: number
+  intercept: number
+  through: [Coordinate, Coordinate]
+}
+
+const integerLineCache = new Map<string, IntegerLineDraw[]>()
+
+/** Finite integer-slope draws whose defining points and optional wrong line fit. */
+const integerLineDraws = (
+  reach: number,
+  mode: 'general' | 'graph-choice',
+): IntegerLineDraw[] => {
+  const key = `${reach}:${mode}`
+  const cached = integerLineCache.get(key)
+  if (cached) return cached
+
+  const draws: IntegerLineDraw[] = []
+  const maxSlope = Math.min(5, Math.max(2, Math.floor(reach / 2)))
+  for (let slope = -maxSlope; slope <= maxSlope; slope += 1) {
+    if (slope === 0) continue
+    for (let intercept = -reach; intercept <= reach; intercept += 1) {
+      if (mode === 'general' && intercept === slope) continue
+      // The equation-from-graph predictions include a sign reversal; a zero
+      // intercept would make that prediction equal to the target expression.
+      if (mode === 'general' && intercept === 0) continue
+      // The graph-choice diagnosis reverses the intercept sign, so zero would
+      // collapse the named mistake into the correct line.
+      if (mode === 'graph-choice' && intercept === 0) continue
+      if (Math.abs(intercept + slope) > reach) continue
+      if (mode === 'graph-choice' && Math.abs(-intercept + slope) > reach) continue
+      draws.push({
+        slope,
+        intercept,
+        through: [
+          { x: 0, y: intercept },
+          { x: 1, y: intercept + slope },
+        ],
+      })
+    }
+  }
+
+  if (draws.length === 0) throw new Error(`integer coordinate lines: no draws at reach ${reach}`)
+  integerLineCache.set(key, draws)
+  return draws
+}
+
+const linearExpression = (slope: number, intercept: number): string => {
+  const variableTerm = term(slope, 'x')
+  if (intercept === 0) return variableTerm
+  return `${variableTerm}${intercept > 0 ? '+' : ''}${intercept}`
+}
+
+const shownLinearExpression = (slope: number, intercept: number): string =>
+  linearExpression(slope, intercept).replaceAll('-', '−')
+
+type RationalLineDraw = {
+  first: Coordinate
+  second: Coordinate
+  rise: number
+  run: number
+}
+
+const rationalLineCache = new Map<number, RationalLineDraw[]>()
+
+/** Separate lattice draws preserve the negative-reciprocal relationship. */
+const rationalLineDraws = (reach: number): RationalLineDraw[] => {
+  const cached = rationalLineCache.get(reach)
+  if (cached) return cached
+
+  const draws: RationalLineDraw[] = []
+  const maxChange = Math.min(8, reach)
+  for (let run = 2; run <= maxChange; run += 1) {
+    for (let rise = -maxChange; rise <= maxChange; rise += 1) {
+      if (rise === 0 || Math.abs(rise) === run) continue
+      if (rational(rise, run).d === 1) continue
+      for (let x = -reach; x + run <= reach; x += 1) {
+        const minY = Math.max(-reach, -reach - rise)
+        const maxY = Math.min(reach, reach - rise)
+        for (let y = minY; y <= maxY; y += 1) {
+          draws.push({
+            first: { x, y },
+            second: { x: x + run, y: y + rise },
+            rise,
+            run,
+          })
+        }
+      }
+    }
+  }
+
+  if (draws.length === 0) throw new Error(`parallel-perpendicular: no draws at reach ${reach}`)
+  rationalLineCache.set(reach, draws)
+  return draws
+}
+
+const slopeRelationship = (value: Rational, relationship: 'parallel' | 'perpendicular'): Rational =>
+  relationship === 'parallel' ? value : rational(-value.d, value.n)
+
+const slopeRelationshipMisconceptions = (
+  value: Rational,
+  relationship: 'parallel' | 'perpendicular',
+): Misconception[] => {
+  const reciprocal = rational(value.d, value.n)
+  return relationship === 'parallel'
+    ? [{
+        value: toNumber(rational(-value.d, value.n)),
+        tag: 'negative-reciprocal-for-parallel',
+        nudge: 'Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.',
+      }]
+    : [
+        {
+          value: toNumber(reciprocal),
+          tag: 'unsigned-reciprocal',
+          nudge: 'A perpendicular slope is the negative reciprocal, so keep the sign change.',
+        },
+        {
+          value: toNumber(value),
+          tag: 'original-slope-kept',
+          nudge: 'Perpendicular lines change to the negative reciprocal of the original slope.',
+        },
+      ]
+}
+
+const slopeIntercept = defineSkill({
+  id: 'slope-intercept',
+  name: 'Slope-Intercept Form',
+  blurb: 'y = mx + b',
+  build({ rng, difficulty }: BuildContext) {
+    const reach = REACH[difficulty]
+    const draw = rng.pick(integerLineDraws(reach, 'general'))
+    const asks = rng.bool() ? 'slope' as const : 'intercept' as const
+    const answerValue = asks === 'slope' ? draw.slope : draw.intercept
+    const predictionValue = asks === 'slope' ? draw.intercept : draw.slope
+    const misconceptions: Misconception[] = [{
+      value: predictionValue,
+      tag: asks === 'slope' ? 'intercept-as-slope' : 'slope-as-intercept',
+      nudge: asks === 'slope'
+        ? 'The slope is the x coefficient; the constant is the y-intercept.'
+        : 'The y-intercept is the constant; the x coefficient is the slope.',
+    }]
+
+    return {
+      prompt: asks === 'slope' ? 'What is the slope?' : 'What is the y-intercept?',
+      display: {
+        kind: 'coordinate-plane',
+        plane: plane(reach, [], [{ through: draw.through }]),
+        coordinate: { operation: 'slope-intercept', slope: draw.slope, intercept: draw.intercept, asks },
+      },
+      answer: exactAnswer(rational(answerValue, 1)),
+      keypad: padFor(answerValue, misconceptions),
+      misconceptions,
+      hint: asks === 'slope'
+        ? 'Read the coefficient of x in y = mx + b.'
+        : 'Read the constant term in y = mx + b.',
+      solution: asks === 'slope'
+        ? [
+            { text: 'Find the coefficient attached to x.', detail: `m = ${drawn(draw.slope)}` },
+            { text: 'The coefficient is the slope.', detail: `slope = ${drawn(answerValue)}` },
+          ]
+        : [
+            { text: 'Find the constant term.', detail: `b = ${drawn(draw.intercept)}` },
+            { text: 'The constant is the y-intercept.', detail: `y-intercept = ${drawn(answerValue)}` },
+          ],
+    }
+  },
+})
+
+const GRAPH_CHOICES: readonly Choice[] = [
+  { id: 'line-1', label: 'Line 1 (solid)' },
+  { id: 'line-2', label: 'Line 2 (dashed)' },
+]
+
+const graphFromEquation = defineSkill({
+  id: 'graph-from-equation',
+  name: 'Graphing an Equation',
+  blurb: 'Choose the matching line',
+  build({ rng, difficulty }: BuildContext) {
+    const reach = REACH[difficulty]
+    const draw = rng.pick(integerLineDraws(reach, 'graph-choice'))
+    const wrongThrough: [Coordinate, Coordinate] = [
+      { x: 0, y: -draw.intercept },
+      { x: 1, y: draw.slope - draw.intercept },
+    ]
+    const matchingFirst = rng.bool()
+    const lines = matchingFirst
+      ? [{ through: draw.through }, { through: wrongThrough }]
+      : [{ through: wrongThrough }, { through: draw.through }]
+    const answerId = matchingFirst ? 'line-1' : 'line-2'
+    const wrongId = matchingFirst ? 'line-2' : 'line-1'
+    const misconceptions: Misconception[] = [{
+      value: { kind: 'text', value: wrongId },
+      tag: 'intercept-sign-reversed',
+      nudge: 'Check the sign of the y-intercept before choosing a line.',
+    }]
+
+    return {
+      prompt: 'Which line matches the equation?',
+      display: {
+        kind: 'coordinate-plane',
+        plane: plane(reach, [], lines),
+        coordinate: { operation: 'graph-from-equation', slope: draw.slope, intercept: draw.intercept },
+      },
+      answer: { kind: 'choice', id: answerId },
+      inputMode: 'choice',
+      choices: rng.shuffle([...GRAPH_CHOICES]),
+      misconceptions,
+      hint: 'Match the slope and y-intercept, then identify its line style.',
+      solution: [
+        { text: 'Find the y-intercept at x equals zero.', detail: `b = ${drawn(draw.intercept)}` },
+        { text: 'Check the rise for each run.', detail: `m = ${drawn(draw.slope)}` },
+        { text: `Choose ${answerId === 'line-1' ? 'Line 1, solid' : 'Line 2, dashed'}.` },
+      ],
+    }
+  },
+})
+
+const equationFromGraph = defineSkill({
+  id: 'equation-from-graph',
+  name: 'Equation from a Graph',
+  blurb: 'Read off the slope and intercept',
+  build({ rng, difficulty }: BuildContext) {
+    const reach = REACH[difficulty]
+    const draw = rng.pick(integerLineDraws(reach, 'general'))
+    const canonical = linearExpression(draw.slope, draw.intercept)
+    const swapped = linearExpression(draw.intercept, draw.slope)
+    const reversedIntercept = linearExpression(draw.slope, -draw.intercept)
+    const misconceptions: Misconception[] = [
+      {
+        value: { kind: 'text', value: swapped },
+        tag: 'slope-intercept-swapped',
+        nudge: 'The x coefficient is the slope; the constant is the y-intercept.',
+      },
+      {
+        value: { kind: 'text', value: reversedIntercept },
+        tag: 'intercept-sign-reversed',
+        nudge: 'Read the y-intercept sign where the line crosses the vertical axis.',
+      },
+    ]
+
+    return {
+      prompt: 'Write the right side of y = from this graph.',
+      display: {
+        kind: 'coordinate-plane',
+        plane: plane(reach, [], [{ through: draw.through }]),
+        coordinate: { operation: 'equation-from-graph' },
+      },
+      answer: { kind: 'expression', canonical, variable: 'x', form: 'expanded' },
+      inputMode: 'expression',
+      expression: { variable: 'x' },
+      misconceptions,
+      hint: 'Read the slope and y-intercept, then write mx + b.',
+      solution: [
+        { text: 'Read the slope from the line.', detail: `m = ${drawn(draw.slope)}` },
+        { text: 'Read where the line crosses y.', detail: `b = ${drawn(draw.intercept)}` },
+        { text: 'Combine them as mx + b.', detail: `y = ${shownLinearExpression(draw.slope, draw.intercept)}` },
+      ],
+    }
+  },
+})
+
+const parallelPerpendicular = defineSkill({
+  id: 'parallel-perpendicular',
+  name: 'Parallel & Perpendicular',
+  blurb: 'Negative reciprocal slopes',
+  build({ rng, difficulty }: BuildContext) {
+    const reach = REACH[difficulty]
+    const draw = rng.pick(rationalLineDraws(reach))
+    const relationship = rng.bool() ? 'parallel' as const : 'perpendicular' as const
+    const reference = rational(draw.rise, draw.run)
+    const answer = slopeRelationship(reference, relationship)
+    const misconceptions = slopeRelationshipMisconceptions(reference, relationship)
+    const ratios = relationship === 'parallel'
+      ? [answer, rational(-reference.d, reference.n)]
+      : [answer, rational(reference.d, reference.n), reference]
+
+    return {
+      prompt: `What is the slope of a ${relationship} line?`,
+      display: {
+        kind: 'coordinate-plane',
+        plane: plane(reach, [], [{ through: [draw.first, draw.second] }]),
+        coordinate: { operation: 'parallel-perpendicular', relationship },
+      },
+      answer: exactAnswer(answer),
+      keypad: slopeKeypad(ratios),
+      misconceptions,
+      hint: relationship === 'parallel'
+        ? 'Parallel lines have equal slopes.'
+        : 'Perpendicular slopes are negative reciprocals.',
+      solution: relationship === 'parallel'
+        ? [
+            { text: 'Read the reference slope.', detail: `m = ${fractionText(reference)}` },
+            { text: 'Parallel lines keep that slope.', detail: `parallel slope = ${fractionText(answer)}` },
+          ]
+        : [
+            { text: 'Read the reference slope.', detail: `m = ${fractionText(reference)}` },
+            { text: 'Swap numerator and denominator.', detail: `${fractionText(reference)} → ${drawn(reference.d)}/${Math.abs(reference.n)}` },
+            { text: 'Change the sign for a negative reciprocal.', detail: `perpendicular slope = ${fractionText(answer)}` },
+          ],
+    }
+  },
+})
+
 export const unit16: SkillGenerator[] = [
   plotPoints,
   quadrants,
@@ -403,4 +706,8 @@ export const unit16: SkillGenerator[] = [
   slopeFromGraph,
   slopeFromPoints,
   yIntercept,
+  slopeIntercept,
+  graphFromEquation,
+  equationFromGraph,
+  parallelPerpendicular,
 ]

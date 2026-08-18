@@ -10,7 +10,7 @@ import {
   type Coordinate,
 } from '../lib/coordinate-plane'
 import { makeRng } from '../lib/rng'
-import { equals, format as formatRational, gcd, toNumber, rational } from '../lib/rational'
+import { equals, format as formatRational, gcd, toNumber, rational, type Rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
 import { ratioWordText } from './phrasing/ratios'
 import type {
@@ -1438,6 +1438,9 @@ function recompute(problem: Problem): number | string {
     const noLines = () => {
       if (display.plane.lines.length !== 0) fail(`${data.operation} must not draw a line`)
     }
+    const noPoints = () => {
+      if (display.plane.points.length !== 0) fail(`${data.operation} must not plot points`)
+    }
     const samePoints = (left: readonly Coordinate[], right: readonly Coordinate[]) => {
       const keys = (points: readonly Coordinate[]) => points.map(coordinateEntry).sort()
       return JSON.stringify(keys(left)) === JSON.stringify(keys(right))
@@ -1449,6 +1452,28 @@ function recompute(problem: Problem): number | string {
       if (run === 0 || rise === 0) fail(`${data.operation} needs non-zero rise and run`)
       if (Math.abs(run) === Math.abs(rise)) fail(`${data.operation} must not draw slope 1 or -1`)
       return toNumber(rational(rise, run))
+    }
+    const lineSlope = (points: readonly [Coordinate, Coordinate]): Rational => {
+      const run = points[1].x - points[0].x
+      const rise = points[1].y - points[0].y
+      if (run === 0) fail(`${data.operation} needs a non-vertical line`)
+      return rational(rise, run)
+    }
+    const lineIntercept = (points: readonly [Coordinate, Coordinate]): Rational => {
+      const run = points[1].x - points[0].x
+      const rise = points[1].y - points[0].y
+      if (run === 0) fail(`${data.operation} needs a non-vertical line`)
+      return rational(points[0].y * run - rise * points[0].x, run)
+    }
+    const lineIs = (
+      points: readonly [Coordinate, Coordinate],
+      slope: Rational,
+      intercept: Rational,
+    ) => equals(lineSlope(points), slope) && equals(lineIntercept(points), intercept)
+    const equationExpression = (slope: number, intercept: number): string => {
+      const coefficient = slope === 1 ? 'x' : slope === -1 ? '-x' : `${slope}x`
+      if (intercept === 0) return coefficient
+      return `${coefficient}${intercept > 0 ? '+' : ''}${intercept}`
     }
 
     switch (data.operation) {
@@ -1520,6 +1545,62 @@ function recompute(problem: Problem): number | string {
           fail('y-intercept must lie on the displayed lattice')
         }
         return intercept
+      }
+      case 'slope-intercept': {
+        noPoints()
+        if (display.plane.lines.length !== 1) fail('slope-intercept needs exactly one line')
+        if (!Number.isInteger(data.slope) || data.slope === 0) fail('slope-intercept slope must be a non-zero integer')
+        if (!Number.isInteger(data.intercept)) fail('slope-intercept intercept must be an integer')
+        if (data.intercept === data.slope) fail('slope-intercept coefficients must be distinct')
+        const expectedSlope = rational(data.slope, 1)
+        const expectedIntercept = rational(data.intercept, 1)
+        const line = display.plane.lines[0].through
+        if (!lineIs(line, expectedSlope, expectedIntercept)) {
+          fail('slope-intercept line disagrees with its equation')
+        }
+        if (data.asks !== 'slope' && data.asks !== 'intercept') fail('slope-intercept asks an unknown coefficient')
+        return data.asks === 'slope' ? data.slope : data.intercept
+      }
+      case 'graph-from-equation': {
+        noPoints()
+        if (display.plane.lines.length !== 2) fail('graph-from-equation needs exactly two lines')
+        if (!Number.isInteger(data.slope) || data.slope === 0) fail('graph-from-equation slope must be a non-zero integer')
+        if (!Number.isInteger(data.intercept)) fail('graph-from-equation intercept must be an integer')
+        const expectedSlope = rational(data.slope, 1)
+        const expectedIntercept = rational(data.intercept, 1)
+        const matching = display.plane.lines.filter((line) => lineIs(line.through, expectedSlope, expectedIntercept))
+        if (matching.length !== 1) fail('graph-from-equation must have exactly one matching line')
+        const index = display.plane.lines.findIndex((line) => lineIs(line.through, expectedSlope, expectedIntercept))
+        const expectedId = `line-${index + 1}`
+        const choice = (problem.choices ?? []).find((candidate) => candidate.id === expectedId)
+        if (!choice || choice.label !== `${index === 0 ? 'Line 1 (solid)' : 'Line 2 (dashed)'}`) {
+          fail('graph-from-equation choice label disagrees with line order')
+        }
+        return expectedId
+      }
+      case 'equation-from-graph': {
+        noPoints()
+        if (display.plane.lines.length !== 1) fail('equation-from-graph needs exactly one line')
+        const line = display.plane.lines[0].through
+        const slope = lineSlope(line)
+        const intercept = lineIntercept(line)
+        if (slope.d !== 1 || intercept.d !== 1 || slope.n === 0) {
+          fail('equation-from-graph needs an integer-slope line')
+        }
+        return equationExpression(slope.n, intercept.n)
+      }
+      case 'parallel-perpendicular': {
+        if (display.plane.lines.length !== 1) fail('parallel-perpendicular needs exactly one line')
+        if (display.plane.points.length !== 0) fail('parallel-perpendicular must not plot points')
+        if (data.relationship !== 'parallel' && data.relationship !== 'perpendicular') {
+          fail('parallel-perpendicular has an unknown relationship')
+        }
+        const reference = lineSlope(display.plane.lines[0].through)
+        if (reference.n === 0) fail('parallel-perpendicular needs a non-horizontal line')
+        const expected = data.relationship === 'parallel'
+          ? reference
+          : rational(-reference.d, reference.n)
+        return toNumber(expected)
       }
       default: {
         const unhandled: never = data
@@ -1783,11 +1864,16 @@ function sourceMagnitude(problem: Problem): number {
   if (problem.display.kind === 'coordinate-plane') {
     const { plane } = problem.display
     assertCoordinatePlane(plane)
+    const operationValues = problem.display.coordinate?.operation === 'slope-intercept' ||
+      problem.display.coordinate?.operation === 'graph-from-equation'
+      ? [problem.display.coordinate.slope, problem.display.coordinate.intercept]
+      : []
     const values = [
       plane.x.min,
       plane.x.max,
       plane.y.min,
       plane.y.max,
+      ...operationValues,
       ...plane.points.flatMap((point) => [point.x, point.y]),
       ...plane.lines.flatMap((line) => line.through.flatMap((point) => [point.x, point.y])),
     ]
@@ -2346,6 +2432,145 @@ describe('coordinate-plane answer verification', () => {
         coordinate: { operation: 'slope-from-points' },
       },
     })).toThrow('slope-from-points needs non-zero rise and run')
+  })
+
+  it('derives slope-intercept coefficients from the visible line', () => {
+    const slopeIntercept: Problem = {
+      skillId: 'synthetic-slope-intercept',
+      prompt: 'What is the slope?',
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [],
+          lines: [{ through: [{ x: 0, y: -3 }, { x: 1, y: -1 }] }],
+        },
+        coordinate: { operation: 'slope-intercept', slope: 2, intercept: -3, asks: 'slope' },
+      },
+      answer: { kind: 'exact', n: 2, d: 1 },
+      inputMode: 'keypad',
+      hint: 'Read the coefficient of x.',
+      solution: [{ text: 'Read m.' }],
+      difficulty: 1,
+    }
+
+    expect(answerMismatch(slopeIntercept)).toBeUndefined()
+    expect(answerMismatch({ ...slopeIntercept, answer: { kind: 'exact', n: -3, d: 1 } })).toContain(
+      'stated -3, derived 2',
+    )
+  })
+
+  it('maps a graph choice from the matching candidate line', () => {
+    const graphChoice: Problem = {
+      skillId: 'synthetic-graph-from-equation',
+      prompt: 'Which line matches?',
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [],
+          lines: [
+            { through: [{ x: 0, y: -3 }, { x: 1, y: -1 }] },
+            { through: [{ x: 0, y: 3 }, { x: 1, y: 5 }] },
+          ],
+        },
+        coordinate: { operation: 'graph-from-equation', slope: 2, intercept: -3 },
+      },
+      answer: { kind: 'choice', id: 'line-1' },
+      inputMode: 'choice',
+      choices: [
+        { id: 'line-2', label: 'Line 2 (dashed)' },
+        { id: 'line-1', label: 'Line 1 (solid)' },
+      ],
+      hint: 'Match both values.',
+      solution: [{ text: 'Find the matching line.' }],
+      difficulty: 1,
+    }
+
+    expect(answerMismatch(graphChoice)).toBeUndefined()
+    expect(answerMismatch({ ...graphChoice, answer: { kind: 'choice', id: 'line-2' } })).toContain(
+      'stated line-2, derived line-1',
+    )
+    const graphDisplay = graphChoice.display
+    if (graphDisplay.kind !== 'coordinate-plane') throw new Error('expected coordinate plane')
+    expect(() => answerMismatch({
+      ...graphChoice,
+      display: {
+        kind: 'coordinate-plane',
+        plane: graphDisplay.plane,
+        coordinate: { operation: 'graph-from-equation', slope: 3, intercept: -3 },
+      },
+    })).toThrow('exactly one matching line')
+  })
+
+  it('derives an expanded equation from the plotted line', () => {
+    const equation: Problem = {
+      skillId: 'synthetic-equation-from-graph',
+      prompt: 'Write the right side.',
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [],
+          lines: [{ through: [{ x: 0, y: -3 }, { x: 1, y: -1 }] }],
+        },
+        coordinate: { operation: 'equation-from-graph' },
+      },
+      answer: { kind: 'expression', canonical: '2x-3', variable: 'x', form: 'expanded' },
+      inputMode: 'expression',
+      expression: { variable: 'x' },
+      hint: 'Read m and b.',
+      solution: [{ text: 'Write mx plus b.' }],
+      difficulty: 1,
+    }
+
+    expect(answerMismatch(equation)).toBeUndefined()
+    expect(answerMismatch({ ...equation, answer: { kind: 'expression', canonical: '3x-2', variable: 'x', form: 'expanded' } })).toContain(
+      'stated 3x-2, derived 2x-3',
+    )
+  })
+
+  it('applies the requested parallel or perpendicular relationship exactly', () => {
+    const perpendicular: Problem = {
+      skillId: 'synthetic-parallel-perpendicular',
+      prompt: 'Find a perpendicular slope.',
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [],
+          lines: [{ through: [{ x: 0, y: 0 }, { x: 3, y: 2 }] }],
+        },
+        coordinate: { operation: 'parallel-perpendicular', relationship: 'perpendicular' },
+      },
+      answer: { kind: 'exact', n: -3, d: 2 },
+      inputMode: 'keypad',
+      keypad: { allowFraction: true, allowNegative: true },
+      hint: 'Use the negative reciprocal.',
+      solution: [{ text: 'Swap and negate.' }],
+      difficulty: 1,
+    }
+
+    expect(answerMismatch(perpendicular)).toBeUndefined()
+    expect(answerMismatch({ ...perpendicular, answer: { kind: 'exact', n: 3, d: 2 } })).toContain(
+      'stated 1.5, derived -1.5',
+    )
+    const perpendicularDisplay = perpendicular.display
+    if (perpendicularDisplay.kind !== 'coordinate-plane') throw new Error('expected coordinate plane')
+    expect(() => answerMismatch({
+      ...perpendicular,
+      display: {
+        ...perpendicularDisplay,
+        coordinate: {
+          operation: 'parallel-perpendicular',
+          relationship: 'skew',
+        } as unknown as NonNullable<typeof perpendicularDisplay.coordinate>,
+      },
+    })).toThrow('unknown relationship')
   })
 })
 

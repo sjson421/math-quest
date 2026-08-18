@@ -1,5 +1,946 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`recorded output: equation-from-graph > matches the wording recorded when the skill landed 1`] = `
+"--- equation-from-graph · seed 1 · difficulty 1
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −2) and (1, −1)" [equation-from-graph]
+answer   expression x-2 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 1]
+step 2   Read where the line crosses y.   [b = −2]
+step 3   Combine them as mx + b.   [y = x−2]
+miss     slope-intercept-swapped = -2x+1   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = x+2   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 12345 · difficulty 1
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 1)→(1, 3)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 1) and (1, 3)" [equation-from-graph]
+answer   expression 2x+1 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 2]
+step 2   Read where the line crosses y.   [b = 1]
+step 3   Combine them as mx + b.   [y = 2x+1]
+miss     slope-intercept-swapped = x+2   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 2x-1   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 67890 · difficulty 1
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 2)→(1, 1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 2) and (1, 1)" [equation-from-graph]
+answer   expression -x+2 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = −1]
+step 2   Read where the line crosses y.   [b = 2]
+step 3   Combine them as mx + b.   [y = −x+2]
+miss     slope-intercept-swapped = 2x-1   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = -x-2   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 424242 · difficulty 1
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 2)→(1, 0)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 2) and (1, 0)" [equation-from-graph]
+answer   expression -2x+2 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = −2]
+step 2   Read where the line crosses y.   [b = 2]
+step 3   Combine them as mx + b.   [y = −2x+2]
+miss     slope-intercept-swapped = 2x-2   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = -2x-2   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 987654321 · difficulty 1
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −1)→(1, 1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −1) and (1, 1)" [equation-from-graph]
+answer   expression 2x-1 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 2]
+step 2   Read where the line crosses y.   [b = −1]
+step 3   Combine them as mx + b.   [y = 2x−1]
+miss     slope-intercept-swapped = -x+2   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 2x+1   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 1 · difficulty 2
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, −2) and (1, −1)" [equation-from-graph]
+answer   expression x-2 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 1]
+step 2   Read where the line crosses y.   [b = −2]
+step 3   Combine them as mx + b.   [y = x−2]
+miss     slope-intercept-swapped = -2x+1   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = x+2   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 12345 · difficulty 2
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 3)→(1, 5)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 3) and (1, 5)" [equation-from-graph]
+answer   expression 2x+3 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 2]
+step 2   Read where the line crosses y.   [b = 3]
+step 3   Combine them as mx + b.   [y = 2x+3]
+miss     slope-intercept-swapped = 3x+2   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 2x-3   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 67890 · difficulty 2
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 2)→(1, 1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 2) and (1, 1)" [equation-from-graph]
+answer   expression -x+2 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = −1]
+step 2   Read where the line crosses y.   [b = 2]
+step 3   Combine them as mx + b.   [y = −x+2]
+miss     slope-intercept-swapped = 2x-1   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = -x-2   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 424242 · difficulty 2
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 2)→(1, 0)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 2) and (1, 0)" [equation-from-graph]
+answer   expression -2x+2 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = −2]
+step 2   Read where the line crosses y.   [b = 2]
+step 3   Combine them as mx + b.   [y = −2x+2]
+miss     slope-intercept-swapped = 2x-2   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = -2x-2   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 987654321 · difficulty 2
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 1)→(1, 3)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 1) and (1, 3)" [equation-from-graph]
+answer   expression 2x+1 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 2]
+step 2   Read where the line crosses y.   [b = 1]
+step 3   Combine them as mx + b.   [y = 2x+1]
+miss     slope-intercept-swapped = x+2   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 2x-1   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 1 · difficulty 3
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 2)→(1, 3)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 2) and (1, 3)" [equation-from-graph]
+answer   expression x+2 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 1]
+step 2   Read where the line crosses y.   [b = 2]
+step 3   Combine them as mx + b.   [y = x+2]
+miss     slope-intercept-swapped = 2x+1   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = x-2   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 12345 · difficulty 3
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 1)→(1, 4)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 1) and (1, 4)" [equation-from-graph]
+answer   expression 3x+1 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 3]
+step 2   Read where the line crosses y.   [b = 1]
+step 3   Combine them as mx + b.   [y = 3x+1]
+miss     slope-intercept-swapped = x+3   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 3x-1   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 67890 · difficulty 3
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 1)→(1, 0)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 1) and (1, 0)" [equation-from-graph]
+answer   expression -x+1 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = −1]
+step 2   Read where the line crosses y.   [b = 1]
+step 3   Combine them as mx + b.   [y = −x+1]
+miss     slope-intercept-swapped = x-1   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = -x-1   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 424242 · difficulty 3
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 5)→(1, 2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 5) and (1, 2)" [equation-from-graph]
+answer   expression -3x+5 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = −3]
+step 2   Read where the line crosses y.   [b = 5]
+step 3   Combine them as mx + b.   [y = −3x+5]
+miss     slope-intercept-swapped = 5x-3   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = -3x-5   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 987654321 · difficulty 3
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, −1)→(1, 2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, −1) and (1, 2)" [equation-from-graph]
+answer   expression 3x-1 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 3]
+step 2   Read where the line crosses y.   [b = −1]
+step 3   Combine them as mx + b.   [y = 3x−1]
+miss     slope-intercept-swapped = -x+3   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 3x+1   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 1 · difficulty 4
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 6)→(1, 7)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 6) and (1, 7)" [equation-from-graph]
+answer   expression x+6 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 1]
+step 2   Read where the line crosses y.   [b = 6]
+step 3   Combine them as mx + b.   [y = x+6]
+miss     slope-intercept-swapped = 6x+1   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = x-6   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 12345 · difficulty 4
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 1)→(1, 5)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 1) and (1, 5)" [equation-from-graph]
+answer   expression 4x+1 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 4]
+step 2   Read where the line crosses y.   [b = 1]
+step 3   Combine them as mx + b.   [y = 4x+1]
+miss     slope-intercept-swapped = x+4   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 4x-1   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 67890 · difficulty 4
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −4)→(1, −5)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −4) and (1, −5)" [equation-from-graph]
+answer   expression -x-4 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = −1]
+step 2   Read where the line crosses y.   [b = −4]
+step 3   Combine them as mx + b.   [y = −x−4]
+miss     slope-intercept-swapped = -4x-1   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = -x+4   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 424242 · difficulty 4
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −4)→(1, −7)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −4) and (1, −7)" [equation-from-graph]
+answer   expression -3x-4 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = −3]
+step 2   Read where the line crosses y.   [b = −4]
+step 3   Combine them as mx + b.   [y = −3x−4]
+miss     slope-intercept-swapped = -4x-3   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = -3x+4   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 987654321 · difficulty 4
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −2)→(1, 2)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −2) and (1, 2)" [equation-from-graph]
+answer   expression 4x-2 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 4]
+step 2   Read where the line crosses y.   [b = −2]
+step 3   Combine them as mx + b.   [y = 4x−2]
+miss     slope-intercept-swapped = -2x+4   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 4x+2   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 1 · difficulty 5
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −8)→(1, −6)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −8) and (1, −6)" [equation-from-graph]
+answer   expression 2x-8 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 2]
+step 2   Read where the line crosses y.   [b = −8]
+step 3   Combine them as mx + b.   [y = 2x−8]
+miss     slope-intercept-swapped = -8x+2   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 2x+8   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 12345 · difficulty 5
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 1)→(1, 6)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 1) and (1, 6)" [equation-from-graph]
+answer   expression 5x+1 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 5]
+step 2   Read where the line crosses y.   [b = 1]
+step 3   Combine them as mx + b.   [y = 5x+1]
+miss     slope-intercept-swapped = x+5   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 5x-1   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 67890 · difficulty 5
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −9)→(1, −10)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −9) and (1, −10)" [equation-from-graph]
+answer   expression -x-9 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = −1]
+step 2   Read where the line crosses y.   [b = −9]
+step 3   Combine them as mx + b.   [y = −x−9]
+miss     slope-intercept-swapped = -9x-1   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = -x+9   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 424242 · difficulty 5
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 2)→(1, −2)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 2) and (1, −2)" [equation-from-graph]
+answer   expression -4x+2 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = −4]
+step 2   Read where the line crosses y.   [b = 2]
+step 3   Combine them as mx + b.   [y = −4x+2]
+miss     slope-intercept-swapped = 2x-4   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = -4x-2   Read the y-intercept sign where the line crosses the vertical axis.
+
+--- equation-from-graph · seed 987654321 · difficulty 5
+prompt   Write the right side of y = from this graph.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −4)→(1, 1)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −4) and (1, 1)" [equation-from-graph]
+answer   expression 5x-4 (x, expanded)
+input    expression
+variable x
+hint     Read the slope and y-intercept, then write mx + b.
+step 1   Read the slope from the line.   [m = 5]
+step 2   Read where the line crosses y.   [b = −4]
+step 3   Combine them as mx + b.   [y = 5x−4]
+miss     slope-intercept-swapped = -4x+5   The x coefficient is the slope; the constant is the y-intercept.
+miss     intercept-sign-reversed = 5x+4   Read the y-intercept sign where the line crosses the vertical axis."
+`;
+
+exports[`recorded output: graph-from-equation > matches the wording recorded when the skill landed 1`] = `
+"--- graph-from-equation · seed 1 · difficulty 1
+prompt   Which line matches the equation?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −1)→(1, 0), (0, 1)→(1, 2)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −1) and (1, 0); line 2 through (0, 1) and (1, 2)" [graph-from-equation slope 1 intercept -1 y = x − 1]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-1 = Line 1 (solid)
+choice   line-2 = Line 2 (dashed)
+step 1   Find the y-intercept at x equals zero.   [b = −1]
+step 2   Check the rise for each run.   [m = 1]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 12345 · difficulty 1
+prompt   Which line matches the equation?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 2)→(1, 4), (0, −2)→(1, 0)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 2) and (1, 4); line 2 through (0, −2) and (1, 0)" [graph-from-equation slope 2 intercept 2 y = 2x + 2]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 2]
+step 2   Check the rise for each run.   [m = 2]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 67890 · difficulty 1
+prompt   Which line matches the equation?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −1)→(1, −2), (0, 1)→(1, 0)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −1) and (1, −2); line 2 through (0, 1) and (1, 0)" [graph-from-equation slope -1 intercept 1 y = −x + 1]
+answer   choice line-2
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 1]
+step 2   Check the rise for each run.   [m = −1]
+step 3   Choose Line 2, dashed.
+miss     intercept-sign-reversed = line-1   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 424242 · difficulty 1
+prompt   Which line matches the equation?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 1)→(1, −1), (0, −1)→(1, −3)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 1) and (1, −1); line 2 through (0, −1) and (1, −3)" [graph-from-equation slope -2 intercept 1 y = −2x + 1]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 1]
+step 2   Check the rise for each run.   [m = −2]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 987654321 · difficulty 1
+prompt   Which line matches the equation?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 2)→(1, 4), (0, −2)→(1, 0)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 2) and (1, 4); line 2 through (0, −2) and (1, 0)" [graph-from-equation slope 2 intercept 2 y = 2x + 2]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 2]
+step 2   Check the rise for each run.   [m = 2]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 1 · difficulty 2
+prompt   Which line matches the equation?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, −1)→(1, 0), (0, 1)→(1, 2)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, −1) and (1, 0); line 2 through (0, 1) and (1, 2)" [graph-from-equation slope 1 intercept -1 y = x − 1]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-1 = Line 1 (solid)
+choice   line-2 = Line 2 (dashed)
+step 1   Find the y-intercept at x equals zero.   [b = −1]
+step 2   Check the rise for each run.   [m = 1]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 12345 · difficulty 2
+prompt   Which line matches the equation?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 3)→(1, 5), (0, −3)→(1, −1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 3) and (1, 5); line 2 through (0, −3) and (1, −1)" [graph-from-equation slope 2 intercept 3 y = 2x + 3]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 3]
+step 2   Check the rise for each run.   [m = 2]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 67890 · difficulty 2
+prompt   Which line matches the equation?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, −2)→(1, −3), (0, 2)→(1, 1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, −2) and (1, −3); line 2 through (0, 2) and (1, 1)" [graph-from-equation slope -1 intercept 2 y = −x + 2]
+answer   choice line-2
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 2]
+step 2   Check the rise for each run.   [m = −1]
+step 3   Choose Line 2, dashed.
+miss     intercept-sign-reversed = line-1   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 424242 · difficulty 2
+prompt   Which line matches the equation?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 1)→(1, −1), (0, −1)→(1, −3)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 1) and (1, −1); line 2 through (0, −1) and (1, −3)" [graph-from-equation slope -2 intercept 1 y = −2x + 1]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 1]
+step 2   Check the rise for each run.   [m = −2]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 987654321 · difficulty 2
+prompt   Which line matches the equation?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 2)→(1, 4), (0, −2)→(1, 0)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 2) and (1, 4); line 2 through (0, −2) and (1, 0)" [graph-from-equation slope 2 intercept 2 y = 2x + 2]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 2]
+step 2   Check the rise for each run.   [m = 2]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 1 · difficulty 3
+prompt   Which line matches the equation?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 2)→(1, 3), (0, −2)→(1, −1)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 2) and (1, 3); line 2 through (0, −2) and (1, −1)" [graph-from-equation slope 1 intercept 2 y = x + 2]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-1 = Line 1 (solid)
+choice   line-2 = Line 2 (dashed)
+step 1   Find the y-intercept at x equals zero.   [b = 2]
+step 2   Check the rise for each run.   [m = 1]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 12345 · difficulty 3
+prompt   Which line matches the equation?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 3)→(1, 6), (0, −3)→(1, 0)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 3) and (1, 6); line 2 through (0, −3) and (1, 0)" [graph-from-equation slope 3 intercept 3 y = 3x + 3]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 3]
+step 2   Check the rise for each run.   [m = 3]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 67890 · difficulty 3
+prompt   Which line matches the equation?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 1)→(1, 0), (0, −1)→(1, −2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 1) and (1, 0); line 2 through (0, −1) and (1, −2)" [graph-from-equation slope -1 intercept -1 y = −x − 1]
+answer   choice line-2
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = −1]
+step 2   Check the rise for each run.   [m = −1]
+step 3   Choose Line 2, dashed.
+miss     intercept-sign-reversed = line-1   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 424242 · difficulty 3
+prompt   Which line matches the equation?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, −4)→(1, −6), (0, 4)→(1, 2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, −4) and (1, −6); line 2 through (0, 4) and (1, 2)" [graph-from-equation slope -2 intercept -4 y = −2x − 4]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = −4]
+step 2   Check the rise for each run.   [m = −2]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 987654321 · difficulty 3
+prompt   Which line matches the equation?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 1)→(1, 4), (0, −1)→(1, 2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 1) and (1, 4); line 2 through (0, −1) and (1, 2)" [graph-from-equation slope 3 intercept 1 y = 3x + 1]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 1]
+step 2   Check the rise for each run.   [m = 3]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 1 · difficulty 4
+prompt   Which line matches the equation?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 5)→(1, 6), (0, −5)→(1, −4)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 5) and (1, 6); line 2 through (0, −5) and (1, −4)" [graph-from-equation slope 1 intercept 5 y = x + 5]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-1 = Line 1 (solid)
+choice   line-2 = Line 2 (dashed)
+step 1   Find the y-intercept at x equals zero.   [b = 5]
+step 2   Check the rise for each run.   [m = 1]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 12345 · difficulty 4
+prompt   Which line matches the equation?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 3)→(1, 7), (0, −3)→(1, 1)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 3) and (1, 7); line 2 through (0, −3) and (1, 1)" [graph-from-equation slope 4 intercept 3 y = 4x + 3]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 3]
+step 2   Check the rise for each run.   [m = 4]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 67890 · difficulty 4
+prompt   Which line matches the equation?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 3)→(1, 2), (0, −3)→(1, −4)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 3) and (1, 2); line 2 through (0, −3) and (1, −4)" [graph-from-equation slope -1 intercept -3 y = −x − 3]
+answer   choice line-2
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = −3]
+step 2   Check the rise for each run.   [m = −1]
+step 3   Choose Line 2, dashed.
+miss     intercept-sign-reversed = line-1   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 424242 · difficulty 4
+prompt   Which line matches the equation?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −2)→(1, −5), (0, 2)→(1, −1)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −2) and (1, −5); line 2 through (0, 2) and (1, −1)" [graph-from-equation slope -3 intercept -2 y = −3x − 2]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = −2]
+step 2   Check the rise for each run.   [m = −3]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 987654321 · difficulty 4
+prompt   Which line matches the equation?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −1)→(1, 3), (0, 1)→(1, 5)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −1) and (1, 3); line 2 through (0, 1) and (1, 5)" [graph-from-equation slope 4 intercept -1 y = 4x − 1]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = −1]
+step 2   Check the rise for each run.   [m = 4]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 1 · difficulty 5
+prompt   Which line matches the equation?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 9)→(1, 10), (0, −9)→(1, −8)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 9) and (1, 10); line 2 through (0, −9) and (1, −8)" [graph-from-equation slope 1 intercept 9 y = x + 9]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-1 = Line 1 (solid)
+choice   line-2 = Line 2 (dashed)
+step 1   Find the y-intercept at x equals zero.   [b = 9]
+step 2   Check the rise for each run.   [m = 1]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 12345 · difficulty 5
+prompt   Which line matches the equation?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 3)→(1, 8), (0, −3)→(1, 2)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 3) and (1, 8); line 2 through (0, −3) and (1, 2)" [graph-from-equation slope 5 intercept 3 y = 5x + 3]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 3]
+step 2   Check the rise for each run.   [m = 5]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 67890 · difficulty 5
+prompt   Which line matches the equation?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 6)→(1, 5), (0, −6)→(1, −7)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 6) and (1, 5); line 2 through (0, −6) and (1, −7)" [graph-from-equation slope -1 intercept -6 y = −x − 6]
+answer   choice line-2
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = −6]
+step 2   Check the rise for each run.   [m = −1]
+step 3   Choose Line 2, dashed.
+miss     intercept-sign-reversed = line-1   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 424242 · difficulty 5
+prompt   Which line matches the equation?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 3)→(1, −1), (0, −3)→(1, −7)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 3) and (1, −1); line 2 through (0, −3) and (1, −7)" [graph-from-equation slope -4 intercept 3 y = −4x + 3]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = 3]
+step 2   Check the rise for each run.   [m = −4]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line.
+
+--- graph-from-equation · seed 987654321 · difficulty 5
+prompt   Which line matches the equation?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −2)→(1, 3), (0, 2)→(1, 7)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −2) and (1, 3); line 2 through (0, 2) and (1, 7)" [graph-from-equation slope 5 intercept -2 y = 5x − 2]
+answer   choice line-1
+input    choice
+hint     Match the slope and y-intercept, then identify its line style.
+choice   line-2 = Line 2 (dashed)
+choice   line-1 = Line 1 (solid)
+step 1   Find the y-intercept at x equals zero.   [b = −2]
+step 2   Check the rise for each run.   [m = 5]
+step 3   Choose Line 1, solid.
+miss     intercept-sign-reversed = line-2   Check the sign of the y-intercept before choosing a line."
+`;
+
+exports[`recorded output: parallel-perpendicular > matches the wording recorded when the skill landed 1`] = `
+"--- parallel-perpendicular · seed 1 · difficulty 1
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(1, 2)→(4, 4)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (1, 2) and (4, 4)" [parallel-perpendicular parallel]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 2/3]
+step 2   Parallel lines keep that slope.   [parallel slope = 2/3]
+miss     negative-reciprocal-for-parallel = -1.5   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 12345 · difficulty 1
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(−2, 0)→(2, 3)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (−2, 0) and (2, 3)" [parallel-perpendicular parallel]
+answer   exact 3/4
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 3/4]
+step 2   Parallel lines keep that slope.   [parallel slope = 3/4]
+miss     negative-reciprocal-for-parallel = -1.3333333333333333   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 67890 · difficulty 1
+prompt   What is the slope of a perpendicular line?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −2)→(3, −4)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −2) and (3, −4)" [parallel-perpendicular perpendicular]
+answer   exact 3/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Perpendicular slopes are negative reciprocals.
+step 1   Read the reference slope.   [m = −2/3]
+step 2   Swap numerator and denominator.   [−2/3 → 3/2]
+step 3   Change the sign for a negative reciprocal.   [perpendicular slope = 3/2]
+miss     unsigned-reciprocal = -1.5   A perpendicular slope is the negative reciprocal, so keep the sign change.
+miss     original-slope-kept = -0.6666666666666666   Perpendicular lines change to the negative reciprocal of the original slope.
+
+--- parallel-perpendicular · seed 424242 · difficulty 1
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(1, −2)→(3, −3)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (1, −2) and (3, −3)" [parallel-perpendicular parallel]
+answer   exact -1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = −1/2]
+step 2   Parallel lines keep that slope.   [parallel slope = −1/2]
+miss     negative-reciprocal-for-parallel = 2   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 987654321 · difficulty 1
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 1)→(4, 3)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 1) and (4, 3)" [parallel-perpendicular parallel]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 1/2]
+step 2   Parallel lines keep that slope.   [parallel slope = 1/2]
+miss     negative-reciprocal-for-parallel = -2   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 1 · difficulty 2
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(−2, −2)→(2, −3)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (−2, −2) and (2, −3)" [parallel-perpendicular parallel]
+answer   exact -1/4
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = −1/4]
+step 2   Parallel lines keep that slope.   [parallel slope = −1/4]
+miss     negative-reciprocal-for-parallel = 4   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 12345 · difficulty 2
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(−5, 0)→(0, 4)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (−5, 0) and (0, 4)" [parallel-perpendicular parallel]
+answer   exact 4/5
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 4/5]
+step 2   Parallel lines keep that slope.   [parallel slope = 4/5]
+miss     negative-reciprocal-for-parallel = -1.25   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 67890 · difficulty 2
+prompt   What is the slope of a perpendicular line?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(−3, 0)→(0, 1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (−3, 0) and (0, 1)" [parallel-perpendicular perpendicular]
+answer   exact -3/1
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Perpendicular slopes are negative reciprocals.
+step 1   Read the reference slope.   [m = 1/3]
+step 2   Swap numerator and denominator.   [1/3 → 3/1]
+step 3   Change the sign for a negative reciprocal.   [perpendicular slope = −3]
+miss     unsigned-reciprocal = 3   A perpendicular slope is the negative reciprocal, so keep the sign change.
+miss     original-slope-kept = 0.3333333333333333   Perpendicular lines change to the negative reciprocal of the original slope.
+
+--- parallel-perpendicular · seed 424242 · difficulty 2
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(−4, 2)→(−2, 3)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (−4, 2) and (−2, 3)" [parallel-perpendicular parallel]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 1/2]
+step 2   Parallel lines keep that slope.   [parallel slope = 1/2]
+miss     negative-reciprocal-for-parallel = -2   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 987654321 · difficulty 2
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(−5, −4)→(0, −1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (−5, −4) and (0, −1)" [parallel-perpendicular parallel]
+answer   exact 3/5
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 3/5]
+step 2   Parallel lines keep that slope.   [parallel slope = 3/5]
+miss     negative-reciprocal-for-parallel = -1.6666666666666667   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 1 · difficulty 3
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(−6, 5)→(−1, 1)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (−6, 5) and (−1, 1)" [parallel-perpendicular parallel]
+answer   exact -4/5
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = −4/5]
+step 2   Parallel lines keep that slope.   [parallel slope = −4/5]
+miss     negative-reciprocal-for-parallel = 1.25   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 12345 · difficulty 3
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(−2, −1)→(4, 3)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (−2, −1) and (4, 3)" [parallel-perpendicular parallel]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 2/3]
+step 2   Parallel lines keep that slope.   [parallel slope = 2/3]
+miss     negative-reciprocal-for-parallel = -1.5   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 67890 · difficulty 3
+prompt   What is the slope of a perpendicular line?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(−1, 3)→(3, −3)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (−1, 3) and (3, −3)" [parallel-perpendicular perpendicular]
+answer   exact 2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Perpendicular slopes are negative reciprocals.
+step 1   Read the reference slope.   [m = −3/2]
+step 2   Swap numerator and denominator.   [−3/2 → 2/3]
+step 3   Change the sign for a negative reciprocal.   [perpendicular slope = 2/3]
+miss     unsigned-reciprocal = -0.6666666666666666   A perpendicular slope is the negative reciprocal, so keep the sign change.
+miss     original-slope-kept = -1.5   Perpendicular lines change to the negative reciprocal of the original slope.
+
+--- parallel-perpendicular · seed 424242 · difficulty 3
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(−4, 2)→(−2, 5)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (−4, 2) and (−2, 5)" [parallel-perpendicular parallel]
+answer   exact 3/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 3/2]
+step 2   Parallel lines keep that slope.   [parallel slope = 3/2]
+miss     negative-reciprocal-for-parallel = -0.6666666666666666   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 987654321 · difficulty 3
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(−6, −2)→(0, 1)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (−6, −2) and (0, 1)" [parallel-perpendicular parallel]
+answer   exact 1/2
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 1/2]
+step 2   Parallel lines keep that slope.   [parallel slope = 1/2]
+miss     negative-reciprocal-for-parallel = -2   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 1 · difficulty 4
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(2, −1)→(8, −5)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (2, −1) and (8, −5)" [parallel-perpendicular parallel]
+answer   exact -2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = −2/3]
+step 2   Parallel lines keep that slope.   [parallel slope = −2/3]
+miss     negative-reciprocal-for-parallel = 1.5   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 12345 · difficulty 4
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(−6, −3)→(2, 2)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (−6, −3) and (2, 2)" [parallel-perpendicular parallel]
+answer   exact 5/8
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 5/8]
+step 2   Parallel lines keep that slope.   [parallel slope = 5/8]
+miss     negative-reciprocal-for-parallel = -1.6   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 67890 · difficulty 4
+prompt   What is the slope of a perpendicular line?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −4)→(4, −1)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −4) and (4, −1)" [parallel-perpendicular perpendicular]
+answer   exact -4/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Perpendicular slopes are negative reciprocals.
+step 1   Read the reference slope.   [m = 3/4]
+step 2   Swap numerator and denominator.   [3/4 → 4/3]
+step 3   Change the sign for a negative reciprocal.   [perpendicular slope = −4/3]
+miss     unsigned-reciprocal = 1.3333333333333333   A perpendicular slope is the negative reciprocal, so keep the sign change.
+miss     original-slope-kept = 0.75   Perpendicular lines change to the negative reciprocal of the original slope.
+
+--- parallel-perpendicular · seed 424242 · difficulty 4
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(−7, 1)→(−4, −6)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (−7, 1) and (−4, −6)" [parallel-perpendicular parallel]
+answer   exact -7/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = −7/3]
+step 2   Parallel lines keep that slope.   [parallel slope = −7/3]
+miss     negative-reciprocal-for-parallel = 0.42857142857142855   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 987654321 · difficulty 4
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(−6, −4)→(2, −2)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (−6, −4) and (2, −2)" [parallel-perpendicular parallel]
+answer   exact 1/4
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 1/4]
+step 2   Parallel lines keep that slope.   [parallel slope = 1/4]
+miss     negative-reciprocal-for-parallel = -4   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 1 · difficulty 5
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(−7, 7)→(−1, 5)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (−7, 7) and (−1, 5)" [parallel-perpendicular parallel]
+answer   exact -1/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = −1/3]
+step 2   Parallel lines keep that slope.   [parallel slope = −1/3]
+miss     negative-reciprocal-for-parallel = 3   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 12345 · difficulty 5
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(−3, −9)→(5, −4)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (−3, −9) and (5, −4)" [parallel-perpendicular parallel]
+answer   exact 5/8
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 5/8]
+step 2   Parallel lines keep that slope.   [parallel slope = 5/8]
+miss     negative-reciprocal-for-parallel = -1.6   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 67890 · difficulty 5
+prompt   What is the slope of a perpendicular line?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(−9, −4)→(−5, 2)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (−9, −4) and (−5, 2)" [parallel-perpendicular perpendicular]
+answer   exact -2/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Perpendicular slopes are negative reciprocals.
+step 1   Read the reference slope.   [m = 3/2]
+step 2   Swap numerator and denominator.   [3/2 → 2/3]
+step 3   Change the sign for a negative reciprocal.   [perpendicular slope = −2/3]
+miss     unsigned-reciprocal = 0.6666666666666666   A perpendicular slope is the negative reciprocal, so keep the sign change.
+miss     original-slope-kept = 1.5   Perpendicular lines change to the negative reciprocal of the original slope.
+
+--- parallel-perpendicular · seed 424242 · difficulty 5
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(2, 1)→(5, −6)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (2, 1) and (5, −6)" [parallel-perpendicular parallel]
+answer   exact -7/3
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = −7/3]
+step 2   Parallel lines keep that slope.   [parallel slope = −7/3]
+miss     negative-reciprocal-for-parallel = 0.42857142857142855   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines.
+
+--- parallel-perpendicular · seed 987654321 · difficulty 5
+prompt   What is the slope of a parallel line?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(−2, −4)→(6, −2)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (−2, −4) and (6, −2)" [parallel-perpendicular parallel]
+answer   exact 1/4
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Parallel lines have equal slopes.
+step 1   Read the reference slope.   [m = 1/4]
+step 2   Parallel lines keep that slope.   [parallel slope = 1/4]
+miss     negative-reciprocal-for-parallel = -4   Parallel lines keep the same slope; use the negative reciprocal for perpendicular lines."
+`;
+
 exports[`recorded output: plot-points > matches the wording recorded when the skill landed 1`] = `
 "--- plot-points · seed 1 · difficulty 1
 prompt   Place this point on the plane.
@@ -1256,6 +2197,275 @@ step 2   Subtract x-values in that order too.   [−2 − −8 = 6]
 step 3   Divide rise by run and reduce.   [3/6 = 1/2]
 miss     inconsistent-subtraction-order = -0.5   Subtract both coordinate pairs in the same point order.
 miss     run-over-rise = 2   Slope is vertical change over horizontal change: rise over run."
+`;
+
+exports[`recorded output: slope-intercept > matches the wording recorded when the skill landed 1`] = `
+"--- slope-intercept · seed 1 · difficulty 1
+prompt   What is the slope?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −2) and (1, −1)" [slope-intercept slope 1 intercept -2 y = x − 2 ask slope]
+answer   exact 1/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 1]
+step 2   The coefficient is the slope.   [slope = 1]
+miss     intercept-as-slope = -2   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 12345 · difficulty 1
+prompt   What is the slope?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 1)→(1, 3)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 1) and (1, 3)" [slope-intercept slope 2 intercept 1 y = 2x + 1 ask slope]
+answer   exact 2/1
+input    keypad
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 2]
+step 2   The coefficient is the slope.   [slope = 2]
+miss     intercept-as-slope = 1   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 67890 · difficulty 1
+prompt   What is the y-intercept?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 2)→(1, 1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 2) and (1, 1)" [slope-intercept slope -1 intercept 2 y = −x + 2 ask intercept]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the constant term in y = mx + b.
+step 1   Find the constant term.   [b = 2]
+step 2   The constant is the y-intercept.   [y-intercept = 2]
+miss     slope-as-intercept = -1   The y-intercept is the constant; the x coefficient is the slope.
+
+--- slope-intercept · seed 424242 · difficulty 1
+prompt   What is the slope?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 2)→(1, 0)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 2) and (1, 0)" [slope-intercept slope -2 intercept 2 y = −2x + 2 ask slope]
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = −2]
+step 2   The coefficient is the slope.   [slope = −2]
+miss     intercept-as-slope = 2   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 987654321 · difficulty 1
+prompt   What is the slope?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −1)→(1, 1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −1) and (1, 1)" [slope-intercept slope 2 intercept -1 y = 2x − 1 ask slope]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 2]
+step 2   The coefficient is the slope.   [slope = 2]
+miss     intercept-as-slope = -1   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 1 · difficulty 2
+prompt   What is the slope?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, −2) and (1, −1)" [slope-intercept slope 1 intercept -2 y = x − 2 ask slope]
+answer   exact 1/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 1]
+step 2   The coefficient is the slope.   [slope = 1]
+miss     intercept-as-slope = -2   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 12345 · difficulty 2
+prompt   What is the slope?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 3)→(1, 5)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 3) and (1, 5)" [slope-intercept slope 2 intercept 3 y = 2x + 3 ask slope]
+answer   exact 2/1
+input    keypad
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 2]
+step 2   The coefficient is the slope.   [slope = 2]
+miss     intercept-as-slope = 3   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 67890 · difficulty 2
+prompt   What is the y-intercept?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 2)→(1, 1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 2) and (1, 1)" [slope-intercept slope -1 intercept 2 y = −x + 2 ask intercept]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the constant term in y = mx + b.
+step 1   Find the constant term.   [b = 2]
+step 2   The constant is the y-intercept.   [y-intercept = 2]
+miss     slope-as-intercept = -1   The y-intercept is the constant; the x coefficient is the slope.
+
+--- slope-intercept · seed 424242 · difficulty 2
+prompt   What is the slope?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 2)→(1, 0)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 2) and (1, 0)" [slope-intercept slope -2 intercept 2 y = −2x + 2 ask slope]
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = −2]
+step 2   The coefficient is the slope.   [slope = −2]
+miss     intercept-as-slope = 2   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 987654321 · difficulty 2
+prompt   What is the slope?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 1)→(1, 3)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 1) and (1, 3)" [slope-intercept slope 2 intercept 1 y = 2x + 1 ask slope]
+answer   exact 2/1
+input    keypad
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 2]
+step 2   The coefficient is the slope.   [slope = 2]
+miss     intercept-as-slope = 1   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 1 · difficulty 3
+prompt   What is the slope?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 2)→(1, 3)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 2) and (1, 3)" [slope-intercept slope 1 intercept 2 y = x + 2 ask slope]
+answer   exact 1/1
+input    keypad
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 1]
+step 2   The coefficient is the slope.   [slope = 1]
+miss     intercept-as-slope = 2   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 12345 · difficulty 3
+prompt   What is the slope?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 1)→(1, 4)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 1) and (1, 4)" [slope-intercept slope 3 intercept 1 y = 3x + 1 ask slope]
+answer   exact 3/1
+input    keypad
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 3]
+step 2   The coefficient is the slope.   [slope = 3]
+miss     intercept-as-slope = 1   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 67890 · difficulty 3
+prompt   What is the y-intercept?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 1)→(1, 0)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 1) and (1, 0)" [slope-intercept slope -1 intercept 1 y = −x + 1 ask intercept]
+answer   exact 1/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the constant term in y = mx + b.
+step 1   Find the constant term.   [b = 1]
+step 2   The constant is the y-intercept.   [y-intercept = 1]
+miss     slope-as-intercept = -1   The y-intercept is the constant; the x coefficient is the slope.
+
+--- slope-intercept · seed 424242 · difficulty 3
+prompt   What is the slope?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 5)→(1, 2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 5) and (1, 2)" [slope-intercept slope -3 intercept 5 y = −3x + 5 ask slope]
+answer   exact -3/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = −3]
+step 2   The coefficient is the slope.   [slope = −3]
+miss     intercept-as-slope = 5   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 987654321 · difficulty 3
+prompt   What is the slope?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, −1)→(1, 2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, −1) and (1, 2)" [slope-intercept slope 3 intercept -1 y = 3x − 1 ask slope]
+answer   exact 3/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 3]
+step 2   The coefficient is the slope.   [slope = 3]
+miss     intercept-as-slope = -1   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 1 · difficulty 4
+prompt   What is the slope?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 6)→(1, 7)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 6) and (1, 7)" [slope-intercept slope 1 intercept 6 y = x + 6 ask slope]
+answer   exact 1/1
+input    keypad
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 1]
+step 2   The coefficient is the slope.   [slope = 1]
+miss     intercept-as-slope = 6   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 12345 · difficulty 4
+prompt   What is the slope?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 1)→(1, 5)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 1) and (1, 5)" [slope-intercept slope 4 intercept 1 y = 4x + 1 ask slope]
+answer   exact 4/1
+input    keypad
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 4]
+step 2   The coefficient is the slope.   [slope = 4]
+miss     intercept-as-slope = 1   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 67890 · difficulty 4
+prompt   What is the y-intercept?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −4)→(1, −5)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −4) and (1, −5)" [slope-intercept slope -1 intercept -4 y = −x − 4 ask intercept]
+answer   exact -4/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the constant term in y = mx + b.
+step 1   Find the constant term.   [b = −4]
+step 2   The constant is the y-intercept.   [y-intercept = −4]
+miss     slope-as-intercept = -1   The y-intercept is the constant; the x coefficient is the slope.
+
+--- slope-intercept · seed 424242 · difficulty 4
+prompt   What is the slope?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −4)→(1, −7)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −4) and (1, −7)" [slope-intercept slope -3 intercept -4 y = −3x − 4 ask slope]
+answer   exact -3/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = −3]
+step 2   The coefficient is the slope.   [slope = −3]
+miss     intercept-as-slope = -4   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 987654321 · difficulty 4
+prompt   What is the slope?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −2)→(1, 2)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −2) and (1, 2)" [slope-intercept slope 4 intercept -2 y = 4x − 2 ask slope]
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 4]
+step 2   The coefficient is the slope.   [slope = 4]
+miss     intercept-as-slope = -2   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 1 · difficulty 5
+prompt   What is the slope?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −8)→(1, −6)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −8) and (1, −6)" [slope-intercept slope 2 intercept -8 y = 2x − 8 ask slope]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 2]
+step 2   The coefficient is the slope.   [slope = 2]
+miss     intercept-as-slope = -8   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 12345 · difficulty 5
+prompt   What is the slope?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 1)→(1, 6)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 1) and (1, 6)" [slope-intercept slope 5 intercept 1 y = 5x + 1 ask slope]
+answer   exact 5/1
+input    keypad
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 5]
+step 2   The coefficient is the slope.   [slope = 5]
+miss     intercept-as-slope = 1   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 67890 · difficulty 5
+prompt   What is the y-intercept?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −9)→(1, −10)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −9) and (1, −10)" [slope-intercept slope -1 intercept -9 y = −x − 9 ask intercept]
+answer   exact -9/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the constant term in y = mx + b.
+step 1   Find the constant term.   [b = −9]
+step 2   The constant is the y-intercept.   [y-intercept = −9]
+miss     slope-as-intercept = -1   The y-intercept is the constant; the x coefficient is the slope.
+
+--- slope-intercept · seed 424242 · difficulty 5
+prompt   What is the slope?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 2)→(1, −2)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 2) and (1, −2)" [slope-intercept slope -4 intercept 2 y = −4x + 2 ask slope]
+answer   exact -4/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = −4]
+step 2   The coefficient is the slope.   [slope = −4]
+miss     intercept-as-slope = 2   The slope is the x coefficient; the constant is the y-intercept.
+
+--- slope-intercept · seed 987654321 · difficulty 5
+prompt   What is the slope?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −4)→(1, 1)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −4) and (1, 1)" [slope-intercept slope 5 intercept -4 y = 5x − 4 ask slope]
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=true
+hint     Read the coefficient of x in y = mx + b.
+step 1   Find the coefficient attached to x.   [m = 5]
+step 2   The coefficient is the slope.   [slope = 5]
+miss     intercept-as-slope = -4   The slope is the x coefficient; the constant is the y-intercept."
 `;
 
 exports[`recorded output: table-to-graph > matches the wording recorded when the skill landed 1`] = `

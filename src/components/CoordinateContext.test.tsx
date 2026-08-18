@@ -35,4 +35,19 @@ describe('CoordinateContext', () => {
     expect(renderToStaticMarkup(<CoordinateContext data={{ operation: 'quadrant' }} />)).toBe('')
     expect(renderToStaticMarkup(<CoordinateContext />)).toBe('')
   })
+
+  it('renders slope-intercept equations with conventional signs and unit coefficients', () => {
+    const positive = renderToStaticMarkup(
+      <CoordinateContext data={{ operation: 'slope-intercept', slope: 2, intercept: -3, asks: 'slope' }} />,
+    )
+    const negativeUnit = renderToStaticMarkup(
+      <CoordinateContext data={{ operation: 'graph-from-equation', slope: -1, intercept: 2 }} />,
+    )
+
+    expect(positive).toContain('data-coordinate-equation')
+    expect(positive).toContain('y = 2x − 3')
+    expect(positive).toContain('aria-label="y equals 2x minus 3"')
+    expect(negativeUnit).toContain('y = −x + 2')
+    expect(negativeUnit).not.toContain('−1x')
+  })
 })
