@@ -24,12 +24,12 @@ inline rather than only in chat.
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-eight changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-nine changes
   have shipped — `ls openspec/changes/archive/` is the authority, and this line has run one
   behind before; the latest archive is
-  `2026-08-16-add-stage-f-unit-16a`. It starts Stage F with six generated coordinate and line
-  skills, structured point and table context, exact slope answers, and independently derived
-  graph verification. Roadmap item 23 remains open for Unit 16b and Units 17–19.
+  `2026-08-17-add-stage-f-unit-16b`. It completes Unit 16 with slope-intercept form,
+  equation/graph translation, and exact parallel or perpendicular slopes over the existing
+  coordinate-plane and answer surfaces. Roadmap item 23 remains open for Units 17–19.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
