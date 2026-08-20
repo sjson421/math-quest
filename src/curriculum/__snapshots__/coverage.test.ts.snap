@@ -116,6 +116,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "div-words": [
     "primes",
   ],
+  "elimination": [
+    "substitution",
+  ],
   "equation-balance": [
     "factor-gcf",
   ],
@@ -398,6 +401,15 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "sub-words": [
     "sub-across-zero",
+  ],
+  "substitution": [
+    "system-by-graphing",
+  ],
+  "system-by-graphing": [
+    "parallel-perpendicular",
+  ],
+  "system-words": [
+    "elimination",
   ],
   "table-to-graph": [
     "quadrants",

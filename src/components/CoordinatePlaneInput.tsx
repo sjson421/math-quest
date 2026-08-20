@@ -54,7 +54,7 @@ export function CoordinatePlaneInput({
 
   return (
     <div className="flex w-80 max-w-full flex-col items-center gap-3">
-      <CoordinateContext data={coordinate} />
+      <CoordinateContext data={coordinate} plane={plane} />
       <CoordinatePlane
         plane={plane}
         placement={{

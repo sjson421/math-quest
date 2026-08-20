@@ -30,6 +30,7 @@ import { unit13 } from './unit-13-expressions'
 import { unit14 } from './unit-14-linear-equations'
 import { unit15 } from './unit-15-inequalities'
 import { unit16 } from './unit-16-coordinate-plane-lines'
+import { unit17 } from './unit-17-systems-equations'
 import {
   indexSkills,
   resolveCourseTree,
@@ -63,6 +64,7 @@ export const allSkills: SkillGenerator[] = [
   ...unit14,
   ...unit15,
   ...unit16,
+  ...unit17,
 ]
 
 /**

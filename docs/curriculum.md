@@ -399,10 +399,10 @@ in lowest terms. Fraction operations wait for Unit 8.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 17.1 | `system-by-graphing` | | |
-| 17.2 | `substitution` | | |
-| 17.3 | `elimination` | | ⚠️ forgetting to scale both sides |
-| 17.4 | `system-words` | | |
+| 17.1 | `system-by-graphing` | | ✅ |
+| 17.2 | `substitution` | | ✅ |
+| 17.3 | `elimination` | | ✅ · ⚠️ forgetting to scale both sides |
+| 17.4 | `system-words` | | ✅ |
 
 ### Unit 18 — Polynomials & Quadratics (9)
 
@@ -519,7 +519,7 @@ Ship by stage; each stage is independently useful.
    and the pad offers the slash. **Diagram rendering** is built for shaded bars, circles and
    grids, so Stage D's capability infrastructure is complete.
 4. **Stage E** (34) — complete; the **expression input mode** it needed is built.
-5. **Stage F** (28) — the **coordinate-plane input** it needs is built; all ten Unit 16 skills are playable.
+5. **Stage F** (28) — the **coordinate-plane input** it needs is built; all ten Unit 16 and all four Unit 17 skills are playable.
 6. **Stage G** (22) — reuses built **diagram rendering** for shapes and still needs charts.
 7. **Stage H** (6) — needs timed mode and a score estimator.
 

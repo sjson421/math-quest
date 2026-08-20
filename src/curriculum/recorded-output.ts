@@ -1,5 +1,6 @@
 import { generateProblem } from '../lib/generator'
-import { coordinateEquationLabel, coordinateLabel, coordinatePlaneLabel } from '../lib/coordinate-plane'
+import { coordinateEquationLabel, coordinateLabel, coordinatePlaneLabel, type CoordinatePlane } from '../lib/coordinate-plane'
+import { lineEquation, linearEquationLabel, passSalesEquations, passSalesStory } from '../lib/linear-system'
 import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
@@ -164,7 +165,7 @@ const formatDecimalData = (data: DecimalData): string => {
   }
 }
 
-const formatCoordinateData = (data: CoordinateData): string => {
+const formatCoordinateData = (data: CoordinateData, plane?: CoordinatePlane): string => {
   switch (data.operation) {
     case 'plot-point':
       return `${data.operation} ${coordinateLabel(data.point)}`
@@ -191,6 +192,28 @@ const formatCoordinateData = (data: CoordinateData): string => {
       return data.operation
     case 'parallel-perpendicular':
       return `${data.operation} ${data.relationship}`
+    case 'system-by-graphing': {
+      const equations = plane?.lines.flatMap((line) => {
+        const equation = lineEquation(line)
+        return equation ? [equation] : []
+      }) ?? []
+      return `${data.operation} variables (x, y) equations [` +
+        `${equations.map((equation) => linearEquationLabel(equation).visible).join('; ')}]`
+    }
+    case 'system-substitution':
+      return `${data.operation} variables (x, y) equations [` +
+        `${data.equations.map((equation) => linearEquationLabel(equation).visible).join('; ')}]`
+    case 'system-elimination':
+      return `${data.operation} variables (x, y) equations [` +
+        `${data.equations.map((equation) => linearEquationLabel(equation).visible).join('; ')}] ` +
+        `scale equation ${data.scaleEquation + 1} by ${data.scaleFactor} to cancel ${data.eliminate}`
+    case 'system-words': {
+      const equations = passSalesEquations(data)
+      return `${data.operation} frame ${data.frameId} variables (x, y) ` +
+        `prices ${data.firstPrice}/${data.secondPrice} total ${data.totalCount} revenue ${data.totalRevenue} ` +
+        `equations [${equations.map((equation) => linearEquationLabel(equation).visible).join('; ')}] ` +
+        `"${passSalesStory(data)}"`
+    }
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled coordinate data: ${JSON.stringify(unhandled)}`)
@@ -420,7 +443,7 @@ const formatDisplay = (display: Problem['display']): string => {
         `coordinate-plane x ${plane.x.min}..${plane.x.max}/${plane.x.step} ` +
         `y ${plane.y.min}..${plane.y.max}/${plane.y.step} ` +
         `points [${points}] lines [${lines}] "${coordinatePlaneLabel(plane)}"` +
-        (display.coordinate ? ` [${formatCoordinateData(display.coordinate)}]` : '')
+        (display.coordinate ? ` [${formatCoordinateData(display.coordinate, display.plane)}]` : '')
       )
     }
     case 'equation':

@@ -2,15 +2,15 @@
 
 What is left, in the order it should be done.
 
-**Status: 155 of 201 skills are playable.** Stages A through F have playable content. Stage E
-is complete with Units 12, 13, 14 and 15; Stage F's Unit 16 is complete with all ten
-coordinate-plane and line-reading skills.
+**Status: 159 of 201 skills are playable.** Stages A through F have playable content. Stage E
+is complete with Units 12, 13, 14 and 15; Stage F's Units 16 and 17 are complete with all
+fourteen coordinate-plane, line-reading, and systems skills.
 Choice input,
 number-line input, math notation, fraction input, diagrams, expression input and
 coordinate-plane input are built,
 so `AVAILABLE_CAPABILITIES` holds
-`choice-input`, `number-line`, `math-notation`, `fraction-input`, `diagram` and
-`expression-input`, plus `coordinate-plane` ahead of Stage F's content. Unit 12 is the first content to use `math-notation`'s superscript and
+`choice-input`, `number-line`, `math-notation`, `fraction-input`, `diagram`,
+`expression-input` and `coordinate-plane`. Unit 12 is the first content to use `math-notation`'s superscript and
 root kinds, for exponent and root display; it does not use `expression-input`, since that
 capability's grammar excludes exponents, so power-rule skills ask for the resulting exponent
 as a number rather than an expression. `zero-neg-exponents` settles Stage E's previously
@@ -1001,8 +1001,8 @@ document's ✅ markers updated to match, which the cross-check enforces.
       central validation rejects off-plane answers and drops off-plane, duplicate, or
       answer-colliding predictions. Recorded output names points, while independent answer
       verification remains fail-closed until a content generator supplies operation-specific
-      source data. No Stage F generator ships here, so all 28 skills remain planned and the
-      playable total remains 145.
+      source data. Unit 16's ten skills and Unit 17's four systems skills now use the shared
+      plane; Units 18–19 remain planned, so 14 Stage F skills are still ahead.
 
 - [ ] **23 · Stage F · Units 16–19** — L — 28 skills, six changes
 
@@ -1019,9 +1019,11 @@ document's ✅ markers updated to match, which the cross-check enforces.
         exact parallel or perpendicular slopes through the existing answer surfaces. The
         graph-choice design uses one full plane and ordinary text choices, with the matching
         line randomized across declaration order and button position.
-      - **17** `system-by-graphing`–`system-words` — answers are ordered pairs throughout, so this
-        is the second consumer of 22b's point answer. `elimination` (17.3) is a wall on forgetting
-        to scale both sides.
+      - **17 — shipped 2026-08-19.** `system-by-graphing`–`system-words` answer ordered pairs
+        throughout as the second consumer of 22b's point answer. Graphing keeps two visible
+        lines; substitution and elimination show structured equation pairs; the fixed pass-sales
+        frame exposes both equations. `elimination` (17.3) is a wall on forgetting to scale both
+        sides, with two reachable point diagnoses that survive filtering.
       - **18a** `add-polynomials`–`factor-trinomial` — expression answers throughout (item 20);
         `factor-trinomial` (18.6) is a major wall, and `sub-polynomials` (18.2) is Unit 6's
         minus-a-minus mistake one abstraction up.

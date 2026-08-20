@@ -50,4 +50,88 @@ describe('CoordinateContext', () => {
     expect(negativeUnit).toContain('y = −x + 2')
     expect(negativeUnit).not.toContain('−1x')
   })
+
+  it('renders two accessible equations and the ordered-pair legend', () => {
+    const html = renderToStaticMarkup(
+      <CoordinateContext
+        data={{
+          operation: 'system-substitution',
+          variables: ['x', 'y'],
+          equations: [
+            { form: 'isolated', slope: -1, intercept: 3 },
+            { form: 'standard', a: 2, b: 1, c: 7 },
+          ],
+        }}
+      />,
+    )
+
+    expect(html).toContain('data-coordinate-system-context')
+    expect(html).toContain('Answer order: (x, y)')
+    expect(html).toContain('y = −x + 3')
+    expect(html).toContain('2x + y = 7')
+    expect(html).toContain('aria-label="y equals −x plus 3"')
+    expect(html).toContain('aria-label="2x plus y equals 7"')
+    expect(html.match(/data-coordinate-system-equation=/g)).toHaveLength(2)
+  })
+
+  it('writes an isolated horizontal equation without a zero x term', () => {
+    const html = renderToStaticMarkup(
+      <CoordinateContext
+        data={{
+          operation: 'system-substitution',
+          variables: ['x', 'y'],
+          equations: [
+            { form: 'isolated', slope: 0, intercept: -3 },
+            { form: 'standard', a: 1, b: 1, c: 2 },
+          ],
+        }}
+      />,
+    )
+
+    expect(html).toContain('y = −3')
+    expect(html).not.toContain('0x')
+  })
+
+  it('derives graphing equations from the same two visible lines', () => {
+    const html = renderToStaticMarkup(
+      <CoordinateContext
+        plane={{
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [],
+          lines: [
+            { through: [{ x: 0, y: 2 }, { x: 1, y: 4 }] },
+            { through: [{ x: 0, y: -1 }, { x: 1, y: 1 }] },
+          ],
+        }}
+        data={{ operation: 'system-by-graphing', variables: ['x', 'y'] }}
+      />,
+    )
+
+    expect(html).toContain('y = 2x + 2')
+    expect(html).toContain('y = 2x − 1')
+  })
+
+  it('renders the fixed pass-sales story with matching equations', () => {
+    const html = renderToStaticMarkup(
+      <CoordinateContext
+        data={{
+          operation: 'system-words',
+          variables: ['x', 'y'],
+          frameId: 'pass-sales',
+          firstPrice: 12,
+          secondPrice: 20,
+          totalCount: 7,
+          totalRevenue: 104,
+        }}
+      />,
+    )
+
+    expect(html).toContain('data-coordinate-system-story')
+    expect(html).toContain('7 passes')
+    expect(html).toContain('$12')
+    expect(html).toContain('$20')
+    expect(html).toContain('x + y = 7')
+    expect(html).toContain('12x + 20y = 104')
+  })
 })

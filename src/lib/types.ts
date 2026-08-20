@@ -104,6 +104,14 @@ export type SolutionStep = {
   detail?: string
 }
 
+/** A closed integer linear equation used by the systems lessons. */
+export type LinearEquation =
+  | { form: 'standard'; a: number; b: number; c: number }
+  | { form: 'isolated'; slope: number; intercept: number }
+
+/** The fixed variable order used by every ordered-pair systems answer. */
+export type SystemVariables = ['x', 'y']
+
 /**
  * What one coordinate-plane problem asks the learner to read or place.
  *
@@ -129,6 +137,39 @@ export type CoordinateData =
   | {
       operation: 'parallel-perpendicular'
       relationship: 'parallel' | 'perpendicular'
+    }
+  /** Two visible lines meet at the ordered pair the learner places. */
+  | {
+      operation: 'system-by-graphing'
+      variables: SystemVariables
+    }
+  /** One equation is isolated so its expression can be substituted. */
+  | {
+      operation: 'system-substitution'
+      variables: SystemVariables
+      equations: readonly [LinearEquation, LinearEquation]
+    }
+  /** Standard equations with a declared non-unit cancellation constraint. */
+  | {
+      operation: 'system-elimination'
+      variables: SystemVariables
+      equations: readonly [
+        Extract<LinearEquation, { form: 'standard' }>,
+        Extract<LinearEquation, { form: 'standard' }>,
+      ]
+      scaleEquation: 0 | 1
+      scaleFactor: number
+      eliminate: 'x' | 'y'
+    }
+  /** Quantities behind the fixed pass-sales story; counts are deliberately absent. */
+  | {
+      operation: 'system-words'
+      variables: SystemVariables
+      frameId: 'pass-sales'
+      firstPrice: number
+      secondPrice: number
+      totalCount: number
+      totalRevenue: number
     }
 
 export type Operator = '+' | '−' | '×' | '÷'

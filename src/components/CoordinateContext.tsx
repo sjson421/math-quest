@@ -1,8 +1,15 @@
-import { coordinateEquationLabel, coordinateLabel } from '../lib/coordinate-plane'
-import type { CoordinateData } from '../lib/types'
+import { coordinateEquationLabel, coordinateLabel, type CoordinatePlane } from '../lib/coordinate-plane'
+import { lineEquation, linearEquationLabel, passSalesEquations, passSalesStory } from '../lib/linear-system'
+import type { CoordinateData, LinearEquation } from '../lib/types'
 
 /** The source values a coordinate problem presents beside its one graph. */
-export function CoordinateContext({ data }: { data?: CoordinateData }) {
+export function CoordinateContext({
+  data,
+  plane,
+}: {
+  data?: CoordinateData
+  plane?: CoordinatePlane
+}) {
   if (!data) return null
 
   switch (data.operation) {
@@ -62,6 +69,22 @@ export function CoordinateContext({ data }: { data?: CoordinateData }) {
         </p>
       )
     }
+    case 'system-by-graphing': {
+      if (!plane || plane.lines.length !== 2) return null
+      const first = lineEquation(plane.lines[0])
+      const second = lineEquation(plane.lines[1])
+      if (!first || !second) return null
+      return <SystemContext equations={[first, second]} />
+    }
+    case 'system-substitution':
+    case 'system-elimination':
+      return <SystemContext equations={data.equations} />
+    case 'system-words': {
+      const equations = passSalesEquations(data)
+      return (
+        <SystemContext equations={equations} story={passSalesStory(data)} />
+      )
+    }
     case 'quadrant':
     case 'slope-from-graph':
     case 'slope-from-points':
@@ -74,6 +97,46 @@ export function CoordinateContext({ data }: { data?: CoordinateData }) {
       throw new Error(`Unhandled coordinate context: ${JSON.stringify(unhandled)}`)
     }
   }
+}
+
+function SystemContext({
+  equations,
+  story,
+}: {
+  equations: readonly [LinearEquation, LinearEquation]
+  story?: string
+}) {
+  const labels = equations.map(linearEquationLabel)
+  return (
+    <section
+      className="flex max-w-full flex-col items-center gap-2 rounded-xl bg-butter-soft px-3 py-2 text-ink"
+      data-coordinate-system-context
+      aria-label="System of equations, answer order x then y"
+    >
+      {story && (
+        <p className="text-center text-sm leading-snug" data-coordinate-system-story>
+          {story}
+        </p>
+      )}
+      <p className="text-center text-sm font-semibold" data-coordinate-variable-order>
+        Answer order: (x, y)
+      </p>
+      <div className="flex max-w-full flex-col items-center gap-1" data-coordinate-system-equations>
+        {labels.map((label, index) => (
+          <p
+            key={`${label.visible}-${index}`}
+            className="text-lg font-bold tabular-nums"
+            data-coordinate-equation
+            data-coordinate-system-equation={index + 1}
+            role="math"
+            aria-label={label.spoken}
+          >
+            <span aria-hidden>{label.visible}</span>
+          </p>
+        ))}
+      </div>
+    </section>
+  )
 }
 
 const drawn = (value: number): string => String(value).replace('-', '−')

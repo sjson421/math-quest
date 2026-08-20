@@ -108,6 +108,31 @@ describe('CoordinatePlaneInput', () => {
     expect(html.match(/data-coordinate-placement-surface/g)).toHaveLength(1)
   })
 
+  it('keeps an algebra system above one empty answer plane', () => {
+    const html = render(
+      plane(2),
+      '',
+      false,
+      {
+        operation: 'system-elimination',
+        variables: ['x', 'y'],
+        equations: [
+          { form: 'standard', a: 1, b: 1, c: 3 },
+          { form: 'standard', a: 2, b: -1, c: 0 },
+        ],
+        scaleEquation: 0,
+        scaleFactor: 2,
+        eliminate: 'x',
+      },
+    )
+
+    expect(html.match(/data-coordinate-system-equation=/g)).toHaveLength(2)
+    expect(html.match(/data-coordinate-placement-surface/g)).toHaveLength(1)
+    expect(html.match(/data-coordinate-plane=/g)).toHaveLength(1)
+    expect(html.match(/data-coordinate-line=/g) ?? []).toHaveLength(0)
+    expect(html).toContain('Answer order: (x, y)')
+  })
+
   it('disables every target, nudge, and confirmation while feedback owns the lesson', () => {
     const html = render(plane(2, 2), '2,-2', true)
 

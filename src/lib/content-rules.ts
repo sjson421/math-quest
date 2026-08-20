@@ -12,7 +12,8 @@
  */
 
 import type { SkillEntry, UnitEntry } from '../curriculum/manifest/types'
-import { coordinateEquationLabel, coordinateLabel, coordinatePlaneLabel } from './coordinate-plane'
+import { coordinateEquationLabel, coordinateLabel, coordinatePlaneLabel, type CoordinatePlane } from './coordinate-plane'
+import { lineEquation, linearEquationLabel, passSalesEquations, passSalesStory } from './linear-system'
 import { shapeDiagramLabel } from './shape-diagram'
 import type { CoordinateData, Display, Problem } from './types'
 
@@ -141,7 +142,7 @@ function displayText(display: Display): string {
     case 'diagram':
       return shapeDiagramLabel(display.diagram)
     case 'coordinate-plane':
-      return [coordinatePlaneLabel(display.plane), coordinateDataText(display.coordinate)]
+      return [coordinatePlaneLabel(display.plane), coordinateDataText(display.coordinate, display.plane)]
         .filter(Boolean)
         .join('; ')
     case 'column':
@@ -154,7 +155,7 @@ function displayText(display: Display): string {
   }
 }
 
-function coordinateDataText(data?: CoordinateData): string {
+function coordinateDataText(data?: CoordinateData, plane?: CoordinatePlane): string {
   if (!data) return ''
   switch (data.operation) {
     case 'plot-point':
@@ -173,6 +174,22 @@ function coordinateDataText(data?: CoordinateData): string {
       return data.operation
     case 'parallel-perpendicular':
       return `${data.operation} ${data.relationship}`
+    case 'system-by-graphing': {
+      const equations = plane?.lines.flatMap((line) => {
+        const equation = lineEquation(line)
+        return equation ? [linearEquationLabel(equation).visible] : []
+      }) ?? []
+      return `${data.operation} variables (x, y) ${equations.join('; ')}`
+    }
+    case 'system-substitution':
+      return `${data.operation} variables (x, y) ` +
+        data.equations.map((equation) => linearEquationLabel(equation).visible).join('; ')
+    case 'system-elimination':
+      return `${data.operation} variables (x, y) ` +
+        data.equations.map((equation) => linearEquationLabel(equation).visible).join('; ')
+    case 'system-words':
+      return `${data.operation} ${passSalesStory(data)} ` +
+        passSalesEquations(data).map((equation) => linearEquationLabel(equation).visible).join('; ')
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled coordinate data: ${JSON.stringify(unhandled)}`)

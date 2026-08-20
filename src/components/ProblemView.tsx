@@ -287,7 +287,7 @@ function CoordinatePlaneView({
 
   return (
     <div className="flex flex-col items-center gap-3 max-w-full">
-      <CoordinateContext data={display.coordinate} />
+      <CoordinateContext data={display.coordinate} plane={display.plane} />
       {/* A passive plane sharing 375px with the keypad needs 96px less height;
           otherwise its prompt and hint slide behind the fixed answer controls. */}
       <div

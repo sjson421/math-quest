@@ -8,6 +8,7 @@ import {
   coordinateEntry,
   isCoordinateTarget,
   type Coordinate,
+  type CoordinateLine,
 } from '../lib/coordinate-plane'
 import { makeRng } from '../lib/rng'
 import { equals, format as formatRational, gcd, toNumber, rational, type Rational } from '../lib/rational'
@@ -17,9 +18,11 @@ import type {
   AlgebraData,
   DecimalData,
   DecimalValue,
+  CoordinateData,
   Difficulty,
   EquationData,
   FractionData,
+  LinearEquation,
   MathNotation,
   PercentData,
   Problem,
@@ -1268,6 +1271,65 @@ function expectedEquation(
  */
 const STORY_REBUILD_LETTER = 'x'
 
+type VerifiedStandardEquation = { a: number; b: number; c: number }
+
+const verifiedStandardEquation = (equation: LinearEquation): VerifiedStandardEquation | undefined => {
+  const standard = equation.form === 'standard'
+    ? { a: equation.a, b: equation.b, c: equation.c }
+    : { a: -equation.slope, b: 1, c: equation.intercept }
+  if (![standard.a, standard.b, standard.c].every(Number.isSafeInteger)) return undefined
+  return standard.a === 0 && standard.b === 0 ? undefined : standard
+}
+
+const verifiedSystemSolution = (
+  equations: readonly [LinearEquation, LinearEquation],
+): Coordinate | undefined => {
+  const first = verifiedStandardEquation(equations[0])
+  const second = verifiedStandardEquation(equations[1])
+  if (!first || !second) return undefined
+  const determinant = first.a * second.b - second.a * first.b
+  if (determinant === 0) return undefined
+  const xNumerator = first.c * second.b - second.c * first.b
+  const yNumerator = first.a * second.c - second.a * first.c
+  if (xNumerator % determinant !== 0 || yNumerator % determinant !== 0) return undefined
+  const x = xNumerator / determinant
+  const y = yNumerator / determinant
+  const point = { x: x === 0 ? 0 : x, y: y === 0 ? 0 : y }
+  return Number.isSafeInteger(point.x) && Number.isSafeInteger(point.y) ? point : undefined
+}
+
+const verifiedLineEquation = (line: CoordinateLine): LinearEquation | undefined => {
+  const [first, second] = line.through
+  const run = second.x - first.x
+  const rise = second.y - first.y
+  if (run === 0 || rise % run !== 0) return undefined
+  const slope = rise / run
+  const intercept = first.y - slope * first.x
+  return Number.isSafeInteger(slope) && Number.isSafeInteger(intercept)
+    ? { form: 'isolated', slope, intercept }
+    : undefined
+}
+
+const verifiedEliminationScale = (
+  equations: readonly [
+    Extract<LinearEquation, { form: 'standard' }>,
+    Extract<LinearEquation, { form: 'standard' }>,
+  ],
+): { equation: 0 | 1; factor: number; variable: 'x' | 'y' } | undefined => {
+  for (const variable of ['x', 'y'] as const) {
+    const first = variable === 'x' ? equations[0].a : equations[0].b
+    const second = variable === 'x' ? equations[1].a : equations[1].b
+    if (first === 0 || second === 0) continue
+    if (second % first === 0 && Math.abs(second / first) > 1) {
+      return { equation: 0, factor: second / first, variable }
+    }
+    if (first % second === 0 && Math.abs(first / second) > 1) {
+      return { equation: 1, factor: first / second, variable }
+    }
+  }
+  return undefined
+}
+
 function recompute(problem: Problem): number | string {
   const { display } = problem
 
@@ -1475,6 +1537,19 @@ function recompute(problem: Problem): number | string {
       if (intercept === 0) return coefficient
       return `${coefficient}${intercept > 0 ? '+' : ''}${intercept}`
     }
+    const systemPoint = (
+      equations: readonly [LinearEquation, LinearEquation],
+      operation: string,
+      nonnegative = false,
+    ): string => {
+      const point = verifiedSystemSolution(equations)
+      if (!point) return fail(`${operation} must have one exact integer solution`)
+      if (nonnegative && (point.x < 0 || point.y < 0)) {
+        fail(`${operation} counts must be nonnegative`)
+      }
+      if (!isCoordinateTarget(display.plane, point)) fail(`${operation} solution must be on the lattice`)
+      return coordinateEntry(point)
+    }
 
     switch (data.operation) {
       case 'plot-point':
@@ -1601,6 +1676,63 @@ function recompute(problem: Problem): number | string {
           ? reference
           : rational(-reference.d, reference.n)
         return toNumber(expected)
+      }
+      case 'system-by-graphing': {
+        if (display.plane.lines.length !== 2) fail('system-by-graphing needs exactly two lines')
+        noPoints()
+        if (JSON.stringify(data.variables) !== JSON.stringify(['x', 'y'])) fail('system-by-graphing variable order is invalid')
+        const equations = display.plane.lines.map((line) => verifiedLineEquation(line))
+        if (equations.some((equation) => !equation)) fail('system-by-graphing needs two integer-slope lines')
+        const pair = equations as [LinearEquation, LinearEquation]
+        return systemPoint(pair, data.operation)
+      }
+      case 'system-substitution': {
+        noLines()
+        noPoints()
+        if (JSON.stringify(data.variables) !== JSON.stringify(['x', 'y'])) fail('system-substitution variable order is invalid')
+        if (data.equations.length !== 2) fail('system-substitution needs two equations')
+        if (data.equations.filter((equation) => equation.form === 'isolated').length !== 1) {
+          fail('system-substitution needs exactly one isolated equation')
+        }
+        return systemPoint(data.equations, data.operation)
+      }
+      case 'system-elimination': {
+        noLines()
+        noPoints()
+        if (JSON.stringify(data.variables) !== JSON.stringify(['x', 'y'])) fail('system-elimination variable order is invalid')
+        if (data.equations.some((equation) => equation.form !== 'standard')) {
+          fail('system-elimination needs standard equations')
+        }
+        if (data.scaleEquation !== 0 && data.scaleEquation !== 1) fail('system-elimination scale equation is invalid')
+        if (!Number.isInteger(data.scaleFactor) || Math.abs(data.scaleFactor) <= 1) {
+          fail('system-elimination needs a non-unit scale factor')
+        }
+        if (data.eliminate !== 'x' && data.eliminate !== 'y') fail('system-elimination variable is invalid')
+        const derivedScale = verifiedEliminationScale(data.equations)
+        if (!derivedScale || derivedScale.equation !== data.scaleEquation ||
+          derivedScale.factor !== data.scaleFactor || derivedScale.variable !== data.eliminate) {
+          fail('system-elimination scale metadata disagrees with its equations')
+        }
+        return systemPoint(data.equations, data.operation)
+      }
+      case 'system-words': {
+        noLines()
+        noPoints()
+        if (JSON.stringify(data.variables) !== JSON.stringify(['x', 'y'])) fail('system-words variable order is invalid')
+        if (data.frameId !== 'pass-sales') fail('system-words has an unknown frame')
+        if (!Number.isInteger(data.firstPrice) || !Number.isInteger(data.secondPrice) ||
+          data.firstPrice <= 0 || data.secondPrice <= 0 || data.firstPrice === data.secondPrice) {
+          fail('system-words prices are invalid')
+        }
+        if (!Number.isInteger(data.totalCount) || data.totalCount <= 0 ||
+          !Number.isInteger(data.totalRevenue) || data.totalRevenue <= 0) {
+          fail('system-words totals are invalid')
+        }
+        const equations: [LinearEquation, LinearEquation] = [
+          { form: 'standard', a: 1, b: 1, c: data.totalCount },
+          { form: 'standard', a: data.firstPrice, b: data.secondPrice, c: data.totalRevenue },
+        ]
+        return systemPoint(equations, data.operation, true)
       }
       default: {
         const unhandled: never = data
@@ -1864,10 +1996,39 @@ function sourceMagnitude(problem: Problem): number {
   if (problem.display.kind === 'coordinate-plane') {
     const { plane } = problem.display
     assertCoordinatePlane(plane)
-    const operationValues = problem.display.coordinate?.operation === 'slope-intercept' ||
-      problem.display.coordinate?.operation === 'graph-from-equation'
-      ? [problem.display.coordinate.slope, problem.display.coordinate.intercept]
-      : []
+    const operationValues = (() => {
+      const coordinate = problem.display.coordinate
+      if (!coordinate) return []
+      switch (coordinate.operation) {
+        case 'slope-intercept':
+        case 'graph-from-equation':
+          return [coordinate.slope, coordinate.intercept]
+        case 'system-substitution':
+        case 'system-elimination':
+          return coordinate.equations.flatMap((equation) => equation.form === 'standard'
+            ? [equation.a, equation.b, equation.c]
+            : [equation.slope, equation.intercept])
+        case 'system-words':
+          return [coordinate.firstPrice, coordinate.secondPrice, coordinate.totalCount, coordinate.totalRevenue]
+        case 'system-by-graphing':
+          return plane.lines.flatMap((line) => line.through.flatMap((point) => [point.x, point.y]))
+        case 'plot-point':
+          return [coordinate.point.x, coordinate.point.y]
+        case 'table-to-graph':
+          return coordinate.rows.flatMap((point) => [point.x, point.y, coordinate.targetX])
+        case 'quadrant':
+        case 'slope-from-graph':
+        case 'slope-from-points':
+        case 'y-intercept':
+        case 'equation-from-graph':
+        case 'parallel-perpendicular':
+          return []
+        default: {
+          const unhandled: never = coordinate
+          throw new Error(`Unknown coordinate operation: ${JSON.stringify(unhandled)}`)
+        }
+      }
+    })()
     const values = [
       plane.x.min,
       plane.x.max,
@@ -3836,6 +3997,93 @@ describe('recompute', () => {
     })
 
     expect(() => recompute(comparison)).toThrow('synthetic-whole: choice ids are not unique')
+  })
+})
+
+describe('system verification fails closed', () => {
+  const system = (
+    coordinate: Extract<CoordinateData, { operation: 'system-substitution' }>,
+    answer: Coordinate = { x: 2, y: 3 },
+  ): Problem => ({
+    skillId: 'synthetic-system-substitution',
+    prompt: 'Solve this system.',
+    display: {
+      kind: 'coordinate-plane',
+      plane: {
+        x: { min: -5, max: 5, step: 1 },
+        y: { min: -5, max: 5, step: 1 },
+        points: [],
+        lines: [],
+      },
+      coordinate,
+    },
+    answer: { kind: 'point', ...answer },
+    inputMode: 'coordinate-plane',
+    hint: 'Solve both equations.',
+    solution: [{ text: 'Solve the system.' }],
+    difficulty: 1,
+  })
+
+  const valid: Extract<CoordinateData, { operation: 'system-substitution' }> = {
+    operation: 'system-substitution',
+    variables: ['x', 'y'],
+    equations: [
+      { form: 'isolated', slope: 1, intercept: 1 },
+      { form: 'standard', a: 2, b: -1, c: 1 },
+    ],
+  }
+
+  it.each([
+    ['malformed', { ...valid, equations: [{ form: 'standard', a: 0, b: 0, c: 1 }, valid.equations[1]] }],
+    ['singular', { ...valid, equations: [{ form: 'isolated', slope: 1, intercept: 1 }, { form: 'standard', a: -1, b: 1, c: 1 }] }],
+    ['inconsistent', { ...valid, equations: [{ form: 'isolated', slope: 1, intercept: 1 }, { form: 'standard', a: -1, b: 1, c: 2 }] }],
+  ] as const)('rejects %s systems', (_label, coordinate) => {
+    expect(() => recompute(system(coordinate))).toThrow('synthetic-system-substitution')
+  })
+
+  it('rejects an exact solution outside the declared plane', () => {
+    const coordinate = {
+      ...valid,
+      equations: [
+        { form: 'isolated' as const, slope: 1, intercept: 1 },
+        { form: 'standard' as const, a: 2, b: -1, c: 20 },
+      ] as const,
+    }
+    expect(() => recompute(system(coordinate, { x: 2, y: 3 }))).toThrow(
+      'solution must be on the lattice',
+    )
+  })
+
+  it('rejects an answer that disagrees with the visible system', () => {
+    expect(answerMismatch(system(valid, { x: 3, y: 2 }))).toContain('stated 3,2, derived 2,3')
+  })
+
+  it('rejects a word system whose visible totals derive a negative count', () => {
+    const problem: Problem = {
+      ...system(valid),
+      skillId: 'synthetic-system-words',
+      display: {
+        kind: 'coordinate-plane',
+        plane: {
+          x: { min: -5, max: 5, step: 1 },
+          y: { min: -5, max: 5, step: 1 },
+          points: [],
+          lines: [],
+        },
+        coordinate: {
+          operation: 'system-words',
+          variables: ['x', 'y'],
+          frameId: 'pass-sales',
+          firstPrice: 12,
+          secondPrice: 20,
+          totalCount: 2,
+          totalRevenue: 8,
+        },
+      },
+      answer: { kind: 'point', x: 4, y: -2 },
+    }
+
+    expect(() => recompute(problem)).toThrow('system-words counts must be nonnegative')
   })
 })
 
