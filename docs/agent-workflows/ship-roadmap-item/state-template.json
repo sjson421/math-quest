@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "repositoryRoot": null,
+  "workflowStatus": "preparing",
+  "currentPhase": 1,
+  "phases": [
+    { "id": 1, "name": "Select", "status": "in_progress" },
+    { "id": 2, "name": "Explore", "status": "pending" },
+    { "id": 3, "name": "Propose", "status": "pending" },
+    { "id": 4, "name": "Audit", "status": "pending" },
+    { "id": 5, "name": "Apply", "status": "pending" },
+    { "id": 6, "name": "Simplify", "status": "pending" },
+    { "id": 7, "name": "Review", "status": "pending" },
+    { "id": 8, "name": "Clean up", "status": "pending" },
+    { "id": 9, "name": "Ship", "status": "pending" },
+    { "id": 10, "name": "Archive", "status": "pending" }
+  ],
+  "selectedRoadmapText": null,
+  "selectedIncrement": null,
+  "skillIds": [],
+  "initial": {
+    "branch": null,
+    "head": null,
+    "originMain": null,
+    "statusPath": "initial-status.txt",
+    "statusSha256": null,
+    "diffPath": "initial.diff",
+    "diffSha256": null,
+    "userOwnedPaths": []
+  },
+  "exploration": {
+    "status": "pending",
+    "summary": null,
+    "reentries": []
+  },
+  "change": {
+    "name": null,
+    "artifactPaths": []
+  },
+  "review": {
+    "mode": "independent",
+    "fallbackReasons": [],
+    "gateResults": {},
+    "verifiedDiffPath": null,
+    "verifiedDiffSha256": null
+  },
+  "shipping": {
+    "implementationCommit": null,
+    "implementationSubject": null,
+    "archiveCommit": null,
+    "archiveSubject": null
+  }
+}

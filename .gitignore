@@ -26,5 +26,13 @@ dist-ssr
 .env*
 .worktrees/
 
+# Cross-session agent workflow state. Run-owned and never committed.
+.agent-state/
+
 # Auto-installed third-party agent skill docs — reinstallable, not project source.
-.agents/
+.agents/*
+!.agents/skills/
+.agents/skills/*
+!.agents/skills/prepare-roadmap/
+!.agents/skills/implement-roadmap/
+!.agents/skills/review-roadmap/

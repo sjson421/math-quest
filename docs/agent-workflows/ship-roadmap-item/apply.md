@@ -6,4 +6,6 @@ coherent.
 
 If implementation disproves an artifact assumption, return to phase 4 and rerun
 `openspec-audit-proposal` for affected artifacts; re-enter phase 2 first when the replacement
-is not obvious. Proceed only when every task is checked.
+is not obvious. Under the split workflow, record the reason, set the handoff to
+`needs-preparation`, and stop so a new `prepare-roadmap` session owns that return. Proceed
+only when every task is checked.

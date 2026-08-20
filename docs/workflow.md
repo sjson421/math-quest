@@ -7,6 +7,11 @@ commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archi
 Task lists are the running record — mark each item done as it lands, and note decisions
 inline rather than only in chat.
 
+The roadmap-to-main workflow runs across three separate skill sessions:
+`prepare-roadmap` plans and audits, `implement-roadmap` applies the audited change, and
+`review-roadmap` simplifies, verifies, ships, and archives it. Ignored state under
+`.agent-state/roadmap/` carries the exact baseline and gate status between sessions.
+
 - `openspec/specs/` is the **baseline**: what the system does today, thirty-six
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
@@ -58,9 +63,8 @@ inline rather than only in chat.
 - **Delegation is bounded.** Exploration, proposal audit, and simplification use one
   read-only reviewer by default. Two or three are allowed only for disjoint path domains
   without overlapping files. Reviewers get no conversation history: only repository root,
-  baseline SHA, assigned paths, focused questions, and a concise `file:line` format. They run
-  on the environment's default model at medium reasoning (never a model name pinned in
-  these documents — a pinned release model may not exist under the installed router/provider),
-  and the parent verifies every finding. Pi may fall back to the same review inline only
-  when its subagent tool or launch infrastructure is unavailable; it records the reason and
-  reports the degraded assurance rather than presenting the pass as independent.
+  baseline SHA, assigned paths, focused questions, and a concise `file:line` format. Each
+  harness adapter owns model routing; the parent verifies every finding. Pi may fall back to
+  the same review inline only when its subagent tool or launch infrastructure is unavailable;
+  it records the reason and reports the degraded assurance rather than presenting the pass
+  as independent.

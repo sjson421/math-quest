@@ -38,5 +38,5 @@ Archive dates reflect the actual archive date.
 Report selected item/increment, exploration decision and re-entry, change name,
 implementation, audit/review corrections, review mode and fallbacks, exact gate results,
 screenshot observations, both commit SHAs and subjects, both pushes, archive path, cleanup
-outcome, stopped processes and cleared scratch space, and every pre-existing path still
+outcome, stopped processes, removed handoff state, and every pre-existing path still
 untouched. If no user-visible surface changed, state that visual review was not applicable.
