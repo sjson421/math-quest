@@ -289,6 +289,8 @@ expression keypad SHALL offer a fraction slash, decimal point, mixed-number spac
 multiplication sign, additional variable, or general exponent key, since those characters
 are outside the expression grammar.
 
+Where an expression problem presents a long source expression as an unframed rewrite, the source SHALL wrap at mathematical term boundaries and the live answer slot SHALL use a bounded expression size rather than inheriting a large numeric-answer size. The source, fullest generated answer, and keypad SHALL remain readable without horizontal page overflow at a 375-pixel viewport.
+
 #### Scenario: An expression problem offers the expression keys only
 
 - **WHEN** a problem declares input mode `expression`
@@ -320,6 +322,13 @@ are outside the expression grammar.
 - **WHEN** the superscript-two key is pressed anywhere except directly after the declared
   variable in a degree-two expression
 - **THEN** the entry is left unchanged
+
+#### Scenario: A long polynomial rewrite fits the installed width
+
+- **WHEN** the widest generated Unit 18a source and its fullest live expression answer are exercised at 375 pixels
+- **THEN** the source wraps only between terms
+- **AND** the answer slot and page do not overflow horizontally
+- **AND** the expression keypad remains fully visible and usable
 
 ### Requirement: An equation's answer slot is framed by the variable it solves for
 
