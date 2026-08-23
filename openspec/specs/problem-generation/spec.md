@@ -698,15 +698,21 @@ A generated coordinate-plane content problem SHALL carry a closed operation-spec
 record beside its generic plane declaration. The record SHALL distinguish plotting a stated
 point, plotting a selected table row, identifying a quadrant, finding slope from a graph,
 finding slope from two points, finding a y-intercept, reading slope-intercept form, selecting
-a graph for an equation, writing an equation from a graph, and finding a parallel or
-perpendicular slope.
+a graph for an equation, writing an equation from a graph, finding a parallel or perpendicular
+slope, and solving a system by graphing, substitution, elimination, or a fixed word-problem
+frame.
 
 Independent verification SHALL validate the plane first, validate that the operation's source
-data agrees with the visible points, lines, equation context, or table, and then derive the
-answer without reading the problem's stated answer. Equation text shown beside a graph SHALL
-be rebuilt from the same structured slope and intercept used for verification. A
-coordinate-plane problem without recognized operation data SHALL continue to fail closed
-rather than fall through to the stated answer.
+data agrees with the visible points, lines, equation context, table, variable labels, or story
+quantities, and then derive the answer without reading the problem's stated answer. Equation
+text shown beside a graph SHALL be rebuilt from the same structured values used for
+verification. A coordinate-plane problem without recognized operation data SHALL continue to
+fail closed rather than fall through to the stated answer.
+
+For a Unit 17 system, verification SHALL solve the two represented equations by exact integer
+arithmetic. The derived answer SHALL be an integer coordinate on the declared input lattice. A
+malformed, singular, inconsistent, underdetermined, out-of-bounds, or visually disagreeing
+system SHALL fail closed and name its skill.
 
 #### Scenario: A point answer comes from visible source data
 
@@ -763,6 +769,31 @@ rather than fall through to the stated answer.
 - **THEN** verification derives its exact slope and applies the declared relationship
 - **AND** compares the resulting reduced rational with the stated answer
 
+#### Scenario: Graph geometry derives a system intersection
+
+- **WHEN** `system-by-graphing` declares two nonparallel visible lines
+- **THEN** verification derives their unique exact intersection from their defining points
+- **AND** compares that point with the structured answer without trusting it
+
+#### Scenario: Algebraic methods derive the same ordered pair
+
+- **WHEN** substitution or elimination carries two visible linear equations
+- **THEN** verification solves their coefficient records exactly
+- **AND** rejects any equation text that disagrees with those coefficients or constants
+
+#### Scenario: Story quantities rebuild the equations
+
+- **WHEN** `system-words` carries its fixed frame and quantities
+- **THEN** verification rebuilds the learner-facing sentence and both equations from that data
+- **AND** derives the two named counts in the displayed variable order
+
+#### Scenario: Invalid systems fail closed
+
+- **WHEN** system data is malformed, singular, inconsistent, underdetermined, out of bounds, or
+  disagrees with visible context
+- **THEN** independent verification names the skill and rejects it
+- **AND** it does not trust the attached point answer
+
 #### Scenario: Missing operation data still fails closed
 
 - **WHEN** a coordinate-plane display carries no recognized content operation
@@ -776,9 +807,12 @@ The wording snapshot SHALL state the operation, target point or complete table r
 present, and the plane declaration. Learner-text collection SHALL include every target or
 table value rendered beside the graph.
 
-For the new linear-equation operations, recorded output SHALL additionally state the slope,
-intercept, or relationship source where present and both candidate lines where present.
-Learner-text collection SHALL include every equation rendered beside the graph.
+For linear-equation operations, recorded output SHALL additionally state the slope, intercept,
+relationship source, system equation pair, or complete story source where present, and both
+candidate lines where present. Learner-text collection SHALL include every equation, variable
+meaning, and story quantity rendered beside the graph. Difficulty evidence for Unit 17 SHALL
+come from visible plane bounds and source coefficients or quantities rather than from the
+stated answer alone.
 
 #### Scenario: A table operation is recorded completely
 
@@ -803,3 +837,16 @@ Learner-text collection SHALL include every equation rendered beside the graph.
 - **WHEN** graph-from-equation presents two lines
 - **THEN** recorded output states both defining pairs in declaration order
 - **AND** the correct choice identity can be reviewed against that order
+
+#### Scenario: System data is recorded completely
+
+- **WHEN** a generated coordinate display carries a Unit 17 system operation
+- **THEN** recorded output states the operation, both equations or complete story source, plane,
+  answer point, and point-valued predictions
+- **AND** changing any source value produces a reviewable snapshot difference
+
+#### Scenario: A swapped system operation cannot pass unnoticed
+
+- **WHEN** a generated system carries equation data under the wrong Unit 17 operation
+- **THEN** exhaustive recording and independent verification identify the operation mismatch
+- **AND** the content checks do not treat the authored answer as evidence of correctness

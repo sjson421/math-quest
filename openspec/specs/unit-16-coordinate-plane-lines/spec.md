@@ -233,23 +233,20 @@ when the slope should remain unchanged.
 - **THEN** the exact answer is `−3/2`
 - **AND** the keypad permits both a sign and a fraction slash
 
-### Requirement: Unit 16 is complete without another capability
+### Requirement: Unit 16 remains complete as Unit 17 ships
 
-The system SHALL register all ten Unit 16 generators in manifest order. The four generators in
-increment 16b SHALL satisfy the existing determinism, independent-answer, difficulty, variety,
-content, recorded-output, and phone-layout gates. Stage F and `AVAILABLE_CAPABILITIES` SHALL
-remain unchanged.
+The system SHALL keep all ten Unit 16 generators implemented in manifest order while Unit 17
+becomes playable. Stage F's requirements and `AVAILABLE_CAPABILITIES` SHALL remain unchanged,
+and roadmap item 23 SHALL stay open for Units 18–19.
 
-Roadmap item 23 SHALL remain open for Units 17–19 even though Unit 16 is complete.
+#### Scenario: Unit 17 joins the completed coordinate-plane unit
 
-#### Scenario: Four more skills become implemented
+- **WHEN** the four Unit 17 generators are registered
+- **THEN** all ten Unit 16 skills and all four Unit 17 skills resolve as implemented
+- **AND** the playable total becomes 159
 
-- **WHEN** the four Unit 16b generators are registered
-- **THEN** all ten Unit 16 skills resolve as `implemented` in manifest order
-- **AND** the playable total becomes 155
+#### Scenario: Remaining Stage F units stay planned
 
-#### Scenario: Later Stage F units remain planned
-
-- **WHEN** increment 16b is complete
-- **THEN** every skill in Units 17–19 remains planned
+- **WHEN** increment 17 is complete
+- **THEN** every skill in Units 18–19 remains planned
 - **AND** roadmap item 23 remains unchecked
