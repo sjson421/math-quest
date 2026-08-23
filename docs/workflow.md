@@ -29,12 +29,12 @@ The roadmap-to-main workflow runs across three separate skill sessions:
   is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Forty-nine changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Fifty-one changes
   have shipped — `ls openspec/changes/archive/` is the authority, and this line has run one
   behind before; the latest archive is
-  `2026-08-17-add-stage-f-unit-16b`. It completes Unit 16 with slope-intercept form,
-  equation/graph translation, and exact parallel or perpendicular slopes over the existing
-  coordinate-plane and answer surfaces. Roadmap item 23 remains open for Units 17–19.
+  `2026-08-23-extend-expression-input-to-quadratics`. It extends the expression answer
+  surface through bounded quadratic notation before Unit 18a. Roadmap item 23 remains open
+  for the remaining Unit 18a–19 content.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
