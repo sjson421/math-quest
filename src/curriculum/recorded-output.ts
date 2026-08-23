@@ -16,6 +16,7 @@ import type {
   MathNotation,
   PercentData,
   PowerData,
+  PolynomialData,
   Problem,
   RatioData,
   SkillGenerator,
@@ -339,6 +340,31 @@ const formatAlgebraData = (data: AlgebraData): string => {
   }
 }
 
+const formatPolynomial = (data: PolynomialData): string => {
+  switch (data.operation) {
+    case 'add':
+    case 'sub':
+      return (
+        `${data.operation} ` +
+        `(${data.left.quadratic}, ${data.left.linear}, ${data.left.constant}) ` +
+        `${data.operation === 'add' ? '+' : '−'} ` +
+        `(${data.right.quadratic}, ${data.right.linear}, ${data.right.constant})`
+      )
+    case 'mult-monomial':
+      return `${data.operation} ${data.outerCoefficient}x(${data.innerLinear}x + ${data.innerConstant})`
+    case 'foil':
+      return `${data.operation} (x + ${data.leftConstant})(x + ${data.rightConstant})`
+    case 'factor-gcf-poly':
+      return `${data.operation} ${data.quadratic}x² + ${data.linear}x`
+    case 'factor-trinomial':
+      return `${data.operation} x² + ${data.linear}x + ${data.constant}`
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled polynomial data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 const formatEquationData = (data: EquationData): string => {
   switch (data.operation) {
     case 'balance':
@@ -418,6 +444,7 @@ const formatDisplay = (display: Problem['display']): string => {
       if (display.percent) return `story [${formatPercentData(display.percent)}] "${display.text}"`
       if (display.ratio) return `story [${formatRatioData(display.ratio)}] "${display.text}"`
       if (display.algebra) return `story [${formatAlgebraData(display.algebra)}] "${display.text}"`
+      if (display.polynomial) return `story [${formatPolynomial(display.polynomial)}] "${display.text}"`
       if (display.equation) return `story [${formatEquationData(display.equation)}] "${display.text}"`
       return `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
     case 'math':

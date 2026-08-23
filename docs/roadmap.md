@@ -2,9 +2,9 @@
 
 What is left, in the order it should be done.
 
-**Status: 159 of 201 skills are playable.** Stages A through F have playable content. Stage E
-is complete with Units 12, 13, 14 and 15; Stage F's Units 16 and 17 are complete with all
-fourteen coordinate-plane, line-reading, and systems skills.
+**Status: 165 of 201 skills are playable.** Stages A through F have playable content. Stage E
+is complete with Units 12, 13, 14 and 15; Stage F's Units 16 and 17 are complete, and the
+first six Unit 18 polynomial skills are playable.
 Choice input,
 number-line input, math notation, fraction input, diagrams, expression input and
 coordinate-plane input are built,
@@ -1002,7 +1002,8 @@ document's ✅ markers updated to match, which the cross-check enforces.
       answer-colliding predictions. Recorded output names points, while independent answer
       verification remains fail-closed until a content generator supplies operation-specific
       source data. Unit 16's ten skills and Unit 17's four systems skills now use the shared
-      plane; Units 18–19 remain planned, so 14 Stage F skills are still ahead.
+      plane; the first six Unit 18 polynomial skills are playable, so eight Stage F skills are
+      still ahead.
 
 - [ ] **23 · Stage F · Units 16–19** — L — 28 skills, seven changes
 
@@ -1029,10 +1030,12 @@ document's ✅ markers updated to match, which the cross-check enforces.
         used by the keypad, parser, checker, and recorded output. A bounded polynomial
         canonicalizer accepts conventional `x²` and quadratic products, while the four-column
         keypad exposes one square key only when declared. This tooling change adds no generators,
-        so every Unit 18 skill remains planned.
-      - **18a** `add-polynomials`–`factor-trinomial` — expression answers throughout (item 20);
-        `factor-trinomial` (18.6) is a major wall, and `sub-polynomials` (18.2) is Unit 6's
-        minus-a-minus mistake one abstraction up.
+        so the remaining Unit 18 skills remain planned until their content increments land.
+      - **18a — shipped 2026-08-23.** `add-polynomials`–`factor-trinomial` — expression answers
+        throughout (item 20); `factor-trinomial` (18.6) is a major wall, and `sub-polynomials`
+        (18.2) is Unit 6's minus-a-minus mistake one abstraction up. The six generators derive
+        answers from structured polynomial sources and keep the long rewrite surface readable
+        at the installed phone width.
       - **18b** `difference-of-squares`–`quadratic-formula` — `quadratic-formula` (18.9) needs the
         radical from item 17, the formula given rather than recalled (it is on the GED sheet), and
         an answer that is a *pair* of roots. The pair is the part to settle first, and it is the

@@ -25,6 +25,7 @@ import type {
   LinearEquation,
   MathNotation,
   PercentData,
+  PolynomialData,
   Problem,
   PowerData,
   RatioData,
@@ -1330,6 +1331,144 @@ const verifiedEliminationScale = (
   return undefined
 }
 
+type PolynomialCoefficients = { quadratic: number; linear: number; constant: number }
+
+const polynomialBody = (coefficient: number, degree: 0 | 1 | 2): string => {
+  const magnitude = Math.abs(coefficient)
+  const variable = degree === 2 ? 'x²' : degree === 1 ? 'x' : ''
+  if (degree === 0) return String(magnitude)
+  return magnitude === 1 ? variable : `${magnitude}${variable}`
+}
+
+const independentPolynomialText = (
+  coefficients: PolynomialCoefficients,
+  minus: '−' | '-' = '−',
+  spaced = true,
+): string => {
+  const terms = [
+    { coefficient: coefficients.quadratic, degree: 2 as const },
+    { coefficient: coefficients.linear, degree: 1 as const },
+    { coefficient: coefficients.constant, degree: 0 as const },
+  ].filter(({ coefficient }) => coefficient !== 0)
+  if (terms.length === 0) return '0'
+  return terms.reduce((text, { coefficient, degree }, index) => {
+    const value = polynomialBody(coefficient, degree)
+    if (index === 0) return coefficient < 0 ? `${minus}${value}` : value
+    const sign = coefficient < 0 ? minus : '+'
+    return spaced ? `${text} ${sign} ${value}` : `${text}${sign}${value}`
+  }, '')
+}
+
+const independentBinomialText = (constant: number, spaced = true): string => {
+  const sign = constant < 0 ? '-' : '+'
+  return spaced
+    ? `x ${constant < 0 ? '−' : '+'} ${Math.abs(constant)}`
+    : `x${sign}${Math.abs(constant)}`
+}
+
+const independentFactoredText = (pair: readonly [number, number], spaced = true): string =>
+  `(${independentBinomialText(pair[0], spaced)})(${independentBinomialText(pair[1], spaced)})`
+
+function expectedPolynomial(data: PolynomialData): { text: string; answer: string; values: number[] } {
+  switch (data.operation) {
+    case 'add': {
+      const answer = {
+        quadratic: data.left.quadratic + data.right.quadratic,
+        linear: data.left.linear + data.right.linear,
+        constant: data.left.constant + data.right.constant,
+      }
+      return {
+        text: `(${independentPolynomialText(data.left)}) + (${independentPolynomialText(data.right)})`,
+        answer: independentPolynomialText(answer, '-', false),
+        values: [
+          data.left.quadratic,
+          data.left.linear,
+          data.left.constant,
+          data.right.quadratic,
+          data.right.linear,
+          data.right.constant,
+        ],
+      }
+    }
+    case 'sub': {
+      const answer = {
+        quadratic: data.left.quadratic - data.right.quadratic,
+        linear: data.left.linear - data.right.linear,
+        constant: data.left.constant - data.right.constant,
+      }
+      return {
+        text: `(${independentPolynomialText(data.left)}) − (${independentPolynomialText(data.right)})`,
+        answer: independentPolynomialText(answer, '-', false),
+        values: [
+          data.left.quadratic,
+          data.left.linear,
+          data.left.constant,
+          data.right.quadratic,
+          data.right.linear,
+          data.right.constant,
+        ],
+      }
+    }
+    case 'mult-monomial': {
+      const quadratic = data.outerCoefficient * data.innerLinear
+      const linear = data.outerCoefficient * data.innerConstant
+      return {
+        text:
+          `${polynomialBody(data.outerCoefficient, 1)}(` +
+          `${independentPolynomialText({ quadratic: data.innerLinear, linear: 0, constant: data.innerConstant })})`,
+        answer: independentPolynomialText({ quadratic, linear, constant: 0 }, '-', false),
+        values: [data.outerCoefficient, data.innerLinear, data.innerConstant],
+      }
+    }
+    case 'foil': {
+      const linear = data.leftConstant + data.rightConstant
+      const constant = data.leftConstant * data.rightConstant
+      return {
+        text: `(${independentBinomialText(data.leftConstant)})(${independentBinomialText(data.rightConstant)})`,
+        answer: independentPolynomialText({ quadratic: 1, linear, constant }, '-', false),
+        values: [data.leftConstant, data.rightConstant],
+      }
+    }
+    case 'factor-gcf-poly': {
+      const factor = gcd(Math.abs(data.quadratic), Math.abs(data.linear))
+      const inner = {
+        quadratic: 0,
+        linear: data.quadratic / factor,
+        constant: data.linear / factor,
+      }
+      if (factor <= 1 || gcd(Math.abs(inner.linear), Math.abs(inner.constant)) !== 1) {
+        throw new Error('factor-gcf-poly: coefficients do not have a unique greatest common factor')
+      }
+      return {
+        text: independentPolynomialText({ quadratic: data.quadratic, linear: data.linear, constant: 0 }),
+        answer: `${polynomialBody(factor, 1)}(${independentPolynomialText(inner, '-', false)})`,
+        values: [data.quadratic, data.linear],
+      }
+    }
+    case 'factor-trinomial': {
+      let pair: [number, number] | undefined
+      for (let first = -100; first <= 100; first += 1) {
+        if (first === 0 || data.constant % first !== 0) continue
+        const second = data.constant / first
+        if (first + second === data.linear) {
+          pair = Math.abs(first) <= Math.abs(second) ? [first, second] : [second, first]
+          break
+        }
+      }
+      if (!pair) throw new Error('factor-trinomial: no integer pair matches the visible sum and product')
+      return {
+        text: independentPolynomialText({ quadratic: 1, linear: data.linear, constant: data.constant }),
+        answer: independentFactoredText(pair, false),
+        values: [data.linear, data.constant],
+      }
+    }
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unknown polynomial operation: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 function recompute(problem: Problem): number | string {
   const { display } = problem
 
@@ -1434,6 +1573,16 @@ function recompute(problem: Problem): number | string {
         throw new Error(`Unknown algebra operation: ${JSON.stringify(unhandled)}`)
       }
     }
+  }
+
+  if (display.kind === 'story' && display.polynomial) {
+    const expected = expectedPolynomial(display.polynomial)
+    if (display.text !== expected.text) {
+      throw new Error(
+        `${problem.skillId}: visible polynomial text "${display.text}" disagrees with "${expected.text}"`,
+      )
+    }
+    return expected.answer
   }
 
   if (display.kind === 'inline') {
@@ -1957,6 +2106,11 @@ function sourceMagnitude(problem: Problem): number {
 
   if (problem.display.kind === 'math' && problem.display.power) {
     const values = expectedPowerDisplay(problem.display.power).values
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
+
+  if (problem.display.kind === 'story' && problem.display.polynomial) {
+    const values = expectedPolynomial(problem.display.polynomial).values
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
@@ -3528,6 +3682,32 @@ describe('recompute', () => {
     difficulty: 1,
   })
 
+  const polynomial = (overrides: Partial<Problem> = {}): Problem => ({
+    skillId: 'synthetic-polynomial',
+    prompt: 'Rewrite the polynomial.',
+    display: {
+      kind: 'story',
+      text: '(2x² + 3x + 4) + (x² + 5x + 6)',
+      polynomial: {
+        operation: 'add',
+        left: { quadratic: 2, linear: 3, constant: 4 },
+        right: { quadratic: 1, linear: 5, constant: 6 },
+      },
+    },
+    answer: {
+      kind: 'expression',
+      canonical: '3x²+8x+10',
+      variable: 'x',
+      maxDegree: 2,
+      form: 'expanded',
+    },
+    inputMode: 'expression',
+    hint: 'Add matching degrees.',
+    solution: [{ text: 'Add the matching coefficients.' }],
+    difficulty: 1,
+    ...overrides,
+  })
+
   const whole = (overrides: Partial<Problem> = {}): Problem => ({
     skillId: 'synthetic-whole',
     prompt: 'Which digit is in the tens place?',
@@ -3579,6 +3759,41 @@ describe('recompute', () => {
     // 9 appears in the text; reading numbers out of the prose would find it.
     const problem = story([4, 3], 7)
     expect(recompute(problem)).not.toBe(16)
+  })
+
+  it('recomputes a polynomial from its structured visible sources', () => {
+    expect(recompute(polynomial())).toBe('3x²+8x+10')
+    expect(answerValue(polynomial())).toBe(recompute(polynomial()))
+  })
+
+  it('names polynomial text that disagrees with carried sources', () => {
+    const mismatched = polynomial({
+      display: {
+        kind: 'story',
+        text: '(2x² + 3x + 4) + (x² + 5x + 7)',
+        polynomial: {
+          operation: 'add',
+          left: { quadratic: 2, linear: 3, constant: 4 },
+          right: { quadratic: 1, linear: 5, constant: 6 },
+        },
+      },
+    })
+
+    expect(() => recompute(mismatched)).toThrow('visible polynomial text')
+  })
+
+  it('catches a polynomial answer that disagrees with its sources', () => {
+    const wrong = polynomial({
+      answer: {
+        kind: 'expression',
+        canonical: '3x²+8x+11',
+        variable: 'x',
+        maxDegree: 2,
+        form: 'expanded',
+      },
+    })
+
+    expect(answerValue(wrong)).not.toBe(recompute(wrong))
   })
 
   it('recomputes a whole-number keypad answer from carried values', () => {

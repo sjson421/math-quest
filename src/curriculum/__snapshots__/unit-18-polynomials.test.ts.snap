@@ -1,0 +1,1813 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Unit 18 recorded output: add-polynomials > matches the wording recorded when the skill landed 1`] = `
+"--- add-polynomials · seed 1 · difficulty 1
+prompt   Add the polynomials.
+display  story [add (3, 1, 3) + (4, 4, 2)] "(3x² + x + 3) + (4x² + 4x + 2)"
+answer   expression 7x²+5x+5 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [3 + 4 = 7]
+step 2   Add the linear coefficients.   [1 + 4 = 5]
+step 3   Add the constant terms.   [3 + 2 = 5]
+miss     added-quadratic-only = 7x²+x+3   Combine matching degrees in every term.
+miss     added-constant-only = 3x²+x+5   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 12345 · difficulty 1
+prompt   Add the polynomials.
+display  story [add (4, 2, 2) + (4, 3, 2)] "(4x² + 2x + 2) + (4x² + 3x + 2)"
+answer   expression 8x²+5x+4 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [4 + 4 = 8]
+step 2   Add the linear coefficients.   [2 + 3 = 5]
+step 3   Add the constant terms.   [2 + 2 = 4]
+miss     added-quadratic-only = 8x²+2x+2   Combine matching degrees in every term.
+miss     added-constant-only = 4x²+2x+4   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 67890 · difficulty 1
+prompt   Add the polynomials.
+display  story [add (2, 3, 2) + (2, 1, 4)] "(2x² + 3x + 2) + (2x² + x + 4)"
+answer   expression 4x²+4x+6 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [2 + 2 = 4]
+step 2   Add the linear coefficients.   [3 + 1 = 4]
+step 3   Add the constant terms.   [2 + 4 = 6]
+miss     added-quadratic-only = 4x²+3x+2   Combine matching degrees in every term.
+miss     added-constant-only = 2x²+3x+6   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 424242 · difficulty 1
+prompt   Add the polynomials.
+display  story [add (1, 1, 1) + (3, 2, 3)] "(x² + x + 1) + (3x² + 2x + 3)"
+answer   expression 4x²+3x+4 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [1 + 3 = 4]
+step 2   Add the linear coefficients.   [1 + 2 = 3]
+step 3   Add the constant terms.   [1 + 3 = 4]
+miss     added-quadratic-only = 4x²+x+1   Combine matching degrees in every term.
+miss     added-constant-only = x²+x+4   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 987654321 · difficulty 1
+prompt   Add the polynomials.
+display  story [add (4, 1, 1) + (4, 3, 2)] "(4x² + x + 1) + (4x² + 3x + 2)"
+answer   expression 8x²+4x+3 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [4 + 4 = 8]
+step 2   Add the linear coefficients.   [1 + 3 = 4]
+step 3   Add the constant terms.   [1 + 2 = 3]
+miss     added-quadratic-only = 8x²+x+1   Combine matching degrees in every term.
+miss     added-constant-only = 4x²+x+3   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 1 · difficulty 2
+prompt   Add the polynomials.
+display  story [add (4, 1, 4) + (6, 6, 2)] "(4x² + x + 4) + (6x² + 6x + 2)"
+answer   expression 10x²+7x+6 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [4 + 6 = 10]
+step 2   Add the linear coefficients.   [1 + 6 = 7]
+step 3   Add the constant terms.   [4 + 2 = 6]
+miss     added-quadratic-only = 10x²+x+4   Combine matching degrees in every term.
+miss     added-constant-only = 4x²+x+6   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 12345 · difficulty 2
+prompt   Add the polynomials.
+display  story [add (6, 2, 3) + (5, 4, 3)] "(6x² + 2x + 3) + (5x² + 4x + 3)"
+answer   expression 11x²+6x+6 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [6 + 5 = 11]
+step 2   Add the linear coefficients.   [2 + 4 = 6]
+step 3   Add the constant terms.   [3 + 3 = 6]
+miss     added-quadratic-only = 11x²+2x+3   Combine matching degrees in every term.
+miss     added-constant-only = 6x²+2x+6   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 67890 · difficulty 2
+prompt   Add the polynomials.
+display  story [add (3, 4, 3) + (3, 1, 5)] "(3x² + 4x + 3) + (3x² + x + 5)"
+answer   expression 6x²+5x+8 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [3 + 3 = 6]
+step 2   Add the linear coefficients.   [4 + 1 = 5]
+step 3   Add the constant terms.   [3 + 5 = 8]
+miss     added-quadratic-only = 6x²+4x+3   Combine matching degrees in every term.
+miss     added-constant-only = 3x²+4x+8   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 424242 · difficulty 2
+prompt   Add the polynomials.
+display  story [add (1, 2, 2) + (4, 3, 4)] "(x² + 2x + 2) + (4x² + 3x + 4)"
+answer   expression 5x²+5x+6 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [1 + 4 = 5]
+step 2   Add the linear coefficients.   [2 + 3 = 5]
+step 3   Add the constant terms.   [2 + 4 = 6]
+miss     added-quadratic-only = 5x²+2x+2   Combine matching degrees in every term.
+miss     added-constant-only = x²+2x+6   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 987654321 · difficulty 2
+prompt   Add the polynomials.
+display  story [add (6, 1, 1) + (6, 4, 3)] "(6x² + x + 1) + (6x² + 4x + 3)"
+answer   expression 12x²+5x+4 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [6 + 6 = 12]
+step 2   Add the linear coefficients.   [1 + 4 = 5]
+step 3   Add the constant terms.   [1 + 3 = 4]
+miss     added-quadratic-only = 12x²+x+1   Combine matching degrees in every term.
+miss     added-constant-only = 6x²+x+4   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 1 · difficulty 3
+prompt   Add the polynomials.
+display  story [add (7, 2, 6) + (9, 9, 4)] "(7x² + 2x + 6) + (9x² + 9x + 4)"
+answer   expression 16x²+11x+10 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [7 + 9 = 16]
+step 2   Add the linear coefficients.   [2 + 9 = 11]
+step 3   Add the constant terms.   [6 + 4 = 10]
+miss     added-quadratic-only = 16x²+2x+6   Combine matching degrees in every term.
+miss     added-constant-only = 7x²+2x+10   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 12345 · difficulty 3
+prompt   Add the polynomials.
+display  story [add (9, 4, 5) + (8, 6, 4)] "(9x² + 4x + 5) + (8x² + 6x + 4)"
+answer   expression 17x²+10x+9 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [9 + 8 = 17]
+step 2   Add the linear coefficients.   [4 + 6 = 10]
+step 3   Add the constant terms.   [5 + 4 = 9]
+miss     added-quadratic-only = 17x²+4x+5   Combine matching degrees in every term.
+miss     added-constant-only = 9x²+4x+9   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 67890 · difficulty 3
+prompt   Add the polynomials.
+display  story [add (5, 6, 4) + (4, 2, 8)] "(5x² + 6x + 4) + (4x² + 2x + 8)"
+answer   expression 9x²+8x+12 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [5 + 4 = 9]
+step 2   Add the linear coefficients.   [6 + 2 = 8]
+step 3   Add the constant terms.   [4 + 8 = 12]
+miss     added-quadratic-only = 9x²+6x+4   Combine matching degrees in every term.
+miss     added-constant-only = 5x²+6x+12   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 424242 · difficulty 3
+prompt   Add the polynomials.
+display  story [add (3, 3, 3) + (7, 4, 6)] "(3x² + 3x + 3) + (7x² + 4x + 6)"
+answer   expression 10x²+7x+9 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [3 + 7 = 10]
+step 2   Add the linear coefficients.   [3 + 4 = 7]
+step 3   Add the constant terms.   [3 + 6 = 9]
+miss     added-quadratic-only = 10x²+3x+3   Combine matching degrees in every term.
+miss     added-constant-only = 3x²+3x+9   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 987654321 · difficulty 3
+prompt   Add the polynomials.
+display  story [add (9, 3, 2) + (9, 7, 5)] "(9x² + 3x + 2) + (9x² + 7x + 5)"
+answer   expression 18x²+10x+7 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [9 + 9 = 18]
+step 2   Add the linear coefficients.   [3 + 7 = 10]
+step 3   Add the constant terms.   [2 + 5 = 7]
+miss     added-quadratic-only = 18x²+3x+2   Combine matching degrees in every term.
+miss     added-constant-only = 9x²+3x+7   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 1 · difficulty 4
+prompt   Add the polynomials.
+display  story [add (9, 2, 8) + (13, 13, 5)] "(9x² + 2x + 8) + (13x² + 13x + 5)"
+answer   expression 22x²+15x+13 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [9 + 13 = 22]
+step 2   Add the linear coefficients.   [2 + 13 = 15]
+step 3   Add the constant terms.   [8 + 5 = 13]
+miss     added-quadratic-only = 22x²+2x+8   Combine matching degrees in every term.
+miss     added-constant-only = 9x²+2x+13   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 12345 · difficulty 4
+prompt   Add the polynomials.
+display  story [add (13, 5, 7) + (11, 8, 6)] "(13x² + 5x + 7) + (11x² + 8x + 6)"
+answer   expression 24x²+13x+13 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [13 + 11 = 24]
+step 2   Add the linear coefficients.   [5 + 8 = 13]
+step 3   Add the constant terms.   [7 + 6 = 13]
+miss     added-quadratic-only = 24x²+5x+7   Combine matching degrees in every term.
+miss     added-constant-only = 13x²+5x+13   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 67890 · difficulty 4
+prompt   Add the polynomials.
+display  story [add (6, 9, 6) + (6, 2, 11)] "(6x² + 9x + 6) + (6x² + 2x + 11)"
+answer   expression 12x²+11x+17 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [6 + 6 = 12]
+step 2   Add the linear coefficients.   [9 + 2 = 11]
+step 3   Add the constant terms.   [6 + 11 = 17]
+miss     added-quadratic-only = 12x²+9x+6   Combine matching degrees in every term.
+miss     added-constant-only = 6x²+9x+17   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 424242 · difficulty 4
+prompt   Add the polynomials.
+display  story [add (3, 4, 4) + (9, 6, 9)] "(3x² + 4x + 4) + (9x² + 6x + 9)"
+answer   expression 12x²+10x+13 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [3 + 9 = 12]
+step 2   Add the linear coefficients.   [4 + 6 = 10]
+step 3   Add the constant terms.   [4 + 9 = 13]
+miss     added-quadratic-only = 12x²+4x+4   Combine matching degrees in every term.
+miss     added-constant-only = 3x²+4x+13   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 987654321 · difficulty 4
+prompt   Add the polynomials.
+display  story [add (13, 3, 2) + (12, 9, 6)] "(13x² + 3x + 2) + (12x² + 9x + 6)"
+answer   expression 25x²+12x+8 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [13 + 12 = 25]
+step 2   Add the linear coefficients.   [3 + 9 = 12]
+step 3   Add the constant terms.   [2 + 6 = 8]
+miss     added-quadratic-only = 25x²+3x+2   Combine matching degrees in every term.
+miss     added-constant-only = 13x²+3x+8   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 1 · difficulty 5
+prompt   Add the polynomials.
+display  story [add (13, 3, 11) + (18, 18, 7)] "(13x² + 3x + 11) + (18x² + 18x + 7)"
+answer   expression 31x²+21x+18 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [13 + 18 = 31]
+step 2   Add the linear coefficients.   [3 + 18 = 21]
+step 3   Add the constant terms.   [11 + 7 = 18]
+miss     added-quadratic-only = 31x²+3x+11   Combine matching degrees in every term.
+miss     added-constant-only = 13x²+3x+18   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 12345 · difficulty 5
+prompt   Add the polynomials.
+display  story [add (18, 7, 10) + (16, 11, 8)] "(18x² + 7x + 10) + (16x² + 11x + 8)"
+answer   expression 34x²+18x+18 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [18 + 16 = 34]
+step 2   Add the linear coefficients.   [7 + 11 = 18]
+step 3   Add the constant terms.   [10 + 8 = 18]
+miss     added-quadratic-only = 34x²+7x+10   Combine matching degrees in every term.
+miss     added-constant-only = 18x²+7x+18   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 67890 · difficulty 5
+prompt   Add the polynomials.
+display  story [add (9, 12, 8) + (8, 3, 15)] "(9x² + 12x + 8) + (8x² + 3x + 15)"
+answer   expression 17x²+15x+23 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [9 + 8 = 17]
+step 2   Add the linear coefficients.   [12 + 3 = 15]
+step 3   Add the constant terms.   [8 + 15 = 23]
+miss     added-quadratic-only = 17x²+12x+8   Combine matching degrees in every term.
+miss     added-constant-only = 9x²+12x+23   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 424242 · difficulty 5
+prompt   Add the polynomials.
+display  story [add (5, 6, 5) + (13, 8, 12)] "(5x² + 6x + 5) + (13x² + 8x + 12)"
+answer   expression 18x²+14x+17 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [5 + 13 = 18]
+step 2   Add the linear coefficients.   [6 + 8 = 14]
+step 3   Add the constant terms.   [5 + 12 = 17]
+miss     added-quadratic-only = 18x²+6x+5   Combine matching degrees in every term.
+miss     added-constant-only = 5x²+6x+17   Add the constants, linear terms, and squares separately.
+
+--- add-polynomials · seed 987654321 · difficulty 5
+prompt   Add the polynomials.
+display  story [add (18, 5, 3) + (17, 13, 9)] "(18x² + 5x + 3) + (17x² + 13x + 9)"
+answer   expression 35x²+18x+12 (x, expanded, degree 2)
+input    expression
+hint     Add coefficients with the same degree.
+step 1   Add the square coefficients.   [18 + 17 = 35]
+step 2   Add the linear coefficients.   [5 + 13 = 18]
+step 3   Add the constant terms.   [3 + 9 = 12]
+miss     added-quadratic-only = 35x²+5x+3   Combine matching degrees in every term.
+miss     added-constant-only = 18x²+5x+12   Add the constants, linear terms, and squares separately."
+`;
+
+exports[`Unit 18 recorded output: factor-gcf-poly > matches the wording recorded when the skill landed 1`] = `
+"--- factor-gcf-poly · seed 1 · difficulty 1
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 15x² + 3x] "15x² + 3x"
+answer   expression 3x(5x+1) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [15 and 3 share 3]
+step 2   Take out the shared x.   [3x(...)]
+step 3   Divide both terms inside.   [3x(5x+1)]
+miss     left-expanded = 15x²+3x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 3(5x²+x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 3x(5x+3)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 12345 · difficulty 1
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 9x² + 6x] "9x² + 6x"
+answer   expression 3x(3x+2) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [9 and 6 share 3]
+step 2   Take out the shared x.   [3x(...)]
+step 3   Divide both terms inside.   [3x(3x+2)]
+miss     left-expanded = 9x²+6x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 3(3x²+2x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 3x(3x+6)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 67890 · difficulty 1
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 8x² + 6x] "8x² + 6x"
+answer   expression 2x(4x+3) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [8 and 6 share 2]
+step 2   Take out the shared x.   [2x(...)]
+step 3   Divide both terms inside.   [2x(4x+3)]
+miss     left-expanded = 8x²+6x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 2(4x²+3x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 2x(4x+6)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 424242 · difficulty 1
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 2x² + 4x] "2x² + 4x"
+answer   expression 2x(x+2) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [2 and 4 share 2]
+step 2   Take out the shared x.   [2x(...)]
+step 3   Divide both terms inside.   [2x(x+2)]
+miss     left-expanded = 2x²+4x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 2(x²+2x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 2x(x+4)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 987654321 · difficulty 1
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 3x² + 3x] "3x² + 3x"
+answer   expression 3x(x+1) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [3 and 3 share 3]
+step 2   Take out the shared x.   [3x(...)]
+step 3   Divide both terms inside.   [3x(x+1)]
+miss     left-expanded = 3x²+3x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 3(x²+x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 3x(x+3)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 1 · difficulty 2
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 20x² + 4x] "20x² + 4x"
+answer   expression 4x(5x+1) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [20 and 4 share 4]
+step 2   Take out the shared x.   [4x(...)]
+step 3   Divide both terms inside.   [4x(5x+1)]
+miss     left-expanded = 20x²+4x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 4(5x²+x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 4x(5x+4)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 12345 · difficulty 2
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 20x² + 15x] "20x² + 15x"
+answer   expression 5x(4x+3) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [20 and 15 share 5]
+step 2   Take out the shared x.   [5x(...)]
+step 3   Divide both terms inside.   [5x(4x+3)]
+miss     left-expanded = 20x²+15x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 5(4x²+3x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 5x(4x+15)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 67890 · difficulty 2
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 9x² + 15x] "9x² + 15x"
+answer   expression 3x(3x+5) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [9 and 15 share 3]
+step 2   Take out the shared x.   [3x(...)]
+step 3   Divide both terms inside.   [3x(3x+5)]
+miss     left-expanded = 9x²+15x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 3(3x²+5x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 3x(3x+15)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 424242 · difficulty 2
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 2x² + 4x] "2x² + 4x"
+answer   expression 2x(x+2) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [2 and 4 share 2]
+step 2   Take out the shared x.   [2x(...)]
+step 3   Divide both terms inside.   [2x(x+2)]
+miss     left-expanded = 2x²+4x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 2(x²+2x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 2x(x+4)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 987654321 · difficulty 2
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 5x² + 5x] "5x² + 5x"
+answer   expression 5x(x+1) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [5 and 5 share 5]
+step 2   Take out the shared x.   [5x(...)]
+step 3   Divide both terms inside.   [5x(x+1)]
+miss     left-expanded = 5x²+5x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 5(x²+x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 5x(x+5)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 1 · difficulty 3
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 30x² + 12x] "30x² + 12x"
+answer   expression 6x(5x+2) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [30 and 12 share 6]
+step 2   Take out the shared x.   [6x(...)]
+step 3   Divide both terms inside.   [6x(5x+2)]
+miss     left-expanded = 30x²+12x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 6(5x²+2x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 6x(5x+12)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 12345 · difficulty 3
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 21x² + 28x] "21x² + 28x"
+answer   expression 7x(3x+4) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [21 and 28 share 7]
+step 2   Take out the shared x.   [7x(...)]
+step 3   Divide both terms inside.   [7x(3x+4)]
+miss     left-expanded = 21x²+28x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 7(3x²+4x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 7x(3x+28)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 67890 · difficulty 3
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 20x² + 24x] "20x² + 24x"
+answer   expression 4x(5x+6) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [20 and 24 share 4]
+step 2   Take out the shared x.   [4x(...)]
+step 3   Divide both terms inside.   [4x(5x+6)]
+miss     left-expanded = 20x²+24x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 4(5x²+6x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 4x(5x+24)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 424242 · difficulty 3
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 6x² + 9x] "6x² + 9x"
+answer   expression 3x(2x+3) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [6 and 9 share 3]
+step 2   Take out the shared x.   [3x(...)]
+step 3   Divide both terms inside.   [3x(2x+3)]
+miss     left-expanded = 6x²+9x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 3(2x²+3x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 3x(2x+9)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 987654321 · difficulty 3
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 7x² + 21x] "7x² + 21x"
+answer   expression 7x(x+3) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [7 and 21 share 7]
+step 2   Take out the shared x.   [7x(...)]
+step 3   Divide both terms inside.   [7x(x+3)]
+miss     left-expanded = 7x²+21x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 7(x²+3x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 7x(x+21)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 1 · difficulty 4
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 35x² + 14x] "35x² + 14x"
+answer   expression 7x(5x+2) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [35 and 14 share 7]
+step 2   Take out the shared x.   [7x(...)]
+step 3   Divide both terms inside.   [7x(5x+2)]
+miss     left-expanded = 35x²+14x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 7(5x²+2x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 7x(5x+14)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 12345 · difficulty 4
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 36x² + 45x] "36x² + 45x"
+answer   expression 9x(4x+5) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [36 and 45 share 9]
+step 2   Take out the shared x.   [9x(...)]
+step 3   Divide both terms inside.   [9x(4x+5)]
+miss     left-expanded = 36x²+45x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 9(4x²+5x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 9x(4x+45)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 67890 · difficulty 4
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 18x² + 48x] "18x² + 48x"
+answer   expression 6x(3x+8) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [18 and 48 share 6]
+step 2   Take out the shared x.   [6x(...)]
+step 3   Divide both terms inside.   [6x(3x+8)]
+miss     left-expanded = 18x²+48x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 6(3x²+8x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 6x(3x+48)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 424242 · difficulty 4
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 4x² + 16x] "4x² + 16x"
+answer   expression 4x(x+4) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [4 and 16 share 4]
+step 2   Take out the shared x.   [4x(...)]
+step 3   Divide both terms inside.   [4x(x+4)]
+miss     left-expanded = 4x²+16x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 4(x²+4x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 4x(x+16)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 987654321 · difficulty 4
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 9x² + 27x] "9x² + 27x"
+answer   expression 9x(x+3) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [9 and 27 share 9]
+step 2   Take out the shared x.   [9x(...)]
+step 3   Divide both terms inside.   [9x(x+3)]
+miss     left-expanded = 9x²+27x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 9(x²+3x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 9x(x+27)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 1 · difficulty 5
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 50x² + 30x] "50x² + 30x"
+answer   expression 10x(5x+3) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [50 and 30 share 10]
+step 2   Take out the shared x.   [10x(...)]
+step 3   Divide both terms inside.   [10x(5x+3)]
+miss     left-expanded = 50x²+30x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 10(5x²+3x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 10x(5x+30)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 12345 · difficulty 5
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 48x² + 84x] "48x² + 84x"
+answer   expression 12x(4x+7) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [48 and 84 share 12]
+step 2   Take out the shared x.   [12x(...)]
+step 3   Divide both terms inside.   [12x(4x+7)]
+miss     left-expanded = 48x²+84x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 12(4x²+7x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 12x(4x+84)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 67890 · difficulty 5
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 24x² + 88x] "24x² + 88x"
+answer   expression 8x(3x+11) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [24 and 88 share 8]
+step 2   Take out the shared x.   [8x(...)]
+step 3   Divide both terms inside.   [8x(3x+11)]
+miss     left-expanded = 24x²+88x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 8(3x²+11x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 8x(3x+88)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 424242 · difficulty 5
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 6x² + 36x] "6x² + 36x"
+answer   expression 6x(x+6) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [6 and 36 share 6]
+step 2   Take out the shared x.   [6x(...)]
+step 3   Divide both terms inside.   [6x(x+6)]
+miss     left-expanded = 6x²+36x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 6(x²+6x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 6x(x+36)   Divide both terms by the common factor.
+
+--- factor-gcf-poly · seed 987654321 · difficulty 5
+prompt   Factor out the greatest common monomial.
+display  story [factor-gcf-poly 12x² + 48x] "12x² + 48x"
+answer   expression 12x(x+4) (x, exact, degree 2)
+input    expression
+hint     Find the greatest common monomial, then divide both terms by it.
+step 1   Find the numeric greatest common factor.   [12 and 48 share 12]
+step 2   Take out the shared x.   [12x(...)]
+step 3   Divide both terms inside.   [12x(x+4)]
+miss     left-expanded = 12x²+48x   The shared monomial belongs outside the parentheses.
+miss     left-variable-inside = 12(x²+4x)   Take out the shared x as well as the number.
+miss     divided-second-term-only = 12x(x+48)   Divide both terms by the common factor."
+`;
+
+exports[`Unit 18 recorded output: factor-trinomial > matches the wording recorded when the skill landed 1`] = `
+"--- factor-trinomial · seed 1 · difficulty 1
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 10x + 21] "x² + 10x + 21"
+answer   expression (x+3)(x+7) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [3 × 7 = 21]
+step 2   Check that their sum matches.   [3 + 7 = 10]
+step 3   Write the two binomial factors.   [(x+3)(x+7)]
+miss     matched-product-only = (x+1)(x+21)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+2)(x+8)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 12345 · difficulty 1
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 10x + 21] "x² + 10x + 21"
+answer   expression (x+3)(x+7) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [3 × 7 = 21]
+step 2   Check that their sum matches.   [3 + 7 = 10]
+step 3   Write the two binomial factors.   [(x+3)(x+7)]
+miss     matched-product-only = (x+1)(x+21)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+2)(x+8)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 67890 · difficulty 1
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + -8x + 12] "x² − 8x + 12"
+answer   expression (x-2)(x-6) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [-2 × -6 = 12]
+step 2   Check that their sum matches.   [−2 + −6 = −8]
+step 3   Write the two binomial factors.   [(x-2)(x-6)]
+miss     matched-product-only = (x-3)(x-4)   The pair must match the product and the sum.
+miss     matched-sum-only = (x-1)(x-7)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 424242 · difficulty 1
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 8x + 12] "x² + 8x + 12"
+answer   expression (x+2)(x+6) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [2 × 6 = 12]
+step 2   Check that their sum matches.   [2 + 6 = 8]
+step 3   Write the two binomial factors.   [(x+2)(x+6)]
+miss     matched-product-only = (x+3)(x+4)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+1)(x+7)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 987654321 · difficulty 1
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 10x + 21] "x² + 10x + 21"
+answer   expression (x+3)(x+7) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [3 × 7 = 21]
+step 2   Check that their sum matches.   [3 + 7 = 10]
+step 3   Write the two binomial factors.   [(x+3)(x+7)]
+miss     matched-product-only = (x+1)(x+21)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+2)(x+8)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 1 · difficulty 2
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 13x + 36] "x² + 13x + 36"
+answer   expression (x+4)(x+9) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [4 × 9 = 36]
+step 2   Check that their sum matches.   [4 + 9 = 13]
+step 3   Write the two binomial factors.   [(x+4)(x+9)]
+miss     matched-product-only = (x+6)(x+6)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+3)(x+10)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 12345 · difficulty 2
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 13x + 36] "x² + 13x + 36"
+answer   expression (x+4)(x+9) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [4 × 9 = 36]
+step 2   Check that their sum matches.   [4 + 9 = 13]
+step 3   Write the two binomial factors.   [(x+4)(x+9)]
+miss     matched-product-only = (x+6)(x+6)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+3)(x+10)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 67890 · difficulty 2
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + -11x + 24] "x² − 11x + 24"
+answer   expression (x-3)(x-8) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [-3 × -8 = 24]
+step 2   Check that their sum matches.   [−3 + −8 = −11]
+step 3   Write the two binomial factors.   [(x-3)(x-8)]
+miss     matched-product-only = (x-4)(x-6)   The pair must match the product and the sum.
+miss     matched-sum-only = (x-2)(x-9)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 424242 · difficulty 2
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 11x + 24] "x² + 11x + 24"
+answer   expression (x+3)(x+8) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [3 × 8 = 24]
+step 2   Check that their sum matches.   [3 + 8 = 11]
+step 3   Write the two binomial factors.   [(x+3)(x+8)]
+miss     matched-product-only = (x+4)(x+6)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+2)(x+9)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 987654321 · difficulty 2
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 13x + 36] "x² + 13x + 36"
+answer   expression (x+4)(x+9) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [4 × 9 = 36]
+step 2   Check that their sum matches.   [4 + 9 = 13]
+step 3   Write the two binomial factors.   [(x+4)(x+9)]
+miss     matched-product-only = (x+6)(x+6)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+3)(x+10)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 1 · difficulty 3
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 16x + 55] "x² + 16x + 55"
+answer   expression (x+5)(x+11) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [5 × 11 = 55]
+step 2   Check that their sum matches.   [5 + 11 = 16]
+step 3   Write the two binomial factors.   [(x+5)(x+11)]
+miss     matched-product-only = (x+1)(x+55)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+4)(x+12)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 12345 · difficulty 3
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 16x + 55] "x² + 16x + 55"
+answer   expression (x+5)(x+11) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [5 × 11 = 55]
+step 2   Check that their sum matches.   [5 + 11 = 16]
+step 3   Write the two binomial factors.   [(x+5)(x+11)]
+miss     matched-product-only = (x+1)(x+55)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+4)(x+12)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 67890 · difficulty 3
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + -14x + 40] "x² − 14x + 40"
+answer   expression (x-4)(x-10) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [-4 × -10 = 40]
+step 2   Check that their sum matches.   [−4 + −10 = −14]
+step 3   Write the two binomial factors.   [(x-4)(x-10)]
+miss     matched-product-only = (x-5)(x-8)   The pair must match the product and the sum.
+miss     matched-sum-only = (x-3)(x-11)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 424242 · difficulty 3
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 14x + 40] "x² + 14x + 40"
+answer   expression (x+4)(x+10) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [4 × 10 = 40]
+step 2   Check that their sum matches.   [4 + 10 = 14]
+step 3   Write the two binomial factors.   [(x+4)(x+10)]
+miss     matched-product-only = (x+5)(x+8)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+3)(x+11)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 987654321 · difficulty 3
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 16x + 55] "x² + 16x + 55"
+answer   expression (x+5)(x+11) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [5 × 11 = 55]
+step 2   Check that their sum matches.   [5 + 11 = 16]
+step 3   Write the two binomial factors.   [(x+5)(x+11)]
+miss     matched-product-only = (x+1)(x+55)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+4)(x+12)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 1 · difficulty 4
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 19x + 78] "x² + 19x + 78"
+answer   expression (x+6)(x+13) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [6 × 13 = 78]
+step 2   Check that their sum matches.   [6 + 13 = 19]
+step 3   Write the two binomial factors.   [(x+6)(x+13)]
+miss     matched-product-only = (x+5)(x+13)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+5)(x+14)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 12345 · difficulty 4
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 19x + 78] "x² + 19x + 78"
+answer   expression (x+6)(x+13) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [6 × 13 = 78]
+step 2   Check that their sum matches.   [6 + 13 = 19]
+step 3   Write the two binomial factors.   [(x+6)(x+13)]
+miss     matched-product-only = (x+5)(x+13)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+5)(x+14)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 67890 · difficulty 4
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + -17x + 60] "x² − 17x + 60"
+answer   expression (x-5)(x-12) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [-5 × -12 = 60]
+step 2   Check that their sum matches.   [−5 + −12 = −17]
+step 3   Write the two binomial factors.   [(x-5)(x-12)]
+miss     matched-product-only = (x-6)(x-10)   The pair must match the product and the sum.
+miss     matched-sum-only = (x-4)(x-13)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 424242 · difficulty 4
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 17x + 60] "x² + 17x + 60"
+answer   expression (x+5)(x+12) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [5 × 12 = 60]
+step 2   Check that their sum matches.   [5 + 12 = 17]
+step 3   Write the two binomial factors.   [(x+5)(x+12)]
+miss     matched-product-only = (x+6)(x+10)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+4)(x+13)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 987654321 · difficulty 4
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 19x + 78] "x² + 19x + 78"
+answer   expression (x+6)(x+13) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [6 × 13 = 78]
+step 2   Check that their sum matches.   [6 + 13 = 19]
+step 3   Write the two binomial factors.   [(x+6)(x+13)]
+miss     matched-product-only = (x+5)(x+13)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+5)(x+14)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 1 · difficulty 5
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 22x + 105] "x² + 22x + 105"
+answer   expression (x+7)(x+15) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [7 × 15 = 105]
+step 2   Check that their sum matches.   [7 + 15 = 22]
+step 3   Write the two binomial factors.   [(x+7)(x+15)]
+miss     matched-product-only = (x+5)(x+21)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+6)(x+16)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 12345 · difficulty 5
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 22x + 105] "x² + 22x + 105"
+answer   expression (x+7)(x+15) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [7 × 15 = 105]
+step 2   Check that their sum matches.   [7 + 15 = 22]
+step 3   Write the two binomial factors.   [(x+7)(x+15)]
+miss     matched-product-only = (x+5)(x+21)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+6)(x+16)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 67890 · difficulty 5
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + -20x + 84] "x² − 20x + 84"
+answer   expression (x-6)(x-14) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [-6 × -14 = 84]
+step 2   Check that their sum matches.   [−6 + −14 = −20]
+step 3   Write the two binomial factors.   [(x-6)(x-14)]
+miss     matched-product-only = (x-7)(x-12)   The pair must match the product and the sum.
+miss     matched-sum-only = (x-5)(x-15)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 424242 · difficulty 5
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 20x + 84] "x² + 20x + 84"
+answer   expression (x+6)(x+14) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [6 × 14 = 84]
+step 2   Check that their sum matches.   [6 + 14 = 20]
+step 3   Write the two binomial factors.   [(x+6)(x+14)]
+miss     matched-product-only = (x+7)(x+12)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+5)(x+15)   Check the product as well as the sum.
+
+--- factor-trinomial · seed 987654321 · difficulty 5
+prompt   Factor the monic trinomial.
+display  story [factor-trinomial x² + 22x + 105] "x² + 22x + 105"
+answer   expression (x+7)(x+15) (x, exact, degree 2)
+input    expression
+hint     Find two integers with this product and this sum.
+step 1   Find a pair with the constant product.   [7 × 15 = 105]
+step 2   Check that their sum matches.   [7 + 15 = 22]
+step 3   Write the two binomial factors.   [(x+7)(x+15)]
+miss     matched-product-only = (x+5)(x+21)   The pair must match the product and the sum.
+miss     matched-sum-only = (x+6)(x+16)   Check the product as well as the sum."
+`;
+
+exports[`Unit 18 recorded output: foil > matches the wording recorded when the skill landed 1`] = `
+"--- foil · seed 1 · difficulty 1
+prompt   Expand using FOIL.
+display  story [foil (x + -3)(x + -4)] "(x − 3)(x − 4)"
+answer   expression x²-7x+12 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [-3x + -4x = -7x]
+step 3   Multiply the last terms.   [-3 × -4 = 12]
+miss     omitted-middle-terms = x²+12   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²+12x+12   Add the two middle products instead of multiplying them.
+
+--- foil · seed 12345 · difficulty 1
+prompt   Expand using FOIL.
+display  story [foil (x + 3)(x + -4)] "(x + 3)(x − 4)"
+answer   expression x²-x-12 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [3x + -4x = -1x]
+step 3   Multiply the last terms.   [3 × -4 = −12]
+miss     omitted-middle-terms = x²-12   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-12x-12   Add the two middle products instead of multiplying them.
+
+--- foil · seed 67890 · difficulty 1
+prompt   Expand using FOIL.
+display  story [foil (x + 2)(x + 4)] "(x + 2)(x + 4)"
+answer   expression x²+6x+8 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [2x + 4x = 6x]
+step 3   Multiply the last terms.   [2 × 4 = 8]
+miss     omitted-middle-terms = x²+8   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²+8x+8   Add the two middle products instead of multiplying them.
+
+--- foil · seed 424242 · difficulty 1
+prompt   Expand using FOIL.
+display  story [foil (x + 2)(x + -3)] "(x + 2)(x − 3)"
+answer   expression x²-x-6 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [2x + -3x = -1x]
+step 3   Multiply the last terms.   [2 × -3 = −6]
+miss     omitted-middle-terms = x²-6   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-6x-6   Add the two middle products instead of multiplying them.
+
+--- foil · seed 987654321 · difficulty 1
+prompt   Expand using FOIL.
+display  story [foil (x + 3)(x + -4)] "(x + 3)(x − 4)"
+answer   expression x²-x-12 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [3x + -4x = -1x]
+step 3   Multiply the last terms.   [3 × -4 = −12]
+miss     omitted-middle-terms = x²-12   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-12x-12   Add the two middle products instead of multiplying them.
+
+--- foil · seed 1 · difficulty 2
+prompt   Expand using FOIL.
+display  story [foil (x + -4)(x + -5)] "(x − 4)(x − 5)"
+answer   expression x²-9x+20 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [-4x + -5x = -9x]
+step 3   Multiply the last terms.   [-4 × -5 = 20]
+miss     omitted-middle-terms = x²+20   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²+20x+20   Add the two middle products instead of multiplying them.
+
+--- foil · seed 12345 · difficulty 2
+prompt   Expand using FOIL.
+display  story [foil (x + 5)(x + -6)] "(x + 5)(x − 6)"
+answer   expression x²-x-30 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [5x + -6x = -1x]
+step 3   Multiply the last terms.   [5 × -6 = −30]
+miss     omitted-middle-terms = x²-30   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-30x-30   Add the two middle products instead of multiplying them.
+
+--- foil · seed 67890 · difficulty 2
+prompt   Expand using FOIL.
+display  story [foil (x + 3)(x + 5)] "(x + 3)(x + 5)"
+answer   expression x²+8x+15 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [3x + 5x = 8x]
+step 3   Multiply the last terms.   [3 × 5 = 15]
+miss     omitted-middle-terms = x²+15   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²+15x+15   Add the two middle products instead of multiplying them.
+
+--- foil · seed 424242 · difficulty 2
+prompt   Expand using FOIL.
+display  story [foil (x + 2)(x + -3)] "(x + 2)(x − 3)"
+answer   expression x²-x-6 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [2x + -3x = -1x]
+step 3   Multiply the last terms.   [2 × -3 = −6]
+miss     omitted-middle-terms = x²-6   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-6x-6   Add the two middle products instead of multiplying them.
+
+--- foil · seed 987654321 · difficulty 2
+prompt   Expand using FOIL.
+display  story [foil (x + 5)(x + -6)] "(x + 5)(x − 6)"
+answer   expression x²-x-30 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [5x + -6x = -1x]
+step 3   Multiply the last terms.   [5 × -6 = −30]
+miss     omitted-middle-terms = x²-30   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-30x-30   Add the two middle products instead of multiplying them.
+
+--- foil · seed 1 · difficulty 3
+prompt   Expand using FOIL.
+display  story [foil (x + -6)(x + -7)] "(x − 6)(x − 7)"
+answer   expression x²-13x+42 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [-6x + -7x = -13x]
+step 3   Multiply the last terms.   [-6 × -7 = 42]
+miss     omitted-middle-terms = x²+42   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²+42x+42   Add the two middle products instead of multiplying them.
+
+--- foil · seed 12345 · difficulty 3
+prompt   Expand using FOIL.
+display  story [foil (x + 7)(x + -8)] "(x + 7)(x − 8)"
+answer   expression x²-x-56 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [7x + -8x = -1x]
+step 3   Multiply the last terms.   [7 × -8 = −56]
+miss     omitted-middle-terms = x²-56   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-56x-56   Add the two middle products instead of multiplying them.
+
+--- foil · seed 67890 · difficulty 3
+prompt   Expand using FOIL.
+display  story [foil (x + 4)(x + 7)] "(x + 4)(x + 7)"
+answer   expression x²+11x+28 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [4x + 7x = 11x]
+step 3   Multiply the last terms.   [4 × 7 = 28]
+miss     omitted-middle-terms = x²+28   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²+28x+28   Add the two middle products instead of multiplying them.
+
+--- foil · seed 424242 · difficulty 3
+prompt   Expand using FOIL.
+display  story [foil (x + 3)(x + -5)] "(x + 3)(x − 5)"
+answer   expression x²-2x-15 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [3x + -5x = -2x]
+step 3   Multiply the last terms.   [3 × -5 = −15]
+miss     omitted-middle-terms = x²-15   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-15x-15   Add the two middle products instead of multiplying them.
+
+--- foil · seed 987654321 · difficulty 3
+prompt   Expand using FOIL.
+display  story [foil (x + 7)(x + -8)] "(x + 7)(x − 8)"
+answer   expression x²-x-56 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [7x + -8x = -1x]
+step 3   Multiply the last terms.   [7 × -8 = −56]
+miss     omitted-middle-terms = x²-56   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-56x-56   Add the two middle products instead of multiplying them.
+
+--- foil · seed 1 · difficulty 4
+prompt   Expand using FOIL.
+display  story [foil (x + -8)(x + -9)] "(x − 8)(x − 9)"
+answer   expression x²-17x+72 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [-8x + -9x = -17x]
+step 3   Multiply the last terms.   [-8 × -9 = 72]
+miss     omitted-middle-terms = x²+72   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²+72x+72   Add the two middle products instead of multiplying them.
+
+--- foil · seed 12345 · difficulty 4
+prompt   Expand using FOIL.
+display  story [foil (x + 10)(x + -11)] "(x + 10)(x − 11)"
+answer   expression x²-x-110 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [10x + -11x = -1x]
+step 3   Multiply the last terms.   [10 × -11 = −110]
+miss     omitted-middle-terms = x²-110   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-110x-110   Add the two middle products instead of multiplying them.
+
+--- foil · seed 67890 · difficulty 4
+prompt   Expand using FOIL.
+display  story [foil (x + 6)(x + 9)] "(x + 6)(x + 9)"
+answer   expression x²+15x+54 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [6x + 9x = 15x]
+step 3   Multiply the last terms.   [6 × 9 = 54]
+miss     omitted-middle-terms = x²+54   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²+54x+54   Add the two middle products instead of multiplying them.
+
+--- foil · seed 424242 · difficulty 4
+prompt   Expand using FOIL.
+display  story [foil (x + 4)(x + -6)] "(x + 4)(x − 6)"
+answer   expression x²-2x-24 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [4x + -6x = -2x]
+step 3   Multiply the last terms.   [4 × -6 = −24]
+miss     omitted-middle-terms = x²-24   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-24x-24   Add the two middle products instead of multiplying them.
+
+--- foil · seed 987654321 · difficulty 4
+prompt   Expand using FOIL.
+display  story [foil (x + 10)(x + -11)] "(x + 10)(x − 11)"
+answer   expression x²-x-110 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [10x + -11x = -1x]
+step 3   Multiply the last terms.   [10 × -11 = −110]
+miss     omitted-middle-terms = x²-110   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-110x-110   Add the two middle products instead of multiplying them.
+
+--- foil · seed 1 · difficulty 5
+prompt   Expand using FOIL.
+display  story [foil (x + -11)(x + -12)] "(x − 11)(x − 12)"
+answer   expression x²-23x+132 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [-11x + -12x = -23x]
+step 3   Multiply the last terms.   [-11 × -12 = 132]
+miss     omitted-middle-terms = x²+132   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²+132x+132   Add the two middle products instead of multiplying them.
+
+--- foil · seed 12345 · difficulty 5
+prompt   Expand using FOIL.
+display  story [foil (x + 14)(x + -15)] "(x + 14)(x − 15)"
+answer   expression x²-x-210 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [14x + -15x = -1x]
+step 3   Multiply the last terms.   [14 × -15 = −210]
+miss     omitted-middle-terms = x²-210   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-210x-210   Add the two middle products instead of multiplying them.
+
+--- foil · seed 67890 · difficulty 5
+prompt   Expand using FOIL.
+display  story [foil (x + 8)(x + 13)] "(x + 8)(x + 13)"
+answer   expression x²+21x+104 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [8x + 13x = 21x]
+step 3   Multiply the last terms.   [8 × 13 = 104]
+miss     omitted-middle-terms = x²+104   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²+104x+104   Add the two middle products instead of multiplying them.
+
+--- foil · seed 424242 · difficulty 5
+prompt   Expand using FOIL.
+display  story [foil (x + 6)(x + -9)] "(x + 6)(x − 9)"
+answer   expression x²-3x-54 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [6x + -9x = -3x]
+step 3   Multiply the last terms.   [6 × -9 = −54]
+miss     omitted-middle-terms = x²-54   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-54x-54   Add the two middle products instead of multiplying them.
+
+--- foil · seed 987654321 · difficulty 5
+prompt   Expand using FOIL.
+display  story [foil (x + 14)(x + -15)] "(x + 14)(x − 15)"
+answer   expression x²-x-210 (x, expanded, degree 2)
+input    expression
+hint     Multiply all four pairs, then combine the middle terms.
+step 1   Multiply the first terms.   [x × x = x²]
+step 2   Multiply the two middle pairs.   [14x + -15x = -1x]
+step 3   Multiply the last terms.   [14 × -15 = −210]
+miss     omitted-middle-terms = x²-210   The middle products combine into a linear term.
+miss     multiplied-middle-terms = x²-210x-210   Add the two middle products instead of multiplying them."
+`;
+
+exports[`Unit 18 recorded output: mult-monomial > matches the wording recorded when the skill landed 1`] = `
+"--- mult-monomial · seed 1 · difficulty 1
+prompt   Expand the product.
+display  story [mult-monomial 3x(1x + 3)] "3x(x² + 3)"
+answer   expression 3x²+9x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [3x × 1x = 3x²]
+step 2   Multiply the constant term.   [3x × 3 = 9x]
+miss     distributed-first-term-only = 3x²+3   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 3x+9   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 12345 · difficulty 1
+prompt   Expand the product.
+display  story [mult-monomial 4x(2x + 2)] "4x(2x² + 2)"
+answer   expression 8x²+8x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [4x × 2x = 8x²]
+step 2   Multiply the constant term.   [4x × 2 = 8x]
+miss     distributed-first-term-only = 8x²+2   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 8x+8   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 67890 · difficulty 1
+prompt   Expand the product.
+display  story [mult-monomial 3x(3x + 2)] "3x(3x² + 2)"
+answer   expression 9x²+6x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [3x × 3x = 9x²]
+step 2   Multiply the constant term.   [3x × 2 = 6x]
+miss     distributed-first-term-only = 9x²+2   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 9x+6   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 424242 · difficulty 1
+prompt   Expand the product.
+display  story [mult-monomial 2x(1x + 1)] "2x(x² + 1)"
+answer   expression 2x²+2x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [2x × 1x = 2x²]
+step 2   Multiply the constant term.   [2x × 1 = 2x]
+miss     distributed-first-term-only = 2x²+1   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 2x+2   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 987654321 · difficulty 1
+prompt   Expand the product.
+display  story [mult-monomial 4x(1x + 1)] "4x(x² + 1)"
+answer   expression 4x²+4x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [4x × 1x = 4x²]
+step 2   Multiply the constant term.   [4x × 1 = 4x]
+miss     distributed-first-term-only = 4x²+1   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 4x+4   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 1 · difficulty 2
+prompt   Expand the product.
+display  story [mult-monomial 4x(1x + 4)] "4x(x² + 4)"
+answer   expression 4x²+16x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [4x × 1x = 4x²]
+step 2   Multiply the constant term.   [4x × 4 = 16x]
+miss     distributed-first-term-only = 4x²+4   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 4x+16   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 12345 · difficulty 2
+prompt   Expand the product.
+display  story [mult-monomial 5x(2x + 3)] "5x(2x² + 3)"
+answer   expression 10x²+15x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [5x × 2x = 10x²]
+step 2   Multiply the constant term.   [5x × 3 = 15x]
+miss     distributed-first-term-only = 10x²+3   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 10x+15   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 67890 · difficulty 2
+prompt   Expand the product.
+display  story [mult-monomial 3x(4x + 3)] "3x(4x² + 3)"
+answer   expression 12x²+9x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [3x × 4x = 12x²]
+step 2   Multiply the constant term.   [3x × 3 = 9x]
+miss     distributed-first-term-only = 12x²+3   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 12x+9   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 424242 · difficulty 2
+prompt   Expand the product.
+display  story [mult-monomial 2x(2x + 2)] "2x(2x² + 2)"
+answer   expression 4x²+4x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [2x × 2x = 4x²]
+step 2   Multiply the constant term.   [2x × 2 = 4x]
+miss     distributed-first-term-only = 4x²+2   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 4x+4   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 987654321 · difficulty 2
+prompt   Expand the product.
+display  story [mult-monomial 5x(1x + 1)] "5x(x² + 1)"
+answer   expression 5x²+5x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [5x × 1x = 5x²]
+step 2   Multiply the constant term.   [5x × 1 = 5x]
+miss     distributed-first-term-only = 5x²+1   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 5x+5   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 1 · difficulty 3
+prompt   Expand the product.
+display  story [mult-monomial 6x(2x + 6)] "6x(2x² + 6)"
+answer   expression 12x²+36x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [6x × 2x = 12x²]
+step 2   Multiply the constant term.   [6x × 6 = 36x]
+miss     distributed-first-term-only = 12x²+6   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 12x+36   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 12345 · difficulty 3
+prompt   Expand the product.
+display  story [mult-monomial 7x(4x + 5)] "7x(4x² + 5)"
+answer   expression 28x²+35x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [7x × 4x = 28x²]
+step 2   Multiply the constant term.   [7x × 5 = 35x]
+miss     distributed-first-term-only = 28x²+5   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 28x+35   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 67890 · difficulty 3
+prompt   Expand the product.
+display  story [mult-monomial 4x(6x + 4)] "4x(6x² + 4)"
+answer   expression 24x²+16x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [4x × 6x = 24x²]
+step 2   Multiply the constant term.   [4x × 4 = 16x]
+miss     distributed-first-term-only = 24x²+4   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 24x+16   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 424242 · difficulty 3
+prompt   Expand the product.
+display  story [mult-monomial 3x(3x + 3)] "3x(3x² + 3)"
+answer   expression 9x²+9x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [3x × 3x = 9x²]
+step 2   Multiply the constant term.   [3x × 3 = 9x]
+miss     distributed-first-term-only = 9x²+3   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 9x+9   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 987654321 · difficulty 3
+prompt   Expand the product.
+display  story [mult-monomial 7x(3x + 2)] "7x(3x² + 2)"
+answer   expression 21x²+14x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [7x × 3x = 21x²]
+step 2   Multiply the constant term.   [7x × 2 = 14x]
+miss     distributed-first-term-only = 21x²+2   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 21x+14   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 1 · difficulty 4
+prompt   Expand the product.
+display  story [mult-monomial 7x(2x + 8)] "7x(2x² + 8)"
+answer   expression 14x²+56x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [7x × 2x = 14x²]
+step 2   Multiply the constant term.   [7x × 8 = 56x]
+miss     distributed-first-term-only = 14x²+8   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 14x+56   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 12345 · difficulty 4
+prompt   Expand the product.
+display  story [mult-monomial 9x(5x + 7)] "9x(5x² + 7)"
+answer   expression 45x²+63x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [9x × 5x = 45x²]
+step 2   Multiply the constant term.   [9x × 7 = 63x]
+miss     distributed-first-term-only = 45x²+7   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 45x+63   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 67890 · difficulty 4
+prompt   Expand the product.
+display  story [mult-monomial 5x(9x + 6)] "5x(9x² + 6)"
+answer   expression 45x²+30x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [5x × 9x = 45x²]
+step 2   Multiply the constant term.   [5x × 6 = 30x]
+miss     distributed-first-term-only = 45x²+6   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 45x+30   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 424242 · difficulty 4
+prompt   Expand the product.
+display  story [mult-monomial 3x(4x + 4)] "3x(4x² + 4)"
+answer   expression 12x²+12x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [3x × 4x = 12x²]
+step 2   Multiply the constant term.   [3x × 4 = 12x]
+miss     distributed-first-term-only = 12x²+4   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 12x+12   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 987654321 · difficulty 4
+prompt   Expand the product.
+display  story [mult-monomial 9x(3x + 2)] "9x(3x² + 2)"
+answer   expression 27x²+18x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [9x × 3x = 27x²]
+step 2   Multiply the constant term.   [9x × 2 = 18x]
+miss     distributed-first-term-only = 27x²+2   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 27x+18   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 1 · difficulty 5
+prompt   Expand the product.
+display  story [mult-monomial 9x(3x + 11)] "9x(3x² + 11)"
+answer   expression 27x²+99x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [9x × 3x = 27x²]
+step 2   Multiply the constant term.   [9x × 11 = 99x]
+miss     distributed-first-term-only = 27x²+11   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 27x+99   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 12345 · difficulty 5
+prompt   Expand the product.
+display  story [mult-monomial 12x(7x + 10)] "12x(7x² + 10)"
+answer   expression 84x²+120x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [12x × 7x = 84x²]
+step 2   Multiply the constant term.   [12x × 10 = 120x]
+miss     distributed-first-term-only = 84x²+10   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 84x+120   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 67890 · difficulty 5
+prompt   Expand the product.
+display  story [mult-monomial 7x(12x + 8)] "7x(12x² + 8)"
+answer   expression 84x²+56x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [7x × 12x = 84x²]
+step 2   Multiply the constant term.   [7x × 8 = 56x]
+miss     distributed-first-term-only = 84x²+8   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 84x+56   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 424242 · difficulty 5
+prompt   Expand the product.
+display  story [mult-monomial 5x(6x + 5)] "5x(6x² + 5)"
+answer   expression 30x²+25x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [5x × 6x = 30x²]
+step 2   Multiply the constant term.   [5x × 5 = 25x]
+miss     distributed-first-term-only = 30x²+5   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 30x+25   The outside x joins the inside x to make x².
+
+--- mult-monomial · seed 987654321 · difficulty 5
+prompt   Expand the product.
+display  story [mult-monomial 12x(5x + 3)] "12x(5x² + 3)"
+answer   expression 60x²+36x (x, expanded, degree 2)
+input    expression
+hint     Multiply the outside monomial by each term inside.
+step 1   Multiply the x terms.   [12x × 5x = 60x²]
+step 2   Multiply the constant term.   [12x × 3 = 36x]
+miss     distributed-first-term-only = 60x²+3   Multiply the outside term by both terms inside.
+miss     lost-variable-degree = 60x+36   The outside x joins the inside x to make x²."
+`;
+
+exports[`Unit 18 recorded output: sub-polynomials > matches the wording recorded when the skill landed 1`] = `
+"--- sub-polynomials · seed 1 · difficulty 1
+prompt   Subtract the second polynomial from the first.
+display  story [sub (2, 2, 3) − (3, 4, 4)] "(2x² + 2x + 3) − (3x² + 4x + 4)"
+answer   expression -x²-2x-1 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [3x²+4x+4]
+step 2   Subtract matching square terms.   [2 − 3 = -1]
+step 3   Combine the linear and constant terms.   [-2x + -1]
+miss     subtracted-first-term-only = -x²+6x+7   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 5x²+6x+7   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 12345 · difficulty 1
+prompt   Subtract the second polynomial from the first.
+display  story [sub (4, 4, 3) − (3, 2, 2)] "(4x² + 4x + 3) − (3x² + 2x + 2)"
+answer   expression x²+2x+1 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [3x²+2x+2]
+step 2   Subtract matching square terms.   [4 − 3 = 1]
+step 3   Combine the linear and constant terms.   [2x + 1]
+miss     subtracted-first-term-only = x²+6x+5   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 7x²+6x+5   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 67890 · difficulty 1
+prompt   Subtract the second polynomial from the first.
+display  story [sub (4, 3, 4) − (2, 2, 1)] "(4x² + 3x + 4) − (2x² + 2x + 1)"
+answer   expression 2x²+x+3 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [2x²+2x+1]
+step 2   Subtract matching square terms.   [4 − 2 = 2]
+step 3   Combine the linear and constant terms.   [1x + 3]
+miss     subtracted-first-term-only = 2x²+5x+5   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 6x²+5x+5   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 424242 · difficulty 1
+prompt   Subtract the second polynomial from the first.
+display  story [sub (2, 3, 4) − (1, 1, 2)] "(2x² + 3x + 4) − (x² + x + 2)"
+answer   expression x²+2x+2 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [x²+x+2]
+step 2   Subtract matching square terms.   [2 − 1 = 1]
+step 3   Combine the linear and constant terms.   [2x + 2]
+miss     subtracted-first-term-only = x²+4x+6   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 3x²+4x+6   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 987654321 · difficulty 1
+prompt   Subtract the second polynomial from the first.
+display  story [sub (4, 4, 3) − (3, 1, 2)] "(4x² + 4x + 3) − (3x² + x + 2)"
+answer   expression x²+3x+1 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [3x²+x+2]
+step 2   Subtract matching square terms.   [4 − 3 = 1]
+step 3   Combine the linear and constant terms.   [3x + 1]
+miss     subtracted-first-term-only = x²+5x+5   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 7x²+5x+5   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 1 · difficulty 2
+prompt   Subtract the second polynomial from the first.
+display  story [sub (4, 3, 5) − (5, 6, 6)] "(4x² + 3x + 5) − (5x² + 6x + 6)"
+answer   expression -x²-3x-1 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [5x²+6x+6]
+step 2   Subtract matching square terms.   [4 − 5 = -1]
+step 3   Combine the linear and constant terms.   [-3x + -1]
+miss     subtracted-first-term-only = -x²+9x+11   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 9x²+9x+11   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 12345 · difficulty 2
+prompt   Subtract the second polynomial from the first.
+display  story [sub (6, 6, 5) − (5, 3, 3)] "(6x² + 6x + 5) − (5x² + 3x + 3)"
+answer   expression x²+3x+2 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [5x²+3x+3]
+step 2   Subtract matching square terms.   [6 − 5 = 1]
+step 3   Combine the linear and constant terms.   [3x + 2]
+miss     subtracted-first-term-only = x²+9x+8   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 11x²+9x+8   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 67890 · difficulty 2
+prompt   Subtract the second polynomial from the first.
+display  story [sub (5, 4, 5) − (2, 2, 1)] "(5x² + 4x + 5) − (2x² + 2x + 1)"
+answer   expression 3x²+2x+4 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [2x²+2x+1]
+step 2   Subtract matching square terms.   [5 − 2 = 3]
+step 3   Combine the linear and constant terms.   [2x + 4]
+miss     subtracted-first-term-only = 3x²+6x+6   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 7x²+6x+6   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 424242 · difficulty 2
+prompt   Subtract the second polynomial from the first.
+display  story [sub (3, 5, 5) − (1, 1, 2)] "(3x² + 5x + 5) − (x² + x + 2)"
+answer   expression 2x²+4x+3 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [x²+x+2]
+step 2   Subtract matching square terms.   [3 − 1 = 2]
+step 3   Combine the linear and constant terms.   [4x + 3]
+miss     subtracted-first-term-only = 2x²+6x+7   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 4x²+6x+7   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 987654321 · difficulty 2
+prompt   Subtract the second polynomial from the first.
+display  story [sub (6, 6, 5) − (5, 1, 4)] "(6x² + 6x + 5) − (5x² + x + 4)"
+answer   expression x²+5x+1 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [5x²+x+4]
+step 2   Subtract matching square terms.   [6 − 5 = 1]
+step 3   Combine the linear and constant terms.   [5x + 1]
+miss     subtracted-first-term-only = x²+7x+9   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 11x²+7x+9   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 1 · difficulty 3
+prompt   Subtract the second polynomial from the first.
+display  story [sub (6, 5, 8) − (7, 9, 9)] "(6x² + 5x + 8) − (7x² + 9x + 9)"
+answer   expression -x²-4x-1 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [7x²+9x+9]
+step 2   Subtract matching square terms.   [6 − 7 = -1]
+step 3   Combine the linear and constant terms.   [-4x + -1]
+miss     subtracted-first-term-only = -x²+14x+17   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 13x²+14x+17   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 12345 · difficulty 3
+prompt   Subtract the second polynomial from the first.
+display  story [sub (9, 9, 7) − (8, 5, 5)] "(9x² + 9x + 7) − (8x² + 5x + 5)"
+answer   expression x²+4x+2 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [8x²+5x+5]
+step 2   Subtract matching square terms.   [9 − 8 = 1]
+step 3   Combine the linear and constant terms.   [4x + 2]
+miss     subtracted-first-term-only = x²+14x+12   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 17x²+14x+12   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 67890 · difficulty 3
+prompt   Subtract the second polynomial from the first.
+display  story [sub (7, 6, 8) − (4, 4, 2)] "(7x² + 6x + 8) − (4x² + 4x + 2)"
+answer   expression 3x²+2x+6 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [4x²+4x+2]
+step 2   Subtract matching square terms.   [7 − 4 = 3]
+step 3   Combine the linear and constant terms.   [2x + 6]
+miss     subtracted-first-term-only = 3x²+10x+10   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 11x²+10x+10   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 424242 · difficulty 3
+prompt   Subtract the second polynomial from the first.
+display  story [sub (4, 7, 8) − (2, 3, 4)] "(4x² + 7x + 8) − (2x² + 3x + 4)"
+answer   expression 2x²+4x+4 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [2x²+3x+4]
+step 2   Subtract matching square terms.   [4 − 2 = 2]
+step 3   Combine the linear and constant terms.   [4x + 4]
+miss     subtracted-first-term-only = 2x²+10x+12   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 6x²+10x+12   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 987654321 · difficulty 3
+prompt   Subtract the second polynomial from the first.
+display  story [sub (9, 9, 8) − (8, 2, 6)] "(9x² + 9x + 8) − (8x² + 2x + 6)"
+answer   expression x²+7x+2 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [8x²+2x+6]
+step 2   Subtract matching square terms.   [9 − 8 = 1]
+step 3   Combine the linear and constant terms.   [7x + 2]
+miss     subtracted-first-term-only = x²+11x+14   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 17x²+11x+14   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 1 · difficulty 4
+prompt   Subtract the second polynomial from the first.
+display  story [sub (8, 7, 12) − (9, 13, 13)] "(8x² + 7x + 12) − (9x² + 13x + 13)"
+answer   expression -x²-6x-1 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [9x²+13x+13]
+step 2   Subtract matching square terms.   [8 − 9 = -1]
+step 3   Combine the linear and constant terms.   [-6x + -1]
+miss     subtracted-first-term-only = -x²+20x+25   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 17x²+20x+25   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 12345 · difficulty 4
+prompt   Subtract the second polynomial from the first.
+display  story [sub (13, 12, 10) − (12, 7, 7)] "(13x² + 12x + 10) − (12x² + 7x + 7)"
+answer   expression x²+5x+3 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [12x²+7x+7]
+step 2   Subtract matching square terms.   [13 − 12 = 1]
+step 3   Combine the linear and constant terms.   [5x + 3]
+miss     subtracted-first-term-only = x²+19x+17   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 25x²+19x+17   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 67890 · difficulty 4
+prompt   Subtract the second polynomial from the first.
+display  story [sub (11, 8, 11) − (6, 5, 2)] "(11x² + 8x + 11) − (6x² + 5x + 2)"
+answer   expression 5x²+3x+9 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [6x²+5x+2]
+step 2   Subtract matching square terms.   [11 − 6 = 5]
+step 3   Combine the linear and constant terms.   [3x + 9]
+miss     subtracted-first-term-only = 5x²+13x+13   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 17x²+13x+13   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 424242 · difficulty 4
+prompt   Subtract the second polynomial from the first.
+display  story [sub (6, 10, 10) − (3, 4, 5)] "(6x² + 10x + 10) − (3x² + 4x + 5)"
+answer   expression 3x²+6x+5 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [3x²+4x+5]
+step 2   Subtract matching square terms.   [6 − 3 = 3]
+step 3   Combine the linear and constant terms.   [6x + 5]
+miss     subtracted-first-term-only = 3x²+14x+15   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 9x²+14x+15   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 987654321 · difficulty 4
+prompt   Subtract the second polynomial from the first.
+display  story [sub (13, 13, 10) − (12, 2, 8)] "(13x² + 13x + 10) − (12x² + 2x + 8)"
+answer   expression x²+11x+2 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [12x²+2x+8]
+step 2   Subtract matching square terms.   [13 − 12 = 1]
+step 3   Combine the linear and constant terms.   [11x + 2]
+miss     subtracted-first-term-only = x²+15x+18   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 25x²+15x+18   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 1 · difficulty 5
+prompt   Subtract the second polynomial from the first.
+display  story [sub (12, 10, 17) − (13, 18, 18)] "(12x² + 10x + 17) − (13x² + 18x + 18)"
+answer   expression -x²-8x-1 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [13x²+18x+18]
+step 2   Subtract matching square terms.   [12 − 13 = -1]
+step 3   Combine the linear and constant terms.   [-8x + -1]
+miss     subtracted-first-term-only = -x²+28x+35   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 25x²+28x+35   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 12345 · difficulty 5
+prompt   Subtract the second polynomial from the first.
+display  story [sub (18, 17, 13) − (17, 10, 10)] "(18x² + 17x + 13) − (17x² + 10x + 10)"
+answer   expression x²+7x+3 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [17x²+10x+10]
+step 2   Subtract matching square terms.   [18 − 17 = 1]
+step 3   Combine the linear and constant terms.   [7x + 3]
+miss     subtracted-first-term-only = x²+27x+23   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 35x²+27x+23   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 67890 · difficulty 5
+prompt   Subtract the second polynomial from the first.
+display  story [sub (14, 12, 15) − (8, 8, 3)] "(14x² + 12x + 15) − (8x² + 8x + 3)"
+answer   expression 6x²+4x+12 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [8x²+8x+3]
+step 2   Subtract matching square terms.   [14 − 8 = 6]
+step 3   Combine the linear and constant terms.   [4x + 12]
+miss     subtracted-first-term-only = 6x²+20x+18   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 22x²+20x+18   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 424242 · difficulty 5
+prompt   Subtract the second polynomial from the first.
+display  story [sub (8, 14, 15) − (4, 5, 8)] "(8x² + 14x + 15) − (4x² + 5x + 8)"
+answer   expression 4x²+9x+7 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [4x²+5x+8]
+step 2   Subtract matching square terms.   [8 − 4 = 4]
+step 3   Combine the linear and constant terms.   [9x + 7]
+miss     subtracted-first-term-only = 4x²+19x+23   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 12x²+19x+23   Subtract the second polynomial instead of adding it.
+
+--- sub-polynomials · seed 987654321 · difficulty 5
+prompt   Subtract the second polynomial from the first.
+display  story [sub (18, 17, 15) − (17, 3, 12)] "(18x² + 17x + 15) − (17x² + 3x + 12)"
+answer   expression x²+14x+3 (x, expanded, degree 2)
+input    expression
+hint     Change every sign in the second polynomial before combining.
+step 1   Distribute the minus to every term.   [17x²+3x+12]
+step 2   Subtract matching square terms.   [18 − 17 = 1]
+step 3   Combine the linear and constant terms.   [14x + 3]
+miss     subtracted-first-term-only = x²+20x+27   The minus applies to every term in the second polynomial.
+miss     added-polynomials = 35x²+20x+27   Subtract the second polynomial instead of adding it."
+`;

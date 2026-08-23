@@ -106,6 +106,29 @@ describe('ProblemView', () => {
     expect(html).toContain('whitespace-nowrap')
   })
 
+  it('wraps a long polynomial rewrite at term boundaries with a bounded entry slot', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'story',
+          text: '(18x² + 17x + 16) + (15x² + 14x + 13)',
+          polynomial: {
+            operation: 'add',
+            left: { quadratic: 18, linear: 17, constant: 16 },
+            right: { quadratic: 15, linear: 14, constant: 13 },
+          },
+        }}
+        entry="15x²+29x+27"
+        entryMode="expression"
+      />,
+    )
+
+    expect(html).toContain('whitespace-normal')
+    expect(html).toContain('max-w-full')
+    expect(html).toContain('overflow-hidden')
+    expect(html).toContain('text-2xl')
+  })
+
   it('bounds and wraps a selected choice label instead of sizing it like digits', () => {
     const html = renderToStaticMarkup(
       <ProblemView

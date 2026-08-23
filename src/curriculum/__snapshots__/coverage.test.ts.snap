@@ -35,6 +35,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "add-neg-pos": [
     "compare-negatives",
   ],
+  "add-polynomials": [
+    "system-words",
+  ],
   "add-tens": [
     "add-facts",
   ],
@@ -161,6 +164,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "factor-gcf": [
     "distribute-negative",
   ],
+  "factor-gcf-poly": [
+    "foil",
+  ],
+  "factor-trinomial": [
+    "factor-gcf-poly",
+  ],
   "factors": [
     "long-div-2digit",
   ],
@@ -172,6 +181,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "flip-the-sign": [
     "solve-multi-step-ineq",
+  ],
+  "foil": [
+    "mult-monomial",
   ],
   "fraction-meaning": [
     "negatives-mixed",
@@ -235,6 +247,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "mult-meaning": [
     "sub-words",
+  ],
+  "mult-monomial": [
+    "sub-polynomials",
   ],
   "mult-negatives": [
     "sub-negatives",
@@ -395,6 +410,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "sub-negatives": [
     "add-two-negs",
+  ],
+  "sub-polynomials": [
+    "add-polynomials",
   ],
   "sub-tens": [
     "sub-facts",

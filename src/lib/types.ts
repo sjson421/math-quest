@@ -416,6 +416,46 @@ export type AlgebraData =
    */
   | { operation: 'factor-gcf'; factor: number; coefficient: number; constant: number }
 
+/** The visible source quantities behind Unit 18's polynomial rewrites. */
+export type PolynomialCoefficients = {
+  quadratic: number
+  linear: number
+  constant: number
+}
+
+/**
+ * Unit 18's operations stay separate from `AlgebraData`: the same-looking
+ * expression display asks a different question, and each arm carries only
+ * the operands that appear in that polynomial operation.
+ */
+export type PolynomialData =
+  | {
+      operation: 'add' | 'sub'
+      left: PolynomialCoefficients
+      right: PolynomialCoefficients
+    }
+  | {
+      operation: 'mult-monomial'
+      outerCoefficient: number
+      innerLinear: number
+      innerConstant: number
+    }
+  | {
+      operation: 'foil'
+      leftConstant: number
+      rightConstant: number
+    }
+  | {
+      operation: 'factor-gcf-poly'
+      quadratic: number
+      linear: number
+    }
+  | {
+      operation: 'factor-trinomial'
+      linear: number
+      constant: number
+    }
+
 /**
  * The source quantities behind Unit 14's equation displays.
  *
@@ -727,16 +767,17 @@ export type Display =
    * no such frame.
    */
   | ({ kind: 'story'; text: string } & (
-      | { operands: number[]; operator: Operator; percent?: never; ratio?: never; algebra?: never; equation?: never }
-      | { percent: PercentData; operands?: never; operator?: never; ratio?: never; algebra?: never; equation?: never }
-      | { ratio: RatioData; operands?: never; operator?: never; percent?: never; algebra?: never; equation?: never }
-      | { algebra: AlgebraData; operands?: never; operator?: never; percent?: never; ratio?: never; equation?: never }
+      | { operands: number[]; operator: Operator; percent?: never; ratio?: never; algebra?: never; polynomial?: never; equation?: never }
+      | { percent: PercentData; operands?: never; operator?: never; ratio?: never; algebra?: never; polynomial?: never; equation?: never }
+      | { ratio: RatioData; operands?: never; operator?: never; percent?: never; algebra?: never; polynomial?: never; equation?: never }
+      | { algebra: AlgebraData; operands?: never; operator?: never; percent?: never; ratio?: never; polynomial?: never; equation?: never }
+      | { polynomial: PolynomialData; operands?: never; operator?: never; percent?: never; ratio?: never; algebra?: never; equation?: never }
       /**
        * A situation whose structure is an equation. `equation-words` is the
        * consumer: its sentence states two operations applied in sequence, and
        * `operands` with one `operator` states exactly one by construction.
        */
-      | { equation: EquationData; operands?: never; operator?: never; percent?: never; ratio?: never; algebra?: never }
+      | { equation: EquationData; operands?: never; operator?: never; percent?: never; ratio?: never; algebra?: never; polynomial?: never }
     ))
   /** Structured notation with the one complete name assistive technology reads. */
   | ({

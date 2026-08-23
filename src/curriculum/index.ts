@@ -31,6 +31,7 @@ import { unit14 } from './unit-14-linear-equations'
 import { unit15 } from './unit-15-inequalities'
 import { unit16 } from './unit-16-coordinate-plane-lines'
 import { unit17 } from './unit-17-systems-equations'
+import { unit18 } from './unit-18-polynomials'
 import {
   indexSkills,
   resolveCourseTree,
@@ -65,6 +66,7 @@ export const allSkills: SkillGenerator[] = [
   ...unit15,
   ...unit16,
   ...unit17,
+  ...unit18,
 ]
 
 /**

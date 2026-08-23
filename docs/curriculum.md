@@ -408,12 +408,12 @@ in lowest terms. Fraction operations wait for Unit 8.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 18.1 | `add-polynomials` | | |
-| 18.2 | `sub-polynomials` | | ⚠️ distributing the minus |
-| 18.3 | `mult-monomial` | | |
-| 18.4 | `foil` | | |
-| 18.5 | `factor-gcf-poly` | | |
-| 18.6 | `factor-trinomial` | | ⚠️ **major wall** |
+| 18.1 | `add-polynomials` | | ✅ |
+| 18.2 | `sub-polynomials` | | ✅ · ⚠️ distributing the minus |
+| 18.3 | `mult-monomial` | | ✅ |
+| 18.4 | `foil` | | ✅ |
+| 18.5 | `factor-gcf-poly` | | ✅ |
+| 18.6 | `factor-trinomial` | | ✅ · ⚠️ **major wall** |
 | 18.7 | `difference-of-squares` | | |
 | 18.8 | `solve-by-factoring` | Zero product | |
 | 18.9 | `quadratic-formula` | | on the GED formula sheet |
@@ -519,7 +519,7 @@ Ship by stage; each stage is independently useful.
    and the pad offers the slash. **Diagram rendering** is built for shaded bars, circles and
    grids, so Stage D's capability infrastructure is complete.
 4. **Stage E** (34) — complete; the **expression input mode** it needed is built.
-5. **Stage F** (28) — the **coordinate-plane input** it needs is built; all ten Unit 16 and all four Unit 17 skills are playable.
+5. **Stage F** (28) — the **coordinate-plane input** it needs is built; all ten Unit 16, all four Unit 17, and the first six Unit 18 skills are playable.
 6. **Stage G** (22) — reuses built **diagram rendering** for shapes and still needs charts.
 7. **Stage H** (6) — needs timed mode and a score estimator.
 

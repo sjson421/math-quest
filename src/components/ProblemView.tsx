@@ -145,12 +145,20 @@ function InlineView({
  * rendered in 6xl digits reads as an eye test.
  */
 function StoryView({ display, entry, entryMode }: { display: Of<'story'> } & EntryProps) {
+  const polynomialRewrite = display.polynomial !== undefined && entryMode === 'expression'
+
   return (
-    <div className="flex flex-col items-center gap-6 max-w-md text-6xl">
-      <p className="text-2xl font-medium leading-snug text-center text-balance">
+    <div className={`flex w-full flex-col items-center gap-6 max-w-md ${polynomialRewrite ? 'text-2xl' : 'text-6xl'}`}>
+      <p
+        className={`font-medium leading-snug text-center text-balance ${
+          polynomialRewrite ? 'max-w-full whitespace-normal' : 'text-2xl'
+        }`}
+      >
         {display.text}
       </p>
-      <EntrySlot value={entry} mode={entryMode} />
+      <div className={polynomialRewrite ? 'max-w-full overflow-hidden' : undefined}>
+        <EntrySlot value={entry} mode={entryMode} />
+      </div>
     </div>
   )
 }
