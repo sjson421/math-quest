@@ -4,9 +4,8 @@ exports[`recorded output: combine-like-terms > matches the wording recorded when
 "--- combine-like-terms · seed 1 · difficulty 1
 prompt   Combine the like terms.
 display  inline "3x + x + 3" [combine-like-terms 3x + 1x + 3]
-answer   expression 4x+3 (x, expanded)
+answer   expression 4x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [3x + x = 4x]
 step 2   Keep the constant separate.   [4x + 3]
@@ -16,9 +15,8 @@ miss     dropped-variable = 7   The x terms stay attached to x; only add the mat
 --- combine-like-terms · seed 12345 · difficulty 1
 prompt   Combine the like terms.
 display  inline "4x + 2x + 3" [combine-like-terms 4x + 2x + 3]
-answer   expression 6x+3 (x, expanded)
+answer   expression 6x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [4x + 2x = 6x]
 step 2   Keep the constant separate.   [6x + 3]
@@ -28,9 +26,8 @@ miss     dropped-variable = 9   The x terms stay attached to x; only add the mat
 --- combine-like-terms · seed 67890 · difficulty 1
 prompt   Combine the like terms.
 display  inline "2x + 3x + 2" [combine-like-terms 2x + 3x + 2]
-answer   expression 5x+2 (x, expanded)
+answer   expression 5x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [2x + 3x = 5x]
 step 2   Keep the constant separate.   [5x + 2]
@@ -40,9 +37,8 @@ miss     dropped-variable = 7   The x terms stay attached to x; only add the mat
 --- combine-like-terms · seed 424242 · difficulty 1
 prompt   Combine the like terms.
 display  inline "x + x + 1" [combine-like-terms 1x + 1x + 1]
-answer   expression 2x+1 (x, expanded)
+answer   expression 2x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [x + x = 2x]
 step 2   Keep the constant separate.   [2x + 1]
@@ -52,9 +48,8 @@ miss     dropped-variable = 3   The x terms stay attached to x; only add the mat
 --- combine-like-terms · seed 987654321 · difficulty 1
 prompt   Combine the like terms.
 display  inline "4x + x + 1" [combine-like-terms 4x + 1x + 1]
-answer   expression 5x+1 (x, expanded)
+answer   expression 5x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [4x + x = 5x]
 step 2   Keep the constant separate.   [5x + 1]
@@ -64,9 +59,8 @@ miss     dropped-variable = 6   The x terms stay attached to x; only add the mat
 --- combine-like-terms · seed 1 · difficulty 2
 prompt   Combine the like terms.
 display  inline "4x + 2x + 5" [combine-like-terms 4x + 2x + 5]
-answer   expression 6x+5 (x, expanded)
+answer   expression 6x+5 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [4x + 2x = 6x]
 step 2   Keep the constant separate.   [6x + 5]
@@ -76,9 +70,8 @@ miss     dropped-variable = 11   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 12345 · difficulty 2
 prompt   Combine the like terms.
 display  inline "5x + 3x + 4" [combine-like-terms 5x + 3x + 4]
-answer   expression 8x+4 (x, expanded)
+answer   expression 8x+4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [5x + 3x = 8x]
 step 2   Keep the constant separate.   [8x + 4]
@@ -88,9 +81,8 @@ miss     dropped-variable = 12   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 67890 · difficulty 2
 prompt   Combine the like terms.
 display  inline "3x + 4x + 4" [combine-like-terms 3x + 4x + 4]
-answer   expression 7x+4 (x, expanded)
+answer   expression 7x+4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [3x + 4x = 7x]
 step 2   Keep the constant separate.   [7x + 4]
@@ -100,9 +92,8 @@ miss     dropped-variable = 11   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 424242 · difficulty 2
 prompt   Combine the like terms.
 display  inline "2x + 2x + 3" [combine-like-terms 2x + 2x + 3]
-answer   expression 4x+3 (x, expanded)
+answer   expression 4x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [2x + 2x = 4x]
 step 2   Keep the constant separate.   [4x + 3]
@@ -112,9 +103,8 @@ miss     dropped-variable = 7   The x terms stay attached to x; only add the mat
 --- combine-like-terms · seed 987654321 · difficulty 2
 prompt   Combine the like terms.
 display  inline "5x + 2x + 2" [combine-like-terms 5x + 2x + 2]
-answer   expression 7x+2 (x, expanded)
+answer   expression 7x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [5x + 2x = 7x]
 step 2   Keep the constant separate.   [7x + 2]
@@ -124,9 +114,8 @@ miss     dropped-variable = 9   The x terms stay attached to x; only add the mat
 --- combine-like-terms · seed 1 · difficulty 3
 prompt   Combine the like terms.
 display  inline "5x + 2x + 6" [combine-like-terms 5x + 2x + 6]
-answer   expression 7x+6 (x, expanded)
+answer   expression 7x+6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [5x + 2x = 7x]
 step 2   Keep the constant separate.   [7x + 6]
@@ -136,9 +125,8 @@ miss     dropped-variable = 13   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 12345 · difficulty 3
 prompt   Combine the like terms.
 display  inline "6x + 3x + 6" [combine-like-terms 6x + 3x + 6]
-answer   expression 9x+6 (x, expanded)
+answer   expression 9x+6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [6x + 3x = 9x]
 step 2   Keep the constant separate.   [9x + 6]
@@ -148,9 +136,8 @@ miss     dropped-variable = 15   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 67890 · difficulty 3
 prompt   Combine the like terms.
 display  inline "3x + 4x + 5" [combine-like-terms 3x + 4x + 5]
-answer   expression 7x+5 (x, expanded)
+answer   expression 7x+5 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [3x + 4x = 7x]
 step 2   Keep the constant separate.   [7x + 5]
@@ -160,9 +147,8 @@ miss     dropped-variable = 12   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 424242 · difficulty 3
 prompt   Combine the like terms.
 display  inline "2x + 3x + 4" [combine-like-terms 2x + 3x + 4]
-answer   expression 5x+4 (x, expanded)
+answer   expression 5x+4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [2x + 3x = 5x]
 step 2   Keep the constant separate.   [5x + 4]
@@ -172,9 +158,8 @@ miss     dropped-variable = 9   The x terms stay attached to x; only add the mat
 --- combine-like-terms · seed 987654321 · difficulty 3
 prompt   Combine the like terms.
 display  inline "6x + 2x + 3" [combine-like-terms 6x + 2x + 3]
-answer   expression 8x+3 (x, expanded)
+answer   expression 8x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [6x + 2x = 8x]
 step 2   Keep the constant separate.   [8x + 3]
@@ -184,9 +169,8 @@ miss     dropped-variable = 11   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 1 · difficulty 4
 prompt   Combine the like terms.
 display  inline "6x + 3x + 8" [combine-like-terms 6x + 3x + 8]
-answer   expression 9x+8 (x, expanded)
+answer   expression 9x+8 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [6x + 3x = 9x]
 step 2   Keep the constant separate.   [9x + 8]
@@ -196,9 +180,8 @@ miss     dropped-variable = 17   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 12345 · difficulty 4
 prompt   Combine the like terms.
 display  inline "7x + 4x + 7" [combine-like-terms 7x + 4x + 7]
-answer   expression 11x+7 (x, expanded)
+answer   expression 11x+7 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [7x + 4x = 11x]
 step 2   Keep the constant separate.   [11x + 7]
@@ -208,9 +191,8 @@ miss     dropped-variable = 18   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 67890 · difficulty 4
 prompt   Combine the like terms.
 display  inline "4x + 5x + 6" [combine-like-terms 4x + 5x + 6]
-answer   expression 9x+6 (x, expanded)
+answer   expression 9x+6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [4x + 5x = 9x]
 step 2   Keep the constant separate.   [9x + 6]
@@ -220,9 +202,8 @@ miss     dropped-variable = 15   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 424242 · difficulty 4
 prompt   Combine the like terms.
 display  inline "3x + 4x + 5" [combine-like-terms 3x + 4x + 5]
-answer   expression 7x+5 (x, expanded)
+answer   expression 7x+5 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [3x + 4x = 7x]
 step 2   Keep the constant separate.   [7x + 5]
@@ -232,9 +213,8 @@ miss     dropped-variable = 12   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 987654321 · difficulty 4
 prompt   Combine the like terms.
 display  inline "7x + 3x + 4" [combine-like-terms 7x + 3x + 4]
-answer   expression 10x+4 (x, expanded)
+answer   expression 10x+4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [7x + 3x = 10x]
 step 2   Keep the constant separate.   [10x + 4]
@@ -244,9 +224,8 @@ miss     dropped-variable = 14   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 1 · difficulty 5
 prompt   Combine the like terms.
 display  inline "7x + 3x + 9" [combine-like-terms 7x + 3x + 9]
-answer   expression 10x+9 (x, expanded)
+answer   expression 10x+9 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [7x + 3x = 10x]
 step 2   Keep the constant separate.   [10x + 9]
@@ -256,9 +235,8 @@ miss     dropped-variable = 19   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 12345 · difficulty 5
 prompt   Combine the like terms.
 display  inline "9x + 5x + 8" [combine-like-terms 9x + 5x + 8]
-answer   expression 14x+8 (x, expanded)
+answer   expression 14x+8 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [9x + 5x = 14x]
 step 2   Keep the constant separate.   [14x + 8]
@@ -268,9 +246,8 @@ miss     dropped-variable = 22   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 67890 · difficulty 5
 prompt   Combine the like terms.
 display  inline "5x + 7x + 7" [combine-like-terms 5x + 7x + 7]
-answer   expression 12x+7 (x, expanded)
+answer   expression 12x+7 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [5x + 7x = 12x]
 step 2   Keep the constant separate.   [12x + 7]
@@ -280,9 +257,8 @@ miss     dropped-variable = 19   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 424242 · difficulty 5
 prompt   Combine the like terms.
 display  inline "3x + 4x + 6" [combine-like-terms 3x + 4x + 6]
-answer   expression 7x+6 (x, expanded)
+answer   expression 7x+6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [3x + 4x = 7x]
 step 2   Keep the constant separate.   [7x + 6]
@@ -292,9 +268,8 @@ miss     dropped-variable = 13   The x terms stay attached to x; only add the ma
 --- combine-like-terms · seed 987654321 · difficulty 5
 prompt   Combine the like terms.
 display  inline "9x + 3x + 5" [combine-like-terms 9x + 3x + 5]
-answer   expression 12x+5 (x, expanded)
+answer   expression 12x+5 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Add the coefficients of the matching x terms and keep the constant separate.
 step 1   Add the two x terms.   [9x + 3x = 12x]
 step 2   Keep the constant separate.   [12x + 5]
@@ -306,9 +281,8 @@ exports[`recorded output: distribute-negative > matches the wording recorded whe
 "--- distribute-negative · seed 1 · difficulty 1
 prompt   Distribute to expand this expression.
 display  inline "−3(x − 1)" [distribute-negative -3(x - 1)]
-answer   expression -3x+3 (x, expanded)
+answer   expression -3x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−3 × x = −3x]
 step 2   Multiply by the second term.   [−3 × −1 = 3]
@@ -319,9 +293,8 @@ miss     dropped-outer-sign = 3x-3   The coefficient outside is negative — bot
 --- distribute-negative · seed 12345 · difficulty 1
 prompt   Distribute to expand this expression.
 display  inline "−4(x + 2)" [distribute-negative -4(x + 2)]
-answer   expression -4x-8 (x, expanded)
+answer   expression -4x-8 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−4 × x = −4x]
 step 2   Multiply by the second term.   [−4 × 2 = −8]
@@ -332,9 +305,8 @@ miss     dropped-outer-sign = 4x+8   The coefficient outside is negative — bot
 --- distribute-negative · seed 67890 · difficulty 1
 prompt   Distribute to expand this expression.
 display  inline "−3(x + 3)" [distribute-negative -3(x + 3)]
-answer   expression -3x-9 (x, expanded)
+answer   expression -3x-9 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−3 × x = −3x]
 step 2   Multiply by the second term.   [−3 × 3 = −9]
@@ -345,9 +317,8 @@ miss     dropped-outer-sign = 3x+9   The coefficient outside is negative — bot
 --- distribute-negative · seed 424242 · difficulty 1
 prompt   Distribute to expand this expression.
 display  inline "−2(x + 2)" [distribute-negative -2(x + 2)]
-answer   expression -2x-4 (x, expanded)
+answer   expression -2x-4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−2 × x = −2x]
 step 2   Multiply by the second term.   [−2 × 2 = −4]
@@ -358,9 +329,8 @@ miss     dropped-outer-sign = 2x+4   The coefficient outside is negative — bot
 --- distribute-negative · seed 987654321 · difficulty 1
 prompt   Distribute to expand this expression.
 display  inline "−4(x + 1)" [distribute-negative -4(x + 1)]
-answer   expression -4x-4 (x, expanded)
+answer   expression -4x-4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−4 × x = −4x]
 step 2   Multiply by the second term.   [−4 × 1 = −4]
@@ -371,9 +341,8 @@ miss     dropped-outer-sign = 4x+4   The coefficient outside is negative — bot
 --- distribute-negative · seed 1 · difficulty 2
 prompt   Distribute to expand this expression.
 display  inline "−4(x − 2)" [distribute-negative -4(x - 2)]
-answer   expression -4x+8 (x, expanded)
+answer   expression -4x+8 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−4 × x = −4x]
 step 2   Multiply by the second term.   [−4 × −2 = 8]
@@ -384,9 +353,8 @@ miss     dropped-outer-sign = 4x-8   The coefficient outside is negative — bot
 --- distribute-negative · seed 12345 · difficulty 2
 prompt   Distribute to expand this expression.
 display  inline "−5(x + 3)" [distribute-negative -5(x + 3)]
-answer   expression -5x-15 (x, expanded)
+answer   expression -5x-15 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−5 × x = −5x]
 step 2   Multiply by the second term.   [−5 × 3 = −15]
@@ -397,9 +365,8 @@ miss     dropped-outer-sign = 5x+15   The coefficient outside is negative — bo
 --- distribute-negative · seed 67890 · difficulty 2
 prompt   Distribute to expand this expression.
 display  inline "−3(x + 5)" [distribute-negative -3(x + 5)]
-answer   expression -3x-15 (x, expanded)
+answer   expression -3x-15 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−3 × x = −3x]
 step 2   Multiply by the second term.   [−3 × 5 = −15]
@@ -410,9 +377,8 @@ miss     dropped-outer-sign = 3x+15   The coefficient outside is negative — bo
 --- distribute-negative · seed 424242 · difficulty 2
 prompt   Distribute to expand this expression.
 display  inline "−2(x + 3)" [distribute-negative -2(x + 3)]
-answer   expression -2x-6 (x, expanded)
+answer   expression -2x-6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−2 × x = −2x]
 step 2   Multiply by the second term.   [−2 × 3 = −6]
@@ -423,9 +389,8 @@ miss     dropped-outer-sign = 2x+6   The coefficient outside is negative — bot
 --- distribute-negative · seed 987654321 · difficulty 2
 prompt   Distribute to expand this expression.
 display  inline "−5(x + 2)" [distribute-negative -5(x + 2)]
-answer   expression -5x-10 (x, expanded)
+answer   expression -5x-10 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−5 × x = −5x]
 step 2   Multiply by the second term.   [−5 × 2 = −10]
@@ -436,9 +401,8 @@ miss     dropped-outer-sign = 5x+10   The coefficient outside is negative — bo
 --- distribute-negative · seed 1 · difficulty 3
 prompt   Distribute to expand this expression.
 display  inline "−5(x − 3)" [distribute-negative -5(x - 3)]
-answer   expression -5x+15 (x, expanded)
+answer   expression -5x+15 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−5 × x = −5x]
 step 2   Multiply by the second term.   [−5 × −3 = 15]
@@ -449,9 +413,8 @@ miss     dropped-outer-sign = 5x-15   The coefficient outside is negative — bo
 --- distribute-negative · seed 12345 · difficulty 3
 prompt   Distribute to expand this expression.
 display  inline "−6(x + 5)" [distribute-negative -6(x + 5)]
-answer   expression -6x-30 (x, expanded)
+answer   expression -6x-30 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−6 × x = −6x]
 step 2   Multiply by the second term.   [−6 × 5 = −30]
@@ -462,9 +425,8 @@ miss     dropped-outer-sign = 6x+30   The coefficient outside is negative — bo
 --- distribute-negative · seed 67890 · difficulty 3
 prompt   Distribute to expand this expression.
 display  inline "−4(x + 7)" [distribute-negative -4(x + 7)]
-answer   expression -4x-28 (x, expanded)
+answer   expression -4x-28 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−4 × x = −4x]
 step 2   Multiply by the second term.   [−4 × 7 = −28]
@@ -475,9 +437,8 @@ miss     dropped-outer-sign = 4x+28   The coefficient outside is negative — bo
 --- distribute-negative · seed 424242 · difficulty 3
 prompt   Distribute to expand this expression.
 display  inline "−3(x + 4)" [distribute-negative -3(x + 4)]
-answer   expression -3x-12 (x, expanded)
+answer   expression -3x-12 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−3 × x = −3x]
 step 2   Multiply by the second term.   [−3 × 4 = −12]
@@ -488,9 +449,8 @@ miss     dropped-outer-sign = 3x+12   The coefficient outside is negative — bo
 --- distribute-negative · seed 987654321 · difficulty 3
 prompt   Distribute to expand this expression.
 display  inline "−6(x + 3)" [distribute-negative -6(x + 3)]
-answer   expression -6x-18 (x, expanded)
+answer   expression -6x-18 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−6 × x = −6x]
 step 2   Multiply by the second term.   [−6 × 3 = −18]
@@ -501,9 +461,8 @@ miss     dropped-outer-sign = 6x+18   The coefficient outside is negative — bo
 --- distribute-negative · seed 1 · difficulty 4
 prompt   Distribute to expand this expression.
 display  inline "−6(x − 4)" [distribute-negative -6(x - 4)]
-answer   expression -6x+24 (x, expanded)
+answer   expression -6x+24 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−6 × x = −6x]
 step 2   Multiply by the second term.   [−6 × −4 = 24]
@@ -514,9 +473,8 @@ miss     dropped-outer-sign = 6x-24   The coefficient outside is negative — bo
 --- distribute-negative · seed 12345 · difficulty 4
 prompt   Distribute to expand this expression.
 display  inline "−7(x + 6)" [distribute-negative -7(x + 6)]
-answer   expression -7x-42 (x, expanded)
+answer   expression -7x-42 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−7 × x = −7x]
 step 2   Multiply by the second term.   [−7 × 6 = −42]
@@ -527,9 +485,8 @@ miss     dropped-outer-sign = 7x+42   The coefficient outside is negative — bo
 --- distribute-negative · seed 67890 · difficulty 4
 prompt   Distribute to expand this expression.
 display  inline "−4(x + 8)" [distribute-negative -4(x + 8)]
-answer   expression -4x-32 (x, expanded)
+answer   expression -4x-32 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−4 × x = −4x]
 step 2   Multiply by the second term.   [−4 × 8 = −32]
@@ -540,9 +497,8 @@ miss     dropped-outer-sign = 4x+32   The coefficient outside is negative — bo
 --- distribute-negative · seed 424242 · difficulty 4
 prompt   Distribute to expand this expression.
 display  inline "−3(x + 5)" [distribute-negative -3(x + 5)]
-answer   expression -3x-15 (x, expanded)
+answer   expression -3x-15 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−3 × x = −3x]
 step 2   Multiply by the second term.   [−3 × 5 = −15]
@@ -553,9 +509,8 @@ miss     dropped-outer-sign = 3x+15   The coefficient outside is negative — bo
 --- distribute-negative · seed 987654321 · difficulty 4
 prompt   Distribute to expand this expression.
 display  inline "−7(x + 5)" [distribute-negative -7(x + 5)]
-answer   expression -7x-35 (x, expanded)
+answer   expression -7x-35 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−7 × x = −7x]
 step 2   Multiply by the second term.   [−7 × 5 = −35]
@@ -566,9 +521,8 @@ miss     dropped-outer-sign = 7x+35   The coefficient outside is negative — bo
 --- distribute-negative · seed 1 · difficulty 5
 prompt   Distribute to expand this expression.
 display  inline "−7(x − 5)" [distribute-negative -7(x - 5)]
-answer   expression -7x+35 (x, expanded)
+answer   expression -7x+35 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−7 × x = −7x]
 step 2   Multiply by the second term.   [−7 × −5 = 35]
@@ -579,9 +533,8 @@ miss     dropped-outer-sign = 7x-35   The coefficient outside is negative — bo
 --- distribute-negative · seed 12345 · difficulty 5
 prompt   Distribute to expand this expression.
 display  inline "−8(x + 7)" [distribute-negative -8(x + 7)]
-answer   expression -8x-56 (x, expanded)
+answer   expression -8x-56 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−8 × x = −8x]
 step 2   Multiply by the second term.   [−8 × 7 = −56]
@@ -592,9 +545,8 @@ miss     dropped-outer-sign = 8x+56   The coefficient outside is negative — bo
 --- distribute-negative · seed 67890 · difficulty 5
 prompt   Distribute to expand this expression.
 display  inline "−5(x + 9)" [distribute-negative -5(x + 9)]
-answer   expression -5x-45 (x, expanded)
+answer   expression -5x-45 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−5 × x = −5x]
 step 2   Multiply by the second term.   [−5 × 9 = −45]
@@ -605,9 +557,8 @@ miss     dropped-outer-sign = 5x+45   The coefficient outside is negative — bo
 --- distribute-negative · seed 424242 · difficulty 5
 prompt   Distribute to expand this expression.
 display  inline "−4(x + 6)" [distribute-negative -4(x + 6)]
-answer   expression -4x-24 (x, expanded)
+answer   expression -4x-24 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−4 × x = −4x]
 step 2   Multiply by the second term.   [−4 × 6 = −24]
@@ -618,9 +569,8 @@ miss     dropped-outer-sign = 4x+24   The coefficient outside is negative — bo
 --- distribute-negative · seed 987654321 · difficulty 5
 prompt   Distribute to expand this expression.
 display  inline "−8(x + 6)" [distribute-negative -8(x + 6)]
-answer   expression -8x-48 (x, expanded)
+answer   expression -8x-48 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply both terms inside by the negative number outside.
 step 1   Multiply by the first term.   [−8 × x = −8x]
 step 2   Multiply by the second term.   [−8 × 6 = −48]
@@ -633,9 +583,8 @@ exports[`recorded output: distributive > matches the wording recorded when the s
 "--- distributive · seed 1 · difficulty 1
 prompt   Distribute to expand this expression.
 display  inline "3(x + 1)" [distributive 3(x + 1)]
-answer   expression 3x+3 (x, expanded)
+answer   expression 3x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [3 × x = 3x]
 step 2   Multiply by the second term.   [3 × 1 = 3]
@@ -645,9 +594,8 @@ miss     distributed-second-term-only = x+3   The number outside multiplies both
 --- distributive · seed 12345 · difficulty 1
 prompt   Distribute to expand this expression.
 display  inline "4(x + 2)" [distributive 4(x + 2)]
-answer   expression 4x+8 (x, expanded)
+answer   expression 4x+8 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [4 × x = 4x]
 step 2   Multiply by the second term.   [4 × 2 = 8]
@@ -657,9 +605,8 @@ miss     distributed-second-term-only = x+8   The number outside multiplies both
 --- distributive · seed 67890 · difficulty 1
 prompt   Distribute to expand this expression.
 display  inline "3(x + 3)" [distributive 3(x + 3)]
-answer   expression 3x+9 (x, expanded)
+answer   expression 3x+9 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [3 × x = 3x]
 step 2   Multiply by the second term.   [3 × 3 = 9]
@@ -669,9 +616,8 @@ miss     distributed-second-term-only = x+9   The number outside multiplies both
 --- distributive · seed 424242 · difficulty 1
 prompt   Distribute to expand this expression.
 display  inline "2(x + 2)" [distributive 2(x + 2)]
-answer   expression 2x+4 (x, expanded)
+answer   expression 2x+4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [2 × x = 2x]
 step 2   Multiply by the second term.   [2 × 2 = 4]
@@ -681,9 +627,8 @@ miss     distributed-second-term-only = x+4   The number outside multiplies both
 --- distributive · seed 987654321 · difficulty 1
 prompt   Distribute to expand this expression.
 display  inline "4(x + 1)" [distributive 4(x + 1)]
-answer   expression 4x+4 (x, expanded)
+answer   expression 4x+4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [4 × x = 4x]
 step 2   Multiply by the second term.   [4 × 1 = 4]
@@ -693,9 +638,8 @@ miss     distributed-second-term-only = x+4   The number outside multiplies both
 --- distributive · seed 1 · difficulty 2
 prompt   Distribute to expand this expression.
 display  inline "4(x + 2)" [distributive 4(x + 2)]
-answer   expression 4x+8 (x, expanded)
+answer   expression 4x+8 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [4 × x = 4x]
 step 2   Multiply by the second term.   [4 × 2 = 8]
@@ -705,9 +649,8 @@ miss     distributed-second-term-only = x+8   The number outside multiplies both
 --- distributive · seed 12345 · difficulty 2
 prompt   Distribute to expand this expression.
 display  inline "5(x + 3)" [distributive 5(x + 3)]
-answer   expression 5x+15 (x, expanded)
+answer   expression 5x+15 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [5 × x = 5x]
 step 2   Multiply by the second term.   [5 × 3 = 15]
@@ -717,9 +660,8 @@ miss     distributed-second-term-only = x+15   The number outside multiplies bot
 --- distributive · seed 67890 · difficulty 2
 prompt   Distribute to expand this expression.
 display  inline "3(x + 5)" [distributive 3(x + 5)]
-answer   expression 3x+15 (x, expanded)
+answer   expression 3x+15 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [3 × x = 3x]
 step 2   Multiply by the second term.   [3 × 5 = 15]
@@ -729,9 +671,8 @@ miss     distributed-second-term-only = x+15   The number outside multiplies bot
 --- distributive · seed 424242 · difficulty 2
 prompt   Distribute to expand this expression.
 display  inline "2(x + 3)" [distributive 2(x + 3)]
-answer   expression 2x+6 (x, expanded)
+answer   expression 2x+6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [2 × x = 2x]
 step 2   Multiply by the second term.   [2 × 3 = 6]
@@ -741,9 +682,8 @@ miss     distributed-second-term-only = x+6   The number outside multiplies both
 --- distributive · seed 987654321 · difficulty 2
 prompt   Distribute to expand this expression.
 display  inline "5(x + 2)" [distributive 5(x + 2)]
-answer   expression 5x+10 (x, expanded)
+answer   expression 5x+10 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [5 × x = 5x]
 step 2   Multiply by the second term.   [5 × 2 = 10]
@@ -753,9 +693,8 @@ miss     distributed-second-term-only = x+10   The number outside multiplies bot
 --- distributive · seed 1 · difficulty 3
 prompt   Distribute to expand this expression.
 display  inline "5(x + 3)" [distributive 5(x + 3)]
-answer   expression 5x+15 (x, expanded)
+answer   expression 5x+15 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [5 × x = 5x]
 step 2   Multiply by the second term.   [5 × 3 = 15]
@@ -765,9 +704,8 @@ miss     distributed-second-term-only = x+15   The number outside multiplies bot
 --- distributive · seed 12345 · difficulty 3
 prompt   Distribute to expand this expression.
 display  inline "6(x + 5)" [distributive 6(x + 5)]
-answer   expression 6x+30 (x, expanded)
+answer   expression 6x+30 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [6 × x = 6x]
 step 2   Multiply by the second term.   [6 × 5 = 30]
@@ -777,9 +715,8 @@ miss     distributed-second-term-only = x+30   The number outside multiplies bot
 --- distributive · seed 67890 · difficulty 3
 prompt   Distribute to expand this expression.
 display  inline "4(x + 7)" [distributive 4(x + 7)]
-answer   expression 4x+28 (x, expanded)
+answer   expression 4x+28 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [4 × x = 4x]
 step 2   Multiply by the second term.   [4 × 7 = 28]
@@ -789,9 +726,8 @@ miss     distributed-second-term-only = x+28   The number outside multiplies bot
 --- distributive · seed 424242 · difficulty 3
 prompt   Distribute to expand this expression.
 display  inline "3(x + 4)" [distributive 3(x + 4)]
-answer   expression 3x+12 (x, expanded)
+answer   expression 3x+12 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [3 × x = 3x]
 step 2   Multiply by the second term.   [3 × 4 = 12]
@@ -801,9 +737,8 @@ miss     distributed-second-term-only = x+12   The number outside multiplies bot
 --- distributive · seed 987654321 · difficulty 3
 prompt   Distribute to expand this expression.
 display  inline "6(x + 3)" [distributive 6(x + 3)]
-answer   expression 6x+18 (x, expanded)
+answer   expression 6x+18 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [6 × x = 6x]
 step 2   Multiply by the second term.   [6 × 3 = 18]
@@ -813,9 +748,8 @@ miss     distributed-second-term-only = x+18   The number outside multiplies bot
 --- distributive · seed 1 · difficulty 4
 prompt   Distribute to expand this expression.
 display  inline "6(x + 4)" [distributive 6(x + 4)]
-answer   expression 6x+24 (x, expanded)
+answer   expression 6x+24 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [6 × x = 6x]
 step 2   Multiply by the second term.   [6 × 4 = 24]
@@ -825,9 +759,8 @@ miss     distributed-second-term-only = x+24   The number outside multiplies bot
 --- distributive · seed 12345 · difficulty 4
 prompt   Distribute to expand this expression.
 display  inline "7(x + 6)" [distributive 7(x + 6)]
-answer   expression 7x+42 (x, expanded)
+answer   expression 7x+42 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [7 × x = 7x]
 step 2   Multiply by the second term.   [7 × 6 = 42]
@@ -837,9 +770,8 @@ miss     distributed-second-term-only = x+42   The number outside multiplies bot
 --- distributive · seed 67890 · difficulty 4
 prompt   Distribute to expand this expression.
 display  inline "4(x + 8)" [distributive 4(x + 8)]
-answer   expression 4x+32 (x, expanded)
+answer   expression 4x+32 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [4 × x = 4x]
 step 2   Multiply by the second term.   [4 × 8 = 32]
@@ -849,9 +781,8 @@ miss     distributed-second-term-only = x+32   The number outside multiplies bot
 --- distributive · seed 424242 · difficulty 4
 prompt   Distribute to expand this expression.
 display  inline "3(x + 5)" [distributive 3(x + 5)]
-answer   expression 3x+15 (x, expanded)
+answer   expression 3x+15 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [3 × x = 3x]
 step 2   Multiply by the second term.   [3 × 5 = 15]
@@ -861,9 +792,8 @@ miss     distributed-second-term-only = x+15   The number outside multiplies bot
 --- distributive · seed 987654321 · difficulty 4
 prompt   Distribute to expand this expression.
 display  inline "7(x + 5)" [distributive 7(x + 5)]
-answer   expression 7x+35 (x, expanded)
+answer   expression 7x+35 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [7 × x = 7x]
 step 2   Multiply by the second term.   [7 × 5 = 35]
@@ -873,9 +803,8 @@ miss     distributed-second-term-only = x+35   The number outside multiplies bot
 --- distributive · seed 1 · difficulty 5
 prompt   Distribute to expand this expression.
 display  inline "7(x + 5)" [distributive 7(x + 5)]
-answer   expression 7x+35 (x, expanded)
+answer   expression 7x+35 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [7 × x = 7x]
 step 2   Multiply by the second term.   [7 × 5 = 35]
@@ -885,9 +814,8 @@ miss     distributed-second-term-only = x+35   The number outside multiplies bot
 --- distributive · seed 12345 · difficulty 5
 prompt   Distribute to expand this expression.
 display  inline "8(x + 7)" [distributive 8(x + 7)]
-answer   expression 8x+56 (x, expanded)
+answer   expression 8x+56 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [8 × x = 8x]
 step 2   Multiply by the second term.   [8 × 7 = 56]
@@ -897,9 +825,8 @@ miss     distributed-second-term-only = x+56   The number outside multiplies bot
 --- distributive · seed 67890 · difficulty 5
 prompt   Distribute to expand this expression.
 display  inline "5(x + 9)" [distributive 5(x + 9)]
-answer   expression 5x+45 (x, expanded)
+answer   expression 5x+45 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [5 × x = 5x]
 step 2   Multiply by the second term.   [5 × 9 = 45]
@@ -909,9 +836,8 @@ miss     distributed-second-term-only = x+45   The number outside multiplies bot
 --- distributive · seed 424242 · difficulty 5
 prompt   Distribute to expand this expression.
 display  inline "4(x + 6)" [distributive 4(x + 6)]
-answer   expression 4x+24 (x, expanded)
+answer   expression 4x+24 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [4 × x = 4x]
 step 2   Multiply by the second term.   [4 × 6 = 24]
@@ -921,9 +847,8 @@ miss     distributed-second-term-only = x+24   The number outside multiplies bot
 --- distributive · seed 987654321 · difficulty 5
 prompt   Distribute to expand this expression.
 display  inline "8(x + 6)" [distributive 8(x + 6)]
-answer   expression 8x+48 (x, expanded)
+answer   expression 8x+48 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Multiply the number outside by both terms inside.
 step 1   Multiply by the first term.   [8 × x = 8x]
 step 2   Multiply by the second term.   [8 × 6 = 48]
@@ -1162,9 +1087,8 @@ exports[`recorded output: factor-gcf > matches the wording recorded when the ski
 "--- factor-gcf · seed 1 · difficulty 1
 prompt   Factor out the greatest common factor.
 display  inline "9x + 6" [factor-gcf 3(3x + 2)]
-answer   expression 3(3x+2) (x, exact)
+answer   expression 3(3x+2) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [9 and 6 share 3]
 step 2   Divide both terms by it.   [9 ÷ 3 = 3, 6 ÷ 3 = 2]
@@ -1176,9 +1100,8 @@ miss     divided-second-term-only = 3(9x+2)   Both terms inside the brackets are
 --- factor-gcf · seed 12345 · difficulty 1
 prompt   Factor out the greatest common factor.
 display  inline "6x + 9" [factor-gcf 3(2x + 3)]
-answer   expression 3(2x+3) (x, exact)
+answer   expression 3(2x+3) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [6 and 9 share 3]
 step 2   Divide both terms by it.   [6 ÷ 3 = 2, 9 ÷ 3 = 3]
@@ -1190,9 +1113,8 @@ miss     divided-second-term-only = 3(6x+3)   Both terms inside the brackets are
 --- factor-gcf · seed 67890 · difficulty 1
 prompt   Factor out the greatest common factor.
 display  inline "6x + 8" [factor-gcf 2(3x + 4)]
-answer   expression 2(3x+4) (x, exact)
+answer   expression 2(3x+4) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [6 and 8 share 2]
 step 2   Divide both terms by it.   [6 ÷ 2 = 3, 8 ÷ 2 = 4]
@@ -1204,9 +1126,8 @@ miss     divided-second-term-only = 2(6x+4)   Both terms inside the brackets are
 --- factor-gcf · seed 424242 · difficulty 1
 prompt   Factor out the greatest common factor.
 display  inline "2x + 4" [factor-gcf 2(x + 2)]
-answer   expression 2(x+2) (x, exact)
+answer   expression 2(x+2) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [2 and 4 share 2]
 step 2   Divide both terms by it.   [2 ÷ 2 = 1, 4 ÷ 2 = 2]
@@ -1218,9 +1139,8 @@ miss     divided-second-term-only = 2(2x+2)   Both terms inside the brackets are
 --- factor-gcf · seed 987654321 · difficulty 1
 prompt   Factor out the greatest common factor.
 display  inline "3x + 6" [factor-gcf 3(x + 2)]
-answer   expression 3(x+2) (x, exact)
+answer   expression 3(x+2) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [3 and 6 share 3]
 step 2   Divide both terms by it.   [3 ÷ 3 = 1, 6 ÷ 3 = 2]
@@ -1232,9 +1152,8 @@ miss     divided-second-term-only = 3(3x+2)   Both terms inside the brackets are
 --- factor-gcf · seed 1 · difficulty 2
 prompt   Factor out the greatest common factor.
 display  inline "9x + 6" [factor-gcf 3(3x + 2)]
-answer   expression 3(3x+2) (x, exact)
+answer   expression 3(3x+2) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [9 and 6 share 3]
 step 2   Divide both terms by it.   [9 ÷ 3 = 3, 6 ÷ 3 = 2]
@@ -1246,9 +1165,8 @@ miss     divided-second-term-only = 3(9x+2)   Both terms inside the brackets are
 --- factor-gcf · seed 12345 · difficulty 2
 prompt   Factor out the greatest common factor.
 display  inline "8x + 12" [factor-gcf 4(2x + 3)]
-answer   expression 4(2x+3) (x, exact)
+answer   expression 4(2x+3) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [8 and 12 share 4]
 step 2   Divide both terms by it.   [8 ÷ 4 = 2, 12 ÷ 4 = 3]
@@ -1261,9 +1179,8 @@ miss     divided-second-term-only = 4(8x+3)   Both terms inside the brackets are
 --- factor-gcf · seed 67890 · difficulty 2
 prompt   Factor out the greatest common factor.
 display  inline "6x + 15" [factor-gcf 3(2x + 5)]
-answer   expression 3(2x+5) (x, exact)
+answer   expression 3(2x+5) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [6 and 15 share 3]
 step 2   Divide both terms by it.   [6 ÷ 3 = 2, 15 ÷ 3 = 5]
@@ -1275,9 +1192,8 @@ miss     divided-second-term-only = 3(6x+5)   Both terms inside the brackets are
 --- factor-gcf · seed 424242 · difficulty 2
 prompt   Factor out the greatest common factor.
 display  inline "2x + 6" [factor-gcf 2(x + 3)]
-answer   expression 2(x+3) (x, exact)
+answer   expression 2(x+3) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [2 and 6 share 2]
 step 2   Divide both terms by it.   [2 ÷ 2 = 1, 6 ÷ 2 = 3]
@@ -1289,9 +1205,8 @@ miss     divided-second-term-only = 2(2x+3)   Both terms inside the brackets are
 --- factor-gcf · seed 987654321 · difficulty 2
 prompt   Factor out the greatest common factor.
 display  inline "4x + 8" [factor-gcf 4(x + 2)]
-answer   expression 4(x+2) (x, exact)
+answer   expression 4(x+2) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [4 and 8 share 4]
 step 2   Divide both terms by it.   [4 ÷ 4 = 1, 8 ÷ 4 = 2]
@@ -1304,9 +1219,8 @@ miss     divided-second-term-only = 4(4x+2)   Both terms inside the brackets are
 --- factor-gcf · seed 1 · difficulty 3
 prompt   Factor out the greatest common factor.
 display  inline "20x + 15" [factor-gcf 5(4x + 3)]
-answer   expression 5(4x+3) (x, exact)
+answer   expression 5(4x+3) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [20 and 15 share 5]
 step 2   Divide both terms by it.   [20 ÷ 5 = 4, 15 ÷ 5 = 3]
@@ -1318,9 +1232,8 @@ miss     divided-second-term-only = 5(20x+3)   Both terms inside the brackets ar
 --- factor-gcf · seed 12345 · difficulty 3
 prompt   Factor out the greatest common factor.
 display  inline "12x + 30" [factor-gcf 6(2x + 5)]
-answer   expression 6(2x+5) (x, exact)
+answer   expression 6(2x+5) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [12 and 30 share 6]
 step 2   Divide both terms by it.   [12 ÷ 6 = 2, 30 ÷ 6 = 5]
@@ -1334,9 +1247,8 @@ miss     divided-second-term-only = 6(12x+5)   Both terms inside the brackets ar
 --- factor-gcf · seed 67890 · difficulty 3
 prompt   Factor out the greatest common factor.
 display  inline "6x + 21" [factor-gcf 3(2x + 7)]
-answer   expression 3(2x+7) (x, exact)
+answer   expression 3(2x+7) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [6 and 21 share 3]
 step 2   Divide both terms by it.   [6 ÷ 3 = 2, 21 ÷ 3 = 7]
@@ -1348,9 +1260,8 @@ miss     divided-second-term-only = 3(6x+7)   Both terms inside the brackets are
 --- factor-gcf · seed 424242 · difficulty 3
 prompt   Factor out the greatest common factor.
 display  inline "2x + 8" [factor-gcf 2(x + 4)]
-answer   expression 2(x+4) (x, exact)
+answer   expression 2(x+4) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [2 and 8 share 2]
 step 2   Divide both terms by it.   [2 ÷ 2 = 1, 8 ÷ 2 = 4]
@@ -1362,9 +1273,8 @@ miss     divided-second-term-only = 2(2x+4)   Both terms inside the brackets are
 --- factor-gcf · seed 987654321 · difficulty 3
 prompt   Factor out the greatest common factor.
 display  inline "6x + 18" [factor-gcf 6(x + 3)]
-answer   expression 6(x+3) (x, exact)
+answer   expression 6(x+3) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [6 and 18 share 6]
 step 2   Divide both terms by it.   [6 ÷ 6 = 1, 18 ÷ 6 = 3]
@@ -1378,9 +1288,8 @@ miss     divided-second-term-only = 6(6x+3)   Both terms inside the brackets are
 --- factor-gcf · seed 1 · difficulty 4
 prompt   Factor out the greatest common factor.
 display  inline "24x + 18" [factor-gcf 6(4x + 3)]
-answer   expression 6(4x+3) (x, exact)
+answer   expression 6(4x+3) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [24 and 18 share 6]
 step 2   Divide both terms by it.   [24 ÷ 6 = 4, 18 ÷ 6 = 3]
@@ -1394,9 +1303,8 @@ miss     divided-second-term-only = 6(24x+3)   Both terms inside the brackets ar
 --- factor-gcf · seed 12345 · difficulty 4
 prompt   Factor out the greatest common factor.
 display  inline "16x + 40" [factor-gcf 8(2x + 5)]
-answer   expression 8(2x+5) (x, exact)
+answer   expression 8(2x+5) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [16 and 40 share 8]
 step 2   Divide both terms by it.   [16 ÷ 8 = 2, 40 ÷ 8 = 5]
@@ -1410,9 +1318,8 @@ miss     divided-second-term-only = 8(16x+5)   Both terms inside the brackets ar
 --- factor-gcf · seed 67890 · difficulty 4
 prompt   Factor out the greatest common factor.
 display  inline "15x + 40" [factor-gcf 5(3x + 8)]
-answer   expression 5(3x+8) (x, exact)
+answer   expression 5(3x+8) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [15 and 40 share 5]
 step 2   Divide both terms by it.   [15 ÷ 5 = 3, 40 ÷ 5 = 8]
@@ -1424,9 +1331,8 @@ miss     divided-second-term-only = 5(15x+8)   Both terms inside the brackets ar
 --- factor-gcf · seed 424242 · difficulty 4
 prompt   Factor out the greatest common factor.
 display  inline "3x + 15" [factor-gcf 3(x + 5)]
-answer   expression 3(x+5) (x, exact)
+answer   expression 3(x+5) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [3 and 15 share 3]
 step 2   Divide both terms by it.   [3 ÷ 3 = 1, 15 ÷ 3 = 5]
@@ -1438,9 +1344,8 @@ miss     divided-second-term-only = 3(3x+5)   Both terms inside the brackets are
 --- factor-gcf · seed 987654321 · difficulty 4
 prompt   Factor out the greatest common factor.
 display  inline "8x + 32" [factor-gcf 8(x + 4)]
-answer   expression 8(x+4) (x, exact)
+answer   expression 8(x+4) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [8 and 32 share 8]
 step 2   Divide both terms by it.   [8 ÷ 8 = 1, 32 ÷ 8 = 4]
@@ -1454,9 +1359,8 @@ miss     divided-second-term-only = 8(8x+4)   Both terms inside the brackets are
 --- factor-gcf · seed 1 · difficulty 5
 prompt   Factor out the greatest common factor.
 display  inline "21x + 28" [factor-gcf 7(3x + 4)]
-answer   expression 7(3x+4) (x, exact)
+answer   expression 7(3x+4) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [21 and 28 share 7]
 step 2   Divide both terms by it.   [21 ÷ 7 = 3, 28 ÷ 7 = 4]
@@ -1468,9 +1372,8 @@ miss     divided-second-term-only = 7(21x+4)   Both terms inside the brackets ar
 --- factor-gcf · seed 12345 · difficulty 5
 prompt   Factor out the greatest common factor.
 display  inline "9x + 54" [factor-gcf 9(x + 6)]
-answer   expression 9(x+6) (x, exact)
+answer   expression 9(x+6) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [9 and 54 share 9]
 step 2   Divide both terms by it.   [9 ÷ 9 = 1, 54 ÷ 9 = 6]
@@ -1483,9 +1386,8 @@ miss     divided-second-term-only = 9(9x+6)   Both terms inside the brackets are
 --- factor-gcf · seed 67890 · difficulty 5
 prompt   Factor out the greatest common factor.
 display  inline "10x + 45" [factor-gcf 5(2x + 9)]
-answer   expression 5(2x+9) (x, exact)
+answer   expression 5(2x+9) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [10 and 45 share 5]
 step 2   Divide both terms by it.   [10 ÷ 5 = 2, 45 ÷ 5 = 9]
@@ -1497,9 +1399,8 @@ miss     divided-second-term-only = 5(10x+9)   Both terms inside the brackets ar
 --- factor-gcf · seed 424242 · difficulty 5
 prompt   Factor out the greatest common factor.
 display  inline "3x + 18" [factor-gcf 3(x + 6)]
-answer   expression 3(x+6) (x, exact)
+answer   expression 3(x+6) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [3 and 18 share 3]
 step 2   Divide both terms by it.   [3 ÷ 3 = 1, 18 ÷ 3 = 6]
@@ -1511,9 +1412,8 @@ miss     divided-second-term-only = 3(3x+6)   Both terms inside the brackets are
 --- factor-gcf · seed 987654321 · difficulty 5
 prompt   Factor out the greatest common factor.
 display  inline "9x + 45" [factor-gcf 9(x + 5)]
-answer   expression 9(x+5) (x, exact)
+answer   expression 9(x+5) (x, exact, degree 1)
 input    expression
-variable x
 hint     Find the largest number that divides both terms, then write what is left inside.
 step 1   Find the greatest common factor.   [9 and 45 share 9]
 step 2   Divide both terms by it.   [9 ÷ 9 = 1, 45 ÷ 9 = 5]
@@ -2032,9 +1932,8 @@ exports[`recorded output: words-to-expression > matches the wording recorded whe
 "--- words-to-expression · seed 1 · difficulty 1
 prompt   Write the expression.
 display  story [words-to-expression 5 less-than] "5 less than a number"
-answer   expression x-5 (x, expanded)
+answer   expression x-5 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-5]
 miss     reversed-order = 5-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2043,9 +1942,8 @@ miss     used-addition = x+5   This phrase means subtraction, not addition.
 --- words-to-expression · seed 12345 · difficulty 1
 prompt   Write the expression.
 display  story [words-to-expression 6 less-than] "6 less than a number"
-answer   expression x-6 (x, expanded)
+answer   expression x-6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-6]
 miss     reversed-order = 6-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2054,9 +1952,8 @@ miss     used-addition = x+6   This phrase means subtraction, not addition.
 --- words-to-expression · seed 67890 · difficulty 1
 prompt   Write the expression.
 display  story [words-to-expression 3 subtracted-from] "a number subtracted from 3"
-answer   expression 3-x (x, expanded)
+answer   expression 3-x (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [3-x]
 miss     reversed-order = x-3   Subtraction order matters — write it in the order the phrase names it.
@@ -2065,9 +1962,8 @@ miss     used-addition = 3+x   This phrase means subtraction, not addition.
 --- words-to-expression · seed 424242 · difficulty 1
 prompt   Write the expression.
 display  story [words-to-expression 2 less-than] "2 less than a number"
-answer   expression x-2 (x, expanded)
+answer   expression x-2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-2]
 miss     reversed-order = 2-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2076,9 +1972,8 @@ miss     used-addition = x+2   This phrase means subtraction, not addition.
 --- words-to-expression · seed 987654321 · difficulty 1
 prompt   Write the expression.
 display  story [words-to-expression 6 less-than] "6 less than a number"
-answer   expression x-6 (x, expanded)
+answer   expression x-6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-6]
 miss     reversed-order = 6-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2087,9 +1982,8 @@ miss     used-addition = x+6   This phrase means subtraction, not addition.
 --- words-to-expression · seed 1 · difficulty 2
 prompt   Write the expression.
 display  story [words-to-expression 6 less-than] "6 less than a number"
-answer   expression x-6 (x, expanded)
+answer   expression x-6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-6]
 miss     reversed-order = 6-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2098,9 +1992,8 @@ miss     used-addition = x+6   This phrase means subtraction, not addition.
 --- words-to-expression · seed 12345 · difficulty 2
 prompt   Write the expression.
 display  story [words-to-expression 8 less-than] "8 less than a number"
-answer   expression x-8 (x, expanded)
+answer   expression x-8 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-8]
 miss     reversed-order = 8-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2109,9 +2002,8 @@ miss     used-addition = x+8   This phrase means subtraction, not addition.
 --- words-to-expression · seed 67890 · difficulty 2
 prompt   Write the expression.
 display  story [words-to-expression 5 subtracted-from] "a number subtracted from 5"
-answer   expression 5-x (x, expanded)
+answer   expression 5-x (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [5-x]
 miss     reversed-order = x-5   Subtraction order matters — write it in the order the phrase names it.
@@ -2120,9 +2012,8 @@ miss     used-addition = 5+x   This phrase means subtraction, not addition.
 --- words-to-expression · seed 424242 · difficulty 2
 prompt   Write the expression.
 display  story [words-to-expression 3 less-than] "3 less than a number"
-answer   expression x-3 (x, expanded)
+answer   expression x-3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-3]
 miss     reversed-order = 3-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2131,9 +2022,8 @@ miss     used-addition = x+3   This phrase means subtraction, not addition.
 --- words-to-expression · seed 987654321 · difficulty 2
 prompt   Write the expression.
 display  story [words-to-expression 8 less-than] "8 less than a number"
-answer   expression x-8 (x, expanded)
+answer   expression x-8 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-8]
 miss     reversed-order = 8-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2142,9 +2032,8 @@ miss     used-addition = x+8   This phrase means subtraction, not addition.
 --- words-to-expression · seed 1 · difficulty 3
 prompt   Write the expression.
 display  story [words-to-expression 8 less-than] "8 less than a number"
-answer   expression x-8 (x, expanded)
+answer   expression x-8 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-8]
 miss     reversed-order = 8-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2153,9 +2042,8 @@ miss     used-addition = x+8   This phrase means subtraction, not addition.
 --- words-to-expression · seed 12345 · difficulty 3
 prompt   Write the expression.
 display  story [words-to-expression 10 less-than] "10 less than a number"
-answer   expression x-10 (x, expanded)
+answer   expression x-10 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-10]
 miss     reversed-order = 10-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2164,9 +2052,8 @@ miss     used-addition = x+10   This phrase means subtraction, not addition.
 --- words-to-expression · seed 67890 · difficulty 3
 prompt   Write the expression.
 display  story [words-to-expression 6 subtracted-from] "a number subtracted from 6"
-answer   expression 6-x (x, expanded)
+answer   expression 6-x (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [6-x]
 miss     reversed-order = x-6   Subtraction order matters — write it in the order the phrase names it.
@@ -2175,9 +2062,8 @@ miss     used-addition = 6+x   This phrase means subtraction, not addition.
 --- words-to-expression · seed 424242 · difficulty 3
 prompt   Write the expression.
 display  story [words-to-expression 4 less-than] "4 less than a number"
-answer   expression x-4 (x, expanded)
+answer   expression x-4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-4]
 miss     reversed-order = 4-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2186,9 +2072,8 @@ miss     used-addition = x+4   This phrase means subtraction, not addition.
 --- words-to-expression · seed 987654321 · difficulty 3
 prompt   Write the expression.
 display  story [words-to-expression 10 less-than] "10 less than a number"
-answer   expression x-10 (x, expanded)
+answer   expression x-10 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-10]
 miss     reversed-order = 10-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2197,9 +2082,8 @@ miss     used-addition = x+10   This phrase means subtraction, not addition.
 --- words-to-expression · seed 1 · difficulty 4
 prompt   Write the expression.
 display  story [words-to-expression 9 less-than] "9 less than a number"
-answer   expression x-9 (x, expanded)
+answer   expression x-9 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-9]
 miss     reversed-order = 9-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2208,9 +2092,8 @@ miss     used-addition = x+9   This phrase means subtraction, not addition.
 --- words-to-expression · seed 12345 · difficulty 4
 prompt   Write the expression.
 display  story [words-to-expression 11 less-than] "11 less than a number"
-answer   expression x-11 (x, expanded)
+answer   expression x-11 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-11]
 miss     reversed-order = 11-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2219,9 +2102,8 @@ miss     used-addition = x+11   This phrase means subtraction, not addition.
 --- words-to-expression · seed 67890 · difficulty 4
 prompt   Write the expression.
 display  story [words-to-expression 7 subtracted-from] "a number subtracted from 7"
-answer   expression 7-x (x, expanded)
+answer   expression 7-x (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [7-x]
 miss     reversed-order = x-7   Subtraction order matters — write it in the order the phrase names it.
@@ -2230,9 +2112,8 @@ miss     used-addition = 7+x   This phrase means subtraction, not addition.
 --- words-to-expression · seed 424242 · difficulty 4
 prompt   Write the expression.
 display  story [words-to-expression 5 less-than] "5 less than a number"
-answer   expression x-5 (x, expanded)
+answer   expression x-5 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-5]
 miss     reversed-order = 5-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2241,9 +2122,8 @@ miss     used-addition = x+5   This phrase means subtraction, not addition.
 --- words-to-expression · seed 987654321 · difficulty 4
 prompt   Write the expression.
 display  story [words-to-expression 11 less-than] "11 less than a number"
-answer   expression x-11 (x, expanded)
+answer   expression x-11 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-11]
 miss     reversed-order = 11-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2252,9 +2132,8 @@ miss     used-addition = x+11   This phrase means subtraction, not addition.
 --- words-to-expression · seed 1 · difficulty 5
 prompt   Write the expression.
 display  story [words-to-expression 10 less-than] "10 less than a number"
-answer   expression x-10 (x, expanded)
+answer   expression x-10 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-10]
 miss     reversed-order = 10-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2263,9 +2142,8 @@ miss     used-addition = x+10   This phrase means subtraction, not addition.
 --- words-to-expression · seed 12345 · difficulty 5
 prompt   Write the expression.
 display  story [words-to-expression 12 less-than] "12 less than a number"
-answer   expression x-12 (x, expanded)
+answer   expression x-12 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-12]
 miss     reversed-order = 12-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2274,9 +2152,8 @@ miss     used-addition = x+12   This phrase means subtraction, not addition.
 --- words-to-expression · seed 67890 · difficulty 5
 prompt   Write the expression.
 display  story [words-to-expression 8 subtracted-from] "a number subtracted from 8"
-answer   expression 8-x (x, expanded)
+answer   expression 8-x (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [8-x]
 miss     reversed-order = x-8   Subtraction order matters — write it in the order the phrase names it.
@@ -2285,9 +2162,8 @@ miss     used-addition = 8+x   This phrase means subtraction, not addition.
 --- words-to-expression · seed 424242 · difficulty 5
 prompt   Write the expression.
 display  story [words-to-expression 6 less-than] "6 less than a number"
-answer   expression x-6 (x, expanded)
+answer   expression x-6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-6]
 miss     reversed-order = 6-x   Subtraction order matters — write it in the order the phrase names it.
@@ -2296,9 +2172,8 @@ miss     used-addition = x+6   This phrase means subtraction, not addition.
 --- words-to-expression · seed 987654321 · difficulty 5
 prompt   Write the expression.
 display  story [words-to-expression 12 less-than] "12 less than a number"
-answer   expression x-12 (x, expanded)
+answer   expression x-12 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the phrase in the order the subtraction happens.
 step 1   Write what is subtracted from what, in order.   [x-12]
 miss     reversed-order = 12-x   Subtraction order matters — write it in the order the phrase names it.

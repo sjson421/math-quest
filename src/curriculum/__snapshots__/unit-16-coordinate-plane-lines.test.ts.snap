@@ -4,9 +4,8 @@ exports[`recorded output: equation-from-graph > matches the wording recorded whe
 "--- equation-from-graph · seed 1 · difficulty 1
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −2) and (1, −1)" [equation-from-graph]
-answer   expression x-2 (x, expanded)
+answer   expression x-2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 1]
 step 2   Read where the line crosses y.   [b = −2]
@@ -17,9 +16,8 @@ miss     intercept-sign-reversed = x+2   Read the y-intercept sign where the lin
 --- equation-from-graph · seed 12345 · difficulty 1
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 1)→(1, 3)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 1) and (1, 3)" [equation-from-graph]
-answer   expression 2x+1 (x, expanded)
+answer   expression 2x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 2]
 step 2   Read where the line crosses y.   [b = 1]
@@ -30,9 +28,8 @@ miss     intercept-sign-reversed = 2x-1   Read the y-intercept sign where the li
 --- equation-from-graph · seed 67890 · difficulty 1
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 2)→(1, 1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 2) and (1, 1)" [equation-from-graph]
-answer   expression -x+2 (x, expanded)
+answer   expression -x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = −1]
 step 2   Read where the line crosses y.   [b = 2]
@@ -43,9 +40,8 @@ miss     intercept-sign-reversed = -x-2   Read the y-intercept sign where the li
 --- equation-from-graph · seed 424242 · difficulty 1
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 2)→(1, 0)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 2) and (1, 0)" [equation-from-graph]
-answer   expression -2x+2 (x, expanded)
+answer   expression -2x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = −2]
 step 2   Read where the line crosses y.   [b = 2]
@@ -56,9 +52,8 @@ miss     intercept-sign-reversed = -2x-2   Read the y-intercept sign where the l
 --- equation-from-graph · seed 987654321 · difficulty 1
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −1)→(1, 1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −1) and (1, 1)" [equation-from-graph]
-answer   expression 2x-1 (x, expanded)
+answer   expression 2x-1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 2]
 step 2   Read where the line crosses y.   [b = −1]
@@ -69,9 +64,8 @@ miss     intercept-sign-reversed = 2x+1   Read the y-intercept sign where the li
 --- equation-from-graph · seed 1 · difficulty 2
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, −2) and (1, −1)" [equation-from-graph]
-answer   expression x-2 (x, expanded)
+answer   expression x-2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 1]
 step 2   Read where the line crosses y.   [b = −2]
@@ -82,9 +76,8 @@ miss     intercept-sign-reversed = x+2   Read the y-intercept sign where the lin
 --- equation-from-graph · seed 12345 · difficulty 2
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 3)→(1, 5)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 3) and (1, 5)" [equation-from-graph]
-answer   expression 2x+3 (x, expanded)
+answer   expression 2x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 2]
 step 2   Read where the line crosses y.   [b = 3]
@@ -95,9 +88,8 @@ miss     intercept-sign-reversed = 2x-3   Read the y-intercept sign where the li
 --- equation-from-graph · seed 67890 · difficulty 2
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 2)→(1, 1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 2) and (1, 1)" [equation-from-graph]
-answer   expression -x+2 (x, expanded)
+answer   expression -x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = −1]
 step 2   Read where the line crosses y.   [b = 2]
@@ -108,9 +100,8 @@ miss     intercept-sign-reversed = -x-2   Read the y-intercept sign where the li
 --- equation-from-graph · seed 424242 · difficulty 2
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 2)→(1, 0)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 2) and (1, 0)" [equation-from-graph]
-answer   expression -2x+2 (x, expanded)
+answer   expression -2x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = −2]
 step 2   Read where the line crosses y.   [b = 2]
@@ -121,9 +112,8 @@ miss     intercept-sign-reversed = -2x-2   Read the y-intercept sign where the l
 --- equation-from-graph · seed 987654321 · difficulty 2
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 1)→(1, 3)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 1) and (1, 3)" [equation-from-graph]
-answer   expression 2x+1 (x, expanded)
+answer   expression 2x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 2]
 step 2   Read where the line crosses y.   [b = 1]
@@ -134,9 +124,8 @@ miss     intercept-sign-reversed = 2x-1   Read the y-intercept sign where the li
 --- equation-from-graph · seed 1 · difficulty 3
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 2)→(1, 3)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 2) and (1, 3)" [equation-from-graph]
-answer   expression x+2 (x, expanded)
+answer   expression x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 1]
 step 2   Read where the line crosses y.   [b = 2]
@@ -147,9 +136,8 @@ miss     intercept-sign-reversed = x-2   Read the y-intercept sign where the lin
 --- equation-from-graph · seed 12345 · difficulty 3
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 1)→(1, 4)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 1) and (1, 4)" [equation-from-graph]
-answer   expression 3x+1 (x, expanded)
+answer   expression 3x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 3]
 step 2   Read where the line crosses y.   [b = 1]
@@ -160,9 +148,8 @@ miss     intercept-sign-reversed = 3x-1   Read the y-intercept sign where the li
 --- equation-from-graph · seed 67890 · difficulty 3
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 1)→(1, 0)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 1) and (1, 0)" [equation-from-graph]
-answer   expression -x+1 (x, expanded)
+answer   expression -x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = −1]
 step 2   Read where the line crosses y.   [b = 1]
@@ -173,9 +160,8 @@ miss     intercept-sign-reversed = -x-1   Read the y-intercept sign where the li
 --- equation-from-graph · seed 424242 · difficulty 3
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 5)→(1, 2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 5) and (1, 2)" [equation-from-graph]
-answer   expression -3x+5 (x, expanded)
+answer   expression -3x+5 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = −3]
 step 2   Read where the line crosses y.   [b = 5]
@@ -186,9 +172,8 @@ miss     intercept-sign-reversed = -3x-5   Read the y-intercept sign where the l
 --- equation-from-graph · seed 987654321 · difficulty 3
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, −1)→(1, 2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, −1) and (1, 2)" [equation-from-graph]
-answer   expression 3x-1 (x, expanded)
+answer   expression 3x-1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 3]
 step 2   Read where the line crosses y.   [b = −1]
@@ -199,9 +184,8 @@ miss     intercept-sign-reversed = 3x+1   Read the y-intercept sign where the li
 --- equation-from-graph · seed 1 · difficulty 4
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 6)→(1, 7)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 6) and (1, 7)" [equation-from-graph]
-answer   expression x+6 (x, expanded)
+answer   expression x+6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 1]
 step 2   Read where the line crosses y.   [b = 6]
@@ -212,9 +196,8 @@ miss     intercept-sign-reversed = x-6   Read the y-intercept sign where the lin
 --- equation-from-graph · seed 12345 · difficulty 4
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 1)→(1, 5)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 1) and (1, 5)" [equation-from-graph]
-answer   expression 4x+1 (x, expanded)
+answer   expression 4x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 4]
 step 2   Read where the line crosses y.   [b = 1]
@@ -225,9 +208,8 @@ miss     intercept-sign-reversed = 4x-1   Read the y-intercept sign where the li
 --- equation-from-graph · seed 67890 · difficulty 4
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −4)→(1, −5)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −4) and (1, −5)" [equation-from-graph]
-answer   expression -x-4 (x, expanded)
+answer   expression -x-4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = −1]
 step 2   Read where the line crosses y.   [b = −4]
@@ -238,9 +220,8 @@ miss     intercept-sign-reversed = -x+4   Read the y-intercept sign where the li
 --- equation-from-graph · seed 424242 · difficulty 4
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −4)→(1, −7)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −4) and (1, −7)" [equation-from-graph]
-answer   expression -3x-4 (x, expanded)
+answer   expression -3x-4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = −3]
 step 2   Read where the line crosses y.   [b = −4]
@@ -251,9 +232,8 @@ miss     intercept-sign-reversed = -3x+4   Read the y-intercept sign where the l
 --- equation-from-graph · seed 987654321 · difficulty 4
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −2)→(1, 2)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −2) and (1, 2)" [equation-from-graph]
-answer   expression 4x-2 (x, expanded)
+answer   expression 4x-2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 4]
 step 2   Read where the line crosses y.   [b = −2]
@@ -264,9 +244,8 @@ miss     intercept-sign-reversed = 4x+2   Read the y-intercept sign where the li
 --- equation-from-graph · seed 1 · difficulty 5
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −8)→(1, −6)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −8) and (1, −6)" [equation-from-graph]
-answer   expression 2x-8 (x, expanded)
+answer   expression 2x-8 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 2]
 step 2   Read where the line crosses y.   [b = −8]
@@ -277,9 +256,8 @@ miss     intercept-sign-reversed = 2x+8   Read the y-intercept sign where the li
 --- equation-from-graph · seed 12345 · difficulty 5
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 1)→(1, 6)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 1) and (1, 6)" [equation-from-graph]
-answer   expression 5x+1 (x, expanded)
+answer   expression 5x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 5]
 step 2   Read where the line crosses y.   [b = 1]
@@ -290,9 +268,8 @@ miss     intercept-sign-reversed = 5x-1   Read the y-intercept sign where the li
 --- equation-from-graph · seed 67890 · difficulty 5
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −9)→(1, −10)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −9) and (1, −10)" [equation-from-graph]
-answer   expression -x-9 (x, expanded)
+answer   expression -x-9 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = −1]
 step 2   Read where the line crosses y.   [b = −9]
@@ -303,9 +280,8 @@ miss     intercept-sign-reversed = -x+9   Read the y-intercept sign where the li
 --- equation-from-graph · seed 424242 · difficulty 5
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 2)→(1, −2)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 2) and (1, −2)" [equation-from-graph]
-answer   expression -4x+2 (x, expanded)
+answer   expression -4x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = −4]
 step 2   Read where the line crosses y.   [b = 2]
@@ -316,9 +292,8 @@ miss     intercept-sign-reversed = -4x-2   Read the y-intercept sign where the l
 --- equation-from-graph · seed 987654321 · difficulty 5
 prompt   Write the right side of y = from this graph.
 display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, −4)→(1, 1)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, −4) and (1, 1)" [equation-from-graph]
-answer   expression 5x-4 (x, expanded)
+answer   expression 5x-4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Read the slope and y-intercept, then write mx + b.
 step 1   Read the slope from the line.   [m = 5]
 step 2   Read where the line crosses y.   [b = −4]

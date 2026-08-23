@@ -42,6 +42,29 @@ describe('recorded output for structured math', () => {
         'row(fraction("3", "4"), "+", root(superscript("x", "2")))',
     )
   })
+
+  it('records expression rules from the answer as one declaration', () => {
+    const problem: Problem = {
+      skillId: 'synthetic-quadratic',
+      prompt: 'Write the expression.',
+      display: { kind: 'inline', text: '(x + 2)(x + 3)' },
+      answer: {
+        kind: 'expression',
+        canonical: 'x² + 5x + 6',
+        variable: 'x',
+        form: 'expanded',
+        maxDegree: 2,
+      },
+      inputMode: 'expression',
+      hint: 'Multiply each term.',
+      solution: [{ text: 'Combine like terms.' }],
+      difficulty: 1,
+    }
+
+    const output = format(problem, 1)
+    expect(output).toContain('answer   expression x² + 5x + 6 (x, expanded, degree 2)')
+    expect(output).not.toContain('\nvariable ')
+  })
 })
 
 describe('recorded output for diagrams', () => {

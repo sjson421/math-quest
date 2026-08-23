@@ -645,7 +645,6 @@ const equationFromGraph = defineSkill({
       },
       answer: { kind: 'expression', canonical, variable: 'x', form: 'expanded' },
       inputMode: 'expression',
-      expression: { variable: 'x' },
       misconceptions,
       hint: 'Read the slope and y-intercept, then write mx + b.',
       solution: [

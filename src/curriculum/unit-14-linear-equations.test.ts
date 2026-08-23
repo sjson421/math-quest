@@ -459,7 +459,7 @@ describe('rearrange-formula', () => {
       const { subject, term, text } = dataOf(problem)
       const canonical = canonicalOf(problem)
 
-      expect(problem.expression?.variable, text).toBe(term)
+      expect(problem.answer).toMatchObject({ kind: 'expression', variable: term })
       expect(equationOf(problem).variable, text).toBe(subject)
       expect(canonical, text).not.toContain(subject)
       expect(canonicalForm(canonical, term, 'expanded'), text).not.toBeNull()

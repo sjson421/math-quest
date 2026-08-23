@@ -139,7 +139,7 @@ describe('words-to-expression', () => {
       const text = storyText(problem)
       if (problem.answer.kind !== 'expression') throw new Error('expected expression answer')
       expect(problem.inputMode).toBe('expression')
-      expect(problem.expression).toEqual({ variable: 'x' })
+      expect(problem.answer).toMatchObject({ kind: 'expression', variable: 'x' })
       expect(problem.answer.form).toBe('expanded')
       expect(problem.misconceptions).toHaveLength(2)
       expect(new Set(problem.misconceptions?.map((m) => m.tag)).size).toBe(2)

@@ -53,7 +53,6 @@ export const RENDERED_KEYS = [
   'inputMode',
   'keypad',
   'numberLine',
-  'expression',
   'choices',
   'misconceptions',
   'hint',
@@ -515,7 +514,10 @@ const formatAnswer = (answer: Problem['answer']): string => {
     case 'choice':
       return `choice ${answer.id}`
     case 'expression':
-      return `expression ${answer.canonical} (${answer.variable}, ${answer.form})`
+      return (
+        `expression ${answer.canonical} ` +
+        `(${answer.variable}, ${answer.form}, degree ${answer.maxDegree ?? 1})`
+      )
     case 'point':
       return `point ${coordinateLabel(answer)}`
     default: {
@@ -537,7 +539,6 @@ export const format = (problem: Problem, seed: number): string => {
   const keypad = formatKeypad(problem.keypad)
   if (keypad) lines.push(`keypad   ${keypad}`)
   if (problem.numberLine) lines.push(`line     ${formatNumberLine(problem.numberLine)}`)
-  if (problem.expression) lines.push(`variable ${problem.expression.variable}`)
 
   lines.push(`hint     ${problem.hint}`)
 

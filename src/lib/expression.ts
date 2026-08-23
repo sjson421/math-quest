@@ -2,21 +2,24 @@
  * Parsing and canonical-form comparison for single-variable integer expressions.
  *
  * Grammar: integer coefficients, one declared variable letter, infix +/-, unary
- * -, parentheses, and implicit multiplication by juxtaposition (`2x`). No
- * exponents, second variable, or division — any unrecognized character or a
- * degree above 1 (e.g. `x*x`, reachable only through explicit juxtaposition
- * since there is no exponent key) makes the whole entry unparseable rather
- * than partially interpreted.
+ * -, parentheses, and implicit multiplication by juxtaposition (`2x`). A
+ * degree-two declaration additionally accepts the variable's Unicode square.
+ * No general exponents, second variable, or division — any unrecognized
+ * character or degree above the declared bound makes the whole entry
+ * unparseable rather than partially interpreted.
  */
 
 type Token =
   | { kind: 'num'; value: number }
   | { kind: 'var' }
+  | { kind: 'square' }
   | { kind: 'op'; value: '+' | '-' }
   | { kind: 'lparen' }
   | { kind: 'rparen' }
 
-function tokenize(text: string, variable: string): Token[] | null {
+export type ExpressionMaxDegree = 1 | 2
+
+function tokenize(text: string, variable: string, maxDegree: ExpressionMaxDegree): Token[] | null {
   const tokens: Token[] = []
   let i = 0
   while (i < text.length) {
@@ -29,8 +32,17 @@ function tokenize(text: string, variable: string): Token[] | null {
       continue
     }
     if (c === variable) {
-      tokens.push({ kind: 'var' })
-      i++
+      // `xx` is not conventional exponent notation. Keep it outside the
+      // grammar even when degree two makes its algebraic value representable.
+      if (text[i + 1] === variable) return null
+      if (text[i + 1] === '²') {
+        if (maxDegree !== 2) return null
+        tokens.push({ kind: 'square' })
+        i += 2
+      } else {
+        tokens.push({ kind: 'var' })
+        i++
+      }
       continue
     }
     if (c === '+' || c === '-') {
@@ -58,6 +70,7 @@ function tokenize(text: string, variable: string): Token[] | null {
 export type ExpressionNode =
   | { kind: 'num'; value: number }
   | { kind: 'var' }
+  | { kind: 'square' }
   | { kind: 'neg'; expr: ExpressionNode }
   | { kind: 'add'; terms: ExpressionNode[] }
   | { kind: 'mul'; factors: ExpressionNode[] }
@@ -114,7 +127,9 @@ class Parser {
 
   private startsFactor(): boolean {
     const t = this.peek()
-    return t !== undefined && (t.kind === 'num' || t.kind === 'var' || t.kind === 'lparen')
+    return t !== undefined && (
+      t.kind === 'num' || t.kind === 'var' || t.kind === 'square' || t.kind === 'lparen'
+    )
   }
 
   private parseFactor(): ExpressionNode | null {
@@ -135,6 +150,10 @@ class Parser {
       this.next()
       return { kind: 'var' }
     }
+    if (t.kind === 'square') {
+      this.next()
+      return { kind: 'square' }
+    }
     if (t.kind === 'lparen') {
       this.next()
       const inner = this.parseExpr()
@@ -148,10 +167,14 @@ class Parser {
 }
 
 /** Parse a raw entry against one declared variable letter, or null if it does not fit the grammar. */
-export function parseExpression(raw: string, variable: string): ExpressionNode | null {
+export function parseExpression(
+  raw: string,
+  variable: string,
+  maxDegree: ExpressionMaxDegree = 1,
+): ExpressionNode | null {
   const text = raw.trim().replace(/\s+/g, '')
   if (text === '') return null
-  const tokens = tokenize(text, variable)
+  const tokens = tokenize(text, variable, maxDegree)
   if (!tokens || tokens.length === 0) return null
   const parser = new Parser(tokens)
   const node = parser.parseExpr()
@@ -159,54 +182,74 @@ export function parseExpression(raw: string, variable: string): ExpressionNode |
   return node
 }
 
-/** `coeff * variable + constant` — the only shape a degree-1 expression can take. */
-type Linear = { constant: number; coeff: number }
+/** Coefficients at degrees zero, one, and two. */
+type Polynomial = [number, number, number]
 
-/** Null means the expression is degree 2 or higher — out of grammar. */
-function evalLinear(node: ExpressionNode): Linear | null {
+/** Null means an intermediate result exceeds the problem's declared bound. */
+function evalPolynomial(node: ExpressionNode, maxDegree: ExpressionMaxDegree): Polynomial | null {
   switch (node.kind) {
     case 'num':
-      return { constant: node.value, coeff: 0 }
+      return [node.value, 0, 0]
     case 'var':
-      return { constant: 0, coeff: 1 }
+      return [0, 1, 0]
+    case 'square':
+      return maxDegree === 2 ? [0, 0, 1] : null
     case 'neg': {
-      const inner = evalLinear(node.expr)
+      const inner = evalPolynomial(node.expr, maxDegree)
       if (!inner) return null
-      return { constant: -inner.constant, coeff: -inner.coeff }
+      return [-inner[0], -inner[1], -inner[2]]
     }
     case 'add': {
-      let acc: Linear = { constant: 0, coeff: 0 }
+      const acc: Polynomial = [0, 0, 0]
       for (const term of node.terms) {
-        const t = evalLinear(term)
-        if (!t) return null
-        acc = { constant: acc.constant + t.constant, coeff: acc.coeff + t.coeff }
+        const value = evalPolynomial(term, maxDegree)
+        if (!value) return null
+        for (let degree = 0; degree <= maxDegree; degree += 1) {
+          acc[degree] += value[degree]
+        }
       }
       return acc
     }
     case 'mul': {
-      let acc: Linear = { constant: 1, coeff: 0 }
+      let acc: Polynomial = [1, 0, 0]
       for (const factor of node.factors) {
-        const f = evalLinear(factor)
-        if (!f) return null
-        // Both sides already carry a variable term: multiplying them produces
-        // a degree-2 result, which this grammar does not represent.
-        if (acc.coeff !== 0 && f.coeff !== 0) return null
-        acc = {
-          constant: acc.constant * f.constant,
-          coeff: acc.constant * f.coeff + acc.coeff * f.constant,
+        const value = evalPolynomial(factor, maxDegree)
+        if (!value) return null
+        const next: Polynomial = [0, 0, 0]
+        for (let leftDegree = 0; leftDegree <= maxDegree; leftDegree += 1) {
+          for (let rightDegree = 0; rightDegree <= maxDegree; rightDegree += 1) {
+            const product = acc[leftDegree] * value[rightDegree]
+            if (product === 0) continue
+            const degree = leftDegree + rightDegree
+            // Reject the unsupported work now. A later term cannot cancel an
+            // intermediate the problem never allowed the learner to write.
+            if (degree > maxDegree) return null
+            next[degree] += product
+          }
         }
+        acc = next
       }
       return acc
     }
   }
 }
 
-function serializeLinear(linear: Linear, variable: string): string {
-  const { constant, coeff } = linear
-  if (coeff === 0) return String(constant)
-  const coeffPart = coeff === 1 ? variable : coeff === -1 ? `-${variable}` : `${coeff}${variable}`
-  if (constant === 0) return coeffPart
-  return constant > 0 ? `${coeffPart}+${constant}` : `${coeffPart}${constant}`
+function serializeExpanded(polynomial: Polynomial, variable: string, maxDegree: ExpressionMaxDegree): string {
+  const terms: string[] = []
+  for (let degree: number = maxDegree; degree >= 0; degree -= 1) {
+    const coefficient = polynomial[degree]
+    if (coefficient === 0) continue
+    const magnitude = Math.abs(coefficient)
+    const variablePart = degree === 2 ? `${variable}²` : degree === 1 ? variable : ''
+    const body = degree === 0
+      ? String(magnitude)
+      : magnitude === 1
+        ? variablePart
+        : `${magnitude}${variablePart}`
+    if (terms.length === 0) terms.push(coefficient < 0 ? `-${body}` : body)
+    else terms.push(`${coefficient < 0 ? '-' : '+'}${body}`)
+  }
+  return terms.join('') || '0'
 }
 
 /**
@@ -220,6 +263,8 @@ function serializeExact(node: ExpressionNode, variable: string): string {
       return String(node.value)
     case 'var':
       return variable
+    case 'square':
+      return `${variable}²`
     case 'neg':
       return `-(${serializeExact(node.expr, variable)})`
     case 'add':
@@ -257,12 +302,19 @@ export type ExpressionForm = 'expanded' | 'exact'
  * describes a degree above what this grammar supports — both are reported as
  * `unparseable` by the caller, never as a silent misparse.
  */
-export function canonicalForm(raw: string, variable: string, form: ExpressionForm): string | null {
-  const node = parseExpression(raw, variable)
+export function canonicalForm(
+  raw: string,
+  variable: string,
+  form: ExpressionForm,
+  maxDegree: ExpressionMaxDegree = 1,
+): string | null {
+  const node = parseExpression(raw, variable, maxDegree)
   if (!node) return null
   // The degree gate applies to every form: an out-of-grammar expression is
   // invalid however it would be compared.
-  const linear = evalLinear(node)
-  if (!linear) return null
-  return form === 'expanded' ? serializeLinear(linear, variable) : serializeExact(node, variable)
+  const polynomial = evalPolynomial(node, maxDegree)
+  if (!polynomial) return null
+  return form === 'expanded'
+    ? serializeExpanded(polynomial, variable, maxDegree)
+    : serializeExact(node, variable)
 }

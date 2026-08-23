@@ -847,7 +847,6 @@ const rearrangeFormula = defineSkill({
       },
       answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'expanded' },
       inputMode: 'expression',
-      expression: { variable: VARIABLE },
       // Written exactly as the pad produces them — no spaces, ASCII `-` — since
       // a text prediction is matched against the raw entry by exact string.
       misconceptions: [

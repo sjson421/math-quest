@@ -376,7 +376,7 @@ describe('equation-from-graph', () => {
       const canonical = intercept === 0 ? coefficient : `${coefficient}${intercept > 0 ? '+' : ''}${intercept}`
       expect(answer.canonical).toBe(canonical)
       expect(checkAnswer(answer, `${intercept}+${coefficient}`)).toEqual({ status: 'correct' })
-      expect(problem.expression).toEqual({ variable: 'x' })
+      expect(answer.maxDegree).toBeUndefined()
       expect(predictionTags(problem)).toEqual(['slope-intercept-swapped', 'intercept-sign-reversed'])
       shapes.add(canonical)
     }

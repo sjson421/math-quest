@@ -156,6 +156,28 @@ const coordinatePlaneInputSkill: SkillGenerator = {
   }),
 }
 
+const expressionSkill = (maxDegree?: 2): SkillGenerator => ({
+  id: 'synthetic-expression',
+  name: 'Synthetic Expression',
+  blurb: 'For testing expression wiring',
+  generate: (_rng, difficulty) => ({
+    skillId: 'synthetic-expression',
+    prompt: 'Write the expression.',
+    display: { kind: 'inline', text: 'A quadratic in y' },
+    answer: {
+      kind: 'expression',
+      canonical: maxDegree === 2 ? 'y² + 2y + 1' : '2y + 1',
+      variable: 'y',
+      form: 'expanded',
+      maxDegree,
+    },
+    inputMode: 'expression',
+    hint: 'Use the terms shown.',
+    solution: [{ text: 'Write each term.' }],
+    difficulty,
+  }),
+})
+
 const has = (html: string, label: string) => html.includes(`aria-label="${label}"`)
 
 describe('Lesson', () => {
@@ -204,6 +226,20 @@ describe('Lesson', () => {
     expect(html).not.toContain('aria-label="Number line"')
     for (const { label } of answerChoices) expect(html).not.toContain(label)
     expect(html).not.toContain('data-coordinate-plane-answer')
+  })
+
+  it('reads the expression keypad rules from the answer declaration', () => {
+    const quadratic = renderToStaticMarkup(
+      <Lesson skill={expressionSkill(2)} onExit={() => {}} />,
+    )
+    const linear = renderToStaticMarkup(
+      <Lesson skill={expressionSkill()} onExit={() => {}} />,
+    )
+
+    expect(has(quadratic, 'Variable y')).toBe(true)
+    expect(has(quadratic, 'Square')).toBe(true)
+    expect(has(linear, 'Variable y')).toBe(true)
+    expect(has(linear, 'Square')).toBe(false)
   })
 
   it('gives the pad the sign key when the problem asks for one', () => {

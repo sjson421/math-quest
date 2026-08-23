@@ -96,11 +96,12 @@ export function checkAnswer(answer: Answer, raw: string): CheckResult {
   }
 
   if (answer.kind === 'expression') {
-    const entry = canonicalForm(raw, answer.variable, answer.form)
+    const maxDegree = answer.maxDegree ?? 1
+    const entry = canonicalForm(raw, answer.variable, answer.form, maxDegree)
     if (entry === null) return { status: 'unparseable' }
     // The stored answer is written naturally by the generator, not
     // pre-normalized, so it is canonicalized the same way the entry is.
-    const expected = canonicalForm(answer.canonical, answer.variable, answer.form)
+    const expected = canonicalForm(answer.canonical, answer.variable, answer.form, maxDegree)
     return entry === expected ? { status: 'correct' } : { status: 'incorrect' }
   }
 

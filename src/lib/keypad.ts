@@ -1,3 +1,5 @@
+import type { ExpressionMaxDegree } from './expression'
+
 export type KeypadKey = string
 
 export type KeypadRules = {
@@ -105,11 +107,22 @@ export function applyKey(value: string, key: KeypadKey, rules: KeypadRules = {})
  * fraction slash, or sign toggle), so folding it into one function would mean
  * two unrelated rule sets reading each other's branches for no benefit.
  */
-export function applyExpressionKey(value: string, key: KeypadKey, variable: string, maxLength = 20): string {
+export function applyExpressionKey(
+  value: string,
+  key: KeypadKey,
+  variable: string,
+  maxDegree: ExpressionMaxDegree = 1,
+  maxLength = 20,
+): string {
   if (key === 'back') return value.slice(0, -1)
   if (key === 'clear') return ''
 
   const last = value.at(-1)
+
+  if (key === '²') {
+    if (maxDegree !== 2 || last !== variable || value.length >= maxLength) return value
+    return value + key
+  }
 
   if (key === '(') {
     if (value.length >= maxLength) return value

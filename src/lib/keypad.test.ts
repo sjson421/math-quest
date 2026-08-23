@@ -190,4 +190,20 @@ describe('applyExpressionKey', () => {
     const second = applyExpressionKey(first, 'x', 'x')
     expect(second).toBe('2x')
   })
+
+  it('accepts a square only after the declared variable at degree two', () => {
+    expect(applyExpressionKey('x', '²', 'x', 2)).toBe('x²')
+    expect(applyExpressionKey('2x', '²', 'x', 2)).toBe('2x²')
+    expect(applyExpressionKey('y', '²', 'y', 2)).toBe('y²')
+  })
+
+  it('refuses a square outside its declared position', () => {
+    for (const value of ['', '2', 'x+', 'x²', '(x)']) {
+      expect(applyExpressionKey(value, '²', 'x', 2), value).toBe(value)
+    }
+  })
+
+  it('refuses a square under the default linear declaration', () => {
+    expect(applyExpressionKey('x', '²', 'x')).toBe('x')
+  })
 })

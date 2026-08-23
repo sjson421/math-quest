@@ -159,7 +159,6 @@ const wordsToExpression = defineSkill({
       display: { kind: 'story', text: phrase, algebra: { operation: 'words-to-expression', n, lessThan } },
       answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'expanded' },
       inputMode: 'expression',
-      expression: { variable: VARIABLE },
       misconceptions: [
         {
           value: { kind: 'text', value: reversed },
@@ -247,7 +246,6 @@ const combineLikeTerms = defineSkill({
       },
       answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'expanded' },
       inputMode: 'expression',
-      expression: { variable: VARIABLE },
       misconceptions: [
         {
           value: { kind: 'text', value: collapsedIntoTerm },
@@ -300,7 +298,6 @@ const distributive = defineSkill({
       },
       answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'expanded' },
       inputMode: 'expression',
-      expression: { variable: VARIABLE },
       misconceptions: [
         {
           value: { kind: 'text', value: firstTermOnly },
@@ -364,7 +361,6 @@ const distributeNegative = defineSkill({
       },
       answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'expanded' },
       inputMode: 'expression',
-      expression: { variable: VARIABLE },
       misconceptions: [
         {
           // The wall: the second term's sign copied from inside the bracket
@@ -445,7 +441,6 @@ const factorGcf = defineSkill({
       // answer, and accepting it back would accept doing nothing at all.
       answer: { kind: 'expression', canonical, variable: VARIABLE, form: 'exact' },
       inputMode: 'expression',
-      expression: { variable: VARIABLE },
       misconceptions: [
         {
           value: { kind: 'text', value: `${shownCoeff}${VARIABLE}+${shownConstant}` },

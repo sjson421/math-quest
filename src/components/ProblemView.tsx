@@ -115,7 +115,10 @@ function InlineView({
   // A word-based display still does not fit at any of these sizes: `read-numbers`
   // spells out 27 characters and wants wrapping rather than shrinking, which is a
   // different mechanism and is left alone here.
-  const length = display.text.length
+  // Numeric answers already have bounded widths reflected in the bands above.
+  // Expression answers do not: a factored quadratic can be as wide as its
+  // prompt, so count the live entry before choosing the shared row size.
+  const length = display.text.length + (entryMode === 'expression' ? entry.length : 0)
   const size =
     length > 16
       ? 'text-2xl'
@@ -129,7 +132,7 @@ function InlineView({
 
   return (
     <div className={`flex items-baseline justify-center gap-3 ${size}`}>
-      <span className="font-bold tabular-nums tracking-tight">{display.text}</span>
+      <span className="font-bold tabular-nums tracking-tight whitespace-nowrap">{display.text}</span>
       <span className="font-bold text-ink-faint">=</span>
       <EntrySlot value={entry} mode={entryMode} />
     </div>

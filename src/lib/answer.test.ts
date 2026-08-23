@@ -226,5 +226,44 @@ describe('checkAnswer', () => {
       expect(checkAnswer(expanded, 'x^2').status).toBe('unparseable')
       expect(checkAnswer(expanded, '2y + 2').status).toBe('unparseable')
     })
+
+    describe('with a degree-two declaration', () => {
+      const quadratic: Answer = {
+        kind: 'expression',
+        canonical: 'x² + 5x + 6',
+        variable: 'x',
+        form: 'expanded',
+        maxDegree: 2,
+      }
+      const factored: Answer = {
+        kind: 'expression',
+        canonical: '(x + 2)(x + 3)',
+        variable: 'x',
+        form: 'exact',
+        maxDegree: 2,
+      }
+
+      it('accepts an equivalent expanded or factored quadratic', () => {
+        expect(checkAnswer(quadratic, '6 + 5x + x²')).toEqual({ status: 'correct' })
+        expect(checkAnswer(quadratic, '(x + 2)(x + 3)')).toEqual({ status: 'correct' })
+        expect(checkAnswer(factored, '(x + 3)(x + 2)')).toEqual({ status: 'correct' })
+      })
+
+      it('keeps exact factor structure distinct from the expanded value', () => {
+        expect(checkAnswer(factored, 'x² + 5x + 6')).toEqual({ status: 'incorrect' })
+        expect(checkAnswer(factored, '(x + 1)(x + 6)')).toEqual({ status: 'incorrect' })
+      })
+
+      it('keeps omission equivalent to the linear grammar', () => {
+        expect(checkAnswer(expanded, 'x² + 2')).toEqual({ status: 'unparseable' })
+        expect(checkAnswer(expanded, 'x(x + 2)')).toEqual({ status: 'unparseable' })
+      })
+
+      it('rejects out-of-bound work before later cancellation', () => {
+        expect(checkAnswer(quadratic, 'x²x - x²x + x² + 5x + 6')).toEqual({
+          status: 'unparseable',
+        })
+      })
+    })
   })
 })

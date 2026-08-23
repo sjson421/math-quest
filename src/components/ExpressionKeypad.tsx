@@ -17,15 +17,17 @@ import { KEY_STYLE, KeypadKey } from './keypad-key'
 type Props = {
   value: string
   variable: string
+  maxDegree?: 2
   onEntry: (apply: (prev: string) => string) => void
   onSubmit: () => void
   disabled?: boolean
 }
 
-export function ExpressionKeypad({ value, variable, onEntry, onSubmit, disabled }: Props) {
+export function ExpressionKeypad({ value, variable, maxDegree, onEntry, onSubmit, disabled }: Props) {
+  const degree = maxDegree ?? 1
   const press = (k: string) => {
     tap()
-    onEntry((prev) => applyExpressionKey(prev, k, variable))
+    onEntry((prev) => applyExpressionKey(prev, k, variable, degree))
   }
 
   return (
@@ -65,10 +67,21 @@ export function ExpressionKeypad({ value, variable, onEntry, onSubmit, disabled 
         <KeypadKey label="0" onPress={() => press('0')} />
         <KeypadKey label="+" ariaLabel="Plus" onPress={() => press('+')} />
 
+        {degree === 2 ? (
+          <KeypadKey
+            label="²"
+            ariaLabel="Square"
+            className="bg-lilac-soft"
+            onPress={() => press('²')}
+          />
+        ) : (
+          <div aria-hidden="true" />
+        )}
+
         <motion.button
           type="button"
           whileTap={{ scale: 0.94 }}
-          className={`${KEY_STYLE} col-span-4 bg-mint text-xl text-ink`}
+          className={`${KEY_STYLE} col-span-3 bg-mint text-xl text-ink`}
           onClick={() => {
             tap()
             onSubmit()

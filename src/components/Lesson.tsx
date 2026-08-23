@@ -210,10 +210,11 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
         )
 
       case 'expression':
-        return problem.expression ? (
+        return problem.answer.kind === 'expression' ? (
           <ExpressionKeypad
             value={entry}
-            variable={problem.expression.variable}
+            variable={problem.answer.variable}
+            maxDegree={problem.answer.maxDegree}
             onEntry={(apply) => setEntry(apply)}
             onSubmit={submit}
           />

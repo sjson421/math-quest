@@ -93,6 +93,19 @@ describe('ProblemView', () => {
     expect(html).toContain(size)
   })
 
+  it('sizes the whole quadratic row from both expressions', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{ kind: 'inline', text: 'x² + 5x + 6' }}
+        entry="(x+2)(x+3)"
+        entryMode="expression"
+      />,
+    )
+
+    expect(html).toContain('text-2xl')
+    expect(html).toContain('whitespace-nowrap')
+  })
+
   it('bounds and wraps a selected choice label instead of sizing it like digits', () => {
     const html = renderToStaticMarkup(
       <ProblemView

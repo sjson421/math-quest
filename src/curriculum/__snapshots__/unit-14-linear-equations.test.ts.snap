@@ -1294,9 +1294,8 @@ exports[`recorded output: rearrange-formula > matches the wording recorded when 
 "--- rearrange-formula · seed 1 · difficulty 1
 prompt   Solve for y.
 display  equation "3y + 3x = 6" solve y [rearrange 3y + 3x = 6 for y]
-answer   expression -x+2 (x, expanded)
+answer   expression -x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 3x from both sides.   [3y = 6 − 3x]
 step 2   Divide every term by 3.   [y = −x + 2]
@@ -1306,9 +1305,8 @@ miss     divided-one-term-only = -3x+2   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 12345 · difficulty 1
 prompt   Solve for y.
 display  equation "3y + 3x = 6" solve y [rearrange 3y + 3x = 6 for y]
-answer   expression -x+2 (x, expanded)
+answer   expression -x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 3x from both sides.   [3y = 6 − 3x]
 step 2   Divide every term by 3.   [y = −x + 2]
@@ -1318,9 +1316,8 @@ miss     divided-one-term-only = -3x+2   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 67890 · difficulty 1
 prompt   Solve for y.
 display  equation "2y + 4x = 4" solve y [rearrange 2y + 4x = 4 for y]
-answer   expression -2x+2 (x, expanded)
+answer   expression -2x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 4x from both sides.   [2y = 4 − 4x]
 step 2   Divide every term by 2.   [y = −2x + 2]
@@ -1330,9 +1327,8 @@ miss     divided-one-term-only = -4x+2   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 424242 · difficulty 1
 prompt   Solve for y.
 display  equation "2y + 2x = 2" solve y [rearrange 2y + 2x = 2 for y]
-answer   expression -x+1 (x, expanded)
+answer   expression -x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 2x from both sides.   [2y = 2 − 2x]
 step 2   Divide every term by 2.   [y = −x + 1]
@@ -1342,9 +1338,8 @@ miss     divided-one-term-only = -2x+1   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 987654321 · difficulty 1
 prompt   Solve for y.
 display  equation "3y + 3x = 3" solve y [rearrange 3y + 3x = 3 for y]
-answer   expression -x+1 (x, expanded)
+answer   expression -x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 3x from both sides.   [3y = 3 − 3x]
 step 2   Divide every term by 3.   [y = −x + 1]
@@ -1354,9 +1349,8 @@ miss     divided-one-term-only = -3x+1   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 1 · difficulty 2
 prompt   Solve for y.
 display  equation "3y + 3x = 9" solve y [rearrange 3y + 3x = 9 for y]
-answer   expression -x+3 (x, expanded)
+answer   expression -x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 3x from both sides.   [3y = 9 − 3x]
 step 2   Divide every term by 3.   [y = −x + 3]
@@ -1366,9 +1360,8 @@ miss     divided-one-term-only = -3x+3   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 12345 · difficulty 2
 prompt   Solve for y.
 display  equation "4y + 8x = 8" solve y [rearrange 4y + 8x = 8 for y]
-answer   expression -2x+2 (x, expanded)
+answer   expression -2x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 8x from both sides.   [4y = 8 − 8x]
 step 2   Divide every term by 4.   [y = −2x + 2]
@@ -1378,9 +1371,8 @@ miss     divided-one-term-only = -8x+2   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 67890 · difficulty 2
 prompt   Solve for y.
 display  equation "3y + 9x = 6" solve y [rearrange 3y + 9x = 6 for y]
-answer   expression -3x+2 (x, expanded)
+answer   expression -3x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 9x from both sides.   [3y = 6 − 9x]
 step 2   Divide every term by 3.   [y = −3x + 2]
@@ -1390,9 +1382,8 @@ miss     divided-one-term-only = -9x+2   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 424242 · difficulty 2
 prompt   Solve for y.
 display  equation "2y + 2x = 2" solve y [rearrange 2y + 2x = 2 for y]
-answer   expression -x+1 (x, expanded)
+answer   expression -x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 2x from both sides.   [2y = 2 − 2x]
 step 2   Divide every term by 2.   [y = −x + 1]
@@ -1402,9 +1393,8 @@ miss     divided-one-term-only = -2x+1   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 987654321 · difficulty 2
 prompt   Solve for y.
 display  equation "4y + 4x = 4" solve y [rearrange 4y + 4x = 4 for y]
-answer   expression -x+1 (x, expanded)
+answer   expression -x+1 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 4x from both sides.   [4y = 4 − 4x]
 step 2   Divide every term by 4.   [y = −x + 1]
@@ -1414,9 +1404,8 @@ miss     divided-one-term-only = -4x+1   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 1 · difficulty 3
 prompt   Solve for y.
 display  equation "4y + 8x = 16" solve y [rearrange 4y + 8x = 16 for y]
-answer   expression -2x+4 (x, expanded)
+answer   expression -2x+4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 8x from both sides.   [4y = 16 − 8x]
 step 2   Divide every term by 4.   [y = −2x + 4]
@@ -1426,9 +1415,8 @@ miss     divided-one-term-only = -8x+4   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 12345 · difficulty 3
 prompt   Solve for y.
 display  equation "5y + 15x = 20" solve y [rearrange 5y + 15x = 20 for y]
-answer   expression -3x+4 (x, expanded)
+answer   expression -3x+4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 15x from both sides.   [5y = 20 − 15x]
 step 2   Divide every term by 5.   [y = −3x + 4]
@@ -1438,9 +1426,8 @@ miss     divided-one-term-only = -15x+4   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 67890 · difficulty 3
 prompt   Solve for y.
 display  equation "3y + 12x = 9" solve y [rearrange 3y + 12x = 9 for y]
-answer   expression -4x+3 (x, expanded)
+answer   expression -4x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 12x from both sides.   [3y = 9 − 12x]
 step 2   Divide every term by 3.   [y = −4x + 3]
@@ -1450,9 +1437,8 @@ miss     divided-one-term-only = -12x+3   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 424242 · difficulty 3
 prompt   Solve for y.
 display  equation "2y + 6x = 4" solve y [rearrange 2y + 6x = 4 for y]
-answer   expression -3x+2 (x, expanded)
+answer   expression -3x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 6x from both sides.   [2y = 4 − 6x]
 step 2   Divide every term by 2.   [y = −3x + 2]
@@ -1462,9 +1448,8 @@ miss     divided-one-term-only = -6x+2   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 987654321 · difficulty 3
 prompt   Solve for y.
 display  equation "5y + 10x = 10" solve y [rearrange 5y + 10x = 10 for y]
-answer   expression -2x+2 (x, expanded)
+answer   expression -2x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 10x from both sides.   [5y = 10 − 10x]
 step 2   Divide every term by 5.   [y = −2x + 2]
@@ -1474,9 +1459,8 @@ miss     divided-one-term-only = -10x+2   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 1 · difficulty 4
 prompt   Solve for y.
 display  equation "5y + 10x = 25" solve y [rearrange 5y + 10x = 25 for y]
-answer   expression -2x+5 (x, expanded)
+answer   expression -2x+5 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 10x from both sides.   [5y = 25 − 10x]
 step 2   Divide every term by 5.   [y = −2x + 5]
@@ -1486,9 +1470,8 @@ miss     divided-one-term-only = -10x+5   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 12345 · difficulty 4
 prompt   Solve for y.
 display  equation "6y + 24x = 30" solve y [rearrange 6y + 24x = 30 for y]
-answer   expression -4x+5 (x, expanded)
+answer   expression -4x+5 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 24x from both sides.   [6y = 30 − 24x]
 step 2   Divide every term by 6.   [y = −4x + 5]
@@ -1498,9 +1481,8 @@ miss     divided-one-term-only = -24x+5   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 67890 · difficulty 4
 prompt   Solve for y.
 display  equation "3y + 18x = 12" solve y [rearrange 3y + 18x = 12 for y]
-answer   expression -6x+4 (x, expanded)
+answer   expression -6x+4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 18x from both sides.   [3y = 12 − 18x]
 step 2   Divide every term by 3.   [y = −6x + 4]
@@ -1510,9 +1492,8 @@ miss     divided-one-term-only = -18x+4   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 424242 · difficulty 4
 prompt   Solve for y.
 display  equation "2y + 6x = 6" solve y [rearrange 2y + 6x = 6 for y]
-answer   expression -3x+3 (x, expanded)
+answer   expression -3x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 6x from both sides.   [2y = 6 − 6x]
 step 2   Divide every term by 2.   [y = −3x + 3]
@@ -1522,9 +1503,8 @@ miss     divided-one-term-only = -6x+3   Dividing by the coefficient divides eve
 --- rearrange-formula · seed 987654321 · difficulty 4
 prompt   Solve for y.
 display  equation "6y + 12x = 12" solve y [rearrange 6y + 12x = 12 for y]
-answer   expression -2x+2 (x, expanded)
+answer   expression -2x+2 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 12x from both sides.   [6y = 12 − 12x]
 step 2   Divide every term by 6.   [y = −2x + 2]
@@ -1534,9 +1514,8 @@ miss     divided-one-term-only = -12x+2   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 1 · difficulty 5
 prompt   Solve for y.
 display  equation "6y + 18x = 42" solve y [rearrange 6y + 18x = 42 for y]
-answer   expression -3x+7 (x, expanded)
+answer   expression -3x+7 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 18x from both sides.   [6y = 42 − 18x]
 step 2   Divide every term by 6.   [y = −3x + 7]
@@ -1546,9 +1525,8 @@ miss     divided-one-term-only = -18x+7   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 12345 · difficulty 5
 prompt   Solve for y.
 display  equation "8y + 40x = 48" solve y [rearrange 8y + 40x = 48 for y]
-answer   expression -5x+6 (x, expanded)
+answer   expression -5x+6 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 40x from both sides.   [8y = 48 − 40x]
 step 2   Divide every term by 8.   [y = −5x + 6]
@@ -1558,9 +1536,8 @@ miss     divided-one-term-only = -40x+6   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 67890 · difficulty 5
 prompt   Solve for y.
 display  equation "5y + 35x = 25" solve y [rearrange 5y + 35x = 25 for y]
-answer   expression -7x+5 (x, expanded)
+answer   expression -7x+5 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 35x from both sides.   [5y = 25 − 35x]
 step 2   Divide every term by 5.   [y = −7x + 5]
@@ -1570,9 +1547,8 @@ miss     divided-one-term-only = -35x+5   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 424242 · difficulty 5
 prompt   Solve for y.
 display  equation "3y + 12x = 12" solve y [rearrange 3y + 12x = 12 for y]
-answer   expression -4x+4 (x, expanded)
+answer   expression -4x+4 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 12x from both sides.   [3y = 12 − 12x]
 step 2   Divide every term by 3.   [y = −4x + 4]
@@ -1582,9 +1558,8 @@ miss     divided-one-term-only = -12x+4   Dividing by the coefficient divides ev
 --- rearrange-formula · seed 987654321 · difficulty 5
 prompt   Solve for y.
 display  equation "8y + 32x = 24" solve y [rearrange 8y + 32x = 24 for y]
-answer   expression -4x+3 (x, expanded)
+answer   expression -4x+3 (x, expanded, degree 1)
 input    expression
-variable x
 hint     Move the x term across, then divide the whole side by the y coefficient.
 step 1   Subtract 32x from both sides.   [8y = 24 − 32x]
 step 2   Divide every term by 8.   [y = −4x + 3]

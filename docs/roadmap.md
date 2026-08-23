@@ -1004,7 +1004,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
       source data. Unit 16's ten skills and Unit 17's four systems skills now use the shared
       plane; Units 18–19 remain planned, so 14 Stage F skills are still ahead.
 
-- [ ] **23 · Stage F · Units 16–19** — L — 28 skills, six changes
+- [ ] **23 · Stage F · Units 16–19** — L — 28 skills, seven changes
 
       Ordered increments:
 
@@ -1024,6 +1024,12 @@ document's ✅ markers updated to match, which the cross-check enforces.
         lines; substitution and elimination show structured equation pairs; the fixed pass-sales
         frame exposes both equations. `elimination` (17.3) is a wall on forgetting to scale both
         sides, with two reachable point diagnoses that survive filtering.
+      - **18a prerequisite — shipped 2026-08-23.** Expression answers keep degree one as
+        the default and may opt into degree two. The answer now owns the variable and degree
+        used by the keypad, parser, checker, and recorded output. A bounded polynomial
+        canonicalizer accepts conventional `x²` and quadratic products, while the four-column
+        keypad exposes one square key only when declared. This tooling change adds no generators,
+        so every Unit 18 skill remains planned.
       - **18a** `add-polynomials`–`factor-trinomial` — expression answers throughout (item 20);
         `factor-trinomial` (18.6) is a major wall, and `sub-polynomials` (18.2) is Unit 6's
         minus-a-minus mistake one abstraction up.
