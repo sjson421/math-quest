@@ -8,9 +8,7 @@ human-readable companion and the two cross-check each other, so neither can drif
 
 The manifest is written in full while generators arrive one unit at a time, which is why a
 skill with no generator is a normal state rather than a gap.
-
 ## Requirements
-
 ### Requirement: Canonical curriculum manifest
 
 The system SHALL maintain a single machine-readable manifest describing the entire course:
@@ -90,12 +88,77 @@ manifest is populated in full while generators arrive one unit at a time.
 - **THEN** only `implemented` skills are offered
 - **AND** `planned` skills do not block their dependants from being reachable in the graph
 
-### Requirement: Stage capability requirements are recorded
+### Requirement: Skills carry pacing metadata
+
+Each skill SHALL record whether it is a `quick` skill and whether it is a known
+difficulty wall. These markers come from `docs/curriculum.md` and drive lesson length and
+misconception-authoring effort respectively.
+
+#### Scenario: Quick skill is marked
+
+- **WHEN** a skill is marked `quick` in the curriculum document
+- **THEN** the manifest entry carries a `quick` flag
+
+#### Scenario: Wall skill is marked
+
+- **WHEN** a skill is flagged as a difficulty wall in the curriculum document
+- **THEN** the manifest entry records it, so authoring coverage can be checked
+
+### Requirement: The playable course structure is derived
+
+The system SHALL derive the playable structure of the course from the manifest and the
+registered generators: the stages, and the units within them, that hold at least one
+`implemented` skill, each carrying its `implemented` skills. A stage or unit whose skills are
+all `planned` SHALL be absent from that structure rather than present and empty.
+
+The structure SHALL be derived rather than stored, for the same reason per-skill state is:
+registering a generator SHALL place its skill under the unit and stage the manifest declares
+for it, with no second list to keep in step. There SHALL be no other authority for which
+unit or stage a playable skill belongs to.
+
+Every level of the derived structure SHALL be in curriculum order — stages in manifest
+order, units in manifest order within their stage, and skills in manifest order within their
+unit — regardless of the order their generators were written or registered in.
+
+#### Scenario: Membership follows the manifest, not the generator files
+
+- **WHEN** a generator is registered in a source file that does not correspond to its unit
+- **THEN** the derived structure places its skill under the unit the manifest declares
+
+#### Scenario: A unit with no generator is absent
+
+- **WHEN** every skill of a unit is `planned`
+- **THEN** that unit does not appear in the derived structure
+
+#### Scenario: A stage with no generator is absent
+
+- **WHEN** every skill of a stage is `planned`
+- **THEN** that stage does not appear in the derived structure
+
+#### Scenario: A partly built unit carries only its playable skills
+
+- **WHEN** a unit holds both `implemented` and `planned` skills
+- **THEN** it appears in the derived structure
+- **AND** it carries its `implemented` skills only
+
+#### Scenario: A new generator needs no second edit
+
+- **WHEN** a generator is registered for a skill in a unit that had none
+- **THEN** that unit appears in the derived structure in its manifest position
+- **AND** no separate list of units is edited to make it appear
+
+#### Scenario: Every level is in curriculum order
+
+- **WHEN** the derived structure is read
+- **THEN** its stages, each stage's units, and each unit's skills are in the order the
+  manifest declares them
+
+### Requirement: Stage capability requirements remain complete
 
 Each stage SHALL record the capabilities its skills require — choice input, structured math
 notation, fraction keypad input, diagram rendering, expression input, number-line input,
-coordinate-plane input, chart rendering, and timed mode. Recording a requirement SHALL NOT
-imply it is built.
+coordinate-plane input, root-pair input, chart rendering, and timed mode. Recording a
+requirement SHALL NOT imply it is built.
 
 A stage's record SHALL name every capability its own skills need, not only the one it
 introduces, so the set can be read off the stage rather than assembled from earlier ones.
@@ -167,70 +230,12 @@ introduces, so the set can be read off the stage rather than assembled from earl
 
 - **WHEN** coordinate-plane display and confirmed point placement are both built
 - **THEN** Stage F lists `coordinate-plane` as an available required capability
-- **AND** all 28 Stage F skills remain planned while none has a generator
-- **AND** the playable skill total remains 145 and the offered course is unchanged
+- **AND** all Stage F skills without generators remain planned
+- **AND** coordinate-plane availability alone changes no playable skill
 
-### Requirement: Skills carry pacing metadata
+#### Scenario: Stage F records root-pair input before its content
 
-Each skill SHALL record whether it is a `quick` skill and whether it is a known
-difficulty wall. These markers come from `docs/curriculum.md` and drive lesson length and
-misconception-authoring effort respectively.
-
-#### Scenario: Quick skill is marked
-
-- **WHEN** a skill is marked `quick` in the curriculum document
-- **THEN** the manifest entry carries a `quick` flag
-
-#### Scenario: Wall skill is marked
-
-- **WHEN** a skill is flagged as a difficulty wall in the curriculum document
-- **THEN** the manifest entry records it, so authoring coverage can be checked
-
-### Requirement: The playable course structure is derived
-
-The system SHALL derive the playable structure of the course from the manifest and the
-registered generators: the stages, and the units within them, that hold at least one
-`implemented` skill, each carrying its `implemented` skills. A stage or unit whose skills are
-all `planned` SHALL be absent from that structure rather than present and empty.
-
-The structure SHALL be derived rather than stored, for the same reason per-skill state is:
-registering a generator SHALL place its skill under the unit and stage the manifest declares
-for it, with no second list to keep in step. There SHALL be no other authority for which
-unit or stage a playable skill belongs to.
-
-Every level of the derived structure SHALL be in curriculum order — stages in manifest
-order, units in manifest order within their stage, and skills in manifest order within their
-unit — regardless of the order their generators were written or registered in.
-
-#### Scenario: Membership follows the manifest, not the generator files
-
-- **WHEN** a generator is registered in a source file that does not correspond to its unit
-- **THEN** the derived structure places its skill under the unit the manifest declares
-
-#### Scenario: A unit with no generator is absent
-
-- **WHEN** every skill of a unit is `planned`
-- **THEN** that unit does not appear in the derived structure
-
-#### Scenario: A stage with no generator is absent
-
-- **WHEN** every skill of a stage is `planned`
-- **THEN** that stage does not appear in the derived structure
-
-#### Scenario: A partly built unit carries only its playable skills
-
-- **WHEN** a unit holds both `implemented` and `planned` skills
-- **THEN** it appears in the derived structure
-- **AND** it carries its `implemented` skills only
-
-#### Scenario: A new generator needs no second edit
-
-- **WHEN** a generator is registered for a skill in a unit that had none
-- **THEN** that unit appears in the derived structure in its manifest position
-- **AND** no separate list of units is edited to make it appear
-
-#### Scenario: Every level is in curriculum order
-
-- **WHEN** the derived structure is read
-- **THEN** its stages, each stage's units, and each unit's skills are in the order the
-  manifest declares them
+- **WHEN** exact two-root entry is built before Unit 18b generators
+- **THEN** Stage F lists `root-pair-input` as an available required capability
+- **AND** `difference-of-squares`, `solve-by-factoring`, and `quadratic-formula` remain planned
+- **AND** the playable skill total remains 165

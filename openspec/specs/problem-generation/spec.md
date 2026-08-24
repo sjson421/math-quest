@@ -398,7 +398,8 @@ exact answer from that structured data without trusting the generator's stated a
 
 A generator MAY predict a mistake whose result is not a plain number. Text-valued predictions
 represent exact authored forms such as an unsimplified or mis-transformed algebraic expression;
-point-valued predictions represent an exact structured integer ordered pair. Either kind SHALL
+point-valued predictions represent an exact structured integer ordered pair; root-pair
+predictions represent two exact rational roots whose order is not meaningful. Each kind SHALL
 reach the learner and be diagnosable on the same terms as a numeric prediction, subject to the
 kind-specific validation and comparison below.
 
@@ -414,8 +415,17 @@ declared lattice of its coordinate-plane input problem. It SHALL be diagnosed on
 learner's parsed point has the same x and y in the same order. `(3, 2)` and `(2, 3)` are
 distinct predictions.
 
-Numeric, text, and point predictions SHALL be validated and deduplicated within their own
-kinds. Similar written forms across kinds SHALL NOT collide.
+A root-pair prediction SHALL contain two valid exact rationals and belong to a problem whose
+answer and input mode both declare a root pair. It SHALL be carried unless it equals the
+structured root-pair answer or duplicates an earlier root-pair prediction after exact rational
+normalization and order-insensitive comparison. A malformed pair, including a non-finite
+component or zero denominator, or a pair attached to another answer surface SHALL be dropped.
+It SHALL be diagnosed only when both submitted roots match the prediction, in either order.
+Reversing a pair SHALL NOT create a second prediction; repeating one root SHALL remain distinct
+from a pair of two different roots.
+
+Numeric, text, point, and root-pair predictions SHALL be validated and deduplicated within
+their own kinds. Similar written forms across kinds SHALL NOT collide.
 
 #### Scenario: A non-numeric prediction reaches the learner
 
@@ -435,8 +445,8 @@ kinds. Similar written forms across kinds SHALL NOT collide.
 
 #### Scenario: Non-numeric and numeric predictions do not collide
 
-- **WHEN** a problem carries numeric, text, and point predicted misconceptions with similar
-  written forms
+- **WHEN** a problem carries numeric, text, point, and root-pair predicted misconceptions with
+  similar written forms
 - **THEN** deduplication applies within each kind independently
 - **AND** otherwise-valid predictions are never compared across kinds
 
@@ -478,6 +488,33 @@ kinds. Similar written forms across kinds SHALL NOT collide.
 
 - **WHEN** an entry cannot be parsed as a finite integer point
 - **THEN** it matches no structured point misconception
+
+#### Scenario: A root-pair prediction equal to the answer is dropped
+
+- **WHEN** a root-pair problem predicts its exact answer with the two roots reversed
+- **THEN** that prediction does not reach the learner
+
+#### Scenario: Duplicate root-pair predictions keep the first diagnosis
+
+- **WHEN** two predictions carry the same exact roots in opposite orders under different tags
+- **THEN** only the first prediction reaches the learner
+
+#### Scenario: A predicted root pair is diagnosed in either order
+
+- **WHEN** roots `−3` and `−3` are carried as the repeated-root misconception
+- **AND** the learner submits those two values in either slot order
+- **THEN** diagnosis returns the repeated-root misconception and its stable tag
+
+#### Scenario: An invalid authored root-pair prediction is dropped
+
+- **WHEN** a generator predicts a root pair with a non-finite component, a zero denominator,
+  or no matching root-pair answer and input mode
+- **THEN** that prediction does not reach the learner
+
+#### Scenario: An invalid root pair has no diagnosis
+
+- **WHEN** either submitted root cannot be parsed as an exact rational
+- **THEN** the entry matches no structured root-pair misconception
 
 ### Requirement: Single-variable expression displays carry independently verifiable source data
 
