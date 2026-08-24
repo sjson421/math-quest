@@ -422,11 +422,11 @@ in lowest terms. Fraction operations wait for Unit 8.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 19.1 | `function-notation` | f(x) is not multiplication | ⚠️ |
-| 19.2 | `evaluate-function` | | |
-| 19.3 | `domain-range` | | |
-| 19.4 | `linear-vs-nonlinear` | | |
-| 19.5 | `compare-functions` | Table vs graph vs equation | GED-specific |
+| 19.1 | `function-notation` | f(x) is not multiplication | ✅ · ⚠️ |
+| 19.2 | `evaluate-function` | | ✅ |
+| 19.3 | `domain-range` | | ✅ |
+| 19.4 | `linear-vs-nonlinear` | | ✅ |
+| 19.5 | `compare-functions` | Table vs graph vs equation | ✅ · GED-specific |
 
 ---
 

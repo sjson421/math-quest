@@ -1,0 +1,1586 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Unit 19 recorded output: compare-functions > matches the authored sample output 1`] = `
+"--- compare-functions · seed 1 · difficulty 1
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, 1)→(1, −1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, 1) and (1, −1)" [compare-functions ask intercept table [(−1, −4), (0, 0), (1, 4)] equation 3x + -3]
+answer   choice graph
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   equation = Equation
+choice   table = Table
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = 4, b = 0]
+step 2   Read the graph or equation rule.   [graph b = 1, equation b = −3]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 12345 · difficulty 1
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −2)→(1, 1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −2) and (1, 1)" [compare-functions ask intercept table [(−1, −5), (0, −3), (1, −1)] equation -4x + 2]
+answer   choice equation
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   equation = Equation
+choice   table = Table
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = 2, b = −3]
+step 2   Read the graph or equation rule.   [graph b = −2, equation b = 2]
+step 3   Choose the greatest requested value.   [equation]
+
+--- compare-functions · seed 67890 · difficulty 1
+prompt   Which representation has the greatest rate of change?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −2)→(1, −5)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −2) and (1, −5)" [compare-functions ask slope table [(−1, −5), (0, −3), (1, −1)] equation 4x + -1]
+answer   choice equation
+input    choice
+hint     Compare each representation's slope.
+choice   graph = Graph
+choice   table = Table
+choice   equation = Equation
+step 1   Read the table rule from its rows.   [m = 2, b = −3]
+step 2   Read the graph or equation rule.   [graph m = −3, equation m = 4]
+step 3   Choose the greatest requested value.   [equation]
+
+--- compare-functions · seed 424242 · difficulty 1
+prompt   Which representation has the greatest rate of change?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −2)→(1, −1)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −2) and (1, −1)" [compare-functions ask slope table [(−1, −1), (0, 1), (1, 3)] equation -4x + -3]
+answer   choice table
+input    choice
+hint     Compare each representation's slope.
+choice   equation = Equation
+choice   graph = Graph
+choice   table = Table
+step 1   Read the table rule from its rows.   [m = 2, b = 1]
+step 2   Read the graph or equation rule.   [graph m = 1, equation m = −4]
+step 3   Choose the greatest requested value.   [table]
+
+--- compare-functions · seed 987654321 · difficulty 1
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [] lines [(0, −3)→(1, 0)] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; line 1 through (0, −3) and (1, 0)" [compare-functions ask intercept table [(−1, 5), (0, 3), (1, 1)] equation 1x + 2]
+answer   choice table
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   table = Table
+choice   graph = Graph
+choice   equation = Equation
+step 1   Read the table rule from its rows.   [m = −2, b = 3]
+step 2   Read the graph or equation rule.   [graph b = −3, equation b = 2]
+step 3   Choose the greatest requested value.   [table]
+
+--- compare-functions · seed 1 · difficulty 2
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 3)→(1, 7)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 3) and (1, 7)" [compare-functions ask intercept table [(−1, −4), (0, 1), (1, 6)] equation 1x + 4]
+answer   choice equation
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   graph = Graph
+choice   equation = Equation
+choice   table = Table
+step 1   Read the table rule from its rows.   [m = 5, b = 1]
+step 2   Read the graph or equation rule.   [graph b = 3, equation b = 4]
+step 3   Choose the greatest requested value.   [equation]
+
+--- compare-functions · seed 12345 · difficulty 2
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 4)→(1, 0)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 4) and (1, 0)" [compare-functions ask intercept table [(−1, −6), (0, −2), (1, 2)] equation 1x + -3]
+answer   choice graph
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   table = Table
+choice   equation = Equation
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = 4, b = −2]
+step 2   Read the graph or equation rule.   [graph b = 4, equation b = −3]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 67890 · difficulty 2
+prompt   Which representation has the greatest rate of change?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, −1)→(1, −5)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, −1) and (1, −5)" [compare-functions ask slope table [(−1, −8), (0, −3), (1, 2)] equation 4x + 0]
+answer   choice table
+input    choice
+hint     Compare each representation's slope.
+choice   table = Table
+choice   equation = Equation
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = 5, b = −3]
+step 2   Read the graph or equation rule.   [graph m = −4, equation m = 4]
+step 3   Choose the greatest requested value.   [table]
+
+--- compare-functions · seed 424242 · difficulty 2
+prompt   Which representation has the greatest rate of change?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, −3)→(1, 1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, −3) and (1, 1)" [compare-functions ask slope table [(−1, −1), (0, −2), (1, −3)] equation 3x + -1]
+answer   choice graph
+input    choice
+hint     Compare each representation's slope.
+choice   equation = Equation
+choice   graph = Graph
+choice   table = Table
+step 1   Read the table rule from its rows.   [m = −1, b = −2]
+step 2   Read the graph or equation rule.   [graph m = 4, equation m = 3]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 987654321 · difficulty 2
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [] lines [(0, 3)→(1, 1)] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; line 1 through (0, 3) and (1, 1)" [compare-functions ask intercept table [(−1, −3), (0, −1), (1, 1)] equation 4x + -2]
+answer   choice graph
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   graph = Graph
+choice   equation = Equation
+choice   table = Table
+step 1   Read the table rule from its rows.   [m = 2, b = −1]
+step 2   Read the graph or equation rule.   [graph b = 3, equation b = −2]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 1 · difficulty 3
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 3)→(1, 9)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 3) and (1, 9)" [compare-functions ask intercept table [(−1, −1), (0, 4), (1, 9)] equation -5x + 0]
+answer   choice table
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   table = Table
+choice   equation = Equation
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = 5, b = 4]
+step 2   Read the graph or equation rule.   [graph b = 3, equation b = 0]
+step 3   Choose the greatest requested value.   [table]
+
+--- compare-functions · seed 12345 · difficulty 3
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, −3)→(1, −1)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, −3) and (1, −1)" [compare-functions ask intercept table [(−1, −6), (0, −5), (1, −4)] equation -5x + 3]
+answer   choice equation
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   equation = Equation
+choice   table = Table
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = 1, b = −5]
+step 2   Read the graph or equation rule.   [graph b = −3, equation b = 3]
+step 3   Choose the greatest requested value.   [equation]
+
+--- compare-functions · seed 67890 · difficulty 3
+prompt   Which representation has the greatest rate of change?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, −3)→(1, 3)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, −3) and (1, 3)" [compare-functions ask slope table [(−1, −5), (0, −2), (1, 1)] equation -2x + -4]
+answer   choice graph
+input    choice
+hint     Compare each representation's slope.
+choice   table = Table
+choice   graph = Graph
+choice   equation = Equation
+step 1   Read the table rule from its rows.   [m = 3, b = −2]
+step 2   Read the graph or equation rule.   [graph m = 6, equation m = −2]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 424242 · difficulty 3
+prompt   Which representation has the greatest rate of change?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 0)→(1, 5)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 0) and (1, 5)" [compare-functions ask slope table [(−1, −6), (0, −2), (1, 2)] equation -5x + 4]
+answer   choice graph
+input    choice
+hint     Compare each representation's slope.
+choice   equation = Equation
+choice   table = Table
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = 4, b = −2]
+step 2   Read the graph or equation rule.   [graph m = 5, equation m = −5]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 987654321 · difficulty 3
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [] lines [(0, 4)→(1, 2)] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; line 1 through (0, 4) and (1, 2)" [compare-functions ask intercept table [(−1, −7), (0, −2), (1, 3)] equation 1x + 3]
+answer   choice graph
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   equation = Equation
+choice   graph = Graph
+choice   table = Table
+step 1   Read the table rule from its rows.   [m = 5, b = −2]
+step 2   Read the graph or equation rule.   [graph b = 4, equation b = 3]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 1 · difficulty 4
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −5)→(1, −8)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −5) and (1, −8)" [compare-functions ask intercept table [(−1, 4), (0, 7), (1, 10)] equation -4x + 5]
+answer   choice table
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   graph = Graph
+choice   table = Table
+choice   equation = Equation
+step 1   Read the table rule from its rows.   [m = 3, b = 7]
+step 2   Read the graph or equation rule.   [graph b = −5, equation b = 5]
+step 3   Choose the greatest requested value.   [table]
+
+--- compare-functions · seed 12345 · difficulty 4
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, −1)→(1, 2)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, −1) and (1, 2)" [compare-functions ask intercept table [(−1, 12), (0, 6), (1, 0)] equation -7x + -5]
+answer   choice table
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   table = Table
+choice   equation = Equation
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = −6, b = 6]
+step 2   Read the graph or equation rule.   [graph b = −1, equation b = −5]
+step 3   Choose the greatest requested value.   [table]
+
+--- compare-functions · seed 67890 · difficulty 4
+prompt   Which representation has the greatest rate of change?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 7)→(1, 12)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 7) and (1, 12)" [compare-functions ask slope table [(−1, 2), (0, −4), (1, −10)] equation 3x + -5]
+answer   choice graph
+input    choice
+hint     Compare each representation's slope.
+choice   graph = Graph
+choice   equation = Equation
+choice   table = Table
+step 1   Read the table rule from its rows.   [m = −6, b = −4]
+step 2   Read the graph or equation rule.   [graph m = 5, equation m = 3]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 424242 · difficulty 4
+prompt   Which representation has the greatest rate of change?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 5)→(1, 13)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 5) and (1, 13)" [compare-functions ask slope table [(−1, 11), (0, 4), (1, −3)] equation 6x + -6]
+answer   choice graph
+input    choice
+hint     Compare each representation's slope.
+choice   graph = Graph
+choice   table = Table
+choice   equation = Equation
+step 1   Read the table rule from its rows.   [m = −7, b = 4]
+step 2   Read the graph or equation rule.   [graph m = 8, equation m = 6]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 987654321 · difficulty 4
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [] lines [(0, 3)→(1, 9)] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; line 1 through (0, 3) and (1, 9)" [compare-functions ask intercept table [(−1, −2), (0, 0), (1, 2)] equation 7x + -4]
+answer   choice graph
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   equation = Equation
+choice   table = Table
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = 2, b = 0]
+step 2   Read the graph or equation rule.   [graph b = 3, equation b = −4]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 1 · difficulty 5
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 1)→(1, 6)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 1) and (1, 6)" [compare-functions ask intercept table [(−1, 8), (0, 5), (1, 2)] equation -4x + 7]
+answer   choice equation
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   equation = Equation
+choice   table = Table
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = −3, b = 5]
+step 2   Read the graph or equation rule.   [graph b = 1, equation b = 7]
+step 3   Choose the greatest requested value.   [equation]
+
+--- compare-functions · seed 12345 · difficulty 5
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 8)→(1, 1)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 8) and (1, 1)" [compare-functions ask intercept table [(−1, 16), (0, 6), (1, −4)] equation 10x + -6]
+answer   choice graph
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   table = Table
+choice   equation = Equation
+choice   graph = Graph
+step 1   Read the table rule from its rows.   [m = −10, b = 6]
+step 2   Read the graph or equation rule.   [graph b = 8, equation b = −6]
+step 3   Choose the greatest requested value.   [graph]
+
+--- compare-functions · seed 67890 · difficulty 5
+prompt   Which representation has the greatest rate of change?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 4)→(1, −2)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 4) and (1, −2)" [compare-functions ask slope table [(−1, 17), (0, 8), (1, −1)] equation 5x + 1]
+answer   choice equation
+input    choice
+hint     Compare each representation's slope.
+choice   graph = Graph
+choice   equation = Equation
+choice   table = Table
+step 1   Read the table rule from its rows.   [m = −9, b = 8]
+step 2   Read the graph or equation rule.   [graph m = −6, equation m = 5]
+step 3   Choose the greatest requested value.   [equation]
+
+--- compare-functions · seed 424242 · difficulty 5
+prompt   Which representation has the greatest rate of change?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 4)→(1, 13)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 4) and (1, 13)" [compare-functions ask slope table [(−1, −12), (0, −6), (1, 0)] equation 10x + 2]
+answer   choice equation
+input    choice
+hint     Compare each representation's slope.
+choice   table = Table
+choice   graph = Graph
+choice   equation = Equation
+step 1   Read the table rule from its rows.   [m = 6, b = −6]
+step 2   Read the graph or equation rule.   [graph m = 9, equation m = 10]
+step 3   Choose the greatest requested value.   [equation]
+
+--- compare-functions · seed 987654321 · difficulty 5
+prompt   Which representation has the greatest initial value?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [] lines [(0, 1)→(1, 0)] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; line 1 through (0, 1) and (1, 0)" [compare-functions ask intercept table [(−1, −7), (0, −3), (1, 1)] equation 2x + -4]
+answer   choice graph
+input    choice
+hint     Compare each representation's value when x = 0.
+choice   graph = Graph
+choice   equation = Equation
+choice   table = Table
+step 1   Read the table rule from its rows.   [m = 4, b = −3]
+step 2   Read the graph or equation rule.   [graph b = 1, equation b = −4]
+step 3   Choose the greatest requested value.   [graph]"
+`;
+
+exports[`Unit 19 recorded output: domain-range > matches the authored sample output 1`] = `
+"--- domain-range · seed 1 · difficulty 1
+prompt   What is the domain of this function?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(3, −1), (−2, 4), (2, 0)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (3, −1), (−2, 4), and (2, 0)" [domain-range ask domain]
+answer   choice set--2-2-3
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--1-0-4 = {−1, 0, 4}
+choice   set--2-2-3 = {−2, 2, 3}
+step 1   Read every plotted point.   [(3, −1), (−2, 4), (2, 0)]
+step 2   Keep the distinct x-values.   [{−2, 2, 3}]
+miss     domain-range-swapped = set--1-0-4   Use the x-coordinates for the domain.
+
+--- domain-range · seed 12345 · difficulty 1
+prompt   What is the range of this function?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(1, 4), (2, 3), (−4, 0)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (1, 4), (2, 3), and (−4, 0)" [domain-range ask range]
+answer   choice set-0-3-4
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set-0-3-4 = {0, 3, 4}
+choice   set--4-1-2 = {−4, 1, 2}
+step 1   Read every plotted point.   [(1, 4), (2, 3), (−4, 0)]
+step 2   Keep the distinct y-values.   [{0, 3, 4}]
+miss     domain-range-swapped = set--4-1-2   Use the y-coordinates for the range.
+
+--- domain-range · seed 67890 · difficulty 1
+prompt   What is the range of this function?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(1, 2), (−3, 0), (3, 3)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (1, 2), (−3, 0), and (3, 3)" [domain-range ask range]
+answer   choice set-0-2-3
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set-0-2-3 = {0, 2, 3}
+choice   set--3-1-3 = {−3, 1, 3}
+step 1   Read every plotted point.   [(1, 2), (−3, 0), (3, 3)]
+step 2   Keep the distinct y-values.   [{0, 2, 3}]
+miss     domain-range-swapped = set--3-1-3   Use the y-coordinates for the range.
+
+--- domain-range · seed 424242 · difficulty 1
+prompt   What is the range of this function?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(1, 4), (0, 4), (−4, 1)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (1, 4), (0, 4), and (−4, 1)" [domain-range ask range]
+answer   choice set-1-4
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set--4-0-1 = {−4, 0, 1}
+choice   set-1-4 = {1, 4}
+step 1   Read every plotted point.   [(1, 4), (0, 4), (−4, 1)]
+step 2   Keep the distinct y-values.   [{1, 4}]
+miss     domain-range-swapped = set--4-0-1   Use the y-coordinates for the range.
+
+--- domain-range · seed 987654321 · difficulty 1
+prompt   What is the range of this function?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−2, −2), (2, 1), (0, 4)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−2, −2), (2, 1), and (0, 4)" [domain-range ask range]
+answer   choice set--2-1-4
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set--2-1-4 = {−2, 1, 4}
+choice   set--2-0-2 = {−2, 0, 2}
+step 1   Read every plotted point.   [(−2, −2), (2, 1), (0, 4)]
+step 2   Keep the distinct y-values.   [{−2, 1, 4}]
+miss     domain-range-swapped = set--2-0-2   Use the y-coordinates for the range.
+
+--- domain-range · seed 1 · difficulty 2
+prompt   What is the domain of this function?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(4, 0), (3, 0), (0, −4)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (4, 0), (3, 0), and (0, −4)" [domain-range ask domain]
+answer   choice set-0-3-4
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--4-0 = {−4, 0}
+choice   set-0-3-4 = {0, 3, 4}
+step 1   Read every plotted point.   [(4, 0), (3, 0), (0, −4)]
+step 2   Keep the distinct x-values.   [{0, 3, 4}]
+miss     domain-range-swapped = set--4-0   Use the x-coordinates for the domain.
+
+--- domain-range · seed 12345 · difficulty 2
+prompt   What is the range of this function?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(3, 0), (−4, 5), (0, 4)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (3, 0), (−4, 5), and (0, 4)" [domain-range ask range]
+answer   choice set-0-4-5
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set-0-4-5 = {0, 4, 5}
+choice   set--4-0-3 = {−4, 0, 3}
+step 1   Read every plotted point.   [(3, 0), (−4, 5), (0, 4)]
+step 2   Keep the distinct y-values.   [{0, 4, 5}]
+miss     domain-range-swapped = set--4-0-3   Use the y-coordinates for the range.
+
+--- domain-range · seed 67890 · difficulty 2
+prompt   What is the range of this function?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(4, 3), (−4, 4), (3, 3)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (4, 3), (−4, 4), and (3, 3)" [domain-range ask range]
+answer   choice set-3-4
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set-3-4 = {3, 4}
+choice   set--4-3-4 = {−4, 3, 4}
+step 1   Read every plotted point.   [(4, 3), (−4, 4), (3, 3)]
+step 2   Keep the distinct y-values.   [{3, 4}]
+miss     domain-range-swapped = set--4-3-4   Use the y-coordinates for the range.
+
+--- domain-range · seed 424242 · difficulty 2
+prompt   What is the range of this function?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−1, 1), (3, 2), (2, −4)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−1, 1), (3, 2), and (2, −4)" [domain-range ask range]
+answer   choice set--4-1-2
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set--1-2-3 = {−1, 2, 3}
+choice   set--4-1-2 = {−4, 1, 2}
+step 1   Read every plotted point.   [(−1, 1), (3, 2), (2, −4)]
+step 2   Keep the distinct y-values.   [{−4, 1, 2}]
+miss     domain-range-swapped = set--1-2-3   Use the y-coordinates for the range.
+
+--- domain-range · seed 987654321 · difficulty 2
+prompt   What is the domain of this function?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(1, 5), (−2, 2), (3, 5)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (1, 5), (−2, 2), and (3, 5)" [domain-range ask domain]
+answer   choice set--2-1-3
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set-2-5 = {2, 5}
+choice   set--2-1-3 = {−2, 1, 3}
+step 1   Read every plotted point.   [(1, 5), (−2, 2), (3, 5)]
+step 2   Keep the distinct x-values.   [{−2, 1, 3}]
+miss     domain-range-swapped = set-2-5   Use the x-coordinates for the domain.
+
+--- domain-range · seed 1 · difficulty 3
+prompt   What is the domain of this function?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(4, −5), (5, −1), (−5, −3), (−3, −4)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (4, −5), (5, −1), (−5, −3), and (−3, −4)" [domain-range ask domain]
+answer   choice set--5--3-4-5
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--5--4--3--1 = {−5, −4, −3, −1}
+choice   set--5--3-4-5 = {−5, −3, 4, 5}
+step 1   Read every plotted point.   [(4, −5), (5, −1), (−5, −3), (−3, −4)]
+step 2   Keep the distinct x-values.   [{−5, −3, 4, 5}]
+miss     domain-range-swapped = set--5--4--3--1   Use the x-coordinates for the domain.
+
+--- domain-range · seed 12345 · difficulty 3
+prompt   What is the domain of this function?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(0, 5), (1, 6), (−5, 2), (5, −3)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (0, 5), (1, 6), (−5, 2), and (5, −3)" [domain-range ask domain]
+answer   choice set--5-0-1-5
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--3-2-5-6 = {−3, 2, 5, 6}
+choice   set--5-0-1-5 = {−5, 0, 1, 5}
+step 1   Read every plotted point.   [(0, 5), (1, 6), (−5, 2), (5, −3)]
+step 2   Keep the distinct x-values.   [{−5, 0, 1, 5}]
+miss     domain-range-swapped = set--3-2-5-6   Use the x-coordinates for the domain.
+
+--- domain-range · seed 67890 · difficulty 3
+prompt   What is the range of this function?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(2, 4), (5, 4), (−2, 0), (−4, −6)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (2, 4), (5, 4), (−2, 0), and (−4, −6)" [domain-range ask range]
+answer   choice set--6-0-4
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set--4--2-2-5 = {−4, −2, 2, 5}
+choice   set--6-0-4 = {−6, 0, 4}
+step 1   Read every plotted point.   [(2, 4), (5, 4), (−2, 0), (−4, −6)]
+step 2   Keep the distinct y-values.   [{−6, 0, 4}]
+miss     domain-range-swapped = set--4--2-2-5   Use the y-coordinates for the range.
+
+--- domain-range · seed 424242 · difficulty 3
+prompt   What is the domain of this function?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(3, −5), (4, 3), (6, −4), (−1, −6)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (3, −5), (4, 3), (6, −4), and (−1, −6)" [domain-range ask domain]
+answer   choice set--1-3-4-6
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--1-3-4-6 = {−1, 3, 4, 6}
+choice   set--6--5--4-3 = {−6, −5, −4, 3}
+step 1   Read every plotted point.   [(3, −5), (4, 3), (6, −4), (−1, −6)]
+step 2   Keep the distinct x-values.   [{−1, 3, 4, 6}]
+miss     domain-range-swapped = set--6--5--4-3   Use the x-coordinates for the domain.
+
+--- domain-range · seed 987654321 · difficulty 3
+prompt   What is the range of this function?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(4, 6), (−2, −3), (0, −6), (2, −4)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (4, 6), (−2, −3), (0, −6), and (2, −4)" [domain-range ask range]
+answer   choice set--6--4--3-6
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set--6--4--3-6 = {−6, −4, −3, 6}
+choice   set--2-0-2-4 = {−2, 0, 2, 4}
+step 1   Read every plotted point.   [(4, 6), (−2, −3), (0, −6), (2, −4)]
+step 2   Keep the distinct y-values.   [{−6, −4, −3, 6}]
+miss     domain-range-swapped = set--2-0-2-4   Use the y-coordinates for the range.
+
+--- domain-range · seed 1 · difficulty 4
+prompt   What is the domain of this function?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(8, 0), (−3, −7), (−4, −2), (−7, 5)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (8, 0), (−3, −7), (−4, −2), and (−7, 5)" [domain-range ask domain]
+answer   choice set--7--4--3-8
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--7--2-0-5 = {−7, −2, 0, 5}
+choice   set--7--4--3-8 = {−7, −4, −3, 8}
+step 1   Read every plotted point.   [(8, 0), (−3, −7), (−4, −2), (−7, 5)]
+step 2   Keep the distinct x-values.   [{−7, −4, −3, 8}]
+miss     domain-range-swapped = set--7--2-0-5   Use the x-coordinates for the domain.
+
+--- domain-range · seed 12345 · difficulty 4
+prompt   What is the range of this function?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−6, 0), (2, −3), (−7, 5), (1, 6)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−6, 0), (2, −3), (−7, 5), and (1, 6)" [domain-range ask range]
+answer   choice set--3-0-5-6
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set--3-0-5-6 = {−3, 0, 5, 6}
+choice   set--7--6-1-2 = {−7, −6, 1, 2}
+step 1   Read every plotted point.   [(−6, 0), (2, −3), (−7, 5), (1, 6)]
+step 2   Keep the distinct y-values.   [{−3, 0, 5, 6}]
+miss     domain-range-swapped = set--7--6-1-2   Use the y-coordinates for the range.
+
+--- domain-range · seed 67890 · difficulty 4
+prompt   What is the domain of this function?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−6, 5), (4, −6), (2, 8), (−1, −7)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−6, 5), (4, −6), (2, 8), and (−1, −7)" [domain-range ask domain]
+answer   choice set--6--1-2-4
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--6--1-2-4 = {−6, −1, 2, 4}
+choice   set--7--6-5-8 = {−7, −6, 5, 8}
+step 1   Read every plotted point.   [(−6, 5), (4, −6), (2, 8), (−1, −7)]
+step 2   Keep the distinct x-values.   [{−6, −1, 2, 4}]
+miss     domain-range-swapped = set--7--6-5-8   Use the x-coordinates for the domain.
+
+--- domain-range · seed 424242 · difficulty 4
+prompt   What is the domain of this function?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−7, −4), (7, 3), (5, −2), (6, 0)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−7, −4), (7, 3), (5, −2), and (6, 0)" [domain-range ask domain]
+answer   choice set--7-5-6-7
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--7-5-6-7 = {−7, 5, 6, 7}
+choice   set--4--2-0-3 = {−4, −2, 0, 3}
+step 1   Read every plotted point.   [(−7, −4), (7, 3), (5, −2), (6, 0)]
+step 2   Keep the distinct x-values.   [{−7, 5, 6, 7}]
+miss     domain-range-swapped = set--4--2-0-3   Use the x-coordinates for the domain.
+
+--- domain-range · seed 987654321 · difficulty 4
+prompt   What is the domain of this function?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(1, 6), (5, 8), (6, −5), (−7, −1)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (1, 6), (5, 8), (6, −5), and (−7, −1)" [domain-range ask domain]
+answer   choice set--7-1-5-6
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--5--1-6-8 = {−5, −1, 6, 8}
+choice   set--7-1-5-6 = {−7, 1, 5, 6}
+step 1   Read every plotted point.   [(1, 6), (5, 8), (6, −5), (−7, −1)]
+step 2   Keep the distinct x-values.   [{−7, 1, 5, 6}]
+miss     domain-range-swapped = set--5--1-6-8   Use the x-coordinates for the domain.
+
+--- domain-range · seed 1 · difficulty 5
+prompt   What is the range of this function?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−3, −4), (4, −6), (−4, −10), (10, −2), (−8, 2)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−3, −4), (4, −6), (−4, −10), (10, −2), and (−8, 2)" [domain-range ask range]
+answer   choice set--10--6--4--2-2
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set--8--4--3-4-10 = {−8, −4, −3, 4, 10}
+choice   set--10--6--4--2-2 = {−10, −6, −4, −2, 2}
+step 1   Read every plotted point.   [(−3, −4), (4, −6), (−4, −10), (10, −2), (−8, 2)]
+step 2   Keep the distinct y-values.   [{−10, −6, −4, −2, 2}]
+miss     domain-range-swapped = set--8--4--3-4-10   Use the y-coordinates for the range.
+
+--- domain-range · seed 12345 · difficulty 5
+prompt   What is the domain of this function?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−10, 3), (−7, 6), (9, 6), (3, 3), (−8, −1)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−10, 3), (−7, 6), (9, 6), (3, 3), and (−8, −1)" [domain-range ask domain]
+answer   choice set--10--8--7-3-9
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--1-3-6 = {−1, 3, 6}
+choice   set--10--8--7-3-9 = {−10, −8, −7, 3, 9}
+step 1   Read every plotted point.   [(−10, 3), (−7, 6), (9, 6), (3, 3), (−8, −1)]
+step 2   Keep the distinct x-values.   [{−10, −8, −7, 3, 9}]
+miss     domain-range-swapped = set--1-3-6   Use the x-coordinates for the domain.
+
+--- domain-range · seed 67890 · difficulty 5
+prompt   What is the range of this function?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−9, 0), (−6, 4), (4, 0), (−5, 10), (−3, 6)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−9, 0), (−6, 4), (4, 0), (−5, 10), and (−3, 6)" [domain-range ask range]
+answer   choice set-0-4-6-10
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set--9--6--5--3-4 = {−9, −6, −5, −3, 4}
+choice   set-0-4-6-10 = {0, 4, 6, 10}
+step 1   Read every plotted point.   [(−9, 0), (−6, 4), (4, 0), (−5, 10), (−3, 6)]
+step 2   Keep the distinct y-values.   [{0, 4, 6, 10}]
+miss     domain-range-swapped = set--9--6--5--3-4   Use the y-coordinates for the range.
+
+--- domain-range · seed 424242 · difficulty 5
+prompt   What is the domain of this function?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(5, −6), (8, 8), (9, −8), (10, −4), (0, −1)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (5, −6), (8, 8), (9, −8), (10, −4), and (0, −1)" [domain-range ask domain]
+answer   choice set-0-5-8-9-10
+input    choice
+hint     List each distinct x-coordinate from the plotted points.
+choice   set--8--6--4--1-8 = {−8, −6, −4, −1, 8}
+choice   set-0-5-8-9-10 = {0, 5, 8, 9, 10}
+step 1   Read every plotted point.   [(5, −6), (8, 8), (9, −8), (10, −4), (0, −1)]
+step 2   Keep the distinct x-values.   [{0, 5, 8, 9, 10}]
+miss     domain-range-swapped = set--8--6--4--1-8   Use the x-coordinates for the domain.
+
+--- domain-range · seed 987654321 · difficulty 5
+prompt   What is the range of this function?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(3, −10), (−1, −7), (1, 10), (2, 5), (−6, −4)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (3, −10), (−1, −7), (1, 10), (2, 5), and (−6, −4)" [domain-range ask range]
+answer   choice set--10--7--4-5-10
+input    choice
+hint     List each distinct y-coordinate from the plotted points.
+choice   set--6--1-1-2-3 = {−6, −1, 1, 2, 3}
+choice   set--10--7--4-5-10 = {−10, −7, −4, 5, 10}
+step 1   Read every plotted point.   [(3, −10), (−1, −7), (1, 10), (2, 5), (−6, −4)]
+step 2   Keep the distinct y-values.   [{−10, −7, −4, 5, 10}]
+miss     domain-range-swapped = set--6--1-1-2-3   Use the y-coordinates for the range."
+`;
+
+exports[`Unit 19 recorded output: evaluate-function > matches the authored sample output 1`] = `
+"--- evaluate-function · seed 1 · difficulty 1
+prompt   Evaluate the function at x = 0.
+display  equation "f(x) = 2x − 4" solve f(0) [evaluate-function coefficient 2 constant -4 input 0 label f(0)]
+answer   exact -4/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 0.   [2x → 2(0)]
+step 2   Multiply the coefficient and input.   [0]
+step 3   Add the constant −4.   [−4]
+
+--- evaluate-function · seed 12345 · difficulty 1
+prompt   Evaluate the function at x = 0.
+display  equation "f(x) = 4x − 2" solve f(0) [evaluate-function coefficient 4 constant -2 input 0 label f(0)]
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 0.   [4x → 4(0)]
+step 2   Multiply the coefficient and input.   [0]
+step 3   Add the constant −2.   [−2]
+
+--- evaluate-function · seed 67890 · difficulty 1
+prompt   Evaluate the function at x = −1.
+display  equation "f(x) = −x + 1" solve f(−1) [evaluate-function coefficient -1 constant 1 input -1 label f(−1)]
+answer   exact 2/1
+input    keypad
+keypad   allowNegative=false maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −1.   [−x → −1(−1)]
+step 2   Multiply the coefficient and input.   [1]
+step 3   Add the constant 1.   [2]
+
+--- evaluate-function · seed 424242 · difficulty 1
+prompt   Evaluate the function at x = −3.
+display  equation "f(x) = −3x − 2" solve f(−3) [evaluate-function coefficient -3 constant -2 input -3 label f(−3)]
+answer   exact 7/1
+input    keypad
+keypad   allowNegative=false maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −3.   [−3x → −3(−3)]
+step 2   Multiply the coefficient and input.   [9]
+step 3   Add the constant −2.   [7]
+
+--- evaluate-function · seed 987654321 · difficulty 1
+prompt   Evaluate the function at x = −4.
+display  equation "f(x) = 4x − 3" solve f(−4) [evaluate-function coefficient 4 constant -3 input -4 label f(−4)]
+answer   exact -19/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −4.   [4x → 4(−4)]
+step 2   Multiply the coefficient and input.   [−16]
+step 3   Add the constant −3.   [−19]
+
+--- evaluate-function · seed 1 · difficulty 2
+prompt   Evaluate the function at x = 0.
+display  equation "f(x) = 2x − 5" solve f(0) [evaluate-function coefficient 2 constant -5 input 0 label f(0)]
+answer   exact -5/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 0.   [2x → 2(0)]
+step 2   Multiply the coefficient and input.   [0]
+step 3   Add the constant −5.   [−5]
+
+--- evaluate-function · seed 12345 · difficulty 2
+prompt   Evaluate the function at x = 0.
+display  equation "f(x) = 5x − 2" solve f(0) [evaluate-function coefficient 5 constant -2 input 0 label f(0)]
+answer   exact -2/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 0.   [5x → 5(0)]
+step 2   Multiply the coefficient and input.   [0]
+step 3   Add the constant −2.   [−2]
+
+--- evaluate-function · seed 67890 · difficulty 2
+prompt   Evaluate the function at x = −2.
+display  equation "f(x) = −2x + 1" solve f(−2) [evaluate-function coefficient -2 constant 1 input -2 label f(−2)]
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=false maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −2.   [−2x → −2(−2)]
+step 2   Multiply the coefficient and input.   [4]
+step 3   Add the constant 1.   [5]
+
+--- evaluate-function · seed 424242 · difficulty 2
+prompt   Evaluate the function at x = −3.
+display  equation "f(x) = −4x − 3" solve f(−3) [evaluate-function coefficient -4 constant -3 input -3 label f(−3)]
+answer   exact 9/1
+input    keypad
+keypad   allowNegative=false maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −3.   [−4x → −4(−3)]
+step 2   Multiply the coefficient and input.   [12]
+step 3   Add the constant −3.   [9]
+
+--- evaluate-function · seed 987654321 · difficulty 2
+prompt   Evaluate the function at x = −5.
+display  equation "f(x) = 5x − 4" solve f(−5) [evaluate-function coefficient 5 constant -4 input -5 label f(−5)]
+answer   exact -29/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −5.   [5x → 5(−5)]
+step 2   Multiply the coefficient and input.   [−25]
+step 3   Add the constant −4.   [−29]
+
+--- evaluate-function · seed 1 · difficulty 3
+prompt   Evaluate the function at x = 0.
+display  equation "f(x) = 2x − 6" solve f(0) [evaluate-function coefficient 2 constant -6 input 0 label f(0)]
+answer   exact -6/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 0.   [2x → 2(0)]
+step 2   Multiply the coefficient and input.   [0]
+step 3   Add the constant −6.   [−6]
+
+--- evaluate-function · seed 12345 · difficulty 3
+prompt   Evaluate the function at x = 0.
+display  equation "f(x) = 6x − 3" solve f(0) [evaluate-function coefficient 6 constant -3 input 0 label f(0)]
+answer   exact -3/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 0.   [6x → 6(0)]
+step 2   Multiply the coefficient and input.   [0]
+step 3   Add the constant −3.   [−3]
+
+--- evaluate-function · seed 67890 · difficulty 3
+prompt   Evaluate the function at x = −2.
+display  equation "f(x) = −2x + 1" solve f(−2) [evaluate-function coefficient -2 constant 1 input -2 label f(−2)]
+answer   exact 5/1
+input    keypad
+keypad   allowNegative=false maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −2.   [−2x → −2(−2)]
+step 2   Multiply the coefficient and input.   [4]
+step 3   Add the constant 1.   [5]
+
+--- evaluate-function · seed 424242 · difficulty 3
+prompt   Evaluate the function at x = −4.
+display  equation "f(x) = −5x − 3" solve f(−4) [evaluate-function coefficient -5 constant -3 input -4 label f(−4)]
+answer   exact 17/1
+input    keypad
+keypad   allowNegative=false maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −4.   [−5x → −5(−4)]
+step 2   Multiply the coefficient and input.   [20]
+step 3   Add the constant −3.   [17]
+
+--- evaluate-function · seed 987654321 · difficulty 3
+prompt   Evaluate the function at x = −6.
+display  equation "f(x) = 6x − 5" solve f(−6) [evaluate-function coefficient 6 constant -5 input -6 label f(−6)]
+answer   exact -41/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −6.   [6x → 6(−6)]
+step 2   Multiply the coefficient and input.   [−36]
+step 3   Add the constant −5.   [−41]
+
+--- evaluate-function · seed 1 · difficulty 4
+prompt   Evaluate the function at x = 0.
+display  equation "f(x) = 3x − 8" solve f(0) [evaluate-function coefficient 3 constant -8 input 0 label f(0)]
+answer   exact -8/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 0.   [3x → 3(0)]
+step 2   Multiply the coefficient and input.   [0]
+step 3   Add the constant −8.   [−8]
+
+--- evaluate-function · seed 12345 · difficulty 4
+prompt   Evaluate the function at x = 0.
+display  equation "f(x) = 8x − 3" solve f(0) [evaluate-function coefficient 8 constant -3 input 0 label f(0)]
+answer   exact -3/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 0.   [8x → 8(0)]
+step 2   Multiply the coefficient and input.   [0]
+step 3   Add the constant −3.   [−3]
+
+--- evaluate-function · seed 67890 · difficulty 4
+prompt   Evaluate the function at x = −2.
+display  equation "f(x) = −2x + 2" solve f(−2) [evaluate-function coefficient -2 constant 2 input -2 label f(−2)]
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=false maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −2.   [−2x → −2(−2)]
+step 2   Multiply the coefficient and input.   [4]
+step 3   Add the constant 2.   [6]
+
+--- evaluate-function · seed 424242 · difficulty 4
+prompt   Evaluate the function at x = −5.
+display  equation "f(x) = −6x − 4" solve f(−5) [evaluate-function coefficient -6 constant -4 input -5 label f(−5)]
+answer   exact 26/1
+input    keypad
+keypad   allowNegative=false maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −5.   [−6x → −6(−5)]
+step 2   Multiply the coefficient and input.   [30]
+step 3   Add the constant −4.   [26]
+
+--- evaluate-function · seed 987654321 · difficulty 4
+prompt   Evaluate the function at x = −8.
+display  equation "f(x) = 8x − 6" solve f(−8) [evaluate-function coefficient 8 constant -6 input -8 label f(−8)]
+answer   exact -70/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −8.   [8x → 8(−8)]
+step 2   Multiply the coefficient and input.   [−64]
+step 3   Add the constant −6.   [−70]
+
+--- evaluate-function · seed 1 · difficulty 5
+prompt   Evaluate the function at x = 1.
+display  equation "f(x) = 3x − 10" solve f(1) [evaluate-function coefficient 3 constant -10 input 1 label f(1)]
+answer   exact -7/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 1.   [3x → 3(1)]
+step 2   Multiply the coefficient and input.   [3]
+step 3   Add the constant −10.   [−7]
+
+--- evaluate-function · seed 12345 · difficulty 5
+prompt   Evaluate the function at x = 0.
+display  equation "f(x) = 10x − 4" solve f(0) [evaluate-function coefficient 10 constant -4 input 0 label f(0)]
+answer   exact -4/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 0.   [10x → 10(0)]
+step 2   Multiply the coefficient and input.   [0]
+step 3   Add the constant −4.   [−4]
+
+--- evaluate-function · seed 67890 · difficulty 5
+prompt   Evaluate the function at x = −3.
+display  equation "f(x) = −3x + 2" solve f(−3) [evaluate-function coefficient -3 constant 2 input -3 label f(−3)]
+answer   exact 11/1
+input    keypad
+keypad   allowNegative=false maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −3.   [−3x → −3(−3)]
+step 2   Multiply the coefficient and input.   [9]
+step 3   Add the constant 2.   [11]
+
+--- evaluate-function · seed 424242 · difficulty 5
+prompt   Evaluate the function at x = −7.
+display  equation "f(x) = −8x − 6" solve f(−7) [evaluate-function coefficient -8 constant -6 input -7 label f(−7)]
+answer   exact 50/1
+input    keypad
+keypad   allowNegative=false maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −7.   [−8x → −8(−7)]
+step 2   Multiply the coefficient and input.   [56]
+step 3   Add the constant −6.   [50]
+
+--- evaluate-function · seed 987654321 · difficulty 5
+prompt   Evaluate the function at x = −10.
+display  equation "f(x) = 10x − 8" solve f(−10) [evaluate-function coefficient 10 constant -8 input -10 label f(−10)]
+answer   exact -108/1
+input    keypad
+keypad   allowNegative=true maxLength=3
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with −10.   [10x → 10(−10)]
+step 2   Multiply the coefficient and input.   [−100]
+step 3   Add the constant −8.   [−108]"
+`;
+
+exports[`Unit 19 recorded output: function-notation > matches the authored sample output 1`] = `
+"--- function-notation · seed 1 · difficulty 1
+prompt   What does this function notation say?
+display  equation "f(1) = −4" unframed [function-notation input 1 output -4]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-to-output = The input 1 gives output −4.
+choice   input-output-reversed = Input −4 gives output 1.
+choice   function-as-multiplication = Multiply f by 1 to get −4.
+step 1   Find the input inside f( ).   [input = 1]
+step 2   Read the value on the right as the output.   [output = −4]
+step 3   State the mapping in words.   [The input 1 gives output −4.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 12345 · difficulty 1
+prompt   What does this function notation say?
+display  equation "f(4) = −2" unframed [function-notation input 4 output -2]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-to-output = The input 4 gives output −2.
+choice   input-output-reversed = Input −2 gives output 4.
+choice   function-as-multiplication = Multiply f by 4 to get −2.
+step 1   Find the input inside f( ).   [input = 4]
+step 2   Read the value on the right as the output.   [output = −2]
+step 3   State the mapping in words.   [The input 4 gives output −2.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 67890 · difficulty 1
+prompt   What does this function notation say?
+display  equation "f(−1) = 1" unframed [function-notation input -1 output 1]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input 1 gives output −1.
+choice   input-to-output = The input −1 gives output 1.
+choice   function-as-multiplication = Multiply f by −1 to get 1.
+step 1   Find the input inside f( ).   [input = −1]
+step 2   Read the value on the right as the output.   [output = 1]
+step 3   State the mapping in words.   [The input −1 gives output 1.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 424242 · difficulty 1
+prompt   What does this function notation say?
+display  equation "f(−3) = −2" unframed [function-notation input -3 output -2]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input −2 gives output −3.
+choice   function-as-multiplication = Multiply f by −3 to get −2.
+choice   input-to-output = The input −3 gives output −2.
+step 1   Find the input inside f( ).   [input = −3]
+step 2   Read the value on the right as the output.   [output = −2]
+step 3   State the mapping in words.   [The input −3 gives output −2.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 987654321 · difficulty 1
+prompt   What does this function notation say?
+display  equation "f(4) = −3" unframed [function-notation input 4 output -3]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input −3 gives output 4.
+choice   function-as-multiplication = Multiply f by 4 to get −3.
+choice   input-to-output = The input 4 gives output −3.
+step 1   Find the input inside f( ).   [input = 4]
+step 2   Read the value on the right as the output.   [output = −3]
+step 3   State the mapping in words.   [The input 4 gives output −3.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 1 · difficulty 2
+prompt   What does this function notation say?
+display  equation "f(1) = −5" unframed [function-notation input 1 output -5]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-to-output = The input 1 gives output −5.
+choice   input-output-reversed = Input −5 gives output 1.
+choice   function-as-multiplication = Multiply f by 1 to get −5.
+step 1   Find the input inside f( ).   [input = 1]
+step 2   Read the value on the right as the output.   [output = −5]
+step 3   State the mapping in words.   [The input 1 gives output −5.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 12345 · difficulty 2
+prompt   What does this function notation say?
+display  equation "f(5) = −2" unframed [function-notation input 5 output -2]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-to-output = The input 5 gives output −2.
+choice   input-output-reversed = Input −2 gives output 5.
+choice   function-as-multiplication = Multiply f by 5 to get −2.
+step 1   Find the input inside f( ).   [input = 5]
+step 2   Read the value on the right as the output.   [output = −2]
+step 3   State the mapping in words.   [The input 5 gives output −2.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 67890 · difficulty 2
+prompt   What does this function notation say?
+display  equation "f(−1) = 1" unframed [function-notation input -1 output 1]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input 1 gives output −1.
+choice   input-to-output = The input −1 gives output 1.
+choice   function-as-multiplication = Multiply f by −1 to get 1.
+step 1   Find the input inside f( ).   [input = −1]
+step 2   Read the value on the right as the output.   [output = 1]
+step 3   State the mapping in words.   [The input −1 gives output 1.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 424242 · difficulty 2
+prompt   What does this function notation say?
+display  equation "f(−4) = −3" unframed [function-notation input -4 output -3]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input −3 gives output −4.
+choice   function-as-multiplication = Multiply f by −4 to get −3.
+choice   input-to-output = The input −4 gives output −3.
+step 1   Find the input inside f( ).   [input = −4]
+step 2   Read the value on the right as the output.   [output = −3]
+step 3   State the mapping in words.   [The input −4 gives output −3.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 987654321 · difficulty 2
+prompt   What does this function notation say?
+display  equation "f(5) = −4" unframed [function-notation input 5 output -4]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input −4 gives output 5.
+choice   function-as-multiplication = Multiply f by 5 to get −4.
+choice   input-to-output = The input 5 gives output −4.
+step 1   Find the input inside f( ).   [input = 5]
+step 2   Read the value on the right as the output.   [output = −4]
+step 3   State the mapping in words.   [The input 5 gives output −4.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 1 · difficulty 3
+prompt   What does this function notation say?
+display  equation "f(2) = −6" unframed [function-notation input 2 output -6]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-to-output = The input 2 gives output −6.
+choice   input-output-reversed = Input −6 gives output 2.
+choice   function-as-multiplication = Multiply f by 2 to get −6.
+step 1   Find the input inside f( ).   [input = 2]
+step 2   Read the value on the right as the output.   [output = −6]
+step 3   State the mapping in words.   [The input 2 gives output −6.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 12345 · difficulty 3
+prompt   What does this function notation say?
+display  equation "f(6) = −3" unframed [function-notation input 6 output -3]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-to-output = The input 6 gives output −3.
+choice   input-output-reversed = Input −3 gives output 6.
+choice   function-as-multiplication = Multiply f by 6 to get −3.
+step 1   Find the input inside f( ).   [input = 6]
+step 2   Read the value on the right as the output.   [output = −3]
+step 3   State the mapping in words.   [The input 6 gives output −3.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 67890 · difficulty 3
+prompt   What does this function notation say?
+display  equation "f(−1) = 1" unframed [function-notation input -1 output 1]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input 1 gives output −1.
+choice   input-to-output = The input −1 gives output 1.
+choice   function-as-multiplication = Multiply f by −1 to get 1.
+step 1   Find the input inside f( ).   [input = −1]
+step 2   Read the value on the right as the output.   [output = 1]
+step 3   State the mapping in words.   [The input −1 gives output 1.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 424242 · difficulty 3
+prompt   What does this function notation say?
+display  equation "f(−5) = −3" unframed [function-notation input -5 output -3]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input −3 gives output −5.
+choice   function-as-multiplication = Multiply f by −5 to get −3.
+choice   input-to-output = The input −5 gives output −3.
+step 1   Find the input inside f( ).   [input = −5]
+step 2   Read the value on the right as the output.   [output = −3]
+step 3   State the mapping in words.   [The input −5 gives output −3.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 987654321 · difficulty 3
+prompt   What does this function notation say?
+display  equation "f(6) = −5" unframed [function-notation input 6 output -5]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input −5 gives output 6.
+choice   function-as-multiplication = Multiply f by 6 to get −5.
+choice   input-to-output = The input 6 gives output −5.
+step 1   Find the input inside f( ).   [input = 6]
+step 2   Read the value on the right as the output.   [output = −5]
+step 3   State the mapping in words.   [The input 6 gives output −5.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 1 · difficulty 4
+prompt   What does this function notation say?
+display  equation "f(2) = −8" unframed [function-notation input 2 output -8]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-to-output = The input 2 gives output −8.
+choice   input-output-reversed = Input −8 gives output 2.
+choice   function-as-multiplication = Multiply f by 2 to get −8.
+step 1   Find the input inside f( ).   [input = 2]
+step 2   Read the value on the right as the output.   [output = −8]
+step 3   State the mapping in words.   [The input 2 gives output −8.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 12345 · difficulty 4
+prompt   What does this function notation say?
+display  equation "f(8) = −3" unframed [function-notation input 8 output -3]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-to-output = The input 8 gives output −3.
+choice   input-output-reversed = Input −3 gives output 8.
+choice   function-as-multiplication = Multiply f by 8 to get −3.
+step 1   Find the input inside f( ).   [input = 8]
+step 2   Read the value on the right as the output.   [output = −3]
+step 3   State the mapping in words.   [The input 8 gives output −3.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 67890 · difficulty 4
+prompt   What does this function notation say?
+display  equation "f(−2) = 2" unframed [function-notation input -2 output 2]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input 2 gives output −2.
+choice   input-to-output = The input −2 gives output 2.
+choice   function-as-multiplication = Multiply f by −2 to get 2.
+step 1   Find the input inside f( ).   [input = −2]
+step 2   Read the value on the right as the output.   [output = 2]
+step 3   State the mapping in words.   [The input −2 gives output 2.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 424242 · difficulty 4
+prompt   What does this function notation say?
+display  equation "f(−6) = −4" unframed [function-notation input -6 output -4]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input −4 gives output −6.
+choice   function-as-multiplication = Multiply f by −6 to get −4.
+choice   input-to-output = The input −6 gives output −4.
+step 1   Find the input inside f( ).   [input = −6]
+step 2   Read the value on the right as the output.   [output = −4]
+step 3   State the mapping in words.   [The input −6 gives output −4.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 987654321 · difficulty 4
+prompt   What does this function notation say?
+display  equation "f(8) = −6" unframed [function-notation input 8 output -6]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input −6 gives output 8.
+choice   function-as-multiplication = Multiply f by 8 to get −6.
+choice   input-to-output = The input 8 gives output −6.
+step 1   Find the input inside f( ).   [input = 8]
+step 2   Read the value on the right as the output.   [output = −6]
+step 3   State the mapping in words.   [The input 8 gives output −6.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 1 · difficulty 5
+prompt   What does this function notation say?
+display  equation "f(3) = −10" unframed [function-notation input 3 output -10]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-to-output = The input 3 gives output −10.
+choice   input-output-reversed = Input −10 gives output 3.
+choice   function-as-multiplication = Multiply f by 3 to get −10.
+step 1   Find the input inside f( ).   [input = 3]
+step 2   Read the value on the right as the output.   [output = −10]
+step 3   State the mapping in words.   [The input 3 gives output −10.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 12345 · difficulty 5
+prompt   What does this function notation say?
+display  equation "f(10) = −4" unframed [function-notation input 10 output -4]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-to-output = The input 10 gives output −4.
+choice   input-output-reversed = Input −4 gives output 10.
+choice   function-as-multiplication = Multiply f by 10 to get −4.
+step 1   Find the input inside f( ).   [input = 10]
+step 2   Read the value on the right as the output.   [output = −4]
+step 3   State the mapping in words.   [The input 10 gives output −4.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 67890 · difficulty 5
+prompt   What does this function notation say?
+display  equation "f(−2) = 2" unframed [function-notation input -2 output 2]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input 2 gives output −2.
+choice   input-to-output = The input −2 gives output 2.
+choice   function-as-multiplication = Multiply f by −2 to get 2.
+step 1   Find the input inside f( ).   [input = −2]
+step 2   Read the value on the right as the output.   [output = 2]
+step 3   State the mapping in words.   [The input −2 gives output 2.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 424242 · difficulty 5
+prompt   What does this function notation say?
+display  equation "f(−8) = −6" unframed [function-notation input -8 output -6]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input −6 gives output −8.
+choice   function-as-multiplication = Multiply f by −8 to get −6.
+choice   input-to-output = The input −8 gives output −6.
+step 1   Find the input inside f( ).   [input = −8]
+step 2   Read the value on the right as the output.   [output = −6]
+step 3   State the mapping in words.   [The input −8 gives output −6.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output.
+
+--- function-notation · seed 987654321 · difficulty 5
+prompt   What does this function notation say?
+display  equation "f(9) = −8" unframed [function-notation input 9 output -8]
+answer   choice input-to-output
+input    choice
+hint     Read the input inside the parentheses and the output after the equals sign.
+choice   input-output-reversed = Input −8 gives output 9.
+choice   function-as-multiplication = Multiply f by 9 to get −8.
+choice   input-to-output = The input 9 gives output −8.
+step 1   Find the input inside f( ).   [input = 9]
+step 2   Read the value on the right as the output.   [output = −8]
+step 3   State the mapping in words.   [The input 9 gives output −8.]
+miss     function-as-multiplication = function-as-multiplication   The notation names an input and output; it does not multiply f by the input.
+miss     input-output-reversed = input-output-reversed   The number inside the parentheses is the input, and the other value is the output."
+`;
+
+exports[`Unit 19 recorded output: linear-vs-nonlinear > matches the authored sample output 1`] = `
+"--- linear-vs-nonlinear · seed 1 · difficulty 1
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−1, 4), (3, 0), (4, 0)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−1, 4), (3, 0), and (4, 0)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−1, 4), (3, 0), (4, 0)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 12345 · difficulty 1
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(0, 3), (2, 0), (4, 4)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (0, 3), (2, 0), and (4, 4)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(0, 3), (2, 0), (4, 4)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 67890 · difficulty 1
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−3, 3), (−2, 2), (0, 0)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−3, 3), (−2, 2), and (0, 0)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(−3, 3), (−2, 2), (0, 0)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- linear-vs-nonlinear · seed 424242 · difficulty 1
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(1, 2), (2, 3), (3, 4)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (1, 2), (2, 3), and (3, 4)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(1, 2), (2, 3), (3, 4)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- linear-vs-nonlinear · seed 987654321 · difficulty 1
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−2, 1), (1, 4), (3, 2)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−2, 1), (1, 4), and (3, 2)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(−2, 1), (1, 4), (3, 2)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 1 · difficulty 2
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−3, 0), (−1, −4), (5, −1)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−3, 0), (−1, −4), and (5, −1)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−3, 0), (−1, −4), (5, −1)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 12345 · difficulty 2
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−4, 5), (0, 4), (1, 5)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−4, 5), (0, 4), and (1, 5)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(−4, 5), (0, 4), (1, 5)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 67890 · difficulty 2
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−3, 0), (−2, 1), (−1, 2)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−3, 0), (−2, 1), and (−1, 2)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(−3, 0), (−2, 1), (−1, 2)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- linear-vs-nonlinear · seed 424242 · difficulty 2
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(1, −3), (3, −1), (4, 0)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (1, −3), (3, −1), and (4, 0)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(1, −3), (3, −1), (4, 0)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- linear-vs-nonlinear · seed 987654321 · difficulty 2
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−2, 2), (2, 5), (4, −2)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−2, 2), (2, 5), and (4, −2)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−2, 2), (2, 5), (4, −2)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 1 · difficulty 3
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−5, −1), (−3, −3), (5, −4), (6, 0)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−5, −1), (−3, −3), (5, −4), and (6, 0)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−5, −1), (−3, −3), (5, −4), (6, 0)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 12345 · difficulty 3
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−5, 6), (−4, 2), (1, −3), (4, 0)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−5, 6), (−4, 2), (1, −3), and (4, 0)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−5, 6), (−4, 2), (1, −3), (4, 0)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 67890 · difficulty 3
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−4, 6), (−1, 3), (2, 0), (4, −2)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−4, 6), (−1, 3), (2, 0), and (4, −2)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−4, 6), (−1, 3), (2, 0), (4, −2)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- linear-vs-nonlinear · seed 424242 · difficulty 3
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−2, −6), (−1, −5), (2, −2), (3, −1)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−2, −6), (−1, −5), (2, −2), and (3, −1)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−2, −6), (−1, −5), (2, −2), (3, −1)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- linear-vs-nonlinear · seed 987654321 · difficulty 3
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−2, −3), (−1, −6), (1, −4), (5, 4)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−2, −3), (−1, −6), (1, −4), and (5, 4)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(−2, −3), (−1, −6), (1, −4), (5, 4)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 1 · difficulty 4
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−7, −7), (−3, −2), (−2, 5), (1, −4)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−7, −7), (−3, −2), (−2, 5), and (1, −4)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−7, −7), (−3, −2), (−2, 5), (1, −4)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 12345 · difficulty 4
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−7, −3), (−6, 5), (2, 6), (3, 2)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−7, −3), (−6, 5), (2, 6), and (3, 2)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(−7, −3), (−6, 5), (2, 6), (3, 2)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 67890 · difficulty 4
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−6, −6), (−5, −4), (−4, −2), (−2, 2)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−6, −6), (−5, −4), (−4, −2), and (−2, 2)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(−6, −6), (−5, −4), (−4, −2), (−2, 2)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- linear-vs-nonlinear · seed 424242 · difficulty 4
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−5, −2), (−2, −5), (−1, −6), (1, −8)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−5, −2), (−2, −5), (−1, −6), and (1, −8)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−5, −2), (−2, −5), (−1, −6), (1, −8)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- linear-vs-nonlinear · seed 987654321 · difficulty 4
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−5, 8), (1, −5), (2, −1), (7, −8)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−5, 8), (1, −5), (2, −1), and (7, −8)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−5, 8), (1, −5), (2, −1), (7, −8)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 1 · difficulty 5
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−4, −6), (−2, −10), (4, −2), (6, 2), (10, 6)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−4, −6), (−2, −10), (4, −2), (6, 2), and (10, 6)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−4, −6), (−2, −10), (4, −2), (6, 2), (10, 6)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 12345 · difficulty 5
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−10, 6), (−7, 6), (−6, 3), (−3, −1), (10, −9)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−10, 6), (−7, 6), (−6, 3), (−3, −1), and (10, −9)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−10, 6), (−7, 6), (−6, 3), (−3, −1), (10, −9)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]
+
+--- linear-vs-nonlinear · seed 67890 · difficulty 5
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−1, 6), (0, 5), (1, 4), (4, 1), (7, −2)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−1, 6), (0, 5), (1, 4), (4, 1), and (7, −2)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−1, 6), (0, 5), (1, 4), (4, 1), (7, −2)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- linear-vs-nonlinear · seed 424242 · difficulty 5
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−9, 5), (−7, 3), (−2, −2), (2, −6), (3, −7)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−9, 5), (−7, 3), (−2, −2), (2, −6), and (3, −7)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−9, 5), (−7, 3), (−2, −2), (2, −6), (3, −7)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- linear-vs-nonlinear · seed 987654321 · difficulty 5
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−6, −7), (−2, 10), (0, 5), (3, −4), (5, 7)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−6, −7), (−2, 10), (0, 5), (3, −4), and (5, 7)" [linear-vs-nonlinear]
+answer   choice nonlinear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−6, −7), (−2, 10), (0, 5), (3, −4), (5, 7)]
+step 2   Compare each consecutive slope.   [At least one slope changes.]
+step 3   Choose the matching classification.   [Nonlinear]"
+`;

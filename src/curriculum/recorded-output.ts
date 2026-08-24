@@ -184,6 +184,16 @@ const formatCoordinateData = (data: CoordinateData, plane?: CoordinatePlane): st
         `${data.operation} slope ${data.slope} intercept ${data.intercept} ` +
         coordinateEquationLabel(data.slope, data.intercept)
       )
+    case 'domain-range':
+      return `${data.operation} ask ${data.asks}`
+    case 'linear-vs-nonlinear':
+      return data.operation
+    case 'compare-functions':
+      return (
+        `${data.operation} ask ${data.asks} table [` +
+        `${data.tableRows.map(coordinateLabel).join(', ')}] equation ` +
+        `${data.equationSlope}x + ${data.equationIntercept}`
+      )
     case 'quadrant':
     case 'slope-from-graph':
     case 'slope-from-points':
@@ -401,6 +411,13 @@ const formatEquationData = (data: EquationData): string => {
       return (
         `${data.operation} ${data.subjectCoefficient}${data.subject} + ` +
         `${data.termCoefficient}${data.term} = ${data.constant} for ${data.subject}`
+      )
+    case 'function-notation':
+      return `${data.operation} input ${data.input} output ${data.output}`
+    case 'evaluate-function':
+      return (
+        `${data.operation} coefficient ${data.coefficient} constant ${data.constant} ` +
+        `input ${data.input} label ${data.inputLabel}`
       )
     case 'inequality-meaning':
     case 'inequality-graph':

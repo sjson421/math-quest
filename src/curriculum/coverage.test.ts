@@ -72,10 +72,9 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(168)
+    expect(documentedAsBuilt).toHaveLength(173)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
-
   it('keeps every inline expression inside the width its size band was chosen for', () => {
     // `ProblemView` picks a font size from a character count, and its thresholds
     // were set from a measurement of every built skill. A comment recording that
@@ -351,7 +350,7 @@ describe('the skills that are built', () => {
       'ratio-words',
     ])
     expect(unit11Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(168)
+    expect(implementedSkillIds).toHaveLength(173)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -417,7 +416,7 @@ describe('the skills that are built', () => {
       'factor-gcf',
     ])
     expect(unit13Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(168)
+    expect(implementedSkillIds).toHaveLength(173)
   })
 
   it('completes Unit 14 on the capabilities Stage E already had, adding none', () => {
@@ -475,7 +474,7 @@ describe('the skills that are built', () => {
     expect(stageIds.filter((id) => skillState(id) === 'planned')).toEqual([])
   })
 
-  it('completes Units 16, 17, and 18 while leaving Unit 19 planned', () => {
+  it('completes all of Stage F, including Unit 19', () => {
     const stage = manifestIndex.get('plot-points')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unit16Ids = stage?.units.find((unit) => unit.id === 'unit-16')?.skills.map((skill) => skill.id) ?? []
@@ -513,19 +512,20 @@ describe('the skills that are built', () => {
       'difference-of-squares',
       'solve-by-factoring',
       'quadratic-formula',
+      'function-notation',
+      'evaluate-function',
+      'domain-range',
+      'linear-vs-nonlinear',
+      'compare-functions',
     ])
     expect(unit16Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
     const unit17Ids = stage?.units.find((unit) => unit.id === 'unit-17')?.skills.map((skill) => skill.id) ?? []
     expect(unit17Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(5)
-    expect(['difference-of-squares', 'solve-by-factoring', 'quadratic-formula'].map(skillState)).toEqual([
-      'implemented',
-      'implemented',
-      'implemented',
-    ])
+    const unit18Ids = stage?.units.find((unit) => unit.id === 'unit-18')?.skills.map((skill) => skill.id) ?? []
+    expect(unit18Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
     const unit19Ids = stage?.units.find((unit) => unit.id === 'unit-19')?.skills.map((skill) => skill.id) ?? []
-    expect(unit19Ids.filter((id) => skillState(id) === 'planned')).toEqual(unit19Ids)
-    expect(implementedSkillIds).toHaveLength(168)
+    expect(unit19Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
+    expect(implementedSkillIds).toHaveLength(173)
   })
 
   it('declares a capability for every input mode a stage actually uses', () => {
@@ -549,7 +549,7 @@ describe('the skills that are built', () => {
       if (!stage) continue
       for (const difficulty of [1, 2, 3, 4, 5] as const) {
         // Five a difficulty rather than twenty: `inputMode` varies by draw at
-        // most, never by seed depth, and this walks all 168 generators.
+        // most, never by seed depth, and this walks all 173 generators.
         for (let i = 0; i < 5; i += 1) {
           const { inputMode } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
           const capability = modes[inputMode]
@@ -595,9 +595,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 33 skills out of the skill tree entirely', () => {
+  it('leaves the other 28 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(168)
+    expect(offered).toHaveLength(173)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -649,6 +649,7 @@ describe('what the learner is offered', () => {
       'unit-16',
       'unit-17',
       'unit-18',
+      'unit-19',
     ])
   })
 })

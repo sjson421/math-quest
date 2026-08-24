@@ -50,6 +50,27 @@ describe('CoordinateContext', () => {
     expect(negativeUnit).toContain('y = −x + 2')
     expect(negativeUnit).not.toContain('−1x')
   })
+  it('renders a semantic function table and one accessible function equation', () => {
+    const html = renderToStaticMarkup(
+      <CoordinateContext
+        data={{
+          operation: 'compare-functions',
+          tableRows: [{ x: -1, y: -5 }, { x: 0, y: -3 }, { x: 1, y: -1 }],
+          equationSlope: 2,
+          equationIntercept: -3,
+          asks: 'slope',
+        }}
+      />,
+    )
+
+    expect(html).toContain('data-coordinate-comparison')
+    expect(html).toContain('data-coordinate-function-table')
+    expect(html).toContain('<th')
+    expect(html.match(/<tr/g)).toHaveLength(4)
+    expect(html).toContain('data-coordinate-function-equation')
+    expect(html).toContain('f(x) = 2x − 3')
+    expect(html).toContain('aria-label="f of x equals 2x minus 3"')
+  })
 
   it('renders two accessible equations and the ordered-pair legend', () => {
     const html = renderToStaticMarkup(

@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 168 of 201 skills are playable.** Stages A through F have playable content. Stage E
-is complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17 and 18 are complete.
+**Status: 173 of 201 skills are playable.** Stages A through F have playable content. Stage E
+is complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17, 18 and 19 are complete.
 Choice input,
 number-line input, math notation, fraction input, diagrams, expression input,
 coordinate-plane input and root-pair input are built,
@@ -1004,7 +1004,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
       plane; the first six Unit 18 polynomial skills are playable, so eight Stage F skills are
       still ahead.
 
-- [ ] **23 · Stage F · Units 16–19** — L — 28 skills, eight changes
+- [x] **23 · Stage F · Units 16–19** — L — 28 skills, eight changes — **shipped 2026-08-24**
 
       Ordered increments:
 
@@ -1046,10 +1046,12 @@ document's ✅ markers updated to match, which the cross-check enforces.
         zero-product roots; and the quadratic formula is supplied through structured notation
         beside its generated equation and coefficient mapping. Formula frames keep a positive
         perfect-square discriminant and introduce non-monic rational roots at higher difficulty.
-      - **19** `function-notation`–`compare-functions` — 19.1 is a wall on reading f(x) as
-        multiplication. `compare-functions` (19.5) puts a table, a graph and an equation side by
-        side; the stage declares no `chart`, so it must be served by 22a's plane plus a table, and
-        the proposal should say so rather than reach for item 24.
+      - **19 — shipped 2026-08-24.** `function-notation`–`compare-functions` complete Stage F's
+        final five generators. Function notation keeps multiplication and input-output reversal
+        diagnoses distinct; evaluation substitutes into generated linear rules; domain and range
+        use finite plotted functions; linearity compares exact consecutive rates; and
+        `compare-functions` presents a semantic table, graph, and equation through the existing
+        plane without a chart capability.
 
 - [ ] **24 · Chart rendering** — M
 

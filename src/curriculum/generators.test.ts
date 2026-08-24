@@ -145,6 +145,14 @@ function choiceIdFor(problem: Problem, label: string): string {
  * untouched, so every display that shipped before Unit 6 is unaffected.
  */
 const drawn = (value: number): string => String(value).replace('-', '−')
+const functionTermText = (coefficient: number): string =>
+  coefficient === 1 ? 'x' : coefficient === -1 ? '−x' : `${drawn(coefficient)}x`
+
+const functionRuleText = (coefficient: number, constant: number): string => {
+  const term = functionTermText(coefficient)
+  if (constant === 0) return `f(x) = ${term}`
+  return `f(x) = ${term} ${constant > 0 ? '+' : '−'} ${drawn(Math.abs(constant))}`
+}
 
 /**
  * Unit 15's relation vocabulary, spelled out again here.
@@ -1166,6 +1174,24 @@ function expectedEquation(
         values: [data.subjectCoefficient, data.termCoefficient, data.constant],
       }
     }
+    case 'function-notation':
+      if (variable !== undefined) throw new Error('function-notation must not frame a choice answer')
+      return {
+        text: `f(${drawn(data.input)}) = ${drawn(data.output)}`,
+        answer: 'input-to-output',
+        values: [data.input, data.output],
+      }
+    case 'evaluate-function': {
+      const label = `f(${drawn(data.input)})`
+      if (data.inputLabel !== label || variable !== label) {
+        throw new Error(`${data.operation}: requested input label disagrees with its input`)
+      }
+      return {
+        text: functionRuleText(data.coefficient, data.constant),
+        answer: data.coefficient * data.input + data.constant,
+        values: [data.coefficient, data.constant, data.input],
+      }
+    }
     // Unit 15's six. Each rebuilds the *displayed* statement and then solves it,
     // so a generator that shows one inequality and carries another is caught
     // before its answer is ever looked at.
@@ -1821,8 +1847,104 @@ function recompute(problem: Problem): number | string {
       if (!isCoordinateTarget(display.plane, point)) fail(`${operation} solution must be on the lattice`)
       return coordinateEntry(point)
     }
+    const coordinateSetLabel = (values: readonly number[]): string =>
+      `{${[...new Set(values)].sort((left, right) => left - right).map(drawn).join(', ')}}`
+    const compareRationals = (left: Rational, right: Rational): number =>
+      left.n * right.d - right.n * left.d
+    const relationIsLinear = (points: readonly Coordinate[]): boolean => {
+      const ordered = [...points].sort((left, right) => left.x - right.x)
+      const first = ordered[0]
+      const second = ordered[1]
+      const run = BigInt(second.x - first.x)
+      const rise = BigInt(second.y - first.y)
+      return ordered.slice(2).every((point) =>
+        BigInt(point.y - first.y) * run === rise * BigInt(point.x - first.x),
+      )
+    }
+    const tableRule = (rows: readonly Coordinate[]): { slope: Rational; intercept: Rational } => {
+      const [first, second, ...rest] = rows
+      const run = second.x - first.x
+      const rise = second.y - first.y
+      if (run === 0) fail('compare-functions table needs unique x values')
+      if (rest.some((point) =>
+        BigInt(point.y - first.y) * BigInt(run) !== BigInt(rise) * BigInt(point.x - first.x),
+      )) fail('compare-functions table rows are not one linear rule')
+      return {
+        slope: rational(rise, run),
+        intercept: rational(first.y * run - rise * first.x, run),
+      }
+    }
+
 
     switch (data.operation) {
+      case 'domain-range': {
+        noLines()
+        if (display.plane.points.length < 3) fail('domain-range needs at least three plotted points')
+        if (new Set(display.plane.points.map((point) => point.x)).size !== display.plane.points.length) {
+          fail('domain-range x values must be unique')
+        }
+        const requested = data.asks === 'domain'
+          ? display.plane.points.map((point) => point.x)
+          : display.plane.points.map((point) => point.y)
+        const opposite = data.asks === 'domain'
+          ? display.plane.points.map((point) => point.y)
+          : display.plane.points.map((point) => point.x)
+        const requestedLabel = coordinateSetLabel(requested)
+        if (requestedLabel === coordinateSetLabel(opposite)) fail('domain-range sets must be distinct')
+        return choiceIdFor(problem, requestedLabel)
+      }
+      case 'linear-vs-nonlinear': {
+        noLines()
+        if (display.plane.points.length < 3) fail('linear-vs-nonlinear needs at least three plotted points')
+        if (new Set(display.plane.points.map((point) => point.x)).size !== display.plane.points.length) {
+          fail('linear-vs-nonlinear x values must be unique')
+        }
+        return choiceIdFor(problem, relationIsLinear(display.plane.points) ? 'Linear' : 'Nonlinear')
+      }
+      case 'compare-functions': {
+        if (display.plane.points.length !== 0) fail('compare-functions must not plot points')
+        if (display.plane.lines.length !== 1) fail('compare-functions needs one graph line')
+        if (data.tableRows.length < 3) fail('compare-functions table needs at least three rows')
+        if (new Set(data.tableRows.map((point) => point.x)).size !== data.tableRows.length) {
+          fail('compare-functions table x values must be unique')
+        }
+        if (!data.tableRows.some((point) => point.x === 0)) {
+          fail('compare-functions table must include x = 0')
+        }
+        const table = tableRule(data.tableRows)
+        const graph = {
+          slope: lineSlope(display.plane.lines[0].through),
+          intercept: lineIntercept(display.plane.lines[0].through),
+        }
+        if (!Number.isInteger(data.equationSlope) || !Number.isInteger(data.equationIntercept)) {
+          fail('compare-functions equation coefficients must be integers')
+        }
+        const equation = {
+          slope: rational(data.equationSlope, 1),
+          intercept: rational(data.equationIntercept, 1),
+        }
+        if (data.asks !== 'slope' && data.asks !== 'intercept') {
+          fail('compare-functions asks an unknown property')
+        }
+        if (data.asks === 'intercept') {
+          if (graph.intercept.d !== 1 || !isCoordinateTarget(display.plane, { x: 0, y: graph.intercept.n })) {
+            fail('compare-functions graph intercept must be a visible y-axis tick')
+          }
+        }
+        const candidates = [table, graph, equation].map((rule) =>
+          data.asks === 'slope' ? rule.slope : rule.intercept,
+        )
+        if (candidates.some((value, index) =>
+          candidates.some((other, otherIndex) => index !== otherIndex && equals(value, other)),
+        )) {
+          fail('compare-functions requested values must have one unique maximum')
+        }
+        const winner = candidates.reduce(
+          (best, value, index) => (compareRationals(value, candidates[best]) > 0 ? index : best),
+          0,
+        )
+        return choiceIdFor(problem, ['Table', 'Graph', 'Equation'][winner])
+      }
       case 'plot-point':
         noLines()
         if (display.plane.points.length !== 0) fail('plot-point must start with no plotted points')
@@ -2312,6 +2434,14 @@ function sourceMagnitude(problem: Problem): number {
           return [coordinate.point.x, coordinate.point.y]
         case 'table-to-graph':
           return coordinate.rows.flatMap((point) => [point.x, point.y, coordinate.targetX])
+        case 'compare-functions':
+          return [
+            coordinate.equationSlope,
+            coordinate.equationIntercept,
+            ...coordinate.tableRows.flatMap((point) => [point.x, point.y]),
+          ]
+        case 'domain-range':
+        case 'linear-vs-nonlinear':
         case 'quadrant':
         case 'slope-from-graph':
         case 'slope-from-points':

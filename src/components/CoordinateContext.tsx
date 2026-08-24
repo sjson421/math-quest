@@ -69,6 +69,8 @@ export function CoordinateContext({
         </p>
       )
     }
+    case 'compare-functions':
+      return <FunctionComparisonContext data={data} />
     case 'system-by-graphing': {
       if (!plane || plane.lines.length !== 2) return null
       const first = lineEquation(plane.lines[0])
@@ -85,6 +87,8 @@ export function CoordinateContext({
         <SystemContext equations={equations} story={passSalesStory(data)} />
       )
     }
+    case 'domain-range':
+    case 'linear-vs-nonlinear':
     case 'quadrant':
     case 'slope-from-graph':
     case 'slope-from-points':
@@ -97,6 +101,64 @@ export function CoordinateContext({
       throw new Error(`Unhandled coordinate context: ${JSON.stringify(unhandled)}`)
     }
   }
+}
+
+function functionEquationLabel(slope: number, intercept: number): string {
+  const term = slope === 1 ? 'x' : slope === -1 ? '−x' : `${drawn(slope)}x`
+  if (intercept === 0) return `f(x) = ${term}`
+  return `f(x) = ${term} ${intercept > 0 ? '+' : '−'} ${drawn(Math.abs(intercept))}`
+}
+
+function spokenFunctionEquation(label: string): string {
+  return label
+    .replace('f(x) = ', 'f of x equals ')
+    .replace(' − ', ' minus ')
+    .replace(' + ', ' plus ')
+}
+
+function FunctionComparisonContext({
+  data,
+}: {
+  data: Extract<CoordinateData, { operation: 'compare-functions' }>
+}) {
+  const equation = functionEquationLabel(data.equationSlope, data.equationIntercept)
+  return (
+    <section
+      className="flex max-w-full flex-wrap items-center justify-center gap-2"
+      data-coordinate-comparison
+      aria-label="Function table and equation"
+    >
+      <table
+        className="overflow-hidden rounded-xl border-separate border-spacing-0 bg-cream-deep text-center tabular-nums"
+        data-coordinate-function-table
+      >
+        <caption className="sr-only">Function values in a table</caption>
+        <thead>
+          <tr>
+            <th className="border-b border-cream-deep bg-lilac-soft px-3 py-1 text-sm font-bold" scope="col">x</th>
+            <th className="border-b border-cream-deep bg-lilac-soft px-3 py-1 text-sm font-bold" scope="col">y</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.tableRows.map((point) => (
+            <tr key={`${point.x},${point.y}`} className="bg-white/60">
+              <td className="px-3 py-1">{drawn(point.x)}</td>
+              <td className="px-3 py-1">{drawn(point.y)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <p
+        className="rounded-xl bg-butter-soft px-3 py-2 text-lg font-bold text-ink"
+        data-coordinate-function-equation
+        data-coordinate-equation
+        role="math"
+        aria-label={spokenFunctionEquation(equation)}
+      >
+        <span aria-hidden>{equation}</span>
+      </p>
+    </section>
+  )
 }
 
 function SystemContext({

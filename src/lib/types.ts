@@ -171,6 +171,20 @@ export type CoordinateData =
       scaleFactor: number
       eliminate: 'x' | 'y'
     }
+  /** A finite function relation whose domain, range, or linearity is read from its points. */
+  | { operation: 'domain-range'; asks: 'domain' | 'range' }
+  | { operation: 'linear-vs-nonlinear' }
+  /**
+   * Three linear rules shown as a table, graph, and equation. The graph line
+   * remains in the plane; the other two representations carry their own rows.
+   */
+  | {
+      operation: 'compare-functions'
+      tableRows: Coordinate[]
+      equationSlope: number
+      equationIntercept: number
+      asks: 'slope' | 'intercept'
+    }
   /** Quantities behind the fixed pass-sales story; counts are deliberately absent. */
   | {
       operation: 'system-words'
@@ -570,6 +584,22 @@ export type EquationData =
       subjectCoefficient: number
       termCoefficient: number
       constant: number
+    }
+  /**
+   * `function-notation`: the input and output shown in `f(input) = output`.
+   * Choices own the reading answer, so this display has no answer frame.
+   */
+  | { operation: 'function-notation'; input: number; output: number }
+  /**
+   * `evaluate-function`: the displayed linear rule and the named input on the
+   * separate answer row.
+   */
+  | {
+      operation: 'evaluate-function'
+      coefficient: number
+      constant: number
+      input: number
+      inputLabel: string
     }
   /*
    * Unit 15's six. Every arm below states an *inequality*, so its `relation` is

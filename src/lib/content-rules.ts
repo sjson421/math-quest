@@ -157,6 +157,14 @@ function displayText(display: Display): string {
   }
 }
 
+const drawn = (value: number): string => String(value).replace('-', '−')
+
+const functionEquationLabel = (slope: number, intercept: number): string => {
+  const term = slope === 1 ? 'x' : slope === -1 ? '−x' : `${drawn(slope)}x`
+  if (intercept === 0) return `f(x) = ${term}`
+  return `f(x) = ${term} ${intercept > 0 ? '+' : '−'} ${drawn(Math.abs(intercept))}`
+}
+
 function coordinateDataText(data?: CoordinateData, plane?: CoordinatePlane): string {
   if (!data) return ''
   switch (data.operation) {
@@ -168,6 +176,15 @@ function coordinateDataText(data?: CoordinateData, plane?: CoordinatePlane): str
       return `${data.operation} ${coordinateEquationLabel(data.slope, data.intercept)}; ask ${data.asks}`
     case 'graph-from-equation':
       return `${data.operation} ${coordinateEquationLabel(data.slope, data.intercept)}`
+    case 'domain-range':
+      return `${data.operation} ask ${data.asks}; points ${(plane?.points ?? []).map(coordinateLabel).join(', ')}`
+    case 'linear-vs-nonlinear':
+      return `${data.operation} points ${(plane?.points ?? []).map(coordinateLabel).join(', ')}`
+    case 'compare-functions':
+      return (
+        `${data.operation} ask ${data.asks}; table ${data.tableRows.map(coordinateLabel).join(', ')}; ` +
+        `${functionEquationLabel(data.equationSlope, data.equationIntercept)}`
+      )
     case 'quadrant':
     case 'slope-from-graph':
     case 'slope-from-points':
