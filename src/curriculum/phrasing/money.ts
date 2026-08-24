@@ -1,7 +1,7 @@
 import type { Frame } from '../engine'
 
 /**
- * Fixed adult-situation frames for a price-times-quantity purchase total.
+ * Fixed everyday frames for a price-times-quantity purchase total.
  *
  * `a` is a price in exact integer cents rather than a decimal dollar amount, so
  * the shared engine's plain-number multiplication stays exact — no floating-point

@@ -87,7 +87,7 @@ single-sentence hint, and ≥2 distinct predicted misconceptions on any skill ma
   answer, and dedups by value. A wall skill therefore needs predictions that cannot collide
   with the answer *or each other* — the count in the source is not the count that survives.
 - **Skill blurbs stay ≤32 characters.** The Home card truncates beyond that on a phone.
-- **Adult tone.** Describe the skill; never talk down, never scold. Wrong answers are
+- **Respectful tone.** Describe the skill; never talk down, never scold. Wrong answers are
   diagnosed, not marked incorrect.
 
 ## Workflow

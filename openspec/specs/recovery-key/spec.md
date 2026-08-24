@@ -6,7 +6,7 @@ Identity without an account: a single transcribable key that brings progress bac
 on a new phone. No password, no email, no reset.
 
 The key is a bearer credential rather than a password — anyone holding it can read and write
-that progress — which is a deliberate trade for single-learner math progress, and one the app
+that progress — which is a deliberate trade for lightweight learning progress, and one the app
 states plainly wherever the key appears.
 
 ## Requirements

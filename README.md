@@ -1,13 +1,13 @@
 # Math Quest
 
-A gamified math app that starts at counting and builds toward GED level. Built as an
-installable iPhone home-screen web app (PWA) — no App Store, no Apple Developer account,
-no Mac required.
+A cute, offline-first GED math prep app that builds from number sense to test-ready algebra,
+geometry, data, and calculator skills. Math Quest is a standards-based PWA, so it runs in a
+browser and can be installed on devices that support web apps.
 
-## Status: playable loop, whole course mapped
+## Status: playable foundations, whole course mapped
 
-A full playable loop over every skill built so far — mastery levels, XP, coins, streaks,
-and backup.
+**173 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
+streaks, a companion mascot, and progress backup.
 
 The rest of the course now exists as data rather than intent: all **201 skills** across 8
 stages and 23 units are declared in `src/curriculum/manifest/`, with prerequisites, unit
@@ -51,17 +51,18 @@ npm run build        # production build into dist/
 npm run icons        # regenerate app icons after changing the mascot
 ```
 
-## Getting it onto the iPhone
+## Installing the PWA
 
 The app must be served over HTTPS for the service worker and install to work, so deploy
 rather than using the LAN dev server:
 
 1. Push to GitHub, import the repo at [vercel.com](https://vercel.com) — the Vite preset
    needs no configuration. Free tier is plenty.
-2. On the iPhone, open the deployed URL **in Safari** (not Chrome — only Safari can install).
+2. On an iPhone, open the deployed URL **in Safari** (not Chrome — only Safari can install).
 3. Share → **Add to Home Screen**.
 4. Launch from the new icon. It opens fullscreen with no browser chrome and works offline.
 
+Other browsers can use the deployed app directly; install and offline support vary by browser.
 For quick iteration against a phone on the same network, `npm run dev:lan` exposes the dev
 server — good enough for layout checks, though PWA install and offline behaviour need the
 deployed HTTPS build.
@@ -74,8 +75,8 @@ Every skill owns a generator that computes its own answer from the operands it j
 Nothing is hardcoded, so problems never run out and the answer key cannot drift from the
 question.
 
-- `src/curriculum/unit-00-numbers.ts` … `unit-04-division.ts` — the built generators, one
-  file per curriculum unit, added a unit at a time
+- `src/curriculum/unit-*.ts` — the built generators, one file per curriculum unit, added a
+  unit at a time
 - `src/lib/generator.ts` — the factory every problem passes through
 - `src/lib/rng.ts` — seeded RNG (`mulberry32`) plus `constrain()` for rejecting degenerate
   problems like `x + 0`
@@ -110,9 +111,9 @@ naming the offending entry, since a bare failure on a 201-node graph is untracea
 
 ### Generated text has a contract
 
-Brevity is a requirement, not a preference: a worked example beats prose for a novice, and
-long explanations are where an adult restarting math disengages. Because the text is
-generated, `src/lib/content-rules.ts` runs over sampled problems inside the test suite —
+Brevity is a requirement, not a preference: a worked example beats a long explanation when a
+new idea is hard to approach. Because the text is generated, `src/lib/content-rules.ts` runs
+over sampled problems inside the test suite —
 at most 4 solution steps, at most 12 words each, single-sentence hints, and at least two
 distinct predicted misconceptions on any skill marked a difficulty wall.
 
@@ -148,10 +149,9 @@ hearts exist to sell refills, which is irrelevant here.
 
 ### Progress is local-first, with a recovery key
 
-The device is the working store: everything lives in IndexedDB, and the app is fully
-usable offline. `navigator.storage.persist()` is requested on first launch, but iOS can
-still evict web app storage — and losing months of streak is the worst failure this app
-has — so a copy also syncs to a small serverless endpoint.
+The device is the working store: everything lives in IndexedDB, and the app is fully usable
+offline. `navigator.storage.persist()` is requested on first launch, but browsers can still
+evict web app storage, so a copy also syncs to a small serverless endpoint.
 
 Identity is a single **recovery key** (`MATH-XXXX-XXXX-XXXX-XXXX`), generated on first
 run. No account, no password, no email. Typing it into Math Quest on a new phone brings
@@ -159,9 +159,8 @@ everything back. It lives permanently in **Settings → Your recovery key**, nev
 one-time reveal, because with file export gone it is the only route back to the data.
 
 The key is a **bearer credential**, not a password: anyone holding it can read and write
-that progress, and it is not encrypted. That trade is deliberate for single-learner math
-progress, and it is stated plainly wherever the key appears. There is no reset — a lost
-key cannot be recovered.
+that progress, and it is not encrypted. That trade keeps recovery lightweight, and it is
+stated plainly wherever the key appears. There is no reset — a lost key cannot be recovered.
 
 Sync is last-write-wins behind a version guard, so a stale device is refused rather than
 allowed to silently overwrite newer progress. **Settings → Backup** shows when progress
@@ -198,17 +197,16 @@ scripts/        icon generation from the mascot artwork
 
 ## Design notes
 
-**Kawaii presentation, adult content.** Pastels, rounded shapes, and a companion mascot —
-but the language addresses a capable adult who simply hasn't been taught this yet. The
-mascot never baby-talks and never scolds; the wrong-answer state is sympathetic rather
-than disappointed, and error feedback deliberately avoids alarm-red styling.
+**Kawaii presentation, serious practice.** Pastels, rounded shapes, and a companion mascot
+make practice inviting. The language stays clear and respectful: Pip never baby-talks or
+scolds, and error feedback is sympathetic rather than alarm-red.
 
 **Pip** is an original character, built as layered SVG (`src/components/Mascot.tsx`) so
 expressions and future outfits are composable data rather than separate drawings. Adding a
 new outfit is a few lines of geometry, not an art commission.
 
-**The custom keypad** matters more than it looks. The iOS system keyboard covers half the
-screen and makes the app feel like a web form.
+**The custom keypad** matters more than it looks. Mobile system keyboards can cover half the
+screen and make a focused lesson feel like a web form.
 
 **Haptics** work on iOS 18+ via the native `switch`-element trick (`src/lib/haptics.ts`),
 since Safari does not implement the Vibration API. Feature-detected, silent no-op elsewhere.

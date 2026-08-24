@@ -4,7 +4,7 @@
 
 Limits on the learner-facing text a generator produces. Brevity is a requirement,
 not a preference: a worked example outperforms prose for a novice, and long explanations are
-where an adult restarting math disengages.
+where a learner disengages.
 
 Because the text is generated rather than authored, these are enforced at test time over
 sampled problems rather than by reading source.
@@ -15,7 +15,7 @@ sampled problems rather than by reading source.
 
 Every skill's learner-facing text SHALL satisfy fixed length limits. Brevity is a
 requirement, not a preference: a worked example outperforms prose for novice learners, and
-long explanations are where an adult restarting math disengages.
+long explanations are where a learner disengages.
 
 Limits per skill:
 

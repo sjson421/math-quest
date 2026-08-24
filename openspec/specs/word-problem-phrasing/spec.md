@@ -175,7 +175,7 @@ prediction shadowed by an earlier one never reaches the learner either.
 ### Requirement: Proper-fraction stories use authored source-checked frames
 
 A word problem asking for a part-over-whole fraction SHALL draw from a bank of at least eight
-fixed adult-situation frames. Frame selection SHALL use the problem's seeded generator, and
+fixed everyday frames. Frame selection SHALL use the problem's seeded generator, and
 every frame SHALL be checked directly against the content contract using quantity sets that
 produce a positive proper fraction and three distinct surviving comprehension predictions.
 
@@ -201,7 +201,7 @@ produce a positive proper fraction and three distinct surviving comprehension pr
 ### Requirement: Money-problem stories use authored, source-checked frames
 
 A word problem asking for a dollars-and-cents result SHALL draw from a bank of at least eight
-fixed adult-situation frames, each a price-times-quantity purchase total. Frame selection
+fixed everyday frames, each a price-times-quantity purchase total. Frame selection
 SHALL use the problem's seeded generator, and every frame SHALL be checked directly against
 the content contract using quantity sets that produce a nonnegative dollars-and-cents result
 and predict the comprehension errors that frame's wording invites.
@@ -225,7 +225,7 @@ cents.
 
 ### Requirement: Ratio stories use authored source-checked frames
 
-Ratio word problems SHALL draw from a bank of at least eight fixed adult-situation frames.
+Ratio word problems SHALL draw from a bank of at least eight fixed everyday frames.
 Every frame SHALL state two category counts and their computed total, SHALL provide fixed
 wording for both a first-to-second and a first-to-whole request, and SHALL be selected from
 the problem's seeded generator.

@@ -1,7 +1,7 @@
 import { format, rational } from '../../lib/rational'
 import type { Frame } from '../engine'
 
-/** Fixed adult-situation frames for reading a part as a fraction of its whole. */
+/** Fixed everyday frames for reading a part as a fraction of its whole. */
 const steps = (part: number, whole: number, closing: string) => [
   { text: 'Identify the named part and the whole.', detail: `${part} out of ${whole}` },
   {

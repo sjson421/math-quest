@@ -8,8 +8,8 @@ import type { Frame } from '../engine'
  * wrong, and a story with nothing to pick up wrongly is an arithmetic problem
  * wearing a sentence.
  *
- * Adult situations on purpose. The learner is an adult restarting, and counting
- * sweets would tell them what we think of them.
+ * Familiar situations on purpose. The stories should feel useful and respectful, not
+ * like they are talking down to the learner.
  */
 
 /** Shared shape: name the two that matter, add them, say the total. */

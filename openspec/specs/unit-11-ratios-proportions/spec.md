@@ -116,7 +116,7 @@ unstated lookup knowledge.
 ### Requirement: Ratio word problems distinguish part-to-part from part-to-whole
 
 The system SHALL generate the Stage D Unit 11 skill `ratio-words` under its manifest id.
-Each problem SHALL present two positive, unequal category counts in an authored adult-context
+Each problem SHALL present two positive, unequal category counts in an authored everyday-context
 story, state their total, and request either the first-to-second ratio or the first-to-whole
 ratio. The exact answer SHALL preserve the requested order, use fraction entry, and be
 recomputable from structured category counts and comparison type carried with the story.

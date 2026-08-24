@@ -4,8 +4,7 @@
  * The text being constrained is *generated*, so no static analyser can see it —
  * these rules run over sampled problems inside the test suite instead. Brevity
  * is a requirement here, not a preference: a worked example outperforms prose for
- * novice learners, and long explanations are where an adult restarting math
- * disengages.
+ * novice learners, and long explanations make a difficult idea harder to approach.
  *
  * Every rule reports which skill broke it and by how much, because a bare
  * failure on generated text is nearly impossible to trace back to a line.

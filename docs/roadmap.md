@@ -365,7 +365,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
       rows and repeated addition until the course has a diagram capability.
 
       Left behind: **a multiplication frame bank and operator-specific source checks**. Eight
-      adult contexts are checked with multiplication-safe quantities that exclude `2 × 2`,
+      everyday contexts are checked with multiplication-safe quantities that exclude `2 × 2`,
       where adding the operands equals their product. Two-by-two lessons show both
       aligned partial products before combining them, and every Unit 3 problem remains a
       whole-number problem on the digit keypad. The manifest's first three skills keep their

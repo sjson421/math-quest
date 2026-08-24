@@ -28,7 +28,7 @@ Do not ask the user to run the app or browser.
 
 On a passing run, capture and inspect at least one 375px screenshot. Shoot each changed
 visual state and any existing screen touched. Check internal representation consistency,
-alignment/spacing/collisions/truncation, and consistency with the app's cute adult visual
+alignment/spacing/collisions/truncation, and consistency with the app's cute visual language
 identity. Fix confirmed bugs, rerun gates, and reshoot; report design choices instead of
 guessing. The final report names screens and concrete observations, not merely screenshots.
 

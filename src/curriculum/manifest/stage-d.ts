@@ -25,7 +25,7 @@ export const stageD: StageEntry = {
   requires: ['choice-input', 'math-notation', 'fraction-input', 'diagram', 'number-line'],
   units: [
     {
-      // Conceptual only — adults fail fractions when procedure arrives before
+      // Conceptual only — learners struggle with fractions when procedure arrives before
       // meaning, so not one problem in this unit asks for a calculation.
       id: 'unit-7',
       name: 'Fractions: Meaning',

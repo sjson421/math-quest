@@ -246,7 +246,7 @@ multiplying straight across without inverting either fraction.
 
 ### Requirement: Fraction word problems ask for a proper part-over-whole fraction
 
-A `fraction-words` problem SHALL select a fixed adult-situation frame, mention a part, its
+A `fraction-words` problem SHALL select a fixed everyday frame, mention a part, its
 whole, and an irrelevant quantity, and ask what fraction of the whole the part represents.
 It SHALL carry the relevant part and whole as machine-readable division operands, require the
 answer in lowest terms, and predict the three comprehension errors invited by the frame.

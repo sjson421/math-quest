@@ -9,18 +9,18 @@ Arithmetic from the very beginning through to GED level.
 
 Patient pacing means **more, smaller skills — not fewer, bigger ones.**
 
-An adult restarting math usually carries shame about it. A skill that takes three
-attempts to pass feels like failing again; a skill that passes first try feels like
-progress. So every notorious wall gets its **own** skill rather than being buried inside
-a larger one:
+Math practice works better when a difficult idea is small enough to revisit. A skill that
+takes three attempts to pass still records progress; a skill that passes first try builds
+momentum. So every notorious wall gets its **own** skill rather than being buried inside a
+larger one:
 
 - subtracting a negative (`−` a `−`) — not folded into "negative numbers"
 - subtracting across zero (`500 − 237`) — not folded into "3-digit subtraction"
 - flipping the inequality sign when multiplying by a negative — its own skill
 - each times table separately, easiest first — not "the times tables"
 
-Splitting these costs nothing (a generator is cheap) and removes the exact moments where
-adult learners historically quit.
+Splitting these costs nothing (a generator is cheap) and gives learners a clear recovery path
+through the moments where practice is most likely to stall.
 
 ---
 
@@ -40,8 +40,8 @@ Rules:
 - **Show, don't explain.** A worked example outperforms prose for novice learners. Prose
   is the fallback, never the default.
 - **No forward references.** Never mention a concept from a later unit, even in passing.
-- **Concrete before abstract.** Use money for decimals and percents — an adult already
-  has strong money intuition, and it transfers.
+- **Concrete before abstract.** Use familiar contexts for decimals and percents so the ideas
+  connect to something learners already know.
 - **No jargon debt.** "Numerator" arrives when it's needed, not in an overview.
 
 ---
@@ -241,7 +241,7 @@ The gate to all algebra. Nothing here is optional.
 
 ### Unit 7 — Fractions: Meaning (9) — *meaning before operations*
 
-Adults fail fractions when procedure arrives before meaning. This unit builds
+Learners often struggle with fractions when procedure arrives before meaning. This unit builds
 representations, equivalence, and comparison first, then closes by expressing fractions
 in lowest terms. Fraction operations wait for Unit 8.
 

@@ -4,7 +4,7 @@ import type { Frame } from '../engine'
  * Division word problems, as fixed frames.
  *
  * The same rules as the other three banks: three quantities mentioned, two used,
- * adult situations, and prose fixed in source so every sentence a learner sees
+ * everyday situations, and prose fixed in source so every sentence a learner sees
  * has been read by a person first.
  *
  * Division carries a constraint the others do not. Its predicted wrong-pair

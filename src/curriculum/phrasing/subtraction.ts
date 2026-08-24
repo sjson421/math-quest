@@ -12,8 +12,8 @@ import type { Frame } from '../engine'
  * names which is the whole and which comes off it in the sentence itself, rather
  * than leaving the learner to infer it from which number is bigger.
  *
- * Adult situations on purpose. The learner is an adult restarting, and counting
- * sweets would tell them what we think of them.
+ * Familiar situations on purpose. The stories should feel useful and respectful, not
+ * like they are talking down to the learner.
  */
 
 /** Shared shape: name the two that matter, take one from the other, say what is left. */

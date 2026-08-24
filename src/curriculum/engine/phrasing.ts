@@ -8,8 +8,8 @@ import type { ProblemSpec } from './problem'
  * Templated phrasing for word problems.
  *
  * Fixed sentence frames with generated numbers, rather than prose composed at
- * generation time. The reason is not technical: an adult restarting math reads a
- * clumsy sentence as their own failure to understand, not as ours to write. Every
+ * generation time. The reason is not technical: a learner reads a clumsy sentence as
+ * their own failure to understand, not as ours to write. Every
  * sentence that reaches a learner has been read by a person first.
  *
  * Frames also carry their own misconceptions, because only the sentence that

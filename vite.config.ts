@@ -19,7 +19,7 @@ export default defineConfig({
       manifest: {
         name: 'Math Quest',
         short_name: 'Math Quest',
-        description: 'Learn math from the beginning, one lesson at a time.',
+        description: 'Cute, offline-first GED math prep from foundational skills to test practice.',
         theme_color: '#fef7f9',
         background_color: '#fef7f9',
         display: 'standalone',

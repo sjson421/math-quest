@@ -56,7 +56,7 @@ SHALL represent subtracting the original equations before the required scaling.
 
 ### Requirement: System word problems expose their two equations
 
-The system SHALL generate `system-words` from a fixed adult-tone frame whose visible quantities
+The system SHALL generate `system-words` from a fixed respectful-tone frame whose visible quantities
 determine two equations and one nonnegative integer ordered-pair solution inside the declared
 answer plane. The situation, variable meanings, and both equations SHALL agree with the same
 structured source data.

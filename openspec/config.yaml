@@ -1,7 +1,7 @@
 schema: spec-driven
 
 context: |
-  Math Quest is an offline-first React math PWA for one adult learner.
+  Math Quest is an offline-first React math PWA for GED math practice and foundational skills.
 
   Read repository authorities instead of repeating them here:
   - AGENTS.md: architecture, invariants, commands, and task-document routing

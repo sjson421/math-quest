@@ -1,6 +1,6 @@
 import type { Frame } from '../engine'
 
-/** Fixed adult-situation frames for equal-group multiplication stories. */
+/** Fixed everyday frames for equal-group multiplication stories. */
 const steps = (a: number, b: number, answer: number, closing: string) => [
   { text: 'Pick out the number of groups and the amount in each.', detail: `${a} groups of ${b}` },
   { text: 'Multiply the two numbers.', detail: `${a} × ${b} = ${answer}` },
