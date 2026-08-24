@@ -236,6 +236,11 @@ describe('stage capabilities', () => {
       'root-pair-input',
     ])
   })
+
+  it('marks chart rendering built while Stage G content remains planned', () => {
+    expect(AVAILABLE_CAPABILITIES.has('chart')).toBe(true)
+    expect(stageById.get('stage-g')?.requires).toEqual(['math-notation', 'diagram', 'chart'])
+  })
 })
 
 describe('skill ids are unique', () => {

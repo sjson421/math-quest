@@ -262,3 +262,74 @@ describe('recorded output for coordinate planes', () => {
     expect(output).toContain('lines [(0, −3)→(1, −1), (0, 3)→(1, 5)]')
   })
 })
+
+describe('recorded output for charts', () => {
+  it('records every chart source and the derived accessible name', () => {
+    const problem: Problem = {
+      skillId: 'synthetic-chart',
+      prompt: 'Read the bar.',
+      display: {
+        kind: 'chart',
+        chart: {
+          title: 'Monthly output',
+          xLabel: 'Month',
+          yLabel: 'Units',
+          kind: 'bar',
+          labels: ['Jan', 'Feb'],
+          y: { min: 0, max: 20, step: 5 },
+          series: [
+            { label: 'North', values: [4, 12] },
+            { label: 'South', values: [7, 8] },
+          ],
+        },
+      },
+      answer: { kind: 'exact', n: 12, d: 1 },
+      inputMode: 'keypad',
+      hint: 'Read the February bar.',
+      solution: [{ text: 'The February value is 12.' }],
+      difficulty: 1,
+    }
+
+    const output = format(problem, 23)
+    expect(output).toContain(
+      'display  chart bar "Monthly output" x-label "Month" y-label "Units" ' +
+        'y-scale 0..20/5 labels ["Jan","Feb"] series ["North": [4,12]; "South": [7,8]]',
+    )
+    expect(output).toContain('Bar chart "Monthly output"')
+    expect(output).toContain('South')
+    expect(output).toContain('12')
+  })
+
+  it('records scatter points and each trend request', () => {
+    const problem: Problem = {
+      skillId: 'synthetic-scatter',
+      prompt: 'Read the trend.',
+      display: {
+        kind: 'chart',
+        chart: {
+          title: 'Study results',
+          xLabel: 'Hours',
+          yLabel: 'Score',
+          kind: 'scatter',
+          x: { min: 0, max: 10, step: 5 },
+          y: { min: 0, max: 10, step: 5 },
+          series: [{
+            label: 'Learners',
+            points: [{ x: 1, y: 2 }, { x: 5, y: 6 }, { x: 9, y: 8 }],
+            trendLine: true,
+          }],
+        },
+      },
+      answer: { kind: 'choice', id: 'rising' },
+      inputMode: 'choice',
+      choices: [{ id: 'rising', label: 'Rising' }],
+      hint: 'Compare left and right.',
+      solution: [{ text: 'The points rise overall.' }],
+      difficulty: 1,
+    }
+
+    const output = format(problem, 29)
+    expect(output).toContain('x-scale 0..10/5 y-scale 0..10/5')
+    expect(output).toContain('"Learners": [{"x":1,"y":2},{"x":5,"y":6},{"x":9,"y":8}] trend=true')
+  })
+})

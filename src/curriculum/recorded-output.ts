@@ -5,6 +5,7 @@ import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
 import { shapeDiagramLabel } from '../lib/shape-diagram'
+import { assertChart, chartAccessibleName, type Chart } from '../lib/chart'
 import { decimalColumnText, decimalText } from '../lib/decimal'
 import type {
   AlgebraData,
@@ -451,6 +452,28 @@ const formatEquationData = (data: EquationData): string => {
   }
 }
 
+const formatChartScale = (scale: Chart['y']): string =>
+  `${scale.min}..${scale.max}/${scale.step}`
+
+const formatChart = (chart: Chart): string => {
+  assertChart(chart)
+  const base = `${chart.kind} ${JSON.stringify(chart.title)} x-label ${JSON.stringify(chart.xLabel)} y-label ${JSON.stringify(chart.yLabel)}`
+  if (chart.kind === 'bar' || chart.kind === 'line') {
+    return (
+      `${base} y-scale ${formatChartScale(chart.y)} labels ${JSON.stringify(chart.labels)} ` +
+      `series [${chart.series.map((series) => `${JSON.stringify(series.label)}: ${JSON.stringify(series.values)}`).join('; ')}] ` +
+      `"${chartAccessibleName(chart)}"`
+    )
+  }
+
+  return (
+    `${base} x-scale ${formatChartScale(chart.x)} y-scale ${formatChartScale(chart.y)} ` +
+    `series [${chart.series.map((series) =>
+      `${JSON.stringify(series.label)}: ${JSON.stringify(series.points)} trend=${series.trendLine === true}`,
+    ).join('; ')}] "${chartAccessibleName(chart)}"`
+  )
+}
+
 const formatDisplay = (display: Problem['display']): string => {
   switch (display.kind) {
     case 'inline':
@@ -496,6 +519,8 @@ const formatDisplay = (display: Problem['display']): string => {
         (display.coordinate ? ` [${formatCoordinateData(display.coordinate, display.plane)}]` : '')
       )
     }
+    case 'chart':
+      return `chart ${formatChart(display.chart)}`
     case 'equation':
       // Both optional fields are stated rather than interpolated raw. An absent
       // frame label would otherwise print `solve undefined`, and unrendered

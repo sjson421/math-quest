@@ -1053,22 +1053,17 @@ document's ✅ markers updated to match, which the cross-check enforces.
         `compare-functions` presents a semantic table, graph, and equation through the existing
         plane without a chart capability.
 
-- [ ] **24 · Chart rendering** — M
+- [x] **24 · Chart rendering** — M — shipped 2026-08-24
 
-      Bar, line, scatter. First needed at `read-bar-line` (21.5), reused at `read-scatterplot`
-      (21.6), and those two skills are its whole scope.
-
-      In order:
-
-      1. **The data model** — series and labels in the problem's data, so the answer is derivable
-         from what is charted without trusting the generator, which is the same rule item 18's
-         shape spec follows.
-      2. **The three renderers** — SVG, sharing axes and labelling, drawn legibly at 375px.
-      3. **A non-visual path** — an accessible name plus the underlying values reachable as text.
-         A chart that exists only visually makes its skill unanswerable with a screen reader, and
-         every input mode so far has held that line.
-      4. **The flag** — `chart` into `AVAILABLE_CAPABILITIES`, opening nothing on its own, since
-         Stage G also declares `math-notation` and `diagram`.
+      Chart data now lives on `Problem` displays and supports bar, line, and scatter forms.
+      A shared responsive SVG provides labelled axes, ticks, legends, grouped bars, line
+      markers, scatter points, and clipped trend lines at the 375px target. Each chart also
+      exposes one derived image name and a semantic values table, while the existing keypad
+      and choice answer frames remain neutral and truthful. Recorded output, content-rule
+      collection, and difficulty verification fail closed until chart-specific data is
+      supported. `chart` is now available to the manifest, completing Stage G's infrastructure
+      without making any Stage G skill playable before its generators land. Math notation and
+      diagram rendering were already available and remain part of Stage G's requirements.
 
 - [ ] **25 · Stage G · Units 20–21** — M — 22 skills, five changes
 

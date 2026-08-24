@@ -269,6 +269,28 @@ describe('forward references', () => {
     expect(checkContent(problem({ display: graph }), at({}, 'unit-16'))).toEqual([])
   })
 
+  it('collects chart titles, axes, categories, series, and values from one declaration', () => {
+    const chart: Problem['display'] = {
+      kind: 'chart',
+      chart: {
+        title: 'Median by group',
+        xLabel: 'Group',
+        yLabel: 'Value',
+        kind: 'bar',
+        labels: ['A', 'B'],
+        y: { min: 0, max: 10, step: 5 },
+        series: [{ label: 'Scores', values: [4, 7] }],
+      },
+    }
+    const learner = learnerText(problem({ display: chart }))
+
+    expect(learner).toContain('Median by group; Group; Value; A; B; Scores; 4; 7')
+    expect(checkContent(problem({ display: chart }), at({}, 'unit-21'))).toEqual([])
+    expect(checkContent(problem({ display: chart }), at({}, 'unit-20')).map((v) => v.rule)).toEqual([
+      'forward-reference',
+    ])
+  })
+
   it('reads coordinate operation context from its structured values', () => {
     const graph: Problem['display'] = {
       kind: 'coordinate-plane',

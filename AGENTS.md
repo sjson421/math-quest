@@ -52,11 +52,11 @@ Break these and something fails loudly — or worse, quietly. Each rule is state
 - **Skill ids are verbatim.** Never re-spell one. `times-7-8` is not `times-78`.
 - **A skill ships by gaining a generator**, never by being added to the manifest. State is
   derived at load: `implemented` needs a registered generator *and* every capability its
-  stage requires. `planned` is the normal state for 36 of 201 skills, not an error.
+  stage requires. `planned` is the normal state for 28 of 201 skills, not an error.
 - **`AVAILABLE_CAPABILITIES`** in `manifest/resolve.ts` is the one-line switch that turns
   a stage on once its infrastructure exists. It contains `choice-input`, `math-notation`,
-  `fraction-input`, `diagram`, `number-line`, `expression-input`, `coordinate-plane`, and
-  `root-pair-input` today.
+  `fraction-input`, `diagram`, `number-line`, `expression-input`, `coordinate-plane`,
+  `root-pair-input`, and `chart` today.
 - **Two different `skillById`s.** `curriculum/index.ts` exports `generators` (the
   registry); `manifest/index.ts` exports `skillById` (manifest entries). Do not conflate
   them, and do not reintroduce the old name for the registry.

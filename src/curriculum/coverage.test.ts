@@ -528,6 +528,26 @@ describe('the skills that are built', () => {
     expect(implementedSkillIds).toHaveLength(173)
   })
 
+  it('completes Stage G infrastructure without adding chart content', () => {
+    const stage = manifestIndex.get('read-bar-line')?.stage
+    const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
+    const stageH = manifestIndex.get('timed-practice-1')?.stage
+    const stageHIds = stageH?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
+
+    expect(AVAILABLE_CAPABILITIES.has('chart')).toBe(true)
+    expect(stage?.requires).toEqual(['math-notation', 'diagram', 'chart'])
+    expect((stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))).toEqual([])
+    expect(stageIds).toHaveLength(22)
+    expect(stageIds.filter((id) => generators.has(id))).toEqual([])
+    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(22)
+    expect(stageHIds).toHaveLength(6)
+    expect(stageHIds.filter((id) => skillState(id) === 'planned')).toHaveLength(6)
+    expect(stageH?.requires).toEqual(['timed'])
+    expect(implementedSkillIds).toHaveLength(173)
+    expect(allSkills).toHaveLength(173)
+    expect(course.map(({ stage: courseStage }) => courseStage.id)).not.toContain('stage-g')
+  })
+
   it('declares a capability for every input mode a stage actually uses', () => {
     // The rule `requires` states, executed rather than restated. Stage E carried
     // a choice-input consumer from 13a without declaring one, and nothing

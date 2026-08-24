@@ -3,6 +3,7 @@ import type { NumberLineSpec } from './number-line'
 import type { Rational } from './rational'
 import type { ShapeDiagram } from './shape-diagram'
 import type { Coordinate, CoordinatePlane } from './coordinate-plane'
+import type { Chart } from './chart'
 
 export type Difficulty = 1 | 2 | 3 | 4 | 5
 
@@ -848,6 +849,8 @@ export type Display =
   | { kind: 'diagram'; diagram: ShapeDiagram }
   /** A bounded graph whose axes, points, lines, and optional content meaning are data. */
   | { kind: 'coordinate-plane'; plane: CoordinatePlane; coordinate?: CoordinateData }
+  /** A labelled chart whose marks and accessible table share one source declaration. */
+  | { kind: 'chart'; chart: Chart }
   /**
    * A statement that already contains its relation — an equation, or since Unit
    * 15 an inequality.

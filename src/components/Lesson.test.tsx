@@ -108,6 +108,56 @@ const diagramSkill: SkillGenerator = {
   }),
 }
 
+const chartDisplay = {
+  kind: 'chart' as const,
+  chart: {
+    title: 'Monthly output',
+    xLabel: 'Month',
+    yLabel: 'Units',
+    kind: 'bar' as const,
+    labels: ['Jan', 'Feb', 'Mar'],
+    y: { min: 0, max: 20, step: 5 },
+    series: [{ label: 'North', values: [4, 12, 8] }],
+  },
+}
+
+const chartKeypadSkill: SkillGenerator = {
+  id: 'synthetic-chart-keypad',
+  name: 'Synthetic Chart Keypad',
+  blurb: 'For testing chart keypad wiring',
+  generate: (_rng, difficulty) => ({
+    skillId: 'synthetic-chart-keypad',
+    prompt: 'What value appears in February?',
+    display: chartDisplay,
+    answer: intAnswer(12),
+    inputMode: 'keypad',
+    hint: 'Read the February column.',
+    solution: [{ text: 'The February value is 12.' }],
+    difficulty,
+  }),
+}
+
+const chartChoiceSkill: SkillGenerator = {
+  id: 'synthetic-chart-choice',
+  name: 'Synthetic Chart Choice',
+  blurb: 'For testing chart choice wiring',
+  generate: (_rng, difficulty) => ({
+    skillId: 'synthetic-chart-choice',
+    prompt: 'Which month is highest?',
+    display: chartDisplay,
+    answer: { kind: 'choice', id: 'february' },
+    inputMode: 'choice',
+    choices: [
+      { id: 'january', label: 'January' },
+      { id: 'february', label: 'February' },
+      { id: 'march', label: 'March' },
+    ],
+    hint: 'Compare the three bars.',
+    solution: [{ text: 'February has the tallest bar.' }],
+    difficulty,
+  }),
+}
+
 const coordinatePlaneChoiceSkill: SkillGenerator = {
   id: 'synthetic-coordinate-plane-choice',
   name: 'Synthetic Coordinate Plane Choice',
@@ -239,6 +289,28 @@ describe('Lesson', () => {
     expect(html).toContain('What fraction is shaded?')
     expect(has(html, '/')).toBe(true)
     expect(html).toContain('Check')
+  })
+
+  it('keeps a chart on the ordinary keypad path with one neutral answer frame', () => {
+    const html = renderToStaticMarkup(<Lesson skill={chartKeypadSkill} onExit={() => {}} />)
+
+    expect(html).toContain('aria-label="Bar chart &quot;Monthly output&quot;')
+    expect(html.match(/data-chart-table/g)).toHaveLength(1)
+    expect(html).toContain('data-chart-answer')
+    expect(html).toContain('>Answer<')
+    expect(html).toContain('>Check<')
+    expect(html).not.toContain('text-ink-faint">=')
+  })
+
+  it('keeps a chart on the declared choice path without a duplicate answer frame', () => {
+    const html = renderToStaticMarkup(<Lesson skill={chartChoiceSkill} onExit={() => {}} />)
+
+    expect(html).toContain('aria-label="Bar chart &quot;Monthly output&quot;')
+    expect(html.match(/data-chart-table/g)).toHaveLength(1)
+    expect(html).not.toContain('data-chart-answer')
+    expect(html).not.toContain('february')
+    expect(html).not.toContain('>Check<')
+    for (const choice of ['January', 'February', 'March']) expect(html).toContain(choice)
   })
 
   it('keeps a coordinate-plane display on the declared choice path', () => {

@@ -5,6 +5,7 @@ import { MathNotation } from './MathNotation'
 import { ShapeDiagram } from './ShapeDiagram'
 import { CoordinateContext } from './CoordinateContext'
 import { CoordinatePlane } from './CoordinatePlane'
+import { Chart as ChartDisplay } from './Chart'
 import { NumericEntry } from './NumericEntry'
 
 /**
@@ -40,6 +41,8 @@ export function ProblemView({
       return <DiagramView display={display} entry={entry} entryMode={entryMode} />
     case 'coordinate-plane':
       return <CoordinatePlaneView display={display} entry={entry} entryMode={entryMode} />
+    case 'chart':
+      return <ChartView display={display} entry={entry} entryMode={entryMode} />
     case 'equation':
       return <EquationView display={display} entry={entry} entryMode={entryMode} />
     default: {
@@ -78,8 +81,8 @@ const GENERIC_ENTRY_FRAME: Record<Problem['inputMode'], boolean> = {
 
 // Choice and number-line controls already own their answer surface outside the
 // display. Key this on the full union so a new input mode cannot silently gain
-// a graph-owned entry frame.
-const COORDINATE_PLANE_ENTRY_FRAME: Record<Problem['inputMode'], boolean> = {
+// a display-owned entry frame.
+const DISPLAY_ENTRY_FRAME: Record<Problem['inputMode'], boolean> = {
   keypad: true,
   choice: false,
   'number-line': false,
@@ -314,7 +317,7 @@ function CoordinatePlaneView({
   entry,
   entryMode,
 }: { display: Of<'coordinate-plane'> } & EntryProps) {
-  const ownsEntry = COORDINATE_PLANE_ENTRY_FRAME[entryMode]
+  const ownsEntry = DISPLAY_ENTRY_FRAME[entryMode]
 
   return (
     <div className="flex flex-col items-center gap-3 max-w-full">
@@ -332,6 +335,24 @@ function CoordinatePlaneView({
           data-coordinate-plane-answer
           className="flex items-center justify-center gap-3"
         >
+          <span className="text-lg font-bold text-ink-soft">Answer</span>
+          <span className="text-4xl">
+            <EntrySlot value={entry} mode={entryMode} />
+          </span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function ChartView({ display, entry, entryMode }: { display: Of<'chart'> } & EntryProps) {
+  // Keypad and expression answers still need a neutral slot; controls with
+  // their own answer surface must not receive a duplicate echo beneath the chart.
+  return (
+    <div className="flex flex-col items-center gap-3 max-w-full" data-chart-display>
+      <ChartDisplay chart={display.chart} />
+      {DISPLAY_ENTRY_FRAME[entryMode] && (
+        <div className="flex items-center justify-center gap-3" data-chart-answer>
           <span className="text-lg font-bold text-ink-soft">Answer</span>
           <span className="text-4xl">
             <EntrySlot value={entry} mode={entryMode} />

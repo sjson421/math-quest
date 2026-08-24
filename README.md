@@ -17,7 +17,7 @@ how many are playable is a fact about the code, and the status line of
 [`docs/roadmap.md`](docs/roadmap.md) is where it is written down, deliberately in only one
 place.
 
-Stages A, B, C, D, and the start of E are playable. Unit 8
+Stages A through F have playable content. Unit 8
 covers like- and unlike-denominator addition and subtraction, mixed-number conversion and
 arithmetic, fraction multiplication and division, and fixed-frame word problems. Structured
 math notation, fraction input, expression input, and shaded-shape diagram rendering are
@@ -34,7 +34,7 @@ a variable is, evaluating and translating expressions, spotting like terms, comb
 distributing across a sign, and factoring a common factor back out — the first content to
 use expression input, and the first to ask for an answer whose written form matters as much
 as its value, since the expanded expression a factoring question displays is a wrong answer
-to it. Later units still need a tap-to-plot coordinate plane, charts, and timed mode.
+to it. Later units still need timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
 milestone, what blocks what, and the unbuilt product features (dress-up, skip-ahead,

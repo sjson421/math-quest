@@ -401,6 +401,48 @@ describe('ProblemView', () => {
     },
   }
 
+  const chartDisplay: Display = {
+    kind: 'chart',
+    chart: {
+      title: 'Monthly output',
+      xLabel: 'Month',
+      yLabel: 'Units',
+      kind: 'bar',
+      labels: ['Jan', 'Feb', 'Mar'],
+      y: { min: 0, max: 20, step: 5 },
+      series: [{ label: 'North', values: [4, 12, 8] }],
+    },
+  }
+
+  it.each(['choice', 'number-line', 'coordinate-plane', 'root-pair'] as const)(
+    'lets %s own a chart answer surface without a duplicate display echo',
+    (entryMode) => {
+      const html = renderToStaticMarkup(
+        <ProblemView display={chartDisplay} entry="choice-id" entryMode={entryMode} />,
+      )
+
+      expect(html.match(/role="img"/g)).toHaveLength(1)
+      expect(html.match(/data-chart-table/g)).toHaveLength(1)
+      expect(html).not.toContain('data-chart-answer')
+      expect(html).not.toContain('choice-id')
+      expect(html).not.toContain('text-ink-faint">=')
+    },
+  )
+
+  it.each(['keypad', 'expression'] as const)(
+    'frames a %s chart answer with a neutral label and no equality claim',
+    (entryMode) => {
+      const html = renderToStaticMarkup(
+        <ProblemView display={chartDisplay} entry="42" entryMode={entryMode} />,
+      )
+
+      expect(html).toContain('data-chart-answer')
+      expect(html).toContain('>Answer<')
+      expect(html).toContain('>42<')
+      expect(html).not.toContain('text-ink-faint">=')
+    },
+  )
+
   it.each(['choice', 'number-line', 'coordinate-plane'] as const)(
     'lets %s own a coordinate-plane answer surface without a display echo',
     (entryMode) => {

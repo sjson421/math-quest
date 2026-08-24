@@ -13,6 +13,7 @@ import {
 import { makeRng } from '../lib/rng'
 import { equals, format as formatRational, gcd, toNumber, rational, type Rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
+import { assertChart, chartSourceValues } from '../lib/chart'
 import { encodeRootPairEntry, normalizeRootPair } from '../lib/root-pair'
 import { ratioWordText } from './phrasing/ratios'
 import type {
@@ -1784,6 +1785,11 @@ function recompute(problem: Problem): number | string {
     return matches[0].id
   }
 
+  if (display.kind === 'chart') {
+    assertChart(display.chart)
+    throw new Error(`${problem.skillId}: chart needs operation-specific data for independent verification`)
+  }
+
   if (display.kind === 'coordinate-plane') {
     assertCoordinatePlane(display.plane)
     const data = display.coordinate
@@ -2410,6 +2416,11 @@ function sourceMagnitude(problem: Problem): number {
   }
 
   if (problem.display.kind === 'diagram') return problem.display.diagram.parts
+
+  if (problem.display.kind === 'chart') {
+    const values = chartSourceValues(problem.display.chart)
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
 
   if (problem.display.kind === 'coordinate-plane') {
     const { plane } = problem.display
@@ -4027,6 +4038,28 @@ describe('recompute', () => {
     expect(() => recompute(candidate)).toThrow('synthetic-math: a math display needs operation-specific data')
   })
 
+  it('rejects a chart until its generator adds operation-specific data', () => {
+    const candidate = whole({
+      skillId: 'synthetic-chart',
+      display: {
+        kind: 'chart',
+        chart: {
+          title: 'Monthly output',
+          xLabel: 'Month',
+          yLabel: 'Units',
+          kind: 'bar',
+          labels: ['Jan', 'Feb'],
+          y: { min: 0, max: 20, step: 5 },
+          series: [{ label: 'North', values: [4, 12] }],
+        },
+      },
+    })
+
+    expect(() => recompute(candidate)).toThrow(
+      'synthetic-chart: chart needs operation-specific data for independent verification',
+    )
+  })
+
   it('catches a story whose stated answer disagrees with its operands', () => {
     // The failure this branch exists to prevent: prose and answer look
     // plausible together, and the answer key is still wrong.
@@ -4651,6 +4684,39 @@ describe('difficulty reporting', () => {
 
   it('keeps measuring existing arithmetic by its numeric answer', () => {
     expect(scalingProblems(synthetic(false, false))).toEqual([])
+  })
+
+  it('measures chart difficulty from declared scales and values', () => {
+    const chartSkill: SkillGenerator = {
+      id: 'growing-chart',
+      name: 'Growing chart',
+      blurb: 'For testing chart difficulty',
+      generate(_rng, difficulty) {
+        return {
+          skillId: 'growing-chart',
+          prompt: 'Read the chart.',
+          display: {
+            kind: 'chart',
+            chart: {
+              title: 'Totals',
+              xLabel: 'Group',
+              yLabel: 'Value',
+              kind: 'bar',
+              labels: ['A', 'B'],
+              y: { min: 0, max: difficulty * 10, step: difficulty },
+              series: [{ label: 'Total', values: [difficulty, difficulty * 2] }],
+            },
+          },
+          answer: { kind: 'exact', n: difficulty, d: 1 },
+          inputMode: 'keypad',
+          hint: 'Read the first bar.',
+          solution: [{ text: 'The first bar gives the answer.' }],
+          difficulty,
+        }
+      },
+    }
+
+    expect(scalingProblems(chartSkill)).toEqual([])
   })
 })
 
