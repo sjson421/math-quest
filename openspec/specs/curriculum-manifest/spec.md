@@ -239,3 +239,17 @@ introduces, so the set can be read off the stage rather than assembled from earl
 - **THEN** Stage F still lists `choice-input`, `math-notation`, `expression-input`, `coordinate-plane`, and `root-pair-input` as available required capabilities
 - **AND** every one of its 28 skills resolves as implemented
 - **AND** the playable skill total is 173
+
+#### Scenario: Chart availability completes Stage G infrastructure without content
+
+- **WHEN** chart rendering and its capability flag are present before any Stage G generator
+- **THEN** Stage G lists `math-notation`, `diagram`, and `chart` as available required
+  capabilities
+- **AND** all 22 Stage G skills remain planned
+- **AND** the playable skill total remains 173
+
+#### Scenario: Stage H remains gated by timed mode
+
+- **WHEN** chart rendering is available while timed mode is not
+- **THEN** all six Stage H skills remain planned
+- **AND** chart availability does not change the Stage H capability state
