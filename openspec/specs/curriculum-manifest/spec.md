@@ -233,9 +233,10 @@ introduces, so the set can be read off the stage rather than assembled from earl
 - **AND** all Stage F skills without generators remain planned
 - **AND** coordinate-plane availability alone changes no playable skill
 
-#### Scenario: Stage F records root-pair input before its content
+#### Scenario: Stage F consumes root-pair input in Unit 18b
 
-- **WHEN** exact two-root entry is built before Unit 18b generators
+- **WHEN** the Unit 18b generators are registered after exact two-root entry is built
 - **THEN** Stage F lists `root-pair-input` as an available required capability
-- **AND** `difference-of-squares`, `solve-by-factoring`, and `quadratic-formula` remain planned
-- **AND** the playable skill total remains 165
+- **AND** `difference-of-squares`, `solve-by-factoring`, and `quadratic-formula` resolve as implemented
+- **AND** the five Unit 19 skills remain planned
+- **AND** the playable skill total is 168
