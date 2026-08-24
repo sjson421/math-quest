@@ -2,6 +2,8 @@ import type { Answer } from './types'
 import { parseCoordinateEntry } from './coordinate-plane'
 import { canonicalForm } from './expression'
 import { fromDecimalString, fromInt, gcd, rational, toNumber, type Rational } from './rational'
+import { decodeRootPairEntry, rootPairsEqual } from './root-pair'
+import type { RootPairValue } from './types'
 
 export type ParsedInput =
   | {
@@ -82,7 +84,24 @@ export type CheckResult =
   | { status: 'not-fraction' }
   | { status: 'unparseable' }
 
+export function parseRootPairInput(raw: string): RootPairValue | null {
+  const slots = decodeRootPairEntry(raw)
+  if (!slots) return null
+  const first = parseInput(slots[0])
+  const second = parseInput(slots[1])
+  if (first.kind === 'invalid' || second.kind === 'invalid') return null
+  return { kind: 'root-pair', roots: [first.value, second.value] }
+}
+
 export function checkAnswer(answer: Answer, raw: string): CheckResult {
+  if (answer.kind === 'root-pair') {
+    const pair = parseRootPairInput(raw)
+    if (!pair) return { status: 'unparseable' }
+    return rootPairsEqual(pair, answer)
+      ? { status: 'correct' }
+      : { status: 'incorrect' }
+  }
+
   if (answer.kind === 'point') {
     const point = parseCoordinateEntry(raw)
     if (!point) return { status: 'unparseable' }

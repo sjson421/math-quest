@@ -4,6 +4,20 @@ import type { Display, WholeNumberData } from '../lib/types'
 import { ProblemView } from './ProblemView'
 
 describe('ProblemView', () => {
+  it('does not expose a root-pair tuple or duplicate answer frame', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{ kind: 'inline', text: 'x² − x − 12' }}
+        entry={'["-3","4"]'}
+        entryMode="root-pair"
+      />,
+    )
+    expect(html).toContain('x² − x − 12')
+    expect(html).not.toContain('[&quot;-3&quot;,&quot;4&quot;]')
+    expect(html).not.toContain('text-ink-faint')
+    expect(html).not.toContain('animate-pulse')
+  })
+
   it('shrinks long number names while keeping them on the inline surface', () => {
     const html = renderToStaticMarkup(
       <ProblemView

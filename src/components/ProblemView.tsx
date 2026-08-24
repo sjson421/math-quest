@@ -1,10 +1,11 @@
 import type { DecimalArithmeticData, Display, Problem } from '../lib/types'
 import { decimalColumnText } from '../lib/decimal'
-import { entrySpokenLabel, fractionEntryNotation } from '../lib/math-notation'
+import { entrySpokenLabel } from '../lib/math-notation'
 import { MathNotation } from './MathNotation'
 import { ShapeDiagram } from './ShapeDiagram'
 import { CoordinateContext } from './CoordinateContext'
 import { CoordinatePlane } from './CoordinatePlane'
+import { NumericEntry } from './NumericEntry'
 
 /**
  * Column layout matters pedagogically — it is how the carrying and borrowing
@@ -63,6 +64,16 @@ const SLOT: Record<Problem['inputMode'], 'prose' | 'number'> = {
   'number-line': 'number',
   expression: 'number',
   'coordinate-plane': 'prose',
+  'root-pair': 'prose',
+}
+
+const GENERIC_ENTRY_FRAME: Record<Problem['inputMode'], boolean> = {
+  keypad: true,
+  choice: true,
+  'number-line': true,
+  expression: true,
+  'coordinate-plane': true,
+  'root-pair': false,
 }
 
 // Choice and number-line controls already own their answer surface outside the
@@ -74,6 +85,7 @@ const COORDINATE_PLANE_ENTRY_FRAME: Record<Problem['inputMode'], boolean> = {
   'number-line': false,
   expression: true,
   'coordinate-plane': false,
+  'root-pair': false,
 }
 
 type Of<K extends Display['kind']> = Extract<Display, { kind: K }>
@@ -85,14 +97,17 @@ function InlineView({
   entry,
   entryMode,
 }: { display: Of<'inline'> } & EntryProps) {
+  const showsEntry = GENERIC_ENTRY_FRAME[entryMode]
   if (display.decimal?.operation === 'read') {
     return (
       <div className="flex max-w-xs flex-col items-center gap-4 text-center">
         <span className="text-balance text-2xl font-bold leading-snug">{display.text}</span>
-        <div className="flex items-baseline justify-center gap-3 text-4xl">
-          <span className="font-bold text-ink-faint">=</span>
-          <EntrySlot value={entry} mode={entryMode} />
-        </div>
+        {showsEntry && (
+          <div className="flex items-baseline justify-center gap-3 text-4xl">
+            <span className="font-bold text-ink-faint">=</span>
+            <EntrySlot value={entry} mode={entryMode} />
+          </div>
+        )}
       </div>
     )
   }
@@ -133,8 +148,8 @@ function InlineView({
   return (
     <div className={`flex items-baseline justify-center gap-3 ${size}`}>
       <span className="font-bold tabular-nums tracking-tight whitespace-nowrap">{display.text}</span>
-      <span className="font-bold text-ink-faint">=</span>
-      <EntrySlot value={entry} mode={entryMode} />
+      {showsEntry && <span className="font-bold text-ink-faint">=</span>}
+      {showsEntry && <EntrySlot value={entry} mode={entryMode} />}
     </div>
   )
 }
@@ -156,9 +171,11 @@ function StoryView({ display, entry, entryMode }: { display: Of<'story'> } & Ent
       >
         {display.text}
       </p>
-      <div className={polynomialRewrite ? 'max-w-full overflow-hidden' : undefined}>
-        <EntrySlot value={entry} mode={entryMode} />
-      </div>
+      {GENERIC_ENTRY_FRAME[entryMode] && (
+        <div className={polynomialRewrite ? 'max-w-full overflow-hidden' : undefined}>
+          <EntrySlot value={entry} mode={entryMode} />
+        </div>
+      )}
     </div>
   )
 }
@@ -171,7 +188,8 @@ function MathView({ display, entry, entryMode }: { display: Of<'math'> } & Entry
   // then give only the keypad equality a labelled echo for its typed digits.
   if (
     display.fraction?.operation === 'name-part' ||
-    display.fraction?.operation === 'compare'
+    display.fraction?.operation === 'compare' ||
+    !GENERIC_ENTRY_FRAME[entryMode]
   ) {
     return (
       <div className="flex items-center justify-center max-w-full">
@@ -266,7 +284,7 @@ function EquationView({ display, entry, entryMode }: { display: Of<'equation'> }
         These options are sentences with slug ids, so it would read `none`. The
         choices are the answer surface here, and the feedback names the mistake.
       */}
-      {display.variable !== undefined && (
+      {display.variable !== undefined && GENERIC_ENTRY_FRAME[entryMode] && (
         <div className="flex items-baseline justify-center gap-3 text-4xl">
           <span className="font-bold tabular-nums tracking-tight">{display.variable}</span>
           <span className="font-bold text-ink-faint">=</span>
@@ -281,10 +299,12 @@ function DiagramView({ display, entry, entryMode }: { display: Of<'diagram'> } &
   return (
     <div className="flex flex-col items-center gap-3 max-w-full">
       <ShapeDiagram diagram={display.diagram} />
-      <div className="flex items-center justify-center gap-3 text-4xl">
-        <span className="font-bold text-ink-faint">=</span>
-        <EntrySlot value={entry} mode={entryMode} fractionSize="fluid" />
-      </div>
+      {GENERIC_ENTRY_FRAME[entryMode] && (
+        <div className="flex items-center justify-center gap-3 text-4xl">
+          <span className="font-bold text-ink-faint">=</span>
+          <EntrySlot value={entry} mode={entryMode} fractionSize="fluid" />
+        </div>
+      )}
     </div>
   )
 }
@@ -368,10 +388,12 @@ function FormattedColumn({
         </div>
       ))}
       <div className="h-1.5 self-stretch rounded-full bg-ink-faint my-[0.2em]" aria-hidden />
-      <div className="flex items-center gap-4" aria-hidden>
-        <span className="w-8" />
-        <EntrySlot value={entry} mode={entryMode} minWidth={width} />
-      </div>
+      {GENERIC_ENTRY_FRAME[entryMode] && (
+        <div className="flex items-center gap-4" aria-hidden>
+          <span className="w-8" />
+          <EntrySlot value={entry} mode={entryMode} minWidth={width} />
+        </div>
+      )}
     </div>
   )
 }
@@ -405,32 +427,20 @@ function EntrySlot({
   minWidth?: number
   fractionSize?: 'fluid' | 'entry'
 }) {
-  const fraction = mode === 'keypad' ? fractionEntryNotation(value) : undefined
-  const content =
-    value === '' ? (
-      <span className="inline-block w-[3px] h-[0.9em] bg-blossom-deep animate-pulse rounded-full" />
-    ) : fraction ? (
-      <MathNotation notation={fraction.notation} label={fraction.label} size={fractionSize} />
-    ) : (
-      value
-    )
-
   if (SLOT[mode] === 'prose') {
     return (
       <span className="inline-flex items-center justify-center max-w-40 min-h-11 rounded-2xl bg-white/70 px-3 py-2 text-center text-xl font-bold leading-snug text-blossom-deep break-words">
-        {content}
+        {value}
       </span>
     )
   }
 
-  const chars = Math.max(minWidth, value.length || 1)
-
   return (
-    <span
-      className="inline-flex items-center justify-end rounded-2xl bg-white/70 px-3 py-1 font-bold tabular-nums text-blossom-deep min-h-[1.3em]"
-      style={{ minWidth: `${chars * 0.68}em` }}
-    >
-      {content}
-    </span>
+    <NumericEntry
+      value={value}
+      minWidth={minWidth}
+      fractionSize={fractionSize}
+      allowFraction={mode === 'keypad'}
+    />
   )
 }

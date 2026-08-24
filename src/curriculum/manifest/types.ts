@@ -22,6 +22,7 @@ export type Capability =
   | 'expression-input'
   | 'number-line'
   | 'coordinate-plane'
+  | 'root-pair-input'
   | 'chart'
   | 'timed'
 

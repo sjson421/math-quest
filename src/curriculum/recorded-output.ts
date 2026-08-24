@@ -547,11 +547,25 @@ const formatAnswer = (answer: Problem['answer']): string => {
       )
     case 'point':
       return `point ${coordinateLabel(answer)}`
+    case 'root-pair':
+      return `root-pair roots (${answer.roots.map(formatRational).join(', ')})`
     default: {
       const unhandled: never = answer
       throw new Error(`Unhandled answer: ${JSON.stringify(unhandled)}`)
     }
   }
+}
+
+const formatInputMode = (mode: Problem['inputMode']): string => {
+  const modes: Record<Problem['inputMode'], string> = {
+    keypad: 'keypad',
+    choice: 'choice',
+    'number-line': 'number-line',
+    expression: 'expression',
+    'coordinate-plane': 'coordinate-plane',
+    'root-pair': 'root-pair (Root 1, Root 2; one Check)',
+  }
+  return modes[mode]
 }
 
 export const format = (problem: Problem, seed: number): string => {
@@ -560,7 +574,7 @@ export const format = (problem: Problem, seed: number): string => {
     `prompt   ${problem.prompt}`,
     `display  ${formatDisplay(problem.display)}`,
     `answer   ${formatAnswer(problem.answer)}`,
-    `input    ${problem.inputMode}`,
+    `input    ${formatInputMode(problem.inputMode)}`,
   ]
 
   const keypad = formatKeypad(problem.keypad)
@@ -583,7 +597,9 @@ export const format = (problem: Problem, seed: number): string => {
       ? m.value
       : m.value.kind === 'text'
         ? m.value.value
-        : coordinateLabel(m.value)
+        : m.value.kind === 'point'
+          ? coordinateLabel(m.value)
+          : `roots (${m.value.roots.map(formatRational).join(', ')})`
     lines.push(`miss     ${m.tag} = ${value}   ${m.nudge}`)
   }
 

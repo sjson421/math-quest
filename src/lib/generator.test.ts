@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { diagnose, generateProblem } from './generator'
+import { rational, type Rational } from './rational'
+import { encodeRootPairEntry } from './root-pair'
 import type { Difficulty, Misconception, Problem, SkillGenerator } from './types'
 
 /**
@@ -31,6 +33,12 @@ const missText = (value: string, tag: string): Misconception => ({
 
 const missPoint = (x: number, y: number, tag: string): Misconception => ({
   value: { kind: 'point', x, y },
+  tag,
+  nudge: `nudge for ${tag}`,
+})
+
+const missRootPair = (first: Rational, second: Rational, tag: string): Misconception => ({
+  value: { kind: 'root-pair', roots: [first, second] },
   tag,
   nudge: `nudge for ${tag}`,
 })
@@ -102,6 +110,31 @@ function pointSkill(
         misconceptions,
         hint: 'Read x first, then y.',
         solution: [{ text: 'Move across, then up or down.' }],
+        difficulty,
+      }
+    },
+  }
+}
+
+function rootPairSkill(misconceptions: Misconception[]): SkillGenerator {
+  return {
+    id: 'synthetic-root-pair',
+    name: 'Synthetic Root Pair',
+    blurb: 'For testing root pairs',
+    generate(_rng, difficulty) {
+      return {
+        skillId: 'synthetic-root-pair',
+        prompt: 'Find both roots.',
+        display: { kind: 'inline', text: 'x² − x − 12' },
+        answer: {
+          kind: 'root-pair',
+          roots: [rational(-3, 1), rational(4, 1)],
+        },
+        inputMode: 'root-pair',
+        keypad: { allowNegative: true, allowFraction: true },
+        misconceptions,
+        hint: 'Find both values that make zero.',
+        solution: [{ text: 'Set each factor equal to zero.' }],
         difficulty,
       }
     },
@@ -309,6 +342,28 @@ describe('generateProblem drops predictions that cannot help', () => {
     expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['numeric', 'text', 'point'])
   })
 
+  it('drops answer-equal and reversed duplicate root-pair predictions', () => {
+    const skill = rootPairSkill([
+      missRootPair(rational(4, 1), rational(-3, 1), 'equals-answer'),
+      missRootPair(rational(-3, 2), rational(5, 2), 'first'),
+      missRootPair({ n: 10, d: 4 }, { n: -6, d: 4 }, 'reversed-equivalent'),
+      missRootPair(rational(-3, 1), rational(-3, 1), 'repeated-root'),
+    ])
+
+    expect(tagsOf(generateProblem(skill, 1, 1))).toEqual(['first', 'repeated-root'])
+  })
+
+  it('drops malformed root pairs and pairs on another input surface', () => {
+    const malformed = [
+      missRootPair({ n: Number.POSITIVE_INFINITY, d: 1 }, rational(2, 1), 'infinite'),
+      missRootPair({ n: 1, d: 0 }, rational(2, 1), 'zero-denominator'),
+    ]
+    expect(tagsOf(generateProblem(rootPairSkill(malformed), 1, 1))).toEqual([])
+    expect(tagsOf(generateProblem(skillPredicting([
+      missRootPair(rational(1, 1), rational(2, 1), 'wrong-surface'),
+    ]), 1, 1))).toEqual([])
+  })
+
   it('rejects a point answer the declared lattice cannot place', () => {
     expect(() => generateProblem(pointSkill({ x: 1, y: 2 }, [], 2), 1, 1)).toThrow(
       'synthetic-point: point answer must be a declared lattice target',
@@ -336,6 +391,31 @@ describe('generateProblem drops predictions that cannot help', () => {
     )
     expect(() => generateProblem(wrongMode, 1, 1)).toThrow(
       'point answer needs coordinate-plane input',
+    )
+  })
+
+  it('rejects mismatched root-pair answer and input declarations', () => {
+    const rootAnswerOnKeypad: SkillGenerator = {
+      ...rootPairSkill([]),
+      generate(rng, difficulty) {
+        return { ...rootPairSkill([]).generate(rng, difficulty), inputMode: 'keypad' }
+      },
+    }
+    const scalarAnswerOnPairInput: SkillGenerator = {
+      ...rootPairSkill([]),
+      generate(rng, difficulty) {
+        return {
+          ...rootPairSkill([]).generate(rng, difficulty),
+          answer: { kind: 'exact', n: 4, d: 1 },
+        }
+      },
+    }
+
+    expect(() => generateProblem(rootAnswerOnKeypad, 1, 1)).toThrow(
+      'root-pair answer needs root-pair input',
+    )
+    expect(() => generateProblem(scalarAnswerOnPairInput, 1, 1)).toThrow(
+      'root-pair input needs a root-pair answer',
     )
   })
 })
@@ -413,5 +493,17 @@ describe('diagnose', () => {
     expect(diagnose(problem, '3,2')).toBeUndefined()
     expect(diagnose(problem, '(2, 3)')).toBeUndefined()
     expect(diagnose(problem, '4,4')).toBeUndefined()
+  })
+
+  it('matches an exact root-pair prediction in either order', () => {
+    const problem = generateProblem(rootPairSkill([
+      missRootPair(rational(-3, 1), rational(-3, 1), 'repeated-root'),
+      missRootPair(rational(-2, 1), rational(6, 1), 'other'),
+    ]), 1, 1)
+
+    expect(diagnose(problem, encodeRootPairEntry(['-3', '-3']))?.tag).toBe('repeated-root')
+    expect(diagnose(problem, encodeRootPairEntry(['6', '-2']))?.tag).toBe('other')
+    expect(diagnose(problem, encodeRootPairEntry(['-2', '5/']))).toBeUndefined()
+    expect(diagnose(problem, 'not-a-pair')).toBeUndefined()
   })
 })

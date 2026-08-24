@@ -70,4 +70,8 @@ describe('visibleEntry', () => {
   it('leaves the internal point entry to the coordinate placement surface', () => {
     expect(visibleEntry(problem({ inputMode: 'coordinate-plane' }), '-3,2')).toBe('')
   })
+
+  it('leaves the private root tuple to the two-slot input surface', () => {
+    expect(visibleEntry(problem({ inputMode: 'root-pair' }), '["-3","4"]')).toBe('')
+  })
 })

@@ -480,7 +480,13 @@ describe('the skills that are built', () => {
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unit16Ids = stage?.units.find((unit) => unit.id === 'unit-16')?.skills.map((skill) => skill.id) ?? []
 
-    expect(stage?.requires).toEqual(['choice-input', 'math-notation', 'expression-input', 'coordinate-plane'])
+    expect(stage?.requires).toEqual([
+      'choice-input',
+      'math-notation',
+      'expression-input',
+      'coordinate-plane',
+      'root-pair-input',
+    ])
     expect((stage?.requires ?? []).filter((c) => !AVAILABLE_CAPABILITIES.has(c))).toEqual([])
     expect(stageIds).toHaveLength(28)
     expect(stageIds.filter((id) => generators.has(id))).toEqual([
@@ -509,6 +515,11 @@ describe('the skills that are built', () => {
     const unit17Ids = stage?.units.find((unit) => unit.id === 'unit-17')?.skills.map((skill) => skill.id) ?? []
     expect(unit17Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
     expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(8)
+    expect(['difference-of-squares', 'solve-by-factoring', 'quadratic-formula'].map(skillState)).toEqual([
+      'planned',
+      'planned',
+      'planned',
+    ])
     expect(implementedSkillIds).toHaveLength(165)
   })
 
@@ -524,6 +535,7 @@ describe('the skills that are built', () => {
       expression: 'expression-input',
       'number-line': 'number-line',
       'coordinate-plane': 'coordinate-plane',
+      'root-pair': 'root-pair-input',
     }
 
     const undeclared = new Set<string>()

@@ -3,6 +3,7 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { intAnswer } from '../lib/answer'
 import type { KeypadRules } from '../lib/keypad'
 import { rational } from '../lib/rational'
+import { encodeRootPairEntry } from '../lib/root-pair'
 import type { Choice, Difficulty, SkillGenerator } from '../lib/types'
 import { Lesson } from './Lesson'
 
@@ -178,9 +179,52 @@ const expressionSkill = (maxDegree?: 2): SkillGenerator => ({
   }),
 })
 
+const rootPairSkill: SkillGenerator = {
+  id: 'synthetic-root-pair',
+  name: 'Synthetic Root Pair',
+  blurb: 'For testing root input',
+  generate: (_rng, difficulty) => ({
+    skillId: 'synthetic-root-pair',
+    prompt: 'Find both roots.',
+    display: { kind: 'inline', text: 'x² − x − 12' },
+    answer: { kind: 'root-pair', roots: [rational(-3, 1), rational(4, 1)] },
+    inputMode: 'root-pair',
+    keypad: { allowNegative: true, allowFraction: true },
+    hint: 'Find both values that make zero.',
+    solution: [{ text: 'Set each factor equal to zero.' }],
+    difficulty,
+  }),
+}
+
 const has = (html: string, label: string) => html.includes(`aria-label="${label}"`)
 
 describe('Lesson', () => {
+  it('routes a root pair to one dedicated control with no private or fallback surface', () => {
+    const html = renderToStaticMarkup(<Lesson skill={rootPairSkill} onExit={() => {}} />)
+    expect(html.match(/data-root-pair-input/g)).toHaveLength(1)
+    expect(html).toContain('aria-label="Root 1"')
+    expect(html).toContain('aria-label="Root 2"')
+    expect(html).toContain('>Check</button>')
+    expect(html).not.toContain(encodeRootPairEntry(['-3', '4']))
+    expect(html).not.toContain('aria-label="Number line"')
+    expect(html).not.toContain('data-coordinate-plane="true"')
+    expect(html).not.toContain('aria-label="Variable x"')
+    for (const { label } of answerChoices) expect(html).not.toContain(label)
+  })
+
+  it('fails closed when root-pair input carries another answer shape', () => {
+    const mismatched: SkillGenerator = {
+      ...rootPairSkill,
+      generate: (rng, difficulty) => ({
+        ...rootPairSkill.generate(rng, difficulty),
+        answer: intAnswer(4),
+      }),
+    }
+    expect(() => renderToStaticMarkup(<Lesson skill={mismatched} onExit={() => {}} />)).toThrow(
+      'root-pair input needs a root-pair answer',
+    )
+  })
+
   it('opens on the first problem with the pad ready', () => {
     const html = render()
     expect(html).toContain('What is the sum?')

@@ -39,6 +39,8 @@ const SHOW: Record<Problem['inputMode'], (problem: Problem, entry: string) => st
   // The interactive plane owns its selection marker and reads the raw entry
   // through the point codec. No passive answer slot should echo that encoding.
   'coordinate-plane': () => '',
+  // The two-slot control owns both visible values. The tuple is private state.
+  'root-pair': () => '',
 }
 
 export const visibleEntry = (problem: Problem, entry: string): string =>

@@ -6,11 +6,11 @@ What is left, in the order it should be done.
 is complete with Units 12, 13, 14 and 15; Stage F's Units 16 and 17 are complete, and the
 first six Unit 18 polynomial skills are playable.
 Choice input,
-number-line input, math notation, fraction input, diagrams, expression input and
-coordinate-plane input are built,
+number-line input, math notation, fraction input, diagrams, expression input,
+coordinate-plane input and root-pair input are built,
 so `AVAILABLE_CAPABILITIES` holds
 `choice-input`, `number-line`, `math-notation`, `fraction-input`, `diagram`,
-`expression-input` and `coordinate-plane`. Unit 12 is the first content to use `math-notation`'s superscript and
+`expression-input`, `coordinate-plane` and `root-pair-input`. Unit 12 is the first content to use `math-notation`'s superscript and
 root kinds, for exponent and root display; it does not use `expression-input`, since that
 capability's grammar excludes exponents, so power-rule skills ask for the resulting exponent
 as a number rather than an expression. `zero-neg-exponents` settles Stage E's previously
@@ -88,7 +88,7 @@ behind our build order.
 
 **Capabilities gate whole stages.** `AVAILABLE_CAPABILITIES` in
 `src/curriculum/manifest/resolve.ts` contains `choice-input`, `number-line`, `math-notation`,
-`fraction-input`, `diagram`, `expression-input` and `coordinate-plane` today. Adding a capability there is a one-line edit that flips its stage
+`fraction-input`, `diagram`, `expression-input`, `coordinate-plane` and `root-pair-input` today. Adding a capability there is a one-line edit that flips its stage
 on — which is why capability work is its own item, never bundled with the content it unblocks.
 It flips nothing on its own, though: a skill still needs a generator and every other
 capability its stage declares.
@@ -105,9 +105,9 @@ assert on `renderToStaticMarkup`, which is what ruled out both animation runtime
 and anything that widens what is on screen re-measures the inline size ladder that
 `coverage.test.ts` executes, which is item 12's finding.
 
-**All nine capability names exist today.** `Capability` in `manifest/types.ts` declares
+**All ten capability names exist today.** `Capability` in `manifest/types.ts` declares
 `choice-input`, `number-line`, `math-notation`, `fraction-input`, `diagram`,
-`expression-input`, `coordinate-plane`, `chart` and `timed`, and every stage's `requires` is
+`expression-input`, `coordinate-plane`, `root-pair-input`, `chart` and `timed`, and every stage's `requires` is
 already written against them. A capability item normally flips a name the manifest has held
 from the start. Item 17 was the measured exception: 17a rejected the KaTeX library and 17b
 replaced its library-specific `katex` flag with the implementation-honest `math-notation`.
@@ -1005,7 +1005,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
       plane; the first six Unit 18 polynomial skills are playable, so eight Stage F skills are
       still ahead.
 
-- [ ] **23 · Stage F · Units 16–19** — L — 28 skills, seven changes
+- [ ] **23 · Stage F · Units 16–19** — L — 28 skills, eight changes
 
       Ordered increments:
 
@@ -1036,6 +1036,11 @@ document's ✅ markers updated to match, which the cross-check enforces.
         (18.2) is Unit 6's minus-a-minus mistake one abstraction up. The six generators derive
         answers from structured polynomial sources and keep the long rewrite surface readable
         at the installed phone width.
+      - **18b prerequisite — shipped 2026-08-24.** Root-pair answers carry two exact rational
+        values and accept either order through two labelled slots sharing one numeric keypad.
+        Central checking, misconception diagnosis, recorded output, lesson routing, and Stage F
+        capability resolution all name the new shape. This tooling change adds no generators,
+        so all three Unit 18b skills remain planned.
       - **18b** `difference-of-squares`–`quadratic-formula` — `quadratic-formula` (18.9) needs the
         radical from item 17, the formula given rather than recalled (it is on the GED sheet), and
         an answer that is a *pair* of roots. The pair is the part to settle first, and it is the

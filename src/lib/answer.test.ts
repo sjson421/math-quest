@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { checkAnswer, parseInput } from './answer'
+import { checkAnswer, parseInput, parseRootPairInput } from './answer'
+import { rational } from './rational'
+import { encodeRootPairEntry } from './root-pair'
 import type { Answer } from './types'
 
 const exact = (n: number, d = 1, requireSimplified = false): Answer => ({
@@ -61,6 +63,43 @@ describe('parseInput', () => {
 })
 
 describe('checkAnswer', () => {
+  describe('an exact root pair', () => {
+    const answer: Answer = {
+      kind: 'root-pair',
+      roots: [rational(-3, 1), rational(1, 2)],
+    }
+    const entry = (first: string, second: string) => encodeRootPairEntry([first, second])
+
+    it('accepts either root order and equivalent rational forms', () => {
+      expect(checkAnswer(answer, entry('-3', '0.5'))).toEqual({ status: 'correct' })
+      expect(checkAnswer(answer, entry('2/4', '-3'))).toEqual({ status: 'correct' })
+    })
+
+    it('preserves multiplicity when one distinct root is repeated', () => {
+      expect(checkAnswer(answer, entry('-3', '-3'))).toEqual({ status: 'incorrect' })
+      expect(checkAnswer(answer, entry('1/2', '1/2'))).toEqual({ status: 'incorrect' })
+    })
+
+    it('keeps incomplete, unfinished, and malformed pairs unparseable', () => {
+      for (const raw of [
+        '',
+        entry('-3', ''),
+        entry('-3', '-'),
+        entry('-3', '5/'),
+        entry('-3', '1/0'),
+        '["-3", "1/2"]',
+      ]) {
+        expect(checkAnswer(answer, raw), raw).toEqual({ status: 'unparseable' })
+      }
+    })
+
+    it('exposes one pure readiness parse for the input surface', () => {
+      expect(parseRootPairInput(entry('-3', '4'))).not.toBeNull()
+      expect(parseRootPairInput(entry('-3', '5/'))).toBeNull()
+      expect(parseRootPairInput(entry('', '4'))).toBeNull()
+    })
+  })
+
   it('accepts the stable id of the expected choice', () => {
     const answer: Answer = { kind: 'choice', id: 'less-than' }
 

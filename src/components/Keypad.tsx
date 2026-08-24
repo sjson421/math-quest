@@ -26,11 +26,13 @@ type Props = {
   onEntry: (apply: (prev: string) => string) => void
   onSubmit: () => void
   disabled?: boolean
+  /** Optional readiness for a composite answer; single values keep the current rule. */
+  submitReady?: boolean
   /** What this problem's answer may contain. Omitted means whole digits only. */
   rules?: KeypadRules
 }
 
-export function Keypad({ value, onEntry, onSubmit, disabled, rules }: Props) {
+export function Keypad({ value, onEntry, onSubmit, disabled, submitReady, rules }: Props) {
   const {
     allowFraction = false,
     allowNegative = false,
@@ -40,6 +42,7 @@ export function Keypad({ value, onEntry, onSubmit, disabled, rules }: Props) {
   // A mixed number always contains a fraction, so mixed entry implies the
   // slash — the same effective rule applyKey applies.
   const fractionAllowed = allowFraction || allowMixed
+  const canSubmit = submitReady ?? value.trim() !== ''
 
   const press = (k: string) => {
     tap()
@@ -75,8 +78,8 @@ export function Keypad({ value, onEntry, onSubmit, disabled, rules }: Props) {
             tap()
             onSubmit()
           }}
-          disabled={disabled || value.trim() === ''}
-          style={{ opacity: disabled || value.trim() === '' ? 0.45 : 1 }}
+          disabled={disabled || !canSubmit}
+          style={{ opacity: disabled || !canSubmit ? 0.45 : 1 }}
         >
           Check
         </motion.button>

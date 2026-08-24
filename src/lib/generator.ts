@@ -1,4 +1,4 @@
-import { parseInput } from './answer'
+import { parseInput, parseRootPairInput } from './answer'
 import {
   assertCoordinatePlane,
   coordinateEntry,
@@ -9,6 +9,7 @@ import {
 } from './coordinate-plane'
 import { makeRng } from './rng'
 import { toNumber, rational } from './rational'
+import { rootPairKey, rootPairsEqual } from './root-pair'
 import type { Difficulty, Problem, SkillGenerator } from './types'
 
 /**
@@ -26,6 +27,14 @@ export function generateProblem(
   difficulty: Difficulty,
 ): Problem {
   const problem = skill.generate(makeRng(seed), difficulty)
+
+  if (problem.inputMode === 'root-pair') {
+    if (problem.answer.kind !== 'root-pair') {
+      throw new Error(`${problem.skillId}: root-pair input needs a root-pair answer`)
+    }
+  } else if (problem.answer.kind === 'root-pair') {
+    throw new Error(`${problem.skillId}: root-pair answer needs root-pair input`)
+  }
 
   let inputPlane: CoordinatePlane | undefined
   if (problem.inputMode === 'coordinate-plane') {
@@ -65,6 +74,7 @@ export function generateProblem(
   const seenNumbers = new Set<number>()
   const seenText = new Set<string>()
   const seenPoints = new Set<string>()
+  const seenRootPairs = new Set<string>()
   const misconceptions = problem.misconceptions.filter((m) => {
     if (typeof m.value === 'number') {
       if (!Number.isFinite(m.value)) return false
@@ -78,6 +88,17 @@ export function generateProblem(
       if (!text) return false
       if (seenText.has(text)) return false
       seenText.add(text)
+      return true
+    }
+
+    if (m.value.kind === 'root-pair') {
+      const key = rootPairKey(m.value)
+      if (!key || problem.inputMode !== 'root-pair' || problem.answer.kind !== 'root-pair') {
+        return false
+      }
+      if (rootPairsEqual(m.value, problem.answer)) return false
+      if (seenRootPairs.has(key)) return false
+      seenRootPairs.add(key)
       return true
     }
 
@@ -103,9 +124,13 @@ export function diagnose(problem: Problem, raw: string) {
   const parsed = parseInput(raw)
   const value = parsed.kind === 'invalid' ? undefined : toNumber(parsed.value)
   const point = parseCoordinateEntry(raw)
+  const rootPair = parseRootPairInput(raw)
   return problem.misconceptions?.find((m) => {
     if (typeof m.value === 'number') return m.value === value
     if (m.value.kind === 'text') return m.value.value === trimmed
+    if (m.value.kind === 'root-pair') {
+      return rootPair ? rootPairsEqual(rootPair, m.value) : false
+    }
     return point?.x === m.value.x && point.y === m.value.y
   })
 }

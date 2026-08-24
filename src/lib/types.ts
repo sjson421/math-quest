@@ -9,6 +9,12 @@ export type Difficulty = 1 | 2 | 3 | 4 | 5
 /** One exact ordered pair, shared by point answers and point misconceptions. */
 export type PointValue = Coordinate & { kind: 'point' }
 
+/** Two exact roots whose order is not meaningful. */
+export type RootPairValue = {
+  kind: 'root-pair'
+  roots: readonly [Rational, Rational]
+}
+
 export type Answer =
   /** Exact rational match — covers integers and fractions alike. */
   | {
@@ -68,6 +74,8 @@ export type Answer =
     }
   /** Exact ordered-pair match for coordinate-plane placement. */
   | PointValue
+  /** Exact unordered match for two numeric roots. */
+  | RootPairValue
 
 export type Choice = {
   id: string
@@ -93,7 +101,7 @@ export type Misconception = {
    * numeric or algebraic equivalence. A point keeps its coordinates structured
    * so order reversal can be filtered and diagnosed exactly.
    */
-  value: number | { kind: 'text'; value: string } | PointValue
+  value: number | { kind: 'text'; value: string } | PointValue | RootPairValue
   /** Stable tag for tracking recurring errors across sessions. */
   tag: string
   /** Shown to the learner. Warm, specific, never scolding. */
@@ -860,7 +868,7 @@ export type Problem = {
   prompt: string
   display: Display
   answer: Answer
-  inputMode: 'keypad' | 'choice' | 'number-line' | 'expression' | 'coordinate-plane'
+  inputMode: 'keypad' | 'choice' | 'number-line' | 'expression' | 'coordinate-plane' | 'root-pair'
   /**
    * What this answer may be typed with. Omitted means whole digits only, which
    * is what every skill built so far wants.

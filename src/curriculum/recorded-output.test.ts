@@ -1,8 +1,33 @@
 import { describe, expect, it } from 'vitest'
 import type { Problem } from '../lib/types'
+import { rational } from '../lib/rational'
 import { format } from './recorded-output'
 
 describe('recorded output for structured math', () => {
+  it('records root-pair answers, input, and misconceptions semantically', () => {
+    const problem: Problem = {
+      skillId: 'synthetic-root-pair',
+      prompt: 'Find both roots.',
+      display: { kind: 'inline', text: 'x² − x − 12' },
+      answer: { kind: 'root-pair', roots: [rational(-3, 1), rational(4, 1)] },
+      inputMode: 'root-pair',
+      misconceptions: [{
+        value: { kind: 'root-pair', roots: [rational(-3, 1), rational(-3, 1)] },
+        tag: 'repeated-root',
+        nudge: 'Check both factors.',
+      }],
+      hint: 'Find both values that make zero.',
+      solution: [{ text: 'Set each factor equal to zero.' }],
+      difficulty: 1,
+    }
+
+    const output = format(problem, 3)
+    expect(output).toContain('answer   root-pair roots (-3, 4)')
+    expect(output).toContain('input    root-pair (Root 1, Root 2; one Check)')
+    expect(output).toContain('miss     repeated-root = roots (-3, -3)')
+    expect(output).not.toContain('["-3","4"]')
+  })
+
   it('records both the authored label and every notation node', () => {
     const problem: Problem = {
       skillId: 'synthetic-math',

@@ -13,6 +13,7 @@ import {
 import { makeRng } from '../lib/rng'
 import { equals, format as formatRational, gcd, toNumber, rational, type Rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
+import { encodeRootPairEntry, normalizeRootPair } from '../lib/root-pair'
 import { ratioWordText } from './phrasing/ratios'
 import type {
   AlgebraData,
@@ -1470,6 +1471,12 @@ function expectedPolynomial(data: PolynomialData): { text: string; answer: strin
 }
 
 function recompute(problem: Problem): number | string {
+  if (problem.answer.kind === 'root-pair' || problem.inputMode === 'root-pair') {
+    throw new Error(
+      `${problem.skillId}: root-pair answer needs operation-specific data for independent verification`,
+    )
+  }
+
   const { display } = problem
 
   if (display.kind === 'inline' && display.decimal) {
@@ -1994,6 +2001,11 @@ const answerValue = (problem: Problem): number | string => {
   if (problem.answer.kind === 'approx') return problem.answer.value
   if (problem.answer.kind === 'expression') return problem.answer.canonical
   if (problem.answer.kind === 'point') return coordinateEntry(problem.answer)
+  if (problem.answer.kind === 'root-pair') {
+    const pair = normalizeRootPair(problem.answer)
+    if (!pair) return 'invalid root pair'
+    return `roots [${pair.roots.map(formatRational).sort().join(', ')}]`
+  }
   return problem.answer.id
 }
 
@@ -3538,7 +3550,9 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
               problem.answer.requireDecimal
               ? String(toNumber(rational(problem.answer.n, problem.answer.d)))
               : formatRational(rational(problem.answer.n, problem.answer.d))
-          : String(answerValue(problem))
+          : problem.answer.kind === 'root-pair'
+            ? encodeRootPairEntry(problem.answer.roots.map(formatRational) as [string, string])
+            : String(answerValue(problem))
       expect(checkAnswer(problem.answer, typed).status).toBe('correct')
     }
   })
@@ -4297,6 +4311,30 @@ describe('system verification fails closed', () => {
     }
 
     expect(() => recompute(problem)).toThrow('system-words counts must be nonnegative')
+  })
+})
+
+describe('root-pair verification fails closed', () => {
+  const problem = (): Problem => ({
+    skillId: 'synthetic-root-pair',
+    prompt: 'Find both roots.',
+    display: { kind: 'inline', text: 'x² − x − 12' },
+    answer: { kind: 'root-pair', roots: [rational(-3, 1), rational(4, 1)] },
+    inputMode: 'root-pair',
+    keypad: { allowNegative: true, allowFraction: true },
+    hint: 'Find both values that make zero.',
+    solution: [{ text: 'Set each factor equal to zero.' }],
+    difficulty: 1,
+  })
+
+  it('reports both exact values without exposing the private entry codec', () => {
+    expect(answerValue(problem())).toBe('roots [-3, 4]')
+  })
+
+  it('rejects root-pair content until it carries independent source data', () => {
+    expect(() => recompute(problem())).toThrow(
+      'synthetic-root-pair: root-pair answer needs operation-specific data for independent verification',
+    )
   })
 })
 

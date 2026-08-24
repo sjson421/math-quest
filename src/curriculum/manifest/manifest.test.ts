@@ -225,6 +225,17 @@ describe('stage capabilities', () => {
       'expression-input',
     ])
   })
+
+  it('records built root-pair input in Stage F before its content', () => {
+    expect(AVAILABLE_CAPABILITIES.has('root-pair-input')).toBe(true)
+    expect(stageById.get('stage-f')?.requires).toEqual([
+      'choice-input',
+      'math-notation',
+      'expression-input',
+      'coordinate-plane',
+      'root-pair-input',
+    ])
+  })
 })
 
 describe('skill ids are unique', () => {

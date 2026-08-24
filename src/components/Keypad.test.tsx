@@ -24,6 +24,29 @@ const positionOf = (html: string, label: string) => html.indexOf(`aria-label="${
 const has = (html: string, label: string) => positionOf(html, label) >= 0
 
 describe('Keypad', () => {
+  it('preserves single-value Check readiness by default', () => {
+    const empty = renderToStaticMarkup(
+      <Keypad value="" onEntry={() => {}} onSubmit={() => {}} />,
+    )
+    const filled = renderToStaticMarkup(
+      <Keypad value="7" onEntry={() => {}} onSubmit={() => {}} />,
+    )
+    expect(empty).toContain('>Check</button>')
+    expect(empty).toContain('disabled=""')
+    expect(filled).not.toContain('disabled=""')
+  })
+
+  it('uses composite readiness when the caller supplies it', () => {
+    const waiting = renderToStaticMarkup(
+      <Keypad value="private-pair" submitReady={false} onEntry={() => {}} onSubmit={() => {}} />,
+    )
+    const ready = renderToStaticMarkup(
+      <Keypad value="" submitReady onEntry={() => {}} onSubmit={() => {}} />,
+    )
+    expect(waiting).toContain('disabled=""')
+    expect(ready).not.toContain('disabled=""')
+  })
+
   it('offers digits, backspace and Check with no rules at all', () => {
     const html = render()
     for (const d of DIGITS) expect(has(html, d)).toBe(true)

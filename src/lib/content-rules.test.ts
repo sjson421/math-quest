@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { checkContent, formatViolations, VOCABULARY } from './content-rules'
+import { checkContent, formatViolations, learnerText, VOCABULARY } from './content-rules'
+import { rational } from './rational'
 import type { ContentLocation } from './content-rules'
 import type { Problem, SolutionStep } from './types'
 
@@ -31,6 +32,20 @@ const steps = (count: number): SolutionStep[] =>
   Array.from({ length: count }, (_, i) => ({ text: `Step ${i + 1}.` }))
 
 describe('a problem that meets the contract', () => {
+  it('collects root-pair answer values and input labels as learner-facing text', () => {
+    const pair = problem({
+      answer: { kind: 'root-pair', roots: [rational(-3, 4), rational(2, 1)] },
+      inputMode: 'root-pair',
+    })
+    expect(learnerText(pair)).toEqual(expect.arrayContaining([
+      'Root 1: −3/4',
+      'Root 2: 2',
+      'Root 1',
+      'Root 2',
+      'Check both roots',
+    ]))
+  })
+
   it('reports nothing', () => {
     expect(checkContent(problem(), at())).toEqual([])
   })

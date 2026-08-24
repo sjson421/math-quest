@@ -1,8 +1,25 @@
 import { describe, expect, it } from 'vitest'
+import { checkAnswer } from './answer'
+import { rational } from './rational'
+import { encodeRootPairEntry } from './root-pair'
 import type { CheckResult } from './answer'
 import { feedbackText, responseTo } from './submit'
 
 describe('responseTo', () => {
+  it('keeps an unfinished root pair editable without recording an attempt', () => {
+    const result = checkAnswer(
+      { kind: 'root-pair', roots: [rational(-3, 1), rational(4, 1)] },
+      encodeRootPairEntry(['-3', '5/']),
+    )
+
+    expect(responseTo[result.status]).toMatchObject({
+      record: 'none',
+      requeues: false,
+      showsSolution: false,
+      keepsEntry: true,
+    })
+  })
+
   it('covers every status checkAnswer can return', () => {
     // Named literally rather than derived from the table, so a status that
     // stops being handled fails here instead of quietly agreeing with itself.

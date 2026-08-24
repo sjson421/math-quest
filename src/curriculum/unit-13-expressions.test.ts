@@ -278,6 +278,7 @@ const typable = (value: string): boolean =>
 const predictionEntry = ({ value }: Misconception): string => {
   if (typeof value === 'number') return String(value)
   if (value.kind === 'text') return value.value
+  if (value.kind === 'root-pair') throw new Error('unexpected root-pair prediction in Unit 13')
   return coordinateEntry(value)
 }
 

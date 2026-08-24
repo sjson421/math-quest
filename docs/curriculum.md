@@ -519,7 +519,7 @@ Ship by stage; each stage is independently useful.
    and the pad offers the slash. **Diagram rendering** is built for shaded bars, circles and
    grids, so Stage D's capability infrastructure is complete.
 4. **Stage E** (34) — complete; the **expression input mode** it needed is built.
-5. **Stage F** (28) — the **coordinate-plane input** it needs is built; all ten Unit 16, all four Unit 17, and the first six Unit 18 skills are playable.
+5. **Stage F** (28) — its **coordinate-plane input** and **root-pair input** are built; all ten Unit 16, all four Unit 17, and the first six Unit 18 skills are playable.
 6. **Stage G** (22) — reuses built **diagram rendering** for shapes and still needs charts.
 7. **Stage H** (6) — needs timed mode and a score estimator.
 
@@ -534,6 +534,7 @@ Ship by stage; each stage is independently useful.
 | Expression input | E (Unit 13) | Built — a variable key per problem via `expression`, compared under a canonical form |
 | Number-line input | C (Unit 6.1) | Built — declared per problem via `numberLine` |
 | Coordinate-plane input | F (Unit 16.1) | Built — tap or use large axis controls or arrow keys to place an integer-lattice point, then confirm |
+| Root-pair input | F (Unit 18.8) | Built — two labelled exact-numeric slots share one keypad and accept either root order |
 | Chart rendering | G (Unit 21.5) | Bar, line, scatter |
 | Timed mode | H | Only place time pressure appears |
 
@@ -555,8 +556,8 @@ Ship by stage; each stage is independently useful.
   rather than storing them, and commits a snapshot of the expanded graph so a change to the
   derivation is reviewable.
 - **A skill with no generator is `planned`, not broken.** State is derived at load from the
-  generator registry plus the capabilities that are actually built, so a stage waiting on
-  KaTeX or a coordinate plane reports honestly. Planned skills are transparent to unlocking —
+  generator registry plus the capabilities that are actually built. Today 36 of 201 skills
+  are planned; later stages still wait on chart rendering or timed mode. Planned skills are transparent to unlocking —
   a learner is never held behind our build order — and never offered for play.
 - **The content style contract above is enforced**, not advisory: `src/lib/content-rules.ts`
   checks step count, step length, single-sentence hints, wall misconception coverage, and

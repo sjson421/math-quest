@@ -15,6 +15,8 @@ import type { SkillEntry, UnitEntry } from '../curriculum/manifest/types'
 import { coordinateEquationLabel, coordinateLabel, coordinatePlaneLabel, type CoordinatePlane } from './coordinate-plane'
 import { lineEquation, linearEquationLabel, passSalesEquations, passSalesStory } from './linear-system'
 import { shapeDiagramLabel } from './shape-diagram'
+import { entryLabel } from './keypad'
+import { format as formatRational } from './rational'
 import type { CoordinateData, Display, Problem } from './types'
 
 export const MAX_SOLUTION_STEPS = 4
@@ -197,7 +199,16 @@ function coordinateDataText(data?: CoordinateData, plane?: CoordinatePlane): str
   }
 }
 
-function learnerText(problem: Problem): string[] {
+export function learnerText(problem: Problem): string[] {
+  const rootPair = problem.answer.kind === 'root-pair'
+    ? [
+        `Root 1: ${entryLabel(formatRational(problem.answer.roots[0]))}`,
+        `Root 2: ${entryLabel(formatRational(problem.answer.roots[1]))}`,
+      ]
+    : []
+  const input = problem.inputMode === 'root-pair'
+    ? ['Root 1', 'Root 2', 'Check both roots']
+    : []
   return [
     problem.prompt,
     // A story is the longest learner-facing string in the course and the most
@@ -208,6 +219,8 @@ function learnerText(problem: Problem): string[] {
     ...problem.solution.flatMap((step) => [step.text, step.detail ?? '']),
     ...(problem.misconceptions ?? []).map((m) => m.nudge),
     ...(problem.choices ?? []).map((c) => c.label),
+    ...rootPair,
+    ...input,
   ].filter(Boolean)
 }
 

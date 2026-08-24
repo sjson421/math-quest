@@ -25,6 +25,7 @@ import { Keypad } from './Keypad'
 import { Mascot, type MascotState } from './Mascot'
 import { NumberLineInput } from './NumberLineInput'
 import { ProblemView } from './ProblemView'
+import { RootPairInput } from './RootPairInput'
 import { StageCheckpoint } from './StageCheckpoint'
 
 /**
@@ -224,6 +225,27 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
         // The interactive graph occupies the problem surface itself so the
         // learner sees one plane, not a passive display plus a second control.
         return null
+
+      case 'root-pair':
+        return (
+          <>
+            {unfinished && (
+              <p className="text-center text-ink-soft text-sm pb-2">
+                Both roots need a complete number.
+              </p>
+            )}
+            <RootPairInput
+              entry={entry}
+              onEntry={(apply) => {
+                if (unfinished) dismiss()
+                setEntry(apply)
+              }}
+              onConfirm={() => submit()}
+              rules={problem.keypad}
+              disabled={feedback !== null && !unfinished}
+            />
+          </>
+        )
 
       default: {
         const unhandled: never = problem.inputMode
