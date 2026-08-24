@@ -23,7 +23,7 @@ Treat permission errors as environment failures before treating them as product 
 
 - The source tree may be writable while `.git` is read-only in the sandbox. If staging,
   committing, or another index operation reports `EROFS`, `EPERM`, or `index.lock`, retry
-  the same scoped command with `sandbox_permissions: "require_escalated"` and a concise
+  the same scoped command with the sandbox escalation this harness provides, and a concise
   justification. Do not broaden the command or its approval prefix.
 - If `git fetch` or `git push` is denied by the sandbox, retry the same exact command with
   escalation after checking the branch and remote. Stop for authentication, protection, or
@@ -44,16 +44,17 @@ Treat permission errors as environment failures before treating them as product 
 
 When changing phase, update `currentPhase`, the phase statuses, workflow status, and gate
 fields in the same controlled state transition. Keep exactly one phase `in_progress` and
-verify the parsed state on disk before changing `update_plan`. If either a state edit or
-the corresponding plan update fails, re-read the state and reconcile it before continuing;
-never infer the current phase from chat history.
+verify the parsed state on disk before updating the plan described below. If
+either a state edit or the corresponding plan update fails, re-read the state and reconcile
+it before continuing; never infer the current phase from chat history.
 
 ## Codex adapter
 
 Create an `update_plan` plan with exactly Simplify, Review, Clean up, Ship, and Archive in
 that order. Keep exactly one entry `in_progress`, and never mark a phase complete before its
 gate passes. This skill is intended to run in a session using `gpt-5.6-luna` with max
-reasoning.
+reasoning. Sandbox escalation here is `sandbox_permissions: "require_escalated"` on the
+same scoped command.
 
 In phase 6, invoke `$simplify` on this run's changed paths. This adapter controls reviewer
 launch: use Luna with max reasoning even if another cleanup instruction suggests a different
