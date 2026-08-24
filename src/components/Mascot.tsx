@@ -53,7 +53,7 @@ export function Mascot({ state = 'idle', size = 160, className, equipped }: Prop
     happy: { y: [0, -14, 0], rotate: 0 },
     encouraging: { y: [0, -3, 0], rotate: 5 },
     celebrating: { y: [0, -18, 0], rotate: [0, -6, 6, 0] },
-    sleeping: { y: [0, -2, 0], rotate: 8 },
+    sleeping: { y: [0, -2, 0], rotate: [0, 8, 0] },
   }[state]
 
   const duration = {
