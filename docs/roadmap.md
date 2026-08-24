@@ -121,7 +121,9 @@ until every increment lands.
 
 **Exit criteria, every content item:** every skill in scope resolves as `implemented`;
 `npm test` green including the content contract over ~1000 sampled problems per skill; the
-document's ✅ markers updated to match, which the cross-check enforces.
+document's ✅ markers updated to match, which the cross-check enforces. From item 25a
+onward, each skill in scope also carries the teaching line and worked example that item
+shows before a lesson's first problem.
 
 ---
 
@@ -699,7 +701,7 @@ document's ✅ markers updated to match, which the cross-check enforces.
       **Scoped to those two skills deliberately.** Unit 20 wants labelled dimensions, composite
       outlines and right-angle marks; guessing at them here would repeat the mistake item 12
       avoided by keeping Unit 5's expression model out of `engine/` — build for the consumers
-      that exist. Unit 20's figures extend this model under item 25, not here.
+      that exist. Unit 20's figures extend this model under item 26, not here.
 
       In order:
 
@@ -1065,7 +1067,62 @@ document's ✅ markers updated to match, which the cross-check enforces.
       without making any Stage G skill playable before its generators land. Math notation and
       diagram rendering were already available and remain part of Stage G's requirements.
 
-- [ ] **25 · Stage G · Units 20–21** — M — 22 skills, five changes
+- [ ] **25 · Skill intros** — L — **four increments**
+
+      `docs/curriculum.md`'s content style contract has promised a **teaching line** and **one
+      worked example**, "shown once, before the first problem", since before item 0 — and
+      nothing has ever drawn them. A lesson opens straight onto its warm-up, so a learner
+      meeting a new skill is asked a question about something the app never showed them. This
+      item pays that promise back. It sits here rather than earlier because the intro draws its
+      example with the same renderers the problem does, and the last of those landed in item 24.
+
+      **The worked example is generated, not written.** A generator already produces a concrete
+      problem with its `display`, its `answer` and up to four `solution` steps computed from the
+      operands it just chose — which is exactly "concrete numbers, never symbols" with the
+      working shown. So an intro is that generator called at difficulty 1 with the solution
+      revealed instead of hidden, and every visual in the course comes along for free: the
+      example renders through `ProblemView`'s existing `Display` arms, so a fraction arrives as
+      notation, Unit 7 as a diagram, Unit 16 as a plane and Unit 21 as a chart, with no second
+      renderer and no per-skill artwork. Prose that a human writes is then one sentence per
+      skill, which is the whole of what `SkillGenerator` gains.
+
+      Three things to settle in 25a's proposal rather than in a generator:
+
+      - **What "once" means.** Shown once per skill needs a seen-flag on `SkillProgress`, and
+        `reconcile()` merges a stored skill per object, so every record saved before the field
+        existed carries nothing — read-time defaulting, the shape items 1 and 27a both use.
+        Defaulting to *unseen* re-shows the intro to existing learners once, which is the
+        harmless direction; defaulting to seen hides it from exactly the people who never got
+        one. Either way it stays reachable after the first time, since a learner who returns to
+        a skill months later wants the reminder, not a lesson that assumes it.
+      - **Whether it can be skipped, and what that costs.** A tap past it must not count as
+        seen-and-understood in any way review or skip-ahead later reads.
+      - **What gates the new prose.** `content-rules.ts` is the one place a generator's text is
+        checked, so the teaching line's one-sentence limit and the vocabulary budget belong
+        there beside `MAX_SOLUTION_STEPS`, not in a new checker. Its `VOCABULARY` map already
+        holds the "max 1 new word per skill" rule the teaching line is most likely to break.
+
+      A standing constraint: the intro is another screen the size ladder in `coverage.test.ts`
+      measures, and a worked example is a display *plus* its solution steps, which is more on
+      screen at 375px than any problem has had to fit. That is item 12's finding arriving in a
+      new place, and it is why 25a ships a stage's worth of content rather than one pilot skill.
+
+      Ordered increments:
+
+      - **25a** The screen, its data, and Stage A's 8 skills — the mechanism above, proven on
+        Unit 0, where a worked example is small enough that a layout problem is a layout problem
+        rather than a Unit 8 problem.
+      - **25b** Stage B — 44 skills across Units 1–5, the course's largest block of plain
+        arithmetic and the cheapest teaching lines in it.
+      - **25c** Stages C and D — 57 skills, and the first intros carrying a diagram.
+      - **25d** Stages E and F — 62 skills, the notation- and plane-heavy end of what is built.
+
+      **Stages G and H carry their own**, rather than waiting for a fifth increment here: from
+      25a onward a teaching line and a worked example are part of what shipping a skill means,
+      which is the exit-criteria line above and the reason items 26 and 30 need no clause of
+      their own.
+
+- [ ] **26 · Stage G · Units 20–21** *(was 25)* — M — 22 skills, five changes
 
       Geometry teaches *choosing and applying* the formula the GED provides, never memorising
       it.
@@ -1089,12 +1146,12 @@ document's ✅ markers updated to match, which the cross-check enforces.
         form question 9b settles applies again here: a probability typed as 0.5, 1/2 or 50% is
         one value and three different answers, and the unit picks one.
 
-- [ ] **26 · Review and spaced repetition** — L *(was B6)* — **three increments**
+- [ ] **27 · Review and spaced repetition** — L *(was B6, then 26)* — **three increments**
 
       Review lessons, per-skill strength, and the stats surface. Ordered before skip-ahead
       because it is what makes skip-ahead safe.
 
-      **26a · Strength and the schedule.** New fields on `SkillProgress` — strength, when a skill
+      **27a · Strength and the schedule.** New fields on `SkillProgress` — strength, when a skill
       is next due, how many review attempts it has taken — and a pure scheduler beside them, in
       `lib/` rather than the store, the way `checkpoint.ts` and `lesson.ts` already are. Two
       things to know before writing them: `reconcile()` merges a stored skill **per object**, so
@@ -1104,84 +1161,84 @@ document's ✅ markers updated to match, which the cross-check enforces.
       round trip needs no change; what needs a test is today's stored record surviving the new
       fields.
 
-      **26b · The review lesson.** `lesson.ts` builds each queue slot from a factory taking only
+      **27b · The review lesson.** `lesson.ts` builds each queue slot from a factory taking only
       a difficulty, so a session is one skill by construction. A review lesson is many: a slot
       has to carry the skill it belongs to, and `recordAttempt` — already keyed by skill id —
-      gets called per slot. **This is the increment two later items wait on.** Item 27's
+      gets called per slot. **This is the increment two later items wait on.** Item 28's
       check-first sampling and Stage H's mixed reviews are this mechanism with different
       selection, so neither should grow its own.
 
-      **26c · Where it is seen.** A review entry point that appears only when something is due,
+      **27c · Where it is seen.** A review entry point that appears only when something is due,
       per-skill strength on the skill tree, and the "you keep doing X" insight that the store's
       `mistakes` map has been accumulating tags for since before there was anywhere to show them.
 
-- [ ] **27 · Skip-ahead** — L *(was B5)* — **three increments**
+- [ ] **28 · Skip-ahead** — L *(was B5, then 27)* — **three increments**
 
       The full flow from [skipping ahead](curriculum.md#skipping-ahead). Every route is optional
       to the learner and reversible at any time.
 
-      **27a · Marking a block known, and taking it back.** `source: 'practiced' | 'tested-out' |
+      **28a · Marking a block known, and taking it back.** `source: 'practiced' | 'tested-out' |
       'self-assessed'` on `SkillProgress`, and a block mutation setting every skill in a stage or
       unit to mastery 3 — clear of `UNLOCK_THRESHOLD`, short of `MAX_MASTERY`, so a skipped skill
       reads as "not needed yet" rather than finished. "Actually, let me practice this" resets the
-      block to 0. Same read-time defaulting as 26a, since an existing record has no `source`;
+      block to 0. Same read-time defaulting as 27a, since an existing record has no `source`;
       `hasPractised()` already reads mastery for exactly this case, which item 1 wrote down
       before anything could produce it.
 
-      **27b · Check first.** Eight problems sampled across the block at difficulty 3, ≥7 correct
+      **28b · Check first.** Eight problems sampled across the block at difficulty 3, ≥7 correct
       to skip, and a failing run offers the first unmastered unit with no penalty framing.
-      Sampling many skills into one session is 26b's, which is why this waits rather than
+      Sampling many skills into one session is 27b's, which is why this waits rather than
       duplicating it. Both entry points land here: per stage on first launch, and the "I already
       know this" affordance on a locked or unstarted unit — the second matters most, because it
       lets the decision wait until the learner knows what the app is like.
 
-      **27c · The safety net.** A skipped skill enters review at low strength so it resurfaces
+      **28c · The safety net.** A skipped skill enters review at low strength so it resurfaces
       sooner than a practised one; below 60% accuracy across 5+ review attempts the app quietly
       offers to warm its unit up; and a downstream skill failing repeatedly points back at the
       skipped prerequisite, which is the actual cause and the one thing the learner cannot see.
-      All three read counters that 26a and 26b maintain, which is the whole reason review is
+      All three read counters that 27a and 27b maintain, which is the whole reason review is
       ordered first.
 
-- [ ] **28 · Timed mode and score estimator** — M — **two increments**
+- [ ] **29 · Timed mode and score estimator** *(was 28)* — M — **two increments**
 
-      **28a · The timer.** A clock on the session and `timed` into `AVAILABLE_CAPABILITIES`,
+      **29a · The timer.** A clock on the session and `timed` into `AVAILABLE_CAPABILITIES`,
       which is what makes Stage H playable at all. It stays a property of the session rather than
       a setting: "no time pressure until Stage H" is a curriculum commitment, and a global switch
       would erode it by accident.
 
-      **28b · The score estimator.** Raw score to a GED scaled estimate, with the mapping written
+      **29b · The score estimator.** Raw score to a GED scaled estimate, with the mapping written
       where a reader can check it and the result presented as an estimate. This is the only place
       the app says anything about an official test, so the caveat is part of the feature rather
       than a disclaimer bolted to it.
 
-- [ ] **29 · Stage H · Unit 22** — S — 6 skills — **two increments**
+- [ ] **30 · Stage H · Unit 22** *(was 29)* — S — 6 skills — **two increments**
 
       Closes the course, and the only unit whose skills are not all ordinary lessons.
 
-      **29a · `calculator-skills`–`review-algebraic`.** 22.1 teaches TI-30XS operation, and the
+      **30a · `calculator-skills`–`review-algebraic`.** 22.1 teaches TI-30XS operation, and the
       open question is what the learner operates: the GED supplies the calculator and this app
       does not, so either the skill teaches key sequences as text and choices, or something
       calculator-shaped gets built. Decide that in the proposal, not in the generator. 22.2
       renders the provided formula sheet in item 17's notation. 22.3 and 22.4 are mixed reviews
-      across the whole course, sampling other skills' generators — that is 26b's session, so they
+      across the whole course, sampling other skills' generators — that is 27b's session, so they
       cannot ship before it.
 
-      **29b · `timed-practice-1`, `timed-practice-2`.** Full-length forms on item 28's clock,
+      **30b · `timed-practice-1`, `timed-practice-2`.** Full-length forms on item 29's clock,
       sampled the way 22.3 and 22.4 sample. Two skills, but each is a test form rather than a
-      ten-problem lesson, which is why they are not a tail on 29a.
+      ten-problem lesson, which is why they are not a tail on 30a.
 
-- [ ] **30 · Streak reminders** — S *(was B7)* — **two increments**
+- [ ] **31 · Streak reminders** — S *(was B7, then 30)* — **two increments**
 
       Last because it is the only item nothing else depends on.
 
-      **30a · The in-app nudge.** Works on every platform and asks for no permission, and the
+      **31a · The in-app nudge.** Works on every platform and asks for no permission, and the
       state is already there: `streakCount` and `lastActiveDay` are on the record and the store
       breaks a stale streak on load, so this reads existing values rather than adding any.
 
-      **30b · System notifications where they actually work.** Permission asked at a moment the
+      **31b · System notifications where they actually work.** Permission asked at a moment the
       learner has earned something, never on first launch. Worth an honest caveat: iOS PWA
       notification support is narrow and may not reach an installed home-screen app reliably. If
-      it does not, 30a is the shipped answer and that is an acceptable outcome — which is why it
+      it does not, 31a is the shipped answer and that is an acceptable outcome — which is why it
       ships first. Verifying on real hardware is launch work and out of scope below.
 
 ---
