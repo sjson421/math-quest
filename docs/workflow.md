@@ -12,7 +12,7 @@ The roadmap-to-main workflow runs across three separate skill sessions:
 `review-roadmap` simplifies, verifies, ships, and archives it. Ignored state under
 `.agent-state/roadmap/` carries the exact baseline and gate status between sessions.
 
-- `openspec/specs/` is the **baseline**: what the system does today, thirty-six
+- `openspec/specs/` is the **baseline**: what the system does today, forty
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
@@ -21,20 +21,19 @@ The roadmap-to-main workflow runs across three separate skill sessions:
   `unit-08-fraction-operations`, `unit-09-decimals`, `unit-10-percents`,
   `unit-11-ratios-proportions`, `unit-12-exponents-roots`, `unit-13-expressions`,
   `unit-14-linear-equations`, `unit-15-inequalities`, `unit-16-coordinate-plane-lines`,
+  `unit-17-systems-equations`, `unit-18-polynomials-quadratics`, `unit-19-functions`,
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
-  `recovery-key`, `answer-entry`,
-  `cosmetic-wardrobe`, `decorated-room`, `math-notation`, `diagram-rendering`,
-  `expression-input`, `coordinate-plane-display`, `coordinate-plane-input`. A change
-  amending built behaviour writes `## MODIFIED Requirements` against one of these; `## ADDED`
-  is for genuinely new surface.
+  `recovery-key`, `answer-entry`, `root-pair-input`, `cosmetic-wardrobe`, `decorated-room`,
+  `math-notation`, `diagram-rendering`, `expression-input`, `coordinate-plane-display`,
+  `coordinate-plane-input`. A change amending built behaviour writes `## MODIFIED
+  Requirements` against one of these; `## ADDED` is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Fifty-one changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Fifty-two changes
   have shipped — `ls openspec/changes/archive/` is the authority, and this line has run one
   behind before; the latest archive is
-  `2026-08-23-extend-expression-input-to-quadratics`. It extends the expression answer
-  surface through bounded quadratic notation before Unit 18a. Roadmap item 23 remains open
-  for the remaining Unit 18a–19 content.
+  `2026-08-24-add-stage-f-unit-19`. It completes Stage F's final Unit 19 content, and
+  roadmap item 23 is complete.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the

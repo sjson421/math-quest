@@ -153,7 +153,7 @@ unit — regardless of the order their generators were written or registered in.
 - **THEN** its stages, each stage's units, and each unit's skills are in the order the
   manifest declares them
 
-### Requirement: Stage capability requirements remain complete
+### Requirement: Stage capability requirements remain complete after Unit 19
 
 Each stage SHALL record the capabilities its skills require — choice input, structured math
 notation, fraction keypad input, diagram rendering, expression input, number-line input,
@@ -233,10 +233,9 @@ introduces, so the set can be read off the stage rather than assembled from earl
 - **AND** all Stage F skills without generators remain planned
 - **AND** coordinate-plane availability alone changes no playable skill
 
-#### Scenario: Stage F consumes root-pair input in Unit 18b
+#### Scenario: Unit 19 completes Stage F without a capability change
 
-- **WHEN** the Unit 18b generators are registered after exact two-root entry is built
-- **THEN** Stage F lists `root-pair-input` as an available required capability
-- **AND** `difference-of-squares`, `solve-by-factoring`, and `quadratic-formula` resolve as implemented
-- **AND** the five Unit 19 skills remain planned
-- **AND** the playable skill total is 168
+- **WHEN** the five Unit 19 generators are registered after Units 16–18 are complete
+- **THEN** Stage F still lists `choice-input`, `math-notation`, `expression-input`, `coordinate-plane`, and `root-pair-input` as available required capabilities
+- **AND** every one of its 28 skills resolves as implemented
+- **AND** the playable skill total is 173
