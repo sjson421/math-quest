@@ -302,6 +302,283 @@ miss     added-quadratic-only = 35x²+5x+3   Combine matching degrees in every t
 miss     added-constant-only = 18x²+5x+12   Add the constants, linear terms, and squares separately."
 `;
 
+exports[`Unit 18 recorded output: difference-of-squares > matches the wording recorded when the skill landed 1`] = `
+"--- difference-of-squares · seed 1 · difficulty 1
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 5] "x² − 25"
+answer   expression (x-5)(x+5) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 5²]
+step 2   Use one minus and one plus factor.   [(x-5)(x+5)]
+miss     used-same-sign = (x-5)(x-5)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-25)(x+25)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 12345 · difficulty 1
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 6] "x² − 36"
+answer   expression (x-6)(x+6) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 6²]
+step 2   Use one minus and one plus factor.   [(x-6)(x+6)]
+miss     used-same-sign = (x-6)(x-6)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-36)(x+36)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 67890 · difficulty 1
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 3] "x² − 9"
+answer   expression (x-3)(x+3) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 3²]
+step 2   Use one minus and one plus factor.   [(x-3)(x+3)]
+miss     used-same-sign = (x-3)(x-3)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-9)(x+9)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 424242 · difficulty 1
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 2] "x² − 4"
+answer   expression (x-2)(x+2) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 2²]
+step 2   Use one minus and one plus factor.   [(x-2)(x+2)]
+miss     used-same-sign = (x-2)(x-2)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-4)(x+4)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 987654321 · difficulty 1
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 6] "x² − 36"
+answer   expression (x-6)(x+6) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 6²]
+step 2   Use one minus and one plus factor.   [(x-6)(x+6)]
+miss     used-same-sign = (x-6)(x-6)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-36)(x+36)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 1 · difficulty 2
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 7] "x² − 49"
+answer   expression (x-7)(x+7) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 7²]
+step 2   Use one minus and one plus factor.   [(x-7)(x+7)]
+miss     used-same-sign = (x-7)(x-7)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-49)(x+49)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 12345 · difficulty 2
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 9] "x² − 81"
+answer   expression (x-9)(x+9) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 9²]
+step 2   Use one minus and one plus factor.   [(x-9)(x+9)]
+miss     used-same-sign = (x-9)(x-9)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-81)(x+81)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 67890 · difficulty 2
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 6] "x² − 36"
+answer   expression (x-6)(x+6) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 6²]
+step 2   Use one minus and one plus factor.   [(x-6)(x+6)]
+miss     used-same-sign = (x-6)(x-6)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-36)(x+36)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 424242 · difficulty 2
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 4] "x² − 16"
+answer   expression (x-4)(x+4) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 4²]
+step 2   Use one minus and one plus factor.   [(x-4)(x+4)]
+miss     used-same-sign = (x-4)(x-4)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-16)(x+16)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 987654321 · difficulty 2
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 9] "x² − 81"
+answer   expression (x-9)(x+9) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 9²]
+step 2   Use one minus and one plus factor.   [(x-9)(x+9)]
+miss     used-same-sign = (x-9)(x-9)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-81)(x+81)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 1 · difficulty 3
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 11] "x² − 121"
+answer   expression (x-11)(x+11) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 11²]
+step 2   Use one minus and one plus factor.   [(x-11)(x+11)]
+miss     used-same-sign = (x-11)(x-11)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-121)(x+121)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 12345 · difficulty 3
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 13] "x² − 169"
+answer   expression (x-13)(x+13) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 13²]
+step 2   Use one minus and one plus factor.   [(x-13)(x+13)]
+miss     used-same-sign = (x-13)(x-13)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-169)(x+169)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 67890 · difficulty 3
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 9] "x² − 81"
+answer   expression (x-9)(x+9) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 9²]
+step 2   Use one minus and one plus factor.   [(x-9)(x+9)]
+miss     used-same-sign = (x-9)(x-9)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-81)(x+81)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 424242 · difficulty 3
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 7] "x² − 49"
+answer   expression (x-7)(x+7) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 7²]
+step 2   Use one minus and one plus factor.   [(x-7)(x+7)]
+miss     used-same-sign = (x-7)(x-7)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-49)(x+49)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 987654321 · difficulty 3
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 13] "x² − 169"
+answer   expression (x-13)(x+13) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 13²]
+step 2   Use one minus and one plus factor.   [(x-13)(x+13)]
+miss     used-same-sign = (x-13)(x-13)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-169)(x+169)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 1 · difficulty 4
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 15] "x² − 225"
+answer   expression (x-15)(x+15) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 15²]
+step 2   Use one minus and one plus factor.   [(x-15)(x+15)]
+miss     used-same-sign = (x-15)(x-15)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-225)(x+225)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 12345 · difficulty 4
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 18] "x² − 324"
+answer   expression (x-18)(x+18) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 18²]
+step 2   Use one minus and one plus factor.   [(x-18)(x+18)]
+miss     used-same-sign = (x-18)(x-18)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-324)(x+324)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 67890 · difficulty 4
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 13] "x² − 169"
+answer   expression (x-13)(x+13) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 13²]
+step 2   Use one minus and one plus factor.   [(x-13)(x+13)]
+miss     used-same-sign = (x-13)(x-13)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-169)(x+169)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 424242 · difficulty 4
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 11] "x² − 121"
+answer   expression (x-11)(x+11) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 11²]
+step 2   Use one minus and one plus factor.   [(x-11)(x+11)]
+miss     used-same-sign = (x-11)(x-11)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-121)(x+121)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 987654321 · difficulty 4
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 18] "x² − 324"
+answer   expression (x-18)(x+18) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 18²]
+step 2   Use one minus and one plus factor.   [(x-18)(x+18)]
+miss     used-same-sign = (x-18)(x-18)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-324)(x+324)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 1 · difficulty 5
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 21] "x² − 441"
+answer   expression (x-21)(x+21) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 21²]
+step 2   Use one minus and one plus factor.   [(x-21)(x+21)]
+miss     used-same-sign = (x-21)(x-21)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-441)(x+441)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 12345 · difficulty 5
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 25] "x² − 625"
+answer   expression (x-25)(x+25) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 25²]
+step 2   Use one minus and one plus factor.   [(x-25)(x+25)]
+miss     used-same-sign = (x-25)(x-25)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-625)(x+625)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 67890 · difficulty 5
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 18] "x² − 324"
+answer   expression (x-18)(x+18) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 18²]
+step 2   Use one minus and one plus factor.   [(x-18)(x+18)]
+miss     used-same-sign = (x-18)(x-18)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-324)(x+324)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 424242 · difficulty 5
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 15] "x² − 225"
+answer   expression (x-15)(x+15) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 15²]
+step 2   Use one minus and one plus factor.   [(x-15)(x+15)]
+miss     used-same-sign = (x-15)(x-15)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-225)(x+225)   Use the square root of the constant in each factor.
+
+--- difference-of-squares · seed 987654321 · difficulty 5
+prompt   Factor the difference of squares.
+display  story [difference-of-squares square-root 25] "x² − 625"
+answer   expression (x-25)(x+25) (x, exact, degree 2)
+input    expression
+hint     Find each square root, then use opposite signs.
+step 1   Recognise both terms as perfect squares.   [x² and 25²]
+step 2   Use one minus and one plus factor.   [(x-25)(x+25)]
+miss     used-same-sign = (x-25)(x-25)   Conjugate factors use opposite signs.
+miss     used-square-not-root = (x-625)(x+625)   Use the square root of the constant in each factor."
+`;
+
 exports[`Unit 18 recorded output: factor-gcf-poly > matches the wording recorded when the skill landed 1`] = `
 "--- factor-gcf-poly · seed 1 · difficulty 1
 prompt   Factor out the greatest common monomial.
@@ -1508,6 +1785,685 @@ step 1   Multiply the x terms.   [12x × 5x = 60x²]
 step 2   Multiply the constant term.   [12x × 3 = 36x]
 miss     distributed-first-term-only = 60x²+3   Multiply the outside term by both terms inside.
 miss     lost-variable-degree = 60x+36   The outside x joins the inside x to make x²."
+`;
+
+exports[`Unit 18 recorded output: quadratic-formula > matches the wording recorded when the skill landed 1`] = `
+"--- quadratic-formula · seed 1 · difficulty 1
+prompt   Solve x² − x − 12 = 0 using a = 1, b = −1, c = −12.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=1 b=-1 c=-12]
+answer   root-pair roots (-3, 4)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=false
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 1, b = −1, c = −12]
+step 2   Evaluate the discriminant.   [b² − 4ac = 49]
+step 3   Use both signs in the numerator.   [−b ± 7]
+step 4   Divide each result by two a.   [-3, 4]
+miss     used-positive-b = roots (-4, 3)   The numerator starts with negative b.
+miss     divided-by-a = roots (-6, 8)   The denominator is two times a.
+
+--- quadratic-formula · seed 12345 · difficulty 1
+prompt   Solve x² + 3x − 4 = 0 using a = 1, b = 3, c = −4.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=1 b=3 c=-4]
+answer   root-pair roots (-4, 1)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=false
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 1, b = 3, c = −4]
+step 2   Evaluate the discriminant.   [b² − 4ac = 25]
+step 3   Use both signs in the numerator.   [−b ± 5]
+step 4   Divide each result by two a.   [-4, 1]
+miss     used-positive-b = roots (-1, 4)   The numerator starts with negative b.
+miss     divided-by-a = roots (-8, 2)   The denominator is two times a.
+
+--- quadratic-formula · seed 67890 · difficulty 1
+prompt   Solve x² − 4x + 3 = 0 using a = 1, b = −4, c = 3.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=1 b=-4 c=3]
+answer   root-pair roots (1, 3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=false
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 1, b = −4, c = 3]
+step 2   Evaluate the discriminant.   [b² − 4ac = 4]
+step 3   Use both signs in the numerator.   [−b ± 2]
+step 4   Divide each result by two a.   [1, 3]
+miss     used-positive-b = roots (-3, -1)   The numerator starts with negative b.
+miss     divided-by-a = roots (2, 6)   The denominator is two times a.
+
+--- quadratic-formula · seed 424242 · difficulty 1
+prompt   Solve x² + 4x + 3 = 0 using a = 1, b = 4, c = 3.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=1 b=4 c=3]
+answer   root-pair roots (-3, -1)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=false
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 1, b = 4, c = 3]
+step 2   Evaluate the discriminant.   [b² − 4ac = 4]
+step 3   Use both signs in the numerator.   [−b ± 2]
+step 4   Divide each result by two a.   [-3, -1]
+miss     used-positive-b = roots (1, 3)   The numerator starts with negative b.
+miss     divided-by-a = roots (-6, -2)   The denominator is two times a.
+
+--- quadratic-formula · seed 987654321 · difficulty 1
+prompt   Solve x² − x − 6 = 0 using a = 1, b = −1, c = −6.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=1 b=-1 c=-6]
+answer   root-pair roots (-2, 3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=false
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 1, b = −1, c = −6]
+step 2   Evaluate the discriminant.   [b² − 4ac = 25]
+step 3   Use both signs in the numerator.   [−b ± 5]
+step 4   Divide each result by two a.   [-2, 3]
+miss     used-positive-b = roots (-3, 2)   The numerator starts with negative b.
+miss     divided-by-a = roots (-4, 6)   The denominator is two times a.
+
+--- quadratic-formula · seed 1 · difficulty 2
+prompt   Solve x² − 2x − 35 = 0 using a = 1, b = −2, c = −35.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=1 b=-2 c=-35]
+answer   root-pair roots (-5, 7)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=false
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 1, b = −2, c = −35]
+step 2   Evaluate the discriminant.   [b² − 4ac = 144]
+step 3   Use both signs in the numerator.   [−b ± 12]
+step 4   Divide each result by two a.   [-5, 7]
+miss     used-positive-b = roots (-7, 5)   The numerator starts with negative b.
+miss     divided-by-a = roots (-10, 14)   The denominator is two times a.
+
+--- quadratic-formula · seed 12345 · difficulty 2
+prompt   Solve x² + x − 42 = 0 using a = 1, b = 1, c = −42.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=1 b=1 c=-42]
+answer   root-pair roots (-7, 6)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=false
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 1, b = 1, c = −42]
+step 2   Evaluate the discriminant.   [b² − 4ac = 169]
+step 3   Use both signs in the numerator.   [−b ± 13]
+step 4   Divide each result by two a.   [-7, 6]
+miss     used-positive-b = roots (-6, 7)   The numerator starts with negative b.
+miss     divided-by-a = roots (-14, 12)   The denominator is two times a.
+
+--- quadratic-formula · seed 67890 · difficulty 2
+prompt   Solve x² − 7x + 10 = 0 using a = 1, b = −7, c = 10.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=1 b=-7 c=10]
+answer   root-pair roots (2, 5)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=false
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 1, b = −7, c = 10]
+step 2   Evaluate the discriminant.   [b² − 4ac = 9]
+step 3   Use both signs in the numerator.   [−b ± 3]
+step 4   Divide each result by two a.   [2, 5]
+miss     used-positive-b = roots (-5, -2)   The numerator starts with negative b.
+miss     divided-by-a = roots (4, 10)   The denominator is two times a.
+
+--- quadratic-formula · seed 424242 · difficulty 2
+prompt   Solve x² + 7x + 10 = 0 using a = 1, b = 7, c = 10.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=1 b=7 c=10]
+answer   root-pair roots (-5, -2)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=false
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 1, b = 7, c = 10]
+step 2   Evaluate the discriminant.   [b² − 4ac = 9]
+step 3   Use both signs in the numerator.   [−b ± 3]
+step 4   Divide each result by two a.   [-5, -2]
+miss     used-positive-b = roots (2, 5)   The numerator starts with negative b.
+miss     divided-by-a = roots (-10, -4)   The denominator is two times a.
+
+--- quadratic-formula · seed 987654321 · difficulty 2
+prompt   Solve x² − x − 20 = 0 using a = 1, b = −1, c = −20.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=1 b=-1 c=-20]
+answer   root-pair roots (-4, 5)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=false
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 1, b = −1, c = −20]
+step 2   Evaluate the discriminant.   [b² − 4ac = 81]
+step 3   Use both signs in the numerator.   [−b ± 9]
+step 4   Divide each result by two a.   [-4, 5]
+miss     used-positive-b = roots (-5, 4)   The numerator starts with negative b.
+miss     divided-by-a = roots (-8, 10)   The denominator is two times a.
+
+--- quadratic-formula · seed 1 · difficulty 3
+prompt   Solve 2x² − 11x − 63 = 0 using a = 2, b = −11, c = −63.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=2 b=-11 c=-63]
+answer   root-pair roots (-7/2, 9)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 2, b = −11, c = −63]
+step 2   Evaluate the discriminant.   [b² − 4ac = 625]
+step 3   Use both signs in the numerator.   [−b ± 25]
+step 4   Divide each result by two a.   [-7/2, 9]
+miss     used-positive-b = roots (-9, 7/2)   The numerator starts with negative b.
+miss     divided-by-a = roots (-7, 18)   The denominator is two times a.
+
+--- quadratic-formula · seed 12345 · difficulty 3
+prompt   Solve 2x² + 5x − 12 = 0 using a = 2, b = 5, c = −12.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=2 b=5 c=-12]
+answer   root-pair roots (-4, 3/2)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 2, b = 5, c = −12]
+step 2   Evaluate the discriminant.   [b² − 4ac = 121]
+step 3   Use both signs in the numerator.   [−b ± 11]
+step 4   Divide each result by two a.   [-4, 3/2]
+miss     used-positive-b = roots (-3/2, 4)   The numerator starts with negative b.
+miss     divided-by-a = roots (-8, 3)   The denominator is two times a.
+
+--- quadratic-formula · seed 67890 · difficulty 3
+prompt   Solve 2x² − 5x − 25 = 0 using a = 2, b = −5, c = −25.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=2 b=-5 c=-25]
+answer   root-pair roots (-5/2, 5)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 2, b = −5, c = −25]
+step 2   Evaluate the discriminant.   [b² − 4ac = 225]
+step 3   Use both signs in the numerator.   [−b ± 15]
+step 4   Divide each result by two a.   [-5/2, 5]
+miss     used-positive-b = roots (-5, 5/2)   The numerator starts with negative b.
+miss     divided-by-a = roots (-5, 10)   The denominator is two times a.
+
+--- quadratic-formula · seed 424242 · difficulty 3
+prompt   Solve 2x² + 13x + 21 = 0 using a = 2, b = 13, c = 21.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=2 b=13 c=21]
+answer   root-pair roots (-7/2, -3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 2, b = 13, c = 21]
+step 2   Evaluate the discriminant.   [b² − 4ac = 1]
+step 3   Use both signs in the numerator.   [−b ± 1]
+step 4   Divide each result by two a.   [-7/2, -3]
+miss     used-positive-b = roots (3, 7/2)   The numerator starts with negative b.
+miss     divided-by-a = roots (-7, -6)   The denominator is two times a.
+
+--- quadratic-formula · seed 987654321 · difficulty 3
+prompt   Solve 2x² − 3x − 9 = 0 using a = 2, b = −3, c = −9.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=2 b=-3 c=-9]
+answer   root-pair roots (-3/2, 3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 2, b = −3, c = −9]
+step 2   Evaluate the discriminant.   [b² − 4ac = 81]
+step 3   Use both signs in the numerator.   [−b ± 9]
+step 4   Divide each result by two a.   [-3/2, 3]
+miss     used-positive-b = roots (-3, 3/2)   The numerator starts with negative b.
+miss     divided-by-a = roots (-3, 6)   The denominator is two times a.
+
+--- quadratic-formula · seed 1 · difficulty 4
+prompt   Solve 3x² − 8x − 60 = 0 using a = 3, b = −8, c = −60.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=3 b=-8 c=-60]
+answer   root-pair roots (-10/3, 6)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 3, b = −8, c = −60]
+step 2   Evaluate the discriminant.   [b² − 4ac = 784]
+step 3   Use both signs in the numerator.   [−b ± 28]
+step 4   Divide each result by two a.   [-10/3, 6]
+miss     used-positive-b = roots (-6, 10/3)   The numerator starts with negative b.
+miss     divided-by-a = roots (-20/3, 12)   The denominator is two times a.
+
+--- quadratic-formula · seed 12345 · difficulty 4
+prompt   Solve 2x² + x − 66 = 0 using a = 2, b = 1, c = −66.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=2 b=1 c=-66]
+answer   root-pair roots (-6, 11/2)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 2, b = 1, c = −66]
+step 2   Evaluate the discriminant.   [b² − 4ac = 529]
+step 3   Use both signs in the numerator.   [−b ± 23]
+step 4   Divide each result by two a.   [-6, 11/2]
+miss     used-positive-b = roots (-11/2, 6)   The numerator starts with negative b.
+miss     divided-by-a = roots (-12, 11)   The denominator is two times a.
+
+--- quadratic-formula · seed 67890 · difficulty 4
+prompt   Solve 3x² − 5x − 28 = 0 using a = 3, b = −5, c = −28.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=3 b=-5 c=-28]
+answer   root-pair roots (-7/3, 4)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 3, b = −5, c = −28]
+step 2   Evaluate the discriminant.   [b² − 4ac = 361]
+step 3   Use both signs in the numerator.   [−b ± 19]
+step 4   Divide each result by two a.   [-7/3, 4]
+miss     used-positive-b = roots (-4, 7/3)   The numerator starts with negative b.
+miss     divided-by-a = roots (-14/3, 8)   The denominator is two times a.
+
+--- quadratic-formula · seed 424242 · difficulty 4
+prompt   Solve 3x² + 19x + 30 = 0 using a = 3, b = 19, c = 30.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=3 b=19 c=30]
+answer   root-pair roots (-10/3, -3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 3, b = 19, c = 30]
+step 2   Evaluate the discriminant.   [b² − 4ac = 1]
+step 3   Use both signs in the numerator.   [−b ± 1]
+step 4   Divide each result by two a.   [-10/3, -3]
+miss     used-positive-b = roots (3, 10/3)   The numerator starts with negative b.
+miss     divided-by-a = roots (-20/3, -6)   The denominator is two times a.
+
+--- quadratic-formula · seed 987654321 · difficulty 4
+prompt   Solve 2x² + x − 28 = 0 using a = 2, b = 1, c = −28.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=2 b=1 c=-28]
+answer   root-pair roots (-4, 7/2)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 2, b = 1, c = −28]
+step 2   Evaluate the discriminant.   [b² − 4ac = 225]
+step 3   Use both signs in the numerator.   [−b ± 15]
+step 4   Divide each result by two a.   [-4, 7/2]
+miss     used-positive-b = roots (-7/2, 4)   The numerator starts with negative b.
+miss     divided-by-a = roots (-8, 7)   The denominator is two times a.
+
+--- quadratic-formula · seed 1 · difficulty 5
+prompt   Solve 3x² − 13x − 126 = 0 using a = 3, b = −13, c = −126.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=3 b=-13 c=-126]
+answer   root-pair roots (-14/3, 9)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 3, b = −13, c = −126]
+step 2   Evaluate the discriminant.   [b² − 4ac = 1681]
+step 3   Use both signs in the numerator.   [−b ± 41]
+step 4   Divide each result by two a.   [-14/3, 9]
+miss     used-positive-b = roots (-9, 14/3)   The numerator starts with negative b.
+miss     divided-by-a = roots (-28/3, 18)   The denominator is two times a.
+
+--- quadratic-formula · seed 12345 · difficulty 5
+prompt   Solve 3x² + 2x − 96 = 0 using a = 3, b = 2, c = −96.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=3 b=2 c=-96]
+answer   root-pair roots (-6, 16/3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 3, b = 2, c = −96]
+step 2   Evaluate the discriminant.   [b² − 4ac = 1156]
+step 3   Use both signs in the numerator.   [−b ± 34]
+step 4   Divide each result by two a.   [-6, 16/3]
+miss     used-positive-b = roots (-16/3, 6)   The numerator starts with negative b.
+miss     divided-by-a = roots (-12, 32/3)   The denominator is two times a.
+
+--- quadratic-formula · seed 67890 · difficulty 5
+prompt   Solve 4x² − 5x − 44 = 0 using a = 4, b = −5, c = −44.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=4 b=-5 c=-44]
+answer   root-pair roots (-11/4, 4)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 4, b = −5, c = −44]
+step 2   Evaluate the discriminant.   [b² − 4ac = 729]
+step 3   Use both signs in the numerator.   [−b ± 27]
+step 4   Divide each result by two a.   [-11/4, 4]
+miss     used-positive-b = roots (-4, 11/4)   The numerator starts with negative b.
+miss     divided-by-a = roots (-11/2, 8)   The denominator is two times a.
+
+--- quadratic-formula · seed 424242 · difficulty 5
+prompt   Solve 2x² + 19x + 45 = 0 using a = 2, b = 19, c = 45.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=2 b=19 c=45]
+answer   root-pair roots (-5, -9/2)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 2, b = 19, c = 45]
+step 2   Evaluate the discriminant.   [b² − 4ac = 1]
+step 3   Use both signs in the numerator.   [−b ± 1]
+step 4   Divide each result by two a.   [-5, -9/2]
+miss     used-positive-b = roots (9/2, 5)   The numerator starts with negative b.
+miss     divided-by-a = roots (-10, -9)   The denominator is two times a.
+
+--- quadratic-formula · seed 987654321 · difficulty 5
+prompt   Solve 2x² + 5x − 42 = 0 using a = 2, b = 5, c = −42.
+display  math "x equals negative b plus or minus the square root of b squared minus four a c, all over two a" row("x", "=", fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")) [quadratic-formula a=2 b=5 c=-42]
+answer   root-pair roots (-6, 7/2)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true allowFraction=true
+hint     Substitute the coefficients, then use both signs before dividing.
+step 1   Substitute a, b, and c.   [a = 2, b = 5, c = −42]
+step 2   Evaluate the discriminant.   [b² − 4ac = 361]
+step 3   Use both signs in the numerator.   [−b ± 19]
+step 4   Divide each result by two a.   [-6, 7/2]
+miss     used-positive-b = roots (-7/2, 6)   The numerator starts with negative b.
+miss     divided-by-a = roots (-12, 7)   The denominator is two times a."
+`;
+
+exports[`Unit 18 recorded output: solve-by-factoring > matches the wording recorded when the skill landed 1`] = `
+"--- solve-by-factoring · seed 1 · difficulty 1
+prompt   Find both roots.
+display  equation "(x + 4)(x + 2) = 0" unframed [factored-zero constants 4, 2]
+answer   root-pair roots (-4, -2)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 4 = 0]
+step 2   Solve for the first root.   [x = −4]
+step 3   Repeat with the second factor.   [x = −2]
+miss     copied-factor-signs = roots (4, 2)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-4, -4)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 12345 · difficulty 1
+prompt   Find both roots.
+display  equation "(x + 5)(x + 2) = 0" unframed [factored-zero constants 5, 2]
+answer   root-pair roots (-5, -2)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 5 = 0]
+step 2   Solve for the first root.   [x = −5]
+step 3   Repeat with the second factor.   [x = −2]
+miss     copied-factor-signs = roots (5, 2)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-5, -5)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 67890 · difficulty 1
+prompt   Find both roots.
+display  equation "(x + 3)(x + 4) = 0" unframed [factored-zero constants 3, 4]
+answer   root-pair roots (-3, -4)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 3 = 0]
+step 2   Solve for the first root.   [x = −3]
+step 3   Repeat with the second factor.   [x = −4]
+miss     copied-factor-signs = roots (3, 4)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-3, -3)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 424242 · difficulty 1
+prompt   Find both roots.
+display  equation "(x + 2)(x + 3) = 0" unframed [factored-zero constants 2, 3]
+answer   root-pair roots (-2, -3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 2 = 0]
+step 2   Solve for the first root.   [x = −2]
+step 3   Repeat with the second factor.   [x = −3]
+miss     copied-factor-signs = roots (2, 3)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-2, -2)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 987654321 · difficulty 1
+prompt   Find both roots.
+display  equation "(x + 5)(x + 2) = 0" unframed [factored-zero constants 5, 2]
+answer   root-pair roots (-5, -2)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 5 = 0]
+step 2   Solve for the first root.   [x = −5]
+step 3   Repeat with the second factor.   [x = −2]
+miss     copied-factor-signs = roots (5, 2)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-5, -5)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 1 · difficulty 2
+prompt   Find both roots.
+display  equation "(x + 5)(x + 3) = 0" unframed [factored-zero constants 5, 3]
+answer   root-pair roots (-5, -3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 5 = 0]
+step 2   Solve for the first root.   [x = −5]
+step 3   Repeat with the second factor.   [x = −3]
+miss     copied-factor-signs = roots (5, 3)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-5, -5)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 12345 · difficulty 2
+prompt   Find both roots.
+display  equation "(x + 6)(x + 3) = 0" unframed [factored-zero constants 6, 3]
+answer   root-pair roots (-6, -3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 6 = 0]
+step 2   Solve for the first root.   [x = −6]
+step 3   Repeat with the second factor.   [x = −3]
+miss     copied-factor-signs = roots (6, 3)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-6, -6)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 67890 · difficulty 2
+prompt   Find both roots.
+display  equation "(x + 4)(x + 5) = 0" unframed [factored-zero constants 4, 5]
+answer   root-pair roots (-4, -5)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 4 = 0]
+step 2   Solve for the first root.   [x = −4]
+step 3   Repeat with the second factor.   [x = −5]
+miss     copied-factor-signs = roots (4, 5)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-4, -4)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 424242 · difficulty 2
+prompt   Find both roots.
+display  equation "(x + 3)(x + 4) = 0" unframed [factored-zero constants 3, 4]
+answer   root-pair roots (-3, -4)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 3 = 0]
+step 2   Solve for the first root.   [x = −3]
+step 3   Repeat with the second factor.   [x = −4]
+miss     copied-factor-signs = roots (3, 4)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-3, -3)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 987654321 · difficulty 2
+prompt   Find both roots.
+display  equation "(x + 6)(x + 3) = 0" unframed [factored-zero constants 6, 3]
+answer   root-pair roots (-6, -3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 6 = 0]
+step 2   Solve for the first root.   [x = −6]
+step 3   Repeat with the second factor.   [x = −3]
+miss     copied-factor-signs = roots (6, 3)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-6, -6)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 1 · difficulty 3
+prompt   Find both roots.
+display  equation "(x − 6)(x + 3) = 0" unframed [factored-zero constants -6, 3]
+answer   root-pair roots (6, -3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 6 = 0]
+step 2   Solve for the first root.   [x = 6]
+step 3   Repeat with the second factor.   [x = −3]
+miss     copied-factor-signs = roots (-6, 3)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (6, 6)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 12345 · difficulty 3
+prompt   Find both roots.
+display  equation "(x − 7)(x + 4) = 0" unframed [factored-zero constants -7, 4]
+answer   root-pair roots (7, -4)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 7 = 0]
+step 2   Solve for the first root.   [x = 7]
+step 3   Repeat with the second factor.   [x = −4]
+miss     copied-factor-signs = roots (-7, 4)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (7, 7)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 67890 · difficulty 3
+prompt   Find both roots.
+display  equation "(x − 4)(x + 6) = 0" unframed [factored-zero constants -4, 6]
+answer   root-pair roots (4, -6)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 4 = 0]
+step 2   Solve for the first root.   [x = 4]
+step 3   Repeat with the second factor.   [x = −6]
+miss     copied-factor-signs = roots (-4, 6)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (4, 4)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 424242 · difficulty 3
+prompt   Find both roots.
+display  equation "(x − 3)(x + 4) = 0" unframed [factored-zero constants -3, 4]
+answer   root-pair roots (3, -4)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 3 = 0]
+step 2   Solve for the first root.   [x = 3]
+step 3   Repeat with the second factor.   [x = −4]
+miss     copied-factor-signs = roots (-3, 4)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (3, 3)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 987654321 · difficulty 3
+prompt   Find both roots.
+display  equation "(x − 7)(x + 3) = 0" unframed [factored-zero constants -7, 3]
+answer   root-pair roots (7, -3)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 7 = 0]
+step 2   Solve for the first root.   [x = 7]
+step 3   Repeat with the second factor.   [x = −3]
+miss     copied-factor-signs = roots (-7, 3)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (7, 7)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 1 · difficulty 4
+prompt   Find both roots.
+display  equation "(x − 7)(x + 4) = 0" unframed [factored-zero constants -7, 4]
+answer   root-pair roots (7, -4)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 7 = 0]
+step 2   Solve for the first root.   [x = 7]
+step 3   Repeat with the second factor.   [x = −4]
+miss     copied-factor-signs = roots (-7, 4)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (7, 7)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 12345 · difficulty 4
+prompt   Find both roots.
+display  equation "(x − 8)(x + 5) = 0" unframed [factored-zero constants -8, 5]
+answer   root-pair roots (8, -5)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 8 = 0]
+step 2   Solve for the first root.   [x = 8]
+step 3   Repeat with the second factor.   [x = −5]
+miss     copied-factor-signs = roots (-8, 5)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (8, 8)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 67890 · difficulty 4
+prompt   Find both roots.
+display  equation "(x − 5)(x + 7) = 0" unframed [factored-zero constants -5, 7]
+answer   root-pair roots (5, -7)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 5 = 0]
+step 2   Solve for the first root.   [x = 5]
+step 3   Repeat with the second factor.   [x = −7]
+miss     copied-factor-signs = roots (-5, 7)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (5, 5)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 424242 · difficulty 4
+prompt   Find both roots.
+display  equation "(x + 4)(x + 5) = 0" unframed [factored-zero constants 4, 5]
+answer   root-pair roots (-4, -5)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 4 = 0]
+step 2   Solve for the first root.   [x = −4]
+step 3   Repeat with the second factor.   [x = −5]
+miss     copied-factor-signs = roots (4, 5)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-4, -4)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 987654321 · difficulty 4
+prompt   Find both roots.
+display  equation "(x + 8)(x + 4) = 0" unframed [factored-zero constants 8, 4]
+answer   root-pair roots (-8, -4)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 8 = 0]
+step 2   Solve for the first root.   [x = −8]
+step 3   Repeat with the second factor.   [x = −4]
+miss     copied-factor-signs = roots (8, 4)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-8, -8)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 1 · difficulty 5
+prompt   Find both roots.
+display  equation "(x − 8)(x + 5) = 0" unframed [factored-zero constants -8, 5]
+answer   root-pair roots (8, -5)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 8 = 0]
+step 2   Solve for the first root.   [x = 8]
+step 3   Repeat with the second factor.   [x = −5]
+miss     copied-factor-signs = roots (-8, 5)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (8, 8)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 12345 · difficulty 5
+prompt   Find both roots.
+display  equation "(x − 9)(x + 6) = 0" unframed [factored-zero constants -9, 6]
+answer   root-pair roots (9, -6)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 9 = 0]
+step 2   Solve for the first root.   [x = 9]
+step 3   Repeat with the second factor.   [x = −6]
+miss     copied-factor-signs = roots (-9, 6)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (9, 9)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 67890 · difficulty 5
+prompt   Find both roots.
+display  equation "(x − 6)(x + 8) = 0" unframed [factored-zero constants -6, 8]
+answer   root-pair roots (6, -8)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x − 6 = 0]
+step 2   Solve for the first root.   [x = 6]
+step 3   Repeat with the second factor.   [x = −8]
+miss     copied-factor-signs = roots (-6, 8)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (6, 6)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 424242 · difficulty 5
+prompt   Find both roots.
+display  equation "(x + 5)(x + 6) = 0" unframed [factored-zero constants 5, 6]
+answer   root-pair roots (-5, -6)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 5 = 0]
+step 2   Solve for the first root.   [x = −5]
+step 3   Repeat with the second factor.   [x = −6]
+miss     copied-factor-signs = roots (5, 6)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-5, -5)   The second factor gives a different root.
+
+--- solve-by-factoring · seed 987654321 · difficulty 5
+prompt   Find both roots.
+display  equation "(x + 9)(x + 5) = 0" unframed [factored-zero constants 9, 5]
+answer   root-pair roots (-9, -5)
+input    root-pair (Root 1, Root 2; one Check)
+keypad   allowNegative=true
+hint     Set each factor equal to zero and solve both equations.
+step 1   Set the first factor equal to zero.   [x + 9 = 0]
+step 2   Solve for the first root.   [x = −9]
+step 3   Repeat with the second factor.   [x = −5]
+miss     copied-factor-signs = roots (9, 5)   Set each factor equal to zero before solving.
+miss     repeated-first-root = roots (-9, -9)   The second factor gives a different root."
 `;
 
 exports[`Unit 18 recorded output: sub-polynomials > matches the wording recorded when the skill landed 1`] = `

@@ -358,6 +358,12 @@ const formatPolynomial = (data: PolynomialData): string => {
       return `${data.operation} ${data.quadratic}x² + ${data.linear}x`
     case 'factor-trinomial':
       return `${data.operation} x² + ${data.linear}x + ${data.constant}`
+    case 'difference-of-squares':
+      return `${data.operation} square-root ${data.squareRoot}`
+    case 'factored-zero':
+      return `${data.operation} constants ${data.firstConstant}, ${data.secondConstant}`
+    case 'quadratic-formula':
+      return `${data.operation} a=${data.a} b=${data.b} c=${data.c}`
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled polynomial data: ${JSON.stringify(unhandled)}`)
@@ -452,7 +458,8 @@ const formatDisplay = (display: Problem['display']): string => {
         `math "${display.label}" ${formatNotation(display.notation)}` +
         (display.fraction ? ` [${formatFractionData(display.fraction)}]` : '') +
         (display.ratio ? ` [${formatRatioData(display.ratio)}]` : '') +
-        (display.power ? ` [${formatPowerData(display.power)}]` : '')
+        (display.power ? ` [${formatPowerData(display.power)}]` : '') +
+        (display.polynomial ? ` [${formatPolynomial(display.polynomial)}]` : '')
       )
     case 'diagram':
       return (
@@ -482,7 +489,9 @@ const formatDisplay = (display: Problem['display']): string => {
         `equation "${display.text}" ` +
         `${display.variable === undefined ? 'unframed' : `solve ${display.variable}`}` +
         (display.notation ? ` ${formatNotation(display.notation)}` : '') +
-        ` [${formatEquationData(display.equation)}]`
+        ` [${display.equation
+          ? formatEquationData(display.equation)
+          : formatPolynomial(display.polynomial)}]`
       )
     default: {
       // A new Display variant must be rendered here or it slips past the gate.

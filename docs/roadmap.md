@@ -2,9 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 165 of 201 skills are playable.** Stages A through F have playable content. Stage E
-is complete with Units 12, 13, 14 and 15; Stage F's Units 16 and 17 are complete, and the
-first six Unit 18 polynomial skills are playable.
+**Status: 168 of 201 skills are playable.** Stages A through F have playable content. Stage E
+is complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17 and 18 are complete.
 Choice input,
 number-line input, math notation, fraction input, diagrams, expression input,
 coordinate-plane input and root-pair input are built,
@@ -1041,10 +1040,12 @@ document's ✅ markers updated to match, which the cross-check enforces.
         Central checking, misconception diagnosis, recorded output, lesson routing, and Stage F
         capability resolution all name the new shape. This tooling change adds no generators,
         so all three Unit 18b skills remain planned.
-      - **18b** `difference-of-squares`–`quadratic-formula` — `quadratic-formula` (18.9) needs the
-        radical from item 17, the formula given rather than recalled (it is on the GED sheet), and
-        an answer that is a *pair* of roots. The pair is the part to settle first, and it is the
-        third answer shape after a point and an expression that a single value cannot hold.
+      - **18b — shipped 2026-08-24.** `difference-of-squares`–`quadratic-formula` use exact
+        expression and unordered root-pair answers over operation-specific polynomial sources.
+        Difference-of-squares requires conjugate factors; factored equations expose both
+        zero-product roots; and the quadratic formula is supplied through structured notation
+        beside its generated equation and coefficient mapping. Formula frames keep a positive
+        perfect-square discriminant and introduce non-monic rational roots at higher difficulty.
       - **19** `function-notation`–`compare-functions` — 19.1 is a wall on reading f(x) as
         multiplication. `compare-functions` (19.5) puts a table, a graph and an equation side by
         side; the stage declares no `chart`, so it must be served by 22a's plane plus a table, and

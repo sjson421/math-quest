@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { generateProblem } from '../lib/generator'
 import { makeRng } from '../lib/rng'
-import type { Difficulty, EquationData, Problem, Relation } from '../lib/types'
+import type { Difficulty, Display, EquationData, Problem, Relation } from '../lib/types'
 import { sample } from './recorded-output'
 import {
   RELATIONS,
@@ -39,8 +39,10 @@ const atDifficulty = (id: string, difficulty: Difficulty) =>
   problems(id).filter((problem) => problem.difficulty === difficulty)
 
 const equationOf = (problem: Problem) => {
-  if (problem.display.kind !== 'equation') throw new Error(`${problem.skillId}: expected an equation display`)
-  return problem.display
+  if (problem.display.kind !== 'equation' || !problem.display.equation) {
+    throw new Error(`${problem.skillId}: expected an equation display`)
+  }
+  return problem.display as Extract<Display, { kind: 'equation' }> & { equation: EquationData }
 }
 
 const dataOf = <K extends EquationData['operation']>(problem: Problem, operation: K) => {

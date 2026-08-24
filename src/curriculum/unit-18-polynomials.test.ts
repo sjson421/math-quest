@@ -2,9 +2,10 @@ import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
 import { canonicalForm } from '../lib/expression'
 import { diagnose, generateProblem } from '../lib/generator'
-import { applyExpressionKey } from '../lib/keypad'
-import { gcd } from '../lib/rational'
-import type { Difficulty, PolynomialData, Problem } from '../lib/types'
+import { applyExpressionKey, applyKey } from '../lib/keypad'
+import { format as formatRational, gcd, rational } from '../lib/rational'
+import { encodeRootPairEntry, rootPairsEqual } from '../lib/root-pair'
+import type { Difficulty, PolynomialData, Problem, RootPairValue } from '../lib/types'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit18 } from './unit-18-polynomials'
 
@@ -30,8 +31,19 @@ const displayOf = (problem: Problem) => {
   return problem.display
 }
 
+const polynomialOf = (problem: Problem): PolynomialData => {
+  const display = problem.display
+  if (
+    (display.kind !== 'story' && display.kind !== 'equation' && display.kind !== 'math') ||
+    !display.polynomial
+  ) {
+    throw new Error(`${problem.skillId}: expected polynomial operation data`)
+  }
+  return display.polynomial
+}
+
 const dataOf = <K extends PolynomialData['operation']>(problem: Problem, operation: K) => {
-  const data = displayOf(problem).polynomial
+  const data = polynomialOf(problem)
   if (data.operation !== operation) throw new Error(`${problem.skillId}: expected ${operation}`)
   return data as Extract<PolynomialData, { operation: K }>
 }
@@ -104,6 +116,11 @@ const polynomialAnswer = (data: PolynomialData): string => {
       }
       throw new Error('no factor pair')
     }
+    case 'difference-of-squares':
+      return `(x-${data.squareRoot})(x+${data.squareRoot})`
+    case 'factored-zero':
+    case 'quadratic-formula':
+      throw new Error(`${data.operation}: not an expression answer`)
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled polynomial operation: ${JSON.stringify(unhandled)}`)
@@ -131,6 +148,12 @@ const sourceValues = (data: PolynomialData): number[] => {
       return [data.quadratic, data.linear]
     case 'factor-trinomial':
       return [data.linear, data.constant]
+    case 'difference-of-squares':
+      return [data.squareRoot]
+    case 'factored-zero':
+      return [data.firstConstant, data.secondConstant]
+    case 'quadratic-formula':
+      return [data.a, data.b, data.c]
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled polynomial operation: ${JSON.stringify(unhandled)}`)
@@ -141,7 +164,7 @@ const sourceValues = (data: PolynomialData): number[] => {
 const meanAt = (id: string, difficulty: Difficulty): number => {
   const values = problems(id)
     .filter((problem) => problem.difficulty === difficulty)
-    .map((problem) => sourceValues(displayOf(problem).polynomial))
+    .map((problem) => sourceValues(polynomialOf(problem)))
     .flat()
   return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
 }
@@ -152,6 +175,21 @@ const predictionText = (value: string): string => {
   return typed
 }
 
+const rootAnswerOf = (problem: Problem): RootPairValue => {
+  if (problem.answer.kind !== 'root-pair') throw new Error(`${problem.skillId}: expected root-pair answer`)
+  return problem.answer
+}
+
+const rootEntry = (problem: Problem, pair: RootPairValue, reverse = false): string => {
+  const roots = reverse ? [pair.roots[1], pair.roots[0]] : pair.roots
+  const typed = roots.map((root) => {
+    let entry = ''
+    for (const key of formatRational(root)) entry = applyKey(entry, key, problem.keypad)
+    return entry
+  }) as [string, string]
+  return encodeRootPairEntry(typed)
+}
+
 describe.each(unit18.map((skill) => [skill.id, skill] as const))('Unit 18 recorded output: %s', (_id, skill) => {
   it('matches the wording recorded when the skill landed', () => {
     expect(sample(skill)).toMatchSnapshot()
@@ -160,7 +198,7 @@ describe.each(unit18.map((skill) => [skill.id, skill] as const))('Unit 18 record
 
 describe('Unit 18 shared expression contract', () => {
   it('keeps every generated answer in the bounded quadratic expression surface', () => {
-    for (const skill of unit18) {
+    for (const skill of unit18.filter((candidate) => !['solve-by-factoring', 'quadratic-formula'].includes(candidate.id))) {
       for (const problem of problems(skill.id)) {
         const answer = answerOf(problem)
         expect(problem.inputMode).toBe('expression')
@@ -281,5 +319,149 @@ describe('factor-trinomial', () => {
       expect(checkAnswer(answerOf(problem), displayOf(problem).text.replaceAll('−', '-')).status).toBe('incorrect')
     }
     expect(families).toEqual(new Set(['positive', 'negative', 'opposite']))
+  })
+})
+
+describe('difference-of-squares', () => {
+  it('derives conjugate factors from the visible perfect square', () => {
+    for (const problem of problems('difference-of-squares')) {
+      const data = dataOf(problem, 'difference-of-squares')
+      const answer = answerOf(problem)
+      expect(displayOf(problem).text).toBe(`x² − ${data.squareRoot * data.squareRoot}`)
+      expect(answer.canonical).toBe(polynomialAnswer(data))
+      expect(answer.form).toBe('exact')
+      expect(checkAnswer(answer, `(x+${data.squareRoot})(x-${data.squareRoot})`).status).toBe('correct')
+      expect(checkAnswer(answer, `x²-${data.squareRoot * data.squareRoot}`).status).toBe('incorrect')
+      expect(problem.misconceptions?.map((misconception) => misconception.tag)).toEqual([
+        'used-same-sign',
+        'used-square-not-root',
+      ])
+    }
+  })
+
+  it('grows the square root and varies seeded frames', () => {
+    expect(meanAt('difference-of-squares', 5)).toBeGreaterThan(meanAt('difference-of-squares', 1))
+    expect(new Set(problems('difference-of-squares').map((problem) => JSON.stringify(problem.display))).size)
+      .toBeGreaterThan(20)
+  })
+})
+
+describe('solve-by-factoring', () => {
+  it('recovers two exact roots from distinct visible factors in either order', () => {
+    const families = new Set<string>()
+    for (const problem of problems('solve-by-factoring')) {
+      const data = dataOf(problem, 'factored-zero')
+      if (problem.display.kind !== 'equation') throw new Error('expected equation display')
+      expect(data.firstConstant).not.toBe(0)
+      expect(data.secondConstant).not.toBe(0)
+      expect(data.firstConstant).not.toBe(data.secondConstant)
+      expect(data.firstConstant + data.secondConstant).not.toBe(0)
+      expect(problem.display.text).toBe(
+        `(${data.firstConstant < 0 ? `x − ${Math.abs(data.firstConstant)}` : `x + ${data.firstConstant}`})` +
+        `(${data.secondConstant < 0 ? `x − ${Math.abs(data.secondConstant)}` : `x + ${data.secondConstant}`}) = 0`,
+      )
+      const expected: RootPairValue = {
+        kind: 'root-pair',
+        roots: [rational(-data.firstConstant, 1), rational(-data.secondConstant, 1)],
+      }
+      expect(rootPairsEqual(rootAnswerOf(problem), expected)).toBe(true)
+      expect(checkAnswer(problem.answer, rootEntry(problem, expected)).status).toBe('correct')
+      expect(checkAnswer(problem.answer, rootEntry(problem, expected, true)).status).toBe('correct')
+      families.add(
+        data.firstConstant > 0 && data.secondConstant > 0
+          ? 'positive'
+          : data.firstConstant < 0 && data.secondConstant < 0
+            ? 'negative'
+            : 'mixed',
+      )
+    }
+    expect(families).toEqual(new Set(['positive', 'mixed', 'negative']))
+  })
+
+  it('keeps both predicted pairs reachable and diagnosable', () => {
+    for (const problem of problems('solve-by-factoring')) {
+      expect(problem.keypad).toEqual({ allowNegative: true })
+      expect(problem.misconceptions).toHaveLength(2)
+      for (const misconception of problem.misconceptions ?? []) {
+        if (typeof misconception.value !== 'object' || misconception.value.kind !== 'root-pair') {
+          throw new Error('expected root-pair prediction')
+        }
+        const entry = rootEntry(problem, misconception.value)
+        expect(checkAnswer(problem.answer, entry).status).toBe('incorrect')
+        expect(diagnose(problem, entry)?.tag).toBe(misconception.tag)
+      }
+    }
+  })
+})
+
+describe('quadratic-formula', () => {
+  it('recomputes exact roots from normalized visible coefficients', () => {
+    for (const problem of problems('quadratic-formula')) {
+      const data = dataOf(problem, 'quadratic-formula')
+      const discriminant = data.b * data.b - 4 * data.a * data.c
+      const squareRoot = Math.sqrt(discriminant)
+      expect([data.a, data.b, data.c].every((value) => value !== 0)).toBe(true)
+      expect(gcd(gcd(Math.abs(data.a), Math.abs(data.b)), Math.abs(data.c))).toBe(1)
+      expect(discriminant).toBeGreaterThan(0)
+      expect(Number.isInteger(squareRoot)).toBe(true)
+      const expected: RootPairValue = {
+        kind: 'root-pair',
+        roots: [
+          rational(-data.b - squareRoot, 2 * data.a),
+          rational(-data.b + squareRoot, 2 * data.a),
+        ],
+      }
+      expect(expected.roots.every((root) => root.n !== 0)).toBe(true)
+      expect(rootPairsEqual(rootAnswerOf(problem), expected)).toBe(true)
+      expect(checkAnswer(problem.answer, rootEntry(problem, expected, true)).status).toBe('correct')
+    }
+  })
+
+  it('keeps formula, label, prompt, keys, and diagnoses aligned', () => {
+    for (const problem of problems('quadratic-formula')) {
+      const data = dataOf(problem, 'quadratic-formula')
+      if (problem.display.kind !== 'math') throw new Error('expected math display')
+      expect(problem.display.label).toBe(
+        'x equals negative b plus or minus the square root of b squared minus four a c, all over two a',
+      )
+      expect(JSON.stringify(problem.display.notation)).toContain('superscript')
+      expect(JSON.stringify(problem.display.notation)).toContain('root')
+      expect(JSON.stringify(problem.display.notation)).toContain('fraction')
+      expect(problem.prompt).toContain(`a = ${data.a}, b = ${String(data.b).replace('-', '−')}, c = ${String(data.c).replace('-', '−')}`)
+      const pairs = [rootAnswerOf(problem), ...(problem.misconceptions ?? []).map((misconception) => {
+        if (typeof misconception.value !== 'object' || misconception.value.kind !== 'root-pair') {
+          throw new Error('expected root-pair prediction')
+        }
+        return misconception.value
+      })]
+      expect(problem.keypad?.allowNegative).toBe(pairs.some((pair) => pair.roots.some((root) => root.n < 0)))
+      expect(problem.keypad?.allowFraction).toBe(pairs.some((pair) => pair.roots.some((root) => root.d > 1)))
+      expect(problem.misconceptions?.map((misconception) => misconception.tag)).toEqual([
+        'used-positive-b',
+        'divided-by-a',
+      ])
+      for (const misconception of problem.misconceptions ?? []) {
+        if (typeof misconception.value !== 'object' || misconception.value.kind !== 'root-pair') continue
+        const entry = rootEntry(problem, misconception.value, true)
+        expect(checkAnswer(problem.answer, entry).status).toBe('incorrect')
+        expect(diagnose(problem, entry)?.tag).toBe(misconception.tag)
+      }
+    }
+  })
+
+  it('moves from monic whole roots to non-monic rational roots', () => {
+    const early = problems('quadratic-formula').filter((problem) => problem.difficulty <= 2)
+    const later = problems('quadratic-formula').filter((problem) => problem.difficulty >= 3)
+    expect(early.every((problem) => {
+      const data = dataOf(problem, 'quadratic-formula')
+      return data.a === 1 && rootAnswerOf(problem).roots.every((root) => root.d === 1)
+    })).toBe(true)
+    expect(later.every((problem) => {
+      const data = dataOf(problem, 'quadratic-formula')
+      return data.a > 1 && rootAnswerOf(problem).roots.some((root) => root.d > 1)
+    })).toBe(true)
+    expect(meanAt('quadratic-formula', 5)).toBeGreaterThan(meanAt('quadratic-formula', 1))
+    expect(new Set(problems('quadratic-formula').map((problem) => JSON.stringify(problem.display))).size)
+      .toBeGreaterThan(20)
   })
 })

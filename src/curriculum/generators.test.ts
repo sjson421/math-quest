@@ -1370,7 +1370,48 @@ const independentBinomialText = (constant: number, spaced = true): string => {
 const independentFactoredText = (pair: readonly [number, number], spaced = true): string =>
   `(${independentBinomialText(pair[0], spaced)})(${independentBinomialText(pair[1], spaced)})`
 
-function expectedPolynomial(data: PolynomialData): { text: string; answer: string; values: number[] } {
+type ExpectedPolynomial = {
+  text: string
+  answer: string
+  values: number[]
+  prompt?: string
+  notation?: MathNotation
+  label?: string
+}
+
+const independentRootPairAnswer = (roots: readonly [Rational, Rational]): string =>
+  `roots [${roots.map(formatRational).sort().join(', ')}]`
+
+const independentQuadraticFormula = (): MathNotation => ({
+  kind: 'row',
+  children: [
+    notationText('x'),
+    notationText('='),
+    {
+      kind: 'fraction',
+      numerator: {
+        kind: 'row',
+        children: [
+          notationText('−b'),
+          notationText('±'),
+          {
+            kind: 'root',
+            radicand: {
+              kind: 'row',
+              children: [notationSuperscript('b', '2'), notationText('−'), notationText('4ac')],
+            },
+          },
+        ],
+      },
+      denominator: notationText('2a'),
+    },
+  ],
+})
+
+const INDEPENDENT_QUADRATIC_FORMULA_LABEL =
+  'x equals negative b plus or minus the square root of b squared minus four a c, all over two a'
+
+function expectedPolynomial(data: PolynomialData): ExpectedPolynomial {
   switch (data.operation) {
     case 'add': {
       const answer = {
@@ -1463,6 +1504,59 @@ function expectedPolynomial(data: PolynomialData): { text: string; answer: strin
         values: [data.linear, data.constant],
       }
     }
+    case 'difference-of-squares': {
+      const square = data.squareRoot * data.squareRoot
+      return {
+        text: independentPolynomialText({ quadratic: 1, linear: 0, constant: -square }),
+        answer: independentFactoredText([-data.squareRoot, data.squareRoot], false),
+        values: [data.squareRoot],
+      }
+    }
+    case 'factored-zero': {
+      const roots = [rational(-data.firstConstant, 1), rational(-data.secondConstant, 1)] as const
+      if (
+        data.firstConstant === 0 ||
+        data.secondConstant === 0 ||
+        data.firstConstant === data.secondConstant ||
+        data.firstConstant + data.secondConstant === 0
+      ) {
+        throw new Error('factored-zero: factor constants must be distinct, nonzero, and not opposites')
+      }
+      return {
+        text: `${independentFactoredText([data.firstConstant, data.secondConstant])} = 0`,
+        answer: independentRootPairAnswer(roots),
+        values: [data.firstConstant, data.secondConstant],
+      }
+    }
+    case 'quadratic-formula': {
+      if (data.a === 0 || data.b === 0 || data.c === 0) {
+        throw new Error('quadratic-formula: a, b, and c must be nonzero')
+      }
+      if (gcd(gcd(Math.abs(data.a), Math.abs(data.b)), Math.abs(data.c)) !== 1) {
+        throw new Error('quadratic-formula: coefficients are not normalized')
+      }
+      const discriminant = data.b * data.b - 4 * data.a * data.c
+      const squareRoot = Math.sqrt(discriminant)
+      if (discriminant <= 0 || !Number.isSafeInteger(squareRoot)) {
+        throw new Error('quadratic-formula: discriminant must be a positive perfect square')
+      }
+      const roots = [
+        rational(-data.b - squareRoot, 2 * data.a),
+        rational(-data.b + squareRoot, 2 * data.a),
+      ] as const
+      if (roots.some((root) => root.n === 0) || equals(roots[0], roots[1])) {
+        throw new Error('quadratic-formula: roots must be distinct and nonzero')
+      }
+      const text = `${independentPolynomialText({ quadratic: data.a, linear: data.b, constant: data.c })} = 0`
+      return {
+        text,
+        prompt: `Solve ${text} using a = ${data.a}, b = ${drawn(data.b)}, c = ${drawn(data.c)}.`,
+        notation: independentQuadraticFormula(),
+        label: INDEPENDENT_QUADRATIC_FORMULA_LABEL,
+        answer: independentRootPairAnswer(roots),
+        values: [data.a, data.b, data.c],
+      }
+    }
     default: {
       const unhandled: never = data
       throw new Error(`Unknown polynomial operation: ${JSON.stringify(unhandled)}`)
@@ -1471,13 +1565,20 @@ function expectedPolynomial(data: PolynomialData): { text: string; answer: strin
 }
 
 function recompute(problem: Problem): number | string {
-  if (problem.answer.kind === 'root-pair' || problem.inputMode === 'root-pair') {
+  const { display } = problem
+  const rootPolynomial =
+    display.kind === 'equation' || display.kind === 'math'
+      ? display.polynomial
+      : undefined
+  if (
+    (problem.answer.kind === 'root-pair' || problem.inputMode === 'root-pair') &&
+    rootPolynomial?.operation !== 'factored-zero' &&
+    rootPolynomial?.operation !== 'quadratic-formula'
+  ) {
     throw new Error(
       `${problem.skillId}: root-pair answer needs operation-specific data for independent verification`,
     )
   }
-
-  const { display } = problem
 
   if (display.kind === 'inline' && display.decimal) {
     const expected = expectedDecimal(display.decimal)
@@ -1601,6 +1702,20 @@ function recompute(problem: Problem): number | string {
   }
 
   if (display.kind === 'math') {
+    if (display.polynomial) {
+      const expected = expectedPolynomial(display.polynomial)
+      if (
+        JSON.stringify(display.notation) !== JSON.stringify(expected.notation) ||
+        display.label !== expected.label
+      ) {
+        throw new Error(`${problem.skillId}: visible quadratic formula disagrees with its data`)
+      }
+      if (problem.prompt !== expected.prompt) {
+        throw new Error(`${problem.skillId}: quadratic prompt disagrees with its data`)
+      }
+      return expected.answer
+    }
+
     if (display.ratio) {
       const expected = expectedRatioDisplay(display.ratio)
       if (JSON.stringify(display.notation) !== JSON.stringify(expected.notation) || display.label !== expected.label) {
@@ -1918,6 +2033,16 @@ function recompute(problem: Problem): number | string {
   }
 
   if (display.kind === 'equation') {
+    if (display.polynomial) {
+      const expected = expectedPolynomial(display.polynomial)
+      if (display.text !== expected.text) {
+        throw new Error(
+          `${problem.skillId}: visible polynomial equation "${display.text}" disagrees with "${expected.text}"`,
+        )
+      }
+      return expected.answer
+    }
+
     const expected = expectedEquation(display.equation, display.variable)
     // The equation is rebuilt from the operands and compared, never parsed.
     // This is the direction that catches a generator showing one equation while
@@ -2121,6 +2246,11 @@ function sourceMagnitude(problem: Problem): number {
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
+  if (problem.display.kind === 'math' && problem.display.polynomial) {
+    const values = expectedPolynomial(problem.display.polynomial).values
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
+
   if (problem.display.kind === 'story' && problem.display.polynomial) {
     const values = expectedPolynomial(problem.display.polynomial).values
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
@@ -2228,7 +2358,9 @@ function sourceMagnitude(problem: Problem): number {
   // pass on a ladder that has stopped climbing. Every new `Display` kind needs
   // a branch here even though nothing will ask for one.
   if (problem.display.kind === 'equation') {
-    const { values } = expectedEquation(problem.display.equation, problem.display.variable)
+    const { values } = problem.display.polynomial
+      ? expectedPolynomial(problem.display.polynomial)
+      : expectedEquation(problem.display.equation, problem.display.variable)
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
@@ -2604,7 +2736,11 @@ describe('equation answer verification', () => {
     // expression grammar and unenterable on the pad — so the check refuses to
     // derive one rather than deriving something the learner cannot type.
     const problem = rearranged()
-    if (problem.display.kind !== 'equation' || problem.display.equation.operation !== 'rearrange') {
+    if (
+      problem.display.kind !== 'equation' ||
+      !problem.display.equation ||
+      problem.display.equation.operation !== 'rearrange'
+    ) {
       throw new Error('expected rearrange display')
     }
     problem.display.equation.termCoefficient = 5

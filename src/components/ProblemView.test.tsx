@@ -180,6 +180,61 @@ describe('ProblemView', () => {
     expect(html).toContain('=')
   })
 
+  it('keeps the supplied quadratic formula as one bounded root-pair display', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'math',
+          notation: {
+            kind: 'row',
+            children: [
+              { kind: 'text', value: 'x' },
+              { kind: 'text', value: '=' },
+              {
+                kind: 'fraction',
+                numerator: {
+                  kind: 'row',
+                  children: [
+                    { kind: 'text', value: '−b' },
+                    { kind: 'text', value: '±' },
+                    {
+                      kind: 'root',
+                      radicand: {
+                        kind: 'row',
+                        children: [
+                          {
+                            kind: 'superscript',
+                            base: { kind: 'text', value: 'b' },
+                            exponent: { kind: 'text', value: '2' },
+                          },
+                          { kind: 'text', value: '−' },
+                          { kind: 'text', value: '4ac' },
+                        ],
+                      },
+                    },
+                  ],
+                },
+                denominator: { kind: 'text', value: '2a' },
+              },
+            ],
+          },
+          label: 'x equals negative b plus or minus the square root of b squared minus four a c, all over two a',
+          polynomial: { operation: 'quadratic-formula', a: 2, b: 5, c: 2 },
+        }}
+        entry={'["-2","-1/2"]'}
+        entryMode="root-pair"
+      />,
+    )
+
+    expect(html).toContain('max-w-full')
+    expect(html).toContain('mq-math-fraction')
+    expect(html).toContain('mq-math-root')
+    expect(html).toContain('mq-math-superscript')
+    expect(html.match(/role="math"/g)).toHaveLength(1)
+    expect(html).not.toContain('[&quot;-2&quot;,&quot;-1/2&quot;]')
+    expect(html).not.toContain('text-ink-faint">=')
+  })
+
   it('renders an expression prompt through the existing text/row notation, with no new display kind', () => {
     const html = renderToStaticMarkup(
       <ProblemView

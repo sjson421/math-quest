@@ -226,7 +226,7 @@ describe('stage capabilities', () => {
     ])
   })
 
-  it('records built root-pair input in Stage F before its content', () => {
+  it('records built root-pair input for its Stage F consumers', () => {
     expect(AVAILABLE_CAPABILITIES.has('root-pair-input')).toBe(true)
     expect(stageById.get('stage-f')?.requires).toEqual([
       'choice-input',

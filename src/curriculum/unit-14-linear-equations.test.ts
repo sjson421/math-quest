@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { coordinateEntry } from '../lib/coordinate-plane'
 import { generateProblem } from '../lib/generator'
 import { canonicalForm } from '../lib/expression'
-import type { Difficulty, Misconception, Problem } from '../lib/types'
+import type { Difficulty, Display, EquationData, Misconception, Problem } from '../lib/types'
 import { sample } from './recorded-output'
 import { unit14 } from './unit-14-linear-equations'
 
@@ -34,8 +34,10 @@ const predictionEntry = ({ value }: Misconception): string => {
 }
 
 const equationOf = (problem: Problem) => {
-  if (problem.display.kind !== 'equation') throw new Error(`${problem.skillId}: expected an equation display`)
-  return problem.display
+  if (problem.display.kind !== 'equation' || !problem.display.equation) {
+    throw new Error(`${problem.skillId}: expected an equation display`)
+  }
+  return problem.display as Extract<Display, { kind: 'equation' }> & { equation: EquationData }
 }
 
 const answerOf = (problem: Problem): number => {

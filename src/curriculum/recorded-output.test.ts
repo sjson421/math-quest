@@ -1,9 +1,35 @@
 import { describe, expect, it } from 'vitest'
+import { generateProblem } from '../lib/generator'
 import type { Problem } from '../lib/types'
 import { rational } from '../lib/rational'
 import { format } from './recorded-output'
+import { unit18 } from './unit-18-polynomials'
 
 describe('recorded output for structured math', () => {
+  const unit18Problem = (id: string, difficulty: 1 | 2 | 3 | 4 | 5) => {
+    const skill = unit18.find((candidate) => candidate.id === id)
+    if (!skill) throw new Error(`missing ${id}`)
+    return generateProblem(skill, 12345, difficulty)
+  }
+
+  it('records factored-zero sources and semantic roots without the entry codec', () => {
+    const output = format(unit18Problem('solve-by-factoring', 4), 12345)
+    expect(output).toContain('display  equation "')
+    expect(output).toContain('[factored-zero constants ')
+    expect(output).toContain('answer   root-pair roots (')
+    expect(output).not.toContain('["')
+  })
+
+  it('records the quadratic coefficients, complete formula tree, and coefficient prompt', () => {
+    const problem = unit18Problem('quadratic-formula', 5)
+    const output = format(problem, 12345)
+    expect(output).toContain('prompt   Solve ')
+    expect(output).toContain('using a = ')
+    expect(output).toContain('[quadratic-formula a=')
+    expect(output).toContain('fraction(row("−b", "±", root(row(superscript("b", "2"), "−", "4ac"))), "2a")')
+    expect(output).toContain('answer   root-pair roots (')
+  })
+
   it('records root-pair answers, input, and misconceptions semantically', () => {
     const problem: Problem = {
       skillId: 'synthetic-root-pair',

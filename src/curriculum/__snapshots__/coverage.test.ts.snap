@@ -83,6 +83,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "decimal-to-percent": [
     "percent-to-decimal",
   ],
+  "difference-of-squares": [
+    "factor-trinomial",
+  ],
   "discount-tax-tip": [
     "percent-change",
   ],
@@ -323,6 +326,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "quadrants": [
     "plot-points",
   ],
+  "quadratic-formula": [
+    "solve-by-factoring",
+  ],
   "ratio-words": [
     "unit-conversion",
   ],
@@ -365,6 +371,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "slope-intercept": [
     "y-intercept",
+  ],
+  "solve-by-factoring": [
+    "difference-of-squares",
   ],
   "solve-multi-step-ineq": [
     "solve-one-step-ineq",

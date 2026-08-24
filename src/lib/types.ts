@@ -463,6 +463,21 @@ export type PolynomialData =
       linear: number
       constant: number
     }
+  | {
+      operation: 'difference-of-squares'
+      squareRoot: number
+    }
+  | {
+      operation: 'factored-zero'
+      firstConstant: number
+      secondConstant: number
+    }
+  | {
+      operation: 'quadratic-formula'
+      a: number
+      b: number
+      c: number
+    }
 
 /**
  * The source quantities behind Unit 14's equation displays.
@@ -793,10 +808,11 @@ export type Display =
       notation: MathNotation
       label: string
     } & (
-      | { fraction: FractionData; ratio?: never; power?: never }
-      | { ratio: RatioData; fraction?: never; power?: never }
-      | { power: PowerData; fraction?: never; ratio?: never }
-      | { fraction?: never; ratio?: never; power?: never }
+      | { fraction: FractionData; ratio?: never; power?: never; polynomial?: never }
+      | { ratio: RatioData; fraction?: never; power?: never; polynomial?: never }
+      | { power: PowerData; fraction?: never; ratio?: never; polynomial?: never }
+      | { polynomial: PolynomialData; fraction?: never; ratio?: never; power?: never }
+      | { fraction?: never; ratio?: never; power?: never; polynomial?: never }
     ))
   /** A shaded equal-part shape whose visible fraction is carried as data. */
   | { kind: 'diagram'; diagram: ShapeDiagram }
@@ -831,7 +847,7 @@ export type Display =
    * a rename with no behaviour in it, and the arm renders, measures and
    * announces an inequality exactly as it does an equation.
    */
-  | {
+  | ({
       kind: 'equation'
       /**
        * The equation in plain characters. Three jobs at once, and they have to
@@ -850,7 +866,6 @@ export type Display =
        * whose question is whether it does.
        */
       variable?: string
-      equation: EquationData
       /**
        * The equation as structured notation, drawn instead of `text` when set.
        *
@@ -860,7 +875,10 @@ export type Display =
        * display with no way to avoid it.
        */
       notation?: MathNotation
-    }
+    } & (
+      | { equation: EquationData; polynomial?: never }
+      | { polynomial: PolynomialData; equation?: never }
+    ))
 
 export type Problem = {
   skillId: string

@@ -72,7 +72,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(165)
+    expect(documentedAsBuilt).toHaveLength(168)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
 
@@ -351,7 +351,7 @@ describe('the skills that are built', () => {
       'ratio-words',
     ])
     expect(unit11Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(165)
+    expect(implementedSkillIds).toHaveLength(168)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -417,7 +417,7 @@ describe('the skills that are built', () => {
       'factor-gcf',
     ])
     expect(unit13Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(165)
+    expect(implementedSkillIds).toHaveLength(168)
   })
 
   it('completes Unit 14 on the capabilities Stage E already had, adding none', () => {
@@ -475,7 +475,7 @@ describe('the skills that are built', () => {
     expect(stageIds.filter((id) => skillState(id) === 'planned')).toEqual([])
   })
 
-  it('completes Units 16 and 17 and the first six Unit 18 skills', () => {
+  it('completes Units 16, 17, and 18 while leaving Unit 19 planned', () => {
     const stage = manifestIndex.get('plot-points')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unit16Ids = stage?.units.find((unit) => unit.id === 'unit-16')?.skills.map((skill) => skill.id) ?? []
@@ -510,17 +510,22 @@ describe('the skills that are built', () => {
       'foil',
       'factor-gcf-poly',
       'factor-trinomial',
+      'difference-of-squares',
+      'solve-by-factoring',
+      'quadratic-formula',
     ])
     expect(unit16Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
     const unit17Ids = stage?.units.find((unit) => unit.id === 'unit-17')?.skills.map((skill) => skill.id) ?? []
     expect(unit17Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(8)
+    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(5)
     expect(['difference-of-squares', 'solve-by-factoring', 'quadratic-formula'].map(skillState)).toEqual([
-      'planned',
-      'planned',
-      'planned',
+      'implemented',
+      'implemented',
+      'implemented',
     ])
-    expect(implementedSkillIds).toHaveLength(165)
+    const unit19Ids = stage?.units.find((unit) => unit.id === 'unit-19')?.skills.map((skill) => skill.id) ?? []
+    expect(unit19Ids.filter((id) => skillState(id) === 'planned')).toEqual(unit19Ids)
+    expect(implementedSkillIds).toHaveLength(168)
   })
 
   it('declares a capability for every input mode a stage actually uses', () => {
@@ -544,7 +549,7 @@ describe('the skills that are built', () => {
       if (!stage) continue
       for (const difficulty of [1, 2, 3, 4, 5] as const) {
         // Five a difficulty rather than twenty: `inputMode` varies by draw at
-        // most, never by seed depth, and this walks all 165 generators.
+        // most, never by seed depth, and this walks all 168 generators.
         for (let i = 0; i < 5; i += 1) {
           const { inputMode } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
           const capability = modes[inputMode]
@@ -590,9 +595,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 36 skills out of the skill tree entirely', () => {
+  it('leaves the other 33 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(165)
+    expect(offered).toHaveLength(168)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {

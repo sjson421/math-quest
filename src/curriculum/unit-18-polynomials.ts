@@ -1,8 +1,9 @@
-import { gcd } from '../lib/rational'
-import type { PolynomialCoefficients, PolynomialData } from '../lib/types'
+import { constrain } from '../lib/rng'
+import { format as formatRational, gcd, rational, type Rational } from '../lib/rational'
+import type { MathNotation, PolynomialCoefficients, PolynomialData, RootPairValue } from '../lib/types'
 import { band, defineSkill, drawn, term, type BuildContext, type Ladder } from './engine'
 
-/** Unit 18 · Polynomials & Quadratics — the first six expression skills. */
+/** Unit 18 · Polynomials & Quadratics. */
 
 const VARIABLE = 'x'
 
@@ -486,6 +487,300 @@ const factorTrinomial = defineSkill({
   },
 })
 
+const SQUARE_ROOT_BAND: Ladder = {
+  1: [2, 6],
+  2: [4, 9],
+  3: [7, 13],
+  4: [10, 18],
+  5: [14, 25],
+}
+
+const differenceOfSquares = defineSkill({
+  id: 'difference-of-squares',
+  name: 'Difference of Squares',
+  blurb: 'A pattern worth recognising',
+  build(context: BuildContext) {
+    const [min, max] = band(context.difficulty, SQUARE_ROOT_BAND)
+    const squareRoot = context.rng.int(min, max)
+    const square = squareRoot * squareRoot
+    const data: PolynomialData = { operation: 'difference-of-squares', squareRoot }
+    const canonical = factoredText([-squareRoot, squareRoot], false)
+
+    return {
+      prompt: 'Factor the difference of squares.',
+      display: {
+        kind: 'story',
+        text: polynomialText({ quadratic: 1, linear: 0, constant: -square }),
+        polynomial: data,
+      },
+      answer: { kind: 'expression', canonical, variable: VARIABLE, maxDegree: 2, form: 'exact' },
+      inputMode: 'expression',
+      misconceptions: [
+        {
+          value: { kind: 'text', value: factoredText([-squareRoot, -squareRoot], false) },
+          tag: 'used-same-sign',
+          nudge: 'Conjugate factors use opposite signs.',
+        },
+        {
+          value: { kind: 'text', value: factoredText([-square, square], false) },
+          tag: 'used-square-not-root',
+          nudge: 'Use the square root of the constant in each factor.',
+        },
+      ],
+      hint: 'Find each square root, then use opposite signs.',
+      solution: [
+        { text: 'Recognise both terms as perfect squares.', detail: `x² and ${squareRoot}²` },
+        { text: 'Use one minus and one plus factor.', detail: canonical },
+      ],
+    }
+  },
+})
+
+const FACTORED_ZERO_BAND: Ladder = {
+  1: [2, 5],
+  2: [3, 6],
+  3: [3, 7],
+  4: [4, 8],
+  5: [5, 9],
+}
+
+const signedFactorConstant = (magnitude: number, negative: boolean) =>
+  negative ? -magnitude : magnitude
+
+const solveByFactoring = defineSkill({
+  id: 'solve-by-factoring',
+  name: 'Solving by Factoring',
+  blurb: 'The zero product rule',
+  build(context: BuildContext) {
+    const [min, max] = band(context.difficulty, FACTORED_ZERO_BAND)
+    const firstMagnitude = context.rng.int(min, max)
+    const secondMagnitude = context.rng.intExcept(min, max, [firstMagnitude])
+    const family = context.difficulty <= 2
+      ? 'positive'
+      : context.difficulty === 3
+        ? 'mixed'
+        : context.rng.pick(['positive', 'mixed', 'negative'] as const)
+    const firstConstant = signedFactorConstant(firstMagnitude, family !== 'positive')
+    const secondConstant = signedFactorConstant(secondMagnitude, family === 'negative')
+    const data: PolynomialData = { operation: 'factored-zero', firstConstant, secondConstant }
+    const firstRoot = rational(-firstConstant, 1)
+    const secondRoot = rational(-secondConstant, 1)
+
+    return {
+      prompt: 'Find both roots.',
+      display: {
+        kind: 'equation',
+        text: `${factoredText([firstConstant, secondConstant])} = 0`,
+        polynomial: data,
+      },
+      answer: { kind: 'root-pair', roots: [firstRoot, secondRoot] },
+      inputMode: 'root-pair',
+      keypad: { allowNegative: true },
+      misconceptions: [
+        {
+          value: {
+            kind: 'root-pair',
+            roots: [rational(firstConstant, 1), rational(secondConstant, 1)],
+          },
+          tag: 'copied-factor-signs',
+          nudge: 'Set each factor equal to zero before solving.',
+        },
+        {
+          value: { kind: 'root-pair', roots: [firstRoot, firstRoot] },
+          tag: 'repeated-first-root',
+          nudge: 'The second factor gives a different root.',
+        },
+      ],
+      hint: 'Set each factor equal to zero and solve both equations.',
+      solution: [
+        { text: 'Set the first factor equal to zero.', detail: `${binomialText(firstConstant)} = 0` },
+        { text: 'Solve for the first root.', detail: `x = ${drawn(-firstConstant)}` },
+        { text: 'Repeat with the second factor.', detail: `x = ${drawn(-secondConstant)}` },
+      ],
+    }
+  },
+})
+
+const QUADRATIC_NUMERATOR_BAND: Ladder = {
+  1: [1, 4],
+  2: [2, 7],
+  3: [3, 9],
+  4: [5, 12],
+  5: [8, 18],
+}
+
+const quadraticFormulaNotation = (): MathNotation => ({
+  kind: 'row',
+  children: [
+    { kind: 'text', value: 'x' },
+    { kind: 'text', value: '=' },
+    {
+      kind: 'fraction',
+      numerator: {
+        kind: 'row',
+        children: [
+          { kind: 'text', value: '−b' },
+          { kind: 'text', value: '±' },
+          {
+            kind: 'root',
+            radicand: {
+              kind: 'row',
+              children: [
+                {
+                  kind: 'superscript',
+                  base: { kind: 'text', value: 'b' },
+                  exponent: { kind: 'text', value: '2' },
+                },
+                { kind: 'text', value: '−' },
+                { kind: 'text', value: '4ac' },
+              ],
+            },
+          },
+        ],
+      },
+      denominator: { kind: 'text', value: '2a' },
+    },
+  ],
+})
+
+const QUADRATIC_FORMULA_LABEL =
+  'x equals negative b plus or minus the square root of b squared minus four a c, all over two a'
+
+type QuadraticFrame = {
+  a: number
+  b: number
+  c: number
+  discriminantRoot: number
+  roots: readonly [Rational, Rational]
+}
+
+const sameRational = (left: Rational, right: Rational) =>
+  left.n === right.n && left.d === right.d
+
+const quadraticRoots = (
+  a: number,
+  b: number,
+  discriminantRoot: number,
+  numeratorUsesPositiveB = false,
+  denominatorFactor = 2,
+): readonly [Rational, Rational] => {
+  const middle = numeratorUsesPositiveB ? b : -b
+  const denominator = denominatorFactor * a
+  return [
+    rational(middle - discriminantRoot, denominator),
+    rational(middle + discriminantRoot, denominator),
+  ]
+}
+
+const quadraticFrame = (context: BuildContext): QuadraticFrame => {
+  const [min, max] = band(context.difficulty, QUADRATIC_NUMERATOR_BAND)
+  const denominators = context.difficulty <= 2
+    ? [1]
+    : context.difficulty === 3
+      ? [1, 2]
+      : context.difficulty === 4
+        ? [2, 3]
+        : [2, 3, 4]
+
+  return constrain(
+    () => {
+      const first = rational(
+        signedFactorConstant(context.rng.int(min, max), context.rng.bool()),
+        context.rng.pick(denominators),
+      )
+      const second = rational(
+        signedFactorConstant(context.rng.int(min, max), context.rng.bool()),
+        context.rng.pick(denominators),
+      )
+      const rawA = first.d * second.d
+      const rawB = -(first.n * second.d + second.n * first.d)
+      const rawC = first.n * second.n
+      const common = gcd(gcd(Math.abs(rawA), Math.abs(rawB)), Math.abs(rawC))
+      const a = rawA / common
+      const b = rawB / common
+      const c = rawC / common
+      const discriminantRoot = Math.sqrt(b * b - 4 * a * c)
+      return {
+        a,
+        b,
+        c,
+        discriminantRoot,
+        roots: quadraticRoots(a, b, discriminantRoot),
+      }
+    },
+    (frame) => {
+      if (![frame.a, frame.b, frame.c, frame.discriminantRoot].every(Number.isSafeInteger)) return false
+      if (frame.b === 0 || frame.c === 0 || frame.discriminantRoot <= 0) return false
+      if (sameRational(frame.roots[0], frame.roots[1])) return false
+      if (context.difficulty <= 2) return frame.a === 1 && frame.roots.every((root) => root.d === 1)
+      return frame.a > 1 && frame.roots.some((root) => root.d > 1)
+    },
+  )
+}
+
+const needsNegativeKey = (pairs: readonly RootPairValue[]) =>
+  pairs.some((pair) => pair.roots.some((root) => root.n < 0))
+
+const needsFractionKey = (pairs: readonly RootPairValue[]) =>
+  pairs.some((pair) => pair.roots.some((root) => root.d > 1))
+
+const quadraticFormula = defineSkill({
+  id: 'quadratic-formula',
+  name: 'The Quadratic Formula',
+  blurb: 'Substitute into the formula',
+  build(context: BuildContext) {
+    const frame = quadraticFrame(context)
+    const { a, b, c, discriminantRoot, roots } = frame
+    const data: PolynomialData = { operation: 'quadratic-formula', a, b, c }
+    const answer: RootPairValue = { kind: 'root-pair', roots }
+    const positiveB: RootPairValue = {
+      kind: 'root-pair',
+      roots: quadraticRoots(a, b, discriminantRoot, true),
+    }
+    const dividedByA: RootPairValue = {
+      kind: 'root-pair',
+      roots: quadraticRoots(a, b, discriminantRoot, false, 1),
+    }
+    const pairs = [answer, positiveB, dividedByA]
+    const equation = `${polynomialText({ quadratic: a, linear: b, constant: c })} = 0`
+
+    return {
+      prompt: `Solve ${equation} using a = ${a}, b = ${drawn(b)}, c = ${drawn(c)}.`,
+      display: {
+        kind: 'math',
+        notation: quadraticFormulaNotation(),
+        label: QUADRATIC_FORMULA_LABEL,
+        polynomial: data,
+      },
+      answer,
+      inputMode: 'root-pair',
+      keypad: {
+        allowNegative: needsNegativeKey(pairs),
+        allowFraction: needsFractionKey(pairs),
+      },
+      misconceptions: [
+        {
+          value: positiveB,
+          tag: 'used-positive-b',
+          nudge: 'The numerator starts with negative b.',
+        },
+        {
+          value: dividedByA,
+          tag: 'divided-by-a',
+          nudge: 'The denominator is two times a.',
+        },
+      ],
+      hint: 'Substitute the coefficients, then use both signs before dividing.',
+      solution: [
+        { text: 'Substitute a, b, and c.', detail: `a = ${a}, b = ${drawn(b)}, c = ${drawn(c)}` },
+        { text: 'Evaluate the discriminant.', detail: `b² − 4ac = ${discriminantRoot * discriminantRoot}` },
+        { text: 'Use both signs in the numerator.', detail: `−b ± ${discriminantRoot}` },
+        { text: 'Divide each result by two a.', detail: roots.map(formatRational).join(', ') },
+      ],
+    }
+  },
+})
+
 export const unit18 = [
   addPolynomials,
   subPolynomials,
@@ -493,4 +788,7 @@ export const unit18 = [
   foil,
   factorGcfPoly,
   factorTrinomial,
+  differenceOfSquares,
+  solveByFactoring,
+  quadraticFormula,
 ]
