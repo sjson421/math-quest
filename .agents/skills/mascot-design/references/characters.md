@@ -1,7 +1,8 @@
 # Characters
 
-Two characters ship: **Pip**, a cream bunny, free and the one a fresh record starts as;
-and **Mochi**, a ginger cat, 500 coins. They live in
+Three characters ship: **Pip**, a cream bunny, free and the one a fresh record starts as;
+**Mochi**, a ginger cat, 500 coins; and **Taro**, a greyed-brown capybara, 500 coins. They
+live in
 [`src/cosmetics/characters.tsx`](../../../src/cosmetics/characters.tsx) and are bought,
 owned, and chosen through the same catalogue and the same purse as a hat or a rug.
 
@@ -42,7 +43,7 @@ coordinates — eyes at `x 78` / `x 122` on `y 110`, mouth around `y 138` — an
 `frame.tsx`, which maps Pip's face centre `(100, 124)` onto `face.centre` at `face.scale`. A
 wider head does not get its own eyes; it gets Pip's, further apart. The `face` slot rides
 the same frame, which is why `round-glasses` is authored on Pip's eye line and lands on the
-eyes of both. Pip's frame is the identity and is not emitted at all.
+eyes of all three. Pip's frame is the identity and is not emitted at all.
 
 The one thing inside that frame which is *not* face-shaped is the arms of `heart-shades`:
 they have to reach the silhouette, which is a different distance out on every body, so they
@@ -71,13 +72,18 @@ Four parts have envelopes, and each is a real collision rather than a style pref
 
 - **The head must actually pass through its own spans.** A brim is drawn at the `brow`
   half-width; if the silhouette is narrower than that there, the hat hangs off the side. The
-  two shipped bodies are a circle (Pip) and a broad flat-topped shape with fur points
-  (Mochi) — the shape is free, the spans are not.
+  three shipped bodies are a circle (Pip), a broad flat-topped shape with fur points
+  (Mochi), and a boxy loaf with a flat top and a square jaw (Taro) — the shape is free, the
+  spans are not. A flat top is wide where it starts, which is why Taro's `brow` half-width is
+  53 against Pip's 36: every hat is measured off that number and every one of them comes out
+  broader on him.
 - **The ear must hold what rides it.** A bow ties at `hold` and an earmuff covers a 30-unit
   circle centred there, both in the ear's *unrotated* frame. An ear with no material around
   its own `hold` is an ear those two items fall off. Being a different shape from Pip's is
   fine — Mochi's is a short triangle, and its `hold` sits low on that triangle to match,
-  where the mass actually is.
+  where the mass actually is. Taro's is smaller still, a rounded ear about 28 units across
+  with `hold` at its middle: the muff covers it whole, which is what an earmuff on a capybara
+  should do.
 - **The crest sits above `crown` and no wider than `brow`.** Wider or taller and it collides
   with the hats. Note that a crest paints *over* the party hat's crown, because that crown is
   a `back` fragment passing behind the head and a crest is one of the character's own layers:
@@ -98,12 +104,15 @@ against.
 | --- | --- | --- | --- |
 | `pip` | `#fff6f0` | `#ffe8dd` | `#ffb3c9` |
 | `mochi` | `#ffd2b0` | `#f0a97e` | `#fb90ac` |
+| `taro` | `#c19a76` | `#9b7550` | `#e0919b` |
 
 **A coat stays out of the five app families.** Every cosmetic is one family outlined in that
 family's deep shade, so a mint character loses the mint scarf and a lilac one loses the party
-hat. Cream and ginger both sit outside all five. A coat also has to be clearly deeper
-than cream, or the new character reads as Pip in a slightly different light — which is the
-failure that does not show up until the two are side by side in the shop.
+hat. Cream, ginger and greyed brown all sit outside all five. A coat also has to be clearly
+deeper than cream, or the new character reads as Pip in a slightly different light — and it
+has to differ from every coat already shipped, which is the harder half once there is more
+than one: ginger and brown are told apart by value as much as by hue. Neither failure shows
+up until the coats are side by side in the shop.
 
 ## Ownership
 

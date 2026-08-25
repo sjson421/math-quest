@@ -10,10 +10,10 @@ Ears, head, face, and a signature-star accessory are separate layers inside one
 `0 0 200 200` view box, which is the whole reason cosmetics are possible without redrawing
 the character.
 
-**Pip is also one of two characters, not the only one.** Mochi draws her own head and
-declares her own anchors, and differs in coat, ears, crest, markings and charm; the component
-draws whichever one the learner is playing as. Everything below describes both, and "Pip" is
-used where the point is the geometry rather than the individual.
+**Pip is also one of three characters, not the only one.** Mochi and Taro each draw their own
+head and declare their own anchors, and differ in coat, ears, crest, markings and charm; the
+component draws whichever one the learner is playing as. Everything below describes all three,
+and "Pip" is used where the point is the geometry rather than the individual.
 
 **A cosmetic is one small layer attached to a stable slot. It is never a second Pip.** The
 rule exists because the alternative — a complete mascot variant per outfit — multiplies
@@ -31,7 +31,7 @@ another:
 - **[references/layers.md](references/layers.md)** — Pip's canvas, named anchors, slot list,
   global render order, and how one item spans back and front fragments.
 - **[references/characters.md](references/characters.md)** — what a character may vary and
-  what it may never touch, the two coats, the ear and crest envelopes, and how one is
+  what it may never touch, the three coats, the ear and crest envelopes, and how one is
   owned.
 - **[references/room.md](references/room.md)** — the room's canvas, how Pip's is nested
   inside it, the horizon, the four placement slots, the paint order that makes Pip one

@@ -21,9 +21,10 @@ import { Mascot } from './Mascot'
 const render = (equipped?: Equipped, character?: string) =>
   renderToStaticMarkup(<Mascot state="idle" character={character} equipped={equipped} />)
 
-/** Pip's signature star, and Mochi's fish — each a unique first command. */
+/** Each character's charm, by a command unique to it. */
 const STAR = 'M148 150'
 const FISH_TAIL = 'M161 166'
+const LILY_PAD = 'M152 162'
 /** Pip's head circle, and the last of his own layers a hat has to get behind. */
 const HEAD = 'r="57"'
 /**
@@ -75,9 +76,9 @@ describe('each character', () => {
     const html = render(undefined, character.id)
 
     expect(html).toContain(`aria-label="${character.name} is idle"`)
-    // The head circle, which is the one shape every character shares. Its fill
-    // is the coat, so this is the check that the coat reached the body rather
-    // than only the ears.
+    // The body silhouette, whatever shape this character drew it as. Its fill is
+    // the coat, so this is the check that the coat reached the body rather than
+    // only the ears.
     expect(html).toContain(`fill="${character.coat.base}"`)
   })
 
@@ -88,8 +89,10 @@ describe('each character', () => {
   it('gives each of them a charm of their own in the pin slot', () => {
     expect(render(undefined, 'pip')).toContain(STAR)
     expect(render(undefined, 'mochi')).toContain(FISH_TAIL)
+    expect(render(undefined, 'taro')).toContain(LILY_PAD)
 
     expect(render(undefined, 'mochi')).not.toContain(STAR)
+    expect(render(undefined, 'taro')).not.toContain(STAR)
   })
 
   /**
@@ -218,6 +221,7 @@ describe('the pin slot', () => {
     for (const [id, charm] of [
       ['pip', STAR],
       ['mochi', FISH_TAIL],
+      ['taro', LILY_PAD],
     ] as const) {
       const html = render({ pin: badge.id }, id)
 

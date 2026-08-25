@@ -204,9 +204,9 @@ export function Mascot({
  * catalogue does that today.
  *
  * **The motion is here and the shape is not.** Pip's star, Mochi's fish and
- * Mochi's fish both rock gently and both spin once on `celebrating`, because that
- * beat belongs to the moment rather than to the object — a charm that chose its
- * own would make the celebration land differently depending on who you had
+ * Taro's lily pad all rock gently and all spin once on `celebrating`, because
+ * that beat belongs to the moment rather than to the object — a charm that chose
+ * its own would make the celebration land differently depending on who you had
  * bought.
  */
 function Charm({

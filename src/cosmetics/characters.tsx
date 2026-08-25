@@ -2,7 +2,7 @@ import { INK, coats, families } from './palette'
 import type { Anchors, Character } from './types'
 
 /**
- * The two creatures a learner can be, and the parts that make them different.
+ * The three creatures a learner can be, and the parts that make them different.
  *
  * **Each one draws its own body.** They used to share a single head circle at
  * `(100, 112) r 57`, because the ten shipped accessories were authored against
@@ -19,7 +19,7 @@ import type { Anchors, Character } from './types'
  * carries no motion of its own; `Mascot.tsx` supplies all of it.
  */
 
-const { butter, powder } = families
+const { butter, mint, powder } = families
 
 /* ------------------------------------------------------------------------- *
  * Pip — cream bunny
@@ -258,6 +258,168 @@ const mochi: Character = {
 }
 
 /* ------------------------------------------------------------------------- *
+ * Taro — greyed-brown capybara
+ * ------------------------------------------------------------------------- */
+
+/**
+ * A loaf: flat on top, straight down both sides, and squared off at the jaw,
+ * with the ears set inboard on the top corners rather than above them.
+ *
+ * The silhouette is the whole character. A capybara read from the front is a
+ * rectangle with rounded corners — no taper to a muzzle, no crown between the
+ * ears — so where Pip is a circle and Mochi is a broad wedge with fur points,
+ * this one is a box, and at 92px that is the difference a learner sees before
+ * any of the colour.
+ *
+ * The three things underneath it are the same argument at smaller scale: ears
+ * far too small for the head, a bristle crest instead of a tuft, and a blunt
+ * muzzle taking up the lower half of the face with the mouth drawn on it.
+ */
+const TARO_EAR: Anchors['ear'] = {
+  left: { base: { x: 62, y: 70 }, hold: { x: 61, y: 53 } },
+  right: { base: { x: 138, y: 70 }, hold: { x: 139, y: 53 } },
+}
+
+const taroAnchors: Anchors = {
+  // The face sits a little larger than Pip's and in the same place, which on a
+  // head this tall puts the eyes above centre and leaves the lower half to the
+  // muzzle — where a capybara keeps its face.
+  face: { centre: { x: 100, y: 124 }, scale: 1.08 },
+  ear: TARO_EAR,
+  crown: 62,
+  // A flat top is wide the moment it starts, so the brow half-width is 53 where
+  // Pip's is 36. Every hat is measured off it and every one of them comes out
+  // broader here — which is right: they are sitting on a broader head.
+  brow: { y: 76, halfWidth: 53 },
+  temple: { y: 112, halfWidth: 58 },
+  chin: { y: 160, halfWidth: 44 },
+  shoulder: { y: 132, halfWidth: 58 },
+  pin: { x: 152, y: 162 },
+}
+
+const taro: Character = {
+  kind: 'character',
+  id: 'taro',
+  name: 'Taro',
+  price: 500,
+  coat: coats.taro,
+  anchors: taroAnchors,
+  head: (
+    <path
+      // Flat from corner to corner, out to the widest point at the temple, then
+      // in to a jaw that stays square — the corners are rounded and nothing else
+      // about the shape is.
+      d="M66 62
+         H134
+         Q152 64 156 84
+         Q160 104 158 118
+         Q156 146 146 158
+         Q136 172 100 172
+         Q64 172 54 158
+         Q44 146 42 118
+         Q40 104 44 84
+         Q48 64 66 62 Z"
+      fill={coats.taro.base}
+      stroke={coats.taro.shade}
+      strokeWidth="3"
+      strokeLinejoin="round"
+    />
+  ),
+  ear: (ear) => {
+    const { x } = TARO_EAR[ear].base
+    // Which way is away from the midline. The ear is taller and rounder on that
+    // side and clipped short on the other, so the pair mirror rather than repeat.
+    const out = ear === 'left' ? -1 : 1
+
+    return (
+      <g>
+        <path
+          // Small enough that the earmuff covers it, which is what an earmuff on
+          // a capybara should do. `hold` sits in the middle of this shape, so the
+          // bow ties on the ear rather than beside it.
+          d={`M${x - out * 13} 66
+              C${x - out * 15} 46 ${x - out * 8} 36 ${x + out * 2} 36
+              C${x + out * 13} 37 ${x + out * 16} 52 ${x + out * 14} 65
+              Q${x + out * 1} 73 ${x - out * 13} 66 Z`}
+          fill={coats.taro.base}
+          stroke={coats.taro.shade}
+          strokeWidth="3"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+        <path
+          d={`M${x - out * 6} 64
+              C${x - out * 8} 48 ${x - out * 4} 42 ${x + out * 2} 42
+              C${x + out * 8} 43 ${x + out * 10} 53 ${x + out * 8} 63
+              Q${x + out * 1} 69 ${x - out * 6} 64 Z`}
+          fill={coats.taro.blush}
+          opacity="0.5"
+        />
+      </g>
+    )
+  },
+  // Three separate bristles rather than one arch. A capybara has no crown of fur
+  // to draw, and coarse hair standing up off a flat skull is the thing it has
+  // instead — at the tuft's weight, so it reads as fur and not as an accessory.
+  crest: (
+    <g stroke={coats.taro.shade} strokeWidth="4.5" strokeLinecap="round" fill="none">
+      <path d="M89 64 q1 -8 4 -11" />
+      <path d="M100 64 q0 -9 2 -12" />
+      <path d="M111 64 q-1 -8 -4 -11" />
+    </g>
+  ),
+  markings: (
+    <g>
+      {/* The muzzle is a plane, not a line: filled in the coat's own shade at
+          low opacity so the mouth is drawn *on* it and an open one still reads.
+          An outlined snout would put a stroke straight through the delighted
+          smile, which opens from y 133 in the face frame — y 134 here. */}
+      <path
+        d="M76 122 Q74 144 82 156 Q100 165 118 156 Q126 144 124 122 Q100 114 76 122 Z"
+        fill={coats.taro.shade}
+        opacity="0.38"
+      />
+      {/* Blunt, wide, and high on the muzzle — the one feature of a capybara's
+          face that is bigger than its eyes. Outlined in INK for the reason
+          Mochi's nose is: a nose belongs to the expression, not on top of it.
+          It stops at y 126, eight units clear of the open mouth. */}
+      <path
+        d="M89 112 Q89 106 96 106 H104 Q111 106 111 112 Q111 121 100 126 Q89 121 89 112 Z"
+        fill={coats.taro.blush}
+        stroke={INK}
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      />
+    </g>
+  ),
+  // A lily pad, in the star's footprint. Mint rather than butter or powder, so
+  // the three charms are told apart by colour before shape at 92px — and a pad
+  // is what a capybara is usually drawn sitting in rather than something it
+  // wears.
+  charm: (
+    <g>
+      <path
+        d="M152 162 L147.9 173.3 A12 12 0 1 0 140.2 164.1 Z"
+        strokeWidth="2.5"
+        strokeLinejoin="round"
+        strokeLinecap="round"
+        style={{ fill: mint.base, stroke: mint.deep }}
+      />
+      {/* Two veins off the notch. A third is 4 units from its neighbour, which
+          at 92px is under two pixels and reads as a thicker line, not a vein. */}
+      <path
+        d="M152 162 L155 151 M152 162 L163 165"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        style={{ fill: 'none', stroke: mint.deep }}
+      />
+      <ellipse cx="147" cy="156" rx="4.5" ry="3" style={{ fill: mint.soft }} />
+    </g>
+  ),
+}
+
+/* ------------------------------------------------------------------------- *
  * The list
  * ------------------------------------------------------------------------- */
 
@@ -271,4 +433,4 @@ const mochi: Character = {
  * and the one an unknown id falls back to, and `index.tsx` reads both of those
  * off the head of this list rather than naming him again.
  */
-export const characters: Character[] = [pip, mochi]
+export const characters: Character[] = [pip, mochi, taro]

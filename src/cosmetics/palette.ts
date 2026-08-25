@@ -86,13 +86,20 @@ export type Coat = {
  *
  * **A coat stays out of the five app families.** Every cosmetic is one family
  * outlined in that family's deep shade, so a mint character would lose the mint
- * scarf and a lilac one the party hat. Cream and ginger both sit outside all
- * five — which is the constraint a third character has to satisfy too, and the
- * reason there is no sixth pastel here to reach for.
+ * scarf and a lilac one the party hat. Cream, ginger and greyed brown all sit
+ * outside all five — which is the constraint every further coat has to satisfy
+ * too, and the reason there is no sixth pastel here to reach for.
  */
 export const coats = {
   /** Pip's, moved rather than rewritten — the same four values he always had. */
   pip: { base: CREAM, shade: CREAM_SHADE, blush: BLUSH },
   /** Ginger: warm and clearly deeper than cream, so the two never read as one. */
   mochi: { base: '#ffd2b0', shade: '#f0a97e', blush: '#fb90ac' },
+  /**
+   * Greyed brown, and the third coat that had to differ from *two* others rather
+   * than one. Ginger is a light peach; this is a darker, greyer, less orange
+   * tone, so the two are told apart by value as well as by hue — which is the
+   * channel that survives at 92px, where the shop shows all three side by side.
+   */
+  taro: { base: '#c19a76', shade: '#9b7550', blush: '#e0919b' },
 } as const satisfies Record<string, Coat>

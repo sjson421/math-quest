@@ -21,13 +21,13 @@ list and what reads each one.
 | --- | --- |
 | ground shadow | ellipse `(100, 180)`, `rx 42`, `ry 7` — the lowest point, `y 187` |
 | ears | ellipses `(56, 72)` and `(144, 72)`, `rx 17`, `ry 30`, rotated −24° / +24° about their bases — **rendered** extent `x 26–66` and `x 134–174`, `y 46–102` |
-| head | Pip's is a circle `(100, 112)`, `r 57` — spans `x 43–157`, `y 55–169`. Mochi's is her own shape |
+| head | Pip's is a circle `(100, 112)`, `r 57` — spans `x 43–157`, `y 55–169`. Mochi's and Taro's are their own shapes |
 | tuft | `M92 58 Q100 42 108 58` — `42` is the Bézier control point, not a point on the curve; the apex is `y 50` |
 | cheeks | ellipses `(66, 126)` and `(134, 126)` |
 | eyes | centred `x 78` and `x 122`, `y 110` — in **face-frame** coordinates, placed on each body by `anchors.face` |
 | mouth | around `y 138`, likewise in face-frame coordinates |
-| signature star | occupies the `pin` slot, origin `(148, 162)` — Mochi's fish sits in the same footprint |
-| markings | drawn between the cheeks and the eyes; Mochi's nose and whiskers. Pip has none |
+| signature star | occupies the `pin` slot, origin `(148, 162)` — Mochi's fish and Taro's lily pad sit in the same footprint |
+| markings | drawn between the cheeks and the eyes; Mochi's nose and whiskers, Taro's muzzle and nose. Pip has none |
 | thinking dots | `(163, 88)` and `(173, 76)` — `thinking` state only |
 | sleep marks | `(152, 74)` and `(168, 56)` on Pip — `sleeping` state only; drawn out past `anchors.temple` on each body |
 
@@ -54,8 +54,8 @@ argument. A literal coordinate is an item that fits Pip and hangs off a cat.
 | `pin` | `(148, 162)` | the charm, and any `pin` cosmetic replacing it |
 
 Adding an anchor is a real cost: it is a question every future character has to answer.
-Adding or renaming one means updating this table, the `Anchors` type, and both
-characters in the same change. An anchor that means one thing in the contract and another in
+Adding or renaming one means updating this table, the `Anchors` type, and every
+character in the same change. An anchor that means one thing in the contract and another in
 a shipped item is worse than no anchor.
 
 ## Slots
