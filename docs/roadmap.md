@@ -1109,9 +1109,13 @@ shows before a lesson's first problem.
 
       Ordered increments:
 
-      - **25a** The screen, its data, and Stage A's 8 skills — the mechanism above, proven on
-        Unit 0, where a worked example is small enough that a layout problem is a layout problem
-        rather than a Unit 8 problem.
+      - **25a** The screen, its data, and Stage A's 8 skills — shipped 2026-08-25. Unit 0 now
+        opens with one authored teaching line and one fixed difficulty-1 generated example,
+        rendered through `ProblemView` with shared worked steps and a learner-facing answer
+        label. `introSeen` is optional presentation state: old and synced records read as unseen,
+        Start practice marks only that flag, and **Review intro** returns to the same active
+        problem only while the learner is answering. No attempt, mastery, reward, unlock, or
+        lesson seed changes on the intro path.
       - **25b** Stage B — 44 skills across Units 1–5, the course's largest block of plain
         arithmetic and the cheapest teaching lines in it.
       - **25c** Stages C and D — 57 skills, and the first intros carrying a diagram.

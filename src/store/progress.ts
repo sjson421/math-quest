@@ -23,6 +23,8 @@ export type SkillProgress = {
   lastPracticed: string | null
   attempts: number
   correct: number
+  /** Presentation state only; it never contributes to learning evidence. */
+  introSeen?: boolean
 }
 
 export type Progress = {
@@ -91,6 +93,7 @@ const emptySkill = (): SkillProgress => ({
   lastPracticed: null,
   attempts: 0,
   correct: 0,
+  introSeen: false,
 })
 
 /**
@@ -127,6 +130,7 @@ type Store = {
   loaded: boolean
   hydrate: () => Promise<void>
   recordAttempt: (skillId: string, correct: boolean, misconceptionTag?: string) => void
+  markIntroSeen: (skillId: string) => void
   completeLesson: (skillId: string) => LessonOutcome
   buyItem: (id: string) => void
   equipItem: (id: string) => void
@@ -221,6 +225,20 @@ export const useProgress = create<Store>((set, get) => {
             attempts: skill.attempts + 1,
             correct: skill.correct + (correct ? 1 : 0),
           },
+        },
+      })
+    },
+
+    markIntroSeen(skillId) {
+      const p = get().progress
+      const skill = p.skills[skillId]
+      if (!skill || skill.introSeen === true) return
+
+      persist({
+        ...p,
+        skills: {
+          ...p.skills,
+          [skillId]: { ...skill, introSeen: true },
         },
       })
     },

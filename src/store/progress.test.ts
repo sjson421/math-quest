@@ -9,6 +9,7 @@
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { set as idbSet } from 'idb-keyval'
 import { implementedSkillIds, skillStates } from '../curriculum'
 import { stageA } from '../curriculum/manifest'
 import {
@@ -34,6 +35,7 @@ const skill = (record: Partial<SkillProgress> = {}): SkillProgress => ({
   lastPracticed: null,
   attempts: 0,
   correct: 0,
+  introSeen: false,
   ...record,
 })
 
@@ -204,6 +206,81 @@ describe('a practised skill is never re-locked', () => {
 
     expect(isUnlocked('add-facts-small', practised)).toBe(true)
     expect(practised.skills['add-facts-small'].mastery).toBe(1)
+  })
+})
+
+describe('skill intro presentation state', () => {
+  beforeEach(() => {
+    useProgress.getState().reset()
+    vi.mocked(idbSet).mockClear()
+  })
+
+  it('seeds new skills unseen and marks only the intro flag', () => {
+    const before = useProgress.getState().progress
+    const beforeSkill = before.skills['read-numbers']
+    const beforeOpen = isUnlocked('read-numbers', before)
+
+    useProgress.getState().markIntroSeen('read-numbers')
+
+    const after = useProgress.getState().progress
+    expect(initialProgress().skills['read-numbers'].introSeen).toBe(false)
+    expect(after.skills['read-numbers']).toEqual({ ...beforeSkill, introSeen: true })
+    expect({ ...after, updatedAt: before.updatedAt }).toEqual({
+      ...before,
+      skills: { ...before.skills, 'read-numbers': { ...beforeSkill, introSeen: true } },
+    })
+    expect(isUnlocked('read-numbers', after)).toBe(beforeOpen)
+  })
+
+  it('does not persist a second mark on an already seen intro', () => {
+    useProgress.getState().markIntroSeen('read-numbers')
+    const afterFirst = useProgress.getState().progress
+    const writes = vi.mocked(idbSet).mock.calls.length
+
+    useProgress.getState().markIntroSeen('read-numbers')
+
+    expect(vi.mocked(idbSet).mock.calls).toHaveLength(writes)
+    expect(useProgress.getState().progress).toEqual(afterFirst)
+  })
+
+  it('reads missing or malformed state as unseen while preserving opaque skill fields', () => {
+    const { introSeen: _omitted, ...legacyFields } = skill()
+    const legacySkill = { ...legacyFields, legacyField: 'keep-me' }
+    const legacy = {
+      ...progressWith({}),
+      skills: { ...progressWith({}).skills, 'read-numbers': legacySkill },
+    } as unknown as Progress
+
+    useProgress.getState().replaceProgress(legacy)
+    expect(useProgress.getState().progress.skills['read-numbers'].introSeen).toBeUndefined()
+    expect((useProgress.getState().progress.skills['read-numbers'] as SkillProgress & { legacyField: string }).legacyField)
+      .toBe('keep-me')
+
+    const malformed = {
+      ...useProgress.getState().progress,
+      skills: {
+        ...useProgress.getState().progress.skills,
+        'read-numbers': { ...legacySkill, introSeen: 'yes' },
+      },
+    } as unknown as Progress
+    useProgress.getState().replaceProgress(malformed)
+    expect(useProgress.getState().progress.skills['read-numbers'].introSeen).not.toBe(true)
+  })
+
+  it('keeps true state and unknown fields through remote adoption', () => {
+    const remote = {
+      ...progressWith({}),
+      skills: {
+        ...progressWith({}).skills,
+        'read-numbers': { ...skill({ introSeen: true }), remoteField: 7 },
+      },
+    } as unknown as Progress
+
+    useProgress.getState().adoptRemote(remote, 4321)
+    const restored = useProgress.getState().progress.skills['read-numbers'] as SkillProgress & { remoteField: number }
+
+    expect(restored.introSeen).toBe(true)
+    expect(restored.remoteField).toBe(7)
   })
 })
 

@@ -33,6 +33,7 @@ export type SkillConfig = {
   name: string
   /** Shown on the skill tree node. Stays under 32 characters or the card truncates. */
   blurb: string
+  teachingLine?: string
   build(context: BuildContext): ProblemSpec
 }
 
@@ -43,11 +44,12 @@ export type SkillConfig = {
  * of a seeded rng and a difficulty, which is what makes it reproducible and
  * testable without any of this being involved.
  */
-export function defineSkill({ id, name, blurb, build }: SkillConfig): SkillGenerator {
+export function defineSkill({ id, name, blurb, teachingLine, build }: SkillConfig): SkillGenerator {
   return {
     id,
     name,
     blurb,
+    teachingLine,
     generate(rng, difficulty) {
       const spec = build({ rng, difficulty })
       return {

@@ -27,6 +27,10 @@ export type ContentRule =
   | 'empty-hint'
   | 'empty-solution'
   | 'hint-sentences'
+  | 'empty-teaching-line'
+  | 'teaching-line-sentences'
+  | 'teaching-line-forward-reference'
+  | 'teaching-line-vocabulary'
   | 'step-count'
   | 'step-length'
   | 'wall-misconceptions'
@@ -58,6 +62,10 @@ export type ContentLocation = {
  * assume understanding it has not built without using a flagged word.
  */
 export const VOCABULARY: ReadonlyMap<string, number> = new Map([
+  ['numeral', 0],
+  ['expanded form', 0],
+  ['ascending order', 0],
+  ['rounding', 0],
   ['factor', 4],
   ['multiple', 4],
   ['prime', 4],
@@ -246,6 +254,54 @@ export function learnerText(problem: Problem): string[] {
 function mentions(text: string, term: string): boolean {
   const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
   return new RegExp(`\\b${escaped}(?:s|es)?\\b`, 'i').test(text)
+}
+
+/** Curated current-unit terms a teaching line introduces, in authority order. */
+export function teachingLineTerms(teachingLine: string, unitId: string): string[] {
+  const here = unitNumber(unitId)
+  return [...VOCABULARY]
+    .filter(([term, introducedIn]) => introducedIn === here && mentions(teachingLine, term))
+    .map(([term]) => term)
+}
+
+/** Check authored teaching prose directly; generated samples cannot cover it. */
+export function checkTeachingLine(
+  teachingLine: string | undefined,
+  at: ContentLocation,
+): ContentViolation[] {
+  if (teachingLine === undefined) return []
+
+  const violations: ContentViolation[] = []
+  const report = (rule: ContentRule, message: string) =>
+    violations.push({ rule, skillId: at.skill.id, message })
+
+  if (!teachingLine.trim()) {
+    report('empty-teaching-line', 'teaching line is empty')
+    return violations
+  }
+
+  const count = sentences(teachingLine).length
+  if (count !== 1)
+    report('teaching-line-sentences', `teaching line is ${count} sentences: "${teachingLine}"`)
+
+  const here = unitNumber(at.unit.id)
+  for (const [term, introducedIn] of VOCABULARY) {
+    if (introducedIn > here && mentions(teachingLine, term)) {
+      report(
+        'teaching-line-forward-reference',
+        `"${term}" is introduced in unit ${introducedIn} but used in unit ${here}: "${teachingLine}"`,
+      )
+    }
+  }
+
+  const currentTerms = teachingLineTerms(teachingLine, at.unit.id)
+  if (currentTerms.length > 1)
+    report(
+      'teaching-line-vocabulary',
+      `teaching line introduces ${currentTerms.length} current-unit terms, limit is 1: ${currentTerms.join(', ')}`,
+    )
+
+  return violations
 }
 
 /**

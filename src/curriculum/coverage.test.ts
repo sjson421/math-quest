@@ -10,6 +10,7 @@
 
 import { describe, expect, it } from 'vitest'
 import { generateProblem } from '../lib/generator'
+import { checkTeachingLine, teachingLineTerms } from '../lib/content-rules'
 import {
   allSkills,
   course,
@@ -22,6 +23,7 @@ import {
 } from './index'
 import { parseCurriculumDoc } from './manifest/curriculum-doc'
 import { AVAILABLE_CAPABILITIES, allSkills as manifestSkills } from './manifest'
+import { stageA } from './manifest'
 import type { Capability } from './manifest/types'
 import type { Problem } from '../lib/types'
 
@@ -29,6 +31,7 @@ const doc = parseCurriculumDoc()
 
 /** Ids marked ✅ built in the curriculum document. */
 const documentedAsBuilt = doc.rows.filter((row) => row.built).map((row) => row.id)
+const stageAIds = stageA.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
 
 describe('every generator is declared in the manifest', () => {
   it('registers nothing the manifest does not declare', () => {
@@ -173,6 +176,19 @@ describe('the skills that are built', () => {
 
     expect(mismatches).toEqual([])
     expect(longBlurbs).toEqual([])
+  })
+
+  it('ships teaching lines only for Stage A in the first intro increment', () => {
+    const withLines = allSkills.filter((skill) => skill.teachingLine !== undefined)
+    expect(withLines.map((skill) => skill.id)).toEqual(stageAIds)
+
+    const counts = withLines.map((skill) => {
+      const location = manifestIndex.get(skill.id)
+      if (!location || skill.teachingLine === undefined) throw new Error(`Missing location: ${skill.id}`)
+      expect(checkTeachingLine(skill.teachingLine, location)).toEqual([])
+      return teachingLineTerms(skill.teachingLine, location.unit.id).length
+    })
+    expect(counts).toEqual([1, 0, 0, 1, 0, 1, 1, 0])
   })
 
   it('report the unit the manifest puts them in, not the file they live in', () => {

@@ -17,10 +17,13 @@ export function ProblemView({
   display,
   entry,
   entryMode = 'keypad',
+  readOnly = false,
 }: {
   display: Display
   entry: string
   entryMode?: Problem['inputMode']
+  /** Hide the answer frame when the display is used as a worked example. */
+  readOnly?: boolean
 }) {
   // Exhaustive rather than a fall-through to the column layout. `story` carries
   // the same `operands` and `operator` fields as `column`, so TypeScript narrows
@@ -28,23 +31,23 @@ export function ProblemView({
   // problem as a stack of digits without a compile error.
   switch (display.kind) {
     case 'inline':
-      return <InlineView display={display} entry={entry} entryMode={entryMode} />
+      return <InlineView display={display} entry={entry} entryMode={entryMode} readOnly={readOnly} />
     case 'column':
-      return <ColumnView display={display} entry={entry} entryMode={entryMode} />
+      return <ColumnView display={display} entry={entry} entryMode={entryMode} readOnly={readOnly} />
     case 'decimal-column':
-      return <DecimalColumnView display={display} entry={entry} entryMode={entryMode} />
+      return <DecimalColumnView display={display} entry={entry} entryMode={entryMode} readOnly={readOnly} />
     case 'story':
-      return <StoryView display={display} entry={entry} entryMode={entryMode} />
+      return <StoryView display={display} entry={entry} entryMode={entryMode} readOnly={readOnly} />
     case 'math':
-      return <MathView display={display} entry={entry} entryMode={entryMode} />
+      return <MathView display={display} entry={entry} entryMode={entryMode} readOnly={readOnly} />
     case 'diagram':
-      return <DiagramView display={display} entry={entry} entryMode={entryMode} />
+      return <DiagramView display={display} entry={entry} entryMode={entryMode} readOnly={readOnly} />
     case 'coordinate-plane':
-      return <CoordinatePlaneView display={display} entry={entry} entryMode={entryMode} />
+      return <CoordinatePlaneView display={display} entry={entry} entryMode={entryMode} readOnly={readOnly} />
     case 'chart':
-      return <ChartView display={display} entry={entry} entryMode={entryMode} />
+      return <ChartView display={display} entry={entry} entryMode={entryMode} readOnly={readOnly} />
     case 'equation':
-      return <EquationView display={display} entry={entry} entryMode={entryMode} />
+      return <EquationView display={display} entry={entry} entryMode={entryMode} readOnly={readOnly} />
     default: {
       const unhandled: never = display
       throw new Error(`Unhandled display: ${JSON.stringify(unhandled)}`)
@@ -93,14 +96,15 @@ const DISPLAY_ENTRY_FRAME: Record<Problem['inputMode'], boolean> = {
 
 type Of<K extends Display['kind']> = Extract<Display, { kind: K }>
 
-type EntryProps = { entry: string; entryMode: Problem['inputMode'] }
+type EntryProps = { entry: string; entryMode: Problem['inputMode']; readOnly: boolean }
 
 function InlineView({
   display,
   entry,
   entryMode,
+  readOnly,
 }: { display: Of<'inline'> } & EntryProps) {
-  const showsEntry = GENERIC_ENTRY_FRAME[entryMode]
+  const showsEntry = GENERIC_ENTRY_FRAME[entryMode] && !readOnly
   if (display.decimal?.operation === 'read') {
     return (
       <div className="flex max-w-xs flex-col items-center gap-4 text-center">
@@ -162,7 +166,7 @@ function InlineView({
  * than problem size: the work here is understanding the situation, and a story
  * rendered in 6xl digits reads as an eye test.
  */
-function StoryView({ display, entry, entryMode }: { display: Of<'story'> } & EntryProps) {
+function StoryView({ display, entry, entryMode, readOnly }: { display: Of<'story'> } & EntryProps) {
   const polynomialRewrite = display.polynomial !== undefined && entryMode === 'expression'
 
   return (
@@ -174,7 +178,7 @@ function StoryView({ display, entry, entryMode }: { display: Of<'story'> } & Ent
       >
         {display.text}
       </p>
-      {GENERIC_ENTRY_FRAME[entryMode] && (
+      {GENERIC_ENTRY_FRAME[entryMode] && !readOnly && (
         <div className={polynomialRewrite ? 'max-w-full overflow-hidden' : undefined}>
           <EntrySlot value={entry} mode={entryMode} />
         </div>
@@ -183,7 +187,7 @@ function StoryView({ display, entry, entryMode }: { display: Of<'story'> } & Ent
   )
 }
 
-function MathView({ display, entry, entryMode }: { display: Of<'math'> } & EntryProps) {
+function MathView({ display, entry, entryMode, readOnly }: { display: Of<'math'> } & EntryProps) {
   // These fraction prompts already carry the answer relationship in their
   // authored notation. Appending the ordinary "= answer" frame turns a
   // vocabulary answer into an equality, duplicates a missing-term equality,
@@ -192,7 +196,8 @@ function MathView({ display, entry, entryMode }: { display: Of<'math'> } & Entry
   if (
     display.fraction?.operation === 'name-part' ||
     display.fraction?.operation === 'compare' ||
-    !GENERIC_ENTRY_FRAME[entryMode]
+    !GENERIC_ENTRY_FRAME[entryMode] ||
+    readOnly
   ) {
     return (
       <div className="flex items-center justify-center max-w-full">
@@ -243,7 +248,7 @@ function MathView({ display, entry, entryMode }: { display: Of<'math'> } & Entry
  * differently-shaped rows is how a display passes the gate and still wraps on a
  * phone, which is item 12's finding.
  */
-function EquationView({ display, entry, entryMode }: { display: Of<'equation'> } & EntryProps) {
+function EquationView({ display, entry, entryMode, readOnly }: { display: Of<'equation'> } & EntryProps) {
   // A notated row is a stack, not a line of characters, so it takes one size
   // rather than a ladder over `text.length` — the text names the equation but no
   // longer describes how wide it draws. `coverage.test.ts` bounds the two rows
@@ -287,7 +292,7 @@ function EquationView({ display, entry, entryMode }: { display: Of<'equation'> }
         These options are sentences with slug ids, so it would read `none`. The
         choices are the answer surface here, and the feedback names the mistake.
       */}
-      {display.variable !== undefined && GENERIC_ENTRY_FRAME[entryMode] && (
+      {display.variable !== undefined && GENERIC_ENTRY_FRAME[entryMode] && !readOnly && (
         <div className="flex items-baseline justify-center gap-3 text-4xl">
           <span className="font-bold tabular-nums tracking-tight">{display.variable}</span>
           <span className="font-bold text-ink-faint">=</span>
@@ -298,11 +303,11 @@ function EquationView({ display, entry, entryMode }: { display: Of<'equation'> }
   )
 }
 
-function DiagramView({ display, entry, entryMode }: { display: Of<'diagram'> } & EntryProps) {
+function DiagramView({ display, entry, entryMode, readOnly }: { display: Of<'diagram'> } & EntryProps) {
   return (
     <div className="flex flex-col items-center gap-3 max-w-full">
       <ShapeDiagram diagram={display.diagram} />
-      {GENERIC_ENTRY_FRAME[entryMode] && (
+      {GENERIC_ENTRY_FRAME[entryMode] && !readOnly && (
         <div className="flex items-center justify-center gap-3 text-4xl">
           <span className="font-bold text-ink-faint">=</span>
           <EntrySlot value={entry} mode={entryMode} fractionSize="fluid" />
@@ -316,8 +321,9 @@ function CoordinatePlaneView({
   display,
   entry,
   entryMode,
+  readOnly,
 }: { display: Of<'coordinate-plane'> } & EntryProps) {
-  const ownsEntry = DISPLAY_ENTRY_FRAME[entryMode]
+  const ownsEntry = DISPLAY_ENTRY_FRAME[entryMode] && !readOnly
 
   return (
     <div className="flex flex-col items-center gap-3 max-w-full">
@@ -345,13 +351,13 @@ function CoordinatePlaneView({
   )
 }
 
-function ChartView({ display, entry, entryMode }: { display: Of<'chart'> } & EntryProps) {
+function ChartView({ display, entry, entryMode, readOnly }: { display: Of<'chart'> } & EntryProps) {
   // Keypad and expression answers still need a neutral slot; controls with
   // their own answer surface must not receive a duplicate echo beneath the chart.
   return (
     <div className="flex flex-col items-center gap-3 max-w-full" data-chart-display>
       <ChartDisplay chart={display.chart} />
-      {DISPLAY_ENTRY_FRAME[entryMode] && (
+      {DISPLAY_ENTRY_FRAME[entryMode] && !readOnly && (
         <div className="flex items-center justify-center gap-3" data-chart-answer>
           <span className="text-lg font-bold text-ink-soft">Answer</span>
           <span className="text-4xl">
@@ -363,9 +369,9 @@ function ChartView({ display, entry, entryMode }: { display: Of<'chart'> } & Ent
   )
 }
 
-function ColumnView({ display, entry, entryMode }: { display: Of<'column'> } & EntryProps) {
+function ColumnView({ display, entry, entryMode, readOnly }: { display: Of<'column'> } & EntryProps) {
   const values = display.operands.map(String)
-  return <FormattedColumn values={values} operator={display.operator} entry={entry} entryMode={entryMode} />
+  return <FormattedColumn values={values} operator={display.operator} entry={entry} entryMode={entryMode} readOnly={readOnly} />
 }
 
 const DECIMAL_COLUMN_OPERATOR: Record<DecimalArithmeticData['operation'], '+' | '−' | '×'> = {
@@ -374,10 +380,10 @@ const DECIMAL_COLUMN_OPERATOR: Record<DecimalArithmeticData['operation'], '+' | 
   mult: '×',
 }
 
-function DecimalColumnView({ display, entry, entryMode }: { display: Of<'decimal-column'> } & EntryProps) {
+function DecimalColumnView({ display, entry, entryMode, readOnly }: { display: Of<'decimal-column'> } & EntryProps) {
   const values = decimalColumnText(display.decimal)
   const operator = DECIMAL_COLUMN_OPERATOR[display.decimal.operation]
-  return <FormattedColumn values={values} operator={operator} entry={entry} entryMode={entryMode} />
+  return <FormattedColumn values={values} operator={operator} entry={entry} entryMode={entryMode} readOnly={readOnly} />
 }
 
 function FormattedColumn({
@@ -385,6 +391,7 @@ function FormattedColumn({
   operator,
   entry,
   entryMode,
+  readOnly,
 }: {
   values: readonly string[]
   operator: '+' | '−' | '×' | '÷'
@@ -393,6 +400,9 @@ function FormattedColumn({
   // A stack of three is a row taller than any two-operand column. One size down
   // keeps the hint reachable while every nested measurement follows in `em`.
   const size = values.length > 2 ? 'text-5xl' : 'text-6xl'
+  const spoken = readOnly
+    ? values.join(` ${operator} `)
+    : `${values.join(` ${operator} `)} equals ${entrySpokenLabel(entry)}`
 
   return (
     <div
@@ -400,7 +410,7 @@ function FormattedColumn({
       // Per-character spans align places; the complete expression lives here
       // so assistive technology does not read each digit as a separate item.
       role="math"
-      aria-label={`${values.join(` ${operator} `)} equals ${entrySpokenLabel(entry)}`}
+      aria-label={spoken}
     >
       {values.map((value, i) => (
         <div key={i} className="flex items-center gap-4" aria-hidden>
@@ -409,7 +419,7 @@ function FormattedColumn({
         </div>
       ))}
       <div className="h-1.5 self-stretch rounded-full bg-ink-faint my-[0.2em]" aria-hidden />
-      {GENERIC_ENTRY_FRAME[entryMode] && (
+      {GENERIC_ENTRY_FRAME[entryMode] && !readOnly && (
         <div className="flex items-center gap-4" aria-hidden>
           <span className="w-8" />
           <EntrySlot value={entry} mode={entryMode} minWidth={width} />

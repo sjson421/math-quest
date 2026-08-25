@@ -57,6 +57,7 @@ const readNumbers = defineSkill({
   id: 'read-numbers',
   name: 'Read Numerals',
   blurb: 'Read numerals to 999',
+  teachingLine: 'A numeral uses digits to show a number.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [10, 99],
@@ -106,6 +107,7 @@ const placeValueTens = defineSkill({
   id: 'place-value-tens',
   name: 'Tens Digit',
   blurb: 'Name the tens digit',
+  teachingLine: 'The tens digit is second from the right.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [10, 99],
@@ -166,6 +168,7 @@ const placeValueHundreds = defineSkill({
   id: 'place-value-hundreds',
   name: 'Hundreds Digit',
   blurb: 'Name the hundreds digit',
+  teachingLine: 'The hundreds digit is third from the right.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [100, 299],
@@ -223,6 +226,7 @@ const expandedFormSkill = defineSkill({
   id: 'expanded-form',
   name: 'Expanded Form',
   blurb: '347 = 300 + 40 + 7',
+  teachingLine: 'Expanded form shows a number as a sum of its place values.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [100, 299],
@@ -270,6 +274,7 @@ const compareNumbers = defineSkill({
   id: 'compare-numbers',
   name: 'Compare Numbers',
   blurb: 'Use <, >, and =',
+  teachingLine: 'Compare digit counts, then matching places from the left; all matches mean equal.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [0, 99],
@@ -337,6 +342,7 @@ const orderNumbers = defineSkill({
   id: 'order-numbers',
   name: 'Order Numbers',
   blurb: 'Order three numbers',
+  teachingLine: 'Ascending order lists numbers from smallest to largest.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [0, 99],
@@ -394,6 +400,7 @@ const roundTo10 = defineSkill({
   id: 'round-to-10',
   name: 'Round to Ten',
   blurb: 'Round to the nearest ten',
+  teachingLine: 'Rounding uses the ones digit: below 5 goes down, 5 or more goes up.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [11, 99],
@@ -452,6 +459,7 @@ const roundTo100 = defineSkill({
   id: 'round-to-100',
   name: 'Round to Hundred',
   blurb: 'Round to the nearest hundred',
+  teachingLine: 'Use the final two digits: below 50 goes down, 50 or more goes up.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [105, 299],

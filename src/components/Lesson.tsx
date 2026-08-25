@@ -13,10 +13,11 @@ import {
   recordSessionAttempt,
   requeueMiss,
   startLessonSession,
+  type LessonSession,
 } from '../lib/lesson'
 import { createSubmissionGate } from '../lib/submission-gate'
 import { feedbackText, responseTo } from '../lib/submit'
-import type { Difficulty, Misconception, SkillGenerator } from '../lib/types'
+import type { Difficulty, Misconception, Problem, SkillGenerator } from '../lib/types'
 import { difficultyFor, useProgress, type LessonOutcome } from '../store/progress'
 import { ChoiceInput } from './ChoiceInput'
 import { CoordinatePlaneInput } from './CoordinatePlaneInput'
@@ -27,6 +28,8 @@ import { NumberLineInput } from './NumberLineInput'
 import { ProblemView } from './ProblemView'
 import { RootPairInput } from './RootPairInput'
 import { StageCheckpoint } from './StageCheckpoint'
+import { SolutionSteps } from './SolutionSteps'
+import { SkillIntro, type SkillIntroMode } from './SkillIntro'
 
 /**
  * What is on screen between submitting an answer and moving on, or `null` while
@@ -47,10 +50,12 @@ type Feedback = { status: CheckResult['status']; misconception?: Misconception }
 export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () => void }) {
   const progress = useProgress((s) => s.progress)
   const recordAttempt = useProgress((s) => s.recordAttempt)
+  const markIntroSeen = useProgress((s) => s.markIntroSeen)
   const completeLesson = useProgress((s) => s.completeLesson)
 
   const baseDifficulty = difficultyFor(progress.skills[skill.id]?.mastery ?? 0)
   const targetCorrect = lessonTarget(skillById.get(skill.id)?.quick)
+  const introNeeded = skill.teachingLine !== undefined && progress.skills[skill.id]?.introSeen !== true
 
   // Seed from mount time so each lesson is a fresh set, but stays reproducible
   // within the session.
@@ -63,8 +68,14 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
     [skill, seedBase],
   )
 
-  const [session, setSession] = useState(() =>
-    startLessonSession(targetCorrect, baseDifficulty, makeProblem),
+  const [introMode, setIntroMode] = useState<SkillIntroMode | null>(() =>
+    introNeeded ? 'automatic' : null,
+  )
+  const [introProblem, setIntroProblem] = useState<Problem | null>(() =>
+    introNeeded ? generateProblem(skill, 1, 1) : null,
+  )
+  const [session, setSession] = useState<LessonSession | null>(() =>
+    introNeeded ? null : startLessonSession(targetCorrect, baseDifficulty, makeProblem),
   )
   const [entry, setEntry] = useState('')
   const [feedback, setFeedback] = useState<Feedback>(null)
@@ -89,6 +100,34 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
   if (finished) {
     return <LessonComplete skill={skill} outcome={finished} onExit={onExit} />
   }
+
+  const startPractice = () => {
+    if (introMode !== 'automatic') return
+    markIntroSeen(skill.id)
+    setSession(startLessonSession(targetCorrect, baseDifficulty, makeProblem))
+    setIntroMode(null)
+  }
+
+  const reviewIntro = () => {
+    if (!skill.teachingLine || feedback) return
+    if (!introProblem) setIntroProblem(generateProblem(skill, 1, 1))
+    setIntroMode('review')
+  }
+
+  if (introMode && introProblem) {
+    return (
+      <SkillIntro
+        skill={skill}
+        problem={introProblem}
+        mode={introMode}
+        onLeave={onExit}
+        onStart={startPractice}
+        onBackToPractice={() => setIntroMode(null)}
+      />
+    )
+  }
+
+  if (!session) throw new Error('Lesson has no intro or session')
 
   const problem = currentProblem(session)
   const mascotState: MascotState =
@@ -274,6 +313,15 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
         <span className="text-sm font-bold text-ink-soft tabular-nums w-12 text-right">
           {session.correctCount}/{session.targetCorrect}
         </span>
+        {skill.teachingLine && !feedback && (
+          <button
+            type="button"
+            onClick={reviewIntro}
+            className="whitespace-nowrap text-xs font-bold text-lilac-deep"
+          >
+            Review intro
+          </button>
+        )}
       </header>
 
       <div className="flex-1 flex flex-col items-center justify-center px-5 gap-5 min-h-0">
@@ -375,21 +423,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
             {/* Withheld for a right value in the wrong form: the arithmetic was
                 already done, and handing it back removes the step still to take. */}
             {response.showsSolution && (
-              <ol className="space-y-2 mb-4">
-                {problem.solution.map((step, i) => (
-                  <li key={i} className="flex gap-2.5">
-                    <span className="shrink-0 w-6 h-6 rounded-full bg-butter-deep/30 text-xs font-bold flex items-center justify-center">
-                      {i + 1}
-                    </span>
-                    <span>
-                      <span className="block">{step.text}</span>
-                      {step.detail && (
-                        <span className="block font-bold tabular-nums text-ink">{step.detail}</span>
-                      )}
-                    </span>
-                  </li>
-                ))}
-              </ol>
+              <SolutionSteps solution={problem.solution} />
             )}
 
             <button

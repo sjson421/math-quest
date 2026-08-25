@@ -4,6 +4,63 @@ import type { Display, WholeNumberData } from '../lib/types'
 import { ProblemView } from './ProblemView'
 
 describe('ProblemView', () => {
+  it.each([
+    ['inline', { kind: 'inline', text: '2 + 3' }],
+    ['column', { kind: 'column', operands: [12, 3], operator: '+' }],
+    ['decimal-column', {
+      kind: 'decimal-column',
+      decimal: {
+        operation: 'add',
+        left: { coefficient: 12, scale: 1 },
+        right: { coefficient: 35, scale: 2 },
+      },
+    }],
+    ['story', { kind: 'story', text: 'A story with two values.', operands: [2, 3], operator: '+' }],
+    ['math', {
+      kind: 'math',
+      notation: { kind: 'text', value: '3/4' },
+      label: 'three fourths',
+    }],
+    ['diagram', { kind: 'diagram', diagram: { kind: 'circle', parts: 4, shadedParts: 3 } }],
+    ['coordinate-plane', {
+      kind: 'coordinate-plane',
+      plane: {
+        x: { min: -2, max: 2, step: 1 },
+        y: { min: -2, max: 2, step: 1 },
+        points: [],
+        lines: [],
+      },
+    }],
+    ['chart', {
+      kind: 'chart',
+      chart: {
+        title: 'Values',
+        xLabel: 'X',
+        yLabel: 'Y',
+        kind: 'bar',
+        labels: ['A', 'B'],
+        y: { min: 0, max: 10, step: 5 },
+        series: [{ label: 'One', values: [2, 3] }],
+      },
+    }],
+    ['equation', {
+      kind: 'equation',
+      text: 'x + 2 = 5',
+      variable: 'x',
+      equation: { operation: 'one-step-addsub', constant: 2, adds: true, rightHand: 5 },
+    }],
+  ] satisfies readonly (readonly [string, Display])[])('renders %s without an answer frame in read-only mode', (_kind, display) => {
+    const html = renderToStaticMarkup(
+      <ProblemView display={display} entry="7" readOnly />,
+    )
+
+    expect(html).not.toContain('animate-pulse')
+    expect(html).not.toContain('data-chart-answer')
+    expect(html).not.toContain('data-coordinate-plane-answer')
+    expect(html).not.toContain('>Answer<')
+    expect(html).not.toContain('equals 7')
+  })
+
   it('does not expose a root-pair tuple or duplicate answer frame', () => {
     const html = renderToStaticMarkup(
       <ProblemView

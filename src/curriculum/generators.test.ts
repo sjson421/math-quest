@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { allSkills, manifestIndex } from './index'
-import { checkContent, formatViolations } from '../lib/content-rules'
+import { checkContent, checkTeachingLine, formatViolations } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { checkAnswer, intAnswer } from '../lib/answer'
 import {
@@ -3854,7 +3854,10 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
     const at = manifestIndex.get(skill.id)
     expect(at, `${skill.id} is not in the manifest`).toBeDefined()
 
-    const violations = all.flatMap((problem) => checkContent(problem, at!))
+    const violations = [
+      ...all.flatMap((problem) => checkContent(problem, at!)),
+      ...checkTeachingLine(skill.teachingLine, at!),
+    ]
     const distinct = [...new Set(formatViolations(violations))]
 
     expect(distinct).toEqual([])

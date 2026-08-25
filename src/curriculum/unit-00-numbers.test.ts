@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { makeRng } from '../lib/rng'
 import type { Difficulty, Display, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { expandedForm, numberWords, unit00 } from './unit-00-numbers'
 
 const SEEDS = [1, 12345, 67890, 424242, 987654321]
@@ -41,6 +43,28 @@ const skill = (id: string) => {
   if (!found) throw new Error(`Missing Unit 0 skill: ${id}`)
   return found
 }
+
+const teachingLines = [
+  ['read-numbers', 'A numeral uses digits to show a number.'],
+  ['place-value-tens', 'The tens digit is second from the right.'],
+  ['place-value-hundreds', 'The hundreds digit is third from the right.'],
+  ['expanded-form', 'Expanded form shows a number as a sum of its place values.'],
+  ['compare-numbers', 'Compare digit counts, then matching places from the left; all matches mean equal.'],
+  ['order-numbers', 'Ascending order lists numbers from smallest to largest.'],
+  ['round-to-10', 'Rounding uses the ones digit: below 5 goes down, 5 or more goes up.'],
+  ['round-to-100', 'Use the final two digits: below 50 goes down, 50 or more goes up.'],
+] as const
+
+describe('Stage A teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = skill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
 
 describe('numberWords', () => {
   it.each([
@@ -399,6 +423,80 @@ describe('round-to-100', () => {
       lower + 100,
       Math.round(value / 10) * 10,
     ])
+  })
+})
+
+describe('fixed Stage A intro examples', () => {
+  it('recomputes read-numbers from its visible whole-number data', () => {
+    const problem = generateProblem(skill('read-numbers'), 1, 1)
+    const display = inline(problem)
+    const value = carried(display)
+
+    expect(value).toBeTypeOf('number')
+    expect(problem.answer).toEqual({ kind: 'exact', n: value, d: 1 })
+  })
+
+  it('recomputes place-value-tens from the visible numeral', () => {
+    const problem = generateProblem(skill('place-value-tens'), 1, 1)
+    const value = Number(inline(problem)?.text)
+
+    expect(problem.answer).toEqual({ kind: 'exact', n: Math.floor(value / 10) % 10, d: 1 })
+  })
+
+  it('recomputes place-value-hundreds from the visible numeral', () => {
+    const problem = generateProblem(skill('place-value-hundreds'), 1, 1)
+    const value = Number(inline(problem)?.text)
+
+    expect(problem.answer).toEqual({ kind: 'exact', n: Math.floor(value / 100), d: 1 })
+  })
+
+  it('recomputes expanded-form from the visible place values', () => {
+    const problem = generateProblem(skill('expanded-form'), 1, 1)
+    const parts = (inline(problem)?.text ?? '').split(' + ').map(Number)
+
+    expect(problem.answer).toEqual({ kind: 'exact', n: parts.reduce((sum, part) => sum + part, 0), d: 1 })
+  })
+
+  it('recomputes compare-numbers and resolves the visible choice label', () => {
+    const problem = generateProblem(skill('compare-numbers'), 1, 1)
+    const [left, right] = (inline(problem)?.text ?? '').split(' ? ').map(Number)
+    const label = left < right ? '<' : left > right ? '>' : '='
+    const matching = (problem.choices ?? []).filter((choice) => choice.label === label)
+
+    expect(matching).toHaveLength(1)
+    expect(problem.answer).toEqual({ kind: 'choice', id: matching[0].id })
+  })
+
+  it('recomputes order-numbers and resolves the sorted visible choice', () => {
+    const problem = generateProblem(skill('order-numbers'), 1, 1)
+    const values = (inline(problem)?.text ?? '').split(', ').map(Number)
+    const label = [...values].sort((a, b) => a - b).join(', ')
+    const matching = (problem.choices ?? []).filter((choice) => choice.label === label)
+
+    expect(matching).toHaveLength(1)
+    expect(problem.answer).toEqual({ kind: 'choice', id: matching[0].id })
+  })
+
+  it('recomputes round-to-10 from its visible value', () => {
+    const problem = generateProblem(skill('round-to-10'), 1, 1)
+    const value = Number(inline(problem)?.text)
+
+    expect(problem.answer).toEqual({ kind: 'exact', n: Math.round(value / 10) * 10, d: 1 })
+  })
+
+  it('recomputes round-to-100 from its visible value and keeps all wall diagnoses', () => {
+    const raw = skill('round-to-100').generate(makeRng(1), 1)
+    const problem = generateProblem(skill('round-to-100'), 1, 1)
+    const value = Number(inline(problem)?.text)
+
+    expect(problem.answer).toEqual({ kind: 'exact', n: Math.round(value / 100) * 100, d: 1 })
+    expect(raw.misconceptions?.map((misconception) => misconception.tag)).toEqual([
+      'rounded-down',
+      'rounded-up',
+      'rounded-only-to-tens',
+    ])
+    expect(problem.misconceptions).toHaveLength(2)
+    expect(new Set(problem.misconceptions?.map((misconception) => misconception.tag)).size).toBe(2)
   })
 })
 

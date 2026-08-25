@@ -467,4 +467,19 @@ describe('Lesson', () => {
     expect(generated).toEqual([1])
   })
 
+  it("shows an unseen teaching skill's fixed example before creating a warm-up", () => {
+    const generated: Difficulty[] = []
+    const skill = {
+      ...skillNeeding(undefined, 'synthetic-intro', generated),
+      teachingLine: 'A clear line teaches one idea.',
+    }
+
+    const html = renderToStaticMarkup(<Lesson skill={skill} onExit={() => {}} />)
+
+    expect(generated).toEqual([1])
+    expect(html).toContain('data-skill-intro="automatic"')
+    expect(html).toContain('A clear line teaches one idea.')
+    expect(html).not.toContain('0/10')
+  })
+
 })

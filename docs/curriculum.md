@@ -560,8 +560,10 @@ Ship by stage; each stage is independently useful.
   are planned; later stages still wait on timed mode. Planned skills are transparent to unlocking —
   a learner is never held behind our build order — and never offered for play.
 - **The content style contract above is enforced**, not advisory: `src/lib/content-rules.ts`
-  checks step count, step length, single-sentence hints, wall misconception coverage, and
-  forward references against a curated vocabulary list, over sampled generated problems.
+  checks authored teaching lines for one sentence, forward references, and current-unit
+  vocabulary, then checks step count, step length, single-sentence hints, wall misconception
+  coverage, and generated-problem forward references against a curated vocabulary list.
+  Stage A's eight lines are the first shipped intro increment; later stages remain staged.
 - **`SkillProgress` gains two fields** for skipping: `source: 'practiced' | 'tested-out' |
   'self-assessed'` and the existing mastery set to 3. These must survive a **sync round
   trip**, not just file export — sync is now the routine path, so losing them there would

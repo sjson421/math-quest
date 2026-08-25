@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { checkContent, formatViolations, learnerText, VOCABULARY } from './content-rules'
+import {
+  checkContent,
+  checkTeachingLine,
+  formatViolations,
+  learnerText,
+  teachingLineTerms,
+  VOCABULARY,
+} from './content-rules'
 import { rational } from './rational'
 import type { ContentLocation } from './content-rules'
 import type { Problem, SolutionStep } from './types'
@@ -82,6 +89,46 @@ describe('length limits', () => {
     const detail = 'this detail line is deliberately far longer than twelve words in total, easily'
 
     expect(checkContent(problem({ solution: [{ text: 'Add.', detail }] }), at())).toEqual([])
+  })
+})
+
+describe('teaching lines', () => {
+  it('accepts one sentence with at most one current-unit term', () => {
+    const location = at({}, 'unit-0')
+    expect(checkTeachingLine('A numeral shows a number.', location)).toEqual([])
+    expect(teachingLineTerms('A numeral shows a number.', 'unit-0')).toEqual(['numeral'])
+  })
+
+  it('names an empty teaching line', () => {
+    const violations = checkTeachingLine('   ', at({}, 'unit-0'))
+
+    expect(violations.map((violation) => violation.rule)).toEqual(['empty-teaching-line'])
+    expect(violations[0].message).toContain('teaching line is empty')
+  })
+
+  it('names a multi-sentence teaching line', () => {
+    const violations = checkTeachingLine('Read the places. Then write the number.', at({}, 'unit-0'))
+
+    expect(violations.map((violation) => violation.rule)).toEqual(['teaching-line-sentences'])
+    expect(violations[0].message).toContain('2 sentences')
+  })
+
+  it('names a later-unit term used in a teaching line', () => {
+    const violations = checkTeachingLine('A numerator is the top number.', at({}, 'unit-0'))
+
+    expect(violations.map((violation) => violation.rule)).toEqual(['teaching-line-forward-reference'])
+    expect(violations[0].message).toContain('"numerator"')
+  })
+
+  it('names multiple current-unit terms', () => {
+    const violations = checkTeachingLine('A numeral uses rounding.', at({}, 'unit-0'))
+
+    expect(violations.map((violation) => violation.rule)).toEqual(['teaching-line-vocabulary'])
+    expect(violations[0].message).toContain('numeral, rounding')
+  })
+
+  it('does not require lines for generators outside the shipped increment', () => {
+    expect(checkTeachingLine(undefined, at({}, 'unit-1'))).toEqual([])
   })
 })
 
