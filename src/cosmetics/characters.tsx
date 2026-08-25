@@ -1,40 +1,54 @@
-import { EAR_X } from './ears'
 import { INK, coats, families } from './palette'
-import type { Character } from './types'
+import type { Anchors, Character } from './types'
 
 /**
- * The three creatures a learner can be, and the parts that make them different.
+ * The two creatures a learner can be, and the parts that make them different.
  *
- * Every one of them is the same head circle at `(100, 112)` with the same eyes,
- * the same mouth, and the same two ear bases — because that is the contract nine
- * shipped accessories are authored against. **Buying a character never costs the
- * learner an accessory**, and holding the anchors still is the whole reason.
+ * **Each one draws its own body.** They used to share a single head circle at
+ * `(100, 112) r 57`, because the ten shipped accessories were authored against
+ * those literal numbers — so a character could vary its ears, its crest and its
+ * coat, and three creatures came out as three colours of one animal. Every item
+ * now reads `anchors` instead, which buys each body its own silhouette: a broad
+ * flat-topped cat with cheek fur, and the round bunny it was shaped like before.
  *
- * What is left over is more than it sounds: a coat, the shape hanging off each
- * ear base, what sits between them, what is drawn on the face, and the charm in
- * the `pin` slot. Cream bunny, ginger cat, sage dragon — a silhouette, a colour
- * and a snout apart, at a glance, with every hat still fitting.
+ * What the anchors still guarantee is the thing the old circle was protecting:
+ * **buying a character never costs the learner an accessory.** Every item fits
+ * every body, and `catalogue.test.tsx` renders every combination to say so.
  *
- * Geometry is in Pip's own `0 0 200 200` view box, unrotated for the ears, and
+ * Geometry is in the shared `0 0 200 200` view box, unrotated for the ears, and
  * carries no motion of its own; `Mascot.tsx` supplies all of it.
  */
 
-const { butter, mint, powder } = families
+const { butter, powder } = families
 
 /* ------------------------------------------------------------------------- *
  * Pip — cream bunny
  * ------------------------------------------------------------------------- */
 
 /**
- * Moved, not redrawn. The ellipses, radii and opacities are the ones
- * `Mascot.tsx` has always used.
+ * The round one, and the baseline the other two are read against.
  *
- * One thing did change and it is a fix: the inner ear used to be painted outside
- * the rotating group with a static `rotate(-24)` of its own, which matched at
- * rest and slid off the ear on `happy` and `celebrating` — the two states where
- * the ears actually move. Inside the group it needs no transform and cannot come
- * adrift, which is the same guarantee every ear-riding cosmetic gets.
+ * His geometry is untouched by the anchor rework — the same circle, the same ear
+ * ellipses, the same tuft. His `anchors` are that circle measured: `brow` and
+ * `temple` are its true half-widths at those heights, and `face` is the identity
+ * frame, so the expressions land exactly where they were authored.
  */
+const PIP_EAR: Anchors['ear'] = {
+  left: { base: { x: 56, y: 96 }, hold: { x: 56, y: 68 } },
+  right: { base: { x: 144, y: 96 }, hold: { x: 144, y: 68 } },
+}
+
+const pipAnchors: Anchors = {
+  face: { centre: { x: 100, y: 124 }, scale: 1 },
+  ear: PIP_EAR,
+  crown: 55,
+  brow: { y: 68, halfWidth: 36 },
+  temple: { y: 99, halfWidth: 55 },
+  chin: { y: 158, halfWidth: 32 },
+  shoulder: { y: 124, halfWidth: 52.5 },
+  pin: { x: 148, y: 162 },
+}
+
 const pip: Character = {
   kind: 'character',
   id: 'pip',
@@ -44,8 +58,10 @@ const pip: Character = {
   // and no migration.
   price: 0,
   coat: coats.pip,
+  anchors: pipAnchors,
+  head: <circle cx="100" cy="112" r="57" fill={coats.pip.base} stroke={coats.pip.shade} strokeWidth="3" />,
   ear: (ear) => {
-    const x = EAR_X[ear]
+    const { x } = PIP_EAR[ear].base
 
     return (
       <g>
@@ -86,34 +102,72 @@ const pip: Character = {
  * ------------------------------------------------------------------------- */
 
 /**
- * A pointed ear where Pip has a long one, and a face with things on it.
+ * Broad, flat-topped and low, with four fur points breaking the outline where a
+ * cheek would be — the opposite proportion to Pip in every direction that reads
+ * at 92px: wider than tall where he is a circle, widest at the cheeks where he
+ * is widest at the eyes, and a jaw that comes to a soft point where he has none.
  *
- * The ear is the piece that had to be checked rather than drawn: it tapers, so
- * it is *narrower* than Pip's at every height, and both ear-riding cosmetics are
- * sized to his. At `y 68` the muff's 30-unit circle covers a 18-unit ear with
- * room to spare, and the tip still pokes out above it exactly as Pip's does. The
- * bow at `y 64` is the one that overhangs — 26 units of ribbon on a 20-unit ear —
- * which reads as a bow tied round a narrow ear rather than as a mistake.
- *
- * The whiskers cross the silhouette on purpose. Kept inside it they read as four
- * scratches on a cheek; the thing that makes a whisker a whisker is leaving the
- * face. They stop short of `y 150`, where the charm starts.
+ * The fur points are part of the head path rather than shapes laid on it, so the
+ * outline runs through them and they cannot show a seam against the fill.
  */
+const MOCHI_EAR: Anchors['ear'] = {
+  left: { base: { x: 58, y: 86 }, hold: { x: 58, y: 66 } },
+  right: { base: { x: 142, y: 86 }, hold: { x: 142, y: 66 } },
+}
+
+const mochiAnchors: Anchors = {
+  // A bigger head carries a bigger face: at scale 1 the eyes sit island-like in
+  // the middle of it with cheek to spare on both sides.
+  face: { centre: { x: 100, y: 128 }, scale: 1.06 },
+  ear: MOCHI_EAR,
+  crown: 74,
+  brow: { y: 90, halfWidth: 52 },
+  temple: { y: 116, halfWidth: 62 },
+  chin: { y: 166, halfWidth: 30 },
+  shoulder: { y: 132, halfWidth: 58 },
+  pin: { x: 152, y: 166 },
+}
+
 const mochi: Character = {
   kind: 'character',
   id: 'mochi',
   name: 'Mochi',
   price: 500,
   coat: coats.mochi,
+  anchors: mochiAnchors,
+  head: (
+    <path
+      // Flat across the top between the ears, out to the widest point at the
+      // cheeks, through three fur points a side, then in to a soft jaw.
+      d="M100 74
+         C 74 74 52 80 44 96
+         C 38 108 38 118 40 128
+         L 30 134 L 42 138
+         L 32 148 L 46 149
+         L 40 160 L 54 157
+         C 66 170 82 176 100 176
+         C 118 176 134 170 146 157
+         L 160 160 L 154 149
+         L 168 148 L 158 138
+         L 170 134 L 160 128
+         C 162 118 162 108 156 96
+         C 148 80 126 74 100 74 Z"
+      fill={coats.mochi.base}
+      stroke={coats.mochi.shade}
+      strokeWidth="3"
+      strokeLinejoin="round"
+    />
+  ),
   ear: (ear) => {
-    const x = EAR_X[ear]
+    const { x } = MOCHI_EAR[ear].base
+    // Leaning outward, the way a cat's do — mirrored so both lean away from the
+    // midline rather than both leaning the same way.
+    const lean = ear === 'left' ? -6 : 6
 
     return (
       <g>
-        {/* Base at y 98 rather than the ear line at 96: the head is painted next
-            and covers the last two units, so no seam shows where they meet. */}
         <path
-          d={`M${x - 16} 98 Q${x - 14} 60 ${x} 46 Q${x + 14} 60 ${x + 16} 98 Z`}
+          d={`M${x - 20} 96 Q${x - 18} 62 ${x + lean} 44 Q${x + 20 + lean} 64 ${x + 21} 96 Z`}
           strokeWidth="3"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -121,18 +175,18 @@ const mochi: Character = {
           stroke={coats.mochi.shade}
         />
         <path
-          d={`M${x - 9} 94 Q${x - 8} 64 ${x} 54 Q${x + 8} 64 ${x + 9} 94 Z`}
+          d={`M${x - 11} 92 Q${x - 10} 66 ${x + lean} 56 Q${x + 11 + lean} 70 ${x + 12} 92 Z`}
           fill={coats.mochi.blush}
           opacity="0.5"
         />
       </g>
     )
   },
-  // Two peaks where Pip has one arch, in the same envelope and the same 5-unit
-  // fur weight — the smallest change that reads as a different animal's fur.
+  // Two peaks where Pip has one arch, in the same fur weight — read as the tuft
+  // between a cat's ears rather than a second crest shape.
   crest: (
     <path
-      d="M90 59 Q94 45 99 56 Q104 45 110 59"
+      d="M88 82 Q93 66 99 79 Q105 66 112 82"
       stroke={coats.mochi.shade}
       strokeWidth="5"
       strokeLinecap="round"
@@ -143,15 +197,10 @@ const mochi: Character = {
   markings: (
     <g>
       {/* The heart of `heart-shades`, at half its size. A nose is the one place
-          on this face that is not INK-on-cream, so it is outlined in INK to keep
-          it part of the expression rather than an item sitting on top of one.
-
-          It ends at y 129 and not a unit lower. The delighted and celebrating
-          mouths both open from y 133, and the considering 'o' reaches y 134 —
-          at the y 133 this started at, all three met the nose and the pair read
-          as one shape with a tongue hanging out of it. */}
+          on this face that is not INK-on-coat, so it is outlined in INK to keep
+          it part of the expression rather than an item sitting on top of one. */}
       <path
-        d="M93 121 a3.5 3.5 0 0 1 7 0 a3.5 3.5 0 0 1 7 0 q0 4.5 -7 8 q-7 -3.5 -7 -8z"
+        d="M93 124 a3.5 3.5 0 0 1 7 0 a3.5 3.5 0 0 1 7 0 q0 4.5 -7 8 q-7 -3.5 -7 -8z"
         strokeWidth="2.5"
         strokeLinejoin="round"
         strokeLinecap="round"
@@ -159,10 +208,10 @@ const mochi: Character = {
         stroke={INK}
       />
       {[
-        'M88 130 Q66 125 38 120',
-        'M88 136 Q66 137 40 141',
-        'M112 130 Q134 125 162 120',
-        'M112 136 Q134 137 160 141',
+        'M86 134 Q62 129 34 124',
+        'M86 140 Q62 141 36 145',
+        'M114 134 Q138 129 166 124',
+        'M114 140 Q138 141 164 145',
       ].map((d) => (
         <path
           key={d}
@@ -184,128 +233,25 @@ const mochi: Character = {
   charm: (
     <g>
       <ellipse
-        cx="146"
-        cy="162"
+        cx="150"
+        cy="166"
         rx="11"
         ry="8"
         strokeWidth="2.5"
         style={{ fill: powder.base, stroke: powder.deep }}
       />
       <path
-        d="M157 162 l8 -7 v14z"
+        d="M161 166 l8 -7 v14z"
         strokeWidth="2.5"
         strokeLinejoin="round"
         strokeLinecap="round"
         style={{ fill: powder.soft, stroke: powder.deep }}
       />
       <path
-        d="M141 156 q-3 6 0 12"
+        d="M145 160 q-3 6 0 12"
         strokeWidth="2.5"
         strokeLinecap="round"
         style={{ fill: 'none', stroke: powder.deep }}
-      />
-    </g>
-  ),
-}
-
-/* ------------------------------------------------------------------------- *
- * Sprig — sage dragon
- * ------------------------------------------------------------------------- */
-
-/**
- * The furthest from Pip the anchors allow: a stubby horn on each ear base, a
- * spiked crest, and a muzzle drawn round the mouth.
- *
- * The horn is short and thick where the ear is long and thin, so the silhouette
- * changes at the top of the head — which is the only part of the outline a
- * character controls. It stays inside the ear's envelope for the same reason
- * Mochi's does, and the two ridge lines are what stop it reading as a blunt cone.
- *
- * The muzzle is `base` fill outlined in `shade` rather than a lighter patch: one
- * more tone would be a fourth colour in the coat, and the outline alone is what
- * a muzzle is. The mouth is painted after it and lands on it in all six states.
- */
-const sprig: Character = {
-  kind: 'character',
-  id: 'sprig',
-  name: 'Sprig',
-  price: 500,
-  coat: coats.sprig,
-  ear: (ear) => {
-    const x = EAR_X[ear]
-
-    return (
-      <g>
-        <path
-          d={`M${x - 13} 98 Q${x - 11} 66 ${x - 4} 52 Q${x} 47 ${x + 4} 52 Q${x + 11} 66 ${x + 13} 98 Z`}
-          strokeWidth="3"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          fill={coats.sprig.base}
-          stroke={coats.sprig.shade}
-        />
-        {[
-          `M${x - 8} 79 q8 -3.5 16 0`,
-          `M${x - 6} 67 q6 -3 12 0`,
-        ].map((d) => (
-          <path
-            key={d}
-            d={d}
-            strokeWidth="2.5"
-            strokeLinecap="round"
-            fill="none"
-            stroke={coats.sprig.shade}
-          />
-        ))}
-      </g>
-    )
-  },
-  // Three spikes, filled rather than stroked, so the crest is a shape with an
-  // outline like the horns rather than a thick squiggle like fur. Round joins
-  // keep the points from turning into the sharp corners nothing else here has.
-  crest: (
-    <path
-      d="M86 61 L91 47 L96 59 L100 45 L104 59 L109 47 L114 61 Z"
-      strokeWidth="3"
-      strokeLinejoin="round"
-      strokeLinecap="round"
-      fill={coats.sprig.base}
-      stroke={coats.sprig.shade}
-    />
-  ),
-  markings: (
-    <g>
-      <ellipse
-        cx="100"
-        cy="141"
-        rx="22"
-        ry="14"
-        strokeWidth="3"
-        fill={coats.sprig.base}
-        stroke={coats.sprig.shade}
-      />
-      {[94, 106].map((cx) => (
-        <ellipse key={cx} cx={cx} cy="132" rx="3" ry="3.5" fill={INK} opacity="0.7" />
-      ))}
-    </g>
-  ),
-  // A sprig, which is the name. Mint is the one family a sage coat could have
-  // swallowed, and the charm is the one place it cannot: the `pin` anchor sits
-  // off the head, against the room rather than against the body.
-  charm: (
-    <g>
-      <path
-        d="M139 172 Q138 152 156 149 Q158 167 141 170 Z"
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        style={{ fill: mint.base, stroke: mint.deep }}
-      />
-      <path
-        d="M141 170 Q147 161 155 154"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        style={{ fill: 'none', stroke: mint.deep }}
       />
     </g>
   ),
@@ -325,4 +271,4 @@ const sprig: Character = {
  * and the one an unknown id falls back to, and `index.tsx` reads both of those
  * off the head of this list rather than naming him again.
  */
-export const characters: Character[] = [pip, mochi, sprig]
+export const characters: Character[] = [pip, mochi]

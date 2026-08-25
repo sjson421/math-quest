@@ -1,5 +1,6 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { families } from './palette'
+import type { Span } from './types'
 
 /**
  * The rainbow wings.
@@ -32,9 +33,16 @@ const { lilac } = families
  * ground shadow at `y 173`. Leftmost point is `x 22.6`, which the ±3° sway takes
  * to `x 20` with the stroke counted.
  */
+/**
+ * Offsets from the wearer's shoulder rather than absolute points, so the pair
+ * spreads from behind whichever body is wearing it: `out` is how far past the
+ * silhouette's own half-width the lobe reaches, and `down` how far below the
+ * shoulder line it sits. A broad cat pushes them wider than a narrow bunny
+ * without either one growing a second table.
+ */
 const LOBES = [
-  { cx: 54, cy: 96, rx: 34, ry: 22, rotate: 30, spotX: 38, spotY: 90 },
-  { cx: 58, cy: 146, rx: 26, ry: 18, rotate: -20, spotX: 46, spotY: 148 },
+  { out: 2, down: -24, rx: 34, ry: 22, rotate: 30, spotOut: 16, spotDown: -30 },
+  { out: -2, down: 26, rx: 26, ry: 18, rotate: -20, spotOut: 10, spotDown: 28 },
 ]
 
 /**
@@ -67,42 +75,43 @@ const LOBES = [
  * it. That is what makes the colour travel outward along the wing, and it keeps
  * the two wings in step so they read as one bird rather than two props.
  */
-export function RainbowWings() {
+export function RainbowWings({ shoulder }: { shoulder: Span }) {
   const still = useReducedMotion()
 
   return (
     <motion.g
       animate={still ? undefined : { rotate: [-3, 3, -3] }}
       transition={{ duration: 4.6, repeat: Infinity, ease: 'easeInOut' }}
-      style={{ transformOrigin: '100px 120px' }}
+      style={{ transformOrigin: `100px ${shoulder.y}px` }}
     >
       {LOBES.map((lobe, i) => (
         <g
-          key={lobe.cy}
+          key={lobe.down}
           className="pip-hue-cycle"
           style={{ animationDelay: `${i * 1.2}s` }}
         >
           {[-1, 1].map((side) => {
             // The table is written for the left wing, so the right one takes
             // the mirror of the position and of the tilt.
-            const cx = side === -1 ? lobe.cx : 200 - lobe.cx
-            const spotX = side === -1 ? lobe.spotX : 200 - lobe.spotX
+            const cx = 100 + side * (shoulder.halfWidth + lobe.out)
+            const cy = shoulder.y + lobe.down
+            const spotX = 100 + side * (shoulder.halfWidth + lobe.out + lobe.spotOut)
             const rotate = side === -1 ? lobe.rotate : -lobe.rotate
 
             return (
               <g key={side}>
                 <ellipse
                   cx={cx}
-                  cy={lobe.cy}
+                  cy={cy}
                   rx={lobe.rx}
                   ry={lobe.ry}
-                  transform={`rotate(${rotate} ${cx} ${lobe.cy})`}
+                  transform={`rotate(${rotate} ${cx} ${cy})`}
                   strokeWidth="3"
                   style={{ fill: lilac.soft, stroke: lilac.deep }}
                 />
                 <circle
                   cx={spotX}
-                  cy={lobe.spotY}
+                  cy={shoulder.y + lobe.spotDown}
                   r="7"
                   strokeWidth="2.5"
                   style={{ fill: lilac.base, stroke: lilac.deep }}

@@ -111,10 +111,16 @@ These replace the parts that are about wearing something:
 
 **Composition**
 
-- [ ] It touches none of the fixed anchors: head circle `(100, 112) r 57`, eyes at `x 78` /
-      `x 122` on `y 110`, the mouth around `y 138`, the ear bases, and the `pin` anchor. The
-      table in [characters.md](characters.md) names the item that breaks for each.
-- [ ] Eyes and mouth are `INK`. The coat supplies body, outline and blush and nothing else.
+- [ ] It declares all eight anchors, and the head's outline actually passes through each
+      span — a brim is drawn at the `brow` half-width, so a head narrower than that there is
+      a head the hat hangs off. The table in [characters.md](characters.md) names what reads
+      each anchor.
+- [ ] The silhouette is its own shape, not Pip's in another colour. This is the layer that
+      makes a different creature; the anchors exist so it can be.
+- [ ] Eyes and mouth are stroked in `INK`. The one exception is the interior of an open
+      mouth — `happy` and `celebrating` fill it with the character's own `blush`, so a
+      delighted smile is never a fourth cream in the middle of a coloured face. The coat
+      supplies body, outline and blush and nothing else.
 - [ ] The coat is in `palette.ts`, sits outside all five app families, and is clearly deeper
       than `CREAM` — check it beside Pip, not on its own.
 - [ ] Its parts carry no motion. The ear is drawn **upright**; the charm is static.
@@ -122,19 +128,21 @@ These replace the parts that are about wearing something:
 
 **Fit — the promise a character makes to the wardrobe**
 
-- [ ] `ear-bows` sits on the ear, not beside it: there is material across `y 60–80` in the
-      ear's unrotated frame.
-- [ ] `mint-earmuffs` covers the ear and the band still meets the muff at both ends of the
-      `happy` waggle.
-- [ ] The crest is inside `x 86–114`, `y 45–61`. Checked with `party-hat`, `butter-crown`
-      and `wizard-hat` on, not against a bare head.
-- [ ] Every one of the nine cosmetics is put on and looked at. A character is not done until
-      all of them have been.
+- [ ] `ear-bows` sits on the ear, not beside it: there is material around the ear's own
+      `hold` point in its unrotated frame.
+- [ ] `mint-earmuffs` covers the ear — the muff is a 30-unit circle centred on `hold` — and
+      the band still meets it at both ends of the `happy` waggle.
+- [ ] The crest sits above `crown` and no wider than `brow`. Checked with `party-hat`,
+      `butter-crown` and `wizard-hat` on, not against a bare head.
+- [ ] Every one of the ten cosmetics is put on and looked at. A character is not done until
+      all of them have been. `catalogue.test.tsx` proves each one *draws*; only looking
+      proves it is in the right place.
 
 **Markings**
 
 - [ ] Nothing sits below `y 130` in the middle of the face: `happy` and `celebrating` open
-      the mouth from `y 133` and `thinking` reaches `y 134`.
+      the mouth from `y 133` and `thinking` reaches `y 134` — in face-frame coordinates, so
+      check against where `anchors.face` actually puts them.
 - [ ] Checked with `round-glasses` and `heart-shades` on — both reach `y 123`.
 
 **Ownership**
