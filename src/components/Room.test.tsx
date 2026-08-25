@@ -137,7 +137,9 @@ describe('the room against the wardrobe', () => {
    * single step: the cape is the *first* thing drawn inside his canvas, so if
    * the room had interleaved its slots with his it would land behind the rug.
    */
-  const CAPE = 'M78 118'
+  // By fill, not by an opening coordinate: the cape is computed from the
+  // wearer's `shoulder` anchor now, so its first command moves with the body.
+  const CAPE = 'fill:var(--color-powder)'
 
   it('draws a worn cosmetic in front of every decoration', () => {
     const html = renderToStaticMarkup(

@@ -26,6 +26,17 @@ export type MascotState =
   | 'celebrating'
   | 'sleeping'
 
+/**
+ * The two ears, in paint order.
+ *
+ * Here rather than in `ears.tsx` because `Anchors` names them and this module
+ * may not import that one — `ears.tsx` holds the wrapper that applies the swing,
+ * which is JSX, and re-exports these for everyone who only wants the names.
+ */
+export const EARS = ['left', 'right'] as const
+
+export type Ear = (typeof EARS)[number]
+
 /** Two items in the same slot cannot be worn at once. That is what a slot is for. */
 export type CosmeticSlot = 'back' | 'headwear' | 'face' | 'neck' | 'pin'
 
@@ -38,12 +49,79 @@ export type Equipped = Partial<Record<CosmeticSlot, string>>
 /** Slot → the id standing in it. An absent slot means nothing is there. */
 export type Placed = Partial<Record<RoomSlot, string>>
 
+/** A point in the shared `0 0 200 200` view box. */
+export type Point = { x: number; y: number }
+
 /**
- * A fragment gets the state so it can follow a part that moves on its own. Only
- * the ears do — everything else rides the root `<svg>` and needs no state at
- * all, which is why most items ignore the argument.
+ * A span across the body: how high it sits, and how far the silhouette reaches
+ * either side of the midline there. A band, a brim and a scarf are all "cross
+ * the body at this height, this wide", which is the whole reason they can be
+ * written once and fit three different heads.
  */
-type Fragment = (state: MascotState) => ReactNode
+export type Span = { y: number; halfWidth: number }
+
+/**
+ * Where the six expressions are drawn.
+ *
+ * The face is authored once, in Pip's coordinates, and *moved* onto each
+ * character rather than redrawn for it: `centre` is where Pip's face centre
+ * `(100, 120)` lands, and `scale` is how much bigger it gets there. A wider
+ * head does not get its own eyes — it gets Pip's, further apart.
+ *
+ * The `face` slot rides this same frame, so glasses land on the eyes on every
+ * character without knowing which one they are on.
+ */
+export type Frame = { centre: Point; scale: number }
+
+/**
+ * The contract between a body and everything worn on it.
+ *
+ * **This type is why a character can be redrawn from scratch.** It used to be
+ * that a head was a circle at `(100, 112) r 57` on all three, because ten
+ * accessories were authored against those literal numbers — so a new creature
+ * could vary its ears and its coat and nothing else. Now the accessories are
+ * authored against the names below and each character says where its own are,
+ * which moves the constraint from "every body is the same shape" to the far
+ * weaker "every body can say where its brow is".
+ *
+ * Adding an anchor is a real cost: it is a question every future character has
+ * to answer. These eight are the ones the shipped wardrobe actually asks.
+ */
+export type Anchors = {
+  /** Where the expression is drawn, and what the `face` slot rides. */
+  face: Frame
+  /**
+   * Each ear: where it pivots, and where things are tied to it.
+   *
+   * Two points rather than one because they answer different questions and the
+   * answers came apart the moment the ears did. `base` is on the head and is
+   * what the swing rotates about. `hold` is out on the ear's own mass, and is
+   * where a bow ties and an earmuff centres — a bunny's is far up a long ellipse
+   * and a cat's is barely above the base of a short triangle, and nothing but
+   * the character knows which. Guessing it from `base` is an earmuff floating
+   * above the ear it is meant to cover.
+   */
+  ear: Record<Ear, { base: Point; hold: Point }>
+  /** The top of the skull. A hat rises from here; nothing is drawn below it. */
+  crown: number
+  /** Where a hat band, a brim or a muff strap crosses. */
+  brow: Span
+  /** Where the arms of a pair of glasses meet the silhouette. */
+  temple: Span
+  /** Where a scarf crosses. */
+  chin: Span
+  /** Where a cape hangs from and a pair of wings emerges behind. */
+  shoulder: Span
+  /** Where the charm hangs, and what a `pin` cosmetic replaces. */
+  pin: Point
+}
+
+/**
+ * A fragment gets the state so it can follow a part that moves on its own — only
+ * the ears do, which is why most items ignore it — and the anchors of whoever is
+ * wearing it, so one drawing fits three bodies.
+ */
+type Fragment = (state: MascotState, anchors: Anchors) => ReactNode
 
 type Owned = {
   id: string
@@ -96,13 +174,17 @@ export type Decoration = Owned & {
 /**
  * Who the learner is playing as — the body every cosmetic is hung off.
  *
- * **A character varies the parts no cosmetic anchors to, and nothing else.** The
- * head circle, the eye line, the mouth, and the two ear bases are the same on
- * all of them, because every shipped accessory is authored against those exact
- * numbers: move the head and the scarf stops crossing a chin, move an ear base
- * and the earmuffs come off. What is left to vary — coat, ear silhouette, crest,
- * markings, charm — is enough to read as a different creature, and that is the
- * whole trade this type encodes.
+ * **A character draws its own body and says where things go on it.** It used to
+ * be the opposite: one head circle at `(100, 112) r 57` on all three, because
+ * ten accessories were authored against those literal numbers, so a creature
+ * could vary its ears and its coat and little else — three colours of the same
+ * animal. A character now brings its own `head` and its own `anchors`, and the
+ * wardrobe reads the anchors instead of the numbers.
+ *
+ * The promise that constraint was protecting is unchanged and now lives in
+ * `anchors`: **buying a character never costs the learner an accessory.** A body
+ * that answers the eight anchors holds all ten items; `catalogue.test.tsx`
+ * renders every item on every character to keep it true.
  *
  * **No state argument anywhere, for the reason `Decoration` has none.** All of
  * the motion belongs to `Mascot.tsx`: the ears take the ear swing, the charm
@@ -115,20 +197,36 @@ export type Character = Owned & {
   /** Body fill, outline, and the warm tone cheeks and inner ears share. */
   coat: Coat
   /**
-   * One ear, drawn upright about its own base. `Mascot.tsx` applies the
-   * rotation, so this is the shape *before* the −24° / +24° rest pose — the same
-   * frame `bow()` and `muff()` are written in.
-   *
-   * It must hold what rides it: an ear bow sits at `y 64` and an earmuff covers
-   * a 30-unit circle at `y 68`, both centred on the ear base. An ear with
-   * nothing there is an ear those two items fall off.
+   * Where everything worn on this body goes. The one thing a character may not
+   * leave out and may not get wrong: an anchor in the wrong place is an item
+   * hanging in the air beside the creature rather than on it.
    */
-  ear: (ear: 'left' | 'right') => ReactNode
+  anchors: Anchors
   /**
-   * What sits between the ears, in the tuft's envelope — `x 86–114`, `y 45–61`.
-   * Wider or taller and it collides with the hats, which is a collision the
-   * render order cannot fix: a crest is one of Pip's own layers and paints over
-   * the party hat's crown, which passes behind them.
+   * The head and body silhouette, drawn once and shared by all six states — the
+   * motion is the root bob, which it inherits.
+   *
+   * This is the layer that makes a character a different creature rather than a
+   * different colour, so it is deliberately unconstrained in shape. What it owes
+   * is only that its outline actually passes through the spans in `anchors`: a
+   * brim drawn at the `brow` half-width hangs off a head narrower than that.
+   */
+  head: ReactNode
+  /**
+   * One ear, drawn upright about its own base at `anchors.ear[ear]`.
+   * `Mascot.tsx` applies the rotation, so this is the shape *before* the rest
+   * pose — the same frame `bow()` and `muff()` are written in.
+   *
+   * It must hold what rides it: both of those are drawn centred on the ear base
+   * and sized off it, so an ear that is much smaller than its own anchor claims
+   * is an ear the earmuff swallows.
+   */
+  ear: (ear: Ear) => ReactNode
+  /**
+   * What sits between the ears, above `anchors.crown` and no wider than the
+   * brow. Wider or taller and it collides with the hats, which is a collision
+   * the render order cannot fix: a crest is one of the character's own layers
+   * and paints over the party hat's crown, which passes behind them.
    */
   crest: ReactNode
   /**
@@ -138,8 +236,8 @@ export type Character = Owned & {
   markings?: ReactNode
   /**
    * What stands in the `pin` slot when nothing is equipped there. Static
-   * geometry about the `pin` anchor `(148, 162)`; `Mascot.tsx` gives it the sway
-   * and the celebration spin that Pip's star has always had.
+   * geometry about this character's own `anchors.pin`; `Mascot.tsx` gives it the
+   * sway and the celebration spin that Pip's star has always had.
    */
   charm: ReactNode
 }

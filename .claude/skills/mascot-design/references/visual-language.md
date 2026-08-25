@@ -15,8 +15,8 @@ peachier than the app's, which is pinker.
 | --- | --- | --- | --- |
 | `CREAM` | `#fff6f0` | body fill | none — **not** `--color-cream` `#fef7f9` |
 | `CREAM_SHADE` | `#ffe8dd` | body outline | none — **not** `--color-cream-deep` `#f9ecf1` |
-| `INK` | `#4a3f47` | eyes, mouth | `--color-ink` |
-| `BLUSH` | `#ffb3c9` | cheeks, inner ear, ground shadow | `--color-blossom` |
+| `INK` | `#4a3f47` | eyes, mouth strokes | `--color-ink` |
+| `BLUSH` | `#ffb3c9` | cheeks, inner ear, ground shadow, open-mouth interior | `--color-blossom` |
 | star fill | `#ffe5a3` | signature star | `--color-butter` |
 | star stroke | `#e8b53d` | signature star | `--color-butter-deep` |
 
@@ -25,11 +25,14 @@ smudge on the character, and because both are near-white it will pass every revi
 does not put them next to each other.
 
 **Each character has a coat of its own**, in the `coats` map in that same module — a `base`
-fill, a `shade` outline, and a `blush` for cheeks, inner ear and ground shadow. Pip's coat is
+fill, a `shade` outline, and a `blush` for cheeks, inner ear, ground shadow and the inside of
+an open mouth. Pip's coat is
 the three constants above. A coat must stay outside the five families below, or that
 character loses every cosmetic in the family it collides with;
 [characters.md](characters.md) lists the three and the rule in full. `INK` is not part of a
-coat: eyes and mouth are the same on everyone.
+coat: eyes and mouth are stroked the same on everyone. Only the interior of an open mouth
+takes the coat's `blush`, which is why `happy` and `celebrating` read as that character's
+pink and every other part of the expression does not.
 
 **App tokens available to cosmetics** — each family is a base, a soft tint, and a deep
 shade, which is exactly enough for a fill, a highlight, and an outline:

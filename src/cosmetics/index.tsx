@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import { characters } from './characters'
-import { EARS, EAR_X, onEar, type Ear } from './ears'
+import { onEar } from './ears'
+import { inverseFaceTransform } from './frame'
 import { INK, families } from './palette'
 import { decorations } from './room'
 import { RainbowWings } from './wings'
@@ -13,8 +14,10 @@ import type {
   Decoration,
   Equipped,
   Placed,
+  Point,
   RoomSlot,
 } from './types'
+import { EARS } from './types'
 
 /**
  * The cosmetics a character can wear, and the one catalogue holding them beside
@@ -26,10 +29,19 @@ import type {
  * also why a new character costs the wardrobe nothing: all three are the same
  * anchors under a different coat.
  *
- * Geometry is written in Pip's own `0 0 200 200` view box against the anchors in
- * the `mascot-design` contract, so nothing here is scaled or repositioned into
- * place. The root `<svg>` carries the per-state bob, and a cosmetic drawn as its
- * child inherits it: re-applying the bob doubles it.
+ * **Every item is drawn from the wearer's `anchors`, never from literal
+ * coordinates.** That is what lets three differently-shaped bodies share one
+ * wardrobe: a hat band is "cross the brow, this much wider than the head", and
+ * the brow is wherever that character says it is. Hard-coding `x 64` instead is
+ * an item that fits Pip and hangs off a cat.
+ *
+ * The `face` slot is the exception that proves it: those items are drawn in the
+ * face's own frame by `Mascot.tsx`, so they are authored in Pip's coordinates
+ * and carried onto whoever is wearing them — see `frame.tsx`.
+ *
+ * Geometry is in the shared `0 0 200 200` view box. The root `<svg>` carries the
+ * per-state bob, and a cosmetic drawn as its child inherits it: re-applying the
+ * bob doubles it.
  */
 
 export type {
@@ -78,6 +90,10 @@ export const cosmetics: Cosmetic[] = [
     price: 40,
     // INK rather than a colour family: glasses sit on the face and read as part
     // of the expression, and a lilac frame competes with the eyes it surrounds.
+    //
+    // Authored in the face frame — `Mascot.tsx` carries the whole `face` slot
+    // onto the wearer, so these are Pip's eye coordinates and land on the eyes
+    // of a wider or a narrower head without knowing whose they are.
     render: () => (
       <g>
         <circle cx="78" cy="110" r="13" fill="none" stroke={INK} strokeWidth="3" />
@@ -93,7 +109,13 @@ export const cosmetics: Cosmetic[] = [
     slot: 'headwear',
     name: 'Ear bows',
     price: 60,
-    render: (state) => <g>{EARS.map((ear) => onEar(ear, state, bow(ear)))}</g>,
+    render: (state, anchors) => (
+      <g>
+        {EARS.map((ear) =>
+          onEar(ear, state, anchors.ear[ear].base, bow(anchors.ear[ear].hold)),
+        )}
+      </g>
+    ),
   },
 
   {
@@ -102,27 +124,41 @@ export const cosmetics: Cosmetic[] = [
     slot: 'neck',
     name: 'Mint scarf',
     price: 90,
-    // Pip has no neck. This reads as a scarf because it crosses the chin line
-    // inside the lower head, not because there is anything to wrap.
-    render: () => (
-      <g>
-        <path
-          d="M68 156 q32 16 64 0 q-4 12 -12 15 q-20 7 -40 0 q-8 -3 -12 -15z"
-          strokeWidth="3"
-          strokeLinejoin="round"
-          strokeLinecap="round"
-          style={{ fill: mint.base, stroke: mint.deep }}
-        />
-        <motion.path
-          d="M124 168 q10 8 8 20"
-          strokeWidth="3"
-          strokeLinecap="round"
-          animate={{ rotate: [0, 6, 0, -6, 0] }}
-          transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ fill: 'none', stroke: mint.deep, transformOrigin: '124px 168px' }}
-        />
-      </g>
-    ),
+    // None of the three has a neck. This reads as a scarf because it crosses the
+    // chin line inside the lower body, not because there is anything to wrap —
+    // so it is drawn from `chin`, and on Mochi that line is under a soft jaw.
+    render: (_state, { chin }) => {
+      const w = chin.halfWidth
+      const tailX = 100 + w * 0.75
+
+      return (
+        <g>
+          <path
+            d={path`M${100 - w} ${chin.y - 2}
+                q${w} 16 ${2 * w} 0
+                q-4 12 -12 15
+                q-${w - 12} 7 -${2 * (w - 12)} 0
+                q-8 -3 -12 -15z`}
+            strokeWidth="3"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            style={{ fill: mint.base, stroke: mint.deep }}
+          />
+          <motion.path
+            d={path`M${tailX} ${chin.y + 10} q10 8 8 20`}
+            strokeWidth="3"
+            strokeLinecap="round"
+            animate={{ rotate: [0, 6, 0, -6, 0] }}
+            transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
+            style={{
+              fill: 'none',
+              stroke: mint.deep,
+              transformOrigin: `${tailX}px ${chin.y + 10}px`,
+            }}
+          />
+        </g>
+      )
+    },
   },
 
   {
@@ -137,17 +173,26 @@ export const cosmetics: Cosmetic[] = [
     // in each direction, and the rest sway another 1.5. That is a third of the
     // muff's radius at worst, so the band still ends well inside it at every
     // extreme and no gap opens.
-    render: (state) => (
-      <g>
-        <path
-          d="M56 68 Q100 30 144 68"
-          strokeWidth="3"
-          strokeLinecap="round"
-          style={{ fill: 'none', stroke: mint.deep }}
-        />
-        {EARS.map((ear) => onEar(ear, state, muff(ear)))}
-      </g>
-    ),
+    render: (state, anchors) => {
+      const left = anchors.ear.left.hold
+      const right = anchors.ear.right.hold
+
+      return (
+        <g>
+          {/* Muff to muff, arcing clear of the crown between them — so the band
+              passes over a cat's tuft rather than through it. */}
+          <path
+            d={path`M${left.x} ${left.y} Q100 ${anchors.crown - 25} ${right.x} ${right.y}`}
+            strokeWidth="3"
+            strokeLinecap="round"
+            style={{ fill: 'none', stroke: mint.deep }}
+          />
+          {EARS.map((ear) =>
+            onEar(ear, state, anchors.ear[ear].base, muff(anchors.ear[ear].hold)),
+          )}
+        </g>
+      )
+    },
   },
 
   {
@@ -156,36 +201,45 @@ export const cosmetics: Cosmetic[] = [
     slot: 'headwear',
     name: 'Party hat',
     price: 120,
-    // The crown passes behind the ear tips, the band crosses the forehead in
+    // The cone passes behind the ear tips, the band crosses the forehead in
     // front. One item, one id, two fragments the render order interleaves.
-    back: () => (
+    //
+    // It rises from `crown` rather than from the top of the canvas: on a low
+    // flat head the hat sits lower and stays the same hat, where a fixed apex
+    // would leave a tall gap between the brim and the head on one character and
+    // crush the cone on another.
+    back: (_state, { crown, brow }) => (
       <path
-        d="M100 14 L124 64 H76 Z"
+        d={path`M100 ${crown - 42} L${100 + brow.halfWidth * 0.66} ${brow.y - 6} H${100 - brow.halfWidth * 0.66} Z`}
         strokeWidth="3"
         strokeLinejoin="round"
         strokeLinecap="round"
         style={{ fill: lilac.base, stroke: lilac.deep }}
       />
     ),
-    front: () => (
-      <g>
-        <path
-          d="M74 62 h52 a5 5 0 0 1 0 10 h-52 a5 5 0 0 1 0 -10z"
-          strokeWidth="3"
-          strokeLinejoin="round"
-          style={{ fill: lilac.soft, stroke: lilac.deep }}
-        />
-        <motion.circle
-          cx="100"
-          cy="12"
-          r="7"
-          strokeWidth="2.5"
-          animate={{ y: [0, -3, 0, 3, 0] }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ fill: lilac.soft, stroke: lilac.deep }}
-        />
-      </g>
-    ),
+    front: (_state, { crown, brow }) => {
+      const w = brow.halfWidth * 0.72
+
+      return (
+        <g>
+          <path
+            d={path`M${100 - w} ${brow.y - 8} h${2 * w} a5 5 0 0 1 0 10 h-${2 * w} a5 5 0 0 1 0 -10z`}
+            strokeWidth="3"
+            strokeLinejoin="round"
+            style={{ fill: lilac.soft, stroke: lilac.deep }}
+          />
+          <motion.circle
+            cx="100"
+            cy={crown - 44}
+            r="7"
+            strokeWidth="2.5"
+            animate={{ y: [0, -3, 0, 3, 0] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ fill: lilac.soft, stroke: lilac.deep }}
+          />
+        </g>
+      )
+    },
   },
 
   {
@@ -194,23 +248,37 @@ export const cosmetics: Cosmetic[] = [
     slot: 'back',
     name: 'Powder cape',
     price: 160,
-    // The only slot painted before Pip. That is the whole design problem: the
-    // head is a circle ending at y 169, so a cape hung below the chin shows up
-    // as a flat band across it and reads as a bib. The hem therefore curves
-    // *up* through the middle — at x 100 it reaches y 165, behind the head —
-    // and what the learner sees is the two flares to either side, which is what
-    // makes it read as fabric spreading out rather than something worn in front.
-    render: () => (
-      <motion.path
-        d="M78 118 Q38 140 30 168 Q100 158 170 168 Q162 140 122 118 Z"
-        strokeWidth="3"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        animate={{ rotate: [-2.5, 2.5, -2.5] }}
-        transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
-        style={{ fill: powder.base, stroke: powder.deep, transformOrigin: '100px 124px' }}
-      />
-    ),
+    // The only slot painted before the character. That is the whole design
+    // problem: the body ends somewhere low, so a cape hung below the chin shows
+    // up as a flat band across it and reads as a bib. The hem therefore curves
+    // *up* through the middle, behind the body — and what the learner sees is
+    // the two flares to either side, which is what makes it read as fabric
+    // spreading out rather than something worn in front.
+    render: (_state, { shoulder, chin }) => {
+      const w = shoulder.halfWidth
+      // Past the widest point of the body, or the flares hide behind it.
+      const flare = w * 1.34
+      const hem = chin.y + 12
+
+      return (
+        <motion.path
+          d={path`M${100 - w * 0.42} ${shoulder.y - 6}
+              Q${100 - flare + 8} ${shoulder.y + 16} ${100 - flare} ${hem}
+              Q100 ${hem - 10} ${100 + flare} ${hem}
+              Q${100 + flare - 8} ${shoulder.y + 16} ${100 + w * 0.42} ${shoulder.y - 6} Z`}
+          strokeWidth="3"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          animate={{ rotate: [-2.5, 2.5, -2.5] }}
+          transition={{ duration: 4.2, repeat: Infinity, ease: 'easeInOut' }}
+          style={{
+            fill: powder.base,
+            stroke: powder.deep,
+            transformOrigin: `100px ${shoulder.y}px`,
+          }}
+        />
+      )
+    },
   },
 
   {
@@ -222,7 +290,11 @@ export const cosmetics: Cosmetic[] = [
     // The lenses are tinted rather than solid. Pip says everything he says with
     // his eyes, and a `face` item that switches four of the six expressions off
     // costs more than it adds — at 0.72 the eyes read straight through the pink.
-    render: () => (
+    // Lenses and bridge are face-frame geometry, carried onto the wearer with the
+    // eyes. The arms are not: they have to reach the *silhouette*, which is a
+    // different distance away on each body, so they are drawn from `temple` in
+    // the shared view box and undo the frame to get there.
+    render: (_state, { face, temple }) => (
       <g>
         {[78, 122].map((cx) => (
           <path
@@ -230,7 +302,7 @@ export const cosmetics: Cosmetic[] = [
             // Two semicircular arcs for the lobes and two quadratics down to the
             // point: a heart in four segments rather than the six a pair of
             // cubics would take, because the extra control is invisible at 92px.
-            d={`M${cx - 14} 105 a7 7 0 0 1 14 0 a7 7 0 0 1 14 0 q0 9 -14 17 q-14 -8 -14 -17z`}
+            d={path`M${cx - 14} 105 a7 7 0 0 1 14 0 a7 7 0 0 1 14 0 q0 9 -14 17 q-14 -8 -14 -17z`}
             strokeWidth="3"
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -244,21 +316,20 @@ export const cosmetics: Cosmetic[] = [
           strokeLinecap="round"
           style={{ fill: 'none', stroke: blossom.deep }}
         />
-        {/* Arms, stopping on the head's own edge — at y 99 the circle reaches
-            x 44.5 and x 155.5, so they end on the silhouette rather than short
-            of it or out in the air beside it. */}
-        <path
-          d="M64 106 q-10 -2 -19 -7"
-          strokeWidth="3"
-          strokeLinecap="round"
-          style={{ fill: 'none', stroke: blossom.deep }}
-        />
-        <path
-          d="M136 106 q10 -2 19 -7"
-          strokeWidth="3"
-          strokeLinecap="round"
-          style={{ fill: 'none', stroke: blossom.deep }}
-        />
+        {/* Arms, stopping on the body's own edge wherever that is — which is why
+            these alone are pulled back out of the face frame. One end stays
+            welded to the lens, the other to the silhouette. */}
+        <g transform={inverseFaceTransform(face)}>
+          {[-1, 1].map((side) => (
+            <path
+              key={side}
+              d={path`M${100 + side * (temple.halfWidth - 19)} ${temple.y + 7} q${side * 10} -2 ${side * 19} -7`}
+              strokeWidth="3"
+              strokeLinecap="round"
+              style={{ fill: 'none', stroke: blossom.deep }}
+            />
+          ))}
+        </g>
       </g>
     ),
   },
@@ -269,21 +340,35 @@ export const cosmetics: Cosmetic[] = [
     slot: 'headwear',
     name: 'Butter crown',
     price: 350,
-    // No `back` fragment, unlike the party hat: the points span x 66–134 and the
-    // ears render at x 26–66 and x 134–174, so there is nothing for a crown this
-    // width to pass behind. Splitting it anyway would be two fragments doing one
-    // fragment's work.
-    render: () => (
+    // No `back` fragment, unlike the party hat: the points sit inside the brow
+    // and the ears are outside it on all three bodies, so there is nothing for a
+    // crown this width to pass behind. Splitting it anyway would be two
+    // fragments doing one fragment's work.
+    render: (_state, { brow, crown }) => {
+      const w = brow.halfWidth * 0.94
+      const band = brow.y - 4
+      // Points rise off the band rather than off the canvas, so a low head gets
+      // a crown sitting on it instead of floating above it.
+      const tall = crown - 20
+      const short = crown - 14
+
+      return (
       <g>
         <path
-          d="M66 68 L74 38 L87 60 L100 32 L113 60 L126 38 L134 68 Z"
+          d={path`M${100 - w} ${band + 4}
+              L${100 - w * 0.78} ${short}
+              L${100 - w * 0.4} ${band - 4}
+              L100 ${tall}
+              L${100 + w * 0.4} ${band - 4}
+              L${100 + w * 0.78} ${short}
+              L${100 + w} ${band + 4} Z`}
           strokeWidth="3"
           strokeLinejoin="round"
           strokeLinecap="round"
           style={{ fill: butter.base, stroke: butter.deep }}
         />
         <path
-          d="M64 64 h72 a6 6 0 0 1 0 12 h-72 a6 6 0 0 1 0 -12z"
+          d={path`M${100 - w - 2} ${band} h${2 * w + 4} a6 6 0 0 1 0 12 h-${2 * w + 4} a6 6 0 0 1 0 -12z`}
           strokeWidth="3"
           strokeLinejoin="round"
           style={{ fill: butter.soft, stroke: butter.deep }}
@@ -291,11 +376,11 @@ export const cosmetics: Cosmetic[] = [
         {/* Deep rather than base: a 9-unit gem is 4 CSS pixels at the shop's
             92px, and base on its own soft tint is not a gem at that size, it is
             a dent. They breathe out of phase so the band reads as lit. */}
-        {[84, 100, 116].map((cx, i) => (
+        {[-0.45, 0, 0.45].map((at, i) => (
           <motion.circle
-            key={cx}
-            cx={cx}
-            cy="70"
+            key={at}
+            cx={100 + w * at}
+            cy={band + 6}
             r="4.5"
             strokeWidth="2.5"
             animate={{ opacity: [0.55, 1, 0.55] }}
@@ -304,7 +389,8 @@ export const cosmetics: Cosmetic[] = [
           />
         ))}
       </g>
-    ),
+      )
+    },
   },
 
   {
@@ -313,13 +399,20 @@ export const cosmetics: Cosmetic[] = [
     slot: 'headwear',
     name: 'Wizard hat',
     price: 700,
-    // The cone leans right so it clears the tuft at x 92–108 rather than sitting
-    // on it, and its tip stops at y 12 — the party hat's pompom already sits at
-    // y 5, so this is the shallower of the two claims on the top of the canvas.
-    render: () => (
+    // The cone leans right so it clears the crest rather than sitting on it, and
+    // like the party hat it is measured off `crown` — the top of whichever skull
+    // is wearing it — so the lean clears a cat's tuft and a bunny's
+    // alike.
+    render: (_state, { brow, crown }) => {
+      const brim = brow.y + 2
+      const tip = crown - 44
+
+      return (
       <g>
         <path
-          d="M74 70 Q88 20 126 12 Q116 34 122 70 Z"
+          d={path`M${100 - brow.halfWidth * 0.72} ${brim}
+              Q${100 - brow.halfWidth * 0.33} ${tip + 8} ${100 + brow.halfWidth * 0.66} ${tip}
+              Q${100 + brow.halfWidth * 0.4} ${tip + 22} ${100 + brow.halfWidth * 0.61} ${brim} Z`}
           strokeWidth="3"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -329,7 +422,10 @@ export const cosmetics: Cosmetic[] = [
             8 CSS pixels at 92px. A star drawn at the 7 units this started as is
             the one the room's bunting had to give up on. */}
         <motion.path
-          d="M101 33 L103.4 38.8 L109.6 39.2 L104.8 43.2 L106.3 49.3 L101 46 L95.7 49.3 L97.2 43.2 L92.4 39.2 L98.6 38.8 Z"
+          // Outer radius 9, inner 4 — 17 units across, which is 8 CSS pixels at
+          // 92px. A star drawn at the 7 units this started as is the one the
+          // room's bunting had to give up on.
+          d={star(101, tip + 22, 9, 4)}
           strokeWidth="2.5"
           strokeLinejoin="round"
           animate={{ opacity: [0.6, 1, 0.6] }}
@@ -338,21 +434,21 @@ export const cosmetics: Cosmetic[] = [
         />
         <ellipse
           cx="100"
-          cy="70"
-          rx="42"
+          cy={brim}
+          rx={brow.halfWidth * 1.16}
           ry="9"
           strokeWidth="3"
           style={{ fill: powder.soft, stroke: powder.deep }}
         />
         <path
-          d="M78 58 h44 a4.5 4.5 0 0 1 0 9 h-44 a4.5 4.5 0 0 1 0 -9z"
+          d={path`M${100 - brow.halfWidth * 0.61} ${brim - 12} h${brow.halfWidth * 1.22} a4.5 4.5 0 0 1 0 9 h-${brow.halfWidth * 1.22} a4.5 4.5 0 0 1 0 -9z`}
           strokeWidth="2.5"
           strokeLinejoin="round"
           style={{ fill: powder.base, stroke: powder.deep }}
         />
         <motion.circle
-          cx="128"
-          cy="10"
+          cx={100 + brow.halfWidth * 0.77}
+          cy={tip - 2}
           r="6"
           strokeWidth="2.5"
           animate={{ y: [0, -3, 0, 3, 0] }}
@@ -360,7 +456,8 @@ export const cosmetics: Cosmetic[] = [
           style={{ fill: powder.soft, stroke: powder.deep }}
         />
       </g>
-    ),
+      )
+    },
   },
 
   {
@@ -381,7 +478,7 @@ export const cosmetics: Cosmetic[] = [
     // Pip, so the head circle hides the inner half of every lobe and the ears —
     // opaque cream across `y 46–102` — take a good part of the upper pair. What
     // reads is the outer sweep and the four spots.
-    render: () => <RainbowWings />,
+    render: (_state, { shoulder }) => <RainbowWings shoulder={shoulder} />,
   },
 
 ]
@@ -390,10 +487,38 @@ export const cosmetics: Cosmetic[] = [
  * Layers that ride an ear
  * ------------------------------------------------------------------------- */
 
-/** One bow, in its ear's unrotated coordinates. `onEar` does the rest. */
-function bow(ear: Ear): ReactNode {
-  const x = EAR_X[ear]
-  const y = 64
+/**
+ * Build a path string, rounding every number interpolated into it.
+ *
+ * Anchor arithmetic produces values like `29.649999999999999`, which are the
+ * same shape on screen and pure noise in the markup — in a snapshot, in a
+ * diff, and in the bytes shipped for ten mascots on the shop screen.
+ */
+function path(parts: TemplateStringsArray, ...values: number[]): string {
+  return parts.reduce(
+    (out, part, i) => out + part + (i < values.length ? String(Number(values[i].toFixed(2))) : ''),
+    '',
+  )
+}
+
+/**
+ * A five-pointed star as a path. Two of them are drawn at different sizes and a
+ * literal ten-point `d` string is unreadable at either.
+ */
+function star(cx: number, cy: number, outer: number, inner: number): string {
+  return (
+    Array.from({ length: 10 }, (_, i) => {
+      const r = i % 2 === 0 ? outer : inner
+      const a = (Math.PI / 5) * i - Math.PI / 2
+      return `${(cx + r * Math.cos(a)).toFixed(1)} ${(cy + r * Math.sin(a)).toFixed(1)}`
+    }).join(' L ') + ' Z'
+  ).replace(/^/, 'M ')
+}
+
+/** One bow, tied at its ear's hold point. `onEar` does the rest. */
+function bow(hold: Point): ReactNode {
+  const x = hold.x
+  const y = hold.y - 4
 
   return (
     <g>
@@ -401,7 +526,7 @@ function bow(ear: Ear): ReactNode {
       {[-13, 13].map((dx) => (
         <path
           key={dx}
-          d={`M${x} ${y} l${dx} -8 v16z`}
+          d={path`M${x} ${y} l${dx} -8 v16z`}
           strokeWidth="2.5"
           strokeLinejoin="round"
           strokeLinecap="round"
@@ -419,22 +544,23 @@ function bow(ear: Ear): ReactNode {
   )
 }
 
-/** One muff, sized to cover the ear it is drawn over (rx 17, ry 30). */
-function muff(ear: Ear): ReactNode {
-  const x = EAR_X[ear]
+/** One muff, centred on its ear's hold point and sized to cover the ear. */
+function muff(hold: Point): ReactNode {
+  const x = hold.x
+  const y = hold.y
 
   return (
     <g>
       <circle
         cx={x}
-        cy="68"
+        cy={y}
         r="15"
         strokeWidth="3"
         style={{ fill: mint.base, stroke: mint.deep }}
       />
       <circle
         cx={x}
-        cy="68"
+        cy={y}
         r="8"
         strokeWidth="2.5"
         style={{ fill: mint.soft, stroke: mint.deep }}

@@ -21,17 +21,24 @@ import { Mascot } from './Mascot'
 const render = (equipped?: Equipped, character?: string) =>
   renderToStaticMarkup(<Mascot state="idle" character={character} equipped={equipped} />)
 
-/** Pip's signature star, and the other two charms — each a unique first command. */
+/** Pip's signature star, and Mochi's fish — each a unique first command. */
 const STAR = 'M148 150'
-const FISH_TAIL = 'M157 162'
-const SPRIG_LEAF = 'M139 172'
-/** The head circle, and the last of Pip's own layers a hat has to get behind. */
+const FISH_TAIL = 'M161 166'
+/** Pip's head circle, and the last of his own layers a hat has to get behind. */
 const HEAD = 'r="57"'
-/** The party hat's crown and its band. */
-const CROWN = 'M100 14'
-const BAND = 'M74 62'
-/** The cape's opening command. */
-const CAPE = 'M78 118'
+/**
+ * The party hat's two fragments and the cape, by the colour each is filled with
+ * rather than by an opening coordinate.
+ *
+ * Those coordinates are no longer constants: every cosmetic is now computed from
+ * the wearer's anchors, so a hat band starts at `x 74.08` on Pip and somewhere
+ * else on a cat, and a test pinned to either number is a test that fails the
+ * next time a body is added. These tests are about **paint order**, and a fill
+ * is the part of an item that order cannot change.
+ */
+const CROWN = 'fill:var(--color-lilac)'
+const BAND = 'fill:var(--color-lilac-soft)'
+const CAPE = 'fill:var(--color-powder)'
 /** The open delighted smile used by the happy expression. */
 const HAPPY_SMILE = 'M88 133'
 
@@ -81,10 +88,8 @@ describe('each character', () => {
   it('gives each of them a charm of their own in the pin slot', () => {
     expect(render(undefined, 'pip')).toContain(STAR)
     expect(render(undefined, 'mochi')).toContain(FISH_TAIL)
-    expect(render(undefined, 'sprig')).toContain(SPRIG_LEAF)
 
     expect(render(undefined, 'mochi')).not.toContain(STAR)
-    expect(render(undefined, 'sprig')).not.toContain(STAR)
   })
 
   /**
@@ -108,7 +113,7 @@ describe('each character', () => {
     // drawn on and never something drawn over an expression.
     const html = render(undefined, 'mochi')
     const cheek = 'cx="66" cy="126"'
-    const nose = 'M93 121'
+    const nose = 'M93 124'
     const mouth = 'M92 138'
 
     expect(html).toContain(nose)
@@ -116,12 +121,18 @@ describe('each character', () => {
     expect(html.indexOf(nose)).toBeLessThan(html.indexOf(mouth))
   })
 
-  it('fills the delighted mouth with the character’s own blush, not Pip’s', () => {
-    const html = renderToStaticMarkup(<Mascot state="happy" character="sprig" />)
+  // Both open mouths, not just `happy`. Covering one of them is how
+  // `celebrating` came to fill its interior with INK while `happy` stayed pink:
+  // they are one expression at two sizes, so they pass or fail together.
+  it.each(['happy', 'celebrating'] as const)(
+    'fills the %s mouth with the character’s own blush, not Pip’s',
+    (state) => {
+      const html = renderToStaticMarkup(<Mascot state={state} character="mochi" />)
 
-    expect(html).toContain(`fill="${coats.sprig.blush}"`)
-    expect(html).not.toContain(coats.pip.blush)
-  })
+      expect(html).toContain(`fill="${coats.mochi.blush}"`)
+      expect(html).not.toContain(coats.pip.blush)
+    },
+  )
 })
 
 describe('each cosmetic', () => {
@@ -163,10 +174,14 @@ describe('render order', () => {
   it('paints face and neck cosmetics over the head', () => {
     const html = render({ face: 'round-glasses', neck: 'mint-scarf' })
 
+    // The scarf by its fill, for the reason the hat fragments are: it is drawn
+    // from `chin` now, so its opening command belongs to whoever is wearing it.
+    const SCARF = 'fill:var(--color-mint)'
+
     expect(html).toContain('M91 110')
-    expect(html).toContain('M68 156')
+    expect(html).toContain(SCARF)
     expect(html.indexOf('M91 110')).toBeGreaterThan(html.indexOf(HEAD))
-    expect(html.indexOf('M68 156')).toBeGreaterThan(html.indexOf(HEAD))
+    expect(html.indexOf(SCARF)).toBeGreaterThan(html.indexOf(HEAD))
   })
 })
 
@@ -203,7 +218,6 @@ describe('the pin slot', () => {
     for (const [id, charm] of [
       ['pip', STAR],
       ['mochi', FISH_TAIL],
-      ['sprig', SPRIG_LEAF],
     ] as const) {
       const html = render({ pin: badge.id }, id)
 

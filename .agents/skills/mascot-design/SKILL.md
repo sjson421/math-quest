@@ -10,10 +10,10 @@ Ears, head, face, and a signature-star accessory are separate layers inside one
 `0 0 200 200` view box, which is the whole reason cosmetics are possible without redrawing
 the character.
 
-**Pip is also one of three characters, not the only one.** Mochi and Sprig share his exact
-anchors and differ in coat, ears, crest, markings and charm; the component draws whichever
-one the learner is playing as. Everything below describes all three, and "Pip" is used where
-the point is the geometry rather than the individual.
+**Pip is also one of two characters, not the only one.** Mochi draws her own head and
+declares her own anchors, and differs in coat, ears, crest, markings and charm; the component
+draws whichever one the learner is playing as. Everything below describes both, and "Pip" is
+used where the point is the geometry rather than the individual.
 
 **A cosmetic is one small layer attached to a stable slot. It is never a second Pip.** The
 rule exists because the alternative — a complete mascot variant per outfit — multiplies
@@ -31,7 +31,7 @@ another:
 - **[references/layers.md](references/layers.md)** — Pip's canvas, named anchors, slot list,
   global render order, and how one item spans back and front fragments.
 - **[references/characters.md](references/characters.md)** — what a character may vary and
-  what it may never touch, the three coats, the ear and crest envelopes, and how one is
+  what it may never touch, the two coats, the ear and crest envelopes, and how one is
   owned.
 - **[references/room.md](references/room.md)** — the room's canvas, how Pip's is nested
   inside it, the horizon, the four placement slots, the paint order that makes Pip one
@@ -89,16 +89,16 @@ has the mechanics.
 ## Non-negotiables
 
 - **Geometry lives in the canvas its surface owns** — `0 0 200 200` for a cosmetic,
-  `0 0 320 200` for a decoration. Pip's head is a circle at `(100, 112)` with radius `57`.
-  Anything authored against a different canvas and scaled in will not survive a future tweak
-  to that circle.
-- **Pip is a head and two ears. There is no body, no neck, no hands.** The `neck-center`
-  anchor at `(100, 160)` sits inside the lower head, and a scarf there reads as a scarf
-  because it crosses the chin line — not because there is a neck to wrap. Do not author an
-  item that assumes anatomy Pip does not have.
-- **The anchors are shared by every character, so moving one breaks shipped items on all of
-  them.** A character may change what hangs off an ear base but never where that base is;
-  `references/characters.md` has the full fixed list and the reason beside each line.
+  `0 0 320 200` for a decoration. Anything authored against a different canvas and scaled in
+  will not survive a future tweak.
+- **A character is a head and two ears. There is no body, no neck, no hands.** The `chin`
+  anchor sits inside the lower head, and a scarf there reads as a scarf because it crosses
+  the chin line — not because there is a neck to wrap. Do not author an item that assumes
+  anatomy the characters do not have.
+- **Every position comes from the wearer's anchors, never from a literal coordinate.** Each
+  character draws its own head and says where its brow, chin, ears and shoulders are; an item
+  pinned to a number fits Pip and hangs off the other two. `references/characters.md` has the
+  anchor list and what reads each one.
 - **An item must be intelligible standing still.** Motion is decoration on top of a shape
   that already reads. A learner with reduced motion enabled, or looking at a screenshot,
   sees the static form and nothing else.

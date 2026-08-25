@@ -11,23 +11,25 @@ Pip's resting geometry occupies roughly `x 26–174`, `y 46–187`. Note that **
 the tuft, are the highest and widest part** — they are drawn as upright ellipses and then
 rotated, so their rendered extent is nowhere near their written coordinates.
 
-Four rows below are Pip's own and vary by character — the ears, the tuft, the signature star,
-and the body colours. Everything else is fixed for all three, and
-[characters.md](characters.md) says which is which and what breaks if one moves:
+**The table below is Pip's body, not every body.** Each character now draws its own head
+and declares its own anchors, so these are the numbers to author *against* — Pip is the
+frame everything is written in — but a hat is positioned from `anchors.brow`, never from
+the literal `y 68` that happens to be Pip's. [characters.md](characters.md) has the anchor
+list and what reads each one.
 
 | Part | Geometry |
 | --- | --- |
 | ground shadow | ellipse `(100, 180)`, `rx 42`, `ry 7` — the lowest point, `y 187` |
 | ears | ellipses `(56, 72)` and `(144, 72)`, `rx 17`, `ry 30`, rotated −24° / +24° about their bases — **rendered** extent `x 26–66` and `x 134–174`, `y 46–102` |
-| head | circle `(100, 112)`, `r 57` — spans `x 43–157`, `y 55–169` |
+| head | Pip's is a circle `(100, 112)`, `r 57` — spans `x 43–157`, `y 55–169`. Mochi's is her own shape |
 | tuft | `M92 58 Q100 42 108 58` — `42` is the Bézier control point, not a point on the curve; the apex is `y 50` |
 | cheeks | ellipses `(66, 126)` and `(134, 126)` |
-| eyes | centred `x 78` and `x 122`, `y 110` |
-| mouth | around `y 138` |
-| signature star | occupies the `pin` slot, origin `(148, 162)` — Mochi's fish and Sprig's sprig sit in the same footprint |
-| markings | drawn between the cheeks and the eyes; Mochi's nose and whiskers, Sprig's muzzle. Pip has none |
+| eyes | centred `x 78` and `x 122`, `y 110` — in **face-frame** coordinates, placed on each body by `anchors.face` |
+| mouth | around `y 138`, likewise in face-frame coordinates |
+| signature star | occupies the `pin` slot, origin `(148, 162)` — Mochi's fish sits in the same footprint |
+| markings | drawn between the cheeks and the eyes; Mochi's nose and whiskers. Pip has none |
 | thinking dots | `(163, 88)` and `(173, 76)` — `thinking` state only |
-| sleep marks | `(152, 74)` and `(168, 56)` — `sleeping` state only |
+| sleep marks | `(152, 74)` and `(168, 56)` on Pip — `sleeping` state only; drawn out past `anchors.temple` on each body |
 
 The upper-right quadrant outside the head is **not free space**: `thinking` and `sleeping`
 both draw there. An item that reaches into it must be checked against those two states, not
@@ -35,21 +37,26 @@ just against `idle`.
 
 ## Named anchors
 
-Author against these rather than against measured pixels. Three of them are the exact
-transform origins the component already uses, so they are load-bearing, not descriptive.
+**Anchors are per character, and a cosmetic reads them at render time.** Each fragment is
+called with `(state, anchors)`, and every position in it must come from that second
+argument. A literal coordinate is an item that fits Pip and hangs off a cat.
 
-| Anchor | Point | Source |
+| Anchor | Pip's value | What reads it |
 | --- | --- | --- |
-| `head-top` | `(100, 55)` | top of the head circle |
-| `left-ear-base` | `(56, 96)` | the left ear's `transformOrigin` |
-| `right-ear-base` | `(144, 96)` | the right ear's `transformOrigin` |
-| `face-center` | `(100, 116)` | between the eye line and the mouth |
-| `neck-center` | `(100, 160)` | the chin line, inside the lower head |
-| `pin` | `(148, 162)` | the signature star's `transformOrigin` |
+| `crown` | `55` | `party-hat` and `wizard-hat` rise from it; the earmuff band arcs clear of it |
+| `ear[side].base` | `(56, 96)` / `(144, 96)` | the ear's `transformOrigin`, and everything that swings with it |
+| `ear[side].hold` | `(56, 68)` / `(144, 68)` | where `ear-bows` ties and `mint-earmuffs` centres |
+| `brow` | `y 68`, `halfWidth 36` | every hat band and brim |
+| `temple` | `y 99`, `halfWidth 55` | `heart-shades` arms; the sleep marks |
+| `face` | `centre (100, 124)`, `scale 1` | the six expressions, the cheeks, the whole `face` slot |
+| `chin` | `y 158`, `halfWidth 32` | `mint-scarf` |
+| `shoulder` | `y 124`, `halfWidth 52.5` | `powder-cape`, `rainbow-wings`, the ground shadow |
+| `pin` | `(148, 162)` | the charm, and any `pin` cosmetic replacing it |
 
-Item 16 may rename an anchor or move a coordinate, but only by updating this table and
-every cosmetic authored against it in the same change. An anchor that means one thing in
-the contract and another in a shipped item is worse than no anchor.
+Adding an anchor is a real cost: it is a question every future character has to answer.
+Adding or renaming one means updating this table, the `Anchors` type, and both
+characters in the same change. An anchor that means one thing in the contract and another in
+a shipped item is worse than no anchor.
 
 ## Slots
 

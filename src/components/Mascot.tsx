@@ -1,9 +1,11 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState, type ReactNode } from 'react'
 import { characterOf, wornIn, type Equipped, type MascotState } from '../cosmetics'
-import { EARS, onEar } from '../cosmetics/ears'
+import { onEar } from '../cosmetics/ears'
+import { onFace } from '../cosmetics/frame'
 import { loopIf } from '../cosmetics/motion'
 import { INK } from '../cosmetics/palette'
+import { EARS, type Anchors, type Point } from '../cosmetics/types'
 
 /**
  * The mascot — one of three original characters in the kawaii idiom.
@@ -52,7 +54,8 @@ export function Mascot({
 }: Props) {
   const expressionState = expression ?? state
   const who = characterOf(character)
-  const { base, shade, blush } = who.coat
+  const { blush } = who.coat
+  const anchors = who.anchors
   const [blinking, setBlinking] = useState(false)
 
   // Irregular blink cadence reads as alive; a fixed interval reads as a loop.
@@ -125,20 +128,29 @@ export function Mascot({
       role="img"
     >
       {/* 1 · soft ground shadow */}
-      <ellipse cx="100" cy="180" rx="42" ry="7" fill={blush} opacity="0.22" />
+      <ellipse
+        cx="100"
+        cy="180"
+        rx={anchors.shoulder.halfWidth * 0.8}
+        ry="7"
+        fill={blush}
+        opacity="0.22"
+      />
 
       {/* 2 · back cosmetics — the only slot painted before the character */}
-      {back?.render?.(state)}
+      {back?.render?.(state, anchors)}
 
       {/* 3 · headwear back fragments — a crown behind the ear tips */}
-      {headwear?.back?.(state)}
+      {headwear?.back?.(state, anchors)}
 
       {/* 4 · ears and head. `onEar` is the same wrapper the ear-riding cosmetics
           go through, so an ear and the bow tied to it cannot move differently
           whatever shape the ear is — see `cosmetics/ears.tsx`. */}
-      <g>{EARS.map((ear) => onEar(ear, state, who.ear(ear)))}</g>
+      <g>{EARS.map((ear) => onEar(ear, state, anchors.ear[ear].base, who.ear(ear)))}</g>
 
-      <circle cx="100" cy="112" r="57" fill={base} stroke={shade} strokeWidth="3" />
+      {/* The body itself belongs to the character — this is the step that used
+          to be one circle for all three. */}
+      {who.head}
 
       {/* the crest between the ears — a tuft, twin peaks, or spines */}
       {who.crest}
@@ -146,28 +158,40 @@ export function Mascot({
       {/* 5 · headwear front fragments — a brim over the forehead. A headwear
           item that does not split is drawn here too: in front is the side that
           reads, and only a shape needing to pass behind declares a `back`. */}
-      {headwear?.front?.(state) ?? headwear?.render?.(state)}
+      {headwear?.front?.(state, anchors) ?? headwear?.render?.(state, anchors)}
 
       {/* 6 · expression: cheeks, then the character's own markings, then eyes
           and mouth. Markings go under the face and over the cheeks, so a muzzle
           is something the mouth is drawn *on* and never something drawn over an
-          expression. */}
-      <ellipse cx="66" cy="126" rx="11" ry="7" fill={blush} opacity="0.75" />
-      <ellipse cx="134" cy="126" rx="11" ry="7" fill={blush} opacity="0.75" />
+          expression.
+          Cheeks and expression ride the face frame together — they are one face,
+          and a cheek left behind in Pip's coordinates would sit off a wider one. */}
+      {onFace(
+        anchors.face,
+        <>
+          <ellipse cx="66" cy="126" rx="11" ry="7" fill={blush} opacity="0.75" />
+          <ellipse cx="134" cy="126" rx="11" ry="7" fill={blush} opacity="0.75" />
+        </>,
+      )}
       {who.markings}
-      <Face state={expressionState} blinking={blinking} blush={blush} />
+      {onFace(anchors.face, <Face state={expressionState} blinking={blinking} blush={blush} />)}
 
-      {/* 7 · face cosmetics */}
-      {face?.render?.(state)}
+      {/* 7 · face cosmetics — the same frame, so glasses land on the eyes
+          without knowing whose they are */}
+      {face && onFace(anchors.face, face.render?.(state, anchors))}
 
       {/* 8 · neck cosmetics */}
-      {neck?.render?.(state)}
+      {neck?.render?.(state, anchors)}
 
       {/* 9 · pin — the character's own charm unless something replaces it */}
-      {pin ? pin.render?.(state) : <Charm state={state}>{who.charm}</Charm>}
+      {pin ? pin.render?.(state, anchors) : (
+        <Charm state={state} at={anchors.pin}>
+          {who.charm}
+        </Charm>
+      )}
 
       {/* 10 · foreground effects */}
-      {state === 'sleeping' && <SleepZs />}
+      {state === 'sleeping' && <SleepZs anchors={anchors} />}
     </motion.svg>
   )
 }
@@ -180,12 +204,20 @@ export function Mascot({
  * catalogue does that today.
  *
  * **The motion is here and the shape is not.** Pip's star, Mochi's fish and
- * Sprig's sprig all rock gently and all spin once on `celebrating`, because that
+ * Mochi's fish both rock gently and both spin once on `celebrating`, because that
  * beat belongs to the moment rather than to the object — a charm that chose its
  * own would make the celebration land differently depending on who you had
  * bought.
  */
-function Charm({ state, children }: { state: MascotState; children: ReactNode }) {
+function Charm({
+  state,
+  at,
+  children,
+}: {
+  state: MascotState
+  at: Point
+  children: ReactNode
+}) {
   const celebrating = state === 'celebrating'
   const scale = celebrating ? [1, 1.25, 1] : 1
 
@@ -196,7 +228,7 @@ function Charm({ state, children }: { state: MascotState; children: ReactNode })
         rotate: { duration: celebrating ? 1.2 : 3.4, repeat: Infinity, ease: 'easeInOut' },
         scale: loopIf(scale, 1.2),
       }}
-      style={{ transformOrigin: '148px 162px' }}
+      style={{ transformOrigin: `${at.x}px ${at.y}px` }}
     >
       {children}
     </motion.g>
@@ -278,8 +310,17 @@ function Face({
         />
       </g>
     ),
+    // The same open smile as `happy`, wider. Same blush fill for the same
+    // reason — the two are one expression at two sizes, and an inked interior
+    // here was the only place a delighted mouth went black.
     celebrating: (
-      <path d="M86 133 q14 22 28 0 q-14 7 -28 0z" fill={INK} stroke={INK} strokeWidth="3" strokeLinejoin="round" />
+      <path
+        d="M86 133 q14 22 28 0 q-14 7 -28 0z"
+        fill={blush}
+        stroke={INK}
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
     ),
     // small, warm, tilted — sympathetic rather than sad
     encouraging: (
@@ -305,12 +346,20 @@ function Face({
   )
 }
 
-function SleepZs() {
+/**
+ * Rising past the widest part of the head rather than off a fixed point, so they
+ * clear a body broader than Pip's instead of landing on it. `temple` sets how
+ * far out and `brow` how high, which on Pip is exactly where they always were.
+ */
+function SleepZs({ anchors }: { anchors: Anchors }) {
+  const x = 100 + anchors.temple.halfWidth - 3
+  const y = anchors.brow.y
+
   return (
     <g>
       {[
-        { x: 152, y: 74, size: 15, delay: 0 },
-        { x: 168, y: 56, size: 11, delay: 0.6 },
+        { x, y: y + 6, size: 15, delay: 0 },
+        { x: x + 16, y: y - 12, size: 11, delay: 0.6 },
       ].map(({ x, y, size, delay }) => (
         <motion.text
           key={x}

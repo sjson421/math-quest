@@ -32,13 +32,19 @@ import { BLUSH, CREAM, CREAM_SHADE, INK, coats, families } from './palette'
 const slots = new Set<string>(COSMETIC_SLOTS)
 const roomSlots = new Set<string>(ROOM_SLOTS)
 
-/** Every fragment of an item, drawn in both a resting and an excited state. */
+/**
+ * Every fragment of an item, drawn in both a resting and an excited state, on
+ * every body — an item is now a function of its wearer's anchors, so sampling
+ * one character would leave the other two unchecked.
+ */
 const markupOf = (cosmetic: Cosmetic): string =>
   (['idle', 'celebrating'] as MascotState[])
     .flatMap((state) =>
-      [cosmetic.render, cosmetic.back, cosmetic.front]
-        .filter((fragment) => fragment !== undefined)
-        .map((fragment) => renderToStaticMarkup(fragment(state))),
+      characters.flatMap((character) =>
+        [cosmetic.render, cosmetic.back, cosmetic.front]
+          .filter((fragment) => fragment !== undefined)
+          .map((fragment) => renderToStaticMarkup(fragment(state, character.anchors))),
+      ),
     )
     .join('')
 
@@ -225,8 +231,8 @@ describe('every character', () => {
     // would draw its left ear twice — invisible at rest, because `onEar` mirrors
     // the rotation and the result looks symmetric anyway, and wrong the moment
     // an ear is drawn asymmetrically. Whether the ear is the right *shape* to
-    // hold a bow at `y 64` and sit under a muff at `y 68` is the acceptance pass
-    // in `mascot-design`'s checklist; a string comparison cannot judge it.
+    // hold a bow and sit under a muff at its own `hold` point is the acceptance
+    // pass in `mascot-design`'s checklist; a string comparison cannot judge it.
     for (const character of characters) {
       const left = renderToStaticMarkup(<g>{character.ear('left')}</g>)
       const right = renderToStaticMarkup(<g>{character.ear('right')}</g>)
@@ -235,6 +241,77 @@ describe('every character', () => {
     }
   })
 
+  /**
+   * The anchors are the whole contract now, so these are the ways a new body
+   * can be wrong in a way nothing else notices.
+   *
+   * Every check is an item that breaks. A brow below a chin puts the crown under
+   * the scarf; a negative half-width turns a band inside out; two ear anchors on
+   * the same side of the midline draws both muffs on one ear. None of it throws
+   * — it just renders a creature with its hat on backwards.
+   */
+  it('anchors every body so the wardrobe has somewhere to hang', () => {
+    for (const { id, anchors } of characters) {
+      const { face, ear, crown, brow, temple, chin, shoulder, pin } = anchors
+
+      // Top to bottom, in the order a body is read.
+      expect(crown, `${id} crown above brow`).toBeLessThan(brow.y)
+      expect(brow.y, `${id} brow above temple`).toBeLessThan(temple.y)
+      expect(temple.y, `${id} temple above chin`).toBeLessThan(chin.y)
+
+      for (const [name, span] of [
+        ['brow', brow],
+        ['temple', temple],
+        ['chin', chin],
+        ['shoulder', shoulder],
+      ] as const) {
+        expect(span.halfWidth, `${id} ${name} half-width`).toBeGreaterThan(0)
+        // Nothing may claim to be wider than the canvas it is drawn in, or the
+        // item measured off it is drawn off the edge rather than on the body.
+        expect(span.halfWidth, `${id} ${name} half-width`).toBeLessThan(100)
+      }
+
+      // The widest point of a head is at the temple, between the brow and the
+      // chin — a body wider at the jaw than at the cheek is one the glasses'
+      // arms stop short of.
+      expect(temple.halfWidth, `${id} widest at temple`).toBeGreaterThan(chin.halfWidth)
+
+      // One ear each side, and each `hold` out on the ear rather than back
+      // inside the skull — that point is where a muff centres.
+      expect(ear.left.base.x, `${id} left ear base`).toBeLessThan(100)
+      expect(ear.right.base.x, `${id} right ear base`).toBeGreaterThan(100)
+      expect(ear.left.hold.y, `${id} left ear hold`).toBeLessThanOrEqual(ear.left.base.y)
+      expect(ear.right.hold.y, `${id} right ear hold`).toBeLessThanOrEqual(ear.right.base.y)
+
+      // A face that is mirrored, inverted or absent.
+      expect(face.scale, `${id} face scale`).toBeGreaterThan(0)
+      // The charm hangs beside the body, not in the middle of its face.
+      expect(pin.x, `${id} pin clear of the face`).toBeGreaterThan(100)
+    }
+  })
+
+  it('fits every cosmetic to every character', () => {
+    // The promise the anchors exist to keep: **buying a character never costs
+    // the learner an accessory.** Thirty combinations, and each one has to draw
+    // more than the bare body does — an item that silently renders nothing on
+    // one body is exactly the failure a shared head circle used to make
+    // impossible and a per-character head makes possible again.
+    for (const character of characters) {
+      const bare = renderToStaticMarkup(<g>{character.head}</g>).length
+
+      for (const cosmetic of cosmetics) {
+        const drawn = [cosmetic.render, cosmetic.back, cosmetic.front]
+          .filter((fragment) => fragment !== undefined)
+          .map((fragment) => renderToStaticMarkup(<g>{fragment('idle', character.anchors)}</g>))
+
+        expect(drawn.length, `${cosmetic.id} on ${character.id}`).toBeGreaterThan(0)
+        for (const markup of drawn) {
+          expect(markup.length, `${cosmetic.id} on ${character.id}`).toBeGreaterThan(7)
+        }
+        expect(bare).toBeGreaterThan(0)
+      }
+    }
+  })
 })
 
 describe('the two slot unions', () => {
