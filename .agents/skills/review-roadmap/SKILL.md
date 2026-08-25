@@ -52,23 +52,13 @@ it before continuing; never infer the current phase from chat history.
 
 Create an `update_plan` plan with exactly Simplify, Review, Clean up, Ship, and Archive in
 that order. Keep exactly one entry `in_progress`, and never mark a phase complete before its
-gate passes. This skill is intended to run in a session using `gpt-5.6-luna` with max
-reasoning. Sandbox escalation here is `sandbox_permissions: "require_escalated"` on the
-same scoped command.
+gate passes. Use the currently selected model throughout this workflow. Sandbox escalation
+here is `sandbox_permissions: "require_escalated"` on the same scoped command.
 
-In phase 6, invoke `$simplify` on this run's changed paths. This adapter controls reviewer
-launch: use Luna with max reasoning even if another cleanup instruction suggests a different
-model. In phase 10, invoke `openspec-archive-change` through Codex's skill mechanism.
-
-For every independent reviewer, call `spawn_agent` with `fork_turns: "none"`,
-`model: "gpt-5.6-luna"`, and `reasoning_effort: "max"`. If the active Codex tool schema
-exposes `fork_context` instead of `fork_turns`, use `fork_context: false` as the equivalent
-fresh-context setting and do not send the unsupported field. Pass only fields permitted by
-the active tool and the handoff contract, require no edits, and verify every returned claim
-locally. Poll in bounded waits of no more than 60 seconds; if a reviewer remains unavailable,
-send one concise finalize request, then record any inline fallback and its reason in state and
-the final report. The parent adjudicates findings, applies accepted fixes, and runs every
-verification gate.
+In phase 6, invoke `$simplify` on this run's changed paths. Complete any required review in
+the current session with the currently selected model. Do not spawn an orchestrator or
+replacement subagent. In phase 10, invoke `openspec-archive-change` through Codex's skill
+mechanism.
 
 Before staging, account for untracked paths with `git status --untracked-files=all`; a plain
 `git diff --stat` does not include them. In phase 10, sync and inspect OpenSpec deltas before

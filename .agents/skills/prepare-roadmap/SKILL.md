@@ -22,14 +22,12 @@ immediately. Read each phase reference only when that phase begins:
 For a new run, create an `update_plan` plan with exactly Select, Explore, Propose, and Audit
 in that order. For `needs-preparation`, preserve selection and plan only the gates named by
 the re-entry reason, ending with Audit. Keep exactly one entry `in_progress`, and never mark
-a phase complete before its gate passes. Use the user-selected planning model and do not
-replace the parent with a hard-coded model.
+a phase complete before its gate passes. Use the currently selected model throughout this
+workflow.
 
 Invoke `openspec-explore`, `openspec-propose`, and `openspec-audit-proposal` through Codex's
-skill mechanism when their phases begin. For every independent reviewer, call `spawn_agent`
-with `fork_turns: "none"`, `model: "gpt-5.6-luna"`, and
-`reasoning_effort: "max"`. Pass only the fields permitted by the handoff contract, require
-no edits, and verify every returned claim locally.
+skill mechanism when their phases begin. Complete any required review in the current session
+with the currently selected model. Do not spawn an orchestrator or replacement subagent.
 
 After the audit gate passes, set the handoff status to `ready-to-implement`. End the session
 with the exact change name, selected increment, state directory, and audit result. Do not
