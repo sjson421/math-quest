@@ -14,6 +14,7 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import {
+  COSMETIC_SLOTS,
   ROOM_SLOTS,
   catalogue,
   cosmetics,
@@ -24,7 +25,7 @@ import {
 } from './index'
 import { BLUSH, CREAM, CREAM_SHADE, INK, families } from './palette'
 
-const slots = new Set(['back', 'headwear', 'face', 'neck', 'pin'])
+const slots = new Set<string>(COSMETIC_SLOTS)
 const roomSlots = new Set<string>(ROOM_SLOTS)
 
 /** Every fragment of an item, drawn in both a resting and an excited state. */
@@ -106,6 +107,17 @@ describe('every catalogue item', () => {
   it('positions transforms in view-box units, never as an originX fraction', () => {
     for (const item of catalogue) {
       expect(markupOfItem(item), `${item.id}`).not.toMatch(/originX|originY/)
+    }
+  })
+
+  it('lists each kind cheapest first, so a category reads plain to elaborate', () => {
+    // The shop groups by slot and shows each group in catalogue order. Ordering
+    // the arrays by price is what makes a category climb rather than jump about,
+    // and it is the one thing a new item can quietly get wrong.
+    for (const list of [cosmetics, decorations]) {
+      const prices = list.map((item) => item.price)
+
+      expect(prices).toEqual([...prices].sort((a, b) => a - b))
     }
   })
 

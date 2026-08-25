@@ -184,3 +184,35 @@
   border-top: 0.07em solid currentColor;
   padding: 0.06em 0.08em 0;
 }
+
+/* The rainbow wings' colour cycle.
+ *
+ * A CSS animation rather than a Framer Motion one, for two reasons. Motion does
+ * not apply `filter` to an SVG element at all — it routes the value to the SVG
+ * presentation attribute of that name, which expects a `url(#…)` reference to a
+ * <filter> and silently ignores a CSS filter function. And a seven-second hue
+ * loop running on up to ten Pips at once on the shop screen is work the
+ * compositor should do without waking JavaScript on every frame.
+ *
+ * The item stays in `src/cosmetics/index.tsx`; only the cycle lives here, beside
+ * the colour tokens that catalogue already reaches for. `animation-delay` is set
+ * per feather from there, which is what makes the colour travel out along the
+ * wing rather than the whole wing changing at once.
+ */
+@keyframes pip-hue-cycle {
+  to {
+    filter: hue-rotate(360deg);
+  }
+}
+
+.pip-hue-cycle {
+  animation: pip-hue-cycle 7s linear infinite;
+}
+
+/* The one animation in the app that respects this, because it is the one that
+ * cycles a full spectrum rather than nudging a shape a couple of degrees. */
+@media (prefers-reduced-motion: reduce) {
+  .pip-hue-cycle {
+    animation: none;
+  }
+}

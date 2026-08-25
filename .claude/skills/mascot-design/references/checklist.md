@@ -95,7 +95,11 @@ remote reference, free tooling. These replace the parts that are about Pip's bod
 
 **Motion and accessibility**
 
-- [ ] The item is still. It takes no state and animates nothing.
+- [ ] The item responds to nothing — no state, no streak, no lesson. Anything it animates is
+      a loop it runs entirely on its own.
+- [ ] It moves only if stillness would make it look broken — an unlit lamp, a dead fish tank.
+      Furniture stays still.
+- [ ] Frozen, it still reads as what it is and nothing it communicates has gone missing.
 - [ ] It adds no accessible name of its own; Pip's single `aria-label` is all that is
       announced.
 

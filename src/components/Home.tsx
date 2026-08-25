@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import { course, courseStageById, courseStageByUnitId, courseUnitById } from '../curriculum'
 import { tap } from '../lib/haptics'
 import { isUnlocked, useProgress } from '../store/progress'
@@ -12,6 +13,8 @@ export type TreeLevel =
   | { name: 'stages' }
   | { name: 'units'; stageId: string }
   | { name: 'skills'; unitId: string }
+
+const PIP_MESSAGES = ['You’ve got this!', 'Keep going!', 'Great work!', 'One step at a time!']
 
 type Props = {
   level: TreeLevel
@@ -35,9 +38,37 @@ type Props = {
 export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }: Props) {
   const progress = useProgress((s) => s.progress)
   const goalPct = Math.min(100, (progress.todayXp / progress.dailyGoal) * 100)
+  const [pipMessage, setPipMessage] = useState<string | null>(null)
 
-  // Greet by state: asleep until the first lesson of the day, awake after.
+  // The menu is the one persistent place for Pip's unprompted encouragement.
+  // Keeping the timer here means it stops with the menu and cannot update a
+  // lesson or a screen that is no longer mounted.
+  useEffect(() => {
+    let messageIndex = 0
+    let hideTimer: number | undefined
+    const showMessage = () => {
+      setPipMessage(PIP_MESSAGES[messageIndex])
+      messageIndex = (messageIndex + 1) % PIP_MESSAGES.length
+      hideTimer = window.setTimeout(() => {
+        setPipMessage(null)
+        hideTimer = undefined
+      }, 2_000)
+    }
+    const timer = window.setInterval(() => {
+      showMessage()
+    }, 10_000)
+
+    return () => {
+      window.clearInterval(timer)
+      if (hideTimer !== undefined) window.clearTimeout(hideTimer)
+    }
+  }, [])
+
+  // Greet by state: asleep until the first lesson of the day and awake after.
+  // A message wakes Pip without selecting a pose that moves him; `Room` gives
+  // him the happy face separately.
   const doneToday = progress.todayXp > 0
+  const pipState = pipMessage || doneToday ? 'idle' : 'sleeping'
 
   const unlocked = (skillId: string) => isUnlocked(skillId, progress)
   const stage = level.name === 'units' ? courseStageById.get(level.stageId) : undefined
@@ -78,10 +109,11 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
             here is exactly the size he rendered at before he had a room — the
             section gains width around him and no height at all. */}
         <Room
-          state={doneToday ? 'idle' : 'sleeping'}
+          state={pipState}
           height={148}
           equipped={progress.equipped}
           placed={progress.room}
+          message={pipMessage}
         />
 
         <div className="w-full max-w-xs px-6 mt-1">

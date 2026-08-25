@@ -23,6 +23,8 @@ const CROWN = 'M100 14'
 const BAND = 'M74 62'
 /** The cape's opening command. */
 const CAPE = 'M78 118'
+/** The open delighted smile used by the happy expression. */
+const HAPPY_SMILE = 'M88 133'
 
 const wearing = (cosmetic: Cosmetic): Equipped => ({ [cosmetic.slot]: cosmetic.id })
 
@@ -41,6 +43,14 @@ describe('Pip alone', () => {
 
     expect(dressed.match(/aria-label/g)).toHaveLength(1)
     expect(dressed).toContain('aria-label="Pip is idle"')
+  })
+
+  it('can show the happy face without changing his movement state', () => {
+    const html = renderToStaticMarkup(<Mascot state="idle" expression="happy" />)
+
+    expect(html).toContain(HAPPY_SMILE)
+    expect(html).toContain('fill="#ffb3c9"')
+    expect(html).toContain('aria-label="Pip is happy"')
   })
 })
 
@@ -93,9 +103,12 @@ describe('render order', () => {
 describe('the pin slot', () => {
   /**
    * No shipped cosmetic takes this slot — replacing Pip's star is an identity
-   * change the contract asks to be made deliberately, and this increment
-   * declined to make it. The renderer still implements the slot, so it is
-   * proved with a fixture registered into the catalogue for the test.
+   * change the contract asks to be made deliberately, and the catalogue declines
+   * to make it. A comet pin did briefly claim it and was withdrawn: at the sizes
+   * Pip is actually drawn it read as a smudge, and taking the star off left the
+   * lower-right of his face emptier than the star had. The renderer still
+   * implements the slot, so it is proved with a fixture registered into the
+   * catalogue for the test.
    */
   const badge: Cosmetic = {
     kind: 'cosmetic',

@@ -8,7 +8,7 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import { cosmeticById, cosmetics, decorations } from '../cosmetics'
+import { COSMETIC_SLOTS, ROOM_SLOTS, cosmeticById, cosmetics, decorations } from '../cosmetics'
 import { initialProgress, type Progress } from '../store/progress'
 import { buy, equip, owns, standing, unequip } from './wardrobe'
 
@@ -139,20 +139,41 @@ describe('standing', () => {
   })
 })
 
+/**
+ * A price is not an implementation detail — it decides how long the shop keeps
+ * being worth opening, which is the thing the first version of it got wrong.
+ * Each check below is one of those decisions, not a restatement of the numbers.
+ */
+const perLesson = 15 // a lesson that raises mastery; a repeat pays 8
+
+/** The largest jump from one price to the next, as a multiple. */
+const biggestStep = (prices: number[]): number =>
+  prices
+    .slice(1)
+    .reduce((worst, price, i) => Math.max(worst, price / prices[i]), 1)
+
 describe('the catalogue the shop is priced against', () => {
-  it('reaches the cheapest item in a few lessons and the dearest in about five days', () => {
-    // 15 coins for a lesson that raises mastery; two or three lessons a sitting.
-    const perLesson = 15
+  it('reaches the cheapest item in a few lessons and the dearest in about a month', () => {
     const prices = cosmetics.map((c) => c.price).sort((a, b) => a - b)
 
     expect(Math.ceil(prices[0] / perLesson)).toBeLessThanOrEqual(3)
-    expect(Math.ceil(prices.at(-1)! / perLesson)).toBeLessThanOrEqual(15)
+    expect(Math.ceil(prices.at(-1)! / perLesson)).toBeLessThanOrEqual(70)
   })
 
-  it('covers four slots, leaving Pip’s signature star alone', () => {
+  it('never doubles from one price to the next, so a next thing is always in sight', () => {
+    // The failure this guards against is not an expensive item, it is a gap:
+    // a learner who has just bought everything under 200 and whose next option
+    // is 500 has nothing to aim at for a fortnight.
+    expect(biggestStep(cosmetics.map((c) => c.price).sort((a, b) => a - b))).toBeLessThanOrEqual(2)
+  })
+
+  it('covers every slot but the one holding Pip’s signature star', () => {
     const slots = new Set(cosmetics.map((c) => c.slot))
 
-    expect(slots).toEqual(new Set(['face', 'headwear', 'neck', 'back']))
+    // `pin` is deliberately empty: it holds the star by default, so an item
+    // there changes the character rather than adding to it. The wardrobe fills
+    // every other slot the contract defines.
+    expect(slots).toEqual(new Set(COSMETIC_SLOTS.filter((slot) => slot !== 'pin')))
     expect(cosmeticById.get('party-hat')?.back).toBeDefined()
     expect(cosmeticById.get('party-hat')?.front).toBeDefined()
   })
@@ -241,18 +262,22 @@ describe('decorations', () => {
 
 describe('the room the shop is priced against', () => {
   it('is priced on the same measured rate as the wardrobe', () => {
-    // 15 coins for a lesson that raises mastery; two or three lessons a sitting.
-    const perLesson = 15
     const prices = decorations.map((d) => d.price).sort((a, b) => a - b)
 
     expect(Math.ceil(prices[0] / perLesson)).toBeLessThanOrEqual(4)
-    expect(Math.ceil(prices.at(-1)! / perLesson)).toBeLessThanOrEqual(15)
+    expect(Math.ceil(prices.at(-1)! / perLesson)).toBeLessThanOrEqual(70)
   })
 
-  it('fills all four room slots, with one of them twice over', () => {
+  it('never doubles from one price to the next either', () => {
+    expect(biggestStep(decorations.map((d) => d.price).sort((a, b) => a - b))).toBeLessThanOrEqual(2)
+  })
+
+  it('fills every room slot more than once, so replacing within a slot is real', () => {
     const slots = decorations.map((d) => d.slot)
 
-    expect(new Set(slots)).toEqual(new Set(['rug', 'wall', 'left', 'right']))
-    expect(slots.filter((slot) => slot === 'wall')).toHaveLength(2)
+    expect(new Set(slots)).toEqual(new Set(ROOM_SLOTS))
+    for (const slot of ROOM_SLOTS) {
+      expect(slots.filter((s) => s === slot).length, slot).toBeGreaterThan(1)
+    }
   })
 })

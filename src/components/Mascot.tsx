@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { wornIn, type Equipped, type MascotState } from '../cosmetics'
+import { earSwing, loopIf } from '../cosmetics/motion'
 import { BLUSH, CREAM, CREAM_SHADE, INK } from '../cosmetics/palette'
 
 /**
@@ -15,6 +16,8 @@ export type { MascotState }
 
 type Props = {
   state?: MascotState
+  /** A face that differs from the movement state, such as smiling while still. */
+  expression?: MascotState
   size?: number
   className?: string
   /**
@@ -26,35 +29,48 @@ type Props = {
   equipped?: Equipped
 }
 
-export function Mascot({ state = 'idle', size = 160, className, equipped }: Props) {
+export function Mascot({ state = 'idle', expression, size = 160, className, equipped }: Props) {
+  const expressionState = expression ?? state
   const [blinking, setBlinking] = useState(false)
 
   // Irregular blink cadence reads as alive; a fixed interval reads as a loop.
   useEffect(() => {
-    if (state === 'sleeping' || state === 'happy' || state === 'celebrating') return
+    if (
+      expressionState === 'sleeping' ||
+      expressionState === 'happy' ||
+      expressionState === 'celebrating'
+    )
+      return
     let timer: number
+    let blinkTimer: number | undefined
     const schedule = () => {
       timer = window.setTimeout(
         () => {
           setBlinking(true)
-          window.setTimeout(() => setBlinking(false), 140)
+          blinkTimer = window.setTimeout(() => setBlinking(false), 140)
           schedule()
         },
         2200 + Math.random() * 3400,
       )
     }
     schedule()
-    return () => window.clearTimeout(timer)
-  }, [state])
+    return () => {
+      window.clearTimeout(timer)
+      if (blinkTimer !== undefined) window.clearTimeout(blinkTimer)
+    }
+  }, [expressionState])
 
-  const bodyMotion = {
+  // The bob always loops; the tilt is a fixed pose in four of the six states and
+  // an oscillation in the other two. They are kept apart because they need
+  // different transitions — see `loopIf`.
+  const { y: bob, rotate: tilt } = {
     idle: { y: [0, -4, 0], rotate: 0 },
     thinking: { y: [0, -2, 0], rotate: -4 },
     happy: { y: [0, -14, 0], rotate: 0 },
     encouraging: { y: [0, -3, 0], rotate: 5 },
     celebrating: { y: [0, -18, 0], rotate: [0, -6, 6, 0] },
     sleeping: { y: [0, -2, 0], rotate: [0, 8, 0] },
-  }[state]
+  }[state] as { y: number[]; rotate: number | number[] }
 
   const duration = {
     idle: 3.2,
@@ -64,6 +80,11 @@ export function Mascot({ state = 'idle', size = 160, className, equipped }: Prop
     celebrating: 0.7,
     sleeping: 4.5,
   }[state]
+
+  // The ear's numbers come from the catalogue side, because every cosmetic that
+  // rides an ear has to repeat them exactly and cannot import them from here.
+  const leftEar = earSwing(state, -1)
+  const rightEar = earSwing(state, 1)
 
   // Resolved once, so an id the catalogue has retired costs one lookup and then
   // reads the same as an empty slot everywhere below.
@@ -81,9 +102,9 @@ export function Mascot({ state = 'idle', size = 160, className, equipped }: Prop
       viewBox="0 0 200 200"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      animate={bodyMotion}
-      transition={{ duration, repeat: Infinity, ease: 'easeInOut' }}
-      aria-label={`Pip is ${state}`}
+      animate={{ y: bob, rotate: tilt }}
+      transition={{ y: loopIf(bob, duration), rotate: loopIf(tilt, duration) }}
+      aria-label={`Pip is ${expressionState}`}
       role="img"
     >
       {/* 1 · soft ground shadow */}
@@ -105,10 +126,16 @@ export function Mascot({ state = 'idle', size = 160, className, equipped }: Prop
           fill={CREAM}
           stroke={CREAM_SHADE}
           strokeWidth="3"
-          animate={{ rotate: state === 'happy' || state === 'celebrating' ? [-24, -14, -24] : -24 }}
-          transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ rotate: leftEar.rotate }}
+          // `loopIf`, not a bare `repeat: Infinity`. Both of these are keyframe
+          // arrays so both do repeat — but the helper is what keeps that a
+          // decision rather than a default. A scalar under an infinite repeat
+          // does not hold its value; it sweeps up to it and snaps back for ever,
+          // which is exactly what these ears used to do in four of six states.
+          //
           // transformOrigin in user units — originX/originY take 0–1, not px,
           // and passing px there detaches the ear from the head.
+          transition={loopIf(leftEar.rotate, leftEar.duration)}
           style={{ transformOrigin: '56px 96px' }}
         />
         <motion.ellipse
@@ -119,8 +146,8 @@ export function Mascot({ state = 'idle', size = 160, className, equipped }: Prop
           fill={CREAM}
           stroke={CREAM_SHADE}
           strokeWidth="3"
-          animate={{ rotate: state === 'happy' || state === 'celebrating' ? [24, 14, 24] : 24 }}
-          transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut' }}
+          animate={{ rotate: rightEar.rotate }}
+          transition={loopIf(rightEar.rotate, rightEar.duration)}
           style={{ transformOrigin: '144px 96px' }}
         />
         <ellipse cx="56" cy="70" rx="8" ry="18" fill={BLUSH} opacity="0.35" transform="rotate(-24 56 70)" />
@@ -146,7 +173,7 @@ export function Mascot({ state = 'idle', size = 160, className, equipped }: Prop
       {/* 6 · expression: cheeks, then eyes and mouth */}
       <ellipse cx="66" cy="126" rx="11" ry="7" fill={BLUSH} opacity="0.75" />
       <ellipse cx="134" cy="126" rx="11" ry="7" fill={BLUSH} opacity="0.75" />
-      <Face state={state} blinking={blinking} />
+      <Face state={expressionState} blinking={blinking} />
 
       {/* 7 · face cosmetics */}
       {face?.render?.(state)}
@@ -179,13 +206,12 @@ function SignatureStar({ state }: { state: MascotState }) {
       strokeWidth="2.5"
       strokeLinejoin="round"
       animate={{
-        rotate: state === 'celebrating' ? [0, 360] : [0, 12, 0],
+        rotate: state === 'celebrating' ? [0, 360] : [0, 12, 0, -12, 0],
         scale: state === 'celebrating' ? [1, 1.25, 1] : 1,
       }}
       transition={{
-        duration: state === 'celebrating' ? 1.2 : 3.4,
-        repeat: Infinity,
-        ease: 'easeInOut',
+        rotate: { duration: state === 'celebrating' ? 1.2 : 3.4, repeat: Infinity, ease: 'easeInOut' },
+        scale: loopIf(state === 'celebrating' ? [1, 1.25, 1] : 1, 1.2),
       }}
       style={{ transformOrigin: '148px 162px' }}
     />
@@ -230,8 +256,8 @@ function Face({ state, blinking }: { state: MascotState; blinking: boolean }) {
 
   let eyes
   if (state === 'sleeping') eyes = [closed(L), closed(R)]
-  else if (blinking) eyes = [closed(L), closed(R)]
   else if (state === 'happy' || state === 'celebrating') eyes = [joyful(L), joyful(R)]
+  else if (blinking) eyes = [closed(L), closed(R)]
   else if (state === 'thinking') eyes = [open(L, 2, -3), open(R, 2, -3)]
   else eyes = [open(L), open(R)]
 
@@ -242,7 +268,15 @@ function Face({ state, blinking }: { state: MascotState; blinking: boolean }) {
     thinking: <ellipse cx="100" cy="140" rx="5" ry="6" fill={INK} opacity="0.85" />,
     // open delighted smile
     happy: (
-      <path d="M88 134 q12 18 24 0 q-12 6 -24 0z" fill={INK} stroke={INK} strokeWidth="3" strokeLinejoin="round" />
+      <g>
+        <path
+          d="M88 133 q12 26 24 0 q-12 7 -24 0z"
+          fill={BLUSH}
+          stroke={INK}
+          strokeWidth="3"
+          strokeLinejoin="round"
+        />
+      </g>
     ),
     celebrating: (
       <path d="M86 133 q14 22 28 0 q-14 7 -28 0z" fill={INK} stroke={INK} strokeWidth="3" strokeLinejoin="round" />

@@ -1,7 +1,9 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
+import { earSwing, loopIf } from './motion'
 import { INK, families } from './palette'
 import { decorations } from './room'
+import { RainbowWings } from './wings'
 import type {
   CatalogueItem,
   Cosmetic,
@@ -42,14 +44,26 @@ export type {
  * The catalogue
  * ------------------------------------------------------------------------- */
 
-const { blossom, lilac, mint, powder } = families
+const { blossom, butter, lilac, mint, powder } = families
 
 /**
  * Prices are set against what a lesson actually pays — 15 coins for a lesson
  * that raises mastery, 8 for a repeat. Two or three lessons is an ordinary
- * sitting, so roughly 30–45 coins a day: the glasses land just past a good first
- * day and the cape at about five. The set totals 470, which is something new
- * every other day for a week and a half rather than a grind.
+ * sitting, so roughly 30–45 coins a day.
+ *
+ * The five original items keep their original prices, so the glasses still land
+ * just past a good first day and the cape at about five. What is new is the
+ * climb above them, to 1000. A five-item wardrobe was cleared in a fortnight and
+ * then there was nothing left to want; the top of the list is now about a month
+ * of saving, and the middle gives the learner somewhere to spend before then.
+ *
+ * **A price is a promise about how much there is to look at.** The earmuffs are
+ * a band and two muffs; the crown adds points and gems that breathe; the comet
+ * adds a tail, sparkles and a spin. An expensive item that is no more elaborate
+ * than a cheap one is the thing that makes the whole ladder feel dishonest.
+ *
+ * The list is ordered by price, and the shop shows each category in this order —
+ * so a category reads plain to elaborate from top to bottom.
  */
 export const cosmetics: Cosmetic[] = [
   {
@@ -75,16 +89,7 @@ export const cosmetics: Cosmetic[] = [
     slot: 'headwear',
     name: 'Ear bows',
     price: 60,
-    // The ears rotate independently of the body — including a swing to ∓14° on
-    // `happy` and `celebrating` — so each bow repeats its ear's animation about
-    // that ear's exact base. `originX`/`originY` take a 0–1 fraction and would
-    // silently detach the bow from the ear it belongs to.
-    render: (state) => (
-      <g>
-        {bow({ x: 56, y: 64, origin: '56px 96px', state, side: -1 })}
-        {bow({ x: 144, y: 64, origin: '144px 96px', state, side: 1 })}
-      </g>
-    ),
+    render: (state) => <g>{EARS.map((ear) => onEar(ear, state, bow(ear)))}</g>,
   },
 
   {
@@ -108,10 +113,35 @@ export const cosmetics: Cosmetic[] = [
           d="M124 168 q10 8 8 20"
           strokeWidth="3"
           strokeLinecap="round"
-          animate={{ rotate: [0, 6, 0] }}
+          animate={{ rotate: [0, 6, 0, -6, 0] }}
           transition={{ duration: 3.6, repeat: Infinity, ease: 'easeInOut' }}
           style={{ fill: 'none', stroke: mint.deep, transformOrigin: '124px 168px' }}
         />
+      </g>
+    ),
+  },
+
+  {
+    kind: 'cosmetic',
+    id: 'mint-earmuffs',
+    slot: 'headwear',
+    name: 'Mint earmuffs',
+    price: 100,
+    // The band is fixed to the head and only the muffs ride the ears, which is
+    // a join that has to be checked rather than assumed. The `happy` waggle takes
+    // an ear 10° either side of rest, sliding a muff about 5 units along its arc
+    // in each direction, and the rest sway another 1.5. That is a third of the
+    // muff's radius at worst, so the band still ends well inside it at every
+    // extreme and no gap opens.
+    render: (state) => (
+      <g>
+        <path
+          d="M56 68 Q100 30 144 68"
+          strokeWidth="3"
+          strokeLinecap="round"
+          style={{ fill: 'none', stroke: mint.deep }}
+        />
+        {EARS.map((ear) => onEar(ear, state, muff(ear)))}
       </g>
     ),
   },
@@ -146,7 +176,7 @@ export const cosmetics: Cosmetic[] = [
           cy="12"
           r="7"
           strokeWidth="2.5"
-          animate={{ y: [0, -3, 0] }}
+          animate={{ y: [0, -3, 0, 3, 0] }}
           transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
           style={{ fill: lilac.soft, stroke: lilac.deep }}
         />
@@ -178,39 +208,225 @@ export const cosmetics: Cosmetic[] = [
       />
     ),
   },
+
+  {
+    kind: 'cosmetic',
+    id: 'heart-shades',
+    slot: 'face',
+    name: 'Heart shades',
+    price: 200,
+    // The lenses are tinted rather than solid. Pip says everything he says with
+    // his eyes, and a `face` item that switches four of the six expressions off
+    // costs more than it adds — at 0.72 the eyes read straight through the pink.
+    render: () => (
+      <g>
+        {[78, 122].map((cx) => (
+          <path
+            key={cx}
+            // Two semicircular arcs for the lobes and two quadratics down to the
+            // point: a heart in four segments rather than the six a pair of
+            // cubics would take, because the extra control is invisible at 92px.
+            d={`M${cx - 14} 105 a7 7 0 0 1 14 0 a7 7 0 0 1 14 0 q0 9 -14 17 q-14 -8 -14 -17z`}
+            strokeWidth="3"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            fillOpacity="0.72"
+            style={{ fill: blossom.base, stroke: blossom.deep }}
+          />
+        ))}
+        <path
+          d="M92 104 q8 -5 16 0"
+          strokeWidth="3"
+          strokeLinecap="round"
+          style={{ fill: 'none', stroke: blossom.deep }}
+        />
+        {/* Arms, stopping on the head's own edge — at y 99 the circle reaches
+            x 44.5 and x 155.5, so they end on the silhouette rather than short
+            of it or out in the air beside it. */}
+        <path
+          d="M64 106 q-10 -2 -19 -7"
+          strokeWidth="3"
+          strokeLinecap="round"
+          style={{ fill: 'none', stroke: blossom.deep }}
+        />
+        <path
+          d="M136 106 q10 -2 19 -7"
+          strokeWidth="3"
+          strokeLinecap="round"
+          style={{ fill: 'none', stroke: blossom.deep }}
+        />
+      </g>
+    ),
+  },
+
+  {
+    kind: 'cosmetic',
+    id: 'butter-crown',
+    slot: 'headwear',
+    name: 'Butter crown',
+    price: 350,
+    // No `back` fragment, unlike the party hat: the points span x 66–134 and the
+    // ears render at x 26–66 and x 134–174, so there is nothing for a crown this
+    // width to pass behind. Splitting it anyway would be two fragments doing one
+    // fragment's work.
+    render: () => (
+      <g>
+        <path
+          d="M66 68 L74 38 L87 60 L100 32 L113 60 L126 38 L134 68 Z"
+          strokeWidth="3"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          style={{ fill: butter.base, stroke: butter.deep }}
+        />
+        <path
+          d="M64 64 h72 a6 6 0 0 1 0 12 h-72 a6 6 0 0 1 0 -12z"
+          strokeWidth="3"
+          strokeLinejoin="round"
+          style={{ fill: butter.soft, stroke: butter.deep }}
+        />
+        {/* Deep rather than base: a 9-unit gem is 4 CSS pixels at the shop's
+            92px, and base on its own soft tint is not a gem at that size, it is
+            a dent. They breathe out of phase so the band reads as lit. */}
+        {[84, 100, 116].map((cx, i) => (
+          <motion.circle
+            key={cx}
+            cx={cx}
+            cy="70"
+            r="4.5"
+            strokeWidth="2.5"
+            animate={{ opacity: [0.55, 1, 0.55] }}
+            transition={{ duration: 2.8, repeat: Infinity, delay: i * 0.5, ease: 'easeInOut' }}
+            style={{ fill: butter.deep, stroke: butter.deep }}
+          />
+        ))}
+      </g>
+    ),
+  },
+
+  {
+    kind: 'cosmetic',
+    id: 'wizard-hat',
+    slot: 'headwear',
+    name: 'Wizard hat',
+    price: 700,
+    // The cone leans right so it clears the tuft at x 92–108 rather than sitting
+    // on it, and its tip stops at y 12 — the party hat's pompom already sits at
+    // y 5, so this is the shallower of the two claims on the top of the canvas.
+    render: () => (
+      <g>
+        <path
+          d="M74 70 Q88 20 126 12 Q116 34 122 70 Z"
+          strokeWidth="3"
+          strokeLinejoin="round"
+          strokeLinecap="round"
+          style={{ fill: powder.base, stroke: powder.deep }}
+        />
+        {/* Outer radius 9, inner 4, about (101, 42) — 17 units across, which is
+            8 CSS pixels at 92px. A star drawn at the 7 units this started as is
+            the one the room's bunting had to give up on. */}
+        <motion.path
+          d="M101 33 L103.4 38.8 L109.6 39.2 L104.8 43.2 L106.3 49.3 L101 46 L95.7 49.3 L97.2 43.2 L92.4 39.2 L98.6 38.8 Z"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ fill: powder.soft, stroke: powder.deep }}
+        />
+        <ellipse
+          cx="100"
+          cy="70"
+          rx="42"
+          ry="9"
+          strokeWidth="3"
+          style={{ fill: powder.soft, stroke: powder.deep }}
+        />
+        <path
+          d="M78 58 h44 a4.5 4.5 0 0 1 0 9 h-44 a4.5 4.5 0 0 1 0 -9z"
+          strokeWidth="2.5"
+          strokeLinejoin="round"
+          style={{ fill: powder.base, stroke: powder.deep }}
+        />
+        <motion.circle
+          cx="128"
+          cy="10"
+          r="6"
+          strokeWidth="2.5"
+          animate={{ y: [0, -3, 0, 3, 0] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ fill: powder.soft, stroke: powder.deep }}
+        />
+      </g>
+    ),
+  },
+
+  {
+    kind: 'cosmetic',
+    id: 'rainbow-wings',
+    slot: 'back',
+    name: 'Rainbow wings',
+    price: 1000,
+    // The dearest thing Pip can wear, and the only one whose colour moves.
+    //
+    // Two lobes a side plus a spot on each, swept up-and-out and down-and-out
+    // from behind the head — the shape this item started as, kept over a wider
+    // four-feather fan that showed about twice as much wing. The fan was the
+    // better answer to the occlusion and the worse answer to what the thing
+    // should look like, and the silhouette won.
+    //
+    // What that costs is written down in `wings.tsx`: step 2 is painted before
+    // Pip, so the head circle hides the inner half of every lobe and the ears —
+    // opaque cream across `y 46–102` — take a good part of the upper pair. What
+    // reads is the outer sweep and the four spots.
+    render: () => <RainbowWings />,
+  },
+
 ]
 
+/* ------------------------------------------------------------------------- *
+ * Layers that ride an ear
+ * ------------------------------------------------------------------------- */
+
+const EARS = ['left', 'right'] as const
+
+type Ear = (typeof EARS)[number]
+
+/** Ear base x, which is also that ear's transform origin. From the contract. */
+const EAR_X: Record<Ear, number> = { left: 56, right: 144 }
+
 /**
- * One bow, repeating its ear's rotation about that ear's base.
+ * Wrap a layer so it repeats one ear's rotation about that ear's base.
  *
- * The numbers are the ear's own: −24°/+24° at rest, swinging to ∓14° on the two
- * excited states, over 0.6s. They are duplicated rather than shared because the
- * ear owns them; a bow that reads them from somewhere else would be a second
- * place the ear's motion is written down.
+ * The numbers are the ear's own and come from `earSwing`, the one place they are
+ * written down. `Mascot.tsx` reads the same function, so a layer pinned to an ear
+ * cannot drift from the ear it is pinned to — they were two copies until the
+ * rest sway would have made a third.
+ *
+ * `originX`/`originY` take a 0–1 fraction and would silently detach the layer
+ * from the ear it belongs to; only a transform origin in user units works.
  */
-function bow({
-  x,
-  y,
-  origin,
-  state,
-  side,
-}: {
-  x: number
-  y: number
-  origin: string
-  state: MascotState
-  side: -1 | 1
-}): ReactNode {
-  const excited = state === 'happy' || state === 'celebrating'
-  const rest = 24 * side
-  const swung = 14 * side
+function onEar(ear: Ear, state: MascotState, children: ReactNode): ReactNode {
+  const side = ear === 'left' ? -1 : 1
+  const { rotate, duration } = earSwing(state, side)
 
   return (
     <motion.g
-      animate={{ rotate: excited ? [rest, swung, rest] : rest }}
-      transition={{ duration: 0.6, repeat: Infinity, ease: 'easeInOut' }}
-      style={{ transformOrigin: origin }}
+      key={ear}
+      animate={{ rotate }}
+      transition={loopIf(rotate, duration)}
+      style={{ transformOrigin: `${EAR_X[ear]}px 96px` }}
     >
+      {children}
+    </motion.g>
+  )
+}
+
+/** One bow, in its ear's unrotated coordinates. `onEar` does the rest. */
+function bow(ear: Ear): ReactNode {
+  const x = EAR_X[ear]
+  const y = 64
+
+  return (
+    <g>
       {/* The two loops differ only in which way they point. */}
       {[-13, 13].map((dx) => (
         <path
@@ -229,7 +445,31 @@ function bow({
         strokeWidth="2.5"
         style={{ fill: blossom.soft, stroke: blossom.deep }}
       />
-    </motion.g>
+    </g>
+  )
+}
+
+/** One muff, sized to cover the ear it is drawn over (rx 17, ry 30). */
+function muff(ear: Ear): ReactNode {
+  const x = EAR_X[ear]
+
+  return (
+    <g>
+      <circle
+        cx={x}
+        cy="68"
+        r="15"
+        strokeWidth="3"
+        style={{ fill: mint.base, stroke: mint.deep }}
+      />
+      <circle
+        cx={x}
+        cy="68"
+        r="8"
+        strokeWidth="2.5"
+        style={{ fill: mint.soft, stroke: mint.deep }}
+      />
+    </g>
   )
 }
 
@@ -253,13 +493,25 @@ export const catalogue: CatalogueItem[] = [...cosmetics, ...decorations]
 export const itemById = new Map(catalogue.map((item) => [item.id, item]))
 
 /**
- * The room slots, as a value rather than only a type.
+ * The two slot lists, as values rather than only types.
  *
  * `unequip` is given a slot and has to decide which map it belongs to. That
  * works only while no string is in both slot unions — true today, and exactly
  * the kind of thing that breaks silently when someone adds a `back` shelf, so
  * `catalogue.test.tsx` asserts the two sets stay disjoint.
+ *
+ * Both are in the contract's own order — the order the two render orders paint
+ * in — and the shop lays its categories out by walking them, so the wardrobe and
+ * the room are offered in the same order they are drawn.
  */
+export const COSMETIC_SLOTS: readonly CosmeticSlot[] = [
+  'back',
+  'headwear',
+  'face',
+  'neck',
+  'pin',
+]
+
 export const ROOM_SLOTS: readonly RoomSlot[] = ['rug', 'wall', 'left', 'right']
 
 const roomSlots = new Set<string>(ROOM_SLOTS)

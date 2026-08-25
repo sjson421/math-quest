@@ -15,7 +15,8 @@ import { describe, expect, it } from 'vitest'
 import { decorations, type Placed } from '../cosmetics'
 import { Room } from './Room'
 
-const render = (placed?: Placed) => renderToStaticMarkup(<Room placed={placed} />)
+const render = (placed?: Placed, message?: string) =>
+  renderToStaticMarkup(<Room placed={placed} message={message} />)
 
 /**
  * Pip's head circle. Its radius identifies it uniquely, where `cx="100"` also
@@ -65,6 +66,20 @@ describe('the surface', () => {
 
     expect(html).toContain('translate(60 0)')
     expect(html).toContain('viewBox="0 0 200 200"')
+  })
+
+  it('draws Pip’s message on the right without moving Pip from the center', () => {
+    const html = render(undefined, 'Keep going!')
+
+    expect(html).toContain('role="status"')
+    expect(html).toContain('Keep going!')
+    expect(html).toContain('fill="#ffffff"')
+    expect(html).toContain('M88 133')
+    expect(html).toContain('aria-label="Pip is happy"')
+    expect(html).toContain('<rect x="172" y="7" width="140"')
+    expect(html).toContain('translate(60 0)')
+    expect(html.indexOf('role="status"')).toBeGreaterThan(html.indexOf('<svg'))
+    expect(html.indexOf('role="status"')).toBeLessThan(html.indexOf(PIP_HEAD))
   })
 })
 

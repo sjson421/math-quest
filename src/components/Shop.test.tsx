@@ -8,7 +8,7 @@
 
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { catalogue, cosmetics, decorations } from '../cosmetics'
+import { COSMETIC_SLOTS, ROOM_SLOTS, catalogue, cosmetics, decorations } from '../cosmetics'
 import { initialProgress, type Progress } from '../store/progress'
 import { Shop } from './Shop'
 
@@ -111,6 +111,25 @@ describe('the two sections', () => {
     expect(placed).toContain('In the room')
     expect(placed).toContain('Put away')
     expect(placed).not.toContain('Take off')
+  })
+
+  it('heads every category that has something in it, and no other', () => {
+    const html = render({ coins: 500 })
+
+    // Both lists cover every slot today. The assertion is written against what
+    // each slot actually holds rather than against that fact, so the day a slot
+    // empties the shop is expected to drop its heading, not keep an empty one.
+    for (const [slots, items, label] of [
+      [COSMETIC_SLOTS, cosmetics, { back: 'Back', headwear: 'Headwear', face: 'Face', neck: 'Neck', pin: 'Badge' }],
+      [ROOM_SLOTS, decorations, { rug: 'Floor', wall: 'Wall', left: 'Left corner', right: 'Right corner' }],
+    ] as const) {
+      for (const slot of slots) {
+        const heading = `>${(label as Record<string, string>)[slot]}<`
+        const occupied = (items as readonly { slot: string }[]).some((item) => item.slot === slot)
+
+        expect(html.includes(heading), `${slot} heading`).toBe(occupied)
+      }
+    }
   })
 
   it('draws a decoration at a size that clears the mascot’s floor', () => {

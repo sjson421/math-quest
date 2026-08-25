@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import {
+  COSMETIC_SLOTS,
+  ROOM_SLOTS,
   cosmetics,
   decorations,
   type CatalogueItem,
@@ -21,7 +23,9 @@ import { Room } from './Room'
  * of reaching for the live one.
  *
  * Two sections, because the two kinds are previewed at different sizes and read
- * with different words: you wear a hat and you place a rug.
+ * with different words: you wear a hat and you place a rug. Inside each section
+ * the items are grouped by slot, which is a category the learner can already
+ * feel — two things in one group are the two things that cannot be used at once.
  */
 type Props = {
   progress: Progress
@@ -29,6 +33,26 @@ type Props = {
   onEquip: (id: string) => void
   onUnequip: (slot: CosmeticSlot | RoomSlot) => void
   onClose: () => void
+}
+
+/**
+ * What each slot is called on screen.
+ *
+ * Keyed by both unions so a new slot on either surface is a type error here
+ * rather than a category that silently renders no heading. The order the
+ * categories appear in is the order of `COSMETIC_SLOTS` and `ROOM_SLOTS`, not
+ * the order of this table.
+ */
+const CATEGORY: Record<CosmeticSlot | RoomSlot, string> = {
+  back: 'Back',
+  headwear: 'Headwear',
+  face: 'Face',
+  neck: 'Neck',
+  pin: 'Badge',
+  rug: 'Floor',
+  wall: 'Wall',
+  left: 'Left corner',
+  right: 'Right corner',
 }
 
 export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
@@ -66,27 +90,48 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
       </p>
 
       <SectionHeading>Wardrobe</SectionHeading>
-      <div className="px-5 pb-6 grid grid-cols-2 gap-4">
-        {cosmetics.map((cosmetic) => (
-          <Card key={cosmetic.id} {...card(cosmetic)}>
-            {/* 92px is the size floor the contract names — an item illegible here is
-                an item that fails its acceptance pass, so the shop card is the check. */}
-            <Mascot state="idle" size={92} equipped={{ [cosmetic.slot]: cosmetic.id }} />
-          </Card>
-        ))}
-      </div>
+      {COSMETIC_SLOTS.map((slot) => (
+        <Category
+          key={slot}
+          label={CATEGORY[slot]}
+          items={cosmetics.filter((cosmetic) => cosmetic.slot === slot)}
+          // Two columns, which puts Pip at 92px — the size floor the contract
+          // names. An item illegible here is an item that fails its acceptance
+          // pass, so the shop card is the check.
+          layout="grid grid-cols-2 gap-4"
+        >
+          {(cosmetic) => (
+            <Card key={cosmetic.id} {...card(cosmetic)}>
+              <Mascot state="idle" size={92} equipped={{ [cosmetic.slot]: cosmetic.id }} />
+            </Card>
+          )}
+        </Category>
+      ))}
 
       <SectionHeading>Room</SectionHeading>
-      {/* Full width, not the wardrobe's two columns: see the card comment below. */}
-      <div className="px-5 pb-10 flex flex-col gap-4">
-        {decorations.map((decoration) => (
-          <Card key={decoration.id} {...card(decoration)}>
-            {/* Full width, so the room draws at 194px and Pip inside it clears the
-                same 92px floor. In the two-column grid he would land at 84. */}
-            <Room state="idle" height={194} placed={{ [decoration.slot]: decoration.id }} />
-          </Card>
-        ))}
-      </div>
+      {ROOM_SLOTS.map((slot) => (
+        <Category
+          key={slot}
+          label={CATEGORY[slot]}
+          items={decorations.filter((decoration) => decoration.slot === slot)}
+          // Full width, not the wardrobe's two columns, so the room draws at
+          // 194px and Pip inside it clears the same 92px floor. In the grid he
+          // would land at 84.
+          layout="flex flex-col gap-4"
+        >
+          {(decoration) => (
+            <Card key={decoration.id} {...card(decoration)}>
+              <Room
+                state="idle"
+                height={194}
+                placed={{ [decoration.slot]: decoration.id }}
+              />
+            </Card>
+          )}
+        </Category>
+      ))}
+
+      <div className="pb-10" />
     </div>
   )
 }
@@ -96,6 +141,36 @@ function SectionHeading({ children }: { children: ReactNode }) {
     <h2 className="px-5 pb-2 text-sm font-bold text-ink-soft uppercase tracking-wide">
       {children}
     </h2>
+  )
+}
+
+/**
+ * One slot's worth of items, under a heading of its own.
+ *
+ * Renders nothing at all when the slot is empty rather than a heading with a
+ * gap under it — a slot with no item yet is a normal state of the catalogue, not
+ * something the learner should be shown.
+ */
+function Category<T>({
+  label,
+  items,
+  layout,
+  children,
+}: {
+  label: string
+  items: readonly T[]
+  layout: string
+  children: (item: T) => ReactNode
+}) {
+  if (items.length === 0) return null
+
+  return (
+    <section>
+      <h3 className="px-5 pb-2 text-xs font-bold text-ink-faint uppercase tracking-wide">
+        {label}
+      </h3>
+      <div className={`px-5 pb-6 ${layout}`}>{items.map(children)}</div>
+    </section>
   )
 }
 

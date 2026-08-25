@@ -82,6 +82,10 @@ export type Decoration = Owned & {
    * signature that cannot receive the state makes a state-dependent decoration
    * unwritable rather than merely discouraged.
    *
+   * It may still run a loop of its own — a bulb glowing, a fish drifting — since
+   * that needs nothing passed in. Responding is what is forbidden here, not
+   * moving; `references/room.md` says which items have earned a loop.
+   *
    * There is no `back`/`front` pair either. The room paints Pip as one step, so
    * it never opens a gap for a decoration to span.
    */

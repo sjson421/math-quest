@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 import { ROOM_SLOTS, placedIn, type Equipped, type MascotState, type Placed } from '../cosmetics'
-import { families } from '../cosmetics/palette'
+import { INK, families } from '../cosmetics/palette'
 import { Mascot } from './Mascot'
 
 /**
@@ -57,9 +57,11 @@ type Props = {
   equipped?: Equipped
   /** What stands in the room. Resolved here, in one place, for the same reason. */
   placed?: Placed
+  /** A temporary message Pip is saying inside the room. */
+  message?: string | null
 }
 
-export function Room({ state = 'idle', height = 148, className, equipped, placed }: Props) {
+export function Room({ state = 'idle', height = 148, className, equipped, placed, message }: Props) {
   return (
     <svg
       // Rounded like every card in the app — a hard-cornered rectangle reads as
@@ -99,10 +101,54 @@ export function Room({ state = 'idle', height = 148, className, equipped, placed
         <Fragment key={slot}>{placedIn(placed, slot)?.render()}</Fragment>
       ))}
 
-      {/* 7 · Pip, as one step */}
-      <g transform={`translate(${PIP_X} 0)`}>
-        <Mascot state={state} size={HEIGHT} equipped={equipped} />
+      {/* 7 · Pip, as one step. The bubble uses room coordinates so it can sit
+          to his right without changing the centered placement of his canvas. */}
+      <g>
+        {message && <SpeechBubble message={message} />}
+        <g transform={`translate(${PIP_X} 0)`}>
+          <Mascot
+            state={state}
+            expression={message ? 'happy' : undefined}
+            size={HEIGHT}
+            equipped={equipped}
+          />
+        </g>
       </g>
     </svg>
+  )
+}
+
+function SpeechBubble({ message }: { message: string }) {
+  return (
+    <g role="status" aria-live="polite" aria-label={message}>
+      <rect
+        x="172"
+        y="7"
+        width="140"
+        height="32"
+        rx="16"
+        fill="#ffffff"
+        stroke={powder.deep}
+        strokeWidth="2"
+      />
+      <path
+        d="M184 38 l-8 8 24-8"
+        fill="#ffffff"
+        stroke={powder.deep}
+        strokeWidth="2"
+        strokeLinejoin="round"
+      />
+      <text
+        x="242"
+        y="23"
+        fill={INK}
+        fontSize="10"
+        fontWeight="700"
+        textAnchor="middle"
+        dominantBaseline="middle"
+      >
+        {message}
+      </text>
+    </g>
   )
 }

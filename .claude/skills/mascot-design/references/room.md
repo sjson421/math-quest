@@ -149,12 +149,26 @@ survive — which is why the room section does not share the wardrobe's grid.
 
 ## Motion
 
-**A decoration does not move.** It responds to nothing: not to Pip's six states, not to a
-streak, not to a lesson. `Decoration.render` takes no argument, so a state-dependent
-decoration cannot be written rather than merely being discouraged.
+**A decoration may carry one small ambient loop. It may never respond to anything.**
 
-Pip continues to carry his own per-state bob inside his nested canvas. The room does not move
-with him — a swaying wall would read as an earthquake.
+The second half is the one the type enforces: `Decoration.render` takes no argument, so a
+decoration that reacted to Pip's six states, to a streak, or to a lesson cannot be written
+rather than merely being discouraged. That is not negotiable and no item may route around it.
+
+The first half replaces a flat "a decoration does not move", which this contract carried until
+the room gained items expensive enough to be the subject of a screen rather than furniture at
+the edge of one. **The test is whether stillness would make the item look broken.** An unlit
+string of bulbs and a fish tank with nothing moving in it do not read as calm, they read as
+dead — so the lights glow and the fish drift. A rug does not have that problem, so the rug
+does not move. Furniture stays still; only a thing that is *supposed* to be doing something
+gets a loop.
+
+One loop, slow, from the vocabulary in `visual-language.md`, and the static form still has to
+carry the whole item — a decoration is seen in a screenshot more often than it is watched.
+
+**The room's own surfaces never move.** Wall, floor and horizon are structure. Pip carries his
+per-state bob inside his nested canvas and the room does not move with him — a swaying wall
+would read as an earthquake.
 
 ## Accessibility
 
