@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useCallback, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { skillById } from '../curriculum/manifest'
 import { checkAnswer, type CheckResult } from '../lib/answer'
 import { completionAction, type CompletionView } from '../lib/checkpoint'
@@ -14,6 +14,7 @@ import {
   requeueMiss,
   startLessonSession,
 } from '../lib/lesson'
+import { success } from '../lib/sound'
 import { createSubmissionGate } from '../lib/submission-gate'
 import { feedbackText, responseTo } from '../lib/submit'
 import type { Difficulty, Misconception, SkillGenerator } from '../lib/types'
@@ -422,6 +423,13 @@ function LessonComplete({
   const character = useProgress((s) => s.progress.character)
   const equipped = useProgress((s) => s.progress.equipped)
   const [view, setView] = useState<CompletionView>('lesson-result')
+
+  // Once, as the celebration lands — beside the confetti rather than at the
+  // moment the last answer was checked, so the cue and what it is about arrive
+  // together. Best-effort like the haptics: silent wherever audio is not there.
+  useEffect(() => {
+    success()
+  }, [])
 
   const continueCompletion = () => {
     if (completionAction(view, Boolean(outcome.checkpoint)) === 'exit') {

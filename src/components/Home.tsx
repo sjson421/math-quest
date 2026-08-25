@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { characterOf } from '../cosmetics'
 import { course, courseStageById, courseStageByUnitId, courseUnitById } from '../curriculum'
 import { tap } from '../lib/haptics'
+import { useSound } from '../lib/sound'
 import { isUnlocked, useProgress } from '../store/progress'
 import { Room } from './Room'
 import { SkillList } from './SkillList'
@@ -38,6 +39,8 @@ type Props = {
  */
 export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }: Props) {
   const progress = useProgress((s) => s.progress)
+  const muted = useSound((s) => s.muted)
+  const toggleMuted = useSound((s) => s.toggleMuted)
   const goalPct = Math.min(100, (progress.todayXp / progress.dailyGoal) * 100)
   const [pipMessage, setPipMessage] = useState<string | null>(null)
 
@@ -93,16 +96,31 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
         >
           <Stat icon="🪙" value={progress.coins} label="coins" />
         </button>
-        <button
-          onClick={() => {
-            tap()
-            onOpenSettings()
-          }}
-          className="w-10 h-10 rounded-full bg-white shadow-soft flex items-center justify-center text-lg"
-          aria-label="Settings"
-        >
-          ⚙︎
-        </button>
+        {/* Two controls, one cluster, so the header keeps three groups rather
+            than spreading four items across the width. */}
+        <div className="flex items-center gap-1.5">
+          <button
+            onClick={() => {
+              tap()
+              toggleMuted()
+            }}
+            className="w-10 h-10 rounded-full bg-white shadow-soft flex items-center justify-center text-lg"
+            aria-label={muted ? 'Turn sounds on' : 'Turn sounds off'}
+            aria-pressed={muted}
+          >
+            {muted ? '🔇' : '🔊'}
+          </button>
+          <button
+            onClick={() => {
+              tap()
+              onOpenSettings()
+            }}
+            className="w-10 h-10 rounded-full bg-white shadow-soft flex items-center justify-center text-lg"
+            aria-label="Settings"
+          >
+            ⚙︎
+          </button>
+        </div>
       </header>
 
       <section className="flex flex-col items-center pt-2 pb-5">
