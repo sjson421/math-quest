@@ -1,15 +1,22 @@
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
-import { wornIn, type Equipped, type MascotState } from '../cosmetics'
-import { earSwing, loopIf } from '../cosmetics/motion'
-import { BLUSH, CREAM, CREAM_SHADE, INK } from '../cosmetics/palette'
+import { useEffect, useState, type ReactNode } from 'react'
+import { characterOf, wornIn, type Equipped, type MascotState } from '../cosmetics'
+import { EARS, onEar } from '../cosmetics/ears'
+import { loopIf } from '../cosmetics/motion'
+import { INK } from '../cosmetics/palette'
 
 /**
- * Pip — an original character in the kawaii idiom.
+ * The mascot — one of three original characters in the kawaii idiom.
  *
  * Built as layered SVG (ears/head, face, accessory) rather than flat artwork so
  * expressions and outfits are composable data instead of separate drawings.
  * Every part is plain geometry, so new cosmetics cost a few lines.
+ *
+ * **This component owns the ten paint steps and all of the motion; a character
+ * owns only the geometry that varies between them.** So the six expressions, the
+ * blink, the bob, the ear swing and the charm's spin are written once here and
+ * are the same on all three — which is what makes them one app's characters
+ * rather than three drawings that happen to share a file.
  */
 
 export type { MascotState }
@@ -21,6 +28,12 @@ type Props = {
   size?: number
   className?: string
   /**
+   * Who to draw. Resolved here like the cosmetic ids below, with the difference
+   * that an unknown one falls back to Pip rather than to nothing — there is no
+   * such thing as an empty character.
+   */
+  character?: string
+  /**
    * What the learner has on. Ids are resolved against the catalogue here rather
    * than by the caller, so one that no longer exists draws nothing in exactly
    * one place — and so the shop can preview an unequipped item by passing
@@ -29,8 +42,17 @@ type Props = {
   equipped?: Equipped
 }
 
-export function Mascot({ state = 'idle', expression, size = 160, className, equipped }: Props) {
+export function Mascot({
+  state = 'idle',
+  expression,
+  size = 160,
+  className,
+  character,
+  equipped,
+}: Props) {
   const expressionState = expression ?? state
+  const who = characterOf(character)
+  const { base, shade, blush } = who.coat
   const [blinking, setBlinking] = useState(false)
 
   // Irregular blink cadence reads as alive; a fixed interval reads as a loop.
@@ -81,11 +103,6 @@ export function Mascot({ state = 'idle', expression, size = 160, className, equi
     sleeping: 4.5,
   }[state]
 
-  // The ear's numbers come from the catalogue side, because every cosmetic that
-  // rides an ear has to repeat them exactly and cannot import them from here.
-  const leftEar = earSwing(state, -1)
-  const rightEar = earSwing(state, 1)
-
   // Resolved once, so an id the catalogue has retired costs one lookup and then
   // reads the same as an empty slot everywhere below.
   const back = wornIn(equipped, 'back')
@@ -104,76 +121,41 @@ export function Mascot({ state = 'idle', expression, size = 160, className, equi
       xmlns="http://www.w3.org/2000/svg"
       animate={{ y: bob, rotate: tilt }}
       transition={{ y: loopIf(bob, duration), rotate: loopIf(tilt, duration) }}
-      aria-label={`Pip is ${expressionState}`}
+      aria-label={`${who.name} is ${expressionState}`}
       role="img"
     >
       {/* 1 · soft ground shadow */}
-      <ellipse cx="100" cy="180" rx="42" ry="7" fill={BLUSH} opacity="0.22" />
+      <ellipse cx="100" cy="180" rx="42" ry="7" fill={blush} opacity="0.22" />
 
-      {/* 2 · back cosmetics — the only slot painted before Pip */}
+      {/* 2 · back cosmetics — the only slot painted before the character */}
       {back?.render?.(state)}
 
       {/* 3 · headwear back fragments — a crown behind the ear tips */}
       {headwear?.back?.(state)}
 
-      {/* 4 · ears and head */}
-      <g>
-        <motion.ellipse
-          cx="56"
-          cy="72"
-          rx="17"
-          ry="30"
-          fill={CREAM}
-          stroke={CREAM_SHADE}
-          strokeWidth="3"
-          animate={{ rotate: leftEar.rotate }}
-          // `loopIf`, not a bare `repeat: Infinity`. Both of these are keyframe
-          // arrays so both do repeat — but the helper is what keeps that a
-          // decision rather than a default. A scalar under an infinite repeat
-          // does not hold its value; it sweeps up to it and snaps back for ever,
-          // which is exactly what these ears used to do in four of six states.
-          //
-          // transformOrigin in user units — originX/originY take 0–1, not px,
-          // and passing px there detaches the ear from the head.
-          transition={loopIf(leftEar.rotate, leftEar.duration)}
-          style={{ transformOrigin: '56px 96px' }}
-        />
-        <motion.ellipse
-          cx="144"
-          cy="72"
-          rx="17"
-          ry="30"
-          fill={CREAM}
-          stroke={CREAM_SHADE}
-          strokeWidth="3"
-          animate={{ rotate: rightEar.rotate }}
-          transition={loopIf(rightEar.rotate, rightEar.duration)}
-          style={{ transformOrigin: '144px 96px' }}
-        />
-        <ellipse cx="56" cy="70" rx="8" ry="18" fill={BLUSH} opacity="0.35" transform="rotate(-24 56 70)" />
-        <ellipse cx="144" cy="70" rx="8" ry="18" fill={BLUSH} opacity="0.35" transform="rotate(24 144 70)" />
-      </g>
+      {/* 4 · ears and head. `onEar` is the same wrapper the ear-riding cosmetics
+          go through, so an ear and the bow tied to it cannot move differently
+          whatever shape the ear is — see `cosmetics/ears.tsx`. */}
+      <g>{EARS.map((ear) => onEar(ear, state, who.ear(ear)))}</g>
 
-      <circle cx="100" cy="112" r="57" fill={CREAM} stroke={CREAM_SHADE} strokeWidth="3" />
+      <circle cx="100" cy="112" r="57" fill={base} stroke={shade} strokeWidth="3" />
 
-      {/* little tuft */}
-      <path
-        d="M92 58 Q100 42 108 58"
-        stroke={CREAM_SHADE}
-        strokeWidth="5"
-        strokeLinecap="round"
-        fill="none"
-      />
+      {/* the crest between the ears — a tuft, twin peaks, or spines */}
+      {who.crest}
 
       {/* 5 · headwear front fragments — a brim over the forehead. A headwear
           item that does not split is drawn here too: in front is the side that
           reads, and only a shape needing to pass behind declares a `back`. */}
       {headwear?.front?.(state) ?? headwear?.render?.(state)}
 
-      {/* 6 · expression: cheeks, then eyes and mouth */}
-      <ellipse cx="66" cy="126" rx="11" ry="7" fill={BLUSH} opacity="0.75" />
-      <ellipse cx="134" cy="126" rx="11" ry="7" fill={BLUSH} opacity="0.75" />
-      <Face state={expressionState} blinking={blinking} />
+      {/* 6 · expression: cheeks, then the character's own markings, then eyes
+          and mouth. Markings go under the face and over the cheeks, so a muzzle
+          is something the mouth is drawn *on* and never something drawn over an
+          expression. */}
+      <ellipse cx="66" cy="126" rx="11" ry="7" fill={blush} opacity="0.75" />
+      <ellipse cx="134" cy="126" rx="11" ry="7" fill={blush} opacity="0.75" />
+      {who.markings}
+      <Face state={expressionState} blinking={blinking} blush={blush} />
 
       {/* 7 · face cosmetics */}
       {face?.render?.(state)}
@@ -181,8 +163,8 @@ export function Mascot({ state = 'idle', expression, size = 160, className, equi
       {/* 8 · neck cosmetics */}
       {neck?.render?.(state)}
 
-      {/* 9 · pin — the signature star unless something replaces it */}
-      {pin ? pin.render?.(state) : <SignatureStar state={state} />}
+      {/* 9 · pin — the character's own charm unless something replaces it */}
+      {pin ? pin.render?.(state) : <Charm state={state}>{who.charm}</Charm>}
 
       {/* 10 · foreground effects */}
       {state === 'sleeping' && <SleepZs />}
@@ -191,34 +173,52 @@ export function Mascot({ state = 'idle', expression, size = 160, className, equi
 }
 
 /**
- * Pip's own charm, and what the `pin` slot falls back to.
+ * The character's own charm, and what the `pin` slot falls back to.
  *
  * It is a default rather than a fixture: a cosmetic equipped there takes its
  * place, which the contract calls a deliberate identity change. Nothing in the
  * catalogue does that today.
+ *
+ * **The motion is here and the shape is not.** Pip's star, Mochi's fish and
+ * Sprig's sprig all rock gently and all spin once on `celebrating`, because that
+ * beat belongs to the moment rather than to the object — a charm that chose its
+ * own would make the celebration land differently depending on who you had
+ * bought.
  */
-function SignatureStar({ state }: { state: MascotState }) {
+function Charm({ state, children }: { state: MascotState; children: ReactNode }) {
+  const celebrating = state === 'celebrating'
+  const scale = celebrating ? [1, 1.25, 1] : 1
+
   return (
-    <motion.path
-      d="M148 150 l4.2 8.6 9.4 1.4 -6.8 6.7 1.6 9.4 -8.4 -4.4 -8.4 4.4 1.6 -9.4 -6.8 -6.7 9.4 -1.4z"
-      fill="#ffe5a3"
-      stroke="#e8b53d"
-      strokeWidth="2.5"
-      strokeLinejoin="round"
-      animate={{
-        rotate: state === 'celebrating' ? [0, 360] : [0, 12, 0, -12, 0],
-        scale: state === 'celebrating' ? [1, 1.25, 1] : 1,
-      }}
+    <motion.g
+      animate={{ rotate: celebrating ? [0, 360] : [0, 12, 0, -12, 0], scale }}
       transition={{
-        rotate: { duration: state === 'celebrating' ? 1.2 : 3.4, repeat: Infinity, ease: 'easeInOut' },
-        scale: loopIf(state === 'celebrating' ? [1, 1.25, 1] : 1, 1.2),
+        rotate: { duration: celebrating ? 1.2 : 3.4, repeat: Infinity, ease: 'easeInOut' },
+        scale: loopIf(scale, 1.2),
       }}
       style={{ transformOrigin: '148px 162px' }}
-    />
+    >
+      {children}
+    </motion.g>
   )
 }
 
-function Face({ state, blinking }: { state: MascotState; blinking: boolean }) {
+/**
+ * The six expressions, in `INK` on every character.
+ *
+ * `blush` is the one colour passed in: the delighted mouth is filled with it, so
+ * an open smile is the character's own pink rather than a fourth cream in the
+ * middle of a ginger face.
+ */
+function Face({
+  state,
+  blinking,
+  blush,
+}: {
+  state: MascotState
+  blinking: boolean
+  blush: string
+}) {
   const L = 78
   const R = 122
   const eyeY = 110
@@ -271,7 +271,7 @@ function Face({ state, blinking }: { state: MascotState; blinking: boolean }) {
       <g>
         <path
           d="M88 133 q12 26 24 0 q-12 7 -24 0z"
-          fill={BLUSH}
+          fill={blush}
           stroke={INK}
           strokeWidth="3"
           strokeLinejoin="round"

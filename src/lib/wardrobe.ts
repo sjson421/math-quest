@@ -11,10 +11,9 @@
  * that advanced `updatedAt` would schedule a push carrying no change, on every
  * tap of something the learner cannot afford.
  *
- * One catalogue covers both surfaces, so `buy` never needs to know which kind it
- * was handed. `standing`, `equip` and `unequip` do, and all three ask the same
- * question — which map does this slot belong to — rather than a caller passing a
- * discriminant it could get wrong.
+ * One catalogue covers all three kinds, so `buy` never needs to know which it was
+ * handed. `standing` and `equip` do, and they ask the item itself rather than
+ * take a discriminant from a caller that could get it wrong.
  */
 
 import {
@@ -29,21 +28,35 @@ import type { Progress } from '../store/progress'
 /** Where the learner stands with one item. What a shop card renders from. */
 export type ItemStanding = 'in-use' | 'owned' | 'affordable' | 'out-of-reach'
 
-export const owns = (progress: Progress, id: string): boolean => progress.inventory.includes(id)
+/**
+ * Owning something is having bought it — with the one exception that costs
+ * nothing to make and would cost a migration to avoid.
+ *
+ * The starting character is priced at zero, and a price of zero is owned before
+ * anything happens. Seeding the inventory with it instead would mean rewriting
+ * every record that predates characters, and pushing that rewrite to the server
+ * on first load, to record a fact the catalogue already states.
+ */
+export const owns = (progress: Progress, id: string): boolean =>
+  progress.inventory.includes(id) || itemById.get(id)?.price === 0
 
 /**
- * Which map a slot belongs to — the single fact all three operations route on.
+ * Where an item would be in use, and what is there now.
  *
- * Slot membership rather than the item's `kind`, even where a `kind` is in hand.
- * `unequip` is given a slot and no item, so it can only ask this question; if
- * the others asked a different one, the same fact would be written down twice
- * and a third surface would have to be added correctly in two places.
+ * A character has no slot, because there is only ever one of them and it is
+ * never empty — `progress.character` is that slot, spelled out. The other two
+ * kinds route on slot membership rather than on `kind`, even where a `kind` is
+ * in hand: `unequip` is given a slot and no item, so it can only ask that
+ * question, and if the others asked a different one the same fact would be
+ * written down twice.
  *
  * It reads the *value* rather than handing back the map, because narrowing the
  * slot is what makes the index legal — a function returning the map loses that
  * pairing and leaves a slot union indexing a record union.
  */
 const inUse = (progress: Progress, item: CatalogueItem): string | undefined => {
+  if (item.kind === 'character') return progress.character
+
   const slot = item.slot
   return isRoomSlot(slot) ? progress.room[slot] : progress.equipped[slot]
 }
@@ -83,15 +96,21 @@ export function buy(progress: Progress, id: string): Progress | null {
 }
 
 /**
- * Wear a cosmetic, or stand a decoration in the room. Refused when it is unknown
- * or not owned; going into an occupied slot replaces what was there, which is
- * the whole point of a slot.
+ * Play as a character, wear a cosmetic, or stand a decoration in the room.
+ * Refused when it is unknown or not owned; going into an occupied slot replaces
+ * what was there, which is the whole point of a slot.
+ *
+ * Becoming a character replaces the one before it and takes nothing off: every
+ * accessory is authored against anchors all three share, so what was worn on Pip
+ * is still worn, and still fits, on Mochi.
  */
 export function equip(progress: Progress, id: string): Progress | null {
   const item = itemById.get(id)
   if (!item) return null
   if (!owns(progress, id)) return null
   if (inUse(progress, item) === id) return null
+
+  if (item.kind === 'character') return { ...progress, character: id }
 
   const slot = item.slot
   return isRoomSlot(slot)
@@ -103,6 +122,9 @@ export function equip(progress: Progress, id: string): Progress | null {
  * Empty a slot, keeping what was in it owned. Refused when the slot is already
  * empty — the one operation that cannot fail is otherwise the one that can push
  * a no-op to the server.
+ *
+ * There is no slot here for a character, and that is the point: someone is
+ * always on screen, so the only way to stop being one is to become another.
  *
  * The slot alone says which map it belongs to, because the two unions share no
  * string. `catalogue.test.tsx` asserts that they stay disjoint, since the day

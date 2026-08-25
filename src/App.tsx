@@ -55,7 +55,7 @@ export default function App() {
   if (!loaded) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <Mascot state="sleeping" size={120} />
+        <Mascot state="sleeping" size={120} character={progress.character} />
       </div>
     )
   }

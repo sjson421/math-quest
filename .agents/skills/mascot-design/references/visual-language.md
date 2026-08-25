@@ -24,6 +24,13 @@ Never substitute `--color-cream` for `CREAM`. Side by side at 190 px the swap re
 smudge on the character, and because both are near-white it will pass every review that
 does not put them next to each other.
 
+**Each character has a coat of its own**, in the `coats` map in that same module — a `base`
+fill, a `shade` outline, and a `blush` for cheeks, inner ear and ground shadow. Pip's coat is
+the three constants above. A coat must stay outside the five families below, or that
+character loses every cosmetic in the family it collides with;
+[characters.md](characters.md) lists the three and the rule in full. `INK` is not part of a
+coat: eyes and mouth are the same on everyone.
+
 **App tokens available to cosmetics** — each family is a base, a soft tint, and a deep
 shade, which is exactly enough for a fill, a highlight, and an outline:
 
@@ -48,6 +55,9 @@ A colour outside these families needs a one-line reason in a comment beside the 
   Thinner vanishes at 92 px; thicker overwhelms the face. Pip's own *face* is drawn heavier
   (3.5 mouth, 4–4.5 eyes, 5 tuft) because it has to stay readable through every expression;
   that is not licence for a cosmetic to match it.
+- **A character's own parts run 2.5 to 5 units**, for that same reason — a crest is fur at
+  the tuft's weight, not an accessory sitting on the head. The floor is shared; only the
+  ceiling differs, and `catalogue.test.tsx` applies each kind its own.
 - **Round caps and joins**, always: `strokeLinecap="round"`, `strokeLinejoin="round"`. Pip
   has no sharp corners and an item with them looks pasted on.
 - **Simple shapes.** Circles, ellipses, and short quadratic curves. If an item needs a path
@@ -90,6 +100,7 @@ behaviour is documented at <https://motion.dev/docs/react-accessibility>. The ch
 simpler than the mechanism — set the OS reduced-motion preference, look at the item, and
 confirm nothing has gone missing.
 
-Pip exposes one accessible name for the whole character (`aria-label="Pip is <state>"`).
-Cosmetics are decorative and must not each announce themselves; a learner using a screen
-reader should hear the mascot's state, not an inventory list.
+The mascot exposes one accessible name for the whole character
+(`aria-label="<name> is <state>"` — the chosen character's name, so it is `Mochi is idle` when
+that is who the learner is). Cosmetics are decorative and must not each announce themselves;
+a learner using a screen reader should hear the mascot's state, not an inventory list.

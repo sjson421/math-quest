@@ -1,27 +1,30 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
-import { earSwing, loopIf } from './motion'
+import { characters } from './characters'
+import { EARS, EAR_X, onEar, type Ear } from './ears'
 import { INK, families } from './palette'
 import { decorations } from './room'
 import { RainbowWings } from './wings'
 import type {
   CatalogueItem,
+  Character,
   Cosmetic,
   CosmeticSlot,
   Decoration,
   Equipped,
-  MascotState,
   Placed,
   RoomSlot,
 } from './types'
 
 /**
- * The cosmetics Pip can wear, and the one catalogue holding them beside the
- * room's decorations.
+ * The cosmetics a character can wear, and the one catalogue holding them beside
+ * the room's decorations and the characters themselves.
  *
- * Each cosmetic is a small layer hung off Pip's existing geometry, never a
- * second drawing of the character — that is what keeps a wardrobe of any size
- * from multiplying every future expression by the number of items shipped.
+ * Each cosmetic is a small layer hung off the character's existing geometry,
+ * never a second drawing of one — that is what keeps a wardrobe of any size from
+ * multiplying every future expression by the number of items shipped, and it is
+ * also why a new character costs the wardrobe nothing: all three are the same
+ * anchors under a different coat.
  *
  * Geometry is written in Pip's own `0 0 200 200` view box against the anchors in
  * the `mascot-design` contract, so nothing here is scaled or repositioned into
@@ -31,6 +34,7 @@ import type {
 
 export type {
   CatalogueItem,
+  Character,
   Cosmetic,
   CosmeticSlot,
   Decoration,
@@ -386,40 +390,6 @@ export const cosmetics: Cosmetic[] = [
  * Layers that ride an ear
  * ------------------------------------------------------------------------- */
 
-const EARS = ['left', 'right'] as const
-
-type Ear = (typeof EARS)[number]
-
-/** Ear base x, which is also that ear's transform origin. From the contract. */
-const EAR_X: Record<Ear, number> = { left: 56, right: 144 }
-
-/**
- * Wrap a layer so it repeats one ear's rotation about that ear's base.
- *
- * The numbers are the ear's own and come from `earSwing`, the one place they are
- * written down. `Mascot.tsx` reads the same function, so a layer pinned to an ear
- * cannot drift from the ear it is pinned to — they were two copies until the
- * rest sway would have made a third.
- *
- * `originX`/`originY` take a 0–1 fraction and would silently detach the layer
- * from the ear it belongs to; only a transform origin in user units works.
- */
-function onEar(ear: Ear, state: MascotState, children: ReactNode): ReactNode {
-  const side = ear === 'left' ? -1 : 1
-  const { rotate, duration } = earSwing(state, side)
-
-  return (
-    <motion.g
-      key={ear}
-      animate={{ rotate }}
-      transition={loopIf(rotate, duration)}
-      style={{ transformOrigin: `${EAR_X[ear]}px 96px` }}
-    >
-      {children}
-    </motion.g>
-  )
-}
-
 /** One bow, in its ear's unrotated coordinates. `onEar` does the rest. */
 function bow(ear: Ear): ReactNode {
   const x = EAR_X[ear]
@@ -482,13 +452,16 @@ export const cosmeticById = new Map(cosmetics.map((c) => [c.id, c]))
 /**
  * Everything the learner can own, in the order the shop offers it.
  *
- * One list rather than two, because there is one purse and one inventory: a
- * decoration is bought with the coins a cosmetic is bought with, and `buy()`
- * should not need to know which kind it was handed.
+ * One list rather than three, because there is one purse and one inventory: a
+ * character is bought with the coins a rug is bought with, and `buy()` should
+ * not need to know which kind it was handed. What the three kinds do *not*
+ * share is their geometry limits — a character draws its own face and is held
+ * to Pip's heavier weights, where an accessory is held to the cosmetic range —
+ * and `catalogue.test.tsx` checks each kind against its own rule.
  */
 export { decorations } from './room'
 
-export const catalogue: CatalogueItem[] = [...cosmetics, ...decorations]
+export const catalogue: CatalogueItem[] = [...characters, ...cosmetics, ...decorations]
 
 export const itemById = new Map(catalogue.map((item) => [item.id, item]))
 
@@ -529,6 +502,33 @@ export const isRoomSlot = (slot: CosmeticSlot | RoomSlot): slot is RoomSlot =>
 export function wornIn(equipped: Equipped | undefined, slot: CosmeticSlot): Cosmetic | undefined {
   const id = equipped?.[slot]
   return id ? cosmeticById.get(id) : undefined
+}
+
+export { characters }
+
+export const characterById = new Map(characters.map((c) => [c.id, c]))
+
+/**
+ * The character a fresh record starts as, and the one an unknown id becomes.
+ *
+ * Written out rather than read off `characters[0]`, because a constant export
+ * with a computed initializer costs this whole module its Fast Refresh — oxlint
+ * flags every other export in the file the moment one appears. `catalogue.test`
+ * pins the two together, so the literal cannot drift from the list.
+ */
+export const DEFAULT_CHARACTER = 'pip'
+
+
+/**
+ * Who to draw. **Unlike `wornIn`, this cannot return nothing** — an unrecognised
+ * id leaves a slot empty, but there is no such thing as an empty character, so a
+ * record naming one the catalogue has retired draws the default rather than a
+ * face with no head. The case is real for the same reason it is for cosmetics:
+ * progress is stored opaquely on the server and never migrated, so a copy naming
+ * anything at all can arrive from sync.
+ */
+export function characterOf(id: string | undefined): Character {
+  return (id ? characterById.get(id) : undefined) ?? characters[0]
 }
 
 export const decorationById = new Map(decorations.map((d) => [d.id, d]))

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { Coat } from './palette'
 
 /**
  * What the learner can own, across both surfaces.
@@ -92,4 +93,55 @@ export type Decoration = Owned & {
   render: () => ReactNode
 }
 
-export type CatalogueItem = Cosmetic | Decoration
+/**
+ * Who the learner is playing as — the body every cosmetic is hung off.
+ *
+ * **A character varies the parts no cosmetic anchors to, and nothing else.** The
+ * head circle, the eye line, the mouth, and the two ear bases are the same on
+ * all of them, because every shipped accessory is authored against those exact
+ * numbers: move the head and the scarf stops crossing a chin, move an ear base
+ * and the earmuffs come off. What is left to vary — coat, ear silhouette, crest,
+ * markings, charm — is enough to read as a different creature, and that is the
+ * whole trade this type encodes.
+ *
+ * **No state argument anywhere, for the reason `Decoration` has none.** All of
+ * the motion belongs to `Mascot.tsx`: the ears take the ear swing, the charm
+ * takes the charm's sway and celebration spin, and everything else rides the
+ * root bob. A character that animated a part itself would either double the
+ * motion already on it or invent a second vocabulary beside the shared one.
+ */
+export type Character = Owned & {
+  kind: 'character'
+  /** Body fill, outline, and the warm tone cheeks and inner ears share. */
+  coat: Coat
+  /**
+   * One ear, drawn upright about its own base. `Mascot.tsx` applies the
+   * rotation, so this is the shape *before* the −24° / +24° rest pose — the same
+   * frame `bow()` and `muff()` are written in.
+   *
+   * It must hold what rides it: an ear bow sits at `y 64` and an earmuff covers
+   * a 30-unit circle at `y 68`, both centred on the ear base. An ear with
+   * nothing there is an ear those two items fall off.
+   */
+  ear: (ear: 'left' | 'right') => ReactNode
+  /**
+   * What sits between the ears, in the tuft's envelope — `x 86–114`, `y 45–61`.
+   * Wider or taller and it collides with the hats, which is a collision the
+   * render order cannot fix: a crest is one of Pip's own layers and paints over
+   * the party hat's crown, which passes behind them.
+   */
+  crest: ReactNode
+  /**
+   * A muzzle, whiskers, a nose — drawn over the cheeks and under the eyes and
+   * mouth, so the expression always wins. Optional: Pip has none.
+   */
+  markings?: ReactNode
+  /**
+   * What stands in the `pin` slot when nothing is equipped there. Static
+   * geometry about the `pin` anchor `(148, 162)`; `Mascot.tsx` gives it the sway
+   * and the celebration spin that Pip's star has always had.
+   */
+  charm: ReactNode
+}
+
+export type CatalogueItem = Cosmetic | Decoration | Character

@@ -8,13 +8,23 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import { COSMETIC_SLOTS, ROOM_SLOTS, cosmeticById, cosmetics, decorations } from '../cosmetics'
+import {
+  COSMETIC_SLOTS,
+  DEFAULT_CHARACTER,
+  ROOM_SLOTS,
+  characters,
+  cosmeticById,
+  cosmetics,
+  decorations,
+} from '../cosmetics'
 import { initialProgress, type Progress } from '../store/progress'
 import { buy, equip, owns, standing, unequip } from './wardrobe'
 
 const glasses = cosmetics.find((c) => c.id === 'round-glasses')!
 const bows = cosmetics.find((c) => c.id === 'ear-bows')!
 const hat = cosmetics.find((c) => c.id === 'party-hat')!
+const pip = characters.find((c) => c.id === DEFAULT_CHARACTER)!
+const mochi = characters.find((c) => c.id === 'mochi')!
 
 const learner = (overrides: Partial<Progress> = {}): Progress => ({
   ...initialProgress(),
@@ -278,6 +288,71 @@ describe('the room the shop is priced against', () => {
     expect(new Set(slots)).toEqual(new Set(ROOM_SLOTS))
     for (const slot of ROOM_SLOTS) {
       expect(slots.filter((s) => s === slot).length, slot).toBeGreaterThan(1)
+    }
+  })
+})
+
+describe('characters', () => {
+  it('starts owning the free one without a purchase or a migration', () => {
+    const fresh = initialProgress()
+
+    expect(fresh.character).toBe(pip.id)
+    expect(fresh.inventory).toEqual([])
+    expect(owns(fresh, pip.id)).toBe(true)
+    expect(standing(fresh, pip)).toBe('in-use')
+  })
+
+  it('refuses to sell the free one, so no coins can be spent on nothing', () => {
+    expect(buy(learner(), pip.id)).toBeNull()
+  })
+
+  it('is bought and then played as, in two steps like everything else', () => {
+    const bought = buy(learner({ coins: mochi.price }), mochi.id)!
+
+    expect(bought.coins).toBe(0)
+    // Buying does not equip. The learner still looks like Pip until they choose.
+    expect(bought.character).toBe(pip.id)
+    expect(standing(bought, mochi)).toBe('owned')
+
+    const played = equip(bought, mochi.id)!
+
+    expect(played.character).toBe(mochi.id)
+    expect(standing(played, mochi)).toBe('in-use')
+    expect(standing(played, pip)).toBe('owned')
+  })
+
+  it('refuses to play as one that has not been bought', () => {
+    expect(equip(learner(), mochi.id)).toBeNull()
+  })
+
+  it('takes nothing off — every accessory fits all of them', () => {
+    const rich = learner({ coins: hat.price + mochi.price })
+    const wearing = equip(buy(rich, hat.id)!, hat.id)!
+    const changed = equip(buy(wearing, mochi.id)!, mochi.id)!
+
+    expect(changed.character).toBe(mochi.id)
+    expect(changed.equipped).toEqual(wearing.equipped)
+    expect(changed.room).toEqual(wearing.room)
+  })
+
+  it('refuses to change into the one already being played as', () => {
+    expect(equip(learner(), pip.id)).toBeNull()
+  })
+
+  it('changes nothing but the character, and never the purse', () => {
+    const bought = buy(learner({ coins: mochi.price }), mochi.id)!
+    const played = equip(bought, mochi.id)!
+
+    expect(played).toEqual({ ...bought, character: mochi.id })
+  })
+
+  it('has no slot to be emptied — somebody is always on screen', () => {
+    // `unequip` only takes the two slot unions, so this is the runtime half of
+    // a guarantee the types already make: there is no call that leaves nobody.
+    const played = equip(buy(learner({ coins: mochi.price }), mochi.id)!, mochi.id)!
+
+    for (const slot of [...COSMETIC_SLOTS, ...ROOM_SLOTS]) {
+      expect(unequip(played, slot)?.character ?? played.character).toBe(mochi.id)
     }
   })
 })

@@ -8,7 +8,15 @@
 
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { COSMETIC_SLOTS, ROOM_SLOTS, catalogue, cosmetics, decorations } from '../cosmetics'
+import {
+  COSMETIC_SLOTS,
+  DEFAULT_CHARACTER,
+  ROOM_SLOTS,
+  catalogue,
+  characters,
+  cosmetics,
+  decorations,
+} from '../cosmetics'
 import { initialProgress, type Progress } from '../store/progress'
 import { Shop } from './Shop'
 
@@ -24,6 +32,7 @@ const render = (progress: Partial<Progress>) =>
   )
 
 const glasses = cosmetics.find((c) => c.id === 'round-glasses')!
+const mochi = characters.find((c) => c.id === 'mochi')!
 
 describe('the shop', () => {
   it('shows the balance and every cosmetic with its price', () => {
@@ -139,5 +148,39 @@ describe('the two sections', () => {
     const html = render({})
 
     expect(html).toContain('height="194"')
+  })
+})
+
+describe('the characters section', () => {
+  it('offers every character, priced, above the wardrobe', () => {
+    const html = render({ coins: 1000 })
+
+    for (const character of characters) {
+      expect(html, character.id).toContain(character.name)
+    }
+    expect(html).toContain(`Buy · ${mochi.price}`)
+    expect(html.indexOf('Characters')).toBeLessThan(html.indexOf('Wardrobe'))
+  })
+
+  it('shows the free one as chosen rather than as something to buy', () => {
+    const html = render({ coins: 0 })
+
+    expect(html).toContain('Playing as')
+    expect(html).toContain('Chosen')
+    // The disabled in-use button. There is no taking a character off, so the
+    // word is a statement and not an offer.
+    expect(html).not.toContain('Buy · 0')
+  })
+
+  it('names the shop after whoever is being played as', () => {
+    expect(render({ character: DEFAULT_CHARACTER })).toContain('Pip&#x27;s shop')
+    expect(render({ character: mochi.id })).toContain('Mochi&#x27;s shop')
+  })
+
+  it('offers to play as one already bought', () => {
+    const html = render({ coins: 0, inventory: [mochi.id] })
+
+    expect(html).toContain('Play as')
+    expect(html).not.toContain(`Buy · ${mochi.price}`)
   })
 })

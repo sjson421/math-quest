@@ -2,10 +2,12 @@
 
 ## Purpose
 
-What the learner buys with coins and what Pip wears. Cosmetics are small layers hung off
-Pip's existing geometry rather than alternate drawings of the character, so a wardrobe of
-any size costs one render pass and every future expression keeps working. Coins earned by
-finishing lessons are the only currency, and nothing here gates or accelerates learning.
+What the learner buys with coins: who they play as, and what that character wears. Cosmetics
+are small layers hung off the character's existing geometry rather than alternate drawings,
+so a wardrobe of any size costs one render pass and every future expression keeps working.
+Characters are the same trade one level down — a coat and a handful of fragments over shared
+anchors, never a second mascot. Coins earned by finishing lessons are the only currency, and
+nothing here gates or accelerates learning.
 
 ## Requirements
 
@@ -31,6 +33,41 @@ identity: they are bought, equipped, and removed together and are never separate
 - **THEN** both fragments appear together
 - **AND** removing it removes both
 
+### Requirement: The learner plays as exactly one character
+
+The learner SHALL always be playing as exactly one character, and the mascot SHALL be drawn
+as that character everywhere it appears. One character SHALL be free and SHALL be the one a
+new record starts as; every other character SHALL be bought with coins like any other item.
+
+A character SHALL have no slot and SHALL NOT be removable. Choosing another character
+replaces the current one, which is the only way to stop being one.
+
+Choosing a character SHALL NOT change what is owned, worn, or placed. Every cosmetic SHALL
+fit every character, because all characters share the anchors cosmetics are authored
+against — buying a character never costs the learner an accessory.
+
+#### Scenario: A new record starts as the free character
+
+- **WHEN** a progress record is created
+- **THEN** the learner is playing as the free character
+- **AND** it is owned without having been bought
+
+#### Scenario: The free character cannot be bought
+
+- **WHEN** a learner tries to buy the free character
+- **THEN** the purchase is refused and no coins are deducted
+
+#### Scenario: Choosing a character keeps the outfit
+
+- **WHEN** a learner wearing cosmetics changes to a different owned character
+- **THEN** the same cosmetics are still worn
+- **AND** the room is unchanged
+
+#### Scenario: A character cannot be taken off
+
+- **WHEN** the learner is playing as a character
+- **THEN** there is no action that leaves them playing as nobody
+
 ### Requirement: Cosmetics are bought with coins
 
 A cosmetic SHALL be owned only by being bought at its price in coins. A purchase SHALL be
@@ -42,6 +79,9 @@ other progress.
 Prices SHALL be set against the rate coins are actually earned, so that the cheapest
 cosmetic is reachable within the first few lessons and the most expensive is a goal rather
 than an afternoon.
+
+A character priced at zero SHALL be treated as already owned rather than as something to
+buy, so that a record written before characters existed loads with one without a migration.
 
 #### Scenario: Buying deducts the price
 
@@ -90,8 +130,8 @@ cosmetics, the behind-fragments of `headwear`, Pip's ears and head, the front-fr
 foreground state effect. Occlusion SHALL follow from that order alone — no cosmetic
 re-layers Pip's own parts.
 
-The `pin` slot SHALL show Pip's signature star when nothing is equipped there, and SHALL
-show the equipped cosmetic instead of the star when something is.
+The `pin` slot SHALL show the character's own charm when nothing is equipped there, and SHALL
+show the equipped cosmetic instead of that charm when something is.
 
 Worn cosmetics SHALL inherit Pip's per-state motion rather than restating it, and SHALL
 remain legible with motion disabled: nothing a cosmetic communicates may exist only while it
@@ -108,6 +148,11 @@ is animating.
 - **WHEN** nothing is equipped in the `pin` slot
 - **THEN** Pip's signature star is drawn
 
+#### Scenario: The pin slot defaults to the character's own charm
+
+- **WHEN** nothing is equipped in the `pin` slot and another character is being played as
+- **THEN** that character's own charm is drawn instead
+
 #### Scenario: An equipped pin replaces the star
 
 - **WHEN** a cosmetic is equipped in the `pin` slot
@@ -120,13 +165,13 @@ is animating.
 
 ### Requirement: The wardrobe is part of the progress record
 
-Owned cosmetics and what is worn SHALL live in the learner's progress record rather than in
-storage of their own, so that whatever preserves XP and mastery preserves the wardrobe by
-the same route. How that record is synced, pushed, and restored is `progress-sync`'s
-requirement and is not restated here.
+Owned cosmetics, what is worn, and which character is being played as SHALL live in the
+learner's progress record rather than in storage of their own, so that whatever preserves XP
+and mastery preserves the wardrobe by the same route. How that record is synced, pushed, and
+restored is `progress-sync`'s requirement and is not restated here.
 
 A progress record written before cosmetics existed SHALL load without migration, with
-nothing owned and nothing worn.
+nothing owned, nothing worn, and the free character being played as.
 
 #### Scenario: The wardrobe travels with the rest of progress
 
@@ -170,16 +215,23 @@ never migrated in storage.
 - **THEN** that slot draws nothing
 - **AND** the rest of Pip and the other slots draw normally
 
+#### Scenario: An unknown character id draws the free character
+
+- **WHEN** stored progress names a character the catalogue does not contain
+- **THEN** the free character is drawn rather than nothing
+- **AND** what is worn and placed is unaffected
+
 ### Requirement: The shop is reachable from the coin balance
 
 The coin balance SHALL be the way into the shop, so the reward and the thing it buys are one
-tap apart. The shop SHALL show every catalogue item — the cosmetics Pip wears and the
-decorations that go in his room — with its price and, for each, whether it is affordable,
-already owned, or currently in use.
+tap apart. The shop SHALL show every catalogue item — the characters the learner can be,
+the cosmetics they wear, and the decorations that go in their room — with its price and, for
+each, whether it is affordable, already owned, or currently in use.
 
 Each item SHALL be shown as it actually appears where it belongs rather than as an icon: a
-cosmetic on Pip, a decoration in the room. Items of the two kinds SHALL be distinguishable
-from one another in the shop rather than presented as one undifferentiated list.
+character on its own, a cosmetic on the character currently being played as, a decoration in
+the room. Items of the three kinds SHALL be distinguishable from one another in the shop
+rather than presented as one undifferentiated list.
 
 Leaving the shop SHALL return to the level of the course the learner came from.
 
@@ -193,11 +245,18 @@ Leaving the shop SHALL return to the level of the course the learner came from.
 - **WHEN** the shop is open
 - **THEN** every decoration shows its price and whether it is owned, in the room, or affordable
 
+#### Scenario: Each character states where the learner stands with it
+
+- **WHEN** the shop is open
+- **THEN** every character shows its price and whether it is owned, played as, or affordable
+- **AND** the one being played as offers no way to take it off
+
 #### Scenario: Each kind is previewed where it belongs
 
 - **WHEN** the shop is open
-- **THEN** each cosmetic is shown drawn on Pip
+- **THEN** each cosmetic is shown drawn on the character being played as
 - **AND** each decoration is shown drawn in the room
+- **AND** each character is shown drawn on its own
 
 #### Scenario: The shop returns to where it was opened from
 

@@ -59,3 +59,42 @@ export const families: Record<Tone, ReturnType<typeof family>> = {
   butter: family('butter'),
   powder: family('powder'),
 }
+
+/* ------------------------------------------------------------------------- *
+ * Coats — one per character
+ * ------------------------------------------------------------------------- */
+
+/**
+ * The three colours a character's own body is drawn in: a fill, an outline, and
+ * the warm tone its cheeks, inner ears and ground shadow share.
+ *
+ * `INK` is deliberately absent. Eyes and mouth are the same colour on everyone,
+ * because they are the six expressions — a character that inked its own face
+ * would be a second expression set to keep in step with the first.
+ */
+export type Coat = {
+  base: string
+  shade: string
+  blush: string
+}
+
+/**
+ * Every character's colours, written down here for the reason Pip's always were:
+ * `characters.tsx` imports the catalogue types and cannot also be the place the
+ * palette lives, and `catalogue.test.tsx` checks hex literals against this map,
+ * so a colour pasted into a character's geometry fails rather than spreads.
+ *
+ * **A coat stays out of the five app families.** Every cosmetic is one family
+ * outlined in that family's deep shade, so a mint character would lose the mint
+ * scarf and a lilac one the party hat. Cream, ginger and sage each sit outside
+ * all five — which is the constraint a fourth character has to satisfy too, and
+ * the reason there is no sixth pastel here to reach for.
+ */
+export const coats = {
+  /** Pip's, moved rather than rewritten — the same four values he always had. */
+  pip: { base: CREAM, shade: CREAM_SHADE, blush: BLUSH },
+  /** Ginger: warm and clearly deeper than cream, so the two never read as one. */
+  mochi: { base: '#ffd2b0', shade: '#f0a97e', blush: '#fb90ac' },
+  /** Sage: muted and olive-leaning, where `--color-mint` is a bright aqua. */
+  sprig: { base: '#c3d8c0', shade: '#8caf88', blush: '#f5a3b6' },
+} as const satisfies Record<string, Coat>

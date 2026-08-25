@@ -50,8 +50,8 @@ looking, which is the point — none of it is a matter of taste.
 
 - [ ] With motion disabled, the item still reads as what it is, and nothing it communicates
       has disappeared.
-- [ ] The item adds no accessible name of its own; Pip's single `aria-label` still describes
-      the character.
+- [ ] The item adds no accessible name of its own; the mascot's single `aria-label` still
+      describes the character.
 
 **Offline**
 
@@ -102,6 +102,45 @@ remote reference, free tooling. These replace the parts that are about Pip's bod
 - [ ] Frozen, it still reads as what it is and nothing it communicates has gone missing.
 - [ ] It adds no accessible name of its own; Pip's single `aria-label` is all that is
       announced.
+
+## The acceptance pass for a character
+
+A character is checked against the first list wherever it still applies — view-box units,
+round caps and joins, no remote reference, free tooling, and every one of the six states.
+These replace the parts that are about wearing something:
+
+**Composition**
+
+- [ ] It touches none of the fixed anchors: head circle `(100, 112) r 57`, eyes at `x 78` /
+      `x 122` on `y 110`, the mouth around `y 138`, the ear bases, and the `pin` anchor. The
+      table in [characters.md](characters.md) names the item that breaks for each.
+- [ ] Eyes and mouth are `INK`. The coat supplies body, outline and blush and nothing else.
+- [ ] The coat is in `palette.ts`, sits outside all five app families, and is clearly deeper
+      than `CREAM` — check it beside Pip, not on its own.
+- [ ] Its parts carry no motion. The ear is drawn **upright**; the charm is static.
+- [ ] Strokes are 2.5–5 units.
+
+**Fit — the promise a character makes to the wardrobe**
+
+- [ ] `ear-bows` sits on the ear, not beside it: there is material across `y 60–80` in the
+      ear's unrotated frame.
+- [ ] `mint-earmuffs` covers the ear and the band still meets the muff at both ends of the
+      `happy` waggle.
+- [ ] The crest is inside `x 86–114`, `y 45–61`. Checked with `party-hat`, `butter-crown`
+      and `wizard-hat` on, not against a bare head.
+- [ ] Every one of the nine cosmetics is put on and looked at. A character is not done until
+      all of them have been.
+
+**Markings**
+
+- [ ] Nothing sits below `y 130` in the middle of the face: `happy` and `celebrating` open
+      the mouth from `y 133` and `thinking` reaches `y 134`.
+- [ ] Checked with `round-glasses` and `heart-shades` on — both reach `y 123`.
+
+**Ownership**
+
+- [ ] Exactly one character is free, and it is the default. Every other price is positive.
+- [ ] The list is cheapest first, so the shop's row reads free then paid.
 
 ## Provenance
 

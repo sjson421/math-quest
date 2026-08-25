@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { characterOf } from '../cosmetics'
 import { course, courseStageById, courseStageByUnitId, courseUnitById } from '../curriculum'
 import { tap } from '../lib/haptics'
 import { isUnlocked, useProgress } from '../store/progress'
@@ -88,7 +89,7 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
             onOpenShop()
           }}
           className="h-10 px-3 rounded-full flex items-center active:bg-cream-deep"
-          aria-label={`${progress.coins} coins — open Pip's shop`}
+          aria-label={`${progress.coins} coins — open ${characterOf(progress.character).name}'s shop`}
         >
           <Stat icon="🪙" value={progress.coins} label="coins" />
         </button>
@@ -111,6 +112,7 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
         <Room
           state={pipState}
           height={148}
+          character={progress.character}
           equipped={progress.equipped}
           placed={progress.room}
           message={pipMessage}

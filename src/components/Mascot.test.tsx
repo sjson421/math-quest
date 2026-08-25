@@ -1,5 +1,5 @@
 /**
- * What Pip paints, and in what order.
+ * What the mascot paints, and in what order.
  *
  * First paint only, per `docs/testing.md`. That is enough for the thing worth
  * pinning here: occlusion is decided entirely by document order, so asserting
@@ -8,14 +8,23 @@
 
 import { renderToStaticMarkup } from 'react-dom/server'
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
-import { cosmetics, cosmeticById, type Cosmetic, type Equipped } from '../cosmetics'
+import {
+  characters,
+  cosmetics,
+  cosmeticById,
+  type Cosmetic,
+  type Equipped,
+} from '../cosmetics'
+import { coats } from '../cosmetics/palette'
 import { Mascot } from './Mascot'
 
-const render = (equipped?: Equipped) =>
-  renderToStaticMarkup(<Mascot state="idle" equipped={equipped} />)
+const render = (equipped?: Equipped, character?: string) =>
+  renderToStaticMarkup(<Mascot state="idle" character={character} equipped={equipped} />)
 
-/** The signature star's first path command — unique to it. */
+/** Pip's signature star, and the other two charms — each a unique first command. */
 const STAR = 'M148 150'
+const FISH_TAIL = 'M157 162'
+const SPRIG_LEAF = 'M139 172'
 /** The head circle, and the last of Pip's own layers a hat has to get behind. */
 const HEAD = 'r="57"'
 /** The party hat's crown and its band. */
@@ -51,6 +60,67 @@ describe('Pip alone', () => {
     expect(html).toContain(HAPPY_SMILE)
     expect(html).toContain('fill="#ffb3c9"')
     expect(html).toContain('aria-label="Pip is happy"')
+  })
+})
+
+describe('each character', () => {
+  it.each(characters.map((c) => [c.id, c] as const))('draws %s in their own coat', (_id, character) => {
+    const html = render(undefined, character.id)
+
+    expect(html).toContain(`aria-label="${character.name} is idle"`)
+    // The head circle, which is the one shape every character shares. Its fill
+    // is the coat, so this is the check that the coat reached the body rather
+    // than only the ears.
+    expect(html).toContain(`fill="${character.coat.base}"`)
+  })
+
+  it('is somebody rather than nobody when the id is one the catalogue retired', () => {
+    expect(render(undefined, 'a-character-that-was-retired')).toBe(render())
+  })
+
+  it('gives each of them a charm of their own in the pin slot', () => {
+    expect(render(undefined, 'pip')).toContain(STAR)
+    expect(render(undefined, 'mochi')).toContain(FISH_TAIL)
+    expect(render(undefined, 'sprig')).toContain(SPRIG_LEAF)
+
+    expect(render(undefined, 'mochi')).not.toContain(STAR)
+    expect(render(undefined, 'sprig')).not.toContain(STAR)
+  })
+
+  /**
+   * The promise a character makes to the wardrobe, and the reason a character is
+   * a coat and five fragments rather than a second drawing: every accessory is
+   * authored against anchors all three share, so buying one can never cost the
+   * learner something they already own.
+   */
+  it.each(characters.map((c) => [c.id, c] as const))('wears everything, on %s', (_id, character) => {
+    const bare = render(undefined, character.id)
+
+    for (const cosmetic of cosmetics) {
+      const worn = render(wearing(cosmetic), character.id)
+
+      expect(worn.length, `${cosmetic.id} on ${character.id}`).toBeGreaterThan(bare.length)
+    }
+  })
+
+  it('paints markings over the cheeks and under the mouth', () => {
+    // Mochi's nose sits between the two, so a muzzle is something the mouth is
+    // drawn on and never something drawn over an expression.
+    const html = render(undefined, 'mochi')
+    const cheek = 'cx="66" cy="126"'
+    const nose = 'M93 121'
+    const mouth = 'M92 138'
+
+    expect(html).toContain(nose)
+    expect(html.indexOf(cheek)).toBeLessThan(html.indexOf(nose))
+    expect(html.indexOf(nose)).toBeLessThan(html.indexOf(mouth))
+  })
+
+  it('fills the delighted mouth with the character’s own blush, not Pip’s', () => {
+    const html = renderToStaticMarkup(<Mascot state="happy" character="sprig" />)
+
+    expect(html).toContain(`fill="${coats.sprig.blush}"`)
+    expect(html).not.toContain(coats.pip.blush)
   })
 })
 
@@ -127,6 +197,19 @@ describe('the pin slot', () => {
 
     expect(html).toContain('data-badge')
     expect(html).not.toContain(STAR)
+  })
+
+  it('replaces whichever charm the character brought', () => {
+    for (const [id, charm] of [
+      ['pip', STAR],
+      ['mochi', FISH_TAIL],
+      ['sprig', SPRIG_LEAF],
+    ] as const) {
+      const html = render({ pin: badge.id }, id)
+
+      expect(html, id).toContain('data-badge')
+      expect(html, id).not.toContain(charm)
+    }
   })
 
   it('ships no cosmetic that would take the star’s place', () => {

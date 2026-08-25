@@ -1,6 +1,6 @@
 ---
 name: mascot-design
-description: Use when authoring, reviewing, or changing a Pip cosmetic, a room decoration, or any mascot or scene layer in Math Quest — the two coordinate systems, slot and occlusion order, palette, geometry limits, motion vocabulary, and asset provenance rules a new item must satisfy.
+description: Use when authoring, reviewing, or changing a Math Quest character, a cosmetic, a room decoration, or any mascot or scene layer — the two coordinate systems, slot and occlusion order, what a character may vary, palette, geometry limits, motion vocabulary, and asset provenance rules a new item must satisfy.
 ---
 
 # Designing for Pip
@@ -9,6 +9,11 @@ Pip is one React component of plain SVG geometry: [`src/components/Mascot.tsx`](
 Ears, head, face, and a signature-star accessory are separate layers inside one
 `0 0 200 200` view box, which is the whole reason cosmetics are possible without redrawing
 the character.
+
+**Pip is also one of three characters, not the only one.** Mochi and Sprig share his exact
+anchors and differ in coat, ears, crest, markings and charm; the component draws whichever
+one the learner is playing as. Everything below describes all three, and "Pip" is used where
+the point is the geometry rather than the individual.
 
 **A cosmetic is one small layer attached to a stable slot. It is never a second Pip.** The
 rule exists because the alternative — a complete mascot variant per outfit — multiplies
@@ -25,6 +30,9 @@ another:
 
 - **[references/layers.md](references/layers.md)** — Pip's canvas, named anchors, slot list,
   global render order, and how one item spans back and front fragments.
+- **[references/characters.md](references/characters.md)** — what a character may vary and
+  what it may never touch, the three coats, the ear and crest envelopes, and how one is
+  owned.
 - **[references/room.md](references/room.md)** — the room's canvas, how Pip's is nested
   inside it, the horizon, the four placement slots, the paint order that makes Pip one
   opaque step, and the fixed surface colours.
@@ -41,9 +49,9 @@ decides how items are drawn.
 The slot list and render order in `references/layers.md` were a contract for future work
 until roadmap item 16's first increment built the renderer. **They now describe code**:
 `Mascot.tsx` walks those ten steps, `Room.tsx` walks the seven in `references/room.md`,
-`src/cosmetics/` holds one catalogue of both kinds, and the progress record carries what is
-owned, worn, and placed. An item authored against this contract displays as soon as it is in
-the catalogue and bought.
+`src/cosmetics/` holds one catalogue of all three kinds, and the progress record carries what
+is owned, worn, placed, and played as. An item authored against this contract displays as
+soon as it is in the catalogue and bought.
 
 ## The shape of an item
 
@@ -88,6 +96,9 @@ has the mechanics.
   anchor at `(100, 160)` sits inside the lower head, and a scarf there reads as a scarf
   because it crosses the chin line — not because there is a neck to wrap. Do not author an
   item that assumes anatomy Pip does not have.
+- **The anchors are shared by every character, so moving one breaks shipped items on all of
+  them.** A character may change what hangs off an ear base but never where that base is;
+  `references/characters.md` has the full fixed list and the reason beside each line.
 - **An item must be intelligible standing still.** Motion is decoration on top of a shape
   that already reads. A learner with reduced motion enabled, or looking at a screenshot,
   sees the static form and nothing else.

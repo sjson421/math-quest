@@ -9,7 +9,11 @@ catalogue item at 92, which makes the smallest size also the most repeated one.
 
 Pip's resting geometry occupies roughly `x 26–174`, `y 46–187`. Note that **the ears, not
 the tuft, are the highest and widest part** — they are drawn as upright ellipses and then
-rotated, so their rendered extent is nowhere near their written coordinates:
+rotated, so their rendered extent is nowhere near their written coordinates.
+
+Four rows below are Pip's own and vary by character — the ears, the tuft, the signature star,
+and the body colours. Everything else is fixed for all three, and
+[characters.md](characters.md) says which is which and what breaks if one moves:
 
 | Part | Geometry |
 | --- | --- |
@@ -20,7 +24,8 @@ rotated, so their rendered extent is nowhere near their written coordinates:
 | cheeks | ellipses `(66, 126)` and `(134, 126)` |
 | eyes | centred `x 78` and `x 122`, `y 110` |
 | mouth | around `y 138` |
-| signature star | occupies the `pin` slot, origin `(148, 162)` |
+| signature star | occupies the `pin` slot, origin `(148, 162)` — Mochi's fish and Sprig's sprig sit in the same footprint |
+| markings | drawn between the cheeks and the eyes; Mochi's nose and whiskers, Sprig's muzzle. Pip has none |
 | thinking dots | `(163, 88)` and `(173, 76)` — `thinking` state only |
 | sleep marks | `(152, 74)` and `(168, 56)` — `sleeping` state only |
 
@@ -71,14 +76,20 @@ rest are the openings cosmetics paint into.
 1. ground shadow
 2. `back` cosmetics
 3. `headwear` **back** fragments
-4. **Pip ears and head**
+4. **Pip ears and head** — the ears, the head circle, then the crest between them
 5. `headwear` **front** fragments
-6. **Pip expression** (eyes, mouth, cheeks)
+6. **Pip expression** — cheeks, then the character's markings, then eyes and mouth
 7. `face` cosmetics
 8. `neck` cosmetics
 9. **`pin`** — the signature star by default
 10. foreground effects — today only the sleep marks; the slot is reserved for the
     celebration effects item 16 may add
+
+Steps 4 and 6 each paint three things in a fixed internal order, and both orders are
+load-bearing. The crest comes after the head, so it paints over the party hat's crown, which
+passes behind — Pip's tuft has always done this and a crest reads the same way. The markings
+come after the cheeks and before the eyes and mouth, so a muzzle is something the expression
+is drawn *on* and can never cover one.
 
 `Mascot.tsx` implements these ten steps in this order. It is the same order Pip was always
 painted in — shadow, ears, head, face, star, sleep marks — with the cosmetic openings

@@ -3,6 +3,8 @@ import type { ReactNode } from 'react'
 import {
   COSMETIC_SLOTS,
   ROOM_SLOTS,
+  characterOf,
+  characters,
   cosmetics,
   decorations,
   type CatalogueItem,
@@ -22,10 +24,16 @@ import { Room } from './Room'
  * a synthetic record — the same reason the tree levels take a `Progress` instead
  * of reaching for the live one.
  *
- * Two sections, because the two kinds are previewed at different sizes and read
- * with different words: you wear a hat and you place a rug. Inside each section
- * the items are grouped by slot, which is a category the learner can already
- * feel — two things in one group are the two things that cannot be used at once.
+ * Three sections, because the three kinds are previewed differently and read
+ * with different words: you become a character, you wear a hat, you place a rug.
+ * Inside the two that have slots the items are grouped by one, which is a
+ * category the learner can already feel — two things in one group are the two
+ * things that cannot be used at once. Characters have no slots because they are
+ * all one group already: there is only ever one of you.
+ *
+ * Characters come first, and the wardrobe below previews every item on the one
+ * currently chosen, so what the learner sees under "Wear" is what they would
+ * actually be wearing.
  */
 type Props = {
   progress: Progress
@@ -56,12 +64,18 @@ const CATEGORY: Record<CosmeticSlot | RoomSlot, string> = {
 }
 
 export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
+  // The shop belongs to whoever the learner is playing as, so the title follows
+  // the character rather than naming the one they may have stopped being.
+  const who = characterOf(progress.character)
+
   const card = (item: CatalogueItem) => ({
     item,
     standing: standing(progress, item),
     onBuy: () => onBuy(item.id),
     onEquip: () => onEquip(item.id),
-    onUnequip: () => onUnequip(item.slot),
+    // Absent for a character, which is what makes its in-use button inert: you
+    // never take one off, you become another.
+    onUnequip: item.kind === 'character' ? undefined : () => onUnequip(item.slot),
   })
 
   return (
@@ -74,7 +88,7 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
         >
           ✕
         </button>
-        <h1 className="text-2xl font-bold flex-1">Pip's shop</h1>
+        <h1 className="text-2xl font-bold flex-1">{who.name}'s shop</h1>
         <div className="flex items-center gap-1.5">
           <span className="text-xl" aria-hidden="true">
             🪙
@@ -89,6 +103,18 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
         changes the maths.
       </p>
 
+      <SectionHeading>Characters</SectionHeading>
+      <div className="px-5 pb-6 grid grid-cols-2 gap-4">
+        {characters.map((character) => (
+          <Card key={character.id} {...card(character)}>
+            {/* Bare, not in the learner's current outfit. The card is asking who
+                they want to be, and a card showing a wizard hat on all three
+                answers a question nobody is being asked. */}
+            <Mascot state="idle" size={92} character={character.id} />
+          </Card>
+        ))}
+      </div>
+
       <SectionHeading>Wardrobe</SectionHeading>
       {COSMETIC_SLOTS.map((slot) => (
         <Category
@@ -102,7 +128,12 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
         >
           {(cosmetic) => (
             <Card key={cosmetic.id} {...card(cosmetic)}>
-              <Mascot state="idle" size={92} equipped={{ [cosmetic.slot]: cosmetic.id }} />
+              <Mascot
+                state="idle"
+                size={92}
+                character={progress.character}
+                equipped={{ [cosmetic.slot]: cosmetic.id }}
+              />
             </Card>
           )}
         </Category>
@@ -124,6 +155,7 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
               <Room
                 state="idle"
                 height={194}
+                character={progress.character}
                 placed={{ [decoration.slot]: decoration.id }}
               />
             </Card>
@@ -175,10 +207,15 @@ function Category<T>({
 }
 
 /**
- * The words for each standing, per kind. One table for both lines of the card;
- * two would drift, and a rug captioned "Worn" is exactly the drift.
+ * The words for each standing, per kind. One table for all three lines of the
+ * card; three would drift, and a rug captioned "Worn" is exactly the drift.
+ *
+ * A character's `stop` labels a button that does nothing — `onUnequip` is absent
+ * for that kind, so the button is disabled and the word is a statement rather
+ * than an offer. That is the honest rendering of a slot that is never empty.
  */
 const WORDS = {
+  character: { using: 'Playing as', stop: 'Chosen', start: 'Play as' },
   cosmetic: { using: 'Worn', stop: 'Take off', start: 'Wear' },
   decoration: { using: 'In the room', stop: 'Put away', start: 'Place' },
 } as const
@@ -195,13 +232,13 @@ function Card({
   standing: ItemStanding
   onBuy: () => void
   onEquip: () => void
-  onUnequip: () => void
+  onUnequip?: () => void
   children: ReactNode
 }) {
   const words = WORDS[item.kind]
 
-  const action = {
-    'in-use': { caption: words.using, label: words.stop, run: onUnequip },
+  const action: { caption: string; label: string; run: (() => void) | null } = {
+    'in-use': { caption: words.using, label: words.stop, run: onUnequip ?? null },
     owned: { caption: 'Owned', label: words.start, run: onEquip },
     affordable: { caption: `${item.price} coins`, label: `Buy · ${item.price}`, run: onBuy },
     'out-of-reach': {
@@ -210,6 +247,8 @@ function Card({
       run: null,
     },
   }[standing]
+
+  const run = action.run
 
   return (
     <motion.div
@@ -224,14 +263,14 @@ function Card({
 
       <button
         onClick={
-          action.run
+          run
             ? () => {
                 tap()
-                action.run()
+                run()
               }
             : undefined
         }
-        disabled={!action.run}
+        disabled={run === null}
         className={`mt-1 w-full rounded-full py-2 text-sm font-bold ${
           action.run ? 'bg-blossom-soft text-blossom-deep' : 'bg-cream-deep text-ink-faint'
         }`}

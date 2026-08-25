@@ -53,7 +53,9 @@ type Props = {
    */
   height?: number
   className?: string
-  /** What Pip has on. Resolved against the catalogue by `Mascot`, not here. */
+  /** Who is standing in it. Resolved against the catalogue by `Mascot`, not here. */
+  character?: string
+  /** What they have on. Resolved against the catalogue by `Mascot`, not here. */
   equipped?: Equipped
   /** What stands in the room. Resolved here, in one place, for the same reason. */
   placed?: Placed
@@ -61,7 +63,15 @@ type Props = {
   message?: string | null
 }
 
-export function Room({ state = 'idle', height = 148, className, equipped, placed, message }: Props) {
+export function Room({
+  state = 'idle',
+  height = 148,
+  className,
+  character,
+  equipped,
+  placed,
+  message,
+}: Props) {
   return (
     <svg
       // Rounded like every card in the app — a hard-cornered rectangle reads as
@@ -107,6 +117,7 @@ export function Room({ state = 'idle', height = 148, className, equipped, placed
         {message && <SpeechBubble message={message} />}
         <g transform={`translate(${PIP_X} 0)`}>
           <Mascot
+            character={character}
             state={state}
             expression={message ? 'happy' : undefined}
             size={HEIGHT}

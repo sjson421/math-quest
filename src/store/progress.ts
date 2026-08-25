@@ -8,7 +8,7 @@ import {
   unlockPrerequisites,
 } from '../curriculum'
 import { crossedStageCheckpoint, type StageCheckpoint } from '../lib/checkpoint'
-import type { CosmeticSlot, Equipped, Placed, RoomSlot } from '../cosmetics'
+import { DEFAULT_CHARACTER, type CosmeticSlot, type Equipped, type Placed, type RoomSlot } from '../cosmetics'
 import { buy, equip, unequip } from '../lib/wardrobe'
 
 const STORAGE_KEY = 'math-quest-progress'
@@ -50,7 +50,16 @@ export type Progress = {
    * bought with, so a second inventory would be a second thing to keep in step.
    */
   inventory: string[]
-  /** Slot → the cosmetic worn in it. An absent slot means Pip's own default. */
+  /**
+   * Who the learner is playing as. Always set — there is no state in which
+   * nobody is on screen — so this is a bare id rather than a slot map, and a
+   * record that predates characters reconciles to the free one.
+   */
+  character: string
+  /**
+   * Slot → the cosmetic worn in it. An absent slot means the character's own
+   * default, which is why nothing here changes when the character does.
+   */
   equipped: Equipped
   /** Slot → the decoration standing in it. An absent slot means nothing there. */
   room: Placed
@@ -107,6 +116,7 @@ export function initialProgress(): Progress {
     skills: Object.fromEntries(allSkills.map((s) => [s.id, emptySkill()])),
     mistakes: {},
     inventory: [],
+    character: DEFAULT_CHARACTER,
     equipped: {},
     room: {},
   }
@@ -140,6 +150,7 @@ function reconcile(stored: Progress): Progress {
     // none of these fields, and a corrupt one can carry anything: `{ ...'ab' }`
     // is `{ 0: 'a', 1: 'b' }`, which would survive as a junk wardrobe.
     inventory: Array.isArray(stored.inventory) ? [...stored.inventory] : [],
+    character: typeof stored.character === 'string' ? stored.character : DEFAULT_CHARACTER,
     equipped: isSlotRecord<Equipped>(stored.equipped) ? { ...stored.equipped } : {},
     room: isSlotRecord<Placed>(stored.room) ? { ...stored.room } : {},
   }

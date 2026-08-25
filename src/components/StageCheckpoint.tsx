@@ -6,10 +6,12 @@ import { Mascot } from './Mascot'
 export function StageCheckpoint({
   checkpoint,
   onContinue,
+  character,
   equipped,
 }: {
   checkpoint: Checkpoint
   onContinue: () => void
+  character?: string
   equipped?: Equipped
 }) {
   return (
@@ -22,7 +24,7 @@ export function StageCheckpoint({
         Stage checkpoint
       </div>
 
-      <Mascot state="celebrating" size={190} equipped={equipped} />
+      <Mascot state="celebrating" size={190} character={character} equipped={equipped} />
 
       <div>
         <h2 className="text-3xl font-bold">{checkpoint.name} boundary reached!</h2>

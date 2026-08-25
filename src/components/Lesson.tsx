@@ -278,7 +278,12 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
 
       <div className="flex-1 flex flex-col items-center justify-center px-5 gap-5 min-h-0">
         <div className="flex items-center gap-2">
-          <Mascot state={mascotState} size={92} equipped={progress.equipped} />
+          <Mascot
+            state={mascotState}
+            size={92}
+            character={progress.character}
+            equipped={progress.equipped}
+          />
           <p className="text-lg font-semibold text-ink-soft max-w-[11rem]">{problem.prompt}</p>
         </div>
 
@@ -414,6 +419,7 @@ function LessonComplete({
   onExit: () => void
 }) {
   const mastery = useProgress((s) => s.progress.skills[skill.id]?.mastery ?? 0)
+  const character = useProgress((s) => s.progress.character)
   const equipped = useProgress((s) => s.progress.equipped)
   const [view, setView] = useState<CompletionView>('lesson-result')
 
@@ -432,6 +438,7 @@ function LessonComplete({
       <StageCheckpoint
         checkpoint={outcome.checkpoint}
         onContinue={continueCompletion}
+        character={character}
         equipped={equipped}
       />
     )
@@ -444,7 +451,7 @@ function LessonComplete({
       className="flex flex-col items-center justify-center h-full gap-5 px-6 text-center"
     >
       <Confetti />
-      <Mascot state="celebrating" size={190} equipped={equipped} />
+      <Mascot state="celebrating" size={190} character={character} equipped={equipped} />
 
       <div>
         <h2 className="text-3xl font-bold">Lesson complete!</h2>

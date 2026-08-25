@@ -15,15 +15,19 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import {
   COSMETIC_SLOTS,
+  DEFAULT_CHARACTER,
   ROOM_SLOTS,
   catalogue,
+  characterOf,
+  characters,
   cosmetics,
   decorations,
   type CatalogueItem,
+  type Character,
   type Cosmetic,
   type MascotState,
 } from './index'
-import { BLUSH, CREAM, CREAM_SHADE, INK, families } from './palette'
+import { BLUSH, CREAM, CREAM_SHADE, INK, coats, families } from './palette'
 
 const slots = new Set<string>(COSMETIC_SLOTS)
 const roomSlots = new Set<string>(ROOM_SLOTS)
@@ -38,12 +42,27 @@ const markupOf = (cosmetic: Cosmetic): string =>
     )
     .join('')
 
+/** Every part of a character: both ears, the crest, the markings, the charm. */
+const markupOfCharacter = (character: Character): string =>
+  renderToStaticMarkup(
+    <g>
+      {character.ear('left')}
+      {character.ear('right')}
+      {character.crest}
+      {character.markings}
+      {character.charm}
+    </g>,
+  )
+
 /**
- * Either kind, as markup. A decoration takes no state, so there is nothing to
- * sample — which is the point of that signature.
+ * Any kind, as markup. Neither a decoration nor a character takes a state, so
+ * there is nothing to sample for those — which is the point of those signatures.
  */
-const markupOfItem = (item: CatalogueItem): string =>
-  item.kind === 'decoration' ? renderToStaticMarkup(item.render()) : markupOf(item)
+const markupOfItem = (item: CatalogueItem): string => {
+  if (item.kind === 'decoration') return renderToStaticMarkup(item.render())
+  if (item.kind === 'character') return markupOfCharacter(item)
+  return markupOf(item)
+}
 
 const strokeWidths = (markup: string): number[] =>
   [...markup.matchAll(/stroke-width="([\d.]+)"/g)].map((m) => Number(m[1]))
@@ -92,14 +111,28 @@ describe('every catalogue item', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('strokes between 2.5 and 3 units — thinner vanishes at 92px, thicker fights the face', () => {
+  it('strokes no thinner than 2.5 units — below that it vanishes at 92px', () => {
     for (const item of catalogue) {
       const widths = strokeWidths(markupOfItem(item))
       expect(widths.length, `${item.id} has strokes`).toBeGreaterThan(0)
 
       for (const width of widths) {
         expect(width, `${item.id} stroke width`).toBeGreaterThanOrEqual(2.5)
-        expect(width, `${item.id} stroke width`).toBeLessThanOrEqual(3)
+      }
+    }
+  })
+
+  it('caps an accessory at 3 units and a character at 5 — the contract’s two weights', () => {
+    // The ceiling is the one geometry limit that is not shared. An accessory
+    // heavier than 3 fights the face it sits on; a character *is* the face, and
+    // Pip's own tuft has been 5 units since before there were cosmetics. Both
+    // numbers come from `mascot-design`, which states them as two rules for
+    // exactly this reason.
+    for (const item of catalogue) {
+      const ceiling = item.kind === 'character' ? 5 : 3
+
+      for (const width of strokeWidths(markupOfItem(item))) {
+        expect(width, `${item.id} stroke width`).toBeLessThanOrEqual(ceiling)
       }
     }
   })
@@ -114,7 +147,7 @@ describe('every catalogue item', () => {
     // The shop groups by slot and shows each group in catalogue order. Ordering
     // the arrays by price is what makes a category climb rather than jump about,
     // and it is the one thing a new item can quietly get wrong.
-    for (const list of [cosmetics, decorations]) {
+    for (const list of [characters, cosmetics, decorations]) {
       const prices = list.map((item) => item.price)
 
       expect(prices).toEqual([...prices].sort((a, b) => a - b))
@@ -147,6 +180,61 @@ describe('every decoration', () => {
       expect('front' in decoration, `${decoration.id} front`).toBe(false)
     }
   })
+})
+
+describe('every character', () => {
+  it('has a unique id, a name, and a price that is not negative', () => {
+    const ids = characters.map((c) => c.id)
+    expect(new Set(ids).size).toBe(ids.length)
+
+    for (const character of characters) {
+      expect(character.name.length, `${character.id} name`).toBeGreaterThan(0)
+      expect(character.price, `${character.id} price`).toBeGreaterThanOrEqual(0)
+      expect(markupOfCharacter(character).length, character.id).toBeGreaterThan(0)
+    }
+  })
+
+  it('ships exactly one free character, and it is the one a record starts as', () => {
+    // `owns()` reads a price of zero as already bought, so a second free
+    // character would be a second thing every learner silently owns, and a
+    // paid default would leave a fresh record playing as someone unowned.
+    const free = characters.filter((c) => c.price === 0)
+
+    expect(free.map((c) => c.id)).toEqual([DEFAULT_CHARACTER])
+    // `DEFAULT_CHARACTER` is a literal rather than `characters[0].id`, for the
+    // Fast Refresh reason written beside it. This is the pin that keeps the two
+    // from drifting apart.
+    expect(characters[0].id).toBe(DEFAULT_CHARACTER)
+  })
+
+  it('declares no slot — there is one character and its slot is never empty', () => {
+    // A slot would put a character into `equipped`, where `unequip` could empty
+    // it and leave nobody on screen.
+    for (const character of characters) {
+      expect('slot' in character, `${character.id} slot`).toBe(false)
+    }
+  })
+
+  it('resolves an unknown or missing id to the default rather than to nothing', () => {
+    expect(characterOf(undefined).id).toBe(DEFAULT_CHARACTER)
+    expect(characterOf('a-character-that-was-retired').id).toBe(DEFAULT_CHARACTER)
+  })
+
+  it('has an ear on each side that is not the same call twice', () => {
+    // Both ears go through one function, and a character that ignored the side
+    // would draw its left ear twice — invisible at rest, because `onEar` mirrors
+    // the rotation and the result looks symmetric anyway, and wrong the moment
+    // an ear is drawn asymmetrically. Whether the ear is the right *shape* to
+    // hold a bow at `y 64` and sit under a muff at `y 68` is the acceptance pass
+    // in `mascot-design`'s checklist; a string comparison cannot judge it.
+    for (const character of characters) {
+      const left = renderToStaticMarkup(<g>{character.ear('left')}</g>)
+      const right = renderToStaticMarkup(<g>{character.ear('right')}</g>)
+
+      expect(left, `${character.id} left ear`).not.toBe(right)
+    }
+  })
+
 })
 
 describe('the two slot unions', () => {
@@ -191,14 +279,21 @@ describe('the checker itself', () => {
 
 describe('where colours come from', () => {
   /**
-   * An app colour is written down once, in `src/index.css`. An item reaches it
-   * by reference, so the only literals allowed in the catalogue are Pip's own
-   * four — anything else is a pasted copy that nothing keeps in step.
+   * An app colour is written down once, in `src/index.css`, and a character's
+   * own colours once in `palette.ts`. An item reaches either by reference, so
+   * the only literals allowed in the catalogue are `INK` and the three coats —
+   * anything else is a pasted copy that nothing keeps in step.
    */
-  const pipsOwn = new Set([CREAM, CREAM_SHADE, INK, BLUSH])
+  const pipsOwn = new Set([
+    INK,
+    CREAM,
+    CREAM_SHADE,
+    BLUSH,
+    ...Object.values(coats).flatMap((coat) => [coat.base, coat.shade, coat.blush]),
+  ])
   const literals = (markup: string) => [...markup.matchAll(/#[0-9a-fA-F]{3,8}/g)].map((m) => m[0])
 
-  it('uses no hex beyond Pip’s own constants', () => {
+  it('uses no hex beyond INK and the coats', () => {
     for (const item of catalogue) {
       for (const literal of literals(markupOfItem(item))) {
         expect(pipsOwn.has(literal), `${item.id} paints a literal ${literal}`).toBe(true)
