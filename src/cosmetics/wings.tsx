@@ -45,6 +45,9 @@ const LOBES = [
   { out: -2, down: 26, rx: 26, ry: 18, rotate: -20, spotOut: 10, spotDown: 28 },
 ]
 
+/** Fixed offsets keep the wings colourful when reduced motion freezes the loop. */
+const RAINBOW_HUES = [0, 90, 180, 270] as const
+
 /**
  * Wings whose colour travels the wheel, one lobe-pair at a time.
  *
@@ -55,9 +58,10 @@ const LOBES = [
  * one item that warrants it asks for itself. It gates the sway; the colour
  * cycle carries its own media query in the stylesheet, next to the keyframe.
  *
- * **The static presentation is the whole item.** With motion off these are plain
- * lilac wings — the shape carries everything, and the colour is the delight on
- * top. That is the contract's rule, and it is also what a screenshot shows.
+ * **The static presentation is the whole item.** With motion off each feather
+ * keeps a different hue, so the wings remain rainbow without requiring motion.
+ * The hues are all rotations of the lilac family, so the item still has one
+ * source palette and its outline stays paired with its fill.
  *
  * The hue is turned by a CSS keyframe — `.pip-hue-cycle` in `src/index.css` —
  * rather than from here. Framer Motion does not apply `filter` to an SVG
@@ -90,16 +94,17 @@ export function RainbowWings({ shoulder }: { shoulder: Span }) {
           className="pip-hue-cycle"
           style={{ animationDelay: `${i * 1.2}s` }}
         >
-          {[-1, 1].map((side) => {
+          {[-1, 1].map((side, sideIndex) => {
             // The table is written for the left wing, so the right one takes
             // the mirror of the position and of the tilt.
             const cx = 100 + side * (shoulder.halfWidth + lobe.out)
             const cy = shoulder.y + lobe.down
             const spotX = 100 + side * (shoulder.halfWidth + lobe.out + lobe.spotOut)
             const rotate = side === -1 ? lobe.rotate : -lobe.rotate
+            const hue = RAINBOW_HUES[i * 2 + sideIndex]
 
             return (
-              <g key={side}>
+              <g key={side} style={{ filter: `hue-rotate(${hue}deg)` }}>
                 <ellipse
                   cx={cx}
                   cy={cy}
@@ -124,4 +129,3 @@ export function RainbowWings({ shoulder }: { shoulder: Span }) {
     </motion.g>
   )
 }
-

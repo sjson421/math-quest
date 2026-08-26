@@ -152,6 +152,13 @@ describe('each cosmetic', () => {
     expect(render(wearing(hat))).toContain(CROWN)
     expect(render({})).not.toContain(CROWN)
   })
+
+  it('keeps the rainbow wings colourful when reduced motion freezes their cycle', () => {
+    const html = render({ back: 'rainbow-wings' })
+    const hues = [...html.matchAll(/filter:hue-rotate\((\d+)deg\)/g)].map((match) => Number(match[1]))
+
+    expect(hues).toEqual([0, 90, 180, 270])
+  })
 })
 
 describe('render order', () => {
