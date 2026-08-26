@@ -27,7 +27,7 @@ npm run dev          # background session for scripted browser checks; see docs/
 npm test             # full suite, ~3s
 npx vitest run src/lib/content-rules.test.ts   # one file
 npm run build        # tsc -b + vite build
-npm run lint         # oxlint (3 pre-existing Settings.tsx warnings are expected)
+npm run lint         # oxlint
 ```
 
 **`npx tsc --noEmit` is not sufficient.** It uses a different config from the build.
@@ -92,12 +92,18 @@ single-sentence hint, and ≥2 distinct predicted misconceptions on any skill ma
 
 ## Workflow
 
-Work is planned as **OpenSpec changes**: `/openspec-propose` → `/openspec-apply-change` →
-`/openspec-archive-change`, with task lists as the running record — mark each item done as
-it lands. Archive a change as soon as it completes, syncing its deltas into the baseline
-first; a completed change left active means the next one has nothing accurate to amend.
-The process details — baseline layout, sizing, what a delta may claim — are in
-[docs/workflow.md](docs/workflow.md).
+Use an **OpenSpec change** when the work benefits from an explicit contract and task record:
+roadmap items, new capabilities, cross-cutting behavior, migrations, or changes whose scope
+needs design decisions before implementation. Small bug fixes, narrow behavior changes,
+documentation, tests, and repository maintenance may be handled directly with proportionate
+verification. Do not create a plan or OpenSpec artifacts when they add more ceremony than
+clarity. If a direct change alters an existing requirement, update its baseline spec with the
+code.
+
+When OpenSpec is warranted, use `/openspec-propose` → `/openspec-apply-change` →
+`/openspec-archive-change`. Archive the change as soon as it completes, syncing its deltas
+into the baseline first. The process details — baseline layout, sizing, and what a delta may
+claim — are in [docs/workflow.md](docs/workflow.md).
 
 Style: no semicolons, single quotes, 2-space indent, comments that say *why*. Match the
 density of the file you are in — this codebase comments its reasoning, not its syntax.

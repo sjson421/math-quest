@@ -1,13 +1,13 @@
 ## Why
 
-Progress lives only in IndexedDB on one iPhone. iOS can evict web app storage, and a lost
-or reset phone takes months of streak with it. The current mitigation is a manual export
-button the learner has to remember to press — which means the backup is only as good as
-her habit of making one, and she will not make one the day before she needs it.
+Progress lives only in IndexedDB on one device. A browser can evict web app storage, and a
+lost or reset phone takes months of streak with it. The current mitigation is a manual export
+button the learner has to remember to press, so the backup is only as good as the last time
+they remembered to make one.
 
 A server-side copy is the only thing that actually survives eviction, device loss, and
-reinstall. For a single learner the cost is effectively zero: roughly 200 requests and a
-few KB per month, against a free tier measured in hundreds of thousands of commands and
+reinstall. For the initial small deployment the cost is effectively zero: roughly 200 requests
+and a few KB per month, against a free tier measured in hundreds of thousands of commands and
 hundreds of megabytes.
 
 The earlier "no backend" decision was a simplicity choice, not a requirement. Storage
@@ -82,9 +82,8 @@ routine backup path.
   honestly and never called secure.
 - **No encryption at rest.** The data is lesson progress, not anything sensitive.
 - **No multi-device merge.** Conflict handling detects and refuses stale writes; it does
-  not field-wise merge two diverged devices. One learner, one phone. Revisit only if that
-  changes.
+  not field-wise merge two diverged devices. It assumes one active device per learner.
 - **No accounts, email, passwords, or login UI.**
 - **No sync of settings or cosmetics** beyond what already lives in the progress record.
 - **No server-side validation of progress contents.** The server stores an opaque blob.
-- **Not a general backup service.** One key, one blob, one learner.
+- **Not a general backup service.** One key owns one blob.

@@ -1,5 +1,10 @@
 import { beforeEach, describe, expect, it } from 'vitest'
-import { createProgressHandler, type ProgressStore, type StoredProgress } from './progress'
+import {
+  createProgressHandler,
+  type ProgressStore,
+  type RequestLimiter,
+  type StoredProgress,
+} from './progress'
 
 const KEY = 'MATH-A1B2-C3D4-E5F6-G7H8'
 const ENDPOINT = 'https://example.test/api/progress'
@@ -21,9 +26,11 @@ let store: ProgressStore
 let data: Map<string, StoredProgress>
 let handle: (request: Request) => Promise<Response>
 
+const allowAll: RequestLimiter = { allow: async () => true }
+
 beforeEach(() => {
   ;({ store, data } = memoryStore())
-  handle = createProgressHandler(store)
+  handle = createProgressHandler(store, allowAll)
 })
 
 const get = (auth?: string) =>
@@ -190,5 +197,44 @@ describe('methods', () => {
       expect(response.status, method).toBe(405)
       expect(response.headers.get('allow')).toBe('GET, PUT')
     }
+  })
+})
+
+describe('rate limiting', () => {
+  it('rejects excess requests before reading or writing progress', async () => {
+    const denied = createProgressHandler(store, { allow: async () => false })
+    const response = await denied(
+      new Request(ENDPOINT, {
+        method: 'PUT',
+        headers: { authorization: `Bearer ${KEY}` },
+        body: JSON.stringify({ progress: { xp: 1 }, updatedAt: 1, baseVersion: null }),
+      }),
+    )
+
+    expect(response.status).toBe(429)
+    expect(response.headers.get('retry-after')).toBe('60')
+    expect(await response.json()).toEqual({ error: 'rate-limited' })
+    expect(data.size).toBe(0)
+  })
+
+  it('uses Vercel client identity for the request budget', async () => {
+    const seen: string[] = []
+    const limited = createProgressHandler(store, {
+      allow: async (clientId) => {
+        seen.push(clientId)
+        return true
+      },
+    })
+
+    await limited(
+      new Request(ENDPOINT, {
+        headers: {
+          authorization: `Bearer ${KEY}`,
+          'x-vercel-forwarded-for': '203.0.113.7, 10.0.0.1',
+        },
+      }),
+    )
+
+    expect(seen).toEqual(['203.0.113.7'])
   })
 })

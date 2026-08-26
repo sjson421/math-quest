@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { hasProvenSync, isDangerouslyStale, useSyncStatus, type SyncSnapshot } from '../lib/sync'
-import { initialProgress, useProgress, type Progress } from '../store/progress'
+import { useProgress, type Progress } from '../store/progress'
 import { RecoveryKeyCard } from './RecoveryKey'
 
 /**
@@ -9,7 +9,7 @@ import { RecoveryKeyCard } from './RecoveryKey'
  * recovery route for backup files produced before sync existed, and export is
  * what the runtime gate falls back to on a device where sync has never worked.
  */
-export function exportProgress(progress: Progress): void {
+function exportProgress(progress: Progress): void {
   const blob = new Blob([JSON.stringify(progress, null, 2)], { type: 'application/json' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
@@ -19,7 +19,7 @@ export function exportProgress(progress: Progress): void {
   URL.revokeObjectURL(url)
 }
 
-export async function importProgress(file: File): Promise<Progress | null> {
+async function importProgress(file: File): Promise<Progress | null> {
   try {
     const parsed = JSON.parse(await file.text()) as Progress
     // A Phase 1 file carries no `updatedAt`; `replaceProgress` treats it as a
@@ -295,5 +295,3 @@ function humanizeTag(tag: string): string {
   }
   return known[tag] ?? tag.replace(/-/g, ' ')
 }
-
-export { initialProgress }

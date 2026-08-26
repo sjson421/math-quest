@@ -1,6 +1,6 @@
 ## Context
 
-Progress lives in one IndexedDB store on one iPhone. iOS can evict it, and a lost phone
+Progress lives in one IndexedDB store on one device. A browser can evict it, and a lost phone
 takes everything. `navigator.storage.persist()` reduces the odds but guarantees nothing.
 
 The current answer is a manual export button, which is only as reliable as remembering to
@@ -13,8 +13,8 @@ failures must be loud, stale writes must be impossible, and the recovery key mus
 irretrievable.
 
 Scale is trivial and worth stating, because it justifies the simplest possible approach:
-roughly 200 requests and a few KB per month for one learner, against a free tier of
-hundreds of thousands of commands and 256 MB.
+roughly 200 requests and a few KB per month for the initial deployment, against a free tier
+of hundreds of thousands of commands and 256 MB.
 
 ## Goals / Non-Goals
 
@@ -43,8 +43,8 @@ last saw; the server refuses if its own is newer.
 - **Field-wise merge** was considered and rejected. It looks attractive because mastery and
   XP are monotonic — but coins are *spent*, and a streak legitimately resets. A merge would
   need per-field semantics for every field, would grow with the data model, and would be
-  the most bug-prone code in the app. For one learner on one phone, conflicts are close to
-  impossible.
+  the most bug-prone code in the app. With one active device per learner, conflicts are close
+  to impossible.
 - **Plain last-write-wins with no guard** was rejected because the one realistic conflict —
   an old device waking with stale state — is exactly the case it silently loses.
 
@@ -90,8 +90,8 @@ Format `MATH-XXXX-XXXX-XXXX-XXXX`, ~100 bits of entropy.
 
 Standard practice for recovery codes is to show once and hide. That is correct when a
 password can reset it. Here there is no reset — with export removed, the key is the only
-route to the data. A one-time reveal converts "she didn't write it down" into permanent
-loss.
+route to the data. A one-time reveal converts "the learner didn't write it down" into
+permanent loss.
 
 So: full key in Settings, always, with tap-to-copy.
 

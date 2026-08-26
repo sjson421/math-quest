@@ -25,6 +25,18 @@ export const config = { runtime: 'edge' }
  */
 const MAX_BODY_BYTES = 256 * 1024
 
+/** A normal client cannot approach this after the three-second sync debounce. */
+const RATE_LIMIT_REQUESTS = 60
+const RATE_LIMIT_WINDOW_SECONDS = 60
+
+const RATE_LIMIT_SCRIPT = `
+local count = redis.call('INCR', KEYS[1])
+if count == 1 then
+  redis.call('EXPIRE', KEYS[1], ARGV[1])
+end
+return count
+`
+
 export type StoredProgress = {
   progress: unknown
   updatedAt: number
@@ -36,14 +48,25 @@ export type ProgressStore = {
   set(key: string, value: StoredProgress): Promise<void>
 }
 
-const json = (body: unknown, status = 200) =>
+export type RequestLimiter = {
+  allow(clientId: string): Promise<boolean>
+}
+
+const json = (body: unknown, status = 200, headers: Record<string, string> = {}) =>
   new Response(JSON.stringify(body), {
     status,
-    headers: { 'content-type': 'application/json', 'cache-control': 'no-store' },
+    headers: { 'content-type': 'application/json', 'cache-control': 'no-store', ...headers },
   })
 
 /** Namespaced so the store can hold something else later without a migration. */
 const storeKeyFor = (recoveryKey: string) => `progress:${normalizeKey(recoveryKey)}`
+
+/** Vercel supplies the first header; the standard header keeps local adapters usable. */
+function clientIdFor(request: Request): string {
+  const forwarded =
+    request.headers.get('x-vercel-forwarded-for') ?? request.headers.get('x-forwarded-for')
+  return forwarded?.split(',')[0].trim() || 'unknown'
+}
 
 /**
  * The recovery key from `Authorization: Bearer <key>`, or null if absent or
@@ -71,10 +94,18 @@ async function readBody(request: Request): Promise<{ text: string } | { tooLarge
   return { text }
 }
 
-export function createProgressHandler(store: ProgressStore) {
+export function createProgressHandler(store: ProgressStore, limiter: RequestLimiter) {
   return async function handle(request: Request): Promise<Response> {
     if (request.method !== 'GET' && request.method !== 'PUT') {
       return new Response(null, { status: 405, headers: { allow: 'GET, PUT' } })
+    }
+
+    if (!(await limiter.allow(clientIdFor(request)))) {
+      return json(
+        { error: 'rate-limited' },
+        429,
+        { 'retry-after': String(RATE_LIMIT_WINDOW_SECONDS) },
+      )
     }
 
     const key = readKey(request)
@@ -142,12 +173,7 @@ export function createProgressHandler(store: ProgressStore) {
  * which is what `@vercel/kv` wrapped anyway. Imported lazily so tests and
  * typechecking never need credentials.
  */
-function upstashStore(): ProgressStore {
-  let client: Promise<{
-    get(key: string): Promise<unknown>
-    set(key: string, value: unknown): Promise<unknown>
-  }> | null = null
-
+function upstashBackend(): { store: ProgressStore; limiter: RequestLimiter } {
   // Read off `globalThis` rather than the `process` global: the edge runtime
   // provides the values but not the Node type definitions, and the client test
   // suite imports this module to exercise the handler.
@@ -162,16 +188,31 @@ function upstashStore(): ProgressStore {
     })
   }
 
+  let client: ReturnType<typeof connect> | null = null
+  const redis = () => (client ??= connect())
+
   return {
-    async get(key) {
-      client ??= connect()
-      return ((await (await client).get(key)) as StoredProgress | null) ?? null
+    store: {
+      async get(key) {
+        return ((await (await redis()).get(key)) as StoredProgress | null) ?? null
+      },
+      async set(key, value) {
+        await (await redis()).set(key, value)
+      },
     },
-    async set(key, value) {
-      client ??= connect()
-      await (await client).set(key, value)
+    limiter: {
+      async allow(clientId) {
+        const count = await (await redis()).eval(
+          RATE_LIMIT_SCRIPT,
+          [`rate-limit:progress:${clientId}`],
+          [String(RATE_LIMIT_WINDOW_SECONDS)],
+        )
+        return Number(count) <= RATE_LIMIT_REQUESTS
+      },
     },
   }
 }
 
-export default createProgressHandler(upstashStore())
+const backend = upstashBackend()
+
+export default createProgressHandler(backend.store, backend.limiter)

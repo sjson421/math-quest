@@ -41,13 +41,17 @@ TypeScript project references.
 
 ## Change workflow
 
-Plan work as an OpenSpec change:
+Use OpenSpec for roadmap items, new capabilities, cross-cutting behavior, migrations, or work
+that needs design decisions before implementation:
 
 1. Explore the idea and confirm its scope.
 2. Create a proposal with `openspec-propose`.
 3. Implement its tasks with `openspec-apply-change`.
 4. Run the checks above and validate the real app when the change affects the UI.
 5. Archive the completed change with `openspec-archive-change`.
+
+Small bug fixes, narrow behavior changes, documentation, tests, and repository maintenance can
+be changed directly. Use the lightest process that still makes the change and its proof clear.
 
 Use the repository documentation as the detailed guide, especially `AGENTS.md`,
 `docs/curriculum.md`, `docs/testing.md`, `docs/environment.md`, and `docs/workflow.md`.

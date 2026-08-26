@@ -166,6 +166,17 @@ progress schema.
 - **THEN** it is rejected as unauthorised
 - **AND** no document is created
 
+### Requirement: Sync requests are rate limited
+
+The endpoint SHALL enforce a per-client request budget before reading or writing progress, so
+one client cannot consume the backing store's request and storage allowance without bound.
+
+#### Scenario: Client exceeds its request budget
+
+- **WHEN** a client sends more sync requests than its current budget allows
+- **THEN** the endpoint responds with a rate-limit error and a retry interval
+- **AND** no progress document is read or written for that request
+
 ### Requirement: File export is replaced by sync
 
 The manual **Export backup** button SHALL be removed once sync is verified working. A

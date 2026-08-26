@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { skillById } from '../curriculum/manifest'
 import { checkAnswer, type CheckResult } from '../lib/answer'
 import { completionAction, type CompletionView } from '../lib/checkpoint'
@@ -58,16 +58,14 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
   const targetCorrect = lessonTarget(skillById.get(skill.id)?.quick)
   const introNeeded = skill.teachingLine !== undefined && progress.skills[skill.id]?.introSeen !== true
 
-  // Seed from mount time so each lesson is a fresh set, but stays reproducible
-  // within the session.
-  const seedBase = useRef(Math.floor(Math.random() * 1_000_000)).current
-  const nextSeed = useRef(0)
-
-  const makeProblem = useCallback(
-    (difficulty: Difficulty) =>
-      generateProblem(skill, seedBase + nextSeed.current++ * 7919, difficulty),
-    [skill, seedBase],
-  )
+  // The lazy initializer runs once, so the seed stream is fresh per lesson and
+  // remains stable across renders without reading mutable refs during render.
+  const [makeProblem] = useState(() => {
+    const seedBase = Math.floor(Math.random() * 1_000_000)
+    let nextSeed = 0
+    return (difficulty: Difficulty) =>
+      generateProblem(skill, seedBase + nextSeed++ * 7919, difficulty)
+  })
 
   const [introMode, setIntroMode] = useState<SkillIntroMode | null>(() =>
     introNeeded ? 'automatic' : null,
@@ -531,29 +529,27 @@ function Reward({ icon, label, tone }: { icon: string; label: string; tone: stri
   )
 }
 
+const CONFETTI_PIECES = Array.from({ length: 26 }, (_, i) => ({
+  id: i,
+  x: (i * 37 + 11) % 100,
+  delay: ((i * 13) % 10) / 20,
+  duration: 2.4 + ((i * 17) % 10) / 10,
+  color: ['#ffb3c9', '#cbb6f0', '#a8e6cf', '#ffe5a3', '#a8d8f0'][i % 5],
+  rotate: (i * 137.5) % 360,
+}))
+
 function Confetti() {
-  const pieces = useMemo(
-    () =>
-      Array.from({ length: 26 }, (_, i) => ({
-        id: i,
-        x: Math.random() * 100,
-        delay: Math.random() * 0.5,
-        color: ['#ffb3c9', '#cbb6f0', '#a8e6cf', '#ffe5a3', '#a8d8f0'][i % 5],
-        rotate: Math.random() * 360,
-      })),
-    [],
-  )
 
   return (
     <div className="pointer-events-none fixed inset-0 overflow-hidden">
-      {pieces.map((p) => (
+      {CONFETTI_PIECES.map((p) => (
         <motion.span
           key={p.id}
           className="absolute w-2.5 h-3.5 rounded-[2px]"
           style={{ left: `${p.x}%`, top: -20, background: p.color }}
           initial={{ y: -20, rotate: p.rotate, opacity: 1 }}
           animate={{ y: '105vh', rotate: p.rotate + 420, opacity: [1, 1, 0] }}
-          transition={{ duration: 2.4 + Math.random(), delay: p.delay, ease: 'easeIn' }}
+          transition={{ duration: p.duration, delay: p.delay, ease: 'easeIn' }}
         />
       ))}
     </div>

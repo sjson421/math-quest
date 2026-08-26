@@ -15,7 +15,7 @@ import { useRecoveryKey } from '../store/recovery-key'
  *
  * The key is shown in full, always. Standard practice is a one-time reveal, but
  * that is only correct when a password can reset it. Here there is no reset, so
- * a one-time reveal would turn "she didn't write it down" into permanent loss.
+ * a one-time reveal would turn "the learner didn't write it down" into permanent loss.
  */
 
 const PLACEHOLDER = 'MATH-XXXX-XXXX-XXXX-XXXX'

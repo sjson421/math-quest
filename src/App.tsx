@@ -1,17 +1,24 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { lazy, Suspense, useEffect, useState } from 'react'
 import { course, getSkill, manifestIndex } from './curriculum'
 import { Home, type TreeLevel } from './components/Home'
-import { Lesson } from './components/Lesson'
 import { Mascot } from './components/Mascot'
 import { RecoveryKeyIntro } from './components/RecoveryKey'
-import { Settings } from './components/Settings'
-import { Shop } from './components/Shop'
 import { currentUnitId } from './lib/course'
 import { initSync, useSyncStatus } from './lib/sync'
 import type { SkillGenerator } from './lib/types'
 import { useProgress, type Progress } from './store/progress'
 import { useRecoveryKey } from './store/recovery-key'
+
+const Lesson = lazy(() =>
+  import('./components/Lesson').then((module) => ({ default: module.Lesson })),
+)
+const Settings = lazy(() =>
+  import('./components/Settings').then((module) => ({ default: module.Settings })),
+)
+const Shop = lazy(() =>
+  import('./components/Shop').then((module) => ({ default: module.Shop })),
+)
 
 /**
  * Every screen names where leaving it goes, so no back edge has to be guessed.
@@ -72,43 +79,53 @@ export default function App() {
           transition={{ duration: 0.16 }}
           className="h-full"
         >
-          {isTreeLevel(active) && (
-            <Home
-              level={active}
-              onNavigate={setScreen}
-              onStart={(skillId) =>
-                setScreen({
-                  name: 'lesson',
-                  skill: getSkill(skillId),
-                  // From the manifest rather than from the level on screen, so
-                  // exit lands in the right unit however the lesson was reached.
-                  unitId: manifestIndex.get(skillId)?.unit.id ?? '',
-                })
-              }
-              onOpenSettings={() => setScreen({ name: 'settings', back: active })}
-              onOpenShop={() => setScreen({ name: 'shop', back: active })}
-            />
-          )}
-          {active.name === 'lesson' && (
-            <Lesson
-              skill={active.skill}
-              onExit={() => setScreen({ name: 'skills', unitId: active.unitId })}
-            />
-          )}
-          {active.name === 'settings' && <Settings onClose={() => setScreen(active.back)} />}
-          {active.name === 'shop' && (
-            <Shop
-              progress={progress}
-              onBuy={buyItem}
-              onEquip={equipItem}
-              onUnequip={unequipSlot}
-              onClose={() => setScreen(active.back)}
-            />
-          )}
+          <Suspense fallback={<ScreenLoading character={progress.character} />}>
+            {isTreeLevel(active) && (
+              <Home
+                level={active}
+                onNavigate={setScreen}
+                onStart={(skillId) =>
+                  setScreen({
+                    name: 'lesson',
+                    skill: getSkill(skillId),
+                    // From the manifest rather than from the level on screen, so
+                    // exit lands in the right unit however the lesson was reached.
+                    unitId: manifestIndex.get(skillId)?.unit.id ?? '',
+                  })
+                }
+                onOpenSettings={() => setScreen({ name: 'settings', back: active })}
+                onOpenShop={() => setScreen({ name: 'shop', back: active })}
+              />
+            )}
+            {active.name === 'lesson' && (
+              <Lesson
+                skill={active.skill}
+                onExit={() => setScreen({ name: 'skills', unitId: active.unitId })}
+              />
+            )}
+            {active.name === 'settings' && <Settings onClose={() => setScreen(active.back)} />}
+            {active.name === 'shop' && (
+              <Shop
+                progress={progress}
+                onBuy={buyItem}
+                onEquip={equipItem}
+                onUnequip={unequipSlot}
+                onClose={() => setScreen(active.back)}
+              />
+            )}
+          </Suspense>
         </motion.div>
       </AnimatePresence>
 
       {showKeyIntro && <RecoveryKeyIntro />}
+    </div>
+  )
+}
+
+function ScreenLoading({ character }: { character: Progress['character'] }) {
+  return (
+    <div className="h-full flex items-center justify-center" role="status" aria-label="Loading">
+      <Mascot state="sleeping" size={96} character={character} />
     </div>
   )
 }

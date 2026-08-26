@@ -1,5 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { createProgressHandler, type ProgressStore, type StoredProgress } from '../../api/progress'
+import {
+  createProgressHandler,
+  type ProgressStore,
+  type RequestLimiter,
+  type StoredProgress,
+} from '../../api/progress'
 import { initialProgress, nextVersion, type Progress } from '../store/progress'
 import {
   createSync,
@@ -16,6 +21,7 @@ import {
 import { buy } from './wardrobe'
 
 const KEY = 'MATH-A1B2-C3D4-E5F6-G7H8'
+const allowAll: RequestLimiter = { allow: async () => true }
 
 const progressAt = (updatedAt: number, xp = updatedAt): Progress => ({
   ...initialProgress(),
@@ -38,7 +44,7 @@ function harness(options: { local?: Progress; meta?: SyncMeta; online?: boolean 
       documents.set(key, value)
     },
   }
-  const handle = createProgressHandler(store)
+  const handle = createProgressHandler(store, allowAll)
 
   let progress = options.local ?? initialProgress()
   let online = options.online ?? true

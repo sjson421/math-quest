@@ -104,7 +104,7 @@ Self-assessed skips are the risky ones, so the system watches them:
 - **On first launch** — offered per stage, so someone comfortable through decimals starts
   at Stage E rather than counting to 999.
 - **On any locked or unstarted unit** — a small "I already know this" affordance, so the
-  decision doesn't have to be made up front before she knows what the app is like.
+  decision doesn't have to be made up front before the learner knows what the app is like.
 
 ---
 

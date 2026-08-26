@@ -1,11 +1,18 @@
 # OpenSpec workflow
 
-Work is planned as **OpenSpec changes**. Repository-wide agent workflows live under
-`docs/agent-workflows/`; `.agents/skills/`, `.claude/skills/`, and `.pi/skills/` provide
-Codex-, Claude-, and Pi-native entry points. `.claude/commands/opsx/` retains Claude slash
-commands. Use `openspec-propose` → `openspec-apply-change` → `openspec-archive-change`.
-Task lists are the running record — mark each item done as it lands, and note decisions
-inline rather than only in chat.
+OpenSpec is for work that benefits from an explicit contract and task record: roadmap items,
+new capabilities, cross-cutting behavior, migrations, and changes whose scope needs design
+decisions before implementation. Small bug fixes, narrow behavior changes, documentation,
+tests, and repository maintenance can be handled directly with proportionate verification.
+Do not create a plan or OpenSpec artifacts when they add more ceremony than clarity.
+If a direct change alters an existing requirement, update its baseline spec with the code.
+
+Repository-wide agent workflows live under `docs/agent-workflows/`; `.agents/skills/`,
+`.claude/skills/`, and `.pi/skills/` provide Codex-, Claude-, and Pi-native entry points.
+`.claude/commands/opsx/` retains Claude slash commands. When OpenSpec is warranted, use
+`openspec-propose` → `openspec-apply-change` → `openspec-archive-change`. Task lists are
+the running record — mark each item done as it lands, and note decisions inline rather than
+only in chat.
 
 The roadmap-to-main workflow runs across three separate skill sessions:
 `prepare-roadmap` plans and audits, `implement-roadmap` applies the audited change, and
