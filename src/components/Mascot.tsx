@@ -87,7 +87,8 @@ export function Mascot({
 
   // The bob always loops; the tilt is a fixed pose in five of the six states and
   // an oscillation only in `celebrating`. They are kept apart because they need
-  // different transitions — see `loopIf`.
+  // different transitions — see `loopIf`. Both are in view-box units, since they
+  // move a group inside the canvas: a float is the same float at every size.
   const { y: bob, rotate: tilt } = {
     idle: { y: [0, -4, 0], rotate: 0 },
     thinking: { y: [0, -2, 0], rotate: -4 },
@@ -115,19 +116,20 @@ export function Mascot({
   const pin = wornIn(equipped, 'pin')
 
   return (
-    <motion.svg
+    <svg
       className={className}
       width={size}
       height={size}
       viewBox="0 0 200 200"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      animate={{ y: bob, rotate: tilt }}
-      transition={{ y: loopIf(bob, duration), rotate: loopIf(tilt, duration) }}
       aria-label={`${who.name} is ${expressionState}`}
       role="img"
     >
-      {/* 1 · soft ground shadow */}
+      {/* 1 · soft ground shadow. The one layer left out of the motion below,
+          because it belongs to the floor rather than to the character: while it
+          turned with him, a lean slid the shadow out from under him and the
+          long-held `sleeping` pose read as a picture sitting off centre. */}
       <ellipse
         cx="100"
         cy="180"
@@ -137,62 +139,71 @@ export function Mascot({
         opacity="0.22"
       />
 
-      {/* 2 · back cosmetics — the only slot painted before the character */}
-      {back?.render?.(state, anchors)}
+      {/* Steps 2–10 are the character, and they bob and lean as one. The turn is
+          about the middle of the canvas, where the head already is, so a lean
+          tips the head instead of carrying the whole of him sideways. */}
+      <motion.g
+        animate={{ y: bob, rotate: tilt }}
+        transition={{ y: loopIf(bob, duration), rotate: loopIf(tilt, duration) }}
+        style={{ transformOrigin: '100px 100px' }}
+      >
+        {/* 2 · back cosmetics — the only slot painted before the character */}
+        {back?.render?.(state, anchors)}
 
-      {/* 3 · headwear back fragments — a crown behind the ear tips */}
-      {headwear?.back?.(state, anchors)}
+        {/* 3 · headwear back fragments — a crown behind the ear tips */}
+        {headwear?.back?.(state, anchors)}
 
-      {/* 4 · ears and head. `onEar` is the same wrapper the ear-riding cosmetics
-          go through, so an ear and the bow tied to it cannot move differently
-          whatever shape the ear is — see `cosmetics/ears.tsx`. */}
-      <g>{EARS.map((ear) => onEar(ear, state, anchors.ear[ear].base, who.ear(ear)))}</g>
+        {/* 4 · ears and head. `onEar` is the same wrapper the ear-riding cosmetics
+            go through, so an ear and the bow tied to it cannot move differently
+            whatever shape the ear is — see `cosmetics/ears.tsx`. */}
+        <g>{EARS.map((ear) => onEar(ear, state, anchors.ear[ear].base, who.ear(ear)))}</g>
 
-      {/* The body itself belongs to the character — this is the step that used
-          to be one circle for all three. */}
-      {who.head}
+        {/* The body itself belongs to the character — this is the step that used
+            to be one circle for all three. */}
+        {who.head}
 
-      {/* the crest between the ears — a tuft, twin peaks, or spines */}
-      {who.crest}
+        {/* the crest between the ears — a tuft, twin peaks, or spines */}
+        {who.crest}
 
-      {/* 5 · headwear front fragments — a brim over the forehead. A headwear
-          item that does not split is drawn here too: in front is the side that
-          reads, and only a shape needing to pass behind declares a `back`. */}
-      {headwear?.front?.(state, anchors) ?? headwear?.render?.(state, anchors)}
+        {/* 5 · headwear front fragments — a brim over the forehead. A headwear
+            item that does not split is drawn here too: in front is the side that
+            reads, and only a shape needing to pass behind declares a `back`. */}
+        {headwear?.front?.(state, anchors) ?? headwear?.render?.(state, anchors)}
 
-      {/* 6 · expression: cheeks, then the character's own markings, then eyes
-          and mouth. Markings go under the face and over the cheeks, so a muzzle
-          is something the mouth is drawn *on* and never something drawn over an
-          expression.
-          Cheeks and expression ride the face frame together — they are one face,
-          and a cheek left behind in Pip's coordinates would sit off a wider one. */}
-      {onFace(
-        anchors.face,
-        <>
-          <ellipse cx="66" cy="126" rx="11" ry="7" fill={blush} opacity="0.75" />
-          <ellipse cx="134" cy="126" rx="11" ry="7" fill={blush} opacity="0.75" />
-        </>,
-      )}
-      {who.markings}
-      {onFace(anchors.face, <Face state={expressionState} blinking={blinking} blush={blush} />)}
+        {/* 6 · expression: cheeks, then the character's own markings, then eyes
+            and mouth. Markings go under the face and over the cheeks, so a muzzle
+            is something the mouth is drawn *on* and never something drawn over an
+            expression.
+            Cheeks and expression ride the face frame together — they are one face,
+            and a cheek left behind in Pip's coordinates would sit off a wider one. */}
+        {onFace(
+          anchors.face,
+          <>
+            <ellipse cx="66" cy="126" rx="11" ry="7" fill={blush} opacity="0.75" />
+            <ellipse cx="134" cy="126" rx="11" ry="7" fill={blush} opacity="0.75" />
+          </>,
+        )}
+        {who.markings}
+        {onFace(anchors.face, <Face state={expressionState} blinking={blinking} blush={blush} />)}
 
-      {/* 7 · face cosmetics — the same frame, so glasses land on the eyes
-          without knowing whose they are */}
-      {face && onFace(anchors.face, face.render?.(state, anchors))}
+        {/* 7 · face cosmetics — the same frame, so glasses land on the eyes
+            without knowing whose they are */}
+        {face && onFace(anchors.face, face.render?.(state, anchors))}
 
-      {/* 8 · neck cosmetics */}
-      {neck?.render?.(state, anchors)}
+        {/* 8 · neck cosmetics */}
+        {neck?.render?.(state, anchors)}
 
-      {/* 9 · pin — the character's own charm unless something replaces it */}
-      {pin ? pin.render?.(state, anchors) : (
-        <Charm state={state} at={anchors.pin}>
-          {who.charm}
-        </Charm>
-      )}
+        {/* 9 · pin — the character's own charm unless something replaces it */}
+        {pin ? pin.render?.(state, anchors) : (
+          <Charm state={state} at={anchors.pin}>
+            {who.charm}
+          </Charm>
+        )}
 
-      {/* 10 · foreground effects */}
-      {state === 'sleeping' && <SleepZs anchors={anchors} />}
-    </motion.svg>
+        {/* 10 · foreground effects */}
+        {state === 'sleeping' && <SleepZs anchors={anchors} />}
+      </motion.g>
+    </svg>
   )
 }
 
