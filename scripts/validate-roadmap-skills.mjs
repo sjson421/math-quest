@@ -106,13 +106,7 @@ try {
 }
 
 const codexPrepare = adapters.get('prepare-roadmap')[0].content
-for (const token of [
-  'update_plan',
-  'spawn_agent',
-  'fork_turns: "none"',
-  'model: "gpt-5.6-luna"',
-  'reasoning_effort: "max"',
-]) {
+for (const token of ['update_plan', 'currently selected model']) {
   requireText(codexPrepare, token, 'Codex prepare adapter')
 }
 const codexImplement = adapters.get('implement-roadmap')[0].content
@@ -120,15 +114,7 @@ for (const token of ['update_plan', 'openspec-apply-change', 'ready-to-review'])
   requireText(codexImplement, token, 'Codex implement adapter')
 }
 const codexReview = adapters.get('review-roadmap')[0].content
-for (const token of [
-  'update_plan',
-  '$simplify',
-  'spawn_agent',
-  'fork_turns: "none"',
-  'model: "gpt-5.6-luna"',
-  'reasoning_effort: "max"',
-  'openspec-archive-change',
-]) {
+for (const token of ['update_plan', '$simplify', 'currently selected model', 'openspec-archive-change']) {
   requireText(codexReview, token, 'Codex review adapter')
 }
 
@@ -194,10 +180,7 @@ const modelCheckedFiles = [
 ]
 const concreteModel = /\b(?:gpt(?:-\d|[._])|o[1-9](?:[-._]|\b)|claude-(?:opus|sonnet|haiku|\d)|deepseek|gemini|qwen|llama|mistral|codestral|command-r|terra|luna|opus|sonnet|haiku)\b/i
 for (const { path, content } of modelCheckedFiles) {
-  const checkedContent = path.startsWith('.agents/skills/')
-    ? content.replaceAll('gpt-5.6-luna', '').replaceAll('Luna', '')
-    : content
-  if (concreteModel.test(checkedContent)) failures.push(`Unexpected concrete model identifier in ${path}`)
+  if (concreteModel.test(content)) failures.push(`Unexpected concrete model identifier in ${path}`)
   for (const match of content.matchAll(/^model:\s*(\S+)/gm)) {
     if (path !== claudeReviewerPath || match[1] !== 'inherit') {
       failures.push(`Pinned model configuration in ${path}`)
