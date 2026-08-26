@@ -85,8 +85,8 @@ export function Mascot({
     }
   }, [expressionState])
 
-  // The bob always loops; the tilt is a fixed pose in four of the six states and
-  // an oscillation in the other two. They are kept apart because they need
+  // The bob always loops; the tilt is a fixed pose in five of the six states and
+  // an oscillation only in `celebrating`. They are kept apart because they need
   // different transitions — see `loopIf`.
   const { y: bob, rotate: tilt } = {
     idle: { y: [0, -4, 0], rotate: 0 },
@@ -94,7 +94,7 @@ export function Mascot({
     happy: { y: [0, -14, 0], rotate: 0 },
     encouraging: { y: [0, -3, 0], rotate: 5 },
     celebrating: { y: [0, -18, 0], rotate: [0, -6, 6, 0] },
-    sleeping: { y: [0, -2, 0], rotate: [0, 8, 0] },
+    sleeping: { y: [0, -5, 0], rotate: 3 },
   }[state] as { y: number[]; rotate: number | number[] }
 
   const duration = {
