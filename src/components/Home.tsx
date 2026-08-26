@@ -47,7 +47,14 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
   // The menu is the one persistent place for Pip's unprompted encouragement.
   // Keeping the timer here means it stops with the menu and cannot update a
   // lesson or a screen that is no longer mounted.
+  //
+  // It runs only while he is awake. A sleeping mascot that pipes up every ten
+  // seconds contradicts its own pose, and waking him for the line made the
+  // sleep state a thing the screen dropped out of on a timer.
+  const doneToday = progress.todayXp > 0
+
   useEffect(() => {
+    if (!doneToday) return
     let messageIndex = 0
     let hideTimer: number | undefined
     const showMessage = () => {
@@ -66,13 +73,13 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
       window.clearInterval(timer)
       if (hideTimer !== undefined) window.clearTimeout(hideTimer)
     }
-  }, [])
+  }, [doneToday])
 
   // Greet by state: asleep until the first lesson of the day and awake after.
-  // A message wakes Pip without selecting a pose that moves him; `Room` gives
-  // him the happy face separately.
-  const doneToday = progress.todayXp > 0
-  const pipState = pipMessage || doneToday ? 'idle' : 'sleeping'
+  // The message is read through `doneToday` as well, so a line still on screen
+  // when the day rolls over goes with the state that produced it.
+  const pipState = doneToday ? 'idle' : 'sleeping'
+  const message = doneToday ? pipMessage : null
 
   const unlocked = (skillId: string) => isUnlocked(skillId, progress)
   const stage = level.name === 'units' ? courseStageById.get(level.stageId) : undefined
@@ -133,7 +140,7 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
           character={progress.character}
           equipped={progress.equipped}
           placed={progress.room}
-          message={pipMessage}
+          message={message}
         />
 
         <div className="w-full max-w-xs px-6 mt-1">
