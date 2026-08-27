@@ -66,7 +66,8 @@ Two things are still the same on everyone:
 | `ear` | `(ear) => ReactNode` | one ear, **drawn upright** about its own `base` — `Mascot.tsx` applies the rest pose and the swing |
 | `crest` | `ReactNode` | what sits between the ears |
 | `markings` | `ReactNode`, optional | a muzzle, whiskers, a nose. Pip has none |
-| `charm` | `ReactNode` | the `pin` slot's default. Static; the sway and the celebration spin belong to the slot and are applied to whatever stands in it |
+| `charms` | five `ReactNode`s | the pin, one entry per earned tier. Index 0 is the plain charm. Static; the sway and the celebration spin belong to the step and are applied to whichever is drawn |
+| `charmTone` | `Tone` | the family the charm and its frames are drawn in, so the three ladders stay told apart by colour before shape |
 
 Four parts have envelopes, and each is a real collision rather than a style preference:
 

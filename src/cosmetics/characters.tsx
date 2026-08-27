@@ -1,3 +1,4 @@
+import { tieredCharms } from './charm'
 import { INK, coats, families } from './palette'
 import type { Anchors, Character } from './types'
 
@@ -49,6 +50,16 @@ const pipAnchors: Anchors = {
   pin: { x: 148, y: 162 },
 }
 
+/** Pip's own charm — tier 1, and the centre of every tier above it. */
+const pipCharm = (
+  <path
+    d="M148 150 l4.2 8.6 9.4 1.4 -6.8 6.7 1.6 9.4 -8.4 -4.4 -8.4 4.4 1.6 -9.4 -6.8 -6.7 9.4 -1.4z"
+    strokeWidth="2.5"
+    strokeLinejoin="round"
+    style={{ fill: butter.base, stroke: butter.deep }}
+  />
+)
+
 const pip: Character = {
   kind: 'character',
   id: 'pip',
@@ -87,14 +98,8 @@ const pip: Character = {
       fill="none"
     />
   ),
-  charm: (
-    <path
-      d="M148 150 l4.2 8.6 9.4 1.4 -6.8 6.7 1.6 9.4 -8.4 -4.4 -8.4 4.4 1.6 -9.4 -6.8 -6.7 9.4 -1.4z"
-      strokeWidth="2.5"
-      strokeLinejoin="round"
-      style={{ fill: butter.base, stroke: butter.deep }}
-    />
-  ),
+  charmTone: 'butter',
+  charms: tieredCharms(pipAnchors.pin, 'butter', pipCharm),
 }
 
 /* ------------------------------------------------------------------------- *
@@ -127,6 +132,33 @@ const mochiAnchors: Anchors = {
   shoulder: { y: 132, halfWidth: 58 },
   pin: { x: 152, y: 166 },
 }
+
+/** Mochi's own charm — tier 1, and the centre of every tier above it. */
+const mochiCharm = (
+  <g>
+    <ellipse
+      cx="150"
+      cy="166"
+      rx="11"
+      ry="8"
+      strokeWidth="2.5"
+      style={{ fill: powder.base, stroke: powder.deep }}
+    />
+    <path
+      d="M161 166 l8 -7 v14z"
+      strokeWidth="2.5"
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      style={{ fill: powder.soft, stroke: powder.deep }}
+    />
+    <path
+      d="M145 160 q-3 6 0 12"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      style={{ fill: 'none', stroke: powder.deep }}
+    />
+  </g>
+)
 
 const mochi: Character = {
   kind: 'character',
@@ -230,31 +262,8 @@ const mochi: Character = {
   // A fish, in the star's footprint. Powder rather than butter so the two charms
   // are told apart at 92px by colour before shape, which is the only channel
   // that survives at that size.
-  charm: (
-    <g>
-      <ellipse
-        cx="150"
-        cy="166"
-        rx="11"
-        ry="8"
-        strokeWidth="2.5"
-        style={{ fill: powder.base, stroke: powder.deep }}
-      />
-      <path
-        d="M161 166 l8 -7 v14z"
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        style={{ fill: powder.soft, stroke: powder.deep }}
-      />
-      <path
-        d="M145 160 q-3 6 0 12"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        style={{ fill: 'none', stroke: powder.deep }}
-      />
-    </g>
-  ),
+  charmTone: 'powder',
+  charms: tieredCharms(mochiAnchors.pin, 'powder', mochiCharm),
 }
 
 /* ------------------------------------------------------------------------- *
@@ -296,6 +305,28 @@ const taroAnchors: Anchors = {
   shoulder: { y: 132, halfWidth: 58 },
   pin: { x: 152, y: 162 },
 }
+
+/** Taro's own charm — tier 1, and the centre of every tier above it. */
+const taroCharm = (
+  <g>
+    <path
+      d="M152 162 L147.9 173.3 A12 12 0 1 0 140.2 164.1 Z"
+      strokeWidth="2.5"
+      strokeLinejoin="round"
+      strokeLinecap="round"
+      style={{ fill: mint.base, stroke: mint.deep }}
+    />
+    {/* Two veins off the notch. A third is 4 units from its neighbour, which
+        at 92px is under two pixels and reads as a thicker line, not a vein. */}
+    <path
+      d="M152 162 L155 151 M152 162 L163 165"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      style={{ fill: 'none', stroke: mint.deep }}
+    />
+    <ellipse cx="147" cy="156" rx="4.5" ry="3" style={{ fill: mint.soft }} />
+  </g>
+)
 
 const taro: Character = {
   kind: 'character',
@@ -397,26 +428,8 @@ const taro: Character = {
   // the three charms are told apart by colour before shape at 92px — and a pad
   // is what a capybara is usually drawn sitting in rather than something it
   // wears.
-  charm: (
-    <g>
-      <path
-        d="M152 162 L147.9 173.3 A12 12 0 1 0 140.2 164.1 Z"
-        strokeWidth="2.5"
-        strokeLinejoin="round"
-        strokeLinecap="round"
-        style={{ fill: mint.base, stroke: mint.deep }}
-      />
-      {/* Two veins off the notch. A third is 4 units from its neighbour, which
-          at 92px is under two pixels and reads as a thicker line, not a vein. */}
-      <path
-        d="M152 162 L155 151 M152 162 L163 165"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        style={{ fill: 'none', stroke: mint.deep }}
-      />
-      <ellipse cx="147" cy="156" rx="4.5" ry="3" style={{ fill: mint.soft }} />
-    </g>
-  ),
+  charmTone: 'mint',
+  charms: tieredCharms(taroAnchors.pin, 'mint', taroCharm),
 }
 
 /* ------------------------------------------------------------------------- *

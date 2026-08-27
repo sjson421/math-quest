@@ -13,7 +13,7 @@ import {
 } from '../cosmetics'
 import { tap } from '../lib/haptics'
 import { standing, type ItemStanding } from '../lib/wardrobe'
-import type { Progress } from '../store/progress'
+import { currentPinTier, type Progress } from '../store/progress'
 import { Mascot } from './Mascot'
 import { Room } from './Room'
 
@@ -56,7 +56,6 @@ const CATEGORY: Record<CosmeticSlot | RoomSlot, string> = {
   headwear: 'Headwear',
   face: 'Face',
   neck: 'Neck',
-  pin: 'Badge',
   rug: 'Floor',
   wall: 'Wall',
   left: 'Left corner',
@@ -64,6 +63,9 @@ const CATEGORY: Record<CosmeticSlot | RoomSlot, string> = {
 }
 
 export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
+  // Every preview in the shop wears the pin the learner has actually earned:
+  // a card is a picture of what you would get, and the pin is not for sale.
+  const tier = currentPinTier(progress)
   // The shop belongs to whoever the learner is playing as, so the title follows
   // the character rather than naming the one they may have stopped being.
   const who = characterOf(progress.character)
@@ -110,7 +112,9 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
             {/* Bare, not in the learner's current outfit. The card is asking who
                 they want to be, and a card showing a wizard hat on all three
                 answers a question nobody is being asked. */}
-            <Mascot state="idle" size={92} character={character.id} />
+            {/* At the learner's own tier, so a character card previews what
+                they would actually be playing as rather than a fresh record. */}
+            <Mascot state="idle" size={92} character={character.id} tier={tier} />
           </Card>
         ))}
       </div>
@@ -133,6 +137,7 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
                 size={92}
                 character={progress.character}
                 equipped={{ [cosmetic.slot]: cosmetic.id }}
+                tier={tier}
               />
             </Card>
           )}
@@ -156,6 +161,7 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
                 state="idle"
                 height={194}
                 character={progress.character}
+                tier={tier}
                 placed={{ [decoration.slot]: decoration.id }}
               />
             </Card>

@@ -24,15 +24,30 @@ export type StageCheckpoint = {
   name: string
 }
 
-export type CompletionView = 'lesson-result' | 'stage-checkpoint'
-type CompletionAction = 'show-checkpoint' | 'exit'
+export type CompletionView = 'lesson-result' | 'stage-checkpoint' | 'pin-upgrade'
+type CompletionAction = 'show-checkpoint' | 'show-pin-upgrade' | 'exit'
 
-/** What one Continue tap does at either step of the completion flow. */
+/**
+ * What one Continue tap does at each step of the completion flow.
+ *
+ * Three screens, of which only the first always happens: the result, then a
+ * stage checkpoint if the lesson crossed a boundary, then a pin upgrade if it
+ * earned one. A lesson can earn both, one, or neither, and the learner reaches
+ * the same place with one tap per screen either way.
+ *
+ * The checkpoint comes first because it is about the course and the pin is
+ * about the learner: finishing a stage is the larger thing, and the pin reads
+ * as the reward that followed it rather than an interruption before it.
+ */
 export function completionAction(
   view: CompletionView,
   hasCheckpoint: boolean,
+  hasUpgrade: boolean,
 ): CompletionAction {
-  return view === 'lesson-result' && hasCheckpoint ? 'show-checkpoint' : 'exit'
+  if (view === 'lesson-result' && hasCheckpoint) return 'show-checkpoint'
+  if (view !== 'pin-upgrade' && hasUpgrade) return 'show-pin-upgrade'
+
+  return 'exit'
 }
 
 type CheckpointOptions = {

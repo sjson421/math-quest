@@ -69,20 +69,20 @@ once; that is what a slot is for.
 | `headwear` | hats, crowns, bows, ear clips | `head-top`, ear bases |
 | `face` | glasses, eye patches, face paint | `face-center` |
 | `neck` | scarves, medals, collars | `neck-center` |
-| `pin` | badges and charms; **defaults to the signature star** | `pin` |
 
-The `pin` slot is already occupied. An item equipped there replaces Pip's star rather than
-stacking with it, and that is a visible identity change — treat replacing the star as a
-deliberate design decision, not a free slot.
+**There are four cosmetic slots, and the charm is not one of them.** The charm the character
+wears is *earned* — five tiers, raised by taking skills past the unlock threshold, described
+in [`src/lib/pin.ts`](../../../src/lib/pin.ts) and drawn by
+[`src/cosmetics/charm.tsx`](../../../src/cosmetics/charm.tsx). Nothing bought can replace,
+hide, or stack with it, which is why `CosmeticSlot` has no `pin` member for an item to
+declare.
 
-One item has made that decision: `blossom-rosette`. It is worth reading before proposing a
-second, because it is written against the two things that sank the pin the catalogue tried
-first — a shape whose blurred form is still the same shape, and enough mass that taking the
-star off is not a loss.
+`anchors.pin` remains, because the charm still has to hang somewhere. It is now read by
+exactly one thing, which is worth knowing: moving it is far cheaper than it used to be.
 
-**The slot carries the charm's motion, not the charm.** Whatever stands in step 9 gets the
-sway and the celebration spin, so a `pin` item adds no loop of its own — the same rule the
-root bob is under.
+**The charm step carries the motion, not the charm.** Whatever is drawn at step 9 — any
+character, at any of its five tiers — gets the sway and the celebration spin, so neither a
+character nor a tier adds a loop of its own. The same rule the root bob is under.
 
 ## Render order
 
@@ -97,7 +97,7 @@ rest are the openings cosmetics paint into.
 6. **Pip expression** — cheeks, then the character's markings, then eyes and mouth
 7. `face` cosmetics
 8. `neck` cosmetics
-9. **`pin`** — the signature star by default
+9. **the charm** — this character's, at the tier the learner has earned
 10. foreground effects — today only the sleep marks; the slot is reserved for the
     celebration effects item 16 may add
 

@@ -19,7 +19,7 @@ import { success } from '../lib/sound'
 import { createSubmissionGate } from '../lib/submission-gate'
 import { feedbackText, responseTo } from '../lib/submit'
 import type { Difficulty, Misconception, Problem, SkillGenerator } from '../lib/types'
-import { difficultyFor, useProgress, type LessonOutcome } from '../store/progress'
+import { currentPinTier, difficultyFor, useProgress, type LessonOutcome } from '../store/progress'
 import { ChoiceInput } from './ChoiceInput'
 import { CoordinatePlaneInput } from './CoordinatePlaneInput'
 import { ExpressionKeypad } from './ExpressionKeypad'
@@ -28,6 +28,7 @@ import { Mascot, type MascotState } from './Mascot'
 import { NumberLineInput } from './NumberLineInput'
 import { ProblemView } from './ProblemView'
 import { RootPairInput } from './RootPairInput'
+import { PinUpgrade } from './PinUpgrade'
 import { StageCheckpoint } from './StageCheckpoint'
 import { SolutionSteps } from './SolutionSteps'
 import { SkillIntro, type SkillIntroMode } from './SkillIntro'
@@ -454,6 +455,9 @@ function LessonComplete({
   const mastery = useProgress((s) => s.progress.skills[skill.id]?.mastery ?? 0)
   const character = useProgress((s) => s.progress.character)
   const equipped = useProgress((s) => s.progress.equipped)
+  // The tier already earned. The upgrade screen draws the *new* one from the
+  // outcome instead, which is the one difference between the two.
+  const tier = useProgress((s) => currentPinTier(s.progress))
   const [view, setView] = useState<CompletionView>('lesson-result')
 
   // Once, as the celebration lands — beside the confetti rather than at the
@@ -464,19 +468,33 @@ function LessonComplete({
   }, [])
 
   const continueCompletion = () => {
-    if (completionAction(view, Boolean(outcome.checkpoint)) === 'exit') {
+    const next = completionAction(view, Boolean(outcome.checkpoint), Boolean(outcome.pinUpgrade))
+
+    if (next === 'exit') {
       onExit()
       return
     }
 
     celebrate()
-    setView('stage-checkpoint')
+    setView(next === 'show-checkpoint' ? 'stage-checkpoint' : 'pin-upgrade')
   }
 
   if (view === 'stage-checkpoint' && outcome.checkpoint) {
     return (
       <StageCheckpoint
         checkpoint={outcome.checkpoint}
+        onContinue={continueCompletion}
+        character={character}
+        equipped={equipped}
+        tier={tier}
+      />
+    )
+  }
+
+  if (view === 'pin-upgrade' && outcome.pinUpgrade) {
+    return (
+      <PinUpgrade
+        upgrade={outcome.pinUpgrade}
         onContinue={continueCompletion}
         character={character}
         equipped={equipped}
@@ -491,7 +509,13 @@ function LessonComplete({
       className="flex flex-col items-center justify-center h-full gap-5 px-6 text-center"
     >
       <Confetti />
-      <Mascot state="celebrating" size={190} character={character} equipped={equipped} />
+      <Mascot
+        state="celebrating"
+        size={190}
+        character={character}
+        equipped={equipped}
+        tier={tier}
+      />
 
       <div>
         <h2 className="text-3xl font-bold">Lesson complete!</h2>

@@ -218,14 +218,30 @@ describe('crossedStageCheckpoint', () => {
 
 describe('completionAction', () => {
   it('shows the checkpoint after a lesson result that crossed a boundary', () => {
-    expect(completionAction('lesson-result', true)).toBe('show-checkpoint')
+    expect(completionAction('lesson-result', true, false)).toBe('show-checkpoint')
   })
 
   it('exits directly after an ordinary lesson result', () => {
-    expect(completionAction('lesson-result', false)).toBe('exit')
+    expect(completionAction('lesson-result', false, false)).toBe('exit')
   })
 
   it('exits after the checkpoint', () => {
-    expect(completionAction('stage-checkpoint', true)).toBe('exit')
+    expect(completionAction('stage-checkpoint', true, false)).toBe('exit')
+  })
+
+  it('shows a pin upgrade straight after the result when no boundary was crossed', () => {
+    expect(completionAction('lesson-result', false, true)).toBe('show-pin-upgrade')
+  })
+
+  it('shows the checkpoint first when a lesson earns both', () => {
+    // The order is the whole point of the pair: the stage is the larger thing,
+    // and the pin reads as what followed it rather than an interruption.
+    expect(completionAction('lesson-result', true, true)).toBe('show-checkpoint')
+    expect(completionAction('stage-checkpoint', true, true)).toBe('show-pin-upgrade')
+  })
+
+  it('exits after the pin upgrade, whatever else the lesson earned', () => {
+    expect(completionAction('pin-upgrade', false, true)).toBe('exit')
+    expect(completionAction('pin-upgrade', true, true)).toBe('exit')
   })
 })

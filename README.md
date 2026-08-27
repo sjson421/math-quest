@@ -7,8 +7,9 @@ browser and can be installed on devices that support web apps.
 ## Status: playable foundations, whole course mapped
 
 **173 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
-streaks, stage checkpoints, a companion character the learner chooses and dresses, a room to
-decorate, and progress backup.
+streaks, stage checkpoints, a companion character the learner chooses and dresses, a pin that
+climbs through five tiers as the course is worked through, a room to decorate, and progress
+backup.
 
 The rest of the course now exists as data rather than intent: all **201 skills** across 8
 stages and 23 units are declared in `src/curriculum/manifest/`, with prerequisites, unit
@@ -221,11 +222,17 @@ cat and a capybara alike. Buying a character therefore costs the learner no acce
 adding one costs the wardrobe nothing.
 
 **Coins buy looks, never progress.** One purse and one catalogue (`src/cosmetics/`) carry
-the characters, the eleven cosmetics filling all five slots, and the eleven decorations that
-furnish the room behind the character (`src/components/Room.tsx`). Nothing bought there gates or
+the characters, the ten cosmetics across four slots, and the eleven decorations that furnish
+the room behind the character (`src/components/Room.tsx`). Nothing bought there gates or
 accelerates a lesson. The authoring rules — the two coordinate systems, slot and occlusion
 order, palette and geometry limits — live in the `mascot-design` skill, settled before any
 cosmetic existed so that later items could not each invent their own conventions.
+
+**The pin is the one thing coins cannot buy.** Each character's charm has five tiers, and it
+climbs as the learner takes more skills past the mastery bar that opens the next one — at 15,
+45, 90 and 150. The tier is derived from mastery rather than stored, so there is no field to
+migrate and a restored record simply shows what it earned; crossing a threshold is announced
+once, after the lesson that did it (`src/lib/pin.ts`, `src/cosmetics/charm.tsx`).
 
 **The custom keypad** matters more than it looks. Mobile system keyboards can cover half the
 screen and make a focused lesson feel like a web form.

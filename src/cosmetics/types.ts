@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react'
+import type { Tone } from '../components/tone'
 import type { Coat } from './palette'
 
 /**
@@ -38,7 +39,7 @@ export const EARS = ['left', 'right'] as const
 export type Ear = (typeof EARS)[number]
 
 /** Two items in the same slot cannot be worn at once. That is what a slot is for. */
-export type CosmeticSlot = 'back' | 'headwear' | 'face' | 'neck' | 'pin'
+export type CosmeticSlot = 'back' | 'headwear' | 'face' | 'neck'
 
 /** The four places a decoration can stand. Same rule: one item each. */
 export type RoomSlot = 'rug' | 'wall' | 'left' | 'right'
@@ -112,7 +113,11 @@ export type Anchors = {
   chin: Span
   /** Where a cape hangs from and a pair of wings emerges behind. */
   shoulder: Span
-  /** Where the charm hangs, and what a `pin` cosmetic replaces. */
+  /**
+   * Where the charm hangs, at whatever tier the learner has earned. Not a
+   * cosmetic slot: nothing bought can stand here, because what stands here is
+   * a record of progress rather than a purchase.
+   */
   pin: Point
 }
 
@@ -235,11 +240,33 @@ export type Character = Owned & {
    */
   markings?: ReactNode
   /**
-   * What stands in the `pin` slot when nothing is equipped there. Static
-   * geometry about this character's own `anchors.pin`; `Mascot.tsx` gives it the
-   * sway and the celebration spin that Pip's star has always had.
+   * The five pins this character can be wearing, cheapest-looking first.
+   *
+   * **A tuple rather than a `charm(tier)` function, deliberately.** A function
+   * taking the tier is a state argument in all but name, and the rule directly
+   * above — that a character receives nothing and owns no motion — is what keeps
+   * a character from growing a second expression set or a second animation
+   * vocabulary. Five slots of data break neither, and make a character that
+   * declares four tiers a compile error rather than an index into nothing.
+   *
+   * Index 0 is the plain charm this character has always had, so a fresh record
+   * looks exactly as it did. Every later entry keeps that same charm visible and
+   * adds only around it: a tier is the same object more finely mounted, never a
+   * different object. `Mascot.tsx` gives whichever is drawn the sway and the
+   * celebration spin, so none of these carries motion of its own.
+   *
+   * Which one a learner sees is earned, not owned — see `src/lib/pin.ts`.
    */
-  charm: ReactNode
+  charms: readonly [ReactNode, ReactNode, ReactNode, ReactNode, ReactNode]
+  /**
+   * The family the charm and its frames are drawn in — butter, powder, mint.
+   *
+   * Declared rather than baked into the geometry because the frame is shared:
+   * one `charmFrame()` builds all three ladders, and the three must still be
+   * told apart by colour before shape at 92px, which is the rule the charms
+   * themselves are already under.
+   */
+  charmTone: Tone
 }
 
 export type CatalogueItem = Cosmetic | Decoration | Character

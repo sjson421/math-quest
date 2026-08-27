@@ -3,11 +3,12 @@ import { lazy, Suspense, useEffect, useState } from 'react'
 import { course, getSkill, manifestIndex } from './curriculum'
 import { Home, type TreeLevel } from './components/Home'
 import { Mascot } from './components/Mascot'
+import type { PinTier } from './lib/pin'
 import { RecoveryKeyIntro } from './components/RecoveryKey'
 import { currentUnitId } from './lib/course'
 import { initSync, useSyncStatus } from './lib/sync'
 import type { SkillGenerator } from './lib/types'
-import { useProgress, type Progress } from './store/progress'
+import { currentPinTier, useProgress, type Progress } from './store/progress'
 import { useRecoveryKey } from './store/recovery-key'
 
 const Lesson = lazy(() =>
@@ -62,7 +63,12 @@ export default function App() {
   if (!loaded) {
     return (
       <div className="flex-1 flex items-center justify-center">
-        <Mascot state="sleeping" size={120} character={progress.character} />
+        <Mascot
+          state="sleeping"
+          size={120}
+          character={progress.character}
+          tier={currentPinTier(progress)}
+        />
       </div>
     )
   }
@@ -79,7 +85,11 @@ export default function App() {
           transition={{ duration: 0.16 }}
           className="h-full"
         >
-          <Suspense fallback={<ScreenLoading character={progress.character} />}>
+          <Suspense
+            fallback={
+              <ScreenLoading character={progress.character} tier={currentPinTier(progress)} />
+            }
+          >
             {isTreeLevel(active) && (
               <Home
                 level={active}
@@ -122,10 +132,18 @@ export default function App() {
   )
 }
 
-function ScreenLoading({ character }: { character: Progress['character'] }) {
+// The tier is carried into the loading state too, so the pin does not draw
+// plain for a frame and then change under the learner as the screen arrives.
+function ScreenLoading({
+  character,
+  tier,
+}: {
+  character: Progress['character']
+  tier: PinTier
+}) {
   return (
     <div className="h-full flex items-center justify-center" role="status" aria-label="Loading">
-      <Mascot state="sleeping" size={96} character={character} />
+      <Mascot state="sleeping" size={96} character={character} tier={tier} />
     </div>
   )
 }

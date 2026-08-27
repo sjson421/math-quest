@@ -48,7 +48,11 @@ const markupOf = (cosmetic: Cosmetic): string =>
     )
     .join('')
 
-/** Every part of a character: both ears, the crest, the markings, the charm. */
+/**
+ * Every part of a character: both ears, the crest, the markings, and all five
+ * pins — the tiers are geometry the character ships, so the stroke and palette
+ * rules below have to reach every one of them, not just the plain charm.
+ */
 const markupOfCharacter = (character: Character): string =>
   renderToStaticMarkup(
     <g>
@@ -56,7 +60,9 @@ const markupOfCharacter = (character: Character): string =>
       {character.ear('right')}
       {character.crest}
       {character.markings}
-      {character.charm}
+      {character.charms.map((charm, tier) => (
+        <g key={tier}>{charm}</g>
+      ))}
     </g>,
   )
 
@@ -224,6 +230,33 @@ describe('every character', () => {
   it('resolves an unknown or missing id to the default rather than to nothing', () => {
     expect(characterOf(undefined).id).toBe(DEFAULT_CHARACTER)
     expect(characterOf('a-character-that-was-retired').id).toBe(DEFAULT_CHARACTER)
+  })
+
+  it('declares five pins, each drawing more than the one below it', () => {
+    // Five is a type-level fact, so this is about the ladder rather than the
+    // count: a tier that drew the same as its neighbour would be a step the
+    // learner cannot see, which is the one way this can be quietly wrong.
+    for (const character of characters) {
+      expect(character.charms, `${character.id} tiers`).toHaveLength(5)
+
+      const lengths = character.charms.map(
+        (charm) => renderToStaticMarkup(<g>{charm}</g>).length,
+      )
+
+      expect(lengths, character.id).toEqual([...lengths].sort((a, b) => a - b))
+      expect(new Set(lengths).size, `${character.id} distinct`).toBe(5)
+    }
+  })
+
+  it('draws every pin in that character’s own charm colour', () => {
+    // The three ladders have to stay told apart by colour before shape at 92px,
+    // which a single shared frame colour would undo at four tiers out of five.
+    for (const character of characters) {
+      const deep = families[character.charmTone].deep
+      const markup = renderToStaticMarkup(<g>{character.charms[4]}</g>)
+
+      expect(markup, character.id).toContain(deep)
+    }
   })
 
   it('has an ear on each side that is not the same call twice', () => {

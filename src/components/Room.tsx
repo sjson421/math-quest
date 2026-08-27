@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { ROOM_SLOTS, placedIn, type Equipped, type MascotState, type Placed } from '../cosmetics'
 import { INK, families } from '../cosmetics/palette'
+import type { PinTier } from '../lib/pin'
 import { Mascot } from './Mascot'
 
 /**
@@ -55,6 +56,8 @@ type Props = {
   className?: string
   /** Who is standing in it. Resolved against the catalogue by `Mascot`, not here. */
   character?: string
+  /** The learner's pin tier, carried to the mascot standing in the room. */
+  tier?: PinTier
   /** What they have on. Resolved against the catalogue by `Mascot`, not here. */
   equipped?: Equipped
   /** What stands in the room. Resolved here, in one place, for the same reason. */
@@ -68,6 +71,7 @@ export function Room({
   height = 148,
   className,
   character,
+  tier,
   equipped,
   placed,
   message,
@@ -118,6 +122,7 @@ export function Room({
         <g transform={`translate(${PIP_X} 0)`}>
           <Mascot
             character={character}
+            tier={tier}
             state={state}
             expression={message ? 'happy' : undefined}
             size={HEIGHT}

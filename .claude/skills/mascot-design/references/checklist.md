@@ -19,8 +19,9 @@ looking, which is the point — none of it is a matter of taste.
       (`style={{ transformOrigin: '148px 162px' }}`), never as `originX` / `originY`, which
       take a 0–1 fraction and silently detach the layer.
 - [ ] `spin` appears only in the `celebrating` state.
-- [ ] If the item occupies the `pin` slot, replacing Pip's signature star was a deliberate
-      decision and is called out in review, not a side effect of choosing that slot.
+- [ ] The item declares one of the four cosmetic slots. Nothing a cosmetic can declare
+      reaches the charm — that is earned rather than worn, and a proposal to change it is a
+      change to the pin ladder, not to the wardrobe.
 
 **Size**
 
@@ -137,6 +138,17 @@ These replace the parts that are about wearing something:
 - [ ] Every one of the ten cosmetics is put on and looked at. A character is not done until
       all of them have been. `catalogue.test.tsx` proves each one *draws*; only looking
       proves it is in the right place.
+
+**The pin ladder**
+
+- [ ] All five tiers are rendered at **92 px** and each is distinguishable from the one below
+      it. This is the check that matters most and the one a test cannot make: a step the
+      learner cannot see is a tier that does not exist.
+- [ ] The character's own charm is recognisable at every tier. A frame that swallows it makes
+      tier 5 the same picture on everyone.
+- [ ] Tier 5 is checked against all six states and against the celebration sweep. The frame
+      is sized for legibility, and the clearance argument is written in `charm.tsx` — redo it
+      if the frame grows.
 
 **Markings**
 

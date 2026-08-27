@@ -8,6 +8,7 @@ import {
   unlockPrerequisites,
 } from '../curriculum'
 import { crossedStageCheckpoint, type StageCheckpoint } from '../lib/checkpoint'
+import { crossedPinTier, pinTier, type PinTier, type PinUpgrade } from '../lib/pin'
 import { DEFAULT_CHARACTER, type CosmeticSlot, type Equipped, type Placed, type RoomSlot } from '../cosmetics'
 import { buy, equip, unequip } from '../lib/wardrobe'
 
@@ -72,6 +73,12 @@ export type LessonOutcome = {
   coinsGained: number
   leveledUp: boolean
   checkpoint?: StageCheckpoint
+  /**
+   * Set only when this lesson took the learner across a pin threshold. Derived
+   * from the same before/after pair the checkpoint is, and stored nowhere — see
+   * `lib/pin.ts` for why the transition is the whole mechanism.
+   */
+  pinUpgrade?: PinUpgrade
 }
 
 /** Local calendar day. Deliberately not UTC — streaks should follow the learner. */
@@ -285,9 +292,11 @@ export const useProgress = create<Store>((set, get) => {
         threshold: UNLOCK_THRESHOLD,
       })
 
+      const pinUpgrade = crossedPinTier({ before: p, after: next, threshold: UNLOCK_THRESHOLD })
+
       persist(next)
 
-      return { xpGained, coinsGained, leveledUp, checkpoint }
+      return { xpGained, coinsGained, leveledUp, checkpoint, pinUpgrade }
     },
 
     /**
@@ -373,6 +382,15 @@ function hasPractised(record: SkillProgress | undefined): boolean {
  * declare their own. `unlockPrerequisites` has already seen through the skills
  * with no generator, so nobody is held behind our build order.
  */
+/**
+ * The pin tier this record has earned.
+ *
+ * The one place `UNLOCK_THRESHOLD` is bound to the pin, so every screen drawing
+ * the learner's mascot reads the same number and no component can pick its own.
+ */
+export const currentPinTier = (progress: Progress): PinTier =>
+  pinTier(progress, UNLOCK_THRESHOLD)
+
 export function isUnlocked(skillId: string, progress: Progress): boolean {
   if (skillState(skillId) !== 'implemented') return false
   if (hasPractised(progress.skills[skillId])) return true

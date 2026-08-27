@@ -4,7 +4,7 @@ import { characterOf } from '../cosmetics'
 import { course, courseStageById, courseStageByUnitId, courseUnitById } from '../curriculum'
 import { tap } from '../lib/haptics'
 import { useSound } from '../lib/sound'
-import { isUnlocked, useProgress } from '../store/progress'
+import { currentPinTier, isUnlocked, useProgress } from '../store/progress'
 import { Room } from './Room'
 import { SkillList } from './SkillList'
 import { StageList } from './StageList'
@@ -139,6 +139,7 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
           height={148}
           character={progress.character}
           equipped={progress.equipped}
+          tier={currentPinTier(progress)}
           placed={progress.room}
           message={message}
         />

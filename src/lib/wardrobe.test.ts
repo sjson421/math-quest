@@ -180,10 +180,9 @@ describe('the catalogue the shop is priced against', () => {
   it('covers every slot the contract defines', () => {
     const slots = new Set(cosmetics.map((c) => c.slot))
 
-    // `pin` stood empty the longest, because it holds the character's own charm
-    // by default and an item there changes the character rather than adding to
-    // it. `blossom-rosette` is the one item that makes that trade, and it is
-    // argued for where it is authored.
+    // Four, not five. The charm the character wears is earned rather than
+    // bought — see `src/lib/pin.ts` — so it is not a slot the wardrobe can sell
+    // into, and `CosmeticSlot` no longer names one.
     expect(slots).toEqual(new Set(COSMETIC_SLOTS))
     expect(cosmeticById.get('party-hat')?.back).toBeDefined()
     expect(cosmeticById.get('party-hat')?.front).toBeDefined()

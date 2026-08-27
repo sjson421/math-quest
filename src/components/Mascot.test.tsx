@@ -15,6 +15,7 @@ import {
   type Equipped,
 } from '../cosmetics'
 import { coats } from '../cosmetics/palette'
+import type { PinTier } from '../lib/pin'
 import { Mascot } from './Mascot'
 
 const render = (equipped?: Equipped, character?: string) =>
@@ -194,52 +195,93 @@ describe('render order', () => {
   })
 })
 
-describe('the pin slot', () => {
+describe('the pin', () => {
   /**
-   * The one slot whose default is a shipped drawing rather than nothing, so an
-   * item here does not add to the character — it stands where the character's
-   * own charm did. `blossom-rosette` is the only cosmetic that makes that trade,
-   * and the two reasons the slot stood empty until it are written beside it in
-   * the catalogue.
+   * Five tiers per character, earned rather than worn — so this is driven by a
+   * prop, not by `equipped`, and nothing in the catalogue can reach it.
    *
-   * Identified by its disc fill, for the reason the hat fragments are: every
-   * part of it is computed from the wearer's `pin`, so no coordinate in it means
-   * the same thing on all three bodies.
+   * The frame is identified by the rim's stroke rather than by a coordinate, for
+   * the reason the hat fragments are: every part of it is computed from the
+   * wearer's own `pin`, so no number in it means the same thing on all three
+   * bodies. Each character's rim is its own charm's colour, which is also the
+   * check that the three ladders did not collapse into one.
    */
-  const ROSETTE = 'fill:var(--color-blossom-soft)'
-  const rosette: Equipped = { pin: 'blossom-rosette' }
+  const rimOf = (tone: string) => `fill:none;stroke:var(--color-${tone}-deep)`
+  /** The rim once it fills, from tier 3 up. Tier 2's is the unfilled `rimOf`. */
+  const plateOf = (tone: string) =>
+    `fill:var(--color-${tone}-soft);stroke:var(--color-${tone}-deep)`
 
-  it('replaces the signature star rather than stacking with it', () => {
-    const html = render(rosette)
+  const TONE = { pip: 'butter', mochi: 'powder', taro: 'mint' } as const
 
-    expect(html).toContain(ROSETTE)
-    expect(html).not.toContain(STAR)
+  const at = (tier: PinTier, character?: string) =>
+    renderToStaticMarkup(<Mascot state="idle" character={character} tier={tier} />)
+
+  it('draws the plain charm at tier 1, exactly as it always did', () => {
+    expect(at(1)).toContain(STAR)
+    expect(at(1), 'no frame yet').not.toContain(rimOf(TONE.pip))
+    expect(at(1), 'no plate yet').not.toContain(plateOf(TONE.pip))
   })
 
-  it('replaces whichever charm the character brought', () => {
+  it('defaults to tier 1 when no tier is given', () => {
+    expect(render()).toBe(at(1))
+  })
+
+  it('keeps the character’s own charm at every tier', () => {
     for (const [id, charm] of [
       ['pip', STAR],
       ['mochi', FISH_TAIL],
       ['taro', LILY_PAD],
-    ] as const) {
-      const html = render(rosette, id)
+    ] as const)
+      for (const tier of [1, 2, 3, 4, 5] as const)
+        expect(at(tier, id), `${id} tier ${tier}`).toContain(charm)
+  })
 
-      expect(html, id).toContain(ROSETTE)
-      expect(html, id).not.toContain(charm)
+  it('adds to the frame at every step up', () => {
+    // Length is a coarse measure and the right one here: the promise is that a
+    // tier adds and never replaces, so each must draw strictly more than the
+    // one below it on every body.
+    for (const id of ['pip', 'mochi', 'taro'] as const) {
+      const lengths = ([1, 2, 3, 4, 5] as const).map((tier) => at(tier, id).length)
+
+      expect(lengths, id).toEqual([...lengths].sort((a, b) => a - b))
+      expect(new Set(lengths).size, `${id} distinct tiers`).toBe(5)
     }
   })
 
+  it('fills the rim from tier 3 up, which is the step that reads at 92px', () => {
+    // Tier 2 outlines, tier 3 fills. A fill is the one addition that costs no
+    // radius, which is why it carries the middle of the ladder — see charm.tsx.
+    expect(at(2)).toContain(rimOf(TONE.pip))
+    expect(at(2), 'not filled yet').not.toContain(plateOf(TONE.pip))
+    expect(at(3)).toContain(plateOf(TONE.pip))
+  })
+
+  it('draws each character’s frame in its own charm’s colour', () => {
+    // The three charms are told apart by colour before shape at 92px, and a
+    // shared frame colour would undo that at four of the five tiers.
+    for (const [id, tone] of Object.entries(TONE))
+      expect(at(5, id), id).toContain(plateOf(tone))
+
+    expect(at(5, 'mochi'), 'not Pip’s butter').not.toContain(plateOf(TONE.pip))
+  })
+
   /**
-   * The sway and the celebration spin belong to the slot rather than to the
-   * fallback: a bought pin that stayed still would make the celebration land
-   * differently depending on what the learner had spent. The wrapper carries
-   * them, and its transform origin is the character's own `pin` — so finding
-   * that origin with an item worn is finding the item inside the wrapper.
+   * The sway and the celebration spin belong to the slot rather than to any one
+   * tier: a tier that chose its own motion would make the reward for progress a
+   * different celebration rather than a better pin. The wrapper carries them,
+   * and its transform origin is the character's own `pin`.
    */
-  it('gives a bought pin the motion the charm has', () => {
+  it('gives every tier the motion the charm has', () => {
     const origin = 'transform-origin:148px 162px'
 
-    expect(render(), 'the charm').toContain(origin)
-    expect(render(rosette), 'the rosette').toContain(origin)
+    for (const tier of [1, 3, 5] as const) expect(at(tier), `tier ${tier}`).toContain(origin)
+  })
+
+  it('cannot be reached through the wardrobe', () => {
+    // `pin` left `CosmeticSlot`, so an old record naming one is an unknown key
+    // that changes nothing — the same contract any retired id is under.
+    const stale = { pin: 'blossom-rosette' } as unknown as Equipped
+
+    expect(render(stale)).toBe(render())
   })
 })

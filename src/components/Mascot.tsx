@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState, type ReactNode } from 'react'
+import type { PinTier } from '../lib/pin'
 import { characterOf, wornIn, type Equipped, type MascotState } from '../cosmetics'
 import { onEar } from '../cosmetics/ears'
 import { onFace } from '../cosmetics/frame'
@@ -42,6 +43,15 @@ type Props = {
    * `{ [slot]: id }` without owning any of that logic.
    */
   equipped?: Equipped
+  /**
+   * Which of the character's five pins to draw — earned, never worn, so it is
+   * not part of `equipped` and nothing in the shop can change it.
+   *
+   * Defaults to the plain charm. Every caller showing the learner's own mascot
+   * passes the tier their mastery has earned, including the loading states, so
+   * the pin does not appear at tier 1 for a frame and then change under them.
+   */
+  tier?: PinTier
 }
 
 export function Mascot({
@@ -51,6 +61,7 @@ export function Mascot({
   className,
   character,
   equipped,
+  tier = 1,
 }: Props) {
   const expressionState = expression ?? state
   const who = characterOf(character)
@@ -113,7 +124,6 @@ export function Mascot({
   const headwear = wornIn(equipped, 'headwear')
   const face = wornIn(equipped, 'face')
   const neck = wornIn(equipped, 'neck')
-  const pin = wornIn(equipped, 'pin')
 
   return (
     <svg
@@ -193,9 +203,9 @@ export function Mascot({
         {/* 8 · neck cosmetics */}
         {neck?.render?.(state, anchors)}
 
-        {/* 9 · pin — the character's own charm unless something replaces it */}
+        {/* 9 · pin — this character's charm, at the tier the learner earned */}
         <Charm state={state} at={anchors.pin}>
-          {pin ? pin.render?.(state, anchors) : who.charm}
+          {who.charms[tier - 1]}
         </Charm>
 
         {/* 10 · foreground effects */}
@@ -206,19 +216,16 @@ export function Mascot({
 }
 
 /**
- * The motion the `pin` slot carries, whatever is standing in it.
+ * The motion the pin carries, at whatever tier is standing in it.
  *
- * The character's own charm is a default rather than a fixture: a cosmetic
- * equipped there takes its place, which the contract calls a deliberate
- * identity change. `blossom-rosette` is the one item that makes it.
- *
- * **The motion is here and the shape is not.** Pip's star, Mochi's fish, Taro's
- * lily pad and the rosette all rock gently and all spin once on `celebrating`,
- * because that beat belongs to the moment rather than to the object. A charm
- * that chose its own would make the celebration land differently depending on
- * who you had bought; a *bought* pin that chose its own would do it depending on
- * what you had spent. So this wraps the slot rather than the fallback, and an
- * item authored for it adds no loop of its own.
+ * **The motion is here and the shape is not.** Every character's charm, at every
+ * one of its five tiers, rocks gently and spins once on `celebrating`, because
+ * that beat belongs to the moment rather than to the object. A charm that chose
+ * its own would make the celebration land differently depending on who you had
+ * bought, and a tier that chose its own would do it depending on how far you had
+ * got — which would make the reward for progress a *different* celebration
+ * rather than a better pin. So the motion sits on the slot, and neither a
+ * character nor a tier adds a loop of its own.
  */
 function Charm({
   state,
