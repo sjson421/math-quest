@@ -31,25 +31,44 @@ identity: they are bought, equipped, and removed together and are never separate
 - **THEN** the character's charm remains drawn
 - **AND** no slot offered can hold something that replaces it
 
+## REMOVED Requirements
+
 ### Requirement: Pip draws worn cosmetics in a fixed order
 
-Pip SHALL paint in one order regardless of what is worn: the ground shadow, `back`
-cosmetics, the behind-fragments of `headwear`, Pip's ears and head, the front-fragments of
-`headwear`, Pip's expression, `face` cosmetics, `neck` cosmetics, the charm, and finally any
+**Reason**: Three of its four scenarios describe the `pin` slot — that it defaults to the
+signature star, that another character's charm stands in, and that an equipped pin replaces
+the star. The slot no longer exists, so those scenarios cannot be reworded into anything
+true; they retire with it. The order itself survives unchanged apart from its last step, and
+is restated by the requirement below.
+
+**Migration**: None for stored records. `Every character draws worn cosmetics in a fixed
+order` keeps the same paint sequence, the same occlusion rule, and the same
+inherit-the-motion and legible-without-motion guarantees. Its final step draws the
+character's own charm at the earned tier instead of a bought cosmetic, which is contracted by
+the `pin-progression` capability. An equipped record still naming a `pin` cosmetic is covered
+by the existing requirement that an unknown id is kept, not drawn.
+
+## ADDED Requirements
+
+### Requirement: Every character draws worn cosmetics in a fixed order
+
+A character SHALL paint in one order regardless of what is worn: the ground shadow, `back`
+cosmetics, the behind-fragments of `headwear`, the ears and head, the front-fragments of
+`headwear`, the expression, `face` cosmetics, `neck` cosmetics, the charm, and finally any
 foreground state effect. Occlusion SHALL follow from that order alone — no cosmetic
-re-layers Pip's own parts.
+re-layers a character's own parts.
 
 The charm step SHALL show the character's own charm at the tier the learner has earned, and
 SHALL carry the charm's motion for whatever is drawn there.
 
-Worn cosmetics SHALL inherit Pip's per-state motion rather than restating it, and SHALL
-remain legible with motion disabled: nothing a cosmetic communicates may exist only while it
-is animating.
+Worn cosmetics SHALL inherit the character's per-state motion rather than restating it, and
+SHALL remain legible with motion disabled: nothing a cosmetic communicates may exist only
+while it is animating.
 
 #### Scenario: A hat passes behind the ears and in front of the forehead
 
 - **WHEN** a two-fragment headwear cosmetic is worn
-- **THEN** its behind-fragment is drawn under Pip's ears and head
+- **THEN** its behind-fragment is drawn under the ears and head
 - **AND** its front-fragment is drawn over them
 
 #### Scenario: The charm step draws the character's own charm
@@ -64,5 +83,5 @@ is animating.
 
 #### Scenario: Cosmetics do not announce themselves
 
-- **WHEN** Pip is read by a screen reader while wearing any number of cosmetics
-- **THEN** the single accessible name describing Pip's state is all that is announced
+- **WHEN** a character is read by a screen reader while wearing any number of cosmetics
+- **THEN** the single accessible name describing its state is all that is announced
