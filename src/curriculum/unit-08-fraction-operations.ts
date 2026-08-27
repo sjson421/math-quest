@@ -205,6 +205,7 @@ const addFracSameDen = defineSkill({
   id: 'add-frac-same-den',
   name: 'Adding Like Fractions',
   blurb: '1/5 + 2/5',
+  teachingLine: 'Add the top numbers and keep the shared denominator.',
   build(context) {
     const { data, leftNumerator, rightNumerator, denominator, resultNumerator } = likeOperation('add', context)
     const misconceptions: Misconception[] = [
@@ -247,6 +248,7 @@ const subFracSameDen = defineSkill({
   id: 'sub-frac-same-den',
   name: 'Subtracting Like Fractions',
   blurb: '4/5 − 2/5',
+  teachingLine: 'Subtract the top numbers and keep the shared denominator.',
   build(context) {
     const { data, leftNumerator, rightNumerator, denominator, resultNumerator } = likeOperation('sub', context)
     const misconceptions: Misconception[] = [
@@ -321,6 +323,7 @@ const commonDenominator = defineSkill({
   id: 'common-denominator',
   name: 'Common Denominators',
   blurb: 'Find the LCD',
+  teachingLine: 'A common denominator is a shared multiple of both bottom numbers.',
   build(context) {
     const { left, right } = denominatorPair(context)
     const leftNumerator = reducedNumerator(context, left)
@@ -398,6 +401,7 @@ const addFracDiffDen = defineSkill({
   id: 'add-frac-diff-den',
   name: 'Adding Unlike Fractions',
   blurb: '1/2 + 1/3',
+  teachingLine: 'Rename both fractions with a common denominator before adding their top numbers.',
   build(context) {
     const { left, right } = coprimeDenominator(context)
     // Low difficulties keep the sum proper; higher ones may exceed one, and
@@ -460,6 +464,7 @@ const subFracDiffDen = defineSkill({
   id: 'sub-frac-diff-den',
   name: 'Subtracting Unlike Fractions',
   blurb: '3/4 − 1/3',
+  teachingLine: 'Rename both fractions with a common denominator before subtracting their top numbers.',
   build(context) {
     const { left, right } = coprimeDenominator(context)
     // Draw the subtrahend first, then a minuend strictly larger than it, so
@@ -517,6 +522,7 @@ const improperToMixed = defineSkill({
   id: 'improper-to-mixed',
   name: 'Improper to Mixed',
   blurb: '7/4 becomes 1 and 3/4',
+  teachingLine: "Divide an improper fraction's top by its bottom to find the whole and remainder.",
   build(context) {
     const { rng } = context
     const [denMin, denMax] = band(context.difficulty, {
@@ -600,6 +606,7 @@ const mixedToImproper = defineSkill({
   id: 'mixed-to-improper',
   name: 'Mixed to Improper',
   blurb: '1 and 3/4 becomes 7/4',
+  teachingLine: 'For a mixed number, multiply the whole by the bottom, then add the top.',
   build(context) {
     const [denMin, denMax] = band(context.difficulty, {
       1: [2, 4],
@@ -701,6 +708,7 @@ const addMixed = defineSkill({
   id: 'add-mixed',
   name: 'Adding Mixed Numbers',
   blurb: '1 1/2 + 2 1/4',
+  teachingLine: 'Add whole parts and fraction parts, then regroup any extra whole.',
   build(context) {
     const carry = context.difficulty >= 4 || (context.difficulty === 3 && context.rng.bool())
     const { denominator, leftNumerator, rightNumerator } = mixedPair(
@@ -782,6 +790,7 @@ const subMixed = defineSkill({
   id: 'sub-mixed',
   name: 'Subtracting Mixed Numbers',
   blurb: 'Borrow from the whole',
+  teachingLine: 'Borrow one whole as equal fraction parts before subtracting.',
   build(context) {
     const { denominator, leftNumerator, rightNumerator } = mixedPair(
       context,
@@ -881,6 +890,7 @@ const multFractions = defineSkill({
   id: 'mult-fractions',
   name: 'Multiplying Fractions',
   blurb: 'Straight across',
+  teachingLine: 'Multiply top numbers together, bottom numbers together, then reduce.',
   build(context) {
     const operands = fractionOperands(context)
     const { leftNumerator, leftDenominator, rightNumerator, rightDenominator } = operands
@@ -925,6 +935,7 @@ const divFractions = defineSkill({
   id: 'div-fractions',
   name: 'Dividing Fractions',
   blurb: 'Keep, change, flip',
+  teachingLine: "Keep the first fraction, then multiply by the second fraction's reciprocal.",
   build(context) {
     const operands = fractionOperands(context, true)
     const { leftNumerator, leftDenominator, rightNumerator, rightDenominator } = operands
@@ -969,6 +980,7 @@ const fractionWords = defineSkill({
   id: 'fraction-words',
   name: 'Fraction Word Problems',
   blurb: 'Spot the fraction',
+  teachingLine: 'Find the named part and whole, then write part over whole.',
   build({ rng, difficulty }) {
     const [wholeMin, wholeMax] = band(difficulty, {
       1: [4, 8],

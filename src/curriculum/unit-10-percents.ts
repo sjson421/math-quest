@@ -40,6 +40,7 @@ const percentMeaning = defineSkill({
   id: 'percent-meaning',
   name: 'What a Percent Is',
   blurb: 'Out of 100',
+  teachingLine: 'A percent tells how many parts out of 100.',
   build(context) {
     const [min, max] = percentBand(context)
     const count = context.rng.int(min, max)
@@ -70,6 +71,7 @@ const percentToDecimal = defineSkill({
   id: 'percent-to-decimal',
   name: 'Percent to Decimal',
   blurb: 'Move the point left',
+  teachingLine: 'Divide a percent by 100, moving the decimal point two places left.',
   build(context) {
     const [min, max] = percentBand(context)
     const percent = context.rng.int(min, max)
@@ -98,6 +100,7 @@ const decimalToPercent = defineSkill({
   id: 'decimal-to-percent',
   name: 'Decimal to Percent',
   blurb: 'Move the point right',
+  teachingLine: 'Multiply a decimal by 100 to write its percent.',
   build(context) {
     const [min, max] = percentBand(context)
     const percent = context.rng.int(min, max)
@@ -129,6 +132,7 @@ const percentToFraction = defineSkill({
   id: 'percent-to-fraction',
   name: 'Percent to Fraction',
   blurb: 'Over 100, then simplify',
+  teachingLine: 'Write the percent over 100, then reduce the fraction.',
   build(context) {
     const [min, max] = percentBand(context)
     const percent = context.rng.int(min, max)
@@ -170,6 +174,7 @@ const percentOf = defineSkill({
   id: 'percent-of',
   name: 'Percent Of',
   blurb: '15% of 80',
+  teachingLine: 'Multiply the quantity by the percent written as a decimal.',
   build(context) {
     const percent = context.rng.pick(PERCENT_OF_FACTORS)
     const g = gcd(100, percent)
@@ -242,6 +247,7 @@ const findThePercent = defineSkill({
   id: 'find-the-percent',
   name: 'Finding the Percent',
   blurb: '12 is what percent of 60',
+  teachingLine: 'Divide the part by the whole, then multiply by 100.',
   build(context) {
     const { percent, whole, part } = drawPercentRelation(context)
     const ratio = part / whole
@@ -282,6 +288,7 @@ const findTheWhole = defineSkill({
   id: 'find-the-whole',
   name: 'Finding the Whole',
   blurb: '20% is 15 — find the total',
+  teachingLine: 'Divide the part by the percent written as a decimal.',
   build(context) {
     const { percent, whole, part } = drawPercentRelation(context)
 
@@ -375,6 +382,7 @@ const percentChange = defineSkill({
   id: 'percent-change',
   name: 'Percent Change',
   blurb: 'Increase and decrease',
+  teachingLine: 'Divide the change by the original amount, then multiply by 100.',
   build(context) {
     const { percent, original, change, current } = drawPercentChange(context)
 
@@ -428,6 +436,7 @@ const discountTaxTip = defineSkill({
   id: 'discount-tax-tip',
   name: 'Discount, Tax & Tip',
   blurb: 'Percents applied to a bill',
+  teachingLine: 'Find the percent amount, then add or subtract it from the price.',
   build(context) {
     const operation = context.rng.pick(['discount', 'tax', 'tip'] as const)
     const percent = context.rng.pick(APPLIED_PERCENT_BAND[context.difficulty])
@@ -494,6 +503,7 @@ const simpleInterest = defineSkill({
   id: 'simple-interest',
   name: 'Simple Interest',
   blurb: 'I = Prt',
+  teachingLine: 'Use I = Prt, writing the percent rate as a decimal.',
   build(context) {
     const [minPrincipal, maxPrincipal] = principalBand(context)
     const principalCents = context.rng.int(minPrincipal, maxPrincipal) * 100

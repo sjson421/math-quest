@@ -49,6 +49,7 @@ const decimalPlaceValue = defineSkill({
   id: 'decimal-place-value',
   name: 'Decimal Places',
   blurb: 'Tenths and hundredths',
+  teachingLine: 'Count places to the right of the decimal point.',
   build(context) {
     const scale: 1 | 2 = context.difficulty === 1 ? 1 : context.rng.bool(0.65) ? 2 : 1
     const place = scale === 1 || context.rng.bool() ? 'tenths' : 'hundredths'
@@ -94,6 +95,7 @@ const readDecimals = defineSkill({
   id: 'read-decimals',
   name: 'Reading Decimals',
   blurb: 'Say a decimal out loud',
+  teachingLine: 'The word "and" marks the decimal point when writing digits.',
   build(context) {
     const scale: 1 | 2 = context.difficulty === 1 ? 1 : context.rng.bool(0.7) ? 2 : 1
     const value = constrain(
@@ -135,6 +137,7 @@ const compareDecimals = defineSkill({
   id: 'compare-decimals',
   name: 'Comparing Decimals',
   blurb: 'Which decimal is larger',
+  teachingLine: 'Add ending zeros, then compare matching places from left to right.',
   build(context) {
     const [minWhole, maxWhole] = wholeBounds(context)
     const whole = context.rng.int(minWhole, maxWhole)
@@ -188,6 +191,7 @@ const roundDecimals = defineSkill({
   id: 'round-decimals',
   name: 'Rounding Decimals',
   blurb: 'Round to a given place',
+  teachingLine: 'Check the next digit: 5 or more rounds up.',
   build(context) {
     const targetScale: 0 | 1 = context.difficulty <= 2 || context.rng.bool(0.4) ? 0 : 1
     const scale: 1 | 2 = targetScale === 0 ? 1 : 2
@@ -277,6 +281,7 @@ const addDecimals = defineSkill({
   id: 'add-decimals',
   name: 'Adding Decimals',
   blurb: 'Line up the points',
+  teachingLine: 'Line up decimal points, then add matching places.',
   build: (context) => arithmetic('add', context),
 })
 
@@ -284,6 +289,7 @@ const subDecimals = defineSkill({
   id: 'sub-decimals',
   name: 'Subtracting Decimals',
   blurb: '4.5 − 1.28',
+  teachingLine: 'Line up decimal points, then subtract matching places.',
   build: (context) => arithmetic('sub', context),
 })
 
@@ -291,6 +297,7 @@ const multDecimals = defineSkill({
   id: 'mult-decimals',
   name: 'Multiplying Decimals',
   blurb: 'Count the places',
+  teachingLine: 'Multiply as whole numbers, then restore all decimal places.',
   build(context) {
     // Both operands stay at tenths, so the product's two decimal places stay
     // within the hundredths this unit covers rather than reaching thousandths.
@@ -331,6 +338,7 @@ const divDecimalByWhole = defineSkill({
   id: 'div-decimal-by-whole',
   name: 'Dividing a Decimal',
   blurb: 'Divide by a whole number',
+  teachingLine: 'Divide as whole numbers and bring the decimal point straight up.',
   build(context) {
     const [, maxWhole] = wholeBounds(context)
     const divisor = context.rng.int(2, Math.max(3, maxWhole))
@@ -363,6 +371,7 @@ const divByDecimal = defineSkill({
   id: 'div-by-decimal',
   name: 'Dividing by a Decimal',
   blurb: 'Shift both numbers',
+  teachingLine: 'Shift both decimal points equally until the divisor is whole.',
   build(context) {
     const [minWhole, maxWhole] = wholeBounds(context)
     const quotient = context.rng.int(Math.max(2, minWhole), Math.max(3, maxWhole))
@@ -422,6 +431,7 @@ const fractionToDecimal = defineSkill({
   id: 'fraction-to-decimal',
   name: 'Fraction to Decimal',
   blurb: 'Convert by dividing',
+  teachingLine: 'Divide the top number by the bottom number to write a decimal.',
   build(context) {
     const denominator = context.rng.pick(TERMINATING_DENOMINATOR_BAND[context.difficulty])
     const numerator = context.rng.int(1, denominator - 1)
@@ -455,6 +465,7 @@ const decimalToFraction = defineSkill({
   id: 'decimal-to-fraction',
   name: 'Decimal to Fraction',
   blurb: 'Convert by place value',
+  teachingLine: "Write a decimal's digits over their place value, then reduce.",
   build(context) {
     const scale: 1 | 2 = context.difficulty === 1 ? 1 : context.rng.bool(0.6) ? 2 : 1
     const value = constrain(
@@ -493,6 +504,7 @@ const moneyProblems = defineSkill({
   id: 'money-problems',
   name: 'Money',
   blurb: 'Decimals applied to money',
+  teachingLine: 'Multiply the price by the needed quantity, then write the total in dollars.',
   build(context) {
     const [minWhole, maxWhole] = wholeBounds(context)
     const priceCents = context.rng.int(Math.max(50, minWhole * 100), Math.max(150, maxWhole * 100 + 99))

@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
-import { diagnose } from '../lib/generator'
+import { checkTeachingLine } from '../lib/content-rules'
+import { diagnose, generateProblem } from '../lib/generator'
 import { ticks } from '../lib/number-line'
 import { equals, gcd, rational, toNumber } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
 import type { FractionData, MathNotation, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { format, sample, sweep, unrenderedKeys } from './recorded-output'
 import { unit07 } from './unit-07-fractions-meaning'
 
@@ -66,6 +68,114 @@ const comparisonValues = (problem: Problem): [string, string, string, string] =>
   expect(textValue(mark)).toBe('?')
   return [...fractionValues(left), ...fractionValues(right)]
 }
+
+const teachingLines = [
+  ['fraction-meaning', 'A fraction writes selected equal parts over all equal parts.'],
+  ['fraction-of-shape', 'Count shaded equal parts over all equal parts in the shape.'],
+  ['name-parts', "A fraction's top number counts selected parts; its bottom counts all equal parts."],
+  ['fractions-numberline', 'Split the space from zero to one into equal parts, then count right.'],
+  ['equivalent-visual', 'Equivalent fractions name the same amount with different equal pieces.'],
+  ['equivalent-multiply', 'Multiply or divide both fraction parts by the same number.'],
+  ['simplify-fractions', 'Lowest terms use no shared factor except 1.'],
+  ['compare-same-den', 'With matching denominators, the larger top number makes the larger fraction.'],
+  ['compare-diff-den', 'Rename both fractions with one shared denominator, then compare their top numbers.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit07.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 7 skill: ${id}`)
+  return found
+}
+
+const answerChoiceLabel = (problem: Problem): string => {
+  if (problem.answer.kind !== 'choice') throw new Error(`Expected choice answer for ${problem.skillId}`)
+  const answerId = problem.answer.id
+  const choice = problem.choices?.find((candidate) => candidate.id === answerId)
+  if (!choice) throw new Error(`Missing answer choice for ${problem.skillId}`)
+  return choice.label
+}
+
+describe('Stage D Unit 7 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = teachingSkill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage D Unit 7 intro examples', () => {
+  it('recomputes every fixed example from visible notation or diagram data', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+
+      if (id === 'fraction-of-shape' || id === 'equivalent-visual') {
+        if (problem.display.kind !== 'diagram') throw new Error(`Expected diagram for ${id}`)
+        const visible = shapeDiagramFraction(problem.display.diagram)
+        if (id === 'fraction-of-shape') {
+          expect(exact(problem)).toEqual(visible)
+        } else {
+          const matching = (problem.choices ?? []).filter(
+            (choice) => choice.value && equals(choice.value, visible),
+          )
+          expect(matching).toHaveLength(1)
+          expect(problem.answer).toEqual({ kind: 'choice', id: matching[0].id })
+        }
+        continue
+      }
+
+      if (id === 'name-parts') {
+        const data = fractionData(problem)
+        if (data.operation !== 'name-part') throw new Error('expected name-part data')
+        expect(problem.answer).toEqual({ kind: 'choice', id: data.requestedPart })
+        expect(answerChoiceLabel(problem)).toBe(
+          data.requestedPart === 'numerator' ? 'Numerator' : 'Denominator',
+        )
+        continue
+      }
+
+      if (id === 'fractions-numberline') {
+        const data = fractionData(problem)
+        if (data.operation !== 'place' || !problem.numberLine) throw new Error('expected number-line data')
+        expect(ticks(problem.numberLine).some((tick) => equals(tick, rational(data.numerator, data.denominator)))).toBe(true)
+        expect(exact(problem)).toEqual(rational(data.numerator, data.denominator))
+        continue
+      }
+
+      if (id === 'compare-same-den' || id === 'compare-diff-den') {
+        const data = comparisonData(problem)
+        const expected = relation(
+          data.leftNumerator,
+          data.leftDenominator,
+          data.rightNumerator,
+          data.rightDenominator,
+        )
+        expect(problem.answer).toEqual({ kind: 'choice', id: String(expected) })
+        expect(answerChoiceLabel(problem)).toBe(expected < 0 ? '<' : expected > 0 ? '>' : '=')
+        continue
+      }
+
+      const data = fractionData(problem)
+      if (id === 'fraction-meaning') {
+        if (data.operation !== 'read') throw new Error('expected read data')
+        expect(exact(problem)).toEqual(rational(data.numerator, data.denominator))
+      } else if (id === 'equivalent-multiply') {
+        if (data.operation !== 'scale-missing') throw new Error('expected scale data')
+        const base = data.missing === 'numerator' ? data.numerator : data.denominator
+        const expected = data.direction === 'up' ? base * data.factor : base
+        expect(exact(problem)).toEqual(rational(expected, 1))
+      } else if (id === 'simplify-fractions') {
+        if (data.operation !== 'simplify') throw new Error('expected simplify data')
+        expect(exact(problem)).toEqual(rational(data.numerator, data.denominator))
+        expect(problem.answer).toMatchObject({ requireSimplified: true })
+      } else {
+        throw new Error(`Unhandled Unit 7 intro: ${id}`)
+      }
+    }
+  })
+})
 
 describe('fraction-meaning', () => {
   it('shows selected parts over all equal parts and answers that exact fraction', () => {

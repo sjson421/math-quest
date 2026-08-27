@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
-import { diagnose } from '../lib/generator'
+import { checkTeachingLine } from '../lib/content-rules'
+import { diagnose, generateProblem } from '../lib/generator'
 import { gcd, rational } from '../lib/rational'
 import type { Difficulty, FractionData, MathNotation, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { format, sample, sweep, unrenderedKeys } from './recorded-output'
 import { unit08 } from './unit-08-fraction-operations'
 
@@ -70,6 +72,115 @@ const operationValues = (problem: Problem): [string, string, string, string] => 
   expect(textValue(mark)).toBe(operator === 'add' ? '+' : '−')
   return [...fractionValues(left), ...fractionValues(right)]
 }
+
+const teachingLines = [
+  ['add-frac-same-den', 'Add the top numbers and keep the shared denominator.'],
+  ['sub-frac-same-den', 'Subtract the top numbers and keep the shared denominator.'],
+  ['common-denominator', 'A common denominator is a shared multiple of both bottom numbers.'],
+  ['add-frac-diff-den', 'Rename both fractions with a common denominator before adding their top numbers.'],
+  ['sub-frac-diff-den', 'Rename both fractions with a common denominator before subtracting their top numbers.'],
+  ['improper-to-mixed', "Divide an improper fraction's top by its bottom to find the whole and remainder."],
+  ['mixed-to-improper', 'For a mixed number, multiply the whole by the bottom, then add the top.'],
+  ['add-mixed', 'Add whole parts and fraction parts, then regroup any extra whole.'],
+  ['sub-mixed', 'Borrow one whole as equal fraction parts before subtracting.'],
+  ['mult-fractions', 'Multiply top numbers together, bottom numbers together, then reduce.'],
+  ['div-fractions', "Keep the first fraction, then multiply by the second fraction's reciprocal."],
+  ['fraction-words', 'Find the named part and whole, then write part over whole.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit08.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 8 skill: ${id}`)
+  return found
+}
+
+describe('Stage D Unit 8 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = teachingSkill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage D Unit 8 intro examples', () => {
+  it('recomputes every fixed example from visible fraction or story quantities', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+
+      if (id === 'fraction-words') {
+        if (problem.display.kind !== 'story' || problem.display.operands?.length !== 2) {
+          throw new Error('expected fraction story operands')
+        }
+        const [part, whole] = problem.display.operands
+        expect(exact(problem)).toEqual(rational(part, whole))
+        continue
+      }
+
+      const data = fractionData(problem)
+      let expected
+      switch (data.operation) {
+        case 'add':
+        case 'sub': {
+          const sign = data.operation === 'add' ? 1 : -1
+          expected = rational(
+            data.leftNumerator * data.rightDenominator + sign * data.rightNumerator * data.leftDenominator,
+            data.leftDenominator * data.rightDenominator,
+          )
+          break
+        }
+        case 'common-denominator':
+          expected = rational(
+            data.leftDenominator * data.rightDenominator /
+              gcd(data.leftDenominator, data.rightDenominator),
+            1,
+          )
+          break
+        case 'improper-to-mixed':
+          expected = rational(data.numerator, data.denominator)
+          break
+        case 'mixed-to-improper':
+          expected = rational(data.whole * data.denominator + data.numerator, data.denominator)
+          break
+        case 'add-mixed':
+        case 'sub-mixed': {
+          const sign = data.operation === 'add-mixed' ? 1 : -1
+          const leftNumerator = data.leftWhole * data.leftDenominator + data.leftNumerator
+          const rightNumerator = data.rightWhole * data.rightDenominator + data.rightNumerator
+          expected = rational(
+            leftNumerator * data.rightDenominator + sign * rightNumerator * data.leftDenominator,
+            data.leftDenominator * data.rightDenominator,
+          )
+          break
+        }
+        case 'multiply':
+          expected = rational(
+            data.leftNumerator * data.rightNumerator,
+            data.leftDenominator * data.rightDenominator,
+          )
+          break
+        case 'divide':
+          expected = rational(
+            data.leftNumerator * data.rightDenominator,
+            data.leftDenominator * data.rightNumerator,
+          )
+          break
+        default:
+          throw new Error(`Unhandled Unit 8 intro: ${data.operation}`)
+      }
+
+      expect(exact(problem)).toEqual(expected)
+      if (id === 'improper-to-mixed' || id === 'add-mixed' || id === 'sub-mixed') {
+        expect(problem.answer).toMatchObject({ requireMixed: true })
+      }
+      if (id === 'add-frac-same-den' || id === 'sub-frac-same-den' || id === 'add-frac-diff-den') {
+        expect(problem.answer).toMatchObject({ requireSimplified: true })
+      }
+    }
+  })
+})
 
 const denominatorBounds: Record<Difficulty, readonly [number, number]> = {
   1: [2, 4],
@@ -867,8 +978,6 @@ describe('the fraction-operation unit', () => {
     }).not.toThrow()
   })
 })
-
-import { generateProblem } from '../lib/generator'
 
 function generateOne(skill: (typeof unit08)[number]): Problem {
   return generateProblem(skill, 1, 1)

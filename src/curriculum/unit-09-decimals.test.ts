@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem, diagnose } from '../lib/generator'
 import { rational } from '../lib/rational'
 import type { DecimalData, DecimalValue, Difficulty, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit09 } from './unit-09-decimals'
 
@@ -38,6 +40,142 @@ const text = (value: DecimalValue) => {
   const divisor = power(value.scale)
   return `${Math.floor(value.coefficient / divisor)}.${String(value.coefficient % divisor).padStart(value.scale, '0')}`
 }
+
+const teachingLines = [
+  ['decimal-place-value', 'Count places to the right of the decimal point.'],
+  ['read-decimals', 'The word "and" marks the decimal point when writing digits.'],
+  ['compare-decimals', 'Add ending zeros, then compare matching places from left to right.'],
+  ['round-decimals', 'Check the next digit: 5 or more rounds up.'],
+  ['add-decimals', 'Line up decimal points, then add matching places.'],
+  ['sub-decimals', 'Line up decimal points, then subtract matching places.'],
+  ['mult-decimals', 'Multiply as whole numbers, then restore all decimal places.'],
+  ['div-decimal-by-whole', 'Divide as whole numbers and bring the decimal point straight up.'],
+  ['div-by-decimal', 'Shift both decimal points equally until the divisor is whole.'],
+  ['fraction-to-decimal', 'Divide the top number by the bottom number to write a decimal.'],
+  ['decimal-to-fraction', "Write a decimal's digits over their place value, then reduce."],
+  ['money-problems', 'Multiply the price by the needed quantity, then write the total in dollars.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit09.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 9 skill: ${id}`)
+  return found
+}
+
+const answerChoiceLabel = (problem: Problem): string => {
+  if (problem.answer.kind !== 'choice') throw new Error(`Expected choice answer for ${problem.skillId}`)
+  const answerId = problem.answer.id
+  const choice = problem.choices?.find((candidate) => candidate.id === answerId)
+  if (!choice) throw new Error(`Missing answer choice for ${problem.skillId}`)
+  return choice.label
+}
+
+const fractionValues = (problem: Problem): [number, number] => {
+  if (problem.display.kind !== 'math' || problem.display.notation.kind !== 'fraction') {
+    throw new Error('expected fraction notation')
+  }
+  const numerator = problem.display.notation.numerator
+  const denominator = problem.display.notation.denominator
+  if (numerator.kind !== 'text' || denominator.kind !== 'text') throw new Error('expected fraction text')
+  return [Number(numerator.value), Number(denominator.value)]
+}
+
+describe('Stage D Unit 9 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = teachingSkill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage D Unit 9 intro examples', () => {
+  it('recomputes every fixed example from visible decimal or carried data', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+
+      if (id === 'fraction-to-decimal') {
+        const [numerator, denominator] = fractionValues(problem)
+        expect(exact(problem)).toEqual(rational(numerator, denominator))
+        expect(problem.answer).toMatchObject({ requireDecimal: true })
+        continue
+      }
+
+      if (id === 'money-problems') {
+        if (problem.display.kind !== 'story' || problem.display.operands?.length !== 2) {
+          throw new Error('expected money story operands')
+        }
+        const [priceCents, quantity] = problem.display.operands
+        expect(problem.display.operator).toBe('×')
+        expect(exact(problem)).toEqual(rational(priceCents * quantity, 100))
+        continue
+      }
+
+      if (id === 'compare-decimals') {
+        const data = decimalData(problem)
+        if (data.operation !== 'compare') throw new Error('expected decimal comparison data')
+        const left = number(data.left)
+        const right = number(data.right)
+        const relation = left < right ? -1 : 1
+        expect(problem.answer).toEqual({ kind: 'choice', id: String(relation) })
+        expect(answerChoiceLabel(problem)).toBe(left < right ? '<' : '>')
+        continue
+      }
+
+      const data = decimalData(problem)
+      switch (data.operation) {
+        case 'digit': {
+          const digits = String(data.value.coefficient % power(data.value.scale)).padStart(data.value.scale, '0')
+          const digit = Number(digits[data.place === 'tenths' ? 0 : 1])
+          expect(exact(problem)).toEqual(rational(digit, 1))
+          break
+        }
+        case 'read':
+          expect(exact(problem)).toEqual(rational(data.value.coefficient, power(data.value.scale)))
+          break
+        case 'round': {
+          const factor = power(data.value.scale - data.targetScale)
+          const rounded = Math.floor((data.value.coefficient + factor / 2) / factor)
+          expect(exact(problem)).toEqual(rational(rounded, power(data.targetScale)))
+          break
+        }
+        case 'add':
+        case 'sub': {
+          const scale = Math.max(data.left.scale, data.right.scale)
+          const left = data.left.coefficient * power(scale - data.left.scale)
+          const right = data.right.coefficient * power(scale - data.right.scale)
+          const result = data.operation === 'add' ? left + right : left - right
+          expect(exact(problem)).toEqual(rational(result, power(scale)))
+          break
+        }
+        case 'mult':
+          expect(exact(problem)).toEqual(
+            rational(data.left.coefficient * data.right.coefficient, power(data.left.scale + data.right.scale)),
+          )
+          break
+        case 'div-whole':
+          expect(exact(problem)).toEqual(rational(data.dividend.coefficient, data.divisor * power(data.dividend.scale)))
+          break
+        case 'div-decimal':
+          expect(exact(problem)).toEqual(
+            rational(
+              data.dividend.coefficient * power(data.divisor.scale),
+              data.divisor.coefficient * power(data.dividend.scale),
+            ),
+          )
+          break
+        case 'display':
+          expect(exact(problem)).toEqual(rational(data.value.coefficient, power(data.value.scale)))
+          expect(problem.answer).toMatchObject({ requireFraction: true })
+          break
+        default:
+          throw new Error(`Unhandled Unit 9 intro: ${data.operation}`)
+      }
+    }
+  })
+})
 
 describe('decimal-place-value', () => {
   it('derives the requested digit from exact visible places', () => {

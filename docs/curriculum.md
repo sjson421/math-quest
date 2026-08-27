@@ -563,8 +563,8 @@ Ship by stage; each stage is independently useful.
   checks authored teaching lines for one sentence, forward references, and current-unit
   vocabulary, then checks step count, step length, single-sentence hints, wall misconception
   coverage, and generated-problem forward references against a curated vocabulary list.
-  Stages A and B's 52 lines are the first two shipped intro increments; later stages remain
-  staged.
+  Stages A through D's 111 lines are the first three shipped intro increments; later stages
+  remain staged.
 - **`SkillProgress` gains two fields** for skipping: `source: 'practiced' | 'tested-out' |
   'self-assessed'` and the existing mastery set to 3. These must survive a **sync round
   trip**, not just file export — sync is now the routine path, so losing them there would

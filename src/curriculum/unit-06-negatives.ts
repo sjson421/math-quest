@@ -116,6 +116,7 @@ const negativesNumberline = defineSkill({
   id: 'negatives-numberline',
   name: 'Below Zero',
   blurb: 'Read values below zero',
+  teachingLine: 'Negative numbers sit to the left of zero on a number line.',
   build: buildNumberline,
 })
 
@@ -185,6 +186,7 @@ const compareNegatives = defineSkill({
   id: 'compare-negatives',
   name: 'Comparing Negatives',
   blurb: '−7 < −3',
+  teachingLine: 'Farther left on the number line means smaller.',
   build: buildCompare,
 })
 
@@ -258,6 +260,7 @@ const addNegPos = defineSkill({
   id: 'add-neg-pos',
   name: 'Negative Plus Positive',
   blurb: '−3 + 5',
+  teachingLine: "With different signs, subtract the sizes and keep the larger size's sign.",
   build: buildAddNegPos,
 })
 
@@ -302,6 +305,7 @@ const addTwoNegs = defineSkill({
   id: 'add-two-negs',
   name: 'Adding Two Negatives',
   blurb: '−3 + −5',
+  teachingLine: 'Add the sizes of two negative numbers, then keep the negative sign.',
   build: buildAddTwoNegs,
 })
 
@@ -388,6 +392,7 @@ const subNegatives = defineSkill({
   id: 'sub-negatives',
   name: 'Subtracting a Negative',
   blurb: '5 − (−3)',
+  teachingLine: "Subtracting a negative is the same as adding its positive size.",
   build: buildSubNegatives,
 })
 
@@ -507,6 +512,7 @@ const multNegatives = defineSkill({
   id: 'mult-negatives',
   name: 'Multiplying Negatives',
   blurb: 'The sign rules',
+  teachingLine: 'When multiplying, matching signs give positive and different signs give negative.',
   build: buildMultNegatives,
 })
 
@@ -546,6 +552,7 @@ const divNegatives = defineSkill({
   id: 'div-negatives',
   name: 'Dividing Negatives',
   blurb: 'The same sign rules',
+  teachingLine: 'When dividing, matching signs give positive and different signs give negative.',
   build: buildDivNegatives,
 })
 
@@ -609,6 +616,7 @@ const absoluteValue = defineSkill({
   id: 'absolute-value',
   name: 'Absolute Value',
   blurb: 'Distance from zero',
+  teachingLine: "Absolute value is a number's distance from zero.",
   build: buildAbsoluteValue,
 })
 
@@ -642,6 +650,7 @@ const negativesMixed = defineSkill({
   id: 'negatives-mixed',
   name: 'Mixed Negatives',
   blurb: 'Interleaved review',
+  teachingLine: 'Choose the operation first, then apply its negative-number rule.',
   build: (context) => context.rng.pick(MIXED_SHAPES)(context),
 })
 

@@ -103,6 +103,7 @@ const fractionMeaning = defineSkill({
   id: 'fraction-meaning',
   name: 'What a Fraction Is',
   blurb: 'Parts of a whole',
+  teachingLine: 'A fraction writes selected equal parts over all equal parts.',
   build(context) {
     const { numerator, denominator } = properFraction(context)
 
@@ -126,6 +127,7 @@ const fractionOfShape = defineSkill({
   id: 'fraction-of-shape',
   name: 'Fractions in Pictures',
   blurb: 'Read a fraction from a diagram',
+  teachingLine: 'Count shaded equal parts over all equal parts in the shape.',
   build(context) {
     const { rng } = context
     const { numerator, denominator } = properFraction(context)
@@ -155,6 +157,7 @@ const nameParts = defineSkill({
   id: 'name-parts',
   name: 'Numerator & Denominator',
   blurb: 'Name the parts of a fraction',
+  teachingLine: "A fraction's top number counts selected parts; its bottom counts all equal parts.",
   build(context) {
     const { rng } = context
     const { numerator, denominator } = properFraction(context)
@@ -187,6 +190,7 @@ const fractionsNumberline = defineSkill({
   id: 'fractions-numberline',
   name: 'Fractions on a Line',
   blurb: 'Place it on a number line',
+  teachingLine: 'Split the space from zero to one into equal parts, then count right.',
   build(context) {
     const { numerator, denominator } = properFraction(context)
 
@@ -242,6 +246,7 @@ const equivalentVisual = defineSkill({
   id: 'equivalent-visual',
   name: 'Same Amount, Different Names',
   blurb: '1/2 = 2/4, seen in a picture',
+  teachingLine: 'Equivalent fractions name the same amount with different equal pieces.',
   build(context) {
     const { rng } = context
     const { numerator, denominator, factor } = equivalentCase(context)
@@ -347,6 +352,7 @@ const equivalentMultiply = defineSkill({
   id: 'equivalent-multiply',
   name: 'Scaling Fractions',
   blurb: 'Scale up and down',
+  teachingLine: 'Multiply or divide both fraction parts by the same number.',
   build(context) {
     const { data, answer, unchanged, changedByOffset } = scaleCase(context)
     const display = scaleNotation(data)
@@ -398,6 +404,7 @@ const simplifyFractions = defineSkill({
   id: 'simplify-fractions',
   name: 'Lowest Terms',
   blurb: 'Simplify a fraction',
+  teachingLine: 'Lowest terms use no shared factor except 1.',
   build(context) {
     const { rng, difficulty } = context
     const base = constrain(
@@ -457,6 +464,7 @@ const compareSameDen = defineSkill({
   id: 'compare-same-den',
   name: 'Comparing Like Fractions',
   blurb: '3/8 or 5/8 — which is more',
+  teachingLine: 'With matching denominators, the larger top number makes the larger fraction.',
   build(context) {
     const { rng, difficulty } = context
     const [min, max] = comparisonDenominatorBand(difficulty)
@@ -510,6 +518,7 @@ const compareDiffDen = defineSkill({
   id: 'compare-diff-den',
   name: 'Comparing Unlike Fractions',
   blurb: '2/3 or 3/5 — which is more',
+  teachingLine: 'Rename both fractions with one shared denominator, then compare their top numbers.',
   build(context) {
     const { rng, difficulty } = context
     const [min, max] = comparisonDenominatorBand(difficulty)

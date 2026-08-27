@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest'
+import { checkTeachingLine } from '../lib/content-rules'
+import { generateProblem } from '../lib/generator'
 import { placement, ticks } from '../lib/number-line'
 import { toNumber } from '../lib/rational'
 import type { Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { format, sample, sweep, unrenderedKeys } from './recorded-output'
 import { unit06 } from './unit-06-negatives'
 
@@ -22,6 +25,84 @@ const shown = (problem: Problem) => {
   if (problem.display.kind !== 'inline') throw new Error('expected an inline problem')
   return problem.display.text
 }
+
+const teachingLines = [
+  ['negatives-numberline', 'Negative numbers sit to the left of zero on a number line.'],
+  ['compare-negatives', 'Farther left on the number line means smaller.'],
+  ['add-neg-pos', "With different signs, subtract the sizes and keep the larger size's sign."],
+  ['add-two-negs', 'Add the sizes of two negative numbers, then keep the negative sign.'],
+  ['sub-negatives', "Subtracting a negative is the same as adding its positive size."],
+  ['mult-negatives', 'When multiplying, matching signs give positive and different signs give negative.'],
+  ['div-negatives', 'When dividing, matching signs give positive and different signs give negative.'],
+  ['absolute-value', "Absolute value is a number's distance from zero."],
+  ['negatives-mixed', 'Choose the operation first, then apply its negative-number rule.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit06.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 6 skill: ${id}`)
+  return found
+}
+
+const answerChoiceLabel = (problem: Problem): string => {
+  if (problem.answer.kind !== 'choice') throw new Error(`Expected choice answer for ${problem.skillId}`)
+  const answerId = problem.answer.id
+  const choice = problem.choices?.find((candidate) => candidate.id === answerId)
+  if (!choice) throw new Error(`Missing answer choice for ${problem.skillId}`)
+  return choice.label
+}
+
+describe('Stage C Unit 6 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = teachingSkill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage C Unit 6 intro examples', () => {
+  it('recomputes every fixed example from visible values', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+
+      if (id === 'compare-negatives') {
+        if (problem.display.kind !== 'inline' || problem.display.wholeNumber?.operation !== 'compare') {
+          throw new Error('expected comparison data')
+        }
+        const { left, right } = problem.display.wholeNumber
+        const relation = left < right ? -1 : 1
+        expect(problem.answer).toEqual({ kind: 'choice', id: String(relation) })
+        expect(answerChoiceLabel(problem)).toBe(left < right ? '<' : '>')
+        expect(new Set(problem.misconceptions?.map(({ tag }) => tag))).toEqual(
+          new Set(['reversed-comparison', 'called-equal']),
+        )
+        continue
+      }
+
+      const value = readDisplay(shown(problem))
+      expect(problem.answer).toEqual({ kind: 'exact', n: value, d: 1 })
+
+      if (id === 'negatives-numberline') {
+        if (!problem.numberLine) throw new Error('expected number line')
+        expect(placement(ticks(problem.numberLine), String(value)).canConfirm).toBe(true)
+      }
+
+      if (id === 'add-neg-pos') {
+        expect(new Set(problem.misconceptions?.map(({ tag }) => tag))).toEqual(
+          new Set(['added-magnitudes', 'wrong-sign']),
+        )
+      }
+      if (id === 'sub-negatives') {
+        const tags = new Set(problem.misconceptions?.map(({ tag }) => tag))
+        expect(tags).toContain('still-subtracted')
+        expect(tags.size).toBe(2)
+      }
+    }
+  })
+})
 
 /**
  * Read a Unit 6 display back, written from scratch.

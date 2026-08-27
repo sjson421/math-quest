@@ -59,6 +59,7 @@ const writeRatios = defineSkill({
   id: 'write-ratios',
   name: 'Writing Ratios',
   blurb: 'Express a comparison',
+  teachingLine: 'A ratio compares two amounts in the requested order.',
   build(context) {
     const [firstLabel, secondLabel] = context.rng.pick(CATEGORY_PAIRS)
     const { first, second } = drawRatioCounts(context)
@@ -99,6 +100,7 @@ const simplifyRatios = defineSkill({
   id: 'simplify-ratios',
   name: 'Simplifying Ratios',
   blurb: 'Reduce to lowest terms',
+  teachingLine: 'Divide both parts of a ratio by their greatest common factor.',
   build(context) {
     const [min, max] = band(context.difficulty, {
       1: [1, 5],
@@ -155,6 +157,7 @@ const unitRate = defineSkill({
   id: 'unit-rate',
   name: 'Unit Rate',
   blurb: 'Which is the better value',
+  teachingLine: 'A unit rate compares cost or amount for exactly one item.',
   build(context) {
     const [minRate, maxRate] = band(context.difficulty, {
       1: [2, 5],
@@ -240,6 +243,7 @@ const solveProportions = defineSkill({
   id: 'solve-proportions',
   name: 'Solving Proportions',
   blurb: 'Cross-multiply',
+  teachingLine: 'In a proportion, cross-multiply, then divide to find the missing value.',
   build(context) {
     const [min, max] = band(context.difficulty, {
       1: [2, 5],
@@ -301,6 +305,7 @@ const scaleDrawings = defineSkill({
   id: 'scale-drawings',
   name: 'Scale Drawings',
   blurb: 'Read a scaled measurement',
+  teachingLine: 'Use the stated scale factor to move between drawing and actual lengths.',
   build(context) {
     const scale = context.rng.int(2, context.difficulty * 3 + 3)
     const multiplier = context.rng.int(context.difficulty + 1, context.difficulty * 5 + 5)
@@ -366,6 +371,7 @@ const unitConversion = defineSkill({
   id: 'unit-conversion',
   name: 'Unit Conversion',
   blurb: 'Convert between units',
+  teachingLine: 'Multiply toward smaller units and divide toward larger units.',
   build(context) {
     const available = CONVERSIONS.slice(0, context.difficulty * 2)
     const conversion = context.rng.pick(available)
@@ -412,6 +418,7 @@ const ratioWords = defineSkill({
   id: 'ratio-words',
   name: 'Ratio Word Problems',
   blurb: 'Spot the ratio',
+  teachingLine: 'Decide whether the ratio compares two parts or one part with the whole.',
   build(context) {
     const { first, second } = drawRatioCounts(context)
     const frame = context.rng.pick(RATIO_FRAMES)

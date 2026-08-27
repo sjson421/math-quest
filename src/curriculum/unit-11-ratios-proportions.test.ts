@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
+import { checkTeachingLine } from '../lib/content-rules'
 import { diagnose, generateProblem } from '../lib/generator'
 import { gcd, rational } from '../lib/rational'
 import type { Difficulty, Problem, RatioData } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit11 } from './unit-11-ratios-proportions'
 import { RATIO_FRAMES, ratioWordText } from './phrasing/ratios'
@@ -33,6 +35,97 @@ const ratioData = (problem: Problem): RatioData => {
   }
   return problem.display.ratio
 }
+
+const teachingLines = [
+  ['write-ratios', 'A ratio compares two amounts in the requested order.'],
+  ['simplify-ratios', 'Divide both parts of a ratio by their greatest common factor.'],
+  ['unit-rate', 'A unit rate compares cost or amount for exactly one item.'],
+  ['solve-proportions', 'In a proportion, cross-multiply, then divide to find the missing value.'],
+  ['scale-drawings', 'Use the stated scale factor to move between drawing and actual lengths.'],
+  ['unit-conversion', 'Multiply toward smaller units and divide toward larger units.'],
+  ['ratio-words', 'Decide whether the ratio compares two parts or one part with the whole.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit11.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 11 skill: ${id}`)
+  return found
+}
+
+const answerChoiceLabel = (problem: Problem): string => {
+  if (problem.answer.kind !== 'choice') throw new Error(`Expected choice answer for ${problem.skillId}`)
+  const answerId = problem.answer.id
+  const choice = problem.choices?.find((candidate) => candidate.id === answerId)
+  if (!choice) throw new Error(`Missing answer choice for ${problem.skillId}`)
+  return choice.label
+}
+
+describe('Stage D Unit 11 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = teachingSkill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage D Unit 11 intro examples', () => {
+  it('recomputes every fixed example from visible ratio quantities', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+      const data = ratioData(problem)
+
+      switch (data.operation) {
+        case 'write-ratio':
+          expect(exact(problem)).toEqual(rational(data.first, data.second))
+          break
+        case 'simplify-ratio':
+          expect(exact(problem)).toEqual(rational(data.first, data.second))
+          expect(problem.answer).toMatchObject({ requireFraction: true, requireSimplified: true })
+          break
+        case 'unit-rate': {
+          const firstRate = data.firstCents / data.firstCount
+          const secondRate = data.secondCents / data.secondCount
+          const answer = firstRate < secondRate ? 'offer-a' : 'offer-b'
+          expect(problem.answer).toEqual({ kind: 'choice', id: answer })
+          expect(answerChoiceLabel(problem)).toBe(answer === 'offer-a' ? 'Offer A' : 'Offer B')
+          break
+        }
+        case 'solve-proportion':
+          expect(exact(problem)).toEqual(rational(data[data.missing], 1))
+          break
+        case 'scale-drawing':
+          expect(exact(problem)).toEqual(
+            rational(
+              data.direction === 'drawing-to-actual' ? data.given * data.scale : data.given,
+              data.direction === 'drawing-to-actual' ? 1 : data.scale,
+            ),
+          )
+          break
+        case 'unit-conversion':
+          expect(exact(problem)).toEqual(
+            rational(
+              data.direction === 'large-to-small' ? data.given * data.factor : data.given,
+              data.direction === 'large-to-small' ? 1 : data.factor,
+            ),
+          )
+          break
+        case 'ratio-word': {
+          const whole = data.first + data.second
+          const denominator = data.comparison === 'part-to-part' ? data.second : whole
+          expect(exact(problem)).toEqual(rational(data.first, denominator))
+          break
+        }
+        default: {
+          const unhandled: never = data
+          throw new Error(`Unhandled Unit 11 intro: ${JSON.stringify(unhandled)}`)
+        }
+      }
+    }
+  })
+})
 
 const exact = (problem: Problem) => {
   if (problem.answer.kind !== 'exact') throw new Error('expected exact answer')

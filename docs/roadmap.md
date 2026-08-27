@@ -1124,7 +1124,15 @@ shows before a lesson's first problem.
         derives Stage B from the manifest, checks all 52 Stage A/B lines, and pins Unit 4's four
         current vocabulary terms. The 375-by-812 browser gate covers all 44 intros; no new
         capability, renderer, dependency, or progress field was needed.
-      - **25c** Stages C and D — 57 skills, and the first intros carrying a diagram.
+      - **25c** Stages C and D — 59 skills — **shipped 2026-08-26**. The manifest-authoritative
+        nine Stage C and 50 Stage D skills now carry reviewed one-sentence teaching lines beside
+        their generators. Their fixed difficulty-1 examples remain generated through the shared
+        renderer, including Unit 7's diagrams, with independent visible-data answer checks and
+        unchanged prompts, answers, solutions, wall diagnoses, lesson behavior, and progress
+        state. Coverage derives the 59 ids from the manifest, checks all 111 Stage A–D lines,
+        and pins the six current-unit vocabulary sequences. The focused suites, full test,
+        build, lint, and 375-by-812 browser gate cover the complete increment; no new capability,
+        renderer, dependency, or progress field was needed.
       - **25d** Stages E and F — 62 skills, the notation- and plane-heavy end of what is built.
 
       **Stages G and H carry their own**, rather than waiting for a fifth increment here: from

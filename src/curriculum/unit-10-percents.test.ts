@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem, diagnose } from '../lib/generator'
 import { rational } from '../lib/rational'
 import type { Difficulty, PercentData, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit10 } from './unit-10-percents'
 
@@ -54,6 +56,105 @@ const meanAt = (id: string, difficulty: Difficulty, value: (data: PercentData) =
     .map((problem) => value(storyPercent(problem)))
   return values.reduce((sum, entry) => sum + entry, 0) / values.length
 }
+
+const teachingLines = [
+  ['percent-meaning', 'A percent tells how many parts out of 100.'],
+  ['percent-to-decimal', 'Divide a percent by 100, moving the decimal point two places left.'],
+  ['decimal-to-percent', 'Multiply a decimal by 100 to write its percent.'],
+  ['percent-to-fraction', 'Write the percent over 100, then reduce the fraction.'],
+  ['percent-of', 'Multiply the quantity by the percent written as a decimal.'],
+  ['find-the-percent', 'Divide the part by the whole, then multiply by 100.'],
+  ['find-the-whole', 'Divide the part by the percent written as a decimal.'],
+  ['percent-change', 'Divide the change by the original amount, then multiply by 100.'],
+  ['discount-tax-tip', 'Find the percent amount, then add or subtract it from the price.'],
+  ['simple-interest', 'Use I = Prt, writing the percent rate as a decimal.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit10.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 10 skill: ${id}`)
+  return found
+}
+
+describe('Stage D Unit 10 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = teachingSkill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage D Unit 10 intro examples', () => {
+  it('recomputes every fixed example from visible percent relationships', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+
+      if (id === 'percent-meaning' || id === 'percent-to-decimal' || id === 'percent-to-fraction') {
+        const match = /^(\d+)%$|^(\d+) out of 100$/.exec(inlineText(problem))
+        const percent = Number(match?.[1] ?? match?.[2])
+        expect(percent).toBeGreaterThan(0)
+        if (id === 'percent-meaning') expect(exact(problem)).toEqual(rational(percent, 1))
+        else expect(exact(problem)).toEqual(rational(percent, 100))
+        if (id === 'percent-to-fraction') expect(problem.answer).toMatchObject({ requireSimplified: true })
+        continue
+      }
+
+      if (id === 'decimal-to-percent') {
+        if (problem.display.kind !== 'inline' || problem.display.decimal?.operation !== 'to-percent') {
+          throw new Error('expected decimal-to-percent data')
+        }
+        const { value } = problem.display.decimal
+        expect(exact(problem)).toEqual(rational(value.coefficient * 100, 10 ** value.scale))
+        continue
+      }
+
+      if (id === 'percent-of') {
+        const match = /^(\d+)% of (\d+)$/.exec(inlineText(problem))
+        if (!match) throw new Error('expected percent-of display')
+        const [, percent, quantity] = match.map(Number)
+        expect(exact(problem)).toEqual(rational(percent * quantity, 100))
+        continue
+      }
+
+      const data = storyPercent(problem)
+      switch (data.operation) {
+        case 'find-percent':
+          expect(exact(problem)).toEqual(rational(data.part * 100, data.whole))
+          break
+        case 'find-whole':
+          expect(exact(problem)).toEqual(rational(data.part * 100, data.percent))
+          break
+        case 'percent-change':
+          expect(exact(problem)).toEqual(
+            rational(Math.abs(data.current - data.original) * 100, data.original),
+          )
+          break
+        case 'discount':
+        case 'tax':
+        case 'tip': {
+          const adjustment = data.baseCents * data.percent / 100
+          const final = data.operation === 'discount'
+            ? data.baseCents - adjustment
+            : data.baseCents + adjustment
+          expect(exact(problem)).toEqual(rational(final, 100))
+          break
+        }
+        case 'simple-interest':
+          expect(exact(problem)).toEqual(
+            rational(data.principalCents * data.percent * data.years, 100 * 100),
+          )
+          break
+        default: {
+          const unhandled: never = data
+          throw new Error(`Unhandled Unit 10 intro: ${JSON.stringify(unhandled)}`)
+        }
+      }
+    }
+  })
+})
 
 const expectDiagnosable = (problem: Problem, tag: string, expectedValue: number) => {
   const misconception = problem.misconceptions?.find((entry) => entry.tag === tag)
