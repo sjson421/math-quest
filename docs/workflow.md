@@ -36,10 +36,10 @@ The roadmap-to-main workflow runs across three separate skill sessions:
   Requirements` against one of these; `## ADDED` is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Sixty changes have
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Sixty-one changes have
   shipped — `ls openspec/changes/archive/` is the authority, and this line has run one behind
-  before; the latest archive is `2026-08-26-add-stage-c-d-skill-intros`. It completes roadmap
-  item 25c's Stage C and D intros, and Stage G's content remains planned.
+  before; the latest archive is `2026-08-27-add-stage-e-f-skill-intros`. It completes roadmap
+  item 25d's Stage E and F intros, and Stage G's content remains planned.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the

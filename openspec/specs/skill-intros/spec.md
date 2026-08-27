@@ -96,6 +96,11 @@ a 375-by-812-pixel viewport without horizontal or page overflow. Diagram-based e
 render through the same accessible diagram markup used by practice problems and SHALL remain
 complete at that viewport.
 
+Every Stage E and Stage F intro SHALL keep the same complete content and actions readable at
+a 375-by-812-pixel viewport without horizontal or page overflow. Notation, equation,
+coordinate-plane, expression-answer, and root-pair examples SHALL render through the same
+accessible markup used by practice problems and SHALL remain complete at that viewport.
+
 #### Scenario: An intro is not an answer surface
 
 - **WHEN** a worked example is shown
@@ -127,3 +132,14 @@ complete at that viewport.
 - **WHEN** a Stage D intro presents a generated diagram example
 - **THEN** the full diagram remains readable as accessible markup
 - **AND** the intro adds no second diagram renderer or interactive answer surface
+
+#### Scenario: Stages E and F fit the installed phone surface
+
+- **WHEN** each of the 62 Stage E and Stage F intros is exercised at 375 by 812 pixels
+- **THEN** its complete content and actions remain readable without horizontal or page overflow
+
+#### Scenario: Advanced examples keep their practice representation
+
+- **WHEN** a Stage E or Stage F intro presents notation, an equation, a coordinate plane, an expression answer, or a root pair
+- **THEN** the full representation remains readable as accessible markup
+- **AND** the intro adds no second renderer or interactive answer surface

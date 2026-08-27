@@ -11,22 +11,29 @@ sampled problems rather than by reading source.
 
 ## Requirements
 
-### Requirement: Learner-facing text stays within authoring limits
+### Requirement: Learner-facing text stays within complete authoring limits
 
-Every generated problem SHALL continue to satisfy the fixed hint and solution limits below. A skill whose roadmap intro increment has shipped SHALL also carry exactly one authored teaching line and present exactly one generated worked example. During the staged 25a–25d rollout, a playable generator outside the completed intro increments MAY omit the teaching line and SHALL keep its existing lesson flow rather than presenting an empty intro.
+Every generated problem SHALL continue to satisfy the fixed hint and solution limits below.
+Every playable generator SHALL also carry exactly one authored teaching line and present
+exactly one generated worked example. A newly playable generator SHALL NOT omit its teaching
+line or fall back to a problem-first lesson.
 
 Limits per skill:
 
 | Element | Limit |
 |---|---|
-| Teaching line | exactly 1 when the skill's intro has shipped; 1 sentence |
-| Worked example | exactly 1 when the skill's intro has shipped |
+| Teaching line | exactly 1; 1 sentence |
+| Worked example | exactly 1 |
 | Hint | 1 sentence |
 | Solution steps | at most 4 |
 | Words per solution step | at most 12 |
 | New vocabulary words | at most 1 per teaching line |
 
-Teaching lines are fixed authored sources, so their checks SHALL run directly over every required generator rather than rely on generated-problem sampling. The same curated vocabulary authority used for forward references SHALL reject a later-unit term and SHALL count terms introduced in the current unit, rejecting a teaching line that introduces more than one.
+Teaching lines are fixed authored sources, so their checks SHALL run directly over every
+playable generator rather than rely on generated-problem sampling. The same curated
+vocabulary authority used for forward references SHALL reject a later-unit term and SHALL
+count terms introduced in the current unit, rejecting a teaching line that introduces more
+than one.
 
 #### Scenario: Solution step count is enforced
 
@@ -40,7 +47,7 @@ Teaching lines are fixed authored sources, so their checks SHALL run directly ov
 
 #### Scenario: Hint is a single sentence
 
-- **WHEN** a generator produces a hint containing more than one sentence
+- **WHEN** a generator produces a problem with a hint containing more than one sentence
 - **THEN** the content check fails
 
 #### Scenario: Every problem carries a hint and a solution
@@ -51,7 +58,7 @@ Teaching lines are fixed authored sources, so their checks SHALL run directly ov
 
 #### Scenario: A required teaching line is checked at its source
 
-- **WHEN** a generator in a completed intro increment has an empty or multi-sentence teaching line
+- **WHEN** a playable generator has an empty or multi-sentence teaching line
 - **THEN** the content check fails and names the skill and teaching-line rule
 
 #### Scenario: A teaching line introduces too much vocabulary
@@ -59,10 +66,11 @@ Teaching lines are fixed authored sources, so their checks SHALL run directly ov
 - **WHEN** a teaching line contains more than one curated term introduced in that skill's unit
 - **THEN** the content check fails and names the terms
 
-#### Scenario: A later increment is not forced forward
+#### Scenario: A future playable generator cannot omit teaching content
 
-- **WHEN** a playable skill is outside the intro increments completed so far
-- **THEN** the teaching-line presence gate does not fail for that skill
+- **WHEN** a generator is added for a planned Stage G or Stage H skill
+- **THEN** its declaration requires one authored teaching line
+- **AND** its lesson presents the existing stable worked example before first practice
 
 ### Requirement: Solution steps show their arithmetic
 
