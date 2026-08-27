@@ -91,6 +91,11 @@ Every Stage A intro SHALL keep its teaching line, example, answer, worked steps,
 Every Stage B intro SHALL keep the same complete content and actions readable at a
 375-by-812-pixel viewport without horizontal or page overflow.
 
+Every Stage C and Stage D intro SHALL keep the same complete content and actions readable at
+a 375-by-812-pixel viewport without horizontal or page overflow. Diagram-based examples SHALL
+render through the same accessible diagram markup used by practice problems and SHALL remain
+complete at that viewport.
+
 #### Scenario: An intro is not an answer surface
 
 - **WHEN** a worked example is shown
@@ -111,3 +116,14 @@ Every Stage B intro SHALL keep the same complete content and actions readable at
 
 - **WHEN** each of the 44 Stage B intros is exercised at 375 by 812 pixels
 - **THEN** its complete content and actions remain readable without horizontal or page overflow
+
+#### Scenario: Stages C and D fit the installed phone surface
+
+- **WHEN** each of the 59 Stage C and Stage D intros is exercised at 375 by 812 pixels
+- **THEN** its complete content and actions remain readable without horizontal or page overflow
+
+#### Scenario: A diagram intro keeps the practice representation
+
+- **WHEN** a Stage D intro presents a generated diagram example
+- **THEN** the full diagram remains readable as accessible markup
+- **AND** the intro adds no second diagram renderer or interactive answer surface
