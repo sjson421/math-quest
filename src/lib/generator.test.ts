@@ -49,6 +49,7 @@ function skillPredicting(misconceptions: Misconception[], answer = 12): SkillGen
     id: 'synthetic',
     name: 'Synthetic',
     blurb: 'For testing the filter',
+    teachingLine: 'A synthetic line teaches one idea.',
     generate(_rng, difficulty) {
       return {
         skillId: 'synthetic',
@@ -92,6 +93,7 @@ function pointSkill(
     id: 'synthetic-point',
     name: 'Synthetic Point',
     blurb: 'For testing point input',
+    teachingLine: 'A synthetic line teaches one idea.',
     generate(_rng, difficulty) {
       return {
         skillId: 'synthetic-point',
@@ -121,6 +123,7 @@ function rootPairSkill(misconceptions: Misconception[]): SkillGenerator {
     id: 'synthetic-root-pair',
     name: 'Synthetic Root Pair',
     blurb: 'For testing root pairs',
+    teachingLine: 'A synthetic line teaches one idea.',
     generate(_rng, difficulty) {
       return {
         skillId: 'synthetic-root-pair',

@@ -29,6 +29,7 @@ const skillNeeding = (
   id,
   name: 'Synthetic',
   blurb: 'For testing the wiring',
+  teachingLine: '',
   generate: (_rng, difficulty) => {
     generated?.push(difficulty)
     return {
@@ -58,6 +59,7 @@ const choiceSkill: SkillGenerator = {
   id: 'synthetic-choice',
   name: 'Synthetic Choice',
   blurb: 'For testing choice wiring',
+  teachingLine: '',
   generate: (_rng, difficulty) => ({
     skillId: 'synthetic-choice',
     prompt: 'How do these compare?',
@@ -75,6 +77,7 @@ const numberLineSkill: SkillGenerator = {
   id: 'synthetic-number-line',
   name: 'Synthetic Number Line',
   blurb: 'For testing number-line wiring',
+  teachingLine: '',
   generate: (_rng, difficulty) => ({
     skillId: 'synthetic-number-line',
     prompt: 'Where does −3 sit?',
@@ -92,6 +95,7 @@ const diagramSkill: SkillGenerator = {
   id: 'synthetic-diagram',
   name: 'Synthetic Diagram',
   blurb: 'For testing diagram wiring',
+  teachingLine: '',
   generate: (_rng, difficulty) => ({
     skillId: 'synthetic-diagram',
     prompt: 'What fraction is shaded?',
@@ -125,6 +129,7 @@ const chartKeypadSkill: SkillGenerator = {
   id: 'synthetic-chart-keypad',
   name: 'Synthetic Chart Keypad',
   blurb: 'For testing chart keypad wiring',
+  teachingLine: '',
   generate: (_rng, difficulty) => ({
     skillId: 'synthetic-chart-keypad',
     prompt: 'What value appears in February?',
@@ -141,6 +146,7 @@ const chartChoiceSkill: SkillGenerator = {
   id: 'synthetic-chart-choice',
   name: 'Synthetic Chart Choice',
   blurb: 'For testing chart choice wiring',
+  teachingLine: '',
   generate: (_rng, difficulty) => ({
     skillId: 'synthetic-chart-choice',
     prompt: 'Which month is highest?',
@@ -162,6 +168,7 @@ const coordinatePlaneChoiceSkill: SkillGenerator = {
   id: 'synthetic-coordinate-plane-choice',
   name: 'Synthetic Coordinate Plane Choice',
   blurb: 'For testing graph wiring',
+  teachingLine: '',
   generate: (_rng, difficulty) => ({
     skillId: 'synthetic-coordinate-plane-choice',
     prompt: 'How does this line move?',
@@ -187,6 +194,7 @@ const coordinatePlaneInputSkill: SkillGenerator = {
   id: 'synthetic-coordinate-plane-input',
   name: 'Synthetic Coordinate Plane Input',
   blurb: 'For testing point wiring',
+  teachingLine: '',
   generate: (_rng, difficulty) => ({
     skillId: 'synthetic-coordinate-plane-input',
     prompt: 'Plot (3, 2).',
@@ -211,6 +219,7 @@ const expressionSkill = (maxDegree?: 2): SkillGenerator => ({
   id: 'synthetic-expression',
   name: 'Synthetic Expression',
   blurb: 'For testing expression wiring',
+  teachingLine: '',
   generate: (_rng, difficulty) => ({
     skillId: 'synthetic-expression',
     prompt: 'Write the expression.',
@@ -233,6 +242,7 @@ const rootPairSkill: SkillGenerator = {
   id: 'synthetic-root-pair',
   name: 'Synthetic Root Pair',
   blurb: 'For testing root input',
+  teachingLine: '',
   generate: (_rng, difficulty) => ({
     skillId: 'synthetic-root-pair',
     prompt: 'Find both roots.',

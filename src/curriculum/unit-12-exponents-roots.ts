@@ -54,6 +54,7 @@ const exponentMeaning = defineSkill({
   id: 'exponent-meaning',
   name: 'What an Exponent Is',
   blurb: 'Repeated multiplication',
+  teachingLine: 'An exponent tells how many times to use the base as a factor.',
   build(context) {
     const [baseMin, baseMax] = band(context.difficulty, BASE_BAND)
     const [expMin, expMax] = band(context.difficulty, EXPONENT_BAND)
@@ -84,6 +85,7 @@ const evaluatePowers = defineSkill({
   id: 'evaluate-powers',
   name: 'Evaluating Powers',
   blurb: 'Work out a power',
+  teachingLine: 'A power uses its base as a factor as many times as the exponent says.',
   build(context) {
     const [baseMin, baseMax] = band(context.difficulty, BASE_BAND)
     const [expMin, expMax] = band(context.difficulty, EXPONENT_BAND)
@@ -146,6 +148,7 @@ const perfectSquares = defineSkill({
   id: 'perfect-squares',
   name: 'Perfect Squares',
   blurb: 'Squares and roots to 144',
+  teachingLine: 'Squaring a number multiplies it by itself; finding a square root reverses that.',
   build(context) {
     const [min, max] = band(context.difficulty, SQUARE_BAND)
     const n = context.rng.int(min, max)
@@ -197,6 +200,7 @@ const estimateRoots = defineSkill({
   id: 'estimate-roots',
   name: 'Estimating Roots',
   blurb: 'Between which whole numbers',
+  teachingLine: 'Compare nearby whole-number squares to find which two the root lies between.',
   build(context) {
     const [min, max] = band(context.difficulty, ROOT_ESTIMATE_BAND)
     const n = context.rng.int(min, max)
@@ -290,6 +294,7 @@ const exponentMultiply = defineSkill({
   id: 'exponent-multiply',
   name: 'Multiplying Powers',
   blurb: 'Add the exponents',
+  teachingLine: 'For matching bases multiplied together, add the exponents.',
   build(context) {
     const { base, leftExponent, rightExponent, answer, data, notation, label } =
       buildPowerCombine(context, 'power-multiply')
@@ -318,6 +323,7 @@ const exponentDivide = defineSkill({
   id: 'exponent-divide',
   name: 'Dividing Powers',
   blurb: 'Subtract the exponents',
+  teachingLine: 'For matching bases divided, subtract the second exponent from the first.',
   build(context) {
     const { base, leftExponent, rightExponent, answer, data, notation, label } =
       buildPowerCombine(context, 'power-divide')
@@ -354,6 +360,7 @@ const powerOfPower = defineSkill({
   id: 'power-of-power',
   name: 'Power of a Power',
   blurb: 'Multiply the exponents',
+  teachingLine: 'When a power is raised again, multiply the two exponents.',
   build(context) {
     const [baseMin, baseMax] = band(context.difficulty, MD_BASE_BAND)
     const [exponentMin, exponentMax] = band(context.difficulty, POWER_OF_POWER_EXPONENT_BAND)
@@ -430,6 +437,7 @@ const zeroNegExponents = defineSkill({
   id: 'zero-neg-exponents',
   name: 'Zero & Negative Exponents',
   blurb: 'What they stand for',
+  teachingLine: 'A zero exponent gives 1; a negative exponent gives one over the positive power.',
   build(context) {
     const [baseMin, baseMax] = band(context.difficulty, ZERO_NEG_BASE_BAND)
     const base = context.rng.int(baseMin, baseMax)
@@ -520,6 +528,7 @@ const scientificNotation = defineSkill({
   id: 'scientific-notation',
   name: 'Scientific Notation',
   blurb: 'Powers of ten as shorthand',
+  teachingLine: 'A positive exponent moves the decimal right; a negative exponent moves it left.',
   build(context) {
     const [magnitudeMin, magnitudeMax] = band(context.difficulty, SCIENTIFIC_EXPONENT_BAND)
     const magnitude = context.rng.int(magnitudeMin, magnitudeMax)
@@ -599,6 +608,7 @@ const pemdasExponents = defineSkill({
   id: 'pemdas-exponents',
   name: 'Order of Operations with Exponents',
   blurb: 'The full rule',
+  teachingLine: 'Evaluate parentheses first, then powers, multiplication or division, and addition or subtraction.',
   build(context) {
     const [termMin, termMax] = band(context.difficulty, PEMDAS_TERM_BAND)
     const exponent = context.rng.int(2, context.difficulty >= 4 ? 3 : 2)

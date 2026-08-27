@@ -56,7 +56,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
 
   const baseDifficulty = difficultyFor(progress.skills[skill.id]?.mastery ?? 0)
   const targetCorrect = lessonTarget(skillById.get(skill.id)?.quick)
-  const introNeeded = skill.teachingLine !== undefined && progress.skills[skill.id]?.introSeen !== true
+  const introNeeded = Boolean(skill.teachingLine) && progress.skills[skill.id]?.introSeen !== true
 
   // The lazy initializer runs once, so the seed stream is fresh per lesson and
   // remains stable across renders without reading mutable refs during render.

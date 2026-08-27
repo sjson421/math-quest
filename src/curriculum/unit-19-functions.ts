@@ -50,6 +50,7 @@ const functionNotation = defineSkill({
   id: 'function-notation',
   name: 'Function Notation',
   blurb: 'f(x) is not multiplication',
+  teachingLine: 'Function notation shows an input inside parentheses and its output after the equals sign.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const { input, output } = constrain(
@@ -104,6 +105,7 @@ const evaluateFunction = defineSkill({
   id: 'evaluate-function',
   name: 'Evaluating a Function',
   blurb: 'Substitute into f(x)',
+  teachingLine: 'Replace x with the given input, then calculate the output.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const draw = constrain(
@@ -188,6 +190,7 @@ const domainRange = defineSkill({
   id: 'domain-range',
   name: 'Domain & Range',
   blurb: 'Inputs and outputs',
+  teachingLine: 'The domain contains every input; the range contains every distinct output.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const count = difficulty <= 2 ? 3 : difficulty <= 4 ? 4 : 5
@@ -242,6 +245,7 @@ const linearVsNonlinear = defineSkill({
   id: 'linear-vs-nonlinear',
   name: 'Linear or Not',
   blurb: 'Tell the two apart',
+  teachingLine: 'A relationship is linear when its rate of change stays constant.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const count = difficulty <= 2 ? 3 : difficulty <= 4 ? 4 : 5
@@ -284,6 +288,7 @@ const compareFunctions = defineSkill({
   id: 'compare-functions',
   name: 'Comparing Functions',
   blurb: 'Table, graph, or equation',
+  teachingLine: 'Compare matching rates of change or starting values across all three forms.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const asks: 'slope' | 'intercept' = rng.bool() ? 'slope' : 'intercept'

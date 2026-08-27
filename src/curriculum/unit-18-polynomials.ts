@@ -98,6 +98,7 @@ const addPolynomials = defineSkill({
   id: 'add-polynomials',
   name: 'Adding Polynomials',
   blurb: 'Combine the like terms',
+  teachingLine: 'Add polynomials by combining number parts on terms with the same power.',
   build(context: BuildContext) {
     const left = drawCoefficients(context)
     const right = drawCoefficients(context)
@@ -188,6 +189,7 @@ const subPolynomials = defineSkill({
   id: 'sub-polynomials',
   name: 'Subtracting Polynomials',
   blurb: 'Distribute the minus first',
+  teachingLine: "Subtract a polynomial by changing every term's sign before combining.",
   build(context: BuildContext) {
     const { left, right } = drawSubtractionSources(context)
     const answerCoefficients = subtractCoefficients(left, right)
@@ -241,6 +243,7 @@ const multMonomial = defineSkill({
   id: 'mult-monomial',
   name: 'Multiplying by a Monomial',
   blurb: 'Distribute a single term',
+  teachingLine: 'Multiply the outside term by every term inside the brackets.',
   build(context: BuildContext) {
     const [innerMin, innerMax] = band(context.difficulty, ARITHMETIC_BAND)
     const [outerMin, outerMax] = band(context.difficulty, OUTER_BAND)
@@ -294,6 +297,7 @@ const foil = defineSkill({
   id: 'foil',
   name: 'FOIL',
   blurb: 'Multiply two binomials',
+  teachingLine: 'Multiply each term in one binomial by each term in the other.',
   build(context: BuildContext) {
     const [min, max] = band(context.difficulty, FOIL_BAND)
     const leftMagnitude = context.rng.int(min, max - 1)
@@ -350,6 +354,7 @@ const factorGcfPoly = defineSkill({
   id: 'factor-gcf-poly',
   name: 'Factoring a Polynomial',
   blurb: 'Take out the common factor',
+  teachingLine: 'Take the shared number and x outside, then divide each term by both.',
   build(context: BuildContext) {
     const [factorMin, factorMax] = band(context.difficulty, FACTOR_BAND)
     const [innerMin, innerMax] = band(context.difficulty, GCF_INNER_BAND)
@@ -438,6 +443,7 @@ const factorTrinomial = defineSkill({
   id: 'factor-trinomial',
   name: 'Factoring Trinomials',
   blurb: 'Find the pair that works',
+  teachingLine: 'Find two numbers whose product is the last term and whose sum is the middle number.',
   build(context: BuildContext) {
     const frames = FACTOR_FRAMES.filter((frame) => frame.difficulty === context.difficulty)
     const frame = context.rng.pick(frames)
@@ -499,6 +505,7 @@ const differenceOfSquares = defineSkill({
   id: 'difference-of-squares',
   name: 'Difference of Squares',
   blurb: 'A pattern worth recognising',
+  teachingLine: 'Two squares subtracted factor into matching brackets with opposite signs.',
   build(context: BuildContext) {
     const [min, max] = band(context.difficulty, SQUARE_ROOT_BAND)
     const squareRoot = context.rng.int(min, max)
@@ -551,6 +558,7 @@ const solveByFactoring = defineSkill({
   id: 'solve-by-factoring',
   name: 'Solving by Factoring',
   blurb: 'The zero product rule',
+  teachingLine: 'Set each factor equal to zero; every result is a root.',
   build(context: BuildContext) {
     const [min, max] = band(context.difficulty, FACTORED_ZERO_BAND)
     const firstMagnitude = context.rng.int(min, max)
@@ -728,6 +736,7 @@ const quadraticFormula = defineSkill({
   id: 'quadratic-formula',
   name: 'The Quadratic Formula',
   blurb: 'Substitute into the formula',
+  teachingLine: 'Substitute a, b, and c into the supplied quadratic formula, then use both signs.',
   build(context: BuildContext) {
     const frame = quadraticFrame(context)
     const { a, b, c, discriminantRoot, roots } = frame

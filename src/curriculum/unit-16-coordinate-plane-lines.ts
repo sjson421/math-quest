@@ -55,6 +55,7 @@ const plotPoints = defineSkill({
   id: 'plot-points',
   name: 'Plotting Points',
   blurb: 'Place a point on the grid',
+  teachingLine: 'In an ordered pair, the first coordinate moves left or right and the second moves up or down.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const target = rng.pick(nonAxisPoints(reach).filter((point) => point.x !== point.y))
@@ -112,6 +113,7 @@ const quadrants = defineSkill({
   id: 'quadrants',
   name: 'Quadrants',
   blurb: 'Name the four regions',
+  teachingLine: 'A quadrant is one of four regions named counterclockwise from the upper right.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const point = rng.pick(nonAxisPoints(reach))
@@ -185,6 +187,7 @@ const tableToGraph = defineSkill({
   id: 'table-to-graph',
   name: 'Table to Graph',
   blurb: 'Plot a table of values',
+  teachingLine: 'Each table row gives one point to place on the graph.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const { rows, targetIndex } = rng.pick(tableDraws(reach))
@@ -316,6 +319,7 @@ const slopeFromGraph = defineSkill({
   id: 'slope-from-graph',
   name: 'Slope from a Graph',
   blurb: 'Rise over run',
+  teachingLine: 'Slope is vertical change divided by horizontal change between two points.',
   build(context) {
     return slopeProblem(context, 'slope-from-graph')
   },
@@ -325,6 +329,7 @@ const slopeFromPoints = defineSkill({
   id: 'slope-from-points',
   name: 'Slope from Two Points',
   blurb: 'Use the formula',
+  teachingLine: 'Find slope by subtracting both pairs in the same point order.',
   build(context) {
     return slopeProblem(context, 'slope-from-points')
   },
@@ -360,6 +365,7 @@ const yIntercept = defineSkill({
   id: 'y-intercept',
   name: 'Y-Intercept',
   blurb: 'Where the line crosses',
+  teachingLine: 'The y-intercept is where a line crosses the vertical axis.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const draw = rng.pick(interceptDraws(reach))
@@ -524,6 +530,7 @@ const slopeIntercept = defineSkill({
   id: 'slope-intercept',
   name: 'Slope-Intercept Form',
   blurb: 'y = mx + b',
+  teachingLine: 'In y = mx + b, m gives rise over run and b gives the vertical crossing.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const draw = rng.pick(integerLineDraws(reach, 'general'))
@@ -573,6 +580,7 @@ const graphFromEquation = defineSkill({
   id: 'graph-from-equation',
   name: 'Graphing an Equation',
   blurb: 'Choose the matching line',
+  teachingLine: 'Use b for the vertical crossing, then m for rise over run.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const draw = rng.pick(integerLineDraws(reach, 'graph-choice'))
@@ -617,6 +625,7 @@ const equationFromGraph = defineSkill({
   id: 'equation-from-graph',
   name: 'Equation from a Graph',
   blurb: 'Read off the slope and intercept',
+  teachingLine: "Read the vertical crossing and rise over run to write the line's rule.",
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const draw = rng.pick(integerLineDraws(reach, 'general'))
@@ -660,6 +669,7 @@ const parallelPerpendicular = defineSkill({
   id: 'parallel-perpendicular',
   name: 'Parallel & Perpendicular',
   blurb: 'Negative reciprocal slopes',
+  teachingLine: 'Parallel lines keep the same slope; perpendicular lines use its negative reciprocal.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const draw = rng.pick(rationalLineDraws(reach))

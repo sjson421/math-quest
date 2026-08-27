@@ -105,6 +105,7 @@ const systemByGraphing = defineSkill({
   id: 'system-by-graphing',
   name: 'Systems by Graphing',
   blurb: 'Where two lines meet',
+  teachingLine: 'The point where both lines meet solves both equations.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const draw = rng.pick(graphDraws(reach))
@@ -167,6 +168,7 @@ const substitution = defineSkill({
   id: 'substitution',
   name: 'Substitution',
   blurb: 'Replace one variable',
+  teachingLine: 'Replace an isolated letter with its equal expression in the other equation.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const draw = rng.pick(substitutionDraws(reach))
@@ -314,6 +316,7 @@ const elimination = defineSkill({
   id: 'elimination',
   name: 'Elimination',
   blurb: 'Cancel a variable out',
+  teachingLine: 'Scale every term in one equation, then add or subtract to cancel one letter.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const draw = rng.pick(eliminationDraws(reach))
@@ -362,6 +365,7 @@ const systemWords = defineSkill({
   id: 'system-words',
   name: 'System Word Problems',
   blurb: 'Build two equations',
+  teachingLine: 'Translate total count and total value into two equations, then solve them together.',
   build({ rng, difficulty }: BuildContext) {
     const reach = REACH[difficulty]
     const target = rng.pick(targetPoints(reach, true))

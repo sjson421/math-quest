@@ -1,11 +1,13 @@
 import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
 import { canonicalForm } from '../lib/expression'
+import { checkTeachingLine } from '../lib/content-rules'
 import { diagnose, generateProblem } from '../lib/generator'
 import { applyExpressionKey, applyKey } from '../lib/keypad'
 import { format as formatRational, gcd, rational } from '../lib/rational'
 import { encodeRootPairEntry, rootPairsEqual } from '../lib/root-pair'
 import type { Difficulty, PolynomialData, Problem, RootPairValue } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit18 } from './unit-18-polynomials'
 
@@ -189,6 +191,64 @@ const rootEntry = (problem: Problem, pair: RootPairValue, reverse = false): stri
   }) as [string, string]
   return encodeRootPairEntry(typed)
 }
+
+const teachingLines = [
+  ['add-polynomials', 'Add polynomials by combining number parts on terms with the same power.'],
+  ['sub-polynomials', "Subtract a polynomial by changing every term's sign before combining."],
+  ['mult-monomial', 'Multiply the outside term by every term inside the brackets.'],
+  ['foil', 'Multiply each term in one binomial by each term in the other.'],
+  ['factor-gcf-poly', 'Take the shared number and x outside, then divide each term by both.'],
+  ['factor-trinomial', 'Find two numbers whose product is the last term and whose sum is the middle number.'],
+  ['difference-of-squares', 'Two squares subtracted factor into matching brackets with opposite signs.'],
+  ['solve-by-factoring', 'Set each factor equal to zero; every result is a root.'],
+  ['quadratic-formula', 'Substitute a, b, and c into the supplied quadratic formula, then use both signs.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit18.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 18 skill: ${id}`)
+  return found
+}
+
+describe('Stage F Unit 18 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    const generator = teachingSkill(id)
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage F Unit 18 intro examples', () => {
+  it('recomputes every fixed expression or root pair from polynomial data', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+      const data = polynomialOf(problem)
+
+      if (data.operation === 'factored-zero') {
+        const expected: RootPairValue = {
+          kind: 'root-pair',
+          roots: [rational(-data.firstConstant, 1), rational(-data.secondConstant, 1)],
+        }
+        expect(rootPairsEqual(rootAnswerOf(problem), expected)).toBe(true)
+      } else if (data.operation === 'quadratic-formula') {
+        const squareRoot = Math.sqrt(data.b * data.b - 4 * data.a * data.c)
+        const expected: RootPairValue = {
+          kind: 'root-pair',
+          roots: [
+            rational(-data.b - squareRoot, 2 * data.a),
+            rational(-data.b + squareRoot, 2 * data.a),
+          ],
+        }
+        expect(rootPairsEqual(rootAnswerOf(problem), expected)).toBe(true)
+      } else {
+        expect(checkAnswer(problem.answer, polynomialAnswer(data))).toEqual({ status: 'correct' })
+      }
+    }
+  })
+})
 
 describe.each(unit18.map((skill) => [skill.id, skill] as const))('Unit 18 recorded output: %s', (_id, skill) => {
   it('matches the wording recorded when the skill landed', () => {

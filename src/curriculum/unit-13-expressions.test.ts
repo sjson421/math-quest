@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
 import { coordinateEntry } from '../lib/coordinate-plane'
+import { checkTeachingLine } from '../lib/content-rules'
 import { diagnose, generateProblem } from '../lib/generator'
 import { applyExpressionKey, type KeypadKey } from '../lib/keypad'
 import { gcd } from '../lib/rational'
-import type { Difficulty, Misconception, Problem } from '../lib/types'
+import type { AlgebraData, Difficulty, Misconception, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit13 } from './unit-13-expressions'
 
@@ -47,6 +49,131 @@ const phraseNumber = (text: string): string => {
 
 /** An unwritten coefficient is one: `x` is `1x`, and the display shows `x`. */
 const coefficient = (digits: string): number => (digits === '' ? 1 : Number(digits))
+
+const teachingLines = [
+  ['variable-meaning', 'A variable is a letter whose value can change.'],
+  ['evaluate-expression', 'Replace the variable with its given value before calculating.'],
+  ['words-to-expression', 'Translate each phrase in order, but reverse less than and subtracted from.'],
+  ['identify-like-terms', 'Like terms match in every letter and power.'],
+  ['combine-like-terms', 'Combine like terms by adding their number parts and keeping their letter parts.'],
+  ['distributive', 'Distribute by multiplying the outside number by every term inside the brackets.'],
+  ['distribute-negative', "A negative outside brackets changes every term's sign when you distribute."],
+  ['factor-gcf', 'Take the greatest common factor outside the brackets, leaving each quotient inside.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit13.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 13 skill: ${id}`)
+  return found
+}
+
+const algebraOf = (problem: Problem): AlgebraData => {
+  if ((problem.display.kind !== 'inline' && problem.display.kind !== 'story') || !problem.display.algebra) {
+    throw new Error(`${problem.skillId}: expected algebra data`)
+  }
+  return problem.display.algebra
+}
+
+describe('Stage E Unit 13 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    const generator = teachingSkill(id)
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage E Unit 13 intro examples', () => {
+  it('recomputes every fixed example from visible expressions and semantic data', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+      const data = algebraOf(problem)
+
+      switch (data.operation) {
+        case 'substitute-term': {
+          const match = /^(\d*)x$/.exec(inlineText(problem))
+          const value = /x = (−?\d+)/.exec(problem.prompt)?.[1]
+          if (!match || value === undefined) throw new Error(`${id}: unexpected visible term`)
+          const answer = problem.answer
+          if (answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+          expect({ n: answer.n, d: answer.d }).toEqual({ n: coefficient(match[1]) * Number(value.replace('−', '-')), d: 1 })
+          break
+        }
+        case 'substitute-expression': {
+          const match = /^(\d*)x (\+|−) (\d+)$/.exec(inlineText(problem))
+          const value = /x = (−?\d+)/.exec(problem.prompt)?.[1]
+          if (!match || value === undefined) throw new Error(`${id}: unexpected visible expression`)
+          const answer = problem.answer
+          if (answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+          const coefficientValue = coefficient(match[1])
+          const constant = Number(match[3])
+          const input = Number(value.replace('−', '-'))
+          expect({ n: answer.n, d: answer.d }).toEqual({
+            n: match[2] === '+' ? coefficientValue * input + constant : coefficientValue * input - constant,
+            d: 1,
+          })
+          break
+        }
+        case 'words-to-expression': {
+          const text = storyText(problem)
+          const number = phraseNumber(text)
+          const expected = text.includes('less than') ? `x-${number}` : `${number}-x`
+          expect(checkAnswer(problem.answer, expected)).toEqual({ status: 'correct' })
+          break
+        }
+        case 'identify-like-terms': {
+          const letter = /[a-z]/.exec(inlineText(problem))?.[0]
+          if (!letter) throw new Error(`${id}: expected a visible variable`)
+          const matching = (problem.choices ?? []).filter((choice) => choice.label.includes(letter))
+          if (problem.answer.kind !== 'choice') throw new Error(`${id}: expected choice answer`)
+          expect(matching).toHaveLength(1)
+          expect(problem.answer.id).toBe(matching[0].id)
+          break
+        }
+        case 'combine-like-terms': {
+          const match = /^(\d*)x \+ (\d*)x \+ (\d+)$/.exec(inlineText(problem))
+          if (!match) throw new Error(`${id}: unexpected combined-term display`)
+          expect(checkAnswer(problem.answer, `${coefficient(match[1]) + coefficient(match[2])}x+${match[3]}`))
+            .toEqual({ status: 'correct' })
+          break
+        }
+        case 'distributive': {
+          const match = /^(\d+)\(x \+ (\d+)\)$/.exec(inlineText(problem))
+          if (!match) throw new Error(`${id}: unexpected distributive display`)
+          const [outside, inside] = match.slice(1).map(Number)
+          expect(checkAnswer(problem.answer, `${outside}x+${outside * inside}`)).toEqual({ status: 'correct' })
+          break
+        }
+        case 'distribute-negative': {
+          const match = /^−(\d+)\(x ([+−]) (\d+)\)$/.exec(inlineText(problem))
+          if (!match) throw new Error(`${id}: unexpected negative distributive display`)
+          const outside = Number(match[1])
+          const constant = Number(match[3])
+          const second = match[2] === '+' ? -outside * constant : outside * constant
+          const expected = `-${outside}x${second < 0 ? '' : '+'}${second}`
+          expect(checkAnswer(problem.answer, expected)).toEqual({ status: 'correct' })
+          break
+        }
+        case 'factor-gcf': {
+          const match = /^(\d+)x \+ (\d+)$/.exec(inlineText(problem))
+          if (!match) throw new Error(`${id}: unexpected factor display`)
+          const [coefficientValue, constant] = match.slice(1).map(Number)
+          const factor = gcd(coefficientValue, constant)
+          const innerCoefficient = coefficientValue / factor
+          const inner = innerCoefficient === 1 ? 'x' : `${innerCoefficient}x`
+          expect(checkAnswer(problem.answer, `${factor}(${inner}+${constant / factor})`)).toEqual({ status: 'correct' })
+          break
+        }
+        default: {
+          const unhandled: never = data
+          throw new Error(`Unhandled Unit 13 intro: ${JSON.stringify(unhandled)}`)
+        }
+      }
+    }
+  })
+})
 
 const meanAt = (id: string, difficulty: Difficulty, value: (problem: Problem) => number) => {
   const values = problems(id)

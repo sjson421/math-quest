@@ -33,7 +33,7 @@ export type SkillConfig = {
   name: string
   /** Shown on the skill tree node. Stays under 32 characters or the card truncates. */
   blurb: string
-  teachingLine?: string
+  teachingLine: string
   build(context: BuildContext): ProblemSpec
 }
 

@@ -953,7 +953,7 @@ export type SkillGenerator = {
   /** Shown on the skill tree node. */
   blurb: string
   /** One concise explanation shown before first practice, when this increment ships it. */
-  teachingLine?: string
+  teachingLine: string
   /**
    * Deliberately no `prerequisites`. What unlocks what is the manifest's, and
    * only the manifest's — see `unlockPrerequisites` in `curriculum/index.ts`. A

@@ -68,6 +68,7 @@ const equationBalance = defineSkill({
   id: 'equation-balance',
   name: 'Keeping the Balance',
   blurb: 'Both sides stay equal',
+  teachingLine: 'An equation stays balanced when the same change is made to both sides.',
   build(context: BuildContext) {
     const [totalMin, totalMax] = band(context.difficulty, TOTAL_BAND)
     const [changeMin, changeMax] = band(context.difficulty, CHANGE_BAND)
@@ -143,6 +144,7 @@ const oneStepAddSub = defineSkill({
   id: 'one-step-addsub',
   name: 'One Step: Add or Subtract',
   blurb: 'Undo a + or −',
+  teachingLine: 'Undo addition with subtraction, or subtraction with addition, on both sides.',
   build(context: BuildContext) {
     const [solMin, solMax] = band(context.difficulty, SOLUTION_BAND)
     const [constMin, constMax] = band(context.difficulty, ADDSUB_CONSTANT_BAND)
@@ -225,6 +227,7 @@ const oneStepMultDiv = defineSkill({
   id: 'one-step-multdiv',
   name: 'One Step: Multiply or Divide',
   blurb: 'Undo a × or ÷',
+  teachingLine: 'Undo multiplication with division, or division with multiplication, on both sides.',
   build(context: BuildContext) {
     const multiplies = context.rng.bool()
     const [solMin, solMax] = band(context.difficulty, SOLUTION_BAND)
@@ -318,6 +321,7 @@ const twoStep = defineSkill({
   id: 'two-step',
   name: 'Two Steps',
   blurb: 'Undo in the right order',
+  teachingLine: 'Undo operations in reverse order, doing the same thing to both sides.',
   build(context: BuildContext) {
     const [solMin, solMax] = band(context.difficulty, SOLUTION_BAND)
     const [coeffMin, coeffMax] = band(context.difficulty, TWO_STEP_COEFF_BAND)
@@ -391,6 +395,7 @@ const varsBothSides = defineSkill({
   id: 'vars-both-sides',
   name: 'Variables on Both Sides',
   blurb: 'Gather the terms first',
+  teachingLine: 'Move variable terms to one side before solving.',
   build(context: BuildContext) {
     const [solMin, solMax] = band(context.difficulty, SOLUTION_BAND)
     const [coeffMin, coeffMax] = band(context.difficulty, COEFFICIENT_BAND)
@@ -462,6 +467,7 @@ const equationParentheses = defineSkill({
   id: 'equation-parentheses',
   name: 'Equations with Parentheses',
   blurb: 'Distribute, then solve',
+  teachingLine: 'Distribute first, then gather variable terms and solve.',
   build(context: BuildContext) {
     const [solMin, solMax] = band(context.difficulty, SOLUTION_BAND)
     const [coeffMin, coeffMax] = band(context.difficulty, TWO_STEP_COEFF_BAND)
@@ -572,6 +578,7 @@ const withFractions = defineSkill({
   id: 'with-fractions',
   name: 'Equations with Fractions',
   blurb: 'Clear the denominators',
+  teachingLine: 'Multiply every term on both sides by a common denominator before solving.',
   build(context: BuildContext) {
     const [denMin, denMax] = band(context.difficulty, DENOMINATOR_BAND)
     const [quotMin, quotMax] = band(context.difficulty, QUOTIENT_BAND)
@@ -670,6 +677,7 @@ const specialSolutions = defineSkill({
   id: 'special-solutions',
   name: 'No Solution or Every Solution',
   blurb: 'When the variable disappears',
+  teachingLine: 'If the variable disappears, a false statement means no solution; a true one means every solution.',
   build(context: BuildContext) {
     const [coeffMin, coeffMax] = band(context.difficulty, SPECIAL_COEFF_BAND)
     const [constMin, constMax] = band(context.difficulty, SPECIAL_CONSTANT_BAND)
@@ -757,6 +765,7 @@ const equationWords = defineSkill({
   id: 'equation-words',
   name: 'Equation Word Problems',
   blurb: 'Build the equation',
+  teachingLine: "Turn the story's steps into an equation, then undo them in reverse order.",
   build(context: BuildContext) {
     const [solMin, solMax] = band(context.difficulty, SOLUTION_BAND)
     const [coeffMin, coeffMax] = band(context.difficulty, TWO_STEP_COEFF_BAND)
@@ -819,6 +828,7 @@ const rearrangeFormula = defineSkill({
   id: 'rearrange-formula',
   name: 'Rearranging a Formula',
   blurb: 'Solve for y',
+  teachingLine: 'Move every other term away from the requested letter, then divide by its coefficient.',
   build(context: BuildContext) {
     const [coeffMin, coeffMax] = band(context.difficulty, SUBJECT_COEFF_BAND)
     const [multMin, multMax] = band(context.difficulty, REARRANGE_MULTIPLIER_BAND)

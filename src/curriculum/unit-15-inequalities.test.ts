@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { makeRng } from '../lib/rng'
 import type { Difficulty, Display, EquationData, Problem, Relation } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample } from './recorded-output'
 import {
   RELATIONS,
@@ -65,6 +67,16 @@ const predictedIds = (problem: Problem): string[] =>
 
 const optionIds = (problem: Problem): string[] => (problem.choices ?? []).map((choice) => choice.id)
 
+type Unit15EquationData = Extract<EquationData, {
+  operation:
+    | 'inequality-meaning'
+    | 'inequality-graph'
+    | 'inequality-addsub'
+    | 'inequality-two-step'
+    | 'inequality-multdiv'
+    | 'inequality-compound'
+}>
+
 /**
  * A boundary as the course draws it, and the statement it sits in.
  *
@@ -79,6 +91,93 @@ const optionIds = (problem: Problem): string[] => (problem.choices ?? []).map((c
 const drawnBound = (value: number): string => String(value).replace('-', '−')
 
 const statementOf = (relation: Relation, bound: number): string => `x ${relation} ${drawnBound(bound)}`
+
+const teachingLines = [
+  ['inequality-symbols', 'An inequality shows which side is larger and whether the boundary is included.'],
+  ['graph-inequality', 'Use an open circle for a strict boundary and a closed circle when included.'],
+  ['solve-one-step-ineq', 'Undo one operation on both sides without changing the inequality sign.'],
+  ['solve-multi-step-ineq', 'Undo the constant first, then undo the positive coefficient.'],
+  ['flip-the-sign', 'Multiplying or dividing both sides by a negative reverses the inequality sign.'],
+  ['compound-inequalities', 'For and, keep values that satisfy both; for or, keep values that satisfy at least one.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit15.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 15 skill: ${id}`)
+  return found
+}
+
+describe('Stage E Unit 15 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    const generator = teachingSkill(id)
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage E Unit 15 intro examples', () => {
+  it('recomputes every fixed example from the displayed inequality', () => {
+    const satisfies = (relation: Relation, left: number, right: number): boolean => {
+      if (relation === '<') return left < right
+      if (relation === '>') return left > right
+      if (relation === '≤') return left <= right
+      return left >= right
+    }
+
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+      const data = equationOf(problem).equation as Unit15EquationData
+
+      switch (data.operation) {
+        case 'inequality-meaning':
+          expect(chosenId(problem)).toBe(relationId(data.relation))
+          expect(equationOf(problem).text).toBe(statementOf(data.relation, data.bound))
+          break
+        case 'inequality-graph': {
+          const circle = isStrict(data.relation) ? 'open' : 'closed'
+          const shading = pointsUp(data.relation) ? 'right' : 'left'
+          expect(chosenId(problem)).toBe(`${circle}-${shading}`)
+          expect(equationOf(problem).text).toBe(statementOf(data.relation, data.bound))
+          break
+        }
+        case 'inequality-addsub': {
+          const bound = data.adds ? data.rightHand - data.constant : data.rightHand + data.constant
+          expect(chosenId(problem)).toBe(statementId({ relation: data.relation, bound }))
+          break
+        }
+        case 'inequality-two-step': {
+          const afterUndo = data.adds ? data.rightHand - data.constant : data.rightHand + data.constant
+          const bound = afterUndo / data.coefficient
+          expect(chosenId(problem)).toBe(statementId({ relation: data.relation, bound }))
+          break
+        }
+        case 'inequality-multdiv': {
+          const bound = data.multiplies ? data.rightHand / data.coefficient : data.rightHand * data.coefficient
+          const relation = data.coefficient < 0 ? REVERSED[data.relation] : data.relation
+          expect(chosenId(problem)).toBe(statementId({ relation, bound }))
+          break
+        }
+        case 'inequality-compound': {
+          const count = Array.from({ length: data.rangeMax + 1 }, (_, value) => value).filter((value) => {
+            const first = satisfies(data.firstRelation, value, data.firstBound)
+            const second = satisfies(data.secondRelation, value, data.secondBound)
+            return data.form === 'or' ? first || second : first && second
+          }).length
+          if (problem.answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+          expect(problem.answer).toMatchObject({ n: count, d: 1 })
+          break
+        }
+        default: {
+          const unhandled: never = data
+          throw new Error(`Unhandled Unit 15 intro: ${JSON.stringify(unhandled)}`)
+        }
+      }
+    }
+  })
+})
 
 describe.each(unit15.map((skill) => [skill.id, skill] as const))('recorded output: %s', (_id, skill) => {
   it('matches the wording recorded when the skill landed', () => {

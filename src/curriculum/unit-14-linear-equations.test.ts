@@ -1,8 +1,11 @@
 import { describe, expect, it } from 'vitest'
+import { checkAnswer } from '../lib/answer'
 import { coordinateEntry } from '../lib/coordinate-plane'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { canonicalForm } from '../lib/expression'
 import type { Difficulty, Display, EquationData, Misconception, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample } from './recorded-output'
 import { unit14 } from './unit-14-linear-equations'
 
@@ -40,6 +43,19 @@ const equationOf = (problem: Problem) => {
   return problem.display as Extract<Display, { kind: 'equation' }> & { equation: EquationData }
 }
 
+type Unit14EquationData = Extract<EquationData, {
+  operation:
+    | 'balance'
+    | 'one-step-addsub'
+    | 'one-step-multdiv'
+    | 'two-step'
+    | 'vars-both-sides'
+    | 'parentheses'
+    | 'clear-fraction'
+    | 'special-solutions'
+    | 'rearrange'
+}>
+
 const answerOf = (problem: Problem): number => {
   if (problem.answer.kind !== 'exact') throw new Error(`${problem.skillId}: expected an exact answer`)
   return problem.answer.n / problem.answer.d
@@ -55,6 +71,135 @@ const displayTextOf = (problem: Problem): string => {
   if (display.kind === 'equation' || display.kind === 'story') return display.text
   throw new Error(`${problem.skillId}: expected an equation or story display`)
 }
+
+const teachingLines = [
+  ['equation-balance', 'An equation stays balanced when the same change is made to both sides.'],
+  ['one-step-addsub', 'Undo addition with subtraction, or subtraction with addition, on both sides.'],
+  ['one-step-multdiv', 'Undo multiplication with division, or division with multiplication, on both sides.'],
+  ['two-step', 'Undo operations in reverse order, doing the same thing to both sides.'],
+  ['vars-both-sides', 'Move variable terms to one side before solving.'],
+  ['equation-parentheses', 'Distribute first, then gather variable terms and solve.'],
+  ['with-fractions', 'Multiply every term on both sides by a common denominator before solving.'],
+  ['special-solutions', 'If the variable disappears, a false statement means no solution; a true one means every solution.'],
+  ['equation-words', "Turn the story's steps into an equation, then undo them in reverse order."],
+  ['rearrange-formula', 'Move every other term away from the requested letter, then divide by its coefficient.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit14.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 14 skill: ${id}`)
+  return found
+}
+
+const structuredEquationOf = (problem: Problem): Unit14EquationData => {
+  if (
+    (problem.display.kind !== 'equation' && problem.display.kind !== 'story') ||
+    !problem.display.equation
+  ) {
+    throw new Error(`${problem.skillId}: expected equation data`)
+  }
+  return problem.display.equation as Unit14EquationData
+}
+
+const expressionTerm = (coefficient: number, variable: string): string => {
+  if (coefficient === 1) return variable
+  if (coefficient === -1) return `-${variable}`
+  return `${coefficient}${variable}`
+}
+
+const expressionWithConstant = (coefficient: number, variable: string, constant: number): string =>
+  `${expressionTerm(coefficient, variable)}${constant > 0 ? '+' : ''}${constant}`
+
+describe('Stage E Unit 14 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    const generator = teachingSkill(id)
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage E Unit 14 intro examples', () => {
+  it('recomputes every fixed example from displayed equation data', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+      const data = structuredEquationOf(problem)
+
+      switch (data.operation) {
+        case 'balance': {
+          const answer = problem.answer
+          if (answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+          expect(answer.n / answer.d).toBe(data.first + data.second + (data.adds ? data.change : -data.change))
+          break
+        }
+        case 'one-step-addsub': {
+          const answer = problem.answer
+          if (answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+          expect(answer.n / answer.d).toBe(data.adds ? data.rightHand - data.constant : data.rightHand + data.constant)
+          break
+        }
+        case 'one-step-multdiv': {
+          const answer = problem.answer
+          if (answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+          expect(answer.n / answer.d).toBe(data.multiplies ? data.rightHand / data.coefficient : data.rightHand * data.coefficient)
+          break
+        }
+        case 'two-step': {
+          const answer = problem.answer
+          if (answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+          const afterUndo = data.adds ? data.rightHand - data.constant : data.rightHand + data.constant
+          expect(answer.n / answer.d).toBe(afterUndo / data.coefficient)
+          break
+        }
+        case 'vars-both-sides': {
+          const answer = problem.answer
+          if (answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+          expect(answer.n / answer.d).toBe(
+            (data.rightConstant - data.leftConstant) / (data.leftCoefficient - data.rightCoefficient),
+          )
+          break
+        }
+        case 'parentheses': {
+          const answer = problem.answer
+          if (answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+          const inside = data.rightHand / data.coefficient
+          expect(answer.n / answer.d).toBe(data.adds ? inside - data.constant : inside + data.constant)
+          break
+        }
+        case 'clear-fraction': {
+          const answer = problem.answer
+          if (answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+          const quotient = data.adds ? data.rightHand - data.constant : data.rightHand + data.constant
+          expect(answer.n / answer.d).toBe(data.denominator * quotient)
+          break
+        }
+        case 'special-solutions': {
+          if (problem.answer.kind !== 'choice') throw new Error(`${id}: expected choice answer`)
+          const expected = data.leftCoefficient !== data.rightCoefficient
+            ? 'one'
+            : data.leftConstant === data.rightConstant ? 'infinite' : 'none'
+          expect(problem.answer.id).toBe(expected)
+          break
+        }
+        case 'rearrange': {
+          const expected = expressionWithConstant(
+            -data.termCoefficient / data.subjectCoefficient,
+            data.term,
+            data.constant / data.subjectCoefficient,
+          )
+          expect(checkAnswer(problem.answer, expected)).toEqual({ status: 'correct' })
+          break
+        }
+        default: {
+          const unhandled: never = data
+          throw new Error(`Unhandled Unit 14 intro: ${JSON.stringify(unhandled)}`)
+        }
+      }
+    }
+  })
+})
 
 /**
  * The skills that display an equation and answer it with a number.

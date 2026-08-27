@@ -1,9 +1,11 @@
 import { describe, expect, it } from 'vitest'
 import { isCoordinateTarget, type Coordinate } from '../lib/coordinate-plane'
 import { checkAnswer } from '../lib/answer'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import { gcd, rational } from '../lib/rational'
 import type { CoordinateData, Difficulty, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample } from './recorded-output'
 import { unit16 } from './unit-16-coordinate-plane-lines'
 
@@ -66,6 +68,20 @@ const numericPredictions = (problem: Problem): number[] =>
 const predictionTags = (problem: Problem): string[] =>
   (problem.misconceptions ?? []).map((misconception) => misconception.tag)
 
+type Unit16CoordinateData = Extract<CoordinateData, {
+  operation:
+    | 'plot-point'
+    | 'quadrant'
+    | 'table-to-graph'
+    | 'slope-from-graph'
+    | 'slope-from-points'
+    | 'y-intercept'
+    | 'slope-intercept'
+    | 'graph-from-equation'
+    | 'equation-from-graph'
+    | 'parallel-perpendicular'
+}>
+
 const reaches = [4, 5, 6, 8, 10]
 
 const usesDifficultyReach = (id: string) => {
@@ -81,6 +97,132 @@ const usesDifficultyReach = (id: string) => {
     }
   }
 }
+
+const teachingLines = [
+  ['plot-points', 'In an ordered pair, the first coordinate moves left or right and the second moves up or down.'],
+  ['quadrants', 'A quadrant is one of four regions named counterclockwise from the upper right.'],
+  ['table-to-graph', 'Each table row gives one point to place on the graph.'],
+  ['slope-from-graph', 'Slope is vertical change divided by horizontal change between two points.'],
+  ['slope-from-points', 'Find slope by subtracting both pairs in the same point order.'],
+  ['y-intercept', 'The y-intercept is where a line crosses the vertical axis.'],
+  ['slope-intercept', 'In y = mx + b, m gives rise over run and b gives the vertical crossing.'],
+  ['graph-from-equation', 'Use b for the vertical crossing, then m for rise over run.'],
+  ['equation-from-graph', "Read the vertical crossing and rise over run to write the line's rule."],
+  ['parallel-perpendicular', 'Parallel lines keep the same slope; perpendicular lines use its negative reciprocal.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit16.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 16 skill: ${id}`)
+  return found
+}
+
+const choiceId = (problem: Problem): string => {
+  if (problem.answer.kind !== 'choice') throw new Error(`${problem.skillId}: expected choice answer`)
+  return problem.answer.id
+}
+
+describe('Stage F Unit 16 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    const generator = teachingSkill(id)
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage F Unit 16 intro examples', () => {
+  it('recomputes every fixed example from coordinate-plane data', () => {
+    const quadrantFor = ({ x, y }: Coordinate): string =>
+      x > 0 ? y > 0 ? 'quadrant-i' : 'quadrant-iv' : y > 0 ? 'quadrant-ii' : 'quadrant-iii'
+    const lineValues = (problem: Problem) => {
+      const display = displayOf(problem)
+      if (display.plane.lines.length !== 1) throw new Error(`${problem.skillId}: expected one line`)
+      const [first, second] = display.plane.lines[0].through
+      const run = second.x - first.x
+      const rise = second.y - first.y
+      return {
+        slope: rational(rise, run),
+        intercept: rational(first.y * run - rise * first.x, run),
+      }
+    }
+
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+      const display = displayOf(problem)
+      const data = display.coordinate as Unit16CoordinateData
+      if (!data) throw new Error(`${id}: expected coordinate data`)
+
+      switch (data.operation) {
+        case 'plot-point':
+          expect(pointAnswerOf(problem)).toEqual(data.point)
+          expect(isCoordinateTarget(display.plane, data.point)).toBe(true)
+          break
+        case 'quadrant':
+          expect(display.plane.points).toHaveLength(1)
+          expect(choiceId(problem)).toBe(quadrantFor(display.plane.points[0]))
+          break
+        case 'table-to-graph': {
+          const target = data.rows.find((point) => point.x === data.targetX)
+          if (!target) throw new Error(`${id}: target row missing`)
+          expect(pointAnswerOf(problem)).toEqual(target)
+          expect(display.plane.points).toEqual(data.rows.filter((point) => point.x !== data.targetX))
+          break
+        }
+        case 'slope-from-graph':
+        case 'slope-from-points': {
+          if (display.plane.points.length !== 2) throw new Error(`${id}: expected two points`)
+          const [first, second] = display.plane.points
+          const expected = rational(second.y - first.y, second.x - first.x)
+          expect(exactAnswerOf(problem)).toEqual({ kind: 'exact', ...expected })
+          break
+        }
+        case 'y-intercept': {
+          const { intercept } = lineValues(problem)
+          expect(exactAnswerOf(problem)).toEqual({ kind: 'exact', ...intercept })
+          break
+        }
+        case 'slope-intercept': {
+          const { slope, intercept } = lineValues(problem)
+          const expected = data.asks === 'slope' ? slope.n : intercept.n
+          expect(exactAnswerOf(problem)).toMatchObject({ n: expected, d: 1 })
+          break
+        }
+        case 'graph-from-equation': {
+          const matching = display.plane.lines.findIndex((line) => {
+            const [first, second] = line.through
+            return second.y - first.y === data.slope * (second.x - first.x) &&
+              first.y === data.intercept + data.slope * first.x
+          })
+          expect(matching).toBeGreaterThanOrEqual(0)
+          expect(choiceId(problem)).toBe(`line-${matching + 1}`)
+          break
+        }
+        case 'equation-from-graph': {
+          const { slope, intercept } = lineValues(problem)
+          const slopeText = slope.n === 1 ? 'x' : slope.n === -1 ? '-x' : `${slope.n}x`
+          const expected = intercept.n === 0
+            ? slopeText
+            : `${slopeText}${intercept.n > 0 ? '+' : ''}${intercept.n}`
+          expect(checkAnswer(problem.answer, expected)).toEqual({ status: 'correct' })
+          break
+        }
+        case 'parallel-perpendicular': {
+          const { slope } = lineValues(problem)
+          const expected = data.relationship === 'parallel' ? slope : rational(-slope.d, slope.n)
+          expect(exactAnswerOf(problem)).toEqual({ kind: 'exact', ...expected })
+          break
+        }
+        default: {
+          const unhandled: never = data
+          throw new Error(`Unhandled Unit 16 intro: ${JSON.stringify(unhandled)}`)
+        }
+      }
+    }
+  })
+})
 
 describe.each(unit16.map((skill) => [skill.id, skill] as const))('recorded output: %s', (_id, skill) => {
   it('matches the wording recorded when the skill landed', () => {

@@ -117,7 +117,7 @@ over sampled problems inside the test suite —
 at most 4 solution steps, at most 12 words each, single-sentence hints, and at least two
 distinct predicted misconceptions on any skill marked a difficulty wall.
 
-Stages A through D now open each of their 111 Unit 0–11 skills with one authored teaching line
+Stages A through F now open all 173 playable Unit 0–19 skills with one authored teaching line
 and one stable, generated difficulty-1 worked example. Starting practice records only that the
 intro was seen; it does not count as an attempt or change mastery. The same example remains
 available through **Review intro**, and each authored line is checked directly for sentence and

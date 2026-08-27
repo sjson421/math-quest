@@ -56,6 +56,7 @@ const variableMeaning = defineSkill({
   id: 'variable-meaning',
   name: 'What a Variable Is',
   blurb: 'A letter standing for a number',
+  teachingLine: 'A variable is a letter whose value can change.',
   build(context: BuildContext) {
     const [coeffMin, coeffMax] = band(context.difficulty, COEFF_BAND)
     const [valueMin, valueMax] = band(context.difficulty, VALUE_BAND)
@@ -92,6 +93,7 @@ const evaluateExpression = defineSkill({
   id: 'evaluate-expression',
   name: 'Evaluating Expressions',
   blurb: 'Substitute and compute',
+  teachingLine: 'Replace the variable with its given value before calculating.',
   build(context: BuildContext) {
     const [coeffMin, coeffMax] = band(context.difficulty, COEFF_BAND)
     const [constMin, constMax] = band(context.difficulty, CONSTANT_BAND)
@@ -140,6 +142,7 @@ const wordsToExpression = defineSkill({
   id: 'words-to-expression',
   name: 'Words to Expressions',
   blurb: 'Translate a phrase',
+  teachingLine: 'Translate each phrase in order, but reverse less than and subtracted from.',
   build(context: BuildContext) {
     const [min, max] = band(context.difficulty, PHRASE_BAND)
     const n = context.rng.int(min, max)
@@ -183,6 +186,7 @@ const identifyLikeTerms = defineSkill({
   id: 'identify-like-terms',
   name: 'Like Terms',
   blurb: 'Spot the terms that match',
+  teachingLine: 'Like terms match in every letter and power.',
   build(context: BuildContext) {
     const [coeffMin, coeffMax] = band(context.difficulty, COEFF_BAND)
     const [constMin, constMax] = band(context.difficulty, CONSTANT_BAND)
@@ -226,6 +230,7 @@ const combineLikeTerms = defineSkill({
   id: 'combine-like-terms',
   name: 'Combining Like Terms',
   blurb: 'Add and subtract terms',
+  teachingLine: 'Combine like terms by adding their number parts and keeping their letter parts.',
   build(context: BuildContext) {
     const [coeffMin, coeffMax] = band(context.difficulty, COEFF_BAND)
     const [constMin, constMax] = band(context.difficulty, CONSTANT_BAND)
@@ -279,6 +284,7 @@ const distributive = defineSkill({
   id: 'distributive',
   name: 'Distributing',
   blurb: 'Multiply across a bracket',
+  teachingLine: 'Distribute by multiplying the outside number by every term inside the brackets.',
   build(context: BuildContext) {
     const [coeffMin, coeffMax] = band(context.difficulty, DISTRIBUTIVE_COEFF_BAND)
     const [constMin, constMax] = band(context.difficulty, CONSTANT_BAND)
@@ -338,6 +344,7 @@ const distributeNegative = defineSkill({
   id: 'distribute-negative',
   name: 'Distributing a Negative',
   blurb: '−3(x − 4)',
+  teachingLine: "A negative outside brackets changes every term's sign when you distribute.",
   build(context: BuildContext) {
     const [coeffMin, coeffMax] = band(context.difficulty, NEGATIVE_COEFF_BAND)
     const [constMin, constMax] = band(context.difficulty, CONSTANT_BAND)
@@ -414,6 +421,7 @@ const factorGcf = defineSkill({
   id: 'factor-gcf',
   name: 'Factoring Out',
   blurb: 'The reverse of distributing',
+  teachingLine: 'Take the greatest common factor outside the brackets, leaving each quotient inside.',
   build(context: BuildContext) {
     const [factorMin, factorMax] = band(context.difficulty, FACTOR_BAND)
     const [innerMin, innerMax] = band(context.difficulty, INNER_CONSTANT_BAND)

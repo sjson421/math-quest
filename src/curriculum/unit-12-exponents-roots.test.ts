@@ -1,8 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import { checkAnswer } from '../lib/answer'
+import { checkTeachingLine } from '../lib/content-rules'
 import { diagnose, generateProblem } from '../lib/generator'
 import { rational, toNumber } from '../lib/rational'
 import type { Difficulty, PowerData, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit12 } from './unit-12-exponents-roots'
 
@@ -39,6 +41,110 @@ const meanAt = (id: string, difficulty: Difficulty, value: (data: PowerData) => 
     .map((problem) => value(powerData(problem)))
   return values.reduce((sum, entry) => sum + entry, 0) / values.length
 }
+
+const teachingLines = [
+  ['exponent-meaning', 'An exponent tells how many times to use the base as a factor.'],
+  ['evaluate-powers', 'A power uses its base as a factor as many times as the exponent says.'],
+  ['perfect-squares', 'Squaring a number multiplies it by itself; finding a square root reverses that.'],
+  ['estimate-roots', 'Compare nearby whole-number squares to find which two the root lies between.'],
+  ['exponent-multiply', 'For matching bases multiplied together, add the exponents.'],
+  ['exponent-divide', 'For matching bases divided, subtract the second exponent from the first.'],
+  ['power-of-power', 'When a power is raised again, multiply the two exponents.'],
+  ['zero-neg-exponents', 'A zero exponent gives 1; a negative exponent gives one over the positive power.'],
+  ['scientific-notation', 'A positive exponent moves the decimal right; a negative exponent moves it left.'],
+  ['pemdas-exponents', 'Evaluate parentheses first, then powers, multiplication or division, and addition or subtraction.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit12.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 12 skill: ${id}`)
+  return found
+}
+
+describe('Stage E Unit 12 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    const generator = teachingSkill(id)
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage E Unit 12 intro examples', () => {
+  it('recomputes every fixed example from visible or semantic power data', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+      const data = powerData(problem)
+      if (problem.answer.kind !== 'exact') throw new Error(`${id}: expected an exact answer`)
+
+      switch (data.operation) {
+        case 'expand-power': {
+          if (problem.display.kind !== 'math') throw new Error(`${id}: expected math display`)
+          const visibleFactors = problem.display.label.split(' equals ')[0].split(' × ')
+          expect(visibleFactors).toHaveLength(data.exponent)
+          expect(problem.answer).toMatchObject({ n: visibleFactors.length, d: 1 })
+          break
+        }
+        case 'evaluate-power':
+          expect(problem.answer).toMatchObject({ n: data.base ** data.exponent, d: 1 })
+          break
+        case 'square':
+          expect(problem.answer).toMatchObject({ n: data.value * data.value, d: 1 })
+          break
+        case 'square-root':
+          expect(problem.answer).toMatchObject({ n: Math.sqrt(data.value), d: 1 })
+          break
+        case 'estimate-root': {
+          const lower = Math.floor(Math.sqrt(data.value))
+          expect(lower * lower).toBeLessThan(data.value)
+          expect((lower + 1) * (lower + 1)).toBeGreaterThan(data.value)
+          expect(problem.answer).toMatchObject({ n: lower, d: 1 })
+          break
+        }
+        case 'power-multiply':
+          expect(problem.answer).toMatchObject({ n: data.leftExponent + data.rightExponent, d: 1 })
+          break
+        case 'power-divide':
+          expect(problem.answer).toMatchObject({ n: data.leftExponent - data.rightExponent, d: 1 })
+          break
+        case 'power-of-power':
+          expect(problem.answer).toMatchObject({ n: data.innerExponent * data.outerExponent, d: 1 })
+          break
+        case 'zero-exponent':
+          expect(problem.answer).toMatchObject({ n: 1, d: 1 })
+          break
+        case 'negative-exponent':
+          expect({ n: problem.answer.n, d: problem.answer.d }).toEqual(rational(1, data.base ** data.magnitude))
+          expect(problem.answer.requireFraction).toBe(true)
+          break
+        case 'scientific-notation': {
+          const expected = data.exponent >= 0
+            ? rational(data.coefficient * 10 ** data.exponent, 10 ** data.coefficientScale)
+            : rational(data.coefficient, 10 ** (data.coefficientScale + Math.abs(data.exponent)))
+          expect({ n: problem.answer.n, d: problem.answer.d }).toEqual(expected)
+          break
+        }
+        case 'pemdas-power-first':
+          expect(problem.answer).toMatchObject({
+            n: data.addend + data.base ** data.exponent * data.factor,
+            d: 1,
+          })
+          break
+        case 'pemdas-group-power':
+          expect({ n: problem.answer.n, d: problem.answer.d }).toEqual(
+            rational((data.left + data.right) ** data.exponent, data.divisor),
+          )
+          break
+        default: {
+          const unhandled: never = data
+          throw new Error(`Unhandled Unit 12 intro: ${JSON.stringify(unhandled)}`)
+        }
+      }
+    }
+  })
+})
 
 describe('exponent-meaning', () => {
   it('requires the factor count, not the evaluated product', () => {

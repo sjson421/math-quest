@@ -197,6 +197,7 @@ const inequalitySymbols = defineSkill({
   id: 'inequality-symbols',
   name: 'Inequality Symbols',
   blurb: 'Read <, >, ≤ and ≥',
+  teachingLine: 'An inequality shows which side is larger and whether the boundary is included.',
   build(context: BuildContext) {
     const [boundMin, boundMax] = band(context.difficulty, BOUND_BAND)
     const bound = context.rng.int(boundMin, boundMax)
@@ -285,6 +286,7 @@ const graphInequality = defineSkill({
   id: 'graph-inequality',
   name: 'Graphing an Inequality',
   blurb: 'Open or closed circle',
+  teachingLine: 'Use an open circle for a strict boundary and a closed circle when included.',
   build(context: BuildContext) {
     const [magnitudeMin, magnitudeMax] = band(context.difficulty, GRAPH_BOUND_BAND)
     const magnitude = context.rng.int(magnitudeMin, magnitudeMax)
@@ -415,6 +417,7 @@ const solveOneStepIneq = defineSkill({
   id: 'solve-one-step-ineq',
   name: 'One-Step Inequalities',
   blurb: 'Solve in a single move',
+  teachingLine: 'Undo one operation on both sides without changing the inequality sign.',
   build(context: BuildContext) {
     const relation = context.rng.pick(RELATIONS)
     const scales = context.rng.bool()
@@ -528,6 +531,7 @@ const solveMultiStepIneq = defineSkill({
   id: 'solve-multi-step-ineq',
   name: 'Multi-Step Inequalities',
   blurb: 'Solve in several moves',
+  teachingLine: 'Undo the constant first, then undo the positive coefficient.',
   build(context: BuildContext) {
     const relation = context.rng.pick(RELATIONS)
     const [factorMin, factorMax] = band(context.difficulty, FACTOR_BAND)
@@ -601,6 +605,7 @@ const flipTheSign = defineSkill({
   id: 'flip-the-sign',
   name: 'Flipping the Sign',
   blurb: 'Multiply or divide by a negative',
+  teachingLine: 'Multiplying or dividing both sides by a negative reverses the inequality sign.',
   build(context: BuildContext) {
     const relation = context.rng.pick(RELATIONS)
     const [factorMin, factorMax] = band(context.difficulty, FACTOR_BAND)
@@ -699,6 +704,7 @@ const compoundInequalities = defineSkill({
   id: 'compound-inequalities',
   name: 'Compound Inequalities',
   blurb: 'And, or, and between',
+  teachingLine: 'For and, keep values that satisfy both; for or, keep values that satisfy at least one.',
   build(context: BuildContext) {
     const [rangeMin, rangeCap] = band(context.difficulty, RANGE_BAND)
     const rangeMax = context.rng.int(rangeMin, rangeCap)

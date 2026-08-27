@@ -1067,7 +1067,7 @@ shows before a lesson's first problem.
       without making any Stage G skill playable before its generators land. Math notation and
       diagram rendering were already available and remain part of Stage G's requirements.
 
-- [ ] **25 · Skill intros** — L — **four increments**
+- [x] **25 · Skill intros** — L — **four increments** — **shipped 2026-08-27**
 
       `docs/curriculum.md`'s content style contract has promised a **teaching line** and **one
       worked example**, "shown once, before the first problem", since before item 0 — and
@@ -1133,7 +1133,17 @@ shows before a lesson's first problem.
         and pins the six current-unit vocabulary sequences. The focused suites, full test,
         build, lint, and 375-by-812 browser gate cover the complete increment; no new capability,
         renderer, dependency, or progress field was needed.
-      - **25d** Stages E and F — 62 skills, the notation- and plane-heavy end of what is built.
+      - **25d** Stages E and F — 62 skills, the notation- and plane-heavy end of what is built —
+        **shipped 2026-08-27**. Every playable generator now carries its reviewed one-sentence
+        teaching line, and `teachingLine` is required on both `SkillConfig` and `SkillGenerator`
+        with `defineSkill` remaining the sole copy boundary. Fixed difficulty-1 examples still
+        come from each generator through the shared renderer, including math notation,
+        expression answers, coordinate planes, and root pairs. Independent unit checks recover
+        answers from visible or semantic data, while coverage derives all 62 ids from the
+        manifest and pins the current-unit vocabulary sequences. Recorded output, lesson
+        behavior, progress state, wall diagnoses, and existing answer surfaces remain unchanged.
+        The complete 375-by-812 browser gate covers all 62 intros; no new capability, renderer,
+        dependency, or progress field was needed.
 
       **Stages G and H carry their own**, rather than waiting for a fifth increment here: from
       25a onward a teaching line and a worked example are part of what shipping a skill means,

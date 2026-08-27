@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { isCoordinateTarget, type Coordinate, type CoordinateLine } from '../lib/coordinate-plane'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import type { CoordinateData, Difficulty, LinearEquation, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample } from './recorded-output'
 import { unit17 } from './unit-17-systems-equations'
 
@@ -97,6 +99,67 @@ const usesDifficultyReach = (id: string) => {
     }
   }
 }
+
+const teachingLines = [
+  ['system-by-graphing', 'The point where both lines meet solves both equations.'],
+  ['substitution', 'Replace an isolated letter with its equal expression in the other equation.'],
+  ['elimination', 'Scale every term in one equation, then add or subtract to cancel one letter.'],
+  ['system-words', 'Translate total count and total value into two equations, then solve them together.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit17.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 17 skill: ${id}`)
+  return found
+}
+
+describe('Stage F Unit 17 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    const generator = teachingSkill(id)
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage F Unit 17 intro examples', () => {
+  it('recomputes every fixed intersection from structured equations or story quantities', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+      const data = dataOf(problem, id === 'system-by-graphing'
+        ? 'system-by-graphing'
+        : id === 'substitution'
+          ? 'system-substitution'
+          : id === 'elimination'
+            ? 'system-elimination'
+            : 'system-words')
+
+      if (id === 'system-by-graphing') {
+        const lines = displayOf(problem).plane.lines.map(equationFromLine)
+        if (!lines[0] || !lines[1]) throw new Error(`${id}: expected two line equations`)
+        expect(solve([lines[0], lines[1]])).toEqual(answerOf(problem))
+      } else if (id === 'system-words') {
+        if (data.operation !== 'system-words') throw new Error(`${id}: wrong payload`)
+        const x = (data.totalRevenue - data.secondPrice * data.totalCount) /
+          (data.firstPrice - data.secondPrice)
+        expect(x).toBe(Number(x))
+        expect(solve([{ form: 'standard', a: 1, b: 1, c: data.totalCount }, {
+          form: 'standard',
+          a: data.firstPrice,
+          b: data.secondPrice,
+          c: data.totalRevenue,
+        }])).toEqual(answerOf(problem))
+      } else {
+        if (data.operation !== 'system-substitution' && data.operation !== 'system-elimination') {
+          throw new Error(`${id}: wrong payload`)
+        }
+        expect(solve(data.equations)).toEqual(answerOf(problem))
+      }
+    }
+  })
+})
 
 describe('Unit 17 recorded output', () => {
   describe.each(unit17)('$id', (skill) => {

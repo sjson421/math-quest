@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
+import { checkTeachingLine } from '../lib/content-rules'
 import { diagnose, generateProblem } from '../lib/generator'
 import { isCoordinateTarget, type Coordinate } from '../lib/coordinate-plane'
 import type { CoordinateData, Difficulty, EquationData, Problem } from '../lib/types'
+import { manifestIndex } from './index'
 import { sample, unrenderedKeys } from './recorded-output'
 import { unit19 } from './unit-19-functions'
 
@@ -96,6 +98,75 @@ const relationIsLinear = (points: readonly Coordinate[]) => {
     BigInt(point.y - first.y) * run === rise * BigInt(point.x - first.x),
   )
 }
+
+const teachingLines = [
+  ['function-notation', 'Function notation shows an input inside parentheses and its output after the equals sign.'],
+  ['evaluate-function', 'Replace x with the given input, then calculate the output.'],
+  ['domain-range', 'The domain contains every input; the range contains every distinct output.'],
+  ['linear-vs-nonlinear', 'A relationship is linear when its rate of change stays constant.'],
+  ['compare-functions', 'Compare matching rates of change or starting values across all three forms.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit19.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 19 skill: ${id}`)
+  return found
+}
+
+describe('Stage F Unit 19 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    const generator = teachingSkill(id)
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage F Unit 19 intro examples', () => {
+  it('recomputes every fixed example across its visible representations', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+
+      if (id === 'function-notation') {
+        const data = equationData(problem)
+        if (data.operation !== 'function-notation') throw new Error(`${id}: wrong payload`)
+        if (problem.display.kind !== 'equation') throw new Error(`${id}: expected equation display`)
+        expect(problem.display.text).toBe(`f(${drawn(data.input)}) = ${drawn(data.output)}`)
+        expect(choiceAnswer(problem)).toBe('input-to-output')
+      } else if (id === 'evaluate-function') {
+        const data = equationData(problem)
+        if (data.operation !== 'evaluate-function') throw new Error(`${id}: wrong payload`)
+        const output = data.coefficient * data.input + data.constant
+        if (problem.answer.kind !== 'exact') throw new Error(`${id}: expected exact answer`)
+        expect({ n: problem.answer.n, d: problem.answer.d }).toEqual({ n: output, d: 1 })
+      } else if (id === 'domain-range') {
+        const data = coordinateData(problem, 'domain-range')
+        if (problem.display.kind !== 'coordinate-plane') throw new Error(`${id}: expected plane`)
+        const values = [...new Set(problem.display.plane.points.map((point) => point[data.asks === 'domain' ? 'x' : 'y']))]
+          .sort((left, right) => left - right)
+        const choice = (problem.choices ?? []).find((candidate) => candidate.id === choiceAnswer(problem))
+        expect(choice?.label).toBe(setLabel(values))
+      } else if (id === 'linear-vs-nonlinear') {
+        const data = coordinateData(problem, 'linear-vs-nonlinear')
+        if (data.operation !== 'linear-vs-nonlinear' || problem.display.kind !== 'coordinate-plane') {
+          throw new Error(`${id}: expected relation data`)
+        }
+        expect(choiceAnswer(problem)).toBe(relationIsLinear(problem.display.plane.points) ? 'linear' : 'nonlinear')
+      } else {
+        const data = coordinateData(problem, 'compare-functions')
+        if (problem.display.kind !== 'coordinate-plane') throw new Error(`${id}: expected plane`)
+        const table = ruleFromRows(data.tableRows)
+        const line = problem.display.plane.lines[0].through
+        const graph = { slope: slopeFrom(line), intercept: interceptFrom(line) }
+        const equation = { slope: data.equationSlope, intercept: data.equationIntercept }
+        const values = [table, graph, equation].map((rule) => rule[data.asks])
+        expect(choiceAnswer(problem)).toBe(['table', 'graph', 'equation'][values.indexOf(Math.max(...values))])
+      }
+    }
+  })
+})
 
 describe.each(unit19.map((skill) => [skill.id, skill] as const))('Unit 19 recorded output: %s', (_id, skill) => {
   it('matches the authored sample output', () => {

@@ -3897,6 +3897,7 @@ describe('alwaysFiltered', () => {
     id: 'synthetic',
     name: 'Synthetic',
     blurb: 'For testing the checker',
+    teachingLine: 'A synthetic line teaches one idea.',
     generate(rng, difficulty) {
       const a = rng.int(2, 9)
       const b = rng.int(2, 9)
@@ -4645,6 +4646,7 @@ describe('difficulty reporting', () => {
     id: flat ? 'flat-whole' : wholeNumber ? 'growing-whole' : 'growing-arithmetic',
     name: 'Synthetic',
     blurb: 'For testing difficulty',
+    teachingLine: 'A synthetic line teaches one idea.',
     generate(_rng, difficulty) {
       const value = flat ? 40 : difficulty * 40
       return wholeNumber
@@ -4694,6 +4696,7 @@ describe('difficulty reporting', () => {
       id: 'growing-chart',
       name: 'Growing chart',
       blurb: 'For testing chart difficulty',
+      teachingLine: 'A synthetic line teaches one idea.',
       generate(_rng, difficulty) {
         return {
           skillId: 'growing-chart',

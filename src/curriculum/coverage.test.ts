@@ -23,7 +23,7 @@ import {
 } from './index'
 import { parseCurriculumDoc } from './manifest/curriculum-doc'
 import { AVAILABLE_CAPABILITIES, allSkills as manifestSkills } from './manifest'
-import { stageA, stageB, stageC, stageD } from './manifest'
+import { stageA, stageB, stageC, stageD, stageE, stageF } from './manifest'
 import type { Capability } from './manifest/types'
 import type { Problem } from '../lib/types'
 
@@ -35,6 +35,8 @@ const stageAIds = stageA.units.flatMap((unit) => unit.skills.map((skill) => skil
 const stageBIds = stageB.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
 const stageCIds = stageC.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
 const stageDIds = stageD.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
+const stageEIds = stageE.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
+const stageFIds = stageF.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
 
 describe('every generator is declared in the manifest', () => {
   it('registers nothing the manifest does not declare', () => {
@@ -181,16 +183,20 @@ describe('the skills that are built', () => {
     expect(longBlurbs).toEqual([])
   })
 
-  it('ships teaching lines for exactly Stages A through D', () => {
+  it('ships teaching lines for exactly Stages A through F', () => {
     const withLines = allSkills.filter((skill) => skill.teachingLine !== undefined)
     expect(stageBIds).toHaveLength(44)
     expect(stageCIds).toHaveLength(9)
     expect(stageDIds).toHaveLength(50)
+    expect(stageEIds).toHaveLength(34)
+    expect(stageFIds).toHaveLength(28)
     expect(withLines.map((skill) => skill.id)).toEqual([
       ...stageAIds,
       ...stageBIds,
       ...stageCIds,
       ...stageDIds,
+      ...stageEIds,
+      ...stageFIds,
     ])
 
     const terms = withLines.map((skill) => {
@@ -208,7 +214,7 @@ describe('the skills that are built', () => {
     expect([...new Set(stageBTerms)]).toEqual(['remainder', 'factor', 'multiple', 'prime'])
 
     const termsByUnit = new Map<string, string[]>()
-    for (const id of [...stageCIds, ...stageDIds]) {
+    for (const id of [...stageCIds, ...stageDIds, ...stageEIds, ...stageFIds]) {
       const location = manifestIndex.get(id)
       if (!location) throw new Error(`Missing manifest location: ${id}`)
       const line = allSkills.find((skill) => skill.id === id)?.teachingLine
@@ -233,6 +239,14 @@ describe('the skills that are built', () => {
       ['unit-9', Array.from({ length: 9 }, () => 'decimal')],
       ['unit-10', Array.from({ length: 8 }, () => 'percent')],
       ['unit-11', ['ratio', 'ratio', 'unit rate', 'proportion', 'ratio']],
+      ['unit-12', ['exponent', 'exponent', 'square root', 'exponent', 'exponent', 'exponent', 'exponent', 'exponent']],
+      ['unit-13', ['variable', 'variable', 'like terms', 'like terms', 'distribute', 'distribute']],
+      ['unit-14', ['equation', 'equation']],
+      ['unit-15', ['inequality', 'inequality', 'inequality']],
+      ['unit-16', ['coordinate', 'quadrant', 'slope', 'slope', 'intercept', 'slope']],
+      ['unit-17', []],
+      ['unit-18', ['polynomial', 'polynomial', 'binomial', 'quadratic']],
+      ['unit-19', ['function', 'domain']],
     ])
   })
 
