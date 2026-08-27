@@ -7,7 +7,8 @@ browser and can be installed on devices that support web apps.
 ## Status: playable foundations, whole course mapped
 
 **173 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
-streaks, a companion mascot, and progress backup.
+streaks, stage checkpoints, a companion character the learner chooses and dresses, a room to
+decorate, and progress backup.
 
 The rest of the course now exists as data rather than intent: all **201 skills** across 8
 stages and 23 units are declared in `src/curriculum/manifest/`, with prerequisites, unit
@@ -37,9 +38,9 @@ as its value, since the expanded expression a factoring question displays is a w
 to it. Later units still need timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
-milestone, what blocks what, and the unbuilt product features (dress-up, skip-ahead,
-review, stage checkpoints). It lives in one place so it cannot drift out of step with this
-file.
+milestone, what blocks what, and the product features still unbuilt (skip-ahead, review and
+spaced repetition, timed mode, streak reminders). It lives in one place so it cannot drift
+out of step with this file.
 
 ## Running it
 
@@ -191,9 +192,12 @@ src/
                 content rules, types
   curriculum/   generators, plus the registry that resolves them against the manifest
     manifest/   the whole course as data — one file per stage, and the derivation rules
-  components/   Mascot, Lesson, Keypad, ProblemView, Settings, and the course tree —
-                Home wraps StageList, UnitList and SkillList
+  components/   Mascot, Room, Shop, Lesson, Keypad, ProblemView, Settings, and the course
+                tree — Home wraps StageList, UnitList and SkillList
+  cosmetics/    the characters, the one catalogue their wardrobe and the room share,
+                the palette, and the motion rules
   store/        zustand + IndexedDB persistence, mastery and unlock rules
+api/            the serverless progress endpoint — one opaque JSON blob per recovery key
 docs/           curriculum.md — the course in prose, cross-checked against the manifest
                 roadmap.md — everything left to build, and what blocks what
 openspec/       specs/ — what the system does today, as requirements
@@ -207,15 +211,37 @@ scripts/        icon generation from the mascot artwork
 make practice inviting. The language stays clear and respectful: Pip never baby-talks or
 scolds, and error feedback is sympathetic rather than alarm-red.
 
-**Pip** is an original character, built as layered SVG (`src/components/Mascot.tsx`) so
-expressions and future outfits are composable data rather than separate drawings. Adding a
-new outfit is a few lines of geometry, not an art commission.
+**Three original characters** ship — Pip the bunny, free and where every record starts, plus
+Mochi and Taro at 500 coins each. All are layered SVG (`src/components/Mascot.tsx`), and a
+character supplies geometry, colour and eight named **anchors**, never a second drawing of the
+mascot: `Mascot.tsx` owns the expressions, the blink, the bob and the ear swing for all of
+them. Every one of the ten cosmetics is hung off those anchors rather than off literal
+coordinates, so a hat is "cross the brow, this much wider than the head" and fits a bunny, a
+cat and a capybara alike. Buying a character therefore costs the learner no accessory, and
+adding one costs the wardrobe nothing.
+
+**Coins buy looks, never progress.** One purse and one catalogue (`src/cosmetics/`) carry the
+characters, the ten cosmetics across five slots, and the eleven decorations that furnish the
+room behind the character (`src/components/Room.tsx`). Nothing bought there gates or
+accelerates a lesson. The authoring rules — the two coordinate systems, slot and occlusion
+order, palette and geometry limits — live in the `mascot-design` skill, settled before any
+cosmetic existed so that later items could not each invent their own conventions.
 
 **The custom keypad** matters more than it looks. Mobile system keyboards can cover half the
 screen and make a focused lesson feel like a web form.
 
 **Haptics** work on iOS 18+ via the native `switch`-element trick (`src/lib/haptics.ts`),
 since Safari does not implement the Vibration API. Feature-detected, silent no-op elsewhere.
+
+**Sound** is one synthesised celebration chime (`src/lib/sound.ts`) — three Web Audio notes,
+so no asset, no licence and no decoder — under the same best-effort contract as haptics, and
+a mute toggle sits on Home. The mute flag lives in `localStorage` rather than in progress,
+because it is about this phone and not this learner: a lesson done quietly in a waiting room
+should not silence the tablet at home.
+
+**Reduced motion is honoured by the rainbow wings only.** That is a known gap, not a
+decision that the rest of the animation is exempt — `src/cosmetics/wings.tsx` says so at the
+point of use.
 
 ## Testing
 

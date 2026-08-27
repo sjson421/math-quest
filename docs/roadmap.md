@@ -6,10 +6,10 @@ What is left, in the order it should be done.
 is complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17, 18 and 19 are complete.
 Choice input,
 number-line input, math notation, fraction input, diagrams, expression input,
-coordinate-plane input and root-pair input are built,
+coordinate-plane input, root-pair input and chart rendering are built,
 so `AVAILABLE_CAPABILITIES` holds
 `choice-input`, `number-line`, `math-notation`, `fraction-input`, `diagram`,
-`expression-input`, `coordinate-plane` and `root-pair-input`. Unit 12 is the first content to use `math-notation`'s superscript and
+`expression-input`, `coordinate-plane`, `root-pair-input` and `chart`. Unit 12 is the first content to use `math-notation`'s superscript and
 root kinds, for exponent and root display; it does not use `expression-input`, since that
 capability's grammar excludes exponents, so power-rule skills ask for the resulting exponent
 as a number rather than an expression. `zero-neg-exponents` settles Stage E's previously
@@ -87,7 +87,8 @@ behind our build order.
 
 **Capabilities gate whole stages.** `AVAILABLE_CAPABILITIES` in
 `src/curriculum/manifest/resolve.ts` contains `choice-input`, `number-line`, `math-notation`,
-`fraction-input`, `diagram`, `expression-input`, `coordinate-plane` and `root-pair-input` today. Adding a capability there is a one-line edit that flips its stage
+`fraction-input`, `diagram`, `expression-input`, `coordinate-plane`, `root-pair-input` and
+`chart` today. Adding a capability there is a one-line edit that flips its stage
 on — which is why capability work is its own item, never bundled with the content it unblocks.
 It flips nothing on its own, though: a skill still needs a generator and every other
 capability its stage declares.
