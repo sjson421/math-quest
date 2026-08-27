@@ -215,14 +215,14 @@ scolds, and error feedback is sympathetic rather than alarm-red.
 Mochi and Taro at 500 coins each. All are layered SVG (`src/components/Mascot.tsx`), and a
 character supplies geometry, colour and eight named **anchors**, never a second drawing of the
 mascot: `Mascot.tsx` owns the expressions, the blink, the bob and the ear swing for all of
-them. Every one of the ten cosmetics is hung off those anchors rather than off literal
+them. Every one of the eleven cosmetics is hung off those anchors rather than off literal
 coordinates, so a hat is "cross the brow, this much wider than the head" and fits a bunny, a
 cat and a capybara alike. Buying a character therefore costs the learner no accessory, and
 adding one costs the wardrobe nothing.
 
-**Coins buy looks, never progress.** One purse and one catalogue (`src/cosmetics/`) carry the
-characters, the ten cosmetics across five slots, and the eleven decorations that furnish the
-room behind the character (`src/components/Room.tsx`). Nothing bought there gates or
+**Coins buy looks, never progress.** One purse and one catalogue (`src/cosmetics/`) carry
+the characters, the eleven cosmetics filling all five slots, and the eleven decorations that
+furnish the room behind the character (`src/components/Room.tsx`). Nothing bought there gates or
 accelerates a lesson. The authoring rules — the two coordinate systems, slot and occlusion
 order, palette and geometry limits — live in the `mascot-design` skill, settled before any
 cosmetic existed so that later items could not each invent their own conventions.

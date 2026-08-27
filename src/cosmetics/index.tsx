@@ -74,9 +74,10 @@ const { blossom, butter, lilac, mint, powder } = families
  * of saving, and the middle gives the learner somewhere to spend before then.
  *
  * **A price is a promise about how much there is to look at.** The earmuffs are
- * a band and two muffs; the crown adds points and gems that breathe; the comet
- * adds a tail, sparkles and a spin. An expensive item that is no more elaborate
- * than a cheap one is the thing that makes the whole ladder feel dishonest.
+ * a band and two muffs; the rosette adds a petal ring, a tail pair and a struck
+ * centre; the wings add four lobes, a sweep and a travelling hue. An expensive
+ * item that is no more elaborate than a cheap one is the thing that makes the
+ * whole ladder feel dishonest.
  *
  * The list is ordered by price, and the shop shows each category in this order —
  * so a category reads plain to elaborate from top to bottom.
@@ -332,6 +333,92 @@ export const cosmetics: Cosmetic[] = [
         </g>
       </g>
     ),
+  },
+
+  {
+    kind: 'cosmetic',
+    id: 'blossom-rosette',
+    slot: 'pin',
+    name: 'Blossom rosette',
+    price: 250,
+    // The only item in the `pin` slot, and the only one anywhere that takes
+    // something away: it stands where the character's own charm does — Pip's
+    // star, Mochi's fish, Taro's lily pad — rather than beside it. That is an
+    // identity change, and `mascot-design` asks for it to be a decision rather
+    // than a side effect of picking the slot. So, the two reasons the slot
+    // stood empty, and what this shape does about each.
+    //
+    // **It read as a smudge.** A comet claimed the slot once and lost it here:
+    // a tail and sparkles are detail, and detail at 92px is mud. A rosette is a
+    // *silhouette* instead. Blur the petal ring and a frilled disc is still a
+    // rosette; blur a comet and it is a streak. Everything that carries the
+    // meaning survives being softened, which is the only legibility test the
+    // smallest size actually runs.
+    //
+    // **It left the corner emptier than it found it.** The star is thin: five
+    // points spanning 22 units and enclosing very little. This is deliberately
+    // the heaviest thing in the slot — a solid 33-unit disc under a full petal
+    // ring — so the trade adds mass rather than spending it.
+    //
+    // Drawn from `pin`, never from Pip's `(148, 162)`: the other two hang their
+    // charm four units over, and Mochi's another four down.
+    //
+    // No motion of its own. `Mascot.tsx` gives whatever stands in this slot the
+    // charm's sway and its celebration spin, for the reason written there —
+    // the beat belongs to the moment, not to the object hanging there.
+    render: (_state, { pin }) => {
+      const cx = pin.x
+      const cy = pin.y - 3
+
+      return (
+        <g>
+          {/* Tails first, so they emerge from under the disc rather than lying
+              across it. Each is one notched ribbon, mirrored. */}
+          {[-1, 1].map((side) => (
+            <path
+              key={side}
+              d={path`M${cx + side * 5} ${cy + 4}
+                      L${cx + side * 11} ${cy + 16}
+                      L${cx + side * 7} ${cy + 13}
+                      L${cx + side * 3} ${cy + 17}
+                      L${cx + side} ${cy + 5}z`}
+              strokeWidth="2.5"
+              strokeLinejoin="round"
+              strokeLinecap="round"
+              style={{ fill: blossom.base, stroke: blossom.deep }}
+            />
+          ))}
+          {/* Nine petals on a 9.5 ring. Nine rather than more because a tenth
+              closes the gaps between them, and a ring with no gaps is a circle
+              with a bumpy edge — the frill is what says rosette. */}
+          {Array.from({ length: 9 }, (_, i) => {
+            const a = (2 * Math.PI * i) / 9 - Math.PI / 2
+
+            return (
+              <circle
+                key={i}
+                cx={Number((cx + 9.5 * Math.cos(a)).toFixed(2))}
+                cy={Number((cy + 9.5 * Math.sin(a)).toFixed(2))}
+                r="5"
+                strokeWidth="2.5"
+                style={{ fill: blossom.base, stroke: blossom.deep }}
+              />
+            )
+          })}
+          <circle
+            cx={cx}
+            cy={cy}
+            r="10"
+            strokeWidth="3"
+            style={{ fill: blossom.soft, stroke: blossom.deep }}
+          />
+          {/* Struck in the deep shade rather than outlined in it. Dark-on-pale
+              is the most contrast one family has, and it is what keeps a
+              5.5-unit star from going to mush at 92px. */}
+          <path d={star(cx, cy, 5.5, 2.4)} style={{ fill: blossom.deep }} />
+        </g>
+      )
+    },
   },
 
   {

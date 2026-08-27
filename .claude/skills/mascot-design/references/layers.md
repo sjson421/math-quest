@@ -75,6 +75,15 @@ The `pin` slot is already occupied. An item equipped there replaces Pip's star r
 stacking with it, and that is a visible identity change — treat replacing the star as a
 deliberate design decision, not a free slot.
 
+One item has made that decision: `blossom-rosette`. It is worth reading before proposing a
+second, because it is written against the two things that sank the pin the catalogue tried
+first — a shape whose blurred form is still the same shape, and enough mass that taking the
+star off is not a loss.
+
+**The slot carries the charm's motion, not the charm.** Whatever stands in step 9 gets the
+sway and the celebration spin, so a `pin` item adds no loop of its own — the same rule the
+root bob is under.
+
 ## Render order
 
 Painted first to last. Steps 1, 4, 6, 9, and 10 are Pip's own layers and are fixed; the

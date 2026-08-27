@@ -66,7 +66,7 @@ Two things are still the same on everyone:
 | `ear` | `(ear) => ReactNode` | one ear, **drawn upright** about its own `base` — `Mascot.tsx` applies the rest pose and the swing |
 | `crest` | `ReactNode` | what sits between the ears |
 | `markings` | `ReactNode`, optional | a muzzle, whiskers, a nose. Pip has none |
-| `charm` | `ReactNode` | the `pin` slot's default. Static; the sway and the celebration spin are applied for it |
+| `charm` | `ReactNode` | the `pin` slot's default. Static; the sway and the celebration spin belong to the slot and are applied to whatever stands in it |
 
 Four parts have envelopes, and each is a real collision rather than a style preference:
 

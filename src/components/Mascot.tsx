@@ -194,11 +194,9 @@ export function Mascot({
         {neck?.render?.(state, anchors)}
 
         {/* 9 · pin — the character's own charm unless something replaces it */}
-        {pin ? pin.render?.(state, anchors) : (
-          <Charm state={state} at={anchors.pin}>
-            {who.charm}
-          </Charm>
-        )}
+        <Charm state={state} at={anchors.pin}>
+          {pin ? pin.render?.(state, anchors) : who.charm}
+        </Charm>
 
         {/* 10 · foreground effects */}
         {state === 'sleeping' && <SleepZs anchors={anchors} />}
@@ -208,17 +206,19 @@ export function Mascot({
 }
 
 /**
- * The character's own charm, and what the `pin` slot falls back to.
+ * The motion the `pin` slot carries, whatever is standing in it.
  *
- * It is a default rather than a fixture: a cosmetic equipped there takes its
- * place, which the contract calls a deliberate identity change. Nothing in the
- * catalogue does that today.
+ * The character's own charm is a default rather than a fixture: a cosmetic
+ * equipped there takes its place, which the contract calls a deliberate
+ * identity change. `blossom-rosette` is the one item that makes it.
  *
- * **The motion is here and the shape is not.** Pip's star, Mochi's fish and
- * Taro's lily pad all rock gently and all spin once on `celebrating`, because
- * that beat belongs to the moment rather than to the object — a charm that chose
- * its own would make the celebration land differently depending on who you had
- * bought.
+ * **The motion is here and the shape is not.** Pip's star, Mochi's fish, Taro's
+ * lily pad and the rosette all rock gently and all spin once on `celebrating`,
+ * because that beat belongs to the moment rather than to the object. A charm
+ * that chose its own would make the celebration land differently depending on
+ * who you had bought; a *bought* pin that chose its own would do it depending on
+ * what you had spent. So this wraps the slot rather than the fallback, and an
+ * item authored for it adds no loop of its own.
  */
 function Charm({
   state,

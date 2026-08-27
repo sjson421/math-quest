@@ -177,13 +177,14 @@ describe('the catalogue the shop is priced against', () => {
     expect(biggestStep(cosmetics.map((c) => c.price).sort((a, b) => a - b))).toBeLessThanOrEqual(2)
   })
 
-  it('covers every slot but the one holding Pip’s signature star', () => {
+  it('covers every slot the contract defines', () => {
     const slots = new Set(cosmetics.map((c) => c.slot))
 
-    // `pin` is deliberately empty: it holds the star by default, so an item
-    // there changes the character rather than adding to it. The wardrobe fills
-    // every other slot the contract defines.
-    expect(slots).toEqual(new Set(COSMETIC_SLOTS.filter((slot) => slot !== 'pin')))
+    // `pin` stood empty the longest, because it holds the character's own charm
+    // by default and an item there changes the character rather than adding to
+    // it. `blossom-rosette` is the one item that makes that trade, and it is
+    // argued for where it is authored.
+    expect(slots).toEqual(new Set(COSMETIC_SLOTS))
     expect(cosmeticById.get('party-hat')?.back).toBeDefined()
     expect(cosmeticById.get('party-hat')?.front).toBeDefined()
   })

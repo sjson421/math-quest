@@ -7,11 +7,10 @@
  */
 
 import { renderToStaticMarkup } from 'react-dom/server'
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import {
   characters,
   cosmetics,
-  cosmeticById,
   type Cosmetic,
   type Equipped,
 } from '../cosmetics'
@@ -197,30 +196,23 @@ describe('render order', () => {
 
 describe('the pin slot', () => {
   /**
-   * No shipped cosmetic takes this slot — replacing Pip's star is an identity
-   * change the contract asks to be made deliberately, and the catalogue declines
-   * to make it. A comet pin did briefly claim it and was withdrawn: at the sizes
-   * Pip is actually drawn it read as a smudge, and taking the star off left the
-   * lower-right of his face emptier than the star had. The renderer still
-   * implements the slot, so it is proved with a fixture registered into the
-   * catalogue for the test.
+   * The one slot whose default is a shipped drawing rather than nothing, so an
+   * item here does not add to the character — it stands where the character's
+   * own charm did. `blossom-rosette` is the only cosmetic that makes that trade,
+   * and the two reasons the slot stood empty until it are written beside it in
+   * the catalogue.
+   *
+   * Identified by its disc fill, for the reason the hat fragments are: every
+   * part of it is computed from the wearer's `pin`, so no coordinate in it means
+   * the same thing on all three bodies.
    */
-  const badge: Cosmetic = {
-    kind: 'cosmetic',
-    id: 'test-badge',
-    slot: 'pin',
-    name: 'Test badge',
-    price: 1,
-    render: () => <circle cx="148" cy="162" r="9" data-badge="" />,
-  }
-
-  beforeEach(() => cosmeticById.set(badge.id, badge))
-  afterEach(() => cosmeticById.delete(badge.id))
+  const ROSETTE = 'fill:var(--color-blossom-soft)'
+  const rosette: Equipped = { pin: 'blossom-rosette' }
 
   it('replaces the signature star rather than stacking with it', () => {
-    const html = render({ pin: badge.id })
+    const html = render(rosette)
 
-    expect(html).toContain('data-badge')
+    expect(html).toContain(ROSETTE)
     expect(html).not.toContain(STAR)
   })
 
@@ -230,14 +222,24 @@ describe('the pin slot', () => {
       ['mochi', FISH_TAIL],
       ['taro', LILY_PAD],
     ] as const) {
-      const html = render({ pin: badge.id }, id)
+      const html = render(rosette, id)
 
-      expect(html, id).toContain('data-badge')
+      expect(html, id).toContain(ROSETTE)
       expect(html, id).not.toContain(charm)
     }
   })
 
-  it('ships no cosmetic that would take the star’s place', () => {
-    expect(cosmetics.some((c) => c.slot === 'pin')).toBe(false)
+  /**
+   * The sway and the celebration spin belong to the slot rather than to the
+   * fallback: a bought pin that stayed still would make the celebration land
+   * differently depending on what the learner had spent. The wrapper carries
+   * them, and its transform origin is the character's own `pin` — so finding
+   * that origin with an item worn is finding the item inside the wrapper.
+   */
+  it('gives a bought pin the motion the charm has', () => {
+    const origin = 'transform-origin:148px 162px'
+
+    expect(render(), 'the charm').toContain(origin)
+    expect(render(rosette), 'the rosette').toContain(origin)
   })
 })
