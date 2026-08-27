@@ -1116,8 +1116,14 @@ shows before a lesson's first problem.
         Start practice marks only that flag, and **Review intro** returns to the same active
         problem only while the learner is answering. No attempt, mastery, reward, unlock, or
         lesson seed changes on the intro path.
-      - **25b** Stage B — 44 skills across Units 1–5, the course's largest block of plain
-        arithmetic and the cheapest teaching lines in it.
+      - **25b** Stage B — 44 skills across Units 1–5 — **shipped 2026-08-26**. Every Stage B
+        generator now carries its reviewed one-sentence teaching line, including the existing
+        multiplication-table helper's seven declarations. The fixed difficulty-1 intro examples
+        remain generated through each skill, with independent visible-data answer checks and
+        unchanged recorded output, wall diagnoses, lesson behavior, and progress state. Coverage
+        derives Stage B from the manifest, checks all 52 Stage A/B lines, and pins Unit 4's four
+        current vocabulary terms. The 375-by-812 browser gate covers all 44 intros; no new
+        capability, renderer, dependency, or progress field was needed.
       - **25c** Stages C and D — 57 skills, and the first intros carrying a diagram.
       - **25d** Stages E and F — 62 skills, the notation- and plane-heavy end of what is built.
 

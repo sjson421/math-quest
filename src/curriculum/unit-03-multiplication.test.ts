@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
+import type { Problem } from '../lib/types'
 import {
   carriedBeforeMultiplying,
   firstPartialOnly,
@@ -10,6 +12,7 @@ import {
   partialProductRow,
   partialProductTrace,
 } from './engine'
+import { manifestIndex } from './index'
 import { format, sample, sweep, unrenderedKeys } from './recorded-output'
 import { unit03 } from './unit-03-multiplication'
 
@@ -21,6 +24,84 @@ describe.each(unit03.map((skill) => [skill.id, skill] as const))(
     })
   },
 )
+
+const teachingLines = [
+  ['mult-meaning', 'Multiplication counts equal groups of the same size.'],
+  ['times-2', 'Multiplying by 2 doubles the other number.'],
+  ['times-10', 'Multiplying by 10 shifts every digit one place left.'],
+  ['times-5', 'Five equal groups make half of ten equal groups.'],
+  ['times-3', 'Multiplying by 3 adds three equal groups.'],
+  ['times-4', 'Multiply by 4 by doubling the number, then doubling again.'],
+  ['times-6', 'Six equal groups are five equal groups plus one more.'],
+  ['times-9', 'Nine equal groups are ten equal groups minus one group.'],
+  ['times-7-8', 'Build seven or eight equal groups from five groups plus the rest.'],
+  ['times-mixed', 'Either number can be the group size; the other tells how many groups.'],
+  ['mult-by-10-100', 'Multiplying by 10 or 100 shifts every digit left one or two places.'],
+  ['mult-2by1', 'Multiply the ones first, write the ones digit, then multiply tens and add the carry.'],
+  ['mult-2by2', 'Make one row for each bottom digit, shift the tens row, then add both rows.'],
+  ['mult-words', 'Use multiplication when equal groups hold the same amount.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit03.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 3 skill: ${id}`)
+  return found
+}
+
+const shownFactors = (problem: Problem): [number, number] => {
+  if (problem.display.kind === 'inline') {
+    const factors = problem.display.text.split(' × ').map(Number)
+    if (factors.length === 2 && factors.every(Number.isInteger)) return factors as [number, number]
+    throw new Error(`Cannot parse multiplication: ${problem.display.text}`)
+  }
+
+  if (problem.display.kind === 'column') {
+    if (problem.display.operands.length !== 2) throw new Error(`Expected two factors for ${problem.skillId}`)
+    return problem.display.operands as [number, number]
+  }
+  if (problem.display.kind === 'story') {
+    const { operands } = problem.display
+    if (!operands || operands.length !== 2) throw new Error(`Expected two factors for ${problem.skillId}`)
+    return operands as [number, number]
+  }
+
+  throw new Error(`Expected multiplication factors for ${problem.skillId}`)
+}
+
+const wallTags: Record<string, string[]> = {
+  'times-7-8': ['one-group-low', 'one-group-high'],
+  'mult-2by1': ['forgot-multiplication-carry', 'carried-before-multiplying'],
+  'mult-2by2': ['missing-placeholder', 'first-partial-only'],
+}
+
+describe('Stage B Unit 3 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = teachingSkill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage B Unit 3 intro examples', () => {
+  it('recomputes every fixed example from its visible factors', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+      const [left, right] = shownFactors(problem)
+
+      expect(problem.answer).toEqual({ kind: 'exact', n: left * right, d: 1 })
+
+      const expectedTags = wallTags[id]
+      if (expectedTags) {
+        expect(new Set(problem.misconceptions?.map((misconception) => misconception.tag))).toEqual(
+          new Set(expectedTags),
+        )
+      }
+    }
+  })
+})
 
 const { everyProblem, exactValue, skill } = sweep(unit03, 'Unit 3')
 

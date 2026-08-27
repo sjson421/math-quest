@@ -88,6 +88,7 @@ const twoOperations = defineSkill({
   id: 'two-operations',
   name: 'Two Operations',
   blurb: '3 + 4 × 2',
+  teachingLine: 'Multiply or divide before adding or subtracting.',
   build({ rng, difficulty }) {
     const [factorMin, factorMax] = band(difficulty, {
       1: [2, 4],
@@ -178,6 +179,7 @@ const withParentheses = defineSkill({
   id: 'with-parentheses',
   name: 'Parentheses First',
   blurb: 'Brackets change the order',
+  teachingLine: 'Work inside parentheses before using operations outside them.',
   build({ rng, difficulty }) {
     const [factorMin, factorMax] = band(difficulty, {
       1: [2, 4],
@@ -238,6 +240,7 @@ const pemdas = defineSkill({
   id: 'pemdas',
   name: 'Full Order of Operations',
   blurb: 'PEMDAS, without exponents yet',
+  teachingLine: 'Use parentheses first, then multiply or divide left to right, then add or subtract left to right.',
   build({ rng, difficulty }) {
     // Tighter than the other two skills at every level, and that is the display
     // rather than the arithmetic: four operands and a bracket pair reach 18

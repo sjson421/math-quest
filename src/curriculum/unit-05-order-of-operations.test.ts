@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import type { Problem } from '../lib/types'
 import { format, sample, sweep, unrenderedKeys } from './recorded-output'
@@ -10,6 +11,7 @@ import {
   render,
   unit05,
 } from './unit-05-order-of-operations'
+import { manifestIndex } from './index'
 
 describe.each(unit05.map((skill) => [skill.id, skill] as const))(
   'recorded output: %s',
@@ -19,6 +21,29 @@ describe.each(unit05.map((skill) => [skill.id, skill] as const))(
     })
   },
 )
+
+const teachingLines = [
+  ['two-operations', 'Multiply or divide before adding or subtracting.'],
+  ['with-parentheses', 'Work inside parentheses before using operations outside them.'],
+  ['pemdas', 'Use parentheses first, then multiply or divide left to right, then add or subtract left to right.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit05.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 5 skill: ${id}`)
+  return found
+}
+
+describe('Stage B Unit 5 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = teachingSkill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
 
 const { everyProblem, exactValue, skill } = sweep(unit05, 'Unit 5')
 
@@ -92,6 +117,24 @@ function evaluateText(text: string): number {
 
 /** The same text with its brackets stripped — what a learner who skips them reads. */
 const withoutBrackets = (text: string) => text.replace(/[()]/g, '')
+
+describe('Stage B Unit 5 intro examples', () => {
+  it('recomputes every fixed example from its visible expression', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+      const tags = new Set(problem.misconceptions?.map((misconception) => misconception.tag))
+
+      expect(problem.answer).toEqual({ kind: 'exact', n: evaluateText(shown(problem)), d: 1 })
+      expect(tags).toContain('first-step-only')
+      expect(tags.size).toBe(2)
+      if (id === 'two-operations') expect(tags).toContain('left-to-right')
+      if (id === 'with-parentheses') expect(tags).toContain('ignored-parentheses')
+      if (id === 'pemdas') {
+        expect(tags.has('ignored-parentheses') || tags.has('pemdas-letter-order')).toBe(true)
+      }
+    }
+  })
+})
 
 describe('the expression model', () => {
   it('prints brackets only where they change the value', () => {

@@ -50,6 +50,7 @@ type TableSkillConfig = {
   id: string
   name: string
   blurb: string
+  teachingLine: string
   table: number
   hint(partner: number, product: number): string
   solution(partner: number, product: number): SolutionStep[]
@@ -61,6 +62,7 @@ function tableSkill(config: TableSkillConfig): SkillGenerator {
     id: config.id,
     name: config.name,
     blurb: config.blurb,
+    teachingLine: config.teachingLine,
     build({ rng, difficulty }) {
       const [min, max] = band(difficulty, TABLE_PARTNERS)
       const partner = rng.int(min, max)
@@ -89,6 +91,7 @@ const multMeaning = defineSkill({
   id: 'mult-meaning',
   name: 'What Multiplication Is',
   blurb: 'Repeated addition and arrays',
+  teachingLine: 'Multiplication counts equal groups of the same size.',
   build({ rng, difficulty }) {
     const { a: groups, b: size } = drawPair({
       label: 'mult-meaning',
@@ -130,6 +133,7 @@ const times2 = tableSkill({
   id: 'times-2',
   name: 'Twos',
   blurb: 'Doubling',
+  teachingLine: 'Multiplying by 2 doubles the other number.',
   table: 2,
   hint: (partner) => `Double ${partner}: add it to itself.`,
   solution: (partner, product) => [
@@ -142,6 +146,7 @@ const times10 = tableSkill({
   id: 'times-10',
   name: 'Tens',
   blurb: 'The pattern of zeros',
+  teachingLine: 'Multiplying by 10 shifts every digit one place left.',
   table: 10,
   hint: (partner) => `Ten groups of ${partner} puts one zero after ${partner}.`,
   solution: (partner, product) => [
@@ -167,6 +172,7 @@ const times5 = tableSkill({
   id: 'times-5',
   name: 'Fives',
   blurb: 'Half of ten',
+  teachingLine: 'Five equal groups make half of ten equal groups.',
   table: 5,
   hint: (partner) => `Find ten groups of ${partner}, then take half.`,
   solution: (partner, product) => {
@@ -183,6 +189,7 @@ const times3 = tableSkill({
   id: 'times-3',
   name: 'Threes',
   blurb: 'The three times table',
+  teachingLine: 'Multiplying by 3 adds three equal groups.',
   table: 3,
   hint: (partner) => `Add three equal groups of ${partner}.`,
   solution: (partner, product) => [
@@ -196,6 +203,7 @@ const times4 = tableSkill({
   id: 'times-4',
   name: 'Fours',
   blurb: 'Double twice',
+  teachingLine: 'Multiply by 4 by doubling the number, then doubling again.',
   table: 4,
   hint: (partner) => `Double ${partner}, then double that result.`,
   solution: (partner, product) => {
@@ -212,6 +220,7 @@ const times6 = tableSkill({
   id: 'times-6',
   name: 'Sixes',
   blurb: 'The six times table',
+  teachingLine: 'Six equal groups are five equal groups plus one more.',
   table: 6,
   hint: (partner) => `Use five groups of ${partner}, then add one more.`,
   solution: (partner, product) => {
@@ -228,6 +237,7 @@ const times9 = tableSkill({
   id: 'times-9',
   name: 'Nines',
   blurb: 'The digit-sum pattern',
+  teachingLine: 'Nine equal groups are ten equal groups minus one group.',
   table: 9,
   hint: (_partner, product) => {
     const digitSum = sumDigits(product)
@@ -260,6 +270,7 @@ const times78 = defineSkill({
   id: 'times-7-8',
   name: 'Sevens & Eights',
   blurb: 'The facts with no shortcut',
+  teachingLine: 'Build seven or eight equal groups from five groups plus the rest.',
   build({ rng, difficulty }) {
     const table = rng.pick([7, 8])
     const [min, max] = band(difficulty, TABLE_PARTNERS)
@@ -291,6 +302,7 @@ const timesMixed = defineSkill({
   id: 'times-mixed',
   name: 'Mixed Tables',
   blurb: 'Full table review',
+  teachingLine: 'Either number can be the group size; the other tells how many groups.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'times-mixed',
@@ -322,6 +334,7 @@ const multBy10100 = defineSkill({
   id: 'mult-by-10-100',
   name: 'Times 10 and 100',
   blurb: 'Shifting places',
+  teachingLine: 'Multiplying by 10 or 100 shifts every digit left one or two places.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [2, 12],
@@ -374,6 +387,7 @@ const mult2by1 = defineSkill({
   id: 'mult-2by1',
   name: 'Two Digits by One',
   blurb: '34 × 6',
+  teachingLine: 'Multiply the ones first, write the ones digit, then multiply tens and add the carry.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'mult-2by1',
@@ -433,6 +447,7 @@ const mult2by2 = defineSkill({
   id: 'mult-2by2',
   name: 'Two Digits by Two',
   blurb: '34 × 26',
+  teachingLine: 'Make one row for each bottom digit, shift the tens row, then add both rows.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'mult-2by2',
@@ -494,6 +509,7 @@ const multWords = defineSkill({
   id: 'mult-words',
   name: 'Multiplication Word Problems',
   blurb: 'Spot the multiplication',
+  teachingLine: 'Use multiplication when equal groups hold the same amount.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'mult-words',

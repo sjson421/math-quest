@@ -31,6 +31,7 @@ const addFactsSmall = defineSkill({
   id: 'add-facts-small',
   name: 'Small Sums',
   blurb: 'Sums to 10',
+  teachingLine: 'Addition combines two amounts into one total.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'add-facts-small',
@@ -97,6 +98,7 @@ const addFacts = defineSkill({
   id: 'add-facts',
   name: 'Addition Facts',
   blurb: 'Adding small numbers',
+  teachingLine: 'Start with the larger number and count on the smaller number.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'add-facts',
@@ -153,6 +155,7 @@ const addTens = defineSkill({
   id: 'add-tens',
   name: 'Adding Tens',
   blurb: '20 + 30',
+  teachingLine: 'Add the counts of tens, then read the result as tens.',
   build({ rng, difficulty }) {
     // The *count* of tens is drawn, then multiplied up. Drawing from [10, 90]
     // and rejecting everything that is not a whole ten would throw away nine
@@ -217,6 +220,7 @@ const add2NoCarry = defineSkill({
   id: 'add-2digit-nocarry',
   name: 'Two-Digit Addition',
   blurb: 'Column addition, no carrying yet',
+  teachingLine: 'Line up ones under ones and tens under tens, then add each column.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'add-2digit-nocarry',
@@ -272,6 +276,7 @@ const add2Carry = defineSkill({
   id: 'add-2digit-carry',
   name: 'Carrying',
   blurb: 'When the ones column overflows',
+  teachingLine: 'When the ones total 10 or more, write the ones digit and carry the ten.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'add-2digit-carry',
@@ -333,6 +338,7 @@ const add3Digit = defineSkill({
   id: 'add-3digit',
   name: 'Bigger Numbers',
   blurb: 'Three-digit column addition',
+  teachingLine: 'Add from right to left, carrying into the next column when needed.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'add-3digit',
@@ -392,6 +398,7 @@ const addThreeNumbers = defineSkill({
   id: 'add-three-numbers',
   name: 'Three Addends',
   blurb: 'Add a stack of three numbers',
+  teachingLine: 'Add all three digits in each column, then carry every full ten.',
   build({ rng, difficulty }) {
     const operands = drawOperands({
       label: 'add-three-numbers',
@@ -463,6 +470,7 @@ const addWords = defineSkill({
   id: 'add-words',
   name: 'Addition Word Problems',
   blurb: 'Spot the addition',
+  teachingLine: 'Find the two amounts being combined, then add them.',
   build({ rng, difficulty }) {
     const frame = pickFrame(rng, ADDITION_FRAMES)
 

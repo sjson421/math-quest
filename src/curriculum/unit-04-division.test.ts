@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
 import type { Problem } from '../lib/types'
 import {
@@ -6,6 +7,7 @@ import {
   forgotBringDown,
   ignoredStepRemainder,
 } from './engine'
+import { manifestIndex } from './index'
 import { format, sample, sweep, unrenderedKeys } from './recorded-output'
 import { factorsOf, isPrime, multiplesOf, unit04 } from './unit-04-division'
 
@@ -29,6 +31,99 @@ const shownOperands = (problem: Problem): [number, number] => {
   }
   return [a, b]
 }
+
+const teachingLines = [
+  ['div-meaning', 'Division shares a total equally or counts equal groups.'],
+  ['div-facts', 'Use a multiplication fact backward to find how many groups fit.'],
+  ['div-remainder', 'A remainder is what stays after making every full group.'],
+  ['div-by-10-100', 'Dividing by 10 or 100 shifts every digit right one or two places.'],
+  ['long-div-1digit', 'Repeat divide, multiply, subtract, and bring down for each digit.'],
+  ['long-div-remainder', 'Count only full groups; an unfinished group does not add one.'],
+  ['long-div-2digit', 'Estimate each quotient digit, multiply to check, then adjust if needed.'],
+  ['factors', 'A factor divides a number exactly with nothing left over.'],
+  ['multiples', 'A multiple comes from multiplying a number by a whole number.'],
+  ['primes', 'A prime number can be divided exactly only by 1 and itself.'],
+  ['div-words', 'Find the total and number of equal groups, then divide.'],
+] as const
+
+const teachingSkill = (id: string) => {
+  const found = unit04.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 4 skill: ${id}`)
+  return found
+}
+
+const trialFactors = (value: number): number[] =>
+  Array.from({ length: value }, (_, index) => index + 1).filter((candidate) => value % candidate === 0)
+
+const answerChoiceLabel = (problem: Problem): string => {
+  const answer = problem.answer
+  if (answer.kind !== 'choice') throw new Error(`Expected choice answer for ${problem.skillId}`)
+  const choice = problem.choices?.find((candidate) => candidate.id === answer.id)
+  if (!choice) throw new Error(`Missing answer choice for ${problem.skillId}`)
+  return choice.label
+}
+
+const fixedDivisionOperands = (problem: Problem): [number, number] => {
+  if (problem.display.kind === 'inline') return shownOperands(problem)
+  if (problem.display.kind === 'story') {
+    const { operands } = problem.display
+    if (operands?.length === 2) return operands as [number, number]
+  }
+  throw new Error(`Expected division operands for ${problem.skillId}`)
+}
+
+describe('Stage B Unit 4 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = teachingSkill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage B Unit 4 intro examples', () => {
+  it('recomputes keypad examples and resolves choice examples from visible data', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(teachingSkill(id), 1, 1)
+
+      if (id === 'factors' || id === 'multiples' || id === 'primes') {
+        if (problem.display.kind !== 'inline') throw new Error(`Expected inline display for ${id}`)
+        const value = Number(problem.display.text)
+        const label = answerChoiceLabel(problem)
+
+        if (id === 'factors') expect(label).toBe(trialFactors(value).join(', '))
+        if (id === 'multiples') {
+          expect(label).toBe([1, 2, 3, 4].map((index) => value * index).join(', '))
+        }
+        if (id === 'primes') {
+          expect(label).toBe(trialFactors(value).length === 2 ? 'prime' : 'composite')
+        }
+        continue
+      }
+
+      const [dividend, divisor] = fixedDivisionOperands(problem)
+      const expected = id === 'div-remainder'
+        ? dividend % divisor
+        : id === 'long-div-remainder'
+          ? Math.floor(dividend / divisor)
+          : dividend / divisor
+
+      expect(problem.answer).toEqual({ kind: 'exact', n: expected, d: 1 })
+
+      const expectedTags: Record<string, string[]> = {
+        'long-div-1digit': ['forgot-bring-down', 'ignored-step-remainder'],
+        'long-div-2digit': ['estimate-low', 'estimate-high'],
+      }
+      if (expectedTags[id]) {
+        expect(new Set(problem.misconceptions?.map((misconception) => misconception.tag))).toEqual(
+          new Set(expectedTags[id]),
+        )
+      }
+    }
+  })
+})
 
 const KEYPAD_SKILLS = [
   'div-meaning',

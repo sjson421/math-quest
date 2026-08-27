@@ -85,6 +85,7 @@ const divMeaning = defineSkill({
   id: 'div-meaning',
   name: 'What Division Is',
   blurb: 'Sharing and grouping',
+  teachingLine: 'Division shares a total equally or counts equal groups.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [2, 4],
@@ -120,6 +121,7 @@ const divFacts = defineSkill({
   id: 'div-facts',
   name: 'Division Facts',
   blurb: 'The inverse of the tables',
+  teachingLine: 'Use a multiplication fact backward to find how many groups fit.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [2, 4],
@@ -165,6 +167,7 @@ const divRemainder = defineSkill({
   id: 'div-remainder',
   name: 'Remainders',
   blurb: 'What is left over',
+  teachingLine: 'A remainder is what stays after making every full group.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [2, 5],
@@ -218,6 +221,7 @@ const divBy10100 = defineSkill({
   id: 'div-by-10-100',
   name: 'Divide by 10 and 100',
   blurb: 'Shifting places back',
+  teachingLine: 'Dividing by 10 or 100 shifts every digit right one or two places.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [2, 12],
@@ -266,6 +270,7 @@ const longDiv1Digit = defineSkill({
   id: 'long-div-1digit',
   name: 'Long Division',
   blurb: 'Single-digit divisor',
+  teachingLine: 'Repeat divide, multiply, subtract, and bring down for each digit.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [12, 39],
@@ -332,6 +337,7 @@ const longDivRemainder = defineSkill({
   id: 'long-div-remainder',
   name: 'Long Division with Remainder',
   blurb: 'When it does not divide evenly',
+  teachingLine: 'Count only full groups; an unfinished group does not add one.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [12, 39],
@@ -381,6 +387,7 @@ const longDiv2Digit = defineSkill({
   id: 'long-div-2digit',
   name: 'Two-Digit Divisor',
   blurb: 'Estimating each digit',
+  teachingLine: 'Estimate each quotient digit, multiply to check, then adjust if needed.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [12, 29],
@@ -466,6 +473,7 @@ const factors = defineSkill({
   id: 'factors',
   name: 'Factors',
   blurb: 'Find all factors of a number',
+  teachingLine: 'A factor divides a number exactly with nothing left over.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [12, 30],
@@ -531,6 +539,7 @@ const multiples = defineSkill({
   id: 'multiples',
   name: 'Multiples',
   blurb: 'List the multiples of a number',
+  teachingLine: 'A multiple comes from multiplying a number by a whole number.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [2, 7],
@@ -587,6 +596,7 @@ const primes = defineSkill({
   id: 'primes',
   name: 'Primes',
   blurb: 'Prime or composite',
+  teachingLine: 'A prime number can be divided exactly only by 1 and itself.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [10, 40],
@@ -666,6 +676,7 @@ const divWords = defineSkill({
   id: 'div-words',
   name: 'Division Word Problems',
   blurb: 'Spot the division',
+  teachingLine: 'Find the total and number of equal groups, then divide.',
   build({ rng, difficulty }) {
     const [min, max] = band(difficulty, {
       1: [3, 5],

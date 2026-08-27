@@ -23,7 +23,7 @@ import {
 } from './index'
 import { parseCurriculumDoc } from './manifest/curriculum-doc'
 import { AVAILABLE_CAPABILITIES, allSkills as manifestSkills } from './manifest'
-import { stageA } from './manifest'
+import { stageA, stageB } from './manifest'
 import type { Capability } from './manifest/types'
 import type { Problem } from '../lib/types'
 
@@ -32,6 +32,7 @@ const doc = parseCurriculumDoc()
 /** Ids marked ✅ built in the curriculum document. */
 const documentedAsBuilt = doc.rows.filter((row) => row.built).map((row) => row.id)
 const stageAIds = stageA.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
+const stageBIds = stageB.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
 
 describe('every generator is declared in the manifest', () => {
   it('registers nothing the manifest does not declare', () => {
@@ -178,17 +179,24 @@ describe('the skills that are built', () => {
     expect(longBlurbs).toEqual([])
   })
 
-  it('ships teaching lines only for Stage A in the first intro increment', () => {
+  it('ships teaching lines only for Stages A and B in the first two intro increments', () => {
     const withLines = allSkills.filter((skill) => skill.teachingLine !== undefined)
-    expect(withLines.map((skill) => skill.id)).toEqual(stageAIds)
+    expect(stageBIds).toHaveLength(44)
+    expect(withLines.map((skill) => skill.id)).toEqual([...stageAIds, ...stageBIds])
 
-    const counts = withLines.map((skill) => {
+    const terms = withLines.map((skill) => {
       const location = manifestIndex.get(skill.id)
       if (!location || skill.teachingLine === undefined) throw new Error(`Missing location: ${skill.id}`)
       expect(checkTeachingLine(skill.teachingLine, location)).toEqual([])
-      return teachingLineTerms(skill.teachingLine, location.unit.id).length
+      return teachingLineTerms(skill.teachingLine, location.unit.id)
     })
-    expect(counts).toEqual([1, 0, 0, 1, 0, 1, 1, 0])
+    expect(terms.slice(0, stageAIds.length).map((lineTerms) => lineTerms.length)).toEqual([
+      1, 0, 0, 1, 0, 1, 1, 0,
+    ])
+
+    const stageBTerms = terms.slice(stageAIds.length).flat()
+    expect(stageBTerms.filter((term) => term === 'remainder')).toHaveLength(1)
+    expect([...new Set(stageBTerms)]).toEqual(['remainder', 'factor', 'multiple', 'prime'])
   })
 
   it('report the unit the manifest puts them in, not the file they live in', () => {

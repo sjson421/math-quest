@@ -33,6 +33,7 @@ const subFactsSmall = defineSkill({
   id: 'sub-facts-small',
   name: 'Small Differences',
   blurb: 'Subtracting within 10',
+  teachingLine: 'Subtraction takes one amount away from another.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'sub-facts-small',
@@ -83,6 +84,7 @@ const subFacts = defineSkill({
   id: 'sub-facts',
   name: 'Subtraction Facts',
   blurb: 'Taking away small numbers',
+  teachingLine: 'Start with the first number and count back the amount taken away.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'sub-facts',
@@ -130,6 +132,7 @@ const subTens = defineSkill({
   id: 'sub-tens',
   name: 'Subtracting Tens',
   blurb: '50 − 20',
+  teachingLine: 'Subtract the counts of tens, then read the result as tens.',
   build({ rng, difficulty }) {
     // The *count* of tens is drawn, then multiplied up, exactly as `add-tens`
     // does — drawing from [20, 90] and rejecting everything that is not a whole
@@ -198,6 +201,7 @@ const sub2NoBorrow = defineSkill({
   id: 'sub-2digit-noborrow',
   name: 'Two-Digit Subtraction',
   blurb: 'Column subtraction, no borrowing',
+  teachingLine: 'Line up ones under ones and tens under tens, then subtract each column.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'sub-2digit-noborrow',
@@ -275,6 +279,7 @@ const sub2Borrow = defineSkill({
   id: 'sub-2digit-borrow',
   name: 'Borrowing',
   blurb: 'When the ones column runs short',
+  teachingLine: 'When the top ones are smaller, trade one ten for 10 ones.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'sub-2digit-borrow',
@@ -356,6 +361,7 @@ const sub3Borrow = defineSkill({
   id: 'sub-3digit-borrow',
   name: 'Three-Digit Borrowing',
   blurb: 'Borrowing across three digits',
+  teachingLine: 'Subtract from right to left, borrowing from the next column when needed.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'sub-3digit-borrow',
@@ -432,6 +438,7 @@ const subAcrossZero = defineSkill({
   id: 'sub-across-zero',
   name: 'Borrowing Across Zero',
   blurb: '500 − 237',
+  teachingLine: 'Borrow through a zero by making 10 tens, then lending one ten onward.',
   build({ rng, difficulty }) {
     const { a, b } = drawPair({
       label: 'sub-across-zero',
@@ -528,6 +535,7 @@ const subWords = defineSkill({
   id: 'sub-words',
   name: 'Subtraction Word Problems',
   blurb: 'Spot the subtraction',
+  teachingLine: 'Find the whole and the amount removed, then subtract.',
   build({ rng, difficulty }) {
     const frame = pickFrame(rng, SUBTRACTION_FRAMES)
 

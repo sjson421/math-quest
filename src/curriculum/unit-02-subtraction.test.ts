@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest'
+import { checkTeachingLine } from '../lib/content-rules'
 import { generateProblem } from '../lib/generator'
-import type { Difficulty } from '../lib/types'
+import type { Difficulty, Problem } from '../lib/types'
 import { borrowChain, columnTrace } from './engine'
+import { manifestIndex } from './index'
 import { format, sample, unrenderedKeys } from './recorded-output'
 import { unit02 } from './unit-02-subtraction'
 
@@ -23,6 +25,65 @@ describe.each(unit02.map((s) => [s.id, s] as const))(
     })
   },
 )
+
+const teachingLines = [
+  ['sub-facts-small', 'Subtraction takes one amount away from another.'],
+  ['sub-facts', 'Start with the first number and count back the amount taken away.'],
+  ['sub-tens', 'Subtract the counts of tens, then read the result as tens.'],
+  ['sub-2digit-noborrow', 'Line up ones under ones and tens under tens, then subtract each column.'],
+  ['sub-2digit-borrow', 'When the top ones are smaller, trade one ten for 10 ones.'],
+  ['sub-3digit-borrow', 'Subtract from right to left, borrowing from the next column when needed.'],
+  ['sub-across-zero', 'Borrow through a zero by making 10 tens, then lending one ten onward.'],
+  ['sub-words', 'Find the whole and the amount removed, then subtract.'],
+] as const
+
+const skill = (id: string) => {
+  const found = unit02.find((candidate) => candidate.id === id)
+  if (!found) throw new Error(`Missing Unit 2 skill: ${id}`)
+  return found
+}
+
+const shownOperands = (problem: Problem): [number, number] => {
+  if (problem.display.kind === 'inline') {
+    const operands = problem.display.text.split(' − ').map(Number)
+    if (operands.length === 2 && operands.every(Number.isInteger)) return operands as [number, number]
+    throw new Error(`Cannot parse subtraction: ${problem.display.text}`)
+  }
+
+  if (problem.display.kind === 'column') {
+    if (problem.display.operands.length !== 2) throw new Error(`Expected two operands for ${problem.skillId}`)
+    return problem.display.operands as [number, number]
+  }
+  if (problem.display.kind === 'story') {
+    const { operands } = problem.display
+    if (!operands || operands.length !== 2) throw new Error(`Expected two operands for ${problem.skillId}`)
+    return operands as [number, number]
+  }
+
+  throw new Error(`Expected subtraction operands for ${problem.skillId}`)
+}
+
+describe('Stage B Unit 2 teaching lines', () => {
+  it.each(teachingLines)('keeps the reviewed line for %s', (id, line) => {
+    const generator = skill(id)
+    const location = manifestIndex.get(id)
+    if (!location) throw new Error(`Missing manifest location: ${id}`)
+
+    expect(generator.teachingLine).toBe(line)
+    expect(checkTeachingLine(generator.teachingLine, location)).toEqual([])
+  })
+})
+
+describe('Stage B Unit 2 intro examples', () => {
+  it('recomputes every fixed example from its visible operands', () => {
+    for (const [id] of teachingLines) {
+      const problem = generateProblem(skill(id), 1, 1)
+      const [whole, removed] = shownOperands(problem)
+
+      expect(problem.answer).toEqual({ kind: 'exact', n: whole - removed, d: 1 })
+    }
+  })
+})
 
 describe('what the unit guarantees about every problem it makes', () => {
   const SEEDS = Array.from({ length: 300 }, (_, i) => i * 7919 + 1)
