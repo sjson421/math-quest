@@ -1,6 +1,6 @@
 ---
 name: prepare-roadmap
-description: Select and prepare the first unchecked Math Quest roadmap item through exploration, OpenSpec proposal, and implementation-readiness audit. Use when starting the roadmap workflow or resuming a handoff marked needs-preparation; stop before implementation.
+description: Select and prepare the first unchecked Math Quest roadmap item through exploration and OpenSpec proposal. Use when starting the roadmap workflow or resuming a handoff marked needs-preparation; exit ready-to-audit before audit or implementation.
 ---
 
 # Prepare Roadmap
@@ -15,20 +15,21 @@ immediately. Read each phase reference only when that phase begins:
 - Phase 1: [select](../../../docs/agent-workflows/ship-roadmap-item/select.md)
 - Phase 1 state: [template](../../../docs/agent-workflows/ship-roadmap-item/state-template.json)
 - Phase 2: [explore](../../../docs/agent-workflows/ship-roadmap-item/explore.md)
-- Phases 3–4: [propose and audit](../../../docs/agent-workflows/ship-roadmap-item/propose-audit.md)
+- Phase 3: [propose](../../../docs/agent-workflows/ship-roadmap-item/propose.md)
 
 ## Codex adapter
 
-For a new run, create an `update_plan` plan with exactly Select, Explore, Propose, and Audit
-in that order. For `needs-preparation`, preserve selection and plan only the gates named by
-the re-entry reason, ending with Audit. Keep exactly one entry `in_progress`, and never mark
-a phase complete before its gate passes. Use the currently selected model throughout this
-workflow.
+For a new run, create an `update_plan` plan with exactly Select, Explore, and Propose in that
+order. For `needs-preparation`, preserve selection and plan only the exploration and proposal
+gates named by the re-entry reason, ending with Propose. Keep exactly one entry
+`in_progress`, and never mark a phase complete before its gate passes.
+Use the currently selected model throughout this workflow.
 
-Invoke `openspec-explore`, `openspec-propose`, and `openspec-audit-proposal` through Codex's
-skill mechanism when their phases begin. Complete any required review in the current session
-with the currently selected model. Do not spawn an orchestrator or replacement subagent.
+Invoke `openspec-explore` and `openspec-propose` through Codex's skill mechanism when their
+phases begin. Do not load or invoke audit instructions in this session. Do not spawn an
+orchestrator or replacement subagent.
 
-After the audit gate passes, set the handoff status to `ready-to-implement`. End the session
-with the exact change name, selected increment, state directory, and audit result. Do not
-write application code.
+After the proposal gate passes, mark Propose complete, set Audit pending and `currentPhase`
+to 4, then set the handoff status to `ready-to-audit`. End the session with the exact change
+name, selected increment, state directory, and proposal result. Do not audit or write
+application code.

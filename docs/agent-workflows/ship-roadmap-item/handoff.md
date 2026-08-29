@@ -1,10 +1,11 @@
 # Roadmap workflow: cross-session handoff
 
-The workflow keeps its original ten ordered phases but runs in three sessions:
+The workflow keeps its original ten ordered phases but runs in four sessions:
 
 | Skill | Owned phases | Required incoming status | Outgoing status |
 | --- | --- | --- | --- |
-| `prepare-roadmap` | 1. Select through 4. Audit | no active run or `needs-preparation` | `ready-to-implement` |
+| `prepare-roadmap` | 1. Select through 3. Propose | no active run or `needs-preparation` | `ready-to-audit` |
+| `audit-roadmap` | 4. Audit | `ready-to-audit` | `ready-to-implement` |
 | `implement-roadmap` | 5. Apply | `ready-to-implement` | `ready-to-review` |
 | `review-roadmap` | 6. Simplify through 10. Archive | `ready-to-review` | complete |
 
@@ -12,9 +13,13 @@ Never add, combine, silently skip, or retroactively complete phases. Phase 2 alo
 skipped under `explore.md`. When implementation or review invalidates an artifact assumption,
 set the workflow status to `needs-preparation`, record the reason in
 `exploration.reentries`, and stop that session. A new `prepare-roadmap` session re-enters only
-the necessary exploration, proposal, and audit gates, then implementation resumes in a new
-`implement-roadmap` session. Do not repeat selection or silently fold the correction into a
-later phase.
+the necessary exploration and proposal gates. A fresh `audit-roadmap` session then repeats
+the audit before implementation resumes in a new `implement-roadmap` session. Do not repeat
+selection or silently fold the correction into a later phase.
+
+When setting `needs-preparation`, keep Select completed, reopen each affected Explore or
+Propose gate as pending, reopen Audit as pending, and set `currentPhase` to the earliest
+reopened phase. No phase remains `in_progress` after the returning session stops.
 
 ## Durable state
 
@@ -54,10 +59,12 @@ cleanup.
 
 ## Independent review
 
-Work inline unless a phase calls for independent review. Default to one read-only reviewer.
-Use two or three only when changed paths form disjoint domains with no overlapping file; each
-reviewer applies reuse, quality, and efficiency checks to its own domain. Never split by
-perspective over the same paths.
+Work inline unless a phase calls for independent review. Audit always uses exactly one
+read-only reviewer over the complete artifact set. Do not split audit by path or perspective:
+the parent must verify every finding, so extra reviewers add context without removing that
+work. Other phases default to one reviewer and may use two or three only when changed paths
+form disjoint domains with no overlapping file; each reviewer applies reuse, quality, and
+efficiency checks to its own domain. Never split by perspective over the same paths.
 
 Start each reviewer with fresh context. Pass only the repository root, baseline SHA,
 explicit assigned paths, focused questions, and concise output format. Never paste the full

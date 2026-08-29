@@ -14,10 +14,11 @@ Repository-wide agent workflows live under `docs/agent-workflows/`; `.agents/ski
 the running record — mark each item done as it lands, and note decisions inline rather than
 only in chat.
 
-The roadmap-to-main workflow runs across three separate skill sessions:
-`prepare-roadmap` plans and audits, `implement-roadmap` applies the audited change, and
-`review-roadmap` simplifies, verifies, ships, and archives it. Ignored state under
-`.agent-state/roadmap/` carries the exact baseline and gate status between sessions.
+The roadmap-to-main workflow runs across four separate skill sessions:
+`prepare-roadmap` selects, explores, and proposes; `audit-roadmap` audits the proposal in
+fresh context; `implement-roadmap` applies the audited change; and `review-roadmap`
+simplifies, verifies, ships, and archives it. Ignored state under `.agent-state/roadmap/`
+carries the exact baseline and gate status between sessions.
 
 - `openspec/specs/` is the **baseline**: what the system does today, forty
   capabilities —
@@ -63,13 +64,16 @@ The roadmap-to-main workflow runs across three separate skill sessions:
 - **Sizing**, from the `tasks` rules in `openspec/config.yaml`: a content change adds at most
   six generators, with explicit generator and independent-test tasks under two hours each.
   Larger units ship as ordered increments and their roadmap item stays unchecked until all
-  increments land. Capability work is its own change, never bundled with the content it
-  unblocks. Create changes just-in-time, one or two ahead; early proposals rot.
-- **Delegation is bounded.** Exploration, proposal audit, and simplification use one
-  read-only reviewer by default. Two or three are allowed only for disjoint path domains
-  without overlapping files. Reviewers get no conversation history: only repository root,
-  baseline SHA, assigned paths, focused questions, and a concise `file:line` format. Each
-  harness adapter owns model routing; the parent verifies every finding. Pi may fall back to
-  the same review inline only when its subagent tool or launch infrastructure is unavailable;
-  it records the reason and reports the degraded assurance rather than presenting the pass
-  as independent.
+  increments land. Do not split a compliant ordered increment to reduce agent context; use
+  the workflow's session boundaries for that. Split further only when each part can ship
+  independently without coordinating one shared model, renderer, or design. Capability work
+  is its own change, never bundled with the content it unblocks. Create changes just-in-time,
+  one or two ahead; early proposals rot.
+- **Delegation is bounded.** Proposal audit always uses one fresh read-only reviewer over
+  the complete artifact set. Exploration and simplification use one reviewer by default and
+  may use two or three only for disjoint path domains without overlapping files. Reviewers
+  get no conversation history: only repository root, baseline SHA, assigned paths, focused
+  questions, and a concise `file:line` format. Each harness adapter owns model routing; the
+  parent verifies every finding. Pi may fall back to inline review for exploration or
+  simplification only when its subagent tool or launch infrastructure is unavailable; audit
+  remains `ready-to-audit` until its independent reviewer can run.

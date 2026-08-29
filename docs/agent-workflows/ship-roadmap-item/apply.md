@@ -4,8 +4,7 @@ Use `openspec-apply-change` with the audited name. Follow every task and test in
 marking a task complete only after its work lands. Keep implementation, tests, and OpenSpec
 coherent.
 
-If implementation disproves an artifact assumption, return to phase 4 and rerun
-`openspec-audit-proposal` for affected artifacts; re-enter phase 2 first when the replacement
-is not obvious. Under the split workflow, record the reason, set the handoff to
-`needs-preparation`, and stop so a new `prepare-roadmap` session owns that return. Proceed
-only when every task is checked.
+If implementation disproves an artifact assumption, record the reason, set the handoff to
+`needs-preparation`, and stop. A new `prepare-roadmap` session owns the necessary exploration
+and proposal work, then a fresh `audit-roadmap` session reruns phase 4 before implementation
+resumes. Proceed only when every task is checked.

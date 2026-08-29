@@ -5,20 +5,22 @@ import { fileURLToPath } from 'node:url'
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const sharedRoot = 'docs/agent-workflows/ship-roadmap-item'
 const harnessRoots = ['.agents', '.claude', '.pi']
-const skillNames = ['prepare-roadmap', 'implement-roadmap', 'review-roadmap']
+const skillNames = ['prepare-roadmap', 'audit-roadmap', 'implement-roadmap', 'review-roadmap']
 const sharedNames = [
   'handoff.md',
   'state-template.json',
   'select.md',
   'explore.md',
-  'propose-audit.md',
+  'propose.md',
+  'audit.md',
   'apply.md',
   'simplify.md',
   'review.md',
   'finish.md',
 ]
 const skillReferences = {
-  'prepare-roadmap': ['handoff.md', 'select.md', 'state-template.json', 'explore.md', 'propose-audit.md'],
+  'prepare-roadmap': ['handoff.md', 'select.md', 'state-template.json', 'explore.md', 'propose.md'],
+  'audit-roadmap': ['handoff.md', 'audit.md'],
   'implement-roadmap': ['handoff.md', 'apply.md'],
   'review-roadmap': ['handoff.md', 'simplify.md', 'review.md', 'finish.md'],
 }
@@ -75,8 +77,10 @@ for (const skillName of skillNames) {
 
 const shared = new Map(sharedNames.map((name) => [name, read(`${sharedRoot}/${name}`)]))
 const handoff = shared.get('handoff.md')
+const workflow = read('docs/workflow.md')
 for (const phaseRow of [
-  '| `prepare-roadmap` | 1. Select through 4. Audit | no active run or `needs-preparation` | `ready-to-implement` |',
+  '| `prepare-roadmap` | 1. Select through 3. Propose | no active run or `needs-preparation` | `ready-to-audit` |',
+  '| `audit-roadmap` | 4. Audit | `ready-to-audit` | `ready-to-implement` |',
   '| `implement-roadmap` | 5. Apply | `ready-to-implement` | `ready-to-review` |',
   '| `review-roadmap` | 6. Simplify through 10. Archive | `ready-to-review` | complete |',
 ]) {
@@ -85,12 +89,17 @@ for (const phaseRow of [
 for (const token of [
   'Keep exactly one phase `in_progress`',
   'set the workflow status to `needs-preparation`',
+  'reopen Audit as pending',
   'State files are run-owned bookkeeping',
   'Start each reviewer with fresh context',
+  'Audit always uses exactly one',
   'Stop in the current phase with a coherent tree',
 ]) {
   requireText(handoff, token, 'cross-session handoff')
 }
+requireText(workflow, 'four separate skill sessions', 'workflow documentation')
+requireText(shared.get('select.md'), 'Do not\n   split a compliant ordered increment to reduce context', 'roadmap selection')
+requireText(workflow, 'Do not split a compliant ordered increment to reduce agent context', 'workflow sizing')
 
 const stateTemplateText = shared.get('state-template.json')
 try {
@@ -106,8 +115,23 @@ try {
 }
 
 const codexPrepare = adapters.get('prepare-roadmap')[0].content
-for (const token of ['update_plan', 'currently selected model']) {
+for (const { path, content } of adapters.get('prepare-roadmap')) {
+  requireText(content, 'set Audit pending', path)
+  requireText(content, '`currentPhase`', path)
+}
+for (const token of ['update_plan', 'currently selected model', '`currentPhase`\nto 4', 'ready-to-audit']) {
   requireText(codexPrepare, token, 'Codex prepare adapter')
+}
+if (codexPrepare.includes('openspec-audit-proposal')) {
+  failures.push('Codex prepare adapter still invokes proposal audit')
+}
+const codexAudit = adapters.get('audit-roadmap')[0].content
+for (const { path, content } of adapters.get('audit-roadmap')) {
+  requireText(content, 'set Apply pending', path)
+  requireText(content, '`currentPhase` to 5', path)
+}
+for (const token of ['update_plan', 'openspec-audit-proposal', 'exactly one fresh read-only reviewer', '`currentPhase` to 5', 'ready-to-implement']) {
+  requireText(codexAudit, token, 'Codex audit adapter')
 }
 const codexImplement = adapters.get('implement-roadmap')[0].content
 for (const token of ['update_plan', 'openspec-apply-change', 'ready-to-review']) {
@@ -121,6 +145,13 @@ for (const token of ['update_plan', '$simplify', 'currently selected model', 'op
 const claudePrepare = adapters.get('prepare-roadmap')[1].content
 for (const token of ['TaskCreate', 'TaskUpdate', 'roadmap-reviewer', 'subagent_type: "roadmap-reviewer"']) {
   requireText(claudePrepare, token, 'Claude prepare adapter')
+}
+if (claudePrepare.includes('openspec-audit-proposal')) {
+  failures.push('Claude prepare adapter still invokes proposal audit')
+}
+const claudeAudit = adapters.get('audit-roadmap')[1].content
+for (const token of ['TaskCreate', 'TaskUpdate', 'openspec-audit-proposal', 'exactly once', 'ready-to-implement']) {
+  requireText(claudeAudit, token, 'Claude audit adapter')
 }
 const claudeImplement = adapters.get('implement-roadmap')[1].content
 for (const token of ['Create one task named Apply', 'openspec-apply-change', 'ready-to-review']) {
@@ -137,6 +168,7 @@ for (const token of ['model: inherit', 'effort: medium', 'tools: Read, Glob, Gre
 }
 
 const piPrepare = adapters.get('prepare-roadmap')[2].content
+const piAudit = adapters.get('audit-roadmap')[2].content
 const piImplement = adapters.get('implement-roadmap')[2].content
 const piReview = adapters.get('review-roadmap')[2].content
 for (const [label, content] of [
@@ -156,7 +188,31 @@ for (const [label, content] of [
 for (const token of ['Mark only Apply `in_progress`', 'openspec-apply-change', 'ready-to-review']) {
   requireText(piImplement, token, 'Pi implement adapter')
 }
+for (const token of [
+  'openspec-audit-proposal',
+  'exactly once',
+  'context: "fresh"',
+  'retain `ready-to-audit`',
+  'ready-to-implement',
+]) {
+  requireText(piAudit, token, 'Pi audit adapter')
+}
+if (piPrepare.includes('openspec-audit-proposal')) {
+  failures.push('Pi prepare adapter still invokes proposal audit')
+}
 requireText(piReview, 'openspec-archive-change', 'Pi review adapter')
+
+for (const path of [
+  '.agents/skills/openspec-audit-proposal/SKILL.md',
+  '.claude/skills/openspec-audit-proposal/SKILL.md',
+]) {
+  const auditSkill = read(path)
+  requireText(auditSkill, 'Dispatch exactly one read-only reviewer for every audit', path)
+  requireText(auditSkill, 'Give it the complete artifact set', path)
+  if (auditSkill.includes('Permit two') || auditSkill.includes('two or three')) {
+    failures.push(`${path} still permits multiple audit reviewers`)
+  }
+}
 
 const piReviewerPath = '.pi/agents/roadmap-reviewer.md'
 const piReviewer = read(piReviewerPath)
@@ -176,7 +232,7 @@ const modelCheckedFiles = [
   ...skillNames.flatMap((skillName) => adapters.get(skillName)),
   { path: claudeReviewerPath, content: claudeReviewer },
   { path: piReviewerPath, content: piReviewer },
-  { path: 'docs/workflow.md', content: read('docs/workflow.md') },
+  { path: 'docs/workflow.md', content: workflow },
 ]
 const concreteModel = /\b(?:gpt(?:-\d|[._])|o[1-9](?:[-._]|\b)|claude-(?:opus|sonnet|haiku|\d)|deepseek|gemini|qwen|llama|mistral|codestral|command-r|terra|luna|opus|sonnet|haiku)\b/i
 for (const { path, content } of modelCheckedFiles) {
@@ -195,6 +251,10 @@ for (const harnessRoot of harnessRoots) {
   if (existsSync(oldReferenceRoot) && readdirSync(oldReferenceRoot).length > 0) {
     failures.push(`Old single-session references remain at ${oldReferenceRoot}`)
   }
+}
+
+if (existsSync(resolve(repoRoot, sharedRoot, 'propose-audit.md'))) {
+  failures.push('Combined propose-audit phase reference remains')
 }
 
 if (failures.length > 0) {

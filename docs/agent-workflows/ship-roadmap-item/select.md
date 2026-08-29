@@ -10,5 +10,7 @@
 4. Select the first unchecked checkbox in document order and retain its full body.
 5. Apply `openspec/config.yaml` and roadmap sizing. A content change contains at most six
    generators. If a unit is larger, take its first remaining ordered increment, name the
-   exact skill ids, and leave the roadmap checkbox open until every increment ships.
+   exact skill ids, and leave the roadmap checkbox open until every increment ships. Do not
+   split a compliant ordered increment to reduce context. Split it further only when each
+   part can ship independently without coordinating one shared model, renderer, or design.
 6. Announce the exact item, selected scope, and proposed kebab-case change name.

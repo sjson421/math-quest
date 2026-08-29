@@ -3,8 +3,9 @@
 Review the complete diff from the phase 1 baseline. Trace every delta requirement and task
 to implementation and tests. Check correctness, edge cases, failures, scope,
 maintainability, and invariants. Fix verified defects and repeat affected review. A design
-defect sets the handoff to `needs-preparation` and stops this session; a new
-`prepare-roadmap` session owns the return through phases 2 and 4.
+defect sets the handoff to `needs-preparation` and stops this session. A new
+`prepare-roadmap` session owns the necessary exploration and proposal work, followed by a
+fresh `audit-roadmap` session for phase 4.
 
 Launch the required independent read-only diff reviewer under the shared handoff contract.
 Verify every returned claim locally. Fix confirmed defects and repeat the affected review,

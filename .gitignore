@@ -35,5 +35,6 @@ dist-ssr
 !.agents/skills/
 .agents/skills/*
 !.agents/skills/prepare-roadmap/
+!.agents/skills/audit-roadmap/
 !.agents/skills/implement-roadmap/
 !.agents/skills/review-roadmap/

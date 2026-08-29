@@ -1,6 +1,6 @@
 ---
 name: implement-roadmap
-description: Implement the audited Math Quest roadmap change prepared by prepare-roadmap. Use only when its cross-session handoff is ready-to-implement; complete every OpenSpec implementation task but do not review, commit, push, or archive.
+description: Implement the audited Math Quest roadmap change. Use only when its cross-session handoff is ready-to-implement; complete every OpenSpec implementation task but do not review, commit, push, or archive.
 ---
 
 # Implement Roadmap
