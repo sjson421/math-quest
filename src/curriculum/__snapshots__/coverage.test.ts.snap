@@ -89,6 +89,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "compare-same-den": [
     "simplify-fractions",
   ],
+  "composite-figures": [
+    "area-circle",
+  ],
   "compound-inequalities": [
     "flip-the-sign",
   ],
@@ -356,6 +359,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "primes": [
     "multiples",
   ],
+  "pythagorean": [
+    "surface-area",
+  ],
   "quadrants": [
     "plot-points",
   ],
@@ -465,6 +471,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "substitution": [
     "system-by-graphing",
   ],
+  "surface-area": [
+    "volume-cone-pyramid-sphere",
+  ],
   "system-by-graphing": [
     "parallel-perpendicular",
   ],
@@ -518,6 +527,15 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "vars-both-sides": [
     "two-step",
+  ],
+  "volume-cone-pyramid-sphere": [
+    "volume-cylinder",
+  ],
+  "volume-cylinder": [
+    "volume-prism",
+  ],
+  "volume-prism": [
+    "composite-figures",
   ],
   "with-fractions": [
     "equation-parentheses",

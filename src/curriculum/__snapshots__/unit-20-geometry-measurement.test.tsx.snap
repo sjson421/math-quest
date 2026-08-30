@@ -1450,6 +1450,283 @@ miss     radius-as-diameter = 37.7   The formula needs diameter, which is twice 
 miss     area-for-circumference = 452.2   Circumference is not the circle area."
 `;
 
+exports[`Unit 20 recorded output: composite-figures > matches the authored sample output 1`] = `
+"--- composite-figures · seed 1 · difficulty 1
+prompt   Find the area of this composite figure in square inches.
+display  geometry area-composite outerLength 8 outerWidth 8 cutoutLength 7 cutoutWidth 4 unit in name "L-shaped composite figure with outer length 8 in, outer width 8 in, and corner cut-out 7 by 4 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 36/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [8 × 4 = 32]
+step 2   Find the top rectangle area.   [1 × 4 = 4]
+step 3   Add both rectangle areas.   [32 + 4 = 36]
+step 4   Use square inches for area.   [36 square inches]
+
+--- composite-figures · seed 12345 · difficulty 1
+prompt   Find the area of this composite figure in square feet.
+display  geometry area-composite outerLength 8 outerWidth 7 cutoutLength 7 cutoutWidth 5 unit ft name "L-shaped composite figure with outer length 8 ft, outer width 7 ft, and corner cut-out 7 by 5 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 21/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [8 × 2 = 16]
+step 2   Find the top rectangle area.   [1 × 5 = 5]
+step 3   Add both rectangle areas.   [16 + 5 = 21]
+step 4   Use square feet for area.   [21 square feet]
+
+--- composite-figures · seed 67890 · difficulty 1
+prompt   Find the area of this composite figure in square metres.
+display  geometry area-composite outerLength 9 outerWidth 7 cutoutLength 4 cutoutWidth 2 unit m name "L-shaped composite figure with outer length 9 m, outer width 7 m, and corner cut-out 4 by 2 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 55/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [9 × 5 = 45]
+step 2   Find the top rectangle area.   [5 × 2 = 10]
+step 3   Add both rectangle areas.   [45 + 10 = 55]
+step 4   Use square metres for area.   [55 square metres]
+
+--- composite-figures · seed 424242 · difficulty 1
+prompt   Find the area of this composite figure in square centimetres.
+display  geometry area-composite outerLength 8 outerWidth 6 cutoutLength 6 cutoutWidth 4 unit cm name "L-shaped composite figure with outer length 8 cm, outer width 6 cm, and corner cut-out 6 by 4 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 24/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [8 × 2 = 16]
+step 2   Find the top rectangle area.   [2 × 4 = 8]
+step 3   Add both rectangle areas.   [16 + 8 = 24]
+step 4   Use square centimetres for area.   [24 square centimetres]
+
+--- composite-figures · seed 987654321 · difficulty 1
+prompt   Find the area of this composite figure in square feet.
+display  geometry area-composite outerLength 9 outerWidth 7 cutoutLength 4 cutoutWidth 3 unit ft name "L-shaped composite figure with outer length 9 ft, outer width 7 ft, and corner cut-out 4 by 3 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 51/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [9 × 4 = 36]
+step 2   Find the top rectangle area.   [5 × 3 = 15]
+step 3   Add both rectangle areas.   [36 + 15 = 51]
+step 4   Use square feet for area.   [51 square feet]
+
+--- composite-figures · seed 1 · difficulty 2
+prompt   Find the area of this composite figure in square inches.
+display  geometry area-composite outerLength 11 outerWidth 11 cutoutLength 9 cutoutWidth 5 unit in name "L-shaped composite figure with outer length 11 in, outer width 11 in, and corner cut-out 9 by 5 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 76/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [11 × 6 = 66]
+step 2   Find the top rectangle area.   [2 × 5 = 10]
+step 3   Add both rectangle areas.   [66 + 10 = 76]
+step 4   Use square inches for area.   [76 square inches]
+
+--- composite-figures · seed 12345 · difficulty 2
+prompt   Find the area of this composite figure in square feet.
+display  geometry area-composite outerLength 11 outerWidth 10 cutoutLength 10 cutoutWidth 6 unit ft name "L-shaped composite figure with outer length 11 ft, outer width 10 ft, and corner cut-out 10 by 6 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 50/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [11 × 4 = 44]
+step 2   Find the top rectangle area.   [1 × 6 = 6]
+step 3   Add both rectangle areas.   [44 + 6 = 50]
+step 4   Use square feet for area.   [50 square feet]
+
+--- composite-figures · seed 67890 · difficulty 2
+prompt   Find the area of this composite figure in square metres.
+display  geometry area-composite outerLength 12 outerWidth 9 cutoutLength 5 cutoutWidth 2 unit m name "L-shaped composite figure with outer length 12 m, outer width 9 m, and corner cut-out 5 by 2 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 98/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [12 × 7 = 84]
+step 2   Find the top rectangle area.   [7 × 2 = 14]
+step 3   Add both rectangle areas.   [84 + 14 = 98]
+step 4   Use square metres for area.   [98 square metres]
+
+--- composite-figures · seed 424242 · difficulty 2
+prompt   Find the area of this composite figure in square centimetres.
+display  geometry area-composite outerLength 11 outerWidth 8 cutoutLength 9 cutoutWidth 5 unit cm name "L-shaped composite figure with outer length 11 cm, outer width 8 cm, and corner cut-out 9 by 5 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 43/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [11 × 3 = 33]
+step 2   Find the top rectangle area.   [2 × 5 = 10]
+step 3   Add both rectangle areas.   [33 + 10 = 43]
+step 4   Use square centimetres for area.   [43 square centimetres]
+
+--- composite-figures · seed 987654321 · difficulty 2
+prompt   Find the area of this composite figure in square feet.
+display  geometry area-composite outerLength 11 outerWidth 10 cutoutLength 6 cutoutWidth 4 unit ft name "L-shaped composite figure with outer length 11 ft, outer width 10 ft, and corner cut-out 6 by 4 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 86/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [11 × 6 = 66]
+step 2   Find the top rectangle area.   [5 × 4 = 20]
+step 3   Add both rectangle areas.   [66 + 20 = 86]
+step 4   Use square feet for area.   [86 square feet]
+
+--- composite-figures · seed 1 · difficulty 3
+prompt   Find the area of this composite figure in square inches.
+display  geometry area-composite outerLength 14 outerWidth 14 cutoutLength 13 cutoutWidth 7 unit in name "L-shaped composite figure with outer length 14 in, outer width 14 in, and corner cut-out 13 by 7 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 105/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [14 × 7 = 98]
+step 2   Find the top rectangle area.   [1 × 7 = 7]
+step 3   Add both rectangle areas.   [98 + 7 = 105]
+step 4   Use square inches for area.   [105 square inches]
+
+--- composite-figures · seed 12345 · difficulty 3
+prompt   Find the area of this composite figure in square feet.
+display  geometry area-composite outerLength 19 outerWidth 14 cutoutLength 5 cutoutWidth 8 unit ft name "L-shaped composite figure with outer length 19 ft, outer width 14 ft, and corner cut-out 5 by 8 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 226/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [19 × 6 = 114]
+step 2   Find the top rectangle area.   [14 × 8 = 112]
+step 3   Add both rectangle areas.   [114 + 112 = 226]
+step 4   Use square feet for area.   [226 square feet]
+
+--- composite-figures · seed 67890 · difficulty 3
+prompt   Find the area of this composite figure in square metres.
+display  geometry area-composite outerLength 17 outerWidth 12 cutoutLength 7 cutoutWidth 2 unit m name "L-shaped composite figure with outer length 17 m, outer width 12 m, and corner cut-out 7 by 2 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 190/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [17 × 10 = 170]
+step 2   Find the top rectangle area.   [10 × 2 = 20]
+step 3   Add both rectangle areas.   [170 + 20 = 190]
+step 4   Use square metres for area.   [190 square metres]
+
+--- composite-figures · seed 424242 · difficulty 3
+prompt   Find the area of this composite figure in square centimetres.
+display  geometry area-composite outerLength 14 outerWidth 11 cutoutLength 12 cutoutWidth 6 unit cm name "L-shaped composite figure with outer length 14 cm, outer width 11 cm, and corner cut-out 12 by 6 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 82/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [14 × 5 = 70]
+step 2   Find the top rectangle area.   [2 × 6 = 12]
+step 3   Add both rectangle areas.   [70 + 12 = 82]
+step 4   Use square centimetres for area.   [82 square centimetres]
+
+--- composite-figures · seed 987654321 · difficulty 3
+prompt   Find the area of this composite figure in square feet.
+display  geometry area-composite outerLength 15 outerWidth 13 cutoutLength 8 cutoutWidth 5 unit ft name "L-shaped composite figure with outer length 15 ft, outer width 13 ft, and corner cut-out 8 by 5 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 155/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [15 × 8 = 120]
+step 2   Find the top rectangle area.   [7 × 5 = 35]
+step 3   Add both rectangle areas.   [120 + 35 = 155]
+step 4   Use square feet for area.   [155 square feet]
+
+--- composite-figures · seed 1 · difficulty 4
+prompt   Find the area of this composite figure in square inches.
+display  geometry area-composite outerLength 19 outerWidth 18 cutoutLength 17 cutoutWidth 9 unit in name "L-shaped composite figure with outer length 19 in, outer width 18 in, and corner cut-out 17 by 9 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 189/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [19 × 9 = 171]
+step 2   Find the top rectangle area.   [2 × 9 = 18]
+step 3   Add both rectangle areas.   [171 + 18 = 189]
+step 4   Use square inches for area.   [189 square inches]
+
+--- composite-figures · seed 12345 · difficulty 4
+prompt   Find the area of this composite figure in square feet.
+display  geometry area-composite outerLength 25 outerWidth 19 cutoutLength 7 cutoutWidth 10 unit ft name "L-shaped composite figure with outer length 25 ft, outer width 19 ft, and corner cut-out 7 by 10 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 405/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [25 × 9 = 225]
+step 2   Find the top rectangle area.   [18 × 10 = 180]
+step 3   Add both rectangle areas.   [225 + 180 = 405]
+step 4   Use square feet for area.   [405 square feet]
+
+--- composite-figures · seed 67890 · difficulty 4
+prompt   Find the area of this composite figure in square metres.
+display  geometry area-composite outerLength 22 outerWidth 16 cutoutLength 9 cutoutWidth 2 unit m name "L-shaped composite figure with outer length 22 m, outer width 16 m, and corner cut-out 9 by 2 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 334/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [22 × 14 = 308]
+step 2   Find the top rectangle area.   [13 × 2 = 26]
+step 3   Add both rectangle areas.   [308 + 26 = 334]
+step 4   Use square metres for area.   [334 square metres]
+
+--- composite-figures · seed 424242 · difficulty 4
+prompt   Find the area of this composite figure in square centimetres.
+display  geometry area-composite outerLength 19 outerWidth 15 cutoutLength 16 cutoutWidth 8 unit cm name "L-shaped composite figure with outer length 19 cm, outer width 15 cm, and corner cut-out 16 by 8 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 157/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [19 × 7 = 133]
+step 2   Find the top rectangle area.   [3 × 8 = 24]
+step 3   Add both rectangle areas.   [133 + 24 = 157]
+step 4   Use square centimetres for area.   [157 square centimetres]
+
+--- composite-figures · seed 987654321 · difficulty 4
+prompt   Find the area of this composite figure in square feet.
+display  geometry area-composite outerLength 20 outerWidth 17 cutoutLength 10 cutoutWidth 6 unit ft name "L-shaped composite figure with outer length 20 ft, outer width 17 ft, and corner cut-out 10 by 6 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 280/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [20 × 11 = 220]
+step 2   Find the top rectangle area.   [10 × 6 = 60]
+step 3   Add both rectangle areas.   [220 + 60 = 280]
+step 4   Use square feet for area.   [280 square feet]
+
+--- composite-figures · seed 1 · difficulty 5
+prompt   Find the area of this composite figure in square inches.
+display  geometry area-composite outerLength 25 outerWidth 24 cutoutLength 22 cutoutWidth 12 unit in name "L-shaped composite figure with outer length 25 in, outer width 24 in, and corner cut-out 22 by 12 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 336/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [25 × 12 = 300]
+step 2   Find the top rectangle area.   [3 × 12 = 36]
+step 3   Add both rectangle areas.   [300 + 36 = 336]
+step 4   Use square inches for area.   [336 square inches]
+
+--- composite-figures · seed 12345 · difficulty 5
+prompt   Find the area of this composite figure in square feet.
+display  geometry area-composite outerLength 32 outerWidth 24 cutoutLength 9 cutoutWidth 13 unit ft name "L-shaped composite figure with outer length 32 ft, outer width 24 ft, and corner cut-out 9 by 13 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 651/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [32 × 11 = 352]
+step 2   Find the top rectangle area.   [23 × 13 = 299]
+step 3   Add both rectangle areas.   [352 + 299 = 651]
+step 4   Use square feet for area.   [651 square feet]
+
+--- composite-figures · seed 67890 · difficulty 5
+prompt   Find the area of this composite figure in square metres.
+display  geometry area-composite outerLength 28 outerWidth 21 cutoutLength 12 cutoutWidth 2 unit m name "L-shaped composite figure with outer length 28 m, outer width 21 m, and corner cut-out 12 by 2 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 564/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [28 × 19 = 532]
+step 2   Find the top rectangle area.   [16 × 2 = 32]
+step 3   Add both rectangle areas.   [532 + 32 = 564]
+step 4   Use square metres for area.   [564 square metres]
+
+--- composite-figures · seed 424242 · difficulty 5
+prompt   Find the area of this composite figure in square centimetres.
+display  geometry area-composite outerLength 24 outerWidth 20 cutoutLength 20 cutoutWidth 10 unit cm name "L-shaped composite figure with outer length 24 cm, outer width 20 cm, and corner cut-out 20 by 10 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 280/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [24 × 10 = 240]
+step 2   Find the top rectangle area.   [4 × 10 = 40]
+step 3   Add both rectangle areas.   [240 + 40 = 280]
+step 4   Use square centimetres for area.   [280 square centimetres]
+
+--- composite-figures · seed 987654321 · difficulty 5
+prompt   Find the area of this composite figure in square feet.
+display  geometry area-composite outerLength 26 outerWidth 22 cutoutLength 13 cutoutWidth 8 unit ft name "L-shaped composite figure with outer length 26 ft, outer width 22 ft, and corner cut-out 13 by 8 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 468/1
+input    keypad
+hint     Split the L-shape into two rectangles, then add their areas.
+step 1   Find the bottom rectangle area.   [26 × 14 = 364]
+step 2   Find the top rectangle area.   [13 × 8 = 104]
+step 3   Add both rectangle areas.   [364 + 104 = 468]
+step 4   Use square feet for area.   [468 square feet]"
+`;
+
 exports[`Unit 20 recorded output: perimeter > matches the authored sample output 1`] = `
 "--- perimeter · seed 1 · difficulty 1
 prompt   Find the perimeter of this rectangle.
@@ -1700,4 +1977,1414 @@ hint     Add both lengths and both widths.
 step 1   Add the two lengths.   [16 + 16 = 32]
 step 2   Add the two widths.   [6 + 6 = 12]
 step 3   Combine both totals.   [32 + 12 = 44]"
+`;
+
+exports[`Unit 20 recorded output: pythagorean > matches the authored sample output 1`] = `
+"--- pythagorean · seed 1 · difficulty 1
+prompt   Find the missing side of this right triangle in inches.
+display  geometry pythagorean missingSide leg leg 3 hypotenuse 5 unit in name "Right triangle with known leg 3 in, hypotenuse 5 in, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 4/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [5² − 3² = 16]
+step 2   Take the square root.   [√16 = 4]
+step 3   Use inches for the missing side.   [4 inches]
+miss     wrong-hypotenuse-placement = 5.8   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 16   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 12345 · difficulty 1
+prompt   Find the missing side of this right triangle in metres.
+display  geometry pythagorean missingSide leg leg 5 hypotenuse 13 unit m name "Right triangle with known leg 5 m, hypotenuse 13 m, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 12/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [13² − 5² = 144]
+step 2   Take the square root.   [√144 = 12]
+step 3   Use metres for the missing side.   [12 metres]
+miss     wrong-hypotenuse-placement = 13.9   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 144   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 67890 · difficulty 1
+prompt   Find the missing side of this right triangle in metres.
+display  geometry pythagorean missingSide hypotenuse leg1 8 leg2 15 unit m name "Right triangle with legs 8 m and 15 m, and a missing hypotenuse" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 17/1
+input    keypad
+keypad   allowDecimal=true
+hint     Add the leg squares, then take the square root.
+step 1   Square both known legs.   [8² + 15² = 289]
+step 2   Take the square root.   [√289 = 17]
+step 3   Use metres for the missing side.   [17 metres]
+miss     wrong-hypotenuse-placement = 12.7   Keep the hypotenuse alone; add the two leg squares.
+miss     stopped-before-square-root = 289   Take the square root after adding the leg squares.
+
+--- pythagorean · seed 424242 · difficulty 1
+prompt   Find the missing side of this right triangle in centimetres.
+display  geometry pythagorean missingSide leg leg 3 hypotenuse 5 unit cm name "Right triangle with known leg 3 cm, hypotenuse 5 cm, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 4/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [5² − 3² = 16]
+step 2   Take the square root.   [√16 = 4]
+step 3   Use centimetres for the missing side.   [4 centimetres]
+miss     wrong-hypotenuse-placement = 5.8   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 16   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 987654321 · difficulty 1
+prompt   Find the missing side of this right triangle in centimetres.
+display  geometry pythagorean missingSide leg leg 3 hypotenuse 5 unit cm name "Right triangle with known leg 3 cm, hypotenuse 5 cm, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 4/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [5² − 3² = 16]
+step 2   Take the square root.   [√16 = 4]
+step 3   Use centimetres for the missing side.   [4 centimetres]
+miss     wrong-hypotenuse-placement = 5.8   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 16   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 1 · difficulty 2
+prompt   Find the missing side of this right triangle in inches.
+display  geometry pythagorean missingSide leg leg 6 hypotenuse 10 unit in name "Right triangle with known leg 6 in, hypotenuse 10 in, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 8/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [10² − 6² = 64]
+step 2   Take the square root.   [√64 = 8]
+step 3   Use inches for the missing side.   [8 inches]
+miss     wrong-hypotenuse-placement = 11.7   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 64   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 12345 · difficulty 2
+prompt   Find the missing side of this right triangle in metres.
+display  geometry pythagorean missingSide leg leg 10 hypotenuse 26 unit m name "Right triangle with known leg 10 m, hypotenuse 26 m, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 24/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [26² − 10² = 576]
+step 2   Take the square root.   [√576 = 24]
+step 3   Use metres for the missing side.   [24 metres]
+miss     wrong-hypotenuse-placement = 27.9   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 576   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 67890 · difficulty 2
+prompt   Find the missing side of this right triangle in metres.
+display  geometry pythagorean missingSide hypotenuse leg1 8 leg2 15 unit m name "Right triangle with legs 8 m and 15 m, and a missing hypotenuse" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 17/1
+input    keypad
+keypad   allowDecimal=true
+hint     Add the leg squares, then take the square root.
+step 1   Square both known legs.   [8² + 15² = 289]
+step 2   Take the square root.   [√289 = 17]
+step 3   Use metres for the missing side.   [17 metres]
+miss     wrong-hypotenuse-placement = 12.7   Keep the hypotenuse alone; add the two leg squares.
+miss     stopped-before-square-root = 289   Take the square root after adding the leg squares.
+
+--- pythagorean · seed 424242 · difficulty 2
+prompt   Find the missing side of this right triangle in centimetres.
+display  geometry pythagorean missingSide leg leg 3 hypotenuse 5 unit cm name "Right triangle with known leg 3 cm, hypotenuse 5 cm, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 4/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [5² − 3² = 16]
+step 2   Take the square root.   [√16 = 4]
+step 3   Use centimetres for the missing side.   [4 centimetres]
+miss     wrong-hypotenuse-placement = 5.8   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 16   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 987654321 · difficulty 2
+prompt   Find the missing side of this right triangle in centimetres.
+display  geometry pythagorean missingSide leg leg 6 hypotenuse 10 unit cm name "Right triangle with known leg 6 cm, hypotenuse 10 cm, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 8/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [10² − 6² = 64]
+step 2   Take the square root.   [√64 = 8]
+step 3   Use centimetres for the missing side.   [8 centimetres]
+miss     wrong-hypotenuse-placement = 11.7   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 64   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 1 · difficulty 3
+prompt   Find the missing side of this right triangle in inches.
+display  geometry pythagorean missingSide leg leg 9 hypotenuse 15 unit in name "Right triangle with known leg 9 in, hypotenuse 15 in, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 12/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [15² − 9² = 144]
+step 2   Take the square root.   [√144 = 12]
+step 3   Use inches for the missing side.   [12 inches]
+miss     wrong-hypotenuse-placement = 17.5   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 144   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 12345 · difficulty 3
+prompt   Find the missing side of this right triangle in metres.
+display  geometry pythagorean missingSide leg leg 15 hypotenuse 39 unit m name "Right triangle with known leg 15 m, hypotenuse 39 m, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 36/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [39² − 15² = 1296]
+step 2   Take the square root.   [√1296 = 36]
+step 3   Use metres for the missing side.   [36 metres]
+miss     wrong-hypotenuse-placement = 41.8   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 1296   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 67890 · difficulty 3
+prompt   Find the missing side of this right triangle in metres.
+display  geometry pythagorean missingSide hypotenuse leg1 16 leg2 30 unit m name "Right triangle with legs 16 m and 30 m, and a missing hypotenuse" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 34/1
+input    keypad
+keypad   allowDecimal=true
+hint     Add the leg squares, then take the square root.
+step 1   Square both known legs.   [16² + 30² = 1156]
+step 2   Take the square root.   [√1156 = 34]
+step 3   Use metres for the missing side.   [34 metres]
+miss     wrong-hypotenuse-placement = 25.4   Keep the hypotenuse alone; add the two leg squares.
+miss     stopped-before-square-root = 1156   Take the square root after adding the leg squares.
+
+--- pythagorean · seed 424242 · difficulty 3
+prompt   Find the missing side of this right triangle in centimetres.
+display  geometry pythagorean missingSide leg leg 6 hypotenuse 10 unit cm name "Right triangle with known leg 6 cm, hypotenuse 10 cm, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 8/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [10² − 6² = 64]
+step 2   Take the square root.   [√64 = 8]
+step 3   Use centimetres for the missing side.   [8 centimetres]
+miss     wrong-hypotenuse-placement = 11.7   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 64   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 987654321 · difficulty 3
+prompt   Find the missing side of this right triangle in centimetres.
+display  geometry pythagorean missingSide leg leg 9 hypotenuse 15 unit cm name "Right triangle with known leg 9 cm, hypotenuse 15 cm, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 12/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [15² − 9² = 144]
+step 2   Take the square root.   [√144 = 12]
+step 3   Use centimetres for the missing side.   [12 centimetres]
+miss     wrong-hypotenuse-placement = 17.5   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 144   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 1 · difficulty 4
+prompt   Find the missing side of this right triangle in inches.
+display  geometry pythagorean missingSide leg leg 12 hypotenuse 20 unit in name "Right triangle with known leg 12 in, hypotenuse 20 in, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 16/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [20² − 12² = 256]
+step 2   Take the square root.   [√256 = 16]
+step 3   Use inches for the missing side.   [16 inches]
+miss     wrong-hypotenuse-placement = 23.3   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 256   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 12345 · difficulty 4
+prompt   Find the missing side of this right triangle in metres.
+display  geometry pythagorean missingSide leg leg 25 hypotenuse 65 unit m name "Right triangle with known leg 25 m, hypotenuse 65 m, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 60/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [65² − 25² = 3600]
+step 2   Take the square root.   [√3600 = 60]
+step 3   Use metres for the missing side.   [60 metres]
+miss     wrong-hypotenuse-placement = 69.6   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 3600   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 67890 · difficulty 4
+prompt   Find the missing side of this right triangle in metres.
+display  geometry pythagorean missingSide hypotenuse leg1 32 leg2 60 unit m name "Right triangle with legs 32 m and 60 m, and a missing hypotenuse" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 68/1
+input    keypad
+keypad   allowDecimal=true
+hint     Add the leg squares, then take the square root.
+step 1   Square both known legs.   [32² + 60² = 4624]
+step 2   Take the square root.   [√4624 = 68]
+step 3   Use metres for the missing side.   [68 metres]
+miss     wrong-hypotenuse-placement = 50.8   Keep the hypotenuse alone; add the two leg squares.
+miss     stopped-before-square-root = 4624   Take the square root after adding the leg squares.
+
+--- pythagorean · seed 424242 · difficulty 4
+prompt   Find the missing side of this right triangle in centimetres.
+display  geometry pythagorean missingSide leg leg 9 hypotenuse 15 unit cm name "Right triangle with known leg 9 cm, hypotenuse 15 cm, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 12/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [15² − 9² = 144]
+step 2   Take the square root.   [√144 = 12]
+step 3   Use centimetres for the missing side.   [12 centimetres]
+miss     wrong-hypotenuse-placement = 17.5   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 144   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 987654321 · difficulty 4
+prompt   Find the missing side of this right triangle in centimetres.
+display  geometry pythagorean missingSide leg leg 15 hypotenuse 25 unit cm name "Right triangle with known leg 15 cm, hypotenuse 25 cm, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 20/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [25² − 15² = 400]
+step 2   Take the square root.   [√400 = 20]
+step 3   Use centimetres for the missing side.   [20 centimetres]
+miss     wrong-hypotenuse-placement = 29.2   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 400   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 1 · difficulty 5
+prompt   Find the missing side of this right triangle in inches.
+display  geometry pythagorean missingSide leg leg 18 hypotenuse 30 unit in name "Right triangle with known leg 18 in, hypotenuse 30 in, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 24/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [30² − 18² = 576]
+step 2   Take the square root.   [√576 = 24]
+step 3   Use inches for the missing side.   [24 inches]
+miss     wrong-hypotenuse-placement = 35   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 576   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 12345 · difficulty 5
+prompt   Find the missing side of this right triangle in metres.
+display  geometry pythagorean missingSide leg leg 35 hypotenuse 91 unit m name "Right triangle with known leg 35 m, hypotenuse 91 m, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 84/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [91² − 35² = 7056]
+step 2   Take the square root.   [√7056 = 84]
+step 3   Use metres for the missing side.   [84 metres]
+miss     wrong-hypotenuse-placement = 97.5   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 7056   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 67890 · difficulty 5
+prompt   Find the missing side of this right triangle in metres.
+display  geometry pythagorean missingSide hypotenuse leg1 40 leg2 75 unit m name "Right triangle with legs 40 m and 75 m, and a missing hypotenuse" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 85/1
+input    keypad
+keypad   allowDecimal=true
+hint     Add the leg squares, then take the square root.
+step 1   Square both known legs.   [40² + 75² = 7225]
+step 2   Take the square root.   [√7225 = 85]
+step 3   Use metres for the missing side.   [85 metres]
+miss     wrong-hypotenuse-placement = 63.4   Keep the hypotenuse alone; add the two leg squares.
+miss     stopped-before-square-root = 7225   Take the square root after adding the leg squares.
+
+--- pythagorean · seed 424242 · difficulty 5
+prompt   Find the missing side of this right triangle in centimetres.
+display  geometry pythagorean missingSide leg leg 12 hypotenuse 20 unit cm name "Right triangle with known leg 12 cm, hypotenuse 20 cm, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 16/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [20² − 12² = 256]
+step 2   Take the square root.   [√256 = 16]
+step 3   Use centimetres for the missing side.   [16 centimetres]
+miss     wrong-hypotenuse-placement = 23.3   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 256   Take the square root after subtracting the leg square.
+
+--- pythagorean · seed 987654321 · difficulty 5
+prompt   Find the missing side of this right triangle in centimetres.
+display  geometry pythagorean missingSide leg leg 21 hypotenuse 35 unit cm name "Right triangle with known leg 21 cm, hypotenuse 35 cm, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))]
+answer   exact 28/1
+input    keypad
+keypad   allowDecimal=true
+hint     Subtract the known leg square from the hypotenuse square, then root.
+step 1   Square the hypotenuse and known leg.   [35² − 21² = 784]
+step 2   Take the square root.   [√784 = 28]
+step 3   Use centimetres for the missing side.   [28 centimetres]
+miss     wrong-hypotenuse-placement = 40.8   Keep the hypotenuse squared alone; subtract the known leg square.
+miss     stopped-before-square-root = 784   Take the square root after subtracting the leg square."
+`;
+
+exports[`Unit 20 recorded output: surface-area > matches the authored sample output 1`] = `
+"--- surface-area · seed 1 · difficulty 1
+prompt   Find the surface area of this prism in square inches.
+display  geometry surface-area length 4 width 5 height 7 unit in faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 4 in, width 5 in, and height 7 in" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 166/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [20, 28, and 35]
+step 2   Double each pair for both faces.   [2(20) + 2(28) + 2(35)]
+step 3   Add all six face areas.   [40 + 56 + 70 = 166]
+step 4   Use square inches for area.   [166 square inches]
+
+--- surface-area · seed 12345 · difficulty 1
+prompt   Find the surface area of this prism in square feet.
+display  geometry surface-area length 5 width 4 height 7 unit ft faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 5 ft, width 4 ft, and height 7 ft" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 166/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [20, 35, and 28]
+step 2   Double each pair for both faces.   [2(20) + 2(35) + 2(28)]
+step 3   Add all six face areas.   [40 + 70 + 56 = 166]
+step 4   Use square feet for area.   [166 square feet]
+
+--- surface-area · seed 67890 · difficulty 1
+prompt   Find the surface area of this prism in square metres.
+display  geometry surface-area length 6 width 4 height 4 unit m faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 6 m, width 4 m, and height 4 m" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 128/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [24, 24, and 16]
+step 2   Double each pair for both faces.   [2(24) + 2(24) + 2(16)]
+step 3   Add all six face areas.   [48 + 48 + 32 = 128]
+step 4   Use square metres for area.   [128 square metres]
+
+--- surface-area · seed 424242 · difficulty 1
+prompt   Find the surface area of this prism in square centimetres.
+display  geometry surface-area length 5 width 3 height 6 unit cm faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 5 cm, width 3 cm, and height 6 cm" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 126/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [15, 30, and 18]
+step 2   Double each pair for both faces.   [2(15) + 2(30) + 2(18)]
+step 3   Add all six face areas.   [30 + 60 + 36 = 126]
+step 4   Use square centimetres for area.   [126 square centimetres]
+
+--- surface-area · seed 987654321 · difficulty 1
+prompt   Find the surface area of this prism in square feet.
+display  geometry surface-area length 4 width 3 height 7 unit ft faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 4 ft, width 3 ft, and height 7 ft" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 122/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [12, 28, and 21]
+step 2   Double each pair for both faces.   [2(12) + 2(28) + 2(21)]
+step 3   Add all six face areas.   [24 + 56 + 42 = 122]
+step 4   Use square feet for area.   [122 square feet]
+
+--- surface-area · seed 1 · difficulty 2
+prompt   Find the surface area of this prism in square inches.
+display  geometry surface-area length 6 width 7 height 10 unit in faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 6 in, width 7 in, and height 10 in" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 344/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [42, 60, and 70]
+step 2   Double each pair for both faces.   [2(42) + 2(60) + 2(70)]
+step 3   Add all six face areas.   [84 + 120 + 140 = 344]
+step 4   Use square inches for area.   [344 square inches]
+
+--- surface-area · seed 12345 · difficulty 2
+prompt   Find the surface area of this prism in square feet.
+display  geometry surface-area length 8 width 6 height 9 unit ft faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 8 ft, width 6 ft, and height 9 ft" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 348/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [48, 72, and 54]
+step 2   Double each pair for both faces.   [2(48) + 2(72) + 2(54)]
+step 3   Add all six face areas.   [96 + 144 + 108 = 348]
+step 4   Use square feet for area.   [348 square feet]
+
+--- surface-area · seed 67890 · difficulty 2
+prompt   Find the surface area of this prism in square metres.
+display  geometry surface-area length 10 width 6 height 6 unit m faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 10 m, width 6 m, and height 6 m" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 312/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [60, 60, and 36]
+step 2   Double each pair for both faces.   [2(60) + 2(60) + 2(36)]
+step 3   Add all six face areas.   [120 + 120 + 72 = 312]
+step 4   Use square metres for area.   [312 square metres]
+
+--- surface-area · seed 424242 · difficulty 2
+prompt   Find the surface area of this prism in square centimetres.
+display  geometry surface-area length 7 width 5 height 8 unit cm faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 7 cm, width 5 cm, and height 8 cm" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 262/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [35, 56, and 40]
+step 2   Double each pair for both faces.   [2(35) + 2(56) + 2(40)]
+step 3   Add all six face areas.   [70 + 112 + 80 = 262]
+step 4   Use square centimetres for area.   [262 square centimetres]
+
+--- surface-area · seed 987654321 · difficulty 2
+prompt   Find the surface area of this prism in square feet.
+display  geometry surface-area length 6 width 4 height 10 unit ft faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 6 ft, width 4 ft, and height 10 ft" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 248/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [24, 60, and 40]
+step 2   Double each pair for both faces.   [2(24) + 2(60) + 2(40)]
+step 3   Add all six face areas.   [48 + 120 + 80 = 248]
+step 4   Use square feet for area.   [248 square feet]
+
+--- surface-area · seed 1 · difficulty 3
+prompt   Find the surface area of this prism in square inches.
+display  geometry surface-area length 8 width 9 height 14 unit in faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 8 in, width 9 in, and height 14 in" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 620/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [72, 112, and 126]
+step 2   Double each pair for both faces.   [2(72) + 2(112) + 2(126)]
+step 3   Add all six face areas.   [144 + 224 + 252 = 620]
+step 4   Use square inches for area.   [620 square inches]
+
+--- surface-area · seed 12345 · difficulty 3
+prompt   Find the surface area of this prism in square feet.
+display  geometry surface-area length 10 width 8 height 13 unit ft faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 10 ft, width 8 ft, and height 13 ft" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 628/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [80, 130, and 104]
+step 2   Double each pair for both faces.   [2(80) + 2(130) + 2(104)]
+step 3   Add all six face areas.   [160 + 260 + 208 = 628]
+step 4   Use square feet for area.   [628 square feet]
+
+--- surface-area · seed 67890 · difficulty 3
+prompt   Find the surface area of this prism in square metres.
+display  geometry surface-area length 13 width 7 height 9 unit m faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 13 m, width 7 m, and height 9 m" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 542/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [91, 117, and 63]
+step 2   Double each pair for both faces.   [2(91) + 2(117) + 2(63)]
+step 3   Add all six face areas.   [182 + 234 + 126 = 542]
+step 4   Use square metres for area.   [542 square metres]
+
+--- surface-area · seed 424242 · difficulty 3
+prompt   Find the surface area of this prism in square centimetres.
+display  geometry surface-area length 10 width 6 height 11 unit cm faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 10 cm, width 6 cm, and height 11 cm" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 472/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [60, 110, and 66]
+step 2   Double each pair for both faces.   [2(60) + 2(110) + 2(66)]
+step 3   Add all six face areas.   [120 + 220 + 132 = 472]
+step 4   Use square centimetres for area.   [472 square centimetres]
+
+--- surface-area · seed 987654321 · difficulty 3
+prompt   Find the surface area of this prism in square feet.
+display  geometry surface-area length 9 width 5 height 14 unit ft faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 9 ft, width 5 ft, and height 14 ft" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 482/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [45, 126, and 70]
+step 2   Double each pair for both faces.   [2(45) + 2(126) + 2(70)]
+step 3   Add all six face areas.   [90 + 252 + 140 = 482]
+step 4   Use square feet for area.   [482 square feet]
+
+--- surface-area · seed 1 · difficulty 4
+prompt   Find the surface area of this prism in square inches.
+display  geometry surface-area length 10 width 12 height 18 unit in faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 10 in, width 12 in, and height 18 in" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 1032/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [120, 180, and 216]
+step 2   Double each pair for both faces.   [2(120) + 2(180) + 2(216)]
+step 3   Add all six face areas.   [240 + 360 + 432 = 1032]
+step 4   Use square inches for area.   [1032 square inches]
+
+--- surface-area · seed 12345 · difficulty 4
+prompt   Find the surface area of this prism in square feet.
+display  geometry surface-area length 13 width 11 height 16 unit ft faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 13 ft, width 11 ft, and height 16 ft" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 1054/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [143, 208, and 176]
+step 2   Double each pair for both faces.   [2(143) + 2(208) + 2(176)]
+step 3   Add all six face areas.   [286 + 416 + 352 = 1054]
+step 4   Use square feet for area.   [1054 square feet]
+
+--- surface-area · seed 67890 · difficulty 4
+prompt   Find the surface area of this prism in square metres.
+display  geometry surface-area length 17 width 10 height 11 unit m faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 17 m, width 10 m, and height 11 m" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 934/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [170, 187, and 110]
+step 2   Double each pair for both faces.   [2(170) + 2(187) + 2(110)]
+step 3   Add all six face areas.   [340 + 374 + 220 = 934]
+step 4   Use square metres for area.   [934 square metres]
+
+--- surface-area · seed 424242 · difficulty 4
+prompt   Find the surface area of this prism in square centimetres.
+display  geometry surface-area length 13 width 8 height 15 unit cm faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 13 cm, width 8 cm, and height 15 cm" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 838/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [104, 195, and 120]
+step 2   Double each pair for both faces.   [2(104) + 2(195) + 2(120)]
+step 3   Add all six face areas.   [208 + 390 + 240 = 838]
+step 4   Use square centimetres for area.   [838 square centimetres]
+
+--- surface-area · seed 987654321 · difficulty 4
+prompt   Find the surface area of this prism in square feet.
+display  geometry surface-area length 11 width 7 height 18 unit ft faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 11 ft, width 7 ft, and height 18 ft" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 802/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [77, 198, and 126]
+step 2   Double each pair for both faces.   [2(77) + 2(198) + 2(126)]
+step 3   Add all six face areas.   [154 + 396 + 252 = 802]
+step 4   Use square feet for area.   [802 square feet]
+
+--- surface-area · seed 1 · difficulty 5
+prompt   Find the surface area of this prism in square inches.
+display  geometry surface-area length 14 width 16 height 24 unit in faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 14 in, width 16 in, and height 24 in" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 1888/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [224, 336, and 384]
+step 2   Double each pair for both faces.   [2(224) + 2(336) + 2(384)]
+step 3   Add all six face areas.   [448 + 672 + 768 = 1888]
+step 4   Use square inches for area.   [1888 square inches]
+
+--- surface-area · seed 12345 · difficulty 5
+prompt   Find the surface area of this prism in square feet.
+display  geometry surface-area length 19 width 15 height 22 unit ft faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 19 ft, width 15 ft, and height 22 ft" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 2066/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [285, 418, and 330]
+step 2   Double each pair for both faces.   [2(285) + 2(418) + 2(330)]
+step 3   Add all six face areas.   [570 + 836 + 660 = 2066]
+step 4   Use square feet for area.   [2066 square feet]
+
+--- surface-area · seed 67890 · difficulty 5
+prompt   Find the surface area of this prism in square metres.
+display  geometry surface-area length 24 width 14 height 15 unit m faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 24 m, width 14 m, and height 15 m" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 1812/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [336, 360, and 210]
+step 2   Double each pair for both faces.   [2(336) + 2(360) + 2(210)]
+step 3   Add all six face areas.   [672 + 720 + 420 = 1812]
+step 4   Use square metres for area.   [1812 square metres]
+
+--- surface-area · seed 424242 · difficulty 5
+prompt   Find the surface area of this prism in square centimetres.
+display  geometry surface-area length 18 width 11 height 19 unit cm faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 18 cm, width 11 cm, and height 19 cm" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 1498/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [198, 342, and 209]
+step 2   Double each pair for both faces.   [2(198) + 2(342) + 2(209)]
+step 3   Add all six face areas.   [396 + 684 + 418 = 1498]
+step 4   Use square centimetres for area.   [1498 square centimetres]
+
+--- surface-area · seed 987654321 · difficulty 5
+prompt   Find the surface area of this prism in square feet.
+display  geometry surface-area length 16 width 9 height 23 unit ft faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 16 ft, width 9 ft, and height 23 ft" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")]
+answer   exact 1438/1
+input    keypad
+hint     Add the areas of all six faces in the net.
+step 1   Find each pair of face areas.   [144, 368, and 207]
+step 2   Double each pair for both faces.   [2(144) + 2(368) + 2(207)]
+step 3   Add all six face areas.   [288 + 736 + 414 = 1438]
+step 4   Use square feet for area.   [1438 square feet]"
+`;
+
+exports[`Unit 20 recorded output: volume-cone-pyramid-sphere > matches the authored sample output 1`] = `
+"--- volume-cone-pyramid-sphere · seed 1 · difficulty 1
+prompt   Find the pyramid's volume in cubic centimetres.
+display  geometry volume-pyramid baseLength 6 baseWidth 6 height 7 unit cm name "Rectangular pyramid with base length 6 cm, base width 6 cm, and perpendicular height 7 cm" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 84/1
+input    keypad
+hint     Find the rectangular base, multiply by height, then take one-third.
+step 1   Find the rectangular base area.   [6 × 6 = 36]
+step 2   Multiply base area by height.   [36 × 7 = 252]
+step 3   Take one-third of the product.   [252 ÷ 3 = 84]
+step 4   Use cubic centimetres for volume.   [84 cubic centimetres]
+
+--- volume-cone-pyramid-sphere · seed 12345 · difficulty 1
+prompt   Find the sphere's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-sphere radius 3 unit m name "Sphere with radius 3 m" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))]
+answer   approx 113 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Cube the radius, multiply by 3.14, then use four-thirds.
+step 1   Cube the radius.   [3 × 3 × 3 = 27]
+step 2   Multiply by 4 and 3.14.   [4 × 3.14 × 27 = 339.12]
+step 3   Divide by 3 and round.   [113.04 ≈ 113]
+
+--- volume-cone-pyramid-sphere · seed 67890 · difficulty 1
+prompt   Find the pyramid's volume in cubic inches.
+display  geometry volume-pyramid baseLength 5 baseWidth 4 height 3 unit in name "Rectangular pyramid with base length 5 in, base width 4 in, and perpendicular height 3 in" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 20/1
+input    keypad
+hint     Find the rectangular base, multiply by height, then take one-third.
+step 1   Find the rectangular base area.   [5 × 4 = 20]
+step 2   Multiply base area by height.   [20 × 3 = 60]
+step 3   Take one-third of the product.   [60 ÷ 3 = 20]
+step 4   Use cubic inches for volume.   [20 cubic inches]
+
+--- volume-cone-pyramid-sphere · seed 424242 · difficulty 1
+prompt   Find the cone's volume in cubic inches. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cone radius 2 height 3 unit in name "Cone with radius 2 in and perpendicular height 3 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 12.6 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Find the circular base, multiply by height, then take one-third.
+step 1   Square the radius.   [2 × 2 = 4]
+step 2   Multiply by 3.14 and height.   [3.14 × 4 × 3 = 37.68]
+step 3   Take one-third and round.   [12.56 ≈ 12.6]
+
+--- volume-cone-pyramid-sphere · seed 987654321 · difficulty 1
+prompt   Find the sphere's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-sphere radius 2 unit cm name "Sphere with radius 2 cm" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))]
+answer   approx 33.5 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Cube the radius, multiply by 3.14, then use four-thirds.
+step 1   Cube the radius.   [2 × 2 × 2 = 8]
+step 2   Multiply by 4 and 3.14.   [4 × 3.14 × 8 = 100.48]
+step 3   Divide by 3 and round.   [33.49333333333333 ≈ 33.5]
+
+--- volume-cone-pyramid-sphere · seed 1 · difficulty 2
+prompt   Find the pyramid's volume in cubic centimetres.
+display  geometry volume-pyramid baseLength 9 baseWidth 9 height 10 unit cm name "Rectangular pyramid with base length 9 cm, base width 9 cm, and perpendicular height 10 cm" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 270/1
+input    keypad
+hint     Find the rectangular base, multiply by height, then take one-third.
+step 1   Find the rectangular base area.   [9 × 9 = 81]
+step 2   Multiply base area by height.   [81 × 10 = 810]
+step 3   Take one-third of the product.   [810 ÷ 3 = 270]
+step 4   Use cubic centimetres for volume.   [270 cubic centimetres]
+
+--- volume-cone-pyramid-sphere · seed 12345 · difficulty 2
+prompt   Find the sphere's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-sphere radius 4 unit m name "Sphere with radius 4 m" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))]
+answer   approx 267.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Cube the radius, multiply by 3.14, then use four-thirds.
+step 1   Cube the radius.   [4 × 4 × 4 = 64]
+step 2   Multiply by 4 and 3.14.   [4 × 3.14 × 64 = 803.84]
+step 3   Divide by 3 and round.   [267.94666666666666 ≈ 267.9]
+
+--- volume-cone-pyramid-sphere · seed 67890 · difficulty 2
+prompt   Find the pyramid's volume in cubic inches.
+display  geometry volume-pyramid baseLength 8 baseWidth 6 height 4 unit in name "Rectangular pyramid with base length 8 in, base width 6 in, and perpendicular height 4 in" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 64/1
+input    keypad
+hint     Find the rectangular base, multiply by height, then take one-third.
+step 1   Find the rectangular base area.   [8 × 6 = 48]
+step 2   Multiply base area by height.   [48 × 4 = 192]
+step 3   Take one-third of the product.   [192 ÷ 3 = 64]
+step 4   Use cubic inches for volume.   [64 cubic inches]
+
+--- volume-cone-pyramid-sphere · seed 424242 · difficulty 2
+prompt   Find the cone's volume in cubic inches. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cone radius 4 height 5 unit in name "Cone with radius 4 in and perpendicular height 5 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 83.7 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Find the circular base, multiply by height, then take one-third.
+step 1   Square the radius.   [4 × 4 = 16]
+step 2   Multiply by 3.14 and height.   [3.14 × 16 × 5 = 251.20000000000002]
+step 3   Take one-third and round.   [83.73333333333333 ≈ 83.7]
+
+--- volume-cone-pyramid-sphere · seed 987654321 · difficulty 2
+prompt   Find the sphere's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-sphere radius 3 unit cm name "Sphere with radius 3 cm" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))]
+answer   approx 113 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Cube the radius, multiply by 3.14, then use four-thirds.
+step 1   Cube the radius.   [3 × 3 × 3 = 27]
+step 2   Multiply by 4 and 3.14.   [4 × 3.14 × 27 = 339.12]
+step 3   Divide by 3 and round.   [113.04 ≈ 113]
+
+--- volume-cone-pyramid-sphere · seed 1 · difficulty 3
+prompt   Find the pyramid's volume in cubic centimetres.
+display  geometry volume-pyramid baseLength 12 baseWidth 12 height 14 unit cm name "Rectangular pyramid with base length 12 cm, base width 12 cm, and perpendicular height 14 cm" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 672/1
+input    keypad
+hint     Find the rectangular base, multiply by height, then take one-third.
+step 1   Find the rectangular base area.   [12 × 12 = 144]
+step 2   Multiply base area by height.   [144 × 14 = 2016]
+step 3   Take one-third of the product.   [2016 ÷ 3 = 672]
+step 4   Use cubic centimetres for volume.   [672 cubic centimetres]
+
+--- volume-cone-pyramid-sphere · seed 12345 · difficulty 3
+prompt   Find the sphere's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-sphere radius 6 unit m name "Sphere with radius 6 m" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))]
+answer   approx 904.3 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Cube the radius, multiply by 3.14, then use four-thirds.
+step 1   Cube the radius.   [6 × 6 × 6 = 216]
+step 2   Multiply by 4 and 3.14.   [4 × 3.14 × 216 = 2712.96]
+step 3   Divide by 3 and round.   [904.32 ≈ 904.3]
+
+--- volume-cone-pyramid-sphere · seed 67890 · difficulty 3
+prompt   Find the pyramid's volume in cubic inches.
+display  geometry volume-pyramid baseLength 11 baseWidth 7 height 6 unit in name "Rectangular pyramid with base length 11 in, base width 7 in, and perpendicular height 6 in" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 154/1
+input    keypad
+hint     Find the rectangular base, multiply by height, then take one-third.
+step 1   Find the rectangular base area.   [11 × 7 = 77]
+step 2   Multiply base area by height.   [77 × 6 = 462]
+step 3   Take one-third of the product.   [462 ÷ 3 = 154]
+step 4   Use cubic inches for volume.   [154 cubic inches]
+
+--- volume-cone-pyramid-sphere · seed 424242 · difficulty 3
+prompt   Find the cone's volume in cubic inches. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cone radius 5 height 7 unit in name "Cone with radius 5 in and perpendicular height 7 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 183.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Find the circular base, multiply by height, then take one-third.
+step 1   Square the radius.   [5 × 5 = 25]
+step 2   Multiply by 3.14 and height.   [3.14 × 25 × 7 = 549.5]
+step 3   Take one-third and round.   [183.16666666666666 ≈ 183.2]
+
+--- volume-cone-pyramid-sphere · seed 987654321 · difficulty 3
+prompt   Find the sphere's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-sphere radius 4 unit cm name "Sphere with radius 4 cm" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))]
+answer   approx 267.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Cube the radius, multiply by 3.14, then use four-thirds.
+step 1   Cube the radius.   [4 × 4 × 4 = 64]
+step 2   Multiply by 4 and 3.14.   [4 × 3.14 × 64 = 803.84]
+step 3   Divide by 3 and round.   [267.94666666666666 ≈ 267.9]
+
+--- volume-cone-pyramid-sphere · seed 1 · difficulty 4
+prompt   Find the pyramid's volume in cubic centimetres.
+display  geometry volume-pyramid baseLength 16 baseWidth 16 height 18 unit cm name "Rectangular pyramid with base length 16 cm, base width 16 cm, and perpendicular height 18 cm" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 1536/1
+input    keypad
+hint     Find the rectangular base, multiply by height, then take one-third.
+step 1   Find the rectangular base area.   [16 × 16 = 256]
+step 2   Multiply base area by height.   [256 × 18 = 4608]
+step 3   Take one-third of the product.   [4608 ÷ 3 = 1536]
+step 4   Use cubic centimetres for volume.   [1536 cubic centimetres]
+
+--- volume-cone-pyramid-sphere · seed 12345 · difficulty 4
+prompt   Find the sphere's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-sphere radius 8 unit m name "Sphere with radius 8 m" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))]
+answer   approx 2143.6 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Cube the radius, multiply by 3.14, then use four-thirds.
+step 1   Cube the radius.   [8 × 8 × 8 = 512]
+step 2   Multiply by 4 and 3.14.   [4 × 3.14 × 512 = 6430.72]
+step 3   Divide by 3 and round.   [2143.5733333333333 ≈ 2143.6]
+
+--- volume-cone-pyramid-sphere · seed 67890 · difficulty 4
+prompt   Find the pyramid's volume in cubic inches.
+display  geometry volume-pyramid baseLength 20 baseWidth 8 height 15 unit in name "Rectangular pyramid with base length 20 in, base width 8 in, and perpendicular height 15 in" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 800/1
+input    keypad
+hint     Find the rectangular base, multiply by height, then take one-third.
+step 1   Find the rectangular base area.   [20 × 8 = 160]
+step 2   Multiply base area by height.   [160 × 15 = 2400]
+step 3   Take one-third of the product.   [2400 ÷ 3 = 800]
+step 4   Use cubic inches for volume.   [800 cubic inches]
+
+--- volume-cone-pyramid-sphere · seed 424242 · difficulty 4
+prompt   Find the cone's volume in cubic inches. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cone radius 8 height 10 unit in name "Cone with radius 8 in and perpendicular height 10 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 669.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Find the circular base, multiply by height, then take one-third.
+step 1   Square the radius.   [8 × 8 = 64]
+step 2   Multiply by 3.14 and height.   [3.14 × 64 × 10 = 2009.6000000000001]
+step 3   Take one-third and round.   [669.8666666666667 ≈ 669.9]
+
+--- volume-cone-pyramid-sphere · seed 987654321 · difficulty 4
+prompt   Find the sphere's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-sphere radius 7 unit cm name "Sphere with radius 7 cm" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))]
+answer   approx 1436 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Cube the radius, multiply by 3.14, then use four-thirds.
+step 1   Cube the radius.   [7 × 7 × 7 = 343]
+step 2   Multiply by 4 and 3.14.   [4 × 3.14 × 343 = 4308.08]
+step 3   Divide by 3 and round.   [1436.0266666666666 ≈ 1436]
+
+--- volume-cone-pyramid-sphere · seed 1 · difficulty 5
+prompt   Find the pyramid's volume in cubic centimetres.
+display  geometry volume-pyramid baseLength 22 baseWidth 22 height 24 unit cm name "Rectangular pyramid with base length 22 cm, base width 22 cm, and perpendicular height 24 cm" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 3872/1
+input    keypad
+hint     Find the rectangular base, multiply by height, then take one-third.
+step 1   Find the rectangular base area.   [22 × 22 = 484]
+step 2   Multiply base area by height.   [484 × 24 = 11616]
+step 3   Take one-third of the product.   [11616 ÷ 3 = 3872]
+step 4   Use cubic centimetres for volume.   [3872 cubic centimetres]
+
+--- volume-cone-pyramid-sphere · seed 12345 · difficulty 5
+prompt   Find the sphere's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-sphere radius 11 unit m name "Sphere with radius 11 m" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))]
+answer   approx 5572.5 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Cube the radius, multiply by 3.14, then use four-thirds.
+step 1   Cube the radius.   [11 × 11 × 11 = 1331]
+step 2   Multiply by 4 and 3.14.   [4 × 3.14 × 1331 = 16717.36]
+step 3   Divide by 3 and round.   [5572.453333333334 ≈ 5572.5]
+
+--- volume-cone-pyramid-sphere · seed 67890 · difficulty 5
+prompt   Find the pyramid's volume in cubic inches.
+display  geometry volume-pyramid baseLength 27 baseWidth 11 height 19 unit in name "Rectangular pyramid with base length 27 in, base width 11 in, and perpendicular height 19 in" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 1881/1
+input    keypad
+hint     Find the rectangular base, multiply by height, then take one-third.
+step 1   Find the rectangular base area.   [27 × 11 = 297]
+step 2   Multiply base area by height.   [297 × 19 = 5643]
+step 3   Take one-third of the product.   [5643 ÷ 3 = 1881]
+step 4   Use cubic inches for volume.   [1881 cubic inches]
+
+--- volume-cone-pyramid-sphere · seed 424242 · difficulty 5
+prompt   Find the cone's volume in cubic inches. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cone radius 11 height 12 unit in name "Cone with radius 11 in and perpendicular height 12 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 1519.8 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Find the circular base, multiply by height, then take one-third.
+step 1   Square the radius.   [11 × 11 = 121]
+step 2   Multiply by 3.14 and height.   [3.14 × 121 × 12 = 4559.28]
+step 3   Take one-third and round.   [1519.76 ≈ 1519.8]
+
+--- volume-cone-pyramid-sphere · seed 987654321 · difficulty 5
+prompt   Find the sphere's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-sphere radius 9 unit cm name "Sphere with radius 9 cm" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))]
+answer   approx 3052.1 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Cube the radius, multiply by 3.14, then use four-thirds.
+step 1   Cube the radius.   [9 × 9 × 9 = 729]
+step 2   Multiply by 4 and 3.14.   [4 × 3.14 × 729 = 9156.24]
+step 3   Divide by 3 and round.   [3052.08 ≈ 3052.1]"
+`;
+
+exports[`Unit 20 recorded output: volume-cylinder > matches the authored sample output 1`] = `
+"--- volume-cylinder · seed 1 · difficulty 1
+prompt   Find the cylinder's volume in cubic inches. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 4 height 3 unit in name "Cylinder with radius 4 in and perpendicular height 3 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 150.7 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [4 × 4 = 16]
+step 2   Multiply by height and 3.14.   [3.14 × 16 × 3 = 150.72]
+step 3   Round to the nearest tenth.   [150.7]
+
+--- volume-cylinder · seed 12345 · difficulty 1
+prompt   Find the cylinder's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 5 height 4 unit m name "Cylinder with radius 5 m and perpendicular height 4 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 314 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [5 × 5 = 25]
+step 2   Multiply by height and 3.14.   [3.14 × 25 × 4 = 314]
+step 3   Round to the nearest tenth.   [314]
+
+--- volume-cylinder · seed 67890 · difficulty 1
+prompt   Find the cylinder's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 3 height 5 unit m name "Cylinder with radius 3 m and perpendicular height 5 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 141.3 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [3 × 3 = 9]
+step 2   Multiply by height and 3.14.   [3.14 × 9 × 5 = 141.3]
+step 3   Round to the nearest tenth.   [141.3]
+
+--- volume-cylinder · seed 424242 · difficulty 1
+prompt   Find the cylinder's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 2 height 4 unit cm name "Cylinder with radius 2 cm and perpendicular height 4 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 50.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [2 × 2 = 4]
+step 2   Multiply by height and 3.14.   [3.14 × 4 × 4 = 50.24]
+step 3   Round to the nearest tenth.   [50.2]
+
+--- volume-cylinder · seed 987654321 · difficulty 1
+prompt   Find the cylinder's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 5 height 3 unit cm name "Cylinder with radius 5 cm and perpendicular height 3 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 235.5 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [5 × 5 = 25]
+step 2   Multiply by height and 3.14.   [3.14 × 25 × 3 = 235.5]
+step 3   Round to the nearest tenth.   [235.5]
+
+--- volume-cylinder · seed 1 · difficulty 2
+prompt   Find the cylinder's volume in cubic inches. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 6 height 4 unit in name "Cylinder with radius 6 in and perpendicular height 4 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 452.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [6 × 6 = 36]
+step 2   Multiply by height and 3.14.   [3.14 × 36 × 4 = 452.16]
+step 3   Round to the nearest tenth.   [452.2]
+
+--- volume-cylinder · seed 12345 · difficulty 2
+prompt   Find the cylinder's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 7 height 6 unit m name "Cylinder with radius 7 m and perpendicular height 6 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 923.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [7 × 7 = 49]
+step 2   Multiply by height and 3.14.   [3.14 × 49 × 6 = 923.1600000000001]
+step 3   Round to the nearest tenth.   [923.2]
+
+--- volume-cylinder · seed 67890 · difficulty 2
+prompt   Find the cylinder's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 4 height 8 unit m name "Cylinder with radius 4 m and perpendicular height 8 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 401.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [4 × 4 = 16]
+step 2   Multiply by height and 3.14.   [3.14 × 16 × 8 = 401.92]
+step 3   Round to the nearest tenth.   [401.9]
+
+--- volume-cylinder · seed 424242 · difficulty 2
+prompt   Find the cylinder's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 3 height 5 unit cm name "Cylinder with radius 3 cm and perpendicular height 5 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 141.3 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [3 × 3 = 9]
+step 2   Multiply by height and 3.14.   [3.14 × 9 × 5 = 141.3]
+step 3   Round to the nearest tenth.   [141.3]
+
+--- volume-cylinder · seed 987654321 · difficulty 2
+prompt   Find the cylinder's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 7 height 4 unit cm name "Cylinder with radius 7 cm and perpendicular height 4 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 615.4 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [7 × 7 = 49]
+step 2   Multiply by height and 3.14.   [3.14 × 49 × 4 = 615.44]
+step 3   Round to the nearest tenth.   [615.4]
+
+--- volume-cylinder · seed 1 · difficulty 3
+prompt   Find the cylinder's volume in cubic inches. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 8 height 6 unit in name "Cylinder with radius 8 in and perpendicular height 6 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 1205.8 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [8 × 8 = 64]
+step 2   Multiply by height and 3.14.   [3.14 × 64 × 6 = 1205.76]
+step 3   Round to the nearest tenth.   [1205.8]
+
+--- volume-cylinder · seed 12345 · difficulty 3
+prompt   Find the cylinder's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 10 height 8 unit m name "Cylinder with radius 10 m and perpendicular height 8 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 2512 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [10 × 10 = 100]
+step 2   Multiply by height and 3.14.   [3.14 × 100 × 8 = 2512]
+step 3   Round to the nearest tenth.   [2512]
+
+--- volume-cylinder · seed 67890 · difficulty 3
+prompt   Find the cylinder's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 6 height 11 unit m name "Cylinder with radius 6 m and perpendicular height 11 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 1243.4 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [6 × 6 = 36]
+step 2   Multiply by height and 3.14.   [3.14 × 36 × 11 = 1243.44]
+step 3   Round to the nearest tenth.   [1243.4]
+
+--- volume-cylinder · seed 424242 · difficulty 3
+prompt   Find the cylinder's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 4 height 8 unit cm name "Cylinder with radius 4 cm and perpendicular height 8 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 401.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [4 × 4 = 16]
+step 2   Multiply by height and 3.14.   [3.14 × 16 × 8 = 401.92]
+step 3   Round to the nearest tenth.   [401.9]
+
+--- volume-cylinder · seed 987654321 · difficulty 3
+prompt   Find the cylinder's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 10 height 7 unit cm name "Cylinder with radius 10 cm and perpendicular height 7 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 2198 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [10 × 10 = 100]
+step 2   Multiply by height and 3.14.   [3.14 × 100 × 7 = 2198]
+step 3   Round to the nearest tenth.   [2198]
+
+--- volume-cylinder · seed 1 · difficulty 4
+prompt   Find the cylinder's volume in cubic inches. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 11 height 8 unit in name "Cylinder with radius 11 in and perpendicular height 8 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 3039.5 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [11 × 11 = 121]
+step 2   Multiply by height and 3.14.   [3.14 × 121 × 8 = 3039.52]
+step 3   Round to the nearest tenth.   [3039.5]
+
+--- volume-cylinder · seed 12345 · difficulty 4
+prompt   Find the cylinder's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 14 height 11 unit m name "Cylinder with radius 14 m and perpendicular height 11 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 6769.8 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [14 × 14 = 196]
+step 2   Multiply by height and 3.14.   [3.14 × 196 × 11 = 6769.84]
+step 3   Round to the nearest tenth.   [6769.8]
+
+--- volume-cylinder · seed 67890 · difficulty 4
+prompt   Find the cylinder's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 9 height 14 unit m name "Cylinder with radius 9 m and perpendicular height 14 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 3560.8 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [9 × 9 = 81]
+step 2   Multiply by height and 3.14.   [3.14 × 81 × 14 = 3560.76]
+step 3   Round to the nearest tenth.   [3560.8]
+
+--- volume-cylinder · seed 424242 · difficulty 4
+prompt   Find the cylinder's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 7 height 10 unit cm name "Cylinder with radius 7 cm and perpendicular height 10 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 1538.6 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [7 × 7 = 49]
+step 2   Multiply by height and 3.14.   [3.14 × 49 × 10 = 1538.6000000000001]
+step 3   Round to the nearest tenth.   [1538.6]
+
+--- volume-cylinder · seed 987654321 · difficulty 4
+prompt   Find the cylinder's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 14 height 9 unit cm name "Cylinder with radius 14 cm and perpendicular height 9 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 5539 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [14 × 14 = 196]
+step 2   Multiply by height and 3.14.   [3.14 × 196 × 9 = 5538.960000000001]
+step 3   Round to the nearest tenth.   [5539]
+
+--- volume-cylinder · seed 1 · difficulty 5
+prompt   Find the cylinder's volume in cubic inches. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 16 height 10 unit in name "Cylinder with radius 16 in and perpendicular height 10 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 8038.4 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [16 × 16 = 256]
+step 2   Multiply by height and 3.14.   [3.14 × 256 × 10 = 8038.400000000001]
+step 3   Round to the nearest tenth.   [8038.4]
+
+--- volume-cylinder · seed 12345 · difficulty 5
+prompt   Find the cylinder's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 20 height 14 unit m name "Cylinder with radius 20 m and perpendicular height 14 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 17584 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [20 × 20 = 400]
+step 2   Multiply by height and 3.14.   [3.14 × 400 × 14 = 17584]
+step 3   Round to the nearest tenth.   [17584]
+
+--- volume-cylinder · seed 67890 · difficulty 5
+prompt   Find the cylinder's volume in cubic metres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 13 height 18 unit m name "Cylinder with radius 13 m and perpendicular height 18 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 9551.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [13 × 13 = 169]
+step 2   Multiply by height and 3.14.   [3.14 × 169 × 18 = 9551.88]
+step 3   Round to the nearest tenth.   [9551.9]
+
+--- volume-cylinder · seed 424242 · difficulty 5
+prompt   Find the cylinder's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 9 height 13 unit cm name "Cylinder with radius 9 cm and perpendicular height 13 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 3306.4 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [9 × 9 = 81]
+step 2   Multiply by height and 3.14.   [3.14 × 81 × 13 = 3306.42]
+step 3   Round to the nearest tenth.   [3306.4]
+
+--- volume-cylinder · seed 987654321 · difficulty 5
+prompt   Find the cylinder's volume in cubic centimetres. Use π = 3.14 and round to the nearest tenth.
+display  geometry volume-cylinder radius 20 height 12 unit cm name "Cylinder with radius 20 cm and perpendicular height 12 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))]
+answer   approx 15072 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Square the radius, then multiply by height and 3.14.
+step 1   Square the radius.   [20 × 20 = 400]
+step 2   Multiply by height and 3.14.   [3.14 × 400 × 12 = 15072]
+step 3   Round to the nearest tenth.   [15072]"
+`;
+
+exports[`Unit 20 recorded output: volume-prism > matches the authored sample output 1`] = `
+"--- volume-prism · seed 1 · difficulty 1
+prompt   Find the volume of this prism in cubic inches.
+display  geometry volume-prism length 4 width 5 height 7 unit in name "Rectangular prism with length 4 in, width 5 in, and height 7 in" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 140/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [4 × 5 = 20]
+step 2   Multiply base area by height.   [20 × 7 = 140]
+step 3   Use cubic inches for volume.   [140 cubic inches]
+
+--- volume-prism · seed 12345 · difficulty 1
+prompt   Find the volume of this prism in cubic feet.
+display  geometry volume-prism length 5 width 4 height 7 unit ft name "Rectangular prism with length 5 ft, width 4 ft, and height 7 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 140/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [5 × 4 = 20]
+step 2   Multiply base area by height.   [20 × 7 = 140]
+step 3   Use cubic feet for volume.   [140 cubic feet]
+
+--- volume-prism · seed 67890 · difficulty 1
+prompt   Find the volume of this prism in cubic metres.
+display  geometry volume-prism length 6 width 4 height 4 unit m name "Rectangular prism with length 6 m, width 4 m, and height 4 m" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 96/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [6 × 4 = 24]
+step 2   Multiply base area by height.   [24 × 4 = 96]
+step 3   Use cubic metres for volume.   [96 cubic metres]
+
+--- volume-prism · seed 424242 · difficulty 1
+prompt   Find the volume of this prism in cubic centimetres.
+display  geometry volume-prism length 5 width 3 height 6 unit cm name "Rectangular prism with length 5 cm, width 3 cm, and height 6 cm" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 90/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [5 × 3 = 15]
+step 2   Multiply base area by height.   [15 × 6 = 90]
+step 3   Use cubic centimetres for volume.   [90 cubic centimetres]
+
+--- volume-prism · seed 987654321 · difficulty 1
+prompt   Find the volume of this prism in cubic feet.
+display  geometry volume-prism length 4 width 3 height 7 unit ft name "Rectangular prism with length 4 ft, width 3 ft, and height 7 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 84/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [4 × 3 = 12]
+step 2   Multiply base area by height.   [12 × 7 = 84]
+step 3   Use cubic feet for volume.   [84 cubic feet]
+
+--- volume-prism · seed 1 · difficulty 2
+prompt   Find the volume of this prism in cubic inches.
+display  geometry volume-prism length 6 width 7 height 10 unit in name "Rectangular prism with length 6 in, width 7 in, and height 10 in" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 420/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [6 × 7 = 42]
+step 2   Multiply base area by height.   [42 × 10 = 420]
+step 3   Use cubic inches for volume.   [420 cubic inches]
+
+--- volume-prism · seed 12345 · difficulty 2
+prompt   Find the volume of this prism in cubic feet.
+display  geometry volume-prism length 8 width 6 height 9 unit ft name "Rectangular prism with length 8 ft, width 6 ft, and height 9 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 432/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [8 × 6 = 48]
+step 2   Multiply base area by height.   [48 × 9 = 432]
+step 3   Use cubic feet for volume.   [432 cubic feet]
+
+--- volume-prism · seed 67890 · difficulty 2
+prompt   Find the volume of this prism in cubic metres.
+display  geometry volume-prism length 10 width 6 height 6 unit m name "Rectangular prism with length 10 m, width 6 m, and height 6 m" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 360/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [10 × 6 = 60]
+step 2   Multiply base area by height.   [60 × 6 = 360]
+step 3   Use cubic metres for volume.   [360 cubic metres]
+
+--- volume-prism · seed 424242 · difficulty 2
+prompt   Find the volume of this prism in cubic centimetres.
+display  geometry volume-prism length 7 width 5 height 8 unit cm name "Rectangular prism with length 7 cm, width 5 cm, and height 8 cm" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 280/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [7 × 5 = 35]
+step 2   Multiply base area by height.   [35 × 8 = 280]
+step 3   Use cubic centimetres for volume.   [280 cubic centimetres]
+
+--- volume-prism · seed 987654321 · difficulty 2
+prompt   Find the volume of this prism in cubic feet.
+display  geometry volume-prism length 6 width 4 height 10 unit ft name "Rectangular prism with length 6 ft, width 4 ft, and height 10 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 240/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [6 × 4 = 24]
+step 2   Multiply base area by height.   [24 × 10 = 240]
+step 3   Use cubic feet for volume.   [240 cubic feet]
+
+--- volume-prism · seed 1 · difficulty 3
+prompt   Find the volume of this prism in cubic inches.
+display  geometry volume-prism length 8 width 9 height 14 unit in name "Rectangular prism with length 8 in, width 9 in, and height 14 in" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 1008/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [8 × 9 = 72]
+step 2   Multiply base area by height.   [72 × 14 = 1008]
+step 3   Use cubic inches for volume.   [1008 cubic inches]
+
+--- volume-prism · seed 12345 · difficulty 3
+prompt   Find the volume of this prism in cubic feet.
+display  geometry volume-prism length 10 width 8 height 13 unit ft name "Rectangular prism with length 10 ft, width 8 ft, and height 13 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 1040/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [10 × 8 = 80]
+step 2   Multiply base area by height.   [80 × 13 = 1040]
+step 3   Use cubic feet for volume.   [1040 cubic feet]
+
+--- volume-prism · seed 67890 · difficulty 3
+prompt   Find the volume of this prism in cubic metres.
+display  geometry volume-prism length 13 width 7 height 9 unit m name "Rectangular prism with length 13 m, width 7 m, and height 9 m" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 819/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [13 × 7 = 91]
+step 2   Multiply base area by height.   [91 × 9 = 819]
+step 3   Use cubic metres for volume.   [819 cubic metres]
+
+--- volume-prism · seed 424242 · difficulty 3
+prompt   Find the volume of this prism in cubic centimetres.
+display  geometry volume-prism length 10 width 6 height 11 unit cm name "Rectangular prism with length 10 cm, width 6 cm, and height 11 cm" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 660/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [10 × 6 = 60]
+step 2   Multiply base area by height.   [60 × 11 = 660]
+step 3   Use cubic centimetres for volume.   [660 cubic centimetres]
+
+--- volume-prism · seed 987654321 · difficulty 3
+prompt   Find the volume of this prism in cubic feet.
+display  geometry volume-prism length 9 width 5 height 14 unit ft name "Rectangular prism with length 9 ft, width 5 ft, and height 14 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 630/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [9 × 5 = 45]
+step 2   Multiply base area by height.   [45 × 14 = 630]
+step 3   Use cubic feet for volume.   [630 cubic feet]
+
+--- volume-prism · seed 1 · difficulty 4
+prompt   Find the volume of this prism in cubic inches.
+display  geometry volume-prism length 10 width 12 height 18 unit in name "Rectangular prism with length 10 in, width 12 in, and height 18 in" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 2160/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [10 × 12 = 120]
+step 2   Multiply base area by height.   [120 × 18 = 2160]
+step 3   Use cubic inches for volume.   [2160 cubic inches]
+
+--- volume-prism · seed 12345 · difficulty 4
+prompt   Find the volume of this prism in cubic feet.
+display  geometry volume-prism length 13 width 11 height 16 unit ft name "Rectangular prism with length 13 ft, width 11 ft, and height 16 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 2288/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [13 × 11 = 143]
+step 2   Multiply base area by height.   [143 × 16 = 2288]
+step 3   Use cubic feet for volume.   [2288 cubic feet]
+
+--- volume-prism · seed 67890 · difficulty 4
+prompt   Find the volume of this prism in cubic metres.
+display  geometry volume-prism length 17 width 10 height 11 unit m name "Rectangular prism with length 17 m, width 10 m, and height 11 m" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 1870/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [17 × 10 = 170]
+step 2   Multiply base area by height.   [170 × 11 = 1870]
+step 3   Use cubic metres for volume.   [1870 cubic metres]
+
+--- volume-prism · seed 424242 · difficulty 4
+prompt   Find the volume of this prism in cubic centimetres.
+display  geometry volume-prism length 13 width 8 height 15 unit cm name "Rectangular prism with length 13 cm, width 8 cm, and height 15 cm" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 1560/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [13 × 8 = 104]
+step 2   Multiply base area by height.   [104 × 15 = 1560]
+step 3   Use cubic centimetres for volume.   [1560 cubic centimetres]
+
+--- volume-prism · seed 987654321 · difficulty 4
+prompt   Find the volume of this prism in cubic feet.
+display  geometry volume-prism length 11 width 7 height 18 unit ft name "Rectangular prism with length 11 ft, width 7 ft, and height 18 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 1386/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [11 × 7 = 77]
+step 2   Multiply base area by height.   [77 × 18 = 1386]
+step 3   Use cubic feet for volume.   [1386 cubic feet]
+
+--- volume-prism · seed 1 · difficulty 5
+prompt   Find the volume of this prism in cubic inches.
+display  geometry volume-prism length 14 width 16 height 24 unit in name "Rectangular prism with length 14 in, width 16 in, and height 24 in" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 5376/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [14 × 16 = 224]
+step 2   Multiply base area by height.   [224 × 24 = 5376]
+step 3   Use cubic inches for volume.   [5376 cubic inches]
+
+--- volume-prism · seed 12345 · difficulty 5
+prompt   Find the volume of this prism in cubic feet.
+display  geometry volume-prism length 19 width 15 height 22 unit ft name "Rectangular prism with length 19 ft, width 15 ft, and height 22 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 6270/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [19 × 15 = 285]
+step 2   Multiply base area by height.   [285 × 22 = 6270]
+step 3   Use cubic feet for volume.   [6270 cubic feet]
+
+--- volume-prism · seed 67890 · difficulty 5
+prompt   Find the volume of this prism in cubic metres.
+display  geometry volume-prism length 24 width 14 height 15 unit m name "Rectangular prism with length 24 m, width 14 m, and height 15 m" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 5040/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [24 × 14 = 336]
+step 2   Multiply base area by height.   [336 × 15 = 5040]
+step 3   Use cubic metres for volume.   [5040 cubic metres]
+
+--- volume-prism · seed 424242 · difficulty 5
+prompt   Find the volume of this prism in cubic centimetres.
+display  geometry volume-prism length 18 width 11 height 19 unit cm name "Rectangular prism with length 18 cm, width 11 cm, and height 19 cm" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 3762/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [18 × 11 = 198]
+step 2   Multiply base area by height.   [198 × 19 = 3762]
+step 3   Use cubic centimetres for volume.   [3762 cubic centimetres]
+
+--- volume-prism · seed 987654321 · difficulty 5
+prompt   Find the volume of this prism in cubic feet.
+display  geometry volume-prism length 16 width 9 height 23 unit ft name "Rectangular prism with length 16 ft, width 9 ft, and height 23 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))]
+answer   exact 3312/1
+input    keypad
+hint     Find the base area, then multiply by prism height.
+step 1   Find the rectangular base area.   [16 × 9 = 144]
+step 2   Multiply base area by height.   [144 × 23 = 3312]
+step 3   Use cubic feet for volume.   [3312 cubic feet]"
 `;

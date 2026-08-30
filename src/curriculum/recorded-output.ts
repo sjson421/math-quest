@@ -5,7 +5,12 @@ import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
 import { shapeDiagramLabel } from '../lib/shape-diagram'
-import { geometryDiagramLabel, geometryFormulaReferences, type GeometryDiagram } from '../lib/geometry-diagram'
+import {
+  geometryDiagramLabel,
+  geometryFormulaReferences,
+  SURFACE_AREA_FACE_PAIRS,
+  type GeometryDiagram,
+} from '../lib/geometry-diagram'
 import { assertChart, chartAccessibleName, type Chart } from '../lib/chart'
 import { decimalColumnText, decimalText } from '../lib/decimal'
 import type {
@@ -490,6 +495,29 @@ const formatGeometryDiagram = (diagram: GeometryDiagram): string => {
         return `${diagram.operation} radius ${diagram.radius} unit ${diagram.unit}`
       case 'area-circle':
         return `${diagram.operation} diameter ${diagram.diameter} unit ${diagram.unit}`
+      case 'area-composite':
+        return (
+          `${diagram.operation} outerLength ${diagram.outerLength} outerWidth ${diagram.outerWidth} ` +
+          `cutoutLength ${diagram.cutoutLength} cutoutWidth ${diagram.cutoutWidth} unit ${diagram.unit}`
+        )
+      case 'volume-prism':
+        return `${diagram.operation} length ${diagram.length} width ${diagram.width} height ${diagram.height} unit ${diagram.unit}`
+      case 'surface-area':
+        return (
+          `${diagram.operation} length ${diagram.length} width ${diagram.width} height ${diagram.height} unit ${diagram.unit} ` +
+          `faces [${SURFACE_AREA_FACE_PAIRS.join(', ')}]`
+        )
+      case 'volume-cylinder':
+      case 'volume-cone':
+        return `${diagram.operation} radius ${diagram.radius} height ${diagram.height} unit ${diagram.unit}`
+      case 'volume-pyramid':
+        return `${diagram.operation} baseLength ${diagram.baseLength} baseWidth ${diagram.baseWidth} height ${diagram.height} unit ${diagram.unit}`
+      case 'volume-sphere':
+        return `${diagram.operation} radius ${diagram.radius} unit ${diagram.unit}`
+      case 'pythagorean':
+        return diagram.missingSide === 'hypotenuse'
+          ? `${diagram.operation} missingSide hypotenuse leg1 ${diagram.leg1} leg2 ${diagram.leg2} unit ${diagram.unit}`
+          : `${diagram.operation} missingSide leg leg ${diagram.leg} hypotenuse ${diagram.hypotenuse} unit ${diagram.unit}`
       default: {
         const unhandled: never = diagram
         throw new Error(`Unhandled geometry diagram: ${JSON.stringify(unhandled)}`)

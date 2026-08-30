@@ -1,6 +1,6 @@
 import type { MathNotation } from './types'
 
-/** The only length units the first geometry increment puts on a figure. */
+/** The only length units Unit 20 puts on a figure. */
 export const LENGTH_UNITS = ['cm', 'm', 'in', 'ft'] as const
 export type LengthUnit = (typeof LENGTH_UNITS)[number]
 
@@ -53,6 +53,75 @@ export type GeometryDiagram =
       diameter: number
       unit: LengthUnit
     }
+  | {
+      kind: 'geometry'
+      operation: 'area-composite'
+      outerLength: number
+      outerWidth: number
+      cutoutLength: number
+      cutoutWidth: number
+      unit: LengthUnit
+    }
+  | {
+      kind: 'geometry'
+      operation: 'volume-prism'
+      length: number
+      width: number
+      height: number
+      unit: LengthUnit
+    }
+  | {
+      kind: 'geometry'
+      operation: 'volume-cylinder'
+      radius: number
+      height: number
+      unit: LengthUnit
+    }
+  | {
+      kind: 'geometry'
+      operation: 'volume-cone'
+      radius: number
+      height: number
+      unit: LengthUnit
+    }
+  | {
+      kind: 'geometry'
+      operation: 'volume-pyramid'
+      baseLength: number
+      baseWidth: number
+      height: number
+      unit: LengthUnit
+    }
+  | {
+      kind: 'geometry'
+      operation: 'volume-sphere'
+      radius: number
+      unit: LengthUnit
+    }
+  | {
+      kind: 'geometry'
+      operation: 'surface-area'
+      length: number
+      width: number
+      height: number
+      unit: LengthUnit
+    }
+  | {
+      kind: 'geometry'
+      operation: 'pythagorean'
+      missingSide: 'hypotenuse'
+      leg1: number
+      leg2: number
+      unit: LengthUnit
+    }
+  | {
+      kind: 'geometry'
+      operation: 'pythagorean'
+      missingSide: 'leg'
+      leg: number
+      hypotenuse: number
+      unit: LengthUnit
+    }
 
 export type GeometryMeasurementName =
   | 'length'
@@ -63,6 +132,16 @@ export type GeometryMeasurementName =
   | 'height'
   | 'radius'
   | 'diameter'
+  | 'outerLength'
+  | 'outerWidth'
+  | 'cutoutLength'
+  | 'cutoutWidth'
+  | 'baseLength'
+  | 'baseWidth'
+  | 'leg1'
+  | 'leg2'
+  | 'leg'
+  | 'hypotenuse'
 
 export type GeometryMeasurementLabel = {
   name: GeometryMeasurementName
@@ -74,6 +153,16 @@ export type GeometryFormulaReference = {
   label: string
 }
 
+/** Fixed face order used by the rectangular-prism net and its recorded trace. */
+export const SURFACE_AREA_FACE_PAIRS = [
+  'length-height',
+  'width-height',
+  'length-height',
+  'width-height',
+  'length-width',
+  'length-width',
+] as const
+
 const OPERATIONS: readonly GeometryDiagram['operation'][] = [
   'perimeter',
   'area-rectangle',
@@ -82,6 +171,14 @@ const OPERATIONS: readonly GeometryDiagram['operation'][] = [
   'area-trapezoid',
   'circumference',
   'area-circle',
+  'area-composite',
+  'volume-prism',
+  'volume-cylinder',
+  'volume-cone',
+  'volume-pyramid',
+  'volume-sphere',
+  'surface-area',
+  'pythagorean',
 ]
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -98,7 +195,7 @@ const assertKeys = (diagram: Record<string, unknown>, keys: readonly string[]) =
   }
 }
 
-const assertMeasurement = (name: string, value: unknown) => {
+function assertMeasurement(name: string, value: unknown): asserts value is number {
   if (typeof value !== 'number' || !Number.isFinite(value) || value <= 0) {
     throw new Error(`geometry ${name} must be a positive finite number`)
   }
@@ -143,6 +240,62 @@ export function assertGeometryDiagram(diagram: unknown): asserts diagram is Geom
       assertKeys(value, ['kind', 'operation', 'diameter', 'unit'])
       assertMeasurement('diameter', value.diameter)
       return
+    case 'area-composite':
+      assertKeys(value, ['kind', 'operation', 'outerLength', 'outerWidth', 'cutoutLength', 'cutoutWidth', 'unit'])
+      const outerLength = value.outerLength
+      const outerWidth = value.outerWidth
+      const cutoutLength = value.cutoutLength
+      const cutoutWidth = value.cutoutWidth
+      assertMeasurement('outerLength', outerLength)
+      assertMeasurement('outerWidth', outerWidth)
+      assertMeasurement('cutoutLength', cutoutLength)
+      assertMeasurement('cutoutWidth', cutoutWidth)
+      if (cutoutLength >= outerLength || cutoutWidth >= outerWidth) {
+        throw new Error('geometry composite cut-out must stay inside its outer rectangle')
+      }
+      return
+    case 'volume-prism':
+    case 'surface-area':
+      assertKeys(value, ['kind', 'operation', 'length', 'width', 'height', 'unit'])
+      assertMeasurement('length', value.length)
+      assertMeasurement('width', value.width)
+      assertMeasurement('height', value.height)
+      return
+    case 'volume-cylinder':
+    case 'volume-cone':
+      assertKeys(value, ['kind', 'operation', 'radius', 'height', 'unit'])
+      assertMeasurement('radius', value.radius)
+      assertMeasurement('height', value.height)
+      return
+    case 'volume-pyramid':
+      assertKeys(value, ['kind', 'operation', 'baseLength', 'baseWidth', 'height', 'unit'])
+      assertMeasurement('baseLength', value.baseLength)
+      assertMeasurement('baseWidth', value.baseWidth)
+      assertMeasurement('height', value.height)
+      return
+    case 'volume-sphere':
+      assertKeys(value, ['kind', 'operation', 'radius', 'unit'])
+      assertMeasurement('radius', value.radius)
+      return
+    case 'pythagorean':
+      if (value.missingSide === 'hypotenuse') {
+        assertKeys(value, ['kind', 'operation', 'missingSide', 'leg1', 'leg2', 'unit'])
+        assertMeasurement('leg1', value.leg1)
+        assertMeasurement('leg2', value.leg2)
+        return
+      }
+      if (value.missingSide === 'leg') {
+        assertKeys(value, ['kind', 'operation', 'missingSide', 'leg', 'hypotenuse', 'unit'])
+        const leg = value.leg
+        const hypotenuse = value.hypotenuse
+        assertMeasurement('leg', leg)
+        assertMeasurement('hypotenuse', hypotenuse)
+        if (hypotenuse <= leg) {
+          throw new Error('geometry hypotenuse must be longer than the known leg')
+        }
+        return
+      }
+      throw new Error('geometry pythagorean missingSide must be leg or hypotenuse')
     default: {
       const unhandled: never = operation
       throw new Error(`Unhandled geometry operation: ${unhandled}`)
@@ -182,6 +335,44 @@ export function geometryMeasurementLabels(diagram: GeometryDiagram): readonly Ge
       return [measurement('radius', diagram.radius, diagram.unit)]
     case 'area-circle':
       return [measurement('diameter', diagram.diameter, diagram.unit)]
+    case 'area-composite':
+      return [
+        measurement('outerLength', diagram.outerLength, diagram.unit),
+        measurement('outerWidth', diagram.outerWidth, diagram.unit),
+        measurement('cutoutLength', diagram.cutoutLength, diagram.unit),
+        measurement('cutoutWidth', diagram.cutoutWidth, diagram.unit),
+      ]
+    case 'volume-prism':
+    case 'surface-area':
+      return [
+        measurement('length', diagram.length, diagram.unit),
+        measurement('width', diagram.width, diagram.unit),
+        measurement('height', diagram.height, diagram.unit),
+      ]
+    case 'volume-cylinder':
+    case 'volume-cone':
+      return [
+        measurement('radius', diagram.radius, diagram.unit),
+        measurement('height', diagram.height, diagram.unit),
+      ]
+    case 'volume-pyramid':
+      return [
+        measurement('baseLength', diagram.baseLength, diagram.unit),
+        measurement('baseWidth', diagram.baseWidth, diagram.unit),
+        measurement('height', diagram.height, diagram.unit),
+      ]
+    case 'volume-sphere':
+      return [measurement('radius', diagram.radius, diagram.unit)]
+    case 'pythagorean':
+      return diagram.missingSide === 'hypotenuse'
+        ? [
+            measurement('leg1', diagram.leg1, diagram.unit),
+            measurement('leg2', diagram.leg2, diagram.unit),
+          ]
+        : [
+            measurement('leg', diagram.leg, diagram.unit),
+            measurement('hypotenuse', diagram.hypotenuse, diagram.unit),
+          ]
     default: {
       const unhandled: never = diagram
       throw new Error(`Unhandled geometry diagram: ${JSON.stringify(unhandled)}`)
@@ -207,6 +398,24 @@ export function geometryDiagramLabel(diagram: GeometryDiagram): string {
       return `Circle with radius ${diagram.radius} ${diagram.unit}`
     case 'area-circle':
       return `Circle with diameter ${diagram.diameter} ${diagram.unit}`
+    case 'area-composite':
+      return `L-shaped composite figure with outer length ${diagram.outerLength} ${diagram.unit}, outer width ${diagram.outerWidth} ${diagram.unit}, and corner cut-out ${diagram.cutoutLength} by ${diagram.cutoutWidth} ${diagram.unit}`
+    case 'volume-prism':
+      return `Rectangular prism with length ${diagram.length} ${diagram.unit}, width ${diagram.width} ${diagram.unit}, and height ${diagram.height} ${diagram.unit}`
+    case 'volume-cylinder':
+      return `Cylinder with radius ${diagram.radius} ${diagram.unit} and perpendicular height ${diagram.height} ${diagram.unit}`
+    case 'volume-cone':
+      return `Cone with radius ${diagram.radius} ${diagram.unit} and perpendicular height ${diagram.height} ${diagram.unit}`
+    case 'volume-pyramid':
+      return `Rectangular pyramid with base length ${diagram.baseLength} ${diagram.unit}, base width ${diagram.baseWidth} ${diagram.unit}, and perpendicular height ${diagram.height} ${diagram.unit}`
+    case 'volume-sphere':
+      return `Sphere with radius ${diagram.radius} ${diagram.unit}`
+    case 'surface-area':
+      return `Rectangular-prism net with length ${diagram.length} ${diagram.unit}, width ${diagram.width} ${diagram.unit}, and height ${diagram.height} ${diagram.unit}`
+    case 'pythagorean':
+      return diagram.missingSide === 'hypotenuse'
+        ? `Right triangle with legs ${diagram.leg1} ${diagram.unit} and ${diagram.leg2} ${diagram.unit}, and a missing hypotenuse`
+        : `Right triangle with known leg ${diagram.leg} ${diagram.unit}, hypotenuse ${diagram.hypotenuse} ${diagram.unit}, and a missing leg`
     default: {
       const unhandled: never = diagram
       throw new Error(`Unhandled geometry diagram: ${JSON.stringify(unhandled)}`)
@@ -256,6 +465,49 @@ const circleFormulas = (): GeometryFormulaReference[] => [
   { notation: row(text('A = '), row(text('π'), superscript('r', '2'))), label: 'A equals pi times r squared' },
 ]
 
+const prismFormulas = (): GeometryFormulaReference[] => [
+  { notation: row(text('V = '), text('Bh')), label: 'V equals B times h' },
+  { notation: row(text('V = '), fraction(text('Bh'), text('3'))), label: 'V equals B times h divided by 3' },
+]
+
+const cylinderFormulas = (): GeometryFormulaReference[] => [
+  {
+    notation: row(text('V = '), row(text('π'), superscript('r', '2'), text('h'))),
+    label: 'V equals pi times r squared times h',
+  },
+  {
+    notation: row(text('V = '), fraction(row(text('π'), superscript('r', '2'), text('h')), text('3'))),
+    label: 'V equals pi times r squared times h divided by 3',
+  },
+]
+
+const sphereFormulas = (): GeometryFormulaReference[] => [
+  {
+    notation: row(text('V = '), fraction(row(text('4π'), superscript('r', '3')), text('3'))),
+    label: 'V equals four pi r cubed divided by 3',
+  },
+  {
+    notation: row(text('SA = '), row(text('4π'), superscript('r', '2'))),
+    label: 'SA equals four pi r squared',
+  },
+]
+
+const surfaceAreaFormulas = (): GeometryFormulaReference[] => [
+  { notation: row(text('SA = '), text('2lw + 2lh + 2wh')), label: 'SA equals 2lw plus 2lh plus 2wh' },
+  { notation: row(text('V = '), text('lwh')), label: 'V equals l times w times h' },
+]
+
+const pythagoreanFormulas = (): GeometryFormulaReference[] => [
+  {
+    notation: row(text('c = '), { kind: 'root', radicand: row(superscript('a', '2'), text(' + '), superscript('b', '2')) }),
+    label: 'c equals the square root of a squared plus b squared',
+  },
+  {
+    notation: row(text('a = '), { kind: 'root', radicand: row(superscript('c', '2'), text(' − '), superscript('b', '2')) }),
+    label: 'a equals the square root of c squared minus b squared',
+  },
+]
+
 /** Formula references are derived from the operation, never authored per problem. */
 export function geometryFormulaReferences(diagram: GeometryDiagram): readonly GeometryFormulaReference[] {
   assertGeometryDiagram(diagram)
@@ -272,6 +524,20 @@ export function geometryFormulaReferences(diagram: GeometryDiagram): readonly Ge
     case 'circumference':
     case 'area-circle':
       return circleFormulas()
+    case 'area-composite':
+      return rectangleFormulas()
+    case 'volume-prism':
+    case 'volume-pyramid':
+      return prismFormulas()
+    case 'volume-cylinder':
+    case 'volume-cone':
+      return cylinderFormulas()
+    case 'volume-sphere':
+      return sphereFormulas()
+    case 'surface-area':
+      return surfaceAreaFormulas()
+    case 'pythagorean':
+      return pythagoreanFormulas()
     default: {
       const unhandled: never = diagram
       throw new Error(`Unhandled geometry diagram: ${JSON.stringify(unhandled)}`)

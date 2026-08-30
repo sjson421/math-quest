@@ -72,4 +72,46 @@ describe('GeometryDiagram', () => {
     expect(html).not.toContain('<input')
     expect(html).not.toContain('Check')
   })
+
+  it.each([
+    ['composite', { kind: 'geometry', operation: 'area-composite', outerLength: 9, outerWidth: 7, cutoutLength: 4, cutoutWidth: 3, unit: 'cm' }],
+    ['prism', { kind: 'geometry', operation: 'volume-prism', length: 6, width: 4, height: 5, unit: 'cm' }],
+    ['cylinder', { kind: 'geometry', operation: 'volume-cylinder', radius: 3, height: 5, unit: 'm' }],
+    ['cone', { kind: 'geometry', operation: 'volume-cone', radius: 3, height: 5, unit: 'm' }],
+    ['pyramid', { kind: 'geometry', operation: 'volume-pyramid', baseLength: 6, baseWidth: 4, height: 9, unit: 'cm' }],
+    ['sphere', { kind: 'geometry', operation: 'volume-sphere', radius: 3, unit: 'ft' }],
+  ] as const)('renders a %s figure from its measurements', (_shape, diagram) => {
+    const html = render(diagram)
+
+    expect(html).toContain(`data-geometry-operation="${diagram.operation}"`)
+    expect(html).toContain('role="img"')
+    expect(html).toContain('data-geometry-formulas')
+    expect(html).toContain('data-geometry-measure=')
+    expect(html).toMatch(/<g aria-hidden="true">[\s\S]*<title>/)
+  })
+
+  it('renders all six faces in a surface-area net', () => {
+    const html = render({ kind: 'geometry', operation: 'surface-area', length: 5, width: 3, height: 2, unit: 'cm' })
+
+    expect(html.match(/data-net-face=/g)).toHaveLength(6)
+    expect(html).toContain('data-net-face="length-width"')
+    expect(html).toContain('data-net-face="length-height"')
+    expect(html).toContain('data-net-face="width-height"')
+    expect(html).toContain('fill="var(--color-cream)"')
+    expect(html).toContain('Rectangular-prism net with length 5 cm, width 3 cm, and height 2 cm')
+    expect(html).not.toContain('data-geometry-shape="prism"')
+  })
+
+  it.each([
+    [{ kind: 'geometry', operation: 'pythagorean', missingSide: 'hypotenuse', leg1: 3, leg2: 4, unit: 'ft' }],
+    [{ kind: 'geometry', operation: 'pythagorean', missingSide: 'leg', leg: 5, hypotenuse: 13, unit: 'in' }],
+  ] as const)('renders a marked right triangle for either missing side', (diagram) => {
+    const html = render(diagram)
+
+    expect(html).toContain('data-geometry-shape="right-triangle"')
+    expect(html).toContain('data-right-angle')
+    expect(html).toContain('data-missing-side')
+    expect(html).toContain('c equals the square root of a squared plus b squared')
+    expect(html).toContain('a equals the square root of c squared minus b squared')
+  })
 })

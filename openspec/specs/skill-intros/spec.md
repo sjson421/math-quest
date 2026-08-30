@@ -151,9 +151,10 @@ through the same accessible markup used in practice, suppress the interactive an
 and present a separate learner-facing exact or approximate correct answer followed by the
 worked steps.
 
-All six complete intros SHALL remain readable at a 375-by-812-pixel viewport without
-horizontal or page overflow. The figure labels, right-angle marks, formulas, correct answer,
-teaching line, worked steps, leave action, and forward action SHALL remain visible and legible.
+All twelve complete intros through `pythagorean` SHALL remain readable at a 375-by-812-pixel
+viewport without horizontal or page overflow. The complete figure, dimension labels, relevant
+right-angle or radius marks, prism net faces, formulas, correct answer, teaching line, worked
+steps, leave action, and forward action SHALL remain visible and legible.
 
 #### Scenario: A geometry intro is not a second answer surface
 
@@ -167,7 +168,14 @@ teaching line, worked steps, leave action, and forward action SHALL remain visib
 - **THEN** its correct answer shows the rounded numeric target rather than an internal tolerance
   or encoding
 
-#### Scenario: Every Unit 20a intro fits the installed phone surface
+#### Scenario: Approximate solid answers remain learner-facing
 
-- **WHEN** all six selected intros are exercised at 375 by 812 pixels
+- **WHEN** a cylinder, cone, or sphere intro opens
+- **THEN** its correct answer shows the rounded nearest-tenth target without the internal
+  tolerance or unit-entry syntax
+
+#### Scenario: Every Unit 20 intro through 20b fits the installed phone surface
+
+- **WHEN** all twelve selected intros are exercised at 375 by 812 pixels
 - **THEN** each complete intro remains readable without horizontal or page overflow
+- **AND** the surface-area net and longest radical formula remain visible and legible
