@@ -10,9 +10,9 @@ import {
 import { crossedStageCheckpoint, type StageCheckpoint } from '../lib/checkpoint'
 import { crossedPinTier, pinTier, type PinTier, type PinUpgrade } from '../lib/pin'
 import {
+  advanceStreak,
   coinsFor,
   crossedStreakMilestone,
-  daysBetween,
   MAX_STREAK_FREEZES,
   openStreak,
   todayKey,
@@ -153,6 +153,16 @@ export function initialProgress(): Progress {
 type Store = {
   progress: Progress
   loaded: boolean
+  /**
+   * Freezes this launch spent covering days away, for the home screen to
+   * report.
+   *
+   * Beside `loaded` rather than in `Progress`, deliberately: it describes this
+   * launch and not this learner. In the record it would sync to every other
+   * device and have to be cleared somewhere, and a restored backup would
+   * announce a freeze spent months ago on a phone the learner no longer owns.
+   */
+  freezesJustSpent: number
   hydrate: () => Promise<void>
   recordAttempt: (skillId: string, correct: boolean, misconceptionTag?: string) => void
   markIntroSeen: (skillId: string) => void
@@ -216,6 +226,7 @@ export const useProgress = create<Store>((set, get) => {
   return {
     progress: initialProgress(),
     loaded: false,
+    freezesJustSpent: 0,
 
     async hydrate() {
       // Ask iOS not to evict us. Best-effort; installed PWAs are usually granted.
@@ -248,11 +259,15 @@ export const useProgress = create<Store>((set, get) => {
       // `lastActiveDay` forward, so re-opening today spends nothing further.
       if (opening.spent > 0) {
         persist(progress)
-        set({ loaded: true })
+        set({ loaded: true, freezesJustSpent: opening.spent })
         return
       }
 
-      set({ progress, loaded: true })
+      // Always written, not only when something was spent: it reports *this*
+      // open, so an open that covered nothing has to clear what the last one
+      // said. Left sticky it would keep announcing a freeze on every screen
+      // after the day it actually covered.
+      set({ progress, loaded: true, freezesJustSpent: 0 })
     },
 
     recordAttempt(skillId, correct, misconceptionTag) {
@@ -298,11 +313,7 @@ export const useProgress = create<Store>((set, get) => {
       const leveledUp = skill.mastery < MAX_MASTERY
       const xpGained = 20
 
-      let streakCount = p.streakCount
-      if (p.lastActiveDay !== today) {
-        const gap = p.lastActiveDay ? daysBetween(p.lastActiveDay, today) : Infinity
-        streakCount = gap === 1 ? p.streakCount + 1 : 1
-      }
+      const streakCount = advanceStreak(p, today)
 
       // Worked out after the streak, and against the run this lesson just
       // extended rather than the one it started from: the screen says "day 7"
@@ -397,6 +408,7 @@ export const useProgress = create<Store>((set, get) => {
 
     reset() {
       persist(initialProgress())
+      set({ freezesJustSpent: 0 })
     },
   }
 })

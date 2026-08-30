@@ -13,6 +13,7 @@
 
 import { describe, expect, it } from 'vitest'
 import {
+  advanceStreak,
   canHoldFreeze,
   coinsFor,
   crossedStreakMilestone,
@@ -132,6 +133,33 @@ describe('opening the app', () => {
 
     expect(opened.streakCount, 'the streak survives a clock change').toBe(4)
     expect(opened.spent).toBe(0)
+  })
+})
+
+describe('finishing a lesson', () => {
+  it('extends a streak whose last lesson was yesterday', () => {
+    expect(advanceStreak(record(6, '2026-03-09'), '2026-03-10')).toBe(7)
+  })
+
+  it('restarts at one after a gap', () => {
+    expect(advanceStreak(record(20, '2026-03-01'), '2026-03-10')).toBe(1)
+  })
+
+  it('starts at one for a learner who has never practised', () => {
+    expect(advanceStreak(record(0, null), '2026-03-10')).toBe(1)
+  })
+
+  it('counts days rather than lessons, so a second one today changes nothing', () => {
+    expect(advanceStreak(record(4, '2026-03-10'), '2026-03-10')).toBe(4)
+  })
+
+  it('picks up exactly where a freeze left the record', () => {
+    // The join between the two halves of the rule: a freeze moves the last
+    // active day to yesterday, so today's lesson has to read as an ordinary
+    // consecutive day rather than as a restart.
+    const covered = openStreak(record(9, '2026-03-08', 1), '2026-03-10')
+
+    expect(advanceStreak(covered, '2026-03-10')).toBe(10)
   })
 })
 

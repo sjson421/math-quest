@@ -21,12 +21,15 @@ export function StreakCard({
   streakCount,
   atRisk,
   freezes,
+  justSpent,
   multiplier,
   nextMilestone,
 }: {
   streakCount: number
   atRisk: boolean
   freezes: number
+  /** Freezes spent covering days away since the app was last opened. */
+  justSpent: number
   multiplier: number
   nextMilestone?: { days: number; away: number }
 }) {
@@ -42,9 +45,7 @@ export function StreakCard({
             🔥
           </span>
           <span className="font-bold text-2xl tabular-nums">{streakCount}</span>
-          <span className="font-semibold text-ink-soft">
-            {streakCount === 1 ? 'day' : 'days'} in a row
-          </span>
+          <span className="font-semibold text-ink-soft">day streak</span>
           {multiplier > 1 && (
             <span className="ml-auto rounded-full bg-mint-soft px-2.5 py-1 text-sm font-bold text-mint-deep tabular-nums">
               {multiplier}× coins
@@ -70,6 +71,19 @@ export function StreakCard({
             'Every milestone reached.'
           )}
         </p>
+
+        {/* A freeze is bought and then spent by the app on the learner's
+            behalf, on a day they were not here to see it. Saying so is the
+            whole of what they paid for — a streak that survived with no
+            explanation reads as one that was never at risk. */}
+        {justSpent > 0 && (
+          <p className="text-sm mt-1 font-semibold text-mint-deep">
+            <span aria-hidden="true">❄ </span>
+            {justSpent === 1
+              ? 'A freeze covered the day you missed.'
+              : `${justSpent} freezes covered the days you missed.`}
+          </p>
+        )}
 
         {freezes > 0 && (
           <p className="text-sm mt-1 text-ink-soft">

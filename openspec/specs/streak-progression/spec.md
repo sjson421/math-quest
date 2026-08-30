@@ -92,6 +92,13 @@ A streak already at zero SHALL NOT consume a freeze.
 - **THEN** the streak breaks
 - **AND** both freezes are still held
 
+#### Scenario: A spent freeze is reported when the learner returns
+
+- **WHEN** the app is opened and a freeze covers a missed day
+- **THEN** the home screen says a freeze covered it
+- **AND** an open that spends nothing says nothing, so the report never outlives
+  the day it describes
+
 #### Scenario: The cap refuses another purchase
 
 - **WHEN** a learner already holding the maximum tries to buy a freeze

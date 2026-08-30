@@ -21,6 +21,7 @@ const render = (props: Partial<Parameters<typeof StreakCard>[0]> = {}) =>
       streakCount={5}
       atRisk={false}
       freezes={0}
+      justSpent={0}
       multiplier={1}
       nextMilestone={{ days: 7, away: 2 }}
       {...props}
@@ -32,11 +33,7 @@ describe('a streak worth keeping', () => {
     const html = render({ streakCount: 5 })
 
     expect(html).toContain('5')
-    expect(html).toContain('days in a row')
-  })
-
-  it('says day rather than days on the first one', () => {
-    expect(render({ streakCount: 1 })).toContain('day in a row')
+    expect(html).toContain('day streak')
   })
 
   it('counts down to the next milestone when nothing is wrong', () => {
@@ -96,5 +93,31 @@ describe('what is held and what it earns', () => {
     expect(render({ multiplier: 1 }), 'no badge at 1x').not.toContain('× coins')
     expect(render({ multiplier: 1.25 })).toContain('1.25× coins')
     expect(render({ multiplier: 2 })).toContain('2× coins')
+  })
+})
+
+describe('a freeze that was spent while the learner was away', () => {
+  it('says so, because they were not there to see it happen', () => {
+    const html = render({ justSpent: 1, streakCount: 12 })
+
+    expect(html).toContain('A freeze covered the day you missed')
+  })
+
+  it('counts them when more than one went', () => {
+    expect(render({ justSpent: 2 })).toContain('2 freezes covered the days you missed')
+  })
+
+  it('says nothing on an ordinary open', () => {
+    expect(render({ justSpent: 0 })).not.toContain('covered the day')
+  })
+
+  it('reports the spend alongside what is left, not instead of it', () => {
+    // The two answer different questions — what just happened, and what is
+    // still in hand — so the one-line rule that governs the state line above
+    // deliberately does not apply to them.
+    const html = render({ justSpent: 1, freezes: 1 })
+
+    expect(html).toContain('A freeze covered the day you missed')
+    expect(html).toContain('1 of 2 freezes held')
   })
 })

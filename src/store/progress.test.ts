@@ -618,6 +618,15 @@ describe('keeping a streak', () => {
     // server, which means a write and an advanced version.
     expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(1)
     expect(progress.updatedAt).toBeGreaterThan(0)
+    // Reported for the home screen to say so. The learner was not there when
+    // the freeze was spent, so this launch is the only chance to tell them.
+    expect(useProgress.getState().freezesJustSpent).toBe(1)
+  })
+
+  it('reports nothing spent on an ordinary open', async () => {
+    await hydrateWith({ streakCount: 6, lastActiveDay: dayBefore(todayKey()) })
+
+    expect(useProgress.getState().freezesJustSpent).toBe(0)
   })
 
   it('spends nothing on the second open of the same day', async () => {

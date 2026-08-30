@@ -46,6 +46,7 @@ type Props = {
  */
 export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }: Props) {
   const progress = useProgress((s) => s.progress)
+  const freezesJustSpent = useProgress((s) => s.freezesJustSpent)
   const muted = useSound((s) => s.muted)
   const toggleMuted = useSound((s) => s.toggleMuted)
   const goalPct = Math.min(100, (progress.todayXp / progress.dailyGoal) * 100)
@@ -96,11 +97,12 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
   return (
     <div className="flex flex-col h-full overflow-y-auto">
       <header className="flex items-center justify-between px-5 pt-4">
-        {/* The streak used to sit here, the same size as the coin count. It is
-            the only thing the learner can lose, so it has its own card below
-            rather than a slot in a row of three numbers. */}
-        {/* The reward and the thing it buys, one tap apart. Sized to match the
-            settings button rather than shrink-wrapping the stat: this is a
+        {/* Two groups now, not three: the streak left this row for a card of
+            its own below, because it is the only thing the learner can lose and
+            it was drawn here at the size of the coin count.
+
+            The reward and the thing it buys stay one tap apart. Sized to match
+            the settings button rather than shrink-wrapping the stat: this is a
             control on a phone, and the text it wraps is only 28px tall. */}
         <button
           onClick={() => {
@@ -112,8 +114,8 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
         >
           <Stat icon="🪙" value={progress.coins} label="coins" />
         </button>
-        {/* Two controls, one cluster, so the header keeps three groups rather
-            than spreading four items across the width. */}
+        {/* Two controls, one cluster, so the header stays two groups rather
+            than spreading three items across the width. */}
         <div className="flex items-center gap-1.5">
           <button
             onClick={() => {
@@ -157,6 +159,7 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
           streakCount={progress.streakCount}
           atRisk={streakAtRisk(progress, todayKey())}
           freezes={progress.streakFreezes}
+          justSpent={freezesJustSpent}
           multiplier={streakMultiplier(progress.streakCount)}
           nextMilestone={nextStreakMilestone(progress.streakCount)}
         />

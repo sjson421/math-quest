@@ -114,7 +114,11 @@ describe('the skills that are built', () => {
       .map(([id, text]) => `${id}: "${text}" is ${text.length} characters`)
 
     expect(tooWide, 'widen the ProblemView size bands, or narrow the draw').toEqual([])
-  })
+    // Vitest's default is 5s and this measurement generates ~45,000 problems,
+    // which lands close enough to the limit that it has failed on load rather
+    // than on a finding. The work is deterministic — every seed here is fixed —
+    // so the only thing a timeout measures is how busy the machine was.
+  }, 20_000)
 
   it('keeps every equation inside the width its own size band was chosen for', () => {
     // Measured separately from the inline ladder above, and that separation is

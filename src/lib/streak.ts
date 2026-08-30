@@ -44,11 +44,12 @@
  * `pin.ts`'s is: the store imports this module, so importing its types back
  * would be a runtime cycle.
  */
-type StreakRecord = {
+type StreakDays = {
   streakCount: number
   lastActiveDay: string | null
-  streakFreezes: number
 }
+
+type StreakRecord = StreakDays & { streakFreezes: number }
 
 /** Local calendar day. Deliberately not UTC — streaks should follow the learner. */
 export function todayKey(date = new Date()): string {
@@ -154,13 +155,32 @@ export function openStreak(record: StreakRecord, today: string): StreakOpening {
 }
 
 /**
+ * The streak after a lesson finished on `today`.
+ *
+ * The counterpart to `openStreak`: that one says what the days away did to a
+ * streak, this one says what a day's work does. Both belong here so the two
+ * halves of one rule cannot drift — the store held this half inline, which is
+ * how a streak that every screen reads came to have no test of it at all.
+ *
+ * A second lesson the same day changes nothing: the streak counts days, not
+ * lessons, and the daily goal is what counts the work inside one.
+ */
+export function advanceStreak(record: StreakDays, today: string): number {
+  if (record.lastActiveDay === today) return record.streakCount
+
+  const gap = record.lastActiveDay ? daysBetween(record.lastActiveDay, today) : Infinity
+
+  return gap === 1 ? record.streakCount + 1 : 1
+}
+
+/**
  * Whether today's lesson is still owed on a streak worth keeping.
  *
  * What the home screen warns on. False on a streak of zero: there is nothing at
  * risk yet, and warning about it would be the app inventing a loss to motivate
  * with.
  */
-export const streakAtRisk = (record: StreakRecord, today: string): boolean =>
+export const streakAtRisk = (record: StreakDays, today: string): boolean =>
   record.streakCount > 0 && record.lastActiveDay !== today
 
 /* ------------------------------------------------------------------------- *
@@ -170,20 +190,24 @@ export const streakAtRisk = (record: StreakRecord, today: string): boolean =>
 /**
  * Coins per lesson, by how long the run is.
  *
- * Read from the top down, so the first tier a streak clears wins. The base rate
- * is unchanged at tier 0 — a learner who never keeps a streak earns exactly
- * what they earned before this existed, which is what makes the ladder a bonus
- * rather than a penalty that was always being applied.
+ * Ascending, like `STREAK_MILESTONES` — both are ladders and a reader climbs
+ * them the same way. `findLast` takes the highest tier cleared, which is what
+ * lets the order match rather than being reversed for the lookup's benefit and
+ * reversed back again wherever it is drawn.
+ *
+ * The base rate is unchanged at tier 0: a learner who never keeps a streak
+ * earns exactly what they earned before this existed, which is what makes the
+ * ladder a bonus rather than a penalty that was always being applied.
  */
 export const STREAK_TIERS = [
-  { days: 30, multiplier: 2 },
-  { days: 14, multiplier: 1.5 },
-  { days: 7, multiplier: 1.25 },
   { days: 0, multiplier: 1 },
+  { days: 7, multiplier: 1.25 },
+  { days: 14, multiplier: 1.5 },
+  { days: 30, multiplier: 2 },
 ] as const
 
 export function streakMultiplier(streakCount: number): number {
-  return STREAK_TIERS.find((tier) => streakCount >= tier.days)?.multiplier ?? 1
+  return STREAK_TIERS.findLast((tier) => streakCount >= tier.days)?.multiplier ?? 1
 }
 
 /**

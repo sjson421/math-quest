@@ -385,16 +385,14 @@ function FreezeCard({
  * the ladder is the answer to "why does the streak matter", and the answer is
  * only meaningful next to the things it buys.
  *
- * Read low to high, which is the reverse of `STREAK_TIERS`' own order — that
- * list is written highest-first so the lookup can take the first match, and a
- * learner reads a ladder upward.
+ * Drawn in `STREAK_TIERS`' own order, which is the order a learner climbs it.
  */
 function Multipliers({ streakCount }: { streakCount: number }) {
   const current = streakMultiplier(streakCount)
 
   return (
     <ol className="mt-3 flex gap-2">
-      {[...STREAK_TIERS].reverse().map(({ days, multiplier }) => {
+      {STREAK_TIERS.map(({ days, multiplier }) => {
         const active = multiplier === current
 
         return (
