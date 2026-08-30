@@ -23,6 +23,7 @@ import {
   type CosmeticSlot,
   type RoomSlot,
 } from '../cosmetics'
+import { canHoldFreeze, STREAK_FREEZE_PRICE } from './streak'
 import type { Progress } from '../store/progress'
 
 /** Where the learner stands with one item. What a shop card renders from. */
@@ -138,4 +139,51 @@ export function unequip(progress: Progress, slot: CosmeticSlot | RoomSlot): Prog
 
   if (!progress.equipped[slot]) return null
   return { ...progress, equipped: without(progress.equipped, slot) }
+}
+
+/* ------------------------------------------------------------------------- *
+ * The one consumable
+ * ------------------------------------------------------------------------- */
+
+/**
+ * Where the learner stands with a streak freeze. What its shop card renders
+ * from, and the consumable's answer to `ItemStanding`.
+ *
+ * There is no `in-use` and no `owned`: a freeze is held rather than worn, and
+ * held in a quantity rather than as a fact, so the two standings that describe a
+ * permanent item have nothing to say about it. `at-cap` is the one they do not
+ * cover — the learner can afford another and still may not have one.
+ */
+export type FreezeStanding = 'affordable' | 'at-cap' | 'out-of-reach'
+
+export function freezeStanding(progress: Progress): FreezeStanding {
+  if (!canHoldFreeze(progress)) return 'at-cap'
+  return progress.coins >= STREAK_FREEZE_PRICE ? 'affordable' : 'out-of-reach'
+}
+
+/**
+ * Buy one streak freeze. Refused at the cap, or when it costs more than the
+ * learner has.
+ *
+ * **A freeze is deliberately not a catalogue item.** Everything in the
+ * catalogue is permanent and unique — `owns()` is membership of `inventory`,
+ * and `buy()` refuses anything already owned — so a consumable held two at a
+ * time cannot be expressed there without weakening the rule every cosmetic,
+ * decoration and character depends on. It also has no geometry, no slot and
+ * nothing to equip, so all three of `CatalogueItem`'s shapes would be carrying
+ * fields it has no use for. One count on the record and one function here is
+ * the whole feature.
+ *
+ * Refusal is `null` for the reason the three above return it: the store
+ * persists only a non-null result, so a tap the learner cannot afford advances
+ * no version and schedules no push.
+ */
+export function buyFreeze(progress: Progress): Progress | null {
+  if (freezeStanding(progress) !== 'affordable') return null
+
+  return {
+    ...progress,
+    coins: progress.coins - STREAK_FREEZE_PRICE,
+    streakFreezes: progress.streakFreezes + 1,
+  }
 }

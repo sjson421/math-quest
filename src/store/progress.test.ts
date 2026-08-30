@@ -9,9 +9,10 @@
  */
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { set as idbSet } from 'idb-keyval'
+import { get as idbGet, set as idbSet } from 'idb-keyval'
 import { implementedSkillIds, skillStates } from '../curriculum'
 import { stageA } from '../curriculum/manifest'
+import { dayBefore, MAX_STREAK_FREEZES, todayKey } from '../lib/streak'
 import {
   UNLOCK_THRESHOLD,
   initialProgress,
@@ -553,5 +554,236 @@ describe('stage checkpoint lesson outcomes', () => {
     expect(useProgress.getState().progress.skills['round-to-100'].mastery).toBe(
       UNLOCK_THRESHOLD + 1,
     )
+  })
+})
+
+/**
+ * The streak, at the store level.
+ *
+ * `lib/streak.test.ts` pins the arithmetic; what is checked here is the part
+ * only the store can get wrong — which openings are written to disk, which are
+ * left as derivations, and what a completed lesson pays.
+ */
+describe('keeping a streak', () => {
+  beforeEach(() => {
+    useProgress.getState().reset()
+    vi.mocked(idbGet).mockReset()
+    vi.mocked(idbGet).mockResolvedValue(undefined)
+    vi.mocked(idbSet).mockClear()
+  })
+
+  const stored = (over: Partial<Progress>): Progress => ({ ...initialProgress(), ...over })
+
+  const hydrateWith = async (over: Partial<Progress>) => {
+    vi.mocked(idbGet).mockResolvedValueOnce(stored(over))
+    await useProgress.getState().hydrate()
+    return useProgress.getState().progress
+  }
+
+  it('leaves a streak alone when yesterday had a lesson', async () => {
+    const progress = await hydrateWith({
+      streakCount: 6,
+      lastActiveDay: dayBefore(todayKey()),
+    })
+
+    expect(progress.streakCount).toBe(6)
+    expect(vi.mocked(idbSet)).not.toHaveBeenCalled()
+  })
+
+  it('breaks a stale streak without writing, because a break recomputes', async () => {
+    const progress = await hydrateWith({
+      streakCount: 12,
+      lastActiveDay: '2020-01-01',
+    })
+
+    expect(progress.streakCount).toBe(0)
+    // The behaviour freezes had to preserve: a break is a stable derivation of
+    // `lastActiveDay`, so persisting it would be a write on every cold start.
+    expect(vi.mocked(idbSet), 'a break is derived, never stored').not.toHaveBeenCalled()
+  })
+
+  it('spends a freeze to cover a missed day, and writes that down', async () => {
+    const progress = await hydrateWith({
+      streakCount: 12,
+      lastActiveDay: dayBefore(dayBefore(todayKey())),
+      streakFreezes: 2,
+    })
+
+    expect(progress.streakCount, 'the streak survives').toBe(12)
+    expect(progress.streakFreezes).toBe(1)
+    expect(progress.lastActiveDay, 'moved up so a second open spends nothing').toBe(
+      dayBefore(todayKey()),
+    )
+    // Spending is not a derivation — it has to survive the reload and reach the
+    // server, which means a write and an advanced version.
+    expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(1)
+    expect(progress.updatedAt).toBeGreaterThan(0)
+  })
+
+  it('spends nothing on the second open of the same day', async () => {
+    const covered = await hydrateWith({
+      streakCount: 12,
+      lastActiveDay: dayBefore(dayBefore(todayKey())),
+      streakFreezes: 2,
+    })
+    vi.mocked(idbSet).mockClear()
+
+    const reopened = await hydrateWith(covered)
+
+    expect(reopened.streakFreezes, 'still one, not zero').toBe(1)
+    expect(reopened.streakCount).toBe(12)
+    expect(vi.mocked(idbSet)).not.toHaveBeenCalled()
+  })
+
+  it('clamps a corrupt freeze count rather than letting it through', async () => {
+    const wild = await hydrateWith({ streakFreezes: 999 as number })
+    expect(wild.streakFreezes).toBe(MAX_STREAK_FREEZES)
+
+    const negative = await hydrateWith({ streakFreezes: -4 as number })
+    expect(negative.streakFreezes).toBe(0)
+
+    const junk = await hydrateWith({ streakFreezes: 'lots' as unknown as number })
+    expect(junk.streakFreezes).toBe(0)
+  })
+
+  it('gives a record that predates freezes none rather than failing', async () => {
+    const legacy = stored({ streakCount: 4 })
+    delete (legacy as Partial<Progress>).streakFreezes
+    vi.mocked(idbGet).mockResolvedValueOnce(legacy)
+
+    await useProgress.getState().hydrate()
+
+    expect(useProgress.getState().progress.streakFreezes).toBe(0)
+    expect(useProgress.getState().progress.streakCount).toBe(4)
+  })
+})
+
+describe('what a lesson pays', () => {
+  beforeEach(() => {
+    useProgress.getState().reset()
+  })
+
+  const startingFrom = (over: Partial<Progress>) => {
+    useProgress.getState().replaceProgress({ ...progressWith({}), ...over })
+  }
+
+  it('extends a streak that had yesterday, and pays the base rate under a week', () => {
+    startingFrom({ streakCount: 3, lastActiveDay: dayBefore(todayKey()) })
+
+    const outcome = useProgress.getState().completeLesson('add-facts-small')
+
+    expect(useProgress.getState().progress.streakCount).toBe(4)
+    expect(outcome.coinsGained, 'unchanged from before the multiplier existed').toBe(15)
+  })
+
+  it('restarts a streak that missed a day', () => {
+    startingFrom({ streakCount: 20, lastActiveDay: '2020-01-01' })
+
+    useProgress.getState().completeLesson('add-facts-small')
+
+    expect(useProgress.getState().progress.streakCount).toBe(1)
+  })
+
+  it('does not count a second lesson on the same day twice', () => {
+    startingFrom({ streakCount: 3, lastActiveDay: dayBefore(todayKey()) })
+
+    useProgress.getState().completeLesson('add-facts-small')
+    useProgress.getState().completeLesson('add-facts-small')
+
+    expect(useProgress.getState().progress.streakCount).toBe(4)
+  })
+
+  it('pays the rate of the run this lesson just extended', () => {
+    // Day 6 finishing into day 7, which is where 1.25x begins. Paying the day-6
+    // rate here would mean the screen saying "day 7" beside 15 coins.
+    startingFrom({ streakCount: 6, lastActiveDay: dayBefore(todayKey()) })
+
+    const outcome = useProgress.getState().completeLesson('add-facts-small')
+
+    expect(useProgress.getState().progress.streakCount).toBe(7)
+    expect(outcome.coinsGained).toBe(18)
+  })
+
+  it('pays a repeat lesson at the same multiplier', () => {
+    startingFrom({
+      streakCount: 29,
+      lastActiveDay: dayBefore(todayKey()),
+      skills: { ...progressWith({}).skills, 'add-facts-small': skill({ mastery: 5 }) },
+    })
+
+    const outcome = useProgress.getState().completeLesson('add-facts-small')
+
+    expect(outcome.leveledUp, 'already at the cap').toBe(false)
+    expect(outcome.coinsGained, '8 at 2x').toBe(16)
+  })
+
+  it('reports the milestone it crossed and pays it on top', () => {
+    startingFrom({ streakCount: 2, lastActiveDay: dayBefore(todayKey()), coins: 0 })
+
+    const outcome = useProgress.getState().completeLesson('add-facts-small')
+
+    expect(outcome.streakMilestone).toEqual({ days: 3, coins: 25, index: 1, of: 5 })
+    expect(
+      useProgress.getState().progress.coins,
+      'the lesson and the milestone both land',
+    ).toBe(15 + 25)
+  })
+
+  it('reports no milestone on an ordinary day', () => {
+    startingFrom({ streakCount: 3, lastActiveDay: dayBefore(todayKey()) })
+
+    expect(useProgress.getState().completeLesson('add-facts-small').streakMilestone)
+      .toBeUndefined()
+  })
+})
+
+describe('buying a streak freeze', () => {
+  beforeEach(() => {
+    useProgress.getState().reset()
+  })
+
+  const withCoins = (coins: number, streakFreezes = 0) => {
+    useProgress.getState().replaceProgress({ ...progressWith({}), coins, streakFreezes })
+  }
+
+  it('charges thirty coins and hands over one freeze', () => {
+    withCoins(100)
+
+    useProgress.getState().buyStreakFreeze()
+
+    expect(useProgress.getState().progress.coins).toBe(70)
+    expect(useProgress.getState().progress.streakFreezes).toBe(1)
+  })
+
+  it('refuses at the cap, however many coins are held', () => {
+    withCoins(10_000, MAX_STREAK_FREEZES)
+    const before = useProgress.getState().progress.updatedAt
+
+    useProgress.getState().buyStreakFreeze()
+
+    expect(useProgress.getState().progress.streakFreezes).toBe(MAX_STREAK_FREEZES)
+    expect(useProgress.getState().progress.coins).toBe(10_000)
+    expect(useProgress.getState().progress.updatedAt, 'no push for a refusal').toBe(before)
+  })
+
+  it('refuses when the coins are not there', () => {
+    withCoins(29)
+    const before = useProgress.getState().progress.updatedAt
+
+    useProgress.getState().buyStreakFreeze()
+
+    expect(useProgress.getState().progress.streakFreezes).toBe(0)
+    expect(useProgress.getState().progress.coins).toBe(29)
+    expect(useProgress.getState().progress.updatedAt).toBe(before)
+  })
+
+  it('leaves the wardrobe out of it', () => {
+    withCoins(100)
+
+    useProgress.getState().buyStreakFreeze()
+
+    // A freeze is held on its own count, never as an inventory id — which is
+    // what keeps `buy()`'s already-owned refusal true of everything in it.
+    expect(useProgress.getState().progress.inventory).toEqual([])
   })
 })

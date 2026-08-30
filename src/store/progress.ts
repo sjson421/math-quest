@@ -9,8 +9,17 @@ import {
 } from '../curriculum'
 import { crossedStageCheckpoint, type StageCheckpoint } from '../lib/checkpoint'
 import { crossedPinTier, pinTier, type PinTier, type PinUpgrade } from '../lib/pin'
+import {
+  coinsFor,
+  crossedStreakMilestone,
+  daysBetween,
+  MAX_STREAK_FREEZES,
+  openStreak,
+  todayKey,
+  type StreakMilestone,
+} from '../lib/streak'
 import { DEFAULT_CHARACTER, type CosmeticSlot, type Equipped, type Placed, type RoomSlot } from '../cosmetics'
-import { buy, equip, unequip } from '../lib/wardrobe'
+import { buy, buyFreeze, equip, unequip } from '../lib/wardrobe'
 
 const STORAGE_KEY = 'math-quest-progress'
 const SCHEMA_VERSION = 1
@@ -41,6 +50,15 @@ export type Progress = {
   coins: number
   streakCount: number
   lastActiveDay: string | null
+  /**
+   * Unspent streak freezes, capped at `MAX_STREAK_FREEZES`.
+   *
+   * The only new stored field the streak needed. Everything else it does — the
+   * multiplier, the milestones, whether it is at risk — is derived from the two
+   * fields above, so this is stored precisely because spending one is spending
+   * something rather than recomputing something.
+   */
+  streakFreezes: number
   dailyGoal: number
   todayXp: number
   todayDate: string
@@ -79,21 +97,20 @@ export type LessonOutcome = {
    * `lib/pin.ts` for why the transition is the whole mechanism.
    */
   pinUpgrade?: PinUpgrade
+  /**
+   * Set only when this lesson took the streak past a milestone day. Derived
+   * from the same before/after pair the checkpoint and the pin upgrade are, and
+   * stored nowhere — see `lib/streak.ts`.
+   */
+  streakMilestone?: StreakMilestone
 }
 
-/** Local calendar day. Deliberately not UTC — streaks should follow the learner. */
-export function todayKey(date = new Date()): string {
-  const y = date.getFullYear()
-  const m = String(date.getMonth() + 1).padStart(2, '0')
-  const d = String(date.getDate()).padStart(2, '0')
-  return `${y}-${m}-${d}`
-}
-
-function daysBetween(from: string, to: string): number {
-  const a = new Date(`${from}T00:00:00`)
-  const b = new Date(`${to}T00:00:00`)
-  return Math.round((b.getTime() - a.getTime()) / 86_400_000)
-}
+/**
+ * The calendar day and the gap between two of them now live in `lib/streak.ts`,
+ * which is what defines what a day boundary means. Re-exported because the
+ * daily-goal counter below is the other thing that turns on it.
+ */
+export { todayKey }
 
 const emptySkill = (): SkillProgress => ({
   mastery: 0,
@@ -120,6 +137,7 @@ export function initialProgress(): Progress {
     coins: 0,
     streakCount: 0,
     lastActiveDay: null,
+    streakFreezes: 0,
     dailyGoal: 30,
     todayXp: 0,
     todayDate: todayKey(),
@@ -140,6 +158,7 @@ type Store = {
   markIntroSeen: (skillId: string) => void
   completeLesson: (skillId: string) => LessonOutcome
   buyItem: (id: string) => void
+  buyStreakFreeze: () => void
   equipItem: (id: string) => void
   unequipSlot: (slot: CosmeticSlot | RoomSlot) => void
   replaceProgress: (next: Progress) => void
@@ -157,6 +176,14 @@ function reconcile(stored: Progress): Progress {
     updatedAt: typeof stored.updatedAt === 'number' ? stored.updatedAt : 0,
     skills: { ...base.skills, ...stored.skills },
     mistakes: { ...stored.mistakes },
+    // Clamped, not merely defaulted. A record that predates the field takes
+    // `base`'s zero through the spread above; this is here for the other case —
+    // a hand-edited backup or a corrupt blob carrying a negative, a fraction,
+    // or a number above the cap, any of which would otherwise become a wallet
+    // that never empties.
+    streakFreezes: Number.isFinite(stored.streakFreezes)
+      ? Math.max(0, Math.min(MAX_STREAK_FREEZES, Math.floor(stored.streakFreezes)))
+      : 0,
     // Shape-checked rather than spread blindly. A record predating cosmetics has
     // none of these fields, and a corrupt one can carry anything: `{ ...'ab' }`
     // is `{ 0: 'a', 1: 'b' }`, which would survive as a junk wardrobe.
@@ -206,10 +233,23 @@ export const useProgress = create<Store>((set, get) => {
         progress.todayXp = 0
       }
 
-      // A missed day breaks the streak. Checked on load so the home screen is
-      // honest the moment it opens, not only after finishing a lesson.
-      if (progress.lastActiveDay && daysBetween(progress.lastActiveDay, today) > 1) {
-        progress.streakCount = 0
+      // What the missed days since the last lesson did to the streak: nothing,
+      // a break, or a freeze spent covering them. Checked on load so the home
+      // screen is honest the moment it opens, not only after a lesson.
+      const opening = openStreak(progress, today)
+      progress.streakCount = opening.streakCount
+      progress.lastActiveDay = opening.lastActiveDay
+      progress.streakFreezes = opening.streakFreezes
+
+      // A break is a stable derivation and stays unpersisted, exactly as it was
+      // before freezes existed — the next load recomputes it identically. A
+      // spend is not: it consumes something, so it is written down and pushed
+      // like any other local change. `openStreak` has already moved
+      // `lastActiveDay` forward, so re-opening today spends nothing further.
+      if (opening.spent > 0) {
+        persist(progress)
+        set({ loaded: true })
+        return
       }
 
       set({ progress, loaded: true })
@@ -257,7 +297,6 @@ export const useProgress = create<Store>((set, get) => {
 
       const leveledUp = skill.mastery < MAX_MASTERY
       const xpGained = 20
-      const coinsGained = leveledUp ? 15 : 8
 
       let streakCount = p.streakCount
       if (p.lastActiveDay !== today) {
@@ -265,10 +304,22 @@ export const useProgress = create<Store>((set, get) => {
         streakCount = gap === 1 ? p.streakCount + 1 : 1
       }
 
+      // Worked out after the streak, and against the run this lesson just
+      // extended rather than the one it started from: the screen says "day 7"
+      // and pays the day-7 rate, which is the only pairing a learner can check.
+      const coinsGained = coinsFor(leveledUp ? 15 : 8, streakCount)
+
+      // Compared on the bare counts, so the milestone is known before the
+      // record it pays into has to be built.
+      const streakMilestone = crossedStreakMilestone({
+        before: p,
+        after: { streakCount },
+      })
+
       const next = {
         ...p,
         xp: p.xp + xpGained,
-        coins: p.coins + coinsGained,
+        coins: p.coins + coinsGained + (streakMilestone?.coins ?? 0),
         streakCount,
         lastActiveDay: today,
         todayDate: today,
@@ -296,7 +347,7 @@ export const useProgress = create<Store>((set, get) => {
 
       persist(next)
 
-      return { xpGained, coinsGained, leveledUp, checkpoint, pinUpgrade }
+      return { xpGained, coinsGained, leveledUp, checkpoint, pinUpgrade, streakMilestone }
     },
 
     /**
@@ -307,6 +358,11 @@ export const useProgress = create<Store>((set, get) => {
      */
     buyItem(id) {
       const next = buy(get().progress, id)
+      if (next) persist(next)
+    },
+
+    buyStreakFreeze() {
+      const next = buyFreeze(get().progress)
       if (next) persist(next)
     },
 
