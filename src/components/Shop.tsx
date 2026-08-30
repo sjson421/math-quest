@@ -12,7 +12,13 @@ import {
   type RoomSlot,
 } from '../cosmetics'
 import { tap } from '../lib/haptics'
-import { standing, type ItemStanding } from '../lib/wardrobe'
+import { freezeStanding, standing, type ItemStanding } from '../lib/wardrobe'
+import {
+  MAX_STREAK_FREEZES,
+  STREAK_FREEZE_PRICE,
+  STREAK_TIERS,
+  streakMultiplier,
+} from '../lib/streak'
 import { currentPinTier, type Progress } from '../store/progress'
 import { Mascot } from './Mascot'
 import { Room } from './Room'
@@ -38,6 +44,7 @@ import { Room } from './Room'
 type Props = {
   progress: Progress
   onBuy: (id: string) => void
+  onBuyFreeze: () => void
   onEquip: (id: string) => void
   onUnequip: (slot: CosmeticSlot | RoomSlot) => void
   onClose: () => void
@@ -62,7 +69,7 @@ const CATEGORY: Record<CosmeticSlot | RoomSlot, string> = {
   right: 'Right corner',
 }
 
-export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
+export function Shop({ progress, onBuy, onBuyFreeze, onEquip, onUnequip, onClose }: Props) {
   // Every preview in the shop wears the pin the learner has actually earned:
   // a card is a picture of what you would get, and the pin is not for sale.
   const tier = currentPinTier(progress)
@@ -104,6 +111,19 @@ export function Shop({ progress, onBuy, onEquip, onUnequip, onClose }: Props) {
         Every lesson you finish pays coins. Spend them on whatever you like — nothing here
         changes the maths.
       </p>
+
+      {/* First, because it is the only thing here that can stop being buyable
+          — the day a freeze would have covered has to be paid for before it
+          arrives. Everything below waits patiently. */}
+      <SectionHeading>Streak</SectionHeading>
+      <div className="px-5 pb-6">
+        <FreezeCard
+          held={progress.streakFreezes}
+          standing={freezeStanding(progress)}
+          onBuy={onBuyFreeze}
+        />
+        <Multipliers streakCount={progress.streakCount} />
+      </div>
 
       <SectionHeading>Characters</SectionHeading>
       <div className="px-5 pb-6 grid grid-cols-2 gap-4">
@@ -284,5 +304,107 @@ function Card({
         {action.label}
       </button>
     </motion.div>
+  )
+}
+
+/**
+ * The one consumable, and the one card that is not a `CatalogueItem`.
+ *
+ * It shares `Card`'s shape without sharing its code: that component reads
+ * `item.name`, `item.price` and `item.kind` off the catalogue, and a freeze has
+ * none of the three. Widening it to take a shapeless item would put four
+ * optional fields on every cosmetic card to serve this one.
+ *
+ * What it says at the cap is the point of the cap: a learner with a thousand
+ * coins is told they already hold as many as they can, not offered a third.
+ */
+function FreezeCard({
+  held,
+  standing,
+  onBuy,
+}: {
+  held: number
+  standing: ReturnType<typeof freezeStanding>
+  onBuy: () => void
+}) {
+  const action = {
+    affordable: { label: `Buy · ${STREAK_FREEZE_PRICE}`, run: onBuy },
+    'at-cap': { label: `Holding ${MAX_STREAK_FREEZES} of ${MAX_STREAK_FREEZES}`, run: null },
+    'out-of-reach': { label: 'Not enough coins', run: null },
+  }[standing]
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="rounded-blob bg-white shadow-soft p-4 flex items-center gap-4"
+    >
+      <span className="text-4xl" aria-hidden="true">
+        ❄
+      </span>
+
+      <div className="flex-1">
+        <p className="font-bold text-sm">Streak freeze</p>
+        <p className="text-xs text-ink-soft mt-0.5">
+          Covers one day you miss, on its own, the next time you open the app. Holding{' '}
+          <span className="tabular-nums">{held}</span> of {MAX_STREAK_FREEZES}.
+        </p>
+      </div>
+
+      <button
+        onClick={
+          action.run
+            ? () => {
+                tap()
+                action.run()
+              }
+            : undefined
+        }
+        disabled={action.run === null}
+        className={`shrink-0 rounded-full px-4 py-2 text-sm font-bold ${
+          action.run ? 'bg-blossom-soft text-blossom-deep' : 'bg-cream-deep text-ink-faint'
+        }`}
+      >
+        {action.label}
+      </button>
+    </motion.div>
+  )
+}
+
+/**
+ * What the run of days is currently worth, and what it would be worth longer.
+ *
+ * Here rather than on the home screen because this is the screen about coins:
+ * the ladder is the answer to "why does the streak matter", and the answer is
+ * only meaningful next to the things it buys.
+ *
+ * Read low to high, which is the reverse of `STREAK_TIERS`' own order — that
+ * list is written highest-first so the lookup can take the first match, and a
+ * learner reads a ladder upward.
+ */
+function Multipliers({ streakCount }: { streakCount: number }) {
+  const current = streakMultiplier(streakCount)
+
+  return (
+    <ol className="mt-3 flex gap-2">
+      {[...STREAK_TIERS].reverse().map(({ days, multiplier }) => {
+        const active = multiplier === current
+
+        return (
+          <li
+            key={days}
+            aria-current={active ? 'true' : undefined}
+            className={`flex-1 rounded-2xl px-2 py-2 text-center ${
+              active ? 'bg-mint-soft text-mint-deep' : 'bg-white text-ink-faint'
+            }`}
+          >
+            <span className="block text-sm font-bold tabular-nums">{multiplier}×</span>
+            <span className="block text-[11px] font-semibold tabular-nums">
+              {days === 0 ? 'start' : `${days}d`}
+            </span>
+          </li>
+        )
+      })}
+    </ol>
   )
 }

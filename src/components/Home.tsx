@@ -4,9 +4,16 @@ import { characterOf } from '../cosmetics'
 import { course, courseStageById, courseStageByUnitId, courseUnitById } from '../curriculum'
 import { tap } from '../lib/haptics'
 import { useSound } from '../lib/sound'
+import {
+  nextStreakMilestone,
+  streakAtRisk,
+  streakMultiplier,
+  todayKey,
+} from '../lib/streak'
 import { currentPinTier, isUnlocked, useProgress } from '../store/progress'
 import { Room } from './Room'
 import { SkillList } from './SkillList'
+import { StreakCard } from './StreakCard'
 import { StageList } from './StageList'
 import { UnitList } from './UnitList'
 
@@ -89,7 +96,9 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
   return (
     <div className="flex flex-col h-full overflow-y-auto">
       <header className="flex items-center justify-between px-5 pt-4">
-        <Stat icon="🔥" value={progress.streakCount} label="day streak" />
+        {/* The streak used to sit here, the same size as the coin count. It is
+            the only thing the learner can lose, so it has its own card below
+            rather than a slot in a row of three numbers. */}
         {/* The reward and the thing it buys, one tap apart. Sized to match the
             settings button rather than shrink-wrapping the stat: this is a
             control on a phone, and the text it wraps is only 28px tall. */}
@@ -144,7 +153,15 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
           message={message}
         />
 
-        <div className="w-full max-w-xs px-6 mt-1">
+        <StreakCard
+          streakCount={progress.streakCount}
+          atRisk={streakAtRisk(progress, todayKey())}
+          freezes={progress.streakFreezes}
+          multiplier={streakMultiplier(progress.streakCount)}
+          nextMilestone={nextStreakMilestone(progress.streakCount)}
+        />
+
+        <div className="w-full max-w-xs px-6 mt-4">
           <div className="flex justify-between text-sm font-semibold text-ink-soft mb-1.5">
             <span>Today's goal</span>
             <span className="tabular-nums">

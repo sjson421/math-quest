@@ -17,6 +17,7 @@ import {
   cosmetics,
   decorations,
 } from '../cosmetics'
+import { MAX_STREAK_FREEZES, STREAK_FREEZE_PRICE } from '../lib/streak'
 import { initialProgress, type Progress } from '../store/progress'
 import { Shop } from './Shop'
 
@@ -25,6 +26,7 @@ const render = (progress: Partial<Progress>) =>
     <Shop
       progress={{ ...initialProgress(), ...progress }}
       onBuy={() => {}}
+      onBuyFreeze={() => {}}
       onEquip={() => {}}
       onUnequip={() => {}}
       onClose={() => {}}
@@ -80,7 +82,11 @@ describe('the shop', () => {
 
     // `shadow-soft` is the card container and nothing else. `rounded-blob` is
     // no longer specific enough — the room preview carries it too.
-    expect(withRetired.match(/shadow-soft/g)).toHaveLength(catalogue.length)
+    //
+    // One card per catalogue item, plus the streak freeze. That is the only
+    // card on this screen with nothing in the catalogue behind it, which is
+    // the whole reason a consumable could not be expressed as one.
+    expect(withRetired.match(/shadow-soft/g)).toHaveLength(catalogue.length + 1)
     expect(withRetired).not.toContain('sombrero')
     expect(withRetired).toBe(known)
   })
@@ -182,5 +188,49 @@ describe('the characters section', () => {
 
     expect(html).toContain('Play as')
     expect(html).not.toContain(`Buy · ${mochi.price}`)
+  })
+})
+
+describe('the streak section', () => {
+  /**
+   * Just the streak section. Scoped rather than asserted over the whole page
+   * because a price is a substring of a longer price — `Buy · 30` is inside the
+   * picture wall's `Buy · 300`, which made a global assertion quietly wrong.
+   */
+  const section = (html: string) =>
+    html.slice(html.indexOf('>Streak<'), html.indexOf('>Characters<'))
+
+  it('offers a freeze at its price when the coins are there', () => {
+    const html = section(render({ coins: STREAK_FREEZE_PRICE }))
+
+    expect(html).toContain('Streak freeze')
+    expect(html).toContain(`Buy · ${STREAK_FREEZE_PRICE}`)
+  })
+
+  it('says what is missing rather than offering a purchase that would be refused', () => {
+    const html = section(render({ coins: STREAK_FREEZE_PRICE - 1 }))
+
+    expect(html).toContain('Not enough coins')
+    expect(html).not.toContain(`Buy · ${STREAK_FREEZE_PRICE}`)
+  })
+
+  it('says the cap is reached rather than offering another, however rich the learner', () => {
+    const html = section(render({ coins: 100_000, streakFreezes: MAX_STREAK_FREEZES }))
+
+    expect(html).toContain(`Holding ${MAX_STREAK_FREEZES} of ${MAX_STREAK_FREEZES}`)
+    expect(html).not.toContain(`Buy · ${STREAK_FREEZE_PRICE}`)
+  })
+
+  it('marks the multiplier the current streak is actually earning', () => {
+    // `aria-current` is the only part of the ladder that changes with the
+    // streak, so it is what pins the lookup rather than the rendered numbers.
+    const starting = section(render({ streakCount: 0 }))
+    const doubled = section(render({ streakCount: 30 }))
+
+    expect(starting).toContain('aria-current="true"')
+    expect(starting.indexOf('aria-current'), 'the first rung is lit at day zero')
+      .toBeLessThan(starting.indexOf('1.25'))
+    expect(doubled.indexOf('aria-current'), 'the last rung is lit at day thirty')
+      .toBeGreaterThan(doubled.indexOf('1.5'))
   })
 })

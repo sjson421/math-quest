@@ -30,6 +30,7 @@ import { ProblemView } from './ProblemView'
 import { RootPairInput } from './RootPairInput'
 import { PinUpgrade } from './PinUpgrade'
 import { StageCheckpoint } from './StageCheckpoint'
+import { StreakMilestone } from './StreakMilestone'
 import { SolutionSteps } from './SolutionSteps'
 import { SkillIntro, type SkillIntroMode } from './SkillIntro'
 
@@ -443,6 +444,20 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
   )
 }
 
+/**
+ * Which screen each action opens. Exhaustive over the action union rather than
+ * a ternary, so a fourth screen is a compile error here instead of quietly
+ * falling through to the pin.
+ */
+const NEXT_VIEW: Record<
+  Exclude<ReturnType<typeof completionAction>, 'exit'>,
+  CompletionView
+> = {
+  'show-checkpoint': 'stage-checkpoint',
+  'show-pin-upgrade': 'pin-upgrade',
+  'show-streak-milestone': 'streak-milestone',
+}
+
 function LessonComplete({
   skill,
   outcome,
@@ -458,6 +473,8 @@ function LessonComplete({
   // The tier already earned. The upgrade screen draws the *new* one from the
   // outcome instead, which is the one difference between the two.
   const tier = useProgress((s) => currentPinTier(s.progress))
+  // Read after the lesson persisted, so it is the run this lesson extended.
+  const streakCount = useProgress((s) => s.progress.streakCount)
   const [view, setView] = useState<CompletionView>('lesson-result')
 
   // Once, as the celebration lands — beside the confetti rather than at the
@@ -468,7 +485,11 @@ function LessonComplete({
   }, [])
 
   const continueCompletion = () => {
-    const next = completionAction(view, Boolean(outcome.checkpoint), Boolean(outcome.pinUpgrade))
+    const next = completionAction(view, {
+      checkpoint: Boolean(outcome.checkpoint),
+      upgrade: Boolean(outcome.pinUpgrade),
+      milestone: Boolean(outcome.streakMilestone),
+    })
 
     if (next === 'exit') {
       onExit()
@@ -476,13 +497,26 @@ function LessonComplete({
     }
 
     celebrate()
-    setView(next === 'show-checkpoint' ? 'stage-checkpoint' : 'pin-upgrade')
+    setView(NEXT_VIEW[next])
   }
 
   if (view === 'stage-checkpoint' && outcome.checkpoint) {
     return (
       <StageCheckpoint
         checkpoint={outcome.checkpoint}
+        onContinue={continueCompletion}
+        character={character}
+        equipped={equipped}
+        tier={tier}
+      />
+    )
+  }
+
+  if (view === 'streak-milestone' && outcome.streakMilestone) {
+    return (
+      <StreakMilestone
+        milestone={outcome.streakMilestone}
+        streakCount={streakCount}
         onContinue={continueCompletion}
         character={character}
         equipped={equipped}

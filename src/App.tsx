@@ -40,6 +40,7 @@ export default function App() {
   const introduced = useRecoveryKey((s) => s.introduced)
   const progress = useProgress((s) => s.progress)
   const buyItem = useProgress((s) => s.buyItem)
+  const buyStreakFreeze = useProgress((s) => s.buyStreakFreeze)
   const equipItem = useProgress((s) => s.equipItem)
   const unequipSlot = useProgress((s) => s.unequipSlot)
 
@@ -118,6 +119,7 @@ export default function App() {
               <Shop
                 progress={progress}
                 onBuy={buyItem}
+                onBuyFreeze={buyStreakFreeze}
                 onEquip={equipItem}
                 onUnequip={unequipSlot}
                 onClose={() => setScreen(active.back)}

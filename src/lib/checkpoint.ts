@@ -24,30 +24,59 @@ export type StageCheckpoint = {
   name: string
 }
 
-export type CompletionView = 'lesson-result' | 'stage-checkpoint' | 'pin-upgrade'
-type CompletionAction = 'show-checkpoint' | 'show-pin-upgrade' | 'exit'
+export type CompletionView =
+  | 'lesson-result'
+  | 'stage-checkpoint'
+  | 'pin-upgrade'
+  | 'streak-milestone'
+
+type CompletionAction =
+  | 'show-checkpoint'
+  | 'show-pin-upgrade'
+  | 'show-streak-milestone'
+  | 'exit'
+
+/** What a lesson earned beyond its XP and coins. */
+export type Earned = {
+  checkpoint: boolean
+  upgrade: boolean
+  milestone: boolean
+}
+
+/**
+ * The screens that can follow the result, in the order they are shown.
+ *
+ * A list rather than a chain of conditionals, because the order *is* the
+ * design and three nested `if`s hide it: the checkpoint is about the course,
+ * the pin is about the distance the learner has covered, and the milestone is
+ * about the habit — largest thing first, and least tied to the learning last.
+ * Adding a fifth screen is a row here rather than another boolean to thread
+ * past the four that already exist.
+ */
+const AFTER_RESULT = [
+  ['stage-checkpoint', 'checkpoint', 'show-checkpoint'],
+  ['pin-upgrade', 'upgrade', 'show-pin-upgrade'],
+  ['streak-milestone', 'milestone', 'show-streak-milestone'],
+] as const satisfies readonly (readonly [CompletionView, keyof Earned, CompletionAction])[]
 
 /**
  * What one Continue tap does at each step of the completion flow.
  *
- * Three screens, of which only the first always happens: the result, then a
- * stage checkpoint if the lesson crossed a boundary, then a pin upgrade if it
- * earned one. A lesson can earn both, one, or neither, and the learner reaches
- * the same place with one tap per screen either way.
+ * Only the result always happens; each screen after it appears if the lesson
+ * earned it. A lesson can earn all three, some, or none, and the learner
+ * reaches the same place with one tap per screen either way.
  *
- * The checkpoint comes first because it is about the course and the pin is
- * about the learner: finishing a stage is the larger thing, and the pin reads
- * as the reward that followed it rather than an interruption before it.
+ * Taking `earned` as an object rather than as positional booleans is not
+ * decoration: three adjacent `boolean` arguments are three chances to pass the
+ * pin's where the streak's belongs, and the compiler cannot tell them apart.
  */
-export function completionAction(
-  view: CompletionView,
-  hasCheckpoint: boolean,
-  hasUpgrade: boolean,
-): CompletionAction {
-  if (view === 'lesson-result' && hasCheckpoint) return 'show-checkpoint'
-  if (view !== 'pin-upgrade' && hasUpgrade) return 'show-pin-upgrade'
+export function completionAction(view: CompletionView, earned: Earned): CompletionAction {
+  const from =
+    view === 'lesson-result'
+      ? 0
+      : AFTER_RESULT.findIndex(([screen]) => screen === view) + 1
 
-  return 'exit'
+  return AFTER_RESULT.slice(from).find(([, key]) => earned[key])?.[2] ?? 'exit'
 }
 
 type CheckpointOptions = {

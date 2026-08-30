@@ -217,6 +217,21 @@ export const STREAK_MILESTONES = [
   { days: 100, coins: 1500 },
 ] as const
 
+/**
+ * The next milestone a live streak is working toward, if any.
+ *
+ * What the home screen counts down to. `undefined` past the last one: the
+ * ladder ends, and inventing a further rung so the card always has something to
+ * show would be the app promising a reward it does not have.
+ */
+export function nextStreakMilestone(
+  streakCount: number,
+): { days: number; coins: number; away: number } | undefined {
+  const next = STREAK_MILESTONES.find(({ days }) => days > streakCount)
+
+  return next && { ...next, away: next.days - streakCount }
+}
+
 export type StreakMilestone = {
   days: number
   coins: number

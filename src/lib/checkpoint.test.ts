@@ -8,7 +8,7 @@ import {
   type SkillState,
   type StageEntry,
 } from '../curriculum/manifest'
-import { completionAction, crossedStageCheckpoint } from './checkpoint'
+import { completionAction, crossedStageCheckpoint, type Earned } from './checkpoint'
 
 const threshold = 2
 
@@ -217,31 +217,80 @@ describe('crossedStageCheckpoint', () => {
 })
 
 describe('completionAction', () => {
-  it('shows the checkpoint after a lesson result that crossed a boundary', () => {
-    expect(completionAction('lesson-result', true, false)).toBe('show-checkpoint')
+  /** Nothing earned but the lesson itself, overridden per case. */
+  const earned = (over: Partial<Earned> = {}): Earned => ({
+    checkpoint: false,
+    upgrade: false,
+    milestone: false,
+    ...over,
   })
 
   it('exits directly after an ordinary lesson result', () => {
-    expect(completionAction('lesson-result', false, false)).toBe('exit')
+    expect(completionAction('lesson-result', earned())).toBe('exit')
+  })
+
+  it('shows the checkpoint after a lesson result that crossed a boundary', () => {
+    expect(completionAction('lesson-result', earned({ checkpoint: true }))).toBe(
+      'show-checkpoint',
+    )
   })
 
   it('exits after the checkpoint', () => {
-    expect(completionAction('stage-checkpoint', true, false)).toBe('exit')
+    expect(completionAction('stage-checkpoint', earned({ checkpoint: true }))).toBe('exit')
   })
 
   it('shows a pin upgrade straight after the result when no boundary was crossed', () => {
-    expect(completionAction('lesson-result', false, true)).toBe('show-pin-upgrade')
+    expect(completionAction('lesson-result', earned({ upgrade: true }))).toBe(
+      'show-pin-upgrade',
+    )
+  })
+
+  it('shows a streak milestone straight after the result when it is the only one', () => {
+    expect(completionAction('lesson-result', earned({ milestone: true }))).toBe(
+      'show-streak-milestone',
+    )
   })
 
   it('shows the checkpoint first when a lesson earns both', () => {
     // The order is the whole point of the pair: the stage is the larger thing,
     // and the pin reads as what followed it rather than an interruption.
-    expect(completionAction('lesson-result', true, true)).toBe('show-checkpoint')
-    expect(completionAction('stage-checkpoint', true, true)).toBe('show-pin-upgrade')
+    const both = earned({ checkpoint: true, upgrade: true })
+
+    expect(completionAction('lesson-result', both)).toBe('show-checkpoint')
+    expect(completionAction('stage-checkpoint', both)).toBe('show-pin-upgrade')
   })
 
-  it('exits after the pin upgrade, whatever else the lesson earned', () => {
-    expect(completionAction('pin-upgrade', false, true)).toBe('exit')
-    expect(completionAction('pin-upgrade', true, true)).toBe('exit')
+  it('exits after the pin upgrade when the streak earned nothing', () => {
+    expect(completionAction('pin-upgrade', earned({ upgrade: true }))).toBe('exit')
+    expect(completionAction('pin-upgrade', earned({ checkpoint: true, upgrade: true }))).toBe(
+      'exit',
+    )
+  })
+
+  it('walks all three in order when one lesson earns everything', () => {
+    // The rare day: a stage finished, the pin grown, and the streak past a
+    // milestone. One tap each, largest thing first, habit last.
+    const all = earned({ checkpoint: true, upgrade: true, milestone: true })
+
+    expect(completionAction('lesson-result', all)).toBe('show-checkpoint')
+    expect(completionAction('stage-checkpoint', all)).toBe('show-pin-upgrade')
+    expect(completionAction('pin-upgrade', all)).toBe('show-streak-milestone')
+    expect(completionAction('streak-milestone', all)).toBe('exit')
+  })
+
+  it('skips past what was not earned rather than stopping at it', () => {
+    // A milestone with no pin upgrade must not be stranded behind the screen
+    // that did not happen — the bug a chain of conditionals invites.
+    expect(completionAction('stage-checkpoint', earned({ checkpoint: true, milestone: true })))
+      .toBe('show-streak-milestone')
+  })
+
+  it('exits from the last screen whatever the lesson earned', () => {
+    expect(
+      completionAction(
+        'streak-milestone',
+        earned({ checkpoint: true, upgrade: true, milestone: true }),
+      ),
+    ).toBe('exit')
   })
 })
