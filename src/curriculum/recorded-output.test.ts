@@ -138,6 +138,39 @@ describe('recorded output for diagrams', () => {
       'display  diagram grid 4/6 "grid in 6 parts, 4 shaded"',
     )
   })
+
+  it('records every geometry source, derived formula, answer policy, and diagnosis', () => {
+    const problem: Problem = {
+      skillId: 'synthetic-geometry',
+      prompt: 'Find the circle\'s area. Use π = 3.14 and round to the nearest tenth.',
+      display: {
+        kind: 'diagram',
+        diagram: { kind: 'geometry', operation: 'area-circle', diameter: 10, unit: 'm' },
+      },
+      answer: { kind: 'approx', value: 78.5, tolerance: 0.05 },
+      inputMode: 'keypad',
+      keypad: { allowDecimal: true },
+      misconceptions: [
+        { value: 314, tag: 'squared-diameter', nudge: 'Square the radius, not the whole diameter.' },
+        { value: 31.4, tag: 'circumference-for-area', nudge: 'Area and circumference use different formulas.' },
+      ],
+      hint: 'Halve the diameter to get radius, then square it.',
+      solution: [{ text: 'Halve the diameter.', detail: '10 ÷ 2 = 5' }],
+      difficulty: 1,
+    }
+
+    const output = format(problem, 31)
+    expect(output).toContain(
+      'display  geometry area-circle diameter 10 unit m name "Circle with diameter 10 m" ' +
+        'formulas ["C equals pi times d" row("C = ", "πd"); ' +
+        '"A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]',
+    )
+    expect(output).toContain('answer   approx 78.5 ±0.05')
+    expect(output).toContain('input    keypad')
+    expect(output).toContain('keypad   allowDecimal=true')
+    expect(output).toContain('miss     squared-diameter = 314')
+    expect(output).toContain('miss     circumference-for-area = 31.4')
+  })
 })
 
 describe('recorded output for coordinate planes', () => {

@@ -44,7 +44,7 @@ export type PinUpgrade = {
  * has today's playable skills in its denominator, so shipping Stage G would drop
  * every learner's percentage overnight and demote a pin nobody had touched. A
  * count only ever rises. The accepted cost is that these numbers are calibrated
- * against a course that is still growing: 173 of the 201 skills are playable, so
+ * against a course that is still growing: 179 of the 201 skills are playable, so
  * 150 is reachable now and stays reachable.
  */
 export const PIN_THRESHOLDS = [0, 15, 45, 90, 150] as const

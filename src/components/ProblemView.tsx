@@ -1,4 +1,5 @@
 import type { DecimalArithmeticData, Display, Problem } from '../lib/types'
+import { GeometryDiagram } from './GeometryDiagram'
 import { decimalColumnText } from '../lib/decimal'
 import { entrySpokenLabel } from '../lib/math-notation'
 import { MathNotation } from './MathNotation'
@@ -306,7 +307,11 @@ function EquationView({ display, entry, entryMode, readOnly }: { display: Of<'eq
 function DiagramView({ display, entry, entryMode, readOnly }: { display: Of<'diagram'> } & EntryProps) {
   return (
     <div className="flex flex-col items-center gap-3 max-w-full">
-      <ShapeDiagram diagram={display.diagram} />
+      {display.diagram.kind === 'geometry' ? (
+        <GeometryDiagram diagram={display.diagram} />
+      ) : (
+        <ShapeDiagram diagram={display.diagram} />
+      )}
       {GENERIC_ENTRY_FRAME[entryMode] && !readOnly && (
         <div className="flex items-center justify-center gap-3 text-4xl">
           <span className="font-bold text-ink-faint">=</span>

@@ -113,6 +113,7 @@ describe('Stage D Unit 7 intro examples', () => {
 
       if (id === 'fraction-of-shape' || id === 'equivalent-visual') {
         if (problem.display.kind !== 'diagram') throw new Error(`Expected diagram for ${id}`)
+        if (problem.display.diagram.kind === 'geometry') throw new Error(`Expected fraction diagram for ${id}`)
         const visible = shapeDiagramFraction(problem.display.diagram)
         if (id === 'fraction-of-shape') {
           expect(exact(problem)).toEqual(visible)
@@ -200,6 +201,7 @@ describe('fraction-of-shape', () => {
   it('derives each answer from valid proper diagram counts', () => {
     for (const problem of everyProblem('fraction-of-shape')) {
       if (problem.display.kind !== 'diagram') throw new Error('expected diagram display')
+      if (problem.display.diagram.kind === 'geometry') throw new Error('expected fraction diagram')
       expect(exact(problem)).toEqual(shapeDiagramFraction(problem.display.diagram))
       expect(problem.display.diagram.shadedParts).toBeGreaterThan(0)
       expect(problem.display.diagram.shadedParts).toBeLessThan(problem.display.diagram.parts)
@@ -273,6 +275,7 @@ describe('equivalent-visual', () => {
     const shapes = new Set<string>()
     for (const problem of everyProblem('equivalent-visual')) {
       if (problem.display.kind !== 'diagram') throw new Error('expected diagram display')
+      if (problem.display.diagram.kind === 'geometry') throw new Error('expected fraction diagram')
       const visible = shapeDiagramFraction(problem.display.diagram)
       const matching = (problem.choices ?? []).filter(
         (choice) => choice.value && equals(choice.value, visible),
@@ -474,7 +477,10 @@ describe('the nine-skill unit', () => {
 
   it('widens each skill from difficulty one to five', () => {
     const magnitude = (problem: Problem) => {
-      if (problem.display.kind === 'diagram') return problem.display.diagram.parts
+      if (problem.display.kind === 'diagram') {
+        if (problem.display.diagram.kind === 'geometry') throw new Error('expected fraction diagram')
+        return problem.display.diagram.parts
+      }
       const data = fractionData(problem)
       let values: number[]
       switch (data.operation) {

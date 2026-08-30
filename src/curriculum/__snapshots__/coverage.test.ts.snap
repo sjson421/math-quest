@@ -50,6 +50,21 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "add-words": [
     "add-three-numbers",
   ],
+  "area-circle": [
+    "circumference",
+  ],
+  "area-parallelogram-trapezoid": [
+    "area-triangle",
+  ],
+  "area-rectangle": [
+    "perimeter",
+  ],
+  "area-triangle": [
+    "area-rectangle",
+  ],
+  "circumference": [
+    "area-parallelogram-trapezoid",
+  ],
   "combine-like-terms": [
     "identify-like-terms",
   ],
@@ -322,6 +337,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "perfect-squares": [
     "evaluate-powers",
+  ],
+  "perimeter": [
+    "compare-functions",
   ],
   "place-value-hundreds": [
     "place-value-tens",

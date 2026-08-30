@@ -13,6 +13,12 @@ import {
 import { makeRng } from '../lib/rng'
 import { equals, format as formatRational, gcd, toNumber, rational, type Rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
+import {
+  assertGeometryDiagram,
+  geometryDiagramLabel,
+  geometryFormulaReferences,
+  type GeometryDiagram,
+} from '../lib/geometry-diagram'
 import { assertChart, chartSourceValues } from '../lib/chart'
 import { encodeRootPairEntry, normalizeRootPair } from '../lib/root-pair'
 import { ratioWordText } from './phrasing/ratios'
@@ -510,6 +516,154 @@ const notationRoot = (radicand: string): MathNotation => ({
   kind: 'root',
   radicand: notationText(radicand),
 })
+
+type ExpectedGeometry = {
+  label: string
+  formulas: Array<{ notation: MathNotation; label: string }>
+  prompt: string
+  answer: number
+  values: number[]
+  tolerance?: number
+}
+
+const geometryUnitName = (unit: GeometryDiagram['unit']): string => {
+  switch (unit) {
+    case 'cm':
+      return 'centimetres'
+    case 'm':
+      return 'metres'
+    case 'in':
+      return 'inches'
+    case 'ft':
+      return 'feet'
+    default: {
+      const unhandled: never = unit
+      throw new Error(`Unknown geometry unit: ${unhandled}`)
+    }
+  }
+}
+
+const expectedGeometryFormulas = (operation: GeometryDiagram['operation']): Array<{ notation: MathNotation; label: string }> => {
+  switch (operation) {
+    case 'perimeter':
+    case 'area-rectangle':
+      return [
+        { notation: { kind: 'row', children: [notationText('P = '), notationText('2l + 2w')] }, label: 'P equals 2l plus 2w' },
+        { notation: { kind: 'row', children: [notationText('A = '), notationText('lw')] }, label: 'A equals l times w' },
+      ]
+    case 'area-triangle':
+      return [
+        { notation: { kind: 'row', children: [notationText('A = '), notationText('bh')] }, label: 'A equals b times h' },
+        {
+          notation: {
+            kind: 'row',
+            children: [notationText('A = '), notationFraction('bh', '2')],
+          },
+          label: 'A equals b times h divided by 2',
+        },
+      ]
+    case 'area-parallelogram':
+    case 'area-trapezoid':
+      return [
+        { notation: { kind: 'row', children: [notationText('A = '), notationText('bh')] }, label: 'A equals b times h' },
+        {
+          notation: {
+            kind: 'row',
+            children: [notationText('A = '), notationFraction('(b1 + b2)h', '2')],
+          },
+          label: 'A equals b1 plus b2 times h divided by 2',
+        },
+      ]
+    case 'circumference':
+    case 'area-circle':
+      return [
+        { notation: { kind: 'row', children: [notationText('C = '), notationText('πd')] }, label: 'C equals pi times d' },
+        {
+          notation: {
+            kind: 'row',
+            children: [notationText('A = '), { kind: 'row', children: [notationText('π'), notationSuperscript('r', '2')] }],
+          },
+          label: 'A equals pi times r squared',
+        },
+      ]
+    default: {
+      const unhandled: never = operation
+      throw new Error(`Unknown geometry operation: ${unhandled}`)
+    }
+  }
+}
+
+const expectedGeometry = (data: GeometryDiagram): ExpectedGeometry => {
+  const unit = geometryUnitName(data.unit)
+  switch (data.operation) {
+    case 'perimeter':
+      return {
+        label: `Rectangle with length ${data.length} ${data.unit} and width ${data.width} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: 'Find the perimeter of this rectangle.',
+        answer: 2 * data.length + 2 * data.width,
+        values: [data.length, data.width],
+      }
+    case 'area-rectangle':
+      return {
+        label: `Rectangle with length ${data.length} ${data.unit} and width ${data.width} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the area of this rectangle in square ${unit}.`,
+        answer: data.length * data.width,
+        values: [data.length, data.width],
+      }
+    case 'area-triangle':
+      return {
+        label: `Triangle with base ${data.base} ${data.unit} and perpendicular height ${data.height} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the area of this triangle in square ${unit}.`,
+        answer: (data.base * data.height) / 2,
+        values: [data.base, data.height],
+      }
+    case 'area-parallelogram':
+      return {
+        label: `Parallelogram with base ${data.base} ${data.unit} and perpendicular height ${data.height} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the area of this parallelogram in square ${unit}.`,
+        answer: data.base * data.height,
+        values: [data.base, data.height],
+      }
+    case 'area-trapezoid':
+      return {
+        label: `Trapezoid with bases ${data.base1} ${data.unit} and ${data.base2} ${data.unit}, and perpendicular height ${data.height} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the area of this trapezoid in square ${unit}.`,
+        answer: ((data.base1 + data.base2) * data.height) / 2,
+        values: [data.base1, data.base2, data.height],
+      }
+    case 'circumference': {
+      const answer = Math.round(3.14 * data.radius * 2 * 10) / 10
+      return {
+        label: `Circle with radius ${data.radius} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: 'Find the circumference. Use π = 3.14 and round to the nearest tenth.',
+        answer,
+        values: [data.radius],
+        tolerance: 0.05,
+      }
+    }
+    case 'area-circle': {
+      const answer = Math.round(3.14 * (data.diameter / 2) ** 2 * 10) / 10
+      return {
+        label: `Circle with diameter ${data.diameter} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: "Find the circle's area. Use π = 3.14 and round to the nearest tenth.",
+        answer,
+        values: [data.diameter],
+        tolerance: 0.05,
+      }
+    }
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unknown geometry diagram: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
 
 /**
  * The exact notation and spoken label a fraction operation claims to show.
@@ -1772,6 +1926,32 @@ function recompute(problem: Problem): number | string {
   }
 
   if (display.kind === 'diagram') {
+    if (display.diagram.kind === 'geometry') {
+      assertGeometryDiagram(display.diagram)
+      const expected = expectedGeometry(display.diagram)
+      const actualLabel = geometryDiagramLabel(display.diagram)
+      const actualFormulas = geometryFormulaReferences(display.diagram)
+      if (problem.prompt !== expected.prompt) {
+        throw new Error(`${problem.skillId}: geometry prompt disagrees with its data`)
+      }
+      // The component derives these values from the same declaration. Rebuilding
+      // them here still checks that a future renderer cannot silently show a
+      // different figure name or formula set.
+      if (actualLabel !== expected.label || JSON.stringify(actualFormulas) !== JSON.stringify(expected.formulas)) {
+        throw new Error(`${problem.skillId}: visible geometry labels or formulas disagree with its data`)
+      }
+      const isCircle = display.diagram.operation === 'circumference' || display.diagram.operation === 'area-circle'
+      if (isCircle) {
+        if (problem.answer.kind !== 'approx' || problem.answer.value !== expected.answer || problem.answer.tolerance !== expected.tolerance) {
+          throw new Error(
+            `${problem.skillId}: circle answer must be ${expected.answer} ±${expected.tolerance}`,
+          )
+        }
+      } else if (problem.answer.kind !== 'exact') {
+        throw new Error(`${problem.skillId}: polygon answer must be exact`)
+      }
+      return expected.answer
+    }
     const visible = shapeDiagramFraction(display.diagram)
     if (problem.answer.kind !== 'choice') return toNumber(visible)
 
@@ -2415,7 +2595,31 @@ function sourceMagnitude(problem: Problem): number {
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
-  if (problem.display.kind === 'diagram') return problem.display.diagram.parts
+  if (problem.display.kind === 'diagram') {
+    if (problem.display.diagram.kind !== 'geometry') return problem.display.diagram.parts
+    const data = problem.display.diagram
+    const values = (() => {
+      switch (data.operation) {
+        case 'perimeter':
+        case 'area-rectangle':
+          return [data.length, data.width]
+        case 'area-triangle':
+        case 'area-parallelogram':
+          return [data.base, data.height]
+        case 'area-trapezoid':
+          return [data.base1, data.base2, data.height]
+        case 'circumference':
+          return [data.radius]
+        case 'area-circle':
+          return [data.diameter]
+        default: {
+          const unhandled: never = data
+          throw new Error(`Unknown geometry operation: ${JSON.stringify(unhandled)}`)
+        }
+      }
+    })()
+    return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+  }
 
   if (problem.display.kind === 'chart') {
     const values = chartSourceValues(problem.display.chart)
@@ -3794,6 +3998,71 @@ describe('value-bearing diagram choice verification', () => {
 
   it('rejects duplicate equivalent choices', () => {
     expect(() => answerMismatch(problem(rational(2, 4)))).toThrow('expected one choice matching the diagram, found 2')
+  })
+})
+
+describe('geometry answer verification', () => {
+  const geometryProblem = (
+    diagram: GeometryDiagram,
+    answer: Problem['answer'],
+    prompt: string,
+  ): Problem => ({
+    skillId: 'synthetic-geometry',
+    prompt,
+    display: { kind: 'diagram', diagram },
+    answer,
+    inputMode: 'keypad',
+    keypad: answer.kind === 'approx' ? { allowDecimal: true } : undefined,
+    hint: 'Use the measurements shown.',
+    solution: [{ text: 'Use the matching formula.' }],
+    difficulty: 1,
+  })
+
+  it('recomputes a polygon answer from the visible source measurements', () => {
+    const problem = geometryProblem(
+      { kind: 'geometry', operation: 'area-triangle', base: 8, height: 5, unit: 'cm' },
+      intAnswer(20),
+      'Find the area of this triangle in square centimetres.',
+    )
+
+    expect(answerMismatch(problem)).toBeUndefined()
+    expect(answerMismatch({ ...problem, answer: intAnswer(40) })).toContain(
+      'synthetic-geometry: stated 40, derived 20',
+    )
+  })
+
+  it('recomputes a circle answer with the shared pi and rounding policy', () => {
+    const problem = geometryProblem(
+      { kind: 'geometry', operation: 'area-circle', diameter: 10, unit: 'm' },
+      { kind: 'approx', value: 78.5, tolerance: 0.05 },
+      "Find the circle's area. Use π = 3.14 and round to the nearest tenth.",
+    )
+
+    expect(answerMismatch(problem)).toBeUndefined()
+    expect(() => answerMismatch({ ...problem, answer: { kind: 'approx', value: 31.4, tolerance: 0.05 } })).toThrow(
+      'circle answer must be 78.5 ±0.05',
+    )
+    expect(() => recompute({
+      ...problem,
+      answer: { kind: 'approx', value: 78.5, tolerance: 0.1 },
+    })).toThrow('circle answer must be 78.5 ±0.05')
+  })
+
+  it('rejects geometry prompt or operation data that no longer agrees', () => {
+    const problem = geometryProblem(
+      { kind: 'geometry', operation: 'perimeter', length: 7, width: 4, unit: 'cm' },
+      intAnswer(22),
+      'Find the perimeter of this rectangle.',
+    )
+    const wrongPrompt = { ...problem, prompt: 'Find the area of this rectangle in square centimetres.' }
+    expect(() => recompute(wrongPrompt)).toThrow('geometry prompt disagrees with its data')
+
+    const wrongOperation = structuredClone(problem)
+    if (wrongOperation.display.kind !== 'diagram' || wrongOperation.display.diagram.kind !== 'geometry') {
+      throw new Error('expected geometry display')
+    }
+    wrongOperation.display.diagram.operation = 'area-rectangle'
+    expect(() => recompute(wrongOperation)).toThrow('geometry prompt disagrees with its data')
   })
 })
 

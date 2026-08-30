@@ -2,8 +2,10 @@
 
 What is left, in the order it should be done.
 
-**Status: 173 of 201 skills are playable.** Stages A through F have playable content. Stage E
-is complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17, 18 and 19 are complete.
+**Status: 179 of 201 skills are playable.** Stages A through F have complete playable content.
+Stage G opens the first six Unit 20 geometry skills; the remaining Stage G content and Stage H
+are still planned. Stage E is complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17, 18
+and 19 are complete.
 Choice input,
 number-line input, math notation, fraction input, diagrams, expression input,
 coordinate-plane input, root-pair input and chart rendering are built,
@@ -1158,11 +1160,14 @@ shows before a lesson's first problem.
 
       Ordered increments:
 
-      - **20a** `perimeter`–`area-circle` — **the geometry figures land here**, as the extension
+      - [x] **20a** `perimeter`–`area-circle` — **shipped 2026-08-29**. The geometry figures land here,
+        as the extension
         item 18 deliberately did not guess at: labelled dimensions, units, and a right-angle mark.
         Two policies to set once for the whole unit rather than per skill: π (the GED sheet's
         3.14) and how a rounded answer is checked, which is what the `approx` answer arm with its
-        tolerance has been waiting for since before anything used it.
+        tolerance had been waiting for since before anything used it. Six generated skills now
+        provide exact polygon answers, rounded circle answers, accessible local figures, formula
+        choices, wall diagnoses, and reviewed intros; 20b, 20c, and Unit 21 remain unchanged.
       - **20b** `composite-figures`–`pythagorean` — `surface-area` (20.11) is the heaviest drawing
         in the course and wants a net rather than a solid; `pythagorean` (20.12) is a wall on
         hypotenuse placement and needs item 17's radical.

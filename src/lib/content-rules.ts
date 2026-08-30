@@ -14,6 +14,7 @@ import type { SkillEntry, UnitEntry } from '../curriculum/manifest/types'
 import { coordinateEquationLabel, coordinateLabel, coordinatePlaneLabel, type CoordinatePlane } from './coordinate-plane'
 import { lineEquation, linearEquationLabel, passSalesEquations, passSalesStory } from './linear-system'
 import { shapeDiagramLabel } from './shape-diagram'
+import { geometryDiagramLabel, geometryFormulaReferences } from './geometry-diagram'
 import { chartLearnerText } from './chart'
 import { entryLabel } from './keypad'
 import { format as formatRational } from './rational'
@@ -150,7 +151,12 @@ function displayText(display: Display): string {
     case 'math':
       return display.label
     case 'diagram':
-      return shapeDiagramLabel(display.diagram)
+      return display.diagram.kind === 'geometry'
+        ? [
+            geometryDiagramLabel(display.diagram),
+            ...geometryFormulaReferences(display.diagram).map((formula) => formula.label),
+          ].join('; ')
+        : shapeDiagramLabel(display.diagram)
     case 'coordinate-plane':
       return [coordinatePlaneLabel(display.plane), coordinateDataText(display.coordinate, display.plane)]
         .filter(Boolean)

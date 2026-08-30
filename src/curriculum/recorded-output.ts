@@ -5,6 +5,7 @@ import { tickLabel, ticks, type NumberLineSpec } from '../lib/number-line'
 // Aliased: this module exports a `format` of its own, over a whole problem.
 import { format as formatRational } from '../lib/rational'
 import { shapeDiagramLabel } from '../lib/shape-diagram'
+import { geometryDiagramLabel, geometryFormulaReferences, type GeometryDiagram } from '../lib/geometry-diagram'
 import { assertChart, chartAccessibleName, type Chart } from '../lib/chart'
 import { decimalColumnText, decimalText } from '../lib/decimal'
 import type {
@@ -474,6 +475,33 @@ const formatChart = (chart: Chart): string => {
   )
 }
 
+const formatGeometryDiagram = (diagram: GeometryDiagram): string => {
+  const source = (() => {
+    switch (diagram.operation) {
+      case 'perimeter':
+      case 'area-rectangle':
+        return `${diagram.operation} length ${diagram.length} width ${diagram.width} unit ${diagram.unit}`
+      case 'area-triangle':
+      case 'area-parallelogram':
+        return `${diagram.operation} base ${diagram.base} height ${diagram.height} unit ${diagram.unit}`
+      case 'area-trapezoid':
+        return `${diagram.operation} base1 ${diagram.base1} base2 ${diagram.base2} height ${diagram.height} unit ${diagram.unit}`
+      case 'circumference':
+        return `${diagram.operation} radius ${diagram.radius} unit ${diagram.unit}`
+      case 'area-circle':
+        return `${diagram.operation} diameter ${diagram.diameter} unit ${diagram.unit}`
+      default: {
+        const unhandled: never = diagram
+        throw new Error(`Unhandled geometry diagram: ${JSON.stringify(unhandled)}`)
+      }
+    }
+  })()
+  const formulas = geometryFormulaReferences(diagram)
+    .map((formula) => `"${formula.label}" ${formatNotation(formula.notation)}`)
+    .join('; ')
+  return `geometry ${source} name "${geometryDiagramLabel(diagram)}" formulas [${formulas}]`
+}
+
 const formatDisplay = (display: Problem['display']): string => {
   switch (display.kind) {
     case 'inline':
@@ -502,6 +530,7 @@ const formatDisplay = (display: Problem['display']): string => {
         (display.polynomial ? ` [${formatPolynomial(display.polynomial)}]` : '')
       )
     case 'diagram':
+      if (display.diagram.kind === 'geometry') return formatGeometryDiagram(display.diagram)
       return (
         `diagram ${display.diagram.kind} ${display.diagram.shadedParts}/${display.diagram.parts} ` +
         `"${shapeDiagramLabel(display.diagram)}"`

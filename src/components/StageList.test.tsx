@@ -1,7 +1,7 @@
 /**
  * What the top of the course offers at first paint.
  *
- * Two of the eight stages have no generator anywhere in them. Neither may
+ * One of the eight stages has no generator anywhere in it. It may not
  * appear here, in any form — that is the difference between a course
  * that is being written and one that looks two-thirds empty.
  */
@@ -22,12 +22,13 @@ describe('StageList', () => {
   it('lists the stages that have something to play, in curriculum order', () => {
     const html = render()
 
-    expect(html.match(/<button/g)).toHaveLength(6)
+    expect(html.match(/<button/g)).toHaveLength(7)
     expect(html.indexOf('Numbers')).toBeLessThan(html.indexOf('The Four Operations'))
     expect(html.indexOf('The Four Operations')).toBeLessThan(html.indexOf('Negatives'))
     expect(html.indexOf('Negatives')).toBeLessThan(html.indexOf('Parts of a Whole'))
     expect(html.indexOf('Parts of a Whole')).toBeLessThan(html.indexOf('Powers &amp; Early Algebra'))
     expect(html.indexOf('Powers &amp; Early Algebra')).toBeLessThan(html.indexOf('Graphs &amp; Algebra II'))
+    expect(html.indexOf('Graphs &amp; Algebra II')).toBeLessThan(html.indexOf('Geometry &amp; Data'))
   })
 
   it('shows no trace of a stage with no generator in it', () => {
@@ -36,10 +37,7 @@ describe('StageList', () => {
       (stage) => !course.some((entry) => entry.stage.id === stage.id),
     )
 
-    expect(unbuilt.map((stage) => stage.name)).toEqual([
-      'Geometry & Data',
-      'GED Prep',
-    ])
+    expect(unbuilt.map((stage) => stage.name)).toEqual(['GED Prep'])
     for (const stage of unbuilt) expect(html).not.toContain(stage.name)
   })
 

@@ -448,6 +448,44 @@ describe('ProblemView', () => {
     expect(html).toContain('=')
   })
 
+  it('renders geometry above the existing numeric answer slot', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'diagram',
+          diagram: { kind: 'geometry', operation: 'area-rectangle', length: 8, width: 3, unit: 'm' },
+        }}
+        entry="24"
+      />,
+    )
+
+    expect(html).toContain('data-diagram-kind="geometry"')
+    expect(html).toContain('aria-label="Rectangle with length 8 m and width 3 m"')
+    expect(html).toContain('P equals 2l plus 2w')
+    expect(html).toContain('A equals l times w')
+    expect(html).toContain('>24<')
+    expect(html).toContain('text-ink-faint')
+  })
+
+  it('keeps geometry read-only in a worked example', () => {
+    const html = renderToStaticMarkup(
+      <ProblemView
+        display={{
+          kind: 'diagram',
+          diagram: { kind: 'geometry', operation: 'circumference', radius: 5, unit: 'cm' },
+        }}
+        entry="31.4"
+        readOnly
+      />,
+    )
+
+    expect(html).toContain('Circle with radius 5 cm')
+    expect(html).toContain('C equals pi times d')
+    expect(html).not.toContain('>31.4<')
+    expect(html).not.toContain('text-ink-faint')
+    expect(html).not.toContain('animate-pulse')
+  })
+
   const coordinatePlaneDisplay: Display = {
     kind: 'coordinate-plane',
     plane: {

@@ -299,6 +299,20 @@ describe('forward references', () => {
     ).toEqual([])
   })
 
+  it('collects geometry names, units, and formula choices as learner text', () => {
+    const geometry: Problem['display'] = {
+      kind: 'diagram',
+      diagram: { kind: 'geometry', operation: 'area-triangle', base: 6, height: 4, unit: 'ft' },
+    }
+    const learner = learnerText(problem({ display: geometry }))
+
+    expect(learner).toContain(
+      'Triangle with base 6 ft and perpendicular height 4 ft; ' +
+        'A equals b times h; A equals b times h divided by 2',
+    )
+    expect(checkContent(problem({ display: geometry }), at({}, 'unit-20'))).toEqual([])
+  })
+
   it('reads a coordinate-plane name from its mathematical data', () => {
     const graph: Problem['display'] = {
       kind: 'coordinate-plane',

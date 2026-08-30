@@ -6,7 +6,7 @@ browser and can be installed on devices that support web apps.
 
 ## Status: playable foundations, whole course mapped
 
-**173 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
+**179 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
 streaks, stage checkpoints, a companion character the learner chooses and dresses, a pin that
 climbs through five tiers as the course is worked through, a room to decorate, and progress
 backup.
@@ -19,7 +19,11 @@ how many are playable is a fact about the code, and the status line of
 [`docs/roadmap.md`](docs/roadmap.md) is where it is written down, deliberately in only one
 place.
 
-Stages A through F have playable content. Unit 8
+Stages A through F have complete playable content, and Stage G now opens the first six Unit 20
+geometry skills: perimeter, rectangle and triangle area, parallelogram and trapezoid area,
+circumference, and circle area. The geometry figures carry labelled dimensions and the GED
+formula choices; polygon answers are exact, while circle answers use π = 3.14 and round to the
+nearest tenth. Unit 8
 covers like- and unlike-denominator addition and subtraction, mixed-number conversion and
 arithmetic, fraction multiplication and division, and fixed-frame word problems. Structured
 math notation, fraction input, expression input, and shaded-shape diagram rendering are
@@ -119,11 +123,11 @@ over sampled problems inside the test suite —
 at most 4 solution steps, at most 12 words each, single-sentence hints, and at least two
 distinct predicted misconceptions on any skill marked a difficulty wall.
 
-Stages A through F now open all 173 playable Unit 0–19 skills with one authored teaching line
-and one stable, generated difficulty-1 worked example. Starting practice records only that the
-intro was seen; it does not count as an attempt or change mastery. The same example remains
-available through **Review intro**, and each authored line is checked directly for sentence and
-vocabulary limits before generated samples run.
+Stages A through F and the first six Unit 20 skills now open all 179 playable skills with one
+authored teaching line and one stable, generated difficulty-1 worked example. Starting practice
+records only that the intro was seen; it does not count as an attempt or change mastery. The same
+example remains available through **Review intro**, and each authored line is checked directly for
+sentence and vocabulary limits before generated samples run.
 
 It earned its keep immediately: enforcing it caught three of the six generators that existed
 at the time, including a wall skill that had only one prediction left on some problems once

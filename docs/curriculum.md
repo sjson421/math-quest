@@ -439,12 +439,12 @@ right formula, never memorising it.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 20.1 | `perimeter` | | `quick` |
-| 20.2 | `area-rectangle` | | |
-| 20.3 | `area-triangle` | | ⚠️ forgetting the ½ |
-| 20.4 | `area-parallelogram-trapezoid` | | |
-| 20.5 | `circumference` | | ⚠️ radius vs diameter |
-| 20.6 | `area-circle` | | ⚠️ |
+| 20.1 | `perimeter` | | ✅ `quick` |
+| 20.2 | `area-rectangle` | | ✅ |
+| 20.3 | `area-triangle` | | ✅ ⚠️ forgetting the ½ |
+| 20.4 | `area-parallelogram-trapezoid` | | ✅ |
+| 20.5 | `circumference` | | ✅ ⚠️ radius vs diameter |
+| 20.6 | `area-circle` | | ✅ ⚠️ |
 | 20.7 | `composite-figures` | Split the shape | |
 | 20.8 | `volume-prism` | | |
 | 20.9 | `volume-cylinder` | | |
@@ -520,7 +520,8 @@ Ship by stage; each stage is independently useful.
    grids, so Stage D's capability infrastructure is complete.
 4. **Stage E** (34) — complete; the **expression input mode** it needed is built.
 5. **Stage F** (28) — its **coordinate-plane input** and **root-pair input** are built; all ten Unit 16, all four Unit 17, and all nine Unit 18 skills are playable.
-6. **Stage G** (22) — reuses built **diagram rendering** for shapes; chart rendering is built, so only Stage G content remains.
+6. **Stage G** (22) — reuses built **diagram rendering** for shapes; chart rendering is built, and
+   the first six Unit 20 skills are playable while the remaining Stage G content stays planned.
 7. **Stage H** (6) — needs timed mode and a score estimator.
 
 ### New capabilities required, by stage
@@ -556,15 +557,15 @@ Ship by stage; each stage is independently useful.
   rather than storing them, and commits a snapshot of the expanded graph so a change to the
   derivation is reviewable.
 - **A skill with no generator is `planned`, not broken.** State is derived at load from the
-  generator registry plus the capabilities that are actually built. Today 28 of 201 skills
-  are planned; later stages still wait on timed mode. Planned skills are transparent to unlocking —
+  generator registry plus the capabilities that are actually built. Today 22 of 201 skills
+  are planned; later Stage G skills and Stage H still wait on their content or timed mode. Planned skills are transparent to unlocking —
   a learner is never held behind our build order — and never offered for play.
 - **The content style contract above is enforced**, not advisory: `src/lib/content-rules.ts`
   checks authored teaching lines for one sentence, forward references, and current-unit
   vocabulary, then checks step count, step length, single-sentence hints, wall misconception
   coverage, and generated-problem forward references against a curated vocabulary list.
-  All 173 playable skills in Stages A through F carry authored intro lines and generated worked
-  examples; Stages G and H remain staged.
+  All 179 playable skills in Stages A through F and the first six Unit 20 skills carry authored
+  intro lines and generated worked examples; the remaining Stage G skills and Stage H remain staged.
 - **`SkillProgress` gains two fields** for skipping: `source: 'practiced' | 'tested-out' |
   'self-assessed'` and the existing mastery set to 3. These must survive a **sync round
   trip**, not just file export — sync is now the routine path, so losing them there would

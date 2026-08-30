@@ -102,15 +102,12 @@ describe('document and manifest agree on pacing markers', () => {
     expect(skillById.get('plot-points')).toMatchObject({ quick: true, wall: true })
   })
 
-  it('leaves two wall rows unexplained, which still have to be predicted', () => {
-    // A bare ⚠️ gives misconception authoring nothing to start from, so these
-    // two are the ones needing their diagnosis worked out from scratch.
+  it('leaves only the unimplemented wall row unexplained', () => {
+    // A bare ⚠️ gives misconception authoring nothing to start from, so this
+    // remaining unimplemented wall still needs its diagnosis worked out.
     const bare = doc.rows.filter((row) => row.note === '⚠️').map((row) => row.id)
 
-    expect(bare).toEqual([
-      'area-circle',
-      'compound-probability',
-    ])
+    expect(bare).toEqual(['compound-probability'])
     expect(bare.every((id) => skillById.get(id)?.wall)).toBe(true)
   })
 })

@@ -237,9 +237,24 @@ describe('stage capabilities', () => {
     ])
   })
 
-  it('marks chart rendering built while Stage G content remains planned', () => {
+  it('marks chart rendering built for the partial Stage G content', () => {
     expect(AVAILABLE_CAPABILITIES.has('chart')).toBe(true)
     expect(stageById.get('stage-g')?.requires).toEqual(['math-notation', 'diagram', 'chart'])
+    expect(stageById.get('stage-g')?.units[0].skills.map((skill) => skill.id)).toEqual([
+      'perimeter',
+      'area-rectangle',
+      'area-triangle',
+      'area-parallelogram-trapezoid',
+      'circumference',
+      'area-circle',
+      'composite-figures',
+      'volume-prism',
+      'volume-cylinder',
+      'volume-cone-pyramid-sphere',
+      'surface-area',
+      'pythagorean',
+      'similar-figures',
+    ])
   })
 })
 

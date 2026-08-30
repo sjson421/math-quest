@@ -2,6 +2,7 @@ import type { KeypadRules } from './keypad'
 import type { NumberLineSpec } from './number-line'
 import type { Rational } from './rational'
 import type { ShapeDiagram } from './shape-diagram'
+import type { GeometryDiagram } from './geometry-diagram'
 import type { Coordinate, CoordinatePlane } from './coordinate-plane'
 import type { Chart } from './chart'
 
@@ -845,8 +846,8 @@ export type Display =
       | { polynomial: PolynomialData; fraction?: never; ratio?: never; power?: never }
       | { fraction?: never; ratio?: never; power?: never; polynomial?: never }
     ))
-  /** A shaded equal-part shape whose visible fraction is carried as data. */
-  | { kind: 'diagram'; diagram: ShapeDiagram }
+  /** A shaded equal-part or labelled geometry figure carried as data. */
+  | { kind: 'diagram'; diagram: ShapeDiagram | GeometryDiagram }
   /** A bounded graph whose axes, points, lines, and optional content meaning are data. */
   | { kind: 'coordinate-plane'; plane: CoordinatePlane; coordinate?: CoordinateData }
   /** A labelled chart whose marks and accessible table share one source declaration. */

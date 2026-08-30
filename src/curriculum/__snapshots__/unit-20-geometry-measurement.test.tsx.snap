@@ -1,0 +1,1703 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Unit 20 recorded output: area-circle > matches the authored sample output 1`] = `
+"--- area-circle · seed 1 · difficulty 1
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 6 unit in name "Circle with diameter 6 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 28.3 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [6 ÷ 2 = 3]
+step 2   Square the radius.   [3 × 3 = 9]
+step 3   Multiply by 3.14.   [3.14 × 9 = 28.26]
+step 4   Round to the nearest tenth.   [28.3]
+miss     squared-diameter = 113   Square the radius, not the whole diameter.
+miss     circumference-for-area = 18.8   Area and circumference use different formulas.
+
+--- area-circle · seed 12345 · difficulty 1
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 8 unit ft name "Circle with diameter 8 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 50.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [8 ÷ 2 = 4]
+step 2   Square the radius.   [4 × 4 = 16]
+step 3   Multiply by 3.14.   [3.14 × 16 = 50.24]
+step 4   Round to the nearest tenth.   [50.2]
+miss     squared-diameter = 201   Square the radius, not the whole diameter.
+miss     circumference-for-area = 25.1   Area and circumference use different formulas.
+
+--- area-circle · seed 67890 · difficulty 1
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 10 unit m name "Circle with diameter 10 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 78.5 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [10 ÷ 2 = 5]
+step 2   Square the radius.   [5 × 5 = 25]
+step 3   Multiply by 3.14.   [3.14 × 25 = 78.5]
+step 4   Round to the nearest tenth.   [78.5]
+miss     squared-diameter = 314   Square the radius, not the whole diameter.
+miss     circumference-for-area = 31.4   Area and circumference use different formulas.
+
+--- area-circle · seed 424242 · difficulty 1
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 6 unit cm name "Circle with diameter 6 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 28.3 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [6 ÷ 2 = 3]
+step 2   Square the radius.   [3 × 3 = 9]
+step 3   Multiply by 3.14.   [3.14 × 9 = 28.26]
+step 4   Round to the nearest tenth.   [28.3]
+miss     squared-diameter = 113   Square the radius, not the whole diameter.
+miss     circumference-for-area = 18.8   Area and circumference use different formulas.
+
+--- area-circle · seed 987654321 · difficulty 1
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 6 unit ft name "Circle with diameter 6 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 28.3 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [6 ÷ 2 = 3]
+step 2   Square the radius.   [3 × 3 = 9]
+step 3   Multiply by 3.14.   [3.14 × 9 = 28.26]
+step 4   Round to the nearest tenth.   [28.3]
+miss     squared-diameter = 113   Square the radius, not the whole diameter.
+miss     circumference-for-area = 18.8   Area and circumference use different formulas.
+
+--- area-circle · seed 1 · difficulty 2
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 8 unit in name "Circle with diameter 8 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 50.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [8 ÷ 2 = 4]
+step 2   Square the radius.   [4 × 4 = 16]
+step 3   Multiply by 3.14.   [3.14 × 16 = 50.24]
+step 4   Round to the nearest tenth.   [50.2]
+miss     squared-diameter = 201   Square the radius, not the whole diameter.
+miss     circumference-for-area = 25.1   Area and circumference use different formulas.
+
+--- area-circle · seed 12345 · difficulty 2
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 10 unit ft name "Circle with diameter 10 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 78.5 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [10 ÷ 2 = 5]
+step 2   Square the radius.   [5 × 5 = 25]
+step 3   Multiply by 3.14.   [3.14 × 25 = 78.5]
+step 4   Round to the nearest tenth.   [78.5]
+miss     squared-diameter = 314   Square the radius, not the whole diameter.
+miss     circumference-for-area = 31.4   Area and circumference use different formulas.
+
+--- area-circle · seed 67890 · difficulty 2
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 14 unit m name "Circle with diameter 14 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 153.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [14 ÷ 2 = 7]
+step 2   Square the radius.   [7 × 7 = 49]
+step 3   Multiply by 3.14.   [3.14 × 49 = 153.86]
+step 4   Round to the nearest tenth.   [153.9]
+miss     squared-diameter = 615.4   Square the radius, not the whole diameter.
+miss     circumference-for-area = 44   Area and circumference use different formulas.
+
+--- area-circle · seed 424242 · difficulty 2
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 10 unit cm name "Circle with diameter 10 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 78.5 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [10 ÷ 2 = 5]
+step 2   Square the radius.   [5 × 5 = 25]
+step 3   Multiply by 3.14.   [3.14 × 25 = 78.5]
+step 4   Round to the nearest tenth.   [78.5]
+miss     squared-diameter = 314   Square the radius, not the whole diameter.
+miss     circumference-for-area = 31.4   Area and circumference use different formulas.
+
+--- area-circle · seed 987654321 · difficulty 2
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 8 unit ft name "Circle with diameter 8 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 50.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [8 ÷ 2 = 4]
+step 2   Square the radius.   [4 × 4 = 16]
+step 3   Multiply by 3.14.   [3.14 × 16 = 50.24]
+step 4   Round to the nearest tenth.   [50.2]
+miss     squared-diameter = 201   Square the radius, not the whole diameter.
+miss     circumference-for-area = 25.1   Area and circumference use different formulas.
+
+--- area-circle · seed 1 · difficulty 3
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 12 unit in name "Circle with diameter 12 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 113 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [12 ÷ 2 = 6]
+step 2   Square the radius.   [6 × 6 = 36]
+step 3   Multiply by 3.14.   [3.14 × 36 = 113.04]
+step 4   Round to the nearest tenth.   [113]
+miss     squared-diameter = 452.2   Square the radius, not the whole diameter.
+miss     circumference-for-area = 37.7   Area and circumference use different formulas.
+
+--- area-circle · seed 12345 · difficulty 3
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 16 unit ft name "Circle with diameter 16 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 201 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [16 ÷ 2 = 8]
+step 2   Square the radius.   [8 × 8 = 64]
+step 3   Multiply by 3.14.   [3.14 × 64 = 200.96]
+step 4   Round to the nearest tenth.   [201]
+miss     squared-diameter = 803.8   Square the radius, not the whole diameter.
+miss     circumference-for-area = 50.2   Area and circumference use different formulas.
+
+--- area-circle · seed 67890 · difficulty 3
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 22 unit m name "Circle with diameter 22 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 379.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [22 ÷ 2 = 11]
+step 2   Square the radius.   [11 × 11 = 121]
+step 3   Multiply by 3.14.   [3.14 × 121 = 379.94]
+step 4   Round to the nearest tenth.   [379.9]
+miss     squared-diameter = 1519.8   Square the radius, not the whole diameter.
+miss     circumference-for-area = 69.1   Area and circumference use different formulas.
+
+--- area-circle · seed 424242 · difficulty 3
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 16 unit cm name "Circle with diameter 16 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 201 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [16 ÷ 2 = 8]
+step 2   Square the radius.   [8 × 8 = 64]
+step 3   Multiply by 3.14.   [3.14 × 64 = 200.96]
+step 4   Round to the nearest tenth.   [201]
+miss     squared-diameter = 803.8   Square the radius, not the whole diameter.
+miss     circumference-for-area = 50.2   Area and circumference use different formulas.
+
+--- area-circle · seed 987654321 · difficulty 3
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 14 unit ft name "Circle with diameter 14 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 153.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [14 ÷ 2 = 7]
+step 2   Square the radius.   [7 × 7 = 49]
+step 3   Multiply by 3.14.   [3.14 × 49 = 153.86]
+step 4   Round to the nearest tenth.   [153.9]
+miss     squared-diameter = 615.4   Square the radius, not the whole diameter.
+miss     circumference-for-area = 44   Area and circumference use different formulas.
+
+--- area-circle · seed 1 · difficulty 4
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 16 unit in name "Circle with diameter 16 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 201 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [16 ÷ 2 = 8]
+step 2   Square the radius.   [8 × 8 = 64]
+step 3   Multiply by 3.14.   [3.14 × 64 = 200.96]
+step 4   Round to the nearest tenth.   [201]
+miss     squared-diameter = 803.8   Square the radius, not the whole diameter.
+miss     circumference-for-area = 50.2   Area and circumference use different formulas.
+
+--- area-circle · seed 12345 · difficulty 4
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 22 unit ft name "Circle with diameter 22 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 379.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [22 ÷ 2 = 11]
+step 2   Square the radius.   [11 × 11 = 121]
+step 3   Multiply by 3.14.   [3.14 × 121 = 379.94]
+step 4   Round to the nearest tenth.   [379.9]
+miss     squared-diameter = 1519.8   Square the radius, not the whole diameter.
+miss     circumference-for-area = 69.1   Area and circumference use different formulas.
+
+--- area-circle · seed 67890 · difficulty 4
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 30 unit m name "Circle with diameter 30 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 706.5 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [30 ÷ 2 = 15]
+step 2   Square the radius.   [15 × 15 = 225]
+step 3   Multiply by 3.14.   [3.14 × 225 = 706.5]
+step 4   Round to the nearest tenth.   [706.5]
+miss     squared-diameter = 2826   Square the radius, not the whole diameter.
+miss     circumference-for-area = 94.2   Area and circumference use different formulas.
+
+--- area-circle · seed 424242 · difficulty 4
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 22 unit cm name "Circle with diameter 22 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 379.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [22 ÷ 2 = 11]
+step 2   Square the radius.   [11 × 11 = 121]
+step 3   Multiply by 3.14.   [3.14 × 121 = 379.94]
+step 4   Round to the nearest tenth.   [379.9]
+miss     squared-diameter = 1519.8   Square the radius, not the whole diameter.
+miss     circumference-for-area = 69.1   Area and circumference use different formulas.
+
+--- area-circle · seed 987654321 · difficulty 4
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 18 unit ft name "Circle with diameter 18 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 254.3 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [18 ÷ 2 = 9]
+step 2   Square the radius.   [9 × 9 = 81]
+step 3   Multiply by 3.14.   [3.14 × 81 = 254.34]
+step 4   Round to the nearest tenth.   [254.3]
+miss     squared-diameter = 1017.4   Square the radius, not the whole diameter.
+miss     circumference-for-area = 56.5   Area and circumference use different formulas.
+
+--- area-circle · seed 1 · difficulty 5
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 20 unit in name "Circle with diameter 20 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 314 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [20 ÷ 2 = 10]
+step 2   Square the radius.   [10 × 10 = 100]
+step 3   Multiply by 3.14.   [3.14 × 100 = 314]
+step 4   Round to the nearest tenth.   [314]
+miss     squared-diameter = 1256   Square the radius, not the whole diameter.
+miss     circumference-for-area = 62.8   Area and circumference use different formulas.
+
+--- area-circle · seed 12345 · difficulty 5
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 30 unit ft name "Circle with diameter 30 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 706.5 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [30 ÷ 2 = 15]
+step 2   Square the radius.   [15 × 15 = 225]
+step 3   Multiply by 3.14.   [3.14 × 225 = 706.5]
+step 4   Round to the nearest tenth.   [706.5]
+miss     squared-diameter = 2826   Square the radius, not the whole diameter.
+miss     circumference-for-area = 94.2   Area and circumference use different formulas.
+
+--- area-circle · seed 67890 · difficulty 5
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 42 unit m name "Circle with diameter 42 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 1384.7 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [42 ÷ 2 = 21]
+step 2   Square the radius.   [21 × 21 = 441]
+step 3   Multiply by 3.14.   [3.14 × 441 = 1384.74]
+step 4   Round to the nearest tenth.   [1384.7]
+miss     squared-diameter = 5539   Square the radius, not the whole diameter.
+miss     circumference-for-area = 131.9   Area and circumference use different formulas.
+
+--- area-circle · seed 424242 · difficulty 5
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 28 unit cm name "Circle with diameter 28 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 615.4 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [28 ÷ 2 = 14]
+step 2   Square the radius.   [14 × 14 = 196]
+step 3   Multiply by 3.14.   [3.14 × 196 = 615.44]
+step 4   Round to the nearest tenth.   [615.4]
+miss     squared-diameter = 2461.8   Square the radius, not the whole diameter.
+miss     circumference-for-area = 87.9   Area and circumference use different formulas.
+
+--- area-circle · seed 987654321 · difficulty 5
+prompt   Find the circle's area. Use π = 3.14 and round to the nearest tenth.
+display  geometry area-circle diameter 24 unit ft name "Circle with diameter 24 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 452.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Halve the diameter to get radius, then square it.
+step 1   Halve the shown diameter.   [24 ÷ 2 = 12]
+step 2   Square the radius.   [12 × 12 = 144]
+step 3   Multiply by 3.14.   [3.14 × 144 = 452.16]
+step 4   Round to the nearest tenth.   [452.2]
+miss     squared-diameter = 1808.6   Square the radius, not the whole diameter.
+miss     circumference-for-area = 75.4   Area and circumference use different formulas."
+`;
+
+exports[`Unit 20 recorded output: area-parallelogram-trapezoid > matches the authored sample output 1`] = `
+"--- area-parallelogram-trapezoid · seed 1 · difficulty 1
+prompt   Find the area of this trapezoid in square centimetres.
+display  geometry area-trapezoid base1 6 base2 8 height 8 unit cm name "Trapezoid with bases 6 cm and 8 cm, and perpendicular height 8 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 56/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [6 + 8 = 14]
+step 2   Multiply the sum by height.   [14 × 8 = 112]
+step 3   Take half the product.   [112 ÷ 2 = 56]
+
+--- area-parallelogram-trapezoid · seed 12345 · difficulty 1
+prompt   Find the area of this trapezoid in square metres.
+display  geometry area-trapezoid base1 5 base2 7 height 6 unit m name "Trapezoid with bases 5 m and 7 m, and perpendicular height 6 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 36/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [5 + 7 = 12]
+step 2   Multiply the sum by height.   [12 × 6 = 72]
+step 3   Take half the product.   [72 ÷ 2 = 36]
+
+--- area-parallelogram-trapezoid · seed 67890 · difficulty 1
+prompt   Find the area of this parallelogram in square metres.
+display  geometry area-parallelogram base 6 height 5 unit m name "Parallelogram with base 6 m and perpendicular height 5 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 30/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Multiply base by perpendicular height.   [6 × 5 = 30]
+step 2   Write square metres for area.   [30 square metres]
+
+--- area-parallelogram-trapezoid · seed 424242 · difficulty 1
+prompt   Find the area of this parallelogram in square inches.
+display  geometry area-parallelogram base 4 height 4 unit in name "Parallelogram with base 4 in and perpendicular height 4 in" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 16/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Multiply base by perpendicular height.   [4 × 4 = 16]
+step 2   Write square inches for area.   [16 square inches]
+
+--- area-parallelogram-trapezoid · seed 987654321 · difficulty 1
+prompt   Find the area of this trapezoid in square centimetres.
+display  geometry area-trapezoid base1 3 base2 8 height 6 unit cm name "Trapezoid with bases 3 cm and 8 cm, and perpendicular height 6 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 33/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [3 + 8 = 11]
+step 2   Multiply the sum by height.   [11 × 6 = 66]
+step 3   Take half the product.   [66 ÷ 2 = 33]
+
+--- area-parallelogram-trapezoid · seed 1 · difficulty 2
+prompt   Find the area of this trapezoid in square centimetres.
+display  geometry area-trapezoid base1 6 base2 8 height 9 unit cm name "Trapezoid with bases 6 cm and 8 cm, and perpendicular height 9 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 63/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [6 + 8 = 14]
+step 2   Multiply the sum by height.   [14 × 9 = 126]
+step 3   Take half the product.   [126 ÷ 2 = 63]
+
+--- area-parallelogram-trapezoid · seed 12345 · difficulty 2
+prompt   Find the area of this trapezoid in square metres.
+display  geometry area-trapezoid base1 7 base2 10 height 8 unit m name "Trapezoid with bases 7 m and 10 m, and perpendicular height 8 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 68/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [7 + 10 = 17]
+step 2   Multiply the sum by height.   [17 × 8 = 136]
+step 3   Take half the product.   [136 ÷ 2 = 68]
+
+--- area-parallelogram-trapezoid · seed 67890 · difficulty 2
+prompt   Find the area of this parallelogram in square metres.
+display  geometry area-parallelogram base 8 height 6 unit m name "Parallelogram with base 8 m and perpendicular height 6 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 48/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Multiply base by perpendicular height.   [8 × 6 = 48]
+step 2   Write square metres for area.   [48 square metres]
+
+--- area-parallelogram-trapezoid · seed 424242 · difficulty 2
+prompt   Find the area of this parallelogram in square inches.
+display  geometry area-parallelogram base 5 height 5 unit in name "Parallelogram with base 5 in and perpendicular height 5 in" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 25/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Multiply base by perpendicular height.   [5 × 5 = 25]
+step 2   Write square inches for area.   [25 square inches]
+
+--- area-parallelogram-trapezoid · seed 987654321 · difficulty 2
+prompt   Find the area of this trapezoid in square centimetres.
+display  geometry area-trapezoid base1 6 base2 8 height 11 unit cm name "Trapezoid with bases 6 cm and 8 cm, and perpendicular height 11 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 77/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [6 + 8 = 14]
+step 2   Multiply the sum by height.   [14 × 11 = 154]
+step 3   Take half the product.   [154 ÷ 2 = 77]
+
+--- area-parallelogram-trapezoid · seed 1 · difficulty 3
+prompt   Find the area of this trapezoid in square centimetres.
+display  geometry area-trapezoid base1 11 base2 16 height 16 unit cm name "Trapezoid with bases 11 cm and 16 cm, and perpendicular height 16 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 216/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [11 + 16 = 27]
+step 2   Multiply the sum by height.   [27 × 16 = 432]
+step 3   Take half the product.   [432 ÷ 2 = 216]
+
+--- area-parallelogram-trapezoid · seed 12345 · difficulty 3
+prompt   Find the area of this trapezoid in square metres.
+display  geometry area-trapezoid base1 9 base2 6 height 14 unit m name "Trapezoid with bases 9 m and 6 m, and perpendicular height 14 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 105/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [9 + 6 = 15]
+step 2   Multiply the sum by height.   [15 × 14 = 210]
+step 3   Take half the product.   [210 ÷ 2 = 105]
+
+--- area-parallelogram-trapezoid · seed 67890 · difficulty 3
+prompt   Find the area of this parallelogram in square metres.
+display  geometry area-parallelogram base 12 height 9 unit m name "Parallelogram with base 12 m and perpendicular height 9 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 108/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Multiply base by perpendicular height.   [12 × 9 = 108]
+step 2   Write square metres for area.   [108 square metres]
+
+--- area-parallelogram-trapezoid · seed 424242 · difficulty 3
+prompt   Find the area of this parallelogram in square inches.
+display  geometry area-parallelogram base 8 height 8 unit in name "Parallelogram with base 8 in and perpendicular height 8 in" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 64/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Multiply base by perpendicular height.   [8 × 8 = 64]
+step 2   Write square inches for area.   [64 square inches]
+
+--- area-parallelogram-trapezoid · seed 987654321 · difficulty 3
+prompt   Find the area of this trapezoid in square centimetres.
+display  geometry area-trapezoid base1 6 base2 16 height 12 unit cm name "Trapezoid with bases 6 cm and 16 cm, and perpendicular height 12 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 132/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [6 + 16 = 22]
+step 2   Multiply the sum by height.   [22 × 12 = 264]
+step 3   Take half the product.   [264 ÷ 2 = 132]
+
+--- area-parallelogram-trapezoid · seed 1 · difficulty 4
+prompt   Find the area of this trapezoid in square centimetres.
+display  geometry area-trapezoid base1 15 base2 10 height 14 unit cm name "Trapezoid with bases 15 cm and 10 cm, and perpendicular height 14 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 175/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [15 + 10 = 25]
+step 2   Multiply the sum by height.   [25 × 14 = 350]
+step 3   Take half the product.   [350 ÷ 2 = 175]
+
+--- area-parallelogram-trapezoid · seed 12345 · difficulty 4
+prompt   Find the area of this trapezoid in square metres.
+display  geometry area-trapezoid base1 15 base2 21 height 16 unit m name "Trapezoid with bases 15 m and 21 m, and perpendicular height 16 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 288/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [15 + 21 = 36]
+step 2   Multiply the sum by height.   [36 × 16 = 576]
+step 3   Take half the product.   [576 ÷ 2 = 288]
+
+--- area-parallelogram-trapezoid · seed 67890 · difficulty 4
+prompt   Find the area of this parallelogram in square metres.
+display  geometry area-parallelogram base 17 height 13 unit m name "Parallelogram with base 17 m and perpendicular height 13 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 221/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Multiply base by perpendicular height.   [17 × 13 = 221]
+step 2   Write square metres for area.   [221 square metres]
+
+--- area-parallelogram-trapezoid · seed 424242 · difficulty 4
+prompt   Find the area of this parallelogram in square inches.
+display  geometry area-parallelogram base 11 height 10 unit in name "Parallelogram with base 11 in and perpendicular height 10 in" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 110/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Multiply base by perpendicular height.   [11 × 10 = 110]
+step 2   Write square inches for area.   [110 square inches]
+
+--- area-parallelogram-trapezoid · seed 987654321 · difficulty 4
+prompt   Find the area of this trapezoid in square centimetres.
+display  geometry area-trapezoid base1 8 base2 22 height 18 unit cm name "Trapezoid with bases 8 cm and 22 cm, and perpendicular height 18 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 270/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [8 + 22 = 30]
+step 2   Multiply the sum by height.   [30 × 18 = 540]
+step 3   Take half the product.   [540 ÷ 2 = 270]
+
+--- area-parallelogram-trapezoid · seed 1 · difficulty 5
+prompt   Find the area of this trapezoid in square centimetres.
+display  geometry area-trapezoid base1 22 base2 32 height 32 unit cm name "Trapezoid with bases 22 cm and 32 cm, and perpendicular height 32 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 864/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [22 + 32 = 54]
+step 2   Multiply the sum by height.   [54 × 32 = 1728]
+step 3   Take half the product.   [1728 ÷ 2 = 864]
+
+--- area-parallelogram-trapezoid · seed 12345 · difficulty 5
+prompt   Find the area of this trapezoid in square metres.
+display  geometry area-trapezoid base1 17 base2 11 height 27 unit m name "Trapezoid with bases 17 m and 11 m, and perpendicular height 27 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 378/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [17 + 11 = 28]
+step 2   Multiply the sum by height.   [28 × 27 = 756]
+step 3   Take half the product.   [756 ÷ 2 = 378]
+
+--- area-parallelogram-trapezoid · seed 67890 · difficulty 5
+prompt   Find the area of this parallelogram in square metres.
+display  geometry area-parallelogram base 23 height 18 unit m name "Parallelogram with base 23 m and perpendicular height 18 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 414/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Multiply base by perpendicular height.   [23 × 18 = 414]
+step 2   Write square metres for area.   [414 square metres]
+
+--- area-parallelogram-trapezoid · seed 424242 · difficulty 5
+prompt   Find the area of this parallelogram in square inches.
+display  geometry area-parallelogram base 15 height 14 unit in name "Parallelogram with base 15 in and perpendicular height 14 in" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 210/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Multiply base by perpendicular height.   [15 × 14 = 210]
+step 2   Write square inches for area.   [210 square inches]
+
+--- area-parallelogram-trapezoid · seed 987654321 · difficulty 5
+prompt   Find the area of this trapezoid in square centimetres.
+display  geometry area-trapezoid base1 10 base2 31 height 24 unit cm name "Trapezoid with bases 10 cm and 31 cm, and perpendicular height 24 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))]
+answer   exact 492/1
+input    keypad
+hint     Use the formula matching the figure.
+step 1   Add the two bases.   [10 + 31 = 41]
+step 2   Multiply the sum by height.   [41 × 24 = 984]
+step 3   Take half the product.   [984 ÷ 2 = 492]"
+`;
+
+exports[`Unit 20 recorded output: area-rectangle > matches the authored sample output 1`] = `
+"--- area-rectangle · seed 1 · difficulty 1
+prompt   Find the area of this rectangle in square inches.
+display  geometry area-rectangle length 8 width 5 unit in name "Rectangle with length 8 in and width 5 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 40/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [8 × 5 = 40]
+step 2   Write the area in square inches.   [40 square inches]
+
+--- area-rectangle · seed 12345 · difficulty 1
+prompt   Find the area of this rectangle in square feet.
+display  geometry area-rectangle length 5 width 3 unit ft name "Rectangle with length 5 ft and width 3 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 15/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [5 × 3 = 15]
+step 2   Write the area in square feet.   [15 square feet]
+
+--- area-rectangle · seed 67890 · difficulty 1
+prompt   Find the area of this rectangle in square metres.
+display  geometry area-rectangle length 6 width 3 unit m name "Rectangle with length 6 m and width 3 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 18/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [6 × 3 = 18]
+step 2   Write the area in square metres.   [18 square metres]
+
+--- area-rectangle · seed 424242 · difficulty 1
+prompt   Find the area of this rectangle in square centimetres.
+display  geometry area-rectangle length 5 width 2 unit cm name "Rectangle with length 5 cm and width 2 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 10/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [5 × 2 = 10]
+step 2   Write the area in square centimetres.   [10 square centimetres]
+
+--- area-rectangle · seed 987654321 · difficulty 1
+prompt   Find the area of this rectangle in square feet.
+display  geometry area-rectangle length 4 width 2 unit ft name "Rectangle with length 4 ft and width 2 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 8/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [4 × 2 = 8]
+step 2   Write the area in square feet.   [8 square feet]
+
+--- area-rectangle · seed 1 · difficulty 2
+prompt   Find the area of this rectangle in square inches.
+display  geometry area-rectangle length 12 width 7 unit in name "Rectangle with length 12 in and width 7 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 84/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [12 × 7 = 84]
+step 2   Write the area in square inches.   [84 square inches]
+
+--- area-rectangle · seed 12345 · difficulty 2
+prompt   Find the area of this rectangle in square feet.
+display  geometry area-rectangle length 7 width 5 unit ft name "Rectangle with length 7 ft and width 5 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 35/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [7 × 5 = 35]
+step 2   Write the area in square feet.   [35 square feet]
+
+--- area-rectangle · seed 67890 · difficulty 2
+prompt   Find the area of this rectangle in square metres.
+display  geometry area-rectangle length 9 width 4 unit m name "Rectangle with length 9 m and width 4 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 36/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [9 × 4 = 36]
+step 2   Write the area in square metres.   [36 square metres]
+
+--- area-rectangle · seed 424242 · difficulty 2
+prompt   Find the area of this rectangle in square centimetres.
+display  geometry area-rectangle length 6 width 3 unit cm name "Rectangle with length 6 cm and width 3 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 18/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [6 × 3 = 18]
+step 2   Write the area in square centimetres.   [18 square centimetres]
+
+--- area-rectangle · seed 987654321 · difficulty 2
+prompt   Find the area of this rectangle in square feet.
+display  geometry area-rectangle length 6 width 3 unit ft name "Rectangle with length 6 ft and width 3 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 18/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [6 × 3 = 18]
+step 2   Write the area in square feet.   [18 square feet]
+
+--- area-rectangle · seed 1 · difficulty 3
+prompt   Find the area of this rectangle in square inches.
+display  geometry area-rectangle length 16 width 10 unit in name "Rectangle with length 16 in and width 10 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 160/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [16 × 10 = 160]
+step 2   Write the area in square inches.   [160 square inches]
+
+--- area-rectangle · seed 12345 · difficulty 3
+prompt   Find the area of this rectangle in square feet.
+display  geometry area-rectangle length 10 width 7 unit ft name "Rectangle with length 10 ft and width 7 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 70/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [10 × 7 = 70]
+step 2   Write the area in square feet.   [70 square feet]
+
+--- area-rectangle · seed 67890 · difficulty 3
+prompt   Find the area of this rectangle in square metres.
+display  geometry area-rectangle length 12 width 6 unit m name "Rectangle with length 12 m and width 6 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 72/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [12 × 6 = 72]
+step 2   Write the area in square metres.   [72 square metres]
+
+--- area-rectangle · seed 424242 · difficulty 3
+prompt   Find the area of this rectangle in square centimetres.
+display  geometry area-rectangle length 9 width 5 unit cm name "Rectangle with length 9 cm and width 5 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 45/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [9 × 5 = 45]
+step 2   Write the area in square centimetres.   [45 square centimetres]
+
+--- area-rectangle · seed 987654321 · difficulty 3
+prompt   Find the area of this rectangle in square feet.
+display  geometry area-rectangle length 8 width 4 unit ft name "Rectangle with length 8 ft and width 4 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 32/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [8 × 4 = 32]
+step 2   Write the area in square feet.   [32 square feet]
+
+--- area-rectangle · seed 1 · difficulty 4
+prompt   Find the area of this rectangle in square inches.
+display  geometry area-rectangle length 24 width 14 unit in name "Rectangle with length 24 in and width 14 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 336/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [24 × 14 = 336]
+step 2   Write the area in square inches.   [336 square inches]
+
+--- area-rectangle · seed 12345 · difficulty 4
+prompt   Find the area of this rectangle in square feet.
+display  geometry area-rectangle length 14 width 9 unit ft name "Rectangle with length 14 ft and width 9 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 126/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [14 × 9 = 126]
+step 2   Write the area in square feet.   [126 square feet]
+
+--- area-rectangle · seed 67890 · difficulty 4
+prompt   Find the area of this rectangle in square metres.
+display  geometry area-rectangle length 18 width 8 unit m name "Rectangle with length 18 m and width 8 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 144/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [18 × 8 = 144]
+step 2   Write the area in square metres.   [144 square metres]
+
+--- area-rectangle · seed 424242 · difficulty 4
+prompt   Find the area of this rectangle in square centimetres.
+display  geometry area-rectangle length 13 width 6 unit cm name "Rectangle with length 13 cm and width 6 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 78/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [13 × 6 = 78]
+step 2   Write the area in square centimetres.   [78 square centimetres]
+
+--- area-rectangle · seed 987654321 · difficulty 4
+prompt   Find the area of this rectangle in square feet.
+display  geometry area-rectangle length 12 width 5 unit ft name "Rectangle with length 12 ft and width 5 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 60/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [12 × 5 = 60]
+step 2   Write the area in square feet.   [60 square feet]
+
+--- area-rectangle · seed 1 · difficulty 5
+prompt   Find the area of this rectangle in square inches.
+display  geometry area-rectangle length 14 width 12 unit in name "Rectangle with length 14 in and width 12 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 168/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [14 × 12 = 168]
+step 2   Write the area in square inches.   [168 square inches]
+
+--- area-rectangle · seed 12345 · difficulty 5
+prompt   Find the area of this rectangle in square feet.
+display  geometry area-rectangle length 19 width 12 unit ft name "Rectangle with length 19 ft and width 12 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 228/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [19 × 12 = 228]
+step 2   Write the area in square feet.   [228 square feet]
+
+--- area-rectangle · seed 67890 · difficulty 5
+prompt   Find the area of this rectangle in square metres.
+display  geometry area-rectangle length 25 width 10 unit m name "Rectangle with length 25 m and width 10 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 250/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [25 × 10 = 250]
+step 2   Write the area in square metres.   [250 square metres]
+
+--- area-rectangle · seed 424242 · difficulty 5
+prompt   Find the area of this rectangle in square centimetres.
+display  geometry area-rectangle length 18 width 8 unit cm name "Rectangle with length 18 cm and width 8 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 144/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [18 × 8 = 144]
+step 2   Write the area in square centimetres.   [144 square centimetres]
+
+--- area-rectangle · seed 987654321 · difficulty 5
+prompt   Find the area of this rectangle in square feet.
+display  geometry area-rectangle length 16 width 6 unit ft name "Rectangle with length 16 ft and width 6 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 96/1
+input    keypad
+hint     Multiply the length by the width.
+step 1   Multiply the length and width.   [16 × 6 = 96]
+step 2   Write the area in square feet.   [96 square feet]"
+`;
+
+exports[`Unit 20 recorded output: area-triangle > matches the authored sample output 1`] = `
+"--- area-triangle · seed 1 · difficulty 1
+prompt   Find the area of this triangle in square inches.
+display  geometry area-triangle base 8 height 8 unit in name "Triangle with base 8 in and perpendicular height 8 in" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 32/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [8 × 8 = 64]
+step 2   Take half the product.   [64 ÷ 2 = 32]
+step 3   Use square inches for area.   [32 square inches]
+miss     omitted-triangle-half = 64   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 16   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 12345 · difficulty 1
+prompt   Find the area of this triangle in square feet.
+display  geometry area-triangle base 4 height 5 unit ft name "Triangle with base 4 ft and perpendicular height 5 ft" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 10/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [4 × 5 = 20]
+step 2   Take half the product.   [20 ÷ 2 = 10]
+step 3   Use square feet for area.   [10 square feet]
+miss     omitted-triangle-half = 20   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 9   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 67890 · difficulty 1
+prompt   Find the area of this triangle in square metres.
+display  geometry area-triangle base 6 height 5 unit m name "Triangle with base 6 m and perpendicular height 5 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 15/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [6 × 5 = 30]
+step 2   Take half the product.   [30 ÷ 2 = 15]
+step 3   Use square metres for area.   [15 square metres]
+miss     omitted-triangle-half = 30   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 11   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 424242 · difficulty 1
+prompt   Find the area of this triangle in square centimetres.
+display  geometry area-triangle base 6 height 5 unit cm name "Triangle with base 6 cm and perpendicular height 5 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 15/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [6 × 5 = 30]
+step 2   Take half the product.   [30 ÷ 2 = 15]
+step 3   Use square centimetres for area.   [15 square centimetres]
+miss     omitted-triangle-half = 30   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 11   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 987654321 · difficulty 1
+prompt   Find the area of this triangle in square feet.
+display  geometry area-triangle base 8 height 6 unit ft name "Triangle with base 8 ft and perpendicular height 6 ft" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 24/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [8 × 6 = 48]
+step 2   Take half the product.   [48 ÷ 2 = 24]
+step 3   Use square feet for area.   [24 square feet]
+miss     omitted-triangle-half = 48   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 14   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 1 · difficulty 2
+prompt   Find the area of this triangle in square inches.
+display  geometry area-triangle base 4 height 8 unit in name "Triangle with base 4 in and perpendicular height 8 in" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 16/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [4 × 8 = 32]
+step 2   Take half the product.   [32 ÷ 2 = 16]
+step 3   Use square inches for area.   [16 square inches]
+miss     omitted-triangle-half = 32   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 12   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 12345 · difficulty 2
+prompt   Find the area of this triangle in square feet.
+display  geometry area-triangle base 6 height 7 unit ft name "Triangle with base 6 ft and perpendicular height 7 ft" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 21/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [6 × 7 = 42]
+step 2   Take half the product.   [42 ÷ 2 = 21]
+step 3   Use square feet for area.   [21 square feet]
+miss     omitted-triangle-half = 42   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 13   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 67890 · difficulty 2
+prompt   Find the area of this triangle in square metres.
+display  geometry area-triangle base 8 height 6 unit m name "Triangle with base 8 m and perpendicular height 6 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 24/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [8 × 6 = 48]
+step 2   Take half the product.   [48 ÷ 2 = 24]
+step 3   Use square metres for area.   [24 square metres]
+miss     omitted-triangle-half = 48   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 14   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 424242 · difficulty 2
+prompt   Find the area of this triangle in square centimetres.
+display  geometry area-triangle base 9 height 6 unit cm name "Triangle with base 9 cm and perpendicular height 6 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 27/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [9 × 6 = 54]
+step 2   Take half the product.   [54 ÷ 2 = 27]
+step 3   Use square centimetres for area.   [27 square centimetres]
+miss     omitted-triangle-half = 54   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 15   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 987654321 · difficulty 2
+prompt   Find the area of this triangle in square feet.
+display  geometry area-triangle base 5 height 4 unit ft name "Triangle with base 5 ft and perpendicular height 4 ft" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 10/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [5 × 4 = 20]
+step 2   Take half the product.   [20 ÷ 2 = 10]
+step 3   Use square feet for area.   [10 square feet]
+miss     omitted-triangle-half = 20   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 9   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 1 · difficulty 3
+prompt   Find the area of this triangle in square inches.
+display  geometry area-triangle base 6 height 11 unit in name "Triangle with base 6 in and perpendicular height 11 in" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 33/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [6 × 11 = 66]
+step 2   Take half the product.   [66 ÷ 2 = 33]
+step 3   Use square inches for area.   [33 square inches]
+miss     omitted-triangle-half = 66   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 17   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 12345 · difficulty 3
+prompt   Find the area of this triangle in square feet.
+display  geometry area-triangle base 14 height 11 unit ft name "Triangle with base 14 ft and perpendicular height 11 ft" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 77/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [14 × 11 = 154]
+step 2   Take half the product.   [154 ÷ 2 = 77]
+step 3   Use square feet for area.   [77 square feet]
+miss     omitted-triangle-half = 154   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 25   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 67890 · difficulty 3
+prompt   Find the area of this triangle in square metres.
+display  geometry area-triangle base 12 height 9 unit m name "Triangle with base 12 m and perpendicular height 9 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 54/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [12 × 9 = 108]
+step 2   Take half the product.   [108 ÷ 2 = 54]
+step 3   Use square metres for area.   [54 square metres]
+miss     omitted-triangle-half = 108   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 21   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 424242 · difficulty 3
+prompt   Find the area of this triangle in square centimetres.
+display  geometry area-triangle base 8 height 8 unit cm name "Triangle with base 8 cm and perpendicular height 8 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 32/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [8 × 8 = 64]
+step 2   Take half the product.   [64 ÷ 2 = 32]
+step 3   Use square centimetres for area.   [32 square centimetres]
+miss     omitted-triangle-half = 64   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 16   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 987654321 · difficulty 3
+prompt   Find the area of this triangle in square feet.
+display  geometry area-triangle base 7 height 6 unit ft name "Triangle with base 7 ft and perpendicular height 6 ft" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 21/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [7 × 6 = 42]
+step 2   Take half the product.   [42 ÷ 2 = 21]
+step 3   Use square feet for area.   [21 square feet]
+miss     omitted-triangle-half = 42   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 13   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 1 · difficulty 4
+prompt   Find the area of this triangle in square inches.
+display  geometry area-triangle base 8 height 16 unit in name "Triangle with base 8 in and perpendicular height 16 in" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 64/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [8 × 16 = 128]
+step 2   Take half the product.   [128 ÷ 2 = 64]
+step 3   Use square inches for area.   [64 square inches]
+miss     omitted-triangle-half = 128   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 24   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 12345 · difficulty 4
+prompt   Find the area of this triangle in square feet.
+display  geometry area-triangle base 12 height 15 unit ft name "Triangle with base 12 ft and perpendicular height 15 ft" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 90/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [12 × 15 = 180]
+step 2   Take half the product.   [180 ÷ 2 = 90]
+step 3   Use square feet for area.   [90 square feet]
+miss     omitted-triangle-half = 180   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 27   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 67890 · difficulty 4
+prompt   Find the area of this triangle in square metres.
+display  geometry area-triangle base 13 height 8 unit m name "Triangle with base 13 m and perpendicular height 8 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 52/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [13 × 8 = 104]
+step 2   Take half the product.   [104 ÷ 2 = 52]
+step 3   Use square metres for area.   [52 square metres]
+miss     omitted-triangle-half = 104   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 21   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 424242 · difficulty 4
+prompt   Find the area of this triangle in square centimetres.
+display  geometry area-triangle base 11 height 10 unit cm name "Triangle with base 11 cm and perpendicular height 10 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 55/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [11 × 10 = 110]
+step 2   Take half the product.   [110 ÷ 2 = 55]
+step 3   Use square centimetres for area.   [55 square centimetres]
+miss     omitted-triangle-half = 110   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 21   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 987654321 · difficulty 4
+prompt   Find the area of this triangle in square feet.
+display  geometry area-triangle base 10 height 8 unit ft name "Triangle with base 10 ft and perpendicular height 8 ft" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 40/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [10 × 8 = 80]
+step 2   Take half the product.   [80 ÷ 2 = 40]
+step 3   Use square feet for area.   [40 square feet]
+miss     omitted-triangle-half = 80   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 18   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 1 · difficulty 5
+prompt   Find the area of this triangle in square inches.
+display  geometry area-triangle base 10 height 22 unit in name "Triangle with base 10 in and perpendicular height 22 in" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 110/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [10 × 22 = 220]
+step 2   Take half the product.   [220 ÷ 2 = 110]
+step 3   Use square inches for area.   [110 square inches]
+miss     omitted-triangle-half = 220   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 32   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 12345 · difficulty 5
+prompt   Find the area of this triangle in square feet.
+display  geometry area-triangle base 28 height 21 unit ft name "Triangle with base 28 ft and perpendicular height 21 ft" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 294/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [28 × 21 = 588]
+step 2   Take half the product.   [588 ÷ 2 = 294]
+step 3   Use square feet for area.   [294 square feet]
+miss     omitted-triangle-half = 588   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 49   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 67890 · difficulty 5
+prompt   Find the area of this triangle in square metres.
+display  geometry area-triangle base 23 height 18 unit m name "Triangle with base 23 m and perpendicular height 18 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 207/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [23 × 18 = 414]
+step 2   Take half the product.   [414 ÷ 2 = 207]
+step 3   Use square metres for area.   [207 square metres]
+miss     omitted-triangle-half = 414   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 41   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 424242 · difficulty 5
+prompt   Find the area of this triangle in square centimetres.
+display  geometry area-triangle base 15 height 14 unit cm name "Triangle with base 15 cm and perpendicular height 14 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 105/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [15 × 14 = 210]
+step 2   Take half the product.   [210 ÷ 2 = 105]
+step 3   Use square centimetres for area.   [105 square centimetres]
+miss     omitted-triangle-half = 210   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 29   Multiply the dimensions instead of adding them.
+
+--- area-triangle · seed 987654321 · difficulty 5
+prompt   Find the area of this triangle in square feet.
+display  geometry area-triangle base 13 height 10 unit ft name "Triangle with base 13 ft and perpendicular height 10 ft" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))]
+answer   exact 65/1
+input    keypad
+hint     Multiply base by height, then take half.
+step 1   Multiply base by height.   [13 × 10 = 130]
+step 2   Take half the product.   [130 ÷ 2 = 65]
+step 3   Use square feet for area.   [65 square feet]
+miss     omitted-triangle-half = 130   Remember the one-half in the triangle area formula.
+miss     added-triangle-dimensions = 23   Multiply the dimensions instead of adding them."
+`;
+
+exports[`Unit 20 recorded output: circumference > matches the authored sample output 1`] = `
+"--- circumference · seed 1 · difficulty 1
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 3 unit in name "Circle with radius 3 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 18.8 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 3 = 6]
+step 2   Multiply diameter by 3.14.   [3.14 × 6 = 18.84]
+step 3   Round to the nearest tenth.   [18.8]
+miss     radius-as-diameter = 9.4   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 28.3   Circumference is not the circle area.
+
+--- circumference · seed 12345 · difficulty 1
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 4 unit ft name "Circle with radius 4 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 25.1 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 4 = 8]
+step 2   Multiply diameter by 3.14.   [3.14 × 8 = 25.12]
+step 3   Round to the nearest tenth.   [25.1]
+miss     radius-as-diameter = 12.6   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 50.2   Circumference is not the circle area.
+
+--- circumference · seed 67890 · difficulty 1
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 5 unit m name "Circle with radius 5 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 31.4 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 5 = 10]
+step 2   Multiply diameter by 3.14.   [3.14 × 10 = 31.400000000000002]
+step 3   Round to the nearest tenth.   [31.4]
+miss     radius-as-diameter = 15.7   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 78.5   Circumference is not the circle area.
+
+--- circumference · seed 424242 · difficulty 1
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 3 unit cm name "Circle with radius 3 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 18.8 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 3 = 6]
+step 2   Multiply diameter by 3.14.   [3.14 × 6 = 18.84]
+step 3   Round to the nearest tenth.   [18.8]
+miss     radius-as-diameter = 9.4   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 28.3   Circumference is not the circle area.
+
+--- circumference · seed 987654321 · difficulty 1
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 3 unit ft name "Circle with radius 3 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 18.8 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 3 = 6]
+step 2   Multiply diameter by 3.14.   [3.14 × 6 = 18.84]
+step 3   Round to the nearest tenth.   [18.8]
+miss     radius-as-diameter = 9.4   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 28.3   Circumference is not the circle area.
+
+--- circumference · seed 1 · difficulty 2
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 4 unit in name "Circle with radius 4 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 25.1 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 4 = 8]
+step 2   Multiply diameter by 3.14.   [3.14 × 8 = 25.12]
+step 3   Round to the nearest tenth.   [25.1]
+miss     radius-as-diameter = 12.6   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 50.2   Circumference is not the circle area.
+
+--- circumference · seed 12345 · difficulty 2
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 5 unit ft name "Circle with radius 5 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 31.4 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 5 = 10]
+step 2   Multiply diameter by 3.14.   [3.14 × 10 = 31.400000000000002]
+step 3   Round to the nearest tenth.   [31.4]
+miss     radius-as-diameter = 15.7   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 78.5   Circumference is not the circle area.
+
+--- circumference · seed 67890 · difficulty 2
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 7 unit m name "Circle with radius 7 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 44 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 7 = 14]
+step 2   Multiply diameter by 3.14.   [3.14 × 14 = 43.96]
+step 3   Round to the nearest tenth.   [44]
+miss     radius-as-diameter = 22   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 153.9   Circumference is not the circle area.
+
+--- circumference · seed 424242 · difficulty 2
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 5 unit cm name "Circle with radius 5 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 31.4 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 5 = 10]
+step 2   Multiply diameter by 3.14.   [3.14 × 10 = 31.400000000000002]
+step 3   Round to the nearest tenth.   [31.4]
+miss     radius-as-diameter = 15.7   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 78.5   Circumference is not the circle area.
+
+--- circumference · seed 987654321 · difficulty 2
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 4 unit ft name "Circle with radius 4 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 25.1 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 4 = 8]
+step 2   Multiply diameter by 3.14.   [3.14 × 8 = 25.12]
+step 3   Round to the nearest tenth.   [25.1]
+miss     radius-as-diameter = 12.6   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 50.2   Circumference is not the circle area.
+
+--- circumference · seed 1 · difficulty 3
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 6 unit in name "Circle with radius 6 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 37.7 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 6 = 12]
+step 2   Multiply diameter by 3.14.   [3.14 × 12 = 37.68]
+step 3   Round to the nearest tenth.   [37.7]
+miss     radius-as-diameter = 18.8   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 113   Circumference is not the circle area.
+
+--- circumference · seed 12345 · difficulty 3
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 8 unit ft name "Circle with radius 8 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 50.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 8 = 16]
+step 2   Multiply diameter by 3.14.   [3.14 × 16 = 50.24]
+step 3   Round to the nearest tenth.   [50.2]
+miss     radius-as-diameter = 25.1   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 201   Circumference is not the circle area.
+
+--- circumference · seed 67890 · difficulty 3
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 11 unit m name "Circle with radius 11 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 69.1 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 11 = 22]
+step 2   Multiply diameter by 3.14.   [3.14 × 22 = 69.08]
+step 3   Round to the nearest tenth.   [69.1]
+miss     radius-as-diameter = 34.5   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 379.9   Circumference is not the circle area.
+
+--- circumference · seed 424242 · difficulty 3
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 8 unit cm name "Circle with radius 8 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 50.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 8 = 16]
+step 2   Multiply diameter by 3.14.   [3.14 × 16 = 50.24]
+step 3   Round to the nearest tenth.   [50.2]
+miss     radius-as-diameter = 25.1   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 201   Circumference is not the circle area.
+
+--- circumference · seed 987654321 · difficulty 3
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 7 unit ft name "Circle with radius 7 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 44 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 7 = 14]
+step 2   Multiply diameter by 3.14.   [3.14 × 14 = 43.96]
+step 3   Round to the nearest tenth.   [44]
+miss     radius-as-diameter = 22   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 153.9   Circumference is not the circle area.
+
+--- circumference · seed 1 · difficulty 4
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 8 unit in name "Circle with radius 8 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 50.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 8 = 16]
+step 2   Multiply diameter by 3.14.   [3.14 × 16 = 50.24]
+step 3   Round to the nearest tenth.   [50.2]
+miss     radius-as-diameter = 25.1   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 201   Circumference is not the circle area.
+
+--- circumference · seed 12345 · difficulty 4
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 11 unit ft name "Circle with radius 11 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 69.1 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 11 = 22]
+step 2   Multiply diameter by 3.14.   [3.14 × 22 = 69.08]
+step 3   Round to the nearest tenth.   [69.1]
+miss     radius-as-diameter = 34.5   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 379.9   Circumference is not the circle area.
+
+--- circumference · seed 67890 · difficulty 4
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 15 unit m name "Circle with radius 15 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 94.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 15 = 30]
+step 2   Multiply diameter by 3.14.   [3.14 × 30 = 94.2]
+step 3   Round to the nearest tenth.   [94.2]
+miss     radius-as-diameter = 47.1   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 706.5   Circumference is not the circle area.
+
+--- circumference · seed 424242 · difficulty 4
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 11 unit cm name "Circle with radius 11 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 69.1 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 11 = 22]
+step 2   Multiply diameter by 3.14.   [3.14 × 22 = 69.08]
+step 3   Round to the nearest tenth.   [69.1]
+miss     radius-as-diameter = 34.5   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 379.9   Circumference is not the circle area.
+
+--- circumference · seed 987654321 · difficulty 4
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 9 unit ft name "Circle with radius 9 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 56.5 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 9 = 18]
+step 2   Multiply diameter by 3.14.   [3.14 × 18 = 56.52]
+step 3   Round to the nearest tenth.   [56.5]
+miss     radius-as-diameter = 28.3   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 254.3   Circumference is not the circle area.
+
+--- circumference · seed 1 · difficulty 5
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 10 unit in name "Circle with radius 10 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 62.8 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 10 = 20]
+step 2   Multiply diameter by 3.14.   [3.14 × 20 = 62.800000000000004]
+step 3   Round to the nearest tenth.   [62.8]
+miss     radius-as-diameter = 31.4   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 314   Circumference is not the circle area.
+
+--- circumference · seed 12345 · difficulty 5
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 15 unit ft name "Circle with radius 15 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 94.2 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 15 = 30]
+step 2   Multiply diameter by 3.14.   [3.14 × 30 = 94.2]
+step 3   Round to the nearest tenth.   [94.2]
+miss     radius-as-diameter = 47.1   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 706.5   Circumference is not the circle area.
+
+--- circumference · seed 67890 · difficulty 5
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 21 unit m name "Circle with radius 21 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 131.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 21 = 42]
+step 2   Multiply diameter by 3.14.   [3.14 × 42 = 131.88]
+step 3   Round to the nearest tenth.   [131.9]
+miss     radius-as-diameter = 65.9   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 1384.7   Circumference is not the circle area.
+
+--- circumference · seed 424242 · difficulty 5
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 14 unit cm name "Circle with radius 14 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 87.9 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 14 = 28]
+step 2   Multiply diameter by 3.14.   [3.14 × 28 = 87.92]
+step 3   Round to the nearest tenth.   [87.9]
+miss     radius-as-diameter = 44   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 615.4   Circumference is not the circle area.
+
+--- circumference · seed 987654321 · difficulty 5
+prompt   Find the circumference. Use π = 3.14 and round to the nearest tenth.
+display  geometry circumference radius 12 unit ft name "Circle with radius 12 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))]
+answer   approx 75.4 ±0.05
+input    keypad
+keypad   allowDecimal=true
+hint     Double the radius, then use circumference formula.
+step 1   Double the shown radius.   [2 × 12 = 24]
+step 2   Multiply diameter by 3.14.   [3.14 × 24 = 75.36]
+step 3   Round to the nearest tenth.   [75.4]
+miss     radius-as-diameter = 37.7   The formula needs diameter, which is twice the radius.
+miss     area-for-circumference = 452.2   Circumference is not the circle area."
+`;
+
+exports[`Unit 20 recorded output: perimeter > matches the authored sample output 1`] = `
+"--- perimeter · seed 1 · difficulty 1
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 8 width 5 unit in name "Rectangle with length 8 in and width 5 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 26/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [8 + 8 = 16]
+step 2   Add the two widths.   [5 + 5 = 10]
+step 3   Combine both totals.   [16 + 10 = 26]
+
+--- perimeter · seed 12345 · difficulty 1
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 5 width 3 unit ft name "Rectangle with length 5 ft and width 3 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 16/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [5 + 5 = 10]
+step 2   Add the two widths.   [3 + 3 = 6]
+step 3   Combine both totals.   [10 + 6 = 16]
+
+--- perimeter · seed 67890 · difficulty 1
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 6 width 3 unit m name "Rectangle with length 6 m and width 3 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 18/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [6 + 6 = 12]
+step 2   Add the two widths.   [3 + 3 = 6]
+step 3   Combine both totals.   [12 + 6 = 18]
+
+--- perimeter · seed 424242 · difficulty 1
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 5 width 2 unit cm name "Rectangle with length 5 cm and width 2 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 14/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [5 + 5 = 10]
+step 2   Add the two widths.   [2 + 2 = 4]
+step 3   Combine both totals.   [10 + 4 = 14]
+
+--- perimeter · seed 987654321 · difficulty 1
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 4 width 2 unit ft name "Rectangle with length 4 ft and width 2 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 12/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [4 + 4 = 8]
+step 2   Add the two widths.   [2 + 2 = 4]
+step 3   Combine both totals.   [8 + 4 = 12]
+
+--- perimeter · seed 1 · difficulty 2
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 12 width 7 unit in name "Rectangle with length 12 in and width 7 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 38/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [12 + 12 = 24]
+step 2   Add the two widths.   [7 + 7 = 14]
+step 3   Combine both totals.   [24 + 14 = 38]
+
+--- perimeter · seed 12345 · difficulty 2
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 7 width 5 unit ft name "Rectangle with length 7 ft and width 5 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 24/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [7 + 7 = 14]
+step 2   Add the two widths.   [5 + 5 = 10]
+step 3   Combine both totals.   [14 + 10 = 24]
+
+--- perimeter · seed 67890 · difficulty 2
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 9 width 4 unit m name "Rectangle with length 9 m and width 4 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 26/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [9 + 9 = 18]
+step 2   Add the two widths.   [4 + 4 = 8]
+step 3   Combine both totals.   [18 + 8 = 26]
+
+--- perimeter · seed 424242 · difficulty 2
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 6 width 3 unit cm name "Rectangle with length 6 cm and width 3 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 18/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [6 + 6 = 12]
+step 2   Add the two widths.   [3 + 3 = 6]
+step 3   Combine both totals.   [12 + 6 = 18]
+
+--- perimeter · seed 987654321 · difficulty 2
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 6 width 3 unit ft name "Rectangle with length 6 ft and width 3 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 18/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [6 + 6 = 12]
+step 2   Add the two widths.   [3 + 3 = 6]
+step 3   Combine both totals.   [12 + 6 = 18]
+
+--- perimeter · seed 1 · difficulty 3
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 16 width 10 unit in name "Rectangle with length 16 in and width 10 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 52/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [16 + 16 = 32]
+step 2   Add the two widths.   [10 + 10 = 20]
+step 3   Combine both totals.   [32 + 20 = 52]
+
+--- perimeter · seed 12345 · difficulty 3
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 10 width 7 unit ft name "Rectangle with length 10 ft and width 7 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 34/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [10 + 10 = 20]
+step 2   Add the two widths.   [7 + 7 = 14]
+step 3   Combine both totals.   [20 + 14 = 34]
+
+--- perimeter · seed 67890 · difficulty 3
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 12 width 6 unit m name "Rectangle with length 12 m and width 6 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 36/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [12 + 12 = 24]
+step 2   Add the two widths.   [6 + 6 = 12]
+step 3   Combine both totals.   [24 + 12 = 36]
+
+--- perimeter · seed 424242 · difficulty 3
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 9 width 5 unit cm name "Rectangle with length 9 cm and width 5 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 28/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [9 + 9 = 18]
+step 2   Add the two widths.   [5 + 5 = 10]
+step 3   Combine both totals.   [18 + 10 = 28]
+
+--- perimeter · seed 987654321 · difficulty 3
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 8 width 4 unit ft name "Rectangle with length 8 ft and width 4 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 24/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [8 + 8 = 16]
+step 2   Add the two widths.   [4 + 4 = 8]
+step 3   Combine both totals.   [16 + 8 = 24]
+
+--- perimeter · seed 1 · difficulty 4
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 24 width 14 unit in name "Rectangle with length 24 in and width 14 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 76/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [24 + 24 = 48]
+step 2   Add the two widths.   [14 + 14 = 28]
+step 3   Combine both totals.   [48 + 28 = 76]
+
+--- perimeter · seed 12345 · difficulty 4
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 14 width 9 unit ft name "Rectangle with length 14 ft and width 9 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 46/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [14 + 14 = 28]
+step 2   Add the two widths.   [9 + 9 = 18]
+step 3   Combine both totals.   [28 + 18 = 46]
+
+--- perimeter · seed 67890 · difficulty 4
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 18 width 8 unit m name "Rectangle with length 18 m and width 8 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 52/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [18 + 18 = 36]
+step 2   Add the two widths.   [8 + 8 = 16]
+step 3   Combine both totals.   [36 + 16 = 52]
+
+--- perimeter · seed 424242 · difficulty 4
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 13 width 6 unit cm name "Rectangle with length 13 cm and width 6 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 38/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [13 + 13 = 26]
+step 2   Add the two widths.   [6 + 6 = 12]
+step 3   Combine both totals.   [26 + 12 = 38]
+
+--- perimeter · seed 987654321 · difficulty 4
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 12 width 5 unit ft name "Rectangle with length 12 ft and width 5 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 34/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [12 + 12 = 24]
+step 2   Add the two widths.   [5 + 5 = 10]
+step 3   Combine both totals.   [24 + 10 = 34]
+
+--- perimeter · seed 1 · difficulty 5
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 14 width 12 unit in name "Rectangle with length 14 in and width 12 in" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 52/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [14 + 14 = 28]
+step 2   Add the two widths.   [12 + 12 = 24]
+step 3   Combine both totals.   [28 + 24 = 52]
+
+--- perimeter · seed 12345 · difficulty 5
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 19 width 12 unit ft name "Rectangle with length 19 ft and width 12 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 62/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [19 + 19 = 38]
+step 2   Add the two widths.   [12 + 12 = 24]
+step 3   Combine both totals.   [38 + 24 = 62]
+
+--- perimeter · seed 67890 · difficulty 5
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 25 width 10 unit m name "Rectangle with length 25 m and width 10 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 70/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [25 + 25 = 50]
+step 2   Add the two widths.   [10 + 10 = 20]
+step 3   Combine both totals.   [50 + 20 = 70]
+
+--- perimeter · seed 424242 · difficulty 5
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 18 width 8 unit cm name "Rectangle with length 18 cm and width 8 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 52/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [18 + 18 = 36]
+step 2   Add the two widths.   [8 + 8 = 16]
+step 3   Combine both totals.   [36 + 16 = 52]
+
+--- perimeter · seed 987654321 · difficulty 5
+prompt   Find the perimeter of this rectangle.
+display  geometry perimeter length 16 width 6 unit ft name "Rectangle with length 16 ft and width 6 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")]
+answer   exact 44/1
+input    keypad
+hint     Add both lengths and both widths.
+step 1   Add the two lengths.   [16 + 16 = 32]
+step 2   Add the two widths.   [6 + 6 = 12]
+step 3   Combine both totals.   [32 + 12 = 44]"
+`;
