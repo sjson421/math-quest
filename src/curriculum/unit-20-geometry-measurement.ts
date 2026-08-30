@@ -7,7 +7,7 @@ import {
 import { constrain } from '../lib/rng'
 import { band, defineSkill, type BuildContext, type Ladder } from './engine'
 
-/** Unit 20a · Geometry & Measurement. */
+/** Unit 20 · Geometry & Measurement. */
 
 export const GED_PI = 3.14
 export const ROUNDING_TOLERANCE = 0.05
@@ -53,6 +53,69 @@ const CIRCLE_DIAMETER: Ladder = {
   4: [16, 40],
   5: [20, 56],
 }
+
+const COMPOSITE_LENGTH: Ladder = {
+  1: [8, 10],
+  2: [10, 14],
+  3: [13, 19],
+  4: [17, 25],
+  5: [22, 32],
+}
+
+const COMPOSITE_WIDTH: Ladder = {
+  1: [6, 9],
+  2: [8, 12],
+  3: [10, 16],
+  4: [14, 21],
+  5: [18, 28],
+}
+
+const SOLID_LENGTH: Ladder = {
+  1: [4, 8],
+  2: [6, 12],
+  3: [8, 16],
+  4: [10, 22],
+  5: [14, 30],
+}
+
+const SOLID_WIDTH: Ladder = {
+  1: [3, 6],
+  2: [4, 9],
+  3: [5, 12],
+  4: [7, 16],
+  5: [9, 22],
+}
+
+const SOLID_HEIGHT: Ladder = {
+  1: [3, 7],
+  2: [4, 10],
+  3: [6, 14],
+  4: [8, 18],
+  5: [10, 24],
+}
+
+const SOLID_RADIUS: Ladder = {
+  1: [2, 5],
+  2: [3, 7],
+  3: [4, 10],
+  4: [6, 14],
+  5: [8, 20],
+}
+
+const PYTHAGOREAN_MULTIPLIER: Ladder = {
+  1: [1, 1],
+  2: [1, 2],
+  3: [2, 3],
+  4: [3, 5],
+  5: [4, 7],
+}
+
+const PYTHAGOREAN_TRIPLES = [
+  [3, 4, 5],
+  [5, 12, 13],
+  [8, 15, 17],
+  [7, 24, 25],
+] as const
 
 const unit = (context: BuildContext): LengthUnit => context.rng.pick(LENGTH_UNITS)
 
@@ -183,6 +246,123 @@ const drawCircleDiameter = (context: BuildContext): Extract<GeometryDiagram, { o
       return new Set([answer, diameterSquared, circumference]).size === 3
     },
   )
+}
+
+const drawComposite = (context: BuildContext): Extract<GeometryDiagram, { operation: 'area-composite' }> => {
+  const [lengthMin, lengthMax] = band(context.difficulty, COMPOSITE_LENGTH)
+  const [widthMin, widthMax] = band(context.difficulty, COMPOSITE_WIDTH)
+  const selectedUnit = unit(context)
+
+  return constrain(
+    () => ({
+      kind: 'geometry' as const,
+      operation: 'area-composite' as const,
+      outerLength: context.rng.int(lengthMin, lengthMax),
+      outerWidth: context.rng.int(widthMin, widthMax),
+      cutoutLength: context.rng.int(2, Math.max(2, lengthMax - 2)),
+      cutoutWidth: context.rng.int(2, Math.max(2, widthMax - 2)),
+      unit: selectedUnit,
+    }),
+    (candidate) => {
+      const answer = candidate.outerLength * candidate.outerWidth - candidate.cutoutLength * candidate.cutoutWidth
+      const bottom = candidate.outerLength * (candidate.outerWidth - candidate.cutoutWidth)
+      const top = (candidate.outerLength - candidate.cutoutLength) * candidate.cutoutWidth
+      return (
+        candidate.cutoutLength < candidate.outerLength &&
+        candidate.cutoutWidth < candidate.outerWidth &&
+        answer > 0 &&
+        bottom > 0 &&
+        top > 0 &&
+        bottom + top === answer &&
+        new Set([answer, bottom, top]).size === 3
+      )
+    },
+  )
+}
+
+const drawPrism = (context: BuildContext, operation: 'volume-prism' | 'surface-area'): Extract<GeometryDiagram, { operation: 'volume-prism' | 'surface-area' }> => {
+  const [lengthMin, lengthMax] = band(context.difficulty, SOLID_LENGTH)
+  const [widthMin, widthMax] = band(context.difficulty, SOLID_WIDTH)
+  const [heightMin, heightMax] = band(context.difficulty, SOLID_HEIGHT)
+  const selectedUnit = unit(context)
+
+  return {
+    kind: 'geometry',
+    operation,
+    length: context.rng.int(lengthMin, lengthMax),
+    width: context.rng.int(widthMin, widthMax),
+    height: context.rng.int(heightMin, heightMax),
+    unit: selectedUnit,
+  }
+}
+
+const drawRoundSolid = (
+  context: BuildContext,
+  operation: 'volume-cylinder' | 'volume-cone',
+): Extract<GeometryDiagram, { operation: 'volume-cylinder' | 'volume-cone' }> => {
+  const [radiusMin, radiusMax] = band(context.difficulty, SOLID_RADIUS)
+  const [heightMin, heightMax] = band(context.difficulty, SOLID_HEIGHT)
+  return {
+    kind: 'geometry',
+    operation,
+    radius: context.rng.int(radiusMin, radiusMax),
+    height: context.rng.int(heightMin, heightMax),
+    unit: unit(context),
+  }
+}
+
+const drawPyramid = (context: BuildContext): Extract<GeometryDiagram, { operation: 'volume-pyramid' }> => {
+  const [lengthMin, lengthMax] = band(context.difficulty, SOLID_LENGTH)
+  const [widthMin, widthMax] = band(context.difficulty, SOLID_WIDTH)
+  const [heightMin, heightMax] = band(context.difficulty, SOLID_HEIGHT)
+  const selectedUnit = unit(context)
+
+  return constrain(
+    () => ({
+      kind: 'geometry' as const,
+      operation: 'volume-pyramid' as const,
+      baseLength: context.rng.int(lengthMin, lengthMax),
+      baseWidth: context.rng.int(widthMin, widthMax),
+      height: context.rng.int(heightMin, heightMax),
+      unit: selectedUnit,
+    }),
+    (candidate) => Number.isInteger((candidate.baseLength * candidate.baseWidth * candidate.height) / 3),
+  )
+}
+
+const drawSphere = (context: BuildContext): Extract<GeometryDiagram, { operation: 'volume-sphere' }> => {
+  const [min, max] = band(context.difficulty, SOLID_RADIUS)
+  return {
+    kind: 'geometry',
+    operation: 'volume-sphere',
+    radius: context.rng.int(min, max),
+    unit: unit(context),
+  }
+}
+
+const drawPythagorean = (context: BuildContext): Extract<GeometryDiagram, { operation: 'pythagorean' }> => {
+  const [multiplierMin, multiplierMax] = band(context.difficulty, PYTHAGOREAN_MULTIPLIER)
+  const multiplier = context.rng.int(multiplierMin, multiplierMax)
+  const [leg1, leg2, hypotenuse] = context.rng.pick(PYTHAGOREAN_TRIPLES)
+  const selectedUnit = unit(context)
+
+  return context.rng.bool()
+    ? {
+        kind: 'geometry',
+        operation: 'pythagorean',
+        missingSide: 'hypotenuse',
+        leg1: leg1 * multiplier,
+        leg2: leg2 * multiplier,
+        unit: selectedUnit,
+      }
+    : {
+        kind: 'geometry',
+        operation: 'pythagorean',
+        missingSide: 'leg',
+        leg: leg1 * multiplier,
+        hypotenuse: hypotenuse * multiplier,
+        unit: selectedUnit,
+      }
 }
 
 const exactAreaPrompt = (shape: string, selectedUnit: LengthUnit): string =>
@@ -379,11 +559,268 @@ const areaCircle = defineSkill({
   },
 })
 
-export const unit20: [typeof perimeter, typeof areaRectangle, typeof areaTriangle, typeof areaParallelogramTrapezoid, typeof circumference, typeof areaCircle] = [
+const compositeFigures = defineSkill({
+  id: 'composite-figures',
+  name: 'Composite Figures',
+  blurb: 'Split the shape into pieces',
+  teachingLine: 'Split a complex shape, then add each piece.',
+  build(context) {
+    const data = drawComposite(context)
+    const outerArea = data.outerLength * data.outerWidth
+    const cutoutArea = data.cutoutLength * data.cutoutWidth
+    const bottomArea = data.outerLength * (data.outerWidth - data.cutoutWidth)
+    const topArea = (data.outerLength - data.cutoutLength) * data.cutoutWidth
+    const answer = outerArea - cutoutArea
+
+    return {
+      prompt: `Find the area of this composite figure in square ${unitName(data.unit)}.`,
+      display: { kind: 'diagram', diagram: data },
+      answer: intAnswer(answer),
+      hint: 'Split the L-shape into two rectangles, then add their areas.',
+      solution: [
+        { text: 'Find the bottom rectangle area.', detail: `${data.outerLength} × ${data.outerWidth - data.cutoutWidth} = ${bottomArea}` },
+        { text: 'Find the top rectangle area.', detail: `${data.outerLength - data.cutoutLength} × ${data.cutoutWidth} = ${topArea}` },
+        { text: 'Add both rectangle areas.', detail: `${bottomArea} + ${topArea} = ${answer}` },
+        { text: `Use square ${unitName(data.unit)} for area.`, detail: `${answer} square ${unitName(data.unit)}` },
+      ],
+    }
+  },
+})
+
+const volumePrism = defineSkill({
+  id: 'volume-prism',
+  name: 'Volume of a Prism',
+  blurb: 'Base area times height',
+  teachingLine: 'A prism\'s volume is its base size times its height.',
+  build(context) {
+    const data = drawPrism(context, 'volume-prism')
+    const baseArea = data.length * data.width
+    const answer = baseArea * data.height
+
+    return {
+      prompt: `Find the volume of this prism in cubic ${unitName(data.unit)}.`,
+      display: { kind: 'diagram', diagram: data },
+      answer: intAnswer(answer),
+      hint: 'Find the base area, then multiply by prism height.',
+      solution: [
+        { text: 'Find the rectangular base area.', detail: `${data.length} × ${data.width} = ${baseArea}` },
+        { text: 'Multiply base area by height.', detail: `${baseArea} × ${data.height} = ${answer}` },
+        { text: `Use cubic ${unitName(data.unit)} for volume.`, detail: `${answer} cubic ${unitName(data.unit)}` },
+      ],
+    }
+  },
+})
+
+const volumeCylinder = defineSkill({
+  id: 'volume-cylinder',
+  name: 'Volume of a Cylinder',
+  blurb: 'A round base, the same idea',
+  teachingLine: 'A cylinder uses its circular base and height to find volume.',
+  build(context) {
+    const data = drawRoundSolid(context, 'volume-cylinder')
+    const baseArea = GED_PI * data.radius ** 2
+    const unrounded = baseArea * data.height
+    const answer = roundToNearestTenth(unrounded)
+
+    return {
+      prompt: `Find the cylinder's volume in cubic ${unitName(data.unit)}. Use π = 3.14 and round to the nearest tenth.`,
+      display: { kind: 'diagram', diagram: data },
+      answer: { kind: 'approx', value: answer, tolerance: ROUNDING_TOLERANCE },
+      keypad: { allowDecimal: true },
+      hint: 'Square the radius, then multiply by height and 3.14.',
+      solution: [
+        { text: 'Square the radius.', detail: `${data.radius} × ${data.radius} = ${data.radius ** 2}` },
+        { text: 'Multiply by height and 3.14.', detail: `3.14 × ${data.radius ** 2} × ${data.height} = ${unrounded}` },
+        { text: 'Round to the nearest tenth.', detail: `${answer}` },
+      ],
+    }
+  },
+})
+
+const volumeConePyramidSphere = defineSkill({
+  id: 'volume-cone-pyramid-sphere',
+  name: 'Cones, Pyramids & Spheres',
+  blurb: 'The fractional volume formulas',
+  teachingLine: 'Cones and pyramids use one-third; spheres use four-thirds.',
+  build(context) {
+    const operation = context.rng.pick(['volume-cone', 'volume-pyramid', 'volume-sphere'] as const)
+    if (operation === 'volume-cone') {
+      const data = drawRoundSolid(context, operation)
+      const unrounded = (GED_PI * data.radius ** 2 * data.height) / 3
+      const answer = roundToNearestTenth(unrounded)
+      return {
+        prompt: `Find the cone's volume in cubic ${unitName(data.unit)}. Use π = 3.14 and round to the nearest tenth.`,
+        display: { kind: 'diagram', diagram: data },
+        answer: { kind: 'approx', value: answer, tolerance: ROUNDING_TOLERANCE },
+        keypad: { allowDecimal: true },
+        hint: 'Find the circular base, multiply by height, then take one-third.',
+        solution: [
+          { text: 'Square the radius.', detail: `${data.radius} × ${data.radius} = ${data.radius ** 2}` },
+          { text: 'Multiply by 3.14 and height.', detail: `3.14 × ${data.radius ** 2} × ${data.height} = ${GED_PI * data.radius ** 2 * data.height}` },
+          { text: 'Take one-third and round.', detail: `${unrounded} ≈ ${answer}` },
+        ],
+      }
+    }
+
+    if (operation === 'volume-pyramid') {
+      const data = drawPyramid(context)
+      const baseArea = data.baseLength * data.baseWidth
+      const product = baseArea * data.height
+      const answer = product / 3
+      return {
+        prompt: `Find the pyramid's volume in cubic ${unitName(data.unit)}.`,
+        display: { kind: 'diagram', diagram: data },
+        answer: intAnswer(answer),
+        hint: 'Find the rectangular base, multiply by height, then take one-third.',
+        solution: [
+          { text: 'Find the rectangular base area.', detail: `${data.baseLength} × ${data.baseWidth} = ${baseArea}` },
+          { text: 'Multiply base area by height.', detail: `${baseArea} × ${data.height} = ${product}` },
+          { text: 'Take one-third of the product.', detail: `${product} ÷ 3 = ${answer}` },
+          { text: `Use cubic ${unitName(data.unit)} for volume.`, detail: `${answer} cubic ${unitName(data.unit)}` },
+        ],
+      }
+    }
+
+    const data = drawSphere(context)
+    const unrounded = (4 * GED_PI * data.radius ** 3) / 3
+    const answer = roundToNearestTenth(unrounded)
+    return {
+      prompt: `Find the sphere's volume in cubic ${unitName(data.unit)}. Use π = 3.14 and round to the nearest tenth.`,
+      display: { kind: 'diagram', diagram: data },
+      answer: { kind: 'approx', value: answer, tolerance: ROUNDING_TOLERANCE },
+      keypad: { allowDecimal: true },
+      hint: 'Cube the radius, multiply by 3.14, then use four-thirds.',
+      solution: [
+        { text: 'Cube the radius.', detail: `${data.radius} × ${data.radius} × ${data.radius} = ${data.radius ** 3}` },
+        { text: 'Multiply by 4 and 3.14.', detail: `4 × 3.14 × ${data.radius ** 3} = ${4 * GED_PI * data.radius ** 3}` },
+        { text: 'Divide by 3 and round.', detail: `${unrounded} ≈ ${answer}` },
+      ],
+    }
+  },
+})
+
+const surfaceArea = defineSkill({
+  id: 'surface-area',
+  name: 'Surface Area',
+  blurb: 'Add up every face',
+  teachingLine: 'A net shows every face that must be added.',
+  build(context) {
+    const data = drawPrism(context, 'surface-area')
+    const lengthWidth = data.length * data.width
+    const lengthHeight = data.length * data.height
+    const widthHeight = data.width * data.height
+    const answer = 2 * lengthWidth + 2 * lengthHeight + 2 * widthHeight
+
+    return {
+      prompt: `Find the surface area of this prism in square ${unitName(data.unit)}.`,
+      display: { kind: 'diagram', diagram: data },
+      answer: intAnswer(answer),
+      hint: 'Add the areas of all six faces in the net.',
+      solution: [
+        { text: 'Find each pair of face areas.', detail: `${lengthWidth}, ${lengthHeight}, and ${widthHeight}` },
+        { text: 'Double each pair for both faces.', detail: `2(${lengthWidth}) + 2(${lengthHeight}) + 2(${widthHeight})` },
+        { text: 'Add all six face areas.', detail: `${2 * lengthWidth} + ${2 * lengthHeight} + ${2 * widthHeight} = ${answer}` },
+        { text: `Use square ${unitName(data.unit)} for area.`, detail: `${answer} square ${unitName(data.unit)}` },
+      ],
+    }
+  },
+})
+
+const pythagorean = defineSkill({
+  id: 'pythagorean',
+  name: 'Pythagorean Theorem',
+  blurb: 'Find a missing side',
+  teachingLine: 'The hypotenuse is longest and sits opposite the right angle.',
+  build(context) {
+    const data = drawPythagorean(context)
+    if (data.missingSide === 'hypotenuse') {
+      const sumOfSquares = data.leg1 ** 2 + data.leg2 ** 2
+      const answer = Math.sqrt(sumOfSquares)
+      const wrongPlacement = roundToNearestTenth(Math.sqrt(Math.abs(data.leg1 ** 2 - data.leg2 ** 2)))
+      const unrooted = sumOfSquares
+      return {
+        prompt: `Find the missing side of this right triangle in ${unitName(data.unit)}.`,
+        display: { kind: 'diagram', diagram: data },
+        answer: intAnswer(answer),
+        keypad: { allowDecimal: true },
+        misconceptions: [
+          {
+            value: wrongPlacement,
+            tag: 'wrong-hypotenuse-placement',
+            nudge: 'Keep the hypotenuse alone; add the two leg squares.',
+          },
+          {
+            value: unrooted,
+            tag: 'stopped-before-square-root',
+            nudge: 'Take the square root after adding the leg squares.',
+          },
+        ],
+        hint: 'Add the leg squares, then take the square root.',
+        solution: [
+          { text: 'Square both known legs.', detail: `${data.leg1}² + ${data.leg2}² = ${sumOfSquares}` },
+          { text: 'Take the square root.', detail: `√${sumOfSquares} = ${answer}` },
+          { text: `Use ${unitName(data.unit)} for the missing side.`, detail: `${answer} ${unitName(data.unit)}` },
+        ],
+      }
+    }
+
+    const hypotenuseSquare = data.hypotenuse ** 2
+    const knownLegSquare = data.leg ** 2
+    const differenceOfSquares = hypotenuseSquare - knownLegSquare
+    const answer = Math.sqrt(differenceOfSquares)
+    const wrongPlacement = roundToNearestTenth(Math.sqrt(hypotenuseSquare + knownLegSquare))
+    const unrooted = differenceOfSquares
+    return {
+      prompt: `Find the missing side of this right triangle in ${unitName(data.unit)}.`,
+      display: { kind: 'diagram', diagram: data },
+      answer: intAnswer(answer),
+      keypad: { allowDecimal: true },
+      misconceptions: [
+        {
+          value: wrongPlacement,
+          tag: 'wrong-hypotenuse-placement',
+          nudge: 'Keep the hypotenuse squared alone; subtract the known leg square.',
+        },
+        {
+          value: unrooted,
+          tag: 'stopped-before-square-root',
+          nudge: 'Take the square root after subtracting the leg square.',
+        },
+      ],
+      hint: 'Subtract the known leg square from the hypotenuse square, then root.',
+      solution: [
+        { text: 'Square the hypotenuse and known leg.', detail: `${data.hypotenuse}² − ${data.leg}² = ${differenceOfSquares}` },
+        { text: 'Take the square root.', detail: `√${differenceOfSquares} = ${answer}` },
+        { text: `Use ${unitName(data.unit)} for the missing side.`, detail: `${answer} ${unitName(data.unit)}` },
+      ],
+    }
+  },
+})
+
+export const unit20: [
+  typeof perimeter,
+  typeof areaRectangle,
+  typeof areaTriangle,
+  typeof areaParallelogramTrapezoid,
+  typeof circumference,
+  typeof areaCircle,
+  typeof compositeFigures,
+  typeof volumePrism,
+  typeof volumeCylinder,
+  typeof volumeConePyramidSphere,
+  typeof surfaceArea,
+  typeof pythagorean,
+] = [
   perimeter,
   areaRectangle,
   areaTriangle,
   areaParallelogramTrapezoid,
   circumference,
   areaCircle,
+  compositeFigures,
+  volumePrism,
+  volumeCylinder,
+  volumeConePyramidSphere,
+  surfaceArea,
+  pythagorean,
 ]

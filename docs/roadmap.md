@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 179 of 201 skills are playable.** Stages A through F have complete playable content.
-Stage G opens the first six Unit 20 geometry skills; the remaining Stage G content and Stage H
+**Status: 185 of 201 skills are playable.** Stages A through F have complete playable content.
+Stage G opens Unit 20 through Pythagorean theorem; the remaining Stage G content and Stage H
 are still planned. Stage E is complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17, 18
 and 19 are complete.
 Choice input,
@@ -1167,10 +1167,13 @@ shows before a lesson's first problem.
         3.14) and how a rounded answer is checked, which is what the `approx` answer arm with its
         tolerance had been waiting for since before anything used it. Six generated skills now
         provide exact polygon answers, rounded circle answers, accessible local figures, formula
-        choices, wall diagnoses, and reviewed intros; 20b, 20c, and Unit 21 remain unchanged.
-      - **20b** `composite-figures`–`pythagorean` — `surface-area` (20.11) is the heaviest drawing
+        choices, wall diagnoses, and reviewed intros; 20b is shipped, while 20c and Unit 21 remain open.
+      - [x] **20b** `composite-figures`–`pythagorean` — **shipped 2026-08-30**. Composite figures,
+        rectangular prisms, cylinders, cones, pyramids, spheres, a six-face surface-area net,
+        and right triangles now provide derived dimensions, neutral formula choices, exact or
+        rounded answers, reviewed intros, and wall diagnoses. `surface-area` (20.11) is the heaviest drawing
         in the course and wants a net rather than a solid; `pythagorean` (20.12) is a wall on
-        hypotenuse placement and needs item 17's radical.
+        hypotenuse placement and uses item 17's radical. 20c and Unit 21 remain unchanged.
       - **20c** `similar-figures` — paired figures at a scale, which is a second figure on screen
         and the reason it is its own increment rather than a tail on 20b.
       - **21a** `mean`–`read-scatterplot` — 21.1–21.4 need only a list of values; 21.5 and 21.6

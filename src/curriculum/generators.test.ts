@@ -501,6 +501,12 @@ const notationFraction = (numerator: string, denominator: string): MathNotation 
   denominator: notationText(denominator),
 })
 
+const notationFractionNodes = (numerator: MathNotation, denominator: MathNotation): MathNotation => ({
+  kind: 'fraction',
+  numerator,
+  denominator,
+})
+
 const notationMixed = (whole: number, numerator: number, denominator: number): MathNotation => ({
   kind: 'row',
   children: [notationText(String(whole)), notationFraction(String(numerator), String(denominator))],
@@ -586,6 +592,56 @@ const expectedGeometryFormulas = (operation: GeometryDiagram['operation']): Arra
           label: 'A equals pi times r squared',
         },
       ]
+    case 'area-composite':
+      return [
+        { notation: { kind: 'row', children: [notationText('P = '), notationText('2l + 2w')] }, label: 'P equals 2l plus 2w' },
+        { notation: { kind: 'row', children: [notationText('A = '), notationText('lw')] }, label: 'A equals l times w' },
+      ]
+    case 'volume-prism':
+    case 'volume-pyramid':
+      return [
+        { notation: { kind: 'row', children: [notationText('V = '), notationText('Bh')] }, label: 'V equals B times h' },
+        { notation: { kind: 'row', children: [notationText('V = '), notationFraction('Bh', '3')] }, label: 'V equals B times h divided by 3' },
+      ]
+    case 'volume-cylinder':
+    case 'volume-cone':
+      return [
+        {
+          notation: { kind: 'row', children: [notationText('V = '), { kind: 'row', children: [notationText('π'), notationSuperscript('r', '2'), notationText('h')] }] },
+          label: 'V equals pi times r squared times h',
+        },
+        {
+          notation: { kind: 'row', children: [notationText('V = '), notationFractionNodes({ kind: 'row', children: [notationText('π'), notationSuperscript('r', '2'), notationText('h')] }, notationText('3'))] },
+          label: 'V equals pi times r squared times h divided by 3',
+        },
+      ]
+    case 'volume-sphere':
+      return [
+        {
+          notation: { kind: 'row', children: [notationText('V = '), notationFractionNodes({ kind: 'row', children: [notationText('4π'), notationSuperscript('r', '3')] }, notationText('3'))] },
+          label: 'V equals four pi r cubed divided by 3',
+        },
+        {
+          notation: { kind: 'row', children: [notationText('SA = '), { kind: 'row', children: [notationText('4π'), notationSuperscript('r', '2')] }] },
+          label: 'SA equals four pi r squared',
+        },
+      ]
+    case 'surface-area':
+      return [
+        { notation: { kind: 'row', children: [notationText('SA = '), notationText('2lw + 2lh + 2wh')] }, label: 'SA equals 2lw plus 2lh plus 2wh' },
+        { notation: { kind: 'row', children: [notationText('V = '), notationText('lwh')] }, label: 'V equals l times w times h' },
+      ]
+    case 'pythagorean':
+      return [
+        {
+          notation: { kind: 'row', children: [notationText('c = '), { kind: 'root', radicand: { kind: 'row', children: [notationSuperscript('a', '2'), notationText(' + '), notationSuperscript('b', '2')] } }] },
+          label: 'c equals the square root of a squared plus b squared',
+        },
+        {
+          notation: { kind: 'row', children: [notationText('a = '), { kind: 'root', radicand: { kind: 'row', children: [notationSuperscript('c', '2'), notationText(' − '), notationSuperscript('b', '2')] } }] },
+          label: 'a equals the square root of c squared minus b squared',
+        },
+      ]
     default: {
       const unhandled: never = operation
       throw new Error(`Unknown geometry operation: ${unhandled}`)
@@ -658,6 +714,88 @@ const expectedGeometry = (data: GeometryDiagram): ExpectedGeometry => {
         tolerance: 0.05,
       }
     }
+    case 'area-composite':
+      return {
+        label: `L-shaped composite figure with outer length ${data.outerLength} ${data.unit}, outer width ${data.outerWidth} ${data.unit}, and corner cut-out ${data.cutoutLength} by ${data.cutoutWidth} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the area of this composite figure in square ${unit}.`,
+        answer: data.outerLength * data.outerWidth - data.cutoutLength * data.cutoutWidth,
+        values: [data.outerLength, data.outerWidth, data.cutoutLength, data.cutoutWidth],
+      }
+    case 'volume-prism':
+      return {
+        label: `Rectangular prism with length ${data.length} ${data.unit}, width ${data.width} ${data.unit}, and height ${data.height} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the volume of this prism in cubic ${unit}.`,
+        answer: data.length * data.width * data.height,
+        values: [data.length, data.width, data.height],
+      }
+    case 'volume-cylinder': {
+      const answer = Math.round((3.14 * data.radius ** 2 * data.height) * 10) / 10
+      return {
+        label: `Cylinder with radius ${data.radius} ${data.unit} and perpendicular height ${data.height} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the cylinder's volume in cubic ${unit}. Use π = 3.14 and round to the nearest tenth.`,
+        answer,
+        values: [data.radius, data.height],
+        tolerance: 0.05,
+      }
+    }
+    case 'volume-cone': {
+      const answer = Math.round(((3.14 * data.radius ** 2 * data.height) / 3) * 10) / 10
+      return {
+        label: `Cone with radius ${data.radius} ${data.unit} and perpendicular height ${data.height} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the cone's volume in cubic ${unit}. Use π = 3.14 and round to the nearest tenth.`,
+        answer,
+        values: [data.radius, data.height],
+        tolerance: 0.05,
+      }
+    }
+    case 'volume-pyramid':
+      return {
+        label: `Rectangular pyramid with base length ${data.baseLength} ${data.unit}, base width ${data.baseWidth} ${data.unit}, and perpendicular height ${data.height} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the pyramid's volume in cubic ${unit}.`,
+        answer: (data.baseLength * data.baseWidth * data.height) / 3,
+        values: [data.baseLength, data.baseWidth, data.height],
+      }
+    case 'volume-sphere': {
+      const answer = Math.round(((4 * 3.14 * data.radius ** 3) / 3) * 10) / 10
+      return {
+        label: `Sphere with radius ${data.radius} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the sphere's volume in cubic ${unit}. Use π = 3.14 and round to the nearest tenth.`,
+        answer,
+        values: [data.radius],
+        tolerance: 0.05,
+      }
+    }
+    case 'surface-area':
+      return {
+        label: `Rectangular-prism net with length ${data.length} ${data.unit}, width ${data.width} ${data.unit}, and height ${data.height} ${data.unit}`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the surface area of this prism in square ${unit}.`,
+        answer: 2 * data.length * data.width + 2 * data.length * data.height + 2 * data.width * data.height,
+        values: [data.length, data.width, data.height],
+      }
+    case 'pythagorean':
+      if (data.missingSide === 'hypotenuse') {
+        return {
+          label: `Right triangle with legs ${data.leg1} ${data.unit} and ${data.leg2} ${data.unit}, and a missing hypotenuse`,
+          formulas: expectedGeometryFormulas(data.operation),
+          prompt: `Find the missing side of this right triangle in ${unit}.`,
+          answer: Math.sqrt(data.leg1 ** 2 + data.leg2 ** 2),
+          values: [data.leg1, data.leg2],
+        }
+      }
+      return {
+        label: `Right triangle with known leg ${data.leg} ${data.unit}, hypotenuse ${data.hypotenuse} ${data.unit}, and a missing leg`,
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the missing side of this right triangle in ${unit}.`,
+        answer: Math.sqrt(data.hypotenuse ** 2 - data.leg ** 2),
+        values: [data.leg, data.hypotenuse],
+      }
     default: {
       const unhandled: never = data
       throw new Error(`Unknown geometry diagram: ${JSON.stringify(unhandled)}`)
@@ -1940,15 +2078,15 @@ function recompute(problem: Problem): number | string {
       if (actualLabel !== expected.label || JSON.stringify(actualFormulas) !== JSON.stringify(expected.formulas)) {
         throw new Error(`${problem.skillId}: visible geometry labels or formulas disagree with its data`)
       }
-      const isCircle = display.diagram.operation === 'circumference' || display.diagram.operation === 'area-circle'
-      if (isCircle) {
+      const isApproximate = expected.tolerance !== undefined
+      if (isApproximate) {
         if (problem.answer.kind !== 'approx' || problem.answer.value !== expected.answer || problem.answer.tolerance !== expected.tolerance) {
           throw new Error(
-            `${problem.skillId}: circle answer must be ${expected.answer} ±${expected.tolerance}`,
+            `${problem.skillId}: ${display.diagram.operation === 'circumference' || display.diagram.operation === 'area-circle' ? 'circle' : 'approximate geometry'} answer must be ${expected.answer} ±${expected.tolerance}`,
           )
         }
       } else if (problem.answer.kind !== 'exact') {
-        throw new Error(`${problem.skillId}: polygon answer must be exact`)
+        throw new Error(`${problem.skillId}: exact geometry answer must be exact`)
       }
       return expected.answer
     }
@@ -2612,6 +2750,22 @@ function sourceMagnitude(problem: Problem): number {
           return [data.radius]
         case 'area-circle':
           return [data.diameter]
+        case 'area-composite':
+          return [data.outerLength, data.outerWidth, data.cutoutLength, data.cutoutWidth]
+        case 'volume-prism':
+        case 'surface-area':
+          return [data.length, data.width, data.height]
+        case 'volume-cylinder':
+        case 'volume-cone':
+          return [data.radius, data.height]
+        case 'volume-pyramid':
+          return [data.baseLength, data.baseWidth, data.height]
+        case 'volume-sphere':
+          return [data.radius]
+        case 'pythagorean':
+          return data.missingSide === 'hypotenuse'
+            ? [data.leg1, data.leg2]
+            : [data.leg, data.hypotenuse]
         default: {
           const unhandled: never = data
           throw new Error(`Unknown geometry operation: ${JSON.stringify(unhandled)}`)
