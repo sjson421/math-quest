@@ -7,9 +7,15 @@ browser and can be installed on devices that support web apps.
 ## Status: playable foundations, whole course mapped
 
 **179 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
-streaks, stage checkpoints, a companion character the learner chooses and dresses, a pin that
+stage checkpoints, a companion character the learner chooses and dresses, a pin that
 climbs through five tiers as the course is worked through, a room to decorate, and progress
 backup.
+
+Day streaks carry stakes: a run pays a rising coin multiplier, announces milestones at 3, 7,
+14, 30 and 100 days, and opens three cosmetics that cannot be bought any other way. A missed
+day breaks it unless a bought freeze covers that day, which happens on its own the next time
+the app opens — at most two are held, because a streak that can simply be bought stops
+measuring anything. An item bought behind a streak stays owned once the streak is gone.
 
 The rest of the course now exists as data rather than intent: all **201 skills** across 8
 stages and 23 units are declared in `src/curriculum/manifest/`, with prerequisites, unit

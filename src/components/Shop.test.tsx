@@ -234,3 +234,31 @@ describe('the streak section', () => {
       .toBeGreaterThan(doubled.indexOf('1.5'))
   })
 })
+
+describe('items behind a streak', () => {
+  const ember = cosmetics.find((c) => c.id === 'ember-scarf')!
+
+  it('names the day the item opens rather than only saying it is locked', () => {
+    const html = render({ coins: 10_000, streakCount: 0 })
+
+    expect(html).toContain(`${ember.requiresStreak}-day streak`)
+    expect(html, 'and does not offer a purchase that would be refused').not.toContain(
+      `Buy · ${ember.price}`,
+    )
+  })
+
+  it('offers it once the streak reaches the day', () => {
+    const html = render({ coins: 10_000, streakCount: ember.requiresStreak })
+
+    expect(html).toContain(`Buy · ${ember.price}`)
+  })
+
+  it('keeps showing it as owned after the streak that unlocked it breaks', () => {
+    const html = render({ coins: 0, streakCount: 0, inventory: [ember.id] })
+
+    expect(html).toContain('Owned')
+    expect(html, 'never re-locked once bought').not.toContain(
+      `${ember.requiresStreak}-day streak`,
+    )
+  })
+})

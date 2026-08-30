@@ -27,7 +27,12 @@ import { canHoldFreeze, STREAK_FREEZE_PRICE } from './streak'
 import type { Progress } from '../store/progress'
 
 /** Where the learner stands with one item. What a shop card renders from. */
-export type ItemStanding = 'in-use' | 'owned' | 'affordable' | 'out-of-reach'
+export type ItemStanding =
+  | 'in-use'
+  | 'owned'
+  | 'streak-locked'
+  | 'affordable'
+  | 'out-of-reach'
 
 /**
  * Owning something is having bought it — with the one exception that costs
@@ -69,9 +74,18 @@ const without = <T extends object, K extends keyof T>(map: T, slot: K): T => {
   return next
 }
 
+/**
+ * **Ownership is checked before the streak, and the order is the promise.**
+ * An item bought at a hundred days stays owned, worn and equippable through
+ * every broken streak afterwards: the gate decides what is still to come and
+ * never reaches back for what the learner already has. Swapping these two lines
+ * would confiscate a cosmetic for missing a day.
+ */
 export function standing(progress: Progress, item: CatalogueItem): ItemStanding {
   if (inUse(progress, item) === item.id) return 'in-use'
   if (owns(progress, item.id)) return 'owned'
+  if (progress.streakCount < (item.requiresStreak ?? 0)) return 'streak-locked'
+
   return progress.coins >= item.price ? 'affordable' : 'out-of-reach'
 }
 
@@ -86,8 +100,11 @@ export function standing(progress: Progress, item: CatalogueItem): ItemStanding 
 export function buy(progress: Progress, id: string): Progress | null {
   const item = itemById.get(id)
   if (!item) return null
-  if (owns(progress, id)) return null
-  if (progress.coins < item.price) return null
+  // Asked as one question rather than re-listing owned, locked and affordable
+  // here. A shop card and a purchase that decide separately are a shop card
+  // and a purchase that can disagree — which is exactly how the streak gate
+  // first shipped, showing a lock over a buy that still went through.
+  if (standing(progress, item) !== 'affordable') return null
 
   return {
     ...progress,

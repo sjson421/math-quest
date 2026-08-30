@@ -1265,6 +1265,14 @@ shows before a lesson's first problem.
 
       Last because it is the only item nothing else depends on.
 
+      **Note, off-roadmap work landed here.** The streak-stakes branch shipped the streak
+      model (`src/lib/streak.ts`), freezes, milestones, a coin multiplier, streak-locked
+      cosmetics, and a home-screen card that **already warns when a live streak has no lesson
+      yet today**. That warning is 31a's nudge. What is left of 31a is whatever the proposal
+      wants beyond it — a nudge somewhere other than the home screen, or on returning to the
+      app — and 31b is untouched. Re-scope this item against `openspec/specs/streak-progression`
+      before proposing it rather than building the card a second time.
+
       **31a · The in-app nudge.** Works on every platform and asks for no permission, and the
       state is already there: `streakCount` and `lastActiveDay` are on the record and the store
       breaks a stale streak on load, so this reads existing values rather than adding any.

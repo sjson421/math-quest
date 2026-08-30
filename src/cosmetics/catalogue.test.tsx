@@ -123,6 +123,19 @@ describe('every catalogue item', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
+  it('renders no coordinate that arithmetic lost', () => {
+    // Every item is positioned from the wearer's anchors, so a missing or
+    // mistyped anchor becomes `NaN` inside a `d` string rather than an error.
+    // The shape then silently does not draw, which passes every other test
+    // here — including the stroke widths, which are literals.
+    for (const item of catalogue) {
+      const markup = markupOfItem(item)
+
+      expect(markup, `${item.id} has NaN in its geometry`).not.toContain('NaN')
+      expect(markup, `${item.id} has undefined in its geometry`).not.toContain('undefined')
+    }
+  })
+
   it('strokes no thinner than 2.5 units — below that it vanishes at 92px', () => {
     for (const item of catalogue) {
       const widths = strokeWidths(markupOfItem(item))

@@ -18,12 +18,15 @@ import {
   decorations,
 } from '../cosmetics'
 import { initialProgress, type Progress } from '../store/progress'
-import { buy, equip, owns, standing, unequip } from './wardrobe'
+import { MAX_STREAK_FREEZES, STREAK_FREEZE_PRICE } from './streak'
+import { buy, buyFreeze, equip, freezeStanding, owns, standing, unequip } from './wardrobe'
 
 const glasses = cosmetics.find((c) => c.id === 'round-glasses')!
 const bows = cosmetics.find((c) => c.id === 'ear-bows')!
 const hat = cosmetics.find((c) => c.id === 'party-hat')!
 const pip = characters.find((c) => c.id === DEFAULT_CHARACTER)!
+/** The cheapest streak-locked item, so its price never masks its gate. */
+const ember = cosmetics.find((c) => c.id === 'ember-scarf')!
 const mochi = characters.find((c) => c.id === 'mochi')!
 
 const learner = (overrides: Partial<Progress> = {}): Progress => ({
@@ -354,5 +357,86 @@ describe('characters', () => {
     for (const slot of [...COSMETIC_SLOTS, ...ROOM_SLOTS]) {
       expect(unequip(played, slot)?.character ?? played.character).toBe(mochi.id)
     }
+  })
+})
+
+describe('items behind a streak', () => {
+  const rich = (streakCount: number) => learner({ coins: 10_000, streakCount })
+
+  it('locks one the streak has not reached, however many coins are held', () => {
+    expect(standing(rich(ember.requiresStreak! - 1), ember)).toBe('streak-locked')
+  })
+
+  it('opens it on the day named and not the day before', () => {
+    expect(standing(rich(ember.requiresStreak!), ember)).toBe('affordable')
+  })
+
+  it('refuses the purchase, not merely the button', () => {
+    // The card is what shows a lock; this is what makes it one. A tap that got
+    // through some other way must not be able to buy past the gate.
+    expect(buy(rich(ember.requiresStreak! - 1), ember.id)).toBeNull()
+    expect(buy(rich(ember.requiresStreak!), ember.id)).not.toBeNull()
+  })
+
+  it('still reports out-of-reach past the gate when the coins are short', () => {
+    const poor = learner({ coins: ember.price - 1, streakCount: ember.requiresStreak! })
+
+    expect(standing(poor, ember)).toBe('out-of-reach')
+  })
+
+  it('leaves an unlocked item alone at a streak of zero', () => {
+    expect(standing(learner({ streakCount: 0 }), glasses)).toBe('affordable')
+  })
+
+  /**
+   * The promise the gate is under, and the one thing about it that must never
+   * regress: it decides what is still to come, never what is already held.
+   */
+  it('keeps an item owned when the streak that unlocked it breaks', () => {
+    const bought = buy(rich(ember.requiresStreak!), ember.id)!
+    const broken = { ...bought, streakCount: 0 }
+
+    expect(standing(broken, ember), 'owned outranks the gate').toBe('owned')
+    expect(owns(broken, ember.id)).toBe(true)
+  })
+
+  it('keeps it wearable, and re-wearable, on a broken streak', () => {
+    const bought = buy(rich(ember.requiresStreak!), ember.id)!
+    const worn = equip({ ...bought, streakCount: 0 }, ember.id)!
+
+    expect(worn.equipped[ember.slot]).toBe(ember.id)
+    expect(standing(worn, ember)).toBe('in-use')
+
+    const off = unequip(worn, ember.slot)!
+    expect(equip(off, ember.id), 'can be put back on').not.toBeNull()
+  })
+})
+
+describe('buying a streak freeze', () => {
+  it('charges the price and hands over one', () => {
+    const after = buyFreeze(learner({ coins: 100 }))
+
+    expect(after!.coins).toBe(100 - STREAK_FREEZE_PRICE)
+    expect(after!.streakFreezes).toBe(1)
+  })
+
+  it('refuses at the cap and when the coins are short', () => {
+    expect(buyFreeze(learner({ coins: 10_000, streakFreezes: MAX_STREAK_FREEZES }))).toBeNull()
+    expect(buyFreeze(learner({ coins: STREAK_FREEZE_PRICE - 1 }))).toBeNull()
+  })
+
+  it('reports the three standings a consumable can be in', () => {
+    expect(freezeStanding(learner({ coins: STREAK_FREEZE_PRICE }))).toBe('affordable')
+    expect(freezeStanding(learner({ coins: 0 }))).toBe('out-of-reach')
+    expect(freezeStanding(learner({ coins: 10_000, streakFreezes: MAX_STREAK_FREEZES }))).toBe(
+      'at-cap',
+    )
+  })
+
+  it('never enters the inventory, so the catalogue rules stay true', () => {
+    const after = buyFreeze(learner({ coins: 100 }))!
+
+    expect(after.inventory).toEqual([])
+    expect(owns(after, 'streak-freeze')).toBe(false)
   })
 })

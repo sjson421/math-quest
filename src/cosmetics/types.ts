@@ -133,6 +133,21 @@ type Owned = {
   /** Shown in the shop. */
   name: string
   price: number
+  /**
+   * Days of streak needed before this can be bought at all. Absent means it is
+   * for sale from the first lesson, which is every item that shipped before
+   * streaks had stakes.
+   *
+   * **A gate on buying, never on keeping.** `standing()` checks ownership
+   * first, so an item bought at a hundred days stays worn, equippable and
+   * owned through every broken streak afterwards. The streak decides what is
+   * still to come; it never reaches back for what the learner already has.
+   *
+   * On `Owned` rather than on `Cosmetic` because it is a fact about acquiring
+   * something, which is what this type is — and one field here is what lets
+   * `standing()` ask the question once instead of narrowing by kind first.
+   */
+  requiresStreak?: number
 }
 
 export type Cosmetic = Owned & {

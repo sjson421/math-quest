@@ -266,6 +266,13 @@ function Card({
   const action: { caption: string; label: string; run: (() => void) | null } = {
     'in-use': { caption: words.using, label: words.stop, run: onUnequip ?? null },
     owned: { caption: 'Owned', label: words.start, run: onEquip },
+    // Names the day it opens rather than saying "locked". A gate the learner
+    // cannot see the far side of is a gate they cannot decide to walk toward.
+    'streak-locked': {
+      caption: `${item.price} coins`,
+      label: `🔒 ${item.requiresStreak}-day streak`,
+      run: null,
+    },
     affordable: { caption: `${item.price} coins`, label: `Buy · ${item.price}`, run: onBuy },
     'out-of-reach': {
       caption: `${item.price} coins`,

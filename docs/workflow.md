@@ -20,7 +20,7 @@ fresh context; `implement-roadmap` applies the audited change; and `review-roadm
 simplifies, verifies, ships, and archives it. Ignored state under `.agent-state/roadmap/`
 carries the exact baseline and gate status between sessions.
 
-- `openspec/specs/` is the **baseline**: what the system does today, forty-one
+- `openspec/specs/` is the **baseline**: what the system does today, forty-five
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
@@ -34,7 +34,7 @@ carries the exact baseline and gate status between sessions.
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`, `root-pair-input`, `cosmetic-wardrobe`, `decorated-room`,
   `math-notation`, `diagram-rendering`, `expression-input`, `coordinate-plane-display`,
-  `coordinate-plane-input`. A change amending built behaviour writes `## MODIFIED
+  `coordinate-plane-input`, `streak-progression`. A change amending built behaviour writes `## MODIFIED
   Requirements` against one of these; `## ADDED` is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.

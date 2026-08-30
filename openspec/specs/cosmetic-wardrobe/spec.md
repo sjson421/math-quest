@@ -114,6 +114,40 @@ buy, so that a record written before characters existed loads with one without a
 - **WHEN** a purchase succeeds
 - **THEN** XP, streak, daily progress, and every skill's mastery are unchanged
 
+### Requirement: A cosmetic may require a streak to buy, never to keep
+
+A cosmetic MAY declare a number of consecutive practised days required before it can be
+bought. Until the learner's streak reaches that number the cosmetic SHALL NOT be
+purchasable at any coin balance, and the shop SHALL name the day it opens rather than
+stating only that it is locked.
+
+**Ownership SHALL outrank the requirement.** A cosmetic already bought SHALL remain owned,
+equippable, worn and re-equippable however far the streak later falls. Losing a streak SHALL
+never take back, hide, or unequip anything the learner has already bought.
+
+The refusal SHALL be enforced where the purchase is decided rather than only where the shop
+card is drawn, so that the gate is a rule rather than a rendering.
+
+A cosmetic that declares no requirement SHALL be purchasable from the first lesson, which is
+every cosmetic that shipped before streaks carried stakes.
+
+#### Scenario: A locked cosmetic cannot be bought at any balance
+
+- **WHEN** a learner whose streak is below a cosmetic's requirement tries to buy it
+- **THEN** the purchase is refused however many coins they hold
+- **AND** the shop names the streak length that would open it
+
+#### Scenario: Reaching the day opens it
+
+- **WHEN** the learner's streak reaches the required number of days
+- **THEN** the cosmetic is offered at its price like any other
+
+#### Scenario: A broken streak does not take back what was bought
+
+- **WHEN** a learner who bought a streak-locked cosmetic loses their streak
+- **THEN** the cosmetic is still owned, still worn if it was worn, and can be removed and
+  put back on
+
 ### Requirement: Only owned cosmetics can be worn
 
 Equipping a cosmetic that is not owned SHALL be refused. An owned cosmetic SHALL be

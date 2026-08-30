@@ -337,6 +337,71 @@ export const cosmetics: Cosmetic[] = [
 
   {
     kind: 'cosmetic',
+    id: 'ember-scarf',
+    slot: 'neck',
+    name: 'Ember scarf',
+    price: 250,
+    requiresStreak: 7,
+    // Crosses `chin` like the mint scarf and is deliberately not its shape:
+    // that one wraps and hangs a single tail, this one knots to one side and
+    // trails two out of phase. The anchor is the only thing they share, which
+    // is the anchor doing its job — two items can occupy one line on three
+    // different bodies without either knowing the other exists.
+    render: (_state, { chin }) => {
+      const w = chin.halfWidth
+      const knot = { x: 100 + w * 0.46, y: chin.y + 6 }
+
+      return (
+        <g>
+          {/* Filled rather than a fat stroke: outlines are capped at 3 units,
+              and a scarf drawn at 3 is a thread. */}
+          <path
+            d={path`M${100 - w} ${chin.y - 3}
+                q${w} 15 ${2 * w} 0
+                q0 12 -3 14
+                q-${w - 3} 11 -${2 * (w - 3)} 0
+                q-3 -2 -3 -14z`}
+            strokeWidth="3"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            style={{ fill: blossom.base, stroke: blossom.deep }}
+          />
+
+          {/* Two lengths off one knot. Different lengths and different periods,
+              because two tails on one timer read as a single forked shape. */}
+          {[
+            { d: path`M${knot.x} ${knot.y} q-5 13 1 24`, stroke: blossom.base, turn: -6, seconds: 3.4 },
+            { d: path`M${knot.x} ${knot.y} q11 11 9 21`, stroke: blossom.deep, turn: 7, seconds: 4.2 },
+          ].map((tail) => (
+            <motion.path
+              key={tail.d}
+              d={tail.d}
+              strokeWidth="3"
+              strokeLinecap="round"
+              animate={{ rotate: [0, tail.turn, 0] }}
+              transition={{ duration: tail.seconds, repeat: Infinity, ease: 'easeInOut' }}
+              style={{
+                fill: 'none',
+                stroke: tail.stroke,
+                transformOrigin: `${knot.x}px ${knot.y}px`,
+              }}
+            />
+          ))}
+
+          <circle
+            cx={knot.x}
+            cy={knot.y}
+            r="6"
+            strokeWidth="2.5"
+            style={{ fill: blossom.soft, stroke: blossom.deep }}
+          />
+        </g>
+      )
+    },
+  },
+
+  {
+    kind: 'cosmetic',
     id: 'butter-crown',
     slot: 'headwear',
     name: 'Butter crown',
@@ -390,6 +455,82 @@ export const cosmetics: Cosmetic[] = [
           />
         ))}
       </g>
+      )
+    },
+  },
+
+  {
+    kind: 'cosmetic',
+    id: 'comet-trail',
+    slot: 'back',
+    name: 'Comet trail',
+    price: 500,
+    requiresStreak: 30,
+    // Step 2, so the body hides the middle of anything drawn here — which is
+    // the one occlusion this item wants. The head sits clear of the silhouette
+    // on the left, the tail thins away clear of it on the right, and what the
+    // body covers is the span between them, so it reads as one object passing
+    // behind rather than two shapes stuck on either side.
+    //
+    // It also has to clear the *ears*, which are opaque cream down to y 102 and
+    // reach further out than the head does — the trap `wings.tsx` records. Both
+    // ends sit below that, level with the shoulder.
+    render: (_state, { shoulder }) => {
+      const w = shoulder.halfWidth
+      // Past the widest point of the body, like the cape's flare, or the whole
+      // item renders inside the silhouette and the learner buys nothing.
+      const reach = w * 1.36
+      const head = { x: 100 - reach, y: shoulder.y + 2 }
+
+      return (
+        <motion.g
+          animate={{ rotate: [-2, 2, -2] }}
+          transition={{ duration: 5.2, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ transformOrigin: `100px ${shoulder.y}px` }}
+        >
+          {/* One tapering band, wide at the head and closing to a point. Two
+              quadratics rather than a dozen segments, per the shape limit. */}
+          <path
+            d={path`M${head.x} ${head.y + 11}
+                Q100 ${shoulder.y + 26} ${100 + reach} ${shoulder.y - 4}
+                Q100 ${shoulder.y + 6} ${head.x} ${head.y - 11} Z`}
+            strokeWidth="2.5"
+            strokeLinejoin="round"
+            strokeLinecap="round"
+            style={{ fill: lilac.soft, stroke: lilac.deep }}
+          />
+
+          <circle
+            cx={head.x}
+            cy={head.y}
+            r="12"
+            strokeWidth="3"
+            style={{ fill: lilac.base, stroke: lilac.deep }}
+          />
+          {/* Deep on base, for the reason the crown's gems are deep on soft: a
+              highlight in the same family's base tint is not a highlight at
+              92px, it is a smudge. */}
+          <circle cx={head.x - 3.5} cy={head.y - 3.5} r="3.5" style={{ fill: lilac.soft }} />
+
+          {/* Sparks off the thin end, out of phase, so the tail reads as
+              travelling rather than as a fin. */}
+          {[0, 1].map((i) => (
+            <motion.circle
+              key={i}
+              cx={100 + reach - i * 13}
+              cy={shoulder.y - 9 - i * 5}
+              r="3.5"
+              animate={{ opacity: [0.35, 1, 0.35] }}
+              transition={{
+                duration: 2.6,
+                repeat: Infinity,
+                delay: i * 0.7,
+                ease: 'easeInOut',
+              }}
+              style={{ fill: lilac.deep }}
+            />
+          ))}
+        </motion.g>
       )
     },
   },
@@ -457,6 +598,66 @@ export const cosmetics: Cosmetic[] = [
           style={{ fill: powder.soft, stroke: powder.deep }}
         />
       </g>
+      )
+    },
+  },
+
+  {
+    kind: 'cosmetic',
+    id: 'aurora-crown',
+    slot: 'headwear',
+    name: 'Aurora crown',
+    price: 900,
+    requiresStreak: 100,
+    // The two-fragment case, and the reason it earns its price: the bands rise
+    // behind the ears and the crest paints over them, exactly as the party
+    // hat's crown does, while the band across the brow passes in front. One
+    // item, one id, two fragments the render order interleaves.
+    //
+    // The bands are the item; the brow band is what holds them on. Splitting it
+    // the other way — bands in front — puts three arcs across a cat's crest.
+    back: (_state, { brow, crown }) => {
+      const w = brow.halfWidth * 0.86
+
+      return (
+        <g>
+          {/* Three arcs off one brow line, at rising heights and thinning
+              tints. They breathe out of phase, which is the `pulse` preset —
+              and the item still reads as three bands with the motion off. */}
+          {[
+            { lift: 16, spread: 1, tint: powder.deep },
+            { lift: 26, spread: 0.78, tint: powder.base },
+            { lift: 34, spread: 0.52, tint: powder.soft },
+          ].map((band, i) => (
+            <motion.path
+              key={band.lift}
+              d={path`M${100 - w * band.spread} ${brow.y}
+                  Q100 ${crown - band.lift * 2} ${100 + w * band.spread} ${brow.y}`}
+              strokeWidth="3"
+              strokeLinecap="round"
+              animate={{ opacity: [0.55, 1, 0.55] }}
+              transition={{
+                duration: 3.6,
+                repeat: Infinity,
+                delay: i * 0.8,
+                ease: 'easeInOut',
+              }}
+              style={{ fill: 'none', stroke: band.tint }}
+            />
+          ))}
+        </g>
+      )
+    },
+    front: (_state, { brow }) => {
+      const w = brow.halfWidth * 0.94
+
+      return (
+        <path
+          d={path`M${100 - w} ${brow.y} h${2 * w} a6 6 0 0 1 0 12 h-${2 * w} a6 6 0 0 1 0 -12z`}
+          strokeWidth="3"
+          strokeLinejoin="round"
+          style={{ fill: powder.base, stroke: powder.deep }}
+        />
       )
     },
   },
