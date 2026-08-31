@@ -436,7 +436,11 @@ function expectedStatisticsList(
   const listData: Extract<StatisticsData, { operation: 'mean' | 'median' | 'mode' | 'range' | 'weighted-mean' }> =
     data.operation === 'read-chart-value' || data.operation === 'scatter-trend'
       ? fail(`${data.operation} needs a chart display`)
-      : data
+      : data.operation === 'basic-probability' ||
+          data.operation === 'compound-probability' ||
+          data.operation === 'counting-outcomes'
+        ? fail(`${data.operation} needs its own probability verification`)
+        : data
 
   if (listData.operation === 'weighted-mean') {
     if (!Array.isArray(listData.entries) || listData.entries.length < 2) {
@@ -519,6 +523,125 @@ function expectedStatisticsList(
 
   wholeStatisticsAnswer(problem, listData.operation)
   return answer
+}
+
+const probabilityPrompt = 'What is the probability of picking a red marble?'
+const probabilityText = (favourable: number, total: number): string =>
+  `A bag holds ${drawn(total)} marbles. ${drawn(favourable)} of them are red.`
+
+const compoundPrompt = (cue: 'and' | 'or'): string =>
+  cue === 'and'
+    ? 'What is the probability of event A and event B?'
+    : 'What is the probability of event A or event B?'
+
+const compoundText = (data: Extract<StatisticsData, { operation: 'compound-probability' }>): string =>
+  data.cue === 'and'
+    ? `Event A has ${drawn(data.firstTotal)} equally likely outcomes, and ${drawn(data.firstFavourable)} are favourable. ` +
+      `Event B has ${drawn(data.secondTotal)} equally likely outcomes, and ${drawn(data.secondFavourable)} are favourable.`
+    : `A group of ${drawn(data.firstTotal)} equally likely outcomes includes ${drawn(data.firstFavourable)} for event A ` +
+      `and ${drawn(data.secondFavourable)} for event B.`
+
+const countingPrompt = 'How many different outcomes are possible?'
+const countingText = (stages: readonly number[]): string => `Choices: ${stages.map(drawn).join(', ')}.`
+
+/**
+ * Independent verification for Unit 21b's three probability arms.
+ *
+ * Kept apart from `expectedStatisticsList`: that function returns a whole
+ * number and asserts one through `wholeStatisticsAnswer`, which explicitly
+ * rejects `requireFraction`. A probability's exact value is a fraction, so it
+ * needs its own recompute branch and its own fraction-form assertion —
+ * `counting-outcomes` stays a whole number and reuses `wholeStatisticsAnswer`
+ * directly.
+ */
+function expectedStatisticsProbability(
+  problem: Problem,
+  data: Extract<StatisticsData, { operation: 'basic-probability' | 'compound-probability' | 'counting-outcomes' }>,
+): number {
+  const fail = (message: string): never => {
+    throw new Error(`${problem.skillId}: ${message}`)
+  }
+
+  if (problem.display.kind !== 'story') {
+    throw new Error(`${problem.skillId}: ${data.operation} needs a story display`)
+  }
+  const text = displayTextForStatistics(problem.display)
+
+  // Shared by every event on every arm: a favourable count outside its total
+  // is a malformed draw, and one that reaches 0 or 1 is a degenerate
+  // probability — a whole number `requireFraction` cannot sensibly ask for.
+  const assertEvent = (favourable: number, total: number, label: string): void => {
+    if (
+      !Number.isSafeInteger(favourable) ||
+      !Number.isSafeInteger(total) ||
+      total <= 0 ||
+      favourable < 0 ||
+      favourable > total
+    ) {
+      fail(`${label} favourable count is outside its total`)
+    }
+    if (favourable === 0 || favourable === total) fail(`${label} probability reaches 0 or 1`)
+  }
+
+  if (data.operation === 'counting-outcomes') {
+    if (!Array.isArray(data.stages) || data.stages.length < 2) {
+      fail('counting-outcomes needs at least two stages')
+    }
+    for (const count of data.stages) {
+      if (!Number.isSafeInteger(count) || count <= 0) {
+        fail('counting-outcomes stage counts must be positive whole numbers')
+      }
+    }
+    if (text !== countingText(data.stages)) fail('visible counting-outcomes choices disagree with their data')
+    if (problem.prompt !== countingPrompt) fail('counting-outcomes prompt disagrees with its data')
+    wholeStatisticsAnswer(problem, data.operation)
+    return data.stages.reduce((product, count) => product * count, 1)
+  }
+
+  const assertFractionAnswer = (): void => {
+    if (problem.inputMode !== 'keypad') fail(`${data.operation} must use keypad input`)
+    if (
+      problem.answer.kind !== 'exact' ||
+      !problem.answer.requireFraction ||
+      problem.answer.requireSimplified ||
+      problem.answer.requireMixed ||
+      problem.answer.requireDecimal
+    ) {
+      fail(`${data.operation} must have a required-fraction exact answer`)
+    }
+    if (!problem.keypad?.allowFraction || problem.keypad.allowDecimal) {
+      fail(`${data.operation} keypad must allow a fraction and no decimal`)
+    }
+  }
+
+  if (data.operation === 'basic-probability') {
+    assertEvent(data.favourable, data.total, 'basic-probability')
+    if (text !== probabilityText(data.favourable, data.total)) {
+      fail('visible probability counts disagree with their data')
+    }
+    if (problem.prompt !== probabilityPrompt) fail('basic-probability prompt disagrees with its data')
+    assertFractionAnswer()
+    return toNumber(rational(data.favourable, data.total))
+  }
+
+  if (data.cue !== 'and' && data.cue !== 'or') fail('compound-probability cue is invalid')
+  assertEvent(data.firstFavourable, data.firstTotal, 'compound-probability first event')
+  assertEvent(data.secondFavourable, data.secondTotal, 'compound-probability second event')
+  if (data.cue === 'or' && data.firstTotal !== data.secondTotal) {
+    fail('compound-probability or must combine one shared outcome set')
+  }
+  if (text !== compoundText(data)) fail('visible compound-probability wording disagrees with its cue')
+  if (problem.prompt !== compoundPrompt(data.cue)) fail('compound-probability prompt disagrees with its cue')
+  assertFractionAnswer()
+
+  const first = rational(data.firstFavourable, data.firstTotal)
+  const second = rational(data.secondFavourable, data.secondTotal)
+  const combined = data.cue === 'and'
+    ? rational(first.n * second.n, first.d * second.d)
+    : rational(first.n * second.d + second.n * first.d, first.d * second.d)
+  const value = toNumber(combined)
+  if (value <= 0 || value >= 1) fail('compound-probability answer must be strictly between 0 and 1')
+  return value
 }
 
 const chartStatisticsPrompt = (category: string, series: string): string =>
@@ -2713,7 +2836,15 @@ function recompute(problem: Problem): number | string {
   }
 
   if (display.kind === 'story' && 'statistics' in display && display.statistics) {
-    return expectedStatisticsList(problem, display.statistics)
+    const stats = display.statistics
+    if (
+      stats.operation === 'basic-probability' ||
+      stats.operation === 'compound-probability' ||
+      stats.operation === 'counting-outcomes'
+    ) {
+      return expectedStatisticsProbability(problem, stats)
+    }
+    return expectedStatisticsList(problem, stats)
   }
 
   if (display.kind === 'story' && display.percent) {
@@ -2877,6 +3008,12 @@ function statisticsSourceValues(data: StatisticsData): number[] {
       return [...data.values]
     case 'weighted-mean':
       return data.entries.flatMap(({ value, weight }) => [value, weight])
+    case 'basic-probability':
+      return [data.favourable, data.total]
+    case 'compound-probability':
+      return [data.firstFavourable, data.firstTotal, data.secondFavourable, data.secondTotal]
+    case 'counting-outcomes':
+      return [...data.stages]
     case 'read-chart-value':
     case 'scatter-trend':
       throw new Error(`Statistics chart operation has no list source values: ${data.operation}`)
@@ -4998,6 +5135,139 @@ describe('recompute', () => {
       if (problem.display.chart.kind !== 'scatter') throw new Error('expected scatter chart')
       problem.display.chart.series[0].trendLine = false
       expect(() => recompute(problem)).toThrow('scatter-trend needs a visible trend line')
+    })
+  })
+
+  describe('probability displays', () => {
+    const probabilityStory = (
+      data: Extract<StatisticsData, { operation: 'basic-probability' | 'compound-probability' }>,
+      answer: { n: number; d: number },
+      text: string,
+    ): Problem => ({
+      skillId: 'synthetic-probability',
+      prompt: data.operation === 'basic-probability' ? probabilityPrompt : compoundPrompt(data.cue),
+      display: { kind: 'story', text, statistics: data },
+      answer: { kind: 'exact', n: answer.n, d: answer.d, requireFraction: true },
+      inputMode: 'keypad',
+      keypad: { allowFraction: true },
+      hint: 'Use every visible count.',
+      solution: [{ text: 'Rebuild the answer from the source.' }],
+      difficulty: 1,
+    })
+
+    const countingStory = (stages: readonly number[], answer: number, text: string): Problem => ({
+      skillId: 'synthetic-probability',
+      prompt: countingPrompt,
+      display: { kind: 'story', text, statistics: { operation: 'counting-outcomes', stages } },
+      answer: intAnswer(answer),
+      inputMode: 'keypad',
+      hint: 'Multiply every visible stage.',
+      solution: [{ text: 'Rebuild the answer from the source.' }],
+      difficulty: 1,
+    })
+
+    it('recomputes every probability operation from typed visible sources', () => {
+      const basic = probabilityStory(
+        { operation: 'basic-probability', favourable: 3, total: 8 },
+        { n: 3, d: 8 },
+        probabilityText(3, 8),
+      )
+      const and: Extract<StatisticsData, { operation: 'compound-probability' }> = {
+        operation: 'compound-probability',
+        cue: 'and',
+        firstFavourable: 1,
+        firstTotal: 2,
+        secondFavourable: 1,
+        secondTotal: 3,
+      }
+      const or: Extract<StatisticsData, { operation: 'compound-probability' }> = {
+        operation: 'compound-probability',
+        cue: 'or',
+        firstFavourable: 3,
+        firstTotal: 10,
+        secondFavourable: 4,
+        secondTotal: 10,
+      }
+      const compoundAnd = probabilityStory(and, { n: 1, d: 6 }, compoundText(and))
+      const compoundOr = probabilityStory(or, { n: 7, d: 10 }, compoundText(or))
+      const counting = countingStory([4, 3, 2], 24, countingText([4, 3, 2]))
+
+      for (const candidate of [basic, compoundAnd, compoundOr]) {
+        expect(answerMismatch(candidate)).toBeUndefined()
+        expect(recompute(candidate)).toBe(answerValue(candidate))
+      }
+      expect(answerMismatch(counting)).toBeUndefined()
+      expect(recompute(counting)).toBe(answerValue(counting))
+    })
+
+    it('rejects probability data that is out of range, degenerate, mismatched, or wrongly formed', () => {
+      const outOfRange = probabilityStory(
+        { operation: 'basic-probability', favourable: 9, total: 8 },
+        { n: 9, d: 8 },
+        probabilityText(9, 8),
+      )
+      expect(() => recompute(outOfRange)).toThrow('basic-probability favourable count is outside its total')
+
+      const certain = probabilityStory(
+        { operation: 'basic-probability', favourable: 8, total: 8 },
+        { n: 1, d: 1 },
+        probabilityText(8, 8),
+      )
+      expect(() => recompute(certain)).toThrow('basic-probability probability reaches 0 or 1')
+
+      const mismatchedCounts = probabilityStory(
+        { operation: 'basic-probability', favourable: 3, total: 8 },
+        { n: 3, d: 8 },
+        'A bag holds 8 marbles. 4 of them are red.',
+      )
+      expect(() => recompute(mismatchedCounts)).toThrow('visible probability counts disagree with their data')
+
+      const and: Extract<StatisticsData, { operation: 'compound-probability' }> = {
+        operation: 'compound-probability',
+        cue: 'and',
+        firstFavourable: 1,
+        firstTotal: 2,
+        secondFavourable: 1,
+        secondTotal: 3,
+      }
+      const wrongCueWording = probabilityStory(and, { n: 1, d: 6 }, compoundText({ ...and, cue: 'or' }))
+      expect(() => recompute(wrongCueWording)).toThrow('visible compound-probability wording disagrees with its cue')
+
+      const mismatchedTotals = probabilityStory(
+        {
+          operation: 'compound-probability',
+          cue: 'or',
+          firstFavourable: 3,
+          firstTotal: 10,
+          secondFavourable: 2,
+          secondTotal: 8,
+        },
+        { n: 19, d: 40 },
+        'placeholder',
+      )
+      expect(() => recompute(mismatchedTotals)).toThrow('compound-probability or must combine one shared outcome set')
+
+      const notFraction = probabilityStory(
+        { operation: 'basic-probability', favourable: 3, total: 8 },
+        { n: 3, d: 8 },
+        probabilityText(3, 8),
+      )
+      notFraction.answer = { kind: 'exact', n: 3, d: 8 }
+      expect(() => recompute(notFraction)).toThrow('basic-probability must have a required-fraction exact answer')
+
+      const noFractionKeypad = probabilityStory(
+        { operation: 'basic-probability', favourable: 3, total: 8 },
+        { n: 3, d: 8 },
+        probabilityText(3, 8),
+      )
+      noFractionKeypad.keypad = { allowDecimal: true }
+      expect(() => recompute(noFractionKeypad)).toThrow('basic-probability keypad must allow a fraction and no decimal')
+
+      const oneStage = countingStory([4], 4, countingText([4]))
+      expect(() => recompute(oneStage)).toThrow('counting-outcomes needs at least two stages')
+
+      const zeroStage = countingStory([4, 0], 0, countingText([4, 0]))
+      expect(() => recompute(zeroStage)).toThrow('counting-outcomes stage counts must be positive whole numbers')
     })
   })
 

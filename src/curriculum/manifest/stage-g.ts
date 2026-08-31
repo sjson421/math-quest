@@ -6,8 +6,10 @@
  *
  * `requires` is the full set this stage's skills need, per the rule stated in
  * stage-e.ts: choice input for the scatter reading, diagram rendering for the
- * shapes, chart rendering from 21.5, and math notation for the formulas the
- * skills apply.
+ * shapes, chart rendering from 21.5, math notation for the formulas the skills
+ * apply, and fraction input for 21.7–21.8's required-fraction probability
+ * answers — declared with its first consumer, unlike Stage E's `choice-input`,
+ * which arrived a unit late.
  */
 
 import type { StageEntry } from './types'
@@ -15,7 +17,7 @@ import type { StageEntry } from './types'
 export const stageG: StageEntry = {
   id: 'stage-g',
   name: 'Geometry & Data',
-  requires: ['choice-input', 'math-notation', 'diagram', 'chart'],
+  requires: ['choice-input', 'math-notation', 'fraction-input', 'diagram', 'chart'],
   units: [
     {
       // The GED *provides* a formula sheet, so every skill here teaches choosing

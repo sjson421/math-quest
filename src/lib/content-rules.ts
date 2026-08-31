@@ -159,6 +159,17 @@ function statisticsLearnerText(data: StatisticsData): string[] {
     case 'read-chart-value':
     case 'scatter-trend':
       return []
+    case 'basic-probability':
+      return [statisticsValueLabel(data.favourable), statisticsValueLabel(data.total)]
+    case 'compound-probability':
+      return [
+        statisticsValueLabel(data.firstFavourable),
+        statisticsValueLabel(data.firstTotal),
+        statisticsValueLabel(data.secondFavourable),
+        statisticsValueLabel(data.secondTotal),
+      ]
+    case 'counting-outcomes':
+      return data.stages.map(statisticsValueLabel)
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled statistics data: ${JSON.stringify(unhandled)}`)

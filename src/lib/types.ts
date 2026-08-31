@@ -501,6 +501,22 @@ export type StatisticsData =
   | { operation: 'weighted-mean'; entries: readonly { value: number; weight: number }[] }
   | { operation: 'read-chart-value'; categoryIndex: number; seriesIndex: number }
   | { operation: 'scatter-trend' }
+  /** `basic-probability`: one event's favourable count out of its total. */
+  | { operation: 'basic-probability'; favourable: number; total: number }
+  /**
+   * `compound-probability`: two events, each with its own favourable and total
+   * count, combined by the stated cue — multiplied for `and`, added for `or`.
+   */
+  | {
+      operation: 'compound-probability'
+      cue: 'and' | 'or'
+      firstFavourable: number
+      firstTotal: number
+      secondFavourable: number
+      secondTotal: number
+    }
+  /** `counting-outcomes`: every independent stage's choice count, in visible order. */
+  | { operation: 'counting-outcomes'; stages: readonly number[] }
 
 /**
  * The source quantities behind Unit 14's equation displays.

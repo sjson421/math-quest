@@ -4,6 +4,7 @@ import { checkAnswer } from '../lib/answer'
 import { assertChart, chartSourceValues, chartTable, scatterTrendSegment, type Chart } from '../lib/chart'
 import { checkTeachingLine } from '../lib/content-rules'
 import { diagnose, generateProblem } from '../lib/generator'
+import { rational, toNumber } from '../lib/rational'
 import type { Difficulty, Problem, StatisticsData } from '../lib/types'
 import { SkillIntro } from '../components/SkillIntro'
 import { manifestIndex } from './index'
@@ -20,6 +21,9 @@ const teachingLines = [
   ['weighted-mean', 'Multiply each value by its weight, then divide by total weight.'],
   ['read-bar-line', 'Match the chart label to its bar or line value.'],
   ['read-scatterplot', 'A trend line shows the overall direction of paired data.'],
+  ['basic-probability', 'Probability compares the outcomes you want with all outcomes.'],
+  ['compound-probability', 'Multiply for and; add for or.'],
+  ['counting-outcomes', 'Multiply the number of choices at each step.'],
 ] as const
 
 type ListOperation = 'mean' | 'median' | 'mode' | 'range' | 'weighted-mean'
@@ -38,12 +42,34 @@ const weightedListText = (entries: readonly { value: number; weight: number }[])
 const promptFor = (operation: ListOperation): string =>
   `What is the ${operation === 'weighted-mean' ? 'weighted mean' : operation} of these values?`
 
+/** Only a denominator with no prime factor besides 2 and 5 has a finite decimal. */
+const isTerminatingDecimal = (denominator: number): boolean => {
+  let remaining = denominator
+  while (remaining % 2 === 0) remaining /= 2
+  while (remaining % 5 === 0) remaining /= 5
+  return remaining === 1
+}
+
 const statisticsOf = (problem: Problem): StatisticsData => {
   if (problem.display.kind === 'story' && 'statistics' in problem.display && problem.display.statistics) {
     return problem.display.statistics
   }
   if (problem.display.kind === 'chart' && problem.display.statistics) return problem.display.statistics
   throw new Error(`${problem.skillId}: expected statistics data`)
+}
+
+/** The exact value a probability arm's carried counts derive, independent of the stated answer. */
+const probabilityAnswer = (data: StatisticsData): number => {
+  if (data.operation === 'basic-probability') return toNumber(rational(data.favourable, data.total))
+  if (data.operation === 'compound-probability') {
+    const first = rational(data.firstFavourable, data.firstTotal)
+    const second = rational(data.secondFavourable, data.secondTotal)
+    return data.cue === 'and'
+      ? toNumber(rational(first.n * second.n, first.d * second.d))
+      : toNumber(rational(first.n * second.d + second.n * first.d, first.d * second.d))
+  }
+  if (data.operation === 'counting-outcomes') return data.stages.reduce((product, count) => product * count, 1)
+  throw new Error(`expected probability data, got ${data.operation}`)
 }
 
 const exactAnswer = (problem: Problem): number => {
@@ -139,9 +165,15 @@ const sourceWork = (problem: Problem): number => {
     ? [...data.values]
     : data.operation === 'weighted-mean'
       ? data.entries.flatMap(({ value, weight }) => [value, weight])
-      : problem.display.kind === 'chart'
-        ? chartSourceValues(problem.display.chart)
-        : []
+      : data.operation === 'basic-probability'
+        ? [data.favourable, data.total]
+        : data.operation === 'compound-probability'
+          ? [data.firstFavourable, data.firstTotal, data.secondFavourable, data.secondTotal]
+          : data.operation === 'counting-outcomes'
+            ? [...data.stages]
+            : problem.display.kind === 'chart'
+              ? chartSourceValues(problem.display.chart)
+              : []
   return values.length + values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
 }
 
@@ -155,7 +187,7 @@ describe.each(unit21.map((candidate) => [candidate.id, candidate] as const))(
 )
 
 describe('Unit 21 shared contracts', () => {
-  it('registers six skills in manifest order and records every field', () => {
+  it('registers nine skills in manifest order and records every field', () => {
     expect(unit21.map(({ id }) => id)).toEqual([
       'mean',
       'median',
@@ -163,6 +195,9 @@ describe('Unit 21 shared contracts', () => {
       'weighted-mean',
       'read-bar-line',
       'read-scatterplot',
+      'basic-probability',
+      'compound-probability',
+      'counting-outcomes',
     ])
     expect(unrenderedKeys(unit21)).toEqual([])
   })
@@ -171,7 +206,13 @@ describe('Unit 21 shared contracts', () => {
     for (const id of ['mean', 'median', 'mode-range', 'weighted-mean']) {
       for (const problem of everyProblem(id)) {
         const data = statisticsOf(problem)
-        if (data.operation === 'read-chart-value' || data.operation === 'scatter-trend') {
+        if (
+          data.operation === 'read-chart-value' ||
+          data.operation === 'scatter-trend' ||
+          data.operation === 'basic-probability' ||
+          data.operation === 'compound-probability' ||
+          data.operation === 'counting-outcomes'
+        ) {
           throw new Error(`${problem.skillId}: expected list operation`)
         }
         const answer = listAnswer(problem, data)
@@ -219,7 +260,14 @@ describe('Unit 21 shared contracts', () => {
     const operations = new Set<string>()
     for (const problem of everyProblem('mode-range')) {
       const data = statisticsOf(problem)
-      if (data.operation === 'read-chart-value' || data.operation === 'scatter-trend' || data.operation === 'weighted-mean') {
+      if (
+        data.operation === 'read-chart-value' ||
+        data.operation === 'scatter-trend' ||
+        data.operation === 'weighted-mean' ||
+        data.operation === 'basic-probability' ||
+        data.operation === 'compound-probability' ||
+        data.operation === 'counting-outcomes'
+      ) {
         throw new Error('expected mode or range data')
       }
       operations.add(data.operation)
@@ -303,6 +351,110 @@ describe('Unit 21 shared contracts', () => {
   })
 })
 
+describe('Unit 21b probability', () => {
+  it('recomputes basic-probability, requires fraction form, and rejects a decimal entry', () => {
+    for (const problem of everyProblem('basic-probability')) {
+      const data = statisticsOf(problem)
+      if (data.operation !== 'basic-probability') throw new Error('expected basic-probability data')
+      expect(data.favourable).toBeGreaterThan(0)
+      expect(data.favourable).toBeLessThan(data.total)
+
+      const exact = rational(data.favourable, data.total)
+      expect(problem.answer).toEqual({ kind: 'exact', ...exact, requireFraction: true })
+      expect(problem.keypad).toEqual({ allowFraction: true })
+      expect(problem.inputMode).toBe('keypad')
+
+      expect(checkAnswer(problem.answer, `${data.favourable}/${data.total}`).status).toBe('correct')
+      expect(checkAnswer(problem.answer, `${data.favourable * 2}/${data.total * 2}`).status).toBe('correct')
+      // Only checkable in decimal form when the reduced denominator terminates
+      // — the pad's one adaptive cell offers the slash, not a decimal point,
+      // so `String(toNumber(...))` would otherwise round-trip a repeating
+      // decimal through too many digits for `parseInput` to accept at all.
+      if (isTerminatingDecimal(exact.d)) {
+        expect(checkAnswer(problem.answer, String(toNumber(exact))).status).toBe('not-fraction')
+      }
+
+      const misconceptions = problem.misconceptions ?? []
+      expect(misconceptions.map(({ tag }) => tag)).toEqual(['favourable-over-remaining'])
+      const [remaining] = misconceptions
+      if (typeof remaining.value !== 'number') throw new Error('expected numeric diagnosis')
+      const remainingFraction = rational(data.favourable, data.total - data.favourable)
+      expect(remaining.value).toBe(toNumber(remainingFraction))
+      expect(diagnose(problem, `${remainingFraction.n}/${remainingFraction.d}`)?.tag).toBe('favourable-over-remaining')
+    }
+  })
+
+  it('keeps both compound-probability wall diagnoses distinct and both cues sampled', () => {
+    const cues = new Set<string>()
+    for (const problem of everyProblem('compound-probability')) {
+      const data = statisticsOf(problem)
+      if (data.operation !== 'compound-probability') throw new Error('expected compound-probability data')
+      cues.add(data.cue)
+
+      const first = rational(data.firstFavourable, data.firstTotal)
+      const second = rational(data.secondFavourable, data.secondTotal)
+      const combined = data.cue === 'and'
+        ? rational(first.n * second.n, first.d * second.d)
+        : rational(first.n * second.d + second.n * first.d, first.d * second.d)
+      const value = toNumber(combined)
+      expect(value).toBeGreaterThan(0)
+      expect(value).toBeLessThan(1)
+      expect(problem.answer).toEqual({ kind: 'exact', ...combined, requireFraction: true })
+      expect(problem.keypad).toEqual({ allowFraction: true })
+
+      const swapped = data.cue === 'and'
+        ? rational(first.n * second.d + second.n * first.d, first.d * second.d)
+        : rational(first.n * second.n, first.d * second.d)
+      const addedNumeratorsDenominators = rational(
+        data.firstFavourable + data.secondFavourable,
+        data.firstTotal + data.secondTotal,
+      )
+
+      const misconceptions = problem.misconceptions ?? []
+      expect(misconceptions.map(({ tag }) => tag)).toEqual([
+        'swapped-operation',
+        'added-numerators-and-denominators',
+      ])
+      expect(misconceptions.map(({ value: v }) => v)).toEqual([
+        toNumber(swapped),
+        toNumber(addedNumeratorsDenominators),
+      ])
+      expect(new Set([value, toNumber(swapped), toNumber(addedNumeratorsDenominators)]).size).toBe(3)
+      // Diagnosed by its exact fraction, not a stringified decimal — the same
+      // reason the basic-probability check above guards on a terminating
+      // denominator: the pad these problems declare has no decimal point.
+      expect(diagnose(problem, `${swapped.n}/${swapped.d}`)?.tag).toBe('swapped-operation')
+      expect(diagnose(problem, `${addedNumeratorsDenominators.n}/${addedNumeratorsDenominators.d}`)?.tag).toBe(
+        'added-numerators-and-denominators',
+      )
+    }
+    expect(cues).toEqual(new Set(['and', 'or']))
+  })
+
+  it('derives counting-outcomes as a product with no fraction form, and a surviving diagnosis', () => {
+    for (const problem of everyProblem('counting-outcomes')) {
+      const data = statisticsOf(problem)
+      if (data.operation !== 'counting-outcomes') throw new Error('expected counting-outcomes data')
+      expect(data.stages.length).toBeGreaterThanOrEqual(2)
+      expect(data.stages.every((count) => Number.isSafeInteger(count) && count >= 2)).toBe(true)
+
+      const product = data.stages.reduce((total, count) => total * count, 1)
+      const sum = data.stages.reduce((total, count) => total + count, 0)
+      expect(exactAnswer(problem)).toBe(product)
+      expect(problem.answer).toMatchObject({ kind: 'exact', d: 1 })
+      expect(problem.keypad).toBeUndefined()
+      expect(checkAnswer(problem.answer, String(product)).status).toBe('correct')
+
+      const misconceptions = problem.misconceptions ?? []
+      expect(misconceptions.map(({ tag }) => tag)).toEqual(['added-stage-counts'])
+      const [added] = misconceptions
+      expect(added.value).toBe(sum)
+      expect(product).not.toBe(sum)
+      expect(diagnose(problem, String(sum))?.tag).toBe('added-stage-counts')
+    }
+  })
+})
+
 describe('Unit 21 teaching lines and intros', () => {
   it.each(teachingLines)('keeps reviewed line for %s', (id, line) => {
     const generator = skill(id)
@@ -318,7 +470,19 @@ describe('Unit 21 teaching lines and intros', () => {
       const first = generateProblem(generator, 1, 1)
       expect(generateProblem(generator, 1, 1)).toEqual(first)
       const data = statisticsOf(first)
-      if (first.display.kind === 'story') {
+      if (
+        data.operation === 'basic-probability' ||
+        data.operation === 'compound-probability' ||
+        data.operation === 'counting-outcomes'
+      ) {
+        const answer = probabilityAnswer(data)
+        if (data.operation === 'counting-outcomes') {
+          expect(exactAnswer(first)).toBe(answer)
+        } else {
+          if (first.answer.kind !== 'exact') throw new Error('expected exact fraction answer')
+          expect(toNumber(rational(first.answer.n, first.answer.d))).toBe(answer)
+        }
+      } else if (first.display.kind === 'story') {
         expect(listAnswer(first, data as ListStatistics)).toBe(exactAnswer(first))
       } else {
         if (first.display.kind !== 'chart') throw new Error('expected chart display')
@@ -355,6 +519,12 @@ describe('Unit 21 teaching lines and intros', () => {
       expect(html).not.toContain('data-chart-answer')
       if (problem.display.kind === 'story') {
         expect(html).toContain(problem.display.text)
+        // A probability intro shows its correct answer as a fraction — the
+        // form `checkAnswer` requires and the exact reason `answerLabel`
+        // never routes a `requireFraction` answer through `decimalLabel`.
+        if (problem.answer.kind === 'exact' && problem.answer.requireFraction) {
+          expect(html).toContain(`${problem.answer.n}/${problem.answer.d}`)
+        }
       } else {
         expect(html).toContain('data-chart-table')
         expect(html).toContain('data-chart-axes')

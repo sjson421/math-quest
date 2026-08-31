@@ -1,5 +1,886 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`Unit 21 recorded output: basic-probability > matches authored sample output 1`] = `
+"--- basic-probability · seed 1 · difficulty 1
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 1 total 5] "A bag holds 5 marbles. 1 of them are red."
+answer   exact 1/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [5]
+step 2   Count the red marbles.   [1]
+step 3   Write red over the total.   [1/5]
+miss     favourable-over-remaining = 0.25   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 12345 · difficulty 1
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 2 total 6] "A bag holds 6 marbles. 2 of them are red."
+answer   exact 1/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [6]
+step 2   Count the red marbles.   [2]
+step 3   Write red over the total.   [2/6]
+miss     favourable-over-remaining = 0.5   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 67890 · difficulty 1
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 3 total 5] "A bag holds 5 marbles. 3 of them are red."
+answer   exact 3/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [5]
+step 2   Count the red marbles.   [3]
+step 3   Write red over the total.   [3/5]
+miss     favourable-over-remaining = 1.5   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 424242 · difficulty 1
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 1 total 4] "A bag holds 4 marbles. 1 of them are red."
+answer   exact 1/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [4]
+step 2   Count the red marbles.   [1]
+step 3   Write red over the total.   [1/4]
+miss     favourable-over-remaining = 0.3333333333333333   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 987654321 · difficulty 1
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 1 total 6] "A bag holds 6 marbles. 1 of them are red."
+answer   exact 1/6 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [6]
+step 2   Count the red marbles.   [1]
+step 3   Write red over the total.   [1/6]
+miss     favourable-over-remaining = 0.2   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 1 · difficulty 2
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 1 total 7] "A bag holds 7 marbles. 1 of them are red."
+answer   exact 1/7 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [7]
+step 2   Count the red marbles.   [1]
+step 3   Write red over the total.   [1/7]
+miss     favourable-over-remaining = 0.16666666666666666   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 12345 · difficulty 2
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 3 total 8] "A bag holds 8 marbles. 3 of them are red."
+answer   exact 3/8 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [8]
+step 2   Count the red marbles.   [3]
+step 3   Write red over the total.   [3/8]
+miss     favourable-over-remaining = 0.6   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 67890 · difficulty 2
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 3 total 6] "A bag holds 6 marbles. 3 of them are red."
+answer   exact 1/2 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [6]
+step 2   Count the red marbles.   [3]
+step 3   Write red over the total.   [3/6]
+miss     favourable-over-remaining = 1   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 424242 · difficulty 2
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 1 total 5] "A bag holds 5 marbles. 1 of them are red."
+answer   exact 1/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [5]
+step 2   Count the red marbles.   [1]
+step 3   Write red over the total.   [1/5]
+miss     favourable-over-remaining = 0.25   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 987654321 · difficulty 2
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 1 total 8] "A bag holds 8 marbles. 1 of them are red."
+answer   exact 1/8 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [8]
+step 2   Count the red marbles.   [1]
+step 3   Write red over the total.   [1/8]
+miss     favourable-over-remaining = 0.14285714285714285   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 1 · difficulty 3
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 1 total 9] "A bag holds 9 marbles. 1 of them are red."
+answer   exact 1/9 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [9]
+step 2   Count the red marbles.   [1]
+step 3   Write red over the total.   [1/9]
+miss     favourable-over-remaining = 0.125   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 12345 · difficulty 3
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 3 total 10] "A bag holds 10 marbles. 3 of them are red."
+answer   exact 3/10 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [10]
+step 2   Count the red marbles.   [3]
+step 3   Write red over the total.   [3/10]
+miss     favourable-over-remaining = 0.42857142857142855   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 67890 · difficulty 3
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 4 total 7] "A bag holds 7 marbles. 4 of them are red."
+answer   exact 4/7 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [7]
+step 2   Count the red marbles.   [4]
+step 3   Write red over the total.   [4/7]
+miss     favourable-over-remaining = 1.3333333333333333   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 424242 · difficulty 3
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 2 total 6] "A bag holds 6 marbles. 2 of them are red."
+answer   exact 1/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [6]
+step 2   Count the red marbles.   [2]
+step 3   Write red over the total.   [2/6]
+miss     favourable-over-remaining = 0.5   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 987654321 · difficulty 3
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 2 total 10] "A bag holds 10 marbles. 2 of them are red."
+answer   exact 1/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [10]
+step 2   Count the red marbles.   [2]
+step 3   Write red over the total.   [2/10]
+miss     favourable-over-remaining = 0.25   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 1 · difficulty 4
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 1 total 11] "A bag holds 11 marbles. 1 of them are red."
+answer   exact 1/11 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [11]
+step 2   Count the red marbles.   [1]
+step 3   Write red over the total.   [1/11]
+miss     favourable-over-remaining = 0.1   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 12345 · difficulty 4
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 4 total 13] "A bag holds 13 marbles. 4 of them are red."
+answer   exact 4/13 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [13]
+step 2   Count the red marbles.   [4]
+step 3   Write red over the total.   [4/13]
+miss     favourable-over-remaining = 0.4444444444444444   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 67890 · difficulty 4
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 6 total 10] "A bag holds 10 marbles. 6 of them are red."
+answer   exact 3/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [10]
+step 2   Count the red marbles.   [6]
+step 3   Write red over the total.   [6/10]
+miss     favourable-over-remaining = 1.5   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 424242 · difficulty 4
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 2 total 8] "A bag holds 8 marbles. 2 of them are red."
+answer   exact 1/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [8]
+step 2   Count the red marbles.   [2]
+step 3   Write red over the total.   [2/8]
+miss     favourable-over-remaining = 0.3333333333333333   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 987654321 · difficulty 4
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 2 total 13] "A bag holds 13 marbles. 2 of them are red."
+answer   exact 2/13 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [13]
+step 2   Count the red marbles.   [2]
+step 3   Write red over the total.   [2/13]
+miss     favourable-over-remaining = 0.18181818181818182   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 1 · difficulty 5
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 1 total 14] "A bag holds 14 marbles. 1 of them are red."
+answer   exact 1/14 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [14]
+step 2   Count the red marbles.   [1]
+step 3   Write red over the total.   [1/14]
+miss     favourable-over-remaining = 0.07692307692307693   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 12345 · difficulty 5
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 5 total 16] "A bag holds 16 marbles. 5 of them are red."
+answer   exact 5/16 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [16]
+step 2   Count the red marbles.   [5]
+step 3   Write red over the total.   [5/16]
+miss     favourable-over-remaining = 0.45454545454545453   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 67890 · difficulty 5
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 7 total 12] "A bag holds 12 marbles. 7 of them are red."
+answer   exact 7/12 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [12]
+step 2   Count the red marbles.   [7]
+step 3   Write red over the total.   [7/12]
+miss     favourable-over-remaining = 1.4   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 424242 · difficulty 5
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 3 total 10] "A bag holds 10 marbles. 3 of them are red."
+answer   exact 3/10 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [10]
+step 2   Count the red marbles.   [3]
+step 3   Write red over the total.   [3/10]
+miss     favourable-over-remaining = 0.42857142857142855   Compare red marbles with every marble, not just the rest.
+
+--- basic-probability · seed 987654321 · difficulty 5
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 3 total 16] "A bag holds 16 marbles. 3 of them are red."
+answer   exact 3/16 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [16]
+step 2   Count the red marbles.   [3]
+step 3   Write red over the total.   [3/16]
+miss     favourable-over-remaining = 0.23076923076923078   Compare red marbles with every marble, not just the rest."
+`;
+
+exports[`Unit 21 recorded output: compound-probability > matches authored sample output 1`] = `
+"--- compound-probability · seed 1 · difficulty 1
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 1/3 second 1/3] "A group of 3 equally likely outcomes includes 1 for event A and 1 for event B."
+answer   exact 2/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [1/3, 1/3]
+step 2   Add the two fractions.   [1/3 + 1/3]
+step 3   That is the exact probability.   [2/3]
+miss     swapped-operation = 0.1111111111111111   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.3333333333333333   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 12345 · difficulty 1
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 1/3 second 1/3] "A group of 3 equally likely outcomes includes 1 for event A and 1 for event B."
+answer   exact 2/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [1/3, 1/3]
+step 2   Add the two fractions.   [1/3 + 1/3]
+step 3   That is the exact probability.   [2/3]
+miss     swapped-operation = 0.1111111111111111   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.3333333333333333   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 67890 · difficulty 1
+prompt   What is the probability of event A and event B?
+display  story [compound-probability and first 2/4 second 1/3] "Event A has 4 equally likely outcomes, and 2 are favourable. Event B has 3 equally likely outcomes, and 1 are favourable."
+answer   exact 1/6 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the two event probabilities.
+step 1   Write each event as a fraction.   [2/4, 1/3]
+step 2   Multiply the two fractions.   [2 × 1 over 4 × 3]
+step 3   That is the exact probability.   [1/6]
+miss     swapped-operation = 0.8333333333333334   And means multiply the two probabilities.
+miss     added-numerators-and-denominators = 0.42857142857142855   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 424242 · difficulty 1
+prompt   What is the probability of event A and event B?
+display  story [compound-probability and first 2/3 second 1/3] "Event A has 3 equally likely outcomes, and 2 are favourable. Event B has 3 equally likely outcomes, and 1 are favourable."
+answer   exact 2/9 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the two event probabilities.
+step 1   Write each event as a fraction.   [2/3, 1/3]
+step 2   Multiply the two fractions.   [2 × 1 over 3 × 3]
+step 3   That is the exact probability.   [2/9]
+miss     swapped-operation = 1   And means multiply the two probabilities.
+miss     added-numerators-and-denominators = 0.5   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 987654321 · difficulty 1
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 1/3 second 1/3] "A group of 3 equally likely outcomes includes 1 for event A and 1 for event B."
+answer   exact 2/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [1/3, 1/3]
+step 2   Add the two fractions.   [1/3 + 1/3]
+step 3   That is the exact probability.   [2/3]
+miss     swapped-operation = 0.1111111111111111   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.3333333333333333   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 1 · difficulty 2
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 1/3 second 1/3] "A group of 3 equally likely outcomes includes 1 for event A and 1 for event B."
+answer   exact 2/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [1/3, 1/3]
+step 2   Add the two fractions.   [1/3 + 1/3]
+step 3   That is the exact probability.   [2/3]
+miss     swapped-operation = 0.1111111111111111   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.3333333333333333   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 12345 · difficulty 2
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 1/3 second 1/3] "A group of 3 equally likely outcomes includes 1 for event A and 1 for event B."
+answer   exact 2/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [1/3, 1/3]
+step 2   Add the two fractions.   [1/3 + 1/3]
+step 3   That is the exact probability.   [2/3]
+miss     swapped-operation = 0.1111111111111111   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.3333333333333333   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 67890 · difficulty 2
+prompt   What is the probability of event A and event B?
+display  story [compound-probability and first 2/4 second 1/4] "Event A has 4 equally likely outcomes, and 2 are favourable. Event B has 4 equally likely outcomes, and 1 are favourable."
+answer   exact 1/8 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the two event probabilities.
+step 1   Write each event as a fraction.   [2/4, 1/4]
+step 2   Multiply the two fractions.   [2 × 1 over 4 × 4]
+step 3   That is the exact probability.   [1/8]
+miss     swapped-operation = 0.75   And means multiply the two probabilities.
+miss     added-numerators-and-denominators = 0.375   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 424242 · difficulty 2
+prompt   What is the probability of event A and event B?
+display  story [compound-probability and first 2/3 second 1/3] "Event A has 3 equally likely outcomes, and 2 are favourable. Event B has 3 equally likely outcomes, and 1 are favourable."
+answer   exact 2/9 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the two event probabilities.
+step 1   Write each event as a fraction.   [2/3, 1/3]
+step 2   Multiply the two fractions.   [2 × 1 over 3 × 3]
+step 3   That is the exact probability.   [2/9]
+miss     swapped-operation = 1   And means multiply the two probabilities.
+miss     added-numerators-and-denominators = 0.5   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 987654321 · difficulty 2
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 1/3 second 1/3] "A group of 3 equally likely outcomes includes 1 for event A and 1 for event B."
+answer   exact 2/3 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [1/3, 1/3]
+step 2   Add the two fractions.   [1/3 + 1/3]
+step 3   That is the exact probability.   [2/3]
+miss     swapped-operation = 0.1111111111111111   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.3333333333333333   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 1 · difficulty 3
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 2/4 second 1/4] "A group of 4 equally likely outcomes includes 2 for event A and 1 for event B."
+answer   exact 3/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [2/4, 1/4]
+step 2   Add the two fractions.   [2/4 + 1/4]
+step 3   That is the exact probability.   [3/4]
+miss     swapped-operation = 0.125   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.375   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 12345 · difficulty 3
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 1/4 second 2/4] "A group of 4 equally likely outcomes includes 1 for event A and 2 for event B."
+answer   exact 3/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [1/4, 2/4]
+step 2   Add the two fractions.   [1/4 + 2/4]
+step 3   That is the exact probability.   [3/4]
+miss     swapped-operation = 0.125   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.375   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 67890 · difficulty 3
+prompt   What is the probability of event A and event B?
+display  story [compound-probability and first 2/5 second 1/5] "Event A has 5 equally likely outcomes, and 2 are favourable. Event B has 5 equally likely outcomes, and 1 are favourable."
+answer   exact 2/25 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the two event probabilities.
+step 1   Write each event as a fraction.   [2/5, 1/5]
+step 2   Multiply the two fractions.   [2 × 1 over 5 × 5]
+step 3   That is the exact probability.   [2/25]
+miss     swapped-operation = 0.6   And means multiply the two probabilities.
+miss     added-numerators-and-denominators = 0.3   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 424242 · difficulty 3
+prompt   What is the probability of event A and event B?
+display  story [compound-probability and first 2/4 second 2/4] "Event A has 4 equally likely outcomes, and 2 are favourable. Event B has 4 equally likely outcomes, and 2 are favourable."
+answer   exact 1/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the two event probabilities.
+step 1   Write each event as a fraction.   [2/4, 2/4]
+step 2   Multiply the two fractions.   [2 × 2 over 4 × 4]
+step 3   That is the exact probability.   [1/4]
+miss     swapped-operation = 1   And means multiply the two probabilities.
+miss     added-numerators-and-denominators = 0.5   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 987654321 · difficulty 3
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 1/4 second 2/4] "A group of 4 equally likely outcomes includes 1 for event A and 2 for event B."
+answer   exact 3/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [1/4, 2/4]
+step 2   Add the two fractions.   [1/4 + 2/4]
+step 3   That is the exact probability.   [3/4]
+miss     swapped-operation = 0.125   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.375   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 1 · difficulty 4
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 2/4 second 1/4] "A group of 4 equally likely outcomes includes 2 for event A and 1 for event B."
+answer   exact 3/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [2/4, 1/4]
+step 2   Add the two fractions.   [2/4 + 1/4]
+step 3   That is the exact probability.   [3/4]
+miss     swapped-operation = 0.125   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.375   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 12345 · difficulty 4
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 2/5 second 2/5] "A group of 5 equally likely outcomes includes 2 for event A and 2 for event B."
+answer   exact 4/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [2/5, 2/5]
+step 2   Add the two fractions.   [2/5 + 2/5]
+step 3   That is the exact probability.   [4/5]
+miss     swapped-operation = 0.16   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.4   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 67890 · difficulty 4
+prompt   What is the probability of event A and event B?
+display  story [compound-probability and first 2/6 second 1/5] "Event A has 6 equally likely outcomes, and 2 are favourable. Event B has 5 equally likely outcomes, and 1 are favourable."
+answer   exact 1/15 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the two event probabilities.
+step 1   Write each event as a fraction.   [2/6, 1/5]
+step 2   Multiply the two fractions.   [2 × 1 over 6 × 5]
+step 3   That is the exact probability.   [1/15]
+miss     swapped-operation = 0.5333333333333333   And means multiply the two probabilities.
+miss     added-numerators-and-denominators = 0.2727272727272727   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 424242 · difficulty 4
+prompt   What is the probability of event A and event B?
+display  story [compound-probability and first 2/4 second 2/4] "Event A has 4 equally likely outcomes, and 2 are favourable. Event B has 4 equally likely outcomes, and 2 are favourable."
+answer   exact 1/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the two event probabilities.
+step 1   Write each event as a fraction.   [2/4, 2/4]
+step 2   Multiply the two fractions.   [2 × 2 over 4 × 4]
+step 3   That is the exact probability.   [1/4]
+miss     swapped-operation = 1   And means multiply the two probabilities.
+miss     added-numerators-and-denominators = 0.5   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 987654321 · difficulty 4
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 1/4 second 2/4] "A group of 4 equally likely outcomes includes 1 for event A and 2 for event B."
+answer   exact 3/4 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [1/4, 2/4]
+step 2   Add the two fractions.   [1/4 + 2/4]
+step 3   That is the exact probability.   [3/4]
+miss     swapped-operation = 0.125   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.375   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 1 · difficulty 5
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 2/5 second 2/5] "A group of 5 equally likely outcomes includes 2 for event A and 2 for event B."
+answer   exact 4/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [2/5, 2/5]
+step 2   Add the two fractions.   [2/5 + 2/5]
+step 3   That is the exact probability.   [4/5]
+miss     swapped-operation = 0.16   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.4   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 12345 · difficulty 5
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 2/6 second 3/6] "A group of 6 equally likely outcomes includes 2 for event A and 3 for event B."
+answer   exact 5/6 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [2/6, 3/6]
+step 2   Add the two fractions.   [2/6 + 3/6]
+step 3   That is the exact probability.   [5/6]
+miss     swapped-operation = 0.16666666666666666   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.4166666666666667   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 67890 · difficulty 5
+prompt   What is the probability of event A and event B?
+display  story [compound-probability and first 3/7 second 1/6] "Event A has 7 equally likely outcomes, and 3 are favourable. Event B has 6 equally likely outcomes, and 1 are favourable."
+answer   exact 1/14 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the two event probabilities.
+step 1   Write each event as a fraction.   [3/7, 1/6]
+step 2   Multiply the two fractions.   [3 × 1 over 7 × 6]
+step 3   That is the exact probability.   [1/14]
+miss     swapped-operation = 0.5952380952380952   And means multiply the two probabilities.
+miss     added-numerators-and-denominators = 0.3076923076923077   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 424242 · difficulty 5
+prompt   What is the probability of event A and event B?
+display  story [compound-probability and first 4/6 second 2/5] "Event A has 6 equally likely outcomes, and 4 are favourable. Event B has 5 equally likely outcomes, and 2 are favourable."
+answer   exact 4/15 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Multiply the two event probabilities.
+step 1   Write each event as a fraction.   [4/6, 2/5]
+step 2   Multiply the two fractions.   [4 × 2 over 6 × 5]
+step 3   That is the exact probability.   [4/15]
+miss     swapped-operation = 1.0666666666666667   And means multiply the two probabilities.
+miss     added-numerators-and-denominators = 0.5454545454545454   Turn each event into its own fraction before combining.
+
+--- compound-probability · seed 987654321 · difficulty 5
+prompt   What is the probability of event A or event B?
+display  story [compound-probability or first 1/5 second 3/5] "A group of 5 equally likely outcomes includes 1 for event A and 3 for event B."
+answer   exact 4/5 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Add the two event probabilities.
+step 1   Write each event as a fraction.   [1/5, 3/5]
+step 2   Add the two fractions.   [1/5 + 3/5]
+step 3   That is the exact probability.   [4/5]
+miss     swapped-operation = 0.12   Or means add the two probabilities.
+miss     added-numerators-and-denominators = 0.4   Turn each event into its own fraction before combining."
+`;
+
+exports[`Unit 21 recorded output: counting-outcomes > matches authored sample output 1`] = `
+"--- counting-outcomes · seed 1 · difficulty 1
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [2,3]] "Choices: 2, 3."
+answer   exact 6/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [2 × 3]
+step 2   The product is the answer.   [6]
+miss     added-stage-counts = 5   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 12345 · difficulty 1
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,3]] "Choices: 3, 3."
+answer   exact 9/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 3]
+step 2   The product is the answer.   [9]
+miss     added-stage-counts = 6   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 67890 · difficulty 1
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,2]] "Choices: 3, 2."
+answer   exact 6/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 2]
+step 2   The product is the answer.   [6]
+miss     added-stage-counts = 5   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 424242 · difficulty 1
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,2]] "Choices: 3, 2."
+answer   exact 6/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 2]
+step 2   The product is the answer.   [6]
+miss     added-stage-counts = 5   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 987654321 · difficulty 1
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,3]] "Choices: 3, 3."
+answer   exact 9/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 3]
+step 2   The product is the answer.   [9]
+miss     added-stage-counts = 6   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 1 · difficulty 2
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [2,3,4]] "Choices: 2, 3, 4."
+answer   exact 24/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [2 × 3 × 4]
+step 2   The product is the answer.   [24]
+miss     added-stage-counts = 9   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 12345 · difficulty 2
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [2,3,4]] "Choices: 2, 3, 4."
+answer   exact 24/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [2 × 3 × 4]
+step 2   The product is the answer.   [24]
+miss     added-stage-counts = 9   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 67890 · difficulty 2
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,3]] "Choices: 3, 3."
+answer   exact 9/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 3]
+step 2   The product is the answer.   [9]
+miss     added-stage-counts = 6   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 424242 · difficulty 2
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,3]] "Choices: 3, 3."
+answer   exact 9/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 3]
+step 2   The product is the answer.   [9]
+miss     added-stage-counts = 6   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 987654321 · difficulty 2
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [2,2,4]] "Choices: 2, 2, 4."
+answer   exact 16/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [2 × 2 × 4]
+step 2   The product is the answer.   [16]
+miss     added-stage-counts = 8   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 1 · difficulty 3
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,4,5]] "Choices: 3, 4, 5."
+answer   exact 60/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 4 × 5]
+step 2   The product is the answer.   [60]
+miss     added-stage-counts = 12   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 12345 · difficulty 3
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,4,5]] "Choices: 3, 4, 5."
+answer   exact 60/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 4 × 5]
+step 2   The product is the answer.   [60]
+miss     added-stage-counts = 12   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 67890 · difficulty 3
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [4,4]] "Choices: 4, 4."
+answer   exact 16/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [4 × 4]
+step 2   The product is the answer.   [16]
+miss     added-stage-counts = 8   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 424242 · difficulty 3
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,3]] "Choices: 3, 3."
+answer   exact 9/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 3]
+step 2   The product is the answer.   [9]
+miss     added-stage-counts = 6   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 987654321 · difficulty 3
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,3,5]] "Choices: 3, 3, 5."
+answer   exact 45/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 3 × 5]
+step 2   The product is the answer.   [45]
+miss     added-stage-counts = 11   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 1 · difficulty 4
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,5,6]] "Choices: 3, 5, 6."
+answer   exact 90/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 5 × 6]
+step 2   The product is the answer.   [90]
+miss     added-stage-counts = 14   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 12345 · difficulty 4
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [4,4,6]] "Choices: 4, 4, 6."
+answer   exact 96/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [4 × 4 × 6]
+step 2   The product is the answer.   [96]
+miss     added-stage-counts = 14   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 67890 · difficulty 4
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [5,4,4]] "Choices: 5, 4, 4."
+answer   exact 80/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [5 × 4 × 4]
+step 2   The product is the answer.   [80]
+miss     added-stage-counts = 13   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 424242 · difficulty 4
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,3,5]] "Choices: 3, 3, 5."
+answer   exact 45/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 3 × 5]
+step 2   The product is the answer.   [45]
+miss     added-stage-counts = 11   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 987654321 · difficulty 4
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [3,3,6]] "Choices: 3, 3, 6."
+answer   exact 54/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [3 × 3 × 6]
+step 2   The product is the answer.   [54]
+miss     added-stage-counts = 12   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 1 · difficulty 5
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [4,6,7,7]] "Choices: 4, 6, 7, 7."
+answer   exact 1176/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [4 × 6 × 7 × 7]
+step 2   The product is the answer.   [1176]
+miss     added-stage-counts = 24   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 12345 · difficulty 5
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [5,5,7,6]] "Choices: 5, 5, 7, 6."
+answer   exact 1050/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [5 × 5 × 7 × 6]
+step 2   The product is the answer.   [1050]
+miss     added-stage-counts = 23   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 67890 · difficulty 5
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [6,5,5]] "Choices: 6, 5, 5."
+answer   exact 150/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [6 × 5 × 5]
+step 2   The product is the answer.   [150]
+miss     added-stage-counts = 16   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 424242 · difficulty 5
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [4,4,6]] "Choices: 4, 4, 6."
+answer   exact 96/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [4 × 4 × 6]
+step 2   The product is the answer.   [96]
+miss     added-stage-counts = 14   Multiply the stage counts instead of adding them.
+
+--- counting-outcomes · seed 987654321 · difficulty 5
+prompt   How many different outcomes are possible?
+display  story [counting-outcomes stages [4,4,7,6]] "Choices: 4, 4, 7, 6."
+answer   exact 672/1
+input    keypad
+hint     Multiply the number of choices at each stage.
+step 1   Multiply the choices at each stage.   [4 × 4 × 7 × 6]
+step 2   The product is the answer.   [672]
+miss     added-stage-counts = 21   Multiply the stage counts instead of adding them."
+`;
+
 exports[`Unit 21 recorded output: mean > matches authored sample output 1`] = `
 "--- mean · seed 1 · difficulty 1
 prompt   What is the mean of these values?

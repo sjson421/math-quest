@@ -472,6 +472,15 @@ const formatStatisticsData = (data: StatisticsData): string => {
       return `${data.operation} category ${data.categoryIndex} series ${data.seriesIndex}`
     case 'scatter-trend':
       return `${data.operation} trend-line true`
+    case 'basic-probability':
+      return `${data.operation} favourable ${data.favourable} total ${data.total}`
+    case 'compound-probability':
+      return (
+        `${data.operation} ${data.cue} first ${data.firstFavourable}/${data.firstTotal} ` +
+        `second ${data.secondFavourable}/${data.secondTotal}`
+      )
+    case 'counting-outcomes':
+      return `${data.operation} stages ${JSON.stringify(data.stages)}`
     default: {
       const unhandled: never = data
       throw new Error(`Unhandled statistics data: ${JSON.stringify(unhandled)}`)

@@ -102,13 +102,13 @@ describe('document and manifest agree on pacing markers', () => {
     expect(skillById.get('plot-points')).toMatchObject({ quick: true, wall: true })
   })
 
-  it('leaves only the unimplemented wall row unexplained', () => {
-    // A bare ⚠️ gives misconception authoring nothing to start from, so this
-    // remaining unimplemented wall still needs its diagnosis worked out.
+  it('leaves no wall row unexplained', () => {
+    // A bare ⚠️ gives misconception authoring nothing to start from.
+    // `compound-probability` was the last row left that way; its generator now
+    // names the and/or swap.
     const bare = doc.rows.filter((row) => row.note === '⚠️').map((row) => row.id)
 
-    expect(bare).toEqual(['compound-probability'])
-    expect(bare.every((id) => skillById.get(id)?.wall)).toBe(true)
+    expect(bare).toEqual([])
   })
 })
 

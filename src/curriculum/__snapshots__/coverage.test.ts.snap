@@ -62,6 +62,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "area-triangle": [
     "area-rectangle",
   ],
+  "basic-probability": [
+    "read-scatterplot",
+  ],
   "circumference": [
     "area-parallelogram-trapezoid",
   ],
@@ -94,6 +97,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "compound-inequalities": [
     "flip-the-sign",
+  ],
+  "compound-probability": [
+    "basic-probability",
+  ],
+  "counting-outcomes": [
+    "compound-probability",
   ],
   "decimal-place-value": [
     "fraction-words",

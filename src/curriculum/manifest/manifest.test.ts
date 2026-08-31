@@ -237,10 +237,17 @@ describe('stage capabilities', () => {
     ])
   })
 
-  it('marks chart and choice rendering built for the partial Stage G content', () => {
+  it('marks chart, choice, and fraction rendering built for the complete Stage G content', () => {
     expect(AVAILABLE_CAPABILITIES.has('chart')).toBe(true)
     expect(AVAILABLE_CAPABILITIES.has('choice-input')).toBe(true)
-    expect(stageById.get('stage-g')?.requires).toEqual(['choice-input', 'math-notation', 'diagram', 'chart'])
+    expect(AVAILABLE_CAPABILITIES.has('fraction-input')).toBe(true)
+    expect(stageById.get('stage-g')?.requires).toEqual([
+      'choice-input',
+      'math-notation',
+      'fraction-input',
+      'diagram',
+      'chart',
+    ])
     expect(stageById.get('stage-g')?.units[0].skills.map((skill) => skill.id)).toEqual([
       'perimeter',
       'area-rectangle',

@@ -1,10 +1,11 @@
 import { intAnswer } from '../lib/answer'
 import type { Chart, ScatterPoint } from '../lib/chart'
+import { rational, toNumber } from '../lib/rational'
 import { constrain } from '../lib/rng'
 import type { Choice, StatisticsData } from '../lib/types'
 import { band, defineSkill, drawn, type BuildContext, type Ladder } from './engine'
 
-/** Unit 21 · Data & Probability, increment 21a. */
+/** Unit 21 · Data & Probability, increments 21a (statistics) and 21b (probability). */
 
 const MEAN_COUNT: Ladder = {
   1: [4, 4],
@@ -546,6 +547,253 @@ const readScatterplot = defineSkill({
   },
 })
 
+/**
+ * Increment 21b · Probability.
+ *
+ * A probability answers as a fraction — `requireFraction`, no
+ * `requireSimplified` — the same shape `write-ratios` already ships: a ratio of
+ * counts requires the notation, and only the skill that teaches reduction opts
+ * into reducing it. See `unit-11-ratios-proportions.ts`'s `exactRatio`.
+ */
+const exactProbability = (n: number, d: number) => ({
+  kind: 'exact' as const,
+  ...rational(n, d),
+  requireFraction: true as const,
+})
+
+const PROBABILITY_TOTAL: Ladder = {
+  1: [4, 6],
+  2: [5, 8],
+  3: [6, 10],
+  4: [8, 13],
+  5: [10, 16],
+}
+
+const basicProbability = defineSkill({
+  id: 'basic-probability',
+  name: 'Probability',
+  blurb: 'How likely an outcome is',
+  teachingLine: 'Probability compares the outcomes you want with all outcomes.',
+  build(context) {
+    const total = context.rng.int(...band(context.difficulty, PROBABILITY_TOTAL))
+    const favourable = context.rng.int(1, total - 1)
+    const statistics: StatisticsData = { operation: 'basic-probability', favourable, total }
+
+    return {
+      prompt: 'What is the probability of picking a red marble?',
+      display: {
+        kind: 'story',
+        text: `A bag holds ${drawn(total)} marbles. ${drawn(favourable)} of them are red.`,
+        statistics,
+      },
+      answer: exactProbability(favourable, total),
+      keypad: { allowFraction: true },
+      misconceptions: [
+        {
+          // The remaining (non-favourable) count instead of the whole bag —
+          // defined only because `favourable < total` keeps a remainder.
+          value: toNumber(rational(favourable, total - favourable)),
+          tag: 'favourable-over-remaining',
+          nudge: 'Compare red marbles with every marble, not just the rest.',
+        },
+      ],
+      hint: 'Compare the favourable count with the total.',
+      solution: [
+        { text: 'Count every marble in the bag.', detail: `${total}` },
+        { text: 'Count the red marbles.', detail: `${favourable}` },
+        { text: 'Write red over the total.', detail: `${favourable}/${total}` },
+      ],
+    }
+  },
+})
+
+const COMPOUND_TOTAL: Ladder = {
+  1: [3, 4],
+  2: [3, 5],
+  3: [4, 6],
+  4: [4, 7],
+  5: [5, 9],
+}
+
+type ProbabilityEvent = { favourable: number; total: number }
+
+/** Multiply for `and`, cross-add for `or` — correct whether or not the two totals match. */
+const combineEvents = (cue: 'and' | 'or', first: ProbabilityEvent, second: ProbabilityEvent) =>
+  cue === 'and'
+    ? rational(first.favourable * second.favourable, first.total * second.total)
+    : rational(
+        first.favourable * second.total + second.favourable * first.total,
+        first.total * second.total,
+      )
+
+const drawCompoundProbability = (context: BuildContext) => {
+  const totalBand = band(context.difficulty, COMPOUND_TOTAL)
+
+  return constrain(
+    () => {
+      const cue = context.rng.bool() ? ('and' as const) : ('or' as const)
+      let first: ProbabilityEvent
+      let second: ProbabilityEvent
+
+      if (cue === 'and') {
+        // Two independent draws — a coin, a spinner — so their totals need not
+        // agree.
+        const firstTotal = context.rng.int(...totalBand)
+        const secondTotal = context.rng.int(...totalBand)
+        first = { favourable: context.rng.int(1, firstTotal - 1), total: firstTotal }
+        second = { favourable: context.rng.int(1, secondTotal - 1), total: secondTotal }
+      } else {
+        // One outcome set, two mutually exclusive categories — a bag with two
+        // colours — so the totals match and the favourable counts leave at
+        // least one outcome uncounted, which keeps the sum strictly under 1.
+        const total = context.rng.int(...totalBand)
+        const firstFavourable = context.rng.int(1, total - 2)
+        const secondFavourable = context.rng.int(1, total - firstFavourable - 1)
+        first = { favourable: firstFavourable, total }
+        second = { favourable: secondFavourable, total }
+      }
+
+      const answer = combineEvents(cue, first, second)
+      const swapped = toNumber(combineEvents(cue === 'and' ? 'or' : 'and', first, second))
+      const addedNumeratorsDenominators = toNumber(
+        rational(first.favourable + second.favourable, first.total + second.total),
+      )
+
+      return { cue, first, second, answer, swapped, addedNumeratorsDenominators }
+    },
+    // Every draw keeps the answer and both wall predictions three distinct
+    // values, and the answer a genuine fraction strictly between 0 and 1.
+    ({ answer, swapped, addedNumeratorsDenominators }) => {
+      const answerValue = toNumber(answer)
+      return (
+        answerValue > 0 &&
+        answerValue < 1 &&
+        new Set([answerValue, swapped, addedNumeratorsDenominators]).size === 3
+      )
+    },
+  )
+}
+
+const compoundProbability = defineSkill({
+  id: 'compound-probability',
+  name: 'Compound Probability',
+  blurb: 'And, or',
+  teachingLine: 'Multiply for and; add for or.',
+  build(context) {
+    const { cue, first, second, answer, swapped, addedNumeratorsDenominators } = drawCompoundProbability(context)
+    const statistics: StatisticsData = {
+      operation: 'compound-probability',
+      cue,
+      firstFavourable: first.favourable,
+      firstTotal: first.total,
+      secondFavourable: second.favourable,
+      secondTotal: second.total,
+    }
+    const text = cue === 'and'
+      ? `Event A has ${drawn(first.total)} equally likely outcomes, and ${drawn(first.favourable)} are favourable. ` +
+        `Event B has ${drawn(second.total)} equally likely outcomes, and ${drawn(second.favourable)} are favourable.`
+      : `A group of ${drawn(first.total)} equally likely outcomes includes ${drawn(first.favourable)} for event A ` +
+        `and ${drawn(second.favourable)} for event B.`
+
+    return {
+      prompt: cue === 'and'
+        ? 'What is the probability of event A and event B?'
+        : 'What is the probability of event A or event B?',
+      display: { kind: 'story', text, statistics },
+      answer: exactProbability(answer.n, answer.d),
+      keypad: { allowFraction: true },
+      misconceptions: [
+        {
+          value: swapped,
+          tag: 'swapped-operation',
+          nudge: cue === 'and'
+            ? 'And means multiply the two probabilities.'
+            : 'Or means add the two probabilities.',
+        },
+        {
+          value: addedNumeratorsDenominators,
+          tag: 'added-numerators-and-denominators',
+          nudge: 'Turn each event into its own fraction before combining.',
+        },
+      ],
+      hint: cue === 'and' ? 'Multiply the two event probabilities.' : 'Add the two event probabilities.',
+      solution: [
+        {
+          text: 'Write each event as a fraction.',
+          detail: `${first.favourable}/${first.total}, ${second.favourable}/${second.total}`,
+        },
+        cue === 'and'
+          ? {
+              text: 'Multiply the two fractions.',
+              detail: `${first.favourable} × ${second.favourable} over ${first.total} × ${second.total}`,
+            }
+          : {
+              text: 'Add the two fractions.',
+              detail: `${first.favourable}/${first.total} + ${second.favourable}/${second.total}`,
+            },
+        { text: 'That is the exact probability.', detail: `${answer.n}/${answer.d}` },
+      ],
+    }
+  },
+})
+
+const STAGE_COUNT: Ladder = {
+  1: [2, 2],
+  2: [2, 3],
+  3: [2, 3],
+  4: [3, 3],
+  5: [3, 4],
+}
+
+const STAGE_SIZE: Ladder = {
+  1: [2, 3],
+  2: [2, 4],
+  3: [3, 5],
+  4: [3, 6],
+  5: [4, 7],
+}
+
+const countingOutcomes = defineSkill({
+  id: 'counting-outcomes',
+  name: 'Counting Outcomes',
+  blurb: 'How many ways it can happen',
+  teachingLine: 'Multiply the number of choices at each step.',
+  build(context) {
+    const count = context.rng.int(...band(context.difficulty, STAGE_COUNT))
+    const stageBand = band(context.difficulty, STAGE_SIZE)
+    const stages = constrain(
+      () => Array.from({ length: count }, () => context.rng.int(...stageBand)),
+      // The one draw the fundamental counting principle cannot distinguish
+      // from repeated addition: every stage at two choices reaches a product
+      // equal to its sum. Every larger stage or stage count clears it.
+      (values) =>
+        values.reduce((product, value) => product * value, 1) !==
+        values.reduce((sum, value) => sum + value, 0),
+    )
+    const product = stages.reduce((total, value) => total * value, 1)
+    const addedStages = stages.reduce((total, value) => total + value, 0)
+    const statistics: StatisticsData = { operation: 'counting-outcomes', stages }
+
+    return {
+      prompt: 'How many different outcomes are possible?',
+      display: { kind: 'story', text: `Choices: ${stages.map(drawn).join(', ')}.`, statistics },
+      answer: intAnswer(product),
+      misconceptions: [
+        {
+          value: addedStages,
+          tag: 'added-stage-counts',
+          nudge: 'Multiply the stage counts instead of adding them.',
+        },
+      ],
+      hint: 'Multiply the number of choices at each stage.',
+      solution: [
+        { text: 'Multiply the choices at each stage.', detail: stages.join(' × ') },
+        { text: 'The product is the answer.', detail: `${product}` },
+      ],
+    }
+  },
+})
+
 export const unit21: [
   typeof mean,
   typeof median,
@@ -553,4 +801,17 @@ export const unit21: [
   typeof weightedMean,
   typeof readBarLine,
   typeof readScatterplot,
-] = [mean, median, modeRange, weightedMean, readBarLine, readScatterplot]
+  typeof basicProbability,
+  typeof compoundProbability,
+  typeof countingOutcomes,
+] = [
+  mean,
+  median,
+  modeRange,
+  weightedMean,
+  readBarLine,
+  readScatterplot,
+  basicProbability,
+  compoundProbability,
+  countingOutcomes,
+]

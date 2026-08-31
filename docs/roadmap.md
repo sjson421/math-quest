@@ -2,9 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 192 of 201 skills are playable.** Stages A through F have complete playable content.
-Stage G opens Unit 20 through similar figures and the first six Unit 21 skills; the final three
-Unit 21 skills and Stage H are still planned. Stage E is
+**Status: 195 of 201 skills are playable.** Stages A through G have complete playable content;
+Stage H alone is still planned. Stage E is
 complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17, 18
 and 19 are complete.
 Choice input,
@@ -1154,7 +1153,7 @@ shows before a lesson's first problem.
       which is the exit-criteria line above and the reason items 26 and 30 need no clause of
       their own.
 
-- [ ] **26 · Stage G · Units 20–21** *(was 25)* — M — 22 skills, five changes
+- [x] **26 · Stage G · Units 20–21** *(was 25)* — M — 22 skills, five changes
 
       Geometry teaches *choosing and applying* the formula the GED provides, never memorising
       it.
@@ -1183,9 +1182,18 @@ shows before a lesson's first problem.
         on forgetting to sort, with a prediction the generator computes exactly. All six skills
         carry exact source data, independent answer checks, reviewed intros, and phone-sized
         list or chart examples.
-      - **21b** `basic-probability`–`counting-outcomes` — answers are fractions, so the required-
-        form question 9b settles applies again here: a probability typed as 0.5, 1/2 or 50% is
-        one value and three different answers, and the unit picks one.
+      - [x] **21b** `basic-probability`–`counting-outcomes` — **shipped 2026-08-31**. The
+        required-form question item 9b settled applies again here: a probability answers as a
+        fraction through the existing `requireFraction` check and the pad's fraction slash, the
+        same shape `write-ratios` already ships, with no reduction required. `basic-probability`
+        and `compound-probability` carry typed favourable-and-total counts beside the story so
+        verification rebuilds every display and answer without trusting the stated one;
+        `compound-probability` is the wall, multiplying for `and` and adding for `or`, with two
+        collision-proof diagnoses — swapping the cue's operation, and adding numerators and
+        denominators across events. `counting-outcomes` answers as a whole number through the
+        fundamental counting principle, predicting the classic add-instead-of-multiply miss.
+        Stage G declares the already-available `fraction-input` capability with its first
+        consumer, and all twenty-two Stage G skills are now playable, closing this item.
 
 - [ ] **27 · Review and spaced repetition** — L *(was B6, then 26)* — **three increments**
 
