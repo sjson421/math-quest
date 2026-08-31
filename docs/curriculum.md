@@ -457,12 +457,12 @@ right formula, never memorising it.
 
 | # | id | Skill | Note |
 |---|---|---|---|
-| 21.1 | `mean` | | `quick` |
-| 21.2 | `median` | | ⚠️ forgetting to sort first |
-| 21.3 | `mode-range` | | |
-| 21.4 | `weighted-mean` | | GED-specific |
-| 21.5 | `read-bar-line` | | |
-| 21.6 | `read-scatterplot` | Trend lines | |
+| 21.1 | `mean` | | ✅ `quick` |
+| 21.2 | `median` | | ✅ ⚠️ forgetting to sort first |
+| 21.3 | `mode-range` | | ✅ |
+| 21.4 | `weighted-mean` | | GED-specific ✅ |
+| 21.5 | `read-bar-line` | | ✅ |
+| 21.6 | `read-scatterplot` | Trend lines | ✅ |
 | 21.7 | `basic-probability` | | |
 | 21.8 | `compound-probability` | And / or | ⚠️ |
 | 21.9 | `counting-outcomes` | | |
@@ -521,7 +521,8 @@ Ship by stage; each stage is independently useful.
 4. **Stage E** (34) — complete; the **expression input mode** it needed is built.
 5. **Stage F** (28) — its **coordinate-plane input** and **root-pair input** are built; all ten Unit 16, all four Unit 17, and all nine Unit 18 skills are playable.
 6. **Stage G** (22) — reuses built **diagram rendering** for shapes; chart rendering is built, and
-   all thirteen Unit 20 skills are playable while Unit 21 stays planned.
+   all thirteen Unit 20 skills plus the first six Unit 21 skills are playable while the final three
+   Unit 21 skills stay planned.
 7. **Stage H** (6) — needs timed mode and a score estimator.
 
 ### New capabilities required, by stage
@@ -557,15 +558,16 @@ Ship by stage; each stage is independently useful.
   rather than storing them, and commits a snapshot of the expanded graph so a change to the
   derivation is reviewable.
 - **A skill with no generator is `planned`, not broken.** State is derived at load from the
-  generator registry plus the capabilities that are actually built. Today 15 of 201 skills
-  are planned; later Stage G skills and Stage H still wait on their content or timed mode. Planned skills are transparent to unlocking —
+  generator registry plus the capabilities that are actually built. Today 9 of 201 skills
+  are planned; the final three Unit 21 skills and Stage H still wait on their content or timed mode. Planned skills are transparent to unlocking —
   a learner is never held behind our build order — and never offered for play.
 - **The content style contract above is enforced**, not advisory: `src/lib/content-rules.ts`
   checks authored teaching lines for one sentence, forward references, and current-unit
   vocabulary, then checks step count, step length, single-sentence hints, wall misconception
   coverage, and generated-problem forward references against a curated vocabulary list.
-  All 186 playable skills in Stages A through F and Unit 20 through `similar-figures` carry authored
-  intro lines and generated worked examples; the remaining Stage G skills and Stage H remain staged.
+  All 192 playable skills in Stages A through F, Unit 20 through `similar-figures`, and the first
+  six Unit 21 skills carry authored intro lines and generated worked examples; the remaining three
+  Stage G skills and Stage H remain staged.
 - **`SkillProgress` gains two fields** for skipping: `source: 'practiced' | 'tested-out' |
   'self-assessed'` and the existing mastery set to 3. These must survive a **sync round
   trip**, not just file export — sync is now the routine path, so losing them there would

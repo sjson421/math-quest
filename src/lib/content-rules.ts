@@ -18,7 +18,7 @@ import { geometryDiagramLabel, geometryFormulaReferences } from './geometry-diag
 import { chartLearnerText } from './chart'
 import { entryLabel } from './keypad'
 import { format as formatRational } from './rational'
-import type { CoordinateData, Display, Problem } from './types'
+import type { CoordinateData, Display, Problem, StatisticsData } from './types'
 
 export const MAX_SOLUTION_STEPS = 4
 export const MAX_WORDS_PER_STEP = 12
@@ -141,13 +141,42 @@ function sentences(text: string): string[] {
     .filter(Boolean)
 }
 
+const statisticsValueLabel = (value: number): string => String(value).replace('-', '−')
+
+/** Source values shown by statistics displays, kept in the learner-text gate. */
+function statisticsLearnerText(data: StatisticsData): string[] {
+  switch (data.operation) {
+    case 'mean':
+    case 'median':
+    case 'mode':
+    case 'range':
+      return data.values.map(statisticsValueLabel)
+    case 'weighted-mean':
+      return data.entries.flatMap(({ value, weight }) => [
+        statisticsValueLabel(value),
+        statisticsValueLabel(weight),
+      ])
+    case 'read-chart-value':
+    case 'scatter-trend':
+      return []
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled statistics data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 /** Every learner-facing string a problem carries. */
 function displayText(display: Display): string {
   switch (display.kind) {
     case 'inline':
-    case 'story':
     case 'equation':
       return display.text
+    case 'story':
+      return [
+        display.text,
+        ...('statistics' in display && display.statistics ? statisticsLearnerText(display.statistics) : []),
+      ].join('; ')
     case 'math':
       return display.label
     case 'diagram':
@@ -162,7 +191,10 @@ function displayText(display: Display): string {
         .filter(Boolean)
         .join('; ')
     case 'chart':
-      return chartLearnerText(display.chart).join('; ')
+      return [
+        ...chartLearnerText(display.chart),
+        ...('statistics' in display && display.statistics ? statisticsLearnerText(display.statistics) : []),
+      ].join('; ')
     case 'column':
     case 'decimal-column':
       return ''

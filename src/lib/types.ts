@@ -495,6 +495,13 @@ export type PolynomialData =
       c: number
     }
 
+/** The visible source quantities behind Unit 21's statistics operations. */
+export type StatisticsData =
+  | { operation: 'mean' | 'median' | 'mode' | 'range'; values: readonly number[] }
+  | { operation: 'weighted-mean'; entries: readonly { value: number; weight: number }[] }
+  | { operation: 'read-chart-value'; categoryIndex: number; seriesIndex: number }
+  | { operation: 'scatter-trend' }
+
 /**
  * The source quantities behind Unit 14's equation displays.
  *
@@ -827,6 +834,7 @@ export type Display =
       | { ratio: RatioData; operands?: never; operator?: never; percent?: never; algebra?: never; polynomial?: never; equation?: never }
       | { algebra: AlgebraData; operands?: never; operator?: never; percent?: never; ratio?: never; polynomial?: never; equation?: never }
       | { polynomial: PolynomialData; operands?: never; operator?: never; percent?: never; ratio?: never; algebra?: never; equation?: never }
+      | { statistics: StatisticsData; operands?: never; operator?: never; percent?: never; ratio?: never; algebra?: never; polynomial?: never; equation?: never }
       /**
        * A situation whose structure is an equation. `equation-words` is the
        * consumer: its sentence states two operations applied in sequence, and
@@ -851,7 +859,12 @@ export type Display =
   /** A bounded graph whose axes, points, lines, and optional content meaning are data. */
   | { kind: 'coordinate-plane'; plane: CoordinatePlane; coordinate?: CoordinateData }
   /** A labelled chart whose marks and accessible table share one source declaration. */
-  | { kind: 'chart'; chart: Chart }
+  | {
+      kind: 'chart'
+      chart: Chart
+      /** Optional so generic charts keep their existing fail-closed verifier path. */
+      statistics?: StatisticsData
+    }
   /**
    * A statement that already contains its relation — an equation, or since Unit
    * 15 an inequality.

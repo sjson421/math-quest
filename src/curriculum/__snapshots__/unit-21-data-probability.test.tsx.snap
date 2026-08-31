@@ -1,0 +1,1678 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Unit 21 recorded output: mean > matches authored sample output 1`] = `
+"--- mean · seed 1 · difficulty 1
+prompt   What is the mean of these values?
+display  story [mean values [3,5,3,5]] "Values: 3, 5, 3, 5"
+answer   exact 4/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [3 + 5 + 3 + 5 = 16]
+step 2   Divide the total by the count.   [16 ÷ 4 = 4]
+step 3   The mean is the result.   [4]
+
+--- mean · seed 12345 · difficulty 1
+prompt   What is the mean of these values?
+display  story [mean values [6,4,6,4]] "Values: 6, 4, 6, 4"
+answer   exact 5/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [6 + 4 + 6 + 4 = 20]
+step 2   Divide the total by the count.   [20 ÷ 4 = 5]
+step 3   The mean is the result.   [5]
+
+--- mean · seed 67890 · difficulty 1
+prompt   What is the mean of these values?
+display  story [mean values [7,7,5,5]] "Values: 7, 7, 5, 5"
+answer   exact 6/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [7 + 7 + 5 + 5 = 24]
+step 2   Divide the total by the count.   [24 ÷ 4 = 6]
+step 3   The mean is the result.   [6]
+
+--- mean · seed 424242 · difficulty 1
+prompt   What is the mean of these values?
+display  story [mean values [4,4,6,6]] "Values: 4, 4, 6, 6"
+answer   exact 5/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [4 + 4 + 6 + 6 = 20]
+step 2   Divide the total by the count.   [20 ÷ 4 = 5]
+step 3   The mean is the result.   [5]
+
+--- mean · seed 987654321 · difficulty 1
+prompt   What is the mean of these values?
+display  story [mean values [5,3,5,3]] "Values: 5, 3, 5, 3"
+answer   exact 4/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [5 + 3 + 5 + 3 = 16]
+step 2   Divide the total by the count.   [16 ÷ 4 = 4]
+step 3   The mean is the result.   [4]
+
+--- mean · seed 1 · difficulty 2
+prompt   What is the mean of these values?
+display  story [mean values [6,6,10,10,8]] "Values: 6, 6, 10, 10, 8"
+answer   exact 8/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [6 + 6 + 10 + 10 + 8 = 40]
+step 2   Divide the total by the count.   [40 ÷ 5 = 8]
+step 3   The mean is the result.   [8]
+
+--- mean · seed 12345 · difficulty 2
+prompt   What is the mean of these values?
+display  story [mean values [10,12,9,11,8]] "Values: 10, 12, 9, 11, 8"
+answer   exact 10/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [10 + 12 + 9 + 11 + 8 = 50]
+step 2   Divide the total by the count.   [50 ÷ 5 = 10]
+step 3   The mean is the result.   [10]
+
+--- mean · seed 67890 · difficulty 2
+prompt   What is the mean of these values?
+display  story [mean values [14,14,10,10]] "Values: 14, 14, 10, 10"
+answer   exact 12/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [14 + 14 + 10 + 10 = 48]
+step 2   Divide the total by the count.   [48 ÷ 4 = 12]
+step 3   The mean is the result.   [12]
+
+--- mean · seed 424242 · difficulty 2
+prompt   What is the mean of these values?
+display  story [mean values [7,8,11,10]] "Values: 7, 8, 11, 10"
+answer   exact 9/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [7 + 8 + 11 + 10 = 36]
+step 2   Divide the total by the count.   [36 ÷ 4 = 9]
+step 3   The mean is the result.   [9]
+
+--- mean · seed 987654321 · difficulty 2
+prompt   What is the mean of these values?
+display  story [mean values [6,7,8,9,10]] "Values: 6, 7, 8, 9, 10"
+answer   exact 8/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [6 + 7 + 8 + 9 + 10 = 40]
+step 2   Divide the total by the count.   [40 ÷ 5 = 8]
+step 3   The mean is the result.   [8]
+
+--- mean · seed 1 · difficulty 3
+prompt   What is the mean of these values?
+display  story [mean values [10,9,15,14,12]] "Values: 10, 9, 15, 14, 12"
+answer   exact 12/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [10 + 9 + 15 + 14 + 12 = 60]
+step 2   Divide the total by the count.   [60 ÷ 5 = 12]
+step 3   The mean is the result.   [12]
+
+--- mean · seed 12345 · difficulty 3
+prompt   What is the mean of these values?
+display  story [mean values [15,18,13,17,12]] "Values: 15, 18, 13, 17, 12"
+answer   exact 15/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [15 + 18 + 13 + 17 + 12 = 75]
+step 2   Divide the total by the count.   [75 ÷ 5 = 15]
+step 3   The mean is the result.   [15]
+
+--- mean · seed 67890 · difficulty 3
+prompt   What is the mean of these values?
+display  story [mean values [16,20,18,20,16]] "Values: 16, 20, 18, 20, 16"
+answer   exact 18/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [16 + 20 + 18 + 20 + 16 = 90]
+step 2   Divide the total by the count.   [90 ÷ 5 = 18]
+step 3   The mean is the result.   [18]
+
+--- mean · seed 424242 · difficulty 3
+prompt   What is the mean of these values?
+display  story [mean values [16,14,13,12,15]] "Values: 16, 14, 13, 12, 15"
+answer   exact 14/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [16 + 14 + 13 + 12 + 15 = 70]
+step 2   Divide the total by the count.   [70 ÷ 5 = 14]
+step 3   The mean is the result.   [14]
+
+--- mean · seed 987654321 · difficulty 3
+prompt   What is the mean of these values?
+display  story [mean values [10,12,13,14,16]] "Values: 10, 12, 13, 14, 16"
+answer   exact 13/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [10 + 12 + 13 + 14 + 16 = 65]
+step 2   Divide the total by the count.   [65 ÷ 5 = 13]
+step 3   The mean is the result.   [13]
+
+--- mean · seed 1 · difficulty 4
+prompt   What is the mean of these values?
+display  story [mean values [15,14,22,14,22,21]] "Values: 15, 14, 22, 14, 22, 21"
+answer   exact 18/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [15 + 14 + 22 + 14 + 22 + 21 = 108]
+step 2   Divide the total by the count.   [108 ÷ 6 = 18]
+step 3   The mean is the result.   [18]
+
+--- mean · seed 12345 · difficulty 4
+prompt   What is the mean of these values?
+display  story [mean values [19,25,25,27,19,17]] "Values: 19, 25, 25, 27, 19, 17"
+answer   exact 22/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [19 + 25 + 25 + 27 + 19 + 17 = 132]
+step 2   Divide the total by the count.   [132 ÷ 6 = 22]
+step 3   The mean is the result.   [22]
+
+--- mean · seed 67890 · difficulty 4
+prompt   What is the mean of these values?
+display  story [mean values [23,29,26,29,23]] "Values: 23, 29, 26, 29, 23"
+answer   exact 26/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [23 + 29 + 26 + 29 + 23 = 130]
+step 2   Divide the total by the count.   [130 ÷ 5 = 26]
+step 3   The mean is the result.   [26]
+
+--- mean · seed 424242 · difficulty 4
+prompt   What is the mean of these values?
+display  story [mean values [25,21,20,17,22]] "Values: 25, 21, 20, 17, 22"
+answer   exact 21/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [25 + 21 + 20 + 17 + 22 = 105]
+step 2   Divide the total by the count.   [105 ÷ 5 = 21]
+step 3   The mean is the result.   [21]
+
+--- mean · seed 987654321 · difficulty 4
+prompt   What is the mean of these values?
+display  story [mean values [16,25,19,21,24,15]] "Values: 16, 25, 19, 21, 24, 15"
+answer   exact 20/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [16 + 25 + 19 + 21 + 24 + 15 = 120]
+step 2   Divide the total by the count.   [120 ÷ 6 = 20]
+step 3   The mean is the result.   [20]
+
+--- mean · seed 1 · difficulty 5
+prompt   What is the mean of these values?
+display  story [mean values [22,20,32,20,32,30]] "Values: 22, 20, 32, 20, 32, 30"
+answer   exact 26/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [22 + 20 + 32 + 20 + 32 + 30 = 156]
+step 2   Divide the total by the count.   [156 ÷ 6 = 26]
+step 3   The mean is the result.   [26]
+
+--- mean · seed 12345 · difficulty 5
+prompt   What is the mean of these values?
+display  story [mean values [28,37,38,40,29,26]] "Values: 28, 37, 38, 40, 29, 26"
+answer   exact 33/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [28 + 37 + 38 + 40 + 29 + 26 = 198]
+step 2   Divide the total by the count.   [198 ÷ 6 = 33]
+step 3   The mean is the result.   [33]
+
+--- mean · seed 67890 · difficulty 5
+prompt   What is the mean of these values?
+display  story [mean values [40,43,43,35,35,38]] "Values: 40, 43, 43, 35, 35, 38"
+answer   exact 39/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [40 + 43 + 43 + 35 + 35 + 38 = 234]
+step 2   Divide the total by the count.   [234 ÷ 6 = 39]
+step 3   The mean is the result.   [39]
+
+--- mean · seed 424242 · difficulty 5
+prompt   What is the mean of these values?
+display  story [mean values [28,33,34,26,29,36]] "Values: 28, 33, 34, 26, 29, 36"
+answer   exact 31/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [28 + 33 + 34 + 26 + 29 + 36 = 186]
+step 2   Divide the total by the count.   [186 ÷ 6 = 31]
+step 3   The mean is the result.   [31]
+
+--- mean · seed 987654321 · difficulty 5
+prompt   What is the mean of these values?
+display  story [mean values [24,36,28,30,34,22]] "Values: 24, 36, 28, 30, 34, 22"
+answer   exact 29/1
+input    keypad
+hint     Add the values, then divide by their count.
+step 1   Add all the values.   [24 + 36 + 28 + 30 + 34 + 22 = 174]
+step 2   Divide the total by the count.   [174 ÷ 6 = 29]
+step 3   The mean is the result.   [29]"
+`;
+
+exports[`Unit 21 recorded output: median > matches authored sample output 1`] = `
+"--- median · seed 1 · difficulty 1
+prompt   What is the median of these values?
+display  story [median values [25,8,11,15,13,18]] "Values: 25, 8, 11, 15, 13, 18"
+answer   exact 14/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [8, 11, 13, 15, 18, 25]
+step 2   Average the two middle values.   [(13 + 15) ÷ 2 = 14]
+step 3   The median is the result.   [14]
+miss     used-unsorted-middle = 13   Sort the list before choosing its middle.
+miss     used-mean-for-median = 15   Find the middle after sorting, not the overall average.
+
+--- median · seed 12345 · difficulty 1
+prompt   What is the median of these values?
+display  story [median values [18,11,14,28,21,16]] "Values: 18, 11, 14, 28, 21, 16"
+answer   exact 17/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [11, 14, 16, 18, 21, 28]
+step 2   Average the two middle values.   [(16 + 18) ÷ 2 = 17]
+step 3   The median is the result.   [17]
+miss     used-unsorted-middle = 21   Sort the list before choosing its middle.
+miss     used-mean-for-median = 18   Find the middle after sorting, not the overall average.
+
+--- median · seed 67890 · difficulty 1
+prompt   What is the median of these values?
+display  story [median values [20,23,16,28,18]] "Values: 20, 23, 16, 28, 18"
+answer   exact 20/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [16, 18, 20, 23, 28]
+step 2   Take the value in the middle.   [20]
+step 3   The median is the result.   [20]
+miss     used-unsorted-middle = 16   Sort the list before choosing its middle.
+miss     used-mean-for-median = 21   Find the middle after sorting, not the overall average.
+
+--- median · seed 424242 · difficulty 1
+prompt   What is the median of these values?
+display  story [median values [24,19,14,16,12]] "Values: 24, 19, 14, 16, 12"
+answer   exact 16/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [12, 14, 16, 19, 24]
+step 2   Take the value in the middle.   [16]
+step 3   The median is the result.   [16]
+miss     used-unsorted-middle = 14   Sort the list before choosing its middle.
+miss     used-mean-for-median = 17   Find the middle after sorting, not the overall average.
+
+--- median · seed 987654321 · difficulty 1
+prompt   What is the median of these values?
+display  story [median values [16,26,12,14,19,9]] "Values: 16, 26, 12, 14, 19, 9"
+answer   exact 15/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [9, 12, 14, 16, 19, 26]
+step 2   Average the two middle values.   [(14 + 16) ÷ 2 = 15]
+step 3   The median is the result.   [15]
+miss     used-unsorted-middle = 13   Sort the list before choosing its middle.
+miss     used-mean-for-median = 16   Find the middle after sorting, not the overall average.
+
+--- median · seed 1 · difficulty 2
+prompt   What is the median of these values?
+display  story [median values [35,18,21,25,23,28]] "Values: 35, 18, 21, 25, 23, 28"
+answer   exact 24/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [18, 21, 23, 25, 28, 35]
+step 2   Average the two middle values.   [(23 + 25) ÷ 2 = 24]
+step 3   The median is the result.   [24]
+miss     used-unsorted-middle = 23   Sort the list before choosing its middle.
+miss     used-mean-for-median = 25   Find the middle after sorting, not the overall average.
+
+--- median · seed 12345 · difficulty 2
+prompt   What is the median of these values?
+display  story [median values [29,22,25,39,32,27]] "Values: 29, 22, 25, 39, 32, 27"
+answer   exact 28/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [22, 25, 27, 29, 32, 39]
+step 2   Average the two middle values.   [(27 + 29) ÷ 2 = 28]
+step 3   The median is the result.   [28]
+miss     used-unsorted-middle = 32   Sort the list before choosing its middle.
+miss     used-mean-for-median = 29   Find the middle after sorting, not the overall average.
+
+--- median · seed 67890 · difficulty 2
+prompt   What is the median of these values?
+display  story [median values [32,35,28,40,30]] "Values: 32, 35, 28, 40, 30"
+answer   exact 32/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [28, 30, 32, 35, 40]
+step 2   Take the value in the middle.   [32]
+step 3   The median is the result.   [32]
+miss     used-unsorted-middle = 28   Sort the list before choosing its middle.
+miss     used-mean-for-median = 33   Find the middle after sorting, not the overall average.
+
+--- median · seed 424242 · difficulty 2
+prompt   What is the median of these values?
+display  story [median values [35,30,25,27,23]] "Values: 35, 30, 25, 27, 23"
+answer   exact 27/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [23, 25, 27, 30, 35]
+step 2   Take the value in the middle.   [27]
+step 3   The median is the result.   [27]
+miss     used-unsorted-middle = 25   Sort the list before choosing its middle.
+miss     used-mean-for-median = 28   Find the middle after sorting, not the overall average.
+
+--- median · seed 987654321 · difficulty 2
+prompt   What is the median of these values?
+display  story [median values [27,37,23,25,30,20]] "Values: 27, 37, 23, 25, 30, 20"
+answer   exact 26/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [20, 23, 25, 27, 30, 37]
+step 2   Average the two middle values.   [(25 + 27) ÷ 2 = 26]
+step 3   The median is the result.   [26]
+miss     used-unsorted-middle = 24   Sort the list before choosing its middle.
+miss     used-mean-for-median = 27   Find the middle after sorting, not the overall average.
+
+--- median · seed 1 · difficulty 3
+prompt   What is the median of these values?
+display  story [median values [49,28,35,33,31,40,43,37]] "Values: 49, 28, 35, 33, 31, 40, 43, 37"
+answer   exact 36/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [28, 31, 33, 35, 37, 40, 43, 49]
+step 2   Average the two middle values.   [(35 + 37) ÷ 2 = 36]
+step 3   The median is the result.   [36]
+miss     used-unsorted-middle = 32   Sort the list before choosing its middle.
+miss     used-mean-for-median = 37   Find the middle after sorting, not the overall average.
+
+--- median · seed 12345 · difficulty 3
+prompt   What is the median of these values?
+display  story [median values [39,34,37,55,43,46,41,49]] "Values: 39, 34, 37, 55, 43, 46, 41, 49"
+answer   exact 42/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [34, 37, 39, 41, 43, 46, 49, 55]
+step 2   Average the two middle values.   [(41 + 43) ÷ 2 = 42]
+step 3   The median is the result.   [42]
+miss     used-unsorted-middle = 49   Sort the list before choosing its middle.
+miss     used-mean-for-median = 43   Find the middle after sorting, not the overall average.
+
+--- median · seed 67890 · difficulty 3
+prompt   What is the median of these values?
+display  story [median values [42,44,46,59,51,48,53]] "Values: 42, 44, 46, 59, 51, 48, 53"
+answer   exact 48/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [42, 44, 46, 48, 51, 53, 59]
+step 2   Take the value in the middle.   [48]
+step 3   The median is the result.   [48]
+miss     used-unsorted-middle = 59   Sort the list before choosing its middle.
+miss     used-mean-for-median = 49   Find the middle after sorting, not the overall average.
+
+--- median · seed 424242 · difficulty 3
+prompt   What is the median of these values?
+display  story [median values [45,43,34,38,51,40,36]] "Values: 45, 43, 34, 38, 51, 40, 36"
+answer   exact 40/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [34, 36, 38, 40, 43, 45, 51]
+step 2   Take the value in the middle.   [40]
+step 3   The median is the result.   [40]
+miss     used-unsorted-middle = 38   Sort the list before choosing its middle.
+miss     used-mean-for-median = 41   Find the middle after sorting, not the overall average.
+
+--- median · seed 987654321 · difficulty 3
+prompt   What is the median of these values?
+display  story [median values [35,51,42,39,33,37,45,30]] "Values: 35, 51, 42, 39, 33, 37, 45, 30"
+answer   exact 38/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [30, 33, 35, 37, 39, 42, 45, 51]
+step 2   Average the two middle values.   [(37 + 39) ÷ 2 = 38]
+step 3   The median is the result.   [38]
+miss     used-unsorted-middle = 36   Sort the list before choosing its middle.
+miss     used-mean-for-median = 39   Find the middle after sorting, not the overall average.
+
+--- median · seed 1 · difficulty 4
+prompt   What is the median of these values?
+display  story [median values [65,44,51,49,47,56,59,53]] "Values: 65, 44, 51, 49, 47, 56, 59, 53"
+answer   exact 52/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [44, 47, 49, 51, 53, 56, 59, 65]
+step 2   Average the two middle values.   [(51 + 53) ÷ 2 = 52]
+step 3   The median is the result.   [52]
+miss     used-unsorted-middle = 48   Sort the list before choosing its middle.
+miss     used-mean-for-median = 53   Find the middle after sorting, not the overall average.
+
+--- median · seed 12345 · difficulty 4
+prompt   What is the median of these values?
+display  story [median values [74,54,63,67,52,56,58,65,60]] "Values: 74, 54, 63, 67, 52, 56, 58, 65, 60"
+answer   exact 60/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [52, 54, 56, 58, 60, 63, 65, 67, 74]
+step 2   Take the value in the middle.   [60]
+step 3   The median is the result.   [60]
+miss     used-unsorted-middle = 52   Sort the list before choosing its middle.
+miss     used-mean-for-median = 61   Find the middle after sorting, not the overall average.
+
+--- median · seed 67890 · difficulty 4
+prompt   What is the median of these values?
+display  story [median values [64,59,62,80,66,74,71,68]] "Values: 64, 59, 62, 80, 66, 74, 71, 68"
+answer   exact 67/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [59, 62, 64, 66, 68, 71, 74, 80]
+step 2   Average the two middle values.   [(66 + 68) ÷ 2 = 67]
+step 3   The median is the result.   [67]
+miss     used-unsorted-middle = 73   Sort the list before choosing its middle.
+miss     used-mean-for-median = 68   Find the middle after sorting, not the overall average.
+
+--- median · seed 424242 · difficulty 4
+prompt   What is the median of these values?
+display  story [median values [63,61,52,56,69,58,54]] "Values: 63, 61, 52, 56, 69, 58, 54"
+answer   exact 58/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [52, 54, 56, 58, 61, 63, 69]
+step 2   Take the value in the middle.   [58]
+step 3   The median is the result.   [58]
+miss     used-unsorted-middle = 56   Sort the list before choosing its middle.
+miss     used-mean-for-median = 59   Find the middle after sorting, not the overall average.
+
+--- median · seed 987654321 · difficulty 4
+prompt   What is the median of these values?
+display  story [median values [60,53,69,49,58,51,55,62,47]] "Values: 60, 53, 69, 49, 58, 51, 55, 62, 47"
+answer   exact 55/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [47, 49, 51, 53, 55, 58, 60, 62, 69]
+step 2   Take the value in the middle.   [55]
+step 3   The median is the result.   [55]
+miss     used-unsorted-middle = 58   Sort the list before choosing its middle.
+miss     used-mean-for-median = 56   Find the middle after sorting, not the overall average.
+
+--- median · seed 1 · difficulty 5
+prompt   What is the median of these values?
+display  story [median values [71,62,67,76,89,69,65,78,80,73]] "Values: 71, 62, 67, 76, 89, 69, 65, 78, 80, 73"
+answer   exact 72/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [62, 65, 67, 69, 71, 73, 76, 78, 80, 89]
+step 2   Average the two middle values.   [(71 + 73) ÷ 2 = 72]
+step 3   The median is the result.   [72]
+miss     used-unsorted-middle = 79   Sort the list before choosing its middle.
+miss     used-mean-for-median = 73   Find the middle after sorting, not the overall average.
+
+--- median · seed 12345 · difficulty 5
+prompt   What is the median of these values?
+display  story [median values [73,80,87,84,78,76,82,89,91,100]] "Values: 73, 80, 87, 84, 78, 76, 82, 89, 91, 100"
+answer   exact 83/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [73, 76, 78, 80, 82, 84, 87, 89, 91, 100]
+step 2   Average the two middle values.   [(82 + 84) ÷ 2 = 83]
+step 3   The median is the result.   [83]
+miss     used-unsorted-middle = 77   Sort the list before choosing its middle.
+miss     used-mean-for-median = 84   Find the middle after sorting, not the overall average.
+
+--- median · seed 67890 · difficulty 5
+prompt   What is the median of these values?
+display  story [median values [96,87,107,100,98,93,85,89,91]] "Values: 96, 87, 107, 100, 98, 93, 85, 89, 91"
+answer   exact 93/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [85, 87, 89, 91, 93, 96, 98, 100, 107]
+step 2   Take the value in the middle.   [93]
+step 3   The median is the result.   [93]
+miss     used-unsorted-middle = 98   Sort the list before choosing its middle.
+miss     used-mean-for-median = 94   Find the middle after sorting, not the overall average.
+
+--- median · seed 424242 · difficulty 5
+prompt   What is the median of these values?
+display  story [median values [80,94,87,85,72,78,76,83,74]] "Values: 80, 94, 87, 85, 72, 78, 76, 83, 74"
+answer   exact 80/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [72, 74, 76, 78, 80, 83, 85, 87, 94]
+step 2   Take the value in the middle.   [80]
+step 3   The median is the result.   [80]
+miss     used-unsorted-middle = 72   Sort the list before choosing its middle.
+miss     used-mean-for-median = 81   Find the middle after sorting, not the overall average.
+
+--- median · seed 987654321 · difficulty 5
+prompt   What is the median of these values?
+display  story [median values [77,93,80,73,75,69,66,71,84,82]] "Values: 77, 93, 80, 73, 75, 69, 66, 71, 84, 82"
+answer   exact 76/1
+input    keypad
+hint     Sort the values before finding the middle.
+step 1   Sort the values from least to greatest.   [66, 69, 71, 73, 75, 77, 80, 82, 84, 93]
+step 2   Average the two middle values.   [(75 + 77) ÷ 2 = 76]
+step 3   The median is the result.   [76]
+miss     used-unsorted-middle = 72   Sort the list before choosing its middle.
+miss     used-mean-for-median = 77   Find the middle after sorting, not the overall average."
+`;
+
+exports[`Unit 21 recorded output: mode-range > matches authored sample output 1`] = `
+"--- mode-range · seed 1 · difficulty 1
+prompt   What is the range of these values?
+display  story [range values [5,7,5,3,4]] "Values: 5, 7, 5, 3, 4"
+answer   exact 4/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [7 and 3]
+step 2   Subtract lowest from highest.   [7 − 3 = 4]
+step 3   The range is the difference.   [4]
+miss     used-mode-for-range = 5   Subtract lowest from highest to find range.
+
+--- mode-range · seed 12345 · difficulty 1
+prompt   What is the range of these values?
+display  story [range values [6,7,11,8,7]] "Values: 6, 7, 11, 8, 7"
+answer   exact 5/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [11 and 6]
+step 2   Subtract lowest from highest.   [11 − 6 = 5]
+step 3   The range is the difference.   [5]
+miss     used-mode-for-range = 7   Subtract lowest from highest to find range.
+
+--- mode-range · seed 67890 · difficulty 1
+prompt   What is the mode of these values?
+display  story [mode values [7,9,7,12,8]] "Values: 7, 9, 7, 12, 8"
+answer   exact 7/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [7 appears twice]
+step 2   Choose the most common value.   [7]
+miss     used-range-for-mode = 5   Count repeats when the question asks for mode.
+
+--- mode-range · seed 424242 · difficulty 1
+prompt   What is the mode of these values?
+display  story [mode values [6,5,4,5,11]] "Values: 6, 5, 4, 5, 11"
+answer   exact 5/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [5 appears twice]
+step 2   Choose the most common value.   [5]
+miss     used-range-for-mode = 7   Count repeats when the question asks for mode.
+
+--- mode-range · seed 987654321 · difficulty 1
+prompt   What is the range of these values?
+display  story [range values [6,9,3,3,12]] "Values: 6, 9, 3, 3, 12"
+answer   exact 9/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [12 and 3]
+step 2   Subtract lowest from highest.   [12 − 3 = 9]
+step 3   The range is the difference.   [9]
+miss     used-mode-for-range = 3   Subtract lowest from highest to find range.
+
+--- mode-range · seed 1 · difficulty 2
+prompt   What is the range of these values?
+display  story [range values [11,7,8,12,12]] "Values: 11, 7, 8, 12, 12"
+answer   exact 5/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [12 and 7]
+step 2   Subtract lowest from highest.   [12 − 7 = 5]
+step 3   The range is the difference.   [5]
+miss     used-mode-for-range = 12   Subtract lowest from highest to find range.
+
+--- mode-range · seed 12345 · difficulty 2
+prompt   What is the range of these values?
+display  story [range values [10,12,18,13,12]] "Values: 10, 12, 18, 13, 12"
+answer   exact 8/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [18 and 10]
+step 2   Subtract lowest from highest.   [18 − 10 = 8]
+step 3   The range is the difference.   [8]
+miss     used-mode-for-range = 12   Subtract lowest from highest to find range.
+
+--- mode-range · seed 67890 · difficulty 2
+prompt   What is the mode of these values?
+display  story [mode values [17,5,13,18,18,7]] "Values: 17, 5, 13, 18, 18, 7"
+answer   exact 18/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [18 appears twice]
+step 2   Choose the most common value.   [18]
+miss     used-range-for-mode = 13   Count repeats when the question asks for mode.
+
+--- mode-range · seed 424242 · difficulty 2
+prompt   What is the mode of these values?
+display  story [mode values [14,7,10,15,7]] "Values: 14, 7, 10, 15, 7"
+answer   exact 7/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [7 appears twice]
+step 2   Choose the most common value.   [7]
+miss     used-range-for-mode = 8   Count repeats when the question asks for mode.
+
+--- mode-range · seed 987654321 · difficulty 2
+prompt   What is the range of these values?
+display  story [range values [11,15,5,5,19]] "Values: 11, 15, 5, 5, 19"
+answer   exact 14/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [19 and 5]
+step 2   Subtract lowest from highest.   [19 − 5 = 14]
+step 3   The range is the difference.   [14]
+miss     used-mode-for-range = 5   Subtract lowest from highest to find range.
+
+--- mode-range · seed 1 · difficulty 3
+prompt   What is the range of these values?
+display  story [range values [20,9,18,18,11,14]] "Values: 20, 9, 18, 18, 11, 14"
+answer   exact 11/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [20 and 9]
+step 2   Subtract lowest from highest.   [20 − 9 = 11]
+step 3   The range is the difference.   [11]
+miss     used-mode-for-range = 18   Subtract lowest from highest to find range.
+
+--- mode-range · seed 12345 · difficulty 3
+prompt   What is the range of these values?
+display  story [range values [23,32,32,19,15,14,27]] "Values: 23, 32, 32, 19, 15, 14, 27"
+answer   exact 18/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [32 and 14]
+step 2   Subtract lowest from highest.   [32 − 14 = 18]
+step 3   The range is the difference.   [18]
+miss     used-mode-for-range = 32   Subtract lowest from highest to find range.
+
+--- mode-range · seed 67890 · difficulty 3
+prompt   What is the mode of these values?
+display  story [mode values [17,17,16,24,27,8,11]] "Values: 17, 17, 16, 24, 27, 8, 11"
+answer   exact 17/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [17 appears twice]
+step 2   Choose the most common value.   [17]
+miss     used-range-for-mode = 19   Count repeats when the question asks for mode.
+
+--- mode-range · seed 424242 · difficulty 3
+prompt   What is the mode of these values?
+display  story [mode values [12,24,12,8,23,16]] "Values: 12, 24, 12, 8, 23, 16"
+answer   exact 12/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [12 appears twice]
+step 2   Choose the most common value.   [12]
+miss     used-range-for-mode = 16   Count repeats when the question asks for mode.
+
+--- mode-range · seed 987654321 · difficulty 3
+prompt   What is the range of these values?
+display  story [range values [8,17,23,18,8,30]] "Values: 8, 17, 23, 18, 8, 30"
+answer   exact 22/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [30 and 8]
+step 2   Subtract lowest from highest.   [30 − 8 = 22]
+step 3   The range is the difference.   [22]
+miss     used-mode-for-range = 8   Subtract lowest from highest to find range.
+
+--- mode-range · seed 1 · difficulty 4
+prompt   What is the range of these values?
+display  story [range values [47,22,31,31,38,34,48]] "Values: 47, 22, 31, 31, 38, 34, 48"
+answer   exact 26/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [48 and 22]
+step 2   Subtract lowest from highest.   [48 − 22 = 26]
+step 3   The range is the difference.   [26]
+miss     used-mode-for-range = 31   Subtract lowest from highest to find range.
+
+--- mode-range · seed 12345 · difficulty 4
+prompt   What is the range of these values?
+display  story [range values [29,29,14,30,42,24,40]] "Values: 29, 29, 14, 30, 42, 24, 40"
+answer   exact 28/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [42 and 14]
+step 2   Subtract lowest from highest.   [42 − 14 = 28]
+step 3   The range is the difference.   [28]
+miss     used-mode-for-range = 29   Subtract lowest from highest to find range.
+
+--- mode-range · seed 67890 · difficulty 4
+prompt   What is the mode of these values?
+display  story [mode values [16,20,14,41,20,38,19]] "Values: 16, 20, 14, 41, 20, 38, 19"
+answer   exact 20/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [20 appears twice]
+step 2   Choose the most common value.   [20]
+miss     used-range-for-mode = 27   Count repeats when the question asks for mode.
+
+--- mode-range · seed 424242 · difficulty 4
+prompt   What is the mode of these values?
+display  story [mode values [34,18,18,35,24,12,31]] "Values: 34, 18, 18, 35, 24, 12, 31"
+answer   exact 18/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [18 appears twice]
+step 2   Choose the most common value.   [18]
+miss     used-range-for-mode = 23   Count repeats when the question asks for mode.
+
+--- mode-range · seed 987654321 · difficulty 4
+prompt   What is the range of these values?
+display  story [range values [26,12,28,45,25,35,12]] "Values: 26, 12, 28, 45, 25, 35, 12"
+answer   exact 33/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [45 and 12]
+step 2   Subtract lowest from highest.   [45 − 12 = 33]
+step 3   The range is the difference.   [33]
+miss     used-mode-for-range = 12   Subtract lowest from highest to find range.
+
+--- mode-range · seed 1 · difficulty 5
+prompt   What is the range of these values?
+display  story [range values [19,59,40,38,18,19,26,32]] "Values: 19, 59, 40, 38, 18, 19, 26, 32"
+answer   exact 41/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [59 and 18]
+step 2   Subtract lowest from highest.   [59 − 18 = 41]
+step 3   The range is the difference.   [41]
+miss     used-mode-for-range = 19   Subtract lowest from highest to find range.
+
+--- mode-range · seed 12345 · difficulty 5
+prompt   What is the range of these values?
+display  story [range values [62,43,43,72,35,20,45,59]] "Values: 62, 43, 43, 72, 35, 20, 45, 59"
+answer   exact 52/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [72 and 20]
+step 2   Subtract lowest from highest.   [72 − 20 = 52]
+step 3   The range is the difference.   [52]
+miss     used-mode-for-range = 43   Subtract lowest from highest to find range.
+
+--- mode-range · seed 67890 · difficulty 5
+prompt   What is the mode of these values?
+display  story [mode values [34,64,54,20,61,44,20,71,45]] "Values: 34, 64, 54, 20, 61, 44, 20, 71, 45"
+answer   exact 20/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [20 appears twice]
+step 2   Choose the most common value.   [20]
+miss     used-range-for-mode = 51   Count repeats when the question asks for mode.
+
+--- mode-range · seed 424242 · difficulty 5
+prompt   What is the mode of these values?
+display  story [mode values [26,35,17,52,26,45,50,71]] "Values: 26, 35, 17, 52, 26, 45, 50, 71"
+answer   exact 26/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [26 appears twice]
+step 2   Choose the most common value.   [26]
+miss     used-range-for-mode = 54   Count repeats when the question asks for mode.
+
+--- mode-range · seed 987654321 · difficulty 5
+prompt   What is the range of these values?
+display  story [range values [51,68,16,16,40,30,38,37]] "Values: 51, 68, 16, 16, 40, 30, 38, 37"
+answer   exact 52/1
+input    keypad
+hint     Subtract the lowest value from the highest.
+step 1   Find the highest and lowest values.   [68 and 16]
+step 2   Subtract lowest from highest.   [68 − 16 = 52]
+step 3   The range is the difference.   [52]
+miss     used-mode-for-range = 16   Subtract lowest from highest to find range."
+`;
+
+exports[`Unit 21 recorded output: read-bar-line > matches authored sample output 1`] = `
+"--- read-bar-line · seed 1 · difficulty 1
+prompt   What is the Books value for Feb?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..20/4 labels ["Jan","Feb","Mar"] series ["Books": [8,12,12]; "Games": [8,16,8]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 20 by 4, series Books and Games" [read-chart-value category 1 series 0]
+answer   exact 12/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Feb]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [12]
+
+--- read-bar-line · seed 12345 · difficulty 1
+prompt   What is the Books value for Mar?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..20/4 labels ["Jan","Feb","Mar"] series ["Books": [8,4,16]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 20 by 4, series Books" [read-chart-value category 2 series 0]
+answer   exact 16/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Mar]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [16]
+
+--- read-bar-line · seed 67890 · difficulty 1
+prompt   What is the Books value for Feb?
+display  chart line "Monthly activity" x-label "Month" y-label "Count" y-scale 0..12/3 labels ["Jan","Feb"] series ["Books": [9,3]] "Line chart "Monthly activity", x-axis Month, y-axis Count from 0 to 12 by 3, series Books" [read-chart-value category 1 series 0]
+answer   exact 3/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Feb]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [3]
+
+--- read-bar-line · seed 424242 · difficulty 1
+prompt   What is the Books value for Feb?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..12/3 labels ["Jan","Feb"] series ["Books": [6,3]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 12 by 3, series Books" [read-chart-value category 1 series 0]
+answer   exact 3/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Feb]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [3]
+
+--- read-bar-line · seed 987654321 · difficulty 1
+prompt   What is the Books value for Jan?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..20/4 labels ["Jan","Feb","Mar"] series ["Books": [8,8,8]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 20 by 4, series Books" [read-chart-value category 0 series 0]
+answer   exact 8/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Jan]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [8]
+
+--- read-bar-line · seed 1 · difficulty 2
+prompt   What is the Books value for Feb?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..30/5 labels ["Jan","Feb","Mar","Apr"] series ["Books": [10,20,20,15]; "Games": [25,15,15,5]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 30 by 5, series Books and Games" [read-chart-value category 1 series 0]
+answer   exact 20/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Feb]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [20]
+
+--- read-bar-line · seed 12345 · difficulty 2
+prompt   What is the Books value for Apr?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..25/5 labels ["Jan","Feb","Mar","Apr"] series ["Books": [10,5,20,20]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 25 by 5, series Books" [read-chart-value category 3 series 0]
+answer   exact 20/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Apr]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [20]
+
+--- read-bar-line · seed 67890 · difficulty 2
+prompt   What is the Books value for Mar?
+display  chart line "Monthly activity" x-label "Month" y-label "Count" y-scale 0..16/4 labels ["Jan","Feb","Mar"] series ["Books": [12,4,8]] "Line chart "Monthly activity", x-axis Month, y-axis Count from 0 to 16 by 4, series Books" [read-chart-value category 2 series 0]
+answer   exact 8/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Mar]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [8]
+
+--- read-bar-line · seed 424242 · difficulty 2
+prompt   What is the Books value for Mar?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..20/4 labels ["Jan","Feb","Mar"] series ["Books": [12,4,12]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 20 by 4, series Books" [read-chart-value category 2 series 0]
+answer   exact 12/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Mar]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [12]
+
+--- read-bar-line · seed 987654321 · difficulty 2
+prompt   What is the Books value for Mar?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..25/5 labels ["Jan","Feb","Mar","Apr"] series ["Books": [10,10,10,10]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 25 by 5, series Books" [read-chart-value category 2 series 0]
+answer   exact 10/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Mar]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [10]
+
+--- read-bar-line · seed 1 · difficulty 3
+prompt   What is the Books value for Feb?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..49/7 labels ["Jan","Feb","Mar","Apr"] series ["Books": [14,28,35,21]; "Games": [42,21,21,7]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 49 by 7, series Books and Games" [read-chart-value category 1 series 0]
+answer   exact 28/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Feb]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [28]
+
+--- read-bar-line · seed 12345 · difficulty 3
+prompt   What is the Books value for Apr?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..42/7 labels ["Jan","Feb","Mar","Apr"] series ["Books": [14,7,28,35]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 42 by 7, series Books" [read-chart-value category 3 series 0]
+answer   exact 35/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Apr]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [35]
+
+--- read-bar-line · seed 67890 · difficulty 3
+prompt   What is the Books value for Mar?
+display  chart line "Monthly activity" x-label "Month" y-label "Count" y-scale 0..25/5 labels ["Jan","Feb","Mar","Apr"] series ["Books": [20,5,15,20]] "Line chart "Monthly activity", x-axis Month, y-axis Count from 0 to 25 by 5, series Books" [read-chart-value category 2 series 0]
+answer   exact 15/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Mar]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [15]
+
+--- read-bar-line · seed 424242 · difficulty 3
+prompt   What is the Books value for Apr?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..36/6 labels ["Jan","Feb","Mar","Apr"] series ["Books": [24,6,18,30]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 36 by 6, series Books" [read-chart-value category 3 series 0]
+answer   exact 30/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Apr]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [30]
+
+--- read-bar-line · seed 987654321 · difficulty 3
+prompt   What is the Books value for Mar?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..42/7 labels ["Jan","Feb","Mar","Apr"] series ["Books": [14,21,14,14]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 42 by 7, series Books" [read-chart-value category 2 series 0]
+answer   exact 14/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Mar]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [14]
+
+--- read-bar-line · seed 1 · difficulty 4
+prompt   What is the Books value for Jan?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..72/9 labels ["Jan","Feb","Mar","Apr","May"] series ["Books": [18,45,54,27,63]; "Games": [36,36,9,27,18]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 72 by 9, series Books and Games" [read-chart-value category 0 series 0]
+answer   exact 18/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Jan]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [18]
+
+--- read-bar-line · seed 12345 · difficulty 4
+prompt   What is the Books value for Mar?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..63/9 labels ["Jan","Feb","Mar","Apr","May"] series ["Books": [27,9,45,54,45]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 63 by 9, series Books" [read-chart-value category 2 series 0]
+answer   exact 45/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Mar]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [45]
+
+--- read-bar-line · seed 67890 · difficulty 4
+prompt   What is the Books value for Mar?
+display  chart line "Monthly activity" x-label "Month" y-label "Count" y-scale 0..30/6 labels ["Jan","Feb","Mar","Apr"] series ["Books": [24,6,18,24]] "Line chart "Monthly activity", x-axis Month, y-axis Count from 0 to 30 by 6, series Books" [read-chart-value category 2 series 0]
+answer   exact 18/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Mar]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [18]
+
+--- read-bar-line · seed 424242 · difficulty 4
+prompt   What is the Books value for Apr?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..48/8 labels ["Jan","Feb","Mar","Apr"] series ["Books": [32,8,24,40]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 48 by 8, series Books" [read-chart-value category 3 series 0]
+answer   exact 40/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Apr]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [40]
+
+--- read-bar-line · seed 987654321 · difficulty 4
+prompt   What is the Books value for May?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..63/9 labels ["Jan","Feb","Mar","Apr","May"] series ["Books": [27,27,27,18,36]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 63 by 9, series Books" [read-chart-value category 4 series 0]
+answer   exact 36/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [May]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [36]
+
+--- read-bar-line · seed 1 · difficulty 5
+prompt   What is the Books value for Jan?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..108/12 labels ["Jan","Feb","Mar","Apr","May","Jun"] series ["Books": [36,60,72,48,96,48]; "Games": [48,24,48,24,24,48]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 108 by 12, series Books and Games" [read-chart-value category 0 series 0]
+answer   exact 36/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Jan]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [36]
+
+--- read-bar-line · seed 12345 · difficulty 5
+prompt   What is the Books value for Jun?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..88/11 labels ["Jan","Feb","Mar","Apr","May","Jun"] series ["Books": [33,11,66,77,66,44]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 88 by 11, series Books" [read-chart-value category 5 series 0]
+answer   exact 44/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Jun]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [44]
+
+--- read-bar-line · seed 67890 · difficulty 5
+prompt   What is the Books value for May?
+display  chart line "Monthly activity" x-label "Month" y-label "Count" y-scale 0..54/9 labels ["Jan","Feb","Mar","Apr","May"] series ["Books": [36,9,36,36,27]] "Line chart "Monthly activity", x-axis Month, y-axis Count from 0 to 54 by 9, series Books" [read-chart-value category 4 series 0]
+answer   exact 27/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [May]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [27]
+
+--- read-bar-line · seed 424242 · difficulty 5
+prompt   What is the Books value for Apr?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..70/10 labels ["Jan","Feb","Mar","Apr","May"] series ["Books": [40,10,40,60,60]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 70 by 10, series Books" [read-chart-value category 3 series 0]
+answer   exact 60/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [Apr]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [60]
+
+--- read-bar-line · seed 987654321 · difficulty 5
+prompt   What is the Books value for May?
+display  chart bar "Monthly activity" x-label "Month" y-label "Count" y-scale 0..96/12 labels ["Jan","Feb","Mar","Apr","May","Jun"] series ["Books": [36,48,36,24,48,84]] "Bar chart "Monthly activity", x-axis Month, y-axis Count from 0 to 96 by 12, series Books" [read-chart-value category 4 series 0]
+answer   exact 48/1
+input    keypad
+hint     Match the label to its bar or line.
+step 1   Find the requested chart label.   [May]
+step 2   Follow the requested series.   [Books]
+step 3   Read the value at their intersection.   [48]"
+`;
+
+exports[`Unit 21 recorded output: read-scatterplot > matches authored sample output 1`] = `
+"--- read-scatterplot · seed 1 · difficulty 1
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..5/1 y-scale 0..10/2 series ["Learners": [{"x":0,"y":4},{"x":1,"y":5},{"x":2,"y":4},{"x":3,"y":6},{"x":4,"y":8}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 5 by 1, y-axis Score from 0 to 10 by 2, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   flat = Flat
+choice   decreasing = Decreasing
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 12345 · difficulty 1
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..5/1 y-scale 0..10/2 series ["Learners": [{"x":0,"y":4},{"x":1,"y":4},{"x":2,"y":5},{"x":3,"y":5},{"x":4,"y":8}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 5 by 1, y-axis Score from 0 to 10 by 2, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 67890 · difficulty 1
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..4/1 y-scale 0..10/2 series ["Learners": [{"x":0,"y":6},{"x":1,"y":4},{"x":2,"y":5},{"x":3,"y":2}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 4 by 1, y-axis Score from 0 to 10 by 2, series Learners" [scatter-trend trend-line true]
+answer   choice decreasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   flat = Flat
+choice   decreasing = Decreasing
+step 1   Look at the trend line.   [Decreasing]
+step 2   Choose decreasing for its direction.   [Decreasing]
+
+--- read-scatterplot · seed 424242 · difficulty 1
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..4/1 y-scale 0..10/2 series ["Learners": [{"x":0,"y":2},{"x":1,"y":3},{"x":2,"y":4},{"x":3,"y":4}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 4 by 1, y-axis Score from 0 to 10 by 2, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   flat = Flat
+choice   decreasing = Decreasing
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 987654321 · difficulty 1
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..5/1 y-scale 0..10/2 series ["Learners": [{"x":0,"y":3},{"x":1,"y":3},{"x":2,"y":4},{"x":3,"y":5},{"x":4,"y":6}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 5 by 1, y-axis Score from 0 to 10 by 2, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   flat = Flat
+choice   decreasing = Decreasing
+choice   increasing = Increasing
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 1 · difficulty 2
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..6/1 y-scale 0..20/4 series ["Learners": [{"x":0,"y":6},{"x":1,"y":8},{"x":2,"y":8},{"x":3,"y":11},{"x":4,"y":14},{"x":5,"y":15}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 6 by 1, y-axis Score from 0 to 20 by 4, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   decreasing = Decreasing
+choice   increasing = Increasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 12345 · difficulty 2
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..6/1 y-scale 0..20/4 series ["Learners": [{"x":0,"y":6},{"x":1,"y":7},{"x":2,"y":9},{"x":3,"y":10},{"x":4,"y":14},{"x":5,"y":16}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 6 by 1, y-axis Score from 0 to 20 by 4, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   decreasing = Decreasing
+choice   increasing = Increasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 67890 · difficulty 2
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..5/1 y-scale 0..20/4 series ["Learners": [{"x":0,"y":13},{"x":1,"y":10},{"x":2,"y":10},{"x":3,"y":6},{"x":4,"y":5}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 5 by 1, y-axis Score from 0 to 20 by 4, series Learners" [scatter-trend trend-line true]
+answer   choice decreasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Decreasing]
+step 2   Choose decreasing for its direction.   [Decreasing]
+
+--- read-scatterplot · seed 424242 · difficulty 2
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..5/1 y-scale 0..20/4 series ["Learners": [{"x":0,"y":3},{"x":1,"y":5},{"x":2,"y":7},{"x":3,"y":8},{"x":4,"y":11}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 5 by 1, y-axis Score from 0 to 20 by 4, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 987654321 · difficulty 2
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..6/1 y-scale 0..20/4 series ["Learners": [{"x":0,"y":3},{"x":1,"y":4},{"x":2,"y":6},{"x":3,"y":8},{"x":4,"y":10},{"x":5,"y":11}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 6 by 1, y-axis Score from 0 to 20 by 4, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   flat = Flat
+choice   decreasing = Decreasing
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 1 · difficulty 3
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..7/1 y-scale 0..30/6 series ["Learners": [{"x":0,"y":10},{"x":1,"y":12},{"x":2,"y":12},{"x":3,"y":15},{"x":4,"y":18},{"x":5,"y":19},{"x":6,"y":22}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 7 by 1, y-axis Score from 0 to 30 by 6, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   flat = Flat
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 12345 · difficulty 3
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..7/1 y-scale 0..30/6 series ["Learners": [{"x":0,"y":10},{"x":1,"y":11},{"x":2,"y":13},{"x":3,"y":14},{"x":4,"y":18},{"x":5,"y":20},{"x":6,"y":22}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 7 by 1, y-axis Score from 0 to 30 by 6, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   flat = Flat
+choice   decreasing = Decreasing
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 67890 · difficulty 3
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..6/1 y-scale 0..30/6 series ["Learners": [{"x":0,"y":21},{"x":1,"y":17},{"x":2,"y":16},{"x":3,"y":11},{"x":4,"y":9},{"x":5,"y":7}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 6 by 1, y-axis Score from 0 to 30 by 6, series Learners" [scatter-trend trend-line true]
+answer   choice decreasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   flat = Flat
+choice   decreasing = Decreasing
+step 1   Look at the trend line.   [Decreasing]
+step 2   Choose decreasing for its direction.   [Decreasing]
+
+--- read-scatterplot · seed 424242 · difficulty 3
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..6/1 y-scale 0..30/6 series ["Learners": [{"x":0,"y":4},{"x":1,"y":7},{"x":2,"y":10},{"x":3,"y":12},{"x":4,"y":16},{"x":5,"y":20}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 6 by 1, y-axis Score from 0 to 30 by 6, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 987654321 · difficulty 3
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..7/1 y-scale 0..30/6 series ["Learners": [{"x":0,"y":3},{"x":1,"y":4},{"x":2,"y":6},{"x":3,"y":8},{"x":4,"y":10},{"x":5,"y":11},{"x":6,"y":14}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 7 by 1, y-axis Score from 0 to 30 by 6, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 1 · difficulty 4
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..8/1 y-scale 0..40/8 series ["Learners": [{"x":0,"y":11},{"x":1,"y":14},{"x":2,"y":15},{"x":3,"y":19},{"x":4,"y":23},{"x":5,"y":25},{"x":6,"y":29},{"x":7,"y":31}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 8 by 1, y-axis Score from 0 to 40 by 8, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   flat = Flat
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 12345 · difficulty 4
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..8/1 y-scale 0..40/8 series ["Learners": [{"x":0,"y":10},{"x":1,"y":12},{"x":2,"y":15},{"x":3,"y":17},{"x":4,"y":22},{"x":5,"y":25},{"x":6,"y":28},{"x":7,"y":30}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 8 by 1, y-axis Score from 0 to 40 by 8, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 67890 · difficulty 4
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..7/1 y-scale 0..40/8 series ["Learners": [{"x":0,"y":30},{"x":1,"y":25},{"x":2,"y":23},{"x":3,"y":17},{"x":4,"y":14},{"x":5,"y":11},{"x":6,"y":6}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 7 by 1, y-axis Score from 0 to 40 by 8, series Learners" [scatter-trend trend-line true]
+answer   choice decreasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Decreasing]
+step 2   Choose decreasing for its direction.   [Decreasing]
+
+--- read-scatterplot · seed 424242 · difficulty 4
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..7/1 y-scale 0..40/8 series ["Learners": [{"x":0,"y":4},{"x":1,"y":8},{"x":2,"y":12},{"x":3,"y":15},{"x":4,"y":20},{"x":5,"y":25},{"x":6,"y":29}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 7 by 1, y-axis Score from 0 to 40 by 8, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   flat = Flat
+choice   decreasing = Decreasing
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 987654321 · difficulty 4
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..8/1 y-scale 0..40/8 series ["Learners": [{"x":0,"y":3},{"x":1,"y":5},{"x":2,"y":8},{"x":3,"y":11},{"x":4,"y":14},{"x":5,"y":16},{"x":6,"y":20},{"x":7,"y":24}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 8 by 1, y-axis Score from 0 to 40 by 8, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 1 · difficulty 5
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..9/1 y-scale 0..50/10 series ["Learners": [{"x":0,"y":10},{"x":1,"y":14},{"x":2,"y":16},{"x":3,"y":21},{"x":4,"y":26},{"x":5,"y":29},{"x":6,"y":34},{"x":7,"y":37},{"x":8,"y":41}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 9 by 1, y-axis Score from 0 to 50 by 10, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   decreasing = Decreasing
+choice   flat = Flat
+choice   increasing = Increasing
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 12345 · difficulty 5
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..10/1 y-scale 0..50/10 series ["Learners": [{"x":0,"y":12},{"x":1,"y":14},{"x":2,"y":17},{"x":3,"y":19},{"x":4,"y":24},{"x":5,"y":27},{"x":6,"y":30},{"x":7,"y":32},{"x":8,"y":36},{"x":9,"y":39}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 10 by 1, y-axis Score from 0 to 50 by 10, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 67890 · difficulty 5
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..9/1 y-scale 0..50/10 series ["Learners": [{"x":0,"y":39},{"x":1,"y":34},{"x":2,"y":32},{"x":3,"y":26},{"x":4,"y":23},{"x":5,"y":20},{"x":6,"y":15},{"x":7,"y":12},{"x":8,"y":8}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 9 by 1, y-axis Score from 0 to 50 by 10, series Learners" [scatter-trend trend-line true]
+answer   choice decreasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   increasing = Increasing
+choice   decreasing = Decreasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Decreasing]
+step 2   Choose decreasing for its direction.   [Decreasing]
+
+--- read-scatterplot · seed 424242 · difficulty 5
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..8/1 y-scale 0..50/10 series ["Learners": [{"x":0,"y":5},{"x":1,"y":9},{"x":2,"y":13},{"x":3,"y":16},{"x":4,"y":21},{"x":5,"y":26},{"x":6,"y":30},{"x":7,"y":33}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 8 by 1, y-axis Score from 0 to 50 by 10, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   decreasing = Decreasing
+choice   increasing = Increasing
+choice   flat = Flat
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]
+
+--- read-scatterplot · seed 987654321 · difficulty 5
+prompt   What is the overall trend in these paired data?
+display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..10/1 y-scale 0..50/10 series ["Learners": [{"x":0,"y":3},{"x":1,"y":5},{"x":2,"y":8},{"x":3,"y":11},{"x":4,"y":14},{"x":5,"y":16},{"x":6,"y":20},{"x":7,"y":24},{"x":8,"y":27},{"x":9,"y":30}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 10 by 1, y-axis Score from 0 to 50 by 10, series Learners" [scatter-trend trend-line true]
+answer   choice increasing
+input    choice
+hint     Follow the trend line from left to right.
+choice   decreasing = Decreasing
+choice   flat = Flat
+choice   increasing = Increasing
+step 1   Look at the trend line.   [Increasing]
+step 2   Choose increasing for its direction.   [Increasing]"
+`;
+
+exports[`Unit 21 recorded output: weighted-mean > matches authored sample output 1`] = `
+"--- weighted-mean · seed 1 · difficulty 1
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":34,"weight":1},{"value":40,"weight":2},{"value":46,"weight":3}]] "Values with weights: 34 (weight 1), 40 (weight 2), 46 (weight 3)"
+answer   exact 42/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [34 × 1 + 40 × 2 + 46 × 3]
+step 2   Add the weighted products.   [252]
+step 3   Add all the weights.   [6]
+step 4   Divide weighted total by total weight.   [252 ÷ 6 = 42]
+miss     ignored-weights = 40   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 12345 · difficulty 1
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":40,"weight":1},{"value":46,"weight":2},{"value":52,"weight":3}]] "Values with weights: 40 (weight 1), 46 (weight 2), 52 (weight 3)"
+answer   exact 48/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [40 × 1 + 46 × 2 + 52 × 3]
+step 2   Add the weighted products.   [288]
+step 3   Add all the weights.   [6]
+step 4   Divide weighted total by total weight.   [288 ÷ 6 = 48]
+miss     ignored-weights = 46   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 67890 · difficulty 1
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":58,"weight":3},{"value":46,"weight":1},{"value":52,"weight":2}]] "Values with weights: 58 (weight 3), 46 (weight 1), 52 (weight 2)"
+answer   exact 54/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [58 × 3 + 46 × 1 + 52 × 2]
+step 2   Add the weighted products.   [324]
+step 3   Add all the weights.   [6]
+step 4   Divide weighted total by total weight.   [324 ÷ 6 = 54]
+miss     ignored-weights = 52   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 424242 · difficulty 1
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":50,"weight":3},{"value":38,"weight":1},{"value":44,"weight":2}]] "Values with weights: 50 (weight 3), 38 (weight 1), 44 (weight 2)"
+answer   exact 46/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [50 × 3 + 38 × 1 + 44 × 2]
+step 2   Add the weighted products.   [276]
+step 3   Add all the weights.   [6]
+step 4   Divide weighted total by total weight.   [276 ÷ 6 = 46]
+miss     ignored-weights = 44   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 987654321 · difficulty 1
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":36,"weight":1},{"value":42,"weight":2},{"value":48,"weight":3}]] "Values with weights: 36 (weight 1), 42 (weight 2), 48 (weight 3)"
+answer   exact 44/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [36 × 1 + 42 × 2 + 48 × 3]
+step 2   Add the weighted products.   [264]
+step 3   Add all the weights.   [6]
+step 4   Divide weighted total by total weight.   [264 ÷ 6 = 44]
+miss     ignored-weights = 42   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 1 · difficulty 2
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":56,"weight":4},{"value":42,"weight":2},{"value":70,"weight":6},{"value":56,"weight":2}]] "Values with weights: 56 (weight 4), 42 (weight 2), 70 (weight 6), 56 (weight 2)"
+answer   exact 60/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [56 × 4 + 42 × 2 + 70 × 6 + 56 × 2]
+step 2   Add the weighted products.   [840]
+step 3   Add all the weights.   [14]
+step 4   Divide weighted total by total weight.   [840 ÷ 14 = 60]
+miss     ignored-weights = 56   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 12345 · difficulty 2
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":71,"weight":3},{"value":57,"weight":1},{"value":64,"weight":2},{"value":64,"weight":1}]] "Values with weights: 71 (weight 3), 57 (weight 1), 64 (weight 2), 64 (weight 1)"
+answer   exact 66/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [71 × 3 + 57 × 1 + 64 × 2 + 64 × 1]
+step 2   Add the weighted products.   [462]
+step 3   Add all the weights.   [7]
+step 4   Divide weighted total by total weight.   [462 ÷ 7 = 66]
+miss     ignored-weights = 64   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 67890 · difficulty 2
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":77,"weight":3},{"value":65,"weight":1},{"value":71,"weight":2}]] "Values with weights: 77 (weight 3), 65 (weight 1), 71 (weight 2)"
+answer   exact 73/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [77 × 3 + 65 × 1 + 71 × 2]
+step 2   Add the weighted products.   [438]
+step 3   Add all the weights.   [6]
+step 4   Divide weighted total by total weight.   [438 ÷ 6 = 73]
+miss     ignored-weights = 71   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 424242 · difficulty 2
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":68,"weight":3},{"value":56,"weight":1},{"value":62,"weight":2}]] "Values with weights: 68 (weight 3), 56 (weight 1), 62 (weight 2)"
+answer   exact 64/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [68 × 3 + 56 × 1 + 62 × 2]
+step 2   Add the weighted products.   [384]
+step 3   Add all the weights.   [6]
+step 4   Divide weighted total by total weight.   [384 ÷ 6 = 64]
+miss     ignored-weights = 62   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 987654321 · difficulty 2
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":66,"weight":3},{"value":52,"weight":1},{"value":59,"weight":2},{"value":59,"weight":1}]] "Values with weights: 66 (weight 3), 52 (weight 1), 59 (weight 2), 59 (weight 1)"
+answer   exact 61/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [66 × 3 + 52 × 1 + 59 × 2 + 59 × 1]
+step 2   Add the weighted products.   [427]
+step 3   Add all the weights.   [7]
+step 4   Divide weighted total by total weight.   [427 ÷ 7 = 61]
+miss     ignored-weights = 59   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 1 · difficulty 3
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":76,"weight":6},{"value":55,"weight":3},{"value":97,"weight":9},{"value":76,"weight":3}]] "Values with weights: 76 (weight 6), 55 (weight 3), 97 (weight 9), 76 (weight 3)"
+answer   exact 82/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [76 × 6 + 55 × 3 + 97 × 9 + 76 × 3]
+step 2   Add the weighted products.   [1722]
+step 3   Add all the weights.   [21]
+step 4   Divide weighted total by total weight.   [1722 ÷ 21 = 82]
+miss     ignored-weights = 76   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 12345 · difficulty 3
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":100,"weight":6},{"value":72,"weight":2},{"value":86,"weight":4},{"value":86,"weight":2}]] "Values with weights: 100 (weight 6), 72 (weight 2), 86 (weight 4), 86 (weight 2)"
+answer   exact 90/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [100 × 6 + 72 × 2 + 86 × 4 + 86 × 2]
+step 2   Add the weighted products.   [1260]
+step 3   Add all the weights.   [14]
+step 4   Divide weighted total by total weight.   [1260 ÷ 14 = 90]
+miss     ignored-weights = 86   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 67890 · difficulty 3
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":110,"weight":6},{"value":96,"weight":2},{"value":82,"weight":2},{"value":96,"weight":4}]] "Values with weights: 110 (weight 6), 96 (weight 2), 82 (weight 2), 96 (weight 4)"
+answer   exact 100/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [110 × 6 + 96 × 2 + 82 × 2 + 96 × 4]
+step 2   Add the weighted products.   [1400]
+step 3   Add all the weights.   [14]
+step 4   Divide weighted total by total weight.   [1400 ÷ 14 = 100]
+miss     ignored-weights = 96   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 424242 · difficulty 3
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":70,"weight":2},{"value":84,"weight":2},{"value":84,"weight":4},{"value":98,"weight":6}]] "Values with weights: 70 (weight 2), 84 (weight 2), 84 (weight 4), 98 (weight 6)"
+answer   exact 88/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [70 × 2 + 84 × 2 + 84 × 4 + 98 × 6]
+step 2   Add the weighted products.   [1232]
+step 3   Add all the weights.   [14]
+step 4   Divide weighted total by total weight.   [1232 ÷ 14 = 88]
+miss     ignored-weights = 84   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 987654321 · difficulty 3
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":94,"weight":6},{"value":66,"weight":2},{"value":80,"weight":4},{"value":80,"weight":2}]] "Values with weights: 94 (weight 6), 66 (weight 2), 80 (weight 4), 80 (weight 2)"
+answer   exact 84/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [94 × 6 + 66 × 2 + 80 × 4 + 80 × 2]
+step 2   Add the weighted products.   [1176]
+step 3   Add all the weights.   [14]
+step 4   Divide weighted total by total weight.   [1176 ÷ 14 = 84]
+miss     ignored-weights = 80   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 1 · difficulty 4
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":132,"weight":12},{"value":100,"weight":8},{"value":68,"weight":4},{"value":100,"weight":4},{"value":100,"weight":4}]] "Values with weights: 132 (weight 12), 100 (weight 8), 68 (weight 4), 100 (weight 4), 100 (weight 4)"
+answer   exact 108/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [132 × 12 + 100 × 8 + 68 × 4 + 100 × 4 + 100 × 4]
+step 2   Add the weighted products.   [3456]
+step 3   Add all the weights.   [32]
+step 4   Divide weighted total by total weight.   [3456 ÷ 32 = 108]
+miss     ignored-weights = 100   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 12345 · difficulty 4
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":113,"weight":3},{"value":89,"weight":3},{"value":113,"weight":6},{"value":137,"weight":9},{"value":113,"weight":3}]] "Values with weights: 113 (weight 3), 89 (weight 3), 113 (weight 6), 137 (weight 9), 113 (weight 3)"
+answer   exact 119/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [113 × 3 + 89 × 3 + 113 × 6 + 137 × 9 + 113 × 3]
+step 2   Add the weighted products.   [2856]
+step 3   Add all the weights.   [24]
+step 4   Divide weighted total by total weight.   [2856 ÷ 24 = 119]
+miss     ignored-weights = 113   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 67890 · difficulty 4
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":147,"weight":9},{"value":126,"weight":3},{"value":105,"weight":3},{"value":126,"weight":6}]] "Values with weights: 147 (weight 9), 126 (weight 3), 105 (weight 3), 126 (weight 6)"
+answer   exact 132/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [147 × 9 + 126 × 3 + 105 × 3 + 126 × 6]
+step 2   Add the weighted products.   [2772]
+step 3   Add all the weights.   [21]
+step 4   Divide weighted total by total weight.   [2772 ÷ 21 = 132]
+miss     ignored-weights = 126   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 424242 · difficulty 4
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":89,"weight":3},{"value":110,"weight":3},{"value":110,"weight":6},{"value":131,"weight":9}]] "Values with weights: 89 (weight 3), 110 (weight 3), 110 (weight 6), 131 (weight 9)"
+answer   exact 116/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [89 × 3 + 110 × 3 + 110 × 6 + 131 × 9]
+step 2   Add the weighted products.   [2436]
+step 3   Add all the weights.   [21]
+step 4   Divide weighted total by total weight.   [2436 ÷ 21 = 116]
+miss     ignored-weights = 110   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 987654321 · difficulty 4
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":106,"weight":3},{"value":82,"weight":3},{"value":106,"weight":6},{"value":130,"weight":9},{"value":106,"weight":3}]] "Values with weights: 106 (weight 3), 82 (weight 3), 106 (weight 6), 130 (weight 9), 106 (weight 3)"
+answer   exact 112/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [106 × 3 + 82 × 3 + 106 × 6 + 130 × 9 + 106 × 3]
+step 2   Add the weighted products.   [2688]
+step 3   Add all the weights.   [24]
+step 4   Divide weighted total by total weight.   [2688 ÷ 24 = 112]
+miss     ignored-weights = 106   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 1 · difficulty 5
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":172,"weight":15},{"value":132,"weight":10},{"value":92,"weight":5},{"value":132,"weight":5},{"value":132,"weight":5}]] "Values with weights: 172 (weight 15), 132 (weight 10), 92 (weight 5), 132 (weight 5), 132 (weight 5)"
+answer   exact 142/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [172 × 15 + 132 × 10 + 92 × 5 + 132 × 5 + 132 × 5]
+step 2   Add the weighted products.   [5680]
+step 3   Add all the weights.   [40]
+step 4   Divide weighted total by total weight.   [5680 ÷ 40 = 142]
+miss     ignored-weights = 132   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 12345 · difficulty 5
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":150,"weight":4},{"value":118,"weight":4},{"value":150,"weight":8},{"value":182,"weight":12},{"value":150,"weight":4}]] "Values with weights: 150 (weight 4), 118 (weight 4), 150 (weight 8), 182 (weight 12), 150 (weight 4)"
+answer   exact 158/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [150 × 4 + 118 × 4 + 150 × 8 + 182 × 12 + 150 × 4]
+step 2   Add the weighted products.   [5056]
+step 3   Add all the weights.   [32]
+step 4   Divide weighted total by total weight.   [5056 ÷ 32 = 158]
+miss     ignored-weights = 150   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 67890 · difficulty 5
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":166,"weight":4},{"value":166,"weight":4},{"value":198,"weight":12},{"value":134,"weight":4},{"value":166,"weight":8}]] "Values with weights: 166 (weight 4), 166 (weight 4), 198 (weight 12), 134 (weight 4), 166 (weight 8)"
+answer   exact 174/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [166 × 4 + 166 × 4 + 198 × 12 + 134 × 4 + 166 × 8]
+step 2   Add the weighted products.   [5568]
+step 3   Add all the weights.   [32]
+step 4   Divide weighted total by total weight.   [5568 ÷ 32 = 174]
+miss     ignored-weights = 166   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 424242 · difficulty 5
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":177,"weight":12},{"value":113,"weight":4},{"value":145,"weight":4},{"value":145,"weight":8},{"value":145,"weight":4}]] "Values with weights: 177 (weight 12), 113 (weight 4), 145 (weight 4), 145 (weight 8), 145 (weight 4)"
+answer   exact 153/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [177 × 12 + 113 × 4 + 145 × 4 + 145 × 8 + 145 × 4]
+step 2   Add the weighted products.   [4896]
+step 3   Add all the weights.   [32]
+step 4   Divide weighted total by total weight.   [4896 ÷ 32 = 153]
+miss     ignored-weights = 145   Use each weight before dividing by total weight.
+
+--- weighted-mean · seed 987654321 · difficulty 5
+prompt   What is the weighted mean of these values?
+display  story [weighted-mean entries [{"value":139,"weight":4},{"value":107,"weight":4},{"value":139,"weight":8},{"value":171,"weight":12},{"value":139,"weight":4}]] "Values with weights: 139 (weight 4), 107 (weight 4), 139 (weight 8), 171 (weight 12), 139 (weight 4)"
+answer   exact 147/1
+input    keypad
+hint     Use each weight before dividing by total weight.
+step 1   Multiply each value by its weight.   [139 × 4 + 107 × 4 + 139 × 8 + 171 × 12 + 139 × 4]
+step 2   Add the weighted products.   [4704]
+step 3   Add all the weights.   [32]
+step 4   Divide weighted total by total weight.   [4704 ÷ 32 = 147]
+miss     ignored-weights = 139   Use each weight before dividing by total weight."
+`;

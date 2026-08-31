@@ -81,7 +81,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(186)
+    expect(documentedAsBuilt).toHaveLength(192)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
   it('keeps every inline expression inside the width its size band was chosen for', () => {
@@ -211,6 +211,12 @@ describe('the skills that are built', () => {
       'surface-area',
       'pythagorean',
       'similar-figures',
+      'mean',
+      'median',
+      'mode-range',
+      'weighted-mean',
+      'read-bar-line',
+      'read-scatterplot',
     ])
     expect(withLines.map((skill) => skill.id)).toEqual([
       ...stageAIds,
@@ -271,6 +277,7 @@ describe('the skills that are built', () => {
       ['unit-18', ['polynomial', 'polynomial', 'binomial', 'quadratic']],
       ['unit-19', ['function', 'domain']],
       ['unit-20', ['perimeter', 'area', 'area', 'circumference', 'volume', 'volume', 'hypotenuse']],
+      ['unit-21', []],
     ])
   })
 
@@ -449,7 +456,7 @@ describe('the skills that are built', () => {
       'ratio-words',
     ])
     expect(unit11Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(186)
+    expect(implementedSkillIds).toHaveLength(192)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -515,7 +522,7 @@ describe('the skills that are built', () => {
       'factor-gcf',
     ])
     expect(unit13Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(186)
+    expect(implementedSkillIds).toHaveLength(192)
   })
 
   it('completes Unit 14 on the capabilities Stage E already had, adding none', () => {
@@ -624,10 +631,10 @@ describe('the skills that are built', () => {
     expect(unit18Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
     const unit19Ids = stage?.units.find((unit) => unit.id === 'unit-19')?.skills.map((skill) => skill.id) ?? []
     expect(unit19Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(186)
+    expect(implementedSkillIds).toHaveLength(192)
   })
 
-  it('completes Unit 20 while keeping Unit 21 planned', () => {
+  it('advances Stage G through the first six Unit 21 skills', () => {
     const stage = manifestIndex.get('read-bar-line')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unit20Ids = stage?.units.find((unit) => unit.id === 'unit-20')?.skills.map((skill) => skill.id) ?? []
@@ -636,7 +643,7 @@ describe('the skills that are built', () => {
     const stageHIds = stageH?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
 
     expect(AVAILABLE_CAPABILITIES.has('chart')).toBe(true)
-    expect(stage?.requires).toEqual(['math-notation', 'diagram', 'chart'])
+    expect(stage?.requires).toEqual(['choice-input', 'math-notation', 'diagram', 'chart'])
     expect((stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))).toEqual([])
     expect(stageIds).toHaveLength(22)
     expect(stageIds.filter((id) => generators.has(id))).toEqual([
@@ -653,16 +660,30 @@ describe('the skills that are built', () => {
       'surface-area',
       'pythagorean',
       'similar-figures',
+      'mean',
+      'median',
+      'mode-range',
+      'weighted-mean',
+      'read-bar-line',
+      'read-scatterplot',
     ])
     expect(unit20Ids).toEqual(stageIds.slice(0, 13))
     expect(unit20Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(unit21Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(9)
-    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(9)
+    expect(unit21Ids.filter((id) => skillState(id) === 'implemented')).toEqual([
+      'mean',
+      'median',
+      'mode-range',
+      'weighted-mean',
+      'read-bar-line',
+      'read-scatterplot',
+    ])
+    expect(unit21Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(3)
+    expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(3)
     expect(stageHIds).toHaveLength(6)
     expect(stageHIds.filter((id) => skillState(id) === 'planned')).toHaveLength(6)
     expect(stageH?.requires).toEqual(['timed'])
-    expect(implementedSkillIds).toHaveLength(186)
-    expect(allSkills).toHaveLength(186)
+    expect(implementedSkillIds).toHaveLength(192)
+    expect(allSkills).toHaveLength(192)
     expect(course.map(({ stage: courseStage }) => courseStage.id)).toContain('stage-g')
   })
 
@@ -687,7 +708,7 @@ describe('the skills that are built', () => {
       if (!stage) continue
       for (const difficulty of [1, 2, 3, 4, 5] as const) {
         // Five a difficulty rather than twenty: `inputMode` varies by draw at
-        // most, never by seed depth, and this walks all 186 generators.
+        // most, never by seed depth, and this walks all 192 generators.
         for (let i = 0; i < 5; i += 1) {
           const { inputMode } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
           const capability = modes[inputMode]
@@ -735,7 +756,7 @@ describe('what the learner is offered', () => {
 
   it('leaves the other 15 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(186)
+    expect(offered).toHaveLength(192)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -758,7 +779,7 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['compare-diff-den', 'unit-7', 'stage-d'])
   })
 
-  it('shows the twenty built units, and no stage or unit that has nothing to play', () => {
+  it('shows the twenty-one built units, and no stage or unit that has nothing to play', () => {
     expect(course.map(({ stage }) => stage.id)).toEqual([
       'stage-a',
       'stage-b',
@@ -790,6 +811,7 @@ describe('what the learner is offered', () => {
       'unit-18',
       'unit-19',
       'unit-20',
+      'unit-21',
     ])
   })
 })

@@ -27,6 +27,7 @@ import type {
   Problem,
   RatioData,
   SkillGenerator,
+  StatisticsData,
 } from '../lib/types'
 
 /**
@@ -458,6 +459,26 @@ const formatEquationData = (data: EquationData): string => {
   }
 }
 
+const formatStatisticsData = (data: StatisticsData): string => {
+  switch (data.operation) {
+    case 'mean':
+    case 'median':
+    case 'mode':
+    case 'range':
+      return `${data.operation} values ${JSON.stringify(data.values)}`
+    case 'weighted-mean':
+      return `${data.operation} entries ${JSON.stringify(data.entries)}`
+    case 'read-chart-value':
+      return `${data.operation} category ${data.categoryIndex} series ${data.seriesIndex}`
+    case 'scatter-trend':
+      return `${data.operation} trend-line true`
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unhandled statistics data: ${JSON.stringify(unhandled)}`)
+    }
+  }
+}
+
 const formatChartScale = (scale: Chart['y']): string =>
   `${scale.min}..${scale.max}/${scale.step}`
 
@@ -553,6 +574,12 @@ const formatDisplay = (display: Problem['display']): string => {
       if (display.algebra) return `story [${formatAlgebraData(display.algebra)}] "${display.text}"`
       if (display.polynomial) return `story [${formatPolynomial(display.polynomial)}] "${display.text}"`
       if (display.equation) return `story [${formatEquationData(display.equation)}] "${display.text}"`
+      if ('statistics' in display && display.statistics) {
+        return `story [${formatStatisticsData(display.statistics)}] "${display.text}"`
+      }
+      if (!('operands' in display) || !display.operands || !display.operator) {
+        throw new Error('Story display needs operation-specific data')
+      }
       return `story [${display.operands.join(` ${display.operator} `)}] "${display.text}"`
     case 'math':
       return (
@@ -582,7 +609,8 @@ const formatDisplay = (display: Problem['display']): string => {
       )
     }
     case 'chart':
-      return `chart ${formatChart(display.chart)}`
+      return `chart ${formatChart(display.chart)}` +
+        ('statistics' in display && display.statistics ? ` [${formatStatisticsData(display.statistics)}]` : '')
     case 'equation':
       // Both optional fields are stated rather than interpolated raw. An absent
       // frame label would otherwise print `solve undefined`, and unrendered

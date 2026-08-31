@@ -5,8 +5,9 @@
  * file cross-check each other in the manifest tests.
  *
  * `requires` is the full set this stage's skills need, per the rule stated in
- * stage-e.ts: diagram rendering for the shapes, chart rendering from 21.5, and
- * math notation for the formulas the skills apply.
+ * stage-e.ts: choice input for the scatter reading, diagram rendering for the
+ * shapes, chart rendering from 21.5, and math notation for the formulas the
+ * skills apply.
  */
 
 import type { StageEntry } from './types'
@@ -14,7 +15,7 @@ import type { StageEntry } from './types'
 export const stageG: StageEntry = {
   id: 'stage-g',
   name: 'Geometry & Data',
-  requires: ['math-notation', 'diagram', 'chart'],
+  requires: ['choice-input', 'math-notation', 'diagram', 'chart'],
   units: [
     {
       // The GED *provides* a formula sheet, so every skill here teaches choosing

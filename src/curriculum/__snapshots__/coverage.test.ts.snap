@@ -260,8 +260,17 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "long-div-remainder": [
     "long-div-1digit",
   ],
+  "mean": [
+    "similar-figures",
+  ],
+  "median": [
+    "mean",
+  ],
   "mixed-to-improper": [
     "improper-to-mixed",
+  ],
+  "mode-range": [
+    "median",
   ],
   "money-problems": [
     "decimal-to-fraction",
@@ -371,10 +380,16 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "ratio-words": [
     "unit-conversion",
   ],
+  "read-bar-line": [
+    "weighted-mean",
+  ],
   "read-decimals": [
     "decimal-place-value",
   ],
   "read-numbers": [],
+  "read-scatterplot": [
+    "read-bar-line",
+  ],
   "rearrange-formula": [
     "equation-words",
   ],
@@ -539,6 +554,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "volume-prism": [
     "composite-figures",
+  ],
+  "weighted-mean": [
+    "mode-range",
   ],
   "with-fractions": [
     "equation-parentheses",

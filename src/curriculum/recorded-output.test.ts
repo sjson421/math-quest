@@ -406,3 +406,78 @@ describe('recorded output for charts', () => {
     expect(output).toContain('"Learners": [{"x":1,"y":2},{"x":5,"y":6},{"x":9,"y":8}] trend=true')
   })
 })
+
+describe('recorded output for statistics sources', () => {
+  const base = (display: Problem['display']): Problem => ({
+    skillId: 'synthetic-statistics',
+    prompt: 'Read the data.',
+    display,
+    answer: { kind: 'exact', n: 7, d: 1 },
+    inputMode: 'keypad',
+    hint: 'Use the visible source.',
+    solution: [{ text: 'Read the source data.' }],
+    difficulty: 1,
+  })
+
+  it('records every list operation, ordered value, and weighted pair', () => {
+    const displays: Problem['display'][] = [
+      { kind: 'story', text: 'Values: 4, 6, 8', statistics: { operation: 'mean', values: [4, 6, 8] } },
+      { kind: 'story', text: 'Values: 10, 1, 8', statistics: { operation: 'median', values: [10, 1, 8] } },
+      { kind: 'story', text: 'Values: 2, 4, 4', statistics: { operation: 'mode', values: [2, 4, 4] } },
+      { kind: 'story', text: 'Values: 2, 4, 9', statistics: { operation: 'range', values: [2, 4, 9] } },
+      {
+        kind: 'story',
+        text: 'Values with weights: 60 (weight 1), 75 (weight 2)',
+        statistics: {
+          operation: 'weighted-mean',
+          entries: [{ value: 60, weight: 1 }, { value: 75, weight: 2 }],
+        },
+      },
+    ]
+
+    const output = displays.map((display) => format(base(display), 37)).join('\n')
+    expect(output).toContain('mean values [4,6,8]')
+    expect(output).toContain('median values [10,1,8]')
+    expect(output).toContain('mode values [2,4,4]')
+    expect(output).toContain('range values [2,4,9]')
+    expect(output).toContain('weighted-mean entries [{"value":60,"weight":1},{"value":75,"weight":2}]')
+  })
+
+  it('records chart selectors, plotted source values, and trend-line requests', () => {
+    const categorical = base({
+      kind: 'chart',
+      chart: {
+        title: 'Monthly output',
+        xLabel: 'Month',
+        yLabel: 'Units',
+        kind: 'bar',
+        labels: ['Jan', 'Feb'],
+        y: { min: 0, max: 20, step: 5 },
+        series: [{ label: 'Books', values: [4, 12] }],
+      },
+      statistics: { operation: 'read-chart-value', categoryIndex: 1, seriesIndex: 0 },
+    })
+    const scatter = base({
+      kind: 'chart',
+      chart: {
+        title: 'Study results',
+        xLabel: 'Hours',
+        yLabel: 'Score',
+        kind: 'scatter',
+        x: { min: 0, max: 4, step: 1 },
+        y: { min: 0, max: 10, step: 5 },
+        series: [{
+          label: 'Learners',
+          points: [{ x: 0, y: 2 }, { x: 1, y: 4 }, { x: 2, y: 5 }],
+          trendLine: true,
+        }],
+      },
+      statistics: { operation: 'scatter-trend' },
+    })
+
+    expect(format(categorical, 41)).toContain('[read-chart-value category 1 series 0]')
+    expect(format(categorical, 41)).toContain('series ["Books": [4,12]]')
+    expect(format(scatter, 43)).toContain('[scatter-trend trend-line true]')
+    expect(format(scatter, 43)).toContain('"Learners": [{"x":0,"y":2},{"x":1,"y":4},{"x":2,"y":5}] trend=true')
+  })
+})

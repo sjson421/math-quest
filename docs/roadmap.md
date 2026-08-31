@@ -2,8 +2,9 @@
 
 What is left, in the order it should be done.
 
-**Status: 186 of 201 skills are playable.** Stages A through F have complete playable content.
-Stage G opens Unit 20 through similar figures; Unit 21 and Stage H are still planned. Stage E is
+**Status: 192 of 201 skills are playable.** Stages A through F have complete playable content.
+Stage G opens Unit 20 through similar figures and the first six Unit 21 skills; the final three
+Unit 21 skills and Stage H are still planned. Stage E is
 complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17, 18
 and 19 are complete.
 Choice input,
@@ -1177,9 +1178,11 @@ shows before a lesson's first problem.
       - [x] **20c** `similar-figures` — **shipped 2026-08-30**. Paired rectangles show three
         visible corresponding measurements, two equivalent proportions, and one exact missing
         side through the existing numeric keypad and diagram surface.
-      - **21a** `mean`–`read-scatterplot` — 21.1–21.4 need only a list of values; 21.5 and 21.6
-        are item 24's only consumers. `median` (21.2) is a wall on forgetting to sort, which is a
-        prediction the generator can compute exactly.
+      - [x] **21a** `mean`–`read-scatterplot` — **shipped 2026-08-31**. 21.1–21.4 use typed
+        value lists; 21.5 and 21.6 consume item 24's chart surface. `median` (21.2) is a wall
+        on forgetting to sort, with a prediction the generator computes exactly. All six skills
+        carry exact source data, independent answer checks, reviewed intros, and phone-sized
+        list or chart examples.
       - **21b** `basic-probability`–`counting-outcomes` — answers are fractions, so the required-
         form question 9b settles applies again here: a probability typed as 0.5, 1/2 or 50% is
         one value and three different answers, and the unit picks one.

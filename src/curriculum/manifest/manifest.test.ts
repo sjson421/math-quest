@@ -237,9 +237,10 @@ describe('stage capabilities', () => {
     ])
   })
 
-  it('marks chart rendering built for the partial Stage G content', () => {
+  it('marks chart and choice rendering built for the partial Stage G content', () => {
     expect(AVAILABLE_CAPABILITIES.has('chart')).toBe(true)
-    expect(stageById.get('stage-g')?.requires).toEqual(['math-notation', 'diagram', 'chart'])
+    expect(AVAILABLE_CAPABILITIES.has('choice-input')).toBe(true)
+    expect(stageById.get('stage-g')?.requires).toEqual(['choice-input', 'math-notation', 'diagram', 'chart'])
     expect(stageById.get('stage-g')?.units[0].skills.map((skill) => skill.id)).toEqual([
       'perimeter',
       'area-rectangle',
@@ -254,6 +255,17 @@ describe('stage capabilities', () => {
       'surface-area',
       'pythagorean',
       'similar-figures',
+    ])
+    expect(stageById.get('stage-g')?.units[1].skills.map((skill) => skill.id)).toEqual([
+      'mean',
+      'median',
+      'mode-range',
+      'weighted-mean',
+      'read-bar-line',
+      'read-scatterplot',
+      'basic-probability',
+      'compound-probability',
+      'counting-outcomes',
     ])
   })
 })

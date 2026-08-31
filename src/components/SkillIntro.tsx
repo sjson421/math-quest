@@ -30,7 +30,10 @@ export function SkillIntro({
     <motion.main
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex h-full min-h-0 flex-col overflow-y-auto px-5 py-3"
+      // The installed phone is 375px wide. Tighten only its vertical rhythm so
+      // a three-step chart intro keeps both actions on screen without shrinking
+      // the chart, source text, or teaching line.
+      className="flex h-full min-h-0 flex-col overflow-y-auto px-5 py-3 max-[390px]:py-1"
       aria-labelledby="skill-intro-title"
       data-skill-intro={mode}
     >
@@ -51,16 +54,16 @@ export function SkillIntro({
       </header>
 
       <section
-        className="mx-auto mt-4 w-full max-w-sm rounded-[1.5rem] bg-white/60 px-4 py-3 shadow-soft"
+        className="mx-auto mt-4 w-full max-w-sm rounded-[1.5rem] bg-white/60 px-4 py-3 shadow-soft max-[390px]:mt-3 max-[390px]:py-2"
         aria-labelledby="worked-example-title"
       >
         <h2 id="worked-example-title" className="text-center text-sm font-bold uppercase tracking-wide text-ink-soft">
           Worked example
         </h2>
-        <p className="mt-2 text-center font-semibold text-ink-soft" data-example-prompt>
+        <p className="mt-2 text-center font-semibold text-ink-soft max-[390px]:mt-1" data-example-prompt>
           {problem.prompt}
         </p>
-        <div className="mt-3 flex justify-center" data-example-display>
+        <div className="mt-3 flex justify-center max-[390px]:mt-2" data-example-display>
           <ProblemView
             display={problem.display}
             entry=""
@@ -69,20 +72,20 @@ export function SkillIntro({
           />
         </div>
 
-        <div className="mt-3 rounded-2xl bg-mint-soft px-3 py-2 text-center" aria-labelledby="correct-answer-label">
+        <div className="mt-3 rounded-2xl bg-mint-soft px-3 py-2 text-center max-[390px]:mt-2" aria-labelledby="correct-answer-label">
           <p id="correct-answer-label" className="text-xs font-bold uppercase tracking-wide text-mint-deep">
             Correct answer
           </p>
           <p className="mt-1 text-xl font-bold" data-correct-answer>{answer}</p>
         </div>
 
-        <h3 className="mt-3 text-center text-sm font-bold text-ink-soft">How it works</h3>
+        <h3 className="mt-3 text-center text-sm font-bold text-ink-soft max-[390px]:mt-2">How it works</h3>
         <div data-worked-steps>
           <SolutionSteps solution={problem.solution} />
         </div>
       </section>
 
-      <div className="mx-auto mt-3 flex w-full max-w-sm flex-col gap-2 pb-1">
+      <div className="mx-auto mt-3 flex w-full max-w-sm flex-col gap-2 pb-1 max-[390px]:mt-2 max-[390px]:gap-1 max-[390px]:pb-0">
         {automatic ? (
           <button
             type="button"
@@ -104,7 +107,7 @@ export function SkillIntro({
           <button
             type="button"
             onClick={onLeave}
-            className="h-9 w-full rounded-2xl font-semibold text-sm text-ink-soft"
+            className="h-9 w-full rounded-2xl font-semibold text-sm text-ink-soft max-[390px]:h-8"
           >
             Leave
           </button>

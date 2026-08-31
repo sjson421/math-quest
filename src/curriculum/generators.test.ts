@@ -19,7 +19,7 @@ import {
   geometryFormulaReferences,
   type GeometryDiagram,
 } from '../lib/geometry-diagram'
-import { assertChart, chartSourceValues } from '../lib/chart'
+import { assertChart, chartSourceValues, scatterTrendSegment, type Chart } from '../lib/chart'
 import { encodeRootPairEntry, normalizeRootPair } from '../lib/root-pair'
 import { ratioWordText } from './phrasing/ratios'
 import type {
@@ -39,6 +39,7 @@ import type {
   RatioData,
   Relation,
   SkillGenerator,
+  StatisticsData,
   WholeNumberData,
 } from '../lib/types'
 
@@ -387,6 +388,200 @@ function displayedText(data: WholeNumberData): string {
       throw new Error(`Unknown whole-number operation: ${JSON.stringify(unhandled)}`)
     }
   }
+}
+
+const statisticsValueText = (value: number): string => drawn(value)
+
+const statisticsListText = (values: readonly number[]): string =>
+  `Values: ${values.map(statisticsValueText).join(', ')}`
+
+const weightedStatisticsText = (entries: readonly { value: number; weight: number }[]): string =>
+  `Values with weights: ${entries
+    .map(({ value, weight }) => `${statisticsValueText(value)} (weight ${statisticsValueText(weight)})`)
+    .join(', ')}`
+
+const statisticsPrompt = (operation: 'mean' | 'median' | 'mode' | 'range' | 'weighted-mean'): string =>
+  `What is the ${operation === 'weighted-mean' ? 'weighted mean' : operation} of these values?`
+
+const wholeStatisticsAnswer = (problem: Problem, operation: string): void => {
+  if (problem.inputMode !== 'keypad') {
+    throw new Error(`${problem.skillId}: ${operation} must use keypad input`)
+  }
+  if (
+    problem.answer.kind !== 'exact' ||
+    problem.answer.d !== 1 ||
+    !Number.isSafeInteger(problem.answer.n) ||
+    problem.answer.requireSimplified ||
+    problem.answer.requireMixed ||
+    problem.answer.requireDecimal ||
+    problem.answer.requireFraction
+  ) {
+    throw new Error(`${problem.skillId}: ${operation} must have an exact whole-number answer`)
+  }
+}
+
+function displayTextForStatistics(display: Extract<Problem['display'], { kind: 'story' }>): string {
+  if (!('statistics' in display) || !display.statistics) return ''
+  return display.text
+}
+
+function expectedStatisticsList(
+  problem: Problem,
+  data: StatisticsData,
+): number {
+  const fail = (message: string): never => {
+    throw new Error(`${problem.skillId}: ${message}`)
+  }
+
+  const listData: Extract<StatisticsData, { operation: 'mean' | 'median' | 'mode' | 'range' | 'weighted-mean' }> =
+    data.operation === 'read-chart-value' || data.operation === 'scatter-trend'
+      ? fail(`${data.operation} needs a chart display`)
+      : data
+
+  if (listData.operation === 'weighted-mean') {
+    if (!Array.isArray(listData.entries) || listData.entries.length < 2) {
+      fail('weighted-mean needs at least two value-weight pairs')
+    }
+    for (const entry of listData.entries) {
+      if (
+        !entry ||
+        !Number.isSafeInteger(entry.value) ||
+        !Number.isSafeInteger(entry.weight) ||
+        entry.value <= 0 ||
+        entry.weight <= 0
+      ) {
+        fail('weighted-mean pairs must contain positive whole numbers')
+      }
+    }
+    if (problem.display.kind !== 'story' || displayTextForStatistics(problem.display) !== weightedStatisticsText(listData.entries)) {
+      fail('visible weighted value-weight pairs disagree with their data')
+    }
+    if (problem.prompt !== statisticsPrompt(listData.operation)) {
+      fail('weighted-mean prompt disagrees with its data')
+    }
+
+    const weightedTotal = listData.entries.reduce((sum, entry) => sum + entry.value * entry.weight, 0)
+    const totalWeight = listData.entries.reduce((sum, entry) => sum + entry.weight, 0)
+    if (weightedTotal % totalWeight !== 0) fail('weighted-mean target must be a whole number')
+    wholeStatisticsAnswer(problem, listData.operation)
+    return weightedTotal / totalWeight
+  }
+
+  if (!Array.isArray(listData.values) || listData.values.length < (listData.operation === 'median' ? 3 : 2)) {
+    fail(`${listData.operation} needs enough visible values`)
+  }
+  const values = listData.values
+  if (!values.every((value) => Number.isSafeInteger(value))) {
+    fail(`${listData.operation} values must be whole numbers`)
+  }
+  if (problem.display.kind !== 'story' || displayTextForStatistics(problem.display) !== statisticsListText(values)) {
+    fail(`visible ${listData.operation} values disagree with their data`)
+  }
+  if (problem.prompt !== statisticsPrompt(listData.operation)) {
+    fail(`${listData.operation} prompt disagrees with its data`)
+  }
+
+  let answer: number
+  switch (listData.operation) {
+    case 'mean': {
+      const total = values.reduce((sum, value) => sum + value, 0)
+      if (total % values.length !== 0) fail('mean total must divide evenly by value count')
+      answer = total / values.length
+      break
+    }
+    case 'median': {
+      const sorted = [...values].sort((left, right) => left - right)
+      if (JSON.stringify(sorted) === JSON.stringify(values)) fail('median values must be unsorted')
+      const middle = Math.floor(sorted.length / 2)
+      answer = sorted.length % 2 === 1
+        ? sorted[middle]
+        : (sorted[middle - 1] + sorted[middle]) / 2
+      if (!Number.isInteger(answer)) fail('median target must be a whole number')
+      break
+    }
+    case 'mode': {
+      const counts = new Map<number, number>()
+      for (const value of values) counts.set(value, (counts.get(value) ?? 0) + 1)
+      const highest = Math.max(...counts.values())
+      const modes = [...counts].filter(([, count]) => count === highest)
+      if (highest < 2 || modes.length !== 1) fail('mode values must have one unique repeated mode')
+      answer = modes[0][0]
+      break
+    }
+    case 'range':
+      answer = Math.max(...values) - Math.min(...values)
+      break
+    default: {
+      const unhandled: never = listData
+      throw new Error(`Unknown statistics operation: ${JSON.stringify(unhandled)}`)
+    }
+  }
+
+  wholeStatisticsAnswer(problem, listData.operation)
+  return answer
+}
+
+const chartStatisticsPrompt = (category: string, series: string): string =>
+  `What is the ${series} value for ${category}?`
+
+const scatterStatisticsPrompt = 'What is the overall trend in these paired data?'
+
+const trendLabel = (covariance: bigint): string =>
+  covariance > 0n ? 'Increasing' : covariance < 0n ? 'Decreasing' : 'Flat'
+
+function expectedStatisticsChart(problem: Problem, chart: Chart, data: StatisticsData): number | string {
+  const fail = (message: string): never => {
+    throw new Error(`${problem.skillId}: ${message}`)
+  }
+
+  assertChart(chart)
+  if (data.operation === 'read-chart-value') {
+    const categorical: Extract<Chart, { kind: 'bar' | 'line' }> = chart.kind === 'scatter'
+      ? fail('read-chart-value needs a bar or line chart')
+      : chart
+    if (
+      !Number.isSafeInteger(data.categoryIndex) ||
+      !Number.isSafeInteger(data.seriesIndex) ||
+      data.categoryIndex < 0 ||
+      data.categoryIndex >= categorical.labels.length ||
+      data.seriesIndex < 0 ||
+      data.seriesIndex >= categorical.series.length
+    ) {
+      fail('read-chart-value selector is outside the chart')
+    }
+    const category = categorical.labels[data.categoryIndex]
+    const series = categorical.series[data.seriesIndex]
+    if (problem.prompt !== chartStatisticsPrompt(category, series.label)) {
+      fail('read-chart-value prompt disagrees with its selector')
+    }
+    wholeStatisticsAnswer(problem, data.operation)
+    return series.values[data.categoryIndex]
+  }
+
+  if (data.operation !== 'scatter-trend') fail('chart has an unsupported statistics operation')
+  const scatter: Extract<Chart, { kind: 'scatter' }> = chart.kind === 'scatter'
+    ? chart
+    : fail('scatter-trend needs a scatter chart')
+  if (scatter.series.length !== 1) fail('scatter-trend needs exactly one series')
+  const series = scatter.series[0]
+  if (series.trendLine !== true) fail('scatter-trend needs a visible trend line')
+  if (scatterTrendSegment(scatter, 0) === undefined) fail('scatter-trend needs a derived trend segment')
+
+  const sumX = series.points.reduce((sum, point) => sum + BigInt(point.x), 0n)
+  const sumY = series.points.reduce((sum, point) => sum + BigInt(point.y), 0n)
+  const sumXY = series.points.reduce((sum, point) => sum + BigInt(point.x) * BigInt(point.y), 0n)
+  const covariance = BigInt(series.points.length) * sumXY - sumX * sumY
+  if (problem.prompt !== scatterStatisticsPrompt) fail('scatter-trend prompt disagrees with its data')
+  if (problem.inputMode !== 'choice' || problem.answer.kind !== 'choice') {
+    fail('scatter-trend must use choice input')
+  }
+
+  const labels = (problem.choices ?? []).map((choice) => choice.label)
+  if (problem.choices?.length !== 3 || new Set(labels).size !== 3 ||
+    JSON.stringify([...labels].sort()) !== JSON.stringify(['Decreasing', 'Flat', 'Increasing'])) {
+    fail('scatter-trend choices must offer increasing, decreasing, and flat')
+  }
+  return choiceIdFor(problem, trendLabel(covariance))
 }
 
 /**
@@ -2157,7 +2352,10 @@ function recompute(problem: Problem): number | string {
 
   if (display.kind === 'chart') {
     assertChart(display.chart)
-    throw new Error(`${problem.skillId}: chart needs operation-specific data for independent verification`)
+    if (!display.statistics) {
+      throw new Error(`${problem.skillId}: chart needs operation-specific data for independent verification`)
+    }
+    return expectedStatisticsChart(problem, display.chart, display.statistics)
   }
 
   if (display.kind === 'coordinate-plane') {
@@ -2514,6 +2712,10 @@ function recompute(problem: Problem): number | string {
     return expectedDecimal(display.decimal).answer
   }
 
+  if (display.kind === 'story' && 'statistics' in display && display.statistics) {
+    return expectedStatisticsList(problem, display.statistics)
+  }
+
   if (display.kind === 'story' && display.percent) {
     const expected = expectedPercent(display.percent)
     if (display.text !== expected.text) {
@@ -2592,6 +2794,9 @@ function recompute(problem: Problem): number | string {
   // produced it. A column or story declares `Operator`, which spells subtraction
   // `−`, so the extra case was unreachable — and now that `operator` is no longer
   // widened to `string` on its way here, the compiler says so.
+  if (!('operands' in display) || !('operator' in display) || !display.operands || !display.operator) {
+    throw new Error(`${problem.skillId}: display needs operation-specific data for independent verification`)
+  }
   const { operands, operator } = display
 
   const raw = (() => {
@@ -2660,6 +2865,25 @@ function sourceValues(data: WholeNumberData): number[] {
       return [data.percent, data.quantity]
     default:
       return [data.value]
+  }
+}
+
+function statisticsSourceValues(data: StatisticsData): number[] {
+  switch (data.operation) {
+    case 'mean':
+    case 'median':
+    case 'mode':
+    case 'range':
+      return [...data.values]
+    case 'weighted-mean':
+      return data.entries.flatMap(({ value, weight }) => [value, weight])
+    case 'read-chart-value':
+    case 'scatter-trend':
+      throw new Error(`Statistics chart operation has no list source values: ${data.operation}`)
+    default: {
+      const unhandled: never = data
+      throw new Error(`Unknown statistics operation: ${JSON.stringify(unhandled)}`)
+    }
   }
 }
 
@@ -2895,13 +3119,26 @@ function sourceMagnitude(problem: Problem): number {
     // is: this chain ends at `operands`, which an equation-carrying story does
     // not have, so leaving it out measures the ladder against `undefined`
     // rather than failing.
+    if ('statistics' in problem.display && problem.display.statistics) {
+      const data = problem.display.statistics
+      if (data.operation === 'read-chart-value' || data.operation === 'scatter-trend') {
+        throw new Error(`${problem.skillId}: chart statistics data cannot use a story display`)
+      }
+      const values = statisticsSourceValues(data)
+      return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
+    }
+
     const values = problem.display.percent
       ? expectedPercent(problem.display.percent).values
       : problem.display.ratio
         ? expectedRatioDisplay(problem.display.ratio).values
         : problem.display.equation
           ? expectedEquation(problem.display.equation, STORY_REBUILD_LETTER).values
-          : problem.display.operands
+          : 'operands' in problem.display && problem.display.operands
+            ? problem.display.operands
+            : (() => {
+                throw new Error(`${problem.skillId}: story needs operation-specific data`)
+              })()
     return values.reduce((sum, value) => sum + Math.abs(value), 0) / values.length
   }
 
@@ -4591,6 +4828,177 @@ describe('recompute', () => {
     expect(() => recompute(candidate)).toThrow(
       'synthetic-chart: chart needs operation-specific data for independent verification',
     )
+  })
+
+  describe('statistics displays', () => {
+    const statisticsStory = (
+      data: Extract<StatisticsData, { operation: 'mean' | 'median' | 'mode' | 'range' | 'weighted-mean' }>,
+      answer: number,
+      text: string,
+    ): Problem => ({
+      skillId: 'synthetic-statistics',
+      prompt: statisticsPrompt(data.operation),
+      display: { kind: 'story', text, statistics: data },
+      answer: intAnswer(answer),
+      inputMode: 'keypad',
+      hint: 'Use every visible value.',
+      solution: [{ text: 'Rebuild the answer from the source.' }],
+      difficulty: 1,
+    })
+
+    it('recomputes every list operation from typed visible sources', () => {
+      const cases = [
+        statisticsStory(
+          { operation: 'mean', values: [4, 6, 8, 10] },
+          7,
+          'Values: 4, 6, 8, 10',
+        ),
+        statisticsStory(
+          { operation: 'median', values: [10, 1, 8, 2, 4] },
+          4,
+          'Values: 10, 1, 8, 2, 4',
+        ),
+        statisticsStory(
+          { operation: 'mode', values: [2, 4, 4, 7, 9] },
+          4,
+          'Values: 2, 4, 4, 7, 9',
+        ),
+        statisticsStory(
+          { operation: 'range', values: [2, 4, 4, 7, 9] },
+          7,
+          'Values: 2, 4, 4, 7, 9',
+        ),
+        statisticsStory(
+          {
+            operation: 'weighted-mean',
+            entries: [
+              { value: 60, weight: 1 },
+              { value: 75, weight: 2 },
+              { value: 90, weight: 3 },
+            ],
+          },
+          80,
+          'Values with weights: 60 (weight 1), 75 (weight 2), 90 (weight 3)',
+        ),
+      ]
+
+      for (const candidate of cases) {
+        expect(answerMismatch(candidate)).toBeUndefined()
+        expect(recompute(candidate)).toBe(answerValue(candidate))
+      }
+    })
+
+    it('rejects list data that is missing, mismatched, fractional, or ambiguous', () => {
+      const mean = statisticsStory(
+        { operation: 'mean', values: [4, 6, 8, 10] },
+        7,
+        'Values: 4, 6, 8, 10',
+      )
+      if (mean.display.kind !== 'story') throw new Error('expected story display')
+      mean.display.text = 'Values: 4, 6, 8'
+      expect(() => recompute(mean)).toThrow('visible mean values disagree with their data')
+
+      const nonInteger = statisticsStory(
+        { operation: 'mean', values: [4, 6, 9] },
+        19 / 3,
+        'Values: 4, 6, 9',
+      )
+      expect(() => recompute(nonInteger)).toThrow('mean total must divide evenly by value count')
+
+      const fractional = statisticsStory(
+        { operation: 'range', values: [4.5, 9] },
+        4,
+        'Values: 4.5, 9',
+      )
+      expect(() => recompute(fractional)).toThrow('range values must be whole numbers')
+
+      const ambiguousMode = statisticsStory(
+        { operation: 'mode', values: [2, 2, 4, 4, 9] },
+        2,
+        'Values: 2, 2, 4, 4, 9',
+      )
+      expect(() => recompute(ambiguousMode)).toThrow('mode values must have one unique repeated mode')
+
+      const invalidWeight = statisticsStory(
+        { operation: 'weighted-mean', entries: [{ value: 60, weight: 0 }, { value: 90, weight: 1 }] },
+        60,
+        'Values with weights: 60 (weight 0), 90 (weight 1)',
+      )
+      expect(() => recompute(invalidWeight)).toThrow('weighted-mean pairs must contain positive whole numbers')
+    })
+
+    it('derives categorical chart values from the selected source intersection', () => {
+      const problem: Problem = {
+        skillId: 'synthetic-chart-value',
+        prompt: 'What is the Books value for Feb?',
+        display: {
+          kind: 'chart',
+          chart: {
+            title: 'Monthly activity',
+            xLabel: 'Month',
+            yLabel: 'Count',
+            kind: 'line',
+            labels: ['Jan', 'Feb', 'Mar'],
+            y: { min: 0, max: 20, step: 5 },
+            series: [
+              { label: 'Books', values: [4, 7, 5] },
+              { label: 'Games', values: [3, 8, 6] },
+            ],
+          },
+          statistics: { operation: 'read-chart-value', categoryIndex: 1, seriesIndex: 0 },
+        },
+        answer: intAnswer(7),
+        inputMode: 'keypad',
+        hint: 'Match the category and series.',
+        solution: [{ text: 'Read the selected intersection.' }],
+        difficulty: 1,
+      }
+
+      expect(answerMismatch(problem)).toBeUndefined()
+      if (problem.display.kind !== 'chart') throw new Error('expected chart display')
+      problem.display.statistics = { operation: 'read-chart-value', categoryIndex: 4, seriesIndex: 0 }
+      expect(() => recompute(problem)).toThrow('read-chart-value selector is outside the chart')
+    })
+
+    it('derives scatter direction from exact covariance and preserves choice identity', () => {
+      const problem: Problem = {
+        skillId: 'synthetic-scatter-value',
+        prompt: 'What is the overall trend in these paired data?',
+        display: {
+          kind: 'chart',
+          chart: {
+            title: 'Study results',
+            xLabel: 'Hours',
+            yLabel: 'Score',
+            kind: 'scatter',
+            x: { min: 0, max: 4, step: 1 },
+            y: { min: 0, max: 10, step: 5 },
+            series: [{
+              label: 'Learners',
+              points: [{ x: 0, y: 2 }, { x: 1, y: 4 }, { x: 2, y: 5 }, { x: 3, y: 8 }],
+              trendLine: true,
+            }],
+          },
+          statistics: { operation: 'scatter-trend' },
+        },
+        answer: { kind: 'choice', id: 'rising-choice' },
+        inputMode: 'choice',
+        choices: [
+          { id: 'flat-choice', label: 'Flat' },
+          { id: 'rising-choice', label: 'Increasing' },
+          { id: 'falling-choice', label: 'Decreasing' },
+        ],
+        hint: 'Follow the trend line from left to right.',
+        solution: [{ text: 'Choose increasing for its direction.' }],
+        difficulty: 1,
+      }
+
+      expect(answerMismatch(problem)).toBeUndefined()
+      if (problem.display.kind !== 'chart') throw new Error('expected chart display')
+      if (problem.display.chart.kind !== 'scatter') throw new Error('expected scatter chart')
+      problem.display.chart.series[0].trendLine = false
+      expect(() => recompute(problem)).toThrow('scatter-trend needs a visible trend line')
+    })
   })
 
   it('catches a story whose stated answer disagrees with its operands', () => {

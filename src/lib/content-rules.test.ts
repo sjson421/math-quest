@@ -352,6 +352,27 @@ describe('forward references', () => {
     ])
   })
 
+  it('collects every visible statistics value and weight', () => {
+    const values: Problem['display'] = {
+      kind: 'story',
+      text: 'Values: −4, 6, 8',
+      statistics: { operation: 'median', values: [-4, 6, 8] },
+    }
+    const weighted: Problem['display'] = {
+      kind: 'story',
+      text: 'Values with weights: 60 (weight 1), 75 (weight 2)',
+      statistics: {
+        operation: 'weighted-mean',
+        entries: [{ value: 60, weight: 1 }, { value: 75, weight: 2 }],
+      },
+    }
+
+    expect(learnerText(problem({ display: values }))).toContain('Values: −4, 6, 8; −4; 6; 8')
+    expect(learnerText(problem({ display: weighted }))).toContain(
+      'Values with weights: 60 (weight 1), 75 (weight 2); 60; 1; 75; 2',
+    )
+  })
+
   it('reads coordinate operation context from its structured values', () => {
     const graph: Problem['display'] = {
       kind: 'coordinate-plane',
