@@ -254,45 +254,47 @@ introduces, so the set can be read off the stage rather than assembled from earl
 - **THEN** all six Stage H skills remain planned
 - **AND** chart availability does not change the Stage H capability state
 
-### Requirement: Stage G extends through its fourth content increment
+### Requirement: Stage G completes with its fifth content increment
 
-The registry SHALL add `mean`, `median`, `mode-range`, `weighted-mean`, `read-bar-line`, and
-`read-scatterplot` under their existing manifest ids after `similar-figures` without changing
-manifest membership, prerequisites, quick markers, or wall markers. Because `read-scatterplot`
-uses choice input, Stage G SHALL add the already-available `choice-input` to its existing
-`math-notation`, `diagram`, and `chart` requirements without changing
-`AVAILABLE_CAPABILITIES`. The manifest and curriculum document SHALL continue to agree.
+The registry SHALL add `basic-probability`, `compound-probability`, and `counting-outcomes`
+under their existing manifest ids after `read-scatterplot` without changing manifest
+membership, prerequisites, quick markers, or wall markers. Because the two probability skills
+answer as fractions on the keypad, Stage G SHALL add the already-available `fraction-input` to
+its existing `choice-input`, `math-notation`, `diagram`, and `chart` requirements without
+changing `AVAILABLE_CAPABILITIES`. The manifest and curriculum document SHALL continue to
+agree.
 
-All thirteen Unit 20 skills and the first six Unit 21 skills SHALL resolve as implemented
-because `choice-input`, `math-notation`, `diagram`, and `chart` are already available. The final
-three Unit 21 skills SHALL remain planned and transparent to runtime unlocking until increment
-21b ships.
+All twenty-two Stage G skills SHALL resolve as implemented because `choice-input`,
+`math-notation`, `diagram`, `chart`, and `fraction-input` are already available. Adding the
+fraction-input requirement SHALL change no other stage's resolved state.
 
 #### Scenario: Registry addition preserves manifest authority
 
-- **WHEN** increment 21a is registered
-- **THEN** `mean` through `read-scatterplot` follow `similar-figures` in manifest order
-- **AND** Stage G records `choice-input`, `math-notation`, `diagram`, and `chart` as its complete
-  available capability requirements
+- **WHEN** increment 21b is registered
+- **THEN** `basic-probability` through `counting-outcomes` follow `read-scatterplot` in
+  manifest order
+- **AND** Stage G records `choice-input`, `math-notation`, `fraction-input`, `diagram`, and
+  `chart` as its complete available capability requirements
 - **AND** no prerequisite, pacing marker, unit membership, or stage capability is copied into
   a generator
 
-#### Scenario: Partial Stage G status advances explicitly
+#### Scenario: Stage G status reaches its boundary
 
-- **WHEN** skill states are resolved after increment 21a
-- **THEN** exactly `perimeter` through `read-scatterplot` are implemented in Stage G
-- **AND** `basic-probability` through `counting-outcomes` remain planned
-- **AND** the total implemented count is 192 of 201
+- **WHEN** skill states are resolved after increment 21b
+- **THEN** every Stage G skill from `perimeter` through `counting-outcomes` is implemented
+- **AND** the only planned skills left are Stage H's six
+- **AND** the total implemented count is 195 of 201
 
-### Requirement: Fourth partial roadmap increment stays aligned
+### Requirement: The final roadmap increment closes Stage G
 
-Curriculum rows 20.1 through 21.6 SHALL be marked complete, and curriculum status prose SHALL
-identify the first six Unit 21 skills as playable and the final three as planned. The roadmap
-status count SHALL state 192 playable skills, and ordered increments 20a, 20b, 20c, and 21a
-SHALL be recorded as shipped. Roadmap item 26 and increment 21b SHALL remain open.
+Curriculum rows 20.1 through 21.9 SHALL be marked complete, and curriculum status prose SHALL
+identify every Stage G skill as playable and Stage H as the only planned work. The roadmap
+status count SHALL state 195 playable skills, and ordered increments 20a, 20b, 20c, 21a, and
+21b SHALL be recorded as shipped. Roadmap item 26 SHALL be closed, because all five of its
+increments have landed.
 
-#### Scenario: Unit 21a does not close the parent item
+#### Scenario: Unit 21b closes the parent item
 
-- **WHEN** the first six Unit 21 skills are playable
-- **THEN** their curriculum rows and increment 21a show completion
-- **AND** the Stage G Units 20–21 checkbox remains open for the three probability skills
+- **WHEN** all nine Unit 21 skills are playable
+- **THEN** their curriculum rows and increment 21b show completion
+- **AND** the Stage G Units 20–21 checkbox is checked
