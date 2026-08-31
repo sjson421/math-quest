@@ -2306,6 +2306,308 @@ miss     wrong-hypotenuse-placement = 40.8   Keep the hypotenuse squared alone; 
 miss     stopped-before-square-root = 784   Take the square root after subtracting the leg square."
 `;
 
+exports[`Unit 20 recorded output: similar-figures > matches the authored sample output 1`] = `
+"--- similar-figures · seed 1 · difficulty 1
+prompt   Find the missing side of the larger rectangle in inches.
+display  geometry similar-figures smallLength 8 smallWidth 5 largeKnownSide 16 knownSide length unit in name "Similar rectangles: small rectangle has lowercase sides a = 8 in and b = 5 in; large rectangle has uppercase side A = 16 in and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 10/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [16 ÷ 8 = 2]
+step 2   Use that scale factor on the other small side.   [5 × 2 = 10]
+step 3   Write the missing side in inches.   [10 inches]
+miss     copied-known-large-side = 16   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 13   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 12345 · difficulty 1
+prompt   Find the missing side of the larger rectangle in metres.
+display  geometry similar-figures smallLength 8 smallWidth 4 largeKnownSide 16 knownSide length unit m name "Similar rectangles: small rectangle has lowercase sides a = 8 m and b = 4 m; large rectangle has uppercase side A = 16 m and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 8/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [16 ÷ 8 = 2]
+step 2   Use that scale factor on the other small side.   [4 × 2 = 8]
+step 3   Write the missing side in metres.   [8 metres]
+miss     copied-known-large-side = 16   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 12   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 67890 · difficulty 1
+prompt   Find the missing side of the larger rectangle in metres.
+display  geometry similar-figures smallLength 5 smallWidth 2 largeKnownSide 4 knownSide width unit m name "Similar rectangles: small rectangle has lowercase sides a = 5 m and b = 2 m; large rectangle has uppercase side B = 4 m and missing uppercase side A (length)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 10/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [4 ÷ 2 = 2]
+step 2   Use that scale factor on the other small side.   [5 × 2 = 10]
+step 3   Write the missing side in metres.   [10 metres]
+miss     copied-known-large-side = 4   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 7   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 424242 · difficulty 1
+prompt   Find the missing side of the larger rectangle in centimetres.
+display  geometry similar-figures smallLength 7 smallWidth 3 largeKnownSide 14 knownSide length unit cm name "Similar rectangles: small rectangle has lowercase sides a = 7 cm and b = 3 cm; large rectangle has uppercase side A = 14 cm and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 6/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [14 ÷ 7 = 2]
+step 2   Use that scale factor on the other small side.   [3 × 2 = 6]
+step 3   Write the missing side in centimetres.   [6 centimetres]
+miss     copied-known-large-side = 14   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 10   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 987654321 · difficulty 1
+prompt   Find the missing side of the larger rectangle in centimetres.
+display  geometry similar-figures smallLength 8 smallWidth 4 largeKnownSide 16 knownSide length unit cm name "Similar rectangles: small rectangle has lowercase sides a = 8 cm and b = 4 cm; large rectangle has uppercase side A = 16 cm and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 8/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [16 ÷ 8 = 2]
+step 2   Use that scale factor on the other small side.   [4 × 2 = 8]
+step 3   Write the missing side in centimetres.   [8 centimetres]
+miss     copied-known-large-side = 16   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 12   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 1 · difficulty 2
+prompt   Find the missing side of the larger rectangle in inches.
+display  geometry similar-figures smallLength 12 smallWidth 7 largeKnownSide 36 knownSide length unit in name "Similar rectangles: small rectangle has lowercase sides a = 12 in and b = 7 in; large rectangle has uppercase side A = 36 in and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 21/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [36 ÷ 12 = 3]
+step 2   Use that scale factor on the other small side.   [7 × 3 = 21]
+step 3   Write the missing side in inches.   [21 inches]
+miss     copied-known-large-side = 36   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 31   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 12345 · difficulty 2
+prompt   Find the missing side of the larger rectangle in metres.
+display  geometry similar-figures smallLength 11 smallWidth 5 largeKnownSide 33 knownSide length unit m name "Similar rectangles: small rectangle has lowercase sides a = 11 m and b = 5 m; large rectangle has uppercase side A = 33 m and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 15/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [33 ÷ 11 = 3]
+step 2   Use that scale factor on the other small side.   [5 × 3 = 15]
+step 3   Write the missing side in metres.   [15 metres]
+miss     copied-known-large-side = 33   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 27   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 67890 · difficulty 2
+prompt   Find the missing side of the larger rectangle in metres.
+display  geometry similar-figures smallLength 7 smallWidth 3 largeKnownSide 6 knownSide width unit m name "Similar rectangles: small rectangle has lowercase sides a = 7 m and b = 3 m; large rectangle has uppercase side B = 6 m and missing uppercase side A (length)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 14/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [6 ÷ 3 = 2]
+step 2   Use that scale factor on the other small side.   [7 × 2 = 14]
+step 3   Write the missing side in metres.   [14 metres]
+miss     copied-known-large-side = 6   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 10   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 424242 · difficulty 2
+prompt   Find the missing side of the larger rectangle in centimetres.
+display  geometry similar-figures smallLength 10 smallWidth 4 largeKnownSide 20 knownSide length unit cm name "Similar rectangles: small rectangle has lowercase sides a = 10 cm and b = 4 cm; large rectangle has uppercase side A = 20 cm and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 8/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [20 ÷ 10 = 2]
+step 2   Use that scale factor on the other small side.   [4 × 2 = 8]
+step 3   Write the missing side in centimetres.   [8 centimetres]
+miss     copied-known-large-side = 20   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 14   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 987654321 · difficulty 2
+prompt   Find the missing side of the larger rectangle in centimetres.
+display  geometry similar-figures smallLength 12 smallWidth 6 largeKnownSide 36 knownSide length unit cm name "Similar rectangles: small rectangle has lowercase sides a = 12 cm and b = 6 cm; large rectangle has uppercase side A = 36 cm and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 18/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [36 ÷ 12 = 3]
+step 2   Use that scale factor on the other small side.   [6 × 3 = 18]
+step 3   Write the missing side in centimetres.   [18 centimetres]
+miss     copied-known-large-side = 36   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 30   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 1 · difficulty 3
+prompt   Find the missing side of the larger rectangle in inches.
+display  geometry similar-figures smallLength 16 smallWidth 10 largeKnownSide 48 knownSide length unit in name "Similar rectangles: small rectangle has lowercase sides a = 16 in and b = 10 in; large rectangle has uppercase side A = 48 in and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 30/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [48 ÷ 16 = 3]
+step 2   Use that scale factor on the other small side.   [10 × 3 = 30]
+step 3   Write the missing side in inches.   [30 inches]
+miss     copied-known-large-side = 48   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 42   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 12345 · difficulty 3
+prompt   Find the missing side of the larger rectangle in metres.
+display  geometry similar-figures smallLength 15 smallWidth 7 largeKnownSide 60 knownSide length unit m name "Similar rectangles: small rectangle has lowercase sides a = 15 m and b = 7 m; large rectangle has uppercase side A = 60 m and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 28/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [60 ÷ 15 = 4]
+step 2   Use that scale factor on the other small side.   [7 × 4 = 28]
+step 3   Write the missing side in metres.   [28 metres]
+miss     copied-known-large-side = 60   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 52   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 67890 · difficulty 3
+prompt   Find the missing side of the larger rectangle in metres.
+display  geometry similar-figures smallLength 10 smallWidth 4 largeKnownSide 12 knownSide width unit m name "Similar rectangles: small rectangle has lowercase sides a = 10 m and b = 4 m; large rectangle has uppercase side B = 12 m and missing uppercase side A (length)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 30/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [12 ÷ 4 = 3]
+step 2   Use that scale factor on the other small side.   [10 × 3 = 30]
+step 3   Write the missing side in metres.   [30 metres]
+miss     copied-known-large-side = 12   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 18   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 424242 · difficulty 3
+prompt   Find the missing side of the larger rectangle in centimetres.
+display  geometry similar-figures smallLength 13 smallWidth 6 largeKnownSide 26 knownSide length unit cm name "Similar rectangles: small rectangle has lowercase sides a = 13 cm and b = 6 cm; large rectangle has uppercase side A = 26 cm and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 12/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [26 ÷ 13 = 2]
+step 2   Use that scale factor on the other small side.   [6 × 2 = 12]
+step 3   Write the missing side in centimetres.   [12 centimetres]
+miss     copied-known-large-side = 26   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 19   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 987654321 · difficulty 3
+prompt   Find the missing side of the larger rectangle in centimetres.
+display  geometry similar-figures smallLength 16 smallWidth 8 largeKnownSide 64 knownSide length unit cm name "Similar rectangles: small rectangle has lowercase sides a = 16 cm and b = 8 cm; large rectangle has uppercase side A = 64 cm and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 32/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [64 ÷ 16 = 4]
+step 2   Use that scale factor on the other small side.   [8 × 4 = 32]
+step 3   Write the missing side in centimetres.   [32 centimetres]
+miss     copied-known-large-side = 64   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 56   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 1 · difficulty 4
+prompt   Find the missing side of the larger rectangle in inches.
+display  geometry similar-figures smallLength 24 smallWidth 14 largeKnownSide 96 knownSide length unit in name "Similar rectangles: small rectangle has lowercase sides a = 24 in and b = 14 in; large rectangle has uppercase side A = 96 in and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 56/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [96 ÷ 24 = 4]
+step 2   Use that scale factor on the other small side.   [14 × 4 = 56]
+step 3   Write the missing side in inches.   [56 inches]
+miss     copied-known-large-side = 96   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 86   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 12345 · difficulty 4
+prompt   Find the missing side of the larger rectangle in metres.
+display  geometry similar-figures smallLength 22 smallWidth 10 largeKnownSide 110 knownSide length unit m name "Similar rectangles: small rectangle has lowercase sides a = 22 m and b = 10 m; large rectangle has uppercase side A = 110 m and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 50/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [110 ÷ 22 = 5]
+step 2   Use that scale factor on the other small side.   [10 × 5 = 50]
+step 3   Write the missing side in metres.   [50 metres]
+miss     copied-known-large-side = 110   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 98   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 67890 · difficulty 4
+prompt   Find the missing side of the larger rectangle in metres.
+display  geometry similar-figures smallLength 15 smallWidth 5 largeKnownSide 20 knownSide width unit m name "Similar rectangles: small rectangle has lowercase sides a = 15 m and b = 5 m; large rectangle has uppercase side B = 20 m and missing uppercase side A (length)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 60/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [20 ÷ 5 = 4]
+step 2   Use that scale factor on the other small side.   [15 × 4 = 60]
+step 3   Write the missing side in metres.   [60 metres]
+miss     copied-known-large-side = 20   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 30   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 424242 · difficulty 4
+prompt   Find the missing side of the larger rectangle in centimetres.
+display  geometry similar-figures smallLength 19 smallWidth 8 largeKnownSide 57 knownSide length unit cm name "Similar rectangles: small rectangle has lowercase sides a = 19 cm and b = 8 cm; large rectangle has uppercase side A = 57 cm and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 24/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [57 ÷ 19 = 3]
+step 2   Use that scale factor on the other small side.   [8 × 3 = 24]
+step 3   Write the missing side in centimetres.   [24 centimetres]
+miss     copied-known-large-side = 57   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 46   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 987654321 · difficulty 4
+prompt   Find the missing side of the larger rectangle in centimetres.
+display  geometry similar-figures smallLength 23 smallWidth 11 largeKnownSide 115 knownSide length unit cm name "Similar rectangles: small rectangle has lowercase sides a = 23 cm and b = 11 cm; large rectangle has uppercase side A = 115 cm and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 55/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [115 ÷ 23 = 5]
+step 2   Use that scale factor on the other small side.   [11 × 5 = 55]
+step 3   Write the missing side in centimetres.   [55 centimetres]
+miss     copied-known-large-side = 115   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 103   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 1 · difficulty 5
+prompt   Find the missing side of the larger rectangle in inches.
+display  geometry similar-figures smallLength 32 smallWidth 18 largeKnownSide 160 knownSide length unit in name "Similar rectangles: small rectangle has lowercase sides a = 32 in and b = 18 in; large rectangle has uppercase side A = 160 in and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 90/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [160 ÷ 32 = 5]
+step 2   Use that scale factor on the other small side.   [18 × 5 = 90]
+step 3   Write the missing side in inches.   [90 inches]
+miss     copied-known-large-side = 160   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 146   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 12345 · difficulty 5
+prompt   Find the missing side of the larger rectangle in metres.
+display  geometry similar-figures smallLength 29 smallWidth 12 largeKnownSide 174 knownSide length unit m name "Similar rectangles: small rectangle has lowercase sides a = 29 m and b = 12 m; large rectangle has uppercase side A = 174 m and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 72/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [174 ÷ 29 = 6]
+step 2   Use that scale factor on the other small side.   [12 × 6 = 72]
+step 3   Write the missing side in metres.   [72 metres]
+miss     copied-known-large-side = 174   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 157   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 67890 · difficulty 5
+prompt   Find the missing side of the larger rectangle in metres.
+display  geometry similar-figures smallLength 20 smallWidth 6 largeKnownSide 24 knownSide width unit m name "Similar rectangles: small rectangle has lowercase sides a = 20 m and b = 6 m; large rectangle has uppercase side B = 24 m and missing uppercase side A (length)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 80/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [24 ÷ 6 = 4]
+step 2   Use that scale factor on the other small side.   [20 × 4 = 80]
+step 3   Write the missing side in metres.   [80 metres]
+miss     copied-known-large-side = 24   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 38   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 424242 · difficulty 5
+prompt   Find the missing side of the larger rectangle in centimetres.
+display  geometry similar-figures smallLength 26 smallWidth 10 largeKnownSide 78 knownSide length unit cm name "Similar rectangles: small rectangle has lowercase sides a = 26 cm and b = 10 cm; large rectangle has uppercase side A = 78 cm and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 30/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [78 ÷ 26 = 3]
+step 2   Use that scale factor on the other small side.   [10 × 3 = 30]
+step 3   Write the missing side in centimetres.   [30 centimetres]
+miss     copied-known-large-side = 78   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 62   Scale the matching side instead of adding a fixed difference.
+
+--- similar-figures · seed 987654321 · difficulty 5
+prompt   Find the missing side of the larger rectangle in centimetres.
+display  geometry similar-figures smallLength 31 smallWidth 14 largeKnownSide 186 knownSide length unit cm name "Similar rectangles: small rectangle has lowercase sides a = 31 cm and b = 14 cm; large rectangle has uppercase side A = 186 cm and missing uppercase side B (width)" formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); "a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]
+answer   exact 84/1
+input    keypad
+hint     Find the scale factor, then use it on the other small side.
+step 1   Divide the known large side by its matching small side.   [186 ÷ 31 = 6]
+step 2   Use that scale factor on the other small side.   [14 × 6 = 84]
+step 3   Write the missing side in centimetres.   [84 centimetres]
+miss     copied-known-large-side = 186   Use the known pair to find the scale factor first.
+miss     used-additive-side-change = 169   Scale the matching side instead of adding a fixed difference."
+`;
+
 exports[`Unit 20 recorded output: surface-area > matches the authored sample output 1`] = `
 "--- surface-area · seed 1 · difficulty 1
 prompt   Find the surface area of this prism in square inches.

@@ -518,6 +518,11 @@ const formatGeometryDiagram = (diagram: GeometryDiagram): string => {
         return diagram.missingSide === 'hypotenuse'
           ? `${diagram.operation} missingSide hypotenuse leg1 ${diagram.leg1} leg2 ${diagram.leg2} unit ${diagram.unit}`
           : `${diagram.operation} missingSide leg leg ${diagram.leg} hypotenuse ${diagram.hypotenuse} unit ${diagram.unit}`
+      case 'similar-figures':
+        return (
+          `${diagram.operation} smallLength ${diagram.smallLength} smallWidth ${diagram.smallWidth} ` +
+          `largeKnownSide ${diagram.largeKnownSide} knownSide ${diagram.knownSide} unit ${diagram.unit}`
+        )
       default: {
         const unhandled: never = diagram
         throw new Error(`Unhandled geometry diagram: ${JSON.stringify(unhandled)}`)

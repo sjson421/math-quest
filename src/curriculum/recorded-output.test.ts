@@ -171,6 +171,46 @@ describe('recorded output for diagrams', () => {
     expect(output).toContain('miss     squared-diameter = 314')
     expect(output).toContain('miss     circumference-for-area = 31.4')
   })
+
+  it('records every similar-figure source, proportion, exact answer, and diagnosis', () => {
+    const problem: Problem = {
+      skillId: 'synthetic-similar-figures',
+      prompt: 'Find the missing side of the larger rectangle in centimetres.',
+      display: {
+        kind: 'diagram',
+        diagram: {
+          kind: 'geometry',
+          operation: 'similar-figures',
+          smallLength: 4,
+          smallWidth: 3,
+          largeKnownSide: 8,
+          knownSide: 'length',
+          unit: 'cm',
+        },
+      },
+      answer: { kind: 'exact', n: 6, d: 1 },
+      inputMode: 'keypad',
+      misconceptions: [
+        { value: 8, tag: 'copied-known-large-side', nudge: 'Use the known pair to find the scale factor first.' },
+        { value: 7, tag: 'used-additive-side-change', nudge: 'Scale the matching side instead of adding a fixed difference.' },
+      ],
+      hint: 'Find the scale factor, then use it on the other small side.',
+      solution: [{ text: 'Find the scale factor.' }, { text: 'Scale the other side.' }],
+      difficulty: 1,
+    }
+
+    const output = format(problem, 31)
+    expect(output).toContain(
+      'display  geometry similar-figures smallLength 4 smallWidth 3 largeKnownSide 8 knownSide length unit cm ' +
+        'name "Similar rectangles: small rectangle has lowercase sides a = 4 cm and b = 3 cm; large rectangle has uppercase side A = 8 cm and missing uppercase side B (width)" ' +
+        'formulas ["a over A equals b over B" row(fraction("a", "A"), " = ", fraction("b", "B")); ' +
+        '"a over b equals A over B" row(fraction("a", "b"), " = ", fraction("A", "B"))]',
+    )
+    expect(output).toContain('answer   exact 6/1')
+    expect(output).toContain('input    keypad')
+    expect(output).toContain('miss     copied-known-large-side = 8')
+    expect(output).toContain('miss     used-additive-side-change = 7')
+  })
 })
 
 describe('recorded output for coordinate planes', () => {

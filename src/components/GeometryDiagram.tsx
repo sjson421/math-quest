@@ -82,6 +82,8 @@ function figureFor(
       return <SurfaceAreaNetFigure measurements={measurements} />
     case 'pythagorean':
       return <PythagoreanFigure diagram={diagram} measurements={measurements} />
+    case 'similar-figures':
+      return <SimilarFiguresFigure diagram={diagram} measurements={measurements} />
     default: {
       const unhandled: never = diagram
       throw new Error(`Unhandled geometry diagram: ${JSON.stringify(unhandled)}`)
@@ -567,5 +569,69 @@ function PythagoreanFigure({
       </text>
       <title>Right triangle for Pythagorean theorem</title>
     </>
+  )
+}
+
+function SimilarFiguresFigure({
+  diagram,
+  measurements,
+}: {
+  diagram: Extract<GeometryDiagramSpec, { operation: 'similar-figures' }>
+  measurements: readonly GeometryMeasurementLabel[]
+}) {
+  const knownLargeSide = diagram.knownSide === 'length' ? 'A' : 'B'
+  const missingLargeSide = diagram.knownSide === 'length' ? 'B' : 'A'
+
+  return (
+    <g data-similar-pair>
+      <rect
+        x="18"
+        y="65"
+        width="80"
+        height="50"
+        rx="4"
+        fill={SHAPE_FILL}
+        stroke={SHAPE_STROKE}
+        strokeWidth="3"
+        data-geometry-shape="similar-small-rectangle"
+      />
+      <rect
+        x="130"
+        y="37"
+        width="96"
+        height="60"
+        rx="4"
+        fill={SHAPE_FILL}
+        stroke={SHAPE_STROKE}
+        strokeWidth="3"
+        data-geometry-shape="similar-large-rectangle"
+      />
+      <text x="58" y="54" textAnchor="middle" {...textProps} data-geometry-measure="smallLength">
+        a = {labelText(measurements, 'smallLength')}
+      </text>
+      <text x="24" y="94" textAnchor="start" {...textProps} data-geometry-measure="smallWidth">
+        b = {labelText(measurements, 'smallWidth')}
+      </text>
+      {diagram.knownSide === 'length' ? (
+        <>
+          <text x="178" y="26" textAnchor="middle" {...textProps} data-geometry-measure="largeKnownSide">
+            {knownLargeSide} = {labelText(measurements, 'largeKnownSide')}
+          </text>
+          <text x="234" y="73" textAnchor="end" {...textProps} data-missing-side>
+            {missingLargeSide} = ?
+          </text>
+        </>
+      ) : (
+        <>
+          <text x="234" y="73" textAnchor="end" {...textProps} data-geometry-measure="largeKnownSide">
+            {knownLargeSide} = {labelText(measurements, 'largeKnownSide')}
+          </text>
+          <text x="178" y="26" textAnchor="middle" {...textProps} data-missing-side>
+            {missingLargeSide} = ?
+          </text>
+        </>
+      )}
+      <title>Small and large similar rectangles with corresponding side labels</title>
+    </g>
   )
 }

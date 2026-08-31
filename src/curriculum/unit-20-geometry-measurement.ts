@@ -110,6 +110,17 @@ const PYTHAGOREAN_MULTIPLIER: Ladder = {
   5: [4, 7],
 }
 
+const SIMILAR_SMALL_LENGTH = RECTANGLE_LENGTH
+const SIMILAR_SMALL_WIDTH = RECTANGLE_WIDTH
+
+const SIMILAR_SCALE: Ladder = {
+  1: [2, 2],
+  2: [2, 3],
+  3: [2, 4],
+  4: [3, 5],
+  5: [3, 6],
+}
+
 const PYTHAGOREAN_TRIPLES = [
   [3, 4, 5],
   [5, 12, 13],
@@ -363,6 +374,44 @@ const drawPythagorean = (context: BuildContext): Extract<GeometryDiagram, { oper
         hypotenuse: hypotenuse * multiplier,
         unit: selectedUnit,
       }
+}
+
+const drawSimilarFigures = (context: BuildContext): Extract<GeometryDiagram, { operation: 'similar-figures' }> => {
+  const [lengthMin, lengthMax] = band(context.difficulty, SIMILAR_SMALL_LENGTH)
+  const [widthMin, widthMax] = band(context.difficulty, SIMILAR_SMALL_WIDTH)
+  const [scaleMin, scaleMax] = band(context.difficulty, SIMILAR_SCALE)
+  const scale = context.rng.int(scaleMin, scaleMax)
+  const knownSide = context.rng.bool() ? 'length' as const : 'width' as const
+  const selectedUnit = unit(context)
+
+  return constrain(
+    () => {
+      const smallLength = context.rng.int(lengthMin, lengthMax)
+      const smallWidth = context.rng.int(widthMin, widthMax)
+      const correspondingSmallSide = knownSide === 'length' ? smallLength : smallWidth
+      const largeKnownSide = correspondingSmallSide * scale
+
+      return {
+        kind: 'geometry' as const,
+        operation: 'similar-figures' as const,
+        smallLength,
+        smallWidth,
+        largeKnownSide,
+        knownSide,
+        unit: selectedUnit,
+      }
+    },
+    (candidate) => {
+      const correspondingSmallSide = knownSide === 'length' ? candidate.smallLength : candidate.smallWidth
+      const otherSmallSide = knownSide === 'length' ? candidate.smallWidth : candidate.smallLength
+      const answer = otherSmallSide * scale
+      const additiveSideChange = otherSmallSide + correspondingSmallSide * (scale - 1)
+      return (
+        candidate.smallLength !== candidate.smallWidth &&
+        new Set([answer, candidate.largeKnownSide, additiveSideChange]).size === 3
+      )
+    },
+  )
 }
 
 const exactAreaPrompt = (shape: string, selectedUnit: LengthUnit): string =>
@@ -797,6 +846,65 @@ const pythagorean = defineSkill({
   },
 })
 
+const similarFigures = defineSkill({
+  id: 'similar-figures',
+  name: 'Similar Figures',
+  blurb: 'Same shape, scaled',
+  teachingLine: 'Corresponding sides in similar figures use the same scale factor.',
+  build(context) {
+    const drawn = drawSimilarFigures(context)
+    const correspondingSmallSide = drawn.knownSide === 'length' ? drawn.smallLength : drawn.smallWidth
+    const otherSmallSide = drawn.knownSide === 'length' ? drawn.smallWidth : drawn.smallLength
+    const scale = drawn.largeKnownSide / correspondingSmallSide
+    const answer = otherSmallSide * scale
+    const additiveSideChange = otherSmallSide + correspondingSmallSide * (scale - 1)
+
+    return {
+      prompt: `Find the missing side of the larger rectangle in ${unitName(drawn.unit)}.`,
+      display: {
+        kind: 'diagram',
+        diagram: {
+          kind: drawn.kind,
+          operation: drawn.operation,
+          smallLength: drawn.smallLength,
+          smallWidth: drawn.smallWidth,
+          largeKnownSide: drawn.largeKnownSide,
+          knownSide: drawn.knownSide,
+          unit: drawn.unit,
+        },
+      },
+      answer: intAnswer(answer),
+      misconceptions: [
+        {
+          value: drawn.largeKnownSide,
+          tag: 'copied-known-large-side',
+          nudge: 'Use the known pair to find the scale factor first.',
+        },
+        {
+          value: additiveSideChange,
+          tag: 'used-additive-side-change',
+          nudge: 'Scale the matching side instead of adding a fixed difference.',
+        },
+      ],
+      hint: 'Find the scale factor, then use it on the other small side.',
+      solution: [
+        {
+          text: 'Divide the known large side by its matching small side.',
+          detail: `${drawn.largeKnownSide} ÷ ${correspondingSmallSide} = ${scale}`,
+        },
+        {
+          text: 'Use that scale factor on the other small side.',
+          detail: `${otherSmallSide} × ${scale} = ${answer}`,
+        },
+        {
+          text: `Write the missing side in ${unitName(drawn.unit)}.`,
+          detail: `${answer} ${unitName(drawn.unit)}`,
+        },
+      ],
+    }
+  },
+})
+
 export const unit20: [
   typeof perimeter,
   typeof areaRectangle,
@@ -810,6 +918,7 @@ export const unit20: [
   typeof volumeConePyramidSphere,
   typeof surfaceArea,
   typeof pythagorean,
+  typeof similarFigures,
 ] = [
   perimeter,
   areaRectangle,
@@ -823,4 +932,5 @@ export const unit20: [
   volumeConePyramidSphere,
   surfaceArea,
   pythagorean,
+  similarFigures,
 ]

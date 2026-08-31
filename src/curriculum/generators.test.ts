@@ -642,6 +642,31 @@ const expectedGeometryFormulas = (operation: GeometryDiagram['operation']): Arra
           label: 'a equals the square root of c squared minus b squared',
         },
       ]
+    case 'similar-figures':
+      return [
+        {
+          notation: {
+            kind: 'row',
+            children: [
+              notationFraction('a', 'A'),
+              notationText(' = '),
+              notationFraction('b', 'B'),
+            ],
+          },
+          label: 'a over A equals b over B',
+        },
+        {
+          notation: {
+            kind: 'row',
+            children: [
+              notationFraction('a', 'b'),
+              notationText(' = '),
+              notationFraction('A', 'B'),
+            ],
+          },
+          label: 'a over b equals A over B',
+        },
+      ]
     default: {
       const unhandled: never = operation
       throw new Error(`Unknown geometry operation: ${unhandled}`)
@@ -796,6 +821,25 @@ const expectedGeometry = (data: GeometryDiagram): ExpectedGeometry => {
         answer: Math.sqrt(data.hypotenuse ** 2 - data.leg ** 2),
         values: [data.leg, data.hypotenuse],
       }
+    case 'similar-figures': {
+      const knownLargeLetter = data.knownSide === 'length' ? 'A' : 'B'
+      const missingLargeLetter = data.knownSide === 'length' ? 'B' : 'A'
+      const missingRole = data.knownSide === 'length' ? 'width' : 'length'
+      const correspondingSmallSide = data.knownSide === 'length' ? data.smallLength : data.smallWidth
+      const missingSmallSide = data.knownSide === 'length' ? data.smallWidth : data.smallLength
+      const scale = data.largeKnownSide / correspondingSmallSide
+      return {
+        label: (
+          `Similar rectangles: small rectangle has lowercase sides a = ${data.smallLength} ${data.unit} ` +
+          `and b = ${data.smallWidth} ${data.unit}; large rectangle has uppercase side ${knownLargeLetter} = ` +
+          `${data.largeKnownSide} ${data.unit} and missing uppercase side ${missingLargeLetter} (${missingRole})`
+        ),
+        formulas: expectedGeometryFormulas(data.operation),
+        prompt: `Find the missing side of the larger rectangle in ${unit}.`,
+        answer: missingSmallSide * scale,
+        values: [data.smallLength, data.smallWidth, data.largeKnownSide],
+      }
+    }
     default: {
       const unhandled: never = data
       throw new Error(`Unknown geometry diagram: ${JSON.stringify(unhandled)}`)
@@ -2088,6 +2132,14 @@ function recompute(problem: Problem): number | string {
       } else if (problem.answer.kind !== 'exact') {
         throw new Error(`${problem.skillId}: exact geometry answer must be exact`)
       }
+      if (display.diagram.operation === 'similar-figures') {
+        if (problem.inputMode !== 'keypad' || problem.keypad !== undefined) {
+          throw new Error(`${problem.skillId}: similar-figures must use the ordinary keypad`)
+        }
+        if (problem.answer.kind !== 'exact' || problem.answer.d !== 1) {
+          throw new Error(`${problem.skillId}: similar-figures answer must be an exact whole number`)
+        }
+      }
       return expected.answer
     }
     const visible = shapeDiagramFraction(display.diagram)
@@ -2766,6 +2818,8 @@ function sourceMagnitude(problem: Problem): number {
           return data.missingSide === 'hypotenuse'
             ? [data.leg1, data.leg2]
             : [data.leg, data.hypotenuse]
+        case 'similar-figures':
+          return [data.smallLength, data.smallWidth, data.largeKnownSide]
         default: {
           const unhandled: never = data
           throw new Error(`Unknown geometry operation: ${JSON.stringify(unhandled)}`)
@@ -4217,6 +4271,58 @@ describe('geometry answer verification', () => {
     }
     wrongOperation.display.diagram.operation = 'area-rectangle'
     expect(() => recompute(wrongOperation)).toThrow('geometry prompt disagrees with its data')
+  })
+
+  it('rebuilds a similar-figure answer from both visible side roles', () => {
+    const problem = geometryProblem(
+      {
+        kind: 'geometry',
+        operation: 'similar-figures',
+        smallLength: 4,
+        smallWidth: 3,
+        largeKnownSide: 8,
+        knownSide: 'length',
+        unit: 'cm',
+      },
+      intAnswer(6),
+      'Find the missing side of the larger rectangle in centimetres.',
+    )
+
+    expect(answerMismatch(problem)).toBeUndefined()
+    expect(answerMismatch({ ...problem, answer: intAnswer(8) })).toContain(
+      'synthetic-geometry: stated 8, derived 6',
+    )
+
+    const widthKnown = structuredClone(problem)
+    if (widthKnown.display.kind !== 'diagram' || widthKnown.display.diagram.kind !== 'geometry') {
+      throw new Error('expected geometry display')
+    }
+    widthKnown.display.diagram = {
+      kind: 'geometry',
+      operation: 'similar-figures',
+      smallLength: 5,
+      smallWidth: 2,
+      largeKnownSide: 6,
+      knownSide: 'width',
+      unit: 'ft',
+    }
+    widthKnown.prompt = 'Find the missing side of the larger rectangle in feet.'
+    widthKnown.answer = intAnswer(15)
+    expect(answerMismatch(widthKnown)).toBeUndefined()
+
+    const invalidScale = structuredClone(problem)
+    if (invalidScale.display.kind !== 'diagram' || invalidScale.display.diagram.kind !== 'geometry') {
+      throw new Error('expected geometry display')
+    }
+    if (invalidScale.display.diagram.operation !== 'similar-figures') {
+      throw new Error('expected similar-figures display')
+    }
+    invalidScale.display.diagram.largeKnownSide = 7
+    expect(() => recompute(invalidScale)).toThrow('whole-number scale greater than one')
+
+    expect(() => recompute({ ...problem, inputMode: 'choice' })).toThrow(
+      'similar-figures must use the ordinary keypad',
+    )
   })
 })
 

@@ -6,7 +6,7 @@ browser and can be installed on devices that support web apps.
 
 ## Status: playable foundations, whole course mapped
 
-**185 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
+**186 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
 stage checkpoints, a companion character the learner chooses and dresses, a pin that
 climbs through five tiers as the course is worked through, a room to decorate, and progress
 backup.
@@ -26,9 +26,9 @@ how many are playable is a fact about the code, and the status line of
 place.
 
 Stages A through F have complete playable content, and Stage G now opens Unit 20 through
-Pythagorean theorem: perimeter, rectangle and triangle area, parallelogram and trapezoid area,
-circle measures, composite figures, prism and round-solid volume, surface area, and missing
-right-triangle sides. Geometry figures carry labelled dimensions and GED formula choices;
+similar figures: perimeter, rectangle and triangle area, parallelogram and trapezoid area,
+circle measures, composite figures, prism and round-solid volume, surface area, missing
+right-triangle sides, and scaled corresponding sides. Geometry figures carry labelled dimensions and GED formula choices;
 non-circular results are exact, while circle and round-solid volume answers use π = 3.14 and
 round to the nearest tenth. Unit 8
 covers like- and unlike-denominator addition and subtraction, mixed-number conversion and
@@ -130,7 +130,7 @@ over sampled problems inside the test suite —
 at most 4 solution steps, at most 12 words each, single-sentence hints, and at least two
 distinct predicted misconceptions on any skill marked a difficulty wall.
 
-Stages A through F and Unit 20 through Pythagorean theorem now open all 185 playable skills with one
+Stages A through F and Unit 20 through similar figures now open all 186 playable skills with one
 authored teaching line and one stable, generated difficulty-1 worked example. Starting practice
 records only that the intro was seen; it does not count as an attempt or change mastery. The same
 example remains available through **Review intro**, and each authored line is checked directly for

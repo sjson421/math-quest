@@ -451,7 +451,7 @@ right formula, never memorising it.
 | 20.10 | `volume-cone-pyramid-sphere` | | ✅ |
 | 20.11 | `surface-area` | | ✅ |
 | 20.12 | `pythagorean` | | ✅ ⚠️ hypotenuse placement |
-| 20.13 | `similar-figures` | | |
+| 20.13 | `similar-figures` | | ✅ |
 
 ### Unit 21 — Data & Probability (9)
 
@@ -521,7 +521,7 @@ Ship by stage; each stage is independently useful.
 4. **Stage E** (34) — complete; the **expression input mode** it needed is built.
 5. **Stage F** (28) — its **coordinate-plane input** and **root-pair input** are built; all ten Unit 16, all four Unit 17, and all nine Unit 18 skills are playable.
 6. **Stage G** (22) — reuses built **diagram rendering** for shapes; chart rendering is built, and
-   the first twelve Unit 20 skills are playable while the remaining Stage G content stays planned.
+   all thirteen Unit 20 skills are playable while Unit 21 stays planned.
 7. **Stage H** (6) — needs timed mode and a score estimator.
 
 ### New capabilities required, by stage
@@ -557,14 +557,14 @@ Ship by stage; each stage is independently useful.
   rather than storing them, and commits a snapshot of the expanded graph so a change to the
   derivation is reviewable.
 - **A skill with no generator is `planned`, not broken.** State is derived at load from the
-  generator registry plus the capabilities that are actually built. Today 16 of 201 skills
+  generator registry plus the capabilities that are actually built. Today 15 of 201 skills
   are planned; later Stage G skills and Stage H still wait on their content or timed mode. Planned skills are transparent to unlocking —
   a learner is never held behind our build order — and never offered for play.
 - **The content style contract above is enforced**, not advisory: `src/lib/content-rules.ts`
   checks authored teaching lines for one sentence, forward references, and current-unit
   vocabulary, then checks step count, step length, single-sentence hints, wall misconception
   coverage, and generated-problem forward references against a curated vocabulary list.
-  All 185 playable skills in Stages A through F and Unit 20 through `pythagorean` carry authored
+  All 186 playable skills in Stages A through F and Unit 20 through `similar-figures` carry authored
   intro lines and generated worked examples; the remaining Stage G skills and Stage H remain staged.
 - **`SkillProgress` gains two fields** for skipping: `source: 'practiced' | 'tested-out' |
   'self-assessed'` and the existing mastery set to 3. These must survive a **sync round

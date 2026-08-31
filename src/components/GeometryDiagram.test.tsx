@@ -114,4 +114,33 @@ describe('GeometryDiagram', () => {
     expect(html).toContain('c equals the square root of a squared plus b squared')
     expect(html).toContain('a equals the square root of c squared minus b squared')
   })
+
+  it.each([
+    [{ kind: 'geometry', operation: 'similar-figures', smallLength: 4, smallWidth: 3, largeKnownSide: 8, knownSide: 'length', unit: 'cm' }],
+    [{ kind: 'geometry', operation: 'similar-figures', smallLength: 5, smallWidth: 2, largeKnownSide: 6, knownSide: 'width', unit: 'ft' }],
+  ] as const)('renders both corresponding rectangles and one missing side', (diagram) => {
+    const html = render(diagram)
+
+    expect(html).toContain('data-geometry-operation="similar-figures"')
+    expect(html.match(/data-geometry-shape="similar-(?:small|large)-rectangle"/g)).toHaveLength(2)
+    expect(html.match(/data-geometry-measure=/g)).toHaveLength(3)
+    expect(html).toContain('a = ')
+    expect(html).toContain('b = ')
+    expect(html).toContain(diagram.knownSide === 'length' ? 'A = ' : 'B = ')
+    expect(html).toContain(diagram.knownSide === 'length' ? 'B = ?' : 'A = ?')
+    if (diagram.knownSide === 'length') {
+      expect(html).toMatch(/<text x="178" y="26"[^>]*data-geometry-measure="largeKnownSide">A = 8 cm<\/text>/)
+      expect(html).toMatch(/<text x="234" y="73"[^>]*data-missing-side="true">B = \?<\/text>/)
+    } else {
+      expect(html).toMatch(/<text x="234" y="73"[^>]*data-geometry-measure="largeKnownSide">B = 6 ft<\/text>/)
+      expect(html).toMatch(/<text x="178" y="26"[^>]*data-missing-side="true">A = \?<\/text>/)
+    }
+    expect(html).toContain('mq-math-fraction')
+    expect(html).toContain('a over A equals b over B')
+    expect(html).toContain('a over b equals A over B')
+    expect(html).toContain('class="block w-64 max-w-full h-auto"')
+    expect(html).toMatch(/<svg[^>]*role="img"[^>]*>\s*<g aria-hidden="true">[\s\S]*data-similar-pair/)
+    expect(html.match(/role="img"/g)).toHaveLength(1)
+    expect(html.match(/role="math"/g)).toHaveLength(2)
+  })
 })

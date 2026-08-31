@@ -122,6 +122,15 @@ export type GeometryDiagram =
       hypotenuse: number
       unit: LengthUnit
     }
+  | {
+      kind: 'geometry'
+      operation: 'similar-figures'
+      smallLength: number
+      smallWidth: number
+      largeKnownSide: number
+      knownSide: 'length' | 'width'
+      unit: LengthUnit
+    }
 
 export type GeometryMeasurementName =
   | 'length'
@@ -142,6 +151,9 @@ export type GeometryMeasurementName =
   | 'leg2'
   | 'leg'
   | 'hypotenuse'
+  | 'smallLength'
+  | 'smallWidth'
+  | 'largeKnownSide'
 
 export type GeometryMeasurementLabel = {
   name: GeometryMeasurementName
@@ -179,6 +191,7 @@ const OPERATIONS: readonly GeometryDiagram['operation'][] = [
   'volume-sphere',
   'surface-area',
   'pythagorean',
+  'similar-figures',
 ]
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -198,6 +211,13 @@ const assertKeys = (diagram: Record<string, unknown>, keys: readonly string[]) =
 function assertMeasurement(name: string, value: unknown): asserts value is number {
   if (typeof value !== 'number' || !Number.isFinite(value) || value <= 0) {
     throw new Error(`geometry ${name} must be a positive finite number`)
+  }
+}
+
+function assertWholeMeasurement(name: string, value: unknown): asserts value is number {
+  assertMeasurement(name, value)
+  if (!Number.isInteger(value)) {
+    throw new Error(`geometry ${name} must be a positive finite whole number`)
   }
 }
 
@@ -296,6 +316,24 @@ export function assertGeometryDiagram(diagram: unknown): asserts diagram is Geom
         return
       }
       throw new Error('geometry pythagorean missingSide must be leg or hypotenuse')
+    case 'similar-figures': {
+      assertKeys(value, ['kind', 'operation', 'smallLength', 'smallWidth', 'largeKnownSide', 'knownSide', 'unit'])
+      assertWholeMeasurement('smallLength', value.smallLength)
+      assertWholeMeasurement('smallWidth', value.smallWidth)
+      assertWholeMeasurement('largeKnownSide', value.largeKnownSide)
+      if (value.knownSide !== 'length' && value.knownSide !== 'width') {
+        throw new Error('geometry similar figures knownSide must be length or width')
+      }
+      if (value.smallLength === value.smallWidth) {
+        throw new Error('geometry similar figures small sides must differ')
+      }
+      const correspondingSmallSide = value.knownSide === 'length' ? value.smallLength : value.smallWidth
+      const scale = value.largeKnownSide / correspondingSmallSide
+      if (!Number.isInteger(scale) || scale <= 1) {
+        throw new Error('geometry similar figures known side must establish a whole-number scale greater than one')
+      }
+      return
+    }
     default: {
       const unhandled: never = operation
       throw new Error(`Unhandled geometry operation: ${unhandled}`)
@@ -373,6 +411,12 @@ export function geometryMeasurementLabels(diagram: GeometryDiagram): readonly Ge
             measurement('leg', diagram.leg, diagram.unit),
             measurement('hypotenuse', diagram.hypotenuse, diagram.unit),
           ]
+    case 'similar-figures':
+      return [
+        measurement('smallLength', diagram.smallLength, diagram.unit),
+        measurement('smallWidth', diagram.smallWidth, diagram.unit),
+        measurement('largeKnownSide', diagram.largeKnownSide, diagram.unit),
+      ]
     default: {
       const unhandled: never = diagram
       throw new Error(`Unhandled geometry diagram: ${JSON.stringify(unhandled)}`)
@@ -416,6 +460,16 @@ export function geometryDiagramLabel(diagram: GeometryDiagram): string {
       return diagram.missingSide === 'hypotenuse'
         ? `Right triangle with legs ${diagram.leg1} ${diagram.unit} and ${diagram.leg2} ${diagram.unit}, and a missing hypotenuse`
         : `Right triangle with known leg ${diagram.leg} ${diagram.unit}, hypotenuse ${diagram.hypotenuse} ${diagram.unit}, and a missing leg`
+    case 'similar-figures': {
+      const knownLargeSide = diagram.knownSide === 'length' ? 'A' : 'B'
+      const missingLargeSide = diagram.knownSide === 'length' ? 'B' : 'A'
+      const missingRole = diagram.knownSide === 'length' ? 'width' : 'length'
+      return (
+        `Similar rectangles: small rectangle has lowercase sides a = ${diagram.smallLength} ${diagram.unit} ` +
+        `and b = ${diagram.smallWidth} ${diagram.unit}; large rectangle has uppercase side ${knownLargeSide} = ` +
+        `${diagram.largeKnownSide} ${diagram.unit} and missing uppercase side ${missingLargeSide} (${missingRole})`
+      )
+    }
     default: {
       const unhandled: never = diagram
       throw new Error(`Unhandled geometry diagram: ${JSON.stringify(unhandled)}`)
@@ -508,6 +562,17 @@ const pythagoreanFormulas = (): GeometryFormulaReference[] => [
   },
 ]
 
+const similarFigureFormulas = (): GeometryFormulaReference[] => [
+  {
+    notation: row(fraction(text('a'), text('A')), text(' = '), fraction(text('b'), text('B'))),
+    label: 'a over A equals b over B',
+  },
+  {
+    notation: row(fraction(text('a'), text('b')), text(' = '), fraction(text('A'), text('B'))),
+    label: 'a over b equals A over B',
+  },
+]
+
 /** Formula references are derived from the operation, never authored per problem. */
 export function geometryFormulaReferences(diagram: GeometryDiagram): readonly GeometryFormulaReference[] {
   assertGeometryDiagram(diagram)
@@ -538,6 +603,8 @@ export function geometryFormulaReferences(diagram: GeometryDiagram): readonly Ge
       return surfaceAreaFormulas()
     case 'pythagorean':
       return pythagoreanFormulas()
+    case 'similar-figures':
+      return similarFigureFormulas()
     default: {
       const unhandled: never = diagram
       throw new Error(`Unhandled geometry diagram: ${JSON.stringify(unhandled)}`)

@@ -24,7 +24,18 @@ const diagrams: GeometryDiagram[] = [
   { kind: 'geometry', operation: 'surface-area', length: 5, width: 3, height: 2, unit: 'cm' },
   { kind: 'geometry', operation: 'pythagorean', missingSide: 'hypotenuse', leg1: 3, leg2: 4, unit: 'ft' },
   { kind: 'geometry', operation: 'pythagorean', missingSide: 'leg', leg: 5, hypotenuse: 13, unit: 'in' },
+  { kind: 'geometry', operation: 'similar-figures', smallLength: 4, smallWidth: 3, largeKnownSide: 8, knownSide: 'length', unit: 'cm' },
 ]
+
+const similarWidthKnown: GeometryDiagram = {
+  kind: 'geometry',
+  operation: 'similar-figures',
+  smallLength: 5,
+  smallWidth: 2,
+  largeKnownSide: 6,
+  knownSide: 'width',
+  unit: 'ft',
+}
 
 describe('geometry diagram data', () => {
   it.each(diagrams)('validates every operation and derives its fields for $operation', (diagram) => {
@@ -68,6 +79,31 @@ describe('geometry diagram data', () => {
     expect(geometryDiagramLabel(diagrams[2])).toBe(
       'Triangle with base 6 ft and perpendicular height 4 ft',
     )
+  })
+
+  it('derives paired-figure labels, names, and proportions from either known side', () => {
+    const lengthKnown = diagrams[16]
+
+    expect(geometryMeasurementLabels(lengthKnown)).toEqual([
+      { name: 'smallLength', text: '4 cm' },
+      { name: 'smallWidth', text: '3 cm' },
+      { name: 'largeKnownSide', text: '8 cm' },
+    ])
+    expect(geometryMeasurementLabels(similarWidthKnown)).toEqual([
+      { name: 'smallLength', text: '5 ft' },
+      { name: 'smallWidth', text: '2 ft' },
+      { name: 'largeKnownSide', text: '6 ft' },
+    ])
+    expect(geometryDiagramLabel(lengthKnown)).toBe(
+      'Similar rectangles: small rectangle has lowercase sides a = 4 cm and b = 3 cm; large rectangle has uppercase side A = 8 cm and missing uppercase side B (width)',
+    )
+    expect(geometryDiagramLabel(similarWidthKnown)).toContain('uppercase side B = 6 ft')
+    expect(geometryDiagramLabel(similarWidthKnown)).toContain('missing uppercase side A (length)')
+    expect(geometryFormulaReferences(lengthKnown).map(({ label }) => label)).toEqual([
+      'a over A equals b over B',
+      'a over b equals A over B',
+    ])
+    expect(Object.keys(lengthKnown)).not.toEqual(expect.arrayContaining(['answer', 'scale', 'missingSide']))
   })
 
   it('uses the formula set required by each operation', () => {
@@ -148,6 +184,12 @@ describe('geometry diagram data', () => {
     ['pyramid missing base', { kind: 'geometry', operation: 'volume-pyramid', baseLength: 6, height: 9, unit: 'cm' }],
     ['pythagorean invalid hypotenuse', { kind: 'geometry', operation: 'pythagorean', missingSide: 'leg', leg: 13, hypotenuse: 5, unit: 'in' }],
     ['pythagorean invalid missing side', { kind: 'geometry', operation: 'pythagorean', missingSide: 'base', leg: 3, hypotenuse: 5, unit: 'in' }],
+    ['similar fractional small side', { kind: 'geometry', operation: 'similar-figures', smallLength: 4.5, smallWidth: 3, largeKnownSide: 9, knownSide: 'length', unit: 'cm' }],
+    ['similar equal small sides', { kind: 'geometry', operation: 'similar-figures', smallLength: 4, smallWidth: 4, largeKnownSide: 8, knownSide: 'length', unit: 'cm' }],
+    ['similar non-divisible known side', { kind: 'geometry', operation: 'similar-figures', smallLength: 4, smallWidth: 3, largeKnownSide: 7, knownSide: 'length', unit: 'cm' }],
+    ['similar unit-scale known side', { kind: 'geometry', operation: 'similar-figures', smallLength: 4, smallWidth: 3, largeKnownSide: 4, knownSide: 'length', unit: 'cm' }],
+    ['similar invalid known side role', { kind: 'geometry', operation: 'similar-figures', smallLength: 4, smallWidth: 3, largeKnownSide: 8, knownSide: 'height', unit: 'cm' }],
+    ['similar extra answer field', { kind: 'geometry', operation: 'similar-figures', smallLength: 4, smallWidth: 3, largeKnownSide: 8, knownSide: 'length', answer: 6, unit: 'cm' }],
   ])('rejects %s data', (_name, diagram) => {
     expect(() => assertGeometryDiagram(diagram)).toThrow()
   })

@@ -393,6 +393,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "scientific-notation": [
     "zero-neg-exponents",
   ],
+  "similar-figures": [
+    "pythagorean",
+  ],
   "simple-interest": [
     "discount-tax-tip",
   ],

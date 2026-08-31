@@ -36,6 +36,7 @@ const teachingLines = [
   ['volume-cone-pyramid-sphere', 'Cones and pyramids use one-third; spheres use four-thirds.'],
   ['surface-area', 'A net shows every face that must be added.'],
   ['pythagorean', 'The hypotenuse is longest and sits opposite the right angle.'],
+  ['similar-figures', 'Corresponding sides in similar figures use the same scale factor.'],
 ] as const
 
 const dataFor = (problem: Problem): GeometryDiagram => {
@@ -88,6 +89,10 @@ const sourceAnswer = (diagram: GeometryDiagram): number => {
       return diagram.missingSide === 'hypotenuse'
         ? Math.sqrt(diagram.leg1 ** 2 + diagram.leg2 ** 2)
         : Math.sqrt(diagram.hypotenuse ** 2 - diagram.leg ** 2)
+    case 'similar-figures':
+      return (diagram.knownSide === 'length' ? diagram.smallWidth : diagram.smallLength) * (
+        diagram.largeKnownSide / (diagram.knownSide === 'length' ? diagram.smallLength : diagram.smallWidth)
+      )
     default: {
       const unhandled: never = diagram
       throw new Error(`Unhandled geometry operation: ${unhandled}`)
@@ -125,6 +130,8 @@ const sourceValues = (diagram: GeometryDiagram): number[] => {
       return diagram.missingSide === 'hypotenuse'
         ? [diagram.leg1, diagram.leg2]
         : [diagram.leg, diagram.hypotenuse]
+    case 'similar-figures':
+      return [diagram.smallLength, diagram.smallWidth, diagram.largeKnownSide]
     default: {
       const unhandled: never = diagram
       throw new Error(`Unhandled geometry operation: ${unhandled}`)
@@ -184,6 +191,8 @@ const expectedPrompt = (diagram: GeometryDiagram): string => {
       return `Find the surface area of this prism in square ${unitWords(diagram.unit)}.`
     case 'pythagorean':
       return `Find the missing side of this right triangle in ${unitWords(diagram.unit)}.`
+    case 'similar-figures':
+      return `Find the missing side of the larger rectangle in ${unitWords(diagram.unit)}.`
     default: {
       const unhandled: never = diagram
       throw new Error(`Unhandled geometry operation: ${unhandled}`)
@@ -201,7 +210,7 @@ describe.each(unit20.map((candidate) => [candidate.id, candidate] as const))(
 )
 
 describe('Unit 20 shared contracts', () => {
-  it('registers all twelve skills in manifest order', () => {
+  it('registers all thirteen skills in manifest order', () => {
     expect(unit20.map(({ id }) => id)).toEqual([
       'perimeter',
       'area-rectangle',
@@ -215,6 +224,7 @@ describe('Unit 20 shared contracts', () => {
       'volume-cone-pyramid-sphere',
       'surface-area',
       'pythagorean',
+      'similar-figures',
     ])
   })
 
@@ -592,5 +602,54 @@ describe('pythagorean geometry', () => {
       }
     }
     expect(roles).toEqual(new Set(['leg', 'hypotenuse']))
+  })
+})
+
+describe('similar figures geometry', () => {
+  it('uses both known-side roles and keeps both wall diagnoses reachable', () => {
+    const roles = new Set<string>()
+
+    for (const problem of everyProblem('similar-figures')) {
+      const diagram = dataFor(problem)
+      if (diagram.operation !== 'similar-figures') throw new Error('expected similar-figures data')
+      roles.add(diagram.knownSide)
+
+      const correspondingSmallSide = diagram.knownSide === 'length' ? diagram.smallLength : diagram.smallWidth
+      const otherSmallSide = diagram.knownSide === 'length' ? diagram.smallWidth : diagram.smallLength
+      const scale = diagram.largeKnownSide / correspondingSmallSide
+      const answer = otherSmallSide * scale
+      const copiedKnownSide = diagram.largeKnownSide
+      const additiveSideChange = otherSmallSide + correspondingSmallSide * (scale - 1)
+      const misconceptions = problem.misconceptions ?? []
+
+      expect(Number.isInteger(scale)).toBe(true)
+      expect(scale).toBeGreaterThan(1)
+      expect(diagram.smallLength).not.toBe(diagram.smallWidth)
+      expect(numericAnswer(problem)).toBe(answer)
+      expect(problem.answer.kind).toBe('exact')
+      expect(problem.keypad).toBeUndefined()
+      expect(problem.prompt).toContain('larger rectangle')
+      expect(formulaLabels(diagram)).toEqual([
+        'a over A equals b over B',
+        'a over b equals A over B',
+      ])
+      expect(misconceptions.map(({ tag }) => tag)).toEqual([
+        'copied-known-large-side',
+        'used-additive-side-change',
+      ])
+      expect(misconceptions.map(({ value }) => value)).toEqual([copiedKnownSide, additiveSideChange])
+      expect(new Set([answer, copiedKnownSide, additiveSideChange])).toHaveProperty('size', 3)
+      for (const misconception of misconceptions) {
+        expect(checkAnswer(problem.answer, String(misconception.value)).status).toBe('incorrect')
+        expect(diagnose(problem, String(misconception.value))).toMatchObject({ tag: misconception.tag })
+      }
+      expect(format(problem, 1)).toContain(
+        `similar-figures smallLength ${diagram.smallLength} smallWidth ${diagram.smallWidth} largeKnownSide ${diagram.largeKnownSide} knownSide ${diagram.knownSide}`,
+      )
+      expect(format(problem, 1)).toContain('a over A equals b over B')
+      expect(format(problem, 1)).toContain(geometryDiagramLabel(diagram))
+    }
+
+    expect(roles).toEqual(new Set(['length', 'width']))
   })
 })
