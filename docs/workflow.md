@@ -20,7 +20,7 @@ fresh context; `implement-roadmap` applies the audited change; and `review-roadm
 simplifies, verifies, ships, and archives it. Ignored state under `.agent-state/roadmap/`
 carries the exact baseline and gate status between sessions.
 
-- `openspec/specs/` is the **baseline**: what the system does today, forty-five
+- `openspec/specs/` is the **baseline**: what the system does today, forty-six
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
@@ -30,7 +30,7 @@ carries the exact baseline and gate status between sessions.
   `unit-11-ratios-proportions`, `unit-12-exponents-roots`, `unit-13-expressions`,
   `unit-14-linear-equations`, `unit-15-inequalities`, `unit-16-coordinate-plane-lines`,
   `unit-17-systems-equations`, `unit-18-polynomials-quadratics`, `unit-19-functions`,
-  `unit-20-geometry-measurement`,
+  `unit-20-geometry-measurement`, `unit-21-data-probability`,
   `word-problem-phrasing`, `choice-input`, `number-line-input`, `progress-sync`,
   `recovery-key`, `answer-entry`, `root-pair-input`, `cosmetic-wardrobe`, `decorated-room`,
   `math-notation`, `diagram-rendering`, `expression-input`, `coordinate-plane-display`,
@@ -38,10 +38,10 @@ carries the exact baseline and gate status between sessions.
   Requirements` against one of these; `## ADDED` is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Sixty-five changes have
-  shipped — `ls openspec/changes/archive/` is the authority, and this line has run one behind
-  before; the latest archive is `2026-08-30-add-similar-figures`. It ships roadmap increment
-  20c's similar-figures skill; Unit 21 content remains planned.
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Sixty-six changes have
+  shipped — `ls openspec/changes/archive/` is the authority; the latest archive is
+  `2026-08-31-add-stage-g-unit-21a`. It ships roadmap increment 21a's first six Unit 21
+  statistics skills; the final three probability skills remain planned.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the

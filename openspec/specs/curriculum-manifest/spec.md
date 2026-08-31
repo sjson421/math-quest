@@ -254,37 +254,45 @@ introduces, so the set can be read off the stage rather than assembled from earl
 - **THEN** all six Stage H skills remain planned
 - **AND** chart availability does not change the Stage H capability state
 
-### Requirement: Stage G extends through its third content increment
+### Requirement: Stage G extends through its fourth content increment
 
-The registry SHALL add `similar-figures` under its existing manifest id after `pythagorean`
-without changing manifest membership, prerequisites, quick markers, wall markers, or Stage G
-capability requirements. The manifest and curriculum document SHALL continue to agree.
+The registry SHALL add `mean`, `median`, `mode-range`, `weighted-mean`, `read-bar-line`, and
+`read-scatterplot` under their existing manifest ids after `similar-figures` without changing
+manifest membership, prerequisites, quick markers, or wall markers. Because `read-scatterplot`
+uses choice input, Stage G SHALL add the already-available `choice-input` to its existing
+`math-notation`, `diagram`, and `chart` requirements without changing
+`AVAILABLE_CAPABILITIES`. The manifest and curriculum document SHALL continue to agree.
 
-All thirteen Unit 20 skills SHALL resolve as implemented because `math-notation`, `diagram`,
-and `chart` are already available. Every Unit 21 skill SHALL remain planned and transparent to
-runtime unlocking until its generator ships.
+All thirteen Unit 20 skills and the first six Unit 21 skills SHALL resolve as implemented
+because `choice-input`, `math-notation`, `diagram`, and `chart` are already available. The final
+three Unit 21 skills SHALL remain planned and transparent to runtime unlocking until increment
+21b ships.
 
 #### Scenario: Registry addition preserves manifest authority
 
-- **WHEN** increment 20c is registered
-- **THEN** `similar-figures` follows `pythagorean` and matches the existing final Unit 20 manifest entry
-- **AND** no prerequisite or stage capability is copied into the generator
+- **WHEN** increment 21a is registered
+- **THEN** `mean` through `read-scatterplot` follow `similar-figures` in manifest order
+- **AND** Stage G records `choice-input`, `math-notation`, `diagram`, and `chart` as its complete
+  available capability requirements
+- **AND** no prerequisite, pacing marker, unit membership, or stage capability is copied into
+  a generator
 
 #### Scenario: Partial Stage G status advances explicitly
 
-- **WHEN** skill states are resolved after increment 20c
-- **THEN** exactly `perimeter` through `similar-figures` are implemented in Stage G
-- **AND** the remaining 9 Stage G skills are planned
-- **AND** the total implemented count is 186 of 201
+- **WHEN** skill states are resolved after increment 21a
+- **THEN** exactly `perimeter` through `read-scatterplot` are implemented in Stage G
+- **AND** `basic-probability` through `counting-outcomes` remain planned
+- **AND** the total implemented count is 192 of 201
 
-### Requirement: Third partial roadmap increment stays aligned
+### Requirement: Fourth partial roadmap increment stays aligned
 
-Curriculum rows 20.1 through 20.13 SHALL be marked complete, the roadmap status count SHALL
-state 186 playable skills, and ordered increments 20a, 20b, and 20c SHALL be recorded as shipped.
-Roadmap item 26 SHALL remain unchecked until increments 21a and 21b also ship.
+Curriculum rows 20.1 through 21.6 SHALL be marked complete, and curriculum status prose SHALL
+identify the first six Unit 21 skills as playable and the final three as planned. The roadmap
+status count SHALL state 192 playable skills, and ordered increments 20a, 20b, 20c, and 21a
+SHALL be recorded as shipped. Roadmap item 26 and increment 21b SHALL remain open.
 
-#### Scenario: Unit 20 completion does not close the parent item
+#### Scenario: Unit 21a does not close the parent item
 
-- **WHEN** all thirteen Unit 20 skills are playable
-- **THEN** their curriculum rows and all three Unit 20 increments show completion
-- **AND** the Stage G Units 20–21 checkbox remains open
+- **WHEN** the first six Unit 21 skills are playable
+- **THEN** their curriculum rows and increment 21a show completion
+- **AND** the Stage G Units 20–21 checkbox remains open for the three probability skills
