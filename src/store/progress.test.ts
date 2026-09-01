@@ -12,7 +12,9 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { get as idbGet, set as idbSet } from 'idb-keyval'
 import { implementedSkillIds, skillStates } from '../curriculum'
 import { stageA } from '../curriculum/manifest'
-import { dayBefore, MAX_STREAK_FREEZES, todayKey } from '../lib/streak'
+import { addDays, dayBefore, todayKey } from '../lib/calendar'
+import { readReviewState } from '../lib/review'
+import { MAX_STREAK_FREEZES } from '../lib/streak'
 import {
   UNLOCK_THRESHOLD,
   initialProgress,
@@ -554,6 +556,125 @@ describe('stage checkpoint lesson outcomes', () => {
     expect(useProgress.getState().progress.skills['round-to-100'].mastery).toBe(
       UNLOCK_THRESHOLD + 1,
     )
+  })
+})
+
+describe('review state in progress', () => {
+  beforeEach(() => {
+    useProgress.getState().reset()
+    vi.mocked(idbSet).mockClear()
+  })
+
+  it('seeds new skills with an unscheduled review state', () => {
+    expect(useProgress.getState().progress.skills['read-numbers']).toMatchObject({
+      strength: 0,
+      nextReview: null,
+      reviewAttempts: 0,
+    })
+  })
+
+  it('persists a lesson schedule in the same local mutation', () => {
+    const before = useProgress.getState().progress
+    const today = todayKey()
+
+    const outcome = useProgress.getState().completeLesson('read-numbers')
+    const after = useProgress.getState().progress
+    const skillAfter = after.skills['read-numbers']
+
+    expect(outcome.xpGained).toBe(20)
+    expect(outcome.coinsGained).toBe(15)
+    expect(skillAfter).toMatchObject({
+      mastery: 1,
+      lastPracticed: today,
+      strength: 1,
+      nextReview: addDays(today, 1),
+      reviewAttempts: 0,
+    })
+    expect(after.updatedAt).toBeGreaterThan(before.updatedAt)
+    expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(1)
+  })
+
+  it('refreshes a stronger schedule without changing mastery outcomes', () => {
+    useProgress.getState().replaceProgress(
+      progressWith({
+        'read-numbers': skill({
+          mastery: 2,
+          strength: 4,
+          nextReview: null,
+          reviewAttempts: 7,
+        }),
+      }),
+    )
+    vi.mocked(idbSet).mockClear()
+
+    const outcome = useProgress.getState().completeLesson('read-numbers')
+    const after = useProgress.getState().progress
+
+    expect(outcome.leveledUp).toBe(true)
+    expect(after.skills['read-numbers']).toMatchObject({
+      mastery: 3,
+      strength: 4,
+      nextReview: addDays(todayKey(), 14),
+      reviewAttempts: 7,
+    })
+    expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(1)
+  })
+
+  it('keeps legacy skill fields opaque while deriving defaults after file restore', () => {
+    const legacySkill = {
+      mastery: 3,
+      lastPracticed: '2026-08-31',
+      attempts: 30,
+      correct: 25,
+      legacyField: 'keep-me',
+    }
+    const legacy = {
+      ...progressWith({}),
+      skills: { ...progressWith({}).skills, 'read-numbers': legacySkill },
+    } as unknown as Progress
+
+    useProgress.getState().replaceProgress(legacy)
+    const restored = useProgress.getState().progress.skills['read-numbers']
+
+    expect(restored).toEqual(legacySkill)
+    expect(readReviewState(restored)).toEqual({
+      strength: 3,
+      nextReview: '2026-09-07',
+      reviewAttempts: 0,
+    })
+    expect((restored as SkillProgress & { legacyField: string }).legacyField).toBe('keep-me')
+
+    const beforeRead = { ...restored }
+    expect(readReviewState(restored)).toEqual(readReviewState(restored))
+    expect(restored).toEqual(beforeRead)
+  })
+
+  it('adopts scheduled and unknown skill fields without changing the server version', () => {
+    const scheduledSkill = {
+      ...skill({
+        mastery: 3,
+        strength: 2,
+        nextReview: '2026-09-03',
+        reviewAttempts: 4,
+      }),
+      remoteField: { source: 'server' },
+    }
+    const remote = {
+      ...progressWith({}),
+      updatedAt: 900,
+      skills: { ...progressWith({}).skills, 'read-numbers': scheduledSkill },
+    } as unknown as Progress
+
+    useProgress.getState().adoptRemote(remote, 4321)
+    const adopted = useProgress.getState().progress
+
+    expect(adopted.updatedAt).toBe(4321)
+    expect(adopted.skills['read-numbers']).toEqual(scheduledSkill)
+    expect(readReviewState(adopted.skills['read-numbers'])).toEqual({
+      strength: 2,
+      nextReview: '2026-09-03',
+      reviewAttempts: 4,
+    })
   })
 })
 

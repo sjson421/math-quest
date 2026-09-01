@@ -8,14 +8,15 @@ import {
   unlockPrerequisites,
 } from '../curriculum'
 import { crossedStageCheckpoint, type StageCheckpoint } from '../lib/checkpoint'
+import { scheduleAfterLesson } from '../lib/review'
 import { crossedPinTier, pinTier, type PinTier, type PinUpgrade } from '../lib/pin'
+import { todayKey } from '../lib/calendar'
 import {
   advanceStreak,
   coinsFor,
   crossedStreakMilestone,
   MAX_STREAK_FREEZES,
   openStreak,
-  todayKey,
   type StreakMilestone,
 } from '../lib/streak'
 import { DEFAULT_CHARACTER, type CosmeticSlot, type Equipped, type Placed, type RoomSlot } from '../cosmetics'
@@ -33,6 +34,9 @@ export type SkillProgress = {
   lastPracticed: string | null
   attempts: number
   correct: number
+  strength?: number
+  nextReview?: string | null
+  reviewAttempts?: number
   /** Presentation state only; it never contributes to learning evidence. */
   introSeen?: boolean
 }
@@ -106,9 +110,8 @@ export type LessonOutcome = {
 }
 
 /**
- * The calendar day and the gap between two of them now live in `lib/streak.ts`,
- * which is what defines what a day boundary means. Re-exported because the
- * daily-goal counter below is the other thing that turns on it.
+ * Re-exported because the daily-goal counter below is one of the store's
+ * consumers, while calendar arithmetic belongs in its pure shared module.
  */
 export { todayKey }
 
@@ -118,6 +121,9 @@ const emptySkill = (): SkillProgress => ({
   attempts: 0,
   correct: 0,
   introSeen: false,
+  strength: 0,
+  nextReview: null,
+  reviewAttempts: 0,
 })
 
 /**
@@ -327,6 +333,18 @@ export const useProgress = create<Store>((set, get) => {
         after: { streakCount },
       })
 
+      const mastery = Math.min(MAX_MASTERY, skill.mastery + 1)
+      const review = scheduleAfterLesson(
+        { ...skill, mastery, lastPracticed: today },
+        today,
+      )
+      const nextSkill = {
+        ...skill,
+        mastery,
+        lastPracticed: today,
+        ...review,
+      }
+
       const next = {
         ...p,
         xp: p.xp + xpGained,
@@ -337,11 +355,7 @@ export const useProgress = create<Store>((set, get) => {
         todayXp: (p.todayDate === today ? p.todayXp : 0) + xpGained,
         skills: {
           ...p.skills,
-          [skillId]: {
-            ...skill,
-            mastery: Math.min(MAX_MASTERY, skill.mastery + 1),
-            lastPracticed: today,
-          },
+          [skillId]: nextSkill,
         },
       }
 

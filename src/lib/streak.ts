@@ -7,9 +7,8 @@
  * the break lived in `hydrate()` and the increment in `completeLesson()`, and
  * neither had a single test.
  *
- * **The calendar day is defined here rather than in the store**, because the
- * streak is the thing that gives a day boundary its meaning. `store/progress.ts`
- * imports both helpers back for the daily-goal counter; nothing else reads them.
+ * Local calendar helpers live in `calendar.ts`, shared by streaks and review
+ * scheduling. This module owns only streak policy.
  *
  * ## What is stored and what is derived
  *
@@ -51,32 +50,7 @@ type StreakDays = {
 
 type StreakRecord = StreakDays & { streakFreezes: number }
 
-/** Local calendar day. Deliberately not UTC — streaks should follow the learner. */
-export function todayKey(date = new Date()): string {
-  const y = date.getFullYear()
-  const m = String(date.getMonth() + 1).padStart(2, '0')
-  const d = String(date.getDate()).padStart(2, '0')
-  return `${y}-${m}-${d}`
-}
-
-export function daysBetween(from: string, to: string): number {
-  const a = new Date(`${from}T00:00:00`)
-  const b = new Date(`${to}T00:00:00`)
-  return Math.round((b.getTime() - a.getTime()) / 86_400_000)
-}
-
-/**
- * The day before `day`, in the same local-calendar terms.
- *
- * Built by subtracting from a local midnight rather than by arithmetic on the
- * string, so the day either side of a daylight-saving boundary is the day a
- * person would name. `Date` normalises a zeroth of the month on its own.
- */
-export function dayBefore(day: string): string {
-  const date = new Date(`${day}T00:00:00`)
-  date.setDate(date.getDate() - 1)
-  return todayKey(date)
-}
+import { dayBefore, daysBetween, isDayKey } from './calendar'
 
 /* ------------------------------------------------------------------------- *
  * Freezes
@@ -136,7 +110,10 @@ export function openStreak(record: StreakRecord, today: string): StreakOpening {
   const { streakCount, lastActiveDay, streakFreezes } = record
   const unchanged = { streakCount, lastActiveDay, streakFreezes, spent: 0 }
 
-  if (!lastActiveDay) return unchanged
+  if (lastActiveDay === null) return unchanged
+  if (!isDayKey(lastActiveDay)) {
+    return { streakCount: 0, lastActiveDay, streakFreezes, spent: 0 }
+  }
 
   const gap = daysBetween(lastActiveDay, today)
   if (gap <= 1) return unchanged
@@ -168,7 +145,9 @@ export function openStreak(record: StreakRecord, today: string): StreakOpening {
 export function advanceStreak(record: StreakDays, today: string): number {
   if (record.lastActiveDay === today) return record.streakCount
 
-  const gap = record.lastActiveDay ? daysBetween(record.lastActiveDay, today) : Infinity
+  const gap = record.lastActiveDay && isDayKey(record.lastActiveDay)
+    ? daysBetween(record.lastActiveDay, today)
+    : Infinity
 
   return gap === 1 ? record.streakCount + 1 : 1
 }

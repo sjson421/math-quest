@@ -17,48 +17,17 @@ import {
   canHoldFreeze,
   coinsFor,
   crossedStreakMilestone,
-  dayBefore,
-  daysBetween,
   MAX_STREAK_FREEZES,
   openStreak,
   STREAK_MILESTONES,
   streakAtRisk,
   streakMultiplier,
-  todayKey,
 } from './streak'
 
 const record = (streakCount: number, lastActiveDay: string | null, streakFreezes = 0) => ({
   streakCount,
   lastActiveDay,
   streakFreezes,
-})
-
-describe('calendar days', () => {
-  it('names a local day, not a UTC one', () => {
-    // 31 December 2025, late evening local. UTC has already rolled over in any
-    // timezone east of the meridian; the learner's streak has not.
-    expect(todayKey(new Date(2025, 11, 31, 23, 30))).toBe('2025-12-31')
-  })
-
-  it('counts whole days between two keys', () => {
-    expect(daysBetween('2026-03-01', '2026-03-01')).toBe(0)
-    expect(daysBetween('2026-03-01', '2026-03-02')).toBe(1)
-    expect(daysBetween('2026-03-01', '2026-03-08')).toBe(7)
-  })
-
-  it('steps back over a month and a year boundary', () => {
-    expect(dayBefore('2026-03-01')).toBe('2026-02-28')
-    expect(dayBefore('2026-01-01')).toBe('2025-12-31')
-  })
-
-  it('steps back across a spring-forward boundary without losing the day', () => {
-    // 8 March 2026 is the US DST switch. A naive `-86400000` lands at 23:00 on
-    // the 7th, which still keys correctly — but on the autumn switch the same
-    // arithmetic lands at 01:00 and the day before that is a day too far. Both
-    // directions are checked here because only one of them is ever wrong.
-    expect(dayBefore('2026-03-08')).toBe('2026-03-07')
-    expect(dayBefore('2026-11-02')).toBe('2026-11-01')
-  })
 })
 
 describe('opening the app', () => {
@@ -133,6 +102,15 @@ describe('opening the app', () => {
 
     expect(opened.streakCount, 'the streak survives a clock change').toBe(4)
     expect(opened.spent).toBe(0)
+  })
+
+  it('breaks a streak with an empty last-active day', () => {
+    expect(openStreak(record(4, '', 1), '2026-03-10')).toEqual({
+      streakCount: 0,
+      lastActiveDay: '',
+      streakFreezes: 1,
+      spent: 0,
+    })
   })
 })
 

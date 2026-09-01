@@ -1200,7 +1200,7 @@ shows before a lesson's first problem.
       Review lessons, per-skill strength, and the stats surface. Ordered before skip-ahead
       because it is what makes skip-ahead safe.
 
-      **27a · Strength and the schedule.** New fields on `SkillProgress` — strength, when a skill
+      **27a · Strength and the schedule — shipped 2026-09-01.** New fields on `SkillProgress` — strength, when a skill
       is next due, how many review attempts it has taken — and a pure scheduler beside them, in
       `lib/` rather than the store, the way `checkpoint.ts` and `lesson.ts` already are. Two
       things to know before writing them: `reconcile()` merges a stored skill **per object**, so

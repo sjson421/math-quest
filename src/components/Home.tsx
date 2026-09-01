@@ -2,13 +2,13 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { characterOf } from '../cosmetics'
 import { course, courseStageById, courseStageByUnitId, courseUnitById } from '../curriculum'
+import { todayKey } from '../lib/calendar'
 import { tap } from '../lib/haptics'
 import { useSound } from '../lib/sound'
 import {
   nextStreakMilestone,
   streakAtRisk,
   streakMultiplier,
-  todayKey,
 } from '../lib/streak'
 import { currentPinTier, isUnlocked, useProgress } from '../store/progress'
 import { Room } from './Room'
