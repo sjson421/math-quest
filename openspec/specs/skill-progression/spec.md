@@ -213,6 +213,12 @@ can be *started*, so a learner whose skill is re-locked keeps a mastery level th
 longer practise or raise. Equally, no re-locking rule SHALL ever reduce a mastery level: a
 graph change adjusts what is open, never what has been earned.
 
+Exactly one thing SHALL be able to reduce a mastery level: the learner taking back a block
+they marked as already known, and then only for the skills that skip itself granted. That is
+not a re-locking rule and not a system decision — it is the learner withdrawing a claim they
+made, and it SHALL never reach a mastery level the learner earned by practice. Any other
+reduction of a stored mastery level SHALL be treated as a defect.
+
 #### Scenario: Tightened prerequisites do not strand a learner
 
 - **WHEN** a skill's prerequisites become stricter than they were when the learner practised it
@@ -248,6 +254,15 @@ graph change adjusts what is open, never what has been earned.
 
 - **WHEN** a progress record holds mastery above 0 for a skill with no recorded attempts
 - **THEN** that skill counts as practised and stays unlocked
+
+#### Scenario: Only a withdrawn skip reduces mastery
+
+- **WHEN** a learner takes back a block they had marked as already known
+- **THEN** the skills that skip granted return to the mastery each held before the mark, which
+  is 0 for a skill the skip found untouched
+- **AND** every skill in that block whose mastery the learner earned by practice keeps it,
+  including one the mark raised from a level they had part-practised
+- **AND** no rule other than this one has reduced a stored mastery level
 
 ### Requirement: Skills are presented in curriculum order
 
