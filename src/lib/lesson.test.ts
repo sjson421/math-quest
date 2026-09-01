@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   advanceCorrect,
   currentProblem,
+  currentSlot,
   INITIAL_PACING,
   difficultyForProblem,
   lessonTarget,
@@ -9,12 +10,14 @@ import {
   recordSessionAttempt,
   requeueMiss,
   startLessonSession,
+  startStandardLessonSession,
+  type LessonSource,
 } from './lesson'
 import { intAnswer } from './answer'
-import type { Difficulty, Problem } from './types'
+import type { Difficulty, Problem, SkillGenerator } from './types'
 
-const problem = (label: string, difficulty: Difficulty): Problem => ({
-  skillId: 'synthetic',
+const problem = (label: string, difficulty: Difficulty, skillId = 'synthetic'): Problem => ({
+  skillId,
   prompt: label,
   display: { kind: 'inline', text: label },
   answer: intAnswer(1),
@@ -24,10 +27,25 @@ const problem = (label: string, difficulty: Difficulty): Problem => ({
   difficulty,
 })
 
+const skill = (id: string): SkillGenerator => ({
+  id,
+  name: id,
+  blurb: id,
+  teachingLine: '',
+  generate: (_rng, difficulty) => problem(id, difficulty, id),
+})
+
+const synthetic = skill('synthetic')
+
+const source = (id: string, baseDifficulty: Difficulty): LessonSource => ({
+  skill: skill(id),
+  baseDifficulty,
+})
+
 const labeledFactory = () => {
   const generated: Problem[] = []
-  const make = (difficulty: Difficulty) => {
-    const next = problem(`p${generated.length}`, difficulty)
+  const make = (skill: SkillGenerator, difficulty: Difficulty) => {
+    const next = problem(`p${generated.length}`, difficulty, skill.id)
     generated.push(next)
     return next
   }
@@ -91,7 +109,7 @@ describe('recordPacing', () => {
 describe('lesson queue', () => {
   it('generates an unseen problem only when it becomes current', () => {
     const { generated, make } = labeledFactory()
-    const started = startLessonSession(5, 4, make)
+    const started = startStandardLessonSession(synthetic, 5, 4, make)
 
     expect(generated.map((item) => item.prompt)).toEqual(['p0'])
     expect(started.queue).toHaveLength(5)
@@ -105,7 +123,7 @@ describe('lesson queue', () => {
 
   it('returns a miss after three intervening problem positions', () => {
     const { make } = labeledFactory()
-    const missed = startLessonSession(5, 3, make)
+    const missed = startStandardLessonSession(synthetic, 5, 3, make)
     const original = currentProblem(missed)
     let session = requeueMiss(missed, make)
 
@@ -120,7 +138,7 @@ describe('lesson queue', () => {
 
   it('clamps a late miss to the required positions remaining', () => {
     const { make } = labeledFactory()
-    const started = startLessonSession(2, 2, make)
+    const started = startStandardLessonSession(synthetic, 2, 2, make)
     const original = currentProblem(started)
     const afterMiss = requeueMiss(started, make)
     const afterIntervening = advanceCorrect(afterMiss, make)
@@ -133,7 +151,7 @@ describe('lesson queue', () => {
 
   it('keeps multiple misses in the order they occurred', () => {
     const { make } = labeledFactory()
-    const started = startLessonSession(5, 2, make)
+    const started = startStandardLessonSession(synthetic, 5, 2, make)
     const firstMiss = currentProblem(started)
     let session = requeueMiss(started, make)
     const secondMiss = currentProblem(session)
@@ -150,7 +168,7 @@ describe('lesson queue', () => {
 describe('lesson session integration', () => {
   it('generates at recovery difficulty immediately after the third miss', () => {
     const { generated, make } = labeledFactory()
-    let session = startLessonSession(5, 4, make)
+    let session = startStandardLessonSession(synthetic, 5, 4, make)
     const warmupRetry = currentProblem(session)
 
     for (let miss = 0; miss < 3; miss += 1) {
@@ -170,7 +188,7 @@ describe('lesson session integration', () => {
 
   it('cannot complete while a late retry remains', () => {
     const { make } = labeledFactory()
-    let session = startLessonSession(2, 3, make)
+    let session = startStandardLessonSession(synthetic, 2, 3, make)
     const retry = currentProblem(session)
     session = recordSessionAttempt(session, 'incorrect')
     session = requeueMiss(session, make)
@@ -182,5 +200,66 @@ describe('lesson session integration', () => {
 
     session = recordSessionAttempt(beforeRetry.session, 'correct')
     expect(advanceCorrect(session, make).complete).toBe(true)
+  })
+
+  it('keeps mixed sources explicit and materializes each skill lazily', () => {
+    const { generated, make } = labeledFactory()
+    const first = source('first', 4)
+    const second = source('second', 2)
+    const started = startLessonSession([first, second], make)
+
+    expect(started.targetCorrect).toBe(2)
+    expect(currentSlot(started).source).toBe(first)
+    expect(currentProblem(started).skillId).toBe('first')
+    expect(started.queue[1]).toEqual({ source: second, problem: null })
+    expect(generated.map(({ skillId, difficulty }) => [skillId, difficulty])).toEqual([
+      ['first', 3],
+    ])
+
+    const next = advanceCorrect(started, make)
+    expect(currentSlot(next.session).source).toBe(second)
+    expect(currentProblem(next.session).skillId).toBe('second')
+    expect(currentProblem(next.session).difficulty).toBe(2)
+  })
+
+  it('keeps recovery across skills and lowers later skills from their own base', () => {
+    const { generated, make } = labeledFactory()
+    const sources = [source('first', 4), source('second', 5), source('third', 3), source('fourth', 2)]
+    let session = startLessonSession(sources, make)
+
+    for (let miss = 0; miss < 3; miss += 1) {
+      session = recordSessionAttempt(session, 'incorrect')
+      session = requeueMiss(session, make)
+    }
+
+    expect(generated.map(({ skillId, difficulty }) => [skillId, difficulty])).toEqual([
+      ['first', 3],
+      ['second', 5],
+      ['third', 3],
+      ['fourth', 1],
+    ])
+    expect(session.pacing).toEqual({ consecutiveMisses: 3, recovering: true })
+  })
+
+  it('keeps a mixed retry tied to its original source and problem', () => {
+    const { make } = labeledFactory()
+    const first = source('first', 4)
+    const second = source('second', 2)
+    const started = startLessonSession([first, second], make)
+    const missed = currentProblem(started)
+    let session = requeueMiss(started, make)
+
+    session = advanceCorrect(session, make).session
+
+    expect(currentSlot(session).source).toBe(first)
+    expect(currentProblem(session)).toBe(missed)
+    expect(currentProblem(session).difficulty).toBe(3)
+  })
+
+  it('keeps quick and standard targets in standard sessions', () => {
+    const { make } = labeledFactory()
+
+    expect(startStandardLessonSession(synthetic, lessonTarget(true), 1, make).queue).toHaveLength(5)
+    expect(startStandardLessonSession(synthetic, lessonTarget(false), 1, make).queue).toHaveLength(10)
   })
 })

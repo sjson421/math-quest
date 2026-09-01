@@ -9,11 +9,14 @@ import { celebrate, tap } from '../lib/haptics'
 import {
   advanceCorrect,
   currentProblem,
+  currentSlot,
   lessonTarget,
   recordSessionAttempt,
   requeueMiss,
   startLessonSession,
+  startStandardLessonSession,
   type LessonSession,
+  type ProblemFactory,
 } from '../lib/lesson'
 import { success } from '../lib/sound'
 import { createSubmissionGate } from '../lib/submission-gate'
@@ -43,40 +46,86 @@ import { SkillIntro, type SkillIntroMode } from './SkillIntro'
  */
 type Feedback = { status: CheckResult['status']; misconception?: Misconception } | null
 
-/**
- * The lesson loop.
- *
- * A lesson ends after its manifest-selected correct target, with no hearts or
- * lives. A missed problem is pushed back into the lazy queue, so the session
- * cannot finish without eventually getting it right.
- */
-export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () => void }) {
-  const progress = useProgress((s) => s.progress)
-  const recordAttempt = useProgress((s) => s.recordAttempt)
-  const markIntroSeen = useProgress((s) => s.markIntroSeen)
-  const completeLesson = useProgress((s) => s.completeLesson)
-
-  const baseDifficulty = difficultyFor(progress.skills[skill.id]?.mastery ?? 0)
-  const targetCorrect = lessonTarget(skillById.get(skill.id)?.quick)
-  const introNeeded = Boolean(skill.teachingLine) && progress.skills[skill.id]?.introSeen !== true
-
+function useProblemFactory(): ProblemFactory {
   // The lazy initializer runs once, so the seed stream is fresh per lesson and
   // remains stable across renders without reading mutable refs during render.
-  const [makeProblem] = useState(() => {
+  const [makeProblem] = useState<ProblemFactory>(() => {
     const seedBase = Math.floor(Math.random() * 1_000_000)
     let nextSeed = 0
-    return (difficulty: Difficulty) =>
+    return (skill: SkillGenerator, difficulty: Difficulty) =>
       generateProblem(skill, seedBase + nextSeed++ * 7919, difficulty)
   })
 
+  return makeProblem
+}
+
+type PracticeMode =
+  | {
+      kind: 'standard'
+      skill: SkillGenerator
+    }
+  | {
+      kind: 'review'
+      skills: readonly SkillGenerator[]
+    }
+
+export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () => void }) {
+  return <PracticeLoop mode={{ kind: 'standard', skill }} onExit={onExit} />
+}
+
+/** Review receives its already-selected generator snapshot from its caller. */
+export function ReviewLesson({
+  skills,
+  onExit,
+}: {
+  skills: readonly SkillGenerator[]
+  onExit: () => void
+}) {
+  return <PracticeLoop mode={{ kind: 'review', skills }} onExit={onExit} />
+}
+
+function PracticeLoop({
+  mode,
+  onExit,
+}: {
+  mode: PracticeMode
+  onExit: () => void
+}) {
+  const progress = useProgress((s) => s.progress)
+  const recordAttempt = useProgress((s) => s.recordAttempt)
+  const recordReviewAttempt = useProgress((s) => s.recordReviewAttempt)
+  const markIntroSeen = useProgress((s) => s.markIntroSeen)
+  const completeLesson = useProgress((s) => s.completeLesson)
+  const completeReviewLesson = useProgress((s) => s.completeReviewLesson)
+  const makeProblem = useProblemFactory()
+  const baseDifficulty =
+    mode.kind === 'standard' ? difficultyFor(progress.skills[mode.skill.id]?.mastery ?? 0) : 1
+  const targetCorrect =
+    mode.kind === 'standard' ? lessonTarget(skillById.get(mode.skill.id)?.quick) : mode.skills.length
+  const introNeeded =
+    mode.kind === 'standard' &&
+    Boolean(mode.skill.teachingLine) &&
+    progress.skills[mode.skill.id]?.introSeen !== true
   const [introMode, setIntroMode] = useState<SkillIntroMode | null>(() =>
     introNeeded ? 'automatic' : null,
   )
   const [introProblem, setIntroProblem] = useState<Problem | null>(() =>
-    introNeeded ? generateProblem(skill, 1, 1) : null,
+    introNeeded && mode.kind === 'standard'
+      ? generateProblem(mode.skill, 1, 1)
+      : null,
   )
   const [session, setSession] = useState<LessonSession | null>(() =>
-    introNeeded ? null : startLessonSession(targetCorrect, baseDifficulty, makeProblem),
+    mode.kind === 'standard'
+      ? introNeeded
+        ? null
+        : startStandardLessonSession(mode.skill, targetCorrect, baseDifficulty, makeProblem)
+      : startLessonSession(
+          mode.skills.map((skill) => ({
+            skill,
+            baseDifficulty: difficultyFor(progress.skills[skill.id]?.mastery ?? 0),
+          })),
+          makeProblem,
+        ),
   )
   const [entry, setEntry] = useState('')
   const [feedback, setFeedback] = useState<Feedback>(null)
@@ -98,27 +147,23 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
    */
   const unfinished = response?.keepsEntry === true
 
-  if (finished) {
-    return <LessonComplete skill={skill} outcome={finished} onExit={onExit} />
-  }
-
   const startPractice = () => {
-    if (introMode !== 'automatic') return
-    markIntroSeen(skill.id)
-    setSession(startLessonSession(targetCorrect, baseDifficulty, makeProblem))
+    if (mode.kind !== 'standard' || introMode !== 'automatic') return
+    markIntroSeen(mode.skill.id)
+    setSession(startStandardLessonSession(mode.skill, targetCorrect, baseDifficulty, makeProblem))
     setIntroMode(null)
   }
 
   const reviewIntro = () => {
-    if (!skill.teachingLine || feedback) return
-    if (!introProblem) setIntroProblem(generateProblem(skill, 1, 1))
+    if (mode.kind !== 'standard' || !mode.skill.teachingLine || feedback) return
+    if (!introProblem) setIntroProblem(generateProblem(mode.skill, 1, 1))
     setIntroMode('review')
   }
 
-  if (introMode && introProblem) {
+  if (introMode && introProblem && mode.kind === 'standard') {
     return (
       <SkillIntro
-        skill={skill}
+        skill={mode.skill}
         problem={introProblem}
         mode={introMode}
         onLeave={onExit}
@@ -128,9 +173,22 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
     )
   }
 
+  if (finished) {
+    return (
+      <LessonComplete
+        skill={mode.kind === 'standard' ? mode.skill : undefined}
+        review={mode.kind === 'review'}
+        outcome={finished}
+        onExit={onExit}
+      />
+    )
+  }
+
   if (!session) throw new Error('Lesson has no intro or session')
 
+  const slot = currentSlot(session)
   const problem = currentProblem(session)
+  const skill = slot.source.skill
   const mascotState: MascotState =
     feedback?.status === 'correct'
       ? 'happy'
@@ -154,7 +212,11 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
     const nextSession = recordSessionAttempt(session, policy.record)
     if (policy.record !== 'none') {
       setSession(nextSession)
-      recordAttempt(skill.id, policy.record === 'correct', misconception?.tag)
+      if (mode.kind === 'review') {
+        recordReviewAttempt(skill.id, policy.record === 'correct', misconception?.tag)
+      } else {
+        recordAttempt(skill.id, policy.record === 'correct', misconception?.tag)
+      }
     } else {
       submissionGate.release()
     }
@@ -171,7 +233,10 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
         const transition = advanceCorrect(nextSession, makeProblem)
         setSession(transition.session)
         if (transition.complete) {
-          const outcome = completeLesson(skill.id)
+          const outcome =
+            mode.kind === 'review'
+              ? completeReviewLesson()
+              : completeLesson(mode.skill.id)
           setFinished(outcome)
         }
         submissionGate.release()
@@ -314,7 +379,7 @@ export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () =>
         <span className="text-sm font-bold text-ink-soft tabular-nums w-12 text-right">
           {session.correctCount}/{session.targetCorrect}
         </span>
-        {skill.teachingLine && !feedback && (
+        {mode.kind === 'standard' && mode.skill.teachingLine && !feedback && (
           <button
             type="button"
             onClick={reviewIntro}
@@ -458,16 +523,18 @@ const NEXT_VIEW: Record<
   'show-streak-milestone': 'streak-milestone',
 }
 
-function LessonComplete({
+export function LessonComplete({
   skill,
+  review = false,
   outcome,
   onExit,
 }: {
-  skill: SkillGenerator
+  skill?: SkillGenerator
+  review?: boolean
   outcome: LessonOutcome
   onExit: () => void
 }) {
-  const mastery = useProgress((s) => s.progress.skills[skill.id]?.mastery ?? 0)
+  const mastery = useProgress((s) => (skill ? s.progress.skills[skill.id]?.mastery ?? 0 : 0))
   const character = useProgress((s) => s.progress.character)
   const equipped = useProgress((s) => s.progress.equipped)
   // The tier already earned. The upgrade screen draws the *new* one from the
@@ -552,10 +619,14 @@ function LessonComplete({
       />
 
       <div>
-        <h2 className="text-3xl font-bold">Lesson complete!</h2>
-        <p className="text-ink-soft mt-1">
-          {skill.name} — level {mastery}
-        </p>
+        <h2 className="text-3xl font-bold">{review ? 'Review complete!' : 'Lesson complete!'}</h2>
+        {review ? (
+          <p className="text-ink-soft mt-1">Your skills are ready for what comes next.</p>
+        ) : (
+          <p className="text-ink-soft mt-1">
+            {skill?.name} — level {mastery}
+          </p>
+        )}
       </div>
 
       <div className="flex gap-3">

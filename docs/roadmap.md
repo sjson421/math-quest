@@ -1210,12 +1210,13 @@ shows before a lesson's first problem.
       round trip needs no change; what needs a test is today's stored record surviving the new
       fields.
 
-      **27b · The review lesson.** `lesson.ts` builds each queue slot from a factory taking only
-      a difficulty, so a session is one skill by construction. A review lesson is many: a slot
-      has to carry the skill it belongs to, and `recordAttempt` — already keyed by skill id —
-      gets called per slot. **This is the increment two later items wait on.** Item 28's
-      check-first sampling and Stage H's mixed reviews are this mechanism with different
-      selection, so neither should grow its own.
+      **27b · The review lesson — shipped 2026-09-01.** `lesson.ts` now carries each queue
+      slot's generator and base difficulty, so standard lessons and mixed review lessons share
+      one lazy practice loop. Review selection is bounded and oldest-first; each recorded slot
+      answer updates its skill's aggregate and recall state in one local write, and completion
+      pays the repeat-lesson reward once. **This is the increment two later items wait on.**
+      Item 28's check-first sampling and Stage H's mixed reviews are this mechanism with
+      different selection, so neither should grow its own.
 
       **27c · Where it is seen.** A review entry point that appears only when something is due,
       per-skill strength on the skill tree, and the "you keep doing X" insight that the store's

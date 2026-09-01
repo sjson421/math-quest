@@ -1,16 +1,22 @@
 import { addDays, daysBetween, isDayKey } from './calendar'
+import type { SkillGenerator } from './types'
 
 /**
  * Review fields are optional in stored skills because older progress blobs do
  * not carry them. The scheduler reads this structural shape so it stays pure
  * and independent of the store that persists it.
  */
-type ReviewSkill = {
+export type ReviewSkill = {
   mastery: number
   lastPracticed: string | null
   strength?: number
   nextReview?: string | null
   reviewAttempts?: number
+}
+
+export type ReviewCandidate = {
+  skill: SkillGenerator
+  progress: ReviewSkill
 }
 
 export type ReviewState = {
@@ -21,6 +27,7 @@ export type ReviewState = {
 
 /** Days between a review and its next return, indexed by strength 0 through 5. */
 export const REVIEW_INTERVALS = [1, 1, 3, 7, 14, 30] as const
+export const REVIEW_LESSON_LIMIT = 10
 
 const MAX_STRENGTH = REVIEW_INTERVALS.length - 1
 const MAX_REVIEW_ATTEMPTS = Number.MAX_SAFE_INTEGER
@@ -111,4 +118,30 @@ export function isReviewDue(
   today: string,
 ): boolean {
   return isDayKey(state.nextReview) && isDayKey(today) && daysBetween(state.nextReview, today) >= 0
+}
+
+/** Pick one deterministic, bounded source snapshot for a review lesson. */
+export function selectReviewSkills(
+  candidates: readonly ReviewCandidate[],
+  today: string,
+): SkillGenerator[] {
+  const seen = new Set<string>()
+  const due = candidates.flatMap((candidate, index) => {
+    if (seen.has(candidate.skill.id)) return []
+    seen.add(candidate.skill.id)
+
+    const review = readReviewState(candidate.progress)
+    if (!isReviewDue(review, today)) return []
+
+    return [{ candidate, nextReview: review.nextReview!, index }]
+  })
+
+  return due
+    .toSorted((left, right) =>
+      left.nextReview === right.nextReview
+        ? left.index - right.index
+        : left.nextReview.localeCompare(right.nextReview),
+    )
+    .slice(0, REVIEW_LESSON_LIMIT)
+    .map(({ candidate }) => candidate.skill)
 }

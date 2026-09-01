@@ -5,7 +5,7 @@ import type { KeypadRules } from '../lib/keypad'
 import { rational } from '../lib/rational'
 import { encodeRootPairEntry } from '../lib/root-pair'
 import type { Choice, Difficulty, SkillGenerator } from '../lib/types'
-import { Lesson } from './Lesson'
+import { Lesson, LessonComplete, ReviewLesson } from './Lesson'
 
 /**
  * The lesson's first paint, rendered to a string in the node environment.
@@ -259,6 +259,32 @@ const rootPairSkill: SkillGenerator = {
 const has = (html: string, label: string) => html.includes(`aria-label="${label}"`)
 
 describe('Lesson', () => {
+  it('starts a review from selected generators with mixed progress and first input mode', () => {
+    const html = renderToStaticMarkup(
+      <ReviewLesson skills={[numberLineSkill, choiceSkill]} onExit={() => {}} />,
+    )
+
+    expect(html).toContain('0/2')
+    expect(html).toContain('Where does −3 sit?')
+    expect(html).toContain('aria-label="Number line"')
+    expect(html).not.toContain('Review intro')
+  })
+
+  it('renders review completion copy and one reward surface', () => {
+    const html = renderToStaticMarkup(
+      <LessonComplete
+        review
+        outcome={{ xpGained: 20, coinsGained: 10, leveledUp: false }}
+        onExit={() => {}}
+      />,
+    )
+
+    expect(html).toContain('Review complete!')
+    expect(html).toContain('+20 XP')
+    expect(html).toContain('+10')
+    expect(html).not.toContain('level')
+  })
+
   it('routes a root pair to one dedicated control with no private or fallback surface', () => {
     const html = renderToStaticMarkup(<Lesson skill={rootPairSkill} onExit={() => {}} />)
     expect(html.match(/data-root-pair-input/g)).toHaveLength(1)

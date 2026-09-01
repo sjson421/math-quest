@@ -676,6 +676,147 @@ describe('review state in progress', () => {
       reviewAttempts: 4,
     })
   })
+
+  it('records a correct review only on its slot skill in one write', () => {
+    const today = todayKey()
+    const beforeProgress = progressWith({
+      'read-numbers': {
+        ...skill({
+          mastery: 3,
+          lastPracticed: '2026-08-20',
+          attempts: 10,
+          correct: 7,
+          strength: 2,
+          nextReview: today,
+          reviewAttempts: 4,
+          introSeen: true,
+        }),
+        unknownField: 'keep-me',
+      } as Partial<SkillProgress>,
+      'add-facts': skill({ mastery: 1, attempts: 4, correct: 3 }),
+    })
+    useProgress.getState().replaceProgress(beforeProgress)
+    vi.mocked(idbSet).mockClear()
+
+    const before = useProgress.getState().progress
+    useProgress.getState().recordReviewAttempt('read-numbers', true)
+    const after = useProgress.getState().progress
+
+    expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(1)
+    expect(after.updatedAt).toBeGreaterThan(before.updatedAt)
+    expect(after.skills['read-numbers']).toMatchObject({
+      mastery: 3,
+      lastPracticed: '2026-08-20',
+      attempts: 11,
+      correct: 8,
+      strength: 3,
+      nextReview: addDays(today, 7),
+      reviewAttempts: 5,
+      introSeen: true,
+      unknownField: 'keep-me',
+    })
+    expect(after.skills['add-facts']).toEqual(before.skills['add-facts'])
+    expect(after.xp).toBe(before.xp)
+    expect(after.coins).toBe(before.coins)
+    expect(after.streakCount).toBe(before.streakCount)
+    expect(after.todayXp).toBe(before.todayXp)
+    expect(isUnlocked('read-numbers', after)).toBe(isUnlocked('read-numbers', before))
+  })
+
+  it('records a diagnosed miss in the skill and progress misconception map', () => {
+    const today = todayKey()
+    useProgress.getState().replaceProgress({
+      ...progressWith({
+        'read-numbers': skill({
+          mastery: 4,
+          attempts: 5,
+          correct: 3,
+          strength: 4,
+          nextReview: today,
+          reviewAttempts: 2,
+        }),
+      }),
+      mistakes: { carry: 2 },
+    })
+    vi.mocked(idbSet).mockClear()
+
+    useProgress.getState().recordReviewAttempt('read-numbers', false, 'carry')
+    const after = useProgress.getState().progress
+
+    expect(after.skills['read-numbers']).toMatchObject({
+      mastery: 4,
+      attempts: 6,
+      correct: 3,
+      strength: 3,
+      nextReview: addDays(today, 7),
+      reviewAttempts: 3,
+    })
+    expect(after.mistakes).toEqual({ carry: 3 })
+    expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(1)
+  })
+
+  it('counts a correct retry as another review result with a new version', () => {
+    const today = todayKey()
+    useProgress.getState().replaceProgress({
+      ...progressWith({
+        'read-numbers': skill({
+          attempts: 5,
+          correct: 3,
+          strength: 1,
+          nextReview: today,
+          reviewAttempts: 2,
+        }),
+      }),
+    })
+    vi.mocked(idbSet).mockClear()
+
+    useProgress.getState().recordReviewAttempt('read-numbers', false, 'place-value')
+    const afterMiss = useProgress.getState().progress
+    useProgress.getState().recordReviewAttempt('read-numbers', true)
+    const afterRetry = useProgress.getState().progress
+
+    expect(afterRetry.skills['read-numbers']).toMatchObject({
+      attempts: 7,
+      correct: 4,
+      strength: 1,
+      nextReview: addDays(today, 1),
+      reviewAttempts: 4,
+    })
+    expect(afterRetry.updatedAt).toBeGreaterThan(afterMiss.updatedAt)
+    expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(2)
+  })
+
+  it('normalizes legacy and remotely restored fields before writing review state', () => {
+    const legacySkill = {
+      mastery: 3,
+      lastPracticed: '2026-08-31',
+      attempts: 8,
+      correct: 6,
+      legacyField: 'keep-me',
+    }
+    const remote = {
+      ...progressWith({}),
+      skills: { ...progressWith({}).skills, 'read-numbers': legacySkill },
+    } as unknown as Progress
+
+    useProgress.getState().adoptRemote(remote, 4321)
+    vi.mocked(idbSet).mockClear()
+    useProgress.getState().recordReviewAttempt('read-numbers', true)
+    const after = useProgress.getState().progress
+    const written = vi.mocked(idbSet).mock.calls[0][1] as Progress
+
+    expect(after.skills['read-numbers']).toMatchObject({
+      mastery: 3,
+      lastPracticed: '2026-08-31',
+      attempts: 9,
+      correct: 7,
+      strength: 4,
+      nextReview: addDays(todayKey(), 14),
+      reviewAttempts: 1,
+      legacyField: 'keep-me',
+    })
+    expect(Object.keys(written).sort()).toEqual(Object.keys(initialProgress()).sort())
+  })
 })
 
 /**
@@ -864,6 +1005,96 @@ describe('what a lesson pays', () => {
 
     expect(useProgress.getState().completeLesson('add-facts-small').streakMilestone)
       .toBeUndefined()
+  })
+
+  it('completes review with repeat rewards once without changing skill progress', () => {
+    const beforeSkill = skill({
+      mastery: 4,
+      attempts: 20,
+      correct: 17,
+      strength: 5,
+      nextReview: todayKey(),
+      reviewAttempts: 9,
+    })
+    startingFrom({
+      xp: 40,
+      coins: 3,
+      streakCount: 7,
+      lastActiveDay: dayBefore(todayKey()),
+      todayXp: 0,
+      skills: { ...progressWith({}).skills, 'add-facts-small': beforeSkill },
+    })
+    vi.mocked(idbSet).mockClear()
+
+    const outcome = useProgress.getState().completeReviewLesson()
+    const after = useProgress.getState().progress
+
+    expect(outcome).toMatchObject({ xpGained: 20, coinsGained: 10, leveledUp: false })
+    expect(outcome.checkpoint).toBeUndefined()
+    expect(outcome.pinUpgrade).toBeUndefined()
+    expect(after.skills['add-facts-small']).toEqual(beforeSkill)
+    expect(after.xp).toBe(60)
+    expect(after.coins).toBe(13)
+    expect(after.streakCount).toBe(8)
+    expect(after.todayXp).toBe(20)
+    expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not let recall strength change review payout', () => {
+    const complete = (strength: number) => {
+      startingFrom({
+        streakCount: 6,
+        lastActiveDay: dayBefore(todayKey()),
+        skills: {
+          ...progressWith({}).skills,
+          'add-facts-small': skill({ strength }),
+        },
+      })
+      return useProgress.getState().completeReviewLesson()
+    }
+
+    expect(complete(0).coinsGained).toBe(10)
+    expect(complete(5).coinsGained).toBe(10)
+  })
+
+  it('advances daily goal and announces a streak milestone once for review', () => {
+    startingFrom({
+      streakCount: 2,
+      lastActiveDay: dayBefore(todayKey()),
+      coins: 0,
+      todayXp: 5,
+    })
+
+    const outcome = useProgress.getState().completeReviewLesson()
+    const after = useProgress.getState().progress
+
+    expect(outcome.streakMilestone).toEqual({ days: 3, coins: 25, index: 1, of: 5 })
+    expect(after.coins).toBe(8 + 25)
+    expect(after.todayXp).toBe(25)
+    expect(after.streakCount).toBe(3)
+    expect(after.skills['add-facts-small'].mastery).toBe(0)
+  })
+
+  it('keeps recorded review evidence without completion rewards when unfinished', () => {
+    startingFrom({
+      xp: 40,
+      coins: 7,
+      streakCount: 4,
+      lastActiveDay: todayKey(),
+      todayXp: 20,
+    })
+    const before = useProgress.getState().progress
+
+    useProgress.getState().recordReviewAttempt('add-facts-small', false, 'fact-recall')
+    const after = useProgress.getState().progress
+
+    expect(after.xp).toBe(before.xp)
+    expect(after.coins).toBe(before.coins)
+    expect(after.todayXp).toBe(before.todayXp)
+    expect(after.streakCount).toBe(before.streakCount)
+    expect(after.skills['add-facts-small'].attempts).toBe(1)
+    expect(after.skills['add-facts-small'].reviewAttempts).toBe(1)
+    expect(after.mistakes).toEqual({ 'fact-recall': 1 })
   })
 })
 

@@ -1,4 +1,4 @@
-import type { Difficulty, Problem } from './types'
+import type { Difficulty, Problem, SkillGenerator } from './types'
 
 export type AttemptRecord = 'correct' | 'incorrect' | 'none'
 
@@ -7,14 +7,23 @@ export type LessonPacing = {
   recovering: boolean
 }
 
-type ProblemFactory = (difficulty: Difficulty) => Problem
+export type ProblemFactory = (skill: SkillGenerator, difficulty: Difficulty) => Problem
+
+export type LessonSource = {
+  skill: SkillGenerator
+  baseDifficulty: Difficulty
+}
+
+export type LessonSlot = {
+  source: LessonSource
+  problem: Problem | null
+}
 
 export type LessonSession = {
   targetCorrect: number
   correctCount: number
-  baseDifficulty: Difficulty
   pacing: LessonPacing
-  queue: Array<Problem | null>
+  queue: LessonSlot[]
 }
 
 export const INITIAL_PACING: LessonPacing = {
@@ -59,39 +68,73 @@ export function recordSessionAttempt(
 }
 
 export function startLessonSession(
+  sources: readonly LessonSource[],
+  makeProblem: ProblemFactory,
+): LessonSession {
+  if (sources.length === 0) throw new Error('Lesson needs at least one source')
+
+  return {
+    targetCorrect: sources.length,
+    correctCount: 0,
+    pacing: INITIAL_PACING,
+    queue: sources.map((source, index) => ({
+      source,
+      problem:
+        index === 0
+          ? makeProblem(
+              source.skill,
+              difficultyForProblem(source.baseDifficulty, 'opening', false),
+            )
+          : null,
+    })),
+  }
+}
+
+export function startStandardLessonSession(
+  skill: SkillGenerator,
   targetCorrect: number,
   baseDifficulty: Difficulty,
   makeProblem: ProblemFactory,
 ): LessonSession {
-  return {
-    targetCorrect,
-    correctCount: 0,
-    baseDifficulty,
-    pacing: INITIAL_PACING,
-    queue: [
-      makeProblem(difficultyForProblem(baseDifficulty, 'opening', false)),
-      ...Array.from({ length: targetCorrect - 1 }, () => null),
-    ],
-  }
+  const source = { skill, baseDifficulty }
+  return startLessonSession(
+    Array.from({ length: targetCorrect }, () => source),
+    makeProblem,
+  )
+}
+
+export function currentSlot(session: LessonSession): LessonSlot {
+  const current = session.queue[0]
+  if (!current) throw new Error('Lesson has no current slot')
+  return current
 }
 
 export function currentProblem(session: LessonSession): Problem {
-  const current = session.queue[0]
-  if (!current) throw new Error('Lesson has no current problem')
-  return current
+  const current = currentSlot(session)
+  if (!current.problem) throw new Error('Lesson has no current problem')
+  return current.problem
 }
 
 function materializeCurrent(
   session: LessonSession,
-  queue: Array<Problem | null>,
+  queue: LessonSlot[],
   makeProblem: ProblemFactory,
-): Array<Problem | null> {
-  if (queue.length === 0 || queue[0]) return queue
+): LessonSlot[] {
+  const current = queue[0]
+  if (!current || current.problem) return queue
 
   const next = [...queue]
-  next[0] = makeProblem(
-    difficultyForProblem(session.baseDifficulty, 'later', session.pacing.recovering),
-  )
+  next[0] = {
+    ...current,
+    problem: makeProblem(
+      current.source.skill,
+      difficultyForProblem(
+        current.source.baseDifficulty,
+        'later',
+        session.pacing.recovering,
+      ),
+    ),
+  }
   return next
 }
 
@@ -117,7 +160,7 @@ export function requeueMiss(
   makeProblem: ProblemFactory,
 ): LessonSession {
   const [missed, ...rest] = session.queue
-  if (!missed) throw new Error('Lesson has no missed problem')
+  if (!missed?.problem) throw new Error('Lesson has no missed problem')
 
   const queue = [...rest]
   queue.splice(Math.min(3, queue.length), 0, missed)

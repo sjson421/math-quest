@@ -2,16 +2,41 @@ import { describe, expect, it } from 'vitest'
 import {
   isReviewDue,
   readReviewState,
+  selectReviewSkills,
   REVIEW_INTERVALS,
   reviewInterval,
   scheduleAfterLesson,
   scheduleAfterReview,
+  type ReviewCandidate,
 } from './review'
+import type { SkillGenerator } from './types'
 
 const skill = (over: Record<string, unknown> = {}) => ({
   mastery: 0,
   lastPracticed: null,
   ...over,
+})
+
+const generator = (id: string): SkillGenerator => ({
+  id,
+  name: id,
+  blurb: id,
+  teachingLine: '',
+  generate: (_rng, difficulty) => ({
+    skillId: id,
+    prompt: id,
+    display: { kind: 'inline', text: id },
+    answer: { kind: 'exact', n: 1, d: 1 },
+    inputMode: 'keypad',
+    hint: id,
+    solution: [{ text: id }],
+    difficulty,
+  }),
+})
+
+const candidate = (id: string, over: Record<string, unknown> = {}): ReviewCandidate => ({
+  skill: generator(id),
+  progress: skill(over),
 })
 
 describe('review state defaults', () => {
@@ -159,5 +184,84 @@ describe('review due status', () => {
     expect(isReviewDue({ nextReview: '2026-09-08' }, '2026-09-07')).toBe(false)
     expect(isReviewDue({ nextReview: '2026-02-30' }, '2026-09-07')).toBe(false)
     expect(isReviewDue({ nextReview: '2026-09-07' }, 'not-a-day')).toBe(false)
+  })
+})
+
+describe('review lesson selection', () => {
+  it('keeps every due skill in a small set and excludes future or unscheduled work', () => {
+    const selected = selectReviewSkills(
+      [
+        candidate('due', { nextReview: '2026-09-07' }),
+        candidate('future', { nextReview: '2026-09-08' }),
+        candidate('unscheduled'),
+      ],
+      '2026-09-07',
+    )
+
+    expect(selected.map(({ id }) => id)).toEqual(['due'])
+  })
+
+  it('takes oldest dates first and caps a backlog at ten skills', () => {
+    const candidates = Array.from({ length: 12 }, (_, index) =>
+      candidate(`skill-${index}`, { nextReview: `2026-08-${String(20 + index).padStart(2, '0')}` }),
+    )
+
+    expect(selectReviewSkills(candidates, '2026-09-07').map(({ id }) => id)).toEqual(
+      Array.from({ length: 10 }, (_, index) => `skill-${index}`),
+    )
+  })
+
+  it('keeps curriculum order for equal dates', () => {
+    const selected = selectReviewSkills(
+      [
+        candidate('third', { nextReview: '2026-09-07' }),
+        candidate('first', { nextReview: '2026-09-01' }),
+        candidate('second', { nextReview: '2026-09-01' }),
+      ],
+      '2026-09-07',
+    )
+
+    expect(selected.map(({ id }) => id)).toEqual(['first', 'second', 'third'])
+  })
+
+  it('normalizes legacy and malformed review fields before selecting', () => {
+    const selected = selectReviewSkills(
+      [
+        candidate('legacy', { mastery: 3, lastPracticed: '2026-08-31' }),
+        candidate('malformed', {
+          mastery: 2,
+          lastPracticed: '2026-09-04',
+          nextReview: 'not-a-day',
+          strength: 'strong',
+        }),
+        candidate('invalid', { nextReview: '2026-02-30' }),
+      ],
+      '2026-09-07',
+    )
+
+    expect(selected.map(({ id }) => id)).toEqual(['legacy', 'malformed'])
+  })
+
+  it('deduplicates without mutating input and returns a stable snapshot', () => {
+    const candidates = [
+      candidate('first', { nextReview: '2026-09-07' }),
+      candidate('first', { nextReview: '2026-09-01' }),
+      candidate('second', { nextReview: '2026-09-07' }),
+    ]
+    const before = candidates.map((item) => ({ ...item, progress: { ...item.progress } }))
+    const selected = selectReviewSkills(candidates, '2026-09-07')
+
+    expect(selected.map(({ id }) => id)).toEqual(['first', 'second'])
+    expect(candidates).toEqual(before)
+
+    const beforeReschedule = selected.map(({ id }) => id)
+    const rescheduled = scheduleAfterReview(
+      readReviewState(candidates[0].progress),
+      true,
+      '2026-09-07',
+    )
+
+    expect(rescheduled.nextReview).toBe('2026-09-08')
+    expect(selected.map(({ id }) => id)).toEqual(beforeReschedule)
   })
 })

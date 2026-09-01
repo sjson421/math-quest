@@ -8,7 +8,7 @@ import {
   unlockPrerequisites,
 } from '../curriculum'
 import { crossedStageCheckpoint, type StageCheckpoint } from '../lib/checkpoint'
-import { scheduleAfterLesson } from '../lib/review'
+import { readReviewState, scheduleAfterLesson, scheduleAfterReview } from '../lib/review'
 import { crossedPinTier, pinTier, type PinTier, type PinUpgrade } from '../lib/pin'
 import { todayKey } from '../lib/calendar'
 import {
@@ -171,8 +171,10 @@ type Store = {
   freezesJustSpent: number
   hydrate: () => Promise<void>
   recordAttempt: (skillId: string, correct: boolean, misconceptionTag?: string) => void
+  recordReviewAttempt: (skillId: string, correct: boolean, misconceptionTag?: string) => void
   markIntroSeen: (skillId: string) => void
   completeLesson: (skillId: string) => LessonOutcome
+  completeReviewLesson: () => LessonOutcome
   buyItem: (id: string) => void
   buyStreakFreeze: () => void
   equipItem: (id: string) => void
@@ -217,6 +219,66 @@ function reconcile(stored: Progress): Progress {
  */
 const isSlotRecord = <T,>(value: unknown): value is T =>
   typeof value === 'object' && value !== null && !Array.isArray(value)
+
+function recordAttemptInProgress(
+  progress: Progress,
+  skillId: string,
+  correct: boolean,
+  misconceptionTag?: string,
+): Progress {
+  const skill = progress.skills[skillId] ?? emptySkill()
+  const mistakes = { ...progress.mistakes }
+  if (!correct && misconceptionTag) {
+    mistakes[misconceptionTag] = (mistakes[misconceptionTag] ?? 0) + 1
+  }
+
+  return {
+    ...progress,
+    mistakes,
+    skills: {
+      ...progress.skills,
+      [skillId]: {
+        ...skill,
+        attempts: skill.attempts + 1,
+        correct: skill.correct + (correct ? 1 : 0),
+      },
+    },
+  }
+}
+
+function completionReward(
+  progress: Progress,
+  baseCoins: number,
+  today: string,
+): {
+  progress: Progress
+  xpGained: number
+  coinsGained: number
+  streakMilestone?: StreakMilestone
+} {
+  const xpGained = 20
+  const streakCount = advanceStreak(progress, today)
+  const coinsGained = coinsFor(baseCoins, streakCount)
+  const streakMilestone = crossedStreakMilestone({
+    before: progress,
+    after: { streakCount },
+  })
+
+  return {
+    progress: {
+      ...progress,
+      xp: progress.xp + xpGained,
+      coins: progress.coins + coinsGained + (streakMilestone?.coins ?? 0),
+      streakCount,
+      lastActiveDay: today,
+      todayDate: today,
+      todayXp: (progress.todayDate === today ? progress.todayXp : 0) + xpGained,
+    },
+    xpGained,
+    coinsGained,
+    streakMilestone,
+  }
+}
 
 export const useProgress = create<Store>((set, get) => {
   /**
@@ -278,21 +340,24 @@ export const useProgress = create<Store>((set, get) => {
 
     recordAttempt(skillId, correct, misconceptionTag) {
       const p = get().progress
-      const skill = p.skills[skillId] ?? emptySkill()
-      const mistakes = { ...p.mistakes }
-      if (!correct && misconceptionTag) {
-        mistakes[misconceptionTag] = (mistakes[misconceptionTag] ?? 0) + 1
-      }
+      persist(recordAttemptInProgress(p, skillId, correct, misconceptionTag))
+    },
+
+    recordReviewAttempt(skillId, correct, misconceptionTag) {
+      const p = get().progress
+      const today = todayKey()
+      const next = recordAttemptInProgress(p, skillId, correct, misconceptionTag)
+      const review = scheduleAfterReview(
+        readReviewState(next.skills[skillId]),
+        correct,
+        today,
+      )
+
       persist({
-        ...p,
-        mistakes,
+        ...next,
         skills: {
-          ...p.skills,
-          [skillId]: {
-            ...skill,
-            attempts: skill.attempts + 1,
-            correct: skill.correct + (correct ? 1 : 0),
-          },
+          ...next.skills,
+          [skillId]: { ...next.skills[skillId], ...review },
         },
       })
     },
@@ -317,21 +382,6 @@ export const useProgress = create<Store>((set, get) => {
       const today = todayKey()
 
       const leveledUp = skill.mastery < MAX_MASTERY
-      const xpGained = 20
-
-      const streakCount = advanceStreak(p, today)
-
-      // Worked out after the streak, and against the run this lesson just
-      // extended rather than the one it started from: the screen says "day 7"
-      // and pays the day-7 rate, which is the only pairing a learner can check.
-      const coinsGained = coinsFor(leveledUp ? 15 : 8, streakCount)
-
-      // Compared on the bare counts, so the milestone is known before the
-      // record it pays into has to be built.
-      const streakMilestone = crossedStreakMilestone({
-        before: p,
-        after: { streakCount },
-      })
 
       const mastery = Math.min(MAX_MASTERY, skill.mastery + 1)
       const review = scheduleAfterLesson(
@@ -347,32 +397,55 @@ export const useProgress = create<Store>((set, get) => {
 
       const next = {
         ...p,
-        xp: p.xp + xpGained,
-        coins: p.coins + coinsGained + (streakMilestone?.coins ?? 0),
-        streakCount,
-        lastActiveDay: today,
-        todayDate: today,
-        todayXp: (p.todayDate === today ? p.todayXp : 0) + xpGained,
         skills: {
           ...p.skills,
           [skillId]: nextSkill,
         },
       }
 
+      // Worked out after the streak, and against the run this lesson just
+      // extended rather than the one it started from: the screen says "day 7"
+      // and pays the day-7 rate, which is the only pairing a learner can check.
+      const reward = completionReward(next, leveledUp ? 15 : 8, today)
+
       const checkpoint = crossedStageCheckpoint({
         skillId,
         before: p,
-        after: next,
+        after: reward.progress,
         locations: manifestIndex,
         states: skillStates,
         threshold: UNLOCK_THRESHOLD,
       })
 
-      const pinUpgrade = crossedPinTier({ before: p, after: next, threshold: UNLOCK_THRESHOLD })
+      const pinUpgrade = crossedPinTier({
+        before: p,
+        after: reward.progress,
+        threshold: UNLOCK_THRESHOLD,
+      })
 
-      persist(next)
+      persist(reward.progress)
 
-      return { xpGained, coinsGained, leveledUp, checkpoint, pinUpgrade, streakMilestone }
+      return {
+        xpGained: reward.xpGained,
+        coinsGained: reward.coinsGained,
+        leveledUp,
+        checkpoint,
+        pinUpgrade,
+        streakMilestone: reward.streakMilestone,
+      }
+    },
+
+    completeReviewLesson() {
+      const today = todayKey()
+      const reward = completionReward(get().progress, 8, today)
+      persist(reward.progress)
+
+      return {
+        xpGained: reward.xpGained,
+        coinsGained: reward.coinsGained,
+        leveledUp: false,
+        streakMilestone: reward.streakMilestone,
+      }
     },
 
     /**
