@@ -80,10 +80,13 @@ Two routes, offered together. **Neither is mandatory.**
 
 ### What a skip actually does
 
-- Sets every skill in the block to **mastery 3**, not 5. That clears the unlock threshold
-  (2) for everything downstream, while leaving headroom to level up later — a skipped
-  skill isn't "finished", just "not needed yet".
-- Records `source: 'tested-out' | 'self-assessed'` on each skill.
+- Raises every playable skill in the block to **mastery 3**, not 5. That clears the unlock
+  threshold (2) for everything downstream, while leaving headroom to level up later — a
+  skipped skill isn't "finished", just "not needed yet". It raises rather than sets: a
+  learner who had already practiced one skill in the block past 3 keeps what they earned.
+- Records `source: 'tested-out' | 'self-assessed'` on the skills it actually raised, so a
+  skill already practiced to that level keeps saying it was practiced — along with the
+  mastery each of those skills held before the skip, which is what a reversal restores.
 - **Enters spaced repetition immediately at low strength.** This is the safety net: a
   skipped skill surfaces in Review lessons sooner than a practiced one.
 
@@ -95,7 +98,10 @@ Self-assessed skips are the risky ones, so the system watches them:
   offer to reopen its unit — framed as *"want to warm this one up?"*, never as a
   correction or a failure.
 - Skipping is reversible at any time from the unit itself: **"Actually, let me practice
-  this"** resets the block to mastery 0.
+  this"** returns exactly the skills the skip granted to the mastery each held before it —
+  0 for a skill the skip found untouched, and the earned level for one it found
+  part-practiced. Anything in the block the learner practiced past 3, or practiced after
+  the skip, is left alone, so changing their mind cannot cost them work they did.
 - A downstream skill failing repeatedly should point back at the skipped prerequisite,
   since that is the actual cause and the learner has no way to know it.
 
@@ -569,14 +575,14 @@ Ship by stage; each stage is independently useful.
   All 195 playable skills through Stage G carry authored intro lines and generated worked
   examples; only Stage H remains staged.
 - **`SkillProgress` gains two fields** for skipping: `source: 'practiced' | 'tested-out' |
-  'self-assessed'` and the existing mastery set to 3. These must survive a **sync round
-  trip**, not just file export — sync is now the routine path, so losing them there would
-  silently re-lock skipped units on the learner's next device. Both directions already
-  carry them: the client pushes the whole progress record and the server stores it as an
-  opaque blob, while `reconcile()` merges stored skills over defaults per skill object
-  rather than per field. Adding a field to `SkillProgress` therefore needs no sync change —
-  but a `reconcile()` that ever starts picking named fields out of a stored skill would
-  break this, and that is the thing to watch.
+  'self-assessed'` and `priorMastery`, the mastery a skip found on each skill it raised.
+  These must survive a **sync round trip**, not just file export — sync is now the routine
+  path, so losing them there would silently re-lock skipped units on the learner's next
+  device. Both directions already carry them: the client pushes the whole progress record
+  and the server stores it as an opaque blob, while `reconcile()` merges stored skills
+  over defaults per skill object rather than per field. Adding a field to `SkillProgress`
+  therefore needs no sync change — but a `reconcile()` that ever starts picking named
+  fields out of a stored skill would break this, and that is the thing to watch.
 - **⚠️ skills get the most misconception-prediction effort** — those are where the
   diagnosis system earns its keep, and where a learner is most likely to quit.
 - **`quick` skills end at 5 correct**, and every hard unit opens with one.

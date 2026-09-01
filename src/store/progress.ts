@@ -21,6 +21,7 @@ import {
 } from '../lib/streak'
 import { DEFAULT_CHARACTER, type CosmeticSlot, type Equipped, type Placed, type RoomSlot } from '../cosmetics'
 import { buy, buyFreeze, equip, unequip } from '../lib/wardrobe'
+import { markKnown, unmark, type DeclaredSource } from '../lib/skip'
 
 const STORAGE_KEY = 'math-quest-progress'
 const SCHEMA_VERSION = 1
@@ -28,6 +29,17 @@ const SCHEMA_VERSION = 1
 /** Mastery a prerequisite must reach before it unlocks what follows. */
 export const UNLOCK_THRESHOLD = 2
 export const MAX_MASTERY = 5
+
+/**
+ * How a skill reached the mastery it holds.
+ *
+ * Stored because it cannot be derived: nothing else in the record tells mastery
+ * a skip granted apart from mastery the learner earned, and taking a skip back
+ * has to reset the first without touching the second. Absent means the record
+ * predates skipping, so its mastery came from lessons — see `readSource()` in
+ * `lib/skip.ts`, which supplies that default at read time rather than here.
+ */
+export type SkillSource = 'practiced' | 'tested-out' | 'self-assessed'
 
 export type SkillProgress = {
   mastery: number
@@ -37,6 +49,19 @@ export type SkillProgress = {
   strength?: number
   nextReview?: string | null
   reviewAttempts?: number
+  source?: SkillSource
+  /**
+   * The mastery this skill held immediately before a block mark raised it, and
+   * 0 once there is no granted level left to restore.
+   *
+   * Stored for the same reason `source` is, and answering the other half of the
+   * question: `source` says a level was granted rather than earned, but not from
+   * where, and attempts and correct counts do not map back to a mastery level. A
+   * mark that raises a part-practised skill would otherwise be irreversible
+   * without cost — see `readPriorMastery()` in `lib/skip.ts`, which defaults and
+   * bounds it at read time rather than here.
+   */
+  priorMastery?: number
   /** Presentation state only; it never contributes to learning evidence. */
   introSeen?: boolean
 }
@@ -124,6 +149,8 @@ const emptySkill = (): SkillProgress => ({
   strength: 0,
   nextReview: null,
   reviewAttempts: 0,
+  source: 'practiced',
+  priorMastery: 0,
 })
 
 /**
@@ -175,6 +202,8 @@ type Store = {
   markIntroSeen: (skillId: string) => void
   completeLesson: (skillId: string) => LessonOutcome
   completeReviewLesson: () => LessonOutcome
+  markBlockKnown: (blockId: string, source: DeclaredSource) => void
+  unmarkBlock: (blockId: string) => void
   buyItem: (id: string) => void
   buyStreakFreeze: () => void
   equipItem: (id: string) => void
@@ -392,6 +421,12 @@ export const useProgress = create<Store>((set, get) => {
         ...skill,
         mastery,
         lastPracticed: today,
+        // A skipped skill the learner has now played is no longer an untested
+        // claim, so the lesson that raises its mastery also converts it. Without
+        // this, taking its block back later would wipe lessons they completed.
+        // The granted level goes with it: there is none left to restore.
+        source: 'practiced' as const,
+        priorMastery: 0,
         ...review,
       }
 
@@ -446,6 +481,23 @@ export const useProgress = create<Store>((set, get) => {
         leveledUp: false,
         streakMilestone: reward.streakMilestone,
       }
+    },
+
+    /**
+     * Declaring a block already known, and withdrawing that declaration. Both
+     * persist only on a non-null result, for the reason the catalogue actions
+     * below do: a mark that raises nothing and a reversal with nothing to
+     * reverse are ordinary taps, and either advancing `updatedAt` would push a
+     * record carrying no change.
+     */
+    markBlockKnown(blockId, source) {
+      const next = markKnown(get().progress, blockId, source)
+      if (next) persist(next)
+    },
+
+    unmarkBlock(blockId) {
+      const next = unmark(get().progress, blockId)
+      if (next) persist(next)
     },
 
     /**

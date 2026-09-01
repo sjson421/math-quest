@@ -14,9 +14,11 @@ import { implementedSkillIds, skillStates } from '../curriculum'
 import { stageA } from '../curriculum/manifest'
 import { addDays, dayBefore, todayKey } from '../lib/calendar'
 import { readReviewState } from '../lib/review'
+import { SKIP_MASTERY, readPriorMastery, readSource } from '../lib/skip'
 import { MAX_STREAK_FREEZES } from '../lib/streak'
 import {
   UNLOCK_THRESHOLD,
+  currentPinTier,
   initialProgress,
   isUnlocked,
   useProgress,
@@ -517,6 +519,198 @@ describe('spending coins', () => {
   })
 })
 
+describe('marking a block known', () => {
+  /** Unit 0's skills, and the first skill sitting behind all of them. */
+  const unit0 = [
+    'read-numbers',
+    'place-value-tens',
+    'place-value-hundreds',
+    'expanded-form',
+    'compare-numbers',
+    'order-numbers',
+    'round-to-10',
+    'round-to-100',
+  ]
+
+  beforeEach(() => {
+    useProgress.getState().reset()
+    vi.mocked(idbSet).mockClear()
+  })
+
+  const masteries = (ids: readonly string[]) =>
+    ids.map((id) => useProgress.getState().progress.skills[id].mastery)
+
+  it('seeds a fresh record with a practised source and no granted level', () => {
+    // Stored rather than left to the read-time default, so a record this build
+    // writes says outright that its mastery was earned.
+    const fresh = initialProgress().skills['read-numbers']
+
+    expect(fresh.source).toBe('practiced')
+    expect(fresh.priorMastery).toBe(0)
+  })
+
+  it('opens the course past a unit the learner says they know', () => {
+    useProgress.getState().markBlockKnown('unit-0', 'self-assessed')
+
+    expect(masteries(unit0)).toEqual(unit0.map(() => SKIP_MASTERY))
+    expect(isUnlocked('add-facts-small', useProgress.getState().progress)).toBe(true)
+  })
+
+  it('advances the version once per action, so sync carries each', () => {
+    const start = useProgress.getState().progress.updatedAt
+
+    useProgress.getState().markBlockKnown('unit-0', 'tested-out')
+    const marked = useProgress.getState().progress.updatedAt
+    expect(marked).toBeGreaterThan(start)
+    expect(vi.mocked(idbSet).mock.calls).toHaveLength(1)
+
+    useProgress.getState().unmarkBlock('unit-0')
+    expect(useProgress.getState().progress.updatedAt).toBeGreaterThan(marked)
+    expect(vi.mocked(idbSet).mock.calls).toHaveLength(2)
+  })
+
+  it('leaves the version alone when there is nothing to write', () => {
+    useProgress.getState().markBlockKnown('unit-0', 'tested-out')
+    const afterFirst = useProgress.getState().progress
+    const writes = vi.mocked(idbSet).mock.calls.length
+
+    // An unknown block, a block already known, and a reversal with nothing to
+    // reverse: the three ordinary ways to reach this, none of which may push.
+    useProgress.getState().markBlockKnown('not-a-block', 'tested-out')
+    useProgress.getState().markBlockKnown('unit-0', 'self-assessed')
+    useProgress.getState().unmarkBlock('unit-1')
+
+    expect(useProgress.getState().progress).toEqual(afterFirst)
+    expect(vi.mocked(idbSet).mock.calls).toHaveLength(writes)
+  })
+
+  it('congratulates nobody for skipping', () => {
+    // Stage B is 44 playable skills, which takes the pin past its second
+    // threshold. The tier rises — a skip does clear the bar the pin measures —
+    // but nothing is announced and nothing is paid, because the checkpoint, the
+    // pin upgrade and the streak milestone are all transitions computed inside
+    // lesson completion, which this never enters.
+    const before = useProgress.getState().progress
+
+    useProgress.getState().markBlockKnown('stage-b', 'tested-out')
+
+    const after = useProgress.getState().progress
+    expect(currentPinTier(after)).toBeGreaterThan(currentPinTier(before))
+    expect(after.xp).toBe(before.xp)
+    expect(after.coins).toBe(before.coins)
+    expect(after.streakCount).toBe(before.streakCount)
+    expect(after.lastActiveDay).toBe(before.lastActiveDay)
+    expect(after.todayXp).toBe(before.todayXp)
+  })
+
+  it('converts a skipped skill the learner has since played', () => {
+    useProgress.getState().markBlockKnown('unit-0', 'self-assessed')
+
+    const outcome = useProgress.getState().completeLesson('read-numbers')
+
+    const played = useProgress.getState().progress.skills['read-numbers']
+    expect(readSource(played)).toBe('practiced')
+    // The granted level goes with the claim: there is none left to restore, so a
+    // later reversal has nothing to take back from this skill.
+    expect(readPriorMastery(played)).toBe(0)
+    expect(played.mastery).toBe(SKIP_MASTERY + 1)
+    expect(outcome.leveledUp).toBe(true)
+  })
+
+  it('clears the granted level when a part-practised skipped skill is played again', () => {
+    // The mark found mastery 1 and wrote it down; the lesson that follows earns
+    // that level back, so there is no granted level left for a reversal to
+    // restore and the skill keeps everything it has.
+    useProgress.getState().completeLesson('read-numbers')
+    useProgress.getState().markBlockKnown('unit-0', 'self-assessed')
+    expect(readPriorMastery(useProgress.getState().progress.skills['read-numbers'])).toBe(1)
+
+    useProgress.getState().completeLesson('read-numbers')
+
+    const played = useProgress.getState().progress.skills['read-numbers']
+    expect(readPriorMastery(played)).toBe(0)
+    expect(readSource(played)).toBe('practiced')
+
+    useProgress.getState().unmarkBlock('unit-0')
+    expect(useProgress.getState().progress.skills['read-numbers'].mastery).toBe(SKIP_MASTERY + 1)
+  })
+
+  it('returns a part-practised skill to the level the mark found', () => {
+    // The one case a recorded source alone cannot answer: mastery 1 is below
+    // UNLOCK_THRESHOLD, so the mark has to raise it, and only the level it wrote
+    // down can bring the learner back to where they stood.
+    useProgress.getState().completeLesson('read-numbers')
+    const earned = useProgress.getState().progress.skills['read-numbers']
+    expect(earned.mastery).toBe(1)
+
+    useProgress.getState().markBlockKnown('unit-0', 'self-assessed')
+    expect(useProgress.getState().progress.skills['read-numbers'].mastery).toBe(SKIP_MASTERY)
+
+    useProgress.getState().unmarkBlock('unit-0')
+
+    const after = useProgress.getState().progress.skills['read-numbers']
+    expect(after.mastery).toBe(1)
+    expect(readSource(after)).toBe('practiced')
+    expect(readPriorMastery(after)).toBe(0)
+    expect(after.attempts).toBe(earned.attempts)
+    expect(after.correct).toBe(earned.correct)
+  })
+
+  it('leaves a converted skill alone when its block is taken back', () => {
+    useProgress.getState().markBlockKnown('unit-0', 'tested-out')
+    useProgress.getState().completeLesson('read-numbers')
+
+    useProgress.getState().unmarkBlock('unit-0')
+
+    const after = useProgress.getState().progress
+    expect(after.skills['read-numbers'].mastery).toBe(SKIP_MASTERY + 1)
+    expect(masteries(unit0.slice(1))).toEqual(unit0.slice(1).map(() => 0))
+  })
+
+  it('writes per-skill mastery, source and prior mastery, and no block state at all', () => {
+    const before = useProgress.getState().progress
+
+    useProgress.getState().markBlockKnown('unit-0', 'tested-out')
+
+    const after = useProgress.getState().progress
+    expect(after).toEqual({
+      ...before,
+      updatedAt: after.updatedAt,
+      skills: Object.fromEntries(
+        Object.entries(before.skills).map(([id, record]) => [
+          id,
+          unit0.includes(id)
+            ? { ...record, mastery: SKIP_MASTERY, source: 'tested-out', priorMastery: 0 }
+            : record,
+        ]),
+      ),
+    })
+    // Whether a block counts as known is read back off its skills. A key here
+    // would be a second authority the manifest could outgrow.
+    expect(Object.keys(after)).toEqual(Object.keys(before))
+    expect(Object.keys(after).filter((key) => /block|unit|stage/i.test(key))).toEqual([])
+  })
+
+  it('gives a skill the manifest has since gained no block state to migrate', () => {
+    // The scenario's premise is a unit the learner marked known that then gains a
+    // playable skill. Nothing stored says the unit is known, so there is nothing
+    // stale to migrate — and the gained skill arrives at 0 and gates what follows
+    // it, rather than inheriting the skip the rest of its unit carries.
+    useProgress.getState().markBlockKnown('unit-0', 'tested-out')
+    const marked = useProgress.getState().progress
+    const { 'round-to-100': _absent, ...missingOne } = marked.skills
+    const skipped = { ...marked, skills: missingOne } as unknown as Progress
+
+    useProgress.getState().replaceProgress(skipped)
+
+    const gained = useProgress.getState().progress.skills['round-to-100']
+    expect(gained.mastery).toBe(0)
+    expect(readSource(gained)).toBe('practiced')
+    expect(readPriorMastery(gained)).toBe(0)
+    expect(isUnlocked('add-facts-small', useProgress.getState().progress)).toBe(false)
+  })
+})
+
 describe('stage checkpoint lesson outcomes', () => {
   beforeEach(() => {
     useProgress.getState().reset()
@@ -647,6 +841,14 @@ describe('review state in progress', () => {
     const beforeRead = { ...restored }
     expect(readReviewState(restored)).toEqual(readReviewState(restored))
     expect(restored).toEqual(beforeRead)
+
+    // Marking this skill's unit known and taking it back leaves it exactly as it
+    // was: at mastery 3 there is nothing for the mark to raise, so it records no
+    // source and the reversal has nothing to reach.
+    useProgress.getState().markBlockKnown('unit-0', 'tested-out')
+    useProgress.getState().unmarkBlock('unit-0')
+
+    expect(useProgress.getState().progress.skills['read-numbers']).toEqual(legacySkill)
   })
 
   it('adopts scheduled and unknown skill fields without changing the server version', () => {
@@ -659,10 +861,21 @@ describe('review state in progress', () => {
       }),
       remoteField: { source: 'server' },
     }
+    // A second skill the mark will actually raise, since `read-numbers` sits at
+    // mastery 3 and the mark skips it — an unknown field on an untouched record
+    // proves nothing about what the two mutations rewrite.
+    const raisedSkill = {
+      ...skill({ mastery: 1, attempts: 6, correct: 4 }),
+      remoteField: { source: 'server' },
+    }
     const remote = {
       ...progressWith({}),
       updatedAt: 900,
-      skills: { ...progressWith({}).skills, 'read-numbers': scheduledSkill },
+      skills: {
+        ...progressWith({}).skills,
+        'read-numbers': scheduledSkill,
+        'place-value-tens': raisedSkill,
+      },
     } as unknown as Progress
 
     useProgress.getState().adoptRemote(remote, 4321)
@@ -674,6 +887,22 @@ describe('review state in progress', () => {
       strength: 2,
       nextReview: '2026-09-03',
       reviewAttempts: 4,
+    })
+
+    // The field the server sent and this build knows nothing about survives both
+    // block actions, for the same reason it survived adoption: skills are merged
+    // and rewritten whole. `place-value-tens` is raised to 3 and restored to the
+    // 1 it came from, so it is rewritten twice and still carries the field;
+    // `read-numbers` is above the mark's reach and is never touched at all.
+    useProgress.getState().markBlockKnown('unit-0', 'self-assessed')
+    useProgress.getState().unmarkBlock('unit-0')
+
+    const settled = useProgress.getState().progress.skills
+    expect(settled['read-numbers']).toEqual(scheduledSkill)
+    expect(settled['place-value-tens']).toEqual({
+      ...raisedSkill,
+      source: 'practiced',
+      priorMastery: 0,
     })
   })
 

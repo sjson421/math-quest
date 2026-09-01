@@ -1227,13 +1227,22 @@ shows before a lesson's first problem.
       The full flow from [skipping ahead](curriculum.md#skipping-ahead). Every route is optional
       to the learner and reversible at any time.
 
-      **28a · Marking a block known, and taking it back.** `source: 'practiced' | 'tested-out' |
-      'self-assessed'` on `SkillProgress`, and a block mutation setting every skill in a stage or
-      unit to mastery 3 — clear of `UNLOCK_THRESHOLD`, short of `MAX_MASTERY`, so a skipped skill
-      reads as "not needed yet" rather than finished. "Actually, let me practice this" resets the
-      block to 0. Same read-time defaulting as 27a, since an existing record has no `source`;
-      `hasPractised()` already reads mastery for exactly this case, which item 1 wrote down
-      before anything could produce it.
+      **28a · Marking a block known, and taking it back — shipped 2026-09-01.** `source:
+      'practiced' | 'tested-out' | 'self-assessed'` on `SkillProgress`, and a block mutation in
+      `lib/skip.ts` **raising** every playable skill in a stage or unit to mastery 3 — clear of
+      `UNLOCK_THRESHOLD`, short of `MAX_MASTERY`, so a skipped skill reads as "not needed yet"
+      rather than finished. It raises rather than sets because no rule may reduce an earned
+      mastery level, and it records the source only on the skills it actually raised, which is
+      what makes "actually, let me practice this" safe: the reversal returns **only the skills
+      the skip granted** and leaves practised ones alone. A second field, `priorMastery`, records
+      the level each raised skill came from, because a skill practised to 1 or 2 is still raised
+      — below `UNLOCK_THRESHOLD` the course would stay shut — and `source` alone cannot say how
+      much of the level was granted; the reversal restores that level rather than resetting to 0,
+      so it is 0 for a skill the skip found untouched and the earned level for one it found
+      part-practised. Completing a lesson converts a skipped skill back to practised and clears
+      the granted level with it. Same read-time defaulting as 27a, since an existing record has
+      neither field; `hasPractised()` already reads mastery for exactly this case, which item 1
+      wrote down before anything could produce it.
 
       **28b · Check first.** Eight problems sampled across the block at difficulty 3, ≥7 correct
       to skip, and a failing run offers the first unmastered unit with no penalty framing.
