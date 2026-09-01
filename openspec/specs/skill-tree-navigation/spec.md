@@ -16,8 +16,10 @@ one unit's playable skills. Each level SHALL present only the entries of the lev
 beneath it — the stage level SHALL NOT list skills, and the unit level SHALL NOT list them
 either.
 
-Choosing a skill at the skill level SHALL start that skill's lesson exactly as it does
-today. Nothing about lesson entry, unlocking, mastery, or the skill card itself changes.
+Choosing an unlocked skill at the skill level SHALL start that skill's lesson exactly as it does
+today. Lesson entry, unlocking, and mastery behavior SHALL remain unchanged. Additional
+learning-progress reporting on a skill card SHALL be labelled separately from mastery and SHALL
+NOT change whether the skill can be started.
 
 #### Scenario: Choosing a stage opens its units
 
@@ -41,6 +43,12 @@ today. Nothing about lesson entry, unlocking, mastery, or the skill card itself 
 
 - **WHEN** the learner selects a locked skill at the skill level
 - **THEN** no lesson starts
+
+#### Scenario: Recall reporting does not change lesson entry
+
+- **WHEN** a playable skill card reports recall strength separately from mastery
+- **THEN** an unlocked skill still starts its lesson
+- **AND** a locked skill still cannot be started
 
 ### Requirement: The tree opens at the learner's current unit
 
