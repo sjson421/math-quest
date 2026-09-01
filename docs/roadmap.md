@@ -1195,7 +1195,7 @@ shows before a lesson's first problem.
         Stage G declares the already-available `fraction-input` capability with its first
         consumer, and all twenty-two Stage G skills are now playable, closing this item.
 
-- [ ] **27 · Review and spaced repetition** — L *(was B6, then 26)* — **three increments**
+- [x] **27 · Review and spaced repetition** — L *(was B6, then 26)* — **three increments**
 
       Review lessons, per-skill strength, and the stats surface. Ordered before skip-ahead
       because it is what makes skip-ahead safe.
@@ -1218,7 +1218,7 @@ shows before a lesson's first problem.
       Item 28's check-first sampling and Stage H's mixed reviews are this mechanism with
       different selection, so neither should grow its own.
 
-      **27c · Where it is seen.** A review entry point that appears only when something is due,
+      **27c · Where it is seen — shipped 2026-09-01.** A review entry point that appears only when something is due,
       per-skill strength on the skill tree, and the "you keep doing X" insight that the store's
       `mistakes` map has been accumulating tags for since before there was anywhere to show them.
 

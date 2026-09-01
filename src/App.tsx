@@ -1,11 +1,13 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { lazy, Suspense, useEffect, useState } from 'react'
-import { course, getSkill, manifestIndex } from './curriculum'
+import { course, getSkill, implementedSkillIds, manifestIndex } from './curriculum'
 import { Home, type TreeLevel } from './components/Home'
 import { Mascot } from './components/Mascot'
 import type { PinTier } from './lib/pin'
 import { RecoveryKeyIntro } from './components/RecoveryKey'
+import { todayKey } from './lib/calendar'
 import { currentUnitId } from './lib/course'
+import { selectReviewSkills } from './lib/review'
 import { initSync, useSyncStatus } from './lib/sync'
 import type { SkillGenerator } from './lib/types'
 import { currentPinTier, useProgress, type Progress } from './store/progress'
@@ -13,6 +15,9 @@ import { useRecoveryKey } from './store/recovery-key'
 
 const Lesson = lazy(() =>
   import('./components/Lesson').then((module) => ({ default: module.Lesson })),
+)
+const ReviewLesson = lazy(() =>
+  import('./components/Lesson').then((module) => ({ default: module.ReviewLesson })),
 )
 const Settings = lazy(() =>
   import('./components/Settings').then((module) => ({ default: module.Settings })),
@@ -30,6 +35,7 @@ const Shop = lazy(() =>
 type Screen =
   | TreeLevel
   | { name: 'lesson'; skill: SkillGenerator; unitId: string }
+  | { name: 'review'; skills: readonly SkillGenerator[]; back: TreeLevel }
   | { name: 'settings'; back: TreeLevel }
   | { name: 'shop'; back: TreeLevel }
 
@@ -51,6 +57,13 @@ export default function App() {
   // `??` short-circuits, so the frontier is only worked out while the learner
   // has not navigated — once they have, this costs nothing per render.
   const active: Screen = screen ?? openingLevel(progress)
+  const reviewSkills = selectReviewSkills(
+    implementedSkillIds.map((id) => ({
+      skill: getSkill(id),
+      progress: progress.skills[id] ?? { mastery: 0, lastPracticed: null },
+    })),
+    todayKey(),
+  )
 
   // Held back until the first lesson is done, and never shown mid-lesson.
   const showKeyIntro = keyLoaded && !introduced && progress.xp > 0 && isTreeLevel(active)
@@ -95,6 +108,10 @@ export default function App() {
               <Home
                 level={active}
                 onNavigate={setScreen}
+                reviewCount={reviewSkills.length}
+                onStartReview={() =>
+                  setScreen({ name: 'review', skills: reviewSkills, back: active })
+                }
                 onStart={(skillId) =>
                   setScreen({
                     name: 'lesson',
@@ -113,6 +130,9 @@ export default function App() {
                 skill={active.skill}
                 onExit={() => setScreen({ name: 'skills', unitId: active.unitId })}
               />
+            )}
+            {active.name === 'review' && (
+              <ReviewLesson skills={active.skills} onExit={() => setScreen(active.back)} />
             )}
             {active.name === 'settings' && <Settings onClose={() => setScreen(active.back)} />}
             {active.name === 'shop' && (
@@ -173,6 +193,7 @@ function screenKey(screen: Screen): string {
   if (screen.name === 'units') return `units:${screen.stageId}`
   if (screen.name === 'skills') return `skills:${screen.unitId}`
   if (screen.name === 'lesson') return `lesson:${screen.skill.id}`
+  if (screen.name === 'review') return `review:${screenKey(screen.back)}`
   return screen.name
 }
 

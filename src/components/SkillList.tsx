@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import type { CourseUnit } from '../curriculum/manifest'
 import { tap } from '../lib/haptics'
+import { readReviewState } from '../lib/review'
 import { MAX_MASTERY, type Progress } from '../store/progress'
 import { TONE_CLASSES, toneForUnit } from './tone'
 
@@ -39,6 +40,9 @@ export function SkillList({ unit, progress, isUnlocked, onStart }: Props) {
             name={skill.name}
             blurb={skill.blurb}
             mastery={progress.skills[skill.id]?.mastery ?? 0}
+            recall={readReviewState(
+              progress.skills[skill.id] ?? { mastery: 0, lastPracticed: null },
+            ).strength}
             unlocked={isUnlocked(skill.id)}
             tone={tone}
             index={i}
@@ -54,6 +58,7 @@ function SkillCard({
   name,
   blurb,
   mastery,
+  recall,
   unlocked,
   tone,
   index,
@@ -62,6 +67,7 @@ function SkillCard({
   name: string
   blurb: string
   mastery: number
+  recall: number
   unlocked: boolean
   tone: keyof typeof TONE_CLASSES
   index: number
@@ -95,6 +101,7 @@ function SkillCard({
       <div className="flex-1 min-w-0">
         <p className="font-bold text-lg leading-tight">{name}</p>
         <p className="text-sm text-ink-soft truncate">{blurb}</p>
+        <p className="text-xs text-ink-soft mt-1">Recall {recall}/{MAX_MASTERY}</p>
 
         <div className="flex gap-1 mt-2" aria-label={`Level ${mastery} of ${MAX_MASTERY}`}>
           {Array.from({ length: MAX_MASTERY }, (_, i) => (

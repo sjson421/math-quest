@@ -59,10 +59,6 @@ export function Settings({ onClose }: { onClose: () => void }) {
   const totalCorrect = Object.values(progress.skills).reduce((n, s) => n + s.correct, 0)
   const accuracy = totalAttempts ? Math.round((totalCorrect / totalAttempts) * 100) : 0
 
-  const topMistakes = Object.entries(progress.mistakes)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 3)
-
   return (
     <div className="flex flex-col h-full overflow-y-auto">
       <header className="flex items-center gap-3 px-5 pt-4 pb-2">
@@ -85,18 +81,7 @@ export function Settings({ onClose }: { onClose: () => void }) {
           <Row label="Accuracy" value={`${accuracy}%`} />
         </Card>
 
-        {topMistakes.length > 0 && (
-          <Card title="Things to watch">
-            <ul className="space-y-1.5 text-sm text-ink-soft">
-              {topMistakes.map(([tag, count]) => (
-                <li key={tag} className="flex justify-between gap-4">
-                  <span>{humanizeTag(tag)}</span>
-                  <span className="tabular-nums font-semibold shrink-0">{count}×</span>
-                </li>
-              ))}
-            </ul>
-          </Card>
-        )}
+        <MistakeInsight mistakes={progress.mistakes} />
 
         <Card title="Your recovery key">
           <RecoveryKeyCard />
@@ -163,6 +148,28 @@ export function Settings({ onClose }: { onClose: () => void }) {
         )}
       </div>
     </div>
+  )
+}
+
+/** Presentational so its existing contract can be checked without a browser store. */
+export function MistakeInsight({ mistakes }: { mistakes: Record<string, number> }) {
+  const topMistakes = Object.entries(mistakes)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+
+  if (topMistakes.length === 0) return null
+
+  return (
+    <Card title="Things to watch">
+      <ul className="space-y-1.5 text-sm text-ink-soft">
+        {topMistakes.map(([tag, count]) => (
+          <li key={tag} className="flex justify-between gap-4">
+            <span>{humanizeTag(tag)}</span>
+            <span className="tabular-nums font-semibold shrink-0">{count}×</span>
+          </li>
+        ))}
+      </ul>
+    </Card>
   )
 }
 

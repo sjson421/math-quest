@@ -8,8 +8,8 @@ browser and can be installed on devices that support web apps.
 
 **195 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
 stage checkpoints, a companion character the learner chooses and dresses, a pin that
-climbs through five tiers as the course is worked through, a room to decorate, and progress
-backup.
+climbs through five tiers as the course is worked through, a room to decorate, progress
+backup, and review lessons with spaced repetition.
 
 Day streaks carry stakes: a run pays a rising coin multiplier, announces milestones at 3, 7,
 14, 30 and 100 days, and opens three cosmetics that cannot be bought any other way. A missed
@@ -51,9 +51,8 @@ as its value, since the expanded expression a factoring question displays is a w
 to it. Later units still need timed mode.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
-milestone, what blocks what, and the product features still unbuilt (skip-ahead, review and
-spaced repetition, timed mode, streak reminders). It lives in one place so it cannot drift
-out of step with this file.
+milestone, what blocks what, and the product features still unbuilt (skip-ahead, timed mode,
+streak reminders). It lives in one place so it cannot drift out of step with this file.
 
 ## Running it
 

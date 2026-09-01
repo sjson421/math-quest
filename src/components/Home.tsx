@@ -28,6 +28,8 @@ const PIP_MESSAGES = ['You’ve got this!', 'Keep going!', 'Great work!', 'One s
 type Props = {
   level: TreeLevel
   onNavigate: (level: TreeLevel) => void
+  reviewCount: number
+  onStartReview: () => void
   onStart: (skillId: string) => void
   onOpenSettings: () => void
   onOpenShop: () => void
@@ -44,7 +46,15 @@ type Props = {
  * one against a synthetic `Progress`. This component is the only place that
  * reaches for the live one.
  */
-export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }: Props) {
+export function Home({
+  level,
+  onNavigate,
+  reviewCount,
+  onStartReview,
+  onStart,
+  onOpenSettings,
+  onOpenShop,
+}: Props) {
   const progress = useProgress((s) => s.progress)
   const freezesJustSpent = useProgress((s) => s.freezesJustSpent)
   const muted = useSound((s) => s.muted)
@@ -181,6 +191,27 @@ export function Home({ level, onNavigate, onStart, onOpenSettings, onOpenShop }:
           </div>
         </div>
       </section>
+
+      {reviewCount > 0 && (
+        <button
+          onClick={() => {
+            tap()
+            onStartReview()
+          }}
+          className="mx-5 mb-5 flex items-center justify-between gap-3 rounded-blob bg-lilac-soft p-4 text-left shadow-soft active:scale-[0.98] transition-transform"
+          aria-label={`Start review — ${reviewCount} ${reviewCount === 1 ? 'skill' : 'skills'} due`}
+        >
+          <span className="min-w-0">
+            <span className="block font-bold text-lg">Review time</span>
+            <span className="block text-sm text-ink-soft">
+              {reviewCount} skill{reviewCount === 1 ? '' : 's'} ready to revisit
+            </span>
+          </span>
+          <span className="shrink-0 text-2xl text-lilac-deep" aria-hidden="true">
+            ›
+          </span>
+        </button>
+      )}
 
       {unit ? (
         <>

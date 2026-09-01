@@ -89,4 +89,65 @@ describe('SkillList', () => {
   it('reports a mastery level for assistive technology', () => {
     expect(render()).toContain('aria-label="Level 0 of 5"')
   })
+
+  it('reports recall separately from mastery', () => {
+    const base = initialProgress()
+    const progress: Progress = {
+      ...base,
+      skills: {
+        ...base.skills,
+        'read-numbers': {
+          mastery: 4,
+          lastPracticed: '2026-08-31',
+          attempts: 8,
+          correct: 7,
+          strength: 2,
+          nextReview: '2026-09-03',
+          reviewAttempts: 1,
+        },
+      },
+    }
+
+    const html = render(unit0, progress)
+
+    expect(html).toContain('Recall 2/5')
+    expect(html).toContain('aria-label="Level 4 of 5"')
+  })
+
+  it('uses legacy progress fields without rewriting the stored skill', () => {
+    const base = initialProgress()
+    const legacy = { mastery: 3, lastPracticed: '2026-08-30', attempts: 4, correct: 3 }
+    const progress: Progress = {
+      ...base,
+      skills: { ...base.skills, 'read-numbers': legacy },
+    }
+
+    expect(render(unit0, progress)).toContain('Recall 3/5')
+    expect(progress.skills['read-numbers']).toEqual(legacy)
+  })
+
+  it('falls back safely for malformed review fields', () => {
+    const base = initialProgress()
+    const progress: Progress = {
+      ...base,
+      skills: {
+        ...base.skills,
+        'read-numbers': {
+          mastery: 4,
+          lastPracticed: null,
+          attempts: 2,
+          correct: 1,
+          strength: Number.NaN,
+          nextReview: 'not-a-day',
+          reviewAttempts: -1,
+        },
+      },
+    }
+
+    expect(render(unit0, progress)).toContain('Recall 4/5')
+  })
+
+  it('reports zero recall for an untouched skill', () => {
+    expect(render(unit0, initialProgress())).toContain('Recall 0/5')
+  })
 })
