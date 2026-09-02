@@ -14,13 +14,16 @@
  * migration and no stored block state can disagree with it.
  */
 
-import { courseStageById, courseUnitById } from '../curriculum'
+import { course, courseStageById, courseUnitById, generators } from '../curriculum'
+import type { TreeLevel } from '../components/Home'
 /**
  * Type-only, and deliberately so: `store/progress.ts` imports this module, so a
  * value imported back would be the runtime cycle `checkpoint.ts` and `pin.ts`
  * refuse for the same reason. Types erase at build time.
  */
 import type { Progress, SkillProgress, SkillSource } from '../store/progress'
+import type { Rng } from './rng'
+import type { SkillGenerator } from './types'
 
 /**
  * Mastery a skip grants: clear of `UNLOCK_THRESHOLD` so everything downstream
@@ -28,6 +31,10 @@ import type { Progress, SkillProgress, SkillSource } from '../store/progress'
  * rather than finished.
  */
 export const SKIP_MASTERY = 3
+
+/** Fixed assessment shape: eight slots at the middle difficulty. */
+export const CHECK_PROBLEM_COUNT = 8
+export const CHECK_DIFFICULTY = 3
 
 /**
  * What a learner may declare about a block. Practised is missing on purpose —
@@ -101,6 +108,104 @@ function blockSkillIds(blockId: string): readonly string[] | undefined {
 
   const stage = courseStageById.get(blockId)
   return stage?.units.flatMap(({ skills }) => skills.map((skill) => skill.id))
+}
+
+/** The generators a playable stage or unit holds, or `undefined` for a miss. */
+export function playableBlockSkills(blockId: string): SkillGenerator[] | undefined {
+  const ids = blockSkillIds(blockId)
+  if (!ids?.length) return undefined
+
+  const skills = ids.flatMap((id) => {
+    const skill = generators.get(id)
+    return skill ? [skill] : []
+  })
+
+  return skills.length === ids.length ? skills : undefined
+}
+
+/** Whether a block contains a skip claim that can be withdrawn. */
+export function blockHasDeclaredSource(
+  progress: Pick<Progress, 'skills'>,
+  blockId: string,
+): boolean {
+  return Boolean(
+    blockSkillIds(blockId)?.some((id) => {
+      const source = readSource(progress.skills[id])
+      return source === 'tested-out' || source === 'self-assessed'
+    }),
+  )
+}
+
+function hasPractised(skill: SkillProgress | undefined): boolean {
+  return (skill?.attempts ?? 0) > 0 || (skill?.mastery ?? 0) > 0
+}
+
+/** Whether a playable unit is still a sensible candidate for a new skip. */
+export function unitCanBeSkipped(
+  unitId: string,
+  progress: Pick<Progress, 'skills'>,
+  isUnlocked: (skillId: string) => boolean,
+): boolean {
+  const unit = courseUnitById.get(unitId)
+  if (!unit || unit.skills.length === 0) return false
+
+  const allLocked = unit.skills.every(({ id }) => !isUnlocked(id))
+  const allUnstarted = unit.skills.every(({ id }) => !hasPractised(progress.skills[id]))
+  return allLocked || allUnstarted
+}
+
+export type UnitSkipState = 'new' | 'reversal'
+
+/** The one unit action the tree should offer, if any. */
+export function unitSkipState(
+  unitId: string,
+  progress: Pick<Progress, 'skills'>,
+  isUnlocked: (skillId: string) => boolean,
+): UnitSkipState | undefined {
+  if (blockHasDeclaredSource(progress, unitId)) return 'reversal'
+  return unitCanBeSkipped(unitId, progress, isUnlocked) ? 'new' : undefined
+}
+
+/** The first playable stage that still has a skill below skip mastery. */
+export function nextFreshStartStage(
+  progress: Pick<Progress, 'skills'>,
+) {
+  return course.find((stage) =>
+    stage.units
+      .flatMap(({ skills }) => skills)
+      .some(({ id }) => (progress.skills[id]?.mastery ?? 0) < SKIP_MASTERY),
+  )
+}
+
+/** Freeze one block-wide, seeded assessment snapshot. */
+export function selectCheckSkills(
+  blockId: string,
+  rng: Pick<Rng, 'shuffle'>,
+): SkillGenerator[] | undefined {
+  const skills = playableBlockSkills(blockId)
+  if (!skills) return undefined
+
+  const selected: SkillGenerator[] = []
+  while (selected.length < CHECK_PROBLEM_COUNT) {
+    selected.push(...rng.shuffle(skills).slice(0, CHECK_PROBLEM_COUNT - selected.length))
+  }
+  return selected
+}
+
+/** Seven or eight recorded results pass the check. */
+export function checkPasses(correctCount: number): boolean {
+  return correctCount === CHECK_PROBLEM_COUNT - 1 || correctCount === CHECK_PROBLEM_COUNT
+}
+
+/** Choose where a check result's Continue action returns without owning state. */
+export function skipResultDestination(
+  passed: boolean,
+  freshStart: boolean,
+  frontierUnitId: string | undefined,
+  back: TreeLevel,
+): TreeLevel | null {
+  if (passed) return freshStart ? null : back
+  return frontierUnitId ? { name: 'skills', unitId: frontierUnitId } : back
 }
 
 /** A record with the named skills replaced, or `null` when there are none. */

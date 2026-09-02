@@ -113,6 +113,8 @@ export type Progress = {
   equipped: Equipped
   /** Slot → the decoration standing in it. An absent slot means nothing there. */
   room: Placed
+  /** Whether optional first-launch skip guidance has ended. */
+  skipOfferSeen: boolean
 }
 
 export type LessonOutcome = {
@@ -180,6 +182,7 @@ export function initialProgress(): Progress {
     character: DEFAULT_CHARACTER,
     equipped: {},
     room: {},
+    skipOfferSeen: false,
   }
 }
 
@@ -200,6 +203,7 @@ type Store = {
   recordAttempt: (skillId: string, correct: boolean, misconceptionTag?: string) => void
   recordReviewAttempt: (skillId: string, correct: boolean, misconceptionTag?: string) => void
   markIntroSeen: (skillId: string) => void
+  markSkipOfferSeen: () => void
   completeLesson: (skillId: string) => LessonOutcome
   completeReviewLesson: () => LessonOutcome
   markBlockKnown: (blockId: string, source: DeclaredSource) => void
@@ -221,6 +225,10 @@ function reconcile(stored: Progress): Progress {
     ...stored,
     version: SCHEMA_VERSION,
     updatedAt: typeof stored.updatedAt === 'number' ? stored.updatedAt : 0,
+    skipOfferSeen:
+      typeof stored.skipOfferSeen === 'boolean'
+        ? stored.skipOfferSeen
+        : hasLearningEvidence(stored),
     skills: { ...base.skills, ...stored.skills },
     mistakes: { ...stored.mistakes },
     // Clamped, not merely defaulted. A record that predates the field takes
@@ -239,6 +247,24 @@ function reconcile(stored: Progress): Progress {
     equipped: isSlotRecord<Equipped>(stored.equipped) ? { ...stored.equipped } : {},
     room: isSlotRecord<Placed>(stored.room) ? { ...stored.room } : {},
   }
+}
+
+/** Whether a legacy record contains evidence that learning already began. */
+function hasLearningEvidence(stored: Progress): boolean {
+  if (typeof stored.updatedAt === 'number' && stored.updatedAt > 0) return true
+  if (typeof stored.xp === 'number' && stored.xp > 0) return true
+  if (typeof stored.todayXp === 'number' && stored.todayXp > 0) return true
+
+  return Object.values(stored.skills ?? {}).some((skill) =>
+    Boolean(
+      skill &&
+        ((typeof skill.attempts === 'number' && skill.attempts > 0) ||
+          (typeof skill.correct === 'number' && skill.correct > 0) ||
+          (typeof skill.mastery === 'number' && skill.mastery > 0) ||
+          typeof skill.lastPracticed === 'string' ||
+          (typeof skill.reviewAttempts === 'number' && skill.reviewAttempts > 0)),
+    ),
+  )
 }
 
 /**
@@ -403,6 +429,12 @@ export const useProgress = create<Store>((set, get) => {
           [skillId]: { ...skill, introSeen: true },
         },
       })
+    },
+
+    markSkipOfferSeen() {
+      const p = get().progress
+      if (p.skipOfferSeen) return
+      persist({ ...p, skipOfferSeen: true })
     },
 
     completeLesson(skillId) {

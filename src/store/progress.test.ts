@@ -10,11 +10,13 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { get as idbGet, set as idbSet } from 'idb-keyval'
-import { implementedSkillIds, skillStates } from '../curriculum'
+import { getSkill, implementedSkillIds, skillStates } from '../curriculum'
 import { stageA } from '../curriculum/manifest'
 import { addDays, dayBefore, todayKey } from '../lib/calendar'
 import { readReviewState } from '../lib/review'
 import { SKIP_MASTERY, readPriorMastery, readSource } from '../lib/skip'
+import { recordCheckResult, startCheckSession } from '../lib/lesson'
+import { makeRng } from '../lib/rng'
 import { MAX_STREAK_FREEZES } from '../lib/streak'
 import {
   UNLOCK_THRESHOLD,
@@ -286,6 +288,104 @@ describe('skill intro presentation state', () => {
 
     expect(restored.introSeen).toBe(true)
     expect(restored.remoteField).toBe(7)
+  })
+})
+
+describe('first-launch skip presentation state', () => {
+  beforeEach(() => {
+    useProgress.getState().reset()
+    vi.mocked(idbSet).mockClear()
+  })
+
+  it('seeds a new record unseen and dismisses it in one idempotent write', () => {
+    const before = useProgress.getState().progress
+
+    expect(before.skipOfferSeen).toBe(false)
+    useProgress.getState().markSkipOfferSeen()
+    const after = useProgress.getState().progress
+    const writes = vi.mocked(idbSet).mock.calls.length
+
+    expect(after.skipOfferSeen).toBe(true)
+    expect(after.updatedAt).toBeGreaterThan(before.updatedAt)
+    expect({ ...after, updatedAt: before.updatedAt }).toEqual({
+      ...before,
+      skipOfferSeen: true,
+    })
+
+    useProgress.getState().markSkipOfferSeen()
+    expect(vi.mocked(idbSet).mock.calls).toHaveLength(writes)
+  })
+
+  it('defaults a legacy record to seen when it has learning evidence', () => {
+    const legacy = {
+      ...progressWith({ 'read-numbers': { mastery: 1, attempts: 2 } }),
+    }
+    delete (legacy as Partial<Progress>).skipOfferSeen
+
+    useProgress.getState().replaceProgress(legacy as Progress)
+
+    expect(useProgress.getState().progress.skipOfferSeen).toBe(true)
+  })
+
+  it('keeps an untouched legacy record eligible and preserves unknown fields', () => {
+    const base = progressWith({})
+    const legacy = {
+      ...base,
+      legacyField: 'keep-me',
+      skills: {
+        ...base.skills,
+        'read-numbers': { ...base.skills['read-numbers'], legacySkillField: 7 },
+      },
+    }
+    delete (legacy as Partial<Progress>).skipOfferSeen
+
+    useProgress.getState().adoptRemote(legacy as Progress, 0)
+    const restored = useProgress.getState().progress
+
+    expect(restored.skipOfferSeen).toBe(false)
+    expect((restored as Progress & { legacyField: string }).legacyField).toBe('keep-me')
+    expect(
+      (restored.skills['read-numbers'] as SkillProgress & { legacySkillField: number })
+        .legacySkillField,
+    ).toBe(7)
+  })
+
+  it('lets an explicit false survive a versioned remote record during the sequence', () => {
+    const remote = {
+      ...progressWith({}),
+      updatedAt: 400,
+      skipOfferSeen: false,
+      remoteField: 'keep-me',
+    }
+
+    useProgress.getState().adoptRemote(remote as Progress, 4321)
+    const restored = useProgress.getState().progress
+
+    expect(restored.skipOfferSeen).toBe(false)
+    expect((restored as Progress & { remoteField: string }).remoteField).toBe('keep-me')
+    expect(restored.version).toBe(initialProgress().version)
+  })
+})
+
+describe('skip check evidence', () => {
+  beforeEach(() => {
+    useProgress.getState().reset()
+    vi.mocked(idbSet).mockClear()
+  })
+
+  it('keeps partial and failed check results out of progress and storage', () => {
+    const before = structuredClone(useProgress.getState().progress)
+    const source = getSkill('read-numbers')
+    const makeProblem = (skill: typeof source, difficulty: 1 | 2 | 3 | 4 | 5) =>
+      skill.generate(makeRng(17), difficulty)
+
+    const started = startCheckSession(Array.from({ length: 8 }, () => source), makeProblem)
+    const partial = recordCheckResult(started, 'incorrect', makeProblem)
+
+    expect(partial.session.answeredCount).toBe(1)
+    expect(partial.session.correctCount).toBe(0)
+    expect(useProgress.getState().progress).toEqual(before)
+    expect(vi.mocked(idbSet)).not.toHaveBeenCalled()
   })
 })
 

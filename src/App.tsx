@@ -1,13 +1,21 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { lazy, Suspense, useEffect, useState } from 'react'
-import { course, getSkill, implementedSkillIds, manifestIndex } from './curriculum'
+import { course, courseUnitById, getSkill, implementedSkillIds, manifestIndex } from './curriculum'
 import { Home, type TreeLevel } from './components/Home'
 import { Mascot } from './components/Mascot'
+import { SkipAheadChoice, SkipAheadResult, type SkipBlock } from './components/SkipAhead'
 import type { PinTier } from './lib/pin'
 import { RecoveryKeyIntro } from './components/RecoveryKey'
 import { todayKey } from './lib/calendar'
 import { currentUnitId } from './lib/course'
 import { selectReviewSkills } from './lib/review'
+import { makeRng } from './lib/rng'
+import {
+  checkPasses,
+  nextFreshStartStage,
+  selectCheckSkills,
+  skipResultDestination,
+} from './lib/skip'
 import { initSync, useSyncStatus } from './lib/sync'
 import type { SkillGenerator } from './lib/types'
 import { currentPinTier, useProgress, type Progress } from './store/progress'
@@ -18,6 +26,9 @@ const Lesson = lazy(() =>
 )
 const ReviewLesson = lazy(() =>
   import('./components/Lesson').then((module) => ({ default: module.ReviewLesson })),
+)
+const SkipCheckLesson = lazy(() =>
+  import('./components/Lesson').then((module) => ({ default: module.SkipCheckLesson })),
 )
 const Settings = lazy(() =>
   import('./components/Settings').then((module) => ({ default: module.Settings })),
@@ -36,6 +47,23 @@ type Screen =
   | TreeLevel
   | { name: 'lesson'; skill: SkillGenerator; unitId: string }
   | { name: 'review'; skills: readonly SkillGenerator[]; back: TreeLevel }
+  | { name: 'skip-choice'; block: SkipBlock; back: TreeLevel; freshStart: boolean }
+  | {
+      name: 'skip-check'
+      block: SkipBlock
+      skills: readonly SkillGenerator[]
+      back: TreeLevel
+      freshStart: boolean
+    }
+  | {
+      name: 'skip-result'
+      block: SkipBlock
+      correct: number
+      passed: boolean
+      frontierUnitId?: string
+      back: TreeLevel
+      freshStart: boolean
+    }
   | { name: 'settings'; back: TreeLevel }
   | { name: 'shop'; back: TreeLevel }
 
@@ -49,6 +77,9 @@ export default function App() {
   const buyStreakFreeze = useProgress((s) => s.buyStreakFreeze)
   const equipItem = useProgress((s) => s.equipItem)
   const unequipSlot = useProgress((s) => s.unequipSlot)
+  const markSkipOfferSeen = useProgress((s) => s.markSkipOfferSeen)
+  const markBlockKnown = useProgress((s) => s.markBlockKnown)
+  const unmarkBlock = useProgress((s) => s.unmarkBlock)
 
   // `null` means "wherever the learner is now", resolved at render rather than
   // in an effect: the fallback is only reached after `loaded`, so there is no
@@ -57,6 +88,7 @@ export default function App() {
   // `??` short-circuits, so the frontier is only worked out while the learner
   // has not navigated — once they have, this costs nothing per render.
   const active: Screen = screen ?? openingLevel(progress)
+  const firstLaunchStage = progress.skipOfferSeen ? undefined : nextFreshStartStage(progress)
   const reviewSkills = selectReviewSkills(
     implementedSkillIds.map((id) => ({
       skill: getSkill(id),
@@ -67,6 +99,30 @@ export default function App() {
 
   // Held back until the first lesson is done, and never shown mid-lesson.
   const showKeyIntro = keyLoaded && !introduced && progress.xp > 0 && isTreeLevel(active)
+
+  const finishFreshStart = () => {
+    const current = useProgress.getState().progress
+    if (!nextFreshStartStage(current)) markSkipOfferSeen()
+    setScreen(null)
+  }
+
+  const openCheck = (block: SkipBlock, back: TreeLevel, freshStart: boolean) => {
+    const skills = selectCheckSkills(
+      block.id,
+      makeRng(Math.floor(Math.random() * 4_294_967_296)),
+    )
+    if (!skills) {
+      setScreen(back)
+      return
+    }
+    setScreen({ name: 'skip-check', block, skills, back, freshStart })
+  }
+
+  const markSelfAssessed = (block: SkipBlock, back: TreeLevel, freshStart: boolean) => {
+    markBlockKnown(block.id, 'self-assessed')
+    if (freshStart) finishFreshStart()
+    else setScreen(back)
+  }
 
   useEffect(() => {
     // Sync starts only after local progress is on screen. It is additive — the
@@ -107,19 +163,37 @@ export default function App() {
             {isTreeLevel(active) && (
               <Home
                 level={active}
+                progress={progress}
                 onNavigate={setScreen}
+                firstLaunchStage={firstLaunchStage}
+                onOpenSkip={(block) =>
+                  setScreen({
+                    name: 'skip-choice',
+                    block,
+                    back: active,
+                    freshStart: block.kind === 'stage',
+                  })
+                }
+                onStartPractice={() => {
+                  markSkipOfferSeen()
+                  setScreen(null)
+                }}
+                onReverseSkip={unmarkBlock}
                 reviewCount={reviewSkills.length}
                 onStartReview={() =>
                   setScreen({ name: 'review', skills: reviewSkills, back: active })
                 }
                 onStart={(skillId) =>
-                  setScreen({
-                    name: 'lesson',
-                    skill: getSkill(skillId),
-                    // From the manifest rather than from the level on screen, so
-                    // exit lands in the right unit however the lesson was reached.
-                    unitId: manifestIndex.get(skillId)?.unit.id ?? '',
-                  })
+                  (() => {
+                    if (!progress.skipOfferSeen && firstLaunchStage) markSkipOfferSeen()
+                    setScreen({
+                      name: 'lesson',
+                      skill: getSkill(skillId),
+                      // From the manifest rather than from the level on screen, so
+                      // exit lands in the right unit however the lesson was reached.
+                      unitId: manifestIndex.get(skillId)?.unit.id ?? '',
+                    })
+                  })()
                 }
                 onOpenSettings={() => setScreen({ name: 'settings', back: active })}
                 onOpenShop={() => setScreen({ name: 'shop', back: active })}
@@ -133,6 +207,69 @@ export default function App() {
             )}
             {active.name === 'review' && (
               <ReviewLesson skills={active.skills} onExit={() => setScreen(active.back)} />
+            )}
+            {active.name === 'skip-choice' && (
+              <SkipAheadChoice
+                block={active.block}
+                freshStart={active.freshStart}
+                onCheck={() => openCheck(active.block, active.back, active.freshStart)}
+                onSkip={() => markSelfAssessed(active.block, active.back, active.freshStart)}
+                onBack={() => {
+                  if (active.freshStart) {
+                    markSkipOfferSeen()
+                    setScreen(null)
+                  } else setScreen(active.back)
+                }}
+              />
+            )}
+            {active.name === 'skip-check' && (
+              <SkipCheckLesson
+                skills={active.skills}
+                onComplete={(correct) => {
+                  const passed = checkPasses(correct)
+                  if (passed) markBlockKnown(active.block.id, 'tested-out')
+                  const next = useProgress.getState().progress
+                  if (passed && active.freshStart && !nextFreshStartStage(next)) {
+                    markSkipOfferSeen()
+                  }
+                  setScreen({
+                    name: 'skip-result',
+                    block: active.block,
+                    correct,
+                    passed,
+                    frontierUnitId: currentUnitId(course, next),
+                    back: active.back,
+                    freshStart: active.freshStart,
+                  })
+                }}
+                onExit={() => setScreen(active.back)}
+              />
+            )}
+            {active.name === 'skip-result' && (
+              <SkipAheadResult
+                block={active.block}
+                correct={active.correct}
+                passed={active.passed}
+                frontierName={
+                  active.frontierUnitId
+                    ? courseUnitById.get(active.frontierUnitId)?.unit.name
+                    : undefined
+                }
+                onContinue={() => {
+                  const destination = skipResultDestination(
+                    active.passed,
+                    active.freshStart,
+                    active.frontierUnitId,
+                    active.back,
+                  )
+                  if (destination) {
+                    if (!active.passed && active.freshStart) markSkipOfferSeen()
+                    setScreen(destination)
+                  } else {
+                    finishFreshStart()
+                  }
+                }}
+              />
             )}
             {active.name === 'settings' && <Settings onClose={() => setScreen(active.back)} />}
             {active.name === 'shop' && (

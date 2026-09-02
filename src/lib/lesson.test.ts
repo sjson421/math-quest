@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   advanceCorrect,
+  recordCheckResult,
   currentProblem,
   currentSlot,
   INITIAL_PACING,
@@ -9,6 +10,7 @@ import {
   recordPacing,
   recordSessionAttempt,
   requeueMiss,
+  startCheckSession,
   startLessonSession,
   startStandardLessonSession,
   type LessonSource,
@@ -107,6 +109,63 @@ describe('recordPacing', () => {
 })
 
 describe('lesson queue', () => {
+  it('keeps a check at difficulty three and materializes one source at a time', () => {
+    const { generated, make } = labeledFactory()
+    const skills = Array.from({ length: 8 }, (_, index) => skill(`check-${index}`))
+    let session = startCheckSession(skills, make)
+
+    expect(generated).toHaveLength(1)
+    expect(generated[0].difficulty).toBe(3)
+    expect(session.queue[1].problem).toBeNull()
+
+    for (let answer = 0; answer < skills.length; answer += 1) {
+      expect(currentProblem(session).difficulty).toBe(3)
+      const transition = recordCheckResult(session, 'incorrect', make)
+      if (!transition.complete) session = transition.session
+    }
+
+    expect(generated).toHaveLength(8)
+    expect(generated.every(({ difficulty }) => difficulty === 3)).toBe(true)
+  })
+
+  it('requires the fixed eight-source snapshot', () => {
+    expect(() => startCheckSession(Array.from({ length: 7 }, () => synthetic), () => problem('p', 3)))
+      .toThrow('Check needs exactly 8 sources')
+    expect(() => startCheckSession(Array.from({ length: 9 }, () => synthetic), () => problem('p', 3)))
+      .toThrow('Check needs exactly 8 sources')
+  })
+
+  it('advances a check miss once without retry or recovery', () => {
+    const { generated, make } = labeledFactory()
+    const session = startCheckSession(
+      [skill('first'), skill('second'), ...Array.from({ length: 6 }, (_, index) => skill(`extra-${index}`))],
+      make,
+    )
+    const first = currentProblem(session)
+
+    const transition = recordCheckResult(session, 'incorrect', make)
+
+    expect(transition.complete).toBe(false)
+    expect(transition.session.answeredCount).toBe(1)
+    expect(transition.session.correctCount).toBe(0)
+    expect(currentProblem(transition.session)).not.toBe(first)
+    expect(generated).toHaveLength(2)
+  })
+
+  it('keeps an unrecorded check entry on the same problem', () => {
+    const { make } = labeledFactory()
+    const session = startCheckSession(
+      [synthetic, skill('second'), ...Array.from({ length: 6 }, (_, index) => skill(`extra-${index}`))],
+      make,
+    )
+
+    const transition = recordCheckResult(session, 'none', make)
+
+    expect(transition.complete).toBe(false)
+    expect(transition.session).toBe(session)
+    expect(currentProblem(transition.session)).toBe(currentProblem(session))
+  })
+
   it('generates an unseen problem only when it becomes current', () => {
     const { generated, make } = labeledFactory()
     const started = startStandardLessonSession(synthetic, 5, 4, make)

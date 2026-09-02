@@ -5,7 +5,7 @@ import type { KeypadRules } from '../lib/keypad'
 import { rational } from '../lib/rational'
 import { encodeRootPairEntry } from '../lib/root-pair'
 import type { Choice, Difficulty, SkillGenerator } from '../lib/types'
-import { Lesson, LessonComplete, ReviewLesson } from './Lesson'
+import { Lesson, LessonComplete, ReviewLesson, SkipCheckLesson } from './Lesson'
 
 /**
  * The lesson's first paint, rendered to a string in the node environment.
@@ -259,6 +259,45 @@ const rootPairSkill: SkillGenerator = {
 const has = (html: string, label: string) => html.includes(`aria-label="${label}"`)
 
 describe('Lesson', () => {
+  it('opens a skip check at eight results with no intro or hint controls', () => {
+    const generated: Difficulty[] = []
+    const skill = skillNeeding(undefined, 'synthetic-check', generated)
+    const html = renderToStaticMarkup(
+      <SkipCheckLesson
+        skills={Array.from({ length: 8 }, () => skill)}
+        onComplete={() => {}}
+        onExit={() => {}}
+      />,
+    )
+
+    expect(html).toContain('0/8')
+    expect(generated).toEqual([3])
+    expect(html).not.toContain('Show me a hint')
+    expect(html).not.toContain('Review intro')
+    expect(html).not.toContain('Before you practice')
+  })
+
+  it('keeps every existing answer surface in skip checks', () => {
+    const cases: [SkillGenerator, string][] = [
+      [choiceSkill, 'Less than'],
+      [numberLineSkill, 'Number line'],
+      [expressionSkill(), 'Variable y'],
+      [coordinatePlaneInputSkill, 'Coordinate plane point placement'],
+      [rootPairSkill, 'Root 1'],
+    ]
+
+    for (const [skill, label] of cases) {
+      const html = renderToStaticMarkup(
+        <SkipCheckLesson
+          skills={[skill, ...Array.from({ length: 7 }, () => skill)]}
+          onComplete={() => {}}
+          onExit={() => {}}
+        />,
+      )
+      expect(html).toContain(label)
+    }
+  })
+
   it('starts a review from selected generators with mixed progress and first input mode', () => {
     const html = renderToStaticMarkup(
       <ReviewLesson skills={[numberLineSkill, choiceSkill]} onExit={() => {}} />,

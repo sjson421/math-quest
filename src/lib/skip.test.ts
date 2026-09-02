@@ -10,7 +10,7 @@
  */
 
 import { describe, expect, it } from 'vitest'
-import { courseUnitById, implementedSkillIds, skillStates } from '../curriculum'
+import { course, courseUnitById, implementedSkillIds, skillStates } from '../curriculum'
 import { stages, allUnits } from '../curriculum/manifest'
 import {
   UNLOCK_THRESHOLD,
@@ -20,7 +20,22 @@ import {
   type Progress,
   type SkillProgress,
 } from '../store/progress'
-import { SKIP_MASTERY, markKnown, readPriorMastery, readSource, unmark } from './skip'
+import { makeRng } from './rng'
+import {
+  blockHasDeclaredSource,
+  checkPasses,
+  CHECK_PROBLEM_COUNT,
+  SKIP_MASTERY,
+  markKnown,
+  nextFreshStartStage,
+  playableBlockSkills,
+  readPriorMastery,
+  readSource,
+  selectCheckSkills,
+  skipResultDestination,
+  unmark,
+  unitCanBeSkipped,
+} from './skip'
 
 const UNIT = 'unit-0'
 const STAGE = 'stage-a'
@@ -57,6 +72,102 @@ const sourcesOf = (progress: Progress, ids: readonly string[]) =>
 
 const masteriesOf = (progress: Progress, ids: readonly string[]) =>
   ids.map((id) => progress.skills[id]?.mastery)
+
+describe('playable skip blocks', () => {
+  it('reads stage and unit membership from the playable course tree', () => {
+    expect(playableBlockSkills(UNIT)?.map(({ id }) => id)).toEqual(unit0)
+    expect(playableBlockSkills(STAGE)?.map(({ id }) => id)).toEqual(unit0)
+    expect(playableBlockSkills(PLANNED_UNIT)).toBeUndefined()
+    expect(playableBlockSkills('not-a-block')).toBeUndefined()
+  })
+
+  it('finds declared source without treating practised mastery as a skip', () => {
+    const practised = progressWith({ [unit0[0]]: { mastery: 3, attempts: 20 } })
+    const skipped = progressWith({ [unit0[0]]: { mastery: 3, source: 'tested-out' } })
+
+    expect(blockHasDeclaredSource(practised, UNIT)).toBe(false)
+    expect(blockHasDeclaredSource(skipped, UNIT)).toBe(true)
+    expect(blockHasDeclaredSource(initialProgress(), 'not-a-block')).toBe(false)
+  })
+
+  it('allows wholly locked or wholly unstarted units, but not part-practised ones', () => {
+    const fresh = initialProgress()
+    expect(unitCanBeSkipped(UNIT, fresh, (id) => isUnlocked(id, fresh))).toBe(true)
+
+    const locked = progressWith({})
+    expect(unitCanBeSkipped('unit-1', locked, (id) => isUnlocked(id, locked))).toBe(true)
+
+    const started = progressWith({ [unit0[0]]: { attempts: 1 } })
+    expect(unitCanBeSkipped(UNIT, started, (id) => isUnlocked(id, started))).toBe(false)
+    expect(unitCanBeSkipped(PLANNED_UNIT, fresh, () => false)).toBe(false)
+  })
+
+  it('finds the next stage in curriculum order by remaining skip mastery', () => {
+    const fresh = initialProgress()
+    expect(nextFreshStartStage(fresh)?.stage.id).toBe(STAGE)
+
+    const stageSkills = courseUnitById.get(UNIT)!.skills.map(({ id }) => id)
+    const afterStage = progressWith(
+      Object.fromEntries(stageSkills.map((id) => [id, { mastery: SKIP_MASTERY }])),
+    )
+
+    expect(nextFreshStartStage(afterStage)?.stage.id).toBe('stage-b')
+  })
+})
+
+describe('check selection and scoring', () => {
+  it('takes eight distinct skills from a large block deterministically', () => {
+    const first = selectCheckSkills('stage-b', makeRng(42))!
+    const second = selectCheckSkills('stage-b', makeRng(42))!
+
+    expect(first).toHaveLength(CHECK_PROBLEM_COUNT)
+    expect(new Set(first.map(({ id }) => id)).size).toBe(CHECK_PROBLEM_COUNT)
+    expect(first.map(({ id }) => id)).toEqual(second.map(({ id }) => id))
+  })
+
+  it('covers every skill before repeating in a small block', () => {
+    const small = course
+      .flatMap((stage) => stage.units)
+      .find(({ skills }) => skills.length < CHECK_PROBLEM_COUNT)!
+    const ids = small.skills.map(({ id }) => id)
+    const selected = selectCheckSkills(small.unit.id, makeRng(42))!
+
+    expect(selected).toHaveLength(CHECK_PROBLEM_COUNT)
+    expect(new Set(selected.slice(0, ids.length).map(({ id }) => id))).toEqual(new Set(ids))
+  })
+
+  it('refuses unknown and empty blocks and keeps only seven or eight as passing', () => {
+    expect(selectCheckSkills('not-a-block', makeRng(1))).toBeUndefined()
+    expect(selectCheckSkills(PLANNED_STAGE, makeRng(1))).toBeUndefined()
+    expect(checkPasses(6)).toBe(false)
+    expect(checkPasses(7)).toBe(true)
+    expect(checkPasses(8)).toBe(true)
+    expect(checkPasses(9)).toBe(false)
+  })
+})
+
+describe('skip result routing', () => {
+  const back = { name: 'units' as const, stageId: 'stage-a' }
+
+  it('returns fresh-start passes to home for the next stage', () => {
+    expect(skipResultDestination(true, true, 'unit-1', back)).toBeNull()
+  })
+
+  it('returns unit passes to their exact tree level', () => {
+    expect(skipResultDestination(true, false, undefined, back)).toEqual(back)
+  })
+
+  it('returns failed checks to the frontier unit', () => {
+    expect(skipResultDestination(false, true, 'unit-1', back)).toEqual({
+      name: 'skills',
+      unitId: 'unit-1',
+    })
+  })
+
+  it('falls back to the original tree level when no frontier exists', () => {
+    expect(skipResultDestination(false, false, undefined, back)).toEqual(back)
+  })
+})
 
 describe('reading a skill s source', () => {
   it('reads a record written before skipping existed as practised', () => {

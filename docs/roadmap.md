@@ -1244,8 +1244,9 @@ shows before a lesson's first problem.
       neither field; `hasPractised()` already reads mastery for exactly this case, which item 1
       wrote down before anything could produce it.
 
-      **28b · Check first.** Eight problems sampled across the block at difficulty 3, ≥7 correct
-      to skip, and a failing run offers the first unmastered unit with no penalty framing.
+      **28b · Check first — shipped 2026-09-01.** Eight problems sampled across the block at
+      difficulty 3, ≥7 correct to skip, and a failing run offers the first unmastered unit with no
+      penalty framing.
       Sampling many skills into one session is 27b's, which is why this waits rather than
       duplicating it. Both entry points land here: per stage on first launch, and the "I already
       know this" affordance on a locked or unstarted unit — the second matters most, because it

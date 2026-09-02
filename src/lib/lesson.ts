@@ -1,4 +1,5 @@
 import type { Difficulty, Problem, SkillGenerator } from './types'
+import { CHECK_DIFFICULTY, CHECK_PROBLEM_COUNT } from './skip'
 
 export type AttemptRecord = 'correct' | 'incorrect' | 'none'
 
@@ -23,6 +24,13 @@ export type LessonSession = {
   targetCorrect: number
   correctCount: number
   pacing: LessonPacing
+  queue: LessonSlot[]
+}
+
+export type CheckSession = {
+  totalProblems: number
+  answeredCount: number
+  correctCount: number
   queue: LessonSlot[]
 }
 
@@ -103,13 +111,38 @@ export function startStandardLessonSession(
   )
 }
 
-export function currentSlot(session: LessonSession): LessonSlot {
+/** A check uses the same lazy slots, but every recorded answer consumes one. */
+export function startCheckSession(
+  skills: readonly SkillGenerator[],
+  makeProblem: ProblemFactory,
+): CheckSession {
+  if (skills.length !== CHECK_PROBLEM_COUNT) {
+    throw new Error(`Check needs exactly ${CHECK_PROBLEM_COUNT} sources`)
+  }
+
+  const sources = skills.map((skill) => ({
+    skill,
+    baseDifficulty: CHECK_DIFFICULTY as Difficulty,
+  }))
+
+  return {
+    totalProblems: sources.length,
+    answeredCount: 0,
+    correctCount: 0,
+    queue: sources.map((source, index) => ({
+      source,
+      problem: index === 0 ? makeProblem(source.skill, CHECK_DIFFICULTY) : null,
+    })),
+  }
+}
+
+export function currentSlot(session: Pick<LessonSession | CheckSession, 'queue'>): LessonSlot {
   const current = session.queue[0]
   if (!current) throw new Error('Lesson has no current slot')
   return current
 }
 
-export function currentProblem(session: LessonSession): Problem {
+export function currentProblem(session: Pick<LessonSession | CheckSession, 'queue'>): Problem {
   const current = currentSlot(session)
   if (!current.problem) throw new Error('Lesson has no current problem')
   return current.problem
@@ -134,6 +167,21 @@ function materializeCurrent(
         session.pacing.recovering,
       ),
     ),
+  }
+  return next
+}
+
+function materializeCheckCurrent(
+  queue: LessonSlot[],
+  makeProblem: ProblemFactory,
+): LessonSlot[] {
+  const current = queue[0]
+  if (!current || current.problem) return queue
+
+  const next = [...queue]
+  next[0] = {
+    ...current,
+    problem: makeProblem(current.source.skill, CHECK_DIFFICULTY),
   }
   return next
 }
@@ -165,4 +213,32 @@ export function requeueMiss(
   const queue = [...rest]
   queue.splice(Math.min(3, queue.length), 0, missed)
   return { ...session, queue: materializeCurrent(session, queue, makeProblem) }
+}
+
+export function recordCheckResult(
+  session: CheckSession,
+  record: AttemptRecord,
+  makeProblem: ProblemFactory,
+): { session: CheckSession; complete: boolean } {
+  if (record === 'none') return { session, complete: false }
+  if (session.queue.length === 0) throw new Error('Check has no current slot')
+
+  const answeredCount = session.answeredCount + 1
+  const correctCount = session.correctCount + (record === 'correct' ? 1 : 0)
+  const complete = answeredCount >= session.totalProblems
+  const next = {
+    ...session,
+    answeredCount,
+    correctCount,
+  }
+
+  return {
+    session: {
+      ...next,
+      queue: complete
+        ? []
+        : materializeCheckCurrent(session.queue.slice(1), makeProblem),
+    },
+    complete,
+  }
 }

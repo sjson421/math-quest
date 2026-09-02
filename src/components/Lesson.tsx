@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { skillById } from '../curriculum/manifest'
 import { checkAnswer, type CheckResult } from '../lib/answer'
 import { completionAction, type CompletionView } from '../lib/checkpoint'
@@ -11,10 +11,13 @@ import {
   currentProblem,
   currentSlot,
   lessonTarget,
+  recordCheckResult,
   recordSessionAttempt,
   requeueMiss,
+  startCheckSession,
   startLessonSession,
   startStandardLessonSession,
+  type CheckSession,
   type LessonSession,
   type ProblemFactory,
 } from '../lib/lesson'
@@ -68,6 +71,11 @@ type PracticeMode =
       kind: 'review'
       skills: readonly SkillGenerator[]
     }
+  | {
+      kind: 'check'
+      skills: readonly SkillGenerator[]
+      onComplete: (correctCount: number) => void
+    }
 
 export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () => void }) {
   return <PracticeLoop mode={{ kind: 'standard', skill }} onExit={onExit} />
@@ -82,6 +90,18 @@ export function ReviewLesson({
   onExit: () => void
 }) {
   return <PracticeLoop mode={{ kind: 'review', skills }} onExit={onExit} />
+}
+
+export function SkipCheckLesson({
+  skills,
+  onComplete,
+  onExit,
+}: {
+  skills: readonly SkillGenerator[]
+  onComplete: (correctCount: number) => void
+  onExit: () => void
+}) {
+  return <PracticeLoop mode={{ kind: 'check', skills, onComplete }} onExit={onExit} />
 }
 
 function PracticeLoop({
@@ -101,7 +121,9 @@ function PracticeLoop({
   const baseDifficulty =
     mode.kind === 'standard' ? difficultyFor(progress.skills[mode.skill.id]?.mastery ?? 0) : 1
   const targetCorrect =
-    mode.kind === 'standard' ? lessonTarget(skillById.get(mode.skill.id)?.quick) : mode.skills.length
+    mode.kind === 'standard'
+      ? lessonTarget(skillById.get(mode.skill.id)?.quick)
+      : mode.skills.length
   const introNeeded =
     mode.kind === 'standard' &&
     Boolean(mode.skill.teachingLine) &&
@@ -114,24 +136,38 @@ function PracticeLoop({
       ? generateProblem(mode.skill, 1, 1)
       : null,
   )
-  const [session, setSession] = useState<LessonSession | null>(() =>
-    mode.kind === 'standard'
-      ? introNeeded
+  const [session, setSession] = useState<(LessonSession | CheckSession) | null>(() => {
+    if (mode.kind === 'standard') {
+      return introNeeded
         ? null
         : startStandardLessonSession(mode.skill, targetCorrect, baseDifficulty, makeProblem)
-      : startLessonSession(
-          mode.skills.map((skill) => ({
-            skill,
-            baseDifficulty: difficultyFor(progress.skills[skill.id]?.mastery ?? 0),
-          })),
-          makeProblem,
-        ),
-  )
+    }
+
+    if (mode.kind === 'check') return startCheckSession(mode.skills, makeProblem)
+
+    return startLessonSession(
+      mode.skills.map((skill) => ({
+        skill,
+        baseDifficulty: difficultyFor(progress.skills[skill.id]?.mastery ?? 0),
+      })),
+      makeProblem,
+    )
+  })
   const [entry, setEntry] = useState('')
   const [feedback, setFeedback] = useState<Feedback>(null)
   const [showHint, setShowHint] = useState(false)
   const [finished, setFinished] = useState<LessonOutcome | null>(null)
   const [submissionGate] = useState(createSubmissionGate)
+  const pendingCheckAdvance = useRef<number | null>(null)
+
+  useEffect(() => {
+    return () => {
+      if (pendingCheckAdvance.current !== null) {
+        window.clearTimeout(pendingCheckAdvance.current)
+        pendingCheckAdvance.current = null
+      }
+    }
+  }, [])
 
   const response = feedback && responseTo[feedback.status]
   const feedbackCopy = feedback
@@ -158,6 +194,26 @@ function PracticeLoop({
     if (mode.kind !== 'standard' || !mode.skill.teachingLine || feedback) return
     if (!introProblem) setIntroProblem(generateProblem(mode.skill, 1, 1))
     setIntroMode('review')
+  }
+
+  const advanceCheck = (record: 'correct' | 'incorrect') => {
+    if (mode.kind !== 'check' || !session || !('answeredCount' in session)) return
+
+    const transition = recordCheckResult(session, record, makeProblem)
+    setEntry('')
+    setShowHint(false)
+    setFeedback(null)
+    if (transition.complete) mode.onComplete(transition.session.correctCount)
+    else setSession(transition.session)
+    submissionGate.release()
+  }
+
+  const leave = () => {
+    if (pendingCheckAdvance.current !== null) {
+      window.clearTimeout(pendingCheckAdvance.current)
+      pendingCheckAdvance.current = null
+    }
+    onExit()
   }
 
   if (introMode && introProblem && mode.kind === 'standard') {
@@ -189,6 +245,16 @@ function PracticeLoop({
   const slot = currentSlot(session)
   const problem = currentProblem(session)
   const skill = slot.source.skill
+  const progressCount =
+    mode.kind === 'check' && 'answeredCount' in session
+      ? session.answeredCount
+      : session.correctCount
+  const progressTotal =
+    mode.kind === 'check' && 'totalProblems' in session
+      ? session.totalProblems
+      : 'targetCorrect' in session
+        ? session.targetCorrect
+        : 0
   const mascotState: MascotState =
     feedback?.status === 'correct'
       ? 'happy'
@@ -209,7 +275,30 @@ function PracticeLoop({
     const misconception =
       status === 'incorrect' ? diagnose(problem, answerEntry) : undefined
 
-    const nextSession = recordSessionAttempt(session, policy.record)
+    if (mode.kind === 'check') {
+      const record = policy.record
+      if (record === 'none') {
+        submissionGate.release()
+        setFeedback({ status, misconception })
+        return
+      }
+
+      if (policy.advances) {
+        celebrate()
+        setFeedback({ status })
+        pendingCheckAdvance.current = window.setTimeout(() => {
+          pendingCheckAdvance.current = null
+          advanceCheck(record)
+        }, 750)
+        return
+      }
+
+      tap()
+      setFeedback({ status, misconception })
+      return
+    }
+
+    const nextSession = recordSessionAttempt(session as LessonSession, policy.record)
     if (policy.record !== 'none') {
       setSession(nextSession)
       if (mode.kind === 'review') {
@@ -253,10 +342,18 @@ function PracticeLoop({
     submissionGate.release()
     setFeedback(null)
     if (!response.keepsEntry) setEntry('')
+
+    if (mode.kind === 'check') {
+      if (!response.keepsEntry && response.record !== 'none') {
+        advanceCheck(response.record)
+      }
+      return
+    }
+
     if (!response.requeues) return
 
     setShowHint(false)
-    setSession(requeueMiss(session, makeProblem))
+    setSession(requeueMiss(session as LessonSession, makeProblem))
   }
 
   /**
@@ -363,7 +460,7 @@ function PracticeLoop({
     <div className="flex flex-col h-full">
       <header className="flex items-center gap-3 px-4 pt-3 pb-2">
         <button
-          onClick={onExit}
+          onClick={leave}
           className="text-2xl text-ink-soft w-9 h-9 rounded-full flex items-center justify-center active:bg-cream-deep"
           aria-label="Leave lesson"
         >
@@ -372,12 +469,12 @@ function PracticeLoop({
         <div className="flex-1 h-4 rounded-full bg-cream-deep overflow-hidden">
           <motion.div
             className="h-full rounded-full bg-mint-deep"
-            animate={{ width: `${(session.correctCount / session.targetCorrect) * 100}%` }}
+            animate={{ width: `${(progressCount / progressTotal) * 100}%` }}
             transition={{ type: 'spring', stiffness: 180, damping: 22 }}
           />
         </div>
         <span className="text-sm font-bold text-ink-soft tabular-nums w-12 text-right">
-          {session.correctCount}/{session.targetCorrect}
+          {progressCount}/{progressTotal}
         </span>
         {mode.kind === 'standard' && mode.skill.teachingLine && !feedback && (
           <button
@@ -403,7 +500,7 @@ function PracticeLoop({
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={`${problem.display.kind}-${JSON.stringify(problem.display)}-${session.correctCount}`}
+            key={`${problem.display.kind}-${JSON.stringify(problem.display)}-${progressCount}`}
             initial={{ opacity: 0, x: 40 }}
             animate={
               feedback?.status === 'incorrect'
@@ -434,7 +531,7 @@ function PracticeLoop({
         </AnimatePresence>
 
         <AnimatePresence>
-          {showHint && !feedback && (
+          {showHint && !feedback && mode.kind !== 'check' && (
             <motion.p
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -446,7 +543,7 @@ function PracticeLoop({
           )}
         </AnimatePresence>
 
-        {!showHint && !feedback && (
+        {!showHint && !feedback && mode.kind !== 'check' && (
           <button
             onClick={() => {
               tap()

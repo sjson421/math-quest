@@ -2,16 +2,19 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { characterOf } from '../cosmetics'
 import { course, courseStageById, courseStageByUnitId, courseUnitById } from '../curriculum'
+import type { CourseStage } from '../curriculum/manifest'
 import { todayKey } from '../lib/calendar'
 import { tap } from '../lib/haptics'
 import { useSound } from '../lib/sound'
+import { unitSkipState } from '../lib/skip'
 import {
   nextStreakMilestone,
   streakAtRisk,
   streakMultiplier,
 } from '../lib/streak'
-import { currentPinTier, isUnlocked, useProgress } from '../store/progress'
+import { currentPinTier, isUnlocked, useProgress, type Progress } from '../store/progress'
 import { Room } from './Room'
+import { SkipUnitAction, type SkipBlock } from './SkipAhead'
 import { SkillList } from './SkillList'
 import { StreakCard } from './StreakCard'
 import { StageList } from './StageList'
@@ -27,6 +30,11 @@ const PIP_MESSAGES = ['You’ve got this!', 'Keep going!', 'Great work!', 'One s
 
 type Props = {
   level: TreeLevel
+  progress: Progress
+  firstLaunchStage?: CourseStage
+  onOpenSkip?: (block: SkipBlock) => void
+  onStartPractice?: () => void
+  onReverseSkip?: (blockId: string) => void
   onNavigate: (level: TreeLevel) => void
   reviewCount: number
   onStartReview: () => void
@@ -48,6 +56,11 @@ type Props = {
  */
 export function Home({
   level,
+  progress,
+  firstLaunchStage,
+  onOpenSkip = () => {},
+  onStartPractice = () => {},
+  onReverseSkip = () => {},
   onNavigate,
   reviewCount,
   onStartReview,
@@ -55,7 +68,6 @@ export function Home({
   onOpenSettings,
   onOpenShop,
 }: Props) {
-  const progress = useProgress((s) => s.progress)
   const freezesJustSpent = useProgress((s) => s.freezesJustSpent)
   const muted = useSound((s) => s.muted)
   const toggleMuted = useSound((s) => s.toggleMuted)
@@ -103,6 +115,19 @@ export function Home({
   const stage = level.name === 'units' ? courseStageById.get(level.stageId) : undefined
   const unit = level.name === 'skills' ? courseUnitById.get(level.unitId) : undefined
   const parent = unit && courseStageByUnitId.get(unit.unit.id)
+  const unitState = unit ? unitSkipState(unit.unit.id, progress, unlocked) : undefined
+  const unitSkipAction =
+    unitState === 'reversal'
+      ? {
+          label: 'Actually, let me practice this',
+          onClick: () => onReverseSkip(unit!.unit.id),
+        }
+      : unitState === 'new'
+        ? {
+            label: 'I already know this',
+            onClick: () => onOpenSkip({ kind: 'unit', id: unit!.unit.id, name: unit!.unit.name }),
+          }
+        : undefined
 
   return (
     <div className="flex flex-col h-full overflow-y-auto">
@@ -213,6 +238,50 @@ export function Home({
         </button>
       )}
 
+      {firstLaunchStage && (
+        <section
+          className="mx-5 mb-5 rounded-blob bg-white p-5 text-center shadow-soft"
+          data-skip-stage-offer
+          aria-labelledby="skip-stage-title"
+        >
+          <p className="text-sm font-bold uppercase tracking-wide text-lilac-deep">
+            Choose your starting point
+          </p>
+          <h2 id="skip-stage-title" className="mt-1 text-2xl font-bold">
+            {firstLaunchStage.stage.name}
+          </h2>
+          <p className="mt-1 text-sm text-ink-soft">
+            Already know this stage? You can check first or move ahead.
+          </p>
+          <div className="mt-4 flex flex-col gap-2">
+            <button
+              type="button"
+              onClick={() => {
+                tap()
+                onOpenSkip({
+                  kind: 'stage',
+                  id: firstLaunchStage.stage.id,
+                  name: firstLaunchStage.stage.name,
+                })
+              }}
+              className="h-12 w-full rounded-2xl bg-lilac-soft font-bold text-lilac-deep active:scale-[0.98] transition-transform"
+            >
+              Choose starting point
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                tap()
+                onStartPractice()
+              }}
+              className="h-10 w-full rounded-2xl text-sm font-semibold text-ink-soft"
+            >
+              Start practice
+            </button>
+          </div>
+        </section>
+      )}
+
       {unit ? (
         <>
           <Back
@@ -223,6 +292,9 @@ export function Home({
               )
             }
           />
+          {unitSkipAction && (
+            <SkipUnitAction label={unitSkipAction.label} onActivate={unitSkipAction.onClick} />
+          )}
           <SkillList unit={unit} progress={progress} isUnlocked={unlocked} onStart={onStart} />
         </>
       ) : stage ? (
