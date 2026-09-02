@@ -40,10 +40,11 @@ carries the exact baseline and gate status between sessions.
   Requirements` against one of these; `## ADDED` is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Seventy-one changes have
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Seventy-two changes have
   shipped — `ls openspec/changes/archive/` is the authority; the latest archive is
-  `2026-09-01-mark-block-known`. It ships roadmap increment 28a: marking a stage or unit
-  already known, and taking that back without costing the learner practice they did.
+  `2026-09-02-add-skip-ahead-check`. It ships roadmap increment 28b: an optional eight-problem
+  check at difficulty 3 that tests a stage or unit out at seven correct, reachable from the
+  first-launch offer and from an "I already know this" affordance on a locked or unstarted unit.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
