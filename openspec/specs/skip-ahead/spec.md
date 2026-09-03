@@ -87,17 +87,15 @@ unlock threshold's reach — is still raised, because leaving it where it stands
 course shut and defeat the skip. Recording the level it came from is what lets a reversal
 return the learner exactly where they stood.
 
+Each raised skill SHALL also be scheduled for review, on the terms the safety net requires
+below. Recording that schedule is what makes a skip watched rather than merely permitted.
+
 The change SHALL be one local progress mutation that strictly advances the stored version,
 preserves unknown fields, and is carried by the existing background sync without any change to
 the endpoint or its stored document. Marking a block known SHALL NOT change attempts, correct
-counts, recorded misconceptions, intro state, XP, coins, or the streak, SHALL NOT write any
-review field, and SHALL NOT announce a stage checkpoint, a pin upgrade, or a streak milestone —
-a skip is a declaration, not an achievement.
-
-Writing no review field is not the same as leaving review untouched: a record saved before those
-fields existed derives its strength from its mastery, so raising that mastery moves the derived
-strength and next review date by the rule already in place. What a skip *should* do to review
-scheduling SHALL be decided where the safety net is built rather than settled here by accident.
+counts, review-attempt or review-correct counts, recorded misconceptions, intro state, XP,
+coins, or the streak, and SHALL NOT announce a stage checkpoint, a pin upgrade, or a streak
+milestone — a skip is a declaration, not an achievement.
 
 A request SHALL be refused — nothing written, the stored version unchanged — when it names a
 block the curriculum does not declare, a block holding no playable skill, or a block in which
@@ -137,6 +135,12 @@ records nothing.
 - **THEN** no checkpoint, pin upgrade, or streak milestone is announced
 - **AND** no XP, coins, or streak day is awarded
 
+#### Scenario: A mark records no review history
+
+- **WHEN** a learner marks a block known
+- **THEN** no skill's review-attempt or review-correct count changes
+- **AND** no skill's aggregate attempt or correct count changes
+
 #### Scenario: Unplayable skills are left alone
 
 - **WHEN** a block contains skills with no generator, or whose stage requires infrastructure
@@ -171,9 +175,9 @@ restores the level they had earned. A reversal therefore returns the learner to 
 stood and cannot cost them work they did. A skill in the block whose source is practised SHALL
 be left entirely unchanged, whatever its mastery.
 
-Taking a block back SHALL NOT change attempts, correct counts, recorded misconceptions, intro
-state, XP, coins, or the streak, and SHALL NOT write any review field — a legacy record's
-derived strength follows its mastery back down for the same reason it followed it up. It SHALL
+Taking a block back SHALL also withdraw the review schedule the skip granted, on the terms the
+safety net requires below. It SHALL NOT change attempts, correct counts, review-attempt or
+review-correct counts, recorded misconceptions, intro state, XP, coins, or the streak. It SHALL
 be one local progress mutation under the same version and sync rules as marking a block known,
 and SHALL be refused without writing anything when the block holds no skill the skip granted.
 
@@ -205,6 +209,11 @@ and SHALL be refused without writing anything when the block holds no skill the 
 - **WHEN** a learner takes back a block holding a skill they had practised to mastery 5 before
   marking it
 - **THEN** that skill is untouched, at mastery 5
+
+#### Scenario: A reversal keeps review history
+
+- **WHEN** a learner takes back a unit whose skills answered review problems while skipped
+- **THEN** their review-attempt and review-correct counts are unchanged
 
 #### Scenario: Nothing to take back writes nothing
 
@@ -444,3 +453,207 @@ progress schema-version or endpoint-format change SHALL be required.
 
 - **WHEN** a stored record predates the presentation field and carries no learning evidence
 - **THEN** it loads normally and may receive the optional first-launch offer
+
+### Requirement: A skipped skill is scheduled to return sooner than a practised one
+
+Marking a block known SHALL record, on exactly the skills it raised, an explicit recall strength
+equal to the strength that skill held immediately before the mark, and a next-review date one
+interval for that strength after the local day of the mark. A skill the skip finds untouched
+therefore enters review at strength 0 and is due the next local day — sooner than any skill a
+completed lesson has scheduled, since a completed lesson raises strength to the mastery it
+reached.
+
+The strength SHALL be recorded explicitly rather than left to the read-time default. A record
+that predates review scheduling derives its strength from its mastery, so raising mastery to 3
+would otherwise read as strength 3 and return the skipped skill in seven days — slower than a
+practised skill, which is the opposite of watching it. Pinning the strength the skill actually
+held is what makes the guarantee true for every record rather than only for recent ones.
+
+Marking a block known SHALL NOT change the recall strength of a skill it did not raise, and
+SHALL NOT lower any strength. Because the recorded strength is the one the skill already held,
+the mark changes only when the skill is next due, never how strongly it is held.
+
+Review raises strength without raising mastery, so a skill can reach the mark carrying a strength
+above the mastery it holds. Such a skill SHALL keep that strength and its longer interval, and
+therefore returns later than a freshly practised skill rather than sooner. The guarantee above is
+for the skill a skip finds untouched, which is the one the app has no evidence about; a skill that
+has earned recall evidence of its own keeps what that evidence bought.
+
+#### Scenario: An untouched skipped skill is due the next day
+
+- **WHEN** a learner marks a unit known that they had never practised
+- **THEN** every raised skill records recall strength 0
+- **AND** each is due for review one local calendar day after the mark
+
+#### Scenario: A skipped skill returns before a practised one
+
+- **WHEN** one skill reaches mastery 3 by completing lessons and another reaches mastery 3 by a
+  skip on the same local day
+- **THEN** the practised skill is due seven local days later
+- **AND** the skipped skill is due one local day later
+
+#### Scenario: A part-practised skill keeps the strength it earned
+
+- **WHEN** a mark raises a skill whose recall strength is 2
+- **THEN** that skill records recall strength 2, not 0 and not the granted mastery
+- **AND** it is due three local calendar days after the mark
+
+#### Scenario: A legacy record is not scheduled from its granted mastery
+
+- **WHEN** a mark raises a skill from a record that carries no review fields at all
+- **THEN** that skill records the strength its record read before the mark
+- **AND** its next-review date follows that strength, not the mastery 3 the mark granted
+
+#### Scenario: A skill the mark did not raise keeps its schedule
+
+- **WHEN** a mark leaves a skill alone because it already stands at mastery 3 or above
+- **THEN** that skill's recall strength and next-review date are unchanged
+
+### Requirement: Taking a block back withdraws the schedule the skip granted
+
+Taking a block back SHALL restore, on exactly the skills it resets, the next-review date those
+skills' own practice implies: the date derived from a valid last-practised day at the recorded
+strength, and no scheduled review at all when there is no valid last-practised day. A skill the
+skip found untouched therefore leaves review entirely, and one the skip found part-practised
+returns to the schedule its own lessons had earned.
+
+This SHALL hold whether or not the learner ever answered a review problem for the skill. Review
+selection considers only whether a skill is due, so a skill left scheduled after its mastery
+returned to 0 would be offered in a review lesson while locked and never practised. Withdrawing
+the schedule is what keeps review offering only skills the learner has evidence for.
+
+#### Scenario: An untouched skipped skill leaves review
+
+- **WHEN** a learner takes back a unit they marked known and never practised
+- **THEN** none of its reset skills has a next-review date
+- **AND** none of them is offered in a review lesson
+
+#### Scenario: A part-practised skill returns to its earned schedule
+
+- **WHEN** a learner takes back a unit holding a skill they had practised before the mark
+- **THEN** that skill's next-review date is the one its own last practice implies at its
+  recorded strength
+
+#### Scenario: A re-locked skill is never reviewed
+
+- **WHEN** a reversal returns a skill to mastery 0 and its prerequisites lock it again
+- **THEN** that skill does not appear in any review lesson
+
+### Requirement: Weak review of a skipped skill offers to warm its unit up
+
+The app SHALL derive a warm-up suggestion for a unit when a skill in it whose source is tested
+out of or self-assessed has recorded at least 5 review attempts and a review accuracy below 60%.
+Review accuracy SHALL be the skill's review-correct count over its review-attempt count, so
+standard lesson answers do not count toward it in either direction.
+
+The suggestion SHALL be derived from the stored record whenever progress is read, and SHALL NOT
+be stored. It therefore SHALL disappear on its own once the skill's review accuracy recovers,
+once the learner practises the skill, or once the skip is taken back, without any dismissal
+state to persist or sync.
+
+#### Scenario: Weak review raises the suggestion
+
+- **WHEN** a self-assessed skill has 5 review attempts of which 2 were correct
+- **THEN** its unit is suggested for warming up
+
+#### Scenario: Too little evidence raises nothing
+
+- **WHEN** a self-assessed skill has 4 review attempts of which 1 was correct
+- **THEN** no warm-up suggestion is raised for it
+
+#### Scenario: Accuracy at the threshold raises nothing
+
+- **WHEN** a self-assessed skill has 5 review attempts of which 3 were correct
+- **THEN** no warm-up suggestion is raised for it
+
+#### Scenario: A practised skill is not watched this way
+
+- **WHEN** a skill whose source is practised has 5 review attempts of which 2 were correct
+- **THEN** no warm-up suggestion is raised for it
+
+#### Scenario: Recovery clears the suggestion
+
+- **WHEN** a suggested skill answers further review problems correctly and passes 60% accuracy
+- **THEN** no warm-up suggestion is raised for it
+- **AND** nothing had to be written to clear it
+
+#### Scenario: Taking the block back clears the suggestion
+
+- **WHEN** the learner takes back the unit a suggestion named
+- **THEN** no warm-up suggestion is raised for that unit
+
+### Requirement: Repeated failure points back at a skipped prerequisite
+
+The app SHALL derive a warm-up suggestion for the unit of a skipped prerequisite when a skill
+the learner is practising has recorded at least 5 attempts, an accuracy below 60%, and at least
+one unlock prerequisite whose source is tested out of or self-assessed. The failing skill's
+evidence SHALL be its aggregate attempt and correct counts, since a downstream skill fails in
+ordinary lessons as much as in review.
+
+The suggestion SHALL name both the unit to warm up and the skill whose failures pointed at it.
+A learner cannot see that the cause of their trouble is a block they declared known, which is
+the whole reason this exists.
+
+The prerequisite graph SHALL be the curriculum manifest's, read through the same unlock
+prerequisites the course already uses, so a prerequisite with no generator cannot be suggested
+and no second graph is introduced.
+
+#### Scenario: A failing skill names its skipped prerequisite
+
+- **WHEN** a learner has 6 attempts and 3 correct on a skill whose prerequisite was self-assessed
+- **THEN** the prerequisite's unit is suggested for warming up
+- **AND** the suggestion names the failing skill
+
+#### Scenario: A practised prerequisite raises nothing
+
+- **WHEN** a learner fails a skill repeatedly and every prerequisite of it reads as practised
+- **THEN** no warm-up suggestion is raised
+
+#### Scenario: Occasional misses raise nothing
+
+- **WHEN** a learner has 4 attempts and 1 correct on a skill whose prerequisite was skipped
+- **THEN** no warm-up suggestion is raised
+
+#### Scenario: Practising the prerequisite clears the suggestion
+
+- **WHEN** the learner completes a lesson for the skipped prerequisite, making it practised
+- **THEN** no warm-up suggestion is raised from that prerequisite
+
+### Requirement: One quiet warm-up offer leads to the existing reversal
+
+At most one warm-up suggestion SHALL be offered at a time. When more than one is available the
+app SHALL choose deterministically in curriculum order, so the same record always offers the
+same one and the offer does not move between reads.
+
+A suggestion SHALL only be offered for a unit that still holds a skill whose source is tested
+out of or self-assessed, so the offer always leads somewhere the learner can act.
+
+The offer SHALL appear on the course tree alongside the existing review entry point, SHALL name
+the unit, and SHALL use warm-up framing rather than correction, failure, penalty, or
+lost-progress framing. Acting on it SHALL open that unit, where the existing "Actually, let me
+practice this" affordance stands. The offer itself SHALL NOT mark, unmark, or otherwise change
+any progress: taking a skip back lowers a mastery level, which keeps the deliberate control it
+already has.
+
+#### Scenario: Only one offer is shown
+
+- **WHEN** two units both qualify for a warm-up suggestion
+- **THEN** exactly one is offered
+- **AND** the same one is offered on every read of the same record
+
+#### Scenario: The offer leads to the unit
+
+- **WHEN** the learner acts on a warm-up offer
+- **THEN** the named unit opens
+- **AND** it presents its existing "Actually, let me practice this" affordance
+
+#### Scenario: Seeing or ignoring the offer writes nothing
+
+- **WHEN** a warm-up offer is shown, acted on, or ignored
+- **THEN** no mastery, source, prior mastery, review field, or stored version changes
+
+#### Scenario: A unit with nothing to take back is not offered
+
+- **WHEN** every skill in a qualifying unit has become practised
+- **THEN** that unit is not offered for warming up
+
