@@ -656,6 +656,27 @@ describe('marking a block known', () => {
     expect(isUnlocked('add-facts-small', useProgress.getState().progress)).toBe(true)
   })
 
+  it('brings a skipped skill back before one the learner practised to the same level', () => {
+    // The whole guarantee, end to end and on one day: a completed lesson raises
+    // strength to the mastery it reached, so mastery 3 earned is seven days out;
+    // a skip pins the strength the skill already held, so mastery 3 granted is
+    // due tomorrow.
+    const today = todayKey()
+    useProgress.getState().completeLesson('read-numbers')
+    useProgress.getState().completeLesson('read-numbers')
+    useProgress.getState().completeLesson('read-numbers')
+    useProgress.getState().markBlockKnown('unit-0', 'self-assessed')
+
+    const after = useProgress.getState().progress
+    const practised = after.skills['read-numbers']
+    const skipped = after.skills['place-value-tens']
+
+    expect(practised.mastery).toBe(SKIP_MASTERY)
+    expect(skipped.mastery).toBe(SKIP_MASTERY)
+    expect(readReviewState(practised).nextReview).toBe(addDays(today, 7))
+    expect(readReviewState(skipped).nextReview).toBe(addDays(today, 1))
+  })
+
   it('advances the version once per action, so sync carries each', () => {
     const start = useProgress.getState().progress.updatedAt
 
@@ -780,7 +801,16 @@ describe('marking a block known', () => {
         Object.entries(before.skills).map(([id, record]) => [
           id,
           unit0.includes(id)
-            ? { ...record, mastery: SKIP_MASTERY, source: 'tested-out', priorMastery: 0 }
+            ? {
+                ...record,
+                mastery: SKIP_MASTERY,
+                source: 'tested-out',
+                priorMastery: 0,
+                // The review the skip grants: strength 0 unchanged, and due the
+                // next local day.
+                strength: 0,
+                nextReview: addDays(todayKey(), 1),
+              }
             : record,
         ]),
       ),
@@ -864,6 +894,7 @@ describe('review state in progress', () => {
       strength: 0,
       nextReview: null,
       reviewAttempts: 0,
+      reviewCorrect: 0,
     })
   })
 
@@ -896,6 +927,7 @@ describe('review state in progress', () => {
           strength: 4,
           nextReview: null,
           reviewAttempts: 7,
+          reviewCorrect: 3,
         }),
       }),
     )
@@ -910,6 +942,7 @@ describe('review state in progress', () => {
       strength: 4,
       nextReview: addDays(todayKey(), 14),
       reviewAttempts: 7,
+      reviewCorrect: 3,
     })
     expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(1)
   })
@@ -935,6 +968,7 @@ describe('review state in progress', () => {
       strength: 3,
       nextReview: '2026-09-07',
       reviewAttempts: 0,
+      reviewCorrect: 0,
     })
     expect((restored as SkillProgress & { legacyField: string }).legacyField).toBe('keep-me')
 
@@ -987,6 +1021,7 @@ describe('review state in progress', () => {
       strength: 2,
       nextReview: '2026-09-03',
       reviewAttempts: 4,
+      reviewCorrect: 0,
     })
 
     // The field the server sent and this build knows nothing about survives both
@@ -1003,7 +1038,28 @@ describe('review state in progress', () => {
       ...raisedSkill,
       source: 'practiced',
       priorMastery: 0,
+      // The mark scheduled this skill at the strength it read — 1, from its
+      // mastery — and the reversal withdrew that schedule, since the record
+      // carries no last-practised day to derive one from.
+      strength: 1,
+      nextReview: null,
     })
+  })
+
+  it('reads an impossible stored review accuracy back down to its attempt count', () => {
+    const restored = {
+      ...progressWith({}),
+      skills: {
+        ...progressWith({}).skills,
+        'read-numbers': skill({ reviewAttempts: 3, reviewCorrect: 9 }),
+      },
+    } as unknown as Progress
+
+    useProgress.getState().replaceProgress(restored)
+    const stored = useProgress.getState().progress.skills['read-numbers']
+
+    expect(stored.reviewCorrect).toBe(9)
+    expect(readReviewState(stored)).toMatchObject({ reviewAttempts: 3, reviewCorrect: 3 })
   })
 
   it('records a correct review only on its slot skill in one write', () => {
@@ -1018,6 +1074,7 @@ describe('review state in progress', () => {
           strength: 2,
           nextReview: today,
           reviewAttempts: 4,
+          reviewCorrect: 2,
           introSeen: true,
         }),
         unknownField: 'keep-me',
@@ -1041,6 +1098,7 @@ describe('review state in progress', () => {
       strength: 3,
       nextReview: addDays(today, 7),
       reviewAttempts: 5,
+      reviewCorrect: 3,
       introSeen: true,
       unknownField: 'keep-me',
     })
@@ -1063,6 +1121,7 @@ describe('review state in progress', () => {
           strength: 4,
           nextReview: today,
           reviewAttempts: 2,
+          reviewCorrect: 2,
         }),
       }),
       mistakes: { carry: 2 },
@@ -1079,6 +1138,7 @@ describe('review state in progress', () => {
       strength: 3,
       nextReview: addDays(today, 7),
       reviewAttempts: 3,
+      reviewCorrect: 2,
     })
     expect(after.mistakes).toEqual({ carry: 3 })
     expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(1)
@@ -1094,6 +1154,7 @@ describe('review state in progress', () => {
           strength: 1,
           nextReview: today,
           reviewAttempts: 2,
+          reviewCorrect: 1,
         }),
       }),
     })
@@ -1110,6 +1171,7 @@ describe('review state in progress', () => {
       strength: 1,
       nextReview: addDays(today, 1),
       reviewAttempts: 4,
+      reviewCorrect: 2,
     })
     expect(afterRetry.updatedAt).toBeGreaterThan(afterMiss.updatedAt)
     expect(vi.mocked(idbSet)).toHaveBeenCalledTimes(2)
@@ -1142,6 +1204,7 @@ describe('review state in progress', () => {
       strength: 4,
       nextReview: addDays(todayKey(), 14),
       reviewAttempts: 1,
+      reviewCorrect: 1,
       legacyField: 'keep-me',
     })
     expect(Object.keys(written).sort()).toEqual(Object.keys(initialProgress()).sort())

@@ -49,6 +49,17 @@ export type SkillProgress = {
   strength?: number
   nextReview?: string | null
   reviewAttempts?: number
+  /**
+   * How many review answers were right, counted only by review — see
+   * `readReviewState()` in `lib/review.ts`, which defaults it at read time and
+   * bounds it by `reviewAttempts`.
+   *
+   * Separate from `correct`, which also counts standard lesson answers and so
+   * cannot say how a skill has fared in review. The safety net divides this by
+   * `reviewAttempts`, and dividing two counts of different things would report
+   * an accuracy for neither.
+   */
+  reviewCorrect?: number
   source?: SkillSource
   /**
    * The mastery this skill held immediately before a block mark raised it, and
@@ -151,6 +162,7 @@ const emptySkill = (): SkillProgress => ({
   strength: 0,
   nextReview: null,
   reviewAttempts: 0,
+  reviewCorrect: 0,
   source: 'practiced',
   priorMastery: 0,
 })
@@ -523,7 +535,7 @@ export const useProgress = create<Store>((set, get) => {
      * record carrying no change.
      */
     markBlockKnown(blockId, source) {
-      const next = markKnown(get().progress, blockId, source)
+      const next = markKnown(get().progress, blockId, source, todayKey())
       if (next) persist(next)
     },
 

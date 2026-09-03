@@ -1,12 +1,18 @@
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { characterOf } from '../cosmetics'
-import { course, courseStageById, courseStageByUnitId, courseUnitById } from '../curriculum'
+import {
+  course,
+  courseStageById,
+  courseStageByUnitId,
+  courseUnitById,
+  manifestIndex,
+} from '../curriculum'
 import type { CourseStage } from '../curriculum/manifest'
 import { todayKey } from '../lib/calendar'
 import { tap } from '../lib/haptics'
 import { useSound } from '../lib/sound'
-import { unitSkipState } from '../lib/skip'
+import { unitSkipState, type WarmUpSuggestion } from '../lib/skip'
 import {
   nextStreakMilestone,
   streakAtRisk,
@@ -14,7 +20,7 @@ import {
 } from '../lib/streak'
 import { currentPinTier, isUnlocked, useProgress, type Progress } from '../store/progress'
 import { Room } from './Room'
-import { SkipUnitAction, type SkipBlock } from './SkipAhead'
+import { SkipUnitAction, WarmUpOffer, type SkipBlock } from './SkipAhead'
 import { SkillList } from './SkillList'
 import { StreakCard } from './StreakCard'
 import { StageList } from './StageList'
@@ -38,6 +44,7 @@ type Props = {
   onNavigate: (level: TreeLevel) => void
   reviewCount: number
   onStartReview: () => void
+  warmUp?: WarmUpSuggestion
   onStart: (skillId: string) => void
   onOpenSettings: () => void
   onOpenShop: () => void
@@ -64,6 +71,7 @@ export function Home({
   onNavigate,
   reviewCount,
   onStartReview,
+  warmUp,
   onStart,
   onOpenSettings,
   onOpenShop,
@@ -236,6 +244,14 @@ export function Home({
             ›
           </span>
         </button>
+      )}
+
+      {warmUp && (
+        <WarmUpOffer
+          unitName={warmUp.unitName}
+          skillName={warmUp.skillId ? manifestIndex.get(warmUp.skillId)?.skill.name : undefined}
+          onActivate={() => onNavigate({ name: 'skills', unitId: warmUp.unitId })}
+        />
       )}
 
       {firstLaunchStage && (

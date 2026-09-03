@@ -14,7 +14,15 @@
  * migration and no stored block state can disagree with it.
  */
 
-import { course, courseStageById, courseUnitById, generators } from '../curriculum'
+import {
+  course,
+  courseStageById,
+  courseUnitById,
+  generators,
+  implementedSkillIds,
+  manifestIndex,
+  unlockPrerequisites,
+} from '../curriculum'
 import type { TreeLevel } from '../components/Home'
 /**
  * Type-only, and deliberately so: `store/progress.ts` imports this module, so a
@@ -22,6 +30,7 @@ import type { TreeLevel } from '../components/Home'
  * refuse for the same reason. Types erase at build time.
  */
 import type { Progress, SkillProgress, SkillSource } from '../store/progress'
+import { nextReviewFromPractice, readReviewState, scheduleAfterSkip } from './review'
 import type { Rng } from './rng'
 import type { SkillGenerator } from './types'
 
@@ -123,17 +132,18 @@ export function playableBlockSkills(blockId: string): SkillGenerator[] | undefin
   return skills.length === ids.length ? skills : undefined
 }
 
+/** Whether one skill's mastery was declared rather than earned. */
+function isDeclared(skill: SkillProgress | undefined): boolean {
+  const source = readSource(skill)
+  return source === 'tested-out' || source === 'self-assessed'
+}
+
 /** Whether a block contains a skip claim that can be withdrawn. */
 export function blockHasDeclaredSource(
   progress: Pick<Progress, 'skills'>,
   blockId: string,
 ): boolean {
-  return Boolean(
-    blockSkillIds(blockId)?.some((id) => {
-      const source = readSource(progress.skills[id])
-      return source === 'tested-out' || source === 'self-assessed'
-    }),
-  )
+  return Boolean(blockSkillIds(blockId)?.some((id) => isDeclared(progress.skills[id])))
 }
 
 function hasPractised(skill: SkillProgress | undefined): boolean {
@@ -235,6 +245,13 @@ function withSkills(
  * indistinguishable from one found at 0 — so the level it came from is written
  * down here or lost, and the reversal would have to destroy earned practice.
  *
+ * Each raised skill is also scheduled for review, at the strength it already
+ * held — see `scheduleAfterSkip()`. That is what makes a skip watched rather
+ * than merely permitted, and it is computed before the mastery is raised because
+ * a record carrying no strength reads its strength *from* mastery: scheduling
+ * after the raise would give a skipped skill a seven-day interval, slower than a
+ * practised one.
+ *
  * Refused when the block holds no playable skill, and when every skill in it
  * already stands at `SKIP_MASTERY` or above: re-marking a block the learner
  * already knows is the ordinary way to reach this, and it has nothing to write.
@@ -243,6 +260,7 @@ export function markKnown(
   progress: Progress,
   blockId: string,
   source: DeclaredSource,
+  today: string,
 ): Progress | null {
   const skillIds = blockSkillIds(blockId)
   if (!skillIds) return null
@@ -250,10 +268,9 @@ export function markKnown(
   const raised: Record<string, SkillProgress> = {}
   for (const id of skillIds) {
     // A skill the record does not carry is built here rather than taken from the
-    // store's default, so a mark writes no review field — what a skip should do
-    // to review scheduling is the safety net's to decide, not this mutation's. A
-    // record the app produced always carries the skill, since `reconcile()` seeds
-    // every skill the manifest offers.
+    // store's default, so the only review fields a mark writes are the two below.
+    // A record the app produced always carries the skill, since `reconcile()`
+    // seeds every skill the manifest offers.
     const skill: SkillProgress = progress.skills[id] ?? {
       mastery: 0,
       lastPracticed: null,
@@ -261,6 +278,7 @@ export function markKnown(
       correct: 0,
     }
     if (skill.mastery >= SKIP_MASTERY) continue
+    const { strength, nextReview } = scheduleAfterSkip(skill, today)
     raised[id] = {
       ...skill,
       mastery: SKIP_MASTERY,
@@ -268,6 +286,8 @@ export function markKnown(
       // Normalised on the way in as well as on the way out: writing a level the
       // reader would reject would silently cost the learner what they earned.
       priorMastery: masteryLevel(skill.mastery),
+      strength,
+      nextReview,
     }
   }
 
@@ -290,6 +310,13 @@ export function markKnown(
  * nothing they did. Both fields are cleared in the same write, because there is
  * no granted level left to restore afterwards.
  *
+ * The schedule the mark granted goes back with it: each reset skill returns to
+ * the next-review date its own last practice implies, which is no scheduled
+ * review at all for one the skip found untouched. That is correctness rather
+ * than tidiness — `selectReviewSkills()` filters on due date alone, so a date
+ * left behind would offer a re-locked, never-practised skill in a review lesson.
+ * Strength is left alone, because the mark never changed it.
+ *
  * Refused when the block holds nothing the skip granted.
  */
 export function unmark(progress: Progress, blockId: string): Progress | null {
@@ -307,8 +334,112 @@ export function unmark(progress: Progress, blockId: string): Progress | null {
       mastery: readPriorMastery(skill),
       source: 'practiced',
       priorMastery: 0,
+      nextReview: nextReviewFromPractice(skill),
     }
   }
 
   return withSkills(progress, reset)
+}
+
+/**
+ * Why a unit is being offered for a warm-up.
+ *
+ * Both readings ask the same question — which unit should the learner warm up —
+ * and differ only in the evidence, so they produce one suggestion with one
+ * surface rather than two of each to keep in step.
+ */
+export type WarmUpReason = 'weak-review' | 'repeated-failure'
+
+export type WarmUpSuggestion = {
+  unitId: string
+  unitName: string
+  reason: WarmUpReason
+  /** The skill whose failures pointed here, on the downstream reading only. */
+  skillId?: string
+}
+
+/** Evidence enough to act on, and worse than the learner would want. */
+const WARM_UP_MIN_ATTEMPTS = 5
+const WARM_UP_ACCURACY = 0.6
+
+/** One stored count, read the way every other stored number here is read. */
+function countOf(value: unknown): number {
+  return typeof value === 'number' && Number.isFinite(value) ? Math.max(0, Math.floor(value)) : 0
+}
+
+/**
+ * The one threshold both readings apply, so there is one rule to explain.
+ *
+ * Multiplied rather than divided: zero attempts is the ordinary case here, and
+ * accuracy exactly at the threshold is doing well enough to be left alone. Both
+ * counts are read defensively because the aggregate pair comes straight off the
+ * stored record; a count above its attempts needs no clamp here, since anything
+ * that high is above the threshold either way.
+ */
+function failingCounts(attempts: unknown, correct: unknown): boolean {
+  const total = countOf(attempts)
+  return total >= WARM_UP_MIN_ATTEMPTS && countOf(correct) < total * WARM_UP_ACCURACY
+}
+
+/** The suggestion one skill raises about itself, from its review record. */
+function weakReviewOf(skill: SkillProgress | undefined): boolean {
+  if (!skill || !isDeclared(skill)) return false
+
+  const { reviewAttempts, reviewCorrect } = readReviewState(skill)
+  return failingCounts(reviewAttempts, reviewCorrect)
+}
+
+/**
+ * The skipped prerequisite a failing skill points back at, if any.
+ *
+ * The graph is the manifest's, read through the unlock prerequisites the course
+ * already uses, so a prerequisite nobody can play cannot be suggested and there
+ * is no second graph to keep in step.
+ */
+function skippedPrerequisiteOf(
+  progress: Pick<Progress, 'skills'>,
+  skillId: string,
+): string | undefined {
+  const skill = progress.skills[skillId]
+  if (!failingCounts(skill?.attempts, skill?.correct)) return undefined
+
+  return unlockPrerequisites.get(skillId)?.find((id) => isDeclared(progress.skills[id]))
+}
+
+/**
+ * The one unit the app quietly offers to warm up, if any.
+ *
+ * Derived on every read and stored nowhere, so it clears itself when review
+ * accuracy recovers, when the skill is practised, or when the skip is taken
+ * back — none of which should need a dismissal flag to be written, cleared and
+ * synced.
+ *
+ * Watched through different counters on purpose. A skipped skill is watched
+ * through review because review is the only place the app sees it at all; a
+ * downstream skill is watched through its aggregate counts because that is where
+ * it actually fails, in ordinary lessons.
+ *
+ * At most one, taken in curriculum order so the same record always offers the
+ * same unit and the offer does not move between reads. Every suggestion names a
+ * unit that still holds a skip claim, because the evidence for either reading is
+ * a skill whose source is a declaration — so acting on it always leads somewhere
+ * the learner can take something back.
+ */
+export function warmUpSuggestion(
+  progress: Pick<Progress, 'skills'>,
+): WarmUpSuggestion | undefined {
+  for (const skillId of implementedSkillIds) {
+    if (weakReviewOf(progress.skills[skillId])) {
+      const unit = manifestIndex.get(skillId)?.unit
+      if (unit) return { unitId: unit.id, unitName: unit.name, reason: 'weak-review' }
+    }
+
+    const prerequisite = skippedPrerequisiteOf(progress, skillId)
+    const unit = prerequisite ? manifestIndex.get(prerequisite)?.unit : undefined
+    if (unit) {
+      return { unitId: unit.id, unitName: unit.name, reason: 'repeated-failure', skillId }
+    }
+  }
+
+  return undefined
 }

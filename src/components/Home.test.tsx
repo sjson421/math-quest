@@ -5,9 +5,9 @@
 
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { courseStageById } from '../curriculum'
+import { courseStageById, getSkill } from '../curriculum'
 import type { CourseStage } from '../curriculum/manifest'
-import { unitSkipState } from '../lib/skip'
+import { unitSkipState, type WarmUpSuggestion } from '../lib/skip'
 import { initialProgress, isUnlocked } from '../store/progress'
 import { Home, type TreeLevel } from './Home'
 import { SkipUnitAction } from './SkipAhead'
@@ -23,6 +23,7 @@ const render = (
   reviewCount: number,
   firstLaunchStage?: CourseStage,
   progress = initialProgress(),
+  warmUp?: WarmUpSuggestion,
 ) =>
   renderToStaticMarkup(
     <Home
@@ -32,6 +33,7 @@ const render = (
       onNavigate={() => {}}
       reviewCount={reviewCount}
       onStartReview={() => {}}
+      warmUp={warmUp}
       onStart={() => {}}
       onOpenSettings={() => {}}
       onOpenShop={() => {}}
@@ -125,5 +127,41 @@ describe('Home skip entry', () => {
       source: 'self-assessed',
     }
     expect(unitSkipState('unit-0', marked, (id) => isUnlocked(id, marked))).toBe('reversal')
+  })
+})
+
+describe('Home warm-up offer', () => {
+  const suggestion: WarmUpSuggestion = {
+    unitId: 'unit-0',
+    unitName: 'Numbers & Place Value',
+    reason: 'weak-review',
+  }
+
+  it('shows nothing without a suggestion', () => {
+    expect(render({ name: 'stages' }, 0)).not.toContain('data-warm-up-offer')
+  })
+
+  it('names the suggested unit', () => {
+    const html = render({ name: 'stages' }, 0, undefined, initialProgress(), suggestion)
+
+    expect(html).toContain('data-warm-up-offer')
+    expect(html).toContain('Warm up Numbers &amp; Place Value?')
+  })
+
+  it('names the failing skill on the downstream reason', () => {
+    const html = render({ name: 'stages' }, 0, undefined, initialProgress(), {
+      ...suggestion,
+      reason: 'repeated-failure',
+      skillId: 'add-facts-small',
+    })
+
+    expect(html).toContain(getSkill('add-facts-small').name)
+  })
+
+  it('keeps the review entry and the warm-up offer on screen together', () => {
+    const html = render({ name: 'stages' }, 2, undefined, initialProgress(), suggestion)
+
+    expect(html).toContain('Review time')
+    expect(html.match(/data-warm-up-offer/g)).toHaveLength(1)
   })
 })

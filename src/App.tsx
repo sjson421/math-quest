@@ -15,6 +15,7 @@ import {
   nextFreshStartStage,
   selectCheckSkills,
   skipResultDestination,
+  warmUpSuggestion,
 } from './lib/skip'
 import { initSync, useSyncStatus } from './lib/sync'
 import type { SkillGenerator } from './lib/types'
@@ -89,6 +90,7 @@ export default function App() {
   // has not navigated — once they have, this costs nothing per render.
   const active: Screen = screen ?? openingLevel(progress)
   const firstLaunchStage = progress.skipOfferSeen ? undefined : nextFreshStartStage(progress)
+  const warmUp = warmUpSuggestion(progress)
   const reviewSkills = selectReviewSkills(
     implementedSkillIds.map((id) => ({
       skill: getSkill(id),
@@ -180,6 +182,7 @@ export default function App() {
                 }}
                 onReverseSkip={unmarkBlock}
                 reviewCount={reviewSkills.length}
+                warmUp={warmUp}
                 onStartReview={() =>
                   setScreen({ name: 'review', skills: reviewSkills, back: active })
                 }

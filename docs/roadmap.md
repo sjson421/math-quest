@@ -1222,7 +1222,7 @@ shows before a lesson's first problem.
       per-skill strength on the skill tree, and the "you keep doing X" insight that the store's
       `mistakes` map has been accumulating tags for since before there was anywhere to show them.
 
-- [ ] **28 · Skip-ahead** — L *(was B5, then 27)* — **three increments**
+- [x] **28 · Skip-ahead** — L *(was B5, then 27)* — **three increments**
 
       The full flow from [skipping ahead](curriculum.md#skipping-ahead). Every route is optional
       to the learner and reversible at any time.
@@ -1252,7 +1252,7 @@ shows before a lesson's first problem.
       know this" affordance on a locked or unstarted unit — the second matters most, because it
       lets the decision wait until the learner knows what the app is like.
 
-      **28c · The safety net.** A skipped skill enters review at low strength so it resurfaces
+      **28c · The safety net — shipped 2026-09-02.** A skipped skill enters review at low strength so it resurfaces
       sooner than a practised one; below 60% accuracy across 5+ review attempts the app quietly
       offers to warm its unit up; and a downstream skill failing repeatedly points back at the
       skipped prerequisite, which is the actual cause and the one thing the learner cannot see.

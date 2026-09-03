@@ -150,3 +150,47 @@ export function SkipAheadResult({
     </motion.main>
   )
 }
+
+/**
+ * The quiet offer to warm a unit up, from `warmUpSuggestion()`.
+ *
+ * Framed as a warm-up rather than a correction: the learner declared they knew
+ * this block, and the app has evidence they are struggling — which is worth
+ * saying, and not worth saying as failure, penalty, or lost progress.
+ *
+ * One action, and it only opens the unit. Taking a skip back lowers a mastery
+ * level, so it keeps the deliberate, labelled control it already has there.
+ */
+export function WarmUpOffer({
+  unitName,
+  skillName,
+  onActivate,
+}: {
+  unitName: string
+  skillName?: string
+  onActivate: () => void
+}) {
+  return (
+    <button
+      type="button"
+      onClick={() => {
+        tap()
+        onActivate()
+      }}
+      className="mx-5 mb-5 flex items-center justify-between gap-3 rounded-blob bg-white p-4 text-left shadow-soft active:scale-[0.98] transition-transform"
+      data-warm-up-offer
+    >
+      <span className="min-w-0">
+        <span className="block font-bold text-lg">Warm up {unitName}?</span>
+        <span className="block text-sm text-ink-soft">
+          {skillName
+            ? `A few problems here would help with ${skillName}.`
+            : 'A few problems here would help it stick.'}
+        </span>
+      </span>
+      <span className="shrink-0 text-2xl text-lilac-deep" aria-hidden="true">
+        ›
+      </span>
+    </button>
+  )
+}

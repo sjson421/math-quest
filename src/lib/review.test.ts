@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import {
   isReviewDue,
+  nextReviewFromPractice,
   readReviewState,
   selectReviewSkills,
   REVIEW_INTERVALS,
   reviewInterval,
   scheduleAfterLesson,
   scheduleAfterReview,
+  scheduleAfterSkip,
   type ReviewCandidate,
 } from './review'
 import type { SkillGenerator } from './types'
@@ -45,6 +47,7 @@ describe('review state defaults', () => {
       strength: 0,
       nextReview: null,
       reviewAttempts: 0,
+      reviewCorrect: 0,
     })
   })
 
@@ -56,6 +59,7 @@ describe('review state defaults', () => {
       strength: 3,
       nextReview: '2026-09-07',
       reviewAttempts: 0,
+      reviewCorrect: 0,
     })
     expect(legacy).toEqual(before)
   })
@@ -63,7 +67,7 @@ describe('review state defaults', () => {
   it('honors explicit low strength and an explicit unscheduled value', () => {
     expect(
       readReviewState(skill({ mastery: 3, lastPracticed: '2026-08-31', strength: 0, nextReview: null })),
-    ).toEqual({ strength: 0, nextReview: null, reviewAttempts: 0 })
+    ).toEqual({ strength: 0, nextReview: null, reviewAttempts: 0, reviewCorrect: 0 })
   })
 
   it('normalizes malformed and out-of-range fields through safe defaults', () => {
@@ -77,17 +81,17 @@ describe('review state defaults', () => {
           reviewAttempts: -2.8,
         }),
       ),
-    ).toEqual({ strength: 3, nextReview: '2026-09-07', reviewAttempts: 0 })
+    ).toEqual({ strength: 3, nextReview: '2026-09-07', reviewAttempts: 0, reviewCorrect: 0 })
 
     expect(
       readReviewState(
         skill({ mastery: 99, lastPracticed: 'not-a-day', strength: Infinity, reviewAttempts: NaN }),
       ),
-    ).toEqual({ strength: 5, nextReview: null, reviewAttempts: 0 })
+    ).toEqual({ strength: 5, nextReview: null, reviewAttempts: 0, reviewCorrect: 0 })
 
     expect(
       readReviewState(skill({ mastery: 3, lastPracticed: '2026-08-31', strength: 2.9, reviewAttempts: 4.9 })),
-    ).toEqual({ strength: 2, nextReview: '2026-09-03', reviewAttempts: 4 })
+    ).toEqual({ strength: 2, nextReview: '2026-09-03', reviewAttempts: 4, reviewCorrect: 0 })
   })
 
   it('leaves an edge-of-range legacy date safely unscheduled', () => {
@@ -95,7 +99,23 @@ describe('review state defaults', () => {
       strength: 1,
       nextReview: null,
       reviewAttempts: 0,
+      reviewCorrect: 0,
     })
+  })
+
+  it('never reads more correct review answers than review attempts', () => {
+    expect(
+      readReviewState(skill({ reviewAttempts: 3, reviewCorrect: 9 })).reviewCorrect,
+    ).toBe(3)
+    expect(
+      readReviewState(skill({ reviewAttempts: 3, reviewCorrect: -2 })).reviewCorrect,
+    ).toBe(0)
+    expect(
+      readReviewState(skill({ reviewAttempts: 5, reviewCorrect: 2.9 })).reviewCorrect,
+    ).toBe(2)
+    expect(
+      readReviewState(skill({ reviewAttempts: 5, reviewCorrect: 'two' })).reviewCorrect,
+    ).toBe(0)
   })
 
   it('caps review attempts before arithmetic can lose an increment', () => {
@@ -103,7 +123,11 @@ describe('review state defaults', () => {
       Number.MAX_SAFE_INTEGER,
     )
     expect(
-      scheduleAfterReview({ strength: 0, reviewAttempts: Number.MAX_VALUE }, false, '2026-08-31'),
+      scheduleAfterReview(
+        { strength: 0, reviewAttempts: Number.MAX_VALUE, reviewCorrect: 0 },
+        false,
+        '2026-08-31',
+      ),
     ).toMatchObject({ reviewAttempts: Number.MAX_SAFE_INTEGER })
   })
 })
@@ -121,45 +145,60 @@ describe('lesson scheduling', () => {
   it('raises recall to newly reached mastery and keeps attempts', () => {
     expect(
       scheduleAfterLesson(
-        skill({ mastery: 3, strength: 1, reviewAttempts: 2 }),
+        skill({ mastery: 3, strength: 1, reviewAttempts: 2, reviewCorrect: 1 }),
         '2026-08-31',
       ),
-    ).toEqual({ strength: 3, nextReview: '2026-09-07', reviewAttempts: 2 })
+    ).toEqual({ strength: 3, nextReview: '2026-09-07', reviewAttempts: 2, reviewCorrect: 1 })
   })
 
   it('keeps stronger recall when standard practice repeats', () => {
     expect(
       scheduleAfterLesson(
-        skill({ mastery: 3, strength: 4, nextReview: null, reviewAttempts: 2 }),
+        skill({ mastery: 3, strength: 4, nextReview: null, reviewAttempts: 2, reviewCorrect: 2 }),
         '2026-08-31',
       ),
-    ).toEqual({ strength: 4, nextReview: '2026-09-14', reviewAttempts: 2 })
+    ).toEqual({ strength: 4, nextReview: '2026-09-14', reviewAttempts: 2, reviewCorrect: 2 })
   })
 })
 
 describe('review result scheduling', () => {
   it('raises strength after a correct result', () => {
     expect(
-      scheduleAfterReview({ strength: 2, reviewAttempts: 4 }, true, '2026-08-31'),
-    ).toEqual({ strength: 3, nextReview: '2026-09-07', reviewAttempts: 5 })
+      scheduleAfterReview({ strength: 2, reviewAttempts: 4, reviewCorrect: 3 }, true, '2026-08-31'),
+    ).toEqual({ strength: 3, nextReview: '2026-09-07', reviewAttempts: 5, reviewCorrect: 4 })
   })
 
   it('lowers strength after an incorrect result', () => {
     expect(
-      scheduleAfterReview({ strength: 4, reviewAttempts: 4 }, false, '2026-08-31'),
-    ).toEqual({ strength: 3, nextReview: '2026-09-07', reviewAttempts: 5 })
+      scheduleAfterReview({ strength: 4, reviewAttempts: 4, reviewCorrect: 3 }, false, '2026-08-31'),
+    ).toEqual({ strength: 3, nextReview: '2026-09-07', reviewAttempts: 5, reviewCorrect: 3 })
+  })
+
+  it('cannot raise the correct count on a wrong answer, whatever was stored', () => {
+    // A blob claiming more correct answers than attempts is clamped against the
+    // attempts it already had, not against the one being added — otherwise a
+    // wrong answer would leave the record reporting one more right than before.
+    expect(
+      scheduleAfterReview({ strength: 2, reviewAttempts: 4, reviewCorrect: 9 }, false, '2026-08-31'),
+    ).toEqual({ strength: 1, nextReview: '2026-09-01', reviewAttempts: 5, reviewCorrect: 4 })
   })
 
   it('keeps both bounds and still counts attempts', () => {
-    expect(scheduleAfterReview({ strength: 5, reviewAttempts: 0 }, true, '2026-08-31')).toEqual({
+    expect(
+      scheduleAfterReview({ strength: 5, reviewAttempts: 0, reviewCorrect: 0 }, true, '2026-08-31'),
+    ).toEqual({
       strength: 5,
       nextReview: '2026-09-30',
       reviewAttempts: 1,
+      reviewCorrect: 1,
     })
-    expect(scheduleAfterReview({ strength: 0, reviewAttempts: 0 }, false, '2026-08-31')).toEqual({
+    expect(
+      scheduleAfterReview({ strength: 0, reviewAttempts: 0, reviewCorrect: 0 }, false, '2026-08-31'),
+    ).toEqual({
       strength: 0,
       nextReview: '2026-09-01',
       reviewAttempts: 1,
+      reviewCorrect: 0,
     })
   })
 
@@ -167,9 +206,78 @@ describe('review result scheduling', () => {
     expect(scheduleAfterLesson(skill({ mastery: 0 }), '9999-12-31')).toMatchObject({
       nextReview: null,
     })
-    expect(scheduleAfterReview({ strength: 0, reviewAttempts: 0 }, false, '9999-12-31')).toMatchObject({
+    expect(
+      scheduleAfterReview({ strength: 0, reviewAttempts: 0, reviewCorrect: 0 }, false, '9999-12-31'),
+    ).toMatchObject({
       nextReview: null,
     })
+  })
+})
+
+describe('skip scheduling', () => {
+  it('brings an untouched skill back the next day', () => {
+    expect(scheduleAfterSkip(skill(), '2026-08-31')).toEqual({
+      strength: 0,
+      nextReview: '2026-09-01',
+      reviewAttempts: 0,
+      reviewCorrect: 0,
+    })
+  })
+
+  it('keeps the strength a part-practised skill earned', () => {
+    expect(
+      scheduleAfterSkip(skill({ mastery: 2, strength: 2, lastPracticed: '2026-08-20' }), '2026-08-31'),
+    ).toEqual({
+      strength: 2,
+      nextReview: '2026-09-03',
+      reviewAttempts: 0,
+      reviewCorrect: 0,
+    })
+  })
+
+  it('schedules a legacy record from the strength it reads, not a mastery raised after', () => {
+    const legacy = skill({ mastery: 0, lastPracticed: null })
+
+    // The caller marks *before* raising mastery, so the strength here is the one
+    // the record held — a skip of a legacy record cannot buy it a week off.
+    expect(scheduleAfterSkip(legacy, '2026-08-31')).toMatchObject({
+      strength: 0,
+      nextReview: '2026-09-01',
+    })
+  })
+
+  it('leaves review counts alone', () => {
+    expect(
+      scheduleAfterSkip(skill({ reviewAttempts: 5, reviewCorrect: 2 }), '2026-08-31'),
+    ).toMatchObject({ reviewAttempts: 5, reviewCorrect: 2 })
+  })
+})
+
+describe('the schedule a practised skill implies', () => {
+  it('derives the date from the last practised day at its recorded strength', () => {
+    expect(nextReviewFromPractice(skill({ mastery: 2, strength: 2, lastPracticed: '2026-08-31' }))).toBe(
+      '2026-09-03',
+    )
+  })
+
+  it('returns no date without a valid last-practised day', () => {
+    expect(nextReviewFromPractice(skill({ mastery: 3, strength: 3 }))).toBeNull()
+    expect(nextReviewFromPractice(skill({ mastery: 3, strength: 3, lastPracticed: 'not-a-day' }))).toBeNull()
+  })
+
+  it('ignores a stored next-review date and changes no count', () => {
+    const scheduled = skill({
+      mastery: 1,
+      strength: 1,
+      lastPracticed: '2026-08-31',
+      nextReview: '2026-12-01',
+      reviewAttempts: 4,
+      reviewCorrect: 1,
+    })
+    const before = { ...scheduled }
+
+    expect(nextReviewFromPractice(scheduled)).toBe('2026-09-01')
+    expect(scheduled).toEqual(before)
   })
 })
 

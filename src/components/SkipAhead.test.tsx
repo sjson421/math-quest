@@ -1,6 +1,12 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { SkipAheadChoice, SkipAheadResult, SkipUnitAction, type SkipBlock } from './SkipAhead'
+import {
+  SkipAheadChoice,
+  SkipAheadResult,
+  SkipUnitAction,
+  WarmUpOffer,
+  type SkipBlock,
+} from './SkipAhead'
 
 const block: SkipBlock = { kind: 'stage', id: 'stage-a', name: 'Numbers' }
 
@@ -54,6 +60,30 @@ describe('skip-ahead surfaces', () => {
     expect(html).toContain('Practice Addition')
     expect(html).not.toContain('failed')
     expect(html).not.toContain('penalty')
+  })
+
+  it('offers a warm-up in the unit’s name, without failure or penalty wording', () => {
+    const html = renderToStaticMarkup(
+      <WarmUpOffer unitName="Numbers & Place Value" onActivate={() => {}} />,
+    )
+
+    expect(html).toContain('data-warm-up-offer')
+    expect(html).toContain('Warm up Numbers &amp; Place Value?')
+    expect(html).not.toContain('failed')
+    expect(html).not.toContain('penalty')
+    expect(html).not.toContain('lost')
+  })
+
+  it('names the skill that pointed at the unit when there is one', () => {
+    const html = renderToStaticMarkup(
+      <WarmUpOffer
+        unitName="Numbers & Place Value"
+        skillName="Add facts to 10"
+        onActivate={() => {}}
+      />,
+    )
+
+    expect(html).toContain('Add facts to 10')
   })
 
   it('renders one unit action surface for either skip state', () => {
