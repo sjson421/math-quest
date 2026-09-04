@@ -530,7 +530,8 @@ Ship by stage; each stage is independently useful.
    all twenty-two Stage G skills are playable. The two probability skills answer as a fraction
    through the already-built fraction keypad, so Stage G's `requires` gains `fraction-input`
    alongside `choice-input`, `math-notation`, `diagram` and `chart`.
-7. **Stage H** (6) — timed mode is built; the score estimator and six skills remain planned.
+7. **Stage H** (6) — timed mode and score-estimation infrastructure are built; all six skills
+   remain planned.
 
 ### New capabilities required, by stage
 
@@ -546,6 +547,7 @@ Ship by stage; each stage is independently useful.
 | Root-pair input | F (Unit 18.8) | Built — two labelled exact-numeric slots share one keypad and accept either root order |
 | Chart rendering | G (Unit 21.5) | Built — bar, line, scatter |
 | Timed mode | H | Built — opt-in elapsed clock; only place time pressure appears |
+| Score estimation | H | Built — offline approximate GED Math estimate; not an official score |
 
 ---
 
@@ -566,8 +568,8 @@ Ship by stage; each stage is independently useful.
   derivation is reviewable.
 - **A skill with no generator is `planned`, not broken.** State is derived at load from the
   generator registry plus the capabilities that are actually built. Today 6 of 201 skills
-  are planned; Stage H alone still waits on its generators and score estimator. Timed mode is
-  built but does not make a skill playable without a generator. Planned skills are transparent to unlocking —
+  are planned; Stage H alone still waits on its generators. Timed mode and score-estimation
+  infrastructure are built but do not make a skill playable without a generator. Planned skills are transparent to unlocking —
   a learner is never held behind our build order — and never offered for play.
 - **The content style contract above is enforced**, not advisory: `src/lib/content-rules.ts`
   checks authored teaching lines for one sentence, forward references, and current-unit

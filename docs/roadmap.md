@@ -60,9 +60,10 @@ picking among rendered lines was never the built option the roadmap took it for,
 inequality graph is declined rather than deferred. The unit needed no new capability, and its
 six new `EquationData` arms sit on the existing `equation` display arm, which was always
 "a statement that already contains its relation" and now says so.
-Timed mode is an opt-in, session-local elapsed clock. It does not add time pressure to existing
-lessons or make Stage H playable without generators; the six Stage H skills and score estimator
-remain planned. This line is the only progress number in the repo's documentation — the
+Timed mode is an opt-in, session-local elapsed clock. Score-estimation infrastructure is also
+built for future Stage H forms, with an approximate mapping that is not an official score. Neither
+adds time pressure or makes Stage H playable without generators; all six Stage H skills remain
+planned. This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
 To re-derive it rather than trusting this file:
@@ -1261,14 +1262,14 @@ shows before a lesson's first problem.
       All three read counters that 27a and 27b maintain, which is the whole reason review is
       ordered first.
 
-- [ ] **29 · Timed mode and score estimator** *(was 28)* — M — **two increments**
+- [x] **29 · Timed mode and score estimator** *(was 28)* — M — **two increments**
 
       **29a · The timer — shipped 2026-09-03.** A clock on the session and `timed` into
       `AVAILABLE_CAPABILITIES`, which completes Stage H's timing infrastructure. It stays a
       property of the session rather than a setting: "no time pressure until Stage H" is a
       curriculum commitment, and a global switch would erode it by accident.
 
-      **29b · The score estimator.** Raw score to a GED scaled estimate, with the mapping written
+      **29b · The score estimator — shipped 2026-09-04.** Raw score to a GED scaled estimate, with the mapping written
       where a reader can check it and the result presented as an estimate. This is the only place
       the app says anything about an official test, so the caveat is part of the feature rather
       than a disclaimer bolted to it.
