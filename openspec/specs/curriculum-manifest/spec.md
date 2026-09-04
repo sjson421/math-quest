@@ -163,6 +163,15 @@ requirement SHALL NOT imply it is built.
 A stage's record SHALL name every capability its own skills need, not only the one it
 introduces, so the set can be read off the stage rather than assembled from earlier ones.
 
+The existing `timed` capability SHALL be marked available only after session-local timing,
+accessible clock markup, cleanup, and phone-layout validation are built. Stage H SHALL retain
+`timed` as its declared stage requirement. No generator, skill id, unit membership,
+prerequisite, quick marker, or wall marker SHALL be added or changed by capability activation.
+
+Because every Stage H skill still lacks a registered generator, adding `timed` to the available
+capability set SHALL leave all six Stage H skills planned, keep Stage H absent from the playable
+course tree, and keep the implemented total at 195 of 201.
+
 #### Scenario: Capability requirement is queryable
 
 - **WHEN** a stage is inspected
@@ -253,6 +262,20 @@ introduces, so the set can be read off the stage rather than assembled from earl
 - **WHEN** chart rendering is available while timed mode is not
 - **THEN** all six Stage H skills remain planned
 - **AND** chart availability does not change the Stage H capability state
+
+#### Scenario: Timed capability becomes available
+
+- **WHEN** timed session infrastructure is complete
+- **THEN** `timed` is present in the available capability set
+- **AND** Stage H still declares `timed` as its required capability
+
+#### Scenario: Availability alone does not ship Stage H content
+
+- **WHEN** skill state is resolved after `timed` becomes available but before any Stage H
+  generator is registered
+- **THEN** all six Stage H skills remain planned
+- **AND** Stage H remains absent from the playable course tree
+- **AND** exactly 195 of 201 skills remain implemented
 
 ### Requirement: Stage G completes with its fifth content increment
 
