@@ -48,10 +48,11 @@ a variable is, evaluating and translating expressions, spotting like terms, comb
 distributing across a sign, and factoring a common factor back out — the first content to
 use expression input, and the first to ask for an answer whose written form matters as much
 as its value, since the expanded expression a factoring question displays is a wrong answer
-to it. Later units still need timed mode.
+to it. Timed mode is now built as an opt-in, session-local elapsed clock for future Stage H
+practice; existing lessons stay untimed. Stage H content and score estimation remain planned.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
-milestone, what blocks what, and the product features still unbuilt (skip-ahead, timed mode,
+milestone, what blocks what, and the product features still unbuilt (Stage H, score estimation,
 streak reminders). It lives in one place so it cannot drift out of step with this file.
 
 ## Running it

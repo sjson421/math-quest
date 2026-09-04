@@ -56,7 +56,7 @@ Break these and something fails loudly — or worse, quietly. Each rule is state
 - **`AVAILABLE_CAPABILITIES`** in `manifest/resolve.ts` is the one-line switch that turns
   a stage on once its infrastructure exists. It contains `choice-input`, `math-notation`,
   `fraction-input`, `diagram`, `number-line`, `expression-input`, `coordinate-plane`,
-  `root-pair-input`, and `chart` today.
+  `root-pair-input`, `chart`, and `timed` today.
 - **Two different `skillById`s.** `curriculum/index.ts` exports `generators` (the
   registry); `manifest/index.ts` exports `skillById` (manifest entries). Do not conflate
   them, and do not reintroduce the old name for the registry.

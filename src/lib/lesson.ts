@@ -1,5 +1,6 @@
 import type { Difficulty, Problem, SkillGenerator } from './types'
 import { CHECK_DIFFICULTY, CHECK_PROBLEM_COUNT } from './skip'
+import type { SessionTiming } from './session-clock'
 
 export type AttemptRecord = 'correct' | 'incorrect' | 'none'
 
@@ -21,6 +22,7 @@ export type LessonSlot = {
 }
 
 export type LessonSession = {
+  timing?: SessionTiming
   targetCorrect: number
   correctCount: number
   pacing: LessonPacing
@@ -28,6 +30,7 @@ export type LessonSession = {
 }
 
 export type CheckSession = {
+  timing?: SessionTiming
   totalProblems: number
   answeredCount: number
   correctCount: number
@@ -78,10 +81,12 @@ export function recordSessionAttempt(
 export function startLessonSession(
   sources: readonly LessonSource[],
   makeProblem: ProblemFactory,
+  timing?: SessionTiming,
 ): LessonSession {
   if (sources.length === 0) throw new Error('Lesson needs at least one source')
 
   return {
+    ...(timing ? { timing } : {}),
     targetCorrect: sources.length,
     correctCount: 0,
     pacing: INITIAL_PACING,
@@ -103,11 +108,13 @@ export function startStandardLessonSession(
   targetCorrect: number,
   baseDifficulty: Difficulty,
   makeProblem: ProblemFactory,
+  timing?: SessionTiming,
 ): LessonSession {
   const source = { skill, baseDifficulty }
   return startLessonSession(
     Array.from({ length: targetCorrect }, () => source),
     makeProblem,
+    timing,
   )
 }
 
@@ -115,6 +122,7 @@ export function startStandardLessonSession(
 export function startCheckSession(
   skills: readonly SkillGenerator[],
   makeProblem: ProblemFactory,
+  timing?: SessionTiming,
 ): CheckSession {
   if (skills.length !== CHECK_PROBLEM_COUNT) {
     throw new Error(`Check needs exactly ${CHECK_PROBLEM_COUNT} sources`)
@@ -126,6 +134,7 @@ export function startCheckSession(
   }))
 
   return {
+    ...(timing ? { timing } : {}),
     totalProblems: sources.length,
     answeredCount: 0,
     correctCount: 0,

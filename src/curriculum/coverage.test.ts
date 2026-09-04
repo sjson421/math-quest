@@ -647,6 +647,7 @@ describe('the skills that are built', () => {
 
     expect(AVAILABLE_CAPABILITIES.has('chart')).toBe(true)
     expect(AVAILABLE_CAPABILITIES.has('fraction-input')).toBe(true)
+    expect(AVAILABLE_CAPABILITIES.has('timed')).toBe(true)
     expect(stage?.requires).toEqual(['choice-input', 'math-notation', 'fraction-input', 'diagram', 'chart'])
     expect((stage?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))).toEqual([])
     expect(stageIds).toHaveLength(22)
@@ -668,11 +669,14 @@ describe('the skills that are built', () => {
     expect(unit21Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
     expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
     expect(stageHIds).toHaveLength(6)
+    expect(stageHIds.filter((id) => generators.has(id))).toEqual([])
     expect(stageHIds.filter((id) => skillState(id) === 'planned')).toHaveLength(6)
     expect(stageH?.requires).toEqual(['timed'])
+    expect((stageH?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))).toEqual([])
     expect(implementedSkillIds).toHaveLength(195)
     expect(allSkills).toHaveLength(195)
     expect(course.map(({ stage: courseStage }) => courseStage.id)).toContain('stage-g')
+    expect(course.map(({ stage: courseStage }) => courseStage.id)).not.toContain('stage-h')
   })
 
   it('declares a capability for every input mode a stage actually uses', () => {

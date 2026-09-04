@@ -277,6 +277,36 @@ describe('Lesson', () => {
     expect(html).not.toContain('Before you practice')
   })
 
+  it('keeps the elapsed clock opt-in and quiet on an active timed lesson', () => {
+    const untimed = render()
+    const timed = renderToStaticMarkup(
+      <Lesson skill={skillNeeding(undefined, 'synthetic-timed')} timed onExit={() => {}} />,
+    )
+
+    expect(untimed).not.toContain('role="timer"')
+    expect(timed.match(/role="timer"/g)).toHaveLength(1)
+    expect(timed).toContain('aria-label="Elapsed time 0:00"')
+    expect(timed).toContain('>0:00</span>')
+    expect(timed).toContain('0/10')
+    expect(timed).toContain('What is the sum?')
+    expect(timed).toContain('Check')
+    expect(timed).not.toContain('aria-live=')
+  })
+
+  it('does not create a timed session before an automatic intro is dismissed', () => {
+    const skill = {
+      ...skillNeeding(undefined, 'synthetic-timed-intro'),
+      teachingLine: 'A clear line teaches one idea.',
+    }
+
+    const html = renderToStaticMarkup(<Lesson skill={skill} timed onExit={() => {}} />)
+
+    expect(html).toContain('data-skill-intro="automatic"')
+    expect(html).toContain('Before you practice')
+    expect(html).not.toContain('role="timer"')
+    expect(html).not.toContain('Elapsed time')
+  })
+
   it('keeps every existing answer surface in skip checks', () => {
     const cases: [SkillGenerator, string][] = [
       [choiceSkill, 'Less than'],

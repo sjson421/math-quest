@@ -21,6 +21,12 @@ import {
   type LessonSession,
   type ProblemFactory,
 } from '../lib/lesson'
+import {
+  createSessionTiming,
+  elapsedSeconds,
+  formatElapsed,
+  type SessionTiming,
+} from '../lib/session-clock'
 import { success } from '../lib/sound'
 import { createSubmissionGate } from '../lib/submission-gate'
 import { feedbackText, responseTo } from '../lib/submit'
@@ -66,42 +72,79 @@ type PracticeMode =
   | {
       kind: 'standard'
       skill: SkillGenerator
+      timed: boolean
     }
   | {
       kind: 'review'
       skills: readonly SkillGenerator[]
+      timed: boolean
     }
   | {
       kind: 'check'
       skills: readonly SkillGenerator[]
       onComplete: (correctCount: number) => void
+      timed: boolean
     }
 
-export function Lesson({ skill, onExit }: { skill: SkillGenerator; onExit: () => void }) {
-  return <PracticeLoop mode={{ kind: 'standard', skill }} onExit={onExit} />
+export function Lesson({
+  skill,
+  onExit,
+  timed = false,
+}: {
+  skill: SkillGenerator
+  onExit: () => void
+  timed?: boolean
+}) {
+  return <PracticeLoop mode={{ kind: 'standard', skill, timed }} onExit={onExit} />
 }
 
 /** Review receives its already-selected generator snapshot from its caller. */
 export function ReviewLesson({
   skills,
   onExit,
+  timed = false,
 }: {
   skills: readonly SkillGenerator[]
   onExit: () => void
+  timed?: boolean
 }) {
-  return <PracticeLoop mode={{ kind: 'review', skills }} onExit={onExit} />
+  return <PracticeLoop mode={{ kind: 'review', skills, timed }} onExit={onExit} />
 }
 
 export function SkipCheckLesson({
   skills,
   onComplete,
   onExit,
+  timed = false,
 }: {
   skills: readonly SkillGenerator[]
   onComplete: (correctCount: number) => void
   onExit: () => void
+  timed?: boolean
 }) {
-  return <PracticeLoop mode={{ kind: 'check', skills, onComplete }} onExit={onExit} />
+  return <PracticeLoop mode={{ kind: 'check', skills, onComplete, timed }} onExit={onExit} />
+}
+
+function useSessionClock(timing: SessionTiming | undefined, active: boolean): string | null {
+  const [clock, setClock] = useState<{ timing?: SessionTiming; elapsed: number }>(() => ({
+    timing,
+    elapsed: timing ? elapsedSeconds(timing, performance.now()) : 0,
+  }))
+
+  useEffect(() => {
+    if (!timing || !active) return
+
+    const update = () =>
+      setClock({ timing, elapsed: elapsedSeconds(timing, performance.now()) })
+    const interval = window.setInterval(update, 1_000)
+
+    return () => window.clearInterval(interval)
+  }, [timing, active])
+
+  if (!timing || !active) return null
+
+  const elapsed = clock.timing === timing ? clock.elapsed : 0
+  return formatElapsed(elapsed)
 }
 
 function PracticeLoop({
@@ -140,10 +183,21 @@ function PracticeLoop({
     if (mode.kind === 'standard') {
       return introNeeded
         ? null
-        : startStandardLessonSession(mode.skill, targetCorrect, baseDifficulty, makeProblem)
+        : startStandardLessonSession(
+            mode.skill,
+            targetCorrect,
+            baseDifficulty,
+            makeProblem,
+            mode.timed ? createSessionTiming(performance.now()) : undefined,
+          )
     }
 
-    if (mode.kind === 'check') return startCheckSession(mode.skills, makeProblem)
+    if (mode.kind === 'check')
+      return startCheckSession(
+        mode.skills,
+        makeProblem,
+        mode.timed ? createSessionTiming(performance.now()) : undefined,
+      )
 
     return startLessonSession(
       mode.skills.map((skill) => ({
@@ -151,14 +205,17 @@ function PracticeLoop({
         baseDifficulty: difficultyFor(progress.skills[skill.id]?.mastery ?? 0),
       })),
       makeProblem,
+      mode.timed ? createSessionTiming(performance.now()) : undefined,
     )
   })
   const [entry, setEntry] = useState('')
   const [feedback, setFeedback] = useState<Feedback>(null)
   const [showHint, setShowHint] = useState(false)
   const [finished, setFinished] = useState<LessonOutcome | null>(null)
+  const [clockActive, setClockActive] = useState(true)
   const [submissionGate] = useState(createSubmissionGate)
   const pendingCheckAdvance = useRef<number | null>(null)
+  const elapsedTime = useSessionClock(session?.timing, !finished && clockActive)
 
   useEffect(() => {
     return () => {
@@ -186,7 +243,15 @@ function PracticeLoop({
   const startPractice = () => {
     if (mode.kind !== 'standard' || introMode !== 'automatic') return
     markIntroSeen(mode.skill.id)
-    setSession(startStandardLessonSession(mode.skill, targetCorrect, baseDifficulty, makeProblem))
+    setSession(
+      startStandardLessonSession(
+        mode.skill,
+        targetCorrect,
+        baseDifficulty,
+        makeProblem,
+        mode.timed ? createSessionTiming(performance.now()) : undefined,
+      ),
+    )
     setIntroMode(null)
   }
 
@@ -203,7 +268,10 @@ function PracticeLoop({
     setEntry('')
     setShowHint(false)
     setFeedback(null)
-    if (transition.complete) mode.onComplete(transition.session.correctCount)
+    if (transition.complete) {
+      setClockActive(false)
+      mode.onComplete(transition.session.correctCount)
+    }
     else setSession(transition.session)
     submissionGate.release()
   }
@@ -213,6 +281,7 @@ function PracticeLoop({
       window.clearTimeout(pendingCheckAdvance.current)
       pendingCheckAdvance.current = null
     }
+    setClockActive(false)
     onExit()
   }
 
@@ -222,7 +291,7 @@ function PracticeLoop({
         skill={mode.skill}
         problem={introProblem}
         mode={introMode}
-        onLeave={onExit}
+        onLeave={leave}
         onStart={startPractice}
         onBackToPractice={() => setIntroMode(null)}
       />
@@ -322,6 +391,7 @@ function PracticeLoop({
         const transition = advanceCorrect(nextSession, makeProblem)
         setSession(transition.session)
         if (transition.complete) {
+          setClockActive(false)
           const outcome =
             mode.kind === 'review'
               ? completeReviewLesson()
@@ -466,16 +536,25 @@ function PracticeLoop({
         >
           ✕
         </button>
-        <div className="flex-1 h-4 rounded-full bg-cream-deep overflow-hidden">
+        <div className="min-w-0 flex-1 h-4 rounded-full bg-cream-deep overflow-hidden">
           <motion.div
             className="h-full rounded-full bg-mint-deep"
             animate={{ width: `${(progressCount / progressTotal) * 100}%` }}
             transition={{ type: 'spring', stiffness: 180, damping: 22 }}
           />
         </div>
-        <span className="text-sm font-bold text-ink-soft tabular-nums w-12 text-right">
+        <span className="shrink-0 text-sm font-bold text-ink-soft tabular-nums w-12 text-right">
           {progressCount}/{progressTotal}
         </span>
+        {elapsedTime !== null && (
+          <span
+            role="timer"
+            aria-label={`Elapsed time ${elapsedTime}`}
+            className="shrink-0 text-sm font-bold text-ink-soft tabular-nums whitespace-nowrap"
+          >
+            {elapsedTime}
+          </span>
+        )}
         {mode.kind === 'standard' && mode.skill.teachingLine && !feedback && (
           <button
             type="button"

@@ -32,6 +32,7 @@ export const AVAILABLE_CAPABILITIES: ReadonlySet<Capability> = new Set([
   'coordinate-plane',
   'root-pair-input',
   'chart',
+  'timed',
 ])
 
 export type SkillLocation = {

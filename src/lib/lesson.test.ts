@@ -16,6 +16,7 @@ import {
   type LessonSource,
 } from './lesson'
 import { intAnswer } from './answer'
+import { createSessionTiming } from './session-clock'
 import type { Difficulty, Problem, SkillGenerator } from './types'
 
 const problem = (label: string, difficulty: Difficulty, skillId = 'synthetic'): Problem => ({
@@ -109,6 +110,33 @@ describe('recordPacing', () => {
 })
 
 describe('lesson queue', () => {
+  it('keeps standard, mixed-review, and skip-check sessions untimed by default', () => {
+    const { make } = labeledFactory()
+
+    expect(startStandardLessonSession(synthetic, 2, 2, make)).not.toHaveProperty('timing')
+    expect(startLessonSession([source('review', 2)], make)).not.toHaveProperty('timing')
+    expect(
+      startCheckSession(Array.from({ length: 8 }, () => synthetic), make),
+    ).not.toHaveProperty('timing')
+  })
+
+  it('keeps one explicit timing origin through lazy review transitions and retries', () => {
+    const { make } = labeledFactory()
+    const timing = createSessionTiming(500)
+    const started = startLessonSession([source('first', 4), source('second', 2)], make, timing)
+    const first = currentProblem(started)
+
+    expect(started.timing).toBe(timing)
+
+    let session = recordSessionAttempt(started, 'incorrect')
+    session = requeueMiss(session, make)
+    expect(session.timing).toBe(timing)
+
+    const next = advanceCorrect(session, make)
+    expect(next.session.timing).toBe(timing)
+    expect(currentProblem(next.session)).toBe(first)
+  })
+
   it('keeps a check at difficulty three and materializes one source at a time', () => {
     const { generated, make } = labeledFactory()
     const skills = Array.from({ length: 8 }, (_, index) => skill(`check-${index}`))
@@ -164,6 +192,21 @@ describe('lesson queue', () => {
     expect(transition.complete).toBe(false)
     expect(transition.session).toBe(session)
     expect(currentProblem(transition.session)).toBe(currentProblem(session))
+  })
+
+  it('keeps explicit timing through check results', () => {
+    const { make } = labeledFactory()
+    const timing = createSessionTiming(900)
+    const session = startCheckSession(
+      [synthetic, skill('second'), ...Array.from({ length: 6 }, (_, index) => skill(`extra-${index}`))],
+      make,
+      timing,
+    )
+
+    const transition = recordCheckResult(session, 'incorrect', make)
+
+    expect(session.timing).toBe(timing)
+    expect(transition.session.timing).toBe(timing)
   })
 
   it('generates an unseen problem only when it becomes current', () => {
@@ -227,12 +270,14 @@ describe('lesson queue', () => {
 describe('lesson session integration', () => {
   it('generates at recovery difficulty immediately after the third miss', () => {
     const { generated, make } = labeledFactory()
-    let session = startStandardLessonSession(synthetic, 5, 4, make)
+    const timing = createSessionTiming(1_200)
+    let session = startStandardLessonSession(synthetic, 5, 4, make, timing)
     const warmupRetry = currentProblem(session)
 
     for (let miss = 0; miss < 3; miss += 1) {
       session = recordSessionAttempt(session, 'incorrect')
       session = requeueMiss(session, make)
+      expect(session.timing).toBe(timing)
     }
 
     expect(generated.map((item) => item.difficulty)).toEqual([3, 4, 4, 3])
@@ -240,6 +285,7 @@ describe('lesson session integration', () => {
 
     session = recordSessionAttempt(session, 'correct')
     session = advanceCorrect(session, make).session
+    expect(session.timing).toBe(timing)
     expect(currentProblem(session)).toBe(warmupRetry)
     expect(currentProblem(session).difficulty).toBe(3)
     expect(session.pacing).toEqual({ consecutiveMisses: 0, recovering: true })
