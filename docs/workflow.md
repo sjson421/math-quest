@@ -20,7 +20,7 @@ fresh context; `implement-roadmap` applies the audited change; and `review-roadm
 simplifies, verifies, ships, and archives it. Ignored state under `.agent-state/roadmap/`
 carries the exact baseline and gate status between sessions.
 
-- `openspec/specs/` is the **baseline**: what the system does today, forty-nine
+- `openspec/specs/` is the **baseline**: what the system does today, fifty-one
   capabilities —
   `curriculum-manifest`, `skill-progression`, `skill-tree-navigation`, `stage-checkpoints`,
   `skill-content-contract`, `problem-generation`, `unit-00-numbers`, `unit-01-addition`,
@@ -35,16 +35,16 @@ carries the exact baseline and gate status between sessions.
   `recovery-key`, `answer-entry`, `root-pair-input`, `cosmetic-wardrobe`, `decorated-room`,
   `math-notation`, `diagram-rendering`, `expression-input`, `coordinate-plane-display`,
   `coordinate-plane-input`, `streak-progression`, `review-scheduling`, `chart-rendering`,
-  `learning-progress-reporting`, `pin-progression`, `skill-intros`, `skip-ahead`. A change
+  `ged-score-estimation`, `learning-progress-reporting`, `pin-progression`, `skill-intros`,
+  `skip-ahead`. A change
   amending built behaviour writes `## MODIFIED
   Requirements` against one of these; `## ADDED` is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Seventy-four changes have
-  shipped — `ls openspec/changes/archive/` is the authority; the latest archive is
-  `2026-09-03-add-session-timer`. It ships roadmap increment 29a: explicitly timed practice
-  sessions have an accurate, accessible elapsed clock, while existing untimed lessons and all
-  Stage H content remain unchanged.
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Seventy-five changes
+  have shipped — `ls openspec/changes/archive/` is the authority; the latest archive is
+  `2026-09-04-add-score-estimator`. It ships roadmap increment 29b: an offline approximate GED
+  Mathematical Reasoning score estimate, while all Stage H content remains planned.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
