@@ -33,7 +33,7 @@ export function SkillIntro({
       // The installed phone is 375px wide. Tighten only its vertical rhythm so
       // a three-step chart intro keeps both actions on screen without shrinking
       // the chart, source text, or teaching line.
-      className="flex h-full min-h-0 flex-col overflow-y-auto px-5 py-3 max-[390px]:py-1"
+      className="flex h-full min-h-0 flex-col overflow-hidden px-5 py-3 max-[390px]:py-1"
       aria-labelledby="skill-intro-title"
       data-skill-intro={mode}
     >
@@ -53,37 +53,45 @@ export function SkillIntro({
         </p>
       </header>
 
-      <section
-        className="mx-auto mt-4 w-full max-w-sm rounded-[1.5rem] bg-white/60 px-4 py-3 shadow-soft max-[390px]:mt-3 max-[390px]:py-2"
-        aria-labelledby="worked-example-title"
-      >
-        <h2 id="worked-example-title" className="text-center text-sm font-bold uppercase tracking-wide text-ink-soft">
-          Worked example
-        </h2>
-        <p className="mt-2 text-center font-semibold text-ink-soft max-[390px]:mt-1" data-example-prompt>
-          {problem.prompt}
-        </p>
-        <div className="mt-3 flex justify-center max-[390px]:mt-2" data-example-display>
-          <ProblemView
-            display={problem.display}
-            entry=""
-            entryMode={problem.inputMode}
-            readOnly
-          />
-        </div>
-
-        <div className="mt-3 rounded-2xl bg-mint-soft px-3 py-2 text-center max-[390px]:mt-2" aria-labelledby="correct-answer-label">
-          <p id="correct-answer-label" className="text-xs font-bold uppercase tracking-wide text-mint-deep">
-            Correct answer
+      {/*
+        A tall example — a coordinate plane with three detailed steps — needs more
+        height than the phone has. Only the example scrolls, so the teaching line
+        and both actions stay on screen at every example size. The region shrinks
+        to its content, so shorter intros keep their existing rhythm.
+      */}
+      <div className="min-h-0 overflow-y-auto" data-example-scroll>
+        <section
+          className="mx-auto mt-4 w-full max-w-sm rounded-[1.5rem] bg-white/60 px-4 py-3 shadow-soft max-[390px]:mt-3 max-[390px]:py-2"
+          aria-labelledby="worked-example-title"
+        >
+          <h2 id="worked-example-title" className="text-center text-sm font-bold uppercase tracking-wide text-ink-soft">
+            Worked example
+          </h2>
+          <p className="mt-2 text-center font-semibold text-ink-soft max-[390px]:mt-1" data-example-prompt>
+            {problem.prompt}
           </p>
-          <p className="mt-1 text-xl font-bold" data-correct-answer>{answer}</p>
-        </div>
+          <div className="mt-3 flex justify-center max-[390px]:mt-2" data-example-display>
+            <ProblemView
+              display={problem.display}
+              entry=""
+              entryMode={problem.inputMode}
+              readOnly
+            />
+          </div>
 
-        <h3 className="mt-3 text-center text-sm font-bold text-ink-soft max-[390px]:mt-2">How it works</h3>
-        <div data-worked-steps>
-          <SolutionSteps solution={problem.solution} />
-        </div>
-      </section>
+          <div className="mt-3 rounded-2xl bg-mint-soft px-3 py-2 text-center max-[390px]:mt-2" aria-labelledby="correct-answer-label">
+            <p id="correct-answer-label" className="text-xs font-bold uppercase tracking-wide text-mint-deep">
+              Correct answer
+            </p>
+            <p className="mt-1 text-xl font-bold" data-correct-answer>{answer}</p>
+          </div>
+
+          <h3 className="mt-3 text-center text-sm font-bold text-ink-soft max-[390px]:mt-2">How it works</h3>
+          <div data-worked-steps>
+            <SolutionSteps solution={problem.solution} />
+          </div>
+        </section>
+      </div>
 
       <div className="mx-auto mt-3 flex w-full max-w-sm flex-col gap-2 pb-1 max-[390px]:mt-2 max-[390px]:gap-1 max-[390px]:pb-0">
         {automatic ? (

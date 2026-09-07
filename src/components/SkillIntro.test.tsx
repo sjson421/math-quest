@@ -85,6 +85,22 @@ describe('SkillIntro', () => {
     }
   })
 
+  it('scrolls only the worked example so both actions stay on screen', () => {
+    // A coordinate-plane example with three detailed steps is taller than the
+    // 812px phone. The example alone scrolls, so the teaching line and both
+    // actions stay in view instead of sliding under the fold with it.
+    const html = render(baseProblem({ kind: 'inline', text: '2 + 3' }, intAnswer(5)))
+    const regionStart = html.indexOf('data-example-scroll')
+    const regionEnd = html.indexOf('</section></div>')
+
+    expect(regionStart).toBeGreaterThan(-1)
+    expect(regionEnd).toBeGreaterThan(regionStart)
+    expect(html.indexOf('Worked example')).toBeGreaterThan(regionStart)
+    expect(html.indexOf('Read the example.')).toBeLessThan(regionEnd)
+    expect(html.indexOf('Start practice')).toBeGreaterThan(regionEnd)
+    expect(html.indexOf('>Leave<')).toBeGreaterThan(regionEnd)
+  })
+
   it('offers only the return action in review mode', () => {
     const html = render(baseProblem({ kind: 'inline', text: '2 + 3' }, intAnswer(5)), 'review')
 
