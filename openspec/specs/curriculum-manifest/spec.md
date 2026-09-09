@@ -295,66 +295,46 @@ observed property of these untimed exercises.
 - **AND** every declared requirement is already available
 - **AND** the four new lessons remain untimed
 
-### Requirement: Stage H opens with its first content increment
+### Requirement: Stage H completes the playable course
 
-The registry SHALL add `calculator-skills`, `formula-sheet`, `review-quantitative`, and
-`review-algebraic` in their existing manifest order. Manifest membership, ids, prerequisites,
-quick markers, wall markers, and available capabilities SHALL remain unchanged. Stage H's
-requirements SHALL change only as specified above.
+`timed-practice-1` and `timed-practice-2` SHALL be registered after `review-algebraic` in their existing manifest order. All six Unit 22 skills SHALL resolve as implemented, all 201 course skills SHALL be playable, and no manifest skill SHALL remain planned. The course tree SHALL derive all six Stage H entries in manifest order from registration and existing capabilities.
 
-Those four skills SHALL resolve as implemented, making 199 of 201 skills playable.
-`timed-practice-1` and `timed-practice-2` SHALL be the only planned skills. Curriculum rows
-22.1–22.4 SHALL show completion and continue to agree with the manifest. Stage H SHALL enter
-the course tree with exactly its four implemented skills.
+All manifest ids, memberships, prerequisites, quick markers, wall markers and available capabilities SHALL remain unchanged. Stage H SHALL retain its existing inherited input/display requirements plus `timed`. No generator SHALL duplicate prerequisite, unit-membership or pacing metadata from the manifest. The two new skills SHALL each carry an authored teaching line and stable example under the content and intro contracts.
 
-README, curriculum and roadmap status prose SHALL reflect the new boundary. Increment 30a
-SHALL be recorded as shipped only after implementation; roadmap item 30 SHALL remain unchecked
-until increment 30b ships.
+Curriculum rows 22.5 and 22.6 SHALL gain completion markers without altering their ids or the curriculum tables' structure. Rows 22.1–22.4 SHALL remain complete. README, curriculum and roadmap status prose SHALL reflect 201 playable skills with both timed forms implemented. Roadmap increment 30b and parent item 30 SHALL be marked complete only once their implementation and verification are complete; item 31 SHALL remain pending.
 
-#### Scenario: Four skills open Stage H
+#### Scenario: Both forms close Stage H
 
-- **WHEN** the four generators are registered and skill state is resolved
-- **THEN** those four ids resolve as implemented and the total is 199 of 201
-- **AND** the course tree contains Unit 22 with those four skills in manifest order
-- **AND** both timed-practice ids stay planned and absent from the playable tree
+- **WHEN** the two form generators are registered and skill state is resolved
+- **THEN** Unit 22 contains all six implemented skills in manifest order
+- **AND** the playable course contains 201 skills with no planned ids
 
 #### Scenario: Registration preserves curriculum authority
 
 - **WHEN** the manifest and curriculum are checked after registration
-- **THEN** all 201 ids, memberships, prerequisites and pacing markers are unchanged
-- **AND** rows 22.1–22.4 are complete and match the implemented set
-- **AND** no prerequisite, pacing marker, unit membership, or stage capability is copied into
-  a generator
+- **THEN** all 201 ids, memberships, prerequisites, quick and wall markers match the existing authority
+- **AND** both new completion markers agree with registration without duplicating manifest metadata in generators
 
-#### Scenario: The parent item stays open
+#### Scenario: Roadmap completion follows verified implementation
 
-- **WHEN** roadmap status is updated after 30a ships
-- **THEN** it records 199 playable skills and completion of 30a
-- **AND** item 30 remains unchecked with 30b still pending
+- **WHEN** both forms and their required checks are complete
+- **THEN** status documents report the complete playable course and mark 30b and item 30 complete
+- **AND** item 31 remains unchecked
 
-### Requirement: Stage G remains complete when Stage H opens
+### Requirement: Earlier stages remain complete when the course closes
 
-All twenty-two Stage G skills from `perimeter` through `counting-outcomes` SHALL remain
-implemented. Unit 21's `basic-probability`, `compound-probability`, and `counting-outcomes`
-SHALL remain registered after `read-scatterplot` in manifest order. Stage G SHALL retain
-`choice-input`, `math-notation`, `fraction-input`, `diagram`, and `chart` as its complete
-available capability requirements. Its manifest membership, prerequisites and pacing markers
-SHALL remain unchanged.
+All previously implemented Stage A–G content SHALL remain implemented with its existing order, requirements, prerequisites and pacing. In particular, all twenty-two Stage G skills from `perimeter` through `counting-outcomes` SHALL remain implemented, with `basic-probability`, `compound-probability` and `counting-outcomes` registered after `read-scatterplot` in manifest order.
 
-Curriculum rows 20.1 through 21.9 SHALL remain complete. Roadmap increments 20a, 20b, 20c, 21a
-and 21b SHALL remain recorded as shipped and roadmap item 26 SHALL remain closed. Updated
-global counts SHALL reflect Stage H's first four playable skills rather than reopening
-completed Stage G work.
+Stage G SHALL retain `choice-input`, `math-notation`, `fraction-input`, `diagram` and `chart` as its complete available capability requirements. Curriculum rows 20.1–21.9 SHALL remain complete. Roadmap increments 20a, 20b, 20c, 21a and 21b SHALL remain shipped and item 26 SHALL remain closed when global counts change to 201.
 
-#### Scenario: Stage G content and capability boundary stays complete
+#### Scenario: Stage G retains content and capabilities
 
-- **WHEN** Stage H's first four generators are registered
-- **THEN** every Stage G skill stays implemented with the same order and requirements
-- **AND** all twenty-two Stage G curriculum rows stay complete
+- **WHEN** both Stage H forms become implemented
+- **THEN** all twenty-two Stage G skills and curriculum rows remain complete in their existing order
+- **AND** Stage G's content requirements and manifest graph are unchanged
 
-#### Scenario: Stage G roadmap completion survives updated totals
+#### Scenario: Updated totals do not reopen shipped work
 
-- **WHEN** the roadmap is updated to 199 playable skills
-- **THEN** all five Stage G increments remain shipped and item 26 remains checked
-- **AND** only the two Stage H timed forms remain planned
-
+- **WHEN** the roadmap reports 201 playable skills
+- **THEN** every previously closed item remains closed, including item 26 and its five increments
+- **AND** completion of Stage H does not remove earlier content

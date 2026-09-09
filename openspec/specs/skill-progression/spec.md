@@ -83,7 +83,7 @@ the learner than a skill that closes because the course itself is unfinished.
 
 ### Requirement: Difficulty follows mastery
 
-Each lesson SHALL have a base generator difficulty derived from current mastery so a skill
+Each ordinary practice lesson SHALL have a base generator difficulty derived from current mastery so a skill
 gets harder as it is learned. Base difficulty SHALL be `mastery + 1`, clamped to the range
 1–5.
 
@@ -96,6 +96,8 @@ before the third consecutive miss SHALL reset the consecutive-miss count. An unf
 that records no attempt SHALL neither advance nor reset that count. The difficulty adjustment
 SHALL NOT be announced to the learner. Re-queued problems SHALL remain the exact problems
 originally presented, including their original difficulty.
+
+Full-length Stage H forms SHALL instead follow the fixed difficulty in `unit-22-test-preparation`. The scenarios below apply to ordinary practice lessons; skip checks retain their separate existing contract.
 
 #### Scenario: Difficulty rises with mastery
 
@@ -152,6 +154,8 @@ lesson needs them. A recorded miss SHALL re-queue that exact problem up to three
 positions later in the same session, clamped to the number of required positions remaining,
 so a lesson cannot be completed without eventually answering every presented problem
 correctly.
+
+These ordinary-lesson rules and scenarios SHALL NOT turn full-length Stage H forms into correct-answer targets. Forms SHALL consume 46 recorded answers under `unit-22-test-preparation`, with no retries and no failure state. Skip checks retain their separate existing contract.
 
 #### Scenario: Standard lesson length
 

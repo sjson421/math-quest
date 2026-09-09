@@ -41,11 +41,10 @@ carries the exact baseline and gate status between sessions.
   Requirements` against one of these; `## ADDED` is for genuinely new surface.
   The count has been wrong before — `ls openspec/specs/` is the authority, not this line.
 - `openspec/changes/` holds active work; use `openspec list --json` for current queue state.
-  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Seventy-six changes
+  `openspec/changes/archive/YYYY-MM-DD-<name>/` holds shipped changes. Seventy-seven changes
   have shipped — `ls openspec/changes/archive/` is the authority; the latest archive is
-  `2026-09-09-add-stage-h-unit-22a`. It ships roadmap increment 30a: Stage H's four untimed
-  skills — calculator practice, formula-sheet selection, and two mixed reviews — leaving only
-  its two timed forms planned.
+  `2026-09-09-add-stage-h-unit-22b`. It ships roadmap increment 30b: Stage H's two full-length
+  timed forms, completing all 201 playable skills and closing roadmap item 30.
 - **`openspec archive` refuses a MODIFIED block that drops a scenario, and a *renamed*
   scenario looks exactly like a dropped one.** `add-decoratable-room` hit this: its delta
   rewrote "Each cosmetic states where the learner stands with it" as "Each item …", and the
