@@ -611,3 +611,34 @@ export function geometryFormulaReferences(diagram: GeometryDiagram): readonly Ge
     }
   }
 }
+
+/** Meaning beside the shared references; no second formula declaration. */
+export function geometryFormulaSelection(diagram: GeometryDiagram): {
+  measurement: string
+  correctIndex: 0 | 1
+  distractor: string
+} {
+  assertGeometryDiagram(diagram)
+  const select = (measurement: string, correctIndex: 0 | 1, distractor: string) => ({ measurement, correctIndex, distractor })
+  switch (diagram.operation) {
+    case 'perimeter': return select('rectangle perimeter', 0, 'rectangle area')
+    case 'area-rectangle': return select('rectangle area', 1, 'rectangle perimeter')
+    case 'area-triangle': return select('triangle area', 1, 'parallelogram area')
+    case 'area-parallelogram': return select('parallelogram area', 0, 'trapezoid area')
+    case 'area-trapezoid': return select('trapezoid area', 1, 'parallelogram area')
+    case 'circumference': return select('circle circumference', 0, 'circle area')
+    case 'area-circle': return select('circle area', 1, 'circle circumference')
+    case 'volume-prism': return select('prism volume', 0, 'pyramid volume')
+    case 'volume-pyramid': return select('pyramid volume', 1, 'prism volume')
+    case 'volume-cylinder': return select('cylinder volume', 0, 'cone volume')
+    case 'volume-cone': return select('cone volume', 1, 'cylinder volume')
+    case 'volume-sphere': return select('sphere volume', 0, 'sphere surface area')
+    case 'surface-area': return select('prism surface area', 0, 'prism volume')
+    case 'pythagorean': return diagram.missingSide === 'hypotenuse'
+      ? select('missing hypotenuse', 0, 'missing leg')
+      : select('missing leg', 1, 'missing hypotenuse')
+    case 'similar-figures':
+    case 'area-composite':
+      throw new Error(`Formula selection excludes ${diagram.operation}`)
+  }
+}

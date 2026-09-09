@@ -822,9 +822,19 @@ export type FractionData =
       rightDenominator: number
     }
 
+/** A bounded teaching sequence, not a calculator emulator. */
+export type CalculatorKey = number | 'negate' | 'subtract' | 'add' | 'multiply' | 'divide' | '(' | ')' | 'enter'
+
+export type CalculatorCandidate = { id: string; keys: CalculatorKey[] }
+
+export type CalculatorData =
+  | { operation: 'evaluate'; keys: CalculatorKey[] }
+  | { operation: 'choose-sequence'; target: Rational; candidates: [CalculatorCandidate, CalculatorCandidate] }
+  | { operation: 'answer-form'; keys: CalculatorKey[]; form: 'fraction' | 'decimal' }
+
 /** How the problem is presented. Column layout matches how arithmetic is taught. */
 export type Display =
-  | { kind: 'inline'; text: string; wholeNumber?: WholeNumberData; decimal?: DecimalData; algebra?: AlgebraData }
+  | { kind: 'inline'; text: string; wholeNumber?: WholeNumberData; decimal?: DecimalData; algebra?: AlgebraData; calculator?: CalculatorData }
   | { kind: 'column'; operands: number[]; operator: Operator }
   /** Decimal columns render from exact source data so trailing zeroes survive. */
   | { kind: 'decimal-column'; decimal: DecimalArithmeticData }
@@ -871,7 +881,8 @@ export type Display =
       | { fraction?: never; ratio?: never; power?: never; polynomial?: never }
     ))
   /** A shaded equal-part or labelled geometry figure carried as data. */
-  | { kind: 'diagram'; diagram: ShapeDiagram | GeometryDiagram }
+  | { kind: 'diagram'; diagram: ShapeDiagram; formulaSelection?: never }
+  | { kind: 'diagram'; diagram: GeometryDiagram; formulaSelection?: true }
   /** A bounded graph whose axes, points, lines, and optional content meaning are data. */
   | { kind: 'coordinate-plane'; plane: CoordinatePlane; coordinate?: CoordinateData }
   /** A labelled chart whose marks and accessible table share one source declaration. */

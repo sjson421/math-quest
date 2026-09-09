@@ -1,6 +1,6 @@
 ---
 name: prepare-roadmap
-description: Select and prepare the first unchecked Math Quest roadmap item through exploration and OpenSpec proposal. Use when starting the roadmap workflow or resuming a handoff marked needs-preparation; exit ready-to-audit before audit or implementation.
+description: Select and prepare the first unchecked Math Quest roadmap item through exploration and OpenSpec proposal. Use when starting the roadmap workflow with no active run; exit ready-to-audit before audit or implementation.
 ---
 
 # Prepare Roadmap
@@ -19,9 +19,8 @@ immediately. Read each phase reference only when that phase begins:
 
 ## Codex adapter
 
-For a new run, create an `update_plan` plan with exactly Select, Explore, and Propose in that
-order. For `needs-preparation`, preserve selection and plan only the exploration and proposal
-gates named by the re-entry reason, ending with Propose. Keep exactly one entry
+Create an `update_plan` plan with exactly Select, Explore, and Propose in that order.
+Keep exactly one entry
 `in_progress`, and never mark a phase complete before its gate passes.
 Use the currently selected model throughout this workflow.
 

@@ -17,5 +17,6 @@ End with the problem understood, chosen approach and rejected alternatives, cons
 and invariants with file evidence, and any open question. This summary feeds proposal.
 
 Any later phase may re-enter exploration for one question it cannot answer. Resolve that
-question inline, record the outcome, and resume through the phase owning affected artifacts
-or code. Do not silently fold a design discovery into implementation or review.
+question inline and continue under the handoff contract's forward amendment steps, which own
+recording the outcome and revising the artifacts. Do not silently fold a design discovery
+into implementation or review, and do not return the run to an earlier skill.

@@ -79,7 +79,7 @@ const shared = new Map(sharedNames.map((name) => [name, read(`${sharedRoot}/${na
 const handoff = shared.get('handoff.md')
 const workflow = read('docs/workflow.md')
 for (const phaseRow of [
-  '| `prepare-roadmap` | 1. Select through 3. Propose | no active run or `needs-preparation` | `ready-to-audit` |',
+  '| `prepare-roadmap` | 1. Select through 3. Propose | no active run | `ready-to-audit` |',
   '| `audit-roadmap` | 4. Audit | `ready-to-audit` | `ready-to-implement` |',
   '| `implement-roadmap` | 5. Apply | `ready-to-implement` | `ready-to-review` |',
   '| `review-roadmap` | 6. Simplify through 10. Archive | `ready-to-review` | complete |',
@@ -88,8 +88,9 @@ for (const phaseRow of [
 }
 for (const token of [
   'Keep exactly one phase `in_progress`',
-  'set the workflow status to `needs-preparation`',
-  'reopen Audit as pending',
+  'The workflow runs forward only',
+  'Every completed phase stays completed',
+  'Re-verify with exactly one fresh read-only reviewer over the revised artifact paths only',
   'State files are run-owned bookkeeping',
   'Start each reviewer with fresh context',
   'Audit always uses exactly one',
@@ -118,6 +119,7 @@ const codexPrepare = adapters.get('prepare-roadmap')[0].content
 for (const { path, content } of adapters.get('prepare-roadmap')) {
   requireText(content, 'set Audit pending', path)
   requireText(content, '`currentPhase`', path)
+  if (content.includes('needs-preparation')) failures.push(`${path} still permits a workflow rewind`)
 }
 for (const token of ['update_plan', 'currently selected model', '`currentPhase`\nto 4', 'ready-to-audit']) {
   requireText(codexPrepare, token, 'Codex prepare adapter')

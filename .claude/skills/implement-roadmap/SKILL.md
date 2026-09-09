@@ -16,6 +16,15 @@ through Claude Code's skill mechanism with the audited change name. Follow every
 test instruction, and verify the edits and task updates in the current worktree. Do not
 simplify, perform final review, stage, commit, push, or archive.
 
+### Forward amendment
+
+If this phase group finds that an artifact assumption is wrong, do not return the run. Follow
+the handoff contract's forward amendment steps: invoke `openspec-update-change` through Claude
+Code's skill mechanism to revise only the invalidated artifacts, append the discovery and
+decision to `exploration.amendments`, then invoke `Agent` once with
+`subagent_type: "roadmap-reviewer"` over the revised artifact paths only. Verify every finding
+before accepting it, then resume where the discovery interrupted.
+
 When every implementation task is checked, complete Apply and set the handoff status to
 `ready-to-review`. End with the exact changed paths, tests run, task status, and state
 directory. Retain the handoff and all intended worktree changes for `review-roadmap`.

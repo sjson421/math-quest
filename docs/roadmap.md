@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 195 of 201 skills are playable.** Stages A through G have complete playable content;
-Stage H alone is still planned. Stage E is
+**Status: 199 of 201 skills are playable.** Stages A through G have complete playable content;
+Stage H has four untimed lessons; only its two full-length forms remain planned. Stage E is
 complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17, 18
 and 19 are complete.
 Choice input,
@@ -62,8 +62,8 @@ six new `EquationData` arms sit on the existing `equation` display arm, which wa
 "a statement that already contains its relation" and now says so.
 Timed mode is an opt-in, session-local elapsed clock. Score-estimation infrastructure is also
 built for future Stage H forms, with an approximate mapping that is not an official score. Neither
-adds time pressure or makes Stage H playable without generators; all six Stage H skills remain
-planned. This line is the only progress number in the repo's documentation — the
+adds time pressure or makes Stage H playable without generators. The four 30a generators
+now open Stage H; its two timed forms remain planned. This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
 To re-derive it rather than trusting this file:
@@ -1278,13 +1278,12 @@ shows before a lesson's first problem.
 
       Closes the course, and the only unit whose skills are not all ordinary lessons.
 
-      **30a · `calculator-skills`–`review-algebraic`.** 22.1 teaches TI-30XS operation, and the
-      open question is what the learner operates: the GED supplies the calculator and this app
-      does not, so either the skill teaches key sequences as text and choices, or something
-      calculator-shaped gets built. Decide that in the proposal, not in the generator. 22.2
-      renders the provided formula sheet in item 17's notation. 22.3 and 22.4 are mixed reviews
-      across the whole course, sampling other skills' generators — that is 27b's session, so they
-      cannot ship before it.
+      **30a · `calculator-skills`–`review-algebraic` — shipped 2026-09-08.** Calculator practice teaches
+      TI-30XS key sequences through text, choices and the keypad. Formula practice selects
+      the supplied reference for a labelled figure. Quantitative review samples Units 0–11,
+      20 and 21; algebraic review samples Units 12–19. Both use ordinary untimed lessons,
+      preserve the source problem and credit only the review skill. All four have teaching
+      intros; Stage H records inherited capabilities plus retained timing for 30b.
 
       **30b · `timed-practice-1`, `timed-practice-2`.** Full-length forms on item 29's clock,
       sampled the way 22.3 and 22.4 sample. Two skills, but each is a test form rather than a

@@ -6,7 +6,7 @@ browser and can be installed on devices that support web apps.
 
 ## Status: playable foundations, whole course mapped
 
-**195 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
+**199 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
 stage checkpoints, a companion character the learner chooses and dresses, a pin that
 climbs through five tiers as the course is worked through, a room to decorate, progress
 backup, and review lessons with spaced repetition.
@@ -49,10 +49,11 @@ distributing across a sign, and factoring a common factor back out — the first
 use expression input, and the first to ask for an answer whose written form matters as much
 as its value, since the expanded expression a factoring question displays is a wrong answer
 to it. Timed mode and score-estimation infrastructure are now built for future Stage H practice;
-existing lessons stay untimed. All Stage H content remains planned.
+existing lessons stay untimed. Stage H now offers calculator-key practice, formula selection,
+and quantitative and algebraic mixed reviews; its two timed forms remain planned.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
-milestone, what blocks what, and the product features still unbuilt (Stage H content and streak
+milestone, what blocks what, and the product features still unbuilt (Stage H timed forms and streak
 reminders). It lives in one place so it cannot drift out of step with this file.
 
 ## Running it
@@ -85,9 +86,10 @@ deployed HTTPS build.
 
 ### Problems are generated, not stored
 
-Every skill owns a generator that computes its own answer from the operands it just chose.
-Nothing is hardcoded, so problems never run out and the answer key cannot drift from the
-question.
+Numeric generators compute answers from their chosen operands. Formula-selection exercises
+derive the choice from the requested measurement and shared symbolic references. Mixed reviews
+delegate to source generators and preserve their computed problems, so the answer key stays
+linked to the question.
 
 - `src/curriculum/unit-*.ts` — the built generators, one file per curriculum unit, added a
   unit at a time
@@ -131,7 +133,7 @@ over sampled problems inside the test suite —
 at most 4 solution steps, at most 12 words each, single-sentence hints, and at least two
 distinct predicted misconceptions on any skill marked a difficulty wall.
 
-Stages A through G now open all 195 playable skills with one authored teaching line and one
+Stages A through H now open all 199 playable skills with one authored teaching line and one
 stable, generated difficulty-1 worked example. Starting practice
 records only that the intro was seen; it does not count as an attempt or change mastery. The same
 example remains available through **Review intro**, and each authored line is checked directly for

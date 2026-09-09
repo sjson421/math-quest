@@ -10,7 +10,9 @@ import {
   type Coordinate,
   type CoordinateLine,
 } from '../lib/coordinate-plane'
+import { unit22, quantitativePool, algebraicPool } from './unit-22-test-preparation'
 import { makeRng } from '../lib/rng'
+import { entryLabel } from '../lib/keypad'
 import { equals, format as formatRational, gcd, toNumber, rational, type Rational } from '../lib/rational'
 import { shapeDiagramFraction } from '../lib/shape-diagram'
 import {
@@ -23,6 +25,7 @@ import { assertChart, chartSourceValues, scatterTrendSegment, type Chart } from 
 import { encodeRootPairEntry, normalizeRootPair } from '../lib/root-pair'
 import { ratioWordText } from './phrasing/ratios'
 import type {
+  CalculatorKey,
   AlgebraData,
   DecimalData,
   DecimalValue,
@@ -42,6 +45,11 @@ import type {
   StatisticsData,
   WholeNumberData,
 } from '../lib/types'
+
+// Thin delegated draws can sample only a source tag's collisions. Sources keep full sweeps.
+const FILTER_EXCLUSIONS = new Set(['review-quantitative', 'review-algebraic'])
+// Per-difficulty seeds otherwise compare different mixes; reviews use paired seeds below.
+const LADDER_EXCLUSIONS = new Set(['review-quantitative', 'review-algebraic'])
 
 const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 const ITERATIONS = 200 // per skill per difficulty → 1000 problems per skill
@@ -2245,8 +2253,131 @@ function expectedPolynomial(data: PolynomialData): ExpectedPolynomial {
   }
 }
 
+/** Parse the supported key grammar independently of the authored templates. */
+function calculatorValue(keys: readonly CalculatorKey[]): Rational {
+  if (keys.at(-1) !== 'enter') throw new Error('calculator: sequence must end with ENTER')
+  let cursor = 0
+  const atom = (): Rational => {
+    const key = keys[cursor++]
+    if (typeof key === 'number' && Number.isInteger(key) && key >= 0 && key <= 99) return rational(key, 1)
+    if (key === 'negate') { const value = atom(); return rational(-value.n, value.d) }
+    if (key === '(') {
+      const value = sum()
+      if (keys[cursor++] !== ')') throw new Error('calculator: missing closing parenthesis')
+      return value
+    }
+    throw new Error('calculator: expected number or parenthesis')
+  }
+  const product = (): Rational => {
+    let value = atom()
+    while (keys[cursor] === 'multiply' || keys[cursor] === 'divide') {
+      const operator = keys[cursor++]
+      const right = atom()
+      value = operator === 'multiply' ? rational(value.n * right.n, value.d * right.d) : rational(value.n * right.d, value.d * right.n)
+    }
+    return value
+  }
+  const sum = (): Rational => {
+    let value = product()
+    while (keys[cursor] === 'add' || keys[cursor] === 'subtract') {
+      const operator = keys[cursor++]
+      const right = product()
+      value = rational(value.n * right.d + (operator === 'add' ? 1 : -1) * right.n * value.d, value.d * right.d)
+    }
+    return value
+  }
+  const result = sum()
+  if (cursor !== keys.length - 1) throw new Error('calculator: unexpected key')
+  return result
+}
+
+function expectedCalculatorText(keys: readonly CalculatorKey[]): string {
+  const labels = { negate: '(-)', subtract: '−', add: '+', multiply: '×', divide: '÷', '(': '(', ')': ')', enter: ' ENTER' }
+  return keys.map((key) => typeof key === 'number' ? String(key) : labels[key]).join('')
+}
+
+function recomputeCalculator(problem: Problem): number | string {
+  if (problem.display.kind !== 'inline' || !problem.display.calculator) throw new Error('Expected calculator')
+  const { calculator: data, text } = problem.display
+  const fail = (message: string): never => { throw new Error(`${problem.skillId}: calculator ${message}`) }
+  if (text.length > 18) fail('text exceeds width budget')
+  if (data.operation === 'choose-sequence') {
+    if (text !== entryLabel(formatRational(data.target))) fail('target disagrees with visible text')
+    if (data.candidates.length !== 2 || new Set(data.candidates.map((c) => c.id)).size !== 2) fail('needs two distinct candidates')
+    const choices = data.candidates.map(({ id, keys }) => ({ id, label: expectedCalculatorText(keys) }))
+    if (JSON.stringify(problem.choices) !== JSON.stringify(choices) || choices.some((c) => c.label.length > 18)) fail('candidate labels disagree')
+    const matches = data.candidates.filter(({ keys }) => equals(calculatorValue(keys), data.target))
+    if (matches.length !== 1) fail('target needs exactly one matching sequence')
+    if (problem.inputMode !== 'choice' || problem.answer.kind !== 'choice' || problem.answer.id !== matches[0].id || problem.keypad !== undefined) fail('choice answer disagrees')
+    return matches[0].id
+  }
+  const value = calculatorValue(data.keys)
+  if (text !== expectedCalculatorText(data.keys)) fail('visible text disagrees with keys')
+  if (problem.inputMode !== 'keypad' || problem.answer.kind !== 'exact') return fail('numeric answer must use exact keypad')
+  if (!equals(rational(problem.answer.n, problem.answer.d), value)) fail('answer disagrees with keys')
+  if (data.operation === 'answer-form') {
+    if (data.keys.length !== 4 || data.keys[1] !== 'divide' || value.d === 1) fail('form exercise needs non-whole division')
+    let denominator = value.d
+    while (denominator % 2 === 0) denominator /= 2
+    while (denominator % 5 === 0) denominator /= 5
+    if (denominator !== 1) fail('decimal must terminate')
+    if (Boolean(problem.answer.requireFraction) !== (data.form === 'fraction') || Boolean(problem.answer.requireDecimal) !== (data.form === 'decimal')) fail('answer form disagrees')
+    if (!problem.keypad?.allowFraction || !problem.keypad?.allowDecimal) fail('both forms must be enterable')
+    if (problem.prompt !== `Use the answer toggle to give a ${data.form}.`) fail('form prompt disagrees')
+  } else if (problem.answer.requireFraction || problem.answer.requireDecimal || !problem.keypad?.allowNegative) fail('evaluation keypad or form disagrees')
+  return toNumber(value)
+}
+
+function expectedFormulaSelection(diagram: GeometryDiagram): [string, number, string] {
+  switch (diagram.operation) {
+    case 'perimeter': return ['rectangle perimeter', 0, 'rectangle area']
+    case 'area-rectangle': return ['rectangle area', 1, 'rectangle perimeter']
+    case 'area-triangle': return ['triangle area', 1, 'parallelogram area']
+    case 'area-parallelogram': return ['parallelogram area', 0, 'trapezoid area']
+    case 'area-trapezoid': return ['trapezoid area', 1, 'parallelogram area']
+    case 'circumference': return ['circle circumference', 0, 'circle area']
+    case 'area-circle': return ['circle area', 1, 'circle circumference']
+    case 'volume-prism': return ['prism volume', 0, 'pyramid volume']
+    case 'volume-pyramid': return ['pyramid volume', 1, 'prism volume']
+    case 'volume-cylinder': return ['cylinder volume', 0, 'cone volume']
+    case 'volume-cone': return ['cone volume', 1, 'cylinder volume']
+    case 'volume-sphere': return ['sphere volume', 0, 'sphere surface area']
+    case 'surface-area': return ['prism surface area', 0, 'prism volume']
+    case 'pythagorean': return diagram.missingSide === 'hypotenuse'
+      ? ['missing hypotenuse', 0, 'missing leg'] : ['missing leg', 1, 'missing hypotenuse']
+    default: throw new Error(`formula-sheet: excluded figure ${diagram.operation}`)
+  }
+}
+
+function independentNodeCount(node: MathNotation): number {
+  // Count the tree structurally, independent of the production kind switch.
+  return 1 + Object.values(node).reduce<number>((sum, value) => {
+    if (Array.isArray(value)) return sum + value.reduce((total, child) => total + independentNodeCount(child), 0)
+    if (typeof value === 'object' && value !== null) return sum + independentNodeCount(value as MathNotation)
+    return sum
+  }, 0)
+}
+
+function recomputeFormula(problem: Problem): string {
+  const { display } = problem
+  if (display.kind !== 'diagram' || display.diagram.kind !== 'geometry') throw new Error('formula-sheet: expected geometry')
+  const diagram = display.diagram
+  assertGeometryDiagram(diagram)
+  const expected = expectedGeometry(diagram)
+  const [measurement, index, distractor] = expectedFormulaSelection(diagram)
+  const fail = (): never => { throw new Error(`${problem.skillId}: formula selection disagrees with figure, references, or answer`) }
+  if (geometryDiagramLabel(diagram) !== expected.label || JSON.stringify(geometryFormulaReferences(diagram)) !== JSON.stringify(expected.formulas)) fail()
+  const choices = expected.formulas.map(({ label }, i) => ({ id: `formula-${i}`, label }))
+  if (problem.prompt !== `Which formula finds the ${measurement}?` || JSON.stringify(problem.choices) !== JSON.stringify(choices)) fail()
+  if (problem.inputMode !== 'choice' || problem.keypad !== undefined || problem.answer.kind !== 'choice' || problem.answer.id !== choices[index].id) fail()
+  if (problem.misconceptions?.[0]?.nudge !== `That formula finds the ${distractor}.`) fail()
+  return choices[index].id
+}
+
 function recompute(problem: Problem): number | string {
   const { display } = problem
+  if (display.kind === 'inline' && display.calculator) return recomputeCalculator(problem)
+  if (display.kind === 'diagram' && display.formulaSelection) return recomputeFormula(problem)
   const rootPolynomial =
     display.kind === 'equation' || display.kind === 'math'
       ? display.polynomial
@@ -3025,6 +3156,20 @@ function statisticsSourceValues(data: StatisticsData): number[] {
 }
 
 function sourceMagnitude(problem: Problem): number {
+  const display = problem.display
+  if (display.kind === 'inline' && display.calculator) {
+    recomputeCalculator(problem)
+    const data = display.calculator
+    const keys = data.operation === 'choose-sequence' ? data.candidates.flatMap((c) => c.keys) : data.keys
+    const operands = keys.filter((key): key is number => typeof key === 'number')
+    return operands.reduce((sum, value) => sum + value, 0) / operands.length
+  }
+  if (display.kind === 'diagram' && display.formulaSelection && display.diagram.kind === 'geometry') {
+    recomputeFormula(problem)
+    const [, index] = expectedFormulaSelection(display.diagram)
+    return independentNodeCount(expectedGeometry(display.diagram).formulas[index].notation)
+  }
+
   if (problem.display.kind === 'inline' && problem.display.decimal) {
     const data = problem.display.decimal
     const values =
@@ -4745,7 +4890,7 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
     // `lib/generator.test.ts`, against skills that deliberately author the bad
     // cases. What belongs here is the property those assertions looked like they
     // were making: that the skill's predictions actually survive to a learner.
-    const never = alwaysFiltered(skill)
+    const never = FILTER_EXCLUSIONS.has(skill.id) ? [] : alwaysFiltered(skill)
 
     expect(never, `${skill.id} predicts these and they never reach anyone`).toEqual([])
   })
@@ -4783,7 +4928,7 @@ describe.each(allSkills.map((s) => [s.id, s] as const))('generator: %s', (_id, s
   })
 
   it('scales operand size with difficulty', () => {
-    expect(scalingProblems(skill)).toEqual([])
+    if (!LADDER_EXCLUSIONS.has(skill.id)) expect(scalingProblems(skill)).toEqual([])
   })
 
   it('produces varied problems rather than repeating one', () => {
@@ -5936,3 +6081,101 @@ describe('difficulty reporting', () => {
 // The prerequisite graph is asserted in `manifest/manifest.test.ts` — acyclic,
 // no dangling ids, every skill reachable from the single root — across all 201
 // skills rather than the seven with generators. Generators do not declare edges.
+
+describe('Unit 22 independent verification', () => {
+  const samples = (index: number) => DIFFICULTIES.flatMap((difficulty) =>
+    Array.from({ length: 200 }, (_, i) => generateProblem(unit22[index], seedFor(i, difficulty), difficulty)))
+
+  it('keeps both exclusion sets closed and all source checks active', () => {
+    for (const set of [FILTER_EXCLUSIONS, LADDER_EXCLUSIONS]) {
+      expect([...set]).toEqual(['review-quantitative', 'review-algebraic'])
+      for (const source of [...quantitativePool, ...algebraicPool]) expect(set.has(source.id)).toBe(false)
+    }
+  })
+
+  it.each([2, 3])('measures review %i difficulty with the same source in each pair', (index) => {
+    let low = 0
+    let high = 0
+    for (let seed = 0; seed < 1000; seed++) {
+      const first = generateProblem(unit22[index], seed * 7919, 1)
+      const last = generateProblem(unit22[index], seed * 7919, 5)
+      expect(last.skillId).toBe(first.skillId)
+      low += sourceMagnitude(first)
+      high += sourceMagnitude(last)
+    }
+    expect(high).toBeGreaterThan(low)
+  })
+
+  it('independently verifies every authored operation, form and difficulty band', () => {
+    for (const index of [0, 1]) {
+      for (const problem of samples(index)) expect(recompute(problem)).toBe(answerValue(problem))
+      expect(scalingProblems(unit22[index])).toEqual([])
+    }
+  })
+
+  it('rejects malformed keys, changed text and wrong numeric answers', () => {
+    const original = samples(0).find((p) => p.display.kind === 'inline' && p.display.calculator?.operation === 'evaluate')!
+    const malformed = structuredClone(original)
+    if (malformed.display.kind !== 'inline' || malformed.display.calculator?.operation !== 'evaluate') throw new Error('fixture')
+    malformed.display.calculator.keys = [2, 'multiply', 'enter']
+    expect(() => recompute(malformed)).toThrow(/calculator/)
+    const changedText = structuredClone(original)
+    if (changedText.display.kind === 'inline') changedText.display.text += '0'
+    expect(() => recompute(changedText)).toThrow(/calculator/)
+    expect(() => recompute({ ...original, answer: intAnswer(99999) })).toThrow(/calculator/)
+  })
+
+  it('rejects changed or duplicate targets, labels and wrong sequence answers', () => {
+    const original = samples(0).find((p) => p.display.kind === 'inline' && p.display.calculator?.operation === 'choose-sequence')!
+    const changed = structuredClone(original)
+    if (changed.display.kind !== 'inline' || changed.display.calculator?.operation !== 'choose-sequence') throw new Error('fixture')
+    changed.display.calculator.target.n += 1
+    expect(() => recompute(changed)).toThrow(/calculator/)
+    const duplicate = structuredClone(original)
+    if (duplicate.display.kind !== 'inline' || duplicate.display.calculator?.operation !== 'choose-sequence') throw new Error('fixture')
+    const data = duplicate.display.calculator
+    data.candidates[1].keys = [...data.candidates[0].keys]
+    duplicate.choices![1].label = duplicate.choices![0].label
+    expect(() => recompute(duplicate)).toThrow(/exactly one/)
+    const label = structuredClone(original)
+    label.choices![0].label = 'changed'
+    expect(() => recompute(label)).toThrow(/calculator/)
+    expect(() => recompute({ ...original, answer: { kind: 'choice', id: 'sequence-1' } })).toThrow(/calculator/)
+  })
+
+  it('rejects mismatched form and keypad declarations', () => {
+    const original = samples(0).find((p) => p.display.kind === 'inline' && p.display.calculator?.operation === 'answer-form')!
+    expect(() => recompute({ ...original, keypad: {} })).toThrow(/calculator/)
+    const changed = structuredClone(original)
+    if (changed.answer.kind !== 'exact') throw new Error('fixture')
+    changed.answer.requireDecimal = true
+    changed.answer.requireFraction = true
+    expect(() => recompute(changed)).toThrow(/calculator/)
+  })
+
+  it('rejects wrong formula prompts, side roles, labels, ambiguity and answers', () => {
+    const original = samples(1).find((p) => p.display.kind === 'diagram' && p.display.diagram.kind === 'geometry' && p.display.diagram.operation === 'pythagorean')!
+    expect(() => recompute({ ...original, prompt: 'Which formula finds the volume?' })).toThrow(/formula/)
+    const label = structuredClone(original)
+    label.choices![0].label = 'changed'
+    expect(() => recompute(label)).toThrow(/formula/)
+    const duplicate = structuredClone(original)
+    duplicate.choices![1] = { ...duplicate.choices![0] }
+    expect(() => recompute(duplicate)).toThrow(/formula/)
+    const side = structuredClone(original)
+    if (side.display.kind !== 'diagram') throw new Error('fixture')
+    side.display.diagram = { kind: 'geometry', operation: 'pythagorean', missingSide: 'leg', leg: 3, hypotenuse: 5, unit: 'cm' }
+    side.prompt = 'Which formula finds the missing hypotenuse?'
+    expect(() => recompute(side)).toThrow(/formula/)
+    expect(() => recompute({ ...original, answer: { kind: 'choice', id: 'wrong' } })).toThrow(/formula/)
+    const ordinary = structuredClone(original)
+    if (ordinary.display.kind === 'diagram') delete ordinary.display.formulaSelection
+    expect(() => recompute(ordinary)).toThrow(/geometry/)
+    for (const diagram of [
+      { kind: 'geometry', operation: 'area-composite', outerLength: 8, outerWidth: 6, cutoutLength: 2, cutoutWidth: 2, unit: 'cm' },
+      { kind: 'geometry', operation: 'similar-figures', smallLength: 4, smallWidth: 3, largeKnownSide: 8, knownSide: 'length', unit: 'cm' },
+    ] as const) {
+      expect(() => recompute({ ...original, display: { kind: 'diagram', diagram, formulaSelection: true } })).toThrow(/excluded/)
+    }
+  })
+})

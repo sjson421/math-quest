@@ -42,6 +42,9 @@ export function Keypad({ value, onEntry, onSubmit, disabled, submitReady, rules 
   // A mixed number always contains a fraction, so mixed entry implies the
   // slash — the same effective rule applyKey applies.
   const fractionAllowed = allowFraction || allowMixed
+  const bothForms = fractionAllowed && allowDecimal
+  // Keep four rows even when the sign/space cell cannot hold the decimal key.
+  const splitBackspace = bothForms && (allowNegative || allowMixed)
   const canSubmit = submitReady ?? value.trim() !== ''
 
   const press = (k: string) => {
@@ -58,7 +61,7 @@ export function Keypad({ value, onEntry, onSubmit, disabled, submitReady, rules 
         <motion.button
           type="button"
           whileTap={{ scale: 0.94 }}
-          className={`${KEY_STYLE} row-span-2 h-auto bg-blossom-soft text-2xl`}
+          className={`${KEY_STYLE} ${splitBackspace ? '' : 'row-span-2 h-auto'} bg-blossom-soft text-2xl`}
           onClick={() => press('back')}
           disabled={disabled}
           aria-label="Backspace"
@@ -91,8 +94,13 @@ export function Keypad({ value, onEntry, onSubmit, disabled, submitReady, rules 
           <KeypadKey label="−" onPress={() => press('-')} />
         ) : allowMixed ? (
           <KeypadKey label="␣" ariaLabel="Space" onPress={() => press(' ')} />
+        ) : bothForms ? (
+          <KeypadKey label="." onPress={() => press('.')} />
         ) : (
           <span aria-hidden />
+        )}
+        {splitBackspace && (
+          <KeypadKey label="." className="row-start-2 col-start-4" onPress={() => press('.')} />
         )}
         <KeypadKey label="0" onPress={() => press('0')} />
         {fractionAllowed ? (

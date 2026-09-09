@@ -1,0 +1,1436 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Unit 22 content > calculator-skills records the complete output and stable intro 1`] = `
+"--- calculator-skills · seed 1 · difficulty 1
+prompt   Which key sequence gives this result?
+display  inline "72" calculator {"operation":"choose-sequence","target":{"n":72,"d":1},"candidates":[{"id":"sequence-1","keys":[2,"add",6,"multiply",9,"enter"]},{"id":"sequence-0","keys":["(",2,"add",6,")","multiply",9,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     Parentheses make the addition happen before multiplication.
+choice   sequence-1 = 2+6×9 ENTER
+choice   sequence-0 = (2+6)×9 ENTER
+step 1   Add inside parentheses: 2 + 6 = 8.
+step 2   Multiply: 8 × 9 = 72.
+miss     ignored-parentheses = sequence-1   Parentheses make the addition happen before multiplication.
+
+--- calculator-skills · seed 12345 · difficulty 1
+prompt   Use the answer toggle to give a decimal.
+display  inline "5÷8 ENTER" calculator {"operation":"answer-form","keys":[5,"divide",8,"enter"],"form":"decimal"}
+answer   exact 5/8 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   5 ÷ 8 = 5/8.
+step 2   5/8 equals 0.625 in decimal form.
+step 3   Use the answer toggle to show the decimal.
+
+--- calculator-skills · seed 67890 · difficulty 1
+prompt   Which key sequence gives this result?
+display  inline "−24" calculator {"operation":"choose-sequence","target":{"n":-24,"d":1},"candidates":[{"id":"sequence-0","keys":[6,"multiply","negate",4,"enter"]},{"id":"sequence-1","keys":[6,"subtract",4,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     The (-) key makes a number negative; − subtracts a number.
+choice   sequence-0 = 6×(-)4 ENTER
+choice   sequence-1 = 6−4 ENTER
+step 1   (-) makes 4 negative.
+step 2   6 × (−4) = −24.
+miss     sign-as-subtraction = sequence-1   The (-) key makes a number negative; − subtracts a number.
+
+--- calculator-skills · seed 424242 · difficulty 1
+prompt   What result does this key sequence give?
+display  inline "3×(-)3 ENTER" calculator {"operation":"evaluate","keys":[3,"multiply","negate",3,"enter"]}
+answer   exact -9/1
+input    keypad
+keypad   allowNegative=true
+hint     The (-) key makes a number negative; − subtracts a number.
+step 1   (-) makes 3 negative.
+step 2   3 × (−3) = −9.
+miss     sign-as-subtraction = 0   The (-) key makes a number negative; − subtracts a number.
+
+--- calculator-skills · seed 987654321 · difficulty 1
+prompt   Use the answer toggle to give a decimal.
+display  inline "2÷8 ENTER" calculator {"operation":"answer-form","keys":[2,"divide",8,"enter"],"form":"decimal"}
+answer   exact 1/4 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   2 ÷ 8 = 1/4.
+step 2   1/4 equals 0.25 in decimal form.
+step 3   Use the answer toggle to show the decimal.
+
+--- calculator-skills · seed 1 · difficulty 2
+prompt   Which key sequence gives this result?
+display  inline "135" calculator {"operation":"choose-sequence","target":{"n":135,"d":1},"candidates":[{"id":"sequence-1","keys":[5,"add",10,"multiply",9,"enter"]},{"id":"sequence-0","keys":["(",5,"add",10,")","multiply",9,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     Parentheses make the addition happen before multiplication.
+choice   sequence-1 = 5+10×9 ENTER
+choice   sequence-0 = (5+10)×9 ENTER
+step 1   Add inside parentheses: 5 + 10 = 15.
+step 2   Multiply: 15 × 9 = 135.
+miss     ignored-parentheses = sequence-1   Parentheses make the addition happen before multiplication.
+
+--- calculator-skills · seed 12345 · difficulty 2
+prompt   Use the answer toggle to give a decimal.
+display  inline "10÷8 ENTER" calculator {"operation":"answer-form","keys":[10,"divide",8,"enter"],"form":"decimal"}
+answer   exact 5/4 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   10 ÷ 8 = 5/4.
+step 2   5/4 equals 1.25 in decimal form.
+step 3   Use the answer toggle to show the decimal.
+
+--- calculator-skills · seed 67890 · difficulty 2
+prompt   Which key sequence gives this result?
+display  inline "−88" calculator {"operation":"choose-sequence","target":{"n":-88,"d":1},"candidates":[{"id":"sequence-0","keys":[11,"multiply","negate",8,"enter"]},{"id":"sequence-1","keys":[11,"subtract",8,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     The (-) key makes a number negative; − subtracts a number.
+choice   sequence-0 = 11×(-)8 ENTER
+choice   sequence-1 = 11−8 ENTER
+step 1   (-) makes 8 negative.
+step 2   11 × (−8) = −88.
+miss     sign-as-subtraction = sequence-1   The (-) key makes a number negative; − subtracts a number.
+
+--- calculator-skills · seed 424242 · difficulty 2
+prompt   What result does this key sequence give?
+display  inline "7×(-)7 ENTER" calculator {"operation":"evaluate","keys":[7,"multiply","negate",7,"enter"]}
+answer   exact -49/1
+input    keypad
+keypad   allowNegative=true
+hint     The (-) key makes a number negative; − subtracts a number.
+step 1   (-) makes 7 negative.
+step 2   7 × (−7) = −49.
+miss     sign-as-subtraction = 0   The (-) key makes a number negative; − subtracts a number.
+
+--- calculator-skills · seed 987654321 · difficulty 2
+prompt   Use the answer toggle to give a decimal.
+display  inline "5÷8 ENTER" calculator {"operation":"answer-form","keys":[5,"divide",8,"enter"],"form":"decimal"}
+answer   exact 5/8 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   5 ÷ 8 = 5/8.
+step 2   5/8 equals 0.625 in decimal form.
+step 3   Use the answer toggle to show the decimal.
+
+--- calculator-skills · seed 1 · difficulty 3
+prompt   Which key sequence gives this result?
+display  inline "279" calculator {"operation":"choose-sequence","target":{"n":279,"d":1},"candidates":[{"id":"sequence-1","keys":[10,"add",21,"multiply",9,"enter"]},{"id":"sequence-0","keys":["(",10,"add",21,")","multiply",9,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     Parentheses make the addition happen before multiplication.
+choice   sequence-1 = 10+21×9 ENTER
+choice   sequence-0 = (10+21)×9 ENTER
+step 1   Add inside parentheses: 10 + 21 = 31.
+step 2   Multiply: 31 × 9 = 279.
+miss     ignored-parentheses = sequence-1   Parentheses make the addition happen before multiplication.
+
+--- calculator-skills · seed 12345 · difficulty 3
+prompt   Use the answer toggle to give a decimal.
+display  inline "20÷8 ENTER" calculator {"operation":"answer-form","keys":[20,"divide",8,"enter"],"form":"decimal"}
+answer   exact 5/2 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   20 ÷ 8 = 5/2.
+step 2   5/2 equals 2.5 in decimal form.
+step 3   Use the answer toggle to show the decimal.
+
+--- calculator-skills · seed 67890 · difficulty 3
+prompt   Which key sequence gives this result?
+display  inline "−374" calculator {"operation":"choose-sequence","target":{"n":-374,"d":1},"candidates":[{"id":"sequence-0","keys":[22,"multiply","negate",17,"enter"]},{"id":"sequence-1","keys":[22,"subtract",17,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     The (-) key makes a number negative; − subtracts a number.
+choice   sequence-0 = 22×(-)17 ENTER
+choice   sequence-1 = 22−17 ENTER
+step 1   (-) makes 17 negative.
+step 2   22 × (−17) = −374.
+miss     sign-as-subtraction = sequence-1   The (-) key makes a number negative; − subtracts a number.
+
+--- calculator-skills · seed 424242 · difficulty 3
+prompt   What result does this key sequence give?
+display  inline "14×(-)13 ENTER" calculator {"operation":"evaluate","keys":[14,"multiply","negate",13,"enter"]}
+answer   exact -182/1
+input    keypad
+keypad   allowNegative=true
+hint     The (-) key makes a number negative; − subtracts a number.
+step 1   (-) makes 13 negative.
+step 2   14 × (−13) = −182.
+miss     sign-as-subtraction = 1   The (-) key makes a number negative; − subtracts a number.
+
+--- calculator-skills · seed 987654321 · difficulty 3
+prompt   Use the answer toggle to give a decimal.
+display  inline "10÷8 ENTER" calculator {"operation":"answer-form","keys":[10,"divide",8,"enter"],"form":"decimal"}
+answer   exact 5/4 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   10 ÷ 8 = 5/4.
+step 2   5/4 equals 1.25 in decimal form.
+step 3   Use the answer toggle to show the decimal.
+
+--- calculator-skills · seed 1 · difficulty 4
+prompt   Which key sequence gives this result?
+display  inline "549" calculator {"operation":"choose-sequence","target":{"n":549,"d":1},"candidates":[{"id":"sequence-1","keys":[20,"add",41,"multiply",9,"enter"]},{"id":"sequence-0","keys":["(",20,"add",41,")","multiply",9,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     Parentheses make the addition happen before multiplication.
+choice   sequence-1 = 20+41×9 ENTER
+choice   sequence-0 = (20+41)×9 ENTER
+step 1   Add inside parentheses: 20 + 41 = 61.
+step 2   Multiply: 61 × 9 = 549.
+miss     ignored-parentheses = sequence-1   Parentheses make the addition happen before multiplication.
+
+--- calculator-skills · seed 12345 · difficulty 4
+prompt   Use the answer toggle to give a decimal.
+display  inline "39÷8 ENTER" calculator {"operation":"answer-form","keys":[39,"divide",8,"enter"],"form":"decimal"}
+answer   exact 39/8 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   39 ÷ 8 = 39/8.
+step 2   39/8 equals 4.875 in decimal form.
+step 3   Use the answer toggle to show the decimal.
+
+--- calculator-skills · seed 67890 · difficulty 4
+prompt   Which key sequence gives this result?
+display  inline "−1496" calculator {"operation":"choose-sequence","target":{"n":-1496,"d":1},"candidates":[{"id":"sequence-0","keys":[44,"multiply","negate",34,"enter"]},{"id":"sequence-1","keys":[44,"subtract",34,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     The (-) key makes a number negative; − subtracts a number.
+choice   sequence-0 = 44×(-)34 ENTER
+choice   sequence-1 = 44−34 ENTER
+step 1   (-) makes 34 negative.
+step 2   44 × (−34) = −1496.
+miss     sign-as-subtraction = sequence-1   The (-) key makes a number negative; − subtracts a number.
+
+--- calculator-skills · seed 424242 · difficulty 4
+prompt   What result does this key sequence give?
+display  inline "29×(-)27 ENTER" calculator {"operation":"evaluate","keys":[29,"multiply","negate",27,"enter"]}
+answer   exact -783/1
+input    keypad
+keypad   allowNegative=true
+hint     The (-) key makes a number negative; − subtracts a number.
+step 1   (-) makes 27 negative.
+step 2   29 × (−27) = −783.
+miss     sign-as-subtraction = 2   The (-) key makes a number negative; − subtracts a number.
+
+--- calculator-skills · seed 987654321 · difficulty 4
+prompt   Use the answer toggle to give a decimal.
+display  inline "20÷8 ENTER" calculator {"operation":"answer-form","keys":[20,"divide",8,"enter"],"form":"decimal"}
+answer   exact 5/2 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   20 ÷ 8 = 5/2.
+step 2   5/2 equals 2.5 in decimal form.
+step 3   Use the answer toggle to show the decimal.
+
+--- calculator-skills · seed 1 · difficulty 5
+prompt   Which key sequence gives this result?
+display  inline "864" calculator {"operation":"choose-sequence","target":{"n":864,"d":1},"candidates":[{"id":"sequence-1","keys":[30,"add",66,"multiply",9,"enter"]},{"id":"sequence-0","keys":["(",30,"add",66,")","multiply",9,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     Parentheses make the addition happen before multiplication.
+choice   sequence-1 = 30+66×9 ENTER
+choice   sequence-0 = (30+66)×9 ENTER
+step 1   Add inside parentheses: 30 + 66 = 96.
+step 2   Multiply: 96 × 9 = 864.
+miss     ignored-parentheses = sequence-1   Parentheses make the addition happen before multiplication.
+
+--- calculator-skills · seed 12345 · difficulty 5
+prompt   Use the answer toggle to give a decimal.
+display  inline "63÷8 ENTER" calculator {"operation":"answer-form","keys":[63,"divide",8,"enter"],"form":"decimal"}
+answer   exact 63/8 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   63 ÷ 8 = 63/8.
+step 2   63/8 equals 7.875 in decimal form.
+step 3   Use the answer toggle to show the decimal.
+
+--- calculator-skills · seed 67890 · difficulty 5
+prompt   Which key sequence gives this result?
+display  inline "−3905" calculator {"operation":"choose-sequence","target":{"n":-3905,"d":1},"candidates":[{"id":"sequence-0","keys":[71,"multiply","negate",55,"enter"]},{"id":"sequence-1","keys":[71,"subtract",55,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     The (-) key makes a number negative; − subtracts a number.
+choice   sequence-0 = 71×(-)55 ENTER
+choice   sequence-1 = 71−55 ENTER
+step 1   (-) makes 55 negative.
+step 2   71 × (−55) = −3905.
+miss     sign-as-subtraction = sequence-1   The (-) key makes a number negative; − subtracts a number.
+
+--- calculator-skills · seed 424242 · difficulty 5
+prompt   What result does this key sequence give?
+display  inline "46×(-)42 ENTER" calculator {"operation":"evaluate","keys":[46,"multiply","negate",42,"enter"]}
+answer   exact -1932/1
+input    keypad
+keypad   allowNegative=true
+hint     The (-) key makes a number negative; − subtracts a number.
+step 1   (-) makes 42 negative.
+step 2   46 × (−42) = −1932.
+miss     sign-as-subtraction = 4   The (-) key makes a number negative; − subtracts a number.
+
+--- calculator-skills · seed 987654321 · difficulty 5
+prompt   Use the answer toggle to give a decimal.
+display  inline "31÷8 ENTER" calculator {"operation":"answer-form","keys":[31,"divide",8,"enter"],"form":"decimal"}
+answer   exact 31/8 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   31 ÷ 8 = 31/8.
+step 2   31/8 equals 3.875 in decimal form.
+step 3   Use the answer toggle to show the decimal."
+`;
+
+exports[`Unit 22 content > formula-sheet records the complete output and stable intro 1`] = `
+"--- formula-sheet · seed 1 · difficulty 1
+prompt   Which formula finds the rectangle perimeter?
+display  geometry perimeter length 6 width 5 unit m name "Rectangle with length 6 m and width 5 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = P equals 2l plus 2w
+choice   formula-1 = A equals l times w
+step 1   We need the rectangle perimeter.
+step 2   Choose the formula for the rectangle perimeter.
+miss     other-measurement = formula-1   That formula finds the rectangle area.
+
+--- formula-sheet · seed 12345 · difficulty 1
+prompt   Which formula finds the rectangle perimeter?
+display  geometry perimeter length 8 width 5 unit ft name "Rectangle with length 8 ft and width 5 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = P equals 2l plus 2w
+choice   formula-1 = A equals l times w
+step 1   We need the rectangle perimeter.
+step 2   Choose the formula for the rectangle perimeter.
+miss     other-measurement = formula-1   That formula finds the rectangle area.
+
+--- formula-sheet · seed 67890 · difficulty 1
+prompt   Which formula finds the circle circumference?
+display  geometry circumference radius 6 unit cm name "Circle with radius 6 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = C equals pi times d
+choice   formula-1 = A equals pi times r squared
+step 1   We need the circle circumference.
+step 2   Choose the formula for the circle circumference.
+miss     other-measurement = formula-1   That formula finds the circle area.
+
+--- formula-sheet · seed 424242 · difficulty 1
+prompt   Which formula finds the rectangle area?
+display  geometry area-rectangle length 5 width 4 unit cm name "Rectangle with length 5 cm and width 4 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = P equals 2l plus 2w
+choice   formula-1 = A equals l times w
+step 1   We need the rectangle area.
+step 2   Choose the formula for the rectangle area.
+miss     other-measurement = formula-0   That formula finds the rectangle perimeter.
+
+--- formula-sheet · seed 987654321 · difficulty 1
+prompt   Which formula finds the prism volume?
+display  geometry volume-prism length 7 width 6 height 4 unit ft name "Rectangular prism with length 7 ft, width 6 ft, and height 4 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals B times h
+choice   formula-1 = V equals B times h divided by 3
+step 1   We need the prism volume.
+step 2   Choose the formula for the prism volume.
+miss     other-measurement = formula-1   That formula finds the pyramid volume.
+
+--- formula-sheet · seed 1 · difficulty 2
+prompt   Which formula finds the rectangle perimeter?
+display  geometry perimeter length 6 width 5 unit m name "Rectangle with length 6 m and width 5 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = P equals 2l plus 2w
+choice   formula-1 = A equals l times w
+step 1   We need the rectangle perimeter.
+step 2   Choose the formula for the rectangle perimeter.
+miss     other-measurement = formula-1   That formula finds the rectangle area.
+
+--- formula-sheet · seed 12345 · difficulty 2
+prompt   Which formula finds the rectangle perimeter?
+display  geometry perimeter length 8 width 5 unit ft name "Rectangle with length 8 ft and width 5 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = P equals 2l plus 2w
+choice   formula-1 = A equals l times w
+step 1   We need the rectangle perimeter.
+step 2   Choose the formula for the rectangle perimeter.
+miss     other-measurement = formula-1   That formula finds the rectangle area.
+
+--- formula-sheet · seed 67890 · difficulty 2
+prompt   Which formula finds the circle circumference?
+display  geometry circumference radius 6 unit cm name "Circle with radius 6 cm" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = C equals pi times d
+choice   formula-1 = A equals pi times r squared
+step 1   We need the circle circumference.
+step 2   Choose the formula for the circle circumference.
+miss     other-measurement = formula-1   That formula finds the circle area.
+
+--- formula-sheet · seed 424242 · difficulty 2
+prompt   Which formula finds the rectangle area?
+display  geometry area-rectangle length 5 width 4 unit cm name "Rectangle with length 5 cm and width 4 cm" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = P equals 2l plus 2w
+choice   formula-1 = A equals l times w
+step 1   We need the rectangle area.
+step 2   Choose the formula for the rectangle area.
+miss     other-measurement = formula-0   That formula finds the rectangle perimeter.
+
+--- formula-sheet · seed 987654321 · difficulty 2
+prompt   Which formula finds the prism volume?
+display  geometry volume-prism length 7 width 6 height 4 unit ft name "Rectangular prism with length 7 ft, width 6 ft, and height 4 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals B times h
+choice   formula-1 = V equals B times h divided by 3
+step 1   We need the prism volume.
+step 2   Choose the formula for the prism volume.
+miss     other-measurement = formula-1   That formula finds the pyramid volume.
+
+--- formula-sheet · seed 1 · difficulty 3
+prompt   Which formula finds the cylinder volume?
+display  geometry volume-cylinder radius 2 height 5 unit ft name "Cylinder with radius 2 ft and perpendicular height 5 ft" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals pi times r squared times h
+choice   formula-1 = V equals pi times r squared times h divided by 3
+step 1   We need the cylinder volume.
+step 2   Choose the formula for the cylinder volume.
+miss     other-measurement = formula-1   That formula finds the cone volume.
+
+--- formula-sheet · seed 12345 · difficulty 3
+prompt   Which formula finds the circle area?
+display  geometry area-circle diameter 12 unit ft name "Circle with diameter 12 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = C equals pi times d
+choice   formula-1 = A equals pi times r squared
+step 1   We need the circle area.
+step 2   Choose the formula for the circle area.
+miss     other-measurement = formula-0   That formula finds the circle circumference.
+
+--- formula-sheet · seed 67890 · difficulty 3
+prompt   Which formula finds the circle area?
+display  geometry area-circle diameter 8 unit in name "Circle with diameter 8 in" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = C equals pi times d
+choice   formula-1 = A equals pi times r squared
+step 1   We need the circle area.
+step 2   Choose the formula for the circle area.
+miss     other-measurement = formula-0   That formula finds the circle circumference.
+
+--- formula-sheet · seed 424242 · difficulty 3
+prompt   Which formula finds the circle area?
+display  geometry area-circle diameter 6 unit m name "Circle with diameter 6 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = C equals pi times d
+choice   formula-1 = A equals pi times r squared
+step 1   We need the circle area.
+step 2   Choose the formula for the circle area.
+miss     other-measurement = formula-0   That formula finds the circle circumference.
+
+--- formula-sheet · seed 987654321 · difficulty 3
+prompt   Which formula finds the circle area?
+display  geometry area-circle diameter 8 unit m name "Circle with diameter 8 m" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = C equals pi times d
+choice   formula-1 = A equals pi times r squared
+step 1   We need the circle area.
+step 2   Choose the formula for the circle area.
+miss     other-measurement = formula-0   That formula finds the circle circumference.
+
+--- formula-sheet · seed 1 · difficulty 4
+prompt   Which formula finds the cylinder volume?
+display  geometry volume-cylinder radius 2 height 5 unit ft name "Cylinder with radius 2 ft and perpendicular height 5 ft" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals pi times r squared times h
+choice   formula-1 = V equals pi times r squared times h divided by 3
+step 1   We need the cylinder volume.
+step 2   Choose the formula for the cylinder volume.
+miss     other-measurement = formula-1   That formula finds the cone volume.
+
+--- formula-sheet · seed 12345 · difficulty 4
+prompt   Which formula finds the cone volume?
+display  geometry volume-cone radius 2 height 7 unit m name "Cone with radius 2 m and perpendicular height 7 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals pi times r squared times h
+choice   formula-1 = V equals pi times r squared times h divided by 3
+step 1   We need the cone volume.
+step 2   Choose the formula for the cone volume.
+miss     other-measurement = formula-0   That formula finds the cylinder volume.
+
+--- formula-sheet · seed 67890 · difficulty 4
+prompt   Which formula finds the cylinder volume?
+display  geometry volume-cylinder radius 2 height 3 unit ft name "Cylinder with radius 2 ft and perpendicular height 3 ft" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals pi times r squared times h
+choice   formula-1 = V equals pi times r squared times h divided by 3
+step 1   We need the cylinder volume.
+step 2   Choose the formula for the cylinder volume.
+miss     other-measurement = formula-1   That formula finds the cone volume.
+
+--- formula-sheet · seed 424242 · difficulty 4
+prompt   Which formula finds the cone volume?
+display  geometry volume-cone radius 2 height 5 unit ft name "Cone with radius 2 ft and perpendicular height 5 ft" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals pi times r squared times h
+choice   formula-1 = V equals pi times r squared times h divided by 3
+step 1   We need the cone volume.
+step 2   Choose the formula for the cone volume.
+miss     other-measurement = formula-0   That formula finds the cylinder volume.
+
+--- formula-sheet · seed 987654321 · difficulty 4
+prompt   Which formula finds the sphere volume?
+display  geometry volume-sphere radius 5 unit cm name "Sphere with radius 5 cm" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals four pi r cubed divided by 3
+choice   formula-1 = SA equals four pi r squared
+step 1   We need the sphere volume.
+step 2   Choose the formula for the sphere volume.
+miss     other-measurement = formula-1   That formula finds the sphere surface area.
+
+--- formula-sheet · seed 1 · difficulty 5
+prompt   Which formula finds the cone volume?
+display  geometry volume-cone radius 3 height 5 unit cm name "Cone with radius 3 cm and perpendicular height 5 cm" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals pi times r squared times h
+choice   formula-1 = V equals pi times r squared times h divided by 3
+step 1   We need the cone volume.
+step 2   Choose the formula for the cone volume.
+miss     other-measurement = formula-0   That formula finds the cylinder volume.
+
+--- formula-sheet · seed 12345 · difficulty 5
+prompt   Which formula finds the cone volume?
+display  geometry volume-cone radius 2 height 7 unit m name "Cone with radius 2 m and perpendicular height 7 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals pi times r squared times h
+choice   formula-1 = V equals pi times r squared times h divided by 3
+step 1   We need the cone volume.
+step 2   Choose the formula for the cone volume.
+miss     other-measurement = formula-0   That formula finds the cylinder volume.
+
+--- formula-sheet · seed 67890 · difficulty 5
+prompt   Which formula finds the missing leg?
+display  geometry pythagorean missingSide leg leg 5 hypotenuse 13 unit ft name "Right triangle with known leg 5 ft, hypotenuse 13 ft, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = c equals the square root of a squared plus b squared
+choice   formula-1 = a equals the square root of c squared minus b squared
+step 1   We need the missing leg.
+step 2   Choose the formula for the missing leg.
+miss     other-measurement = formula-0   That formula finds the missing hypotenuse.
+
+--- formula-sheet · seed 424242 · difficulty 5
+prompt   Which formula finds the cone volume?
+display  geometry volume-cone radius 2 height 5 unit ft name "Cone with radius 2 ft and perpendicular height 5 ft" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals pi times r squared times h
+choice   formula-1 = V equals pi times r squared times h divided by 3
+step 1   We need the cone volume.
+step 2   Choose the formula for the cone volume.
+miss     other-measurement = formula-0   That formula finds the cylinder volume.
+
+--- formula-sheet · seed 987654321 · difficulty 5
+prompt   Which formula finds the sphere volume?
+display  geometry volume-sphere radius 5 unit cm name "Sphere with radius 5 cm" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals four pi r cubed divided by 3
+choice   formula-1 = SA equals four pi r squared
+step 1   We need the sphere volume.
+step 2   Choose the formula for the sphere volume.
+miss     other-measurement = formula-1   That formula finds the sphere surface area."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > answer-form-decimal 1`] = `
+"--- calculator-skills · seed 0 · difficulty 1
+prompt   Use the answer toggle to give a decimal.
+display  inline "6÷5 ENTER" calculator {"operation":"answer-form","keys":[6,"divide",5,"enter"],"form":"decimal"}
+answer   exact 6/5 (decimal)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   6 ÷ 5 = 6/5.
+step 2   6/5 equals 1.2 in decimal form.
+step 3   Use the answer toggle to show the decimal."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > answer-form-fraction 1`] = `
+"--- calculator-skills · seed 0 · difficulty 1
+prompt   Use the answer toggle to give a fraction.
+display  inline "5÷8 ENTER" calculator {"operation":"answer-form","keys":[5,"divide",8,"enter"],"form":"fraction"}
+answer   exact 5/8 (fraction)
+input    keypad
+keypad   allowFraction=true allowDecimal=true
+hint     The answer toggle switches between fraction and decimal forms.
+step 1   5 ÷ 8 = 5/8.
+step 2   5/8 equals 0.625 in decimal form.
+step 3   Use the answer toggle to show the fraction."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > area-circle 1`] = `
+"--- formula-sheet · seed 0 · difficulty 3
+prompt   Which formula finds the circle area?
+display  geometry area-circle diameter 8 unit ft name "Circle with diameter 8 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = C equals pi times d
+choice   formula-1 = A equals pi times r squared
+step 1   We need the circle area.
+step 2   Choose the formula for the circle area.
+miss     other-measurement = formula-0   That formula finds the circle circumference."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > area-parallelogram 1`] = `
+"--- formula-sheet · seed 0 · difficulty 1
+prompt   Which formula finds the parallelogram area?
+display  geometry area-parallelogram base 4 height 3 unit m name "Parallelogram with base 4 m and perpendicular height 3 m" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = A equals b times h
+choice   formula-1 = A equals b1 plus b2 times h divided by 2
+step 1   We need the parallelogram area.
+step 2   Choose the formula for the parallelogram area.
+miss     other-measurement = formula-1   That formula finds the trapezoid area."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > area-rectangle 1`] = `
+"--- formula-sheet · seed 0 · difficulty 1
+prompt   Which formula finds the rectangle area?
+display  geometry area-rectangle length 6 width 3 unit m name "Rectangle with length 6 m and width 3 m" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = P equals 2l plus 2w
+choice   formula-1 = A equals l times w
+step 1   We need the rectangle area.
+step 2   Choose the formula for the rectangle area.
+miss     other-measurement = formula-0   That formula finds the rectangle perimeter."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > area-trapezoid 1`] = `
+"--- formula-sheet · seed 0 · difficulty 2
+prompt   Which formula finds the trapezoid area?
+display  geometry area-trapezoid base1 4 base2 3 height 4 unit cm name "Trapezoid with bases 4 cm and 3 cm, and perpendicular height 4 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b1 plus b2 times h divided by 2" row("A = ", fraction("(b1 + b2)h", "2"))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = A equals b times h
+choice   formula-1 = A equals b1 plus b2 times h divided by 2
+step 1   We need the trapezoid area.
+step 2   Choose the formula for the trapezoid area.
+miss     other-measurement = formula-0   That formula finds the parallelogram area."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > area-triangle 1`] = `
+"--- formula-sheet · seed 0 · difficulty 2
+prompt   Which formula finds the triangle area?
+display  geometry area-triangle base 3 height 8 unit cm name "Triangle with base 3 cm and perpendicular height 8 cm" formulas ["A equals b times h" row("A = ", "bh"); "A equals b times h divided by 2" row("A = ", fraction("bh", "2"))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = A equals b times h
+choice   formula-1 = A equals b times h divided by 2
+step 1   We need the triangle area.
+step 2   Choose the formula for the triangle area.
+miss     other-measurement = formula-0   That formula finds the parallelogram area."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > choose-sequence 1`] = `
+"--- calculator-skills · seed 0 · difficulty 1
+prompt   Which key sequence gives this result?
+display  inline "48" calculator {"operation":"choose-sequence","target":{"n":48,"d":1},"candidates":[{"id":"sequence-1","keys":[4,"add",8,"multiply",4,"enter"]},{"id":"sequence-0","keys":["(",4,"add",8,")","multiply",4,"enter"]}]}
+answer   choice sequence-0
+input    choice
+hint     Parentheses make the addition happen before multiplication.
+choice   sequence-1 = 4+8×4 ENTER
+choice   sequence-0 = (4+8)×4 ENTER
+step 1   Add inside parentheses: 4 + 8 = 12.
+step 2   Multiply: 12 × 4 = 48.
+miss     ignored-parentheses = sequence-1   Parentheses make the addition happen before multiplication."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > circumference 1`] = `
+"--- formula-sheet · seed 0 · difficulty 1
+prompt   Which formula finds the circle circumference?
+display  geometry circumference radius 4 unit ft name "Circle with radius 4 ft" formulas ["C equals pi times d" row("C = ", "πd"); "A equals pi times r squared" row("A = ", row("π", superscript("r", "2")))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = C equals pi times d
+choice   formula-1 = A equals pi times r squared
+step 1   We need the circle circumference.
+step 2   Choose the formula for the circle circumference.
+miss     other-measurement = formula-1   That formula finds the circle area."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > evaluate 1`] = `
+"--- calculator-skills · seed 0 · difficulty 1
+prompt   What result does this key sequence give?
+display  inline "2×(-)3 ENTER" calculator {"operation":"evaluate","keys":[2,"multiply","negate",3,"enter"]}
+answer   exact -6/1
+input    keypad
+keypad   allowNegative=true
+hint     The (-) key makes a number negative; − subtracts a number.
+step 1   (-) makes 3 negative.
+step 2   2 × (−3) = −6.
+miss     sign-as-subtraction = -1   The (-) key makes a number negative; − subtracts a number."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > perimeter 1`] = `
+"--- formula-sheet · seed 0 · difficulty 1
+prompt   Which formula finds the rectangle perimeter?
+display  geometry perimeter length 7 width 3 unit ft name "Rectangle with length 7 ft and width 3 ft" formulas ["P equals 2l plus 2w" row("P = ", "2l + 2w"); "A equals l times w" row("A = ", "lw")] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = P equals 2l plus 2w
+choice   formula-1 = A equals l times w
+step 1   We need the rectangle perimeter.
+step 2   Choose the formula for the rectangle perimeter.
+miss     other-measurement = formula-1   That formula finds the rectangle area."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > pythagorean-hypotenuse 1`] = `
+"--- formula-sheet · seed 0 · difficulty 4
+prompt   Which formula finds the missing hypotenuse?
+display  geometry pythagorean missingSide hypotenuse leg1 5 leg2 12 unit in name "Right triangle with legs 5 in and 12 in, and a missing hypotenuse" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = c equals the square root of a squared plus b squared
+choice   formula-1 = a equals the square root of c squared minus b squared
+step 1   We need the missing hypotenuse.
+step 2   Choose the formula for the missing hypotenuse.
+miss     other-measurement = formula-1   That formula finds the missing leg."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > pythagorean-leg 1`] = `
+"--- formula-sheet · seed 0 · difficulty 4
+prompt   Which formula finds the missing leg?
+display  geometry pythagorean missingSide leg leg 7 hypotenuse 25 unit in name "Right triangle with known leg 7 in, hypotenuse 25 in, and a missing leg" formulas ["c equals the square root of a squared plus b squared" row("c = ", root(row(superscript("a", "2"), " + ", superscript("b", "2")))); "a equals the square root of c squared minus b squared" row("a = ", root(row(superscript("c", "2"), " − ", superscript("b", "2"))))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = c equals the square root of a squared plus b squared
+choice   formula-1 = a equals the square root of c squared minus b squared
+step 1   We need the missing leg.
+step 2   Choose the formula for the missing leg.
+miss     other-measurement = formula-0   That formula finds the missing hypotenuse."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > surface-area 1`] = `
+"--- formula-sheet · seed 0 · difficulty 1
+prompt   Which formula finds the prism surface area?
+display  geometry surface-area length 4 width 4 height 3 unit m faces [length-height, width-height, length-height, width-height, length-width, length-width] name "Rectangular-prism net with length 4 m, width 4 m, and height 3 m" formulas ["SA equals 2lw plus 2lh plus 2wh" row("SA = ", "2lw + 2lh + 2wh"); "V equals l times w times h" row("V = ", "lwh")] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = SA equals 2lw plus 2lh plus 2wh
+choice   formula-1 = V equals l times w times h
+step 1   We need the prism surface area.
+step 2   Choose the formula for the prism surface area.
+miss     other-measurement = formula-1   That formula finds the prism volume."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > volume-cone 1`] = `
+"--- formula-sheet · seed 0 · difficulty 4
+prompt   Which formula finds the cone volume?
+display  geometry volume-cone radius 5 height 3 unit m name "Cone with radius 5 m and perpendicular height 3 m" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals pi times r squared times h
+choice   formula-1 = V equals pi times r squared times h divided by 3
+step 1   We need the cone volume.
+step 2   Choose the formula for the cone volume.
+miss     other-measurement = formula-0   That formula finds the cylinder volume."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > volume-cylinder 1`] = `
+"--- formula-sheet · seed 0 · difficulty 3
+prompt   Which formula finds the cylinder volume?
+display  geometry volume-cylinder radius 5 height 6 unit in name "Cylinder with radius 5 in and perpendicular height 6 in" formulas ["V equals pi times r squared times h" row("V = ", row("π", superscript("r", "2"), "h")); "V equals pi times r squared times h divided by 3" row("V = ", fraction(row("π", superscript("r", "2"), "h"), "3"))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals pi times r squared times h
+choice   formula-1 = V equals pi times r squared times h divided by 3
+step 1   We need the cylinder volume.
+step 2   Choose the formula for the cylinder volume.
+miss     other-measurement = formula-1   That formula finds the cone volume."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > volume-prism 1`] = `
+"--- formula-sheet · seed 0 · difficulty 1
+prompt   Which formula finds the prism volume?
+display  geometry volume-prism length 4 width 6 height 6 unit m name "Rectangular prism with length 4 m, width 6 m, and height 6 m" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals B times h
+choice   formula-1 = V equals B times h divided by 3
+step 1   We need the prism volume.
+step 2   Choose the formula for the prism volume.
+miss     other-measurement = formula-1   That formula finds the pyramid volume."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > volume-pyramid 1`] = `
+"--- formula-sheet · seed 0 · difficulty 2
+prompt   Which formula finds the pyramid volume?
+display  geometry volume-pyramid baseLength 7 baseWidth 5 height 6 unit ft name "Rectangular pyramid with base length 7 ft, base width 5 ft, and perpendicular height 6 ft" formulas ["V equals B times h" row("V = ", "Bh"); "V equals B times h divided by 3" row("V = ", fraction("Bh", "3"))] formula-selection
+answer   choice formula-1
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals B times h
+choice   formula-1 = V equals B times h divided by 3
+step 1   We need the pyramid volume.
+step 2   Choose the formula for the pyramid volume.
+miss     other-measurement = formula-0   That formula finds the prism volume."
+`;
+
+exports[`Unit 22 content > records calculator operations and formula variants explicitly > volume-sphere 1`] = `
+"--- formula-sheet · seed 0 · difficulty 4
+prompt   Which formula finds the sphere volume?
+display  geometry volume-sphere radius 5 unit cm name "Sphere with radius 5 cm" formulas ["V equals four pi r cubed divided by 3" row("V = ", fraction(row("4π", superscript("r", "3")), "3")); "SA equals four pi r squared" row("SA = ", row("4π", superscript("r", "2")))] formula-selection
+answer   choice formula-0
+input    choice
+hint     Match the requested measurement to the provided formulas.
+choice   formula-0 = V equals four pi r cubed divided by 3
+choice   formula-1 = SA equals four pi r squared
+step 1   We need the sphere volume.
+step 2   Choose the formula for the sphere volume.
+miss     other-measurement = formula-1   That formula finds the sphere surface area."
+`;
+
+exports[`Unit 22 content > review-algebraic records the complete output and stable intro 1`] = `
+"--- slope-from-points · seed 1 · difficulty 1
+prompt   Find the slope between these points.
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−3, 2), (−1, −4)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−3, 2) and (−1, −4)" [slope-from-points]
+answer   exact -3/1
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−4 − 2 = −6]
+step 2   Subtract x-values in that order too.   [−1 − −3 = 2]
+step 3   Divide rise by run and reduce.   [−6/2 = −3]
+miss     inconsistent-subtraction-order = 3   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = -0.3333333333333333   Slope is vertical change over horizontal change: rise over run.
+
+--- linear-vs-nonlinear · seed 12345 · difficulty 1
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -4..4/1 y -4..4/1 points [(−3, 3), (0, 0), (3, −3)] lines [] "Coordinate plane, x-axis −4 to 4 by 1; y-axis −4 to 4 by 1; points (−3, 3), (0, 0), and (3, −3)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(−3, 3), (0, 0), (3, −3)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- with-fractions · seed 67890 · difficulty 1
+prompt   Solve for x.
+display  equation "x/3 + 2 = 4" solve x row(fraction("x", "3"), " + 2 = 4") [clear-fraction x/3 + 2 = 4]
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 2 on both sides.   [x/3 = 2]
+step 2   Multiply both sides by 3.   [x = 6]
+miss     multiplied-one-side-only = -2   The whole of the other side is multiplied too, not just the fraction.
+
+--- zero-neg-exponents · seed 424242 · difficulty 1
+prompt   What is the value?
+display  math "2 to the zero power" superscript("2", "0") [zero-exponent 2^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [2^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- evaluate-function · seed 987654321 · difficulty 1
+prompt   Evaluate the function at x = 4.
+display  equation "f(x) = −3x − 4" solve f(4) [evaluate-function coefficient -3 constant -4 input 4 label f(4)]
+answer   exact -16/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 4.   [−3x → −3(4)]
+step 2   Multiply the coefficient and input.   [−12]
+step 3   Add the constant −4.   [−16]
+
+--- slope-from-points · seed 1 · difficulty 2
+prompt   Find the slope between these points.
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(−4, 3), (−2, −3)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (−4, 3) and (−2, −3)" [slope-from-points]
+answer   exact -3/1
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−3 − 3 = −6]
+step 2   Subtract x-values in that order too.   [−2 − −4 = 2]
+step 3   Divide rise by run and reduce.   [−6/2 = −3]
+miss     inconsistent-subtraction-order = 3   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = -0.3333333333333333   Slope is vertical change over horizontal change: rise over run.
+
+--- linear-vs-nonlinear · seed 12345 · difficulty 2
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -5..5/1 y -5..5/1 points [(0, 2), (3, −1), (4, −2)] lines [] "Coordinate plane, x-axis −5 to 5 by 1; y-axis −5 to 5 by 1; points (0, 2), (3, −1), and (4, −2)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(0, 2), (3, −1), (4, −2)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- with-fractions · seed 67890 · difficulty 2
+prompt   Solve for x.
+display  equation "x/3 + 2 = 4" solve x row(fraction("x", "3"), " + 2 = 4") [clear-fraction x/3 + 2 = 4]
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 2 on both sides.   [x/3 = 2]
+step 2   Multiply both sides by 3.   [x = 6]
+miss     multiplied-one-side-only = -2   The whole of the other side is multiplied too, not just the fraction.
+
+--- zero-neg-exponents · seed 424242 · difficulty 2
+prompt   What is the value?
+display  math "2 to the zero power" superscript("2", "0") [zero-exponent 2^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [2^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- evaluate-function · seed 987654321 · difficulty 2
+prompt   Evaluate the function at x = 5.
+display  equation "f(x) = −4x − 5" solve f(5) [evaluate-function coefficient -4 constant -5 input 5 label f(5)]
+answer   exact -25/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 5.   [−4x → −4(5)]
+step 2   Multiply the coefficient and input.   [−20]
+step 3   Add the constant −5.   [−25]
+
+--- slope-from-points · seed 1 · difficulty 3
+prompt   Find the slope between these points.
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−5, 4), (−3, −2)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−5, 4) and (−3, −2)" [slope-from-points]
+answer   exact -3/1
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−2 − 4 = −6]
+step 2   Subtract x-values in that order too.   [−3 − −5 = 2]
+step 3   Divide rise by run and reduce.   [−6/2 = −3]
+miss     inconsistent-subtraction-order = 3   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = -0.3333333333333333   Slope is vertical change over horizontal change: rise over run.
+
+--- linear-vs-nonlinear · seed 12345 · difficulty 3
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -6..6/1 y -6..6/1 points [(−5, −4), (−3, −2), (−2, −1), (0, 1)] lines [] "Coordinate plane, x-axis −6 to 6 by 1; y-axis −6 to 6 by 1; points (−5, −4), (−3, −2), (−2, −1), and (0, 1)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(−5, −4), (−3, −2), (−2, −1), (0, 1)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- with-fractions · seed 67890 · difficulty 3
+prompt   Solve for x.
+display  equation "x/4 + 3 = 6" solve x row(fraction("x", "4"), " + 3 = 6") [clear-fraction x/4 + 3 = 6]
+answer   exact 12/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 3 on both sides.   [x/4 = 3]
+step 2   Multiply both sides by 4.   [x = 12]
+miss     multiplied-one-side-only = -6   The whole of the other side is multiplied too, not just the fraction.
+
+--- zero-neg-exponents · seed 424242 · difficulty 3
+prompt   What is the value?
+display  math "3 to the zero power" superscript("3", "0") [zero-exponent 3^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [3^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- evaluate-function · seed 987654321 · difficulty 3
+prompt   Evaluate the function at x = 5.
+display  equation "f(x) = −5x − 6" solve f(5) [evaluate-function coefficient -5 constant -6 input 5 label f(5)]
+answer   exact -31/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 5.   [−5x → −5(5)]
+step 2   Multiply the coefficient and input.   [−25]
+step 3   Add the constant −6.   [−31]
+
+--- slope-from-points · seed 1 · difficulty 4
+prompt   Find the slope between these points.
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−6, 0), (−4, −6)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−6, 0) and (−4, −6)" [slope-from-points]
+answer   exact -3/1
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [−6 − 0 = −6]
+step 2   Subtract x-values in that order too.   [−4 − −6 = 2]
+step 3   Divide rise by run and reduce.   [−6/2 = −3]
+miss     inconsistent-subtraction-order = 3   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = -0.3333333333333333   Slope is vertical change over horizontal change: rise over run.
+
+--- linear-vs-nonlinear · seed 12345 · difficulty 4
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -8..8/1 y -8..8/1 points [(−8, −6), (−4, −2), (2, 4), (3, 5)] lines [] "Coordinate plane, x-axis −8 to 8 by 1; y-axis −8 to 8 by 1; points (−8, −6), (−4, −2), (2, 4), and (3, 5)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   linear = Linear
+choice   nonlinear = Nonlinear
+step 1   Order the points by x-value.   [(−8, −6), (−4, −2), (2, 4), (3, 5)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- with-fractions · seed 67890 · difficulty 4
+prompt   Solve for x.
+display  equation "x/5 + 4 = 7" solve x row(fraction("x", "5"), " + 4 = 7") [clear-fraction x/5 + 4 = 7]
+answer   exact 15/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 4 on both sides.   [x/5 = 3]
+step 2   Multiply both sides by 5.   [x = 15]
+miss     multiplied-one-side-only = -13   The whole of the other side is multiplied too, not just the fraction.
+
+--- zero-neg-exponents · seed 424242 · difficulty 4
+prompt   What is the value?
+display  math "4 to the zero power" superscript("4", "0") [zero-exponent 4^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [4^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- evaluate-function · seed 987654321 · difficulty 4
+prompt   Evaluate the function at x = 7.
+display  equation "f(x) = −6x − 8" solve f(7) [evaluate-function coefficient -6 constant -8 input 7 label f(7)]
+answer   exact -50/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 7.   [−6x → −6(7)]
+step 2   Multiply the coefficient and input.   [−42]
+step 3   Add the constant −8.   [−50]
+
+--- slope-from-points · seed 1 · difficulty 5
+prompt   Find the slope between these points.
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(−8, 6), (−6, 0)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (−8, 6) and (−6, 0)" [slope-from-points]
+answer   exact -3/1
+input    keypad
+keypad   allowFraction=true allowNegative=true
+hint     Keep the point order consistent and divide rise by run.
+step 1   Subtract y-values in one point order.   [0 − 6 = −6]
+step 2   Subtract x-values in that order too.   [−6 − −8 = 2]
+step 3   Divide rise by run and reduce.   [−6/2 = −3]
+miss     inconsistent-subtraction-order = 3   Subtract both coordinate pairs in the same point order.
+miss     run-over-rise = -0.3333333333333333   Slope is vertical change over horizontal change: rise over run.
+
+--- linear-vs-nonlinear · seed 12345 · difficulty 5
+prompt   Is this relation linear or nonlinear?
+display  coordinate-plane x -10..10/1 y -10..10/1 points [(0, 5), (1, 4), (5, 0), (8, −3), (9, −4)] lines [] "Coordinate plane, x-axis −10 to 10 by 1; y-axis −10 to 10 by 1; points (0, 5), (1, 4), (5, 0), (8, −3), and (9, −4)" [linear-vs-nonlinear]
+answer   choice linear
+input    choice
+hint     Compare the exact rate of change between consecutive points.
+choice   nonlinear = Nonlinear
+choice   linear = Linear
+step 1   Order the points by x-value.   [(0, 5), (1, 4), (5, 0), (8, −3), (9, −4)]
+step 2   Compare each consecutive slope.   [Every slope matches.]
+step 3   Choose the matching classification.   [Linear]
+
+--- with-fractions · seed 67890 · difficulty 5
+prompt   Solve for x.
+display  equation "x/6 + 5 = 9" solve x row(fraction("x", "6"), " + 5 = 9") [clear-fraction x/6 + 5 = 9]
+answer   exact 24/1
+input    keypad
+keypad   allowNegative=true
+hint     Multiply both sides by the denominator to clear the fraction.
+step 1   Subtract 5 on both sides.   [x/6 = 4]
+step 2   Multiply both sides by 6.   [x = 24]
+miss     multiplied-one-side-only = -21   The whole of the other side is multiplied too, not just the fraction.
+
+--- zero-neg-exponents · seed 424242 · difficulty 5
+prompt   What is the value?
+display  math "5 to the zero power" superscript("5", "0") [zero-exponent 5^0]
+answer   exact 1/1
+input    keypad
+hint     Any nonzero number to the zero power equals one.
+step 1   Use the zero-exponent rule.   [5^0 = 1]
+miss     answered-zero = 0   A nonzero base to the zero power equals one.
+
+--- evaluate-function · seed 987654321 · difficulty 5
+prompt   Evaluate the function at x = 9.
+display  equation "f(x) = −8x − 10" solve f(9) [evaluate-function coefficient -8 constant -10 input 9 label f(9)]
+answer   exact -82/1
+input    keypad
+keypad   allowNegative=true maxLength=2
+hint     Substitute the named input for x, then simplify the rule.
+step 1   Replace x with 9.   [−8x → −8(9)]
+step 2   Multiply the coefficient and input.   [−72]
+step 3   Add the constant −10.   [−82]"
+`;
+
+exports[`Unit 22 content > review-quantitative records the complete output and stable intro 1`] = `
+"--- read-decimals · seed 1 · difficulty 1
+prompt   Write this decimal in digits.
+display  inline "zero and one tenth" [read 0.1]
+answer   exact 1/10
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 1 in the tenths places.
+step 3   The decimal is 0.1.
+miss     dropped-decimal-point = 1   The word "and" marks where the decimal point belongs.
+
+--- basic-probability · seed 12345 · difficulty 1
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 2 total 4] "A bag holds 4 marbles. 2 of them are red."
+answer   exact 1/2 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [4]
+step 2   Count the red marbles.   [2]
+step 3   Write red over the total.   [2/4]
+miss     favourable-over-remaining = 1   Compare red marbles with every marble, not just the rest.
+
+--- negatives-numberline · seed 67890 · difficulty 1
+prompt   Place this value on the line.
+display  inline "−2"
+answer   exact -2/1
+input    number-line
+line     −5 to 5 by 1 (11 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 2 ticks to the left.   [0 → −2]
+miss     mirrored-across-zero = 2   That is 2 steps from zero, but the other way.
+miss     counted-the-zero = -1   Zero is where the counting starts, not the first step.
+
+--- sub-facts · seed 424242 · difficulty 1
+prompt   What is the difference?
+display  inline "5 − 2"
+answer   exact 3/1
+input    keypad
+hint     Start at 5 and count back 2.
+step 1   Start at 5.
+step 2   Count back 2.   [5 → 3]
+step 3   So 5 − 2 = 3.
+miss     added = 7   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 2   Nearly — that is one too few.
+miss     off-by-one-high = 4   Nearly — that is one too many.
+
+--- mode-range · seed 987654321 · difficulty 1
+prompt   What is the mode of these values?
+display  story [mode values [12,9,6,7,12]] "Values: 12, 9, 6, 7, 12"
+answer   exact 12/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [12 appears twice]
+step 2   Choose the most common value.   [12]
+miss     used-range-for-mode = 6   Count repeats when the question asks for mode.
+
+--- read-decimals · seed 1 · difficulty 2
+prompt   Write this decimal in digits.
+display  inline "three and sixteen hundredths" [read 3.16]
+answer   exact 79/25
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 16 in the hundredths places.
+step 3   The decimal is 3.16.
+miss     used-tenths-place = 4.6   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 19   The word "and" marks where the decimal point belongs.
+
+--- basic-probability · seed 12345 · difficulty 2
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 3 total 6] "A bag holds 6 marbles. 3 of them are red."
+answer   exact 1/2 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [6]
+step 2   Count the red marbles.   [3]
+step 3   Write red over the total.   [3/6]
+miss     favourable-over-remaining = 1   Compare red marbles with every marble, not just the rest.
+
+--- negatives-numberline · seed 67890 · difficulty 2
+prompt   Place this value on the line.
+display  inline "−3"
+answer   exact -3/1
+input    number-line
+line     −7 to 7 by 1 (15 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 3 ticks to the left.   [0 → −3]
+miss     mirrored-across-zero = 3   That is 3 steps from zero, but the other way.
+miss     counted-the-zero = -2   Zero is where the counting starts, not the first step.
+
+--- sub-facts · seed 424242 · difficulty 2
+prompt   What is the difference?
+display  inline "7 − 3"
+answer   exact 4/1
+input    keypad
+hint     Start at 7 and count back 3.
+step 1   Start at 7.
+step 2   Count back 3.   [7 → 4]
+step 3   So 7 − 3 = 4.
+miss     added = 10   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 3   Nearly — that is one too few.
+miss     off-by-one-high = 5   Nearly — that is one too many.
+
+--- mode-range · seed 987654321 · difficulty 2
+prompt   What is the mode of these values?
+display  story [mode values [6,9,20,8,20,18]] "Values: 6, 9, 20, 8, 20, 18"
+answer   exact 20/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [20 appears twice]
+step 2   Choose the most common value.   [20]
+miss     used-range-for-mode = 14   Count repeats when the question asks for mode.
+
+--- read-decimals · seed 1 · difficulty 3
+prompt   Write this decimal in digits.
+display  inline "seven and thirty-three hundredths" [read 7.33]
+answer   exact 733/100
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 33 in the hundredths places.
+step 3   The decimal is 7.33.
+miss     used-tenths-place = 10.3   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 40   The word "and" marks where the decimal point belongs.
+
+--- basic-probability · seed 12345 · difficulty 3
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 3 total 7] "A bag holds 7 marbles. 3 of them are red."
+answer   exact 3/7 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [7]
+step 2   Count the red marbles.   [3]
+step 3   Write red over the total.   [3/7]
+miss     favourable-over-remaining = 0.75   Compare red marbles with every marble, not just the rest.
+
+--- negatives-numberline · seed 67890 · difficulty 3
+prompt   Place this value on the line.
+display  inline "−4"
+answer   exact -4/1
+input    number-line
+line     −9 to 9 by 1 (19 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 4 ticks to the left.   [0 → −4]
+miss     mirrored-across-zero = 4   That is 4 steps from zero, but the other way.
+miss     counted-the-zero = -3   Zero is where the counting starts, not the first step.
+
+--- sub-facts · seed 424242 · difficulty 3
+prompt   What is the difference?
+display  inline "6 − 2"
+answer   exact 4/1
+input    keypad
+hint     Start at 6 and count back 2.
+step 1   Start at 6.
+step 2   Count back 2.   [6 → 4]
+step 3   So 6 − 2 = 4.
+miss     added = 8   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 3   Nearly — that is one too few.
+miss     off-by-one-high = 5   Nearly — that is one too many.
+
+--- mode-range · seed 987654321 · difficulty 3
+prompt   What is the mode of these values?
+display  story [mode values [29,9,13,32,9,12]] "Values: 29, 9, 13, 32, 9, 12"
+answer   exact 9/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [9 appears twice]
+step 2   Choose the most common value.   [9]
+miss     used-range-for-mode = 23   Count repeats when the question asks for mode.
+
+--- read-decimals · seed 1 · difficulty 4
+prompt   Write this decimal in digits.
+display  inline "seventeen and thirty hundredths" [read 17.30]
+answer   exact 173/10
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 30 in the hundredths places.
+step 3   The decimal is 17.30.
+miss     used-tenths-place = 20   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 47   The word "and" marks where the decimal point belongs.
+
+--- basic-probability · seed 12345 · difficulty 4
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 4 total 9] "A bag holds 9 marbles. 4 of them are red."
+answer   exact 4/9 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [9]
+step 2   Count the red marbles.   [4]
+step 3   Write red over the total.   [4/9]
+miss     favourable-over-remaining = 0.8   Compare red marbles with every marble, not just the rest.
+
+--- negatives-numberline · seed 67890 · difficulty 4
+prompt   Place this value on the line.
+display  inline "−4"
+answer   exact -4/1
+input    number-line
+line     −11 to 11 by 1 (23 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 4 ticks to the left.   [0 → −4]
+miss     mirrored-across-zero = 4   That is 4 steps from zero, but the other way.
+miss     counted-the-zero = -3   Zero is where the counting starts, not the first step.
+
+--- sub-facts · seed 424242 · difficulty 4
+prompt   What is the difference?
+display  inline "8 − 2"
+answer   exact 6/1
+input    keypad
+hint     Start at 8 and count back 2.
+step 1   Start at 8.
+step 2   Count back 2.   [8 → 6]
+step 3   So 8 − 2 = 6.
+miss     added = 10   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 5   Nearly — that is one too few.
+miss     off-by-one-high = 7   Nearly — that is one too many.
+
+--- mode-range · seed 987654321 · difficulty 4
+prompt   What is the mode of these values?
+display  story [mode values [45,35,45,28,21,26,25]] "Values: 45, 35, 45, 28, 21, 26, 25"
+answer   exact 45/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [45 appears twice]
+step 2   Choose the most common value.   [45]
+miss     used-range-for-mode = 24   Count repeats when the question asks for mode.
+
+--- read-decimals · seed 1 · difficulty 5
+prompt   Write this decimal in digits.
+display  inline "thirty-four and fifty-four hundredths" [read 34.54]
+answer   exact 1727/50
+input    keypad
+keypad   allowDecimal=true
+hint     The word "and" marks the decimal point.
+step 1   Write the whole-number part first.
+step 2   Place 54 in the hundredths places.
+step 3   The decimal is 34.54.
+miss     used-tenths-place = 39.4   Hundredths use two places after the decimal point.
+miss     dropped-decimal-point = 88   The word "and" marks where the decimal point belongs.
+
+--- basic-probability · seed 12345 · difficulty 5
+prompt   What is the probability of picking a red marble?
+display  story [basic-probability favourable 6 total 12] "A bag holds 12 marbles. 6 of them are red."
+answer   exact 1/2 (fraction)
+input    keypad
+keypad   allowFraction=true
+hint     Compare the favourable count with the total.
+step 1   Count every marble in the bag.   [12]
+step 2   Count the red marbles.   [6]
+step 3   Write red over the total.   [6/12]
+miss     favourable-over-remaining = 1   Compare red marbles with every marble, not just the rest.
+
+--- negatives-numberline · seed 67890 · difficulty 5
+prompt   Place this value on the line.
+display  inline "−6"
+answer   exact -6/1
+input    number-line
+line     −14 to 14 by 1 (29 ticks)
+hint     Start at zero and count one tick at a time.
+step 1   Find zero in the middle of the line.
+step 2   Count 6 ticks to the left.   [0 → −6]
+miss     mirrored-across-zero = 6   That is 6 steps from zero, but the other way.
+miss     counted-the-zero = -5   Zero is where the counting starts, not the first step.
+
+--- sub-facts · seed 424242 · difficulty 5
+prompt   What is the difference?
+display  inline "10 − 2"
+answer   exact 8/1
+input    keypad
+hint     Start at 10 and count back 2.
+step 1   Start at 10.
+step 2   Count back 2.   [10 → 8]
+step 3   So 10 − 2 = 8.
+miss     added = 12   That is the sum. This one is asking you to take away.
+miss     off-by-one-low = 7   Nearly — that is one too few.
+miss     off-by-one-high = 9   Nearly — that is one too many.
+
+--- mode-range · seed 987654321 · difficulty 5
+prompt   What is the mode of these values?
+display  story [mode values [51,40,37,68,68,30,38,48]] "Values: 51, 40, 37, 68, 68, 30, 38, 48"
+answer   exact 68/1
+input    keypad
+hint     Count repeats to find the mode.
+step 1   Count how often each value appears.   [68 appears twice]
+step 2   Choose the most common value.   [68]
+miss     used-range-for-mode = 38   Count repeats when the question asks for mode."
+`;

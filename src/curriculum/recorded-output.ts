@@ -571,7 +571,8 @@ const formatDisplay = (display: Problem['display']): string => {
       return (
         `inline "${display.text}"` +
         (display.decimal ? ` [${formatDecimalData(display.decimal)}]` : '') +
-        (display.algebra ? ` [${formatAlgebraData(display.algebra)}]` : '')
+        (display.algebra ? ` [${formatAlgebraData(display.algebra)}]` : '') +
+        (display.calculator ? ` calculator ${JSON.stringify(display.calculator)}` : '')
       )
     case 'column':
       return `column ${display.operands.join(` ${display.operator} `)}`
@@ -599,7 +600,7 @@ const formatDisplay = (display: Problem['display']): string => {
         (display.polynomial ? ` [${formatPolynomial(display.polynomial)}]` : '')
       )
     case 'diagram':
-      if (display.diagram.kind === 'geometry') return formatGeometryDiagram(display.diagram)
+      if (display.diagram.kind === 'geometry') return formatGeometryDiagram(display.diagram) + (display.formulaSelection ? ' formula-selection' : '')
       return (
         `diagram ${display.diagram.kind} ${display.diagram.shadedParts}/${display.diagram.parts} ` +
         `"${shapeDiagramLabel(display.diagram)}"`

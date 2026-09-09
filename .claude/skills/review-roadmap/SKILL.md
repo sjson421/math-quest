@@ -61,5 +61,14 @@ review, invoke `Agent` with `subagent_type: "roadmap-reviewer"` and a fresh task
 containing only the fields permitted by the handoff contract. Do not add a model override or
 conversation transcript.
 
+### Forward amendment
+
+If this phase group finds that an artifact assumption is wrong, do not return the run. Follow
+the handoff contract's forward amendment steps: invoke `openspec-update-change` through Claude
+Code's skill mechanism to revise only the invalidated artifacts, append the discovery and
+decision to `exploration.amendments`, then invoke `Agent` once with
+`subagent_type: "roadmap-reviewer"` over the revised artifact paths only. Verify every finding
+before accepting it, then resume where the discovery interrupted.
+
 After the archive commit is pushed, remove only the exact run-owned handoff files and their
 empty directories. Deliver the complete final report required by `finish.md`.

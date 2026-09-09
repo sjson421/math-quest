@@ -4,7 +4,7 @@ Use `openspec-apply-change` with the audited name. Follow every task and test in
 marking a task complete only after its work lands. Keep implementation, tests, and OpenSpec
 coherent.
 
-If implementation disproves an artifact assumption, record the reason, set the handoff to
-`needs-preparation`, and stop. A new `prepare-roadmap` session owns the necessary exploration
-and proposal work, then a fresh `audit-roadmap` session reruns phase 4 before implementation
-resumes. Proceed only when every task is checked.
+If implementation disproves an artifact assumption, amend the change in place under the
+handoff contract's forward amendment steps, then resume the task that found it. The Apply
+phase owns both the amendment and the code that follows from it. Proceed only when every
+task is checked.

@@ -8,13 +8,9 @@
  * or wall marker — they are review and rehearsal over content already learned,
  * not new ground.
  *
- * `requires: ['timed']` breaks the rule stated in stage-e.ts on purpose. The
- * mixed reviews and full-length tests draw their items from every earlier stage,
- * so what they truly need is "whatever the sampled items need" — which is close
- * to all eight capabilities and which a stage-level field cannot express.
- * Restating the other seven here would read as this stage introducing them.
- * Timed mode is the one thing genuinely new at Stage H, and since the stage is
- * last in build order the sampled content will exist before it runs regardless.
+ * Mixed reviews inherit the input and display needs of every source unit.
+ * These content requirements are measured in coverage.test.ts; timed is retained
+ * separately for the two future full-length forms, not for the four lessons.
  */
 
 import type { StageEntry } from './types'
@@ -22,7 +18,7 @@ import type { StageEntry } from './types'
 export const stageH: StageEntry = {
   id: 'stage-h',
   name: 'GED Prep',
-  requires: ['timed'],
+  requires: ['choice-input', 'math-notation', 'fraction-input', 'diagram', 'number-line', 'expression-input', 'coordinate-plane', 'root-pair-input', 'chart', 'timed'],
   units: [
     {
       id: 'unit-22',

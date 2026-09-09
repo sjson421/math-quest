@@ -105,7 +105,8 @@ function InlineView({
   entryMode,
   readOnly,
 }: { display: Of<'inline'> } & EntryProps) {
-  const showsEntry = GENERIC_ENTRY_FRAME[entryMode] && !readOnly
+  const policy = display.calculator?.operation === 'choose-sequence' ? DISPLAY_ENTRY_FRAME : GENERIC_ENTRY_FRAME
+  const showsEntry = policy[entryMode] && !readOnly
   if (display.decimal?.operation === 'read') {
     return (
       <div className="flex max-w-xs flex-col items-center gap-4 text-center">
@@ -305,6 +306,7 @@ function EquationView({ display, entry, entryMode, readOnly }: { display: Of<'eq
 }
 
 function DiagramView({ display, entry, entryMode, readOnly }: { display: Of<'diagram'> } & EntryProps) {
+  const policy = display.formulaSelection ? DISPLAY_ENTRY_FRAME : GENERIC_ENTRY_FRAME
   return (
     <div className="flex flex-col items-center gap-3 max-w-full">
       {display.diagram.kind === 'geometry' ? (
@@ -312,7 +314,7 @@ function DiagramView({ display, entry, entryMode, readOnly }: { display: Of<'dia
       ) : (
         <ShapeDiagram diagram={display.diagram} />
       )}
-      {GENERIC_ENTRY_FRAME[entryMode] && !readOnly && (
+      {policy[entryMode] && !readOnly && (
         <div className="flex items-center justify-center gap-3 text-4xl">
           <span className="font-bold text-ink-faint">=</span>
           <EntrySlot value={entry} mode={entryMode} fractionSize="fluid" />

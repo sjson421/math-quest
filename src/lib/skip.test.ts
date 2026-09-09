@@ -6,7 +6,7 @@
  * would let the two drift apart, which is the failure the derivation exists to
  * remove. `unit-0` is the first block a learner could skip and the one whose
  * downstream unlock is checkable; `stage-a` is the same skills addressed as a
- * stage; `stage-h` is a block nobody can play yet.
+ * stage; `stage-h` has four playable skills and two planned forms.
  */
 
 import { describe, expect, it } from 'vitest'
@@ -44,9 +44,10 @@ const TODAY = '2026-08-31'
 
 const UNIT = 'unit-0'
 const STAGE = 'stage-a'
-/** A block whose stage is waiting on infrastructure, so none of it is playable. */
-const PLANNED_UNIT = 'unit-22'
-const PLANNED_STAGE = 'stage-h'
+/** A partly built block: only its four content lessons can be skipped. */
+const PARTIAL_UNIT = 'unit-22'
+const PARTIAL_STAGE = 'stage-h'
+const partialIds = ['calculator-skills', 'formula-sheet', 'review-quantitative', 'review-algebraic']
 
 const unit0 = courseUnitById.get(UNIT)!.skills.map((skill) => skill.id)
 /** The first skill behind the whole of Unit 0 — what a skip of it should open. */
@@ -82,7 +83,7 @@ describe('playable skip blocks', () => {
   it('reads stage and unit membership from the playable course tree', () => {
     expect(playableBlockSkills(UNIT)?.map(({ id }) => id)).toEqual(unit0)
     expect(playableBlockSkills(STAGE)?.map(({ id }) => id)).toEqual(unit0)
-    expect(playableBlockSkills(PLANNED_UNIT)).toBeUndefined()
+    expect(playableBlockSkills(PARTIAL_UNIT)?.map(({ id }) => id)).toEqual(partialIds)
     expect(playableBlockSkills('not-a-block')).toBeUndefined()
   })
 
@@ -104,7 +105,7 @@ describe('playable skip blocks', () => {
 
     const started = progressWith({ [unit0[0]]: { attempts: 1 } })
     expect(unitCanBeSkipped(UNIT, started, (id) => isUnlocked(id, started))).toBe(false)
-    expect(unitCanBeSkipped(PLANNED_UNIT, fresh, () => false)).toBe(false)
+    expect(unitCanBeSkipped('not-a-block', fresh, () => false)).toBe(false)
   })
 
   it('finds the next stage in curriculum order by remaining skip mastery', () => {
@@ -143,7 +144,9 @@ describe('check selection and scoring', () => {
 
   it('refuses unknown and empty blocks and keeps only seven or eight as passing', () => {
     expect(selectCheckSkills('not-a-block', makeRng(1))).toBeUndefined()
-    expect(selectCheckSkills(PLANNED_STAGE, makeRng(1))).toBeUndefined()
+    const partial = selectCheckSkills(PARTIAL_STAGE, makeRng(1))!
+    expect(partial).toHaveLength(8)
+    expect(new Set(partial.map(({ id }) => id))).toEqual(new Set(partialIds))
     expect(checkPasses(6)).toBe(false)
     expect(checkPasses(7)).toBe(true)
     expect(checkPasses(8)).toBe(true)
@@ -339,16 +342,16 @@ describe('marking a block known', () => {
     expect(markKnown(known, UNIT, 'self-assessed', TODAY)).toBeNull()
   })
 
-  it('leaves a block nobody can play alone, and still locked', () => {
-    const before = initialProgress()
-
-    expect(markKnown(before, PLANNED_UNIT, 'tested-out', TODAY)).toBeNull()
-    expect(markKnown(before, PLANNED_STAGE, 'tested-out', TODAY)).toBeNull()
-
-    for (const entry of allUnits.find((unit) => unit.id === PLANNED_UNIT)!.skills) {
-      expect(skillStates.get(entry.id)).toBe('planned')
-      expect(before.skills).not.toHaveProperty(entry.id)
-      expect(isUnlocked(entry.id, before)).toBe(false)
+  it('marks only playable members of a partly built unit or stage', () => {
+    for (const block of [PARTIAL_UNIT, PARTIAL_STAGE]) {
+      const after = markKnown(initialProgress(), block, 'tested-out', TODAY)!
+      expect(Object.keys(after.skills).filter((id) => after.skills[id].mastery > 0)).toEqual(partialIds)
+      for (const id of partialIds) expect(after.skills[id].mastery).toBe(SKIP_MASTERY)
+      for (const entry of allUnits.find((unit) => unit.id === PARTIAL_UNIT)!.skills.filter((entry) => !partialIds.includes(entry.id))) {
+        expect(skillStates.get(entry.id)).toBe('planned')
+        expect(after.skills).not.toHaveProperty(entry.id)
+        expect(isUnlocked(entry.id, after)).toBe(false)
+      }
     }
   })
 

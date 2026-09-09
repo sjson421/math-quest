@@ -1,6 +1,6 @@
 ---
 name: prepare-roadmap
-description: Select and prepare the first unchecked Math Quest roadmap item through exploration and OpenSpec proposal. Use when starting the roadmap workflow or resuming a handoff marked needs-preparation; exit ready-to-audit before audit or implementation.
+description: Select and prepare the first unchecked Math Quest roadmap item through exploration and OpenSpec proposal. Use when starting the roadmap workflow with no active run; exit ready-to-audit before audit or implementation.
 ---
 
 # Prepare Roadmap
@@ -19,10 +19,8 @@ immediately. Read each phase reference only when that phase begins:
 
 ## Claude Code adapter
 
-For a new run, create exactly three tasks with `TaskCreate`: Select, Explore, and Propose.
-For `needs-preparation`, preserve selection and create only the exploration and proposal
-tasks named by the re-entry reason, ending with Propose. Use `TaskUpdate` so exactly one task
-is `in_progress`; never complete one before its gate passes.
+Create exactly three tasks with `TaskCreate`: Select, Explore, and Propose. Use `TaskUpdate`
+so exactly one task is `in_progress`; never complete one before its gate passes.
 
 Invoke each named OpenSpec project skill through Claude Code's skill mechanism when its
 phase begins. Do not load or invoke audit instructions in this session. When exploration

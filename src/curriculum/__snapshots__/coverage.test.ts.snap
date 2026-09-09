@@ -65,6 +65,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "basic-probability": [
     "read-scatterplot",
   ],
+  "calculator-skills": [
+    "counting-outcomes",
+  ],
   "circumference": [
     "area-parallelogram-trapezoid",
   ],
@@ -223,6 +226,9 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "foil": [
     "mult-monomial",
+  ],
+  "formula-sheet": [
+    "calculator-skills",
   ],
   "fraction-meaning": [
     "negatives-mixed",
@@ -401,6 +407,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   ],
   "rearrange-formula": [
     "equation-words",
+  ],
+  "review-algebraic": [
+    "review-quantitative",
+  ],
+  "review-quantitative": [
+    "formula-sheet",
   ],
   "round-decimals": [
     "compare-decimals",

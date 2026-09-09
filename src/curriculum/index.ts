@@ -35,6 +35,7 @@ import { unit18 } from './unit-18-polynomials'
 import { unit19 } from './unit-19-functions'
 import { unit20 } from './unit-20-geometry-measurement'
 import { unit21 } from './unit-21-data-probability'
+import { unit22 } from './unit-22-test-preparation'
 import {
   indexSkills,
   resolveCourseTree,
@@ -73,6 +74,7 @@ export const allSkills: SkillGenerator[] = [
   ...unit19,
   ...unit20,
   ...unit21,
+  ...unit22,
 ]
 
 /**

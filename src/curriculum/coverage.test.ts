@@ -8,6 +8,7 @@
  * keyed to it would sit outside the course.
  */
 
+import { unit22, quantitativePool, algebraicPool } from './unit-22-test-preparation'
 import { describe, expect, it } from 'vitest'
 import { generateProblem } from '../lib/generator'
 import { checkTeachingLine, teachingLineTerms } from '../lib/content-rules'
@@ -38,6 +39,12 @@ const stageDIds = stageD.units.flatMap((unit) => unit.skills.map((skill) => skil
 const stageEIds = stageE.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
 const stageFIds = stageF.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
 const stageGIds = stageG.units.flatMap((unit) => unit.skills.map((skill) => skill.id))
+
+function inlineWidthProblems(widest: ReadonlyMap<string, string>): string[] {
+  return [...widest]
+    .filter(([id, text]) => !['read-numbers', 'read-decimals'].includes(id) && text.length > 18)
+    .map(([id, text]) => `${id}: "${text}" is ${text.length} characters`)
+}
 
 describe('every generator is declared in the manifest', () => {
   it('registers nothing the manifest does not declare', () => {
@@ -81,7 +88,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(195)
+    expect(documentedAsBuilt).toHaveLength(199)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
   it('keeps every inline expression inside the width its size band was chosen for', () => {
@@ -101,17 +108,15 @@ describe('the skills that are built', () => {
     for (const generator of allSkills) {
       for (const difficulty of [1, 2, 3, 4, 5] as const) {
         for (let i = 0; i < 50; i += 1) {
-          const { display } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
+          const { display, skillId } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
           if (display.kind !== 'inline') continue
-          const seen = widest.get(generator.id) ?? ''
-          if (display.text.length > seen.length) widest.set(generator.id, display.text)
+          const seen = widest.get(skillId) ?? ''
+          if (display.text.length > seen.length) widest.set(skillId, display.text)
         }
       }
     }
 
-    const tooWide = [...widest]
-      .filter(([id, text]) => !['read-numbers', 'read-decimals'].includes(id) && text.length > 18)
-      .map(([id, text]) => `${id}: "${text}" is ${text.length} characters`)
+    const tooWide = inlineWidthProblems(widest)
 
     expect(tooWide, 'widen the ProblemView size bands, or narrow the draw').toEqual([])
     // Vitest's default is 5s and this measurement generates ~45,000 problems,
@@ -188,7 +193,7 @@ describe('the skills that are built', () => {
     expect(longBlurbs).toEqual([])
   })
 
-  it('ships teaching lines for every playable skill through Stage G', () => {
+  it('ships teaching lines for every playable skill through Stage H', () => {
     const withLines = allSkills.filter((skill) => skill.teachingLine !== undefined)
     const stageGImplementedIds = stageGIds.filter((id) => generators.has(id))
     expect(stageBIds).toHaveLength(44)
@@ -229,6 +234,7 @@ describe('the skills that are built', () => {
       ...stageEIds,
       ...stageFIds,
       ...stageGImplementedIds,
+      ...unit22.map((skill) => skill.id),
     ])
 
     const terms = withLines.map((skill) => {
@@ -246,7 +252,7 @@ describe('the skills that are built', () => {
     expect([...new Set(stageBTerms)]).toEqual(['remainder', 'factor', 'multiple', 'prime'])
 
     const termsByUnit = new Map<string, string[]>()
-    for (const id of [...stageCIds, ...stageDIds, ...stageEIds, ...stageFIds, ...stageGImplementedIds]) {
+    for (const id of [...stageCIds, ...stageDIds, ...stageEIds, ...stageFIds, ...stageGImplementedIds, ...unit22.map((skill) => skill.id)]) {
       const location = manifestIndex.get(id)
       if (!location) throw new Error(`Missing manifest location: ${id}`)
       const line = allSkills.find((skill) => skill.id === id)?.teachingLine
@@ -281,6 +287,7 @@ describe('the skills that are built', () => {
       ['unit-19', ['function', 'domain']],
       ['unit-20', ['perimeter', 'area', 'area', 'circumference', 'volume', 'volume', 'hypotenuse']],
       ['unit-21', ['probability']],
+      ['unit-22', []],
     ])
   })
 
@@ -459,7 +466,7 @@ describe('the skills that are built', () => {
       'ratio-words',
     ])
     expect(unit11Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(195)
+    expect(implementedSkillIds).toHaveLength(199)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -525,7 +532,7 @@ describe('the skills that are built', () => {
       'factor-gcf',
     ])
     expect(unit13Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(195)
+    expect(implementedSkillIds).toHaveLength(199)
   })
 
   it('completes Unit 14 on the capabilities Stage E already had, adding none', () => {
@@ -634,10 +641,10 @@ describe('the skills that are built', () => {
     expect(unit18Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
     const unit19Ids = stage?.units.find((unit) => unit.id === 'unit-19')?.skills.map((skill) => skill.id) ?? []
     expect(unit19Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(195)
+    expect(implementedSkillIds).toHaveLength(199)
   })
 
-  it('completes Stage G through counting-outcomes, leaving only Stage H planned', () => {
+  it('completes Stage G through counting-outcomes, leaving only the two timed forms planned', () => {
     const stage = manifestIndex.get('read-bar-line')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unit20Ids = stage?.units.find((unit) => unit.id === 'unit-20')?.skills.map((skill) => skill.id) ?? []
@@ -669,14 +676,14 @@ describe('the skills that are built', () => {
     expect(unit21Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
     expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
     expect(stageHIds).toHaveLength(6)
-    expect(stageHIds.filter((id) => generators.has(id))).toEqual([])
-    expect(stageHIds.filter((id) => skillState(id) === 'planned')).toHaveLength(6)
-    expect(stageH?.requires).toEqual(['timed'])
+    expect(stageHIds.filter((id) => generators.has(id))).toEqual(unit22.map((skill) => skill.id))
+    expect(stageHIds.filter((id) => skillState(id) === 'planned')).toEqual(['timed-practice-1', 'timed-practice-2'])
+    expect(stageH?.requires).toContain('timed')
     expect((stageH?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))).toEqual([])
-    expect(implementedSkillIds).toHaveLength(195)
-    expect(allSkills).toHaveLength(195)
+    expect(implementedSkillIds).toHaveLength(199)
+    expect(allSkills).toHaveLength(199)
     expect(course.map(({ stage: courseStage }) => courseStage.id)).toContain('stage-g')
-    expect(course.map(({ stage: courseStage }) => courseStage.id)).not.toContain('stage-h')
+    expect(course.map(({ stage: courseStage }) => courseStage.id)).toContain('stage-h')
   })
 
   it('declares a capability for every input mode a stage actually uses', () => {
@@ -700,7 +707,7 @@ describe('the skills that are built', () => {
       if (!stage) continue
       for (const difficulty of [1, 2, 3, 4, 5] as const) {
         // Five a difficulty rather than twenty: `inputMode` varies by draw at
-        // most, never by seed depth, and this walks all 195 generators.
+        // most, never by seed depth, and this walks all 199 generators.
         for (let i = 0; i < 5; i += 1) {
           const { inputMode } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
           const capability = modes[inputMode]
@@ -746,9 +753,9 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 6 skills out of the skill tree entirely', () => {
+  it('leaves the other 2 skills out of the skill tree entirely', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(195)
+    expect(offered).toHaveLength(199)
   })
 
   it('groups them under the unit and stage the manifest declares', () => {
@@ -771,7 +778,7 @@ describe('what the learner is offered', () => {
     expect(located).toContainEqual(['compare-diff-den', 'unit-7', 'stage-d'])
   })
 
-  it('shows the twenty-one built units, and no stage or unit that has nothing to play', () => {
+  it('shows the twenty-three built units, and no stage or unit that has nothing to play', () => {
     expect(course.map(({ stage }) => stage.id)).toEqual([
       'stage-a',
       'stage-b',
@@ -780,6 +787,7 @@ describe('what the learner is offered', () => {
       'stage-e',
       'stage-f',
       'stage-g',
+      'stage-h',
     ])
     expect(course.flatMap(({ units }) => units.map(({ unit }) => unit.id))).toEqual([
       'unit-0',
@@ -804,6 +812,7 @@ describe('what the learner is offered', () => {
       'unit-19',
       'unit-20',
       'unit-21',
+      'unit-22',
     ])
   })
 })
@@ -833,5 +842,47 @@ describe('the unlock graph the store gates on', () => {
     const graph = Object.fromEntries(implementedSkillIds.map((id) => [id, unlockPrerequisites.get(id)]))
 
     expect(graph).toMatchSnapshot()
+  })
+})
+
+
+describe('Stage H source-aware evidence', () => {
+  it('keeps arithmetic width failures when delegated and only existing reading exceptions', () => {
+    const samples: Problem[] = [
+      { ...generateProblem(unit22[2], 1, 1), skillId: 'add-facts', display: { kind: 'inline', text: '1 + 2 + 3 + 4 + 5 + 6' } },
+      { ...generateProblem(unit22[2], 1, 1), skillId: 'read-numbers', display: { kind: 'inline', text: 'two hundred thirty-four' } },
+      { ...generateProblem(unit22[2], 1, 1), skillId: 'read-decimals', display: { kind: 'inline', text: 'two hundred thirty-four thousandths' } },
+    ]
+    const widest = new Map(samples.map((p) => [p.skillId, p.display.kind === 'inline' ? p.display.text : '']))
+    expect(inlineWidthProblems(widest)).toEqual(['add-facts: "1 + 2 + 3 + 4 + 5 + 6" is 21 characters'])
+  })
+
+  it('measures all inherited content capabilities and retains timing separately', () => {
+    const witnesses = new Map<Capability, string>()
+    const inputCapabilities: Partial<Record<Problem['inputMode'], Capability>> = {
+      choice: 'choice-input', expression: 'expression-input', 'number-line': 'number-line',
+      'coordinate-plane': 'coordinate-plane', 'root-pair': 'root-pair-input',
+    }
+    for (const source of [...quantitativePool, ...algebraicPool, ...unit22.slice(0, 2)]) {
+      for (const difficulty of [1, 2, 3, 4, 5] as const) {
+        for (let seed = 0; seed < 30; seed++) {
+          const p = generateProblem(source, seed * 7919, difficulty)
+          const record = (capability: Capability) => witnesses.set(capability, `${source.id}/${seed * 7919}/${difficulty}`)
+          const inputCapability = inputCapabilities[p.inputMode]
+          if (inputCapability) record(inputCapability)
+          const display = p.display
+          if (display.kind === 'math' || (display.kind === 'equation' && display.notation) || (display.kind === 'diagram' && display.diagram.kind === 'geometry')) record('math-notation')
+          if (display.kind === 'diagram') record('diagram')
+          if (display.kind === 'chart') record('chart')
+          if (display.kind === 'coordinate-plane') record('coordinate-plane')
+          if (p.keypad?.allowFraction || p.keypad?.allowMixed) record('fraction-input')
+        }
+      }
+    }
+    expect(witnesses.has('timed')).toBe(false)
+    const observed = [...witnesses.keys(), 'timed'].sort()
+    expect(observed, JSON.stringify(Object.fromEntries(witnesses))).toEqual([...manifestIndex.get('calculator-skills')!.stage.requires!].sort())
+    for (const capability of witnesses.keys()) expect(AVAILABLE_CAPABILITIES.has(capability)).toBe(true)
+    expect(AVAILABLE_CAPABILITIES.has('timed')).toBe(true)
   })
 })

@@ -1,15 +1,12 @@
 /**
  * What the top of the course offers at first paint.
  *
- * One of the eight stages has no generator anywhere in it. It may not
- * appear here, in any form — that is the difference between a course
- * that is being written and one that looks two-thirds empty.
+ * All eight stages now contain playable content.
  */
 
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { course } from '../curriculum'
-import { stages } from '../curriculum/manifest'
 import { initialProgress, type Progress } from '../store/progress'
 import { StageList } from './StageList'
 
@@ -22,24 +19,18 @@ describe('StageList', () => {
   it('lists the stages that have something to play, in curriculum order', () => {
     const html = render()
 
-    expect(html.match(/<button/g)).toHaveLength(7)
+    expect(html.match(/<button/g)).toHaveLength(8)
     expect(html.indexOf('Numbers')).toBeLessThan(html.indexOf('The Four Operations'))
     expect(html.indexOf('The Four Operations')).toBeLessThan(html.indexOf('Negatives'))
     expect(html.indexOf('Negatives')).toBeLessThan(html.indexOf('Parts of a Whole'))
     expect(html.indexOf('Parts of a Whole')).toBeLessThan(html.indexOf('Powers &amp; Early Algebra'))
     expect(html.indexOf('Powers &amp; Early Algebra')).toBeLessThan(html.indexOf('Graphs &amp; Algebra II'))
     expect(html.indexOf('Graphs &amp; Algebra II')).toBeLessThan(html.indexOf('Geometry &amp; Data'))
+    expect(html.indexOf('Geometry &amp; Data')).toBeLessThan(html.indexOf('GED Prep'))
   })
 
-  it('shows no trace of a stage with no generator in it', () => {
-    const html = render()
-    const unbuilt = stages.filter(
-      (stage) => !course.some((entry) => entry.stage.id === stage.id),
-    )
-
-    expect(unbuilt.map((stage) => stage.name)).toEqual(['GED Prep'])
-    for (const stage of unbuilt) expect(html).not.toContain(stage.name)
-  })
+  // Empty-stage omission belongs to manifest/resolve.test.ts and coverage.test.ts.
+  // As in UnitList.test.tsx, a hand-trimmed prop would only re-test Array.map.
 
   it('lists no unit and no skill, only stages', () => {
     const html = render()

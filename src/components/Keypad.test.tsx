@@ -1,6 +1,9 @@
 import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 import type { KeypadRules } from '../lib/keypad'
+import { generateProblem } from '../lib/generator'
+import { unit09 } from '../curriculum/unit-09-decimals'
+import { unit22 } from '../curriculum/unit-22-test-preparation'
 import { Keypad } from './Keypad'
 
 /**
@@ -99,12 +102,50 @@ describe('Keypad', () => {
     expect([...ranks].sort((a, b) => a - b)).toEqual(ranks)
   })
 
-  it('gives the fraction key the one slot when both it and the decimal are allowed', () => {
-    // One slot, and a fraction skill wants the slash. `applyKey` would accept
-    // either character; the pad has to pick, and this pins which.
-    const html = render({ allowFraction: true, allowDecimal: true })
+  it.each([
+    { allowFraction: true, allowDecimal: true },
+    { allowFraction: true, allowDecimal: true, allowNegative: true },
+    { allowMixed: true, allowDecimal: true },
+  ])('offers both permitted forms without hiding another key: %j', (rules) => {
+    const html = render(rules)
     expect(has(html, '/')).toBe(true)
-    expect(has(html, '.')).toBe(false)
+    expect(has(html, '.')).toBe(true)
+    expect(has(html, '−')).toBe('allowNegative' in rules)
+    expect(has(html, 'Space')).toBe('allowMixed' in rules)
+    for (const d of DIGITS) expect(has(html, d)).toBe(true)
+    expect(has(html, 'Backspace')).toBe(true)
+    expect(html).toContain('>Check</button>')
+  })
+
+  it.each(['fraction-to-decimal', 'decimal-to-fraction', 'calculator-skills'])(
+    '%s exposes both forms from its actual problem declaration', (id) => {
+      const skill = [...unit09, ...unit22].find((skill) => skill.id === id)!
+      // This stable calculator draw asks for decimal form; both Unit 9 draws
+      // also permit the other form so the learner can receive form feedback.
+      const problem = generateProblem(skill, 12345, 1)
+      expect(problem.keypad).toEqual({ allowFraction: true, allowDecimal: true })
+      const html = render(problem.keypad)
+      expect(has(html, '.')).toBe(true)
+      expect(has(html, '/')).toBe(true)
+    },
+  )
+
+  it('keeps Backspace large unless its second cell is needed for decimal entry', () => {
+    for (const rules of [
+      { allowFraction: true, allowDecimal: true },
+      { allowFraction: true, allowNegative: true },
+      { allowMixed: true },
+    ]) {
+      const button = render(rules).match(/<button[^>]*aria-label="Backspace"[^>]*>/)![0]
+      expect(button).toContain('row-span-2')
+    }
+    for (const rules of [
+      { allowFraction: true, allowDecimal: true, allowNegative: true },
+      { allowMixed: true, allowDecimal: true },
+    ]) {
+      const button = render(rules).match(/<button[^>]*aria-label="Backspace"[^>]*>/)![0]
+      expect(button).not.toContain('row-span-2')
+    }
   })
 
   it('keeps the digits in the same places whatever the rules are', () => {
@@ -116,6 +157,9 @@ describe('Keypad', () => {
       { allowDecimal: true },
       { allowFraction: true },
       { allowNegative: true, allowFraction: true },
+      { allowFraction: true, allowDecimal: true },
+      { allowNegative: true, allowFraction: true, allowDecimal: true },
+      { allowMixed: true, allowDecimal: true },
     ]) {
       const html = render(rules)
       const ranks = DIGITS.map((d) => positionOf(html, d))
