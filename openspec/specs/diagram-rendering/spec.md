@@ -223,6 +223,12 @@ be hidden from the accessibility tree behind one derived figure image name. A si
 image name SHALL identify both figure roles, all three known measurements, the missing side
 role, and the unit.
 
+A formula-selection exercise SHALL display the same figure and structured formula references
+with the existing choice buttons as its answer surface. It SHALL omit a numeric equals sign
+and empty entry frame. The choices SHALL use the references' accessible labels, remain readable
+and keyboard operable, and fit with the figure and formulas at 375 pixels without horizontal
+overflow. Existing numeric geometry exercises SHALL retain their keypad frame.
+
 #### Scenario: A labelled triangle is announced once
 
 - **WHEN** a triangle with base 6 cm and height 4 cm renders
@@ -253,3 +259,19 @@ role, and the unit.
 - **WHEN** the paired figure, both proportion references, and existing keypad answer frame render at 375 pixels
 - **THEN** every side label and missing marker remains visible and legible
 - **AND** the page, figure, formulas, and answer surface do not overflow horizontally
+
+#### Scenario: Formula choices own the answer surface
+
+- **WHEN** a formula-selection geometry problem renders
+- **THEN** the labelled figure and both structured references appear with two choice buttons
+- **AND** no empty numeric answer frame or extra equals sign appears
+- **AND** the figure retains one accessible image name and the formulas retain their math names
+
+#### Scenario: Formula choices fit the phone surface
+
+- **WHEN** a formula-selection problem, including either Pythagorean side variant, renders at
+  a 375-pixel viewport
+- **THEN** the figure, both references, full choice labels and feedback remain readable
+- **AND** the page and answer surface do not overflow horizontally
+- **AND** both choices remain keyboard operable
+

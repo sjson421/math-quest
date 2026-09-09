@@ -168,9 +168,20 @@ accessible clock markup, cleanup, and phone-layout validation are built. Stage H
 `timed` as its declared stage requirement. No generator, skill id, unit membership,
 prerequisite, quick marker, or wall marker SHALL be added or changed by capability activation.
 
-Because every Stage H skill still lacks a registered generator, adding `timed` to the available
-capability set SHALL leave all six Stage H skills planned, keep Stage H absent from the playable
-course tree, and keep the implemented total at 195 of 201.
+When no Stage H generator is registered, adding `timed` to the available capability set
+SHALL leave all six Stage H skills planned, keep Stage H absent from the playable course tree,
+and keep the implemented total at 195 of 201.
+
+Once mixed-review generators are registered, Stage H SHALL also declare every content
+capability reached by its own exercises and their source pools. Its requirement set SHALL be
+the observed content requirements plus retained `timed`. All ten capabilities are already
+available; their availability SHALL NOT change in this content increment. Retaining `timed`
+SHALL NOT add a clock to any of the four untimed lessons.
+
+Content requirement evidence SHALL include input modes, display kinds, embedded math notation
+and fraction-entry declarations from the source generators and new authored exercises.
+Timing SHALL be checked separately as the retained stage requirement, not claimed as an
+observed property of these untimed exercises.
 
 #### Scenario: Capability requirement is queryable
 
@@ -277,47 +288,73 @@ course tree, and keep the implemented total at 195 of 201.
 - **AND** Stage H remains absent from the playable course tree
 - **AND** exactly 195 of 201 skills remain implemented
 
-### Requirement: Stage G completes with its fifth content increment
+#### Scenario: Stage H records inherited content requirements and retained timing
 
-The registry SHALL add `basic-probability`, `compound-probability`, and `counting-outcomes`
-under their existing manifest ids after `read-scatterplot` without changing manifest
-membership, prerequisites, quick markers, or wall markers. Because the two probability skills
-answer as fractions on the keypad, Stage G SHALL add the already-available `fraction-input` to
-its existing `choice-input`, `math-notation`, `diagram`, and `chart` requirements without
-changing `AVAILABLE_CAPABILITIES`. The manifest and curriculum document SHALL continue to
-agree.
+- **WHEN** Stage H's authored exercises and every mixed-review pool member are checked
+- **THEN** its declared requirements equal their observed content requirements plus `timed`
+- **AND** every declared requirement is already available
+- **AND** the four new lessons remain untimed
 
-All twenty-two Stage G skills SHALL resolve as implemented because `choice-input`,
-`math-notation`, `diagram`, `chart`, and `fraction-input` are already available. Adding the
-fraction-input requirement SHALL change no other stage's resolved state.
+### Requirement: Stage H opens with its first content increment
 
-#### Scenario: Registry addition preserves manifest authority
+The registry SHALL add `calculator-skills`, `formula-sheet`, `review-quantitative`, and
+`review-algebraic` in their existing manifest order. Manifest membership, ids, prerequisites,
+quick markers, wall markers, and available capabilities SHALL remain unchanged. Stage H's
+requirements SHALL change only as specified above.
 
-- **WHEN** increment 21b is registered
-- **THEN** `basic-probability` through `counting-outcomes` follow `read-scatterplot` in
-  manifest order
-- **AND** Stage G records `choice-input`, `math-notation`, `fraction-input`, `diagram`, and
-  `chart` as its complete available capability requirements
+Those four skills SHALL resolve as implemented, making 199 of 201 skills playable.
+`timed-practice-1` and `timed-practice-2` SHALL be the only planned skills. Curriculum rows
+22.1–22.4 SHALL show completion and continue to agree with the manifest. Stage H SHALL enter
+the course tree with exactly its four implemented skills.
+
+README, curriculum and roadmap status prose SHALL reflect the new boundary. Increment 30a
+SHALL be recorded as shipped only after implementation; roadmap item 30 SHALL remain unchecked
+until increment 30b ships.
+
+#### Scenario: Four skills open Stage H
+
+- **WHEN** the four generators are registered and skill state is resolved
+- **THEN** those four ids resolve as implemented and the total is 199 of 201
+- **AND** the course tree contains Unit 22 with those four skills in manifest order
+- **AND** both timed-practice ids stay planned and absent from the playable tree
+
+#### Scenario: Registration preserves curriculum authority
+
+- **WHEN** the manifest and curriculum are checked after registration
+- **THEN** all 201 ids, memberships, prerequisites and pacing markers are unchanged
+- **AND** rows 22.1–22.4 are complete and match the implemented set
 - **AND** no prerequisite, pacing marker, unit membership, or stage capability is copied into
   a generator
 
-#### Scenario: Stage G status reaches its boundary
+#### Scenario: The parent item stays open
 
-- **WHEN** skill states are resolved after increment 21b
-- **THEN** every Stage G skill from `perimeter` through `counting-outcomes` is implemented
-- **AND** the only planned skills left are Stage H's six
-- **AND** the total implemented count is 195 of 201
+- **WHEN** roadmap status is updated after 30a ships
+- **THEN** it records 199 playable skills and completion of 30a
+- **AND** item 30 remains unchecked with 30b still pending
 
-### Requirement: The final roadmap increment closes Stage G
+### Requirement: Stage G remains complete when Stage H opens
 
-Curriculum rows 20.1 through 21.9 SHALL be marked complete, and curriculum status prose SHALL
-identify every Stage G skill as playable and Stage H as the only planned work. The roadmap
-status count SHALL state 195 playable skills, and ordered increments 20a, 20b, 20c, 21a, and
-21b SHALL be recorded as shipped. Roadmap item 26 SHALL be closed, because all five of its
-increments have landed.
+All twenty-two Stage G skills from `perimeter` through `counting-outcomes` SHALL remain
+implemented. Unit 21's `basic-probability`, `compound-probability`, and `counting-outcomes`
+SHALL remain registered after `read-scatterplot` in manifest order. Stage G SHALL retain
+`choice-input`, `math-notation`, `fraction-input`, `diagram`, and `chart` as its complete
+available capability requirements. Its manifest membership, prerequisites and pacing markers
+SHALL remain unchanged.
 
-#### Scenario: Unit 21b closes the parent item
+Curriculum rows 20.1 through 21.9 SHALL remain complete. Roadmap increments 20a, 20b, 20c, 21a
+and 21b SHALL remain recorded as shipped and roadmap item 26 SHALL remain closed. Updated
+global counts SHALL reflect Stage H's first four playable skills rather than reopening
+completed Stage G work.
 
-- **WHEN** all nine Unit 21 skills are playable
-- **THEN** their curriculum rows and increment 21b show completion
-- **AND** the Stage G Units 20–21 checkbox is checked
+#### Scenario: Stage G content and capability boundary stays complete
+
+- **WHEN** Stage H's first four generators are registered
+- **THEN** every Stage G skill stays implemented with the same order and requirements
+- **AND** all twenty-two Stage G curriculum rows stay complete
+
+#### Scenario: Stage G roadmap completion survives updated totals
+
+- **WHEN** the roadmap is updated to 199 playable skills
+- **THEN** all five Stage G increments remain shipped and item 26 remains checked
+- **AND** only the two Stage H timed forms remain planned
+
