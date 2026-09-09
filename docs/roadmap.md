@@ -2,8 +2,8 @@
 
 What is left, in the order it should be done.
 
-**Status: 199 of 201 skills are playable.** Stages A through G have complete playable content;
-Stage H has four untimed lessons; only its two full-length forms remain planned. Stage E is
+**Status: 201 of 201 skills are playable.** Stages A through H have complete playable content;
+Stage H has four untimed lessons and two full-length practice forms. Stage E is
 complete with Units 12, 13, 14 and 15; Stage F's Units 16, 17, 18
 and 19 are complete.
 Choice input,
@@ -60,10 +60,11 @@ picking among rendered lines was never the built option the roadmap took it for,
 inequality graph is declined rather than deferred. The unit needed no new capability, and its
 six new `EquationData` arms sit on the existing `equation` display arm, which was always
 "a statement that already contains its relation" and now says so.
-Timed mode is an opt-in, session-local elapsed clock. Score-estimation infrastructure is also
-built for future Stage H forms, with an approximate mapping that is not an official score. Neither
-adds time pressure or makes Stage H playable without generators. The four 30a generators
-now open Stage H; its two timed forms remain planned. This line is the only progress number in the repo's documentation — the
+Timed mode is an opt-in, session-local elapsed clock. Score-estimation infrastructure powers
+Stage H's two forms, with an approximate mapping that is not an official score. Each form uses
+46 one-point questions — 21 quantitative and 25 algebraic draws with replacement — then shows
+that session's estimate after the elapsed-clock practice completes. Neither feature makes a
+skill playable without its generator. The six Unit 22 generators now open Stage H. This line is the only progress number in the repo's documentation — the
 manifest and `npm test` are the authority, and everything below is scope rather than status.
 
 To re-derive it rather than trusting this file:
@@ -1274,7 +1275,7 @@ shows before a lesson's first problem.
       the app says anything about an official test, so the caveat is part of the feature rather
       than a disclaimer bolted to it.
 
-- [ ] **30 · Stage H · Unit 22** *(was 29)* — S — 6 skills — **two increments**
+- [x] **30 · Stage H · Unit 22** *(was 29)* — S — 6 skills — **two increments**
 
       Closes the course, and the only unit whose skills are not all ordinary lessons.
 
@@ -1285,9 +1286,11 @@ shows before a lesson's first problem.
       preserve the source problem and credit only the review skill. All four have teaching
       intros; Stage H records inherited capabilities plus retained timing for 30b.
 
-      **30b · `timed-practice-1`, `timed-practice-2`.** Full-length forms on item 29's clock,
-      sampled the way 22.3 and 22.4 sample. Two skills, but each is a test form rather than a
-      ten-problem lesson, which is why they are not a tail on 30a.
+      **30b · `timed-practice-1`, `timed-practice-2` — shipped 2026-09-09.** Full-length forms
+      on item 29's elapsed clock, sampled the way 22.3 and 22.4 sample. Each form consumes 46
+      one-point answers: 21 quantitative and 25 algebraic, with no cutoff, hints or retries,
+      then shows the existing approximate score estimate. Two skills, but each is a test form
+      rather than a ten-problem lesson, which is why they are not a tail on 30a.
 
 - [ ] **31 · Streak reminders** — S *(was B7, then 30)* — **two increments**
 

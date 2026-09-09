@@ -11,7 +11,16 @@ import { advanceCorrect, currentProblem, currentSlot, recordSessionAttempt, requ
 import type { Difficulty, Problem } from '../lib/types'
 import { allSkills } from './index'
 import { format, sample, unrenderedKeys } from './recorded-output'
-import { algebraicPool, formulaNodeCount, quantitativePool, unit22 } from './unit-22-test-preparation'
+import {
+  algebraicPool,
+  FORM_ALGEBRAIC_COUNT,
+  FORM_QUANTITATIVE_COUNT,
+  FORM_QUESTION_COUNT,
+  formulaNodeCount,
+  quantitativePool,
+  timedFormSources,
+  unit22,
+} from './unit-22-test-preparation'
 import { unit20 } from './unit-20-geometry-measurement'
 import { initialProgress, useProgress } from '../store/progress'
 
@@ -105,6 +114,39 @@ describe('Unit 22 content', () => {
     }
     expect(sources.size).toBeGreaterThan(1)
     expect(repeated).toBe(true)
+  })
+
+  it.each([4, 5] as const)('timed form %i delegates isolated draws with source difficulty', (index) => {
+    const form = unit22[index]
+    for (const difficulty of difficulties) {
+      for (let seed = 0; seed < 100; seed += 1) {
+        const expectedRng = makeRng(seed)
+        const area = expectedRng.int(1, FORM_QUESTION_COUNT) <= FORM_QUANTITATIVE_COUNT
+          ? quantitativePool
+          : algebraicPool
+        const source = expectedRng.pick(area)
+        expect(form.generate(makeRng(seed), difficulty)).toEqual(source.generate(expectedRng, difficulty))
+      }
+    }
+  })
+
+  it('builds reproducible full-form schedules with the approved composition', () => {
+    for (const formId of ['timed-practice-1', 'timed-practice-2'] as const) {
+      const schedule = timedFormSources(formId, 17)
+      expect(schedule).toHaveLength(FORM_QUESTION_COUNT)
+      expect(schedule.filter((source) => quantitativePool.includes(source))).toHaveLength(FORM_QUANTITATIVE_COUNT)
+      expect(schedule.filter((source) => algebraicPool.includes(source))).toHaveLength(FORM_ALGEBRAIC_COUNT)
+      expect(schedule.every((source) => !unit22.includes(source))).toBe(true)
+      expect(timedFormSources(formId, 17)).toEqual(schedule)
+    }
+  })
+
+  it('fresh form seeds may repeat sources but produce fresh schedules', () => {
+    const first = timedFormSources('timed-practice-1', 17)
+    const second = timedFormSources('timed-practice-1', 18)
+
+    expect(second).not.toEqual(first)
+    expect(new Set(first).size).toBeLessThan(FORM_QUESTION_COUNT)
   })
 
   it.each([2, 3])('review %i keeps session ownership, exact requeues and lazy recovery', (index) => {

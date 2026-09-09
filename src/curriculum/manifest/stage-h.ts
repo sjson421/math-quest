@@ -8,9 +8,9 @@
  * or wall marker — they are review and rehearsal over content already learned,
  * not new ground.
  *
- * Mixed reviews inherit the input and display needs of every source unit.
- * These content requirements are measured in coverage.test.ts; timed is retained
- * separately for the two future full-length forms, not for the four lessons.
+ * Mixed reviews inherit the input and display needs of every source unit. The two
+ * forms add timed practice on the existing elapsed clock; coverage.test.ts measures
+ * the inherited requirements.
  */
 
 import type { StageEntry } from './types'

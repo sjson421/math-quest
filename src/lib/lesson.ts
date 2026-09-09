@@ -29,13 +29,18 @@ export type LessonSession = {
   queue: LessonSlot[]
 }
 
-export type CheckSession = {
+/** A fixed paper where every recorded answer consumes one queued slot. */
+export type FixedAnswerSession = {
   timing?: SessionTiming
   totalProblems: number
   answeredCount: number
   correctCount: number
   queue: LessonSlot[]
 }
+
+/** Existing skip-check name, retained for its separate count contract. */
+export type CheckSession = FixedAnswerSession
+export type FormSession = FixedAnswerSession
 
 export const INITIAL_PACING: LessonPacing = {
   consecutiveMisses: 0,
@@ -119,6 +124,25 @@ export function startStandardLessonSession(
 }
 
 /** A check uses the same lazy slots, but every recorded answer consumes one. */
+function startFixedAnswerSession(
+  sources: readonly LessonSource[],
+  makeProblem: ProblemFactory,
+  timing?: SessionTiming,
+): FixedAnswerSession {
+  if (sources.length === 0) throw new Error('Fixed-answer session needs at least one source')
+
+  return {
+    ...(timing ? { timing } : {}),
+    totalProblems: sources.length,
+    answeredCount: 0,
+    correctCount: 0,
+    queue: sources.map((source, index) => ({
+      source,
+      problem: index === 0 ? makeProblem(source.skill, source.baseDifficulty) : null,
+    })),
+  }
+}
+
 export function startCheckSession(
   skills: readonly SkillGenerator[],
   makeProblem: ProblemFactory,
@@ -128,30 +152,37 @@ export function startCheckSession(
     throw new Error(`Check needs exactly ${CHECK_PROBLEM_COUNT} sources`)
   }
 
-  const sources = skills.map((skill) => ({
-    skill,
-    baseDifficulty: CHECK_DIFFICULTY as Difficulty,
-  }))
-
-  return {
-    ...(timing ? { timing } : {}),
-    totalProblems: sources.length,
-    answeredCount: 0,
-    correctCount: 0,
-    queue: sources.map((source, index) => ({
-      source,
-      problem: index === 0 ? makeProblem(source.skill, CHECK_DIFFICULTY) : null,
+  return startFixedAnswerSession(
+    skills.map((skill) => ({
+      skill,
+      baseDifficulty: CHECK_DIFFICULTY as Difficulty,
     })),
-  }
+    makeProblem,
+    timing,
+  )
 }
 
-export function currentSlot(session: Pick<LessonSession | CheckSession, 'queue'>): LessonSlot {
+/** The full-length forms have a fixed paper size and fixed live difficulty. */
+export function startFormSession(
+  sources: readonly LessonSource[],
+  makeProblem: ProblemFactory,
+  timing?: SessionTiming,
+): FormSession {
+  if (sources.length !== 46) throw new Error('Form needs exactly 46 sources')
+  if (sources.some(({ baseDifficulty }) => baseDifficulty !== 3)) {
+    throw new Error('Form sources must use difficulty 3')
+  }
+
+  return startFixedAnswerSession(sources, makeProblem, timing)
+}
+
+export function currentSlot(session: Pick<LessonSession | FixedAnswerSession, 'queue'>): LessonSlot {
   const current = session.queue[0]
   if (!current) throw new Error('Lesson has no current slot')
   return current
 }
 
-export function currentProblem(session: Pick<LessonSession | CheckSession, 'queue'>): Problem {
+export function currentProblem(session: Pick<LessonSession | FixedAnswerSession, 'queue'>): Problem {
   const current = currentSlot(session)
   if (!current.problem) throw new Error('Lesson has no current problem')
   return current.problem
@@ -180,7 +211,7 @@ function materializeCurrent(
   return next
 }
 
-function materializeCheckCurrent(
+function materializeFixedCurrent(
   queue: LessonSlot[],
   makeProblem: ProblemFactory,
 ): LessonSlot[] {
@@ -190,7 +221,7 @@ function materializeCheckCurrent(
   const next = [...queue]
   next[0] = {
     ...current,
-    problem: makeProblem(current.source.skill, CHECK_DIFFICULTY),
+    problem: makeProblem(current.source.skill, current.source.baseDifficulty),
   }
   return next
 }
@@ -224,11 +255,11 @@ export function requeueMiss(
   return { ...session, queue: materializeCurrent(session, queue, makeProblem) }
 }
 
-export function recordCheckResult(
-  session: CheckSession,
+export function recordFixedAnswer(
+  session: FixedAnswerSession,
   record: AttemptRecord,
   makeProblem: ProblemFactory,
-): { session: CheckSession; complete: boolean } {
+): { session: FixedAnswerSession; complete: boolean } {
   if (record === 'none') return { session, complete: false }
   if (session.queue.length === 0) throw new Error('Check has no current slot')
 
@@ -246,8 +277,16 @@ export function recordCheckResult(
       ...next,
       queue: complete
         ? []
-        : materializeCheckCurrent(session.queue.slice(1), makeProblem),
+        : materializeFixedCurrent(session.queue.slice(1), makeProblem),
     },
     complete,
   }
+}
+
+export function recordCheckResult(
+  session: CheckSession,
+  record: AttemptRecord,
+  makeProblem: ProblemFactory,
+): { session: CheckSession; complete: boolean } {
+  return recordFixedAnswer(session, record, makeProblem)
 }

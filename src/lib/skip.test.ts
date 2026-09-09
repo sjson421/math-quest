@@ -6,11 +6,11 @@
  * would let the two drift apart, which is the failure the derivation exists to
  * remove. `unit-0` is the first block a learner could skip and the one whose
  * downstream unlock is checkable; `stage-a` is the same skills addressed as a
- * stage; `stage-h` has four playable skills and two planned forms.
+ * stage; `stage-h` has all six playable Unit 22 skills.
  */
 
 import { describe, expect, it } from 'vitest'
-import { course, courseUnitById, getSkill, implementedSkillIds, skillStates } from '../curriculum'
+import { course, courseUnitById, getSkill, implementedSkillIds } from '../curriculum'
 import { stages, allUnits } from '../curriculum/manifest'
 import {
   UNLOCK_THRESHOLD,
@@ -44,10 +44,17 @@ const TODAY = '2026-08-31'
 
 const UNIT = 'unit-0'
 const STAGE = 'stage-a'
-/** A partly built block: only its four content lessons can be skipped. */
+/** Unit 22 is the smallest complete block, so checks repeat two skills. */
 const PARTIAL_UNIT = 'unit-22'
 const PARTIAL_STAGE = 'stage-h'
-const partialIds = ['calculator-skills', 'formula-sheet', 'review-quantitative', 'review-algebraic']
+const partialIds = [
+  'calculator-skills',
+  'formula-sheet',
+  'review-quantitative',
+  'review-algebraic',
+  'timed-practice-1',
+  'timed-practice-2',
+]
 
 const unit0 = courseUnitById.get(UNIT)!.skills.map((skill) => skill.id)
 /** The first skill behind the whole of Unit 0 — what a skip of it should open. */
@@ -342,16 +349,12 @@ describe('marking a block known', () => {
     expect(markKnown(known, UNIT, 'self-assessed', TODAY)).toBeNull()
   })
 
-  it('marks only playable members of a partly built unit or stage', () => {
+  it('marks every playable member of the complete Unit 22 block', () => {
     for (const block of [PARTIAL_UNIT, PARTIAL_STAGE]) {
       const after = markKnown(initialProgress(), block, 'tested-out', TODAY)!
       expect(Object.keys(after.skills).filter((id) => after.skills[id].mastery > 0)).toEqual(partialIds)
       for (const id of partialIds) expect(after.skills[id].mastery).toBe(SKIP_MASTERY)
-      for (const entry of allUnits.find((unit) => unit.id === PARTIAL_UNIT)!.skills.filter((entry) => !partialIds.includes(entry.id))) {
-        expect(skillStates.get(entry.id)).toBe('planned')
-        expect(after.skills).not.toHaveProperty(entry.id)
-        expect(isUnlocked(entry.id, after)).toBe(false)
-      }
+      expect(allUnits.find((unit) => unit.id === PARTIAL_UNIT)!.skills.map((entry) => entry.id)).toEqual(partialIds)
     }
   })
 

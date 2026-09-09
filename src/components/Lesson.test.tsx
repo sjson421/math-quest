@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
+import { unit22 } from '../curriculum/unit-22-test-preparation'
 import { intAnswer } from '../lib/answer'
 import type { KeypadRules } from '../lib/keypad'
 import { rational } from '../lib/rational'
@@ -259,6 +260,35 @@ const rootPairSkill: SkillGenerator = {
 const has = (html: string, label: string) => html.includes(`aria-label="${label}"`)
 
 describe('Lesson', () => {
+  it('opens a timed form on its stable intro before creating its clock or paper', () => {
+    const html = renderToStaticMarkup(<Lesson skill={unit22[4]} onExit={() => {}} />)
+
+    expect(html).toContain('data-skill-intro="automatic"')
+    expect(html).toContain('46 questions')
+    expect(html).toContain('one scored answer each')
+    expect(html).toContain('no cutoff')
+    expect(html).toContain('partial papers are not saved')
+    expect(html).not.toContain('role="timer"')
+    expect(html).not.toContain('0/46')
+    expect(html).not.toContain('Show me a hint')
+    expect(html).not.toContain('>Check<')
+  })
+
+  it('keeps a form generator as one ordinary source in a skip check', () => {
+    const html = renderToStaticMarkup(
+      <SkipCheckLesson
+        skills={[unit22[4], ...Array.from({ length: 7 }, () => unit22[4])]}
+        onComplete={() => {}}
+        onExit={() => {}}
+      />,
+    )
+
+    expect(html).toContain('0/8')
+    expect(html).not.toContain('0/46')
+    expect(html).not.toContain('role="timer"')
+    expect(html).not.toContain('Practice result')
+  })
+
   it('opens a skip check at eight results with no intro or hint controls', () => {
     const generated: Difficulty[] = []
     const skill = skillNeeding(undefined, 'synthetic-check', generated)
@@ -352,6 +382,23 @@ describe('Lesson', () => {
     expect(html).toContain('+20 XP')
     expect(html).toContain('+10')
     expect(html).not.toContain('level')
+  })
+
+  it('composes completed form points with the accessible score estimate', () => {
+    const html = renderToStaticMarkup(
+      <LessonComplete
+        skill={unit22[4]}
+        practicePoints={{ earned: 20, possible: 46 }}
+        outcome={{ xpGained: 20, coinsGained: 10, leveledUp: true }}
+        onExit={() => {}}
+      />,
+    )
+
+    expect(html).toContain('Practice form complete!')
+    expect(html).toContain('20 of 46 practice points earned')
+    expect(html).toContain('This is an estimate, not an official GED score')
+    expect(html).toContain('How this estimate works')
+    expect(html).toContain('data-form-result="true"')
   })
 
   it('routes a root pair to one dedicated control with no private or fallback surface', () => {

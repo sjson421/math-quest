@@ -1,7 +1,7 @@
 import { intAnswer } from '../lib/answer'
 import { geometryFormulaReferences, geometryFormulaSelection } from '../lib/geometry-diagram'
 import { format, rational, toNumber } from '../lib/rational'
-import { constrain } from '../lib/rng'
+import { constrain, makeRng } from '../lib/rng'
 import type { CalculatorCandidate, CalculatorKey, MathNotation, SkillGenerator } from '../lib/types'
 import { band, defineSkill, drawn, type Ladder } from './engine'
 import { unit00 } from './unit-00-numbers'
@@ -179,4 +179,71 @@ const reviewAlgebraic: SkillGenerator = {
   generate(rng, difficulty) { return rng.pick(algebraicPool).generate(rng, difficulty) },
 }
 
-export const unit22: SkillGenerator[] = [calculatorSkills, formulaSheet, reviewQuantitative, reviewAlgebraic]
+export const FORM_QUESTION_COUNT = 46
+export const FORM_QUANTITATIVE_COUNT = 21
+export const FORM_ALGEBRAIC_COUNT = FORM_QUESTION_COUNT - FORM_QUANTITATIVE_COUNT
+
+export const TIMED_FORM_IDS = ['timed-practice-1', 'timed-practice-2'] as const
+export type TimedFormId = (typeof TIMED_FORM_IDS)[number]
+
+export const isTimedFormId = (id: string): id is TimedFormId =>
+  TIMED_FORM_IDS.includes(id as TimedFormId)
+
+type FormArea = 'quantitative' | 'algebraic'
+
+const formPool = (area: FormArea): readonly SkillGenerator[] =>
+  area === 'quantitative' ? quantitativePool : algebraicPool
+
+const formAreas = (rng: ReturnType<typeof makeRng>): FormArea[] =>
+  rng.shuffle([
+    ...Array.from({ length: FORM_QUANTITATIVE_COUNT }, () => 'quantitative' as const),
+    ...Array.from({ length: FORM_ALGEBRAIC_COUNT }, () => 'algebraic' as const),
+  ])
+
+/** Build one fixed area order and choose each source independently with replacement. */
+export function timedFormSources(formId: string, seed: number): SkillGenerator[] {
+  if (!isTimedFormId(formId)) throw new Error(`Unknown timed form: ${formId}`)
+
+  const rng = makeRng(seed)
+  return formAreas(rng).map((area) => rng.pick(formPool(area)))
+}
+
+const timedForm = (
+  id: TimedFormId,
+  name: string,
+  blurb: string,
+  teachingLine: string,
+): SkillGenerator => ({
+  id,
+  name,
+  blurb,
+  teachingLine,
+  generate(rng, difficulty) {
+    const area = rng.int(1, FORM_QUESTION_COUNT) <= FORM_QUANTITATIVE_COUNT
+      ? 'quantitative'
+      : 'algebraic'
+    return rng.pick(formPool(area)).generate(rng, difficulty)
+  },
+})
+
+const timedPractice1 = timedForm(
+  'timed-practice-1',
+  'Timed Practice 1',
+  'A full-length practice test',
+  'Work through a full mixed practice form one answer at a time.',
+)
+const timedPractice2 = timedForm(
+  'timed-practice-2',
+  'Timed Practice 2',
+  'A second full-length test',
+  'Build stamina with a second full mixed practice form.',
+)
+
+export const unit22: SkillGenerator[] = [
+  calculatorSkills,
+  formulaSheet,
+  reviewQuantitative,
+  reviewAlgebraic,
+  timedPractice1,
+  timedPractice2,
+]

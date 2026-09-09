@@ -11,6 +11,7 @@ export function SkillIntro({
   skill,
   problem,
   mode,
+  context,
   onLeave,
   onStart,
   onBackToPractice,
@@ -18,6 +19,7 @@ export function SkillIntro({
   skill: SkillGenerator
   problem: Problem
   mode: SkillIntroMode
+  context?: string
   onLeave: () => void
   onStart?: () => void
   onBackToPractice?: () => void
@@ -51,6 +53,11 @@ export function SkillIntro({
         <p className="mx-auto mt-2 max-w-sm text-base font-semibold leading-snug text-ink-soft" data-teaching-line>
           {skill.teachingLine}
         </p>
+        {context && (
+          <p className="mx-auto mt-2 max-w-sm text-xs leading-5 text-ink-soft" data-skill-intro-context>
+            {context}
+          </p>
+        )}
       </header>
 
       {/*

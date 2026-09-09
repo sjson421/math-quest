@@ -4,9 +4,9 @@ A cute, offline-first GED math prep app that builds from number sense to test-re
 geometry, data, and calculator skills. Math Quest is a standards-based PWA, so it runs in a
 browser and can be installed on devices that support web apps.
 
-## Status: playable foundations, whole course mapped
+## Status: complete playable course
 
-**199 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
+**201 of 201 skills are playable.** The current loop includes mastery levels, XP, coins,
 stage checkpoints, a companion character the learner chooses and dresses, a pin that
 climbs through five tiers as the course is worked through, a room to decorate, progress
 backup, and review lessons with spaced repetition.
@@ -48,13 +48,15 @@ a variable is, evaluating and translating expressions, spotting like terms, comb
 distributing across a sign, and factoring a common factor back out — the first content to
 use expression input, and the first to ask for an answer whose written form matters as much
 as its value, since the expanded expression a factoring question displays is a wrong answer
-to it. Timed mode and score-estimation infrastructure are now built for future Stage H practice;
-existing lessons stay untimed. Stage H now offers calculator-key practice, formula selection,
-and quantitative and algebraic mixed reviews; its two timed forms remain planned.
+to it. Timed mode and score-estimation infrastructure now power Stage H's two full-length forms.
+Each form uses 46 one-point questions — 21 quantitative and 25 algebraic draws with
+replacement — with an elapsed clock, no cutoff, no hints and no retries. Completion shows an
+approximate GED estimate for that practice session, not an official score. Stage H also offers
+calculator-key practice, formula selection, and quantitative and algebraic mixed reviews.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
-milestone, what blocks what, and the product features still unbuilt (Stage H timed forms and streak
-reminders). It lives in one place so it cannot drift out of step with this file.
+milestone, what blocks what, and the product features still unbuilt (streak reminders). It lives
+in one place so it cannot drift out of step with this file.
 
 ## Running it
 
@@ -133,7 +135,7 @@ over sampled problems inside the test suite —
 at most 4 solution steps, at most 12 words each, single-sentence hints, and at least two
 distinct predicted misconceptions on any skill marked a difficulty wall.
 
-Stages A through H now open all 199 playable skills with one authored teaching line and one
+Stages A through H now open all 201 playable skills with one authored teaching line and one
 stable, generated difficulty-1 worked example. Starting practice
 records only that the intro was seen; it does not count as an attempt or change mastery. The same
 example remains available through **Review intro**, and each authored line is checked directly for

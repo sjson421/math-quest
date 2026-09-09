@@ -67,11 +67,11 @@ describe('every generator is declared in the manifest', () => {
 })
 
 describe('manifest entries without a generator', () => {
-  it('resolve as planned rather than failing', () => {
+  it('resolve every declared skill as implemented when the registry is complete', () => {
     const planned = manifestSkills.filter((skill) => skillState(skill.id) === 'planned')
 
-    expect(planned).toHaveLength(manifestSkills.length - generators.size)
-    expect(planned.length).toBeGreaterThan(0)
+    expect(planned).toEqual([])
+    expect(generators.size).toBe(manifestSkills.length)
   })
 
   it('account for every manifest skill, with nothing unresolved', () => {
@@ -88,7 +88,7 @@ describe('the skills that are built', () => {
   it('resolve as implemented, and are exactly the ones the document marks ✅', () => {
     // Asserted against the parsed ✅ set rather than a hardcoded list, so the
     // document and the registry cannot drift apart as generators land.
-    expect(documentedAsBuilt).toHaveLength(199)
+    expect(documentedAsBuilt).toHaveLength(201)
     expect([...implementedSkillIds].sort()).toEqual([...documentedAsBuilt].sort())
   })
   it('keeps every inline expression inside the width its size band was chosen for', () => {
@@ -466,7 +466,7 @@ describe('the skills that are built', () => {
       'ratio-words',
     ])
     expect(unit11Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(implementedSkillIds).toHaveLength(199)
+    expect(implementedSkillIds).toHaveLength(201)
   })
 
   it('has a skill that actually draws a line, which the capability went a change without', () => {
@@ -532,7 +532,7 @@ describe('the skills that are built', () => {
       'factor-gcf',
     ])
     expect(unit13Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(199)
+    expect(implementedSkillIds).toHaveLength(201)
   })
 
   it('completes Unit 14 on the capabilities Stage E already had, adding none', () => {
@@ -641,10 +641,10 @@ describe('the skills that are built', () => {
     expect(unit18Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
     const unit19Ids = stage?.units.find((unit) => unit.id === 'unit-19')?.skills.map((skill) => skill.id) ?? []
     expect(unit19Ids.filter((id) => skillState(id) === 'planned')).toEqual([])
-    expect(implementedSkillIds).toHaveLength(199)
+    expect(implementedSkillIds).toHaveLength(201)
   })
 
-  it('completes Stage G through counting-outcomes, leaving only the two timed forms planned', () => {
+  it('completes Stage G through counting-outcomes and closes Stage H', () => {
     const stage = manifestIndex.get('read-bar-line')?.stage
     const stageIds = stage?.units.flatMap((unit) => unit.skills.map((skill) => skill.id)) ?? []
     const unit20Ids = stage?.units.find((unit) => unit.id === 'unit-20')?.skills.map((skill) => skill.id) ?? []
@@ -675,13 +675,31 @@ describe('the skills that are built', () => {
     expect(unit21Ids.filter((id) => skillState(id) === 'implemented')).toEqual(unit21Ids)
     expect(unit21Ids.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
     expect(stageIds.filter((id) => skillState(id) === 'planned')).toHaveLength(0)
-    expect(stageHIds).toHaveLength(6)
-    expect(stageHIds.filter((id) => generators.has(id))).toEqual(unit22.map((skill) => skill.id))
-    expect(stageHIds.filter((id) => skillState(id) === 'planned')).toEqual(['timed-practice-1', 'timed-practice-2'])
-    expect(stageH?.requires).toContain('timed')
+    expect(stageHIds).toEqual([
+      'calculator-skills',
+      'formula-sheet',
+      'review-quantitative',
+      'review-algebraic',
+      'timed-practice-1',
+      'timed-practice-2',
+    ])
+    expect(stageHIds.filter((id) => generators.has(id))).toEqual(stageHIds)
+    expect(stageHIds.filter((id) => skillState(id) === 'planned')).toEqual([])
+    expect(stageH?.requires).toEqual([
+      'choice-input',
+      'math-notation',
+      'fraction-input',
+      'diagram',
+      'number-line',
+      'expression-input',
+      'coordinate-plane',
+      'root-pair-input',
+      'chart',
+      'timed',
+    ])
     expect((stageH?.requires ?? []).filter((capability) => !AVAILABLE_CAPABILITIES.has(capability))).toEqual([])
-    expect(implementedSkillIds).toHaveLength(199)
-    expect(allSkills).toHaveLength(199)
+    expect(implementedSkillIds).toHaveLength(201)
+    expect(allSkills).toHaveLength(201)
     expect(course.map(({ stage: courseStage }) => courseStage.id)).toContain('stage-g')
     expect(course.map(({ stage: courseStage }) => courseStage.id)).toContain('stage-h')
   })
@@ -707,7 +725,7 @@ describe('the skills that are built', () => {
       if (!stage) continue
       for (const difficulty of [1, 2, 3, 4, 5] as const) {
         // Five a difficulty rather than twenty: `inputMode` varies by draw at
-        // most, never by seed depth, and this walks all 199 generators.
+        // most, never by seed depth, and this walks all 201 generators.
         for (let i = 0; i < 5; i += 1) {
           const { inputMode } = generateProblem(generator, i * 7919 + difficulty * 104729, difficulty)
           const capability = modes[inputMode]
@@ -753,9 +771,10 @@ describe('what the learner is offered', () => {
     expect(offered).toEqual(implementedSkillIds)
   })
 
-  it('leaves the other 2 skills out of the skill tree entirely', () => {
+  it('offers every manifest skill in the skill tree', () => {
     expect(manifestSkills).toHaveLength(201)
-    expect(offered).toHaveLength(199)
+    expect(offered).toHaveLength(201)
+    expect(manifestSkills.filter((skill) => skillState(skill.id) === 'planned')).toEqual([])
   })
 
   it('groups them under the unit and stage the manifest declares', () => {

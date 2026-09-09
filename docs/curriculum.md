@@ -1,7 +1,8 @@
 # Math Quest — Curriculum
 
 Arithmetic from the very beginning through to GED level.
-**8 stages · 23 units · 201 skills.** One skill = one lesson = one idea = ~5 minutes.
+**8 stages · 23 units · 201 skills.** One skill = one lesson = one idea = ~5 minutes, except
+the two full-length practice forms.
 
 ---
 
@@ -485,8 +486,15 @@ right formula, never memorising it.
 | 22.2 | `formula-sheet` | Navigating the provided sheet | ✅ |
 | 22.3 | `review-quantitative` | Mixed, ~45% of the test | ✅ |
 | 22.4 | `review-algebraic` | Mixed, ~55% of the test | ✅ |
-| 22.5 | `timed-practice-1` | Full length | first timed content in the whole app |
-| 22.6 | `timed-practice-2` | Full length | |
+| 22.5 | `timed-practice-1` | Full length | ✅ first timed content in the whole app |
+| 22.6 | `timed-practice-2` | Full length | ✅ |
+
+Each form has 46 one-point questions: 21 quantitative and 25 algebraic draws from the
+existing review pools, with replacement. The area order is shuffled once per form, live
+questions stay at difficulty 3, and each question consumes its first scored answer. Forms
+use an elapsed clock with no cutoff, no hints and no retries. Completion shows the existing
+approximate GED estimate for that session's points; it is practice feedback, not an official
+GED score or pass result.
 
 ---
 
@@ -530,8 +538,8 @@ Ship by stage; each stage is independently useful.
    all twenty-two Stage G skills are playable. The two probability skills answer as a fraction
    through the already-built fraction keypad, so Stage G's `requires` gains `fraction-input`
    alongside `choice-input`, `math-notation`, `diagram` and `chart`.
-7. **Stage H** (6) — calculator keys, formula selection, and both mixed reviews are playable and untimed.
-   Timed mode and score-estimation infrastructure are built; the two full-length forms remain planned.
+7. **Stage H** (6) — calculator keys, formula selection, and both mixed reviews are playable and untimed;
+   both full-length forms use the elapsed clock and score estimate with 46 one-point questions.
 
 ### New capabilities required, by stage
 
@@ -567,16 +575,16 @@ Ship by stage; each stage is independently useful.
   rather than storing them, and commits a snapshot of the expanded graph so a change to the
   derivation is reviewable.
 - **A skill with no generator is `planned`, not broken.** State is derived at load from the
-  generator registry plus the capabilities that are actually built. Today 2 of 201 skills
-  are planned: the Stage H timed forms. Timed mode and score-estimation
-  infrastructure are built but do not make a skill playable without a generator. Planned skills are transparent to unlocking —
-  a learner is never held behind our build order — and never offered for play.
+  generator registry plus the capabilities that are actually built. All 201 skills now have
+  generators and their required capabilities, so none is planned. Planned skills are
+  transparent to unlocking — a learner is never held behind our build order — and never
+  offered for play.
 - **The content style contract above is enforced**, not advisory: `src/lib/content-rules.ts`
   checks authored teaching lines for one sentence, forward references, and current-unit
   vocabulary, then checks step count, step length, single-sentence hints, wall misconception
   coverage, and generated-problem forward references against a curated vocabulary list.
-  All 199 playable skills through Stage H carry authored intro lines and generated worked
-  examples; only the two timed forms remain planned.
+  All 201 playable skills through Stage H carry authored intro lines and generated worked
+  examples, including the two timed forms.
 - **`SkillProgress` gains two fields** for skipping: `source: 'practiced' | 'tested-out' |
   'self-assessed'` and `priorMastery`, the mastery a skip found on each skill it raised.
   These must survive a **sync round trip**, not just file export — sync is now the routine

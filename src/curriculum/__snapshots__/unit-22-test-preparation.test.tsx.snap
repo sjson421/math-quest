@@ -1434,3 +1434,567 @@ step 1   Count how often each value appears.   [68 appears twice]
 step 2   Choose the most common value.   [68]
 miss     used-range-for-mode = 38   Count repeats when the question asks for mode."
 `;
+
+exports[`Unit 22 content > timed-practice-1 records the complete output and stable intro 1`] = `
+"--- exponent-meaning · seed 1 · difficulty 1
+prompt   How many times is the base multiplied by itself?
+display  math "4 × 4 × 4 equals 4 to the blank power" row("4 × 4 × 4 = ", superscript("4", "?")) [expand-power 4^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [4 × 4 × 4]
+step 2   That count is the exponent.   [4^3]
+
+--- one-step-addsub · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "x − 6 = −2" solve x [one-step-addsub x - 6 = -2]
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Do the opposite operation to both sides.
+step 1   Add 6 on both sides.   [x = −2 + 6]
+step 2   That leaves x alone.   [x = 4]
+miss     repeated-operation = -8   The equation subtracts, so undo it by adding.
+
+--- sub-mixed · seed 67890 · difficulty 1
+prompt   What is the difference?
+display  math "4 and 1 over 3, minus, 1 and 2 over 3" row(row("4", fraction("1", "3")), "−", row("1", fraction("2", "3"))) [sub-mixed 4 1/3 − 1 2/3]
+answer   exact 8/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 3 fraction pieces.   [4 1/3 = 3 4/3]
+step 2   Subtract the whole and fraction parts.   [3 4/3 − 1 2/3 = 2 2/3]
+miss     reversed-fraction-without-borrowing = 3.3333333333333335   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2   One borrowed whole adds 3 fraction pieces, not one.
+
+--- times-9 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "2 × 9"
+answer   exact 18/1
+input    keypad
+hint     Use ten groups minus one; the digits in 18 add to 9.
+step 1   Start with ten groups.   [10 × 2 = 20]
+step 2   Take one group away.   [20 − 2 = 18]
+step 3   Check the digits in 18: they add to 9.
+miss     used-ten-groups = 20   That is ten groups. Take one group of 2 away.
+miss     removed-two-groups = 16   That takes away two groups of 2; only one comes off ten groups.
+
+--- scientific-notation · seed 987654321 · difficulty 1
+prompt   Write this as an ordinary number.
+display  math "6 times 10 to the negative 2 power" row("6 × ", superscript("10", "−2")) [scientific-notation 6e-0 × 10^-2]
+answer   exact 3/50 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.06]
+miss     moved-one-place = 0.6   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 600   A negative exponent moves the decimal left.
+
+--- exponent-meaning · seed 1 · difficulty 2
+prompt   How many times is the base multiplied by itself?
+display  math "5 × 5 × 5 × 5 equals 5 to the blank power" row("5 × 5 × 5 × 5 = ", superscript("5", "?")) [expand-power 5^4]
+answer   exact 4/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [5 × 5 × 5 × 5]
+step 2   That count is the exponent.   [5^4]
+
+--- one-step-addsub · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "x − 8 = −2" solve x [one-step-addsub x - 8 = -2]
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Do the opposite operation to both sides.
+step 1   Add 8 on both sides.   [x = −2 + 8]
+step 2   That leaves x alone.   [x = 6]
+miss     repeated-operation = -10   The equation subtracts, so undo it by adding.
+
+--- sub-mixed · seed 67890 · difficulty 2
+prompt   What is the difference?
+display  math "5 and 1 over 5, minus, 1 and 4 over 5" row(row("5", fraction("1", "5")), "−", row("1", fraction("4", "5"))) [sub-mixed 5 1/5 − 1 4/5]
+answer   exact 17/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [5 1/5 = 4 6/5]
+step 2   Subtract the whole and fraction parts.   [4 6/5 − 1 4/5 = 3 2/5]
+miss     reversed-fraction-without-borrowing = 4.6   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2.6   One borrowed whole adds 5 fraction pieces, not one.
+
+--- times-9 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "2 × 9"
+answer   exact 18/1
+input    keypad
+hint     Use ten groups minus one; the digits in 18 add to 9.
+step 1   Start with ten groups.   [10 × 2 = 20]
+step 2   Take one group away.   [20 − 2 = 18]
+step 3   Check the digits in 18: they add to 9.
+miss     used-ten-groups = 20   That is ten groups. Take one group of 2 away.
+miss     removed-two-groups = 16   That takes away two groups of 2; only one comes off ten groups.
+
+--- scientific-notation · seed 987654321 · difficulty 2
+prompt   Write this as an ordinary number.
+display  math "4.4 times 10 to the negative 2 power" row("4.4 × ", superscript("10", "−2")) [scientific-notation 44e-1 × 10^-2]
+answer   exact 11/250 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.044]
+miss     moved-one-place = 0.44   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 440   A negative exponent moves the decimal left.
+
+--- exponent-meaning · seed 1 · difficulty 3
+prompt   How many times is the base multiplied by itself?
+display  math "6 × 6 × 6 × 6 equals 6 to the blank power" row("6 × 6 × 6 × 6 = ", superscript("6", "?")) [expand-power 6^4]
+answer   exact 4/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [6 × 6 × 6 × 6]
+step 2   That count is the exponent.   [6^4]
+
+--- one-step-addsub · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "x − 11 = −3" solve x [one-step-addsub x - 11 = -3]
+answer   exact 8/1
+input    keypad
+keypad   allowNegative=true
+hint     Do the opposite operation to both sides.
+step 1   Add 11 on both sides.   [x = −3 + 11]
+step 2   That leaves x alone.   [x = 8]
+miss     repeated-operation = -14   The equation subtracts, so undo it by adding.
+
+--- sub-mixed · seed 67890 · difficulty 3
+prompt   What is the difference?
+display  math "6 and 2 over 5, minus, 2 and 4 over 5" row(row("6", fraction("2", "5")), "−", row("2", fraction("4", "5"))) [sub-mixed 6 2/5 − 2 4/5]
+answer   exact 18/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [6 2/5 = 5 7/5]
+step 2   Subtract the whole and fraction parts.   [5 7/5 − 2 4/5 = 3 3/5]
+miss     reversed-fraction-without-borrowing = 4.4   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2.8   One borrowed whole adds 5 fraction pieces, not one.
+
+--- times-9 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "3 × 9"
+answer   exact 27/1
+input    keypad
+hint     Use ten groups minus one; the digits in 27 add to 9.
+step 1   Start with ten groups.   [10 × 3 = 30]
+step 2   Take one group away.   [30 − 3 = 27]
+step 3   Check the digits in 27: they add to 9.
+miss     used-ten-groups = 30   That is ten groups. Take one group of 3 away.
+miss     removed-two-groups = 24   That takes away two groups of 3; only one comes off ten groups.
+
+--- scientific-notation · seed 987654321 · difficulty 3
+prompt   Write this as an ordinary number.
+display  math "4.4 times 10 to the negative 2 power" row("4.4 × ", superscript("10", "−2")) [scientific-notation 44e-1 × 10^-2]
+answer   exact 11/250 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.044]
+miss     moved-one-place = 0.44   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 440   A negative exponent moves the decimal left.
+
+--- exponent-meaning · seed 1 · difficulty 4
+prompt   How many times is the base multiplied by itself?
+display  math "7 × 7 × 7 × 7 × 7 equals 7 to the blank power" row("7 × 7 × 7 × 7 × 7 = ", superscript("7", "?")) [expand-power 7^5]
+answer   exact 5/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [7 × 7 × 7 × 7 × 7]
+step 2   That count is the exponent.   [7^5]
+
+--- one-step-addsub · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "x − 13 = −3" solve x [one-step-addsub x - 13 = -3]
+answer   exact 10/1
+input    keypad
+keypad   allowNegative=true
+hint     Do the opposite operation to both sides.
+step 1   Add 13 on both sides.   [x = −3 + 13]
+step 2   That leaves x alone.   [x = 10]
+miss     repeated-operation = -16   The equation subtracts, so undo it by adding.
+
+--- sub-mixed · seed 67890 · difficulty 4
+prompt   What is the difference?
+display  math "8 and 2 over 7, minus, 2 and 3 over 7" row(row("8", fraction("2", "7")), "−", row("2", fraction("3", "7"))) [sub-mixed 8 2/7 − 2 3/7]
+answer   exact 41/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 7 fraction pieces.   [8 2/7 = 7 9/7]
+step 2   Subtract the whole and fraction parts.   [7 9/7 − 2 3/7 = 5 6/7]
+miss     reversed-fraction-without-borrowing = 6.142857142857143   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 5   One borrowed whole adds 7 fraction pieces, not one.
+
+--- times-9 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "3 × 9"
+answer   exact 27/1
+input    keypad
+hint     Use ten groups minus one; the digits in 27 add to 9.
+step 1   Start with ten groups.   [10 × 3 = 30]
+step 2   Take one group away.   [30 − 3 = 27]
+step 3   Check the digits in 27: they add to 9.
+miss     used-ten-groups = 30   That is ten groups. Take one group of 3 away.
+miss     removed-two-groups = 24   That takes away two groups of 3; only one comes off ten groups.
+
+--- scientific-notation · seed 987654321 · difficulty 4
+prompt   Write this as an ordinary number.
+display  math "4.4 times 10 to the negative 3 power" row("4.4 × ", superscript("10", "−3")) [scientific-notation 44e-1 × 10^-3]
+answer   exact 11/2500 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 3 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.0044]
+miss     moved-one-place = 0.44   The exponent moves the decimal 3 places, not one.
+miss     reversed-exponent-direction = 4400   A negative exponent moves the decimal left.
+
+--- exponent-meaning · seed 1 · difficulty 5
+prompt   How many times is the base multiplied by itself?
+display  math "8 × 8 × 8 × 8 × 8 equals 8 to the blank power" row("8 × 8 × 8 × 8 × 8 = ", superscript("8", "?")) [expand-power 8^5]
+answer   exact 5/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [8 × 8 × 8 × 8 × 8]
+step 2   That count is the exponent.   [8^5]
+
+--- one-step-addsub · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "x − 17 = −4" solve x [one-step-addsub x - 17 = -4]
+answer   exact 13/1
+input    keypad
+keypad   allowNegative=true
+hint     Do the opposite operation to both sides.
+step 1   Add 17 on both sides.   [x = −4 + 17]
+step 2   That leaves x alone.   [x = 13]
+miss     repeated-operation = -21   The equation subtracts, so undo it by adding.
+
+--- sub-mixed · seed 67890 · difficulty 5
+prompt   What is the difference?
+display  math "9 and 2 over 9, minus, 3 and 4 over 9" row(row("9", fraction("2", "9")), "−", row("3", fraction("4", "9"))) [sub-mixed 9 2/9 − 3 4/9]
+answer   exact 52/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 9 fraction pieces.   [9 2/9 = 8 11/9]
+step 2   Subtract the whole and fraction parts.   [8 11/9 − 3 4/9 = 5 7/9]
+miss     reversed-fraction-without-borrowing = 6.222222222222222   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 4.888888888888889   One borrowed whole adds 9 fraction pieces, not one.
+
+--- times-9 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "4 × 9"
+answer   exact 36/1
+input    keypad
+hint     Use ten groups minus one; the digits in 36 add to 9.
+step 1   Start with ten groups.   [10 × 4 = 40]
+step 2   Take one group away.   [40 − 4 = 36]
+step 3   Check the digits in 36: they add to 9.
+miss     used-ten-groups = 40   That is ten groups. Take one group of 4 away.
+miss     removed-two-groups = 32   That takes away two groups of 4; only one comes off ten groups.
+
+--- scientific-notation · seed 987654321 · difficulty 5
+prompt   Write this as an ordinary number.
+display  math "4.4 times 10 to the negative 4 power" row("4.4 × ", superscript("10", "−4")) [scientific-notation 44e-1 × 10^-4]
+answer   exact 11/25000 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 4 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.00044]
+miss     moved-one-place = 0.44   The exponent moves the decimal 4 places, not one.
+miss     reversed-exponent-direction = 44000   A negative exponent moves the decimal left."
+`;
+
+exports[`Unit 22 content > timed-practice-2 records the complete output and stable intro 1`] = `
+"--- exponent-meaning · seed 1 · difficulty 1
+prompt   How many times is the base multiplied by itself?
+display  math "4 × 4 × 4 equals 4 to the blank power" row("4 × 4 × 4 = ", superscript("4", "?")) [expand-power 4^3]
+answer   exact 3/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [4 × 4 × 4]
+step 2   That count is the exponent.   [4^3]
+
+--- one-step-addsub · seed 12345 · difficulty 1
+prompt   Solve for x.
+display  equation "x − 6 = −2" solve x [one-step-addsub x - 6 = -2]
+answer   exact 4/1
+input    keypad
+keypad   allowNegative=true
+hint     Do the opposite operation to both sides.
+step 1   Add 6 on both sides.   [x = −2 + 6]
+step 2   That leaves x alone.   [x = 4]
+miss     repeated-operation = -8   The equation subtracts, so undo it by adding.
+
+--- sub-mixed · seed 67890 · difficulty 1
+prompt   What is the difference?
+display  math "4 and 1 over 3, minus, 1 and 2 over 3" row(row("4", fraction("1", "3")), "−", row("1", fraction("2", "3"))) [sub-mixed 4 1/3 − 1 2/3]
+answer   exact 8/3 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 3 fraction pieces.   [4 1/3 = 3 4/3]
+step 2   Subtract the whole and fraction parts.   [3 4/3 − 1 2/3 = 2 2/3]
+miss     reversed-fraction-without-borrowing = 3.3333333333333335   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2   One borrowed whole adds 3 fraction pieces, not one.
+
+--- times-9 · seed 424242 · difficulty 1
+prompt   What is the product?
+display  inline "2 × 9"
+answer   exact 18/1
+input    keypad
+hint     Use ten groups minus one; the digits in 18 add to 9.
+step 1   Start with ten groups.   [10 × 2 = 20]
+step 2   Take one group away.   [20 − 2 = 18]
+step 3   Check the digits in 18: they add to 9.
+miss     used-ten-groups = 20   That is ten groups. Take one group of 2 away.
+miss     removed-two-groups = 16   That takes away two groups of 2; only one comes off ten groups.
+
+--- scientific-notation · seed 987654321 · difficulty 1
+prompt   Write this as an ordinary number.
+display  math "6 times 10 to the negative 2 power" row("6 × ", superscript("10", "−2")) [scientific-notation 6e-0 × 10^-2]
+answer   exact 3/50 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.06]
+miss     moved-one-place = 0.6   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 600   A negative exponent moves the decimal left.
+
+--- exponent-meaning · seed 1 · difficulty 2
+prompt   How many times is the base multiplied by itself?
+display  math "5 × 5 × 5 × 5 equals 5 to the blank power" row("5 × 5 × 5 × 5 = ", superscript("5", "?")) [expand-power 5^4]
+answer   exact 4/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [5 × 5 × 5 × 5]
+step 2   That count is the exponent.   [5^4]
+
+--- one-step-addsub · seed 12345 · difficulty 2
+prompt   Solve for x.
+display  equation "x − 8 = −2" solve x [one-step-addsub x - 8 = -2]
+answer   exact 6/1
+input    keypad
+keypad   allowNegative=true
+hint     Do the opposite operation to both sides.
+step 1   Add 8 on both sides.   [x = −2 + 8]
+step 2   That leaves x alone.   [x = 6]
+miss     repeated-operation = -10   The equation subtracts, so undo it by adding.
+
+--- sub-mixed · seed 67890 · difficulty 2
+prompt   What is the difference?
+display  math "5 and 1 over 5, minus, 1 and 4 over 5" row(row("5", fraction("1", "5")), "−", row("1", fraction("4", "5"))) [sub-mixed 5 1/5 − 1 4/5]
+answer   exact 17/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [5 1/5 = 4 6/5]
+step 2   Subtract the whole and fraction parts.   [4 6/5 − 1 4/5 = 3 2/5]
+miss     reversed-fraction-without-borrowing = 4.6   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2.6   One borrowed whole adds 5 fraction pieces, not one.
+
+--- times-9 · seed 424242 · difficulty 2
+prompt   What is the product?
+display  inline "2 × 9"
+answer   exact 18/1
+input    keypad
+hint     Use ten groups minus one; the digits in 18 add to 9.
+step 1   Start with ten groups.   [10 × 2 = 20]
+step 2   Take one group away.   [20 − 2 = 18]
+step 3   Check the digits in 18: they add to 9.
+miss     used-ten-groups = 20   That is ten groups. Take one group of 2 away.
+miss     removed-two-groups = 16   That takes away two groups of 2; only one comes off ten groups.
+
+--- scientific-notation · seed 987654321 · difficulty 2
+prompt   Write this as an ordinary number.
+display  math "4.4 times 10 to the negative 2 power" row("4.4 × ", superscript("10", "−2")) [scientific-notation 44e-1 × 10^-2]
+answer   exact 11/250 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.044]
+miss     moved-one-place = 0.44   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 440   A negative exponent moves the decimal left.
+
+--- exponent-meaning · seed 1 · difficulty 3
+prompt   How many times is the base multiplied by itself?
+display  math "6 × 6 × 6 × 6 equals 6 to the blank power" row("6 × 6 × 6 × 6 = ", superscript("6", "?")) [expand-power 6^4]
+answer   exact 4/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [6 × 6 × 6 × 6]
+step 2   That count is the exponent.   [6^4]
+
+--- one-step-addsub · seed 12345 · difficulty 3
+prompt   Solve for x.
+display  equation "x − 11 = −3" solve x [one-step-addsub x - 11 = -3]
+answer   exact 8/1
+input    keypad
+keypad   allowNegative=true
+hint     Do the opposite operation to both sides.
+step 1   Add 11 on both sides.   [x = −3 + 11]
+step 2   That leaves x alone.   [x = 8]
+miss     repeated-operation = -14   The equation subtracts, so undo it by adding.
+
+--- sub-mixed · seed 67890 · difficulty 3
+prompt   What is the difference?
+display  math "6 and 2 over 5, minus, 2 and 4 over 5" row(row("6", fraction("2", "5")), "−", row("2", fraction("4", "5"))) [sub-mixed 6 2/5 − 2 4/5]
+answer   exact 18/5 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 5 fraction pieces.   [6 2/5 = 5 7/5]
+step 2   Subtract the whole and fraction parts.   [5 7/5 − 2 4/5 = 3 3/5]
+miss     reversed-fraction-without-borrowing = 4.4   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 2.8   One borrowed whole adds 5 fraction pieces, not one.
+
+--- times-9 · seed 424242 · difficulty 3
+prompt   What is the product?
+display  inline "3 × 9"
+answer   exact 27/1
+input    keypad
+hint     Use ten groups minus one; the digits in 27 add to 9.
+step 1   Start with ten groups.   [10 × 3 = 30]
+step 2   Take one group away.   [30 − 3 = 27]
+step 3   Check the digits in 27: they add to 9.
+miss     used-ten-groups = 30   That is ten groups. Take one group of 3 away.
+miss     removed-two-groups = 24   That takes away two groups of 3; only one comes off ten groups.
+
+--- scientific-notation · seed 987654321 · difficulty 3
+prompt   Write this as an ordinary number.
+display  math "4.4 times 10 to the negative 2 power" row("4.4 × ", superscript("10", "−2")) [scientific-notation 44e-1 × 10^-2]
+answer   exact 11/250 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 2 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.044]
+miss     moved-one-place = 0.44   The exponent moves the decimal 2 places, not one.
+miss     reversed-exponent-direction = 440   A negative exponent moves the decimal left.
+
+--- exponent-meaning · seed 1 · difficulty 4
+prompt   How many times is the base multiplied by itself?
+display  math "7 × 7 × 7 × 7 × 7 equals 7 to the blank power" row("7 × 7 × 7 × 7 × 7 = ", superscript("7", "?")) [expand-power 7^5]
+answer   exact 5/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [7 × 7 × 7 × 7 × 7]
+step 2   That count is the exponent.   [7^5]
+
+--- one-step-addsub · seed 12345 · difficulty 4
+prompt   Solve for x.
+display  equation "x − 13 = −3" solve x [one-step-addsub x - 13 = -3]
+answer   exact 10/1
+input    keypad
+keypad   allowNegative=true
+hint     Do the opposite operation to both sides.
+step 1   Add 13 on both sides.   [x = −3 + 13]
+step 2   That leaves x alone.   [x = 10]
+miss     repeated-operation = -16   The equation subtracts, so undo it by adding.
+
+--- sub-mixed · seed 67890 · difficulty 4
+prompt   What is the difference?
+display  math "8 and 2 over 7, minus, 2 and 3 over 7" row(row("8", fraction("2", "7")), "−", row("2", fraction("3", "7"))) [sub-mixed 8 2/7 − 2 3/7]
+answer   exact 41/7 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 7 fraction pieces.   [8 2/7 = 7 9/7]
+step 2   Subtract the whole and fraction parts.   [7 9/7 − 2 3/7 = 5 6/7]
+miss     reversed-fraction-without-borrowing = 6.142857142857143   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 5   One borrowed whole adds 7 fraction pieces, not one.
+
+--- times-9 · seed 424242 · difficulty 4
+prompt   What is the product?
+display  inline "3 × 9"
+answer   exact 27/1
+input    keypad
+hint     Use ten groups minus one; the digits in 27 add to 9.
+step 1   Start with ten groups.   [10 × 3 = 30]
+step 2   Take one group away.   [30 − 3 = 27]
+step 3   Check the digits in 27: they add to 9.
+miss     used-ten-groups = 30   That is ten groups. Take one group of 3 away.
+miss     removed-two-groups = 24   That takes away two groups of 3; only one comes off ten groups.
+
+--- scientific-notation · seed 987654321 · difficulty 4
+prompt   Write this as an ordinary number.
+display  math "4.4 times 10 to the negative 3 power" row("4.4 × ", superscript("10", "−3")) [scientific-notation 44e-1 × 10^-3]
+answer   exact 11/2500 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 3 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.0044]
+miss     moved-one-place = 0.44   The exponent moves the decimal 3 places, not one.
+miss     reversed-exponent-direction = 4400   A negative exponent moves the decimal left.
+
+--- exponent-meaning · seed 1 · difficulty 5
+prompt   How many times is the base multiplied by itself?
+display  math "8 × 8 × 8 × 8 × 8 equals 8 to the blank power" row("8 × 8 × 8 × 8 × 8 = ", superscript("8", "?")) [expand-power 8^5]
+answer   exact 5/1
+input    keypad
+hint     Count how many times the base appears as a factor.
+step 1   Count the repeated factors.   [8 × 8 × 8 × 8 × 8]
+step 2   That count is the exponent.   [8^5]
+
+--- one-step-addsub · seed 12345 · difficulty 5
+prompt   Solve for x.
+display  equation "x − 17 = −4" solve x [one-step-addsub x - 17 = -4]
+answer   exact 13/1
+input    keypad
+keypad   allowNegative=true
+hint     Do the opposite operation to both sides.
+step 1   Add 17 on both sides.   [x = −4 + 17]
+step 2   That leaves x alone.   [x = 13]
+miss     repeated-operation = -21   The equation subtracts, so undo it by adding.
+
+--- sub-mixed · seed 67890 · difficulty 5
+prompt   What is the difference?
+display  math "9 and 2 over 9, minus, 3 and 4 over 9" row(row("9", fraction("2", "9")), "−", row("3", fraction("4", "9"))) [sub-mixed 9 2/9 − 3 4/9]
+answer   exact 52/9 (simplified) (mixed)
+input    keypad
+keypad   allowMixed=true
+hint     Borrow one whole, then subtract the whole and fraction parts.
+step 1   Borrow one whole as 9 fraction pieces.   [9 2/9 = 8 11/9]
+step 2   Subtract the whole and fraction parts.   [8 11/9 − 3 4/9 = 5 7/9]
+miss     reversed-fraction-without-borrowing = 6.222222222222222   The smaller fraction part means one whole must be borrowed first.
+miss     borrowed-one-piece = 4.888888888888889   One borrowed whole adds 9 fraction pieces, not one.
+
+--- times-9 · seed 424242 · difficulty 5
+prompt   What is the product?
+display  inline "4 × 9"
+answer   exact 36/1
+input    keypad
+hint     Use ten groups minus one; the digits in 36 add to 9.
+step 1   Start with ten groups.   [10 × 4 = 40]
+step 2   Take one group away.   [40 − 4 = 36]
+step 3   Check the digits in 36: they add to 9.
+miss     used-ten-groups = 40   That is ten groups. Take one group of 4 away.
+miss     removed-two-groups = 32   That takes away two groups of 4; only one comes off ten groups.
+
+--- scientific-notation · seed 987654321 · difficulty 5
+prompt   Write this as an ordinary number.
+display  math "4.4 times 10 to the negative 4 power" row("4.4 × ", superscript("10", "−4")) [scientific-notation 44e-1 × 10^-4]
+answer   exact 11/25000 (decimal)
+input    keypad
+keypad   allowDecimal=true
+hint     Move the decimal 4 places left.
+step 1   Use the exponent as the number of places.
+step 2   Move the decimal left.   [0.00044]
+miss     moved-one-place = 0.44   The exponent moves the decimal 4 places, not one.
+miss     reversed-exponent-direction = 44000   A negative exponent moves the decimal left."
+`;

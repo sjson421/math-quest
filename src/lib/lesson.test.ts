@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import {
   advanceCorrect,
   recordCheckResult,
+  recordFixedAnswer,
   currentProblem,
   currentSlot,
   INITIAL_PACING,
@@ -11,6 +12,7 @@ import {
   recordSessionAttempt,
   requeueMiss,
   startCheckSession,
+  startFormSession,
   startLessonSession,
   startStandardLessonSession,
   type LessonSource,
@@ -366,5 +368,99 @@ describe('lesson session integration', () => {
 
     expect(startStandardLessonSession(synthetic, lessonTarget(true), 1, make).queue).toHaveLength(5)
     expect(startStandardLessonSession(synthetic, lessonTarget(false), 1, make).queue).toHaveLength(10)
+  })
+})
+
+describe('fixed-answer form sessions', () => {
+  const formSources = Array.from({ length: 46 }, (_, index) => source(`form-${index}`, 3))
+
+  it('starts with one difficulty-three problem and materializes later slots lazily', () => {
+    const { generated, make } = labeledFactory()
+    const session = startFormSession(formSources, make)
+
+    expect(session.totalProblems).toBe(46)
+    expect(session.answeredCount).toBe(0)
+    expect(session.correctCount).toBe(0)
+    expect(session.queue).toHaveLength(46)
+    expect(generated).toHaveLength(1)
+    expect(generated[0].difficulty).toBe(3)
+    expect(session.queue.slice(1).every(({ problem: slotProblem }) => slotProblem === null)).toBe(true)
+  })
+
+  it('rejects invalid form sizes and non-fixed source difficulty', () => {
+    const { make } = labeledFactory()
+
+    expect(() => startFormSession(formSources.slice(0, 45), make)).toThrow('Form needs exactly 46 sources')
+    expect(() => startFormSession([...formSources, source('extra', 3)], make)).toThrow('Form needs exactly 46 sources')
+    expect(() => startFormSession([source('wrong-difficulty', 2), ...formSources.slice(1)], make))
+      .toThrow('Form sources must use difficulty 3')
+  })
+
+  it('keeps unparseable answers as no-ops and consumes wrong values once', () => {
+    const { generated, make } = labeledFactory()
+    const started = startFormSession(formSources, make)
+    const first = currentProblem(started)
+
+    const unfinished = recordFixedAnswer(started, 'none', make)
+    expect(unfinished).toEqual({ session: started, complete: false })
+    expect(currentProblem(unfinished.session)).toBe(first)
+
+    const missed = recordFixedAnswer(started, 'incorrect', make)
+    expect(missed.complete).toBe(false)
+    expect(missed.session.answeredCount).toBe(1)
+    expect(missed.session.correctCount).toBe(0)
+    expect(currentProblem(missed.session)).not.toBe(first)
+    expect(currentProblem(missed.session).difficulty).toBe(3)
+    expect(generated.every(({ difficulty }) => difficulty === 3)).toBe(true)
+  })
+
+  it('treats a wrong answer form as one consumed miss without retry', () => {
+    const { make } = labeledFactory()
+    const started = startFormSession(formSources, make)
+
+    const wrongForm = recordFixedAnswer(started, 'incorrect', make)
+    expect(wrongForm.session.answeredCount).toBe(1)
+    expect(wrongForm.session.queue).toHaveLength(45)
+    expect(wrongForm.session.queue.some(({ problem }) => problem === currentProblem(started))).toBe(false)
+  })
+
+  it('completes both zero-score and perfect papers at exactly 46 answers', () => {
+    const { make: missMake } = labeledFactory()
+    let misses = startFormSession(formSources, missMake)
+    for (let answer = 0; answer < 46; answer += 1) {
+      const transition = recordFixedAnswer(misses, 'incorrect', missMake)
+      expect(transition.complete).toBe(answer === 45)
+      if (!transition.complete) misses = transition.session
+      else {
+        expect(transition.session.answeredCount).toBe(46)
+        expect(transition.session.correctCount).toBe(0)
+        expect(transition.session.queue).toEqual([])
+        expect(() => recordFixedAnswer(transition.session, 'incorrect', missMake)).toThrow(
+          'Check has no current slot',
+        )
+      }
+    }
+
+    const { make: correctMake } = labeledFactory()
+    let correct = startFormSession(formSources, correctMake)
+    for (let answer = 0; answer < 46; answer += 1) {
+      const transition = recordFixedAnswer(correct, 'correct', correctMake)
+      expect(transition.complete).toBe(answer === 45)
+      if (!transition.complete) correct = transition.session
+      else {
+        expect(transition.session.answeredCount).toBe(46)
+        expect(transition.session.correctCount).toBe(46)
+      }
+    }
+  })
+
+  it('keeps one explicit clock through form transitions', () => {
+    const { make } = labeledFactory()
+    const timing = createSessionTiming(2_000)
+    const started = startFormSession(formSources, make, timing)
+    const transition = recordFixedAnswer(started, 'incorrect', make)
+
+    expect(started.timing).toBe(timing)
+    expect(transition.session.timing).toBe(timing)
   })
 })

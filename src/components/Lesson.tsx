@@ -1,6 +1,12 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { skillById } from '../curriculum/manifest'
+import {
+  FORM_QUESTION_COUNT,
+  isTimedFormId,
+  timedFormSources,
+  type TimedFormId,
+} from '../curriculum/unit-22-test-preparation'
 import { checkAnswer, type CheckResult } from '../lib/answer'
 import { completionAction, type CompletionView } from '../lib/checkpoint'
 import { visibleEntry } from '../lib/entry'
@@ -11,13 +17,15 @@ import {
   currentProblem,
   currentSlot,
   lessonTarget,
-  recordCheckResult,
+  recordFixedAnswer,
   recordSessionAttempt,
   requeueMiss,
+  startFormSession,
   startCheckSession,
   startLessonSession,
   startStandardLessonSession,
   type CheckSession,
+  type FormSession,
   type LessonSession,
   type ProblemFactory,
 } from '../lib/lesson'
@@ -30,6 +38,7 @@ import {
 import { success } from '../lib/sound'
 import { createSubmissionGate } from '../lib/submission-gate'
 import { feedbackText, responseTo } from '../lib/submit'
+import type { PracticePoints } from '../lib/score-estimation'
 import type { Difficulty, Misconception, Problem, SkillGenerator } from '../lib/types'
 import { currentPinTier, difficultyFor, useProgress, type LessonOutcome } from '../store/progress'
 import { ChoiceInput } from './ChoiceInput'
@@ -41,6 +50,7 @@ import { NumberLineInput } from './NumberLineInput'
 import { ProblemView } from './ProblemView'
 import { RootPairInput } from './RootPairInput'
 import { PinUpgrade } from './PinUpgrade'
+import { ScoreEstimate } from './ScoreEstimate'
 import { StageCheckpoint } from './StageCheckpoint'
 import { StreakMilestone } from './StreakMilestone'
 import { SolutionSteps } from './SolutionSteps'
@@ -55,14 +65,17 @@ import { SkillIntro, type SkillIntroMode } from './SkillIntro'
  */
 type Feedback = { status: CheckResult['status']; misconception?: Misconception } | null
 
-function useProblemFactory(): ProblemFactory {
+const FORM_CONTEXT =
+  '46 questions · one scored answer each · elapsed clock with no cutoff · partial papers are not saved'
+
+function useProblemFactory(seedBase?: number): ProblemFactory {
   // The lazy initializer runs once, so the seed stream is fresh per lesson and
   // remains stable across renders without reading mutable refs during render.
   const [makeProblem] = useState<ProblemFactory>(() => {
-    const seedBase = Math.floor(Math.random() * 1_000_000)
+    const initialSeed = seedBase ?? Math.floor(Math.random() * 1_000_000)
     let nextSeed = 0
     return (skill: SkillGenerator, difficulty: Difficulty) =>
-      generateProblem(skill, seedBase + nextSeed++ * 7919, difficulty)
+      generateProblem(skill, initialSeed + nextSeed++ * 7919, difficulty)
   })
 
   return makeProblem
@@ -73,6 +86,11 @@ type PracticeMode =
       kind: 'standard'
       skill: SkillGenerator
       timed: boolean
+    }
+  | {
+      kind: 'form'
+      skill: SkillGenerator
+      formId: TimedFormId
     }
   | {
       kind: 'review'
@@ -95,7 +113,12 @@ export function Lesson({
   onExit: () => void
   timed?: boolean
 }) {
-  return <PracticeLoop mode={{ kind: 'standard', skill, timed }} onExit={onExit} />
+  const formId = isTimedFormId(skill.id) ? skill.id : null
+  return formId ? (
+    <PracticeLoop mode={{ kind: 'form', skill, formId }} onExit={onExit} />
+  ) : (
+    <PracticeLoop mode={{ kind: 'standard', skill, timed }} onExit={onExit} />
+  )
 }
 
 /** Review receives its already-selected generator snapshot from its caller. */
@@ -160,26 +183,45 @@ function PracticeLoop({
   const markIntroSeen = useProgress((s) => s.markIntroSeen)
   const completeLesson = useProgress((s) => s.completeLesson)
   const completeReviewLesson = useProgress((s) => s.completeReviewLesson)
-  const makeProblem = useProblemFactory()
+  const [formSeed] = useState(() => Math.floor(Math.random() * 1_000_000))
+  const makeProblem = useProblemFactory(mode.kind === 'form' ? formSeed : undefined)
   const baseDifficulty =
-    mode.kind === 'standard' ? difficultyFor(progress.skills[mode.skill.id]?.mastery ?? 0) : 1
+    mode.kind === 'standard'
+      ? difficultyFor(progress.skills[mode.skill.id]?.mastery ?? 0)
+      : mode.kind === 'form'
+        ? 3
+        : 1
   const targetCorrect =
     mode.kind === 'standard'
       ? lessonTarget(skillById.get(mode.skill.id)?.quick)
-      : mode.skills.length
+      : mode.kind === 'form'
+        ? FORM_QUESTION_COUNT
+        : mode.skills.length
   const introNeeded =
-    mode.kind === 'standard' &&
+    (mode.kind === 'standard' || mode.kind === 'form') &&
     Boolean(mode.skill.teachingLine) &&
     progress.skills[mode.skill.id]?.introSeen !== true
   const [introMode, setIntroMode] = useState<SkillIntroMode | null>(() =>
     introNeeded ? 'automatic' : null,
   )
   const [introProblem, setIntroProblem] = useState<Problem | null>(() =>
-    introNeeded && mode.kind === 'standard'
+    introNeeded && (mode.kind === 'standard' || mode.kind === 'form')
       ? generateProblem(mode.skill, 1, 1)
       : null,
   )
-  const [session, setSession] = useState<(LessonSession | CheckSession) | null>(() => {
+  const createFormSession = () => {
+    if (mode.kind !== 'form') throw new Error('Only a form can create a form session')
+
+    return startFormSession(
+      timedFormSources(mode.formId, formSeed).map((skill) => ({
+        skill,
+        baseDifficulty: 3 as Difficulty,
+      })),
+      makeProblem,
+      createSessionTiming(performance.now()),
+    )
+  }
+  const [session, setSession] = useState<(LessonSession | CheckSession | FormSession) | null>(() => {
     if (mode.kind === 'standard') {
       return introNeeded
         ? null
@@ -191,6 +233,8 @@ function PracticeLoop({
             mode.timed ? createSessionTiming(performance.now()) : undefined,
           )
     }
+
+    if (mode.kind === 'form') return introNeeded ? null : createFormSession()
 
     if (mode.kind === 'check')
       return startCheckSession(
@@ -212,16 +256,24 @@ function PracticeLoop({
   const [feedback, setFeedback] = useState<Feedback>(null)
   const [showHint, setShowHint] = useState(false)
   const [finished, setFinished] = useState<LessonOutcome | null>(null)
+  const [practicePoints, setPracticePoints] = useState<PracticePoints | null>(null)
   const [clockActive, setClockActive] = useState(true)
   const [submissionGate] = useState(createSubmissionGate)
-  const pendingCheckAdvance = useRef<number | null>(null)
+  const pendingAdvance = useRef<number | null>(null)
+  const advanceClaimed = useRef(false)
+  const completionHandled = useRef(false)
+  const active = useRef(true)
   const elapsedTime = useSessionClock(session?.timing, !finished && clockActive)
 
   useEffect(() => {
+    // StrictMode runs effect cleanup before its second development setup. Reset
+    // this guard so that simulated cleanup does not disable a still-mounted lesson.
+    active.current = true
     return () => {
-      if (pendingCheckAdvance.current !== null) {
-        window.clearTimeout(pendingCheckAdvance.current)
-        pendingCheckAdvance.current = null
+      active.current = false
+      if (pendingAdvance.current !== null) {
+        window.clearTimeout(pendingAdvance.current)
+        pendingAdvance.current = null
       }
     }
   }, [])
@@ -241,56 +293,91 @@ function PracticeLoop({
   const unfinished = response?.keepsEntry === true
 
   const startPractice = () => {
-    if (mode.kind !== 'standard' || introMode !== 'automatic') return
+    if ((mode.kind !== 'standard' && mode.kind !== 'form') || introMode !== 'automatic') return
     markIntroSeen(mode.skill.id)
     setSession(
-      startStandardLessonSession(
-        mode.skill,
-        targetCorrect,
-        baseDifficulty,
-        makeProblem,
-        mode.timed ? createSessionTiming(performance.now()) : undefined,
-      ),
+      mode.kind === 'form'
+        ? createFormSession()
+        : startStandardLessonSession(
+            mode.skill,
+            targetCorrect,
+            baseDifficulty,
+            makeProblem,
+            mode.timed ? createSessionTiming(performance.now()) : undefined,
+          ),
     )
     setIntroMode(null)
   }
 
   const reviewIntro = () => {
-    if (mode.kind !== 'standard' || !mode.skill.teachingLine || feedback) return
+    if (
+      (mode.kind !== 'standard' && mode.kind !== 'form') ||
+      !mode.skill.teachingLine ||
+      feedback
+    ) return
     if (!introProblem) setIntroProblem(generateProblem(mode.skill, 1, 1))
     setIntroMode('review')
   }
 
-  const advanceCheck = (record: 'correct' | 'incorrect') => {
-    if (mode.kind !== 'check' || !session || !('answeredCount' in session)) return
+  const advanceFixed = (record: 'correct' | 'incorrect') => {
+    if (
+      (mode.kind !== 'check' && mode.kind !== 'form') ||
+      !session ||
+      !('answeredCount' in session)
+    ) {
+      submissionGate.release()
+      return
+    }
 
-    const transition = recordCheckResult(session, record, makeProblem)
+    const transition = recordFixedAnswer(session, record, makeProblem)
     setEntry('')
     setShowHint(false)
     setFeedback(null)
     if (transition.complete) {
+      if (completionHandled.current) {
+        submissionGate.release()
+        return
+      }
+      completionHandled.current = true
       setClockActive(false)
-      mode.onComplete(transition.session.correctCount)
-    }
-    else setSession(transition.session)
+      if (mode.kind === 'check') {
+        mode.onComplete(transition.session.correctCount)
+      } else {
+        setPracticePoints({
+          earned: transition.session.correctCount,
+          possible: transition.session.totalProblems,
+        })
+        setFinished(completeLesson(mode.skill.id))
+      }
+    } else setSession(transition.session)
     submissionGate.release()
   }
 
-  const leave = () => {
-    if (pendingCheckAdvance.current !== null) {
-      window.clearTimeout(pendingCheckAdvance.current)
-      pendingCheckAdvance.current = null
+  const cancelPendingAdvance = () => {
+    if (pendingAdvance.current !== null) {
+      window.clearTimeout(pendingAdvance.current)
+      pendingAdvance.current = null
     }
+  }
+
+  const leave = () => {
+    active.current = false
+    cancelPendingAdvance()
     setClockActive(false)
     onExit()
   }
 
-  if (introMode && introProblem && mode.kind === 'standard') {
+  if (
+    introMode &&
+    introProblem &&
+    (mode.kind === 'standard' || mode.kind === 'form')
+  ) {
     return (
       <SkillIntro
         skill={mode.skill}
         problem={introProblem}
         mode={introMode}
+        context={mode.kind === 'form' ? FORM_CONTEXT : undefined}
         onLeave={leave}
         onStart={startPractice}
         onBackToPractice={() => setIntroMode(null)}
@@ -301,9 +388,10 @@ function PracticeLoop({
   if (finished) {
     return (
       <LessonComplete
-        skill={mode.kind === 'standard' ? mode.skill : undefined}
+        skill={mode.kind === 'standard' || mode.kind === 'form' ? mode.skill : undefined}
         review={mode.kind === 'review'}
         outcome={finished}
+        practicePoints={practicePoints ?? undefined}
         onExit={onExit}
       />
     )
@@ -314,12 +402,13 @@ function PracticeLoop({
   const slot = currentSlot(session)
   const problem = currentProblem(session)
   const skill = slot.source.skill
+  const fixedMode = mode.kind === 'check' || mode.kind === 'form'
   const progressCount =
-    mode.kind === 'check' && 'answeredCount' in session
+    fixedMode && 'answeredCount' in session
       ? session.answeredCount
       : session.correctCount
   const progressTotal =
-    mode.kind === 'check' && 'totalProblems' in session
+    fixedMode && 'totalProblems' in session
       ? session.totalProblems
       : 'targetCorrect' in session
         ? session.targetCorrect
@@ -334,7 +423,7 @@ function PracticeLoop({
   const submit = (answerEntry = entry) => {
     // An unfinished entry left the pad up, so Check is still live — pressing it
     // again should re-answer rather than sit dead until a key is tapped.
-    if ((feedback && !unfinished) || !problem) return
+    if (!active.current || (feedback && !unfinished) || !problem) return
     if (!submissionGate.tryAcquire()) return
 
     const { status } = checkAnswer(problem.answer, answerEntry)
@@ -344,7 +433,9 @@ function PracticeLoop({
     const misconception =
       status === 'incorrect' ? diagnose(problem, answerEntry) : undefined
 
-    if (mode.kind === 'check') {
+    if (policy.record !== 'none') advanceClaimed.current = false
+
+    if (fixedMode) {
       const record = policy.record
       if (record === 'none') {
         submissionGate.release()
@@ -352,12 +443,18 @@ function PracticeLoop({
         return
       }
 
+      if (mode.kind === 'form') {
+        recordAttempt(mode.skill.id, record === 'correct', misconception?.tag)
+      }
+
       if (policy.advances) {
         celebrate()
         setFeedback({ status })
-        pendingCheckAdvance.current = window.setTimeout(() => {
-          pendingCheckAdvance.current = null
-          advanceCheck(record)
+        pendingAdvance.current = window.setTimeout(() => {
+          pendingAdvance.current = null
+          if (!active.current || advanceClaimed.current) return
+          advanceClaimed.current = true
+          advanceFixed(record)
         }, 750)
         return
       }
@@ -382,8 +479,11 @@ function PracticeLoop({
     if (policy.advances) {
       celebrate()
       setFeedback({ status })
-
-      window.setTimeout(() => {
+      advanceClaimed.current = false
+      pendingAdvance.current = window.setTimeout(() => {
+        pendingAdvance.current = null
+        if (!active.current || advanceClaimed.current) return
+        advanceClaimed.current = true
         setEntry('')
         setShowHint(false)
         setFeedback(null)
@@ -391,6 +491,11 @@ function PracticeLoop({
         const transition = advanceCorrect(nextSession, makeProblem)
         setSession(transition.session)
         if (transition.complete) {
+          if (completionHandled.current) {
+            submissionGate.release()
+            return
+          }
+          completionHandled.current = true
           setClockActive(false)
           const outcome =
             mode.kind === 'review'
@@ -408,17 +513,24 @@ function PracticeLoop({
   }
 
   const dismiss = () => {
-    if (!response) return
-    submissionGate.release()
+    if (!response || !active.current) return
+    if (response.record !== 'none') {
+      if (advanceClaimed.current) return
+      advanceClaimed.current = true
+    }
     setFeedback(null)
     if (!response.keepsEntry) setEntry('')
 
-    if (mode.kind === 'check') {
+    if (fixedMode) {
       if (!response.keepsEntry && response.record !== 'none') {
-        advanceCheck(response.record)
+        advanceFixed(response.record)
+      } else {
+        submissionGate.release()
       }
       return
     }
+
+    submissionGate.release()
 
     if (!response.requeues) return
 
@@ -555,7 +667,7 @@ function PracticeLoop({
             {elapsedTime}
           </span>
         )}
-        {mode.kind === 'standard' && mode.skill.teachingLine && !feedback && (
+        {(mode.kind === 'standard' || mode.kind === 'form') && mode.skill.teachingLine && !feedback && (
           <button
             type="button"
             onClick={reviewIntro}
@@ -565,6 +677,15 @@ function PracticeLoop({
           </button>
         )}
       </header>
+
+      {mode.kind === 'form' && (
+        <p
+          className="px-5 text-center text-xs leading-5 text-ink-soft"
+          data-form-context
+        >
+          {FORM_CONTEXT}
+        </p>
+      )}
 
       <div className="flex-1 flex flex-col items-center justify-center px-5 gap-5 min-h-0">
         <div className="flex items-center gap-2">
@@ -610,7 +731,7 @@ function PracticeLoop({
         </AnimatePresence>
 
         <AnimatePresence>
-          {showHint && !feedback && mode.kind !== 'check' && (
+          {showHint && !feedback && !fixedMode && (
             <motion.p
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -622,7 +743,7 @@ function PracticeLoop({
           )}
         </AnimatePresence>
 
-        {!showHint && !feedback && mode.kind !== 'check' && (
+        {!showHint && !feedback && !fixedMode && (
           <button
             onClick={() => {
               tap()
@@ -703,11 +824,13 @@ export function LessonComplete({
   skill,
   review = false,
   outcome,
+  practicePoints,
   onExit,
 }: {
   skill?: SkillGenerator
   review?: boolean
   outcome: LessonOutcome
+  practicePoints?: PracticePoints
   onExit: () => void
 }) {
   const mastery = useProgress((s) => (skill ? s.progress.skills[skill.id]?.mastery ?? 0 : 0))
@@ -783,7 +906,12 @@ export function LessonComplete({
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      className="flex flex-col items-center justify-center h-full gap-5 px-6 text-center"
+      className={`flex flex-col items-center gap-5 px-6 text-center ${
+        practicePoints
+          ? 'min-h-full justify-start overflow-y-auto py-6'
+          : 'h-full justify-center'
+      }`}
+      data-form-result={practicePoints ? true : undefined}
     >
       <Confetti />
       <Mascot
@@ -795,7 +923,9 @@ export function LessonComplete({
       />
 
       <div>
-        <h2 className="text-3xl font-bold">{review ? 'Review complete!' : 'Lesson complete!'}</h2>
+        <h2 className="text-3xl font-bold">
+          {practicePoints ? 'Practice form complete!' : review ? 'Review complete!' : 'Lesson complete!'}
+        </h2>
         {review ? (
           <p className="text-ink-soft mt-1">Your skills are ready for what comes next.</p>
         ) : (
@@ -809,6 +939,8 @@ export function LessonComplete({
         <Reward icon="✦" label={`+${outcome.xpGained} XP`} tone="bg-lilac-soft" />
         <Reward icon="🪙" label={`+${outcome.coinsGained}`} tone="bg-butter-soft" />
       </div>
+
+      {practicePoints && <ScoreEstimate {...practicePoints} />}
 
       <button
         onClick={continueCompletion}

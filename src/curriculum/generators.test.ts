@@ -47,9 +47,19 @@ import type {
 } from '../lib/types'
 
 // Thin delegated draws can sample only a source tag's collisions. Sources keep full sweeps.
-const FILTER_EXCLUSIONS = new Set(['review-quantitative', 'review-algebraic'])
-// Per-difficulty seeds otherwise compare different mixes; reviews use paired seeds below.
-const LADDER_EXCLUSIONS = new Set(['review-quantitative', 'review-algebraic'])
+const FILTER_EXCLUSIONS = new Set([
+  'review-quantitative',
+  'review-algebraic',
+  'timed-practice-1',
+  'timed-practice-2',
+])
+// Per-difficulty seeds otherwise compare different mixes; delegated wrappers use paired seeds below.
+const LADDER_EXCLUSIONS = new Set([
+  'review-quantitative',
+  'review-algebraic',
+  'timed-practice-1',
+  'timed-practice-2',
+])
 
 const DIFFICULTIES: Difficulty[] = [1, 2, 3, 4, 5]
 const ITERATIONS = 200 // per skill per difficulty → 1000 problems per skill
@@ -6088,7 +6098,12 @@ describe('Unit 22 independent verification', () => {
 
   it('keeps both exclusion sets closed and all source checks active', () => {
     for (const set of [FILTER_EXCLUSIONS, LADDER_EXCLUSIONS]) {
-      expect([...set]).toEqual(['review-quantitative', 'review-algebraic'])
+      expect([...set]).toEqual([
+        'review-quantitative',
+        'review-algebraic',
+        'timed-practice-1',
+        'timed-practice-2',
+      ])
       for (const source of [...quantitativePool, ...algebraicPool]) expect(set.has(source.id)).toBe(false)
     }
   })
@@ -6106,10 +6121,32 @@ describe('Unit 22 independent verification', () => {
     expect(high).toBeGreaterThan(low)
   })
 
+  it.each([4, 5])('measures timed form %i with the same source in each difficulty pair', (index) => {
+    let low = 0
+    let high = 0
+    for (let seed = 0; seed < 1000; seed++) {
+      const first = generateProblem(unit22[index], seed * 7919, 1)
+      const last = generateProblem(unit22[index], seed * 7919, 5)
+      expect(last.skillId).toBe(first.skillId)
+      low += sourceMagnitude(first)
+      high += sourceMagnitude(last)
+    }
+    expect(high).toBeGreaterThan(low)
+  })
+
   it('independently verifies every authored operation, form and difficulty band', () => {
     for (const index of [0, 1]) {
       for (const problem of samples(index)) expect(recompute(problem)).toBe(answerValue(problem))
       expect(scalingProblems(unit22[index])).toEqual([])
+    }
+  })
+
+  it.each([4, 5])('independently verifies every delegated timed form draw', (index) => {
+    for (const difficulty of DIFFICULTIES) {
+      for (let i = 0; i < ITERATIONS; i += 1) {
+        const problem = generateProblem(unit22[index], seedFor(i, difficulty), difficulty)
+        expect(recompute(problem)).toBe(answerValue(problem))
+      }
     }
   })
 

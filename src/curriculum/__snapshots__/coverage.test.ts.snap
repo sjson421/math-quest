@@ -522,6 +522,12 @@ exports[`the unlock graph the store gates on > matches the committed snapshot fo
   "table-to-graph": [
     "quadrants",
   ],
+  "timed-practice-1": [
+    "review-algebraic",
+  ],
+  "timed-practice-2": [
+    "timed-practice-1",
+  ],
   "times-10": [
     "times-2",
   ],

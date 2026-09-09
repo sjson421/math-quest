@@ -10,7 +10,7 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { get as idbGet, set as idbSet } from 'idb-keyval'
-import { getSkill, implementedSkillIds, skillStates } from '../curriculum'
+import { getSkill, implementedSkillIds } from '../curriculum'
 import { stageA } from '../curriculum/manifest'
 import { addDays, dayBefore, todayKey } from '../lib/calendar'
 import { readReviewState } from '../lib/review'
@@ -126,10 +126,9 @@ describe('the manifest is the authority', () => {
     expect(isUnlocked('sub-2digit-borrow', dropped)).toBe(true)
   })
 
-  it('locks a skill that has no generator, however far the learner has come', () => {
-    // 177 of the 201 are planned. They must never be offered or hold anyone up.
-    // Unit 3's ids, because Unit 2's have generators as of this change — the
-    // examples move forward each time a unit lands, which is the point.
+  it('keeps downstream skills locked until their prerequisites are mastered', () => {
+    // These skills are implemented, but Unit 1 completion does not satisfy their
+    // own manifest prerequisites yet.
     const finished = throughUnit1()
 
     expect(isUnlocked('mult-meaning', finished)).toBe(false)
@@ -177,20 +176,13 @@ describe('a practised skill is never re-locked', () => {
     expect(isUnlocked('sub-facts', initialProgress())).toBe(false)
   })
 
-  it('still refuses a practised skill that can no longer be generated', () => {
-    // Rule 1 beats rule 2. Not reachable with today's playable skills, but the
-    // order is what stops a future capability requirement handing back a lesson
-    // that cannot be built.
-    //
-    // The id comes from the registry rather than being named. This case used to
-    // say `div-meaning`, and Unit 4 shipping it turned a test about a rule into
-    // a failure about which unit exists — any planned skill proves the same rule.
-    const planned = [...skillStates].find(([, state]) => state === 'planned')?.[0]
-    expect(planned, 'every skill is built; this rule needs a planned one').toBeDefined()
+  it('still refuses a practised skill outside the playable course', () => {
+    // Rule 1 beats the practised-skill grandfathering rule. An id removed from
+    // the manifest must never become playable through an old progress record.
+    const removed = 'removed-skill'
+    const practisedButUnknown = progressWith({ [removed]: { attempts: 9, mastery: 2 } })
 
-    const practisedButPlanned = progressWith({ [planned!]: { attempts: 9, mastery: 2 } })
-
-    expect(isUnlocked(planned!, practisedButPlanned)).toBe(false)
+    expect(isUnlocked(removed, practisedButUnknown)).toBe(false)
   })
 
   it('keeps add-facts open for a learner who reached it before 1.1 existed', () => {
