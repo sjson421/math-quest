@@ -1292,7 +1292,7 @@ shows before a lesson's first problem.
       then shows the existing approximate score estimate. Two skills, but each is a test form
       rather than a ten-problem lesson, which is why they are not a tail on 30a.
 
-- [ ] **31 · Streak reminders** — S *(was B7, then 30)* — **two increments**
+- [x] **31 · Streak reminders** — S *(was B7, then 30)* — **two increments** — **shipped 2026-09-10**
 
       Last because it is the only item nothing else depends on.
 
@@ -1303,11 +1303,12 @@ shows before a lesson's first problem.
       `openspec/specs/streak-progression/spec.md`; no additional reminder surface or
       return-to-app trigger is required.
 
-      **31b · System notifications where they actually work.** Permission asked at a moment the
-      learner has earned something, never on first launch. Worth an honest caveat: iOS PWA
-      notification support is narrow and may not reach an installed home-screen app reliably. If
-      it does not, 31a is the shipped answer and that is an acceptable outcome — which is why it
-      ships first. Verifying on real hardware is launch work and out of scope below.
+      **31b · In-app-only v1.0 fallback — selected 2026-09-10.** The selected outcome is the
+      existing home-screen warning in 31a: no notification permission is requested and no system
+      reminder is sent. Closed-app delivery, push subscriptions, scheduling infrastructure, and
+      real-device notification validation remain out of scope. This records a product scope
+      decision; it does not claim that iOS PWA notifications work or fail on hardware. Real-device
+      validation remains launch work below.
 
 ---
 

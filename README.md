@@ -55,8 +55,9 @@ approximate GED estimate for that practice session, not an official score. Stage
 calculator-key practice, formula selection, and quantitative and algebraic mixed reviews.
 
 **[`docs/roadmap.md`](docs/roadmap.md) is the plan from here to v1.0** — every remaining
-milestone, what blocks what, and the product features still unbuilt (streak reminders). It lives
-in one place so it cannot drift out of step with this file.
+milestone, what blocks what, and the product work still to finish. The Home streak warning ships
+as the v1.0 reminder; no system reminders are sent. It lives in one place so it cannot drift out
+of step with this file.
 
 ## Running it
 
