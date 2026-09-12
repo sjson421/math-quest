@@ -2067,7 +2067,7 @@ miss     added-instead-of-divided = 114   Divide 14 by 100; do not add them."
 exports[`recorded output: money-problems > matches the wording recorded when the skill landed 1`] = `
 "--- money-problems · seed 1 · difficulty 1
 prompt   How much was spent on gym visits?
-display  story [206 × 2] "A drop-in gym visit costs $2.06, and you go 2 times this month. A friend went 8 times. How much did you spend?"
+display  story [206 × 2] "A drop-in gym visit costs $2.06, and you go 2 times this month. A friend went 8 times. How much did you spend on visits?"
 answer   exact 103/25
 input    keypad
 keypad   allowDecimal=true
@@ -2079,7 +2079,7 @@ miss     answered-part = 2.06   That is one visit. Multiply by the number of vis
 miss     distractor-pair = 16.48   That uses your friend's 8 visits, not yours.
 
 --- money-problems · seed 12345 · difficulty 1
-prompt   How much did the paper cost?
+prompt   How much did the order cost?
 display  story [294 × 5] "A ream of paper costs $2.94, and an office orders 5 reams. The supply closet already has 7. How much did the order cost?"
 answer   exact 147/10
 input    keypad
@@ -2119,7 +2119,7 @@ miss     distractor-pair = 2.46   That uses your friend's 3 rides, not yours.
 
 --- money-problems · seed 987654321 · difficulty 1
 prompt   How much was spent on gym visits?
-display  story [287 × 3] "A drop-in gym visit costs $2.87, and you go 3 times this month. A friend went 2 times. How much did you spend?"
+display  story [287 × 3] "A drop-in gym visit costs $2.87, and you go 3 times this month. A friend went 2 times. How much did you spend on visits?"
 answer   exact 861/100
 input    keypad
 keypad   allowDecimal=true
@@ -2132,7 +2132,7 @@ miss     distractor-pair = 5.74   That uses your friend's 2 visits, not yours.
 
 --- money-problems · seed 1 · difficulty 2
 prompt   How much was spent on gym visits?
-display  story [394 × 2] "A drop-in gym visit costs $3.94, and you go 2 times this month. A friend went 8 times. How much did you spend?"
+display  story [394 × 2] "A drop-in gym visit costs $3.94, and you go 2 times this month. A friend went 8 times. How much did you spend on visits?"
 answer   exact 197/25
 input    keypad
 keypad   allowDecimal=true
@@ -2144,7 +2144,7 @@ miss     answered-part = 3.94   That is one visit. Multiply by the number of vis
 miss     distractor-pair = 31.52   That uses your friend's 8 visits, not yours.
 
 --- money-problems · seed 12345 · difficulty 2
-prompt   How much did the paper cost?
+prompt   How much did the order cost?
 display  story [588 × 5] "A ream of paper costs $5.88, and an office orders 5 reams. The supply closet already has 7. How much did the order cost?"
 answer   exact 147/5
 input    keypad
@@ -2184,7 +2184,7 @@ miss     distractor-pair = 3.6   That uses your friend's 3 rides, not yours.
 
 --- money-problems · seed 987654321 · difficulty 2
 prompt   How much was spent on gym visits?
-display  story [573 × 3] "A drop-in gym visit costs $5.73, and you go 3 times this month. A friend went 2 times. How much did you spend?"
+display  story [573 × 3] "A drop-in gym visit costs $5.73, and you go 3 times this month. A friend went 2 times. How much did you spend on visits?"
 answer   exact 1719/100
 input    keypad
 keypad   allowDecimal=true
@@ -2197,7 +2197,7 @@ miss     distractor-pair = 11.46   That uses your friend's 2 visits, not yours.
 
 --- money-problems · seed 1 · difficulty 3
 prompt   How much was spent on gym visits?
-display  story [852 × 2] "A drop-in gym visit costs $8.52, and you go 2 times this month. A friend went 8 times. How much did you spend?"
+display  story [852 × 2] "A drop-in gym visit costs $8.52, and you go 2 times this month. A friend went 8 times. How much did you spend on visits?"
 answer   exact 426/25
 input    keypad
 keypad   allowDecimal=true
@@ -2209,7 +2209,7 @@ miss     answered-part = 8.52   That is one visit. Multiply by the number of vis
 miss     distractor-pair = 68.16   That uses your friend's 8 visits, not yours.
 
 --- money-problems · seed 12345 · difficulty 3
-prompt   How much did the paper cost?
+prompt   How much did the order cost?
 display  story [1275 × 5] "A ream of paper costs $12.75, and an office orders 5 reams. The supply closet already has 7. How much did the order cost?"
 answer   exact 255/4
 input    keypad
@@ -2249,7 +2249,7 @@ miss     distractor-pair = 7.62   That uses your friend's 3 rides, not yours.
 
 --- money-problems · seed 987654321 · difficulty 3
 prompt   How much was spent on gym visits?
-display  story [1241 × 3] "A drop-in gym visit costs $12.41, and you go 3 times this month. A friend went 2 times. How much did you spend?"
+display  story [1241 × 3] "A drop-in gym visit costs $12.41, and you go 3 times this month. A friend went 2 times. How much did you spend on visits?"
 answer   exact 3723/100
 input    keypad
 keypad   allowDecimal=true
@@ -2262,7 +2262,7 @@ miss     distractor-pair = 24.82   That uses your friend's 2 visits, not yours.
 
 --- money-problems · seed 1 · difficulty 4
 prompt   How much was spent on gym visits?
-display  story [2018 × 2] "A drop-in gym visit costs $20.18, and you go 2 times this month. A friend went 8 times. How much did you spend?"
+display  story [2018 × 2] "A drop-in gym visit costs $20.18, and you go 2 times this month. A friend went 8 times. How much did you spend on visits?"
 answer   exact 1009/25
 input    keypad
 keypad   allowDecimal=true
@@ -2274,7 +2274,7 @@ miss     answered-part = 20.18   That is one visit. Multiply by the number of vi
 miss     distractor-pair = 161.44   That uses your friend's 8 visits, not yours.
 
 --- money-problems · seed 12345 · difficulty 4
-prompt   How much did the paper cost?
+prompt   How much did the order cost?
 display  story [3041 × 5] "A ream of paper costs $30.41, and an office orders 5 reams. The supply closet already has 7. How much did the order cost?"
 answer   exact 3041/20
 input    keypad
@@ -2314,7 +2314,7 @@ miss     distractor-pair = 17.19   That uses your friend's 3 rides, not yours.
 
 --- money-problems · seed 987654321 · difficulty 4
 prompt   How much was spent on gym visits?
-display  story [2959 × 3] "A drop-in gym visit costs $29.59, and you go 3 times this month. A friend went 2 times. How much did you spend?"
+display  story [2959 × 3] "A drop-in gym visit costs $29.59, and you go 3 times this month. A friend went 2 times. How much did you spend on visits?"
 answer   exact 8877/100
 input    keypad
 keypad   allowDecimal=true
@@ -2327,7 +2327,7 @@ miss     distractor-pair = 59.18   That uses your friend's 2 visits, not yours.
 
 --- money-problems · seed 1 · difficulty 5
 prompt   How much was spent on gym visits?
-display  story [4011 × 2] "A drop-in gym visit costs $40.11, and you go 2 times this month. A friend went 8 times. How much did you spend?"
+display  story [4011 × 2] "A drop-in gym visit costs $40.11, and you go 2 times this month. A friend went 8 times. How much did you spend on visits?"
 answer   exact 4011/50
 input    keypad
 keypad   allowDecimal=true
@@ -2339,7 +2339,7 @@ miss     answered-part = 40.11   That is one visit. Multiply by the number of vi
 miss     distractor-pair = 320.88   That uses your friend's 8 visits, not yours.
 
 --- money-problems · seed 12345 · difficulty 5
-prompt   How much did the paper cost?
+prompt   How much did the order cost?
 display  story [5986 × 5] "A ream of paper costs $59.86, and an office orders 5 reams. The supply closet already has 7. How much did the order cost?"
 answer   exact 2993/10
 input    keypad
@@ -2379,7 +2379,7 @@ miss     distractor-pair = 36.6   That uses your friend's 3 rides, not yours.
 
 --- money-problems · seed 987654321 · difficulty 5
 prompt   How much was spent on gym visits?
-display  story [5828 × 3] "A drop-in gym visit costs $58.28, and you go 3 times this month. A friend went 2 times. How much did you spend?"
+display  story [5828 × 3] "A drop-in gym visit costs $58.28, and you go 3 times this month. A friend went 2 times. How much did you spend on visits?"
 answer   exact 4371/25
 input    keypad
 keypad   allowDecimal=true

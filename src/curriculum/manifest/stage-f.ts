@@ -166,7 +166,7 @@ export const stageF: StageEntry = {
         {
           id: 'difference-of-squares',
           name: 'Difference of Squares',
-          blurb: 'A pattern worth recognising',
+          blurb: 'A pattern worth recognizing',
         },
         {
           id: 'solve-by-factoring',

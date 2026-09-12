@@ -20,7 +20,7 @@ export const MONEY_FRAMES: Frame[] = [
   {
     id: 'groceries',
     operator: '×',
-    prompt: 'How much did the groceries cost?',
+    prompt: 'How much did the rice cost?',
     text: ({ a, b, distractor }) =>
       `A bag of rice costs ${dollars(a)}, and you buy ${b} bags. A nearby shelf has ${distractor} bags. How much did the rice cost?`,
     hint: ({ a, b }) => `Multiply the price, ${dollars(a)}, by the quantity, ${b}.`,
@@ -28,7 +28,7 @@ export const MONEY_FRAMES: Frame[] = [
       steps(a, b, answer, `The shelf's ${distractor} bags were not bought.`),
     nudges: {
       wrongOperation: () => 'That adds the price to the count instead of multiplying them.',
-      distractorPair: ({ distractor }) => `That uses the shelf's ${distractor} bags, not the ${distractor === 1 ? 'one' : 'ones'} bought.`,
+      distractorPair: ({ distractor }) => `That uses the shelf's ${distractor} bags, not the ones you bought.`,
       answeredPart: () => 'That is the price of one bag. Multiply by the quantity bought.',
     },
   },
@@ -110,7 +110,7 @@ export const MONEY_FRAMES: Frame[] = [
   {
     id: 'paper-reams',
     operator: '×',
-    prompt: 'How much did the paper cost?',
+    prompt: 'How much did the order cost?',
     text: ({ a, b, distractor }) =>
       `A ream of paper costs ${dollars(a)}, and an office orders ${b} reams. The supply closet already has ${distractor}. How much did the order cost?`,
     hint: ({ a, b }) => `Multiply the price, ${dollars(a)}, by ${b} reams.`,
@@ -127,7 +127,7 @@ export const MONEY_FRAMES: Frame[] = [
     operator: '×',
     prompt: 'How much was spent on gym visits?',
     text: ({ a, b, distractor }) =>
-      `A drop-in gym visit costs ${dollars(a)}, and you go ${b} times this month. A friend went ${distractor} times. How much did you spend?`,
+      `A drop-in gym visit costs ${dollars(a)}, and you go ${b} times this month. A friend went ${distractor} times. How much did you spend on visits?`,
     hint: ({ a, b }) => `Multiply the visit price, ${dollars(a)}, by ${b} visits.`,
     solution: ({ a, b, distractor }, answer) =>
       steps(a, b, answer, `Your friend's ${distractor} visits are separate.`),

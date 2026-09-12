@@ -163,8 +163,8 @@ export const EQUATION_FRAMES: EquationFrame[] = [
     id: 'rooms',
     prompt: 'How many rooms were painted?',
     text: (q) =>
-      `A decorator uses ${q.coefficient} litres of paint per room and ${q.constant} litres for the trim. ` +
-      `The job used ${q.rightHand} litres.`,
-    hint: (q) => `Trim is a one-off, so take its ${q.constant} litres off the total first.`,
+      `A decorator uses ${q.coefficient} liters of paint per room and ${q.constant} liters for the trim. ` +
+      `The job used ${q.rightHand} liters.`,
+    hint: (q) => `Trim is a one-off, so take its ${q.constant} liters off the total first.`,
   },
 ]

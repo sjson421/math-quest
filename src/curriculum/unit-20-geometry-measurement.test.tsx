@@ -145,9 +145,9 @@ const formulaLabels = (diagram: GeometryDiagram): string[] =>
 const unitWords = (unit: GeometryDiagram['unit']): string => {
   switch (unit) {
     case 'cm':
-      return 'centimetres'
+      return 'centimeters'
     case 'm':
-      return 'metres'
+      return 'meters'
     case 'in':
       return 'inches'
     case 'ft':

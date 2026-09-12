@@ -792,7 +792,7 @@ const compoundInequalities = defineSkill({
       answer: intAnswer(count),
       keypad: padFor(count, misconceptions),
       misconceptions,
-      hint: 'Walk the range and keep the numbers the statement admits.',
+      hint: 'Try each whole number in the range and keep the ones that fit.',
       solution: [
         { text: `Take the whole numbers from 0 to ${rangeMax}.` },
         {

@@ -6,7 +6,7 @@ prompt   How many whole numbers from 0 to 9 make this true?
 display  equation "x ≤ 1 or x > 8" solve how many [inequality-compound or x ≤ 1 / x > 8 over 0..9]
 answer   exact 3/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 9.
 step 2   Keep every number satisfying either part.   [x ≤ 1 or x > 8]
 step 3   That leaves 3 of them.
@@ -18,7 +18,7 @@ prompt   How many whole numbers from 0 to 10 make this true?
 display  equation "x ≤ 3 or x > 7" solve how many [inequality-compound or x ≤ 3 / x > 7 over 0..10]
 answer   exact 7/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 10.
 step 2   Keep every number satisfying either part.   [x ≤ 3 or x > 7]
 step 3   That leaves 7 of them.
@@ -30,7 +30,7 @@ prompt   How many whole numbers from 0 to 9 make this true?
 display  equation "x < 4 or x > 7" solve how many [inequality-compound or x < 4 / x > 7 over 0..9]
 answer   exact 6/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 9.
 step 2   Keep every number satisfying either part.   [x < 4 or x > 7]
 step 3   That leaves 6 of them.
@@ -42,7 +42,7 @@ prompt   How many whole numbers from 0 to 8 make this true?
 display  equation "x ≥ 2 and x < 5" solve how many [inequality-compound and x ≥ 2 / x < 5 over 0..8]
 answer   exact 3/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 8.
 step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 5]
 step 3   That leaves 3 of them.
@@ -54,7 +54,7 @@ prompt   How many whole numbers from 0 to 10 make this true?
 display  equation "x ≥ 1 and x < 7" solve how many [inequality-compound and x ≥ 1 / x < 7 over 0..10]
 answer   exact 6/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 10.
 step 2   Keep only the numbers satisfying both parts.   [x ≥ 1 and x < 7]
 step 3   That leaves 6 of them.
@@ -66,7 +66,7 @@ prompt   How many whole numbers from 0 to 11 make this true?
 display  equation "x ≤ 1 or x > 10" solve how many [inequality-compound or x ≤ 1 / x > 10 over 0..11]
 answer   exact 3/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 11.
 step 2   Keep every number satisfying either part.   [x ≤ 1 or x > 10]
 step 3   That leaves 3 of them.
@@ -78,7 +78,7 @@ prompt   How many whole numbers from 0 to 12 make this true?
 display  equation "x ≤ 3 or x > 8" solve how many [inequality-compound or x ≤ 3 / x > 8 over 0..12]
 answer   exact 8/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 12.
 step 2   Keep every number satisfying either part.   [x ≤ 3 or x > 8]
 step 3   That leaves 8 of them.
@@ -90,7 +90,7 @@ prompt   How many whole numbers from 0 to 11 make this true?
 display  equation "x < 5 or x > 9" solve how many [inequality-compound or x < 5 / x > 9 over 0..11]
 answer   exact 7/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 11.
 step 2   Keep every number satisfying either part.   [x < 5 or x > 9]
 step 3   That leaves 7 of them.
@@ -102,7 +102,7 @@ prompt   How many whole numbers from 0 to 10 make this true?
 display  equation "x ≥ 2 and x < 5" solve how many [inequality-compound and x ≥ 2 / x < 5 over 0..10]
 answer   exact 3/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 10.
 step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 5]
 step 3   That leaves 3 of them.
@@ -114,7 +114,7 @@ prompt   How many whole numbers from 0 to 12 make this true?
 display  equation "x ≥ 2 and x < 9" solve how many [inequality-compound and x ≥ 2 / x < 9 over 0..12]
 answer   exact 7/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 12.
 step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 9]
 step 3   That leaves 7 of them.
@@ -126,7 +126,7 @@ prompt   How many whole numbers from 0 to 13 make this true?
 display  equation "x ≤ 1 or x > 12" solve how many [inequality-compound or x ≤ 1 / x > 12 over 0..13]
 answer   exact 3/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 13.
 step 2   Keep every number satisfying either part.   [x ≤ 1 or x > 12]
 step 3   That leaves 3 of them.
@@ -138,7 +138,7 @@ prompt   How many whole numbers from 0 to 14 make this true?
 display  equation "x ≤ 4 or x > 9" solve how many [inequality-compound or x ≤ 4 / x > 9 over 0..14]
 answer   exact 10/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 14.
 step 2   Keep every number satisfying either part.   [x ≤ 4 or x > 9]
 step 3   That leaves 10 of them.
@@ -150,7 +150,7 @@ prompt   How many whole numbers from 0 to 11 make this true?
 display  equation "x < 5 or x > 9" solve how many [inequality-compound or x < 5 / x > 9 over 0..11]
 answer   exact 7/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 11.
 step 2   Keep every number satisfying either part.   [x < 5 or x > 9]
 step 3   That leaves 7 of them.
@@ -162,7 +162,7 @@ prompt   How many whole numbers from 0 to 10 make this true?
 display  equation "x ≥ 2 and x < 5" solve how many [inequality-compound and x ≥ 2 / x < 5 over 0..10]
 answer   exact 3/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 10.
 step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 5]
 step 3   That leaves 3 of them.
@@ -174,7 +174,7 @@ prompt   How many whole numbers from 0 to 14 make this true?
 display  equation "x ≥ 2 and x < 10" solve how many [inequality-compound and x ≥ 2 / x < 10 over 0..14]
 answer   exact 8/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 14.
 step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 10]
 step 3   That leaves 8 of them.
@@ -186,7 +186,7 @@ prompt   How many whole numbers from 0 to 15 make this true?
 display  equation "x ≤ 1 or x > 14" solve how many [inequality-compound or x ≤ 1 / x > 14 over 0..15]
 answer   exact 3/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 15.
 step 2   Keep every number satisfying either part.   [x ≤ 1 or x > 14]
 step 3   That leaves 3 of them.
@@ -198,7 +198,7 @@ prompt   How many whole numbers from 0 to 16 make this true?
 display  equation "x ≤ 4 or x > 10" solve how many [inequality-compound or x ≤ 4 / x > 10 over 0..16]
 answer   exact 11/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 16.
 step 2   Keep every number satisfying either part.   [x ≤ 4 or x > 10]
 step 3   That leaves 11 of them.
@@ -210,7 +210,7 @@ prompt   How many whole numbers from 0 to 13 make this true?
 display  equation "x < 6 or x > 11" solve how many [inequality-compound or x < 6 / x > 11 over 0..13]
 answer   exact 8/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 13.
 step 2   Keep every number satisfying either part.   [x < 6 or x > 11]
 step 3   That leaves 8 of them.
@@ -222,7 +222,7 @@ prompt   How many whole numbers from 0 to 12 make this true?
 display  equation "x ≥ 3 and x < 7" solve how many [inequality-compound and x ≥ 3 / x < 7 over 0..12]
 answer   exact 4/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 12.
 step 2   Keep only the numbers satisfying both parts.   [x ≥ 3 and x < 7]
 step 3   That leaves 4 of them.
@@ -234,7 +234,7 @@ prompt   How many whole numbers from 0 to 16 make this true?
 display  equation "x ≥ 2 and x < 11" solve how many [inequality-compound and x ≥ 2 / x < 11 over 0..16]
 answer   exact 9/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 16.
 step 2   Keep only the numbers satisfying both parts.   [x ≥ 2 and x < 11]
 step 3   That leaves 9 of them.
@@ -246,7 +246,7 @@ prompt   How many whole numbers from 0 to 18 make this true?
 display  equation "x ≤ 1 or x > 17" solve how many [inequality-compound or x ≤ 1 / x > 17 over 0..18]
 answer   exact 3/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 18.
 step 2   Keep every number satisfying either part.   [x ≤ 1 or x > 17]
 step 3   That leaves 3 of them.
@@ -258,7 +258,7 @@ prompt   How many whole numbers from 0 to 20 make this true?
 display  equation "x ≤ 6 or x > 13" solve how many [inequality-compound or x ≤ 6 / x > 13 over 0..20]
 answer   exact 14/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 20.
 step 2   Keep every number satisfying either part.   [x ≤ 6 or x > 13]
 step 3   That leaves 14 of them.
@@ -270,7 +270,7 @@ prompt   How many whole numbers from 0 to 16 make this true?
 display  equation "x < 8 or x > 14" solve how many [inequality-compound or x < 8 / x > 14 over 0..16]
 answer   exact 10/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 16.
 step 2   Keep every number satisfying either part.   [x < 8 or x > 14]
 step 3   That leaves 10 of them.
@@ -282,7 +282,7 @@ prompt   How many whole numbers from 0 to 14 make this true?
 display  equation "x ≥ 3 and x < 7" solve how many [inequality-compound and x ≥ 3 / x < 7 over 0..14]
 answer   exact 4/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 14.
 step 2   Keep only the numbers satisfying both parts.   [x ≥ 3 and x < 7]
 step 3   That leaves 4 of them.
@@ -294,7 +294,7 @@ prompt   How many whole numbers from 0 to 20 make this true?
 display  equation "x ≥ 3 and x < 14" solve how many [inequality-compound and x ≥ 3 / x < 14 over 0..20]
 answer   exact 11/1
 input    keypad
-hint     Walk the range and keep the numbers the statement admits.
+hint     Try each whole number in the range and keep the ones that fit.
 step 1   Take the whole numbers from 0 to 20.
 step 2   Keep only the numbers satisfying both parts.   [x ≥ 3 and x < 14]
 step 3   That leaves 11 of them.

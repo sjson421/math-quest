@@ -1153,7 +1153,7 @@ display  story [basic-probability favourable 2 total 4] "A bag holds 4 marbles. 
 answer   exact 1/2 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [4]
 step 2   Count the red marbles.   [2]
 step 3   Write red over the total.   [2/4]
@@ -1213,7 +1213,7 @@ display  story [basic-probability favourable 3 total 6] "A bag holds 6 marbles. 
 answer   exact 1/2 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [6]
 step 2   Count the red marbles.   [3]
 step 3   Write red over the total.   [3/6]
@@ -1273,7 +1273,7 @@ display  story [basic-probability favourable 3 total 7] "A bag holds 7 marbles. 
 answer   exact 3/7 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [7]
 step 2   Count the red marbles.   [3]
 step 3   Write red over the total.   [3/7]
@@ -1333,7 +1333,7 @@ display  story [basic-probability favourable 4 total 9] "A bag holds 9 marbles. 
 answer   exact 4/9 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [9]
 step 2   Count the red marbles.   [4]
 step 3   Write red over the total.   [4/9]
@@ -1393,7 +1393,7 @@ display  story [basic-probability favourable 6 total 12] "A bag holds 12 marbles
 answer   exact 1/2 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [12]
 step 2   Count the red marbles.   [6]
 step 3   Write red over the total.   [6/12]

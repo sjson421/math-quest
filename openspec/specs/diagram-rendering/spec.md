@@ -109,7 +109,7 @@ small side and establish a whole-number scale factor greater than one. The two s
 SHALL differ. The declaration SHALL NOT carry the missing large side, answer, scale factor,
 authored label, formula, path, or second display.
 
-Every geometry diagram SHALL declare one unit from the closed set centimetres (`cm`), metres
+Every geometry diagram SHALL declare one unit from the closed set centimeters (`cm`), meters
 (`m`), inches (`in`), or feet (`ft`). Every measurement SHALL be a positive finite number.
 Cut-outs SHALL stay inside their outer rectangle; Pythagorean side roles SHALL be
 geometrically valid; and shape-specific invalid, extra, or incomplete data SHALL be rejected

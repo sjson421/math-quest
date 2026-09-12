@@ -728,7 +728,7 @@ const specialSolutions = defineSkill({
       // Text-valued at the choice's id: a choice submits its id, and `diagnose`
       // matches a text prediction against the raw entry by exact string.
       misconceptions: [{ value: { kind: 'text', value: predicted }, tag: `expected-${predicted}`, nudge }],
-      hint: 'Gather the x terms and see whether anything is left of them.',
+      hint: 'Gather the x terms on one side and see what is left.',
       solution: [
         {
           // Where the coefficients match, the x terms are gone and writing `0x`

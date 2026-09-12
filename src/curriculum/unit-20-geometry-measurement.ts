@@ -133,9 +133,9 @@ const unit = (context: BuildContext): LengthUnit => context.rng.pick(LENGTH_UNIT
 const unitName = (value: LengthUnit): string => {
   switch (value) {
     case 'cm':
-      return 'centimetres'
+      return 'centimeters'
     case 'm':
-      return 'metres'
+      return 'meters'
     case 'in':
       return 'inches'
     case 'ft':
@@ -560,7 +560,7 @@ const circumference = defineSkill({
           nudge: 'Circumference is not the circle area.',
         },
       ],
-      hint: 'Double the radius, then use circumference formula.',
+      hint: 'Double the radius, then use the circumference formula.',
       solution: [
         { text: 'Double the shown radius.', detail: `2 × ${data.radius} = ${diameter}` },
         { text: 'Multiply diameter by 3.14.', detail: `3.14 × ${diameter} = ${GED_PI * diameter}` },
@@ -597,7 +597,7 @@ const areaCircle = defineSkill({
           nudge: 'Area and circumference use different formulas.',
         },
       ],
-      hint: 'Halve the diameter to get radius, then square it.',
+      hint: 'Halve the diameter to get the radius, then square it.',
       solution: [
         { text: 'Halve the shown diameter.', detail: `${data.diameter} ÷ 2 = ${radius}` },
         { text: 'Square the radius.', detail: `${radius} × ${radius} = ${radius ** 2}` },
@@ -702,7 +702,7 @@ const volumeConePyramidSphere = defineSkill({
         display: { kind: 'diagram', diagram: data },
         answer: { kind: 'approx', value: answer, tolerance: ROUNDING_TOLERANCE },
         keypad: { allowDecimal: true },
-        hint: 'Find the circular base, multiply by height, then take one-third.',
+        hint: 'Find the circular base area, multiply by height, then take one-third.',
         solution: [
           { text: 'Square the radius.', detail: `${data.radius} × ${data.radius} = ${data.radius ** 2}` },
           { text: 'Multiply by 3.14 and height.', detail: `3.14 × ${data.radius ** 2} × ${data.height} = ${GED_PI * data.radius ** 2 * data.height}` },
@@ -720,7 +720,7 @@ const volumeConePyramidSphere = defineSkill({
         prompt: `Find the pyramid's volume in cubic ${unitName(data.unit)}.`,
         display: { kind: 'diagram', diagram: data },
         answer: intAnswer(answer),
-        hint: 'Find the rectangular base, multiply by height, then take one-third.',
+        hint: 'Find the rectangular base area, multiply by height, then take one-third.',
         solution: [
           { text: 'Find the rectangular base area.', detail: `${data.baseLength} × ${data.baseWidth} = ${baseArea}` },
           { text: 'Multiply base area by height.', detail: `${baseArea} × ${data.height} = ${product}` },

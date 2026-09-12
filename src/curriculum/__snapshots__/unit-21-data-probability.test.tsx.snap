@@ -7,7 +7,7 @@ display  story [basic-probability favourable 1 total 5] "A bag holds 5 marbles. 
 answer   exact 1/5 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [5]
 step 2   Count the red marbles.   [1]
 step 3   Write red over the total.   [1/5]
@@ -19,7 +19,7 @@ display  story [basic-probability favourable 2 total 6] "A bag holds 6 marbles. 
 answer   exact 1/3 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [6]
 step 2   Count the red marbles.   [2]
 step 3   Write red over the total.   [2/6]
@@ -31,7 +31,7 @@ display  story [basic-probability favourable 3 total 5] "A bag holds 5 marbles. 
 answer   exact 3/5 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [5]
 step 2   Count the red marbles.   [3]
 step 3   Write red over the total.   [3/5]
@@ -43,7 +43,7 @@ display  story [basic-probability favourable 1 total 4] "A bag holds 4 marbles. 
 answer   exact 1/4 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [4]
 step 2   Count the red marbles.   [1]
 step 3   Write red over the total.   [1/4]
@@ -55,7 +55,7 @@ display  story [basic-probability favourable 1 total 6] "A bag holds 6 marbles. 
 answer   exact 1/6 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [6]
 step 2   Count the red marbles.   [1]
 step 3   Write red over the total.   [1/6]
@@ -67,7 +67,7 @@ display  story [basic-probability favourable 1 total 7] "A bag holds 7 marbles. 
 answer   exact 1/7 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [7]
 step 2   Count the red marbles.   [1]
 step 3   Write red over the total.   [1/7]
@@ -79,7 +79,7 @@ display  story [basic-probability favourable 3 total 8] "A bag holds 8 marbles. 
 answer   exact 3/8 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [8]
 step 2   Count the red marbles.   [3]
 step 3   Write red over the total.   [3/8]
@@ -91,7 +91,7 @@ display  story [basic-probability favourable 3 total 6] "A bag holds 6 marbles. 
 answer   exact 1/2 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [6]
 step 2   Count the red marbles.   [3]
 step 3   Write red over the total.   [3/6]
@@ -103,7 +103,7 @@ display  story [basic-probability favourable 1 total 5] "A bag holds 5 marbles. 
 answer   exact 1/5 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [5]
 step 2   Count the red marbles.   [1]
 step 3   Write red over the total.   [1/5]
@@ -115,7 +115,7 @@ display  story [basic-probability favourable 1 total 8] "A bag holds 8 marbles. 
 answer   exact 1/8 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [8]
 step 2   Count the red marbles.   [1]
 step 3   Write red over the total.   [1/8]
@@ -127,7 +127,7 @@ display  story [basic-probability favourable 1 total 9] "A bag holds 9 marbles. 
 answer   exact 1/9 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [9]
 step 2   Count the red marbles.   [1]
 step 3   Write red over the total.   [1/9]
@@ -139,7 +139,7 @@ display  story [basic-probability favourable 3 total 10] "A bag holds 10 marbles
 answer   exact 3/10 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [10]
 step 2   Count the red marbles.   [3]
 step 3   Write red over the total.   [3/10]
@@ -151,7 +151,7 @@ display  story [basic-probability favourable 4 total 7] "A bag holds 7 marbles. 
 answer   exact 4/7 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [7]
 step 2   Count the red marbles.   [4]
 step 3   Write red over the total.   [4/7]
@@ -163,7 +163,7 @@ display  story [basic-probability favourable 2 total 6] "A bag holds 6 marbles. 
 answer   exact 1/3 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [6]
 step 2   Count the red marbles.   [2]
 step 3   Write red over the total.   [2/6]
@@ -175,7 +175,7 @@ display  story [basic-probability favourable 2 total 10] "A bag holds 10 marbles
 answer   exact 1/5 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [10]
 step 2   Count the red marbles.   [2]
 step 3   Write red over the total.   [2/10]
@@ -187,7 +187,7 @@ display  story [basic-probability favourable 1 total 11] "A bag holds 11 marbles
 answer   exact 1/11 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [11]
 step 2   Count the red marbles.   [1]
 step 3   Write red over the total.   [1/11]
@@ -199,7 +199,7 @@ display  story [basic-probability favourable 4 total 13] "A bag holds 13 marbles
 answer   exact 4/13 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [13]
 step 2   Count the red marbles.   [4]
 step 3   Write red over the total.   [4/13]
@@ -211,7 +211,7 @@ display  story [basic-probability favourable 6 total 10] "A bag holds 10 marbles
 answer   exact 3/5 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [10]
 step 2   Count the red marbles.   [6]
 step 3   Write red over the total.   [6/10]
@@ -223,7 +223,7 @@ display  story [basic-probability favourable 2 total 8] "A bag holds 8 marbles. 
 answer   exact 1/4 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [8]
 step 2   Count the red marbles.   [2]
 step 3   Write red over the total.   [2/8]
@@ -235,7 +235,7 @@ display  story [basic-probability favourable 2 total 13] "A bag holds 13 marbles
 answer   exact 2/13 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [13]
 step 2   Count the red marbles.   [2]
 step 3   Write red over the total.   [2/13]
@@ -247,7 +247,7 @@ display  story [basic-probability favourable 1 total 14] "A bag holds 14 marbles
 answer   exact 1/14 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [14]
 step 2   Count the red marbles.   [1]
 step 3   Write red over the total.   [1/14]
@@ -259,7 +259,7 @@ display  story [basic-probability favourable 5 total 16] "A bag holds 16 marbles
 answer   exact 5/16 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [16]
 step 2   Count the red marbles.   [5]
 step 3   Write red over the total.   [5/16]
@@ -271,7 +271,7 @@ display  story [basic-probability favourable 7 total 12] "A bag holds 12 marbles
 answer   exact 7/12 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [12]
 step 2   Count the red marbles.   [7]
 step 3   Write red over the total.   [7/12]
@@ -283,7 +283,7 @@ display  story [basic-probability favourable 3 total 10] "A bag holds 10 marbles
 answer   exact 3/10 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [10]
 step 2   Count the red marbles.   [3]
 step 3   Write red over the total.   [3/10]
@@ -295,7 +295,7 @@ display  story [basic-probability favourable 3 total 16] "A bag holds 16 marbles
 answer   exact 3/16 (fraction)
 input    keypad
 keypad   allowFraction=true
-hint     Compare the favourable count with the total.
+hint     Compare the red marble count with the total.
 step 1   Count every marble in the bag.   [16]
 step 2   Count the red marbles.   [3]
 step 3   Write red over the total.   [3/16]
@@ -1956,7 +1956,7 @@ step 3   Read the value at their intersection.   [48]"
 
 exports[`Unit 21 recorded output: read-scatterplot > matches authored sample output 1`] = `
 "--- read-scatterplot · seed 1 · difficulty 1
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..5/1 y-scale 0..10/2 series ["Learners": [{"x":0,"y":4},{"x":1,"y":5},{"x":2,"y":4},{"x":3,"y":6},{"x":4,"y":8}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 5 by 1, y-axis Score from 0 to 10 by 2, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -1968,7 +1968,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 12345 · difficulty 1
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..5/1 y-scale 0..10/2 series ["Learners": [{"x":0,"y":4},{"x":1,"y":4},{"x":2,"y":5},{"x":3,"y":5},{"x":4,"y":8}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 5 by 1, y-axis Score from 0 to 10 by 2, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -1980,7 +1980,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 67890 · difficulty 1
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..4/1 y-scale 0..10/2 series ["Learners": [{"x":0,"y":6},{"x":1,"y":4},{"x":2,"y":5},{"x":3,"y":2}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 4 by 1, y-axis Score from 0 to 10 by 2, series Learners" [scatter-trend trend-line true]
 answer   choice decreasing
 input    choice
@@ -1992,7 +1992,7 @@ step 1   Look at the trend line.   [Decreasing]
 step 2   Choose decreasing for its direction.   [Decreasing]
 
 --- read-scatterplot · seed 424242 · difficulty 1
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..4/1 y-scale 0..10/2 series ["Learners": [{"x":0,"y":2},{"x":1,"y":3},{"x":2,"y":4},{"x":3,"y":4}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 4 by 1, y-axis Score from 0 to 10 by 2, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2004,7 +2004,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 987654321 · difficulty 1
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..5/1 y-scale 0..10/2 series ["Learners": [{"x":0,"y":3},{"x":1,"y":3},{"x":2,"y":4},{"x":3,"y":5},{"x":4,"y":6}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 5 by 1, y-axis Score from 0 to 10 by 2, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2016,7 +2016,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 1 · difficulty 2
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..6/1 y-scale 0..20/4 series ["Learners": [{"x":0,"y":6},{"x":1,"y":8},{"x":2,"y":8},{"x":3,"y":11},{"x":4,"y":14},{"x":5,"y":15}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 6 by 1, y-axis Score from 0 to 20 by 4, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2028,7 +2028,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 12345 · difficulty 2
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..6/1 y-scale 0..20/4 series ["Learners": [{"x":0,"y":6},{"x":1,"y":7},{"x":2,"y":9},{"x":3,"y":10},{"x":4,"y":14},{"x":5,"y":16}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 6 by 1, y-axis Score from 0 to 20 by 4, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2040,7 +2040,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 67890 · difficulty 2
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..5/1 y-scale 0..20/4 series ["Learners": [{"x":0,"y":13},{"x":1,"y":10},{"x":2,"y":10},{"x":3,"y":6},{"x":4,"y":5}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 5 by 1, y-axis Score from 0 to 20 by 4, series Learners" [scatter-trend trend-line true]
 answer   choice decreasing
 input    choice
@@ -2052,7 +2052,7 @@ step 1   Look at the trend line.   [Decreasing]
 step 2   Choose decreasing for its direction.   [Decreasing]
 
 --- read-scatterplot · seed 424242 · difficulty 2
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..5/1 y-scale 0..20/4 series ["Learners": [{"x":0,"y":3},{"x":1,"y":5},{"x":2,"y":7},{"x":3,"y":8},{"x":4,"y":11}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 5 by 1, y-axis Score from 0 to 20 by 4, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2064,7 +2064,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 987654321 · difficulty 2
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..6/1 y-scale 0..20/4 series ["Learners": [{"x":0,"y":3},{"x":1,"y":4},{"x":2,"y":6},{"x":3,"y":8},{"x":4,"y":10},{"x":5,"y":11}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 6 by 1, y-axis Score from 0 to 20 by 4, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2076,7 +2076,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 1 · difficulty 3
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..7/1 y-scale 0..30/6 series ["Learners": [{"x":0,"y":10},{"x":1,"y":12},{"x":2,"y":12},{"x":3,"y":15},{"x":4,"y":18},{"x":5,"y":19},{"x":6,"y":22}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 7 by 1, y-axis Score from 0 to 30 by 6, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2088,7 +2088,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 12345 · difficulty 3
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..7/1 y-scale 0..30/6 series ["Learners": [{"x":0,"y":10},{"x":1,"y":11},{"x":2,"y":13},{"x":3,"y":14},{"x":4,"y":18},{"x":5,"y":20},{"x":6,"y":22}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 7 by 1, y-axis Score from 0 to 30 by 6, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2100,7 +2100,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 67890 · difficulty 3
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..6/1 y-scale 0..30/6 series ["Learners": [{"x":0,"y":21},{"x":1,"y":17},{"x":2,"y":16},{"x":3,"y":11},{"x":4,"y":9},{"x":5,"y":7}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 6 by 1, y-axis Score from 0 to 30 by 6, series Learners" [scatter-trend trend-line true]
 answer   choice decreasing
 input    choice
@@ -2112,7 +2112,7 @@ step 1   Look at the trend line.   [Decreasing]
 step 2   Choose decreasing for its direction.   [Decreasing]
 
 --- read-scatterplot · seed 424242 · difficulty 3
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..6/1 y-scale 0..30/6 series ["Learners": [{"x":0,"y":4},{"x":1,"y":7},{"x":2,"y":10},{"x":3,"y":12},{"x":4,"y":16},{"x":5,"y":20}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 6 by 1, y-axis Score from 0 to 30 by 6, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2124,7 +2124,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 987654321 · difficulty 3
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..7/1 y-scale 0..30/6 series ["Learners": [{"x":0,"y":3},{"x":1,"y":4},{"x":2,"y":6},{"x":3,"y":8},{"x":4,"y":10},{"x":5,"y":11},{"x":6,"y":14}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 7 by 1, y-axis Score from 0 to 30 by 6, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2136,7 +2136,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 1 · difficulty 4
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..8/1 y-scale 0..40/8 series ["Learners": [{"x":0,"y":11},{"x":1,"y":14},{"x":2,"y":15},{"x":3,"y":19},{"x":4,"y":23},{"x":5,"y":25},{"x":6,"y":29},{"x":7,"y":31}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 8 by 1, y-axis Score from 0 to 40 by 8, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2148,7 +2148,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 12345 · difficulty 4
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..8/1 y-scale 0..40/8 series ["Learners": [{"x":0,"y":10},{"x":1,"y":12},{"x":2,"y":15},{"x":3,"y":17},{"x":4,"y":22},{"x":5,"y":25},{"x":6,"y":28},{"x":7,"y":30}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 8 by 1, y-axis Score from 0 to 40 by 8, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2160,7 +2160,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 67890 · difficulty 4
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..7/1 y-scale 0..40/8 series ["Learners": [{"x":0,"y":30},{"x":1,"y":25},{"x":2,"y":23},{"x":3,"y":17},{"x":4,"y":14},{"x":5,"y":11},{"x":6,"y":6}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 7 by 1, y-axis Score from 0 to 40 by 8, series Learners" [scatter-trend trend-line true]
 answer   choice decreasing
 input    choice
@@ -2172,7 +2172,7 @@ step 1   Look at the trend line.   [Decreasing]
 step 2   Choose decreasing for its direction.   [Decreasing]
 
 --- read-scatterplot · seed 424242 · difficulty 4
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..7/1 y-scale 0..40/8 series ["Learners": [{"x":0,"y":4},{"x":1,"y":8},{"x":2,"y":12},{"x":3,"y":15},{"x":4,"y":20},{"x":5,"y":25},{"x":6,"y":29}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 7 by 1, y-axis Score from 0 to 40 by 8, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2184,7 +2184,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 987654321 · difficulty 4
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..8/1 y-scale 0..40/8 series ["Learners": [{"x":0,"y":3},{"x":1,"y":5},{"x":2,"y":8},{"x":3,"y":11},{"x":4,"y":14},{"x":5,"y":16},{"x":6,"y":20},{"x":7,"y":24}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 8 by 1, y-axis Score from 0 to 40 by 8, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2196,7 +2196,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 1 · difficulty 5
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..9/1 y-scale 0..50/10 series ["Learners": [{"x":0,"y":10},{"x":1,"y":14},{"x":2,"y":16},{"x":3,"y":21},{"x":4,"y":26},{"x":5,"y":29},{"x":6,"y":34},{"x":7,"y":37},{"x":8,"y":41}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 9 by 1, y-axis Score from 0 to 50 by 10, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2208,7 +2208,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 12345 · difficulty 5
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..10/1 y-scale 0..50/10 series ["Learners": [{"x":0,"y":12},{"x":1,"y":14},{"x":2,"y":17},{"x":3,"y":19},{"x":4,"y":24},{"x":5,"y":27},{"x":6,"y":30},{"x":7,"y":32},{"x":8,"y":36},{"x":9,"y":39}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 10 by 1, y-axis Score from 0 to 50 by 10, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2220,7 +2220,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 67890 · difficulty 5
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..9/1 y-scale 0..50/10 series ["Learners": [{"x":0,"y":39},{"x":1,"y":34},{"x":2,"y":32},{"x":3,"y":26},{"x":4,"y":23},{"x":5,"y":20},{"x":6,"y":15},{"x":7,"y":12},{"x":8,"y":8}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 9 by 1, y-axis Score from 0 to 50 by 10, series Learners" [scatter-trend trend-line true]
 answer   choice decreasing
 input    choice
@@ -2232,7 +2232,7 @@ step 1   Look at the trend line.   [Decreasing]
 step 2   Choose decreasing for its direction.   [Decreasing]
 
 --- read-scatterplot · seed 424242 · difficulty 5
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..8/1 y-scale 0..50/10 series ["Learners": [{"x":0,"y":5},{"x":1,"y":9},{"x":2,"y":13},{"x":3,"y":16},{"x":4,"y":21},{"x":5,"y":26},{"x":6,"y":30},{"x":7,"y":33}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 8 by 1, y-axis Score from 0 to 50 by 10, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2244,7 +2244,7 @@ step 1   Look at the trend line.   [Increasing]
 step 2   Choose increasing for its direction.   [Increasing]
 
 --- read-scatterplot · seed 987654321 · difficulty 5
-prompt   What is the overall trend in these paired data?
+prompt   What is the overall trend in these points?
 display  chart scatter "Study time and scores" x-label "Hours" y-label "Score" x-scale 0..10/1 y-scale 0..50/10 series ["Learners": [{"x":0,"y":3},{"x":1,"y":5},{"x":2,"y":8},{"x":3,"y":11},{"x":4,"y":14},{"x":5,"y":16},{"x":6,"y":20},{"x":7,"y":24},{"x":8,"y":27},{"x":9,"y":30}] trend=true] "Scatter chart "Study time and scores", x-axis Hours from 0 to 10 by 1, y-axis Score from 0 to 50 by 10, series Learners" [scatter-trend trend-line true]
 answer   choice increasing
 input    choice
@@ -2262,298 +2262,298 @@ prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":34,"weight":1},{"value":40,"weight":2},{"value":46,"weight":3}]] "Values with weights: 34 (weight 1), 40 (weight 2), 46 (weight 3)"
 answer   exact 42/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [34 × 1 + 40 × 2 + 46 × 3]
 step 2   Add the weighted products.   [252]
 step 3   Add all the weights.   [6]
 step 4   Divide weighted total by total weight.   [252 ÷ 6 = 42]
-miss     ignored-weights = 40   Use each weight before dividing by total weight.
+miss     ignored-weights = 40   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 12345 · difficulty 1
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":40,"weight":1},{"value":46,"weight":2},{"value":52,"weight":3}]] "Values with weights: 40 (weight 1), 46 (weight 2), 52 (weight 3)"
 answer   exact 48/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [40 × 1 + 46 × 2 + 52 × 3]
 step 2   Add the weighted products.   [288]
 step 3   Add all the weights.   [6]
 step 4   Divide weighted total by total weight.   [288 ÷ 6 = 48]
-miss     ignored-weights = 46   Use each weight before dividing by total weight.
+miss     ignored-weights = 46   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 67890 · difficulty 1
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":58,"weight":3},{"value":46,"weight":1},{"value":52,"weight":2}]] "Values with weights: 58 (weight 3), 46 (weight 1), 52 (weight 2)"
 answer   exact 54/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [58 × 3 + 46 × 1 + 52 × 2]
 step 2   Add the weighted products.   [324]
 step 3   Add all the weights.   [6]
 step 4   Divide weighted total by total weight.   [324 ÷ 6 = 54]
-miss     ignored-weights = 52   Use each weight before dividing by total weight.
+miss     ignored-weights = 52   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 424242 · difficulty 1
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":50,"weight":3},{"value":38,"weight":1},{"value":44,"weight":2}]] "Values with weights: 50 (weight 3), 38 (weight 1), 44 (weight 2)"
 answer   exact 46/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [50 × 3 + 38 × 1 + 44 × 2]
 step 2   Add the weighted products.   [276]
 step 3   Add all the weights.   [6]
 step 4   Divide weighted total by total weight.   [276 ÷ 6 = 46]
-miss     ignored-weights = 44   Use each weight before dividing by total weight.
+miss     ignored-weights = 44   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 987654321 · difficulty 1
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":36,"weight":1},{"value":42,"weight":2},{"value":48,"weight":3}]] "Values with weights: 36 (weight 1), 42 (weight 2), 48 (weight 3)"
 answer   exact 44/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [36 × 1 + 42 × 2 + 48 × 3]
 step 2   Add the weighted products.   [264]
 step 3   Add all the weights.   [6]
 step 4   Divide weighted total by total weight.   [264 ÷ 6 = 44]
-miss     ignored-weights = 42   Use each weight before dividing by total weight.
+miss     ignored-weights = 42   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 1 · difficulty 2
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":56,"weight":4},{"value":42,"weight":2},{"value":70,"weight":6},{"value":56,"weight":2}]] "Values with weights: 56 (weight 4), 42 (weight 2), 70 (weight 6), 56 (weight 2)"
 answer   exact 60/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [56 × 4 + 42 × 2 + 70 × 6 + 56 × 2]
 step 2   Add the weighted products.   [840]
 step 3   Add all the weights.   [14]
 step 4   Divide weighted total by total weight.   [840 ÷ 14 = 60]
-miss     ignored-weights = 56   Use each weight before dividing by total weight.
+miss     ignored-weights = 56   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 12345 · difficulty 2
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":71,"weight":3},{"value":57,"weight":1},{"value":64,"weight":2},{"value":64,"weight":1}]] "Values with weights: 71 (weight 3), 57 (weight 1), 64 (weight 2), 64 (weight 1)"
 answer   exact 66/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [71 × 3 + 57 × 1 + 64 × 2 + 64 × 1]
 step 2   Add the weighted products.   [462]
 step 3   Add all the weights.   [7]
 step 4   Divide weighted total by total weight.   [462 ÷ 7 = 66]
-miss     ignored-weights = 64   Use each weight before dividing by total weight.
+miss     ignored-weights = 64   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 67890 · difficulty 2
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":77,"weight":3},{"value":65,"weight":1},{"value":71,"weight":2}]] "Values with weights: 77 (weight 3), 65 (weight 1), 71 (weight 2)"
 answer   exact 73/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [77 × 3 + 65 × 1 + 71 × 2]
 step 2   Add the weighted products.   [438]
 step 3   Add all the weights.   [6]
 step 4   Divide weighted total by total weight.   [438 ÷ 6 = 73]
-miss     ignored-weights = 71   Use each weight before dividing by total weight.
+miss     ignored-weights = 71   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 424242 · difficulty 2
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":68,"weight":3},{"value":56,"weight":1},{"value":62,"weight":2}]] "Values with weights: 68 (weight 3), 56 (weight 1), 62 (weight 2)"
 answer   exact 64/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [68 × 3 + 56 × 1 + 62 × 2]
 step 2   Add the weighted products.   [384]
 step 3   Add all the weights.   [6]
 step 4   Divide weighted total by total weight.   [384 ÷ 6 = 64]
-miss     ignored-weights = 62   Use each weight before dividing by total weight.
+miss     ignored-weights = 62   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 987654321 · difficulty 2
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":66,"weight":3},{"value":52,"weight":1},{"value":59,"weight":2},{"value":59,"weight":1}]] "Values with weights: 66 (weight 3), 52 (weight 1), 59 (weight 2), 59 (weight 1)"
 answer   exact 61/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [66 × 3 + 52 × 1 + 59 × 2 + 59 × 1]
 step 2   Add the weighted products.   [427]
 step 3   Add all the weights.   [7]
 step 4   Divide weighted total by total weight.   [427 ÷ 7 = 61]
-miss     ignored-weights = 59   Use each weight before dividing by total weight.
+miss     ignored-weights = 59   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 1 · difficulty 3
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":76,"weight":6},{"value":55,"weight":3},{"value":97,"weight":9},{"value":76,"weight":3}]] "Values with weights: 76 (weight 6), 55 (weight 3), 97 (weight 9), 76 (weight 3)"
 answer   exact 82/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [76 × 6 + 55 × 3 + 97 × 9 + 76 × 3]
 step 2   Add the weighted products.   [1722]
 step 3   Add all the weights.   [21]
 step 4   Divide weighted total by total weight.   [1722 ÷ 21 = 82]
-miss     ignored-weights = 76   Use each weight before dividing by total weight.
+miss     ignored-weights = 76   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 12345 · difficulty 3
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":100,"weight":6},{"value":72,"weight":2},{"value":86,"weight":4},{"value":86,"weight":2}]] "Values with weights: 100 (weight 6), 72 (weight 2), 86 (weight 4), 86 (weight 2)"
 answer   exact 90/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [100 × 6 + 72 × 2 + 86 × 4 + 86 × 2]
 step 2   Add the weighted products.   [1260]
 step 3   Add all the weights.   [14]
 step 4   Divide weighted total by total weight.   [1260 ÷ 14 = 90]
-miss     ignored-weights = 86   Use each weight before dividing by total weight.
+miss     ignored-weights = 86   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 67890 · difficulty 3
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":110,"weight":6},{"value":96,"weight":2},{"value":82,"weight":2},{"value":96,"weight":4}]] "Values with weights: 110 (weight 6), 96 (weight 2), 82 (weight 2), 96 (weight 4)"
 answer   exact 100/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [110 × 6 + 96 × 2 + 82 × 2 + 96 × 4]
 step 2   Add the weighted products.   [1400]
 step 3   Add all the weights.   [14]
 step 4   Divide weighted total by total weight.   [1400 ÷ 14 = 100]
-miss     ignored-weights = 96   Use each weight before dividing by total weight.
+miss     ignored-weights = 96   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 424242 · difficulty 3
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":70,"weight":2},{"value":84,"weight":2},{"value":84,"weight":4},{"value":98,"weight":6}]] "Values with weights: 70 (weight 2), 84 (weight 2), 84 (weight 4), 98 (weight 6)"
 answer   exact 88/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [70 × 2 + 84 × 2 + 84 × 4 + 98 × 6]
 step 2   Add the weighted products.   [1232]
 step 3   Add all the weights.   [14]
 step 4   Divide weighted total by total weight.   [1232 ÷ 14 = 88]
-miss     ignored-weights = 84   Use each weight before dividing by total weight.
+miss     ignored-weights = 84   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 987654321 · difficulty 3
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":94,"weight":6},{"value":66,"weight":2},{"value":80,"weight":4},{"value":80,"weight":2}]] "Values with weights: 94 (weight 6), 66 (weight 2), 80 (weight 4), 80 (weight 2)"
 answer   exact 84/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [94 × 6 + 66 × 2 + 80 × 4 + 80 × 2]
 step 2   Add the weighted products.   [1176]
 step 3   Add all the weights.   [14]
 step 4   Divide weighted total by total weight.   [1176 ÷ 14 = 84]
-miss     ignored-weights = 80   Use each weight before dividing by total weight.
+miss     ignored-weights = 80   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 1 · difficulty 4
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":132,"weight":12},{"value":100,"weight":8},{"value":68,"weight":4},{"value":100,"weight":4},{"value":100,"weight":4}]] "Values with weights: 132 (weight 12), 100 (weight 8), 68 (weight 4), 100 (weight 4), 100 (weight 4)"
 answer   exact 108/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [132 × 12 + 100 × 8 + 68 × 4 + 100 × 4 + 100 × 4]
 step 2   Add the weighted products.   [3456]
 step 3   Add all the weights.   [32]
 step 4   Divide weighted total by total weight.   [3456 ÷ 32 = 108]
-miss     ignored-weights = 100   Use each weight before dividing by total weight.
+miss     ignored-weights = 100   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 12345 · difficulty 4
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":113,"weight":3},{"value":89,"weight":3},{"value":113,"weight":6},{"value":137,"weight":9},{"value":113,"weight":3}]] "Values with weights: 113 (weight 3), 89 (weight 3), 113 (weight 6), 137 (weight 9), 113 (weight 3)"
 answer   exact 119/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [113 × 3 + 89 × 3 + 113 × 6 + 137 × 9 + 113 × 3]
 step 2   Add the weighted products.   [2856]
 step 3   Add all the weights.   [24]
 step 4   Divide weighted total by total weight.   [2856 ÷ 24 = 119]
-miss     ignored-weights = 113   Use each weight before dividing by total weight.
+miss     ignored-weights = 113   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 67890 · difficulty 4
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":147,"weight":9},{"value":126,"weight":3},{"value":105,"weight":3},{"value":126,"weight":6}]] "Values with weights: 147 (weight 9), 126 (weight 3), 105 (weight 3), 126 (weight 6)"
 answer   exact 132/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [147 × 9 + 126 × 3 + 105 × 3 + 126 × 6]
 step 2   Add the weighted products.   [2772]
 step 3   Add all the weights.   [21]
 step 4   Divide weighted total by total weight.   [2772 ÷ 21 = 132]
-miss     ignored-weights = 126   Use each weight before dividing by total weight.
+miss     ignored-weights = 126   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 424242 · difficulty 4
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":89,"weight":3},{"value":110,"weight":3},{"value":110,"weight":6},{"value":131,"weight":9}]] "Values with weights: 89 (weight 3), 110 (weight 3), 110 (weight 6), 131 (weight 9)"
 answer   exact 116/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [89 × 3 + 110 × 3 + 110 × 6 + 131 × 9]
 step 2   Add the weighted products.   [2436]
 step 3   Add all the weights.   [21]
 step 4   Divide weighted total by total weight.   [2436 ÷ 21 = 116]
-miss     ignored-weights = 110   Use each weight before dividing by total weight.
+miss     ignored-weights = 110   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 987654321 · difficulty 4
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":106,"weight":3},{"value":82,"weight":3},{"value":106,"weight":6},{"value":130,"weight":9},{"value":106,"weight":3}]] "Values with weights: 106 (weight 3), 82 (weight 3), 106 (weight 6), 130 (weight 9), 106 (weight 3)"
 answer   exact 112/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [106 × 3 + 82 × 3 + 106 × 6 + 130 × 9 + 106 × 3]
 step 2   Add the weighted products.   [2688]
 step 3   Add all the weights.   [24]
 step 4   Divide weighted total by total weight.   [2688 ÷ 24 = 112]
-miss     ignored-weights = 106   Use each weight before dividing by total weight.
+miss     ignored-weights = 106   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 1 · difficulty 5
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":172,"weight":15},{"value":132,"weight":10},{"value":92,"weight":5},{"value":132,"weight":5},{"value":132,"weight":5}]] "Values with weights: 172 (weight 15), 132 (weight 10), 92 (weight 5), 132 (weight 5), 132 (weight 5)"
 answer   exact 142/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [172 × 15 + 132 × 10 + 92 × 5 + 132 × 5 + 132 × 5]
 step 2   Add the weighted products.   [5680]
 step 3   Add all the weights.   [40]
 step 4   Divide weighted total by total weight.   [5680 ÷ 40 = 142]
-miss     ignored-weights = 132   Use each weight before dividing by total weight.
+miss     ignored-weights = 132   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 12345 · difficulty 5
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":150,"weight":4},{"value":118,"weight":4},{"value":150,"weight":8},{"value":182,"weight":12},{"value":150,"weight":4}]] "Values with weights: 150 (weight 4), 118 (weight 4), 150 (weight 8), 182 (weight 12), 150 (weight 4)"
 answer   exact 158/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [150 × 4 + 118 × 4 + 150 × 8 + 182 × 12 + 150 × 4]
 step 2   Add the weighted products.   [5056]
 step 3   Add all the weights.   [32]
 step 4   Divide weighted total by total weight.   [5056 ÷ 32 = 158]
-miss     ignored-weights = 150   Use each weight before dividing by total weight.
+miss     ignored-weights = 150   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 67890 · difficulty 5
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":166,"weight":4},{"value":166,"weight":4},{"value":198,"weight":12},{"value":134,"weight":4},{"value":166,"weight":8}]] "Values with weights: 166 (weight 4), 166 (weight 4), 198 (weight 12), 134 (weight 4), 166 (weight 8)"
 answer   exact 174/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [166 × 4 + 166 × 4 + 198 × 12 + 134 × 4 + 166 × 8]
 step 2   Add the weighted products.   [5568]
 step 3   Add all the weights.   [32]
 step 4   Divide weighted total by total weight.   [5568 ÷ 32 = 174]
-miss     ignored-weights = 166   Use each weight before dividing by total weight.
+miss     ignored-weights = 166   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 424242 · difficulty 5
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":177,"weight":12},{"value":113,"weight":4},{"value":145,"weight":4},{"value":145,"weight":8},{"value":145,"weight":4}]] "Values with weights: 177 (weight 12), 113 (weight 4), 145 (weight 4), 145 (weight 8), 145 (weight 4)"
 answer   exact 153/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [177 × 12 + 113 × 4 + 145 × 4 + 145 × 8 + 145 × 4]
 step 2   Add the weighted products.   [4896]
 step 3   Add all the weights.   [32]
 step 4   Divide weighted total by total weight.   [4896 ÷ 32 = 153]
-miss     ignored-weights = 145   Use each weight before dividing by total weight.
+miss     ignored-weights = 145   That averages the values and leaves out their weights.
 
 --- weighted-mean · seed 987654321 · difficulty 5
 prompt   What is the weighted mean of these values?
 display  story [weighted-mean entries [{"value":139,"weight":4},{"value":107,"weight":4},{"value":139,"weight":8},{"value":171,"weight":12},{"value":139,"weight":4}]] "Values with weights: 139 (weight 4), 107 (weight 4), 139 (weight 8), 171 (weight 12), 139 (weight 4)"
 answer   exact 147/1
 input    keypad
-hint     Use each weight before dividing by total weight.
+hint     Multiply each value by its weight, then divide by the total weight.
 step 1   Multiply each value by its weight.   [139 × 4 + 107 × 4 + 139 × 8 + 171 × 12 + 139 × 4]
 step 2   Add the weighted products.   [4704]
 step 3   Add all the weights.   [32]
 step 4   Divide weighted total by total weight.   [4704 ÷ 32 = 147]
-miss     ignored-weights = 139   Use each weight before dividing by total weight."
+miss     ignored-weights = 139   That averages the values and leaves out their weights."
 `;

@@ -134,10 +134,10 @@ export const SUBTRACTION_FRAMES: Frame[] = [
     operator: '−',
     prompt: 'How many jars are left?',
     text: ({ a, b, distractor }) =>
-      `A stall brings ${a} jars and sells ${b} of them. A neighbouring stall brings ${distractor}. How many of the first stall's jars are left?`,
+      `A stall brings ${a} jars and sells ${b} of them. A neighboring stall brings ${distractor}. How many of the first stall's jars are left?`,
     hint: ({ a, b }) => `Take the ${b} sold off the ${a} brought.`,
     solution: ({ a, b, distractor }, answer) =>
-      steps(a, b, answer, `The ${distractor} are the neighbour's, not this stall's.`),
+      steps(a, b, answer, `The ${distractor} are the neighbor's, not this stall's.`),
     nudges: {
       wrongOperation: () => 'That adds them together. A jar sold leaves the stall.',
       distractorPair: ({ distractor }) => `The ${distractor} belong to the next stall.`,

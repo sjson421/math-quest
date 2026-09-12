@@ -29,7 +29,7 @@ require the exact numeric area through the existing keypad.
 
 - **WHEN** the figure has length 8 m and width 3 m
 - **THEN** the exact numeric answer is 24
-- **AND** the prompt and worked solution identify the result as square metres without requiring
+- **AND** the prompt and worked solution identify the result as square meters without requiring
   the learner to type the unit
 
 ### Requirement: Triangle area keeps the one-half factor
@@ -200,7 +200,7 @@ numeric volume through the existing keypad.
 #### Scenario: Base area is multiplied by prism height
 
 - **WHEN** a prism shows length 6 cm, width 4 cm, and height 5 cm
-- **THEN** its base area is 24 square centimetres
+- **THEN** its base area is 24 square centimeters
 - **AND** its exact volume answer is 120
 
 ### Requirement: Cylinder volume uses the shared pi policy

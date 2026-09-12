@@ -366,9 +366,9 @@ const weightedMean = defineSkill({
       misconceptions: [{
         value: ordinaryMean,
         tag: 'ignored-weights',
-        nudge: 'Use each weight before dividing by total weight.',
+        nudge: 'That averages the values and leaves out their weights.',
       }],
-      hint: 'Use each weight before dividing by total weight.',
+      hint: 'Multiply each value by its weight, then divide by the total weight.',
       solution: [
         {
           text: 'Multiply each value by its weight.',
@@ -533,7 +533,7 @@ const readScatterplot = defineSkill({
     const statistics: StatisticsData = { operation: 'scatter-trend' }
 
     return {
-      prompt: 'What is the overall trend in these paired data?',
+      prompt: 'What is the overall trend in these points?',
       display: { kind: 'chart', chart: data.chart, statistics },
       answer: { kind: 'choice', id: data.trend },
       inputMode: 'choice',
@@ -597,7 +597,7 @@ const basicProbability = defineSkill({
           nudge: 'Compare red marbles with every marble, not just the rest.',
         },
       ],
-      hint: 'Compare the favourable count with the total.',
+      hint: 'Compare the red marble count with the total.',
       solution: [
         { text: 'Count every marble in the bag.', detail: `${total}` },
         { text: 'Count the red marbles.', detail: `${favourable}` },

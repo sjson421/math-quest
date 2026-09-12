@@ -665,7 +665,7 @@ function expectedStatisticsProbability(
 const chartStatisticsPrompt = (category: string, series: string): string =>
   `What is the ${series} value for ${category}?`
 
-const scatterStatisticsPrompt = 'What is the overall trend in these paired data?'
+const scatterStatisticsPrompt = 'What is the overall trend in these points?'
 
 const trendLabel = (covariance: bigint): string =>
   covariance > 0n ? 'Increasing' : covariance < 0n ? 'Decreasing' : 'Flat'
@@ -871,9 +871,9 @@ type ExpectedGeometry = {
 const geometryUnitName = (unit: GeometryDiagram['unit']): string => {
   switch (unit) {
     case 'cm':
-      return 'centimetres'
+      return 'centimeters'
     case 'm':
-      return 'metres'
+      return 'meters'
     case 'in':
       return 'inches'
     case 'ft':
@@ -4759,7 +4759,7 @@ describe('geometry answer verification', () => {
     const problem = geometryProblem(
       { kind: 'geometry', operation: 'area-triangle', base: 8, height: 5, unit: 'cm' },
       intAnswer(20),
-      'Find the area of this triangle in square centimetres.',
+      'Find the area of this triangle in square centimeters.',
     )
 
     expect(answerMismatch(problem)).toBeUndefined()
@@ -4791,7 +4791,7 @@ describe('geometry answer verification', () => {
       intAnswer(22),
       'Find the perimeter of this rectangle.',
     )
-    const wrongPrompt = { ...problem, prompt: 'Find the area of this rectangle in square centimetres.' }
+    const wrongPrompt = { ...problem, prompt: 'Find the area of this rectangle in square centimeters.' }
     expect(() => recompute(wrongPrompt)).toThrow('geometry prompt disagrees with its data')
 
     const wrongOperation = structuredClone(problem)
@@ -4814,7 +4814,7 @@ describe('geometry answer verification', () => {
         unit: 'cm',
       },
       intAnswer(6),
-      'Find the missing side of the larger rectangle in centimetres.',
+      'Find the missing side of the larger rectangle in centimeters.',
     )
 
     expect(answerMismatch(problem)).toBeUndefined()
@@ -5255,7 +5255,7 @@ describe('recompute', () => {
     it('derives scatter direction from exact covariance and preserves choice identity', () => {
       const problem: Problem = {
         skillId: 'synthetic-scatter-value',
-        prompt: 'What is the overall trend in these paired data?',
+        prompt: 'What is the overall trend in these points?',
         display: {
           kind: 'chart',
           chart: {

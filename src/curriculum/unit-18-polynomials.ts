@@ -504,7 +504,7 @@ const SQUARE_ROOT_BAND: Ladder = {
 const differenceOfSquares = defineSkill({
   id: 'difference-of-squares',
   name: 'Difference of Squares',
-  blurb: 'A pattern worth recognising',
+  blurb: 'A pattern worth recognizing',
   teachingLine: 'Two squares subtracted factor into matching brackets with opposite signs.',
   build(context: BuildContext) {
     const [min, max] = band(context.difficulty, SQUARE_ROOT_BAND)

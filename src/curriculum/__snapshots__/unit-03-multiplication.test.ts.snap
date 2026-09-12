@@ -1299,7 +1299,7 @@ miss     distractor-pair = 24   Remote days, 6, do not replace the weekly trip c
 miss     answered-part = 4   That is the number of weeks. Each has 4 trips.
 
 --- mult-words · seed 424242 · difficulty 1
-prompt   How many tickets were sold?
+prompt   How many tickets filled these rows?
 display  story [3 × 3] "A cinema fills 3 rows with 3 ticket holders in each. Another screen sells 4 tickets. How many tickets filled these rows?"
 answer   exact 9/1
 input    keypad
@@ -1364,7 +1364,7 @@ miss     distractor-pair = 24   Remote days, 6, do not replace the weekly trip c
 miss     answered-part = 4   That is the number of weeks. Each has 5 trips.
 
 --- mult-words · seed 424242 · difficulty 2
-prompt   How many tickets were sold?
+prompt   How many tickets filled these rows?
 display  story [3 × 4] "A cinema fills 3 rows with 4 ticket holders in each. Another screen sells 3 tickets. How many tickets filled these rows?"
 answer   exact 12/1
 input    keypad
@@ -1429,7 +1429,7 @@ miss     distractor-pair = 30   Remote days, 5, do not replace the weekly trip c
 miss     answered-part = 6   That is the number of weeks. Each has 7 trips.
 
 --- mult-words · seed 424242 · difficulty 3
-prompt   How many tickets were sold?
+prompt   How many tickets filled these rows?
 display  story [4 × 5] "A cinema fills 4 rows with 5 ticket holders in each. Another screen sells 3 tickets. How many tickets filled these rows?"
 answer   exact 20/1
 input    keypad
@@ -1494,7 +1494,7 @@ miss     distractor-pair = 40   Remote days, 5, do not replace the weekly trip c
 miss     answered-part = 8   That is the number of weeks. Each has 9 trips.
 
 --- mult-words · seed 424242 · difficulty 4
-prompt   How many tickets were sold?
+prompt   How many tickets filled these rows?
 display  story [6 × 6] "A cinema fills 6 rows with 6 ticket holders in each. Another screen sells 3 tickets. How many tickets filled these rows?"
 answer   exact 36/1
 input    keypad
@@ -1559,7 +1559,7 @@ miss     distractor-pair = 60   Remote days, 6, do not replace the weekly trip c
 miss     answered-part = 10   That is the number of weeks. Each has 12 trips.
 
 --- mult-words · seed 424242 · difficulty 5
-prompt   How many tickets were sold?
+prompt   How many tickets filled these rows?
 display  story [8 × 9] "A cinema fills 8 rows with 9 ticket holders in each. Another screen sells 3 tickets. How many tickets filled these rows?"
 answer   exact 72/1
 input    keypad

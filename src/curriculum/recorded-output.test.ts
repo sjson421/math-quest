@@ -154,7 +154,7 @@ describe('recorded output for diagrams', () => {
         { value: 314, tag: 'squared-diameter', nudge: 'Square the radius, not the whole diameter.' },
         { value: 31.4, tag: 'circumference-for-area', nudge: 'Area and circumference use different formulas.' },
       ],
-      hint: 'Halve the diameter to get radius, then square it.',
+      hint: 'Halve the diameter to get the radius, then square it.',
       solution: [{ text: 'Halve the diameter.', detail: '10 ÷ 2 = 5' }],
       difficulty: 1,
     }
@@ -175,7 +175,7 @@ describe('recorded output for diagrams', () => {
   it('records every similar-figure source, proportion, exact answer, and diagnosis', () => {
     const problem: Problem = {
       skillId: 'synthetic-similar-figures',
-      prompt: 'Find the missing side of the larger rectangle in centimetres.',
+      prompt: 'Find the missing side of the larger rectangle in centimeters.',
       display: {
         kind: 'diagram',
         diagram: {

@@ -86,7 +86,7 @@ export const MULTIPLICATION_FRAMES: Frame[] = [
   {
     id: 'cinema',
     operator: '×',
-    prompt: 'How many tickets were sold?',
+    prompt: 'How many tickets filled these rows?',
     text: ({ a, b, distractor }) =>
       `A cinema fills ${a} rows with ${b} ticket holders in each. Another screen sells ${distractor} tickets. How many tickets filled these rows?`,
     hint: ({ a, b }) => `Multiply ${a} rows by ${b} ticket holders in each.`,

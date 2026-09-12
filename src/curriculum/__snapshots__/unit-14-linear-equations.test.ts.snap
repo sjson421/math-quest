@@ -537,10 +537,10 @@ miss     distributed-first-term-only = 35   The number outside multiplies both t
 exports[`recorded output: equation-words > matches the wording recorded when the skill landed 1`] = `
 "--- equation-words · seed 1 · difficulty 1
 prompt   How many rooms were painted?
-display  story [two-step 3x + 3 = 15] "A decorator uses 3 litres of paint per room and 3 litres for the trim. The job used 15 litres."
+display  story [two-step 3x + 3 = 15] "A decorator uses 3 liters of paint per room and 3 liters for the trim. The job used 15 liters."
 answer   exact 4/1
 input    keypad
-hint     Trim is a one-off, so take its 3 litres off the total first.
+hint     Trim is a one-off, so take its 3 liters off the total first.
 step 1   Take off the 3 that was added.   [3x = 12]
 step 2   Divide by 3.   [x = 4]
 miss     undid-in-wrong-order = 2   Take the added amount off first, then divide by the group size.
@@ -577,20 +577,20 @@ miss     undid-in-wrong-order = 1   Take the added amount off first, then divide
 
 --- equation-words · seed 987654321 · difficulty 1
 prompt   How many rooms were painted?
-display  story [two-step 3x + 3 = 9] "A decorator uses 3 litres of paint per room and 3 litres for the trim. The job used 9 litres."
+display  story [two-step 3x + 3 = 9] "A decorator uses 3 liters of paint per room and 3 liters for the trim. The job used 9 liters."
 answer   exact 2/1
 input    keypad
-hint     Trim is a one-off, so take its 3 litres off the total first.
+hint     Trim is a one-off, so take its 3 liters off the total first.
 step 1   Take off the 3 that was added.   [3x = 6]
 step 2   Divide by 3.   [x = 2]
 miss     undid-in-wrong-order = 0   Take the added amount off first, then divide by the group size.
 
 --- equation-words · seed 1 · difficulty 2
 prompt   How many rooms were painted?
-display  story [two-step 3x + 3 = 21] "A decorator uses 3 litres of paint per room and 3 litres for the trim. The job used 21 litres."
+display  story [two-step 3x + 3 = 21] "A decorator uses 3 liters of paint per room and 3 liters for the trim. The job used 21 liters."
 answer   exact 6/1
 input    keypad
-hint     Trim is a one-off, so take its 3 litres off the total first.
+hint     Trim is a one-off, so take its 3 liters off the total first.
 step 1   Take off the 3 that was added.   [3x = 18]
 step 2   Divide by 3.   [x = 6]
 miss     undid-in-wrong-order = 4   Take the added amount off first, then divide by the group size.
@@ -627,20 +627,20 @@ miss     undid-in-wrong-order = 3   Take the added amount off first, then divide
 
 --- equation-words · seed 987654321 · difficulty 2
 prompt   How many rooms were painted?
-display  story [two-step 4x + 4 = 16] "A decorator uses 4 litres of paint per room and 4 litres for the trim. The job used 16 litres."
+display  story [two-step 4x + 4 = 16] "A decorator uses 4 liters of paint per room and 4 liters for the trim. The job used 16 liters."
 answer   exact 3/1
 input    keypad
-hint     Trim is a one-off, so take its 4 litres off the total first.
+hint     Trim is a one-off, so take its 4 liters off the total first.
 step 1   Take off the 4 that was added.   [4x = 12]
 step 2   Divide by 4.   [x = 3]
 miss     undid-in-wrong-order = 0   Take the added amount off first, then divide by the group size.
 
 --- equation-words · seed 1 · difficulty 3
 prompt   How many rooms were painted?
-display  story [two-step 5x + 5 = 45] "A decorator uses 5 litres of paint per room and 5 litres for the trim. The job used 45 litres."
+display  story [two-step 5x + 5 = 45] "A decorator uses 5 liters of paint per room and 5 liters for the trim. The job used 45 liters."
 answer   exact 8/1
 input    keypad
-hint     Trim is a one-off, so take its 5 litres off the total first.
+hint     Trim is a one-off, so take its 5 liters off the total first.
 step 1   Take off the 5 that was added.   [5x = 40]
 step 2   Divide by 5.   [x = 8]
 miss     undid-in-wrong-order = 4   Take the added amount off first, then divide by the group size.
@@ -677,20 +677,20 @@ miss     undid-in-wrong-order = 4   Take the added amount off first, then divide
 
 --- equation-words · seed 987654321 · difficulty 3
 prompt   How many rooms were painted?
-display  story [two-step 6x + 6 = 30] "A decorator uses 6 litres of paint per room and 6 litres for the trim. The job used 30 litres."
+display  story [two-step 6x + 6 = 30] "A decorator uses 6 liters of paint per room and 6 liters for the trim. The job used 30 liters."
 answer   exact 4/1
 input    keypad
-hint     Trim is a one-off, so take its 6 litres off the total first.
+hint     Trim is a one-off, so take its 6 liters off the total first.
 step 1   Take off the 6 that was added.   [6x = 24]
 step 2   Divide by 6.   [x = 4]
 miss     undid-in-wrong-order = -1   Take the added amount off first, then divide by the group size.
 
 --- equation-words · seed 1 · difficulty 4
 prompt   How many rooms were painted?
-display  story [two-step 6x + 12 = 78] "A decorator uses 6 litres of paint per room and 12 litres for the trim. The job used 78 litres."
+display  story [two-step 6x + 12 = 78] "A decorator uses 6 liters of paint per room and 12 liters for the trim. The job used 78 liters."
 answer   exact 11/1
 input    keypad
-hint     Trim is a one-off, so take its 12 litres off the total first.
+hint     Trim is a one-off, so take its 12 liters off the total first.
 step 1   Take off the 12 that was added.   [6x = 66]
 step 2   Divide by 6.   [x = 11]
 miss     undid-in-wrong-order = 1   Take the added amount off first, then divide by the group size.
@@ -727,20 +727,20 @@ miss     undid-in-wrong-order = 3   Take the added amount off first, then divide
 
 --- equation-words · seed 987654321 · difficulty 4
 prompt   How many rooms were painted?
-display  story [two-step 8x + 16 = 56] "A decorator uses 8 litres of paint per room and 16 litres for the trim. The job used 56 litres."
+display  story [two-step 8x + 16 = 56] "A decorator uses 8 liters of paint per room and 16 liters for the trim. The job used 56 liters."
 answer   exact 5/1
 input    keypad
-hint     Trim is a one-off, so take its 16 litres off the total first.
+hint     Trim is a one-off, so take its 16 liters off the total first.
 step 1   Take off the 16 that was added.   [8x = 40]
 step 2   Divide by 8.   [x = 5]
 miss     undid-in-wrong-order = -9   Take the added amount off first, then divide by the group size.
 
 --- equation-words · seed 1 · difficulty 5
 prompt   How many rooms were painted?
-display  story [two-step 7x + 14 = 105] "A decorator uses 7 litres of paint per room and 14 litres for the trim. The job used 105 litres."
+display  story [two-step 7x + 14 = 105] "A decorator uses 7 liters of paint per room and 14 liters for the trim. The job used 105 liters."
 answer   exact 13/1
 input    keypad
-hint     Trim is a one-off, so take its 14 litres off the total first.
+hint     Trim is a one-off, so take its 14 liters off the total first.
 step 1   Take off the 14 that was added.   [7x = 91]
 step 2   Divide by 7.   [x = 13]
 miss     undid-in-wrong-order = 1   Take the added amount off first, then divide by the group size.
@@ -777,10 +777,10 @@ miss     undid-in-wrong-order = 2   Take the added amount off first, then divide
 
 --- equation-words · seed 987654321 · difficulty 5
 prompt   How many rooms were painted?
-display  story [two-step 9x + 18 = 72] "A decorator uses 9 litres of paint per room and 18 litres for the trim. The job used 72 litres."
+display  story [two-step 9x + 18 = 72] "A decorator uses 9 liters of paint per room and 18 liters for the trim. The job used 72 liters."
 answer   exact 6/1
 input    keypad
-hint     Trim is a one-off, so take its 18 litres off the total first.
+hint     Trim is a one-off, so take its 18 liters off the total first.
 step 1   Take off the 18 that was added.   [9x = 54]
 step 2   Divide by 9.   [x = 6]
 miss     undid-in-wrong-order = -10   Take the added amount off first, then divide by the group size."
@@ -1573,7 +1573,7 @@ prompt   How many solutions does this equation have?
 display  equation "2x + 3 = 2x + 3" unframed [special-solutions 2x + 3 = 2x + 3]
 answer   choice infinite
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1586,7 +1586,7 @@ prompt   How many solutions does this equation have?
 display  equation "2x + 3 = 4x + 3" unframed [special-solutions 2x + 3 = 4x + 3]
 answer   choice one
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1599,7 +1599,7 @@ prompt   How many solutions does this equation have?
 display  equation "3x + 2 = 3x + 2" unframed [special-solutions 3x + 2 = 3x + 2]
 answer   choice infinite
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1612,7 +1612,7 @@ prompt   How many solutions does this equation have?
 display  equation "2x + 1 = 2x + 4" unframed [special-solutions 2x + 1 = 2x + 4]
 answer   choice none
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1625,7 +1625,7 @@ prompt   How many solutions does this equation have?
 display  equation "2x + 1 = 4x + 4" unframed [special-solutions 2x + 1 = 4x + 4]
 answer   choice one
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1638,7 +1638,7 @@ prompt   How many solutions does this equation have?
 display  equation "2x + 5 = 2x + 5" unframed [special-solutions 2x + 5 = 2x + 5]
 answer   choice infinite
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1651,7 +1651,7 @@ prompt   How many solutions does this equation have?
 display  equation "3x + 5 = 6x + 5" unframed [special-solutions 3x + 5 = 6x + 5]
 answer   choice one
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1664,7 +1664,7 @@ prompt   How many solutions does this equation have?
 display  equation "4x + 4 = 4x + 4" unframed [special-solutions 4x + 4 = 4x + 4]
 answer   choice infinite
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1677,7 +1677,7 @@ prompt   How many solutions does this equation have?
 display  equation "3x + 3 = 3x + 6" unframed [special-solutions 3x + 3 = 3x + 6]
 answer   choice none
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1690,7 +1690,7 @@ prompt   How many solutions does this equation have?
 display  equation "2x + 2 = 6x + 6" unframed [special-solutions 2x + 2 = 6x + 6]
 answer   choice one
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1703,7 +1703,7 @@ prompt   How many solutions does this equation have?
 display  equation "3x + 7 = 3x + 7" unframed [special-solutions 3x + 7 = 3x + 7]
 answer   choice infinite
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1716,7 +1716,7 @@ prompt   How many solutions does this equation have?
 display  equation "4x + 7 = 8x + 7" unframed [special-solutions 4x + 7 = 8x + 7]
 answer   choice one
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1729,7 +1729,7 @@ prompt   How many solutions does this equation have?
 display  equation "6x + 5 = 6x + 5" unframed [special-solutions 6x + 5 = 6x + 5]
 answer   choice infinite
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1742,7 +1742,7 @@ prompt   How many solutions does this equation have?
 display  equation "4x + 4 = 4x + 9" unframed [special-solutions 4x + 4 = 4x + 9]
 answer   choice none
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1755,7 +1755,7 @@ prompt   How many solutions does this equation have?
 display  equation "3x + 2 = 8x + 8" unframed [special-solutions 3x + 2 = 8x + 8]
 answer   choice one
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1768,7 +1768,7 @@ prompt   How many solutions does this equation have?
 display  equation "3x + 10 = 3x + 10" unframed [special-solutions 3x + 10 = 3x + 10]
 answer   choice infinite
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1781,7 +1781,7 @@ prompt   How many solutions does this equation have?
 display  equation "5x + 9 = 9x + 10" unframed [special-solutions 5x + 9 = 9x + 10]
 answer   choice one
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1794,7 +1794,7 @@ prompt   How many solutions does this equation have?
 display  equation "7x + 8 = 7x + 8" unframed [special-solutions 7x + 8 = 7x + 8]
 answer   choice infinite
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1807,7 +1807,7 @@ prompt   How many solutions does this equation have?
 display  equation "4x + 5 = 4x + 12" unframed [special-solutions 4x + 5 = 4x + 12]
 answer   choice none
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1820,7 +1820,7 @@ prompt   How many solutions does this equation have?
 display  equation "4x + 3 = 10x + 11" unframed [special-solutions 4x + 3 = 10x + 11]
 answer   choice one
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1833,7 +1833,7 @@ prompt   How many solutions does this equation have?
 display  equation "4x + 12 = 4x + 12" unframed [special-solutions 4x + 12 = 4x + 12]
 answer   choice infinite
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1846,7 +1846,7 @@ prompt   How many solutions does this equation have?
 display  equation "6x + 12 = 11x + 12" unframed [special-solutions 6x + 12 = 11x + 12]
 answer   choice one
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1859,7 +1859,7 @@ prompt   How many solutions does this equation have?
 display  equation "9x + 10 = 9x + 10" unframed [special-solutions 9x + 10 = 9x + 10]
 answer   choice infinite
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1872,7 +1872,7 @@ prompt   How many solutions does this equation have?
 display  equation "6x + 7 = 6x + 15" unframed [special-solutions 6x + 7 = 6x + 15]
 answer   choice none
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution
@@ -1885,7 +1885,7 @@ prompt   How many solutions does this equation have?
 display  equation "5x + 4 = 12x + 14" unframed [special-solutions 5x + 4 = 12x + 14]
 answer   choice one
 input    choice
-hint     Gather the x terms and see whether anything is left of them.
+hint     Gather the x terms on one side and see what is left.
 choice   none = No solution
 choice   infinite = Infinitely many solutions
 choice   one = Exactly one solution

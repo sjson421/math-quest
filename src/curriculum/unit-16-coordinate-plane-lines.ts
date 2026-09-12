@@ -646,7 +646,7 @@ const equationFromGraph = defineSkill({
     ]
 
     return {
-      prompt: 'Write the right side of y = from this graph.',
+      prompt: 'Write the expression that goes after y = for this line.',
       display: {
         kind: 'coordinate-plane',
         plane: plane(reach, [], [{ through: draw.through }]),
